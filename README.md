@@ -732,3 +732,8 @@
     </script>
 </body>
 </html>
+<!--\nTesting\n\nTo run the unit tests, install dependencies with `npm install` and run `npm test`.\n-->
+
+## Testing
+
+Install dependencies with `npm install` and run `npm test` to execute the test suite.
