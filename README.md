@@ -89,6 +89,9 @@
         .detail-text { @apply text-gray-700 whitespace-pre-line; }
         .med-concentration { @apply text-sm text-gray-500 ml-2; }
 
+        .toggle-info { @apply text-green-700 cursor-pointer; }
+        .toggle-info .info-text { @apply ml-1; }
+
         /* Header Navigation Buttons */
         .header-nav-button {
             @apply p-2 rounded-md text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed;
@@ -434,13 +437,28 @@
             if (!itemsArray || itemsArray.length === 0) return '<p class="text-gray-500 italic">None listed.</p>';
             return `<ul class="detail-list">${itemsArray.map(item => `<li>${item}</li>`).join('')}</ul>`;
         }
-        function createDetailText(textBlock) { /* ... same as v0.6 ... */
+        function createDetailText(textBlock) { /* enhanced to support toggle-info and red text */
             if (!textBlock || textBlock.trim() === '') return '<p class="text-gray-500 italic">Not specified.</p>';
-            const safeText = textBlock.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            let safeText = textBlock.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            safeText = safeText.replace(/\n/g, "<br>");
+            safeText = safeText.replace(/\[\[(.+?)\|(.+?)\]\]/g, (m, disp, info) =>
+                `<span class="toggle-info">${disp}<span class="info-text hidden">${info}</span></span>`);
+            safeText = safeText.replace(/\{\{red:(.+?)\}\}/g, (m, text) =>
+                `<span class="text-red-600 font-semibold">${text}</span>`);
+            safeText = safeText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
             return `<div class="detail-text">${safeText}</div>`;
         }
         function createWarningIcon(colorClass = 'text-yellow-600') { /* ... same as v0.6 ... */
             return `<svg class="${colorClass} w-5 h-5 mr-2 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>`;
+        }
+
+        function attachToggleInfoHandlers(container) {
+            container.querySelectorAll('.toggle-info').forEach(el => {
+                el.addEventListener('click', () => {
+                    const info = el.querySelector('.info-text');
+                    if (info) info.classList.toggle('hidden');
+                });
+            });
         }
 
         function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) { /* ... warning logic updated ... */
@@ -571,6 +589,7 @@
                 ${patientInfoSummary}
                 ${warningsHtml}
                 <div class="bg-gray-50 p-4 rounded-lg shadow-inner space-y-3 text-gray-800">${detailContentHtml}</div>`;
+            attachToggleInfoHandlers(contentArea);
             document.getElementById('backToListButton').addEventListener('click', () => { /* ... same as v0.6 ... */
                 for (let i = currentHistoryIndex -1 ; i >= 0; i--) {
                     if (navigationHistory[i] && navigationHistory[i].viewType === 'list') {
@@ -663,7 +682,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const medicationDetails = { /* ... All medication details from v0.6 ... */
-                '10-calcium-chloride': { title: "10% Calcium Chloride", concentration: "(1,000mg/10ml)", class: "Electrolyte", indications: ["Hyperkalemia", "Symptomatic ↑HR", "Toxic Ingestion"], contraindications: ["Known hypersensitivity", "Digitalis toxicity"], precautions: "Rx slowly unless → Cardiac Arrest.", sideEffects: ["↓HR", "VF", "Extravasation Necrosis", "Abdominal Pain", "N/V"], adultRx: ["Intervention: Mg OD from Bronchospasm IN Eclampsia 1g IV (clarify how this is written)", "Intervention: Hyperkalemia 1g IVP/IO", "Continuity: ↓BP + Wide-QRS symptomatic rhythm →1g IVP", "Intervention: RRWCT >5mm c̅ HR <150 Implies Hyperkalemia 1gIVP \n   Repeat Rx if QRS Narrows p̄ Ca \n   *do not give Lidocaine", "Continuity: Ca/β-Blocker OD c̅ ↓HR 1g slow IVP"], pediatricRx: ["Don’t give Calcium Chloride to Pediatric pts"] },
+                '10-calcium-chloride': { title: "10% Calcium Chloride", concentration: "(1,000mg/10ml)", class: "Electrolyte", indications: ["Hyperkalemia", "Symptomatic ↑HR", "Toxic Ingestion"], contraindications: ["Known hypersensitivity", "Digitalis toxicity"], precautions: "Rx slowly unless: Cardiac Arrest.", sideEffects: ["↓HR", "VF", "Extravasation Necrosis", "Abdominal Pain", "N/V"], adultRx: ["[[Mg OD|from Bronchospasm in Eclampsia]] Rx: 1g IV", "Hyperkalemia Rx: 1g IVP/IO", "[[↓BP + Wide-QRS symptomatic rhythm|Implies Hyperkalemia]] Rx: Consult to give 1g IVP", "RRWCT >5mm c̅ HR <150 Rx: 1g IVP", "Repeat Rx if QRS Narrows p̄ Ca **do not give Lidocaine**", "Ca/β-Blocker OD c̅ ↓HR Rx: Consult to give 1g slow IVP"], pediatricRx: ["{{red:Don’t give Calcium Chloride to Pediatric pts}}"] },
                 '2-lidocaine-xylocaine': { title: "2% Lidocaine (Xylocaine)", concentration: "(100mg/5ml)", class: "Antiarrhythmic", indications: ["Symptomatic ↑HR & VF/pVT"], contraindications: ["Hypersensitivity or Local anesthetic allergy in the amide class", "AV block >1º in the absence of a pacemaker", "Idioventricular escape rhythm s̄ pacemaker", "Stokes-Adams syndrome", "WPW syndrome"], precautions: "Prolonged Plasma half-life c̅  >70yo, CHF, or hepatic failure \n   → Give ↓ Maintenance Infusions.\nDon’t Rx if Idioventricular escape rhythm s̄ a pacemaker is Present.", sideEffects: ["Drowsiness", "Paresthesia", "Slurred speech", "Nystagmus (early sign of toxicity)", "Seizures (severe toxicity)"], adultRx: ["Intervention: VT = 1-1.5mg/kg slow IVP over 2-3min\n   If n/c p̄ 5min → 0.5-0.75mg/kg \n   Max = 3mg/kg", "Consultation: P̄-ROSC Stabilization = 2mg/min IV Maintenance Infusion", "Intervention: EZ-IO = 2ml over 60-90sec \n   → Flush c̅ 5-10ml NS rapidly over 5sec \n   → Then give 1ml over 30sec"] },
                 '8-4-sodium-bicarbonate-nahco3': { title: "8.4% Sodium Bicarbonate (NaHCO₃)", concentration: "(50mEq/50ml)", notes: ["***Given separately from other drugs***"], class: "Alkalizing (buffering) agent", indications: ["Fall or Weakness (probably only if for suspected hyperkalemia)", "Hyperkalemia", "Symptomatic ↑HR", "Toxic Ingestion"], precautions: "Bicarb precipitates/Interacts c̅ multiple Rx’s → Don’t Mix\nFlush IV line ā & p̄ administration.\nIn neonates and children <2yo → 4.2% slowly used instead.\nBicarb may cause tissue necrosis, ulceration, & sloughing.", sideEffects: ["Metabolic alkalosis", "Paradoxical acidosis", "Exacerbation of HF", "Hypernatremia", "Hypokalemia", "Hypocalcemia"], adultRx: ["Continuity: Dead + Bed Sores from Immobility → Suggests Hyperkalemia\n   = 1mEq/kg", "Intervention: Hyperkalemia = 50mEq IVP/IO", "Intervention: RRWCT >5mm  c̅  HR <150 → Suggests Hyperkalemia \n   = 50mEq IVP → If QRS narrows → Give 2nd dose", "Continuity: Tricyclic OD  c̅  Wide-QRS & ↓BP or Pulseless \n   = 1mEq/kg  IVP  → Several doses may be needed"], pediatricRx: ["Neonates & Children <2yo = 4.2% Bicarb given slowly", "Continuity: Propranolol OD  c̅  Widened QRS \n   = 1-2mEq/kg  IV/IO  Bolus", "Continuity: Tricyclic OD  c̅  ↓BP or Pulseless or Wide-QRS \n   = 1-2mEq/kg  IV/IO"] },
                 'adenosine-adenocard': { title: "Adenosine (Adenocard)", concentration: "(6mg/2ml)", class: "Antiarrhythmic", indications: ["SVT"], contraindications: ["Known hypersensitivity", "A-Fib associated  c̅  WPW Syndrome"], precautions: "Rx in a pt c̅ A-Fib & WPW may result in VF\nRx may induce Airway Hyperresponsiveness & should be used c̅ caution in pts c̅ a RAD Hx (asthma)", sideEffects: ["H/A", "Cx pn", "Flushing", "Dyspnea/Bronchoconstriction", "↓HR", "AV block", "Sinus Pause/Asystole"], adultRx: ["Intervention: SVT →  6mg  Fast IVP c̅ 10ml Flush \n   If n/c → 12mg  Fast IVP  c̅ 10ml Flush\n   If n/c → 12mg  Fast IVP  c̅ 10ml Flush\n   n/c =Stable Pt &Rhythm is unchanged", "Consultation:Med-Control for additional doses", "Continuity: If n/c → Repeat 12mg  Fast IVP  during transport"] },
