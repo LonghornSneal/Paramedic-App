@@ -12,4 +12,9 @@ function slugify(text) {
     .replace(/^-+/, '')
     .replace(/-+$/, '');
 }
-module.exports = slugify;
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = slugify;
+} else if (typeof window !== 'undefined') {
+  window.slugify = slugify;
+}
