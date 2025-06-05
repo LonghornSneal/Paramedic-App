@@ -278,6 +278,7 @@
         <footer class="text-center p-4 text-gray-500 text-sm mt-2">App Version 0.7</footer>
     </div>
 
+    <script src="slugify.js"></script>
     <script>
         // --- DOM Elements ---
         const searchInput = document.getElementById('searchInput');
@@ -328,16 +329,7 @@
 
 
         // --- Utility Function ---
-        function slugify(text) {
-            if (!text) return '';
-            return text.toString().toLowerCase()
-                .replace(/\s+/g, '-')
-                .replace(/[+/:(),&%#₃₄]/g, (match) => {
-                    if (match === '₃') return '3'; if (match === '₄') return '4'; return '-';
-                })
-                .replace(/[^\w-]+/g, '')
-                .replace(/--+/g, '-').replace(/^-+/, '').replace(/-+$/, '');
-        }
+        // slugify is loaded from slugify.js
 
         // --- Sidebar Logic ---
         function openSidebar() { patientSidebar.classList.add('open'); sidebarOverlay.classList.add('active'); }
