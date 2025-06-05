@@ -823,5 +823,8 @@
             updateNavButtonsState();
         });
     </script>
+<div class="hidden">
+  <span class="toggle-info">Example<span class="info-text hidden">info</span></span>
+</div>
 </body>
 </html>
