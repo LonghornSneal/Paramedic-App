@@ -372,15 +372,15 @@
         }
 
 
-        // --- Navigation History Management (same as v0.6) ---
+        // --- Navigation History Management ---
         function updateNavButtonsState() { navBackButton.disabled = currentHistoryIndex <= 0; navForwardButton.disabled = currentHistoryIndex >= navigationHistory.length - 1; }
         function addHistoryEntry(entry) { if (isNavigatingViaHistory) return; if (currentHistoryIndex < navigationHistory.length - 1) { navigationHistory = navigationHistory.slice(0, currentHistoryIndex + 1); } navigationHistory.push(entry); currentHistoryIndex = navigationHistory.length - 1; updateNavButtonsState(); }
         function navigateViaHistory(direction) { if ((direction === -1 && currentHistoryIndex <= 0) || (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return; isNavigatingViaHistory = true; currentHistoryIndex += direction; const state = navigationHistory[currentHistoryIndex]; if (state.viewType === 'list') { searchInput.value = state.contentId || ''; handleSearch(false); } else if (state.viewType === 'detail') { renderDetailPage(state.contentId, true, false); } updateNavButtonsState(); isNavigatingViaHistory = false; }
         navBackButton.addEventListener('click', () => navigateViaHistory(-1));
         navForwardButton.addEventListener('click', () => navigateViaHistory(1));
 
-        // --- Hierarchical List Rendering (same as v0.6) ---
-        function createHierarchicalList(items, container) { /* ... same as v0.6 ... */
+        // --- Hierarchical List Rendering ---
+        function createHierarchicalList(items, container) { /* recursively render categories and topics */
              items.forEach(item => {
                 const listItem = document.createElement('div'); listItem.className = 'py-1';
                 if (item.type === 'category') {
@@ -407,14 +407,14 @@
 
 
         // --- View Rendering Functions ---
-        function renderInitialView(shouldAddHistory = true) { /* ... same as v0.6 ... */
+        function renderInitialView(shouldAddHistory = true) { /* show default category list */
             if (shouldAddHistory) addHistoryEntry({ viewType: 'list', contentId: '' });
             contentArea.innerHTML = `<p class="text-gray-600 text-center mb-4 text-sm md:text-base">Use the <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block align-text-bottom"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg> button for patient info. Browse categories below or use search.</p><div id="hierarchical-list-container" class="space-y-2"></div>`;
             const listContainer = document.getElementById('hierarchical-list-container');
             if (paramedicCategories.length > 0) createHierarchicalList(paramedicCategories, listContainer);
             else listContainer.innerHTML = '<p class="text-gray-500 text-center">No categories available.</p>';
         }
-        function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true) { /* ... same as v0.6 ... */
+        function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true) { /* display search result list */
             if (shouldAddHistory) addHistoryEntry({ viewType: 'list', contentId: searchTerm });
             contentArea.innerHTML = `<div class="flex justify-between items-center mb-3"><p class="text-gray-700 font-medium">Results for "${searchTerm}":</p><button id="clear-search-button" class="text-sm text-blue-600 hover:text-blue-800 hover:underline">Show All Categories</button></div><div id="results-container" class="space-y-2"></div>`;
             const resultsContainer = document.getElementById('results-container');
@@ -430,16 +430,16 @@
             } else resultsContainer.innerHTML = '<p class="text-gray-500 text-center py-4">No topics found matching your search.</p>';
             document.getElementById('clear-search-button').addEventListener('click', () => { searchInput.value = ''; renderInitialView(); });
         }
-        function createDetailList(itemsArray) { /* ... same as v0.6 ... */
+        function createDetailList(itemsArray) { /* build bullet list HTML */
             if (!itemsArray || itemsArray.length === 0) return '<p class="text-gray-500 italic">None listed.</p>';
             return `<ul class="detail-list">${itemsArray.map(item => `<li>${item}</li>`).join('')}</ul>`;
         }
-        function createDetailText(textBlock) { /* ... same as v0.6 ... */
+        function createDetailText(textBlock) { /* wrap text for detail sections */
             if (!textBlock || textBlock.trim() === '') return '<p class="text-gray-500 italic">Not specified.</p>';
             const safeText = textBlock.replace(/</g, "&lt;").replace(/>/g, "&gt;");
             return `<div class="detail-text">${safeText}</div>`;
         }
-        function createWarningIcon(colorClass = 'text-yellow-600') { /* ... same as v0.6 ... */
+        function createWarningIcon(colorClass = 'text-yellow-600') { /* return warning SVG */
             return `<svg class="${colorClass} w-5 h-5 mr-2 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>`;
         }
 
@@ -533,7 +533,7 @@
             if (!calculatedDoseInfo && weightInKg) weightDosePlaceholder = `<p class="text-sm text-gray-600 italic">(Pt weight ${weightInKg.toFixed(1)} kg. Dose calcs for this drug not yet implemented.)</p>`;
 
 
-            let patientInfoSummary = ''; /* ... same as v0.6 ... */
+            let patientInfoSummary = ''; // patient snapshot summary
             if (patientData.age || patientData.weight || patientData.allergies.length > 0 || patientData.currentMedications.length > 0) {
                 patientInfoSummary = `<div class="mb-3 p-3 bg-blue-50 border border-blue-200 rounded-md text-sm">
                     <h4 class="font-semibold text-blue-700 mb-1">Current Patient Snapshot:</h4>
@@ -544,7 +544,7 @@
                 </div>`;
             }
 
-            let detailContentHtml = ''; /* ... same as v0.6 ... */
+            let detailContentHtml = ''; // HTML for topic details
             if (topic.details) {
                 const d = topic.details;
                 detailContentHtml = `
@@ -571,7 +571,7 @@
                 ${patientInfoSummary}
                 ${warningsHtml}
                 <div class="bg-gray-50 p-4 rounded-lg shadow-inner space-y-3 text-gray-800">${detailContentHtml}</div>`;
-            document.getElementById('backToListButton').addEventListener('click', () => { /* ... same as v0.6 ... */
+            document.getElementById('backToListButton').addEventListener('click', () => { // return to previous list view
                 for (let i = currentHistoryIndex -1 ; i >= 0; i--) {
                     if (navigationHistory[i] && navigationHistory[i].viewType === 'list') {
                         isNavigatingViaHistory = true; currentHistoryIndex = i;
@@ -584,7 +584,7 @@
         }
 
         // --- Event Handler ---
-        function handleSearch(shouldAddHistory = true) { /* ... same as v0.6 ... */
+        function handleSearch(shouldAddHistory = true) { /* filter topics based on search */
             const searchTerm = searchInput.value.trim().toLowerCase();
             if (contentArea.offsetWidth > 0) window.scrollTo(0, Math.max(0, contentArea.offsetTop - 80));
             if (!searchTerm) { renderInitialView(shouldAddHistory); return; }
@@ -647,7 +647,7 @@
             });
 
 
-            function processItem(item, parentPath = '') { /* ... same as v0.6 ... */
+            function processItem(item, parentPath = '') { /* recursively process category tree */
                 const currentPath = parentPath ? `${parentPath} > ${item.title}` : item.title;
                 let fullItemDetails = { ...item, path: currentPath };
                 if (item.type === 'topic' && medicationDetailsData[item.id]) {
@@ -662,7 +662,7 @@
 
 
         document.addEventListener('DOMContentLoaded', () => {
-            const medicationDetails = { /* ... All medication details from v0.6 ... */
+            const medicationDetails = { /* medication details dataset */
                 '10-calcium-chloride': { title: "10% Calcium Chloride", concentration: "(1,000mg/10ml)", class: "Electrolyte", indications: ["Hyperkalemia", "Symptomatic ↑HR", "Toxic Ingestion"], contraindications: ["Known hypersensitivity", "Digitalis toxicity"], precautions: "Rx slowly unless → Cardiac Arrest.", sideEffects: ["↓HR", "VF", "Extravasation Necrosis", "Abdominal Pain", "N/V"], adultRx: ["Intervention: Mg OD from Bronchospasm IN Eclampsia 1g IV (clarify how this is written)", "Intervention: Hyperkalemia 1g IVP/IO", "Continuity: ↓BP + Wide-QRS symptomatic rhythm →1g IVP", "Intervention: RRWCT >5mm c̅ HR <150 Implies Hyperkalemia 1gIVP \n   Repeat Rx if QRS Narrows p̄ Ca \n   *do not give Lidocaine", "Continuity: Ca/β-Blocker OD c̅ ↓HR 1g slow IVP"], pediatricRx: ["Don’t give Calcium Chloride to Pediatric pts"] },
                 '2-lidocaine-xylocaine': { title: "2% Lidocaine (Xylocaine)", concentration: "(100mg/5ml)", class: "Antiarrhythmic", indications: ["Symptomatic ↑HR & VF/pVT"], contraindications: ["Hypersensitivity or Local anesthetic allergy in the amide class", "AV block >1º in the absence of a pacemaker", "Idioventricular escape rhythm s̄ pacemaker", "Stokes-Adams syndrome", "WPW syndrome"], precautions: "Prolonged Plasma half-life c̅  >70yo, CHF, or hepatic failure \n   → Give ↓ Maintenance Infusions.\nDon’t Rx if Idioventricular escape rhythm s̄ a pacemaker is Present.", sideEffects: ["Drowsiness", "Paresthesia", "Slurred speech", "Nystagmus (early sign of toxicity)", "Seizures (severe toxicity)"], adultRx: ["Intervention: VT = 1-1.5mg/kg slow IVP over 2-3min\n   If n/c p̄ 5min → 0.5-0.75mg/kg \n   Max = 3mg/kg", "Consultation: P̄-ROSC Stabilization = 2mg/min IV Maintenance Infusion", "Intervention: EZ-IO = 2ml over 60-90sec \n   → Flush c̅ 5-10ml NS rapidly over 5sec \n   → Then give 1ml over 30sec"] },
                 '8-4-sodium-bicarbonate-nahco3': { title: "8.4% Sodium Bicarbonate (NaHCO₃)", concentration: "(50mEq/50ml)", notes: ["***Given separately from other drugs***"], class: "Alkalizing (buffering) agent", indications: ["Fall or Weakness (probably only if for suspected hyperkalemia)", "Hyperkalemia", "Symptomatic ↑HR", "Toxic Ingestion"], precautions: "Bicarb precipitates/Interacts c̅ multiple Rx’s → Don’t Mix\nFlush IV line ā & p̄ administration.\nIn neonates and children <2yo → 4.2% slowly used instead.\nBicarb may cause tissue necrosis, ulceration, & sloughing.", sideEffects: ["Metabolic alkalosis", "Paradoxical acidosis", "Exacerbation of HF", "Hypernatremia", "Hypokalemia", "Hypocalcemia"], adultRx: ["Continuity: Dead + Bed Sores from Immobility → Suggests Hyperkalemia\n   = 1mEq/kg", "Intervention: Hyperkalemia = 50mEq IVP/IO", "Intervention: RRWCT >5mm  c̅  HR <150 → Suggests Hyperkalemia \n   = 50mEq IVP → If QRS narrows → Give 2nd dose", "Continuity: Tricyclic OD  c̅  Wide-QRS & ↓BP or Pulseless \n   = 1mEq/kg  IVP  → Several doses may be needed"], pediatricRx: ["Neonates & Children <2yo = 4.2% Bicarb given slowly", "Continuity: Propranolol OD  c̅  Widened QRS \n   = 1-2mEq/kg  IV/IO  Bolus", "Continuity: Tricyclic OD  c̅  ↓BP or Pulseless or Wide-QRS \n   = 1-2mEq/kg  IV/IO"] },
@@ -691,7 +691,7 @@
                 'ntg': { title: "NTG", concentration: "(0.4mg/spray)", class: "Organic nitrate", indications: ["MI or ACS", "Pulmonary Edema"], contraindications: ["Known hypersensitivity", "SBP <100", "Recent use of a phosphodiesterase type 5 inhibitor (sildenafil [Viagra, Revatio] or vardenafil [Levitra] within 24 hours or tadalafil [Cialis, Adcirca]) c̅in 36 hours.", "Right ventricular infarction (RVI)", "Tachycardia (HR>100) in the absence of HF (not universal)", "↑ICP"], precautions: "Pts c̅ RVI are preload sensitive & can develop severe ↓BP in response to Preload-reducing agents. If ↓BP develops following Rx → IVF may be necessary.\nInferior STEMI → Do right sided EKG to look for RVI evidence\nPts c̅ aortic stenosis are very preload dependent to maintain cardiac output. NTG c̅ aortic stenosis or murmur should be judicious & carefully titrated.", sideEffects: ["Hypotension", "H/A", "Tachycardia (reflex)", "Bradycardia", "Methmemoglobinemia → nitrate ions oxidize hemoglobin\n   long term effect & unlikely seen in EMS setting"], adultRx: ["Don’t give if pt had Viagra/Cialis within the past 48hrs", "NTG is NOT contraindicated c̅ Inferior STEMI \n   → Should the pt become profoundly Hypotensive\n   → Infuse NS until BP >90", "Be cautious c̅ Aortic Stenosis or Murmurs", "Intervention: MI/ACS = 0.4mg SL q̄ 5min prn only if BP >100 \n   or  >110 if pt Never had NTG ā\n   Max = 3 doses", "Continuity: Repeat  q̄  5min  if → SBP >100 & pain still present", "Intervention: Pulmonary Edema = 0.4mg  SL  if BP  >100\n   or  >120  if pt Never had NTG ā", "Intervention: Flash Pulm-Edema from Hypertensive Crisis  s̄  IV \n   = 0.4mg  SL", "Consultation: 0.8-1.2mg  SL & Inform Med-Control if no IV yet"] },
                 'ondansetron-zofran': { title: "Ondansetron (Zofran)", concentration: "(4mg/2ml)", class: "Antiemetic", indications: ["N/V"], contraindications: ["Known hypersensitivity", "Prolonged QTI (male >440msec, female >450msec (probably more of a precaution)", "Pregnancy (1st trimester)"], precautions: "Use c̅ caution c̅ other agents that may cause QTI prolongation.", sideEffects: ["H/A (particularly in those prone to migraine headaches)", "QTI prolongation", "AV conduction disturbance (associated c̅ rapid Rx)", "Sedation", "Diarrhea", "Dry mouth", "Serotonin syndrome"], adultRx: ["Intervention: N/V = 4mg  IVP over  60sec"], pediatricRx: ["Intervention: N/V = 0.15mg/kg  IVP over 60sec     Max = 4mg", "Intervention: N/V s̄  IV →  4-11yo = 4mg tab PO\n   ≥12yo = 8mg tab PO"] }
             };
-            const newCategoriesData = [ /* ... All categories from v0.6 ... */
+            const newCategoriesData = [ /* sample categories dataset */
                 {id: slugify("Abbreviations & References"), title: "Abbreviations & References", type: "category", children: [{ id: slugify("Abbott Approved Abbreviations"), title: "Abbott Approved Abbreviations", type: "topic" },{ id: slugify("Other Abbreviations"), title: "Other Abbreviations", type: "topic" }]},
                 {id: slugify("Introduction & Core Principles"), title: "Introduction & Core Principles", type: "category", children: [{ id: slugify("Introduction to Abbott"), title: "Introduction to Abbott", type: "topic" },{ id: slugify("Core Principles – Safety & Well-Being"), title: "Core Principles – Safety & Well-Being", type: "topic" },{ id: slugify("General Important Information"), title: "General Important Information", type: "topic" }]},
                 {id: slugify("Administrative & Legal Essentials"), title: "Administrative & Legal Essentials", type: "category", children: [{ id: slugify("ALS Ground Rules"), title: "ALS Ground Rules", type: "topic" },{ id: slugify("Scope Violations & Possible Consequences"), title: "Scope Violations & Possible Consequences", type: "topic" },{ id: slugify("Suspension/Revocation"), title: "Suspension/Revocation", type: "topic" },{ id: slugify("On-Scene Authority"), title: "On-Scene Authority", type: "topic" },{ id: slugify("On-Scene Healthcare Professionals"), title: "On-Scene Healthcare Professionals", type: "topic" },{ id: slugify("Dispatching MD [200]"), title: "Dispatching MD [200]", type: "topic" },{ id: slugify("Consulting OLMC"), title: "Consulting OLMC", type: "topic" },{ id: slugify("Transfer to Lesser Credential"), title: "Transfer to Lesser Credential", type: "topic" },{ id: slugify("EMR Accompanying Critically Ill"), title: "EMR Accompanying Critically Ill", type: "topic" },{ id: slugify("Response Mode"), title: "Response Mode", type: "topic" },{ id: slugify("AIR AMBULANCE UTILIZATION"), title: "AIR AMBULANCE UTILIZATION", type: "topic" },{ id: slugify("Applicability of the COG"), title: "Applicability of the COG", type: "topic" },{ id: slugify("Mandatory Reporting"), title: "Mandatory Reporting", type: "topic" },{ id: slugify("Crime Scene"), title: "Crime Scene", type: "topic" },{ id: slugify("Worker’s Compensation Process"), title: "Worker’s Compensation Process", type: "topic" }]},
