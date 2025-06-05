@@ -15,6 +15,7 @@ function slugify(text) {
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = slugify;
-} else if (typeof window !== 'undefined') {
+}
+if (typeof window !== 'undefined') {
   window.slugify = slugify;
 }
