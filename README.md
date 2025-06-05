@@ -142,8 +142,9 @@
         .toggle-info {
             color: #15803d;
             cursor: pointer;
-            text-decoration: underline;
+            text-decoration-line: underline;
             text-decoration-color: #15803d;
+            text-underline-offset: 2px;
         }
         .toggle-info:hover {
             color: #065f46;
