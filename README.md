@@ -725,7 +725,13 @@
 
 
             searchInput.addEventListener('input', () => handleSearch(true));
-            searchInput.addEventListener('keypress', function(event) { if (event.key === 'Enter') { event.preventDefault(); handleSearch(true); }});
+            // Use keydown to reliably capture Enter key presses across browsers
+            searchInput.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    handleSearch(true);
+                }
+            });
             renderInitialView(true);
             updateNavButtonsState();
         });
