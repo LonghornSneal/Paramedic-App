@@ -139,7 +139,16 @@
             margin-left: 0.5rem; /* ml-2 */
         }
 
-        .toggle-info { color: #15803d; cursor: pointer; }
+        .toggle-info {
+            color: #15803d;
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-color: #15803d;
+        }
+        .toggle-info:hover {
+            color: #065f46;
+            background-color: #d1fae5;
+        }
         .toggle-info .info-text { margin-left: 0.25rem; }
 
         /* Header Navigation Buttons */
