@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- To run tests, execute `npm test`. -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
