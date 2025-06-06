@@ -289,6 +289,7 @@
     </div>
 
     <script src="slugify.js"></script>
+    <script src="slugList.js"></script>
     <script>
         // --- DOM Elements ---
         const searchInput = document.getElementById('searchInput');
@@ -843,6 +844,20 @@
             renderInitialView(true);
             updateNavButtonsState();
         });
+    </script>
+    <script>
+      if (window.slugIDs) {
+        const container = document.createElement('div');
+        container.id = 'slug-id-container';
+        container.classList.add('hidden');
+        slugIDs.forEach(id => {
+          const div = document.createElement('div');
+          div.id = id;
+          div.dataset.branch = id;
+          container.appendChild(div);
+        });
+        document.body.appendChild(container);
+      }
     </script>
 <div class="hidden">
   <span class="toggle-info">Example<span class="info-text hidden">info</span></span>
