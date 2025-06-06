@@ -340,6 +340,9 @@
 
         // --- Utility Function ---
         // slugify is loaded from slugify.js
+        // You can also generate branch names with this helper:
+        //   node slugify.js "Administrative & Legal Essentials"
+        // yields "administrative-legal-essentials"
 
         // --- Sidebar Logic ---
         function openSidebar() { patientSidebar.classList.add('open'); sidebarOverlay.classList.add('active'); }
