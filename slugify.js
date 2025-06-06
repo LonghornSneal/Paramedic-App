@@ -19,3 +19,9 @@ if (typeof module !== 'undefined' && module.exports) {
 if (typeof window !== 'undefined') {
   window.slugify = slugify;
 }
+
+// Allow CLI usage: `node slugify.js "Some Text"`
+if (require.main === module) {
+  const input = process.argv.slice(2).join(' ');
+  console.log(slugify(input));
+}
