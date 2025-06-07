@@ -809,7 +809,7 @@
         }
 
 
-        document.addEventListener('DOMContentLoaded', () => {
+        function initApp() {
             const medicationDetails = { /* ... All medication details from v0.6 ... */
                 '10-calcium-chloride': { title: "10% Calcium Chloride", concentration: "(1,000mg/10ml)", class: "Electrolyte", indications: ["Hyperkalemia", "Symptomatic ↑HR", "Toxic Ingestion"], contraindications: ["Known hypersensitivity", "Digitalis toxicity"], precautions: "Rx slowly unless: Cardiac Arrest.", sideEffects: ["↓HR", "VF", "Extravasation Necrosis", "Abdominal Pain", "N/V"], adultRx: ["[[Mg OD|from Bronchospasm in Eclampsia]] Rx: 1g IV", "Hyperkalemia Rx: 1g IVP/IO", "[[↓BP + Wide-QRS symptomatic rhythm|Implies Hyperkalemia]] Rx: Consult to give 1g IVP", "RRWCT >5mm c̅ HR <150 Rx: 1g IVP", "Repeat Rx if QRS Narrows p̄ Ca **do not give Lidocaine**", "Ca/β-Blocker OD c̅ ↓HR Rx: Consult to give 1g slow IVP"], pediatricRx: ["{{red:Don’t give Calcium Chloride to Pediatric pts}}"] },
                 '2-lidocaine-xylocaine': { title: "2% Lidocaine (Xylocaine)", concentration: "(100mg/5ml)", class: "Antiarrhythmic", indications: ["Symptomatic ↑HR & VF/pVT"], contraindications: ["Hypersensitivity or Local anesthetic allergy in the amide class", "AV block >1º in the absence of a pacemaker", "Idioventricular escape rhythm s̄ pacemaker", "Stokes-Adams syndrome", "WPW syndrome"], precautions: "[[Give ↓ Maintenance Infusions for:|Prolonged Plasma half-life]] >70yo, CHF, or hepatic failure.\nDon’t Rx if Idioventricular escape rhythm s̄ a pacemaker is Present.", sideEffects: ["Drowsiness", "Paresthesia", "Slurred speech", "[[Nystagmus|early sign of toxicity]]", "[[Seizures|severe toxicity]]"], adultRx: ["VT Rx: 1-1.5mg/kg slow IVP over 2-3min,\n      If n/c p̄ 5min, [[then give 0.5-0.75mg/kg|Max = 3mg/kg]]", "P̄-ROSC Stabilization Rx: Consult to give 2mg/min IV Maintenance Infusion", "EZ-IO Rx: 2ml over 60-90sec\n      → Flush c̅ 5-10ml NS rapidly over 5sec\n            → Then give 1ml over 30sec"] },
@@ -882,7 +882,10 @@
             });
             renderInitialView(true);
             updateNavButtonsState();
-        });
+        }
+
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initApp);
+        else initApp();
     </script>
     <script>
       if (window.slugIDs) {
