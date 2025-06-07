@@ -55,6 +55,7 @@
         }
         .topic-link-item:hover { background-color: #e0f2fe; /* sky-100 */ }
         .topic-link-item:active { transform: scale(0.98); }
+        .topic-link-item.recently-viewed { background-color: #fef3c7; }
         .search-topic-item {
             padding: 0.75rem 1rem; background-color: #f9fafb; border-radius: 0.375rem;
             cursor: pointer; border: 1px solid #e5e7eb; margin-bottom: 0.5rem;
@@ -466,7 +467,7 @@
         // --- Navigation History Management (same as v0.6) ---
         function updateNavButtonsState() { navBackButton.disabled = currentHistoryIndex <= 0; navForwardButton.disabled = currentHistoryIndex >= navigationHistory.length - 1; }
         function addHistoryEntry(entry) { if (isNavigatingViaHistory) return; if (currentHistoryIndex < navigationHistory.length - 1) { navigationHistory = navigationHistory.slice(0, currentHistoryIndex + 1); } navigationHistory.push(entry); currentHistoryIndex = navigationHistory.length - 1; updateNavButtonsState(); }
-        function navigateViaHistory(direction) { if ((direction === -1 && currentHistoryIndex <= 0) || (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return; isNavigatingViaHistory = true; currentHistoryIndex += direction; const state = navigationHistory[currentHistoryIndex]; if (state.viewType === 'list') { searchInput.value = state.contentId || ''; handleSearch(false); } else if (state.viewType === 'detail') { renderDetailPage(state.contentId, true, false); } updateNavButtonsState(); isNavigatingViaHistory = false; }
+        function navigateViaHistory(direction) { if ((direction === -1 && currentHistoryIndex <= 0) || (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return; isNavigatingViaHistory = true; currentHistoryIndex += direction; const state = navigationHistory[currentHistoryIndex]; if (state.viewType === 'list') { searchInput.value = state.contentId || ''; handleSearch(false, state.highlightTopicId, state.categoryPath || []); } else if (state.viewType === 'detail') { renderDetailPage(state.contentId, true, false); } updateNavButtonsState(); isNavigatingViaHistory = false; }
         navBackButton.addEventListener('click', () => navigateViaHistory(-1));
         navForwardButton.addEventListener('click', () => navigateViaHistory(1));
 
@@ -476,6 +477,7 @@
                 const listItem = document.createElement('div'); listItem.className = 'py-1';
                 if (item.type === 'category') {
                     listItem.classList.add('category-item');
+                    listItem.dataset.categoryId = item.id;
                     const header = document.createElement('div'); header.className = 'category-header';
                     header.innerHTML = `<span>${item.title}</span><span class="icon-toggle"><svg class="w-5 h-5 icon-toggle-closed" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg><svg class="w-5 h-5 icon-toggle-open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" /></svg></span>`;
                     header.setAttribute('role', 'button'); header.setAttribute('aria-expanded', 'false'); header.setAttribute('tabindex', '0');
@@ -498,15 +500,16 @@
 
 
         // --- View Rendering Functions ---
-        function renderInitialView(shouldAddHistory = true) { /* ... same as v0.6 ... */
-            if (shouldAddHistory) addHistoryEntry({ viewType: 'list', contentId: '' });
+        function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) { /* ... same as v0.6 ... */
+            if (shouldAddHistory) addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
             contentArea.innerHTML = `<p class="text-gray-600 text-center mb-4 text-sm md:text-base">Use the <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block align-text-bottom"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg> button for patient info. Browse categories below or use search.</p><div id="hierarchical-list-container" class="space-y-2"></div>`;
             const listContainer = document.getElementById('hierarchical-list-container');
             if (paramedicCategories.length > 0) createHierarchicalList(paramedicCategories, listContainer);
             else listContainer.innerHTML = '<p class="text-gray-500 text-center">No categories available.</p>';
+            openCategoriesAndHighlight(categoryPath, highlightId);
         }
-        function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true) { /* ... same as v0.6 ... */
-            if (shouldAddHistory) addHistoryEntry({ viewType: 'list', contentId: searchTerm });
+        function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) { /* ... same as v0.6 ... */
+            if (shouldAddHistory) addHistoryEntry({ viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath });
             contentArea.innerHTML = `<div class="flex justify-between items-center mb-3"><p class="text-gray-700 font-medium">Results for "${searchTerm}":</p><button id="clear-search-button" class="text-sm text-blue-600 hover:text-blue-800 hover:underline">Show All Categories</button></div><div id="results-container" class="space-y-2"></div>`;
             const resultsContainer = document.getElementById('results-container');
             if (filteredTopics.length > 0) {
@@ -520,6 +523,7 @@
                 });
             } else resultsContainer.innerHTML = '<p class="text-gray-500 text-center py-4">No topics found matching your search.</p>';
             document.getElementById('clear-search-button').addEventListener('click', () => { searchInput.value = ''; renderInitialView(); });
+            openCategoriesAndHighlight(categoryPath, highlightId);
         }
         function createDetailList(itemsArray) { /* ... same as v0.6 ... */
             if (!itemsArray || itemsArray.length === 0) return '<p class="text-gray-500 italic">None listed.</p>';
@@ -551,8 +555,32 @@
             });
         }
 
+        function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
+            // Expand categories along the path
+            categoryPath.forEach(catId => {
+                const el = contentArea.querySelector(`[data-category-id="${catId}"]`);
+                if (el && !el.classList.contains('expanded')) {
+                    el.classList.add('expanded');
+                    const header = el.querySelector('.category-header');
+                    if (header) header.setAttribute('aria-expanded', 'true');
+                }
+            });
+            // Clear previous highlight
+            contentArea.querySelectorAll('.topic-link-item.recently-viewed').forEach(el => {
+                el.classList.remove('recently-viewed');
+            });
+            if (highlightId) {
+                const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
+                if (topicEl) topicEl.classList.add('recently-viewed');
+            }
+        }
+
         function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) { /* ... warning logic updated ... */
-            if (shouldAddHistory) addHistoryEntry({ viewType: 'detail', contentId: topicId });
+            if (navigationHistory[currentHistoryIndex] && navigationHistory[currentHistoryIndex].viewType === 'list') {
+                navigationHistory[currentHistoryIndex].highlightTopicId = topicId;
+                navigationHistory[currentHistoryIndex].categoryPath = allDisplayableTopicsMap[topicId].categoryPath || [];
+            }
+            if (shouldAddHistory) addHistoryEntry({ viewType: 'detail', contentId: topicId, categoryPath: allDisplayableTopicsMap[topicId].categoryPath || [] });
             const topic = allDisplayableTopicsMap[topicId];
             if (!topic) { /* ... error handling ... */
                 contentArea.innerHTML = `<p class="text-red-600 text-center py-4">Error: Topic not found (ID: ${topicId}).</p><button id="backButtonDetailError" class="mt-4 block mx-auto px-6 py-2 bg-blue-500 text-white rounded-lg">Back to List</button>`;
@@ -685,22 +713,22 @@
                     if (navigationHistory[i] && navigationHistory[i].viewType === 'list') {
                         isNavigatingViaHistory = true; currentHistoryIndex = i;
                         searchInput.value = navigationHistory[i].contentId || '';
-                        handleSearch(false); updateNavButtonsState(); isNavigatingViaHistory = false; return;
+                        handleSearch(false, navigationHistory[i].highlightTopicId, navigationHistory[i].categoryPath || []); updateNavButtonsState(); isNavigatingViaHistory = false; return;
                     }
                 }
-                renderInitialView();
+                renderInitialView(true, null, []);
             });
         }
 
         // --- Event Handler ---
-        function handleSearch(shouldAddHistory = true) { /* ... same as v0.6 ... */
+        function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) { /* ... same as v0.6 ... */
             const searchTerm = searchInput.value.trim().toLowerCase();
             if (contentArea.offsetWidth > 0) window.scrollTo(0, Math.max(0, contentArea.offsetTop - 80));
-            if (!searchTerm) { renderInitialView(shouldAddHistory); return; }
+            if (!searchTerm) { renderInitialView(shouldAddHistory, highlightId, categoryPath); return; }
             const filteredTopics = allSearchableTopics.filter(topic =>
                 topic.title.toLowerCase().includes(searchTerm) || (topic.path && topic.path.toLowerCase().includes(searchTerm))
             );
-            renderSearchResults(filteredTopics, searchTerm, shouldAddHistory);
+            renderSearchResults(filteredTopics, searchTerm, shouldAddHistory, highlightId, categoryPath);
         }
 
 
@@ -756,17 +784,19 @@
             });
 
 
-            function processItem(item, parentPath = '') { /* ... same as v0.6 ... */
+            function processItem(item, parentPath = '', parentIds = []) { /* ... same as v0.6 ... */
                 const currentPath = parentPath ? `${parentPath} > ${item.title}` : item.title;
+                const currentIds = item.type === 'category' ? [...parentIds, item.id] : parentIds;
                 let fullItemDetails = { ...item, path: currentPath };
                 if (item.type === 'topic' && medicationDetailsData[item.id]) {
                     fullItemDetails.details = medicationDetailsData[item.id];
                 }
+                if (item.type === 'topic') fullItemDetails.categoryPath = parentIds;
                 allDisplayableTopicsMap[item.id] = fullItemDetails;
-                if (item.type === 'topic') allSearchableTopics.push({ id: item.id, title: item.title, path: currentPath });
-                if (item.children) item.children.forEach(child => processItem(child, currentPath));
+                if (item.type === 'topic') allSearchableTopics.push({ id: item.id, title: item.title, path: currentPath, categoryPath: parentIds });
+                if (item.children) item.children.forEach(child => processItem(child, currentPath, currentIds));
             }
-            paramedicCategories.forEach(category => processItem(category));
+            paramedicCategories.forEach(category => processItem(category, '', []));
         }
 
 
