@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- Run `npm install` once, then `npm test` to execute Jest. -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
