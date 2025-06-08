@@ -21,7 +21,7 @@ if (typeof window !== 'undefined') {
 }
 
 // Allow CLI usage: `node slugify.js "Some Text"`
-if (require.main === module) {
+if (typeof require !== 'undefined' && require.main === module) {
   const input = process.argv.slice(2).join(' ');
   console.log(slugify(input));
 }
