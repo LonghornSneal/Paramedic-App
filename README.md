@@ -304,11 +304,18 @@
 
         function addTapListener(element, handler) {
             if (!element) return;
-            element.addEventListener('click', handler);
-            element.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-                handler(e);
-            }, { passive: false });
+            if (window.PointerEvent) {
+                element.addEventListener('pointerup', function(e) {
+                    if (e.pointerType === 'mouse' && e.button !== 0) return;
+                    handler(e);
+                });
+            } else {
+                element.addEventListener('click', handler);
+                element.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    handler(e);
+                }, { passive: false });
+            }
         }
 
         // --- Patient Data Object & Sidebar Inputs ---
