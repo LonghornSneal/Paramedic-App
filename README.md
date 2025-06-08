@@ -302,6 +302,25 @@
         const navBackButton = document.getElementById('nav-back-button');
         const navForwardButton = document.getElementById('nav-forward-button');
 
+        // Helper to handle taps on both touch and mouse devices
+        function addTapListener(element, handler) {
+            if (!element) return;
+            element.addEventListener('click', handler);
+            if (window.PointerEvent) {
+                element.addEventListener('pointerdown', function(e) {
+                    if (e.pointerType === 'touch') {
+                        e.preventDefault();
+                        handler(e);
+                    }
+                }, { passive: false });
+            } else {
+                element.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    handler(e);
+                }, { passive: false });
+            }
+        }
+
         // --- Patient Data Object & Sidebar Inputs ---
         let patientData = {
             age: null, weight: null, weightUnit: 'kg', pmh: [], allergies: [], currentMedications: [],
@@ -349,9 +368,9 @@
         // --- Sidebar Logic ---
         function openSidebar() { patientSidebar.classList.add('open'); sidebarOverlay.classList.add('active'); }
         function closeSidebar() { patientSidebar.classList.remove('open'); sidebarOverlay.classList.remove('active'); }
-        openSidebarButton.addEventListener('click', openSidebar);
-        closeSidebarButton.addEventListener('click', closeSidebar);
-        sidebarOverlay.addEventListener('click', closeSidebar);
+        addTapListener(openSidebarButton, openSidebar);
+        addTapListener(closeSidebarButton, closeSidebar);
+        addTapListener(sidebarOverlay, closeSidebar);
 
         function updatePatientData() {
             patientData.age = document.getElementById('pt-age').value ? parseInt(document.getElementById('pt-age').value) : null;
@@ -417,7 +436,7 @@
                 }
             });
 
-            suggestionsContainer.addEventListener('click', function(e) {
+            addTapListener(suggestionsContainer, function(e) {
                 if (e.target.classList.contains('autocomplete-suggestion-item')) {
                     const selectedValue = e.target.dataset.value;
                     let existingValues = textarea.value.split(',').map(v => v.trim()).filter(v => v);
@@ -468,8 +487,8 @@
         function updateNavButtonsState() { navBackButton.disabled = currentHistoryIndex <= 0; navForwardButton.disabled = currentHistoryIndex >= navigationHistory.length - 1; }
         function addHistoryEntry(entry) { if (isNavigatingViaHistory) return; if (currentHistoryIndex < navigationHistory.length - 1) { navigationHistory = navigationHistory.slice(0, currentHistoryIndex + 1); } navigationHistory.push(entry); currentHistoryIndex = navigationHistory.length - 1; updateNavButtonsState(); }
         function navigateViaHistory(direction) { if ((direction === -1 && currentHistoryIndex <= 0) || (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return; isNavigatingViaHistory = true; currentHistoryIndex += direction; const state = navigationHistory[currentHistoryIndex]; if (state.viewType === 'list') { searchInput.value = state.contentId || ''; handleSearch(false, state.highlightTopicId, state.categoryPath || []); } else if (state.viewType === 'detail') { renderDetailPage(state.contentId, true, false); } updateNavButtonsState(); isNavigatingViaHistory = false; }
-        navBackButton.addEventListener('click', () => navigateViaHistory(-1));
-        navForwardButton.addEventListener('click', () => navigateViaHistory(1));
+        addTapListener(navBackButton, () => navigateViaHistory(-1));
+        addTapListener(navForwardButton, () => navigateViaHistory(1));
 
         // --- Hierarchical List Rendering (same as v0.6) ---
         function createHierarchicalList(items, container) { /* ... same as v0.6 ... */
@@ -482,7 +501,7 @@
                     header.innerHTML = `<span>${item.title}</span><span class="icon-toggle"><svg class="w-5 h-5 icon-toggle-closed" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg><svg class="w-5 h-5 icon-toggle-open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" /></svg></span>`;
                     header.setAttribute('role', 'button'); header.setAttribute('aria-expanded', 'false'); header.setAttribute('tabindex', '0');
                     const childrenContainer = document.createElement('div'); childrenContainer.className = 'category-children';
-                    header.addEventListener('click', () => { listItem.classList.toggle('expanded'); header.setAttribute('aria-expanded', listItem.classList.contains('expanded').toString()); });
+                    addTapListener(header, () => { listItem.classList.toggle('expanded'); header.setAttribute('aria-expanded', listItem.classList.contains('expanded').toString()); });
                     header.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); listItem.classList.toggle('expanded'); header.setAttribute('aria-expanded', listItem.classList.contains('expanded').toString()); }});
                     listItem.appendChild(header); listItem.appendChild(childrenContainer);
                     if (item.children && item.children.length > 0) createHierarchicalList(item.children, childrenContainer);
@@ -490,7 +509,7 @@
                     const topicLink = document.createElement('a'); topicLink.className = 'topic-link-item';
                     topicLink.textContent = item.title; topicLink.href = `#${item.id}`; topicLink.dataset.topicId = item.id;
                     topicLink.setAttribute('role', 'button'); topicLink.setAttribute('tabindex', '0');
-                    topicLink.addEventListener('click', (e) => { e.preventDefault(); renderDetailPage(item.id); });
+                    addTapListener(topicLink, (e) => { e.preventDefault(); renderDetailPage(item.id); });
                     topicLink.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); renderDetailPage(item.id); }});
                     listItem.appendChild(topicLink);
                 }
@@ -517,12 +536,12 @@
                     const item = document.createElement('div'); item.className = 'search-topic-item'; item.textContent = topic.title;
                     if (topic.path) { const pathEl = document.createElement('div'); pathEl.className = 'text-xs text-gray-500 mt-1'; pathEl.textContent = topic.path.split(' > ').slice(0, -1).join(' > '); item.appendChild(pathEl); }
                     item.dataset.topicId = topic.id; item.setAttribute('role', 'button'); item.setAttribute('tabindex', '0');
-                    item.addEventListener('click', () => renderDetailPage(topic.id));
+                    addTapListener(item, () => renderDetailPage(topic.id));
                     item.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); renderDetailPage(topic.id); }});
                     resultsContainer.appendChild(item);
                 });
             } else resultsContainer.innerHTML = '<p class="text-gray-500 text-center py-4">No topics found matching your search.</p>';
-            document.getElementById('clear-search-button').addEventListener('click', () => { searchInput.value = ''; renderInitialView(); });
+            addTapListener(document.getElementById('clear-search-button'), () => { searchInput.value = ''; renderInitialView(); });
             openCategoriesAndHighlight(categoryPath, highlightId);
         }
         function createDetailList(itemsArray) { /* ... same as v0.6 ... */
@@ -548,7 +567,7 @@
 
         function attachToggleInfoHandlers(container) {
             container.querySelectorAll('.toggle-info').forEach(el => {
-                el.addEventListener('click', () => {
+                addTapListener(el, () => {
                     const info = el.querySelector('.info-text');
                     if (info) info.classList.toggle('hidden');
                 });
@@ -584,7 +603,7 @@
             const topic = allDisplayableTopicsMap[topicId];
             if (!topic) { /* ... error handling ... */
                 contentArea.innerHTML = `<p class="text-red-600 text-center py-4">Error: Topic not found (ID: ${topicId}).</p><button id="backButtonDetailError" class="mt-4 block mx-auto px-6 py-2 bg-blue-500 text-white rounded-lg">Back to List</button>`;
-                document.getElementById('backButtonDetailError').addEventListener('click', () => handleSearch(true));
+                addTapListener(document.getElementById('backButtonDetailError'), () => handleSearch(true));
                 return;
             }
 
@@ -708,7 +727,7 @@
                 ${warningsHtml}
                 <div class="bg-gray-50 p-4 rounded-lg shadow-inner space-y-3 text-gray-800">${detailContentHtml}</div>`;
             attachToggleInfoHandlers(contentArea);
-            document.getElementById('backToListButton').addEventListener('click', () => { /* ... same as v0.6 ... */
+            addTapListener(document.getElementById('backToListButton'), () => { /* ... same as v0.6 ... */
                 for (let i = currentHistoryIndex -1 ; i >= 0; i--) {
                     if (navigationHistory[i] && navigationHistory[i].viewType === 'list') {
                         isNavigatingViaHistory = true; currentHistoryIndex = i;
@@ -800,11 +819,11 @@
         }
 
 
-        document.addEventListener('DOMContentLoaded', () => {
+        function initApp() {
             const medicationDetails = { /* ... All medication details from v0.6 ... */
                 '10-calcium-chloride': { title: "10% Calcium Chloride", concentration: "(1,000mg/10ml)", class: "Electrolyte", indications: ["Hyperkalemia", "Symptomatic ↑HR", "Toxic Ingestion"], contraindications: ["Known hypersensitivity", "Digitalis toxicity"], precautions: "Rx slowly unless: Cardiac Arrest.", sideEffects: ["↓HR", "VF", "Extravasation Necrosis", "Abdominal Pain", "N/V"], adultRx: ["[[Mg OD|from Bronchospasm in Eclampsia]] Rx: 1g IV", "Hyperkalemia Rx: 1g IVP/IO", "[[↓BP + Wide-QRS symptomatic rhythm|Implies Hyperkalemia]] Rx: Consult to give 1g IVP", "RRWCT >5mm c̅ HR <150 Rx: 1g IVP", "Repeat Rx if QRS Narrows p̄ Ca **do not give Lidocaine**", "Ca/β-Blocker OD c̅ ↓HR Rx: Consult to give 1g slow IVP"], pediatricRx: ["{{red:Don’t give Calcium Chloride to Pediatric pts}}"] },
                 '2-lidocaine-xylocaine': { title: "2% Lidocaine (Xylocaine)", concentration: "(100mg/5ml)", class: "Antiarrhythmic", indications: ["Symptomatic ↑HR & VF/pVT"], contraindications: ["Hypersensitivity or Local anesthetic allergy in the amide class", "AV block >1º in the absence of a pacemaker", "Idioventricular escape rhythm s̄ pacemaker", "Stokes-Adams syndrome", "WPW syndrome"], precautions: "[[Give ↓ Maintenance Infusions for:|Prolonged Plasma half-life]] >70yo, CHF, or hepatic failure.\nDon’t Rx if Idioventricular escape rhythm s̄ a pacemaker is Present.", sideEffects: ["Drowsiness", "Paresthesia", "Slurred speech", "[[Nystagmus|early sign of toxicity]]", "[[Seizures|severe toxicity]]"], adultRx: ["VT Rx: 1-1.5mg/kg slow IVP over 2-3min,\n      If n/c p̄ 5min, [[then give 0.5-0.75mg/kg|Max = 3mg/kg]]", "P̄-ROSC Stabilization Rx: Consult to give 2mg/min IV Maintenance Infusion", "EZ-IO Rx: 2ml over 60-90sec\n      → Flush c̅ 5-10ml NS rapidly over 5sec\n            → Then give 1ml over 30sec"] },
-                '8-4-sodium-bicarbonate-nahco3': { title: "8.4% Sodium Bicarbonate (NaHCO₃)", concentration: "(50mEq/50ml)", notes: ["***Given separately from other drugs***"], class: "[[Alkalizing|buffering]] agent", indications: ["[[Fall or Weakness|probably only for suspected hyperkalemia]]", "Hyperkalemia", "Symptomatic ↑HR", "Toxic Ingestion"], precautions: "Bicarb precipitates/Interacts c̅ multiple Rx’s\n      {{red:Don’t Mix}}\n            Flush IV-line ā & p̄ administration.\nNeonates & children <2yo → [[4.2% given slowly instead|Bicarb may cause tissue necrosis, ulceration, & sloughing]]", sideEffects: ["Metabolic alkalosis", "Paradoxical acidosis", "Exacerbation of HF", "Hypernatremia", "Hypokalemia", "Hypocalcemia"], adultRx: ["[[Dead + Bed Sores from Immobility|Suggests Hyperkalemia]] Rx: Consult to give 1mEq/kg", "Hyperkalemia Rx: 50mEq IVP/IO", "[[RRWCT >5mm c̅ HR <150|Suggests Hyperkalemia]] Rx: 50mEq IVP\n      If QRS narrows → Give 2nd dose", "Tricyclic OD c̅ Wide-QRS & ↓BP or Pulseless Rx: [[Consult to give 1mEq/kg IVP|Several doses may be needed]]"], pediatricRx: ["{{redul:Neonates & Children <2yo = 4.2% Bicarb given slowly}}", "Propranolol OD c̅ Widened QRS Rx: Consult to give 1-2mEq/kg IV/IO Bolus", "Tricyclic OD c̅ ↓BP or Pulseless or Wide-QRS Rx: Consult to give 1-2mEq/kg IV/IO"] },
+                '84-sodium-bicarbonate-nahco3': { title: "8.4% Sodium Bicarbonate (NaHCO₃)", concentration: "(50mEq/50ml)", notes: ["***Given separately from other drugs***"], class: "[[Alkalizing|buffering]] agent", indications: ["[[Fall or Weakness|probably only for suspected hyperkalemia]]", "Hyperkalemia", "Symptomatic ↑HR", "Toxic Ingestion"], precautions: "Bicarb precipitates/Interacts c̅ multiple Rx’s\n      {{red:Don’t Mix}}\n            Flush IV-line ā & p̄ administration.\nNeonates & children <2yo → [[4.2% given slowly instead|Bicarb may cause tissue necrosis, ulceration, & sloughing]]", sideEffects: ["Metabolic alkalosis", "Paradoxical acidosis", "Exacerbation of HF", "Hypernatremia", "Hypokalemia", "Hypocalcemia"], adultRx: ["[[Dead + Bed Sores from Immobility|Suggests Hyperkalemia]] Rx: Consult to give 1mEq/kg", "Hyperkalemia Rx: 50mEq IVP/IO", "[[RRWCT >5mm c̅ HR <150|Suggests Hyperkalemia]] Rx: 50mEq IVP\n      If QRS narrows → Give 2nd dose", "Tricyclic OD c̅ Wide-QRS & ↓BP or Pulseless Rx: [[Consult to give 1mEq/kg IVP|Several doses may be needed]]"], pediatricRx: ["{{redul:Neonates & Children <2yo = 4.2% Bicarb given slowly}}", "Propranolol OD c̅ Widened QRS Rx: Consult to give 1-2mEq/kg IV/IO Bolus", "Tricyclic OD c̅ ↓BP or Pulseless or Wide-QRS Rx: Consult to give 1-2mEq/kg IV/IO"] },
                 'adenosine-adenocard': { title: "Adenosine (Adenocard)", concentration: "(6mg/2ml)", class: "Antiarrhythmic", indications: ["SVT"], contraindications: ["Known hypersensitivity", "A-Fib associated  c̅  WPW Syndrome"], precautions: "Rx in a pt c̅ A-Fib & WPW may result in VF\nRx may induce Airway Hyperresponsiveness & should be used c̅ caution in pts c̅ [[RAD Hx|asthma]]", sideEffects: ["H/A", "Cx pn", "Flushing", "Dyspnea/Bronchoconstriction", "↓HR", "AV block", "Sinus Pause/Asystole"], adultRx: ["SVT Rx: 6mg Fast IVP c̅ 10ml Flush\n      If n/c → 12mg Fast IVP c̅ 10ml Flush\n            If n/c → 12mg Fast IVP c̅ 10ml Flush\n                If n/c → Consult to give 12mg Fast IVP during transport\n                [[Note:|n/c =Stable Pt & Rhythm is unchanged]]"] },
                 'albuterol': { title: "Albuterol", concentration: "(2.5mg/3cc)", class: "[[Beta Adrenergic Agonist|β₂ selective]]", indications: ["Bronchospasm"], contraindications: ["Known hypersensitivity"], sideEffects: ["↑HR", "Palpitations/Cardiac Ectopy", "Tremor", "H/A", "N/V"], adultRx: ["Bronchospasm Rx: 2.5mg in 3cc Neb c̅ O₂ ≥6LPM\n      Consult to Repeat Dose or Give Duo-Neb", "Hyperkalemia Rx: 2.5mg Neb given p̄ Ca & Bicarb"], pediatricRx: ["Bronchospasm Rx: 2.5mg Neb c̅ O₂ ≥6LPM\n      Consult to repeat dose"] },
                 'asa': { title: "ASA", concentration: "(81mg/tab)", class: "NSAID", indications: ["MI or ACS"], contraindications: ["Known hypersensitivity", "Environmental hyperthermia", "[[Peptic ulcer disease|relative for cardiac indications]]", "Pediatric/Adolescent → Due to Reye’s Syndrome"], precautions: "[[Reye’s Syndrome S/S|CNS damage, liver injury, & ↓BGL]]", sideEffects: ["Gastritis", "N/V", "Upper GI bleeding", "↑ Bleeding"], adultRx: ["MI or ACS Rx 324mg PO"] },
@@ -840,7 +859,7 @@
                 {id: slugify("Pediatric Protocols"), title: "Pediatric Protocols", type: "category", children: [{ id: slugify("Pediatric Assessment & VS"), title: "Pediatric Assessment & VS", type: "topic" },{ id: slugify("Pediatric Airway & Breathing"), title: "Airway & Breathing", type: "topic" },{ id: slugify("Pediatric Circulation-Cardiac"), title: "Circulation/Cardiac", type: "topic" },{ id: slugify("Pediatric Medical"), title: "Medical", type: "topic" },{ id: slugify("Pediatric Trauma"), title: "Trauma", type: "topic" },{ id: slugify("Pediatric Special Needs Children"), title: "Special Needs Children", type: "topic" },{ id: slugify("Pediatric Refusals"), title: "Refusals", type: "topic" }]},
                 {id: slugify("ALS Medications"), title: "ALS Medications", type: "category", children: [
                         { id: '10-calcium-chloride', title: "10% Calcium Chloride", type: "topic" }, { id: '2-lidocaine-xylocaine', title: "2% Lidocaine (Xylocaine)", type: "topic" },
-                        { id: '8-4-sodium-bicarbonate-nahco3', title: "8.4% Sodium Bicarbonate (NaHCO₃)", type: "topic" }, { id: 'adenosine-adenocard', title: "Adenosine (Adenocard)", type: "topic" },
+                        { id: '84-sodium-bicarbonate-nahco3', title: "8.4% Sodium Bicarbonate (NaHCO₃)", type: "topic" }, { id: 'adenosine-adenocard', title: "Adenosine (Adenocard)", type: "topic" },
                         { id: 'albuterol', title: "Albuterol", type: "topic" }, { id: 'asa', title: "ASA", type: "topic" }, { id: 'atropine-sulfate', title: "Atropine Sulfate", type: "topic" },
                         { id: 'd10', title: "D10", type: "topic" }, { id: 'd5', title: "D5", type: "topic" }, { id: 'dexamethasone-decadron', title: "Dexamethasone (Decadron)", type: "topic" },
                         { id: 'diphenhydramine-benadryl', title: "Diphenhydramine (Benadryl)", type: "topic" }, { id: 'droperidol-inapsine', title: "Droperidol (Inapsine)", type: "topic" },
@@ -873,7 +892,24 @@
             });
             renderInitialView(true);
             updateNavButtonsState();
-        });
+        }
+
+        // On some mobile devices, DOMContentLoaded may fire before scripts load.
+        // This wrapper ensures initialization still occurs reliably.
+        let appInitialized = false;
+        function tryInit() {
+            if (!appInitialized) {
+                appInitialized = true;
+                initApp();
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', tryInit);
+            window.addEventListener('load', tryInit);
+        } else {
+            tryInit();
+        }
     </script>
     <script>
       if (window.slugIDs) {
@@ -889,8 +925,5 @@
         document.body.appendChild(container);
       }
     </script>
-<div class="hidden">
-  <span class="toggle-info">Example<span class="info-text hidden">info</span></span>
-</div>
 </body>
 </html>
