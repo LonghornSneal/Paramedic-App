@@ -8,6 +8,7 @@ describe('slugify', () => {
 
   test('handles special punctuation and subscript numbers', () => {
     expect(slugify('NaHCO₃')).toBe('nahco3');
+    expect(slugify('H₂O')).toBe('h2o');
     expect(slugify('1+1=2')).toBe('1-12');
     expect(slugify('Sample text (test)')).toBe('sample-text-test');
   });
