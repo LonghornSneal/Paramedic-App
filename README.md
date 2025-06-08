@@ -304,18 +304,18 @@
 
         function addTapListener(element, handler) {
             if (!element) return;
-            if (window.PointerEvent) {
-                element.addEventListener('pointerup', function(e) {
-                    if (e.pointerType === 'mouse' && e.button !== 0) return;
-                    handler(e);
-                });
-            } else {
-                element.addEventListener('click', handler);
-                element.addEventListener('touchend', function(e) {
-                    e.preventDefault();
-                    handler(e);
-                }, { passive: false });
-            }
+            const activate = (e) => {
+                if (e.pointerType === 'mouse' && e.button !== 0) return;
+                e.preventDefault();
+                handler(e);
+            };
+            element.addEventListener('click', activate);
+            element.addEventListener('touchend', activate, { passive: false });
+            element.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    activate(e);
+                }
+            });
         }
 
         // --- Patient Data Object & Sidebar Inputs ---
