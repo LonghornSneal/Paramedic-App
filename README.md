@@ -621,7 +621,7 @@
                 // Pediatric Rx Warning
                 if (patientData.age !== null && patientData.age < PEDIATRIC_AGE_THRESHOLD) {
                     const pedsRxText = (topic.details.pediatricRx || []).join('').toLowerCase();
-                    if (!topic.details.pediatricRx || pedsRxText.length === 0 || pedsRxText.includes("don’t give") || pedsRxText.includes("not approved")) {
+                    if (!topic.details.pediatricRx || pedsRxText.length === 0 || pedsRxText.includes("don't give") || pedsRxText.includes("not approved")) {
                         collectedWarnings.push({ type: 'orange', text: `<strong>PEDIATRIC NOTE:</strong> No specific pediatric dosage listed or not recommended for pediatric use. Patient age: ${patientData.age}. Consider alternative or consult.` });
                     }
                 }
