@@ -1,7 +1,7 @@
 const slugIDs = [
   '10-calcium-chloride',
   '2-lidocaine-xylocaine',
-  '84-sodium-bicarbonate-nahco3',
+  '8-4-sodium-bicarbonate-nahco3',
   'a-fib-rvr-or-a-flutter-stable-symptomatic',
   'abbott-approved-abbreviations',
   'abbreviations-references',
