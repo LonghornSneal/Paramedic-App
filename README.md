@@ -571,7 +571,7 @@
         }
 
         function attachToggleInfoHandlers(container) {
-            container.querySelectorAll('.toggle-info').forEach(el => {
+            Array.from(container.querySelectorAll('.toggle-info')).forEach(el => {
                 addTapListener(el, () => {
                     const info = el.querySelector('.info-text');
                     if (info) info.classList.toggle('hidden');
@@ -590,7 +590,7 @@
                 }
             });
             // Clear previous highlight
-            contentArea.querySelectorAll('.topic-link-item.recently-viewed').forEach(el => {
+            Array.from(contentArea.querySelectorAll('.topic-link-item.recently-viewed')).forEach(el => {
                 el.classList.remove('recently-viewed');
             });
             if (highlightId) {
