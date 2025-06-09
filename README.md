@@ -301,25 +301,25 @@
     <script src="slugList.js"></script>
     <script>
         // --- DOM Elements ---
-        const searchInput = document.getElementById('searchInput');
-        const contentArea = document.getElementById('content-area');
-        const patientSidebar = document.getElementById('patient-sidebar');
-        const openSidebarButton = document.getElementById('open-sidebar-button');
-        const closeSidebarButton = document.getElementById('close-sidebar-button');
-        const sidebarOverlay = document.getElementById('sidebar-overlay');
-        const navBackButton = document.getElementById('nav-back-button');
-        const navForwardButton = document.getElementById('nav-forward-button');
+        var searchInput = document.getElementById('searchInput');
+        var contentArea = document.getElementById('content-area');
+        var patientSidebar = document.getElementById('patient-sidebar');
+        var openSidebarButton = document.getElementById('open-sidebar-button');
+        var closeSidebarButton = document.getElementById('close-sidebar-button');
+        var sidebarOverlay = document.getElementById('sidebar-overlay');
+        var navBackButton = document.getElementById('nav-back-button');
+        var navForwardButton = document.getElementById('nav-forward-button');
 
         function addTapListener(element, handler) {
             if (!element) return;
-            const activate = (e) => {
+            function activate(e) {
                 if (e.pointerType === 'mouse' && e.button !== 0) return;
                 e.preventDefault();
                 handler(e);
-            };
+            }
             element.addEventListener('click', activate);
             element.addEventListener('touchend', activate, { passive: false });
-            element.addEventListener('keypress', (e) => {
+            element.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter' || e.key === ' ') {
                     activate(e);
                 }
@@ -327,37 +327,37 @@
         }
 
         // --- Patient Data Object & Sidebar Inputs ---
-        let patientData = {
+        var patientData = {
             age: null, weight: null, weightUnit: 'kg', pmh: [], allergies: [], currentMedications: [],
             symptoms: [], // Changed to array for consistency if S/S also becomes tag-based
             vitalSigns: { bp: '', hr: null, spo2: null, etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: '' },
             ekg: ''
         };
-        const ptInputIds = [ /* IDs of all patient data inputs */
+        var ptInputIds = [ /* IDs of all patient data inputs */
             'pt-age', 'pt-weight', 'pt-weight-unit', 'pt-pmh', 'pt-allergies', 'pt-medications', 'pt-symptoms',
             'vs-bp', 'vs-hr', 'vs-spo2', 'vs-etco2', 'vs-rr', 'vs-bgl', 'vs-eyes', 'vs-gcs',
             'vs-ao-status', 'vs-lung-sounds', 'pt-ekg'
         ];
-        const ptInputs = ptInputIds.map(id => document.getElementById(id));
+        var ptInputs = ptInputIds.map(function(id) { return document.getElementById(id); });
 
         // --- Navigation History ---
-        let navigationHistory = [];
-        let currentHistoryIndex = -1;
-        let isNavigatingViaHistory = false;
+        var navigationHistory = [];
+        var currentHistoryIndex = -1;
+        var isNavigatingViaHistory = false;
 
         // --- Hierarchical Data, Flat Search List, Medication Details ---
-        let paramedicCategories = [];
-        let allSearchableTopics = [];
-        let allDisplayableTopicsMap = {};
-        let medicationDetailsData = {};
-        const PEDIATRIC_AGE_THRESHOLD = 18;
-        const PDE5_INHIBITORS = ["sildenafil", "viagra", "revatio", "vardenafil", "levitra", "tadalafil", "cialis", "adcirca"];
+        var paramedicCategories = [];
+        var allSearchableTopics = [];
+        var allDisplayableTopicsMap = {};
+        var medicationDetailsData = {};
+        var PEDIATRIC_AGE_THRESHOLD = 18;
+        var PDE5_INHIBITORS = ["sildenafil", "viagra", "revatio", "vardenafil", "levitra", "tadalafil", "cialis", "adcirca"];
 
         // --- Autocomplete Data Stores ---
-        let pmhSuggestions = new Set();
-        let allergySuggestions = new Set();
-        let medicationNameSuggestions = new Set(); // For "Current Medications" field
-        let symptomSuggestions = new Set([
+        var pmhSuggestions = new Set();
+        var allergySuggestions = new Set();
+        var medicationNameSuggestions = new Set(); // For "Current Medications" field
+        var symptomSuggestions = new Set([
             "chest pain", "shortness of breath", "sob", "dyspnea", "nausea", "vomiting", "diarrhea", "abdominal pain",
             "headache", "dizziness", "syncope", "altered mental status", "ams", "weakness", "fatigue", "fever",
             "chills", "rash", "seizure", "palpitations", "edema", "cough", "anxiety", "depression", "back pain", "trauma"
@@ -381,7 +381,13 @@
             patientData.age = document.getElementById('pt-age').value ? parseInt(document.getElementById('pt-age').value) : null;
             patientData.weight = document.getElementById('pt-weight').value ? parseFloat(document.getElementById('pt-weight').value) : null;
             patientData.weightUnit = document.getElementById('pt-weight-unit').value;
-            const getArrayFromTextarea = (id) => document.getElementById(id).value.trim() ? document.getElementById(id).value.split(',').map(item => item.trim().toLowerCase()).filter(item => item) : [];
+            function getArrayFromTextarea(id) {
+                var el = document.getElementById(id);
+                if (!el || !el.value.trim()) return [];
+                return el.value.split(',').map(function(item) {
+                    return item.trim().toLowerCase();
+                }).filter(function(item) { return item; });
+            }
             patientData.pmh = getArrayFromTextarea('pt-pmh');
             patientData.allergies = getArrayFromTextarea('pt-allergies');
             patientData.currentMedications = getArrayFromTextarea('pt-medications');
@@ -408,7 +414,9 @@
                 }
             }
         }
-        ptInputs.forEach(input => { if (input) input.addEventListener('input', updatePatientData); });
+        ptInputs.forEach(function(input) {
+            if (input) input.addEventListener('input', updatePatientData);
+        });
 
         // --- Autocomplete Functionality ---
         function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceSet) {
