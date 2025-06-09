@@ -297,8 +297,170 @@
         <footer class="text-center p-4 text-gray-500 text-sm mt-2">App Version 0.7</footer>
     </div>
 
-    <script src="slugify.js"></script>
-    <script src="slugList.js"></script>
+    <script>
+const subscriptMap = {
+  '₀': '0',
+  '₁': '1',
+  '₂': '2',
+  '₃': '3',
+  '₄': '4',
+  '₅': '5',
+  '₆': '6',
+  '₇': '7',
+  '₈': '8',
+  '₉': '9',
+};
+
+function slugify(text) {
+  if (!text) return '';
+  return text.toString().toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[+/:(),&%#\u2080-\u2089]/g, (match) => {
+      if (subscriptMap[match]) return subscriptMap[match];
+      return '-';
+    })
+    .replace(/[^\w-]+/g, '')
+    .replace(/--+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '');
+}
+
+const slugIDs = [
+  '10-calcium-chloride',
+  '2-lidocaine-xylocaine',
+  '8-4-sodium-bicarbonate-nahco3',
+  'a-fib-rvr-or-a-flutter-stable-symptomatic',
+  'abbott-approved-abbreviations',
+  'abbreviations-references',
+  'adenosine-adenocard',
+  'administrative-legal-essentials',
+  'adult-protocols',
+  'air-ambulance-utilization',
+  'airway-breathing',
+  'albuterol',
+  'allergic-reaction',
+  'als-ground-rules',
+  'als-medications',
+  'anaphylaxis',
+  'applicability-of-the-cog',
+  'asa',
+  'atropine-sulfate',
+  'bradycardia',
+  'breech',
+  'bronchospasm',
+  'cardiac-arrest-pressure-sores-from-immobility',
+  'cardiogenic-shock-not-post-arrest',
+  'cdc-field-triage-guidelines-trauma',
+  'circulation-cardiac',
+  'circulation-cardiology',
+  'clinical-errors-reporting',
+  'consulting-olmc',
+  'core-principles-safety-well-being',
+  'cpap-bipap',
+  'crime-scene',
+  'd10',
+  'd5',
+  'dexamethasone-decadron',
+  'diltiazem-add-vantage-directions',
+  'diphenhydramine-benadryl',
+  'dispatching-md-200',
+  'droperidol-inapsine',
+  'eclampsia',
+  'emr-accompanying-critically-ill',
+  'epi-1-1-000-adrenaline',
+  'epi-1-10-000',
+  'epi-1-100-000-push-dose-epi',
+  'etomidate-amidate',
+  'ez-io-insertion',
+  'fall-or-weakness',
+  'fentanyl-sublimaze',
+  'frank-complete-breech-presentation',
+  'general-important-information',
+  'glucometer-mckesson-true-metrix-pro',
+  'h-a-or-abdominal-pain',
+  'hyperglycemia',
+  'hyperkalemia',
+  'hypoglycemia',
+  'i-gel-supraglottic-airway-sga',
+  'introduction-core-principles',
+  'introduction-to-abbott',
+  'ipratropium',
+  'ketamine-ketalar',
+  'ketorolac-tromethamine-toradol',
+  'lvad-pt',
+  'mace-pepper-spray',
+  'magnesium-sulfate-mgso4',
+  'major-level-1-trauma',
+  'mandatory-reporting',
+  'mat-stable',
+  'medical',
+  'medical-emergencies',
+  'medication-administration-cross-check-macc',
+  'metoprolol-tartrate-lopressor',
+  'mi-acs',
+  'midazolam-versed',
+  'minutes-of-oxygen-by-cylinder-size',
+  'mono-vt-stable',
+  'morphine',
+  'mucosal-atomization-device-mad',
+  'n-v',
+  'naloxone-narcan',
+  'nasal-intubation',
+  'normal-delivery',
+  'ntg',
+  'ob-gyn',
+  'on-scene-authority',
+  'on-scene-healthcare-professionals',
+  'ondansetron-zofran',
+  'operational-protocols',
+  'other-abbreviations',
+  'pain',
+  'pcr-requirements',
+  'pea-asystole',
+  'pediatric-assessment-vs',
+  'pediatric-protocols',
+  'poly-vt-torsades-stable',
+  'poly-vt-torsades-unstable',
+  'prolapsed-cord',
+  'pulmonary-edema',
+  'push-dose-epi',
+  'rass-1-through-4',
+  'refusals',
+  'rehabilitation-emergency-incidents-municipal-partners',
+  'response-mode',
+  'restraint-of-agitated-combative-patients',
+  'richmond-agitation-sedation-scale-rass',
+  'rosc-stabilization',
+  'rule-of-9s-rule-of-palms-bsa-burn-estimation',
+  'sai',
+  'scope-violations-possible-consequences',
+  'seizure',
+  'sepsis',
+  'shoulder-dystocia',
+  'sickle-cell-crisis',
+  'skills-equipment',
+  'sludgem-pt',
+  'smith-modified-sgarbossa-criteria',
+  'smr',
+  'special-needs-children',
+  'stroke',
+  'suspension-revocation',
+  'svt-mono-vt-unstable',
+  'svt-stable',
+  'taser',
+  'thermometer-braun-thermoscan',
+  'toxic-ingestion-with-serious-s-s',
+  'transfer-to-lesser-credential',
+  'trauma',
+  'understanding-ratios-percentages-solution-mixtures',
+  'ventilator-pt-intubated-sedated',
+  'ventilator-set-up-parapac-plus',
+  'vf-pvt',
+  'workers-compensation-process',
+];
+if (typeof module !== 'undefined') module.exports = slugIDs;
+if (typeof window !== 'undefined') window.slugIDs = slugIDs;
+    </script>
     <script>
         // --- DOM Elements ---
         const searchInput = document.getElementById('searchInput');
@@ -903,7 +1065,7 @@
         else initApp();
     </script>
     <script>
-      if (window.slugIDs) {
+      if (typeof slugIDs !== 'undefined') {
         const container = document.createElement('div');
         container.id = 'slug-id-container';
         container.classList.add('hidden');
