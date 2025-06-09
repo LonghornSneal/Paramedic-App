@@ -13,10 +13,13 @@
             overscroll-behavior-y: contain; /* Prevents pull-to-refresh on mobile */
             display: flex;
             flex-direction: column;
+            min-height: 100vh; /* fallback for browsers without CSS vars */
             min-height: calc(var(--vh, 1vh) * 100);
         }
         #patient-sidebar {
-            position: fixed; top: 0; left: 0; width: 300px; max-width: 80%; height: calc(var(--vh, 1vh) * 100);
+            position: fixed; top: 0; left: 0; width: 300px; max-width: 80%;
+            height: 100vh; /* fallback */
+            height: calc(var(--vh, 1vh) * 100);
             background-color: #f9fafb; /* gray-50 */ border-right: 1px solid #e5e7eb; /* gray-200 */
             padding: 1rem; overflow-y: auto; z-index: 100; transform: translateX(-100%);
             transition: transform 0.3s ease-in-out; box-shadow: 2px 0 10px rgba(0,0,0,0.1);
@@ -289,7 +292,7 @@
         </header>
 
         <main class="container mx-auto p-4 flex-grow">
-            <div id="content-area" class="bg-white p-3 md:p-6 rounded-lg shadow-lg min-h-[calc(var(--vh,1vh)*100-200px)]">
+            <div id="content-area" class="bg-white p-3 md:p-6 rounded-lg shadow-lg min-h-[calc(100vh-200px)] min-h-[calc(var(--vh,1vh)*100-200px)]">
                 <p class="text-gray-500 text-center">Loading categories...</p>
             </div>
         </main>
