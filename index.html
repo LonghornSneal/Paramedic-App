@@ -710,13 +710,8 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
             addTapListener(document.getElementById('clear-search-button'), () => { searchInput.value = ''; renderInitialView(); });
             openCategoriesAndHighlight(categoryPath, highlightId);
         }
-        function createDetailList(itemsArray) { /* ... same as v0.6 ... */
-            if (!itemsArray || itemsArray.length === 0) return '<p class="text-gray-500 italic">None listed.</p>';
-            return `<ul class="detail-list">${itemsArray.map(item => `<li>${item}</li>`).join('')}</ul>`;
-        }
-        function createDetailText(textBlock) { /* enhanced to support toggle-info and red text */
-            if (!textBlock || textBlock.trim() === '') return '<p class="text-gray-500 italic">Not specified.</p>';
-            let safeText = textBlock.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        function parseTextMarkup(text) {
+            let safeText = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
             safeText = safeText.replace(/\n/g, "<br>");
             safeText = safeText.replace(/\[\[(.+?)\|(.+?)\]\]/g, (m, disp, info) =>
                 `<span class="toggle-info">${disp}<span class="info-text hidden">${info}</span></span>`);
@@ -729,6 +724,15 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
             safeText = safeText.replace(/\{\{blackul:(.+?)\}\}/g, (m, text) =>
                 `<span class="font-bold underline decoration-black">${text}</span>`);
             safeText = safeText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            return safeText;
+        }
+        function createDetailList(itemsArray) { /* ... same as v0.6 ... */
+            if (!itemsArray || itemsArray.length === 0) return '<p class="text-gray-500 italic">None listed.</p>';
+            return `<ul class="detail-list">${itemsArray.map(item => `<li>${parseTextMarkup(item)}</li>`).join('')}</ul>`;
+        }
+        function createDetailText(textBlock) { /* enhanced to support toggle-info and red text */
+            if (!textBlock || textBlock.trim() === '') return '<p class="text-gray-500 italic">Not specified.</p>';
+            const safeText = parseTextMarkup(textBlock);
             return `<div class="detail-text">${safeText}</div>`;
         }
         function createWarningIcon(colorClass = 'text-yellow-600') { /* ... same as v0.6 ... */
