@@ -56,6 +56,10 @@
         .topic-link-item:hover { background-color: #e0f2fe; /* sky-100 */ }
         .topic-link-item:active { transform: scale(0.98); }
         .topic-link-item.recently-viewed { background-color: #fef3c7; }
+        .strikethrough {
+            text-decoration: line-through;
+            color: #6b7280; /* gray-500 */
+        }
         .search-topic-item {
             padding: 0.75rem 1rem; background-color: #f9fafb; border-radius: 0.375rem;
             cursor: pointer; border: 1px solid #e5e7eb; margin-bottom: 0.5rem;
@@ -236,16 +240,21 @@
             <textarea id="pt-allergies" class="sidebar-input" rows="2" placeholder="Type or select, comma separated..."></textarea>
             <div id="pt-allergies-suggestions" class="autocomplete-suggestions hidden"></div>
         </div>
-         <div class="mt-3 autocomplete-container">
-            <label for="pt-medications" class="sidebar-label">Current Medications:</label>
-            <textarea id="pt-medications" class="sidebar-input" rows="2" placeholder="Type or select, comma separated..."></textarea>
-            <div id="pt-medications-suggestions" class="autocomplete-suggestions hidden"></div>
-        </div>
-        <div class="mt-3 autocomplete-container">
-            <label for="pt-symptoms" class="sidebar-label">Signs/Symptoms (S/S):</label>
-            <textarea id="pt-symptoms" class="sidebar-input" rows="3" placeholder="Type or select, comma separated..."></textarea>
-            <div id="pt-symptoms-suggestions" class="autocomplete-suggestions hidden"></div>
-        </div>
+          <div class="mt-3 autocomplete-container">
+              <label for="pt-medications" class="sidebar-label">Current Medications:</label>
+              <textarea id="pt-medications" class="sidebar-input" rows="2" placeholder="Type or select, comma separated..."></textarea>
+              <div id="pt-medications-suggestions" class="autocomplete-suggestions hidden"></div>
+          </div>
+          <div class="mt-3 autocomplete-container">
+              <label for="pt-indications" class="sidebar-label">Indications:</label>
+              <textarea id="pt-indications" class="sidebar-input" rows="2" placeholder="Type or select, comma separated..."></textarea>
+              <div id="pt-indications-suggestions" class="autocomplete-suggestions hidden"></div>
+          </div>
+          <div class="mt-3 autocomplete-container">
+              <label for="pt-symptoms" class="sidebar-label">Signs/Symptoms (S/S):</label>
+              <textarea id="pt-symptoms" class="sidebar-input" rows="3" placeholder="Type or select, comma separated..."></textarea>
+              <div id="pt-symptoms-suggestions" class="autocomplete-suggestions hidden"></div>
+          </div>
         <div class="sidebar-section">
             <h3 class="sidebar-section-title">Vital Signs (VS)</h3>
             <div class="grid grid-cols-2 gap-x-3 gap-y-2">
@@ -479,6 +488,7 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
                 e.preventDefault();
                 handler(e);
             };
+
             element.addEventListener('click', activate);
             element.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
@@ -489,13 +499,13 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
 
         // --- Patient Data Object & Sidebar Inputs ---
         let patientData = {
-            age: null, weight: null, weightUnit: 'kg', pmh: [], allergies: [], currentMedications: [],
+            age: null, weight: null, weightUnit: 'kg', pmh: [], allergies: [], currentMedications: [], indications: [],
             symptoms: [], // Changed to array for consistency if S/S also becomes tag-based
             vitalSigns: { bp: '', hr: null, spo2: null, etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: '' },
             ekg: ''
         };
         const ptInputIds = [ /* IDs of all patient data inputs */
-            'pt-age', 'pt-weight', 'pt-weight-unit', 'pt-pmh', 'pt-allergies', 'pt-medications', 'pt-symptoms',
+            'pt-age', 'pt-weight', 'pt-weight-unit', 'pt-pmh', 'pt-allergies', 'pt-medications', 'pt-indications', 'pt-symptoms',
             'vs-bp', 'vs-hr', 'vs-spo2', 'vs-etco2', 'vs-rr', 'vs-bgl', 'vs-eyes', 'vs-gcs',
             'vs-ao-status', 'vs-lung-sounds', 'pt-ekg'
         ];
@@ -518,6 +528,7 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
         let pmhSuggestions = new Set();
         let allergySuggestions = new Set();
         let medicationNameSuggestions = new Set(); // For "Current Medications" field
+        let indicationSuggestions = new Set();
         let symptomSuggestions = new Set([
             "chest pain", "shortness of breath", "sob", "dyspnea", "nausea", "vomiting", "diarrhea", "abdominal pain",
             "headache", "dizziness", "syncope", "altered mental status", "ams", "weakness", "fatigue", "fever",
@@ -546,6 +557,7 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
             patientData.pmh = getArrayFromTextarea('pt-pmh');
             patientData.allergies = getArrayFromTextarea('pt-allergies');
             patientData.currentMedications = getArrayFromTextarea('pt-medications');
+            patientData.indications = getArrayFromTextarea('pt-indications');
             patientData.symptoms = getArrayFromTextarea('pt-symptoms'); // Now an array
             patientData.vitalSigns = {
                 bp: document.getElementById('vs-bp').value.trim(),
@@ -560,6 +572,21 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
                 lungSounds: document.getElementById('vs-lung-sounds').value.trim()
             };
             patientData.ekg = document.getElementById('pt-ekg').value.trim();
+
+            // Filter medication list by selected indications
+            const topicLinks = document.querySelectorAll('a.topic-link-item');
+            topicLinks.forEach(link => {
+                const medId = link.dataset.topicId;
+                const med = allDisplayableTopicsMap[medId];
+                if (patientData.indications.length > 0 && med && med.details && med.details.indications) {
+                    const medIndications = med.details.indications.map(i => i.toLowerCase());
+                    const hasIndication = patientData.indications.some(ind => medIndications.includes(ind));
+                    if (!hasIndication) link.classList.add('strikethrough');
+                    else link.classList.remove('strikethrough');
+                } else {
+                    link.classList.remove('strikethrough');
+                }
+            });
 
             const currentTopicTitleEl = contentArea.querySelector('h2.topic-main-title');
             if (currentTopicTitleEl) {
@@ -1027,6 +1054,12 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
                 'ntg': { title: "NTG", concentration: "(0.4mg/spray)", class: "Organic nitrate", indications: ["MI or ACS", "Pulmonary Edema"], contraindications: ["Known hypersensitivity", "SBP <100", "Recent use of a phosphodiesterase type 5 inhibitor (sildenafil [Viagra, Revatio] or vardenafil [Levitra] within 24 hours or tadalafil [Cialis, Adcirca]) c̅in 36 hours.", "Right ventricular infarction (RVI)", "Tachycardia (HR>100) in the absence of HF (not universal)", "↑ICP"], precautions: "Pts c̅ RVI are preload sensitive & can develop severe ↓BP in response to Preload-reducing agents. If ↓BP develops following Rx → IVF may be necessary.\nInferior STEMI → Do right sided EKG to look for RVI evidence\nPts c̅ aortic stenosis are very preload dependent to maintain cardiac output. NTG c̅ aortic stenosis or murmur should be judicious & carefully titrated.", sideEffects: ["Hypotension", "H/A", "Tachycardia (reflex)", "Bradycardia", "Methmemoglobinemia → nitrate ions oxidize hemoglobin\n   long term effect & unlikely seen in EMS setting"], adultRx: ["Don’t give if pt had Viagra/Cialis within the past 48hrs", "NTG is NOT contraindicated c̅ Inferior STEMI \n   → Should the pt become profoundly Hypotensive\n   → Infuse NS until BP >90", "Be cautious c̅ Aortic Stenosis or Murmurs", "Intervention: MI/ACS = 0.4mg SL q̄ 5min prn only if BP >100 \n   or  >110 if pt Never had NTG ā\n   Max = 3 doses", "Continuity: Repeat  q̄  5min  if → SBP >100 & pain still present", "Intervention: Pulmonary Edema = 0.4mg  SL  if BP  >100\n   or  >120  if pt Never had NTG ā", "Intervention: Flash Pulm-Edema from Hypertensive Crisis  s̄  IV \n   = 0.4mg  SL", "Consultation: 0.8-1.2mg  SL & Inform Med-Control if no IV yet"] },
                 'ondansetron-zofran': { title: "Ondansetron (Zofran)", concentration: "(4mg/2ml)", class: "Antiemetic", indications: ["N/V"], contraindications: ["Known hypersensitivity", "Prolonged QTI (male >440msec, female >450msec (probably more of a precaution)", "Pregnancy (1st trimester)"], precautions: "Use c̅ caution c̅ other agents that may cause QTI prolongation.", sideEffects: ["H/A (particularly in those prone to migraine headaches)", "QTI prolongation", "AV conduction disturbance (associated c̅ rapid Rx)", "Sedation", "Diarrhea", "Dry mouth", "Serotonin syndrome"], adultRx: ["Intervention: N/V = 4mg  IVP over  60sec"], pediatricRx: ["Intervention: N/V = 0.15mg/kg  IVP over 60sec     Max = 4mg", "Intervention: N/V s̄  IV →  4-11yo = 4mg tab PO\n   ≥12yo = 8mg tab PO"] }
             };
+            // Build autocomplete suggestions from medication indications
+            Object.values(medicationDetails).forEach(med => {
+                if (med.indications) {
+                    med.indications.forEach(ind => indicationSuggestions.add(ind));
+                }
+            });
             const newCategoriesData = [ /* ... All categories from v0.6 ... */
                 {id: slugify("Abbreviations & References"), title: "Abbreviations & References", type: "category", children: [{ id: slugify("Abbott Approved Abbreviations"), title: "Abbott Approved Abbreviations", type: "topic" },{ id: slugify("Other Abbreviations"), title: "Other Abbreviations", type: "topic" }]},
                 {id: slugify("Introduction & Core Principles"), title: "Introduction & Core Principles", type: "category", children: [{ id: slugify("Introduction to Abbott"), title: "Introduction to Abbott", type: "topic" },{ id: slugify("Core Principles – Safety & Well-Being"), title: "Core Principles – Safety & Well-Being", type: "topic" },{ id: slugify("General Important Information"), title: "General Important Information", type: "topic" }]},
@@ -1057,6 +1090,7 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
             setupAutocomplete('pt-pmh', 'pt-pmh-suggestions', pmhSuggestions);
             setupAutocomplete('pt-allergies', 'pt-allergies-suggestions', allergySuggestions);
             setupAutocomplete('pt-medications', 'pt-medications-suggestions', medicationNameSuggestions);
+            setupAutocomplete('pt-indications', 'pt-indications-suggestions', indicationSuggestions);
             setupAutocomplete('pt-symptoms', 'pt-symptoms-suggestions', symptomSuggestions);
 
 
