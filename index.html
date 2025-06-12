@@ -152,6 +152,10 @@
             background-color: #d1fae5;
         }
         .toggle-info .info-text { margin-left: 0.25rem; }
+        .toggle-category { cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .arrow { transition: transform 0.2s; margin-left: 0.25rem; }
+        .arrow.rotate { transform: rotate(-180deg); }
+
 
         /* Header Navigation Buttons */
         .header-nav-button {
@@ -748,6 +752,17 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
             });
         }
 
+        function attachToggleCategoryHandlers(container) {
+            container.querySelectorAll(".toggle-category").forEach(header => {
+                addTapListener(header, () => {
+                    const content = header.nextElementSibling;
+                    if (content) content.classList.toggle("hidden");
+                    const arrow = header.querySelector(".arrow");
+                    if (arrow) arrow.classList.toggle("rotate");
+                });
+            });
+        }
+
         function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
             // Expand categories along the path
             categoryPath.forEach(catId => {
@@ -882,14 +897,49 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
                 }
                 detailContentHtml = `
                     ${d.notes ? `<div class="detail-section"><p class="text-red-600 font-semibold">${d.notes.join('<br>')}</p></div>` : ''}
-                    ${d.class ? `<div class="detail-section"><h3 class="detail-section-title">Class:</h3>${createDetailText(d.class)}</div>` : ''}
-                    ${d.indications ? `<div class="detail-section"><h3 class="detail-section-title">${indicationsHeading}</h3>${createDetailList(d.indications)}</div>` : ''}
-                    ${d.contraindications ? `<div class="detail-section"><h3 class="detail-section-title">Contraindications:</h3>${createDetailList(d.contraindications)}</div>` : ''}
-                    ${d.precautions ? `<div class="detail-section"><h3 class="detail-section-title">Precautions:</h3>${createDetailText(d.precautions)}</div>` : ''}
-                    ${d.sideEffects ? `<div class="detail-section"><h3 class="detail-section-title">Significant Adverse/Side Effects:</h3>${createDetailList(d.sideEffects)}</div>` : ''}
+                    ${d.class ? `<div class="detail-section">
+                       <h3 class="detail-section-title toggle-category">Class: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
+                       <div class="detail-section-content hidden">
+                         ${createDetailText(d.class)}
+                       </div>
+                     </div>` : ''}
+                    ${d.indications ? `<div class="detail-section">
+                          <h3 class="detail-section-title toggle-category">${indicationsHeading} <span class="text-blue-600 arrow">&#x25BC;</span></h3>
+                          <div class="detail-section-content hidden">
+                            ${createDetailList(d.indications)}
+                          </div>
+                        </div>` : ''}
+                    ${d.contraindications ? `<div class="detail-section">
+                                <h3 class="detail-section-title toggle-category">Contraindications: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
+                                <div class="detail-section-content hidden">
+                                  ${createDetailList(d.contraindications)}
+                                </div>
+                              </div>` : ''}
+                    ${d.precautions ? `<div class="detail-section">
+                          <h3 class="detail-section-title toggle-category">Precautions: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
+                          <div class="detail-section-content hidden">
+                            ${createDetailText(d.precautions)}
+                          </div>
+                        </div>` : ''}
+                    ${d.sideEffects ? `<div class="detail-section">
+                          <h3 class="detail-section-title toggle-category">Significant Adverse/Side Effects: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
+                          <div class="detail-section-content hidden">
+                            ${createDetailList(d.sideEffects)}
+                          </div>
+                        </div>` : ''}
                     ${calculatedDoseInfo || weightDosePlaceholder ? `<div class="detail-section mt-3">${calculatedDoseInfo}${weightDosePlaceholder}</div>` : ''}
-                    ${d.adultRx ? `<div class="detail-section"><h3 class="detail-section-title">Adult Rx:</h3>${createDetailText(d.adultRx.join('\n\n'))}</div>` : ''}
-                    ${d.pediatricRx ? `<div class="detail-section"><h3 class="detail-section-title">Pediatric Rx:</h3>${createDetailText(d.pediatricRx.join('\n\n'))}</div>` : ''}`;
+                    ${d.adultRx ? `<div class="detail-section adult-section">
+                     <h3 class="detail-section-title toggle-category">Adult Rx: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
+                     <div class="detail-section-content hidden">
+                       ${createDetailText(d.adultRx.join('\n\n'))}
+                     </div>
+                   </div>` : ''}
+                    ${d.pediatricRx ? `<div class="detail-section pediatric-section">
+                         <h3 class="detail-section-title toggle-category">Pediatric Rx: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
+                         <div class="detail-section-content hidden">
+                           ${createDetailText(d.pediatricRx.join('\n\n'))}
+                         </div>
+                       </div>` : ''}
             } else {
                 detailContentHtml = `<p class="text-lg italic">This is a placeholder for <strong>${topic.title}</strong>.</p><p class="text-sm text-gray-600">Detailed information to be added.</p>`;
             }
@@ -905,6 +955,7 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
                 ${warningsHtml}
                 <div class="bg-gray-50 p-4 rounded-lg shadow-inner space-y-3 text-gray-800">${detailContentHtml}</div>`;
             attachToggleInfoHandlers(contentArea);
+            attachToggleCategoryHandlers(contentArea);
             addTapListener(document.getElementById('backToListButton'), () => { /* ... same as v0.6 ... */
                 for (let i = currentHistoryIndex -1 ; i >= 0; i--) {
                     if (navigationHistory[i] && navigationHistory[i].viewType === 'list') {
