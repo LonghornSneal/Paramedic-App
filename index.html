@@ -133,6 +133,10 @@
             color: #374151; /* gray-700 */
             white-space: pre-wrap;
         }
+        .strikethrough {
+            text-decoration: line-through;
+            color: #9ca3af; /* gray-400 */
+        }
         .med-concentration {
             font-size: 0.875rem; /* text-sm */
             line-height: 1.25rem;
@@ -566,6 +570,22 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
                 const currentTopicId = currentTopicTitleEl.dataset.topicId;
                 if (currentTopicId && allDisplayableTopicsMap[currentTopicId]) {
                     renderDetailPage(currentTopicId, false, false);
+                    // Strike out age-inappropriate dose sections in an open medication detail
+                    if (patientData.age) {
+                        if (patientData.age >= PEDIATRIC_AGE_THRESHOLD) {
+                            // Patient is adult – strike out pediatric doses
+                            document.querySelectorAll('.pediatric-section .detail-section-title, .pediatric-section .detail-text, .pediatric-section .detail-list')
+                                    .forEach(el => el.classList.add('strikethrough'));
+                        } else {
+                            // Patient is pediatric – strike out adult doses
+                            document.querySelectorAll('.adult-section .detail-section-title, .adult-section .detail-text, .adult-section .detail-list')
+                                    .forEach(el => el.classList.add('strikethrough'));
+                        }
+                    } else {
+                        // If age not specified, ensure no strikeouts
+                        document.querySelectorAll('.adult-section .strikethrough, .pediatric-section .strikethrough')
+                                .forEach(el => el.classList.remove('strikethrough'));
+                    }
                 }
             }
         }
@@ -888,8 +908,8 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
                     ${d.precautions ? `<div class="detail-section"><h3 class="detail-section-title">Precautions:</h3>${createDetailText(d.precautions)}</div>` : ''}
                     ${d.sideEffects ? `<div class="detail-section"><h3 class="detail-section-title">Significant Adverse/Side Effects:</h3>${createDetailList(d.sideEffects)}</div>` : ''}
                     ${calculatedDoseInfo || weightDosePlaceholder ? `<div class="detail-section mt-3">${calculatedDoseInfo}${weightDosePlaceholder}</div>` : ''}
-                    ${d.adultRx ? `<div class="detail-section"><h3 class="detail-section-title">Adult Rx:</h3>${createDetailText(d.adultRx.join('\n\n'))}</div>` : ''}
-                    ${d.pediatricRx ? `<div class="detail-section"><h3 class="detail-section-title">Pediatric Rx:</h3>${createDetailText(d.pediatricRx.join('\n\n'))}</div>` : ''}`;
+                    ${d.adultRx ? `<div class="detail-section adult-section"><h3 class="detail-section-title">Adult Rx:</h3>${createDetailText(d.adultRx.join('\n\n'))}</div>` : ''}
+                    ${d.pediatricRx ? `<div class="detail-section pediatric-section"><h3 class="detail-section-title">Pediatric Rx:</h3>${createDetailText(d.pediatricRx.join('\n\n'))}</div>` : ''}`;
             } else {
                 detailContentHtml = `<p class="text-lg italic">This is a placeholder for <strong>${topic.title}</strong>.</p><p class="text-sm text-gray-600">Detailed information to be added.</p>`;
             }
