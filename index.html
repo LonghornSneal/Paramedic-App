@@ -122,6 +122,9 @@
             padding-bottom: 0.25rem; /* pb-1 */
             margin-bottom: 0.5rem; /* mb-2 */
         }
+        .toggle-category {
+            cursor: pointer;
+        }
         .detail-list {
             list-style-type: disc;
             list-style-position: inside;
@@ -882,14 +885,14 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
                 }
                 detailContentHtml = `
                     ${d.notes ? `<div class="detail-section"><p class="text-red-600 font-semibold">${d.notes.join('<br>')}</p></div>` : ''}
-                    ${d.class ? `<div class="detail-section"><h3 class="detail-section-title">Class:</h3>${createDetailText(d.class)}</div>` : ''}
-                    ${d.indications ? `<div class="detail-section"><h3 class="detail-section-title">${indicationsHeading}</h3>${createDetailList(d.indications)}</div>` : ''}
-                    ${d.contraindications ? `<div class="detail-section"><h3 class="detail-section-title">Contraindications:</h3>${createDetailList(d.contraindications)}</div>` : ''}
-                    ${d.precautions ? `<div class="detail-section"><h3 class="detail-section-title">Precautions:</h3>${createDetailText(d.precautions)}</div>` : ''}
-                    ${d.sideEffects ? `<div class="detail-section"><h3 class="detail-section-title">Significant Adverse/Side Effects:</h3>${createDetailList(d.sideEffects)}</div>` : ''}
+                    ${d.class ? `<div class="detail-section"><h3 class="detail-section-title toggle-category">Class:</h3>${createDetailText(d.class)}</div>` : ''}
+                    ${d.indications ? `<div class="detail-section"><h3 class="detail-section-title toggle-category">${indicationsHeading}</h3>${createDetailList(d.indications)}</div>` : ''}
+                    ${d.contraindications ? `<div class="detail-section"><h3 class="detail-section-title toggle-category">Contraindications:</h3>${createDetailList(d.contraindications)}</div>` : ''}
+                    ${d.precautions ? `<div class="detail-section"><h3 class="detail-section-title toggle-category">Precautions:</h3>${createDetailText(d.precautions)}</div>` : ''}
+                    ${d.sideEffects ? `<div class="detail-section"><h3 class="detail-section-title toggle-category">Significant Adverse/Side Effects:</h3>${createDetailList(d.sideEffects)}</div>` : ''}
                     ${calculatedDoseInfo || weightDosePlaceholder ? `<div class="detail-section mt-3">${calculatedDoseInfo}${weightDosePlaceholder}</div>` : ''}
-                    ${d.adultRx ? `<div class="detail-section"><h3 class="detail-section-title">Adult Rx:</h3>${createDetailText(d.adultRx.join('\n\n'))}</div>` : ''}
-                    ${d.pediatricRx ? `<div class="detail-section"><h3 class="detail-section-title">Pediatric Rx:</h3>${createDetailText(d.pediatricRx.join('\n\n'))}</div>` : ''}`;
+                    ${d.adultRx ? `<div class="detail-section"><h3 class="detail-section-title toggle-category">Adult Rx:</h3>${createDetailText(d.adultRx.join('\n\n'))}</div>` : ''}
+                    ${d.pediatricRx ? `<div class="detail-section"><h3 class="detail-section-title toggle-category">Pediatric Rx:</h3>${createDetailText(d.pediatricRx.join('\n\n'))}</div>` : ''}`;
             } else {
                 detailContentHtml = `<p class="text-lg italic">This is a placeholder for <strong>${topic.title}</strong>.</p><p class="text-sm text-gray-600">Detailed information to be added.</p>`;
             }
@@ -905,6 +908,14 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
                 ${warningsHtml}
                 <div class="bg-gray-50 p-4 rounded-lg shadow-inner space-y-3 text-gray-800">${detailContentHtml}</div>`;
             attachToggleInfoHandlers(contentArea);
+            contentArea.querySelectorAll('.toggle-category').forEach(header => {
+                header.addEventListener('click', () => {
+                    const contentDiv = header.nextElementSibling;
+                    if (contentDiv) {
+                        contentDiv.classList.toggle('hidden');
+                    }
+                });
+            });
             addTapListener(document.getElementById('backToListButton'), () => { /* ... same as v0.6 ... */
                 for (let i = currentHistoryIndex -1 ; i >= 0; i--) {
                     if (navigationHistory[i] && navigationHistory[i].viewType === 'list') {
