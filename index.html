@@ -244,16 +244,16 @@
             <textarea id="pt-allergies" class="sidebar-input" rows="2" placeholder="Type or select, comma separated..."></textarea>
             <div id="pt-allergies-suggestions" class="autocomplete-suggestions hidden"></div>
         </div>
-          <div class="mt-3 autocomplete-container">
-              <label for="pt-medications" class="sidebar-label">Current Medications:</label>
-              <textarea id="pt-medications" class="sidebar-input" rows="2" placeholder="Type or select, comma separated..."></textarea>
-              <div id="pt-medications-suggestions" class="autocomplete-suggestions hidden"></div>
-          </div>
-          <div class="mt-3 autocomplete-container">
-              <label for="pt-indications" class="sidebar-label">Indications:</label>
-              <textarea id="pt-indications" class="sidebar-input" rows="2" placeholder="Type or select, comma separated..."></textarea>
-              <div id="pt-indications-suggestions" class="autocomplete-suggestions hidden"></div>
-          </div>
+        <div class="mt-3 autocomplete-container">
+            <label for="pt-medications" class="sidebar-label">Current Medications:</label>
+            <textarea id="pt-medications" class="sidebar-input" rows="2" placeholder="Type or select, comma separated..."></textarea>
+            <div id="pt-medications-suggestions" class="autocomplete-suggestions hidden"></div>
+        </div>
+        <div class="mt-3 autocomplete-container">
+            <label for="pt-indications" class="sidebar-label">Indications:</label>
+            <textarea id="pt-indications" class="sidebar-input" rows="2" placeholder="Type or select, comma separated..."></textarea>
+            <div id="pt-indications-suggestions" class="autocomplete-suggestions hidden"></div>
+        </div>
           <div class="mt-3 autocomplete-container">
               <label for="pt-symptoms" class="sidebar-label">Signs/Symptoms (S/S):</label>
               <textarea id="pt-symptoms" class="sidebar-input" rows="3" placeholder="Type or select, comma separated..."></textarea>
@@ -561,6 +561,7 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
             patientData.pmh = getArrayFromTextarea('pt-pmh');
             patientData.allergies = getArrayFromTextarea('pt-allergies');
             patientData.currentMedications = getArrayFromTextarea('pt-medications');
+            // Capture indications from textarea using same helper
             patientData.indications = getArrayFromTextarea('pt-indications');
             patientData.symptoms = getArrayFromTextarea('pt-symptoms'); // Now an array
             patientData.vitalSigns = {
@@ -999,15 +1000,6 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
                 <div class="bg-gray-50 p-4 rounded-lg shadow-inner space-y-3 text-gray-800">${detailContentHtml}</div>`;
             attachToggleInfoHandlers(contentArea);
             attachToggleCategoryHandlers(contentArea);
-            // After rendering medication detail content:
-            contentArea.querySelectorAll('.toggle-category').forEach(header => {
-                header.addEventListener('click', () => {
-                    const contentDiv = header.nextElementSibling;
-                    if (contentDiv) {
-                        contentDiv.classList.toggle('hidden');  // show/hide the content
-                    }
-                });
-            });
             addTapListener(document.getElementById('backToListButton'), () => { /* ... same as v0.6 ... */
                 for (let i = currentHistoryIndex -1 ; i >= 0; i--) {
                     if (navigationHistory[i] && navigationHistory[i].viewType === 'list') {
