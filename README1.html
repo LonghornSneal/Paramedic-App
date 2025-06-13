@@ -56,10 +56,6 @@
         .topic-link-item:hover { background-color: #e0f2fe; /* sky-100 */ }
         .topic-link-item:active { transform: scale(0.98); }
         .topic-link-item.recently-viewed { background-color: #fef3c7; }
-        .strikethrough {
-            text-decoration: line-through;
-            color: #6b7280; /* gray-500 */
-        }
         .search-topic-item {
             padding: 0.75rem 1rem; background-color: #f9fafb; border-radius: 0.375rem;
             cursor: pointer; border: 1px solid #e5e7eb; margin-bottom: 0.5rem;
@@ -135,7 +131,7 @@
         .detail-list li + li { margin-top: 0.25rem; /* space-y-1 */ }
         .detail-text {
             color: #374151; /* gray-700 */
-            white-space: pre-wrap;
+            white-space: pre-line;
         }
         .med-concentration {
             font-size: 0.875rem; /* text-sm */
@@ -156,10 +152,6 @@
             background-color: #d1fae5;
         }
         .toggle-info .info-text { margin-left: 0.25rem; }
-        .toggle-category { cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .arrow { transition: transform 0.2s; margin-left: 0.25rem; }
-        .arrow.rotate { transform: rotate(-180deg); }
-
 
         /* Header Navigation Buttons */
         .header-nav-button {
@@ -244,15 +236,10 @@
             <textarea id="pt-allergies" class="sidebar-input" rows="2" placeholder="Type or select, comma separated..."></textarea>
             <div id="pt-allergies-suggestions" class="autocomplete-suggestions hidden"></div>
         </div>
-        <div class="mt-3 autocomplete-container">
+         <div class="mt-3 autocomplete-container">
             <label for="pt-medications" class="sidebar-label">Current Medications:</label>
             <textarea id="pt-medications" class="sidebar-input" rows="2" placeholder="Type or select, comma separated..."></textarea>
             <div id="pt-medications-suggestions" class="autocomplete-suggestions hidden"></div>
-        </div>
-        <div class="mt-3 autocomplete-container">
-            <label for="pt-indications" class="sidebar-label">Indications:</label>
-            <textarea id="pt-indications" class="sidebar-input" rows="2" placeholder="Type or select, comma separated..."></textarea>
-            <div id="pt-indications-suggestions" class="autocomplete-suggestions hidden"></div>
         </div>
         <div class="mt-3 autocomplete-container">
             <label for="pt-symptoms" class="sidebar-label">Signs/Symptoms (S/S):</label>
@@ -310,170 +297,8 @@
         <footer class="text-center p-4 text-gray-500 text-sm mt-2">App Version 0.7</footer>
     </div>
 
-    <script>
-const subscriptMap = {
-  '₀': '0',
-  '₁': '1',
-  '₂': '2',
-  '₃': '3',
-  '₄': '4',
-  '₅': '5',
-  '₆': '6',
-  '₇': '7',
-  '₈': '8',
-  '₉': '9',
-};
-
-function slugify(text) {
-  if (!text) return '';
-  return text.toString().toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[+/:(),&%#\u2080-\u2089]/g, (match) => {
-      if (subscriptMap[match]) return subscriptMap[match];
-      return '-';
-    })
-    .replace(/[^\w-]+/g, '')
-    .replace(/--+/g, '-')
-    .replace(/^-+/, '')
-    .replace(/-+$/, '');
-}
-
-const slugIDs = [
-  '10-calcium-chloride',
-  '2-lidocaine-xylocaine',
-  '8-4-sodium-bicarbonate-nahco3',
-  'a-fib-rvr-or-a-flutter-stable-symptomatic',
-  'abbott-approved-abbreviations',
-  'abbreviations-references',
-  'adenosine-adenocard',
-  'administrative-legal-essentials',
-  'adult-protocols',
-  'air-ambulance-utilization',
-  'airway-breathing',
-  'albuterol',
-  'allergic-reaction',
-  'als-ground-rules',
-  'als-medications',
-  'anaphylaxis',
-  'applicability-of-the-cog',
-  'asa',
-  'atropine-sulfate',
-  'bradycardia',
-  'breech',
-  'bronchospasm',
-  'cardiac-arrest-pressure-sores-from-immobility',
-  'cardiogenic-shock-not-post-arrest',
-  'cdc-field-triage-guidelines-trauma',
-  'circulation-cardiac',
-  'circulation-cardiology',
-  'clinical-errors-reporting',
-  'consulting-olmc',
-  'core-principles-safety-well-being',
-  'cpap-bipap',
-  'crime-scene',
-  'd10',
-  'd5',
-  'dexamethasone-decadron',
-  'diltiazem-add-vantage-directions',
-  'diphenhydramine-benadryl',
-  'dispatching-md-200',
-  'droperidol-inapsine',
-  'eclampsia',
-  'emr-accompanying-critically-ill',
-  'epi-1-1-000-adrenaline',
-  'epi-1-10-000',
-  'epi-1-100-000-push-dose-epi',
-  'etomidate-amidate',
-  'ez-io-insertion',
-  'fall-or-weakness',
-  'fentanyl-sublimaze',
-  'frank-complete-breech-presentation',
-  'general-important-information',
-  'glucometer-mckesson-true-metrix-pro',
-  'h-a-or-abdominal-pain',
-  'hyperglycemia',
-  'hyperkalemia',
-  'hypoglycemia',
-  'i-gel-supraglottic-airway-sga',
-  'introduction-core-principles',
-  'introduction-to-abbott',
-  'ipratropium',
-  'ketamine-ketalar',
-  'ketorolac-tromethamine-toradol',
-  'lvad-pt',
-  'mace-pepper-spray',
-  'magnesium-sulfate-mgso4',
-  'major-level-1-trauma',
-  'mandatory-reporting',
-  'mat-stable',
-  'medical',
-  'medical-emergencies',
-  'medication-administration-cross-check-macc',
-  'metoprolol-tartrate-lopressor',
-  'mi-acs',
-  'midazolam-versed',
-  'minutes-of-oxygen-by-cylinder-size',
-  'mono-vt-stable',
-  'morphine',
-  'mucosal-atomization-device-mad',
-  'n-v',
-  'naloxone-narcan',
-  'nasal-intubation',
-  'normal-delivery',
-  'ntg',
-  'ob-gyn',
-  'on-scene-authority',
-  'on-scene-healthcare-professionals',
-  'ondansetron-zofran',
-  'operational-protocols',
-  'other-abbreviations',
-  'pain',
-  'pcr-requirements',
-  'pea-asystole',
-  'pediatric-assessment-vs',
-  'pediatric-protocols',
-  'poly-vt-torsades-stable',
-  'poly-vt-torsades-unstable',
-  'prolapsed-cord',
-  'pulmonary-edema',
-  'push-dose-epi',
-  'rass-1-through-4',
-  'refusals',
-  'rehabilitation-emergency-incidents-municipal-partners',
-  'response-mode',
-  'restraint-of-agitated-combative-patients',
-  'richmond-agitation-sedation-scale-rass',
-  'rosc-stabilization',
-  'rule-of-9s-rule-of-palms-bsa-burn-estimation',
-  'sai',
-  'scope-violations-possible-consequences',
-  'seizure',
-  'sepsis',
-  'shoulder-dystocia',
-  'sickle-cell-crisis',
-  'skills-equipment',
-  'sludgem-pt',
-  'smith-modified-sgarbossa-criteria',
-  'smr',
-  'special-needs-children',
-  'stroke',
-  'suspension-revocation',
-  'svt-mono-vt-unstable',
-  'svt-stable',
-  'taser',
-  'thermometer-braun-thermoscan',
-  'toxic-ingestion-with-serious-s-s',
-  'transfer-to-lesser-credential',
-  'trauma',
-  'understanding-ratios-percentages-solution-mixtures',
-  'ventilator-pt-intubated-sedated',
-  'ventilator-set-up-parapac-plus',
-  'vf-pvt',
-  'workers-compensation-process',
-];
-if (typeof module !== 'undefined') module.exports = slugIDs;
-if (typeof window !== 'undefined') window.slugIDs = slugIDs;
-    </script>
+    <script src="slugify.js"></script>
+    <script src="slugList.js"></script>
     <script>
         // --- DOM Elements ---
         const searchInput = document.getElementById('searchInput');
@@ -492,8 +317,8 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
                 e.preventDefault();
                 handler(e);
             };
-
             element.addEventListener('click', activate);
+            element.addEventListener('touchend', activate, { passive: false });
             element.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     activate(e);
@@ -503,13 +328,13 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
 
         // --- Patient Data Object & Sidebar Inputs ---
         let patientData = {
-            age: null, weight: null, weightUnit: 'kg', pmh: [], allergies: [], currentMedications: [], indications: [],
+            age: null, weight: null, weightUnit: 'kg', pmh: [], allergies: [], currentMedications: [],
             symptoms: [], // Changed to array for consistency if S/S also becomes tag-based
             vitalSigns: { bp: '', hr: null, spo2: null, etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: '' },
             ekg: ''
         };
         const ptInputIds = [ /* IDs of all patient data inputs */
-            'pt-age', 'pt-weight', 'pt-weight-unit', 'pt-pmh', 'pt-allergies', 'pt-medications', 'pt-indications', 'pt-symptoms',
+            'pt-age', 'pt-weight', 'pt-weight-unit', 'pt-pmh', 'pt-allergies', 'pt-medications', 'pt-symptoms',
             'vs-bp', 'vs-hr', 'vs-spo2', 'vs-etco2', 'vs-rr', 'vs-bgl', 'vs-eyes', 'vs-gcs',
             'vs-ao-status', 'vs-lung-sounds', 'pt-ekg'
         ];
@@ -532,7 +357,6 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
         let pmhSuggestions = new Set();
         let allergySuggestions = new Set();
         let medicationNameSuggestions = new Set(); // For "Current Medications" field
-        let indicationSuggestions = new Set();
         let symptomSuggestions = new Set([
             "chest pain", "shortness of breath", "sob", "dyspnea", "nausea", "vomiting", "diarrhea", "abdominal pain",
             "headache", "dizziness", "syncope", "altered mental status", "ams", "weakness", "fatigue", "fever",
@@ -561,8 +385,6 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
             patientData.pmh = getArrayFromTextarea('pt-pmh');
             patientData.allergies = getArrayFromTextarea('pt-allergies');
             patientData.currentMedications = getArrayFromTextarea('pt-medications');
-            // Capture indications from textarea using same helper
-            patientData.indications = getArrayFromTextarea('pt-indications');
             patientData.symptoms = getArrayFromTextarea('pt-symptoms'); // Now an array
             patientData.vitalSigns = {
                 bp: document.getElementById('vs-bp').value.trim(),
@@ -578,42 +400,11 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
             };
             patientData.ekg = document.getElementById('pt-ekg').value.trim();
 
-            // Filter medication list by selected indications
-            const topicLinks = document.querySelectorAll('a.topic-link-item');
-            topicLinks.forEach(link => {
-                const medId = link.dataset.topicId;
-                const med = allDisplayableTopicsMap[medId];
-                if (patientData.indications.length > 0 && med && med.details && med.details.indications) {
-                    const medIndications = med.details.indications.map(i => i.toLowerCase());
-                    const hasIndication = patientData.indications.some(ind => medIndications.includes(ind));
-                    if (!hasIndication) link.classList.add('strikethrough');
-                    else link.classList.remove('strikethrough');
-                } else {
-                    link.classList.remove('strikethrough');
-                }
-            });
-
             const currentTopicTitleEl = contentArea.querySelector('h2.topic-main-title');
             if (currentTopicTitleEl) {
                 const currentTopicId = currentTopicTitleEl.dataset.topicId;
                 if (currentTopicId && allDisplayableTopicsMap[currentTopicId]) {
                     renderDetailPage(currentTopicId, false, false);
-                }
-                // Strike out age-inappropriate dose sections in an open medication detail
-                if (patientData.age) {
-                    if (patientData.age >= PEDIATRIC_AGE_THRESHOLD) {
-                        // Patient is adult – strike out pediatric doses
-                        document.querySelectorAll('.pediatric-section .detail-section-title, .pediatric-section .detail-text, .pediatric-section .detail-list')
-                                .forEach(el => el.classList.add('strikethrough'));
-                    } else {
-                        // Patient is pediatric – strike out adult doses
-                        document.querySelectorAll('.adult-section .detail-section-title, .adult-section .detail-text, .adult-section .detail-list')
-                                .forEach(el => el.classList.add('strikethrough'));
-                    }
-                } else {
-                    // If age not specified, ensure no strikeouts
-                    document.querySelectorAll('.adult-section .strikethrough, .pediatric-section .strikethrough')
-                            .forEach(el => el.classList.remove('strikethrough'));
                 }
             }
         }
@@ -758,8 +549,13 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
             addTapListener(document.getElementById('clear-search-button'), () => { searchInput.value = ''; renderInitialView(); });
             openCategoriesAndHighlight(categoryPath, highlightId);
         }
-        function parseTextMarkup(text) {
-            let safeText = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        function createDetailList(itemsArray) { /* ... same as v0.6 ... */
+            if (!itemsArray || itemsArray.length === 0) return '<p class="text-gray-500 italic">None listed.</p>';
+            return `<ul class="detail-list">${itemsArray.map(item => `<li>${item}</li>`).join('')}</ul>`;
+        }
+        function createDetailText(textBlock) { /* enhanced to support toggle-info and red text */
+            if (!textBlock || textBlock.trim() === '') return '<p class="text-gray-500 italic">Not specified.</p>';
+            let safeText = textBlock.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
             safeText = safeText.replace(/\n/g, "<br>");
             safeText = safeText.replace(/\[\[(.+?)\|(.+?)\]\]/g, (m, disp, info) =>
                 `<span class="toggle-info">${disp}<span class="info-text hidden">${info}</span></span>`);
@@ -767,20 +563,7 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
                 `<span class="text-red-600 font-semibold">${text}</span>`);
             safeText = safeText.replace(/\{\{redul:(.+?)\}\}/g, (m, text) =>
                 `<span class="text-red-600 font-semibold underline decoration-red-600">${text}</span>`);
-            safeText = safeText.replace(/\{\{orange:(.+?)\}\}/g, (m, text) =>
-                `<span class="text-orange-600">${text}</span>`);
-            safeText = safeText.replace(/\{\{blackul:(.+?)\}\}/g, (m, text) =>
-                `<span class="font-bold underline decoration-black">${text}</span>`);
             safeText = safeText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-            return safeText;
-        }
-        function createDetailList(itemsArray) { /* ... same as v0.6 ... */
-            if (!itemsArray || itemsArray.length === 0) return '<p class="text-gray-500 italic">None listed.</p>';
-            return `<ul class="detail-list">${itemsArray.map(item => `<li>${parseTextMarkup(item)}</li>`).join('')}</ul>`;
-        }
-        function createDetailText(textBlock) { /* enhanced to support toggle-info and red text */
-            if (!textBlock || textBlock.trim() === '') return '<p class="text-gray-500 italic">Not specified.</p>';
-            const safeText = parseTextMarkup(textBlock);
             return `<div class="detail-text">${safeText}</div>`;
         }
         function createWarningIcon(colorClass = 'text-yellow-600') { /* ... same as v0.6 ... */
@@ -792,15 +575,6 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
                 addTapListener(el, () => {
                     const info = el.querySelector('.info-text');
                     if (info) info.classList.toggle('hidden');
-                });
-            });
-        }
-
-        function attachToggleCategoryHandlers(container) {
-            container.querySelectorAll(".toggle-category").forEach(header => {
-                addTapListener(header, () => {
-                    const arrow = header.querySelector(".arrow");
-                    if (arrow) arrow.classList.toggle("rotate");
                 });
             });
         }
@@ -933,55 +707,16 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
             let detailContentHtml = ''; /* ... same as v0.6 ... */
             if (topic.details) {
                 const d = topic.details;
-                let indicationsHeading = 'Indications:';
-                if (topic.id === 'atropine-sulfate') {
-                    indicationsHeading += ` <span class="toggle-info" style="color:#2563eb;text-decoration-color:#2563eb">&#x25BC;<span class="info-text hidden" style="color:#15803d;text-decoration-color:#15803d">SLUDGEM pt</span></span>`;
-                }
                 detailContentHtml = `
                     ${d.notes ? `<div class="detail-section"><p class="text-red-600 font-semibold">${d.notes.join('<br>')}</p></div>` : ''}
-                    ${d.class ? `<div class="detail-section">
-                       <h3 class="detail-section-title toggle-category">Class: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                       <div class="detail-section-content hidden">
-                         ${createDetailText(d.class)}
-                       </div>
-                     </div>` : ''}
-                    ${d.indications ? `<div class="detail-section">
-                          <h3 class="detail-section-title toggle-category">${indicationsHeading} <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                          <div class="detail-section-content hidden">
-                            ${createDetailList(d.indications)}
-                          </div>
-                        </div>` : ''}
-                    ${d.contraindications ? `<div class="detail-section">
-                                <h3 class="detail-section-title toggle-category">Contraindications: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                                <div class="detail-section-content hidden">
-                                  ${createDetailList(d.contraindications)}
-                                </div>
-                              </div>` : ''}
-                    ${d.precautions ? `<div class="detail-section">
-                          <h3 class="detail-section-title toggle-category">Precautions: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                          <div class="detail-section-content hidden">
-                            ${createDetailText(d.precautions)}
-                          </div>
-                        </div>` : ''}
-                    ${d.sideEffects ? `<div class="detail-section">
-                          <h3 class="detail-section-title toggle-category">Significant Adverse/Side Effects: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                          <div class="detail-section-content hidden">
-                            ${createDetailList(d.sideEffects)}
-                          </div>
-                        </div>` : ''}
+                    ${d.class ? `<div class="detail-section"><h3 class="detail-section-title">Class:</h3>${createDetailText(d.class)}</div>` : ''}
+                    ${d.indications ? `<div class="detail-section"><h3 class="detail-section-title">Indications:</h3>${createDetailList(d.indications)}</div>` : ''}
+                    ${d.contraindications ? `<div class="detail-section"><h3 class="detail-section-title">Contraindications:</h3>${createDetailList(d.contraindications)}</div>` : ''}
+                    ${d.precautions ? `<div class="detail-section"><h3 class="detail-section-title">Precautions:</h3>${createDetailText(d.precautions)}</div>` : ''}
+                    ${d.sideEffects ? `<div class="detail-section"><h3 class="detail-section-title">Significant Adverse/Side Effects:</h3>${createDetailList(d.sideEffects)}</div>` : ''}
                     ${calculatedDoseInfo || weightDosePlaceholder ? `<div class="detail-section mt-3">${calculatedDoseInfo}${weightDosePlaceholder}</div>` : ''}
-                    ${d.adultRx ? `<div class="detail-section adult-section">
-                     <h3 class="detail-section-title toggle-category">Adult Rx: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                     <div class="detail-section-content hidden">
-                       ${createDetailText(d.adultRx.join('\n\n'))}
-                     </div>
-                   </div>` : ''}
-                    ${d.pediatricRx ? `<div class="detail-section pediatric-section">
-                         <h3 class="detail-section-title toggle-category">Pediatric Rx: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                         <div class="detail-section-content hidden">
-                           ${createDetailText(d.pediatricRx.join('\n\n'))}
-                         </div>
-                       </div>` : ''}
+                    ${d.adultRx ? `<div class="detail-section"><h3 class="detail-section-title">Adult Rx:</h3>${createDetailText(d.adultRx.join('\n\n'))}</div>` : ''}
+                    ${d.pediatricRx ? `<div class="detail-section"><h3 class="detail-section-title">Pediatric Rx:</h3>${createDetailText(d.pediatricRx.join('\n\n'))}</div>` : ''}`;
             } else {
                 detailContentHtml = `<p class="text-lg italic">This is a placeholder for <strong>${topic.title}</strong>.</p><p class="text-sm text-gray-600">Detailed information to be added.</p>`;
             }
@@ -997,7 +732,6 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
                 ${warningsHtml}
                 <div class="bg-gray-50 p-4 rounded-lg shadow-inner space-y-3 text-gray-800">${detailContentHtml}</div>`;
             attachToggleInfoHandlers(contentArea);
-            attachToggleCategoryHandlers(contentArea);
             addTapListener(document.getElementById('backToListButton'), () => { /* ... same as v0.6 ... */
                 for (let i = currentHistoryIndex -1 ; i >= 0; i--) {
                     if (navigationHistory[i] && navigationHistory[i].viewType === 'list') {
@@ -1093,18 +827,14 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
         function initApp() {
             const medicationDetails = { /* ... All medication details from v0.6 ... */
                 '10-calcium-chloride': { title: "10% Calcium Chloride", concentration: "(1,000mg/10ml)", class: "Electrolyte", indications: ["Hyperkalemia", "Symptomatic ↑HR", "Toxic Ingestion"], contraindications: ["Known hypersensitivity", "Digitalis toxicity"], precautions: "Rx slowly unless: Cardiac Arrest.", sideEffects: ["↓HR", "VF", "Extravasation Necrosis", "Abdominal Pain", "N/V"], adultRx: ["[[Mg OD|from Bronchospasm in Eclampsia]] Rx: 1g IV", "Hyperkalemia Rx: 1g IVP/IO", "[[↓BP + Wide-QRS symptomatic rhythm|Implies Hyperkalemia]] Rx: Consult to give 1g IVP", "RRWCT >5mm c̅ HR <150 Rx: 1g IVP", "Repeat Rx if QRS Narrows p̄ Ca **do not give Lidocaine**", "Ca/β-Blocker OD c̅ ↓HR Rx: Consult to give 1g slow IVP"], pediatricRx: ["{{red:Don’t give Calcium Chloride to Pediatric pts}}"] },
-                '2-lidocaine-xylocaine': { title: "2% Lidocaine (Xylocaine)", concentration: "(100mg/5ml)", class: "Antiarrhythmic", indications: ["Symptomatic ↑HR & VF/pVT"], contraindications: ["Hypersensitivity or local anesthetic allergy in the amide class", "AV block >1º in the absence of a pacemaker", "Idioventricular escape rhythm s̄ pacemaker", "Stokes-Adams syndrome", "WPW syndrome"], precautions: "[[Give ↓ Maintenance Infusions for:|Prolonged plasma half-life]] >70yo, CHF, or hepatic failure.\nDon’t Rx if idioventricular escape rhythm s̄ a pacemaker is present.", sideEffects: ["Drowsiness", "Paresthesia", "Slurred speech", "[[Nystagmus|early sign of toxicity]]", "[[Seizures|severe toxicity]]"], adultRx: ["VT Rx: 1-1.5mg/kg slow IVP over 2-3min,\n      If n/c p̄ 5min, [[then give 0.5-0.75mg/kg|Max = 3mg/kg]]", "P̄-ROSC Stabilization Rx: Consult to give 2mg/min IV maintenance infusion", "EZ-IO Rx: 2ml over 60-90sec\n      → Flush c̅ 5-10ml NS rapidly over 5sec\n            → Then give 1ml over 30sec"]
-            // (No separate pediatric Rx listed for Lidocaine in protocols)
-            },
-                '8-4-sodium-bicarbonate-nahco3': { title: "8.4% Sodium Bicarbonate (NaHCO₃)", concentration: "(50mEq/50ml)", notes: ["***Given separately from other drugs***"], class: "[[Alkalizing|buffering]] agent", indications: ["[[Fall or Weakness|probably only for suspected hyperkalemia]]", "Hyperkalemia", "Symptomatic ↑HR", "Toxic Ingestion"], contraindications: [],  // (None absolute besides hypersensitivity) precautions: "Bicarb precipitates/interacts c̅ multiple Rx’s – {{red:Don’t Mix}}.\nFlush IV line ā & p̄ administration.\nNeonates & children <2yo → [[4.2% given slowly instead|Bicarb may cause tissue necrosis, ulceration, & sloughing]].", sideEffects: ["Metabolic alkalosis", "Paradoxical acidosis", "Exacerbation of HF", "Hypernatremia", "Hypokalemia", "Hypocalcemia"], adultRx: ["[[Dead + bed sores from immobility|Suggests Hyperkalemia]] Rx: Consult to give 1mEq/kg", "Hyperkalemia Rx: 50mEq IVP/IO", "[[RRWCT >5mm c̅ HR <150|Suggests Hyperkalemia]] Rx: 50mEq IVP\n      If QRS narrows → give second dose", "Tricyclic OD c̅ wide QRS & ↓BP or pulseless Rx: [[Consult to give 1mEq/kg IVP|Several doses may be needed]]"], pediatricRx: ["{{redul:Neonates & Children <2yo = use 4.2% Bicarb given slowly}}", "Propranolol OD c̅ widened QRS Rx: Consult to give 1-2mEq/kg IV/IO bolus", "Tricyclic OD c̅ ↓BP or pulseless or wide QRS Rx: Consult to give 1-2mEq/kg IV/IO"] },
+                '2-lidocaine-xylocaine': { title: "2% Lidocaine (Xylocaine)", concentration: "(100mg/5ml)", class: "Antiarrhythmic", indications: ["Symptomatic ↑HR & VF/pVT"], contraindications: ["Hypersensitivity or Local anesthetic allergy in the amide class", "AV block >1º in the absence of a pacemaker", "Idioventricular escape rhythm s̄ pacemaker", "Stokes-Adams syndrome", "WPW syndrome"], precautions: "[[Give ↓ Maintenance Infusions for:|Prolonged Plasma half-life]] >70yo, CHF, or hepatic failure.\nDon’t Rx if Idioventricular escape rhythm s̄ a pacemaker is Present.", sideEffects: ["Drowsiness", "Paresthesia", "Slurred speech", "[[Nystagmus|early sign of toxicity]]", "[[Seizures|severe toxicity]]"], adultRx: ["VT Rx: 1-1.5mg/kg slow IVP over 2-3min,\n      If n/c p̄ 5min, [[then give 0.5-0.75mg/kg|Max = 3mg/kg]]", "P̄-ROSC Stabilization Rx: Consult to give 2mg/min IV Maintenance Infusion", "EZ-IO Rx: 2ml over 60-90sec\n      → Flush c̅ 5-10ml NS rapidly over 5sec\n            → Then give 1ml over 30sec"] },
+                '8-4-sodium-bicarbonate-nahco3': { title: "8.4% Sodium Bicarbonate (NaHCO₃)", concentration: "(50mEq/50ml)", notes: ["***Given separately from other drugs***"], class: "[[Alkalizing|buffering]] agent", indications: ["[[Fall or Weakness|probably only for suspected hyperkalemia]]", "Hyperkalemia", "Symptomatic ↑HR", "Toxic Ingestion"], precautions: "Bicarb precipitates/Interacts c̅ multiple Rx’s\n      {{red:Don’t Mix}}\n            Flush IV-line ā & p̄ administration.\nNeonates & children <2yo → [[4.2% given slowly instead|Bicarb may cause tissue necrosis, ulceration, & sloughing]]", sideEffects: ["Metabolic alkalosis", "Paradoxical acidosis", "Exacerbation of HF", "Hypernatremia", "Hypokalemia", "Hypocalcemia"], adultRx: ["[[Dead + Bed Sores from Immobility|Suggests Hyperkalemia]] Rx: Consult to give 1mEq/kg", "Hyperkalemia Rx: 50mEq IVP/IO", "[[RRWCT >5mm c̅ HR <150|Suggests Hyperkalemia]] Rx: 50mEq IVP\n      If QRS narrows → Give 2nd dose", "Tricyclic OD c̅ Wide-QRS & ↓BP or Pulseless Rx: [[Consult to give 1mEq/kg IVP|Several doses may be needed]]"], pediatricRx: ["{{redul:Neonates & Children <2yo = 4.2% Bicarb given slowly}}", "Propranolol OD c̅ Widened QRS Rx: Consult to give 1-2mEq/kg IV/IO Bolus", "Tricyclic OD c̅ ↓BP or Pulseless or Wide-QRS Rx: Consult to give 1-2mEq/kg IV/IO"] },
                 'adenosine-adenocard': { title: "Adenosine (Adenocard)", concentration: "(6mg/2ml)", class: "Antiarrhythmic", indications: ["SVT"], contraindications: ["Known hypersensitivity", "A-Fib associated  c̅  WPW Syndrome"], precautions: "Rx in a pt c̅ A-Fib & WPW may result in VF\nRx may induce Airway Hyperresponsiveness & should be used c̅ caution in pts c̅ [[RAD Hx|asthma]]", sideEffects: ["H/A", "Cx pn", "Flushing", "Dyspnea/Bronchoconstriction", "↓HR", "AV block", "Sinus Pause/Asystole"], adultRx: ["SVT Rx: 6mg Fast IVP c̅ 10ml Flush\n      If n/c → 12mg Fast IVP c̅ 10ml Flush\n            If n/c → 12mg Fast IVP c̅ 10ml Flush\n                If n/c → Consult to give 12mg Fast IVP during transport\n                [[Note:|n/c =Stable Pt & Rhythm is unchanged]]"] },
-                'albuterol': { title: "Albuterol", concentration: "(2.5mg/3cc)", class: "[[Beta adrenergic agonist|β₂-selective]] bronchodilator", indications: ["Bronchospasm"], contraindications: ["Known hypersensitivity"], precautions: "", sideEffects: ["↑HR", "Palpitations/cardiac ectopy", "Tremor", "H/A", "N/V"], adultRx: ["Bronchospasm Rx: 2.5mg in 3cc neb c̅ O₂ ≥6 LPM\n      Consult to repeat dose or give Duo-Neb", "Hyperkalemia Rx: 2.5mg neb given p̄ Ca & Bicarb"], pediatricRx: ["Bronchospasm Rx: 2.5mg neb c̅ O₂ ≥6 LPM\n      Consult to repeat dose"] },
-                'asa': { title: "ASA", concentration: "(81mg/tab)", class: "NSAID (analgesic/antipyretic, antiplatelet)", indications: ["MI or ACS"], contraindications: ["Known hypersensitivity", "Environmental hyperthermia", "[[Peptic ulcer disease|relative for cardiac indications]]", "Pediatric/adolescent (risk of Reye’s Syndrome)"], precautions: "[[Reye’s Syndrome S/S|CNS damage, liver injury, & ↓BGL]]", sideEffects: ["Gastritis", "N/V", "Upper GI bleeding", "↑ Bleeding tendency"], adultRx: ["MI/ACS Rx: 324mg PO (chewed)"] }, // (Contraindicated in pediatrics – no pediatric dose)
-                'atropine-sulfate': { title: "Atropine Sulfate", concentration: "(1mg/10ml)", class: "[[Anticholinergic|specifically, antimuscarinic]]", indications: ["Symptomatic ↓HR", "Organophosphate poisoning"], contraindications: ["Known hypersensitivity", "[[Glaucoma|relative if life-threatening ↓HR]]"], precautions: "[[MI/Hypoxia Caution|Atropine increases myocardial O₂ demand]].\nRx should not delay external pacing for pts c̅ {{blackul:poor perfusion}}.\n[[Mobitz II|Atropine may be ineffective for 2º AV block Type II]] & [[new 3º block c̅ wide QRS|distal (infra-His) blocks]].\n[[Donor hearts|are denervated & not responsive to Atropine]]", sideEffects: ["Blurred vision (high doses)", "Confusion (high doses)", "[[↑HR|may worsen myocardial ischemia]]", "Acute angle closure [[glaucoma|relative]]"], adultRx: ["{{orange:If initial IV attempt is unsuccessful, Atropine may be given IO/IM}}", "Symptomatic ↓HR (with IV access) Rx: 1mg IVP/IO\n   If n/c p̄ 5min → Repeat Rx", "[[SLUDGEM Pt S/S|Organophosphate poisoning]] Rx: 2mg IVP/IO", "Plant ingestion c̅ ↓HR Rx: Consult with Med Control to give 2mg IVP\n   → Repeat dose prn"], pediatricRx: ["[[SLUDGEM Pt S/S|Organophosphate poisoning]] Rx: 0.05mg/kg IV or IM prn\n   → Repeat dose prn", "Plant ingestion c̅ ↓HR Rx: Consult with Med Control for dosing:\n   <12yo = 0.02–0.05mg/kg IV/IO q̄ 20–30min until patient “dries up”\n   ≥12yo = 0.05mg/kg IV/IO q̄ 20–30min until patient “dries up”"] },
-                'd5': { title: "D5", concentration: "(5g/100ml bag)", class: "Carbohydrate", indications: ["↓BGL/Insulin Shock"], contraindications: ["[[Avoid D5W c̅ ↑ICP|General Dextrose precaution]]"], precautions: "Use D10% to Rx ↓BGL with AMS\nHigher dextrose concentrations = [[Hypertonic|which may cause extravasation and subsequently cause tissue injury]]\nā Rx → Verify Patency & Function of IV-line\np̄ Rx → Check BGL", sideEffects: ["Local skin irritation", "Thrombophlebitis", "[[Extravasation|c̅ subsequent tissue necrosis]]", "↑BGL", "Osmotic diuresis"], adultRx: ["[[D5 is primarily for IVFs|D10 is given for ↓BGL]]"] },
-                'd10': { title: "D10", concentration: "(25g/250ml bag)", class: "Carbohydrate", indications: ["↓BGL/Insulin Shock"], contraindications: ["[[Avoid D5W c̅ ↑ICP|General dextrose precaution]]"], precautions: "Use D10% to Rx ↓BGL with AMS.\nHigher dextrose concentrations are [[hypertonic|may cause extravasation and tissue injury]].\n**Ā Rx:** Verify IV patency/function.\n**P̄ Rx:** Recheck BGL.", sideEffects: ["Local irritation", "Thrombophlebitis", "[[Extravasation|c̅ tissue necrosis]]", "↑BGL", "Osmotic diuresis"], adultRx: ["Give D10 in 10g increments until BGL >100 mg/dL"] },
-                // (Pediatric same concentration typically, D10 is used for peds as well if needed)
-
+                'albuterol': { title: "Albuterol", concentration: "(2.5mg/3cc)", class: "[[Beta Adrenergic Agonist|β₂ selective]]", indications: ["Bronchospasm"], contraindications: ["Known hypersensitivity"], sideEffects: ["↑HR", "Palpitations/Cardiac Ectopy", "Tremor", "H/A", "N/V"], adultRx: ["Bronchospasm Rx: 2.5mg in 3cc Neb c̅ O₂ ≥6LPM\n      Consult to Repeat Dose or Give Duo-Neb", "Hyperkalemia Rx: 2.5mg Neb given p̄ Ca & Bicarb"], pediatricRx: ["Bronchospasm Rx: 2.5mg Neb c̅ O₂ ≥6LPM\n      Consult to repeat dose"] },
+                'asa': { title: "ASA", concentration: "(81mg/tab)", class: "NSAID", indications: ["MI or ACS"], contraindications: ["Known hypersensitivity", "Environmental hyperthermia", "[[Peptic ulcer disease|relative for cardiac indications]]", "Pediatric/Adolescent → Due to Reye’s Syndrome"], precautions: "[[Reye’s Syndrome S/S|CNS damage, liver injury, & ↓BGL]]", sideEffects: ["Gastritis", "N/V", "Upper GI bleeding", "↑ Bleeding"], adultRx: ["MI or ACS Rx 324mg PO"] },
+                'atropine-sulfate': { title: "Atropine Sulfate", concentration: "(1mg/10ml)", class: "Anticholinergic & more specifically → Antimuscarinic", indications: ["Symptomatic ↓HR", "Organophosphate Poisoning"], contraindications: ["Known hypersensitivity", "Glaucoma (relative c̅  life threatening ↓HR)"], precautions: "Caution c̅ MI & Hypoxia → ↑O₂ Heart Demand\nRx should not delay external pacing for pts c̅ poor perfusion\nMay not be effective for Type II AV block & new 3º block c̅ Wide QRS where the location of block is likely to be in the bundle of His or more distal conduction system\nDonor hearts are denervated & are not responsive to Atropine", sideEffects: ["↑HR (may worsen myocardial ischemia)", "Blurred vision c̅ high doses", "Confusion c̅ high doses", "Acute angle closure glaucoma (relative)"], adultRx: ["Intervention: Symptomatic ↓HR c̅  IV Access = 1mg IVP/IO \n   If n/c p̄ 5min → Repeat Rx", "Intervention: SLUDGEM Pt S/S = 2mg IVP/IO\n   If Initial IV attempt is unsuccessful → May be given IO/IM", "Continuity: Plant Ingestion c̅ ↓HR = 2mg IVP → Repeat prn"], pediatricRx: ["Intervention: SLUDGEM Pt S/S = 0.05mg/kg  IV   ( IM prn )\n   → Repeat prn", "Continuity: Plant Ingestion c̅ ↓HR:\n   <12yo → 0.02-0.05mg/kg  IV/IO  q̄ 20-30min  until Pt Dries up\n   ≥12yo -----→ 0.05mg/kg  IV/IO  q̄ 20-30min  until Pt Dries up"] },
+                'd5': { title: "D5", concentration: "(5g/100ml bag)", class: "Carbohydrate", indications: ["↓BGL/Insulin Shock"], contraindications: ["Avoid D5W c̅ ↑ICP"], precautions: "Use D10% for the management of ↓BGL.\nHigher concentration are hypertonic and extravasation may lead to tissue injury.\nVerify Patency & Function of IV line ā Rx\nCheck BGL p̄ giving Rx", sideEffects: ["Local skin irritation", "Thrombophlebitis", "Extravasation c̅ subsequent tissue necrosis", "↑BGL", "Osmotic diuresis"], adultRx: ["Give D10 in 10g increments until BGL >100mg/dL (Note: This refers to D10, D5 primarily for fluid)"] },
+                'd10': { title: "D10", concentration: "(25g/250ml bag)", class: "Carbohydrate", indications: ["↓BGL/Insulin Shock"], contraindications: ["Avoid D5W c̅ ↑ICP (General Dextrose precaution)"], precautions: "Use D10% for the management of ↓BGL.\nHigher concentration are hypertonic and extravasation may lead to tissue injury.\nVerify Patency & Function of IV line ā Rx\nCheck BGL p̄ giving Rx", sideEffects: ["Local skin irritation", "Thrombophlebitis", "Extravasation c̅ subsequent tissue necrosis", "↑BGL", "Osmotic diuresis"], adultRx: ["Give D10 in 10g increments until BGL >100mg/dL"] },
                 'dexamethasone-decadron': { title: "Dexamethasone (Decadron)", concentration: "(10mg/ml)", class: "corticosteroid, anti-inflammatory", indications: ["Anaphylaxis", "Bronchospasm"], contraindications: ["Known hypersensitivity"], precautions: "Give Slowly", sideEffects: ["Agitation", "Perineal/body burning sensation", "Pruritis", "N/V"], adultRx: ["Intervention: Anaphylaxis = 10mg IV/IM/PO   *Oral tastes bitter*", "Intervention: Bronchospasm = 10mg IVP/IM"], pediatricRx: ["Intervention: Anaphylaxis = 0.6mg/kg IV/IM", "Intervention: Bronchospasm = 0.6mg/kg IV/IM/PO"] },
                 'diphenhydramine-benadryl': { title: "Diphenhydramine (Benadryl)", concentration: "(50mg/ml)", class: "Antihistamine (H1)", indications: ["Allergic Reaction", "Anaphylaxis", "Toxic Ingestion (probable about treating dystonic reactions)"], contraindications: ["Known hypersensitivity", "Narrow angle glaucoma", "Prostatic hypertrophy or bladder neck obstruction"], precautions: "The drug of choice for anaphylaxis is Epi, not Benadryl", sideEffects: ["Sedation", "↓BP (rare)", "May cause paradoxical excitation in young children"], adultRx: ["Intervention: Allergic RXN or c̅ Anaphylaxis p̄ Epi = 50mg IVP", "Continuity: Extrapyramidal RXN from Haldol use = 50mg IVP/IM"], pediatricRx: ["Intervention: Allergic RXN or c̅ Anaphylaxis p̄ Epi = 1mg/kg IVP", "Continuity: Extrapyramidal RXN from Haldol= 1mg/kg IV/IM/IO"] },
                 'droperidol-inapsine': { title: "Droperidol (Inapsine)", concentration: "(5mg/2ml)", class: "Sedative/Hypnotic/Antiemetic", indications: ["N/V", "Pain Management", "Violent/Agitated/ &/or Anxious pt"], contraindications: ["Known hypersensitivity", "SBP <100mmHg"], precautions: "(might need to do an EKG due to QT elongation)", sideEffects: ["Transient ↓BP", "Hyperactivity/Anxiety", "Neuroleptic Malignant Syndrome"], adultRx: ["Intervention: N/V = 1.25mg IV/IM → Consultation for a 2nd dose*", "Intervention: H/A or abdominal pain = 2.5mg IV", "Intervention: RASS+1 = 5mg IM", "Intervention: RASS+2/3 =10mg IM → Repeat once prn p̄ 10min\n   >65yo = 5mg IM"], pediatricRx: ["Not approved for Pediatric Pts"] },
@@ -1124,12 +854,6 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
                 'ntg': { title: "NTG", concentration: "(0.4mg/spray)", class: "Organic nitrate", indications: ["MI or ACS", "Pulmonary Edema"], contraindications: ["Known hypersensitivity", "SBP <100", "Recent use of a phosphodiesterase type 5 inhibitor (sildenafil [Viagra, Revatio] or vardenafil [Levitra] within 24 hours or tadalafil [Cialis, Adcirca]) c̅in 36 hours.", "Right ventricular infarction (RVI)", "Tachycardia (HR>100) in the absence of HF (not universal)", "↑ICP"], precautions: "Pts c̅ RVI are preload sensitive & can develop severe ↓BP in response to Preload-reducing agents. If ↓BP develops following Rx → IVF may be necessary.\nInferior STEMI → Do right sided EKG to look for RVI evidence\nPts c̅ aortic stenosis are very preload dependent to maintain cardiac output. NTG c̅ aortic stenosis or murmur should be judicious & carefully titrated.", sideEffects: ["Hypotension", "H/A", "Tachycardia (reflex)", "Bradycardia", "Methmemoglobinemia → nitrate ions oxidize hemoglobin\n   long term effect & unlikely seen in EMS setting"], adultRx: ["Don’t give if pt had Viagra/Cialis within the past 48hrs", "NTG is NOT contraindicated c̅ Inferior STEMI \n   → Should the pt become profoundly Hypotensive\n   → Infuse NS until BP >90", "Be cautious c̅ Aortic Stenosis or Murmurs", "Intervention: MI/ACS = 0.4mg SL q̄ 5min prn only if BP >100 \n   or  >110 if pt Never had NTG ā\n   Max = 3 doses", "Continuity: Repeat  q̄  5min  if → SBP >100 & pain still present", "Intervention: Pulmonary Edema = 0.4mg  SL  if BP  >100\n   or  >120  if pt Never had NTG ā", "Intervention: Flash Pulm-Edema from Hypertensive Crisis  s̄  IV \n   = 0.4mg  SL", "Consultation: 0.8-1.2mg  SL & Inform Med-Control if no IV yet"] },
                 'ondansetron-zofran': { title: "Ondansetron (Zofran)", concentration: "(4mg/2ml)", class: "Antiemetic", indications: ["N/V"], contraindications: ["Known hypersensitivity", "Prolonged QTI (male >440msec, female >450msec (probably more of a precaution)", "Pregnancy (1st trimester)"], precautions: "Use c̅ caution c̅ other agents that may cause QTI prolongation.", sideEffects: ["H/A (particularly in those prone to migraine headaches)", "QTI prolongation", "AV conduction disturbance (associated c̅ rapid Rx)", "Sedation", "Diarrhea", "Dry mouth", "Serotonin syndrome"], adultRx: ["Intervention: N/V = 4mg  IVP over  60sec"], pediatricRx: ["Intervention: N/V = 0.15mg/kg  IVP over 60sec     Max = 4mg", "Intervention: N/V s̄  IV →  4-11yo = 4mg tab PO\n   ≥12yo = 8mg tab PO"] }
             };
-            // Build autocomplete suggestions from medication indications
-            Object.values(medicationDetails).forEach(med => {
-                if (med.indications) {
-                    med.indications.forEach(ind => indicationSuggestions.add(ind));
-                }
-            });
             const newCategoriesData = [ /* ... All categories from v0.6 ... */
                 {id: slugify("Abbreviations & References"), title: "Abbreviations & References", type: "category", children: [{ id: slugify("Abbott Approved Abbreviations"), title: "Abbott Approved Abbreviations", type: "topic" },{ id: slugify("Other Abbreviations"), title: "Other Abbreviations", type: "topic" }]},
                 {id: slugify("Introduction & Core Principles"), title: "Introduction & Core Principles", type: "category", children: [{ id: slugify("Introduction to Abbott"), title: "Introduction to Abbott", type: "topic" },{ id: slugify("Core Principles – Safety & Well-Being"), title: "Core Principles – Safety & Well-Being", type: "topic" },{ id: slugify("General Important Information"), title: "General Important Information", type: "topic" }]},
@@ -1160,7 +884,6 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
             setupAutocomplete('pt-pmh', 'pt-pmh-suggestions', pmhSuggestions);
             setupAutocomplete('pt-allergies', 'pt-allergies-suggestions', allergySuggestions);
             setupAutocomplete('pt-medications', 'pt-medications-suggestions', medicationNameSuggestions);
-            setupAutocomplete('pt-indications', 'pt-indications-suggestions', indicationSuggestions);
             setupAutocomplete('pt-symptoms', 'pt-symptoms-suggestions', symptomSuggestions);
 
 
@@ -1180,7 +903,7 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
         else initApp();
     </script>
     <script>
-      if (typeof slugIDs !== 'undefined') {
+      if (window.slugIDs) {
         const container = document.createElement('div');
         container.id = 'slug-id-container';
         container.classList.add('hidden');
