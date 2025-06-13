@@ -799,8 +799,6 @@ if (typeof window !== 'undefined') window.slugIDs = slugIDs;
         function attachToggleCategoryHandlers(container) {
             container.querySelectorAll(".toggle-category").forEach(header => {
                 addTapListener(header, () => {
-                    const content = header.nextElementSibling;
-                    if (content) content.classList.toggle("hidden");
                     const arrow = header.querySelector(".arrow");
                     if (arrow) arrow.classList.toggle("rotate");
                 });
