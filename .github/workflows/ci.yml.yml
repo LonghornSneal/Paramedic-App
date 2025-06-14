@@ -1,0 +1,39 @@
+# GitHub Actions workflow for the Paramedic-App (static HTML/JS site)
+name: CI Pipeline  # Name of the workflow, appears in GitHub Actions tab
+
+on:
+  push:          # Run on every push
+  pull_request:  # Also run on pull requests (if you use them)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Verify that the main HTML file exists
+      - name: Verify main HTML file exists
+        run: |
+          if [ -f index.html ]; then
+            echo "✅ index.html found, proceeding."
+          else
+            echo "❌ index.html is missing!"; exit 1;
+          fi
+
+      # (Optional) Step 3: Set up Node.js (for linting, if desired)
+      # - name: Set up Node.js (for JS linting)
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 18
+
+      # (Optional) Step 4: Run a JavaScript linter to check for errors
+      # - name: Lint JavaScript files
+      #   run: npx eslint --no-eslintrc --env browser --ext .js .
+      #
+      # Note: The above uses npx to run ESLint without a config file.
+      # It checks all .js files in the repository for issues.
+      # You can uncomment the Node setup and this step to enable linting.
+      # Make sure to fix any errors ESLint reports, or the workflow might fail.
