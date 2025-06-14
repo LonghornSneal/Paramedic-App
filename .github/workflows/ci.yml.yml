@@ -24,14 +24,14 @@ jobs:
           fi
 
       # (Optional) Step 3: Set up Node.js (for linting, if desired)
-      # - name: Set up Node.js (for JS linting)
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: 18
+       - name: Set up Node.js (for JS linting)
+         uses: actions/setup-node@v3
+         with:
+           node-version: 18
 
       # (Optional) Step 4: Run a JavaScript linter to check for errors
-      # - name: Lint JavaScript files
-      #   run: npx eslint --no-eslintrc --env browser --ext .js .
+       - name: Lint JavaScript files
+         run: npx eslint --no-eslintrc --env browser --ext .js .
       #
       # Note: The above uses npx to run ESLint without a config file.
       # It checks all .js files in the repository for issues.
