@@ -32,7 +32,7 @@ jobs:
 
          # Step 4: Run a JavaScript linter to check for errors
       - name: Lint JavaScript files
-        run: npx eslint --no-eslintrc --env browser --ext .js .
+        run: npx eslint --env browser --ext .js .
          #
       # Note: The above uses npx to run ESLint without a config file.
       # It checks all .js files in the repository for issues.
