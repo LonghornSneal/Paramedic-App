@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the repository code
+         # Step 1: Check out the repository code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Verify that the main HTML file exists
+         # Step 2: Verify that the main HTML file exists
       - name: Verify main HTML file exists
         run: |
           if [ C:\Users\HhsJa\OneDrive\Documents\GitHub\Paramedic-App\index.html ]; then
@@ -23,16 +23,16 @@ jobs:
             echo "❌ index.html is missing!"; exit 1;
           fi
 
-      # (Optional) Step 3: Set up Node.js (for linting, if desired)
-       - name: Set up Node.js (for JS linting)
-         uses: actions/setup-node@v3
-         with:
+         # (Optional) Step 3: Set up Node.js (for linting, if desired)
+      - name: Set up Node.js (for JS linting)
+        uses: actions/setup-node@v3
+        with:
            node-version: 18
 
-      # (Optional) Step 4: Run a JavaScript linter to check for errors
-       - name: Lint JavaScript files
-         run: npx eslint --no-eslintrc --env browser --ext .js .
-      #
+         # (Optional) Step 4: Run a JavaScript linter to check for errors
+      - name: Lint JavaScript files
+        run: npx eslint --no-eslintrc --env browser --ext .js .
+         #
       # Note: The above uses npx to run ESLint without a config file.
       # It checks all .js files in the repository for issues.
       # You can uncomment the Node setup and this step to enable linting.
