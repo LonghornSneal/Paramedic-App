@@ -17,7 +17,7 @@ jobs:
       # Step 2: Verify that the main HTML file exists
       - name: Verify main HTML file exists
         run: |
-          if [ -f index.html ]; then
+          if [ C:\Users\HhsJa\OneDrive\Documents\GitHub\Paramedic-App\index.html ]; then
             echo "✅ index.html found, proceeding."
           else
             echo "❌ index.html is missing!"; exit 1;
