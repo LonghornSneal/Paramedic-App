@@ -313,9 +313,15 @@
             </div>
         </main>
 
-];       <footer class="text-center p-4 text-gray-500 text-sm mt-2">App Version 0.7</footer>
+       <footer class="text-center p-4 text-gray-500 text-sm mt-2">App Version 0.7</footer>
     </div>
-
+<!-- Load data and module scripts before main code -->
+<script src="Data/ParamedicCategoriesData.js"></script>
+<script src="Data/MedicationDetailsData.js"></script>
+<script src="Features/PatientInfo.js"></script>
+<script src="Data/MedDetails.js"></script>
+<script src="Utils/slugify.js"></script>
+<script src="Data/slugList.js"></script>
 
     <script>
         // --- DOM Elements ---
@@ -737,6 +743,25 @@
                 renderInitialView(true, null, []);
             });
         }
+    function initApp() {
+        // Initialize data structures with categories and med details (if available)
+        initializeData(paramedicCategoriesData || [], medicationDetailsData || {}); 
+        
+        // Attach sidebar open/close event handlers (now that addTapListener is defined)
+        addTapListener(openSidebarButton, openSidebar);
+        addTapListener(closeSidebarButton, closeSidebar);
+        addTapListener(sidebarOverlay, closeSidebar);
+        
+        // Set up autocomplete suggestions for each Patient Info textarea
+        setupAutocomplete('pt-pmh', 'pt-pmh-suggestions', pmhSuggestions);
+        setupAutocomplete('pt-allergies', 'pt-allergies-suggestions', allergySuggestions);
+        setupAutocomplete('pt-medications', 'pt-medications-suggestions', medicationNameSuggestions);
+        setupAutocomplete('pt-indications', 'pt-indications-suggestions', indicationSuggestions);
+        setupAutocomplete('pt-symptoms', 'pt-symptoms-suggestions', symptomSuggestions);
+        
+        // Render the initial hierarchical list view of categories/topics
+        renderInitialView(true, null, []);
+    }
 
         // --- Event Handler ---
         function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) { /* ... same as v0.6 ... */

@@ -52,9 +52,6 @@
         // --- Sidebar Logic ---
         function openSidebar() { patientSidebar.classList.add('open'); sidebarOverlay.classList.add('active'); }
         function closeSidebar() { patientSidebar.classList.remove('open'); sidebarOverlay.classList.remove('active'); }
-        addTapListener(openSidebarButton, openSidebar);
-        addTapListener(closeSidebarButton, closeSidebar);
-        addTapListener(sidebarOverlay, closeSidebar);
 
         function updatePatientData() {
             patientData.age = document.getElementById('pt-age').value ? parseInt(document.getElementById('pt-age').value) : null;
