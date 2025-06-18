@@ -1,3 +1,9 @@
+/**
+ * Provides a master list of all topic slugs used in the Paramedic Quick Reference app.
+ * This array of slug strings is primarily used for developer utilities (like auto-creating Git branches for each topic)
+ * and for generating hidden anchor elements in the app to allow direct linking to topics.
+ * In the running app, most functionality uses the structured data in categoriesData and medDetails instead.
+ */
 const slugIDs = [
   '10-calcium-chloride',
   '2-lidocaine-xylocaine',
@@ -133,3 +139,92 @@ const slugIDs = [
 ];
 if (typeof module !== 'undefined') module.exports = slugIDs;
 if (typeof window !== 'undefined') window.slugIDs = slugIDs;
+
+    <script>
+const subscriptMap = {
+  '₀': '0',
+  '₁': '1',
+  '₂': '2',
+  '₃': '3',
+  '₄': '4',
+  '₅': '5',
+  '₆': '6',
+  '₇': '7',
+  '₈': '8',
+  '₉': '9',
+};
+
+
+const slugIDs = [
+  '10-calcium-chloride',
+  '2-lidocaine-xylocaine',
+  '8-4-sodium-bicarbonate-nahco3',
+  'a-fib-rvr-or-a-flutter-stable-symptomatic',
+  'abbott-approved-abbreviations',
+  'abbreviations-references',
+  'adenosine-adenocard',
+  'administrative-legal-essentials',
+  'adult-protocols',
+  'air-ambulance-utilization',
+  'airway-breathing',
+  'albuterol',
+  'allergic-reaction',
+  'als-ground-rules',
+  'als-medications',
+  'anaphylaxis',
+  'applicability-of-the-cog',
+  'asa',
+  'atropine-sulfate',
+  'bradycardia',
+  'breech',
+  'bronchospasm',
+  'cardiac-arrest-pressure-sores-from-immobility',
+  'cardiogenic-shock-not-post-arrest',
+  'cdc-field-triage-guidelines-trauma',
+  'circulation-cardiac',
+  'circulation-cardiology',
+  'clinical-errors-reporting',
+  'consulting-olmc',
+  'core-principles-safety-well-being',
+  'cpap-bipap',
+  'crime-scene',
+  'd10',
+  'd5',
+  'dexamethasone-decadron',
+  'diltiazem-add-vantage-directions',
+  'diphenhydramine-benadryl',
+  'dispatching-md-200',
+  'droperidol-inapsine',
+  'eclampsia',
+  'emr-accompanying-critically-ill',
+  'epi-1-1000-adrenaline',
+  'epi-1-10000',
+  'epi-1-100000-push-dose-epi',
+  'etomidate-amidate',
+  'ez-io-insertion',
+  'fall-or-weakness',
+  'fentanyl-sublimaze',
+  'frank-complete-breech-presentation',
+  'general-important-information',
+  'glucometer-mckesson-true-metrix-pro',
+  'h-a-or-abdominal-pain',
+  'hyperglycemia',
+  'hyperkalemia',
+  'hypoglycemia',
+  'i-gel-supraglottic-airway-sga',
+  'introduction-core-principles',
+  'introduction-to-abbott',
+  'ipratropium',
+  'ketamine-ketalar',
+  'ketorolac-tromethamine-toradol',
+  'lvad-pt',
+  'mace-pepper-spray',
+  'magnesium-sulfate-mgso4',
+  'major-level-1-trauma',
+  'mandatory-reporting',
+  'mat-stable',
+  'medical',
+  'medical-emergency';
+if (typeof module !== 'undefined') module.exports = slugIDs;
+if (typeof window !== 'undefined') window.slugIDs = slugIDs;
+    </script>
