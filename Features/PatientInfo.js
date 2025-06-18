@@ -120,3 +120,4 @@
                 }
             }
         }
+        ptInputs.forEach(input => { if (input) input.addEventListener('input', updatePatientData); });
