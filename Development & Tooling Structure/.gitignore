@@ -1,3 +1,6 @@
+# A configuration file telling Git which files or folders to ignore in version control. This typically includes node_modules/ (to avoid committing dependencies), build outputs, sensitive config files, or any VS Code setting files and extension packages. By maintaining a proper .gitignore, the repository stays clean, containing only the pertinent source code and resources.
+
+
 # Gradle files
 .gradle/
 build/
