@@ -296,8 +296,11 @@
                         }
                         // General allergy check
                         patientData.allergies.forEach(allergy => {
-                            if (ciLower.includes(allergy) || (ciLower.includes("hypersensitivity") && topic.details.title.toLowerCase().includes(allergy))) {
-                                 collectedWarnings.push({type: 'yellow', text: `<strong>ALLERGY ALERT:</strong> Patient has a listed allergy to <strong>${allergy}</strong>. This medication may be contraindicated or require caution.`});
+                            // Before: using topic.details.title (undefined) – causes error
+                            // if (ciLower.includes("hypersensitivity") && topic.details.title.toLowerCase().includes(allergy)) {
+                            // After: use topic.title instead
+                            if (ciLower.includes("hypersensitivity") && topic.title.toLowerCase().includes(allergy)) {
+                                collectedWarnings.push({ type: 'yellow', text: `<strong>ALLERGY ALERT:</strong> Patient has a listed allergy to <strong>${allergy}</strong>. This medication may be contraindicated or require caution.` });
                             }
                         });
                     });
@@ -306,11 +309,13 @@
              // Deduplicate warnings
             const uniqueWarnings = []; const seenTexts = new Set();
             collectedWarnings.forEach(w => { if (!seenTexts.has(w.text)) { uniqueWarnings.push(w); seenTexts.add(w.text); }});
-            if (uniqueWarnings.length > 0) {
-                warningsHtml = `<div class="warning-box ${uniqueWarnings.sort((a,b) => (a.type === 'red' ? -1 : b.type === 'red' ? 1 : 0))[0].type === 'red' ? 'warning-box-red' : (uniqueWarnings[0].type === 'orange' ? 'warning-box-orange' : 'warning-box-yellow')}">
-                    ${uniqueWarnings.map(w => `<div>${createWarningIcon(w.type === 'red' ? 'text-red-600' : (w.type === 'orange' ? 'text-orange-600' : 'text-yellow-700'))}<span>${w.text}</span></div>`).join('<hr class="my-1 border-gray-300">')}
-                </div>`;
-            }
+            // Sort warnings by severity: red (3), orange (2), yellow (1)
+            const severityRank = { red: 3, orange: 2, yellow: 1 };
+            uniqueWarnings.sort((a, b) => severityRank[b.type] - severityRank[a.type]);
+            const topSeverity = uniqueWarnings[0].type;
+            warningsHtml = `<div class="warning-box ${topSeverity === 'red' ? 'warning-box-red' : (topSeverity === 'orange' ? 'warning-box-orange' : 'warning-box-yellow')}">
+                ${uniqueWarnings.map(w => `<div>${createWarningIcon(w.type === 'red' ? 'text-red-600' : (w.type === 'orange' ? 'text-orange-600' : 'text-yellow-700'))}<span>${w.text}</span></div>`).join('<hr class="my-1 border-gray-300">')}
+            </div>`;
 
             let weightInKg = patientData.weight; if (patientData.weight && patientData.weightUnit === 'lbs') { weightInKg = patientData.weight / 2.20462; }
             let calculatedDoseInfo = "", weightDosePlaceholder = "";
@@ -434,6 +439,13 @@
         setupAutocomplete('pt-indications', 'pt-indications-suggestions', indicationSuggestions);
         setupAutocomplete('pt-symptoms', 'pt-symptoms-suggestions', symptomSuggestions);
         
+        // Trigger search when Enter is pressed in the search box
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+
         // Render the initial hierarchical list view of categories/topics
         renderInitialView(true, null, []);
     }
