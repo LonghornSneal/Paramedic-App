@@ -1,0 +1,16 @@
+{
+  "name": "paramedic-app",
+  "version": "1.0.0",
+  "description": "Paramedic Quick Reference",
+  "main": "index.html",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "jest": "^30.0.0"
+  }
+}
