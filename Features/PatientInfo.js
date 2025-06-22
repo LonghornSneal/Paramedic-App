@@ -1,4 +1,4 @@
-/**
+/*
  * Handles the Patient Info sidebar functionality in the Paramedic Quick Reference app.
  * Manages the patientData object (age, weight, medical history, vitals, etc.) and updates the app UI based on these inputs.
  * This module opens/closes the Patient Info sidebar and dynamically adjusts treatment content (e.g., strikethrough irrelevant info, auto-calc dosages, display warnings) according to the entered patient information.
