@@ -1,4 +1,3 @@
-    <script>
         // --- DOM Elements ---
         const searchInput = document.getElementById('searchInput');
         const contentArea = document.getElementById('content-area');
@@ -235,17 +234,24 @@
         }
 
         function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) { /* ... warning logic updated ... */
-            if (navigationHistory[currentHistoryIndex] && navigationHistory[currentHistoryIndex].viewType === 'list') {
-                navigationHistory[currentHistoryIndex].highlightTopicId = topicId;
-                navigationHistory[currentHistoryIndex].categoryPath = allDisplayableTopicsMap[topicId].categoryPath || [];
-            }
-            if (shouldAddHistory) addHistoryEntry({ viewType: 'detail', contentId: topicId, categoryPath: allDisplayableTopicsMap[topicId].categoryPath || [] });
-            const topic = allDisplayableTopicsMap[topicId];
-            if (!topic) { /* ... error handling ... */
-                contentArea.innerHTML = `<p class="text-red-600 text-center py-4">Error: Topic not found (ID: ${topicId}).</p><button id="backButtonDetailError" class="mt-4 block mx-auto px-6 py-2 bg-blue-500 text-white rounded-lg">Back to List</button>`;
-                addTapListener(document.getElementById('backButtonDetailError'), () => handleSearch(true));
-                return;
-            }
+    const topic = allDisplayableTopicsMap[topicId];
+    if (!topic) {
+        contentArea.innerHTML = `<p class="text-red-600 text-center py-4">Error: Topic not found (ID: ${topicId}).</p>
+            <button id="backButtonDetailError" class="mt-4 block mx-auto px-6 py-2 bg-blue-500 text-white rounded-lg">
+            Back to List</button>`;
+        addTapListener(document.getElementById('backButtonDetailError'), () => handleSearch(true));
+        return;
+    }
+    // If coming from a list view, update that history entry with highlight and path
+    if (navigationHistory[currentHistoryIndex] && navigationHistory[currentHistoryIndex].viewType === 'list') {
+        navigationHistory[currentHistoryIndex].highlightTopicId = topicId;
+        navigationHistory[currentHistoryIndex].categoryPath = topic.categoryPath || [];
+    }
+    if (shouldAddHistory) {
+        addHistoryEntry({ viewType: 'detail', contentId: topicId, categoryPath: topic.categoryPath || [] });
+    }
+    // ... (rest of renderDetailPage logic unchanged) ...
+    }
 
             if (scrollToTop) { contentArea.scrollTop = 0; window.scrollTo(0, Math.max(0, contentArea.offsetTop - 80));}
 
@@ -437,14 +443,20 @@
         setupAutocomplete('pt-allergies', 'pt-allergies-suggestions', allergySuggestions);
         setupAutocomplete('pt-medications', 'pt-medications-suggestions', medicationNameSuggestions);
         setupAutocomplete('pt-indications', 'pt-indications-suggestions', indicationSuggestions);
+        // ... after setting up autocomplete suggestions:
         setupAutocomplete('pt-symptoms', 'pt-symptoms-suggestions', symptomSuggestions);
-        
-        // Trigger search when Enter is pressed in the search box
-        searchInput.addEventListener('keydown', (e) => {
+
+        // Attach search input "Enter" key handler to trigger search
+        searchInput.addEventListener('keydown', e => {
             if (e.key === 'Enter') {
-                handleSearch();
+                e.preventDefault();
+                handleSearch(true);
             }
         });
+
+    // Render the initial hierarchical list view of categories/topics
+    renderInitialView(true, null, []);
+
 
         // Render the initial hierarchical list view of categories/topics
         renderInitialView(true, null, []);
@@ -467,4 +479,3 @@
 
         if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initApp);
         else initApp();
-    </script>
