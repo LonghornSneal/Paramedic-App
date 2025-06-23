@@ -27,7 +27,7 @@
         let paramedicCategories = [];
         let allSearchableTopics = [];
         let allDisplayableTopicsMap = {};
-        let medicationDetailsData = {};
+        medicationDetailsData = { /* new contents */ };  // no const/let here
         const PEDIATRIC_AGE_THRESHOLD = 18;
         const PDE5_INHIBITORS = ["sildenafil", "viagra", "revatio", "vardenafil", "levitra", "tadalafil", "cialis", "adcirca"];
 
