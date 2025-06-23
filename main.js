@@ -233,7 +233,7 @@
             }
         }
 
-        function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true)
+        function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) {
             const topic = allDisplayableTopicsMap[topicId];
             if (!topic) {
                 contentArea.innerHTML = `<p class="text-red-600 text-center py-4">Error: Topic not found (ID: ${topicId}).</p>
@@ -242,6 +242,7 @@
                 addTapListener(document.getElementById('backButtonDetailError'), () => handleSearch(true));
                 return;
             }
+        }
     // If coming from a list view, update that history entry with highlight and path
     if (navigationHistory[currentHistoryIndex] && navigationHistory[currentHistoryIndex].viewType === 'list') {
         navigationHistory[currentHistoryIndex].highlightTopicId = topicId;
