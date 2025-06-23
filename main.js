@@ -359,10 +359,10 @@
                 }
                 detailContentHtml = `
                     ${d.notes ? `<div class="detail-section"><p class="text-red-600 font-semibold">${d.notes.join('<br>')}</p></div>` : ''}
-                    ${d.class ? `<div class="detail-section">
+                    ${d["class"] ? `<div class="detail-section">
                        <h3 class="detail-section-title toggle-category">Class: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
                        <div class="detail-section-content hidden">
-                         ${createDetailText(d.class)}
+                         ${createDetailText(d["class"])}
                        </div>
                      </div>` : ''}
                     ${d.indications ? `<div class="detail-section">
