@@ -247,10 +247,7 @@
     if (navigationHistory[currentHistoryIndex] && navigationHistory[currentHistoryIndex].viewType === 'list') {
         navigationHistory[currentHistoryIndex].highlightTopicId = topicId;
         navigationHistory[currentHistoryIndex].categoryPath = topic.categoryPath || [];
-    }
-    if (shouldAddHistory) {
-        addHistoryEntry({ viewType: 'detail', contentId: topicId, categoryPath: topic.categoryPath || [] });
-    }
+
 
             if (scrollToTop) { contentArea.scrollTop = 0; window.scrollTo(0, Math.max(0, contentArea.offsetTop - 80));}
 
