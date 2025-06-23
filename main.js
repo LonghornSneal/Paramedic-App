@@ -233,15 +233,15 @@
             }
         }
 
-        function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) { /* ... warning logic updated ... */
-    const topic = allDisplayableTopicsMap[topicId];
-    if (!topic) {
-        contentArea.innerHTML = `<p class="text-red-600 text-center py-4">Error: Topic not found (ID: ${topicId}).</p>
-            <button id="backButtonDetailError" class="mt-4 block mx-auto px-6 py-2 bg-blue-500 text-white rounded-lg">
-            Back to List</button>`;
-        addTapListener(document.getElementById('backButtonDetailError'), () => handleSearch(true));
-        return;
-    }
+        function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true)
+            const topic = allDisplayableTopicsMap[topicId];
+            if (!topic) {
+                contentArea.innerHTML = `<p class="text-red-600 text-center py-4">Error: Topic not found (ID: ${topicId}).</p>
+                    <button id="backButtonDetailError" class="mt-4 block mx-auto px-6 py-2 bg-blue-500 text-white rounded-lg">
+                    Back to List</button>`;
+                addTapListener(document.getElementById('backButtonDetailError'), () => handleSearch(true));
+                return;
+            }
     // If coming from a list view, update that history entry with highlight and path
     if (navigationHistory[currentHistoryIndex] && navigationHistory[currentHistoryIndex].viewType === 'list') {
         navigationHistory[currentHistoryIndex].highlightTopicId = topicId;
@@ -249,8 +249,6 @@
     }
     if (shouldAddHistory) {
         addHistoryEntry({ viewType: 'detail', contentId: topicId, categoryPath: topic.categoryPath || [] });
-    }
-    // ... (rest of renderDetailPage logic unchanged) ...
     }
 
             if (scrollToTop) { contentArea.scrollTop = 0; window.scrollTo(0, Math.max(0, contentArea.offsetTop - 80));}
