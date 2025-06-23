@@ -409,9 +409,6 @@
             contentArea.innerHTML = `
                 <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-4 pb-3 border-b border-gray-200">
                     <h2 class="text-xl md:text-2xl font-bold text-blue-700 mb-2 sm:mb-0 topic-main-title" data-topic-id="${topic.id}">
-                    console.log('topic:', topic);
-console.log('topic.title:', topic ? topic.title : '(no topic)');
-
                         ${topic.title} ${topic.details && topic.details.concentration ? `<span class="med-concentration">${topic.details.concentration}</span>` : ''}
                     </h2>
                     <button id="backToListButton" class="w-full sm:w-auto px-5 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300">Back to List View</button>
