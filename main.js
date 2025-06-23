@@ -249,7 +249,7 @@
         navigationHistory[currentHistoryIndex].categoryPath = topic.categoryPath || [];
     }
 
-            if (scrollToTop) { contentArea.scrollTop = 0; window.scrollTo(0, Math.max(0, contentArea.offsetTop - 80));}
+            if (scrollToTop) { contentArea.scrollTop = 0; window.scrollTo(0, Math.max(0, contentArea.offsetTop - 80))};
 
             let warningsHtml = '';
             let collectedWarnings = [];
