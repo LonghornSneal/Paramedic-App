@@ -1,5 +1,5 @@
 // Data/MedicationDetailsData.js
-const medicationDetailsData = {
+medicationDetailsData = {
     /* ... your medication details keyed by ID ... */
 };
 if (typeof module !== 'undefined') module.exports = medicationDetailsData;
