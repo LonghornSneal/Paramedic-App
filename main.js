@@ -403,7 +403,7 @@
                          </div>
                        </div>` : ''}
             } else {
-                detailContentHtml = `<p class="text-lg italic">This is a placeholder for <strong>${topic.title}</strong>.</p><p class="text-sm text-gray-600">Detailed information to be added.</p>`;
+                detailContentHtml = <p class="text-lg italic">This is a placeholder for <strong>${topic.title}</strong>.</p><p class="text-sm text-gray-600">Detailed information to be added.</p>`;
             }
 
             contentArea.innerHTML = `
@@ -428,7 +428,6 @@
                 }
                 renderInitialView(true, null, []);
             });
-        }
     function initApp() {
         // Initialize data structures with categories and med details (if available)
         initializeData(paramedicCategoriesData || [], medicationDetailsData || {}); 
