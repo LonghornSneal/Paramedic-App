@@ -1,4 +1,3 @@
-    <script>
       if (typeof slugIDs !== 'undefined') {
         const container = document.createElement('div');
         container.id = 'slug-id-container';
@@ -11,4 +10,3 @@
         });
         document.body.appendChild(container);
       }
-    </script>
