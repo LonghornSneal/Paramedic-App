@@ -474,6 +474,7 @@ function showSearchSuggestions() {
     }
 }
     function initApp() {
+        searchInput.addEventListener('input', showSearchSuggestions);
         // Initialize data structures with categories and med details (if available)
         initializeData(window.ParamedicCategoriesData, window.medicationDetailsData);
         
