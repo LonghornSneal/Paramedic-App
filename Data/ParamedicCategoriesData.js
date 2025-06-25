@@ -1,4 +1,4 @@
-        function initApp() {
+
 // Data/ParamedicCategoriesData.js
 
 const ParamedicCategoriesData = [ /* ... All categories from v0.6 ... */
@@ -26,4 +26,4 @@ const ParamedicCategoriesData = [ /* ... All categories from v0.6 ... */
             ];
 if (typeof module !== 'undefined') module.exports = ParamedicCategoriesData;
 if (typeof window !== 'undefined') window.ParamedicCategoriesData = ParamedicCategoriesData;
-        }
+        
