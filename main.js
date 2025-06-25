@@ -426,7 +426,7 @@
         }
     function initApp() {
         // Initialize data structures with categories and med details (if available)
-        initializeData(paramedicCategoriesData || [], medicationDetailsData || {}); 
+        initializeData(ParamedicCategoriesData || [], medicationDetailsData || {}); 
         
         // Attach sidebar open/close event handlers (now that addTapListener is defined)
         addTapListener(openSidebarButton, openSidebar);
