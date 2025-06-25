@@ -12,6 +12,10 @@ tailwind.config = {
       // Base styles for global elements and IDs (from styles.css)
       addBase({
         ":root": { "--vh": "1vh" },
+        "html": {
+          "-webkit-text-size-adjust": "100%",
+          "text-size-adjust": "100%"
+        },
         "body": {
           fontFamily: "'Inter', sans-serif",
           overscrollBehaviorY: "contain",
