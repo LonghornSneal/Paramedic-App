@@ -425,37 +425,34 @@
             });
         }
     function initApp() {
-        // Initialize data structures with categories and med details (if available)
-        initializeData(ParamedicCategoriesData || [], medicationDetailsData || {}); 
-        
-        // Attach sidebar open/close event handlers (now that addTapListener is defined)
-        addTapListener(openSidebarButton, openSidebar);
-        addTapListener(closeSidebarButton, closeSidebar);
-        addTapListener(sidebarOverlay, closeSidebar);
-        
-        // Set up autocomplete suggestions for each Patient Info textarea
-        setupAutocomplete('pt-pmh', 'pt-pmh-suggestions', pmhSuggestions);
-        setupAutocomplete('pt-allergies', 'pt-allergies-suggestions', allergySuggestions);
-        setupAutocomplete('pt-medications', 'pt-medications-suggestions', medicationNameSuggestions);
-        setupAutocomplete('pt-indications', 'pt-indications-suggestions', indicationSuggestions);
-        // ... after setting up autocomplete suggestions:
-        setupAutocomplete('pt-symptoms', 'pt-symptoms-suggestions', symptomSuggestions);
+    // **This is the key fix.**
+    // We now directly use the global variables ParamedicCategoriesData and medicationDetailsData,
+    // which are guaranteed to exist because their scripts were loaded first.
+    initializeData(ParamedicCategoriesData, medicationDetailsData);
 
-        // Attach search input "Enter" key handler to trigger search
-        searchInput.addEventListener('keydown', e => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                handleSearch(true);
-            }
-        });
+    // Attach sidebar open/close event handlers
+    addTapListener(openSidebarButton, openSidebar);
+    addTapListener(closeSidebarButton, closeSidebar);
+    addTapListener(sidebarOverlay, closeSidebar);
+
+    // Set up autocomplete suggestions for each Patient Info textarea
+    setupAutocomplete('pt-pmh', 'pt-pmh-suggestions', pmhSuggestions);
+    setupAutocomplete('pt-allergies', 'pt-allergies-suggestions', allergySuggestions);
+    setupAutocomplete('pt-medications', 'pt-medications-suggestions', medicationNameSuggestions);
+    setupAutocomplete('pt-indications', 'pt-indications-suggestions', indicationSuggestions);
+    setupAutocomplete('pt-symptoms', 'pt-symptoms-suggestions', symptomSuggestions);
+
+    // Attach search input "Enter" key handler to trigger search
+    searchInput.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleSearch(true);
+        }
+    });
 
     // Render the initial hierarchical list view of categories/topics
     renderInitialView(true, null, []);
-
-
-        // Render the initial hierarchical list view of categories/topics
-        renderInitialView(true, null, []);
-    }
+}
 
         // --- Event Handler ---
         function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) { /* ... same as v0.6 ... */
