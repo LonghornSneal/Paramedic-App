@@ -11,12 +11,12 @@ tailwind.config = {
     function ({ addBase, addComponents, theme }) {
       // Base styles for global elements and IDs (from styles.css)
       addBase({
-    ":root": { "--vh": "1vh" },
-    "html": {
-      "-webkit-text-size-adjust": "100%", // For Chrome, Safari, and newer Edge
-      "-moz-text-size-adjust": "100%",    // For Firefox
-      "text-size-adjust": "100%"         // The standard property
-    },
+        ":root": { "--vh": "1vh" },
+        "html": {
+          "-webkit-text-size-adjust": "100%", // For Chrome, Safari, and newer Edge
+          "-moz-text-size-adjust": "100%",    // For Firefox
+          "text-size-adjust": "100%"         // The standard property
+        },
         "body": {
           fontFamily: "'Inter', sans-serif",
           overscrollBehaviorY: "contain",
