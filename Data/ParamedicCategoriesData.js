@@ -1,5 +1,5 @@
 // Data/ParamedicCategoriesData.js
-const ParamedicCategoriesData = [goofy shit
+const ParamedicCategoriesData = [goofy 
 ];
 if (typeof module !== 'undefined') module.exports = paramedicCategoriesData;
 if (typeof window !== 'undefined') window.ParamedicCategoriesData = paramedicCategoriesData;
