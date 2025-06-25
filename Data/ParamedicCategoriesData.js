@@ -1,5 +1,5 @@
 // Data/ParamedicCategoriesData.js
 const ParamedicCategoriesData = [goofy 
 ];
-if (typeof module !== 'undefined') module.exports = paramedicCategoriesData;
-if (typeof window !== 'undefined') window.ParamedicCategoriesData = paramedicCategoriesData;
+if (typeof module !== 'undefined') module.exports = ParamedicCategoriesData;
+if (typeof window !== 'undefined') window.ParamedicCategoriesData = ParamedicCategoriesData;
