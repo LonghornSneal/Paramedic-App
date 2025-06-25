@@ -242,7 +242,6 @@
                 addTapListener(document.getElementById('backButtonDetailError'), () => handleSearch(true));
                 return;
             }
-            }
             // If coming from a list view, update that history entry with highlight and path
             if (navigationHistory[currentHistoryIndex] && navigationHistory[currentHistoryIndex].viewType === 'list') {
                 navigationHistory[currentHistoryIndex].highlightTopicId = topicId;
