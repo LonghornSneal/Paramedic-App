@@ -423,6 +423,7 @@
                 }
                 renderInitialView(true, null, []);
             });
+        }
     function initApp() {
         // Initialize data structures with categories and med details (if available)
         initializeData(paramedicCategoriesData || [], medicationDetailsData || {}); 
