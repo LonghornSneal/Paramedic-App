@@ -7,8 +7,8 @@
         // --- Initialization ---
         function initializeData(categoriesData, medDetails) {
             paramedicCategories = categoriesData;
-    
-            allSearchableTopics = []; allDisplayableTopicsMap = {};
+            allSearchableTopics = []; 
+            allDisplayableTopicsMap = {};
 
             // Predefined suggestion lists (can be expanded)
             const commonPmh = ["hypertension", "htn", "diabetes", "dm", "asthma", "copd", "heart failure", "hf", "cad", "coronary artery disease", "stroke", "cva", "seizure disorder", "renal insufficiency", "ckd", "hypothyroidism", "hyperthyroidism", "glaucoma", "peptic ulcer disease", "gerd", "schizophrenia", "anxiety", "depression"];
@@ -56,17 +56,27 @@
             });
 
 
-            function processItem(item, parentPath = '', parentIds = []) { /* ... same as v0.6 ... */
+            function processItem(item, parentPath = '', parentIds = []) {
                 const currentPath = parentPath ? `${parentPath} > ${item.title}` : item.title;
                 const currentIds = item.type === 'category' ? [...parentIds, item.id] : parentIds;
-                let fullItemDetails = { ...item, path: currentPath };
+                const detailsToAttach = medDetails[item.id];
+                let fullItemDetails = { ...item, 
+                    path: currentPath, 
+                    details: detailsToAttach || null, // Attach details if they exist
+                    categoryPath: parentIds
+                };
                 if (item.type === 'topic' && medicationDetailsData[item.id]) {
                     fullItemDetails.details = medicationDetailsData[item.id];
                 }
-                if (item.type === 'topic') fullItemDetails.categoryPath = parentIds;
                 allDisplayableTopicsMap[item.id] = fullItemDetails;
-                if (item.type === 'topic') allSearchableTopics.push({ id: item.id, title: item.title, path: currentPath, categoryPath: parentIds });
-                if (item.children) item.children.forEach(child => processItem(child, currentPath, currentIds));
-            }
+
+        if (item.type === 'topic') {
+            allSearchableTopics.push({ id: item.id, title: item.title, path: currentPath, categoryPath: parentIds });
+        }
+
+        if (item.children) {
+            item.children.forEach(child => processItem(child, currentPath, currentIds));
+        }
+    }
             paramedicCategories.forEach(category => processItem(category, '', []));
         }
