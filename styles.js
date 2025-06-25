@@ -1,5 +1,5 @@
 // Tailwind configuration and custom styles
-tailwindcss.com.config = {
+tailwindcss.config = {
   theme: {
     extend: {
       // Ensure the Inter font is used as the sans-serif font
