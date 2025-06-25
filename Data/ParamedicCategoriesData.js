@@ -1,3 +1,4 @@
+        function initApp() {
 // Data/ParamedicCategoriesData.js
 const medicationDetails = { /* ... All medication details from v0.6 ... */
                 '10-calcium-chloride': { title: "10% Calcium Chloride", concentration: "(1,000mg/10ml)", class: "Electrolyte", indications: ["Hyperkalemia", "Symptomatic ↑HR", "Toxic Ingestion"], contraindications: ["Known hypersensitivity", "Digitalis toxicity"], precautions: "Rx slowly unless: Cardiac Arrest.", sideEffects: ["↓HR", "VF", "Extravasation Necrosis", "Abdominal Pain", "N/V"], adultRx: ["[[Mg OD|from Bronchospasm in Eclampsia]] Rx: 1g IV", "Hyperkalemia Rx: 1g IVP/IO", "[[↓BP + Wide-QRS symptomatic rhythm|Implies Hyperkalemia]] Rx: Consult to give 1g IVP", "RRWCT >5mm c̅ HR <150 Rx: 1g IVP", "Repeat Rx if QRS Narrows p̄ Ca **do not give Lidocaine**", "Ca/β-Blocker OD c̅ ↓HR Rx: Consult to give 1g slow IVP"], pediatricRx: ["{{red:Don’t give Calcium Chloride to Pediatric pts}}"] },
@@ -59,3 +60,4 @@ const ParamedicCategoriesData = [ /* ... All categories from v0.6 ... */
             ];
 if (typeof module !== 'undefined') module.exports = ParamedicCategoriesData;
 if (typeof window !== 'undefined') window.ParamedicCategoriesData = ParamedicCategoriesData;
+        }
