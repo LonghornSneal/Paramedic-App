@@ -7,7 +7,7 @@
         // --- Initialization ---
         function initializeData(categoriesData, medDetails) {
             paramedicCategories = categoriesData;
-            medicationDetailsData = medDetails;
+    
             allSearchableTopics = []; allDisplayableTopicsMap = {};
 
             // Predefined suggestion lists (can be expanded)
