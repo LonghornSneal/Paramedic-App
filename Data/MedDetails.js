@@ -57,18 +57,21 @@
 
 
             function processItem(item, parentPath = '', parentIds = []) {
-                const currentPath = parentPath ? `${parentPath} > ${item.title}` : item.title;
-                const currentIds = item.type === 'category' ? [...parentIds, item.id] : parentIds;
-                const detailsToAttach = medDetails[item.id];
-                let fullItemDetails = { ...item, 
-                    path: currentPath, 
-                    details: detailsToAttach || null, // Attach details if they exist
-                    categoryPath: parentIds
-                };
-                if (item.type === 'topic' && medicationDetailsData[item.id]) {
-                    fullItemDetails.details = medicationDetailsData[item.id];
-                }
-                allDisplayableTopicsMap[item.id] = fullItemDetails;
+        const currentPath = parentPath ? `${parentPath} > ${item.title}` : item.title;
+        const currentIds = item.type === 'category' ? [...parentIds, item.id] : parentIds;
+
+        // This is the key change. We now use medDetails (passed in from the function argument)
+        // instead of the old medicationDetailsData global variable.
+        const detailsToAttach = medDetails[item.id];
+
+        let fullItemDetails = {
+            ...item,
+            path: currentPath,
+            details: detailsToAttach || null, // Attach details if they exist
+            categoryPath: parentIds
+        };
+
+        allDisplayableTopicsMap[item.id] = fullItemDetails;
 
         if (item.type === 'topic') {
             allSearchableTopics.push({ id: item.id, title: item.title, path: currentPath, categoryPath: parentIds });
@@ -78,5 +81,6 @@
             item.children.forEach(child => processItem(child, currentPath, currentIds));
         }
     }
-            paramedicCategories.forEach(category => processItem(category, '', []));
-        }
+
+    paramedicCategories.forEach(category => processItem(category, '', []));
+}
