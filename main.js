@@ -425,6 +425,54 @@
                 renderInitialView(true, null, []);
             });
         }
+        // --- Autocomplete for the main search bar ---
+function showSearchSuggestions() {
+    // Create suggestions container if it doesn't exist
+    let suggestionsContainer = document.getElementById('main-search-suggestions');
+    if (!suggestionsContainer) {
+        suggestionsContainer = document.createElement('div');
+        suggestionsContainer.id = 'main-search-suggestions';
+        // Use existing tailwind classes plus positioning
+        suggestionsContainer.className = 'autocomplete-suggestions hidden'; 
+        suggestionsContainer.style.position = 'absolute';
+        suggestionsContainer.style.width = searchInput.offsetWidth + 'px';
+        suggestionsContainer.style.top = searchInput.offsetTop + searchInput.offsetHeight + 'px';
+        searchInput.parentElement.appendChild(suggestionsContainer);
+    }
+
+    const query = searchInput.value.toLowerCase().trim();
+    if (query.length < 1) {
+        suggestionsContainer.classList.add('hidden');
+        return;
+    }
+
+    const filteredTopics = allSearchableTopics.filter(topic =>
+        topic.title.toLowerCase().includes(query) || (topic.path && topic.path.toLowerCase().includes(query))
+    ).slice(0, 10); // Show top 10 matches
+
+    if (filteredTopics.length > 0) {
+        suggestionsContainer.innerHTML = filteredTopics.map(topic =>
+            `<div class="autocomplete-suggestion-item" data-topic-id="${topic.id}">
+                ${topic.title}
+                <div class="text-xs text-gray-500">${topic.path.split(' > ').slice(0, -1).join(' > ')}</div>
+            </div>`
+        ).join('');
+
+        // Add click listeners to the new suggestions
+        suggestionsContainer.querySelectorAll('.autocomplete-suggestion-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const topicId = e.currentTarget.dataset.topicId;
+                renderDetailPage(topicId);
+                searchInput.value = ''; // Clear search bar
+                suggestionsContainer.classList.add('hidden');
+            });
+        });
+
+        suggestionsContainer.classList.remove('hidden');
+    } else {
+        suggestionsContainer.classList.add('hidden');
+    }
+}
     function initApp() {
         // Initialize data structures with categories and med details (if available)
         initializeData(window.ParamedicCategoriesData, window.medicationDetailsData);
