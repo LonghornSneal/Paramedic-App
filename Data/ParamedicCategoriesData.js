@@ -1,4 +1,3 @@
-
 // Data/ParamedicCategoriesData.js
 
 const ParamedicCategoriesData = [ /* ... All categories from v0.6 ... */
