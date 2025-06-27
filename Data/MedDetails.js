@@ -1,7 +1,12 @@
 function initializeData(categoriesData, medDetails) {
     // Ensure the data passed is valid, otherwise use empty arrays/objects.
     paramedicCategories = categoriesData || [];
-    const medicationData = medDetails || {};
+    // Allow medDetails to be provided as an array or an object
+    // If an array is given (the format used by MedicationDetailsData.js),
+    // convert it to an id -> object map for easier lookup.
+    const medicationData = Array.isArray(medDetails)
+        ? Object.fromEntries(medDetails.map(m => [m.id, m]))
+        : (medDetails || {});
 
     allSearchableTopics = [];
     allDisplayableTopicsMap = {};

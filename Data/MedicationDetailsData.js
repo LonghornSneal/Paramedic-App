@@ -115,13 +115,7 @@ const MedicationDetailsData = [
         adultRx: ["Give D10 in 10g increments until BGL >100 mg/dL"]
     },
     {
-        _id: 'dexamethasone-decadron',
-        get id() {
-            return this._id;
-        },
-        set id(value) {
-            this._id = value;
-        },
+        id: 'dexamethasone-decadron',
         title: "Dexamethasone (Decadron)",
         concentration: "(10mg/ml)",
         class: "corticosteroid, anti-inflammatory",
