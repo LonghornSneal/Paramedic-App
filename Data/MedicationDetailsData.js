@@ -1,5 +1,5 @@
 window.MedicationDetailsData =
-    {id: '10-calcium-chloride',
+    { id: '10-calcium-chloride',
         title: "10% Calcium Chloride",
         concentration: "(1,000mg/10ml)",
         class: "Electrolyte",
@@ -32,7 +32,7 @@ window.MedicationDetailsData =
         adultRx: ["[[Dead + bed sores from immobility|Suggests Hyperkalemia]] Rx: Consult to give 1mEq/kg", "Hyperkalemia Rx: 50mEq IVP/IO", "[[RRWCT >5mm c̅ HR <150|Suggests Hyperkalemia]] Rx: 50mEq IVP\n      If QRS narrows → give second dose", "Tricyclic OD c̅ wide QRS & ↓BP or pulseless Rx: [[Consult to give 1mEq/kg IVP|Several doses may be needed]]"],
         pediatricRx: ["{{redul:Neonates & Children <2yo = use 4.2% Bicarb given slowly}}", "Propranolol OD c̅ widened QRS Rx: Consult to give 1-2mEq/kg IV/IO bolus", "Tricyclic OD c̅ ↓BP or pulseless or wide QRS Rx: Consult to give 1-2mEq/kg IV/IO"]
     },
-    {id: 'adenosine-adenocard',
+    { id: 'adenosine-adenocard',
         title: "Adenosine (Adenocard)",
         concentration: "(6mg/2ml)",
         class: "Antiarrhythmic",
@@ -42,7 +42,7 @@ window.MedicationDetailsData =
         sideEffects: ["H/A", "Cx pn", "Flushing", "Dyspnea/Bronchoconstriction", "↓HR", "AV block", "Sinus Pause/Asystole"],
         adultRx: ["SVT Rx: 6mg Fast IVP c̅ 10ml Flush\n      If n/c → 12mg Fast IVP c̅ 10ml Flush\n            If n/c → 12mg Fast IVP c̅ 10ml Flush\n                If n/c → Consult to give 12mg Fast IVP during transport\n                [[Note:|n/c =Stable Pt & Rhythm is unchanged]]"]
     },
-    {id: 'albuterol',
+    { id: 'albuterol',
         title: "Albuterol",
         concentration: "(2.5mg/3cc)",
         class: "[[Beta adrenergic agonist|β₂-selective]] bronchodilator",
@@ -53,7 +53,7 @@ window.MedicationDetailsData =
         adultRx: ["Bronchospasm Rx: 2.5mg in 3cc neb c̅ O₂ ≥6 LPM\n      Consult to repeat dose or give Duo-Neb", "Hyperkalemia Rx: 2.5mg neb given p̄ Ca & Bicarb"],
         pediatricRx: ["Bronchospasm Rx: 2.5mg neb c̅ O₂ ≥6 LPM\n      Consult to repeat dose"]
     },
-    {id: 'asa',
+    { id: 'asa',
         title: "ASA",
         concentration: "(81mg/tab)",
         class: "NSAID (analgesic/antipyretic, antiplatelet)",
@@ -63,7 +63,7 @@ window.MedicationDetailsData =
         sideEffects: ["Gastritis", "N/V", "Upper GI bleeding", "↑ Bleeding tendency"],
         adultRx: ["MI/ACS Rx: 324mg PO (chewed)"]
     },
-    {id: 'atropine-sulfate',
+    { id: 'atropine-sulfate',
         title: "Atropine Sulfate",
         concentration: "(1mg/10ml)",
         class: "[[Anticholinergic|specifically, antimuscarinic]]",
@@ -74,7 +74,7 @@ window.MedicationDetailsData =
         adultRx: ["{{orange:If initial IV attempt is unsuccessful, Atropine may be given IO/IM}}", "Symptomatic ↓HR (with IV access) Rx: 1mg IVP/IO\n   If n/c p̄ 5min → Repeat Rx", "[[SLUDGEM Pt S/S|Organophosphate poisoning]] Rx: 2mg IVP/IO", "Plant ingestion c̅ ↓HR Rx: Consult with Med Control to give 2mg IVP\n   → Repeat dose prn"],
         pediatricRx: ["[[SLUDGEM Pt S/S|Organophosphate poisoning]] Rx: 0.05mg/kg IV or IM prn\n   → Repeat dose prn", "Plant ingestion c̅ ↓HR Rx: Consult with Med Control for dosing:\n   <12yo = 0.02–0.05mg/kg IV/IO q̄ 20–30min until patient “dries up”\n   ≥12yo = 0.05mg/kg IV/IO q̄ 20–30min until patient “dries up”"]
     },
-    {id: 'd5',
+    { id: 'd5',
         title: "D5",
         concentration: "(5g/100ml bag)",
         class: "Carbohydrate",
@@ -84,7 +84,7 @@ window.MedicationDetailsData =
         sideEffects: ["Local skin irritation", "Thrombophlebitis", "[[Extravasation|c̅ subsequent tissue necrosis]]", "↑BGL", "Osmotic diuresis"],
         adultRx: ["[[D5 is primarily for IVFs|D10 is given for ↓BGL]]"]
     },
-    {id: 'd10',
+    { id: 'd10',
         title: "D10",
         concentration: "(25g/250ml bag)",
         class: "Carbohydrate",
@@ -94,7 +94,13 @@ window.MedicationDetailsData =
         sideEffects: ["Local irritation", "Thrombophlebitis", "[[Extravasation|c̅ tissue necrosis]]", "↑BGL", "Osmotic diuresis"],
         adultRx: ["Give D10 in 10g increments until BGL >100 mg/dL"]
     },
-    {id: 'dexamethasone-decadron',
+    { _id: 'dexamethasone-decadron',
+        get id() {
+            return this._id;
+        },
+        set id(value) {
+            this._id = value;
+        },
         title: "Dexamethasone (Decadron)",
         concentration: "(10mg/ml)",
         class: "corticosteroid, anti-inflammatory",
