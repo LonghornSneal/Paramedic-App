@@ -1,6 +1,7 @@
-export const medicationDetailsData = [
+// Attach medication details to the global scope so main.js can access them
+const MedicationDetailsData = [
   {
-    id: '10-calcium-chloride',
+    id: 'calcium-chloride',
     title: '10% Calcium Chloride',
     concentration: '(1,000mg/10ml)',
     "class": 'Electrolyte',
@@ -325,3 +326,7 @@ export const medicationDetailsData = [
         pediatricRx: ["Intervention: N/V = 0.15mg/kg  IVP over 60sec     Max = 4mg", "Intervention: N/V s̄  IV →  4-11yo = 4mg tab PO\n   ≥12yo = 8mg tab PO"]
     },
 ]
+
+// Support both Node and browser environments
+if (typeof module !== 'undefined') module.exports = MedicationDetailsData;
+if (typeof window !== 'undefined') window.MedicationDetailsData = MedicationDetailsData;
