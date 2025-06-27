@@ -76,5 +76,4 @@ function initializeData(categoriesData, medDetails) {
         }
     }
 
-    paramedicCategories.forEach(category => processItem(category, '', []));
-}
+    paramedicCategories.forEach(category => processItem(category, '', []));}
