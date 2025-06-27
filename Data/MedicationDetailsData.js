@@ -1,5 +1,5 @@
 window.MedicationDetailsData =
-    '10-calcium-chloride': {
+    {id: '10-calcium-chloride',
         title: "10% Calcium Chloride",
         concentration: "(1,000mg/10ml)",
         class: "Electrolyte",
@@ -10,7 +10,7 @@ window.MedicationDetailsData =
         adultRx: ["[[Mg OD|from Bronchospasm in Eclampsia]] Rx: 1g IV", "Hyperkalemia Rx: 1g IVP/IO", "[[↓BP + Wide-QRS symptomatic rhythm|Implies Hyperkalemia]] Rx: Consult to give 1g IVP", "RRWCT >5mm c̅ HR <150 Rx: 1g IVP", "Repeat Rx if QRS Narrows p̄ Ca **do not give Lidocaine**", "Ca/β-Blocker OD c̅ ↓HR Rx: Consult to give 1g slow IVP"],
         pediatricRx: ["{{red:Don’t give Calcium Chloride to Pediatric pts}}"]
     },
-    '2-lidocaine-xylocaine': {
+    {id: '2-lidocaine-xylocaine':
         title: "2% Lidocaine (Xylocaine)",
         concentration: "(100mg/5ml)",
         class: "Antiarrhythmic",
@@ -281,6 +281,3 @@ window.MedicationDetailsData =
         adultRx: ["Intervention: N/V = 4mg  IVP over  60sec"],
         pediatricRx: ["Intervention: N/V = 0.15mg/kg  IVP over 60sec     Max = 4mg", "Intervention: N/V s̄  IV →  4-11yo = 4mg tab PO\n   ≥12yo = 8mg tab PO"]
     }
-
-
-    
