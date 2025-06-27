@@ -24,4 +24,3 @@ window.ParamedicCategoriesData = [
             ];
 if (typeof module !== 'undefined') module.exports = ParamedicCategoriesData;
 if (typeof window !== 'undefined') window.ParamedicCategoriesData = ParamedicCategoriesData;
-        

@@ -33,4 +33,3 @@ if (typeof window !== 'undefined') {
     window.MedicationDetailsData = window.MedicationDetailsData || {};
     Object.assign(window.MedicationDetailsData, MedicationDetailsData);
 }
-if (typeof module !== 'undefined') module.exports = medicationDetailsData;
