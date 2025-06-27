@@ -125,7 +125,7 @@ addTapListener(navForwardButton, () => navigateViaHistory(1));
 
 // --- Global Data Structures --- 
 // (Moved here from PatientInfo.js to ensure single source of truth)
-let paramedicCategories    = [];    // all categories/topics hierarchy
+   // all categories/topics hierarchy
 let allSearchableTopics    = [];    // flat list of all topics for search
 let allDisplayableTopicsMap = {};   // map from topic id -> topic object (with details)
 /* Note: patientData and suggestion Sets (pmhSuggestions, allergySuggestions, 
