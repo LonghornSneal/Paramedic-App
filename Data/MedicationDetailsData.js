@@ -323,5 +323,5 @@ export const medicationDetailsData = [
         sideEffects: ["H/A (particularly in those prone to migraine headaches)", "QTI prolongation", "AV conduction disturbance (associated c̅ rapid Rx)", "Sedation", "Diarrhea", "Dry mouth", "Serotonin syndrome"],
         adultRx: ["Intervention: N/V = 4mg  IVP over  60sec"],
         pediatricRx: ["Intervention: N/V = 0.15mg/kg  IVP over 60sec     Max = 4mg", "Intervention: N/V s̄  IV →  4-11yo = 4mg tab PO\n   ≥12yo = 8mg tab PO"]
-    }
-];
+    },
+]
