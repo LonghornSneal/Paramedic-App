@@ -5,7 +5,7 @@
  * In the running app, most functionality uses the structured data in categoriesData and medDetails instead.
  */
 const slugIDs = [
-  '10-calcium-chloride',
+  'calcium-chloride',
   '2-lidocaine-xylocaine',
   '8-4-sodium-bicarbonate-nahco3',
   'adult-a-fib-rvr-or-a-flutter-stable-symptomatic',
