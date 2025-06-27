@@ -114,18 +114,25 @@ const MedicationDetailsData = [
         sideEffects: ["Local irritation", "Thrombophlebitis", "[[Extravasation|c̅ tissue necrosis]]", "↑BGL", "Osmotic diuresis"],
         adultRx: ["Give D10 in 10g increments until BGL >100 mg/dL"]
     },
-    {
+        {
         id: 'dexamethasone-decadron',
         title: "Dexamethasone (Decadron)",
         concentration: "(10mg/ml)",
-        class: "corticosteroid, anti-inflammatory",
+        class: "Corticosteroid (anti-inflammatory)",
         indications: ["Anaphylaxis", "Bronchospasm"],
         contraindications: ["Known hypersensitivity"],
-        precautions: "Give Slowly",
-        sideEffects: ["Agitation", "Perineal/body burning sensation", "Pruritis", "N/V"],
-        adultRx: ["Intervention: Anaphylaxis = 10mg IV/IM/PO   *Oral tastes bitter*", "Intervention: Bronchospasm = 10mg IVP/IM"],
-        pediatricRx: ["Intervention: Anaphylaxis = 0.6mg/kg IV/IM", "Intervention: Bronchospasm = 0.6mg/kg IV/IM/PO"]
+        precautions: "Give slowly.",
+        sideEffects: ["Agitation", "Perineal/body burning sensation", "Pruritus", "N/V"],
+        adultRx: [
+            "Anaphylaxis: 10mg IV/IM/PO (oral dose has bitter taste)",
+            "Bronchospasm: 10mg IVP or IM"
+        ],
+        pediatricRx: [
+            "Anaphylaxis: 0.6mg/kg IV/IM",
+            "Bronchospasm: 0.6mg/kg IV/IM/PO"
+        ]
     },
+
     {
         id: 'diphenhydramine-benadryl',
         title: "Diphenhydramine (Benadryl)",
