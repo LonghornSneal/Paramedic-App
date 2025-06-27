@@ -29,5 +29,5 @@ const medicationDetailsData = {
     'ondansetron-zofran': { title: "Ondansetron (Zofran)", concentration: "(4mg/2ml)", class: "Antiemetic", indications: ["N/V"], contraindications: ["Known hypersensitivity", "Prolonged QTI (male >440msec, female >450msec (probably more of a precaution)", "Pregnancy (1st trimester)"], precautions: "Use c̅ caution c̅ other agents that may cause QTI prolongation.", sideEffects: ["H/A (particularly in those prone to migraine headaches)", "QTI prolongation", "AV conduction disturbance (associated c̅ rapid Rx)", "Sedation", "Diarrhea", "Dry mouth", "Serotonin syndrome"], adultRx: ["Intervention: N/V = 4mg  IVP over  60sec"], pediatricRx: ["Intervention: N/V = 0.15mg/kg  IVP over 60sec     Max = 4mg", "Intervention: N/V s̄  IV →  4-11yo = 4mg tab PO\n   ≥12yo = 8mg tab PO"] }
 };
 
-if (typeof module !== 'undefined') module.exports = MedicationDetailsData;
-if (typeof window !== 'undefined') window.MedicationDetailsData = MedicationDetailsData;
+if (typeof module !== 'undefined') module.exports = medicationDetailsData;
+if (typeof window !== 'undefined') window.MedicationDetailsData = medicationDetailsData;
