@@ -499,10 +499,6 @@ function showSearchSuggestions() {
             }
         });
 
-    // Render the initial hierarchical list view of categories/topics
-    renderInitialView(true, null, []);
-
-
         // Render the initial hierarchical list view of categories/topics
         renderInitialView(true, null, []);
     }
