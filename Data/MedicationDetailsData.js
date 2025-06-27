@@ -30,8 +30,8 @@ window.MedicationDetailsData = {
 };
 // Ensure medicationDetailsData is available globally
 if (typeof window !== 'undefined') {
-    window.medicationDetailsData = window.medicationDetailsData || {};
-    Object.assign(window.medicationDetailsData, medicationDetailsData);
+    window.MedicationDetailsData = window.MedicationDetailsData || {};
+    Object.assign(window.MedicationDetailsData, MedicationDetailsData);
 }
 if (typeof module !== 'undefined') module.exports = medicationDetailsData;
 if (typeof window !== 'undefined') window.medicationDetailsData = medicationDetailsData;
