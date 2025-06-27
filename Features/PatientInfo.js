@@ -24,9 +24,7 @@
         let isNavigatingViaHistory = false;
 
         // --- Hierarchical Data, Flat Search List, Medication Details ---
-        let paramedicCategories = [];
-        let allSearchableTopics = [];
-        let allDisplayableTopicsMap = {};
+
         let medicationData = [];
         const PEDIATRIC_AGE_THRESHOLD = 18;
         const PDE5_INHIBITORS = ["sildenafil", "viagra", "revatio", "vardenafil", "levitra", "tadalafil", "cialis", "adcirca"];
