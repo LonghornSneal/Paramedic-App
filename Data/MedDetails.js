@@ -1,19 +1,3 @@
-/**
- * Processes the raw category and medication data to prepare it for the application.
- * This file populates the searchable lists and the map used for displaying topic details.
- */
-
-/**
- * Initializes paramedic categories and medication details, populating global suggestion sets and topic maps.
- *
- * This function processes provided category data and medication details to:
- * - Populate global suggestion sets for PMH, allergies, and medication names.
- * - Extract additional allergy suggestions from medication contraindications.
- * - Recursively process category/topic items, attaching medication details and building searchable/displayable topic structures.
- *
- * @param {Array<Object>} categoriesData - Array of category objects representing the paramedic categories and topics. Each item should have at least `id`, `title`, `type`, and optionally `children`.
- * @param {Object} medDetails - Object mapping medication IDs to their detail objects, which may include contraindications and other properties.
- */
 function initializeData(categoriesData, medDetails) {
     // Ensure the data passed is valid, otherwise use empty arrays/objects.
     paramedicCategories = categoriesData || [];
@@ -74,6 +58,5 @@ function initializeData(categoriesData, medDetails) {
         if (item.children) {
             item.children.forEach(child => processItem(child, currentPath, currentIds));
         }
-    }
-
+    };
     paramedicCategories.forEach(category => processItem(category, '', []));}
