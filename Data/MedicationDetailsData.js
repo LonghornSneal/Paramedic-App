@@ -10,7 +10,7 @@ window.MedicationDetailsData =
         adultRx: ["[[Mg OD|from Bronchospasm in Eclampsia]] Rx: 1g IV", "Hyperkalemia Rx: 1g IVP/IO", "[[↓BP + Wide-QRS symptomatic rhythm|Implies Hyperkalemia]] Rx: Consult to give 1g IVP", "RRWCT >5mm c̅ HR <150 Rx: 1g IVP", "Repeat Rx if QRS Narrows p̄ Ca **do not give Lidocaine**", "Ca/β-Blocker OD c̅ ↓HR Rx: Consult to give 1g slow IVP"],
         pediatricRx: ["{{red:Don’t give Calcium Chloride to Pediatric pts}}"]
     },
-    {id: '2-lidocaine-xylocaine':
+    {id: '2-lidocaine-xylocaine',
         title: "2% Lidocaine (Xylocaine)",
         concentration: "(100mg/5ml)",
         class: "Antiarrhythmic",
@@ -20,7 +20,7 @@ window.MedicationDetailsData =
         sideEffects: ["Drowsiness", "Paresthesia", "Slurred speech", "[[Nystagmus|early sign of toxicity]]", "[[Seizures|severe toxicity]]"],
         adultRx: ["VT Rx: 1-1.5mg/kg slow IVP over 2-3min,\n      If n/c p̄ 5min, [[then give 0.5-0.75mg/kg|Max = 3mg/kg]]", "P̄-ROSC Stabilization Rx: Consult to give 2mg/min IV maintenance infusion", "EZ-IO Rx: 2ml over 60-90sec\n      → Flush c̅ 5-10ml NS rapidly over 5sec\n            → Then give 1ml over 30sec"]
     },
-    '8-4-sodium-bicarbonate-nahco3': {
+    {id: '8-4-sodium-bicarbonate-nahco3',
         title: "8.4% Sodium Bicarbonate (NaHCO₃)",
         concentration: "(50mEq/50ml)",
         notes: ["***Given separately from other drugs***"],
@@ -32,7 +32,7 @@ window.MedicationDetailsData =
         adultRx: ["[[Dead + bed sores from immobility|Suggests Hyperkalemia]] Rx: Consult to give 1mEq/kg", "Hyperkalemia Rx: 50mEq IVP/IO", "[[RRWCT >5mm c̅ HR <150|Suggests Hyperkalemia]] Rx: 50mEq IVP\n      If QRS narrows → give second dose", "Tricyclic OD c̅ wide QRS & ↓BP or pulseless Rx: [[Consult to give 1mEq/kg IVP|Several doses may be needed]]"],
         pediatricRx: ["{{redul:Neonates & Children <2yo = use 4.2% Bicarb given slowly}}", "Propranolol OD c̅ widened QRS Rx: Consult to give 1-2mEq/kg IV/IO bolus", "Tricyclic OD c̅ ↓BP or pulseless or wide QRS Rx: Consult to give 1-2mEq/kg IV/IO"]
     },
-    'adenosine-adenocard': {
+    {id: 'adenosine-adenocard',
         title: "Adenosine (Adenocard)",
         concentration: "(6mg/2ml)",
         class: "Antiarrhythmic",
@@ -42,7 +42,7 @@ window.MedicationDetailsData =
         sideEffects: ["H/A", "Cx pn", "Flushing", "Dyspnea/Bronchoconstriction", "↓HR", "AV block", "Sinus Pause/Asystole"],
         adultRx: ["SVT Rx: 6mg Fast IVP c̅ 10ml Flush\n      If n/c → 12mg Fast IVP c̅ 10ml Flush\n            If n/c → 12mg Fast IVP c̅ 10ml Flush\n                If n/c → Consult to give 12mg Fast IVP during transport\n                [[Note:|n/c =Stable Pt & Rhythm is unchanged]]"]
     },
-    'albuterol': {
+    {id: 'albuterol',
         title: "Albuterol",
         concentration: "(2.5mg/3cc)",
         class: "[[Beta adrenergic agonist|β₂-selective]] bronchodilator",
@@ -53,7 +53,7 @@ window.MedicationDetailsData =
         adultRx: ["Bronchospasm Rx: 2.5mg in 3cc neb c̅ O₂ ≥6 LPM\n      Consult to repeat dose or give Duo-Neb", "Hyperkalemia Rx: 2.5mg neb given p̄ Ca & Bicarb"],
         pediatricRx: ["Bronchospasm Rx: 2.5mg neb c̅ O₂ ≥6 LPM\n      Consult to repeat dose"]
     },
-    'asa': {
+    {id: 'asa',
         title: "ASA",
         concentration: "(81mg/tab)",
         class: "NSAID (analgesic/antipyretic, antiplatelet)",
@@ -63,7 +63,7 @@ window.MedicationDetailsData =
         sideEffects: ["Gastritis", "N/V", "Upper GI bleeding", "↑ Bleeding tendency"],
         adultRx: ["MI/ACS Rx: 324mg PO (chewed)"]
     },
-    'atropine-sulfate': {
+    {id: 'atropine-sulfate',
         title: "Atropine Sulfate",
         concentration: "(1mg/10ml)",
         class: "[[Anticholinergic|specifically, antimuscarinic]]",
@@ -74,7 +74,7 @@ window.MedicationDetailsData =
         adultRx: ["{{orange:If initial IV attempt is unsuccessful, Atropine may be given IO/IM}}", "Symptomatic ↓HR (with IV access) Rx: 1mg IVP/IO\n   If n/c p̄ 5min → Repeat Rx", "[[SLUDGEM Pt S/S|Organophosphate poisoning]] Rx: 2mg IVP/IO", "Plant ingestion c̅ ↓HR Rx: Consult with Med Control to give 2mg IVP\n   → Repeat dose prn"],
         pediatricRx: ["[[SLUDGEM Pt S/S|Organophosphate poisoning]] Rx: 0.05mg/kg IV or IM prn\n   → Repeat dose prn", "Plant ingestion c̅ ↓HR Rx: Consult with Med Control for dosing:\n   <12yo = 0.02–0.05mg/kg IV/IO q̄ 20–30min until patient “dries up”\n   ≥12yo = 0.05mg/kg IV/IO q̄ 20–30min until patient “dries up”"]
     },
-    'd5': {
+    {id: 'd5',
         title: "D5",
         concentration: "(5g/100ml bag)",
         class: "Carbohydrate",
@@ -84,7 +84,7 @@ window.MedicationDetailsData =
         sideEffects: ["Local skin irritation", "Thrombophlebitis", "[[Extravasation|c̅ subsequent tissue necrosis]]", "↑BGL", "Osmotic diuresis"],
         adultRx: ["[[D5 is primarily for IVFs|D10 is given for ↓BGL]]"]
     },
-    'd10': {
+    {id: 'd10',
         title: "D10",
         concentration: "(25g/250ml bag)",
         class: "Carbohydrate",
@@ -94,7 +94,7 @@ window.MedicationDetailsData =
         sideEffects: ["Local irritation", "Thrombophlebitis", "[[Extravasation|c̅ tissue necrosis]]", "↑BGL", "Osmotic diuresis"],
         adultRx: ["Give D10 in 10g increments until BGL >100 mg/dL"]
     },
-    'dexamethasone-decadron': {
+    {id: 'dexamethasone-decadron',
         title: "Dexamethasone (Decadron)",
         concentration: "(10mg/ml)",
         class: "corticosteroid, anti-inflammatory",
@@ -105,7 +105,7 @@ window.MedicationDetailsData =
         adultRx: ["Intervention: Anaphylaxis = 10mg IV/IM/PO   *Oral tastes bitter*", "Intervention: Bronchospasm = 10mg IVP/IM"],
         pediatricRx: ["Intervention: Anaphylaxis = 0.6mg/kg IV/IM", "Intervention: Bronchospasm = 0.6mg/kg IV/IM/PO"]
     },
-    'diphenhydramine-benadryl': {
+    {id: 'diphenhydramine-benadryl',
         title: "Diphenhydramine (Benadryl)",
         concentration: "(50mg/ml)",
         class: "Antihistamine (H1)",
@@ -116,7 +116,7 @@ window.MedicationDetailsData =
         adultRx: ["Intervention: Allergic RXN or c̅ Anaphylaxis p̄ Epi = 50mg IVP", "Continuity: Extrapyramidal RXN from Haldol use = 50mg IVP/IM"],
         pediatricRx: ["Intervention: Allergic RXN or c̅ Anaphylaxis p̄ Epi = 1mg/kg IVP", "Continuity: Extrapyramidal RXN from Haldol= 1mg/kg IV/IM/IO"]
     },
-    'droperidol-inapsine': {
+    {id: 'droperidol-inapsine',
         title: "Droperidol (Inapsine)",
         concentration: "(5mg/2ml)",
         class: "Sedative/Hypnotic/Antiemetic",
@@ -127,7 +127,7 @@ window.MedicationDetailsData =
         adultRx: ["Intervention: N/V = 1.25mg IV/IM → Consultation for a 2nd dose*", "Intervention: H/A or abdominal pain = 2.5mg IV", "Intervention: RASS+1 = 5mg IM", "Intervention: RASS+2/3 =10mg IM → Repeat once prn p̄ 10min\n   >65yo = 5mg IM"],
         pediatricRx: ["Not approved for Pediatric Pts"]
     },
-    'epi-1-1000-adrenaline': {
+    {id: 'epi-1-1000-adrenaline',
         title: "Epi 1:1,000 (Adrenaline)",
         concentration: "(10mg/10ml)",
         class: "Endogenous Catecholamine",
@@ -137,7 +137,7 @@ window.MedicationDetailsData =
         adultRx: ["Intervention: Anaphylaxis = 0.5mg IM \n   n/c p̄ 5min → Repeat once\n   Consultation → May give 3rd dose 5min p̄ the 2nd dose", "Consultation:Bronchospasm c̅ severe asthmatics =0.5mg IM"],
         pediatricRx: ["Intervention: Anaphylaxis <10kg = 0.01mg/kg IM  (0.01ml/kg IM)\n   10-25kg = 0.15mg IM   (0.15ml IM)\n   25-60kg = 0.3mg IM   (0.3ml IM)\n   >60kg = 0.5mg IM   (0.5ml IM)", "*All weight classes: give prn every 5-15min   (max = 3 doses)", "Consultation → Epi IV Infusion p̄ 3rd does of Epi", "Consultation:Bronchospasm = 0.3mg IM (0.3ml IM)"]
     },
-    'epi-1-10000': {
+    {id: 'epi-1-10000',
         title: "Epi 1:10,000",
         concentration: "(1mg/10ml)",
         class: "Endogenous Catecholamine",
@@ -147,7 +147,7 @@ window.MedicationDetailsData =
         adultRx: ["Intervention: VF/VT 1mg IVP during CPR"],
         pediatricRx: ["Cardiogenic Shock/Post Arrest Stabilization PEDIATRIC p157- epinephrine 1mcg/kg IO or IVP"]
     },
-    'epi-1-100000-push-dose-epi': {
+    {id: 'epi-1-100000-push-dose-epi',
         title: "Epi 1:100,000 \"Push-Dose Epi\"",
         concentration: "(100mcg/10ml)",
         class: "Endogenous Catecholamine",
@@ -157,7 +157,7 @@ window.MedicationDetailsData =
         adultRx: ["Push-Dose Epi Preparation: \n   Waste 1ml from NS Flush \n   → Draw 1ml Epi 1:10,000 into NS Flush \n   Concentration = 10mcg/ml & total Epi = 100mcg/Flush", "Epi Continuous Infusion: \n   Waste 10ml from 250ml NS bag \n   → Add 10ml of 1:10,000 Epi into the NS bag \n   = 4mcg/ml Epi Concentration", "Epi Continuous Infusion Drip Rates c̅ 60-Drip (Micro-Drip):\n   2mcg/min = 1gtt/2sec\n   4mcg/min = 1gtt/sec\n   8mcg/min = 2gtts/sec\n   12mcg/min = 3gtts/sec\n   16mcg/min = 4gtts/sec", "Intervention: Symptomatic ↓HR (En route & s̄ hypovolemia) \n   = 10mcg IVP followed by 2mcg/min Infusion\n   Consultation:Titrate up by 2mcg/min q̄ min prn    Max= 16mcg/min", "Intervention: Cardiogenic Shock 10mcg IVP followed by \n   → 2mcg/min Infusion → Titrate up 2mcg/min q̄ min\n   Max = 10mcg/min     SBP Goal ≥90", "Intervention: Post-ROSC Stabilization Infused at 2mcg/min \n   → Titrate up by 2mcg/min q̄ min    Max = 16mcg/min"],
         pediatricRx: ["Consultation:Cardiogenic Shockor Post-ROSC Stabilization\n   = 1mcg/kg IVP/IO  → From Push-Dose Epi", "10kg child =1ml    → From Push-Dose Epi", "15kg child =1.5ml   → From Push-Dose Epi"]
     },
-    'etomidate-amidate': {
+    {id: 'etomidate-amidate',
         title: "Etomidate (Amidate)",
         concentration: "(40mg/20ml)",
         class: "Sedative-hypnotic",
@@ -166,7 +166,7 @@ window.MedicationDetailsData =
         sideEffects: ["Pain on injection (secondary to propylene glycol diluent, may be ↓ by administering through a rapidly flowing IV placed in a large vein).", "Myoclonus (not of clinical significance), can be ↓ or mitigated by the co-Rx of an opioid or benzodiazepine."],
         adultRx: ["Intervention: SAI for >10yo = 0.3mg/kg IVP      Max = 40mg"]
     },
-    'fentanyl-sublimaze': {
+    {id: 'fentanyl-sublimaze',
         title: "Fentanyl (Sublimaze)",
         concentration: "(100mcg/2ml)",
         class: "Synthetic opioid",
@@ -177,7 +177,7 @@ window.MedicationDetailsData =
         adultRx: ["Intervention: MI/ACS 1mcg/kg slow over 3-5min IVP \n   →Consultation needed for repeated doses", "Intervention: Pain 1mcg/kg slow IVP/IM/IN    Max= 150mcg", "Intervention: Sickle Cell Crisis 1mcg/kg slow IVP   Max = 150mcg"],
         pediatricRx: ["Intervention: Pain 0.5-1mcg/kg IV/IN     Max = 50mcg\n   → Consultation needed for repeated doses", "Consultation: Sickle Cell Crisis 1mcg/kg slow IVP/SQ \n   Max= 50mcg"]
     },
-    'ipratropium': {
+    {id: 'ipratropium',
         title: "Ipratropium",
         concentration: "(0.5mg/3cc)",
         class: "Anticholinergic\nParasympatholytic used in the Tx of respiratory emergencies.\nCauses bronchodilation & dries Respiratory tract secretions.\nBlocks Acetylcholine. 15% of dose reaches lower airway.",
@@ -186,7 +186,7 @@ window.MedicationDetailsData =
         sideEffects: ["Palpitation", "Anxiety", "Dizziness", "H/A", "N/V"],
         adultRx: ["Continuity: Bronchospasm = 0.5mg orDuo-Neb"]
     },
-    'ketamine-ketalar': {
+    {id: 'ketamine-ketalar',
         title: "Ketamine (Ketalar)",
         concentration: "(500mg/5ml)",
         class: "Dissociative general anesthetic",
@@ -197,7 +197,7 @@ window.MedicationDetailsData =
         adultRx: ["Intervention: Combative pt = 4mg/kg IM      >65yo = 2mg/kg IM\n   Max = 500mg IM       RASS score q̄ 5min", "Intervention: SAI/Bronchospasm = 2mg/kg IV/IO", "Intervention: Pain = 0.2mg/kg IV/IO      Max = 25mg"],
         pediatricRx: ["Intervention: Combative = 4mg/kg IM \n   Don’t exceed Entire Vial/Site", "Intervention: SAI/Bronchospasm = 2mg/kg IV/IO", "Intervention: SAI c̅ ↓BP s̄ Cardiogenic Shock = 1mg/kg IV", "Intervention: SAI c̅ suspected Cardiogenic Shock = 0.5mg/kg IV"]
     },
-    'ketorolac-tromethamine-toradol': {
+    {id: 'ketorolac-tromethamine-toradol',
         title: "Ketorolac Tromethamine (Toradol)",
         concentration: "(30mg/ml)",
         class: "NSAID",
@@ -207,7 +207,7 @@ window.MedicationDetailsData =
         sideEffects: ["GI bleeding", "H/A", "Drowsiness", "Abdominal pain", "Dyspepsia"],
         adultRx: ["Intervention: For Pain = 15mg IV/IM       If >65yo = 7.5mg IV/IM \n   (Not for abdominal/Chest pain)\n   May be given off-label with med control approval for <17yo"]
     },
-    'magnesium-sulfate-mgso4': {
+    {id: 'magnesium-sulfate-mgso4',
         title: "Magnesium sulfate (MgSO₄)",
         concentration: "(1g/2ml)",
         class: "Electrolyte",
@@ -218,7 +218,7 @@ window.MedicationDetailsData =
         adultRx: ["Intervention: Bronchospasm → for Severe Asthmatics or c̅ PMH of Intubation for asthma = 2g slow IV drip", "Slow IV Drip = 1gtt/(1-2sec) c̅ a 10-Drip Set & 250ml NS bag", "Intervention: Eclampsia = 4g  slow IVP over 3-5min c̅ NS \n   → followed by IV piggyback Drip at 1-2g/hr", "IV piggyback Drip at 1-2g/hr = 0.7gtts/sec \n   or ≈ 2gtts/3sec c̅ a 10-Drip Set & 250ml NS bag", "Intervention: Torsades = 2g IV Infusion over 2min \n   → Followed by 5mg/min Infusion", "2g IV Infusion over 2min = 1g in 10ml Flush over 1min \n   → repeat once", "5mg/min Infusion = Mix 1g in c̅  250ml NS bag c̅ 60-Drip Micro Set \n   → Ran at 1.25gtts/sec or 5gtts/4sec"],
         pediatricRx: ["Consultation: Bronchospasm → For >2yo c̅ Severe Asthmatics \n   or c̅ PMH of Intubation for asthma \n   = 40mg/kg diluted c̅ NS to a concentration of 100mg/ml \n   → Infuse over 20min c̅ rate <150mg/min       Max =2g", "“Prepared Syringe” c̅ a concentration of 100mg/ml: \n   = Draw 10ml out of 250ml NS bag c̅ 10cc syringe \n   → Waste 2ml from syringe \n   → Draw up into the syringe 1g (2ml) of MgSO₄", "(Pediatric Weight (in kg))/2.5 = # of ml’s added \n   to our 250ml NS bag from our “prepared syringe”", "Run MgSO₄ Infused NS bag over 20min c̅  10-Drip Set at 2gtts/sec", "Note: 50kg Child = 2g MgSO₄ (our max dose) = 2 Vials of MgSO₄\n   25kg child = 1g MgSO₄ = 1 Vial of MgSO₄\n   Never exceed 3gtts/sec\n   Never exceed 2 Vials of our 1g/2ml MgSO₄"]
     },
-    'metoprolol-tartrate-lopressor': {
+    {id: 'metoprolol-tartrate-lopressor',
         title: "Metoprolol tartrate (Lopressor)",
         concentration: "(5mg/5ml)",
         class: "Beta antagonist (β1 selective)",
@@ -227,7 +227,7 @@ window.MedicationDetailsData =
         sideEffects: ["↓BP", "↓HR", "AV block", "Dizziness", "Bronchospasm", "Heart failure"],
         adultRx: ["Intervention: A-Fib c̅ RVR or A-Flutter \n   = 0.15mg/kg  slow IVP  over 2min       Max = 10mg", "Consultation: Stable SVT \n   → Discuss for use as an additionally used dose for SVT"]
     },
-    'midazolam-versed': {
+    {id: 'midazolam-versed',
         title: "Midazolam (Versed)",
         concentration: "(10mg/2ml)",
         class: "Benzo",
@@ -238,7 +238,7 @@ window.MedicationDetailsData =
         adultRx: ["Intervention: ↓HR c̅ ↓BP If → Pacing Works + Uncomfortable pt \n   = 5mg  IV/IO", "Intervention: ↑HR c̅ ↓BP = 5mg IV/IO ā Cardioversion  if  IV", "Intervention: Vent pt c̅ ↓BP = 5mg IV/IO", "Intervention: RASS +1 Adult ≤65yo = 0.02mg/kg IV\n   Single Max Dose = 2.5mg IV or 5mg IM", "Consultation: RASS+4 p̄ Ketamine or RASS+1 Adult ≤65yo \n   = 5mg IM", "Intervention: SAI = 2.5-5mg IV", "Intervention: Seizure = 10mg IM or 0.1mg/kg IV/IN \n   Max = 5mg IV & 10mg IM", "Intervention: Seizure from Organophosphate OD = 5mg IV/IN"],
         pediatricRx: ["Intervention: SAI = 0.1mg/kg IV       Max = 5mg", "Intervention: Seizure = 0.5mg/kg  IN \n   Initial Max =10mg & Total Dose Max = 20mg\n   or 0.2mg/kg  IV/IO  c̅  Max = 5mg & prn until Total Max = 10mg IV", "Intervention: Seizure from Organophosphate OD \n   = 0.2mg/kg  IV/IO      Max = 5mg\n   or 0.5mg/kg  IN", "Intervention: RASS+3 “safety or ↑ physical restraint” \n   =   0.1-0.2mg/kg  IM        Max = 5mg  IM\n   or 0.05-0.1mg/kg  IV      Max = 10mg  IV\n   or    0.02mg/kg  IN        Max= 20mg  IN\n   prn until Max Dose is Reached"]
     },
-    'morphine': {
+    {id: 'morphine',
         title: "Morphine",
         concentration: "(4mg/2ml)",
         class: "",
@@ -249,7 +249,7 @@ window.MedicationDetailsData =
         adultRx: ["Intervention: MI/ACS = 4mg  Slow IVP \n   Only if  Fentanyl  is Unavailableor Contraindicated", "Intervention: Pain = 2-4mg  IVP"],
         pediatricRx: ["Intervention: Pain = 0.1mg/kg  IV/SQ     Max = 4mg \n   → Consult for further doses", "Consultation: Sickle Cell Crisis = 0.1mg/kg  IV/SQ    Max =4mg"]
     },
-    'naloxone-narcan': {
+    {id: 'naloxone-narcan',
         title: "Naloxone (Narcan)",
         concentration: "(2mg/2ml)",
         class: "",
@@ -260,7 +260,7 @@ window.MedicationDetailsData =
         adultRx: ["Intervention: Coma/Opioid OD = 2mg  IM/IN \n   or 0.4mg  IVP"],
         pediatricRx: ["Intervention: AMS/Opioid OD = 0.1mg/kg  IV/IO/ETT/IM \n   Max = 2.0mg", "Continuity: Methadone OD = 0.2mg/kg       Max = 2.0mg"]
     },
-    'ntg': {
+    {id: 'ntg',
         title: "NTG",
         concentration: "(0.4mg/spray)",
         class: "Organic nitrate",
@@ -270,7 +270,7 @@ window.MedicationDetailsData =
         sideEffects: ["Hypotension", "H/A", "Tachycardia (reflex)", "Bradycardia", "[[Methmemoglobinemia|long term effect & unlikely seen in EMS setting]]"],
         adultRx: ["Don’t give if pt had Viagra/Cialis within the past 48hrs", "NTG is NOT contraindicated c̅ Inferior STEMI \n   → Should the pt become profoundly Hypotensive\n   → Infuse NS until BP >90", "Be cautious c̅ Aortic Stenosis or Murmurs", "Intervention: MI/ACS = 0.4mg SL q̄ 5min prn only if BP >100 \n   or  >110 if pt Never had NTG ā\n   Max = 3 doses", "Continuity: Repeat  q̄  5min  if → SBP >100 & pain still present", "Intervention: Pulmonary Edema = 0.4mg  SL  if BP  >100\n   or  >120  if pt Never had NTG ā", "Intervention: Flash Pulm-Edema from Hypertensive Crisis  s̄  IV \n   = 0.4mg  SL", "Consultation: 0.8-1.2mg  SL & Inform Med-Control if no IV yet"]
     },
-    'ondansetron-zofran': {
+    {id: 'ondansetron-zofran',
         title: "Ondansetron (Zofran)",
         concentration: "(4mg/2ml)",
         class: "Antiemetic",
