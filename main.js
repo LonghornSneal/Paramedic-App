@@ -8,6 +8,11 @@
         const sidebarOverlay = document.getElementById('sidebar-overlay');
         const navBackButton = document.getElementById('nav-back-button');
         const navForwardButton = document.getElementById('nav-forward-button');
+// main.js
+import { medicationDetailsData } from './MedicationDetailsData.js';
+
+console.log(medicationDetailsData);
+// …then use it to render buttons, handle clicks, populate the detail pane, etc.
 
         function addTapListener(element, handler) {
             if (!element) return;
