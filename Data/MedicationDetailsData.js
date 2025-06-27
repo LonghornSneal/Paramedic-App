@@ -30,4 +30,4 @@ const medicationDetailsData = {
 };
 
 if (typeof module !== 'undefined') module.exports = medicationDetailsData;
-if (typeof window !== 'undefined') window.MedicationDetailsData = medicationDetailsData;
+if (typeof window !== 'undefined') window.medicationDetailsData = medicationDetailsData;
