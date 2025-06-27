@@ -397,9 +397,9 @@
                          <div class="detail-section-content hidden">
                            ${createDetailText(d.pediatricRx.join('\n\n'))}
                          </div>
-                       </div>` : ''}
+                       </div>` : ''};
             } else {
-                detailContentHtml = <p class="text-lg italic">This is a placeholder for <strong>${topic.title}</strong>.</p><p class="text-sm text-gray-600">Detailed information to be added.</p>`;
+                detailContentHtml = '<p class="text-lg italic">This is a placeholder for <strong>${topic.title}</strong>.</p><p class="text-sm text-gray-600">Detailed information to be added.</p>`;
             }
 
             contentArea.innerHTML = `
