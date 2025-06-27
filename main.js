@@ -9,10 +9,8 @@
         const navBackButton = document.getElementById('nav-back-button');
         const navForwardButton = document.getElementById('nav-forward-button');
 // main.js
-import { medicationDetailsData } from './MedicationDetailsData.js';
-
-console.log(medicationDetailsData);
-// …then use it to render buttons, handle clicks, populate the detail pane, etc.
+// Medication details are loaded via Data/MedicationDetailsData.js which attaches
+// `MedicationDetailsData` to the window object. No direct import needed here.
 
         function addTapListener(element, handler) {
             if (!element) return;
