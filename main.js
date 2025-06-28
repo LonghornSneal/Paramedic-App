@@ -556,6 +556,22 @@ function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) 
                 <h3 class="detail-section-title toggle-category">Pediatric Rx: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
                 <div class="detail-section-content hidden">${createDetailText(d.pediatricRx.join('\n\n'))}</div>
             </div>` : ''}`;
+    }
+    // Inject the detail page HTML into the content area
+    contentArea.innerHTML = `
+        <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-4 pb-3 border-b border-gray-200">
+            <h2 class="text-xl md:text-2xl font-bold text-blue-700 mb-2 sm:mb-0 topic-main-title" data-topic-id="${topic.id}">
+                ${topic.title} ${topic.details && topic.details.concentration ? `<span class="med-concentration">${topic.details.concentration}</span>` : ''}
+            </h2>
+            <button id="backToListButton" class="w-full sm:w-auto px-5 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">
+                Back to List View
+            </button>
+        </div>
+        ${patientInfoSummary}
+        ${warningsHtml}
+        <div class="bg-gray-50 p-4 rounded-lg shadow-inner space-y-3 text-gray-800">
+            ${detailContentHtml}
+        </div>`;
     // Attach collapsible toggle logic after rendering
     setTimeout(() => {
         contentArea.querySelectorAll('.toggle-category').forEach(header => {
@@ -567,104 +583,6 @@ function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) 
             });
         });
     }, 0);
-
-    // --- Anchor Navigation Helpers ---
-function generateSectionSlugs(topic) {
-    // Use slugList.js if available, else fallback to static mapping
-    if (window.slugList && window.slugList[topic.id]) {
-        return window.slugList[topic.id];
-    }
-    // Fallback: generate slugs for standard sections
-    return [
-        { id: 'indications', label: 'Indications' },
-        { id: 'contraindications', label: 'Contraindications' },
-        { id: 'precautions', label: 'Precautions' },
-        { id: 'sideEffects', label: 'Side Effects' },
-        { id: 'adultRx', label: 'Adult Rx' },
-        { id: 'pediatricRx', label: 'Pediatric Rx' }
-    ];
-}
-
-function createAnchorNavMenu(slugs) {
-    if (!slugs || slugs.length < 2) return '';
-    return `<nav class="anchor-nav-menu fixed right-4 top-24 z-40 bg-white shadow-lg rounded-lg p-2 hidden md:block">
-        <ul class="space-y-1">
-            ${slugs.map(s => `<li><a href="#${s.id}-section" class="anchor-link text-blue-600 hover:underline">${s.label}</a></li>`).join('')}
-        </ul>
-    </nav>`;
-}
-
-function scrollToAnchor(anchorId) {
-    const el = document.getElementById(anchorId);
-    if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        el.classList.add('anchor-highlight');
-        setTimeout(() => el.classList.remove('anchor-highlight'), 1200);
-    }
-}
-
-// --- Patch renderDetailPage to add anchors and nav menu ---
-const origRenderDetailPage = renderDetailPage;
-renderDetailPage = function(topicId, scrollToTop = true, shouldAddHistory = true) {
-    const topic = allDisplayableTopicsMap[topicId];
-    if (!topic) return origRenderDetailPage(topicId, scrollToTop, shouldAddHistory);
-    const slugs = generateSectionSlugs(topic);
-    // Build anchor nav menu
-    let anchorNavHtml = createAnchorNavMenu(slugs);
-    // Build detail content with anchor ids
-    let detailContentHtml = '';
-    if (topic.details) {
-        const d = topic.details;
-        detailContentHtml = `
-            ${ d.notes ? `<div class="detail-section" id="notes-section">${d.notes.map(n => `<p class="text-red-600 font-semibold">${n}</p>`).join('')}</div>` : '' }
-            ${ d.class ? `<div class="detail-section" id="class-section"><h3>Class</h3>${createDetailText(d.class)}</div>` : '' }
-            ${ d.indications ? `<div class="detail-section" id="indications-section"><h3>Indications</h3>${createDetailList(d.indications)}</div>` : '' }
-            ${ d.contraindications ? `<div class="detail-section" id="contraindications-section"><h3>Contraindications</h3>${createDetailList(d.contraindications)}</div>` : '' }
-            ${ d.precautions ? `<div class="detail-section" id="precautions-section"><h3>Precautions</h3>${createDetailText(d.precautions)}</div>` : '' }
-            ${ d.sideEffects ? `<div class="detail-section" id="sideEffects-section"><h3>Side Effects</h3>${createDetailList(d.sideEffects)}</div>` : '' }
-            ${ d.adultRx ? `<div class="detail-section" id="adultRx-section"><h3>Adult Rx</h3>${createDetailText(d.adultRx.join('\n\n'))}</div>` : '' }
-            ${ d.pediatricRx ? `<div class="detail-section" id="pediatricRx-section"><h3>Pediatric Rx</h3>${createDetailText(d.pediatricRx.join('\n\n'))}</div>` : '' }
-        `;
-    } else {
-        detailContentHtml = `<p class="text-lg italic">This is a placeholder for <strong>${topic.title}</strong>.</p>`;
-    }
-    // Inject anchor nav and detail content
-    contentArea.innerHTML = `
-        ${anchorNavHtml}
-        <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-4 pb-3 border-b border-gray-200">
-            <h2 class="text-xl md:text-2xl font-bold text-blue-700 mb-2 sm:mb-0 topic-main-title" data-topic-id="${topic.id}">
-                ${topic.title} ${topic.details && topic.details.concentration ? `<span class="med-concentration">${topic.details.concentration}</span>` : ''}
-            </h2>
-            <button id="backToListButton" class="w-full sm:w-auto px-5 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">
-                Back to List View
-            </button>
-        </div>
-        <div class="bg-gray-50 p-4 rounded-lg shadow-inner space-y-3 text-gray-800">
-            ${detailContentHtml}
-        </div>`;
-    // Attach anchor link listeners
-    contentArea.querySelectorAll('.anchor-link').forEach(link => {
-        link.addEventListener('click', e => {
-            e.preventDefault();
-            const anchorId = link.getAttribute('href').replace('#', '');
-            scrollToAnchor(anchorId);
-        });
-    });
-    // Show/hide anchor nav menu based on scroll
-    const anchorNav = contentArea.querySelector('.anchor-nav-menu');
-    if (anchorNav) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 200) {
-                anchorNav.classList.remove('hidden');
-            } else {
-                anchorNav.classList.add('hidden');
-            }
-        });
-    }
-    // ...existing code for warnings, patient info, etc. (call origRenderDetailPage for those)...
-    origRenderDetailPage(topicId, scrollToTop, shouldAddHistory);
-};
-
     attachToggleInfoHandlers(contentArea);
     attachToggleCategoryHandlers(contentArea);
     addTapListener(document.getElementById('backToListButton'), () => {
