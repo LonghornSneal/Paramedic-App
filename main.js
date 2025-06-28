@@ -770,6 +770,21 @@ function initApp() {
     });
     // Render initial category list view
     renderInitialView(true, null, []);
+    // --- UI Fixes for Modern Look ---
+    document.body.style.fontFamily = 'Inter, sans-serif';
+    document.body.classList.add('bg-gray-100');
+    contentArea.classList.add('rounded-lg', 'shadow-lg', 'bg-white', 'p-4', 'md:p-6');
+    // Ensure sidebar is styled
+    patientSidebar.classList.add('bg-white', 'shadow-xl', 'p-6', 'rounded-lg', 'fixed', 'top-0', 'left-0', 'h-full', 'z-50', 'w-80', 'max-w-full', 'overflow-y-auto');
+    sidebarOverlay.classList.add('fixed', 'top-0', 'left-0', 'w-full', 'h-full', 'bg-black', 'bg-opacity-40', 'z-40', 'hidden');
+    // Responsive tweaks
+    window.addEventListener('resize', () => {
+        if (window.innerWidth < 640) {
+            patientSidebar.classList.add('w-full');
+        } else {
+            patientSidebar.classList.remove('w-full');
+        }
+    });
 }
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
