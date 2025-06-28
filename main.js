@@ -17,29 +17,51 @@ function ensureHeaderUI() {
   const header = document.querySelector('header');
   if (!header) return;
   // Add app title if missing
-  if (!header.querySelector('.app-title')) {
-    const title = document.createElement('span');
-    title.className = 'app-title text-lg sm:text-xl md:text-2xl font-semibold flex-grow px-2';
-    title.textContent = 'Paramedic Quick Reference';
-    header.insertBefore(title, header.firstChild);
-  }
-  if (!document.getElementById('nav-back-button')) {
-    const navBar = document.createElement('div');
-    navBar.className = 'flex items-center space-x-2';
-    navBar.innerHTML = `
-      <button id="nav-back-button" class="p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 focus:ring-2 focus:ring-blue-400" aria-label="Back" title="Back">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-      </button>
-      <button id="nav-forward-button" class="p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 focus:ring-2 focus:ring-blue-400" aria-label="Forward" title="Forward">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-      </button>
-      <input id="searchInput" type="text" placeholder="Search..." class="ml-4 px-3 py-2 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 w-64" autocomplete="off" />
-    `;
+  // Always ensure nav buttons and search input are present and in correct order
+  let navBar = header.querySelector('.header-nav-bar');
+  if (!navBar) {
+    navBar = document.createElement('div');
+    navBar.className = 'header-nav-bar flex items-center space-x-2';
     header.appendChild(navBar);
   }
-  navBackButton = document.getElementById('nav-back-button');
-  navForwardButton = document.getElementById('nav-forward-button');
-  searchInput = document.getElementById('searchInput');
+  // Clear navBar and re-add in correct order
+  navBar.innerHTML = '';
+  // Back button
+  let backBtn = document.getElementById('nav-back-button');
+  if (!backBtn) {
+    backBtn = document.createElement('button');
+    backBtn.id = 'nav-back-button';
+    backBtn.className = 'header-nav-button p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 focus:ring-2 focus:ring-blue-400';
+    backBtn.setAttribute('aria-label', 'Back');
+    backBtn.setAttribute('title', 'Back');
+    backBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>';
+  }
+  navBar.appendChild(backBtn);
+  // Forward button
+  let forwardBtn = document.getElementById('nav-forward-button');
+  if (!forwardBtn) {
+    forwardBtn = document.createElement('button');
+    forwardBtn.id = 'nav-forward-button';
+    forwardBtn.className = 'header-nav-button p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 focus:ring-2 focus:ring-blue-400';
+    forwardBtn.setAttribute('aria-label', 'Forward');
+    forwardBtn.setAttribute('title', 'Forward');
+    forwardBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>';
+  }
+  navBar.appendChild(forwardBtn);
+  // Search input
+  let search = document.getElementById('searchInput');
+  if (!search) {
+    search = document.createElement('input');
+    search.id = 'searchInput';
+    search.type = 'text';
+    search.placeholder = 'Search...';
+    search.className = 'ml-4 px-3 py-2 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 w-64';
+    search.autocomplete = 'off';
+  }
+  navBar.appendChild(search);
+  navBackButton = backBtn;
+  navForwardButton = forwardBtn;
+  searchInput = search;
 }
 
 function addTapListener(element, handler) {
@@ -349,8 +371,9 @@ function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) 
     if (scrollToTop) window.scrollTo(0, 0);
     // Title
     const title = document.createElement('h2');
-    title.className = 'text-2xl font-bold mb-2';
+    title.className = 'topic-main-title text-2xl font-bold mb-2';
     title.textContent = topic.title || topic.name || topic.id;
+    title.dataset.topicId = topic.id;
     contentArea.innerHTML = '';
     contentArea.appendChild(title);
     // Collapsible sections for details (ALS Medications)
@@ -370,9 +393,19 @@ function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) 
         // --- Previous/Next navigation for ALS Medications ---
         let prevId = null, nextId = null;
         // Find ALS Medications list
-        const alsMedCat = paramedicCategories.find(cat => cat.title && cat.title.toLowerCase().includes('als medications'));
-        if (alsMedCat && alsMedCat.children) {
-            const idx = alsMedCat.children.findIndex(child => child.id === topic.id);
+        const alsMedCat = paramedicCategories.find(cat => cat.title?.toLowerCase().includes('als medications'));
+        if (alsMedCat?.children) {
+            // Try to match by topic.id or by alternate id (with/without number prefix)
+            let idx = alsMedCat.children.findIndex(child => child.id === topic.id);
+            if (idx === -1 && topic.id.match(/^\d+-/)) {
+                // Try without number prefix
+                const altId = topic.id.replace(/^\d+-/, '');
+                idx = alsMedCat.children.findIndex(child => child.id === altId);
+            } else if (idx === -1 && !topic.id.match(/^\d+-/)) {
+                // Try with number prefix
+                const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
+                if (altId) idx = alsMedCat.children.findIndex(child => child.id === altId);
+            }
             if (idx !== -1) {
                 if (idx > 0) prevId = alsMedCat.children[idx - 1].id;
                 if (idx < alsMedCat.children.length - 1) nextId = alsMedCat.children[idx + 1].id;
@@ -449,7 +482,7 @@ function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) 
         contentArea.appendChild(desc);
     }
     if (shouldAddHistory) {
-        addHistoryEntry({ type: 'detail', id: topicId });
+        addHistoryEntry({ viewType: 'detail', contentId: topicId });
     }
 }
 
@@ -478,6 +511,7 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
     if (shouldAddHistory) {
         addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
     }
+    updateNavButtonsState();
     contentArea.innerHTML = '';
     const title = document.createElement('h2');
     title.className = 'text-xl font-semibold mb-2';
@@ -494,6 +528,7 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
     if (shouldAddHistory) {
         addHistoryEntry({ viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath });
     }
+    updateNavButtonsState();
     contentArea.innerHTML = `
         <div class="flex justify-between items-center mb-3">
             <p class="text-gray-700 font-medium">Results for "${searchTerm}":</p>

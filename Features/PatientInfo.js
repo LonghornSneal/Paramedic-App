@@ -47,8 +47,16 @@
         // yields "administrative-legal-essentials"
 
         // --- Sidebar Logic ---
-        function openSidebar() { patientSidebar.classList.add('open'); sidebarOverlay.classList.add('active'); }
-        function closeSidebar() { patientSidebar.classList.remove('open'); sidebarOverlay.classList.remove('active'); }
+        function openSidebar() {
+            patientSidebar.classList.add('open');
+            sidebarOverlay.classList.add('active');
+            sidebarOverlay.classList.remove('hidden');
+        }
+        function closeSidebar() {
+            patientSidebar.classList.remove('open');
+            sidebarOverlay.classList.remove('active');
+            sidebarOverlay.classList.add('hidden');
+        }
 
         function updatePatientData() {
             patientData.age = document.getElementById('pt-age').value ? parseInt(document.getElementById('pt-age').value) : null;

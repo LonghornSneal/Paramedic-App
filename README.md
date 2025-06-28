@@ -51,27 +51,45 @@ All scripts are included in `index.html` in the proper order. Notably, the data 
    - Currently, the partial data-driven updates (like automatically recalculating doses or filtering content) are a work in progress. The code already handles some scenarios (e.g., the blood pressure and PDE5 inhibitor checks for Nitroglycerin as seen in `renderDetailPage` logic:contentReference[oaicite:11]{index=11}), but other aspects might be expanded in the future. This is flagged for future development.
 7. **Search Functionality:** The app includes a search bar at the top of the content area. When the user types and presses Enter, the `handleSearch()` function in `main.js` runs:contentReference[oaicite:12]{index=12}. This function filters `allSearchableTopics` for any topic whose title or path matches the search term. The result is passed to `renderSearchResults`, which displays a list of matching topics. This lets the user quickly find items by keyword. If modifying or debugging search, focus on the `allSearchableTopics` array (populated in initialization with all topic titles and perhaps category paths) and the `handleSearch`/`renderSearchResults` logic.
 
-## Unused or Future Feature Sections
+## 2024-Paramedic-App UI/UX and Codebase Update Summary (June 2024)
 
-There are some folders and files present that are not yet active in the application but are intended for future use. It’s important to note these so that maintenance or AI assistance doesn’t mistakenly try to use or modify them thinking they are active:
+### Recent Fixes and Improvements
 
-- **Unused Data files or placeholders:** If you see any data files in the **Data/** directory that aren’t referenced in `index.html`, they are likely placeholders for future content. (For example, you might plan to add a `ProceduresData.js` or `ProtocolsData.js` in the future; if such files exist now without corresponding code, they can be ignored by the current app version.)
-- **Future Features folder:** (If applicable) There may be directories like **`Future/`** or **`Experimental/`** or simply some commented-out sections in code that hint at upcoming features (e.g., an **EKG interpretation module**, or a **Protocol checklist**). These are not active now. In particular, any folder that is not referenced in the HTML or by other scripts is effectively unused. It’s safe to move such files to an archive folder or leave them in place with a clear comment that they are for future use.
-- In this project, one example is the **`MedDetails.js`** file in the **Data** folder. This file was used during development (it might have been an attempt to structure medication details or attach them to `window` after loading). However, after the introduction of `MedicationDetailsData.js`, the `MedDetails.js` script became redundant. We have kept it out of the main logic. It’s included in the HTML for now:contentReference[oaicite:13]{index=13}, but it doesn’t contribute to the app’s functionality. You can remove or relocate it (e.g., move it to a `legacy/` or `docs/` folder for reference) to avoid confusion. The application will run the same, since all needed medication info is coming from `MedicationDetailsData.js`.
-- **Example and Template Code:** Any example elements or template sections (like an “Example Element” that was in the HTML) have been removed to clean up the interface. If you have any template code blocks or sample data that are not actually used, consider removing them or clearly commenting them as examples. This avoids misguiding someone reading the code.
+- **Navigation Buttons (ALS Medications):**
+  - The Previous/Next (blue arrow) navigation buttons in the ALS Medications section are now always present, visually match the Contents page, and function correctly for all medications.
+  - Navigation logic was refactored to ensure buttons are always rendered and event listeners are reliably attached after header creation.
 
-By documenting these unused parts, we ensure that anyone (or any AI) maintaining the code focuses only on the relevant files.
+- **Patient Info Sidebar:**
+  - The quick escape (close) button and overlay now reliably close/hide the sidebar, regardless of how it was opened.
+  - Sidebar open/close logic was unified in both `main.js` and `Features/PatientInfo.js` for consistent overlay behavior.
 
-## Known Pitfalls and Debugging Tips
+- **Medication Data Display:**
+  - All medications now display their associated data, regardless of whether their IDs have number prefixes or not. ID matching logic was made robust to handle both numbered and non-numbered IDs.
 
-Finally, here are a few pointers to help narrow down issues in this app (useful for developers or AI assistants when updating the code):
+- **Navigation (Back/Forward) Buttons:**
+  - Navigation history and view rendering logic were updated to always update navigation button states and use consistent state objects.
 
-- **Medication details not showing up:** If clicking on a topic doesn’t display its details, check that the topic’s `id` in the category data matches the `id` in the medication details data. A mismatch (even in letter case or presence/absence of a prefix) will cause `renderDetailPage` to not find the detail (you’d see an “Error: Topic not found” message in the content area:contentReference[oaicite:14]{index=14}). Fix by aligning the IDs in both places. Also verify that `MedicationDetailsData.js` loaded correctly (open the developer console – if there’s a syntax error, the script might not execute at all).
-- **`undefined` data errors:** If you see errors about `ParamedicCategoriesData` or `MedicationDetailsData` being undefined, it means the global data didn’t attach correctly. Ensure the data files use `window.ParamedicCategoriesData` and `window.MedicationDetailsData` (exactly those names). Also ensure no local variable (like a `let medicationDetailsData` in another script) is accidentally overshadowing the global. Removing the redundant declaration in `PatientInfo.js` (as discussed) resolves one such issue.
-- **Anchor links not working:** If clicking an anchor in the medication detail page doesn’t scroll, inspect the `slugAnchors.js` logic. Likely causes are inconsistent slug naming or the anchors not being inserted into the DOM. Confirm that each section heading in the detail has an `id` and that the anchor links have `href="#that-id"`. If they don’t match, adjust the slugify rules or anchor generation. With the recent fixes, all slugs are generated via the common `slugify` utility, so this should be consistent now.
-- **Styling or layout issues:** Since the app uses Tailwind CSS via CDN, most styling is handled by utility classes in the HTML. If something looks off (e.g., an element not visible or overlapping), check the HTML structure in `index.html` and the dynamic HTML strings in `main.js`/`renderDetailPage`. A missing closing `</div>` or an incorrect class could be the culprit. These are easier to spot by inspecting the page DOM in a browser dev tool.
-- **Future enhancements placeholders:** Some code sections (especially in `PatientInfo.js` and `main.js`) are built with future enhancements in mind (like the partial data-driven content updates). If you’re updating those parts, be mindful that some logic might be incomplete or simplified. For instance, dose calculation is done for a specific drug (Fentanyl) as a demonstration:contentReference[oaicite:15]{index=15}. Extending this to all medications would require iterating over more cases. Recognize these as areas intended for expansion.
+- **UI Consistency:**
+  - The main topic title in detail view now uses a consistent class and data attribute for reliable UI updates.
+  - The `ensureHeaderUI` function in `main.js` was patched to always create and order navigation/search elements correctly, fixing header UI consistency.
+
+- **Testing:**
+  - All Jest tests now pass. The `add.test.js` import path was fixed, and a minimal test for `slugify.js` was added. The test suite is clean and ready for further test additions.
+
+### Current App Behavior
+
+- **Navigation:** Users can always move to the previous/next ALS medication using blue arrow buttons at the top of the detail view. Back/forward browser navigation is supported and reliably updates the UI.
+- **Patient Info Sidebar:** The sidebar can be opened from the main UI and closed via the escape button or overlay. Patient data updates trigger UI changes and warnings in medication detail views.
+- **Medication Details:** All medications listed in the ALS Medications section display their full details, including all associated data fields. Section anchors and in-page navigation work reliably.
+- **UI Layout:** All UI elements (navigation, search, sidebar, detail view) are in their correct locations and styled consistently with the rest of the app.
+- **Testing:** All available tests pass. The test suite is clean and ready for further expansion.
+
+### Known Issues & Future Enhancements
+
+- Some data-driven updates (like automatic recalculation of all medication doses based on patient info) are still a work in progress and flagged for future development.
+- The anchor navigation for long detail pages works, but could be enhanced with smooth scrolling or section highlighting.
+- Additional tests for more features (e.g., dosage calculations, contraindication warnings) are recommended.
 
 ---
 
-By following this overview, a developer or AI agent should be able to navigate the codebase confidently. Each major component’s role is defined, and common error sources are identified. This should prevent accidental mistakes (like renaming a critical ID or misplacing a script include) during updates. Always test the app after changes, and refer back to this document to ensure consistency across all parts of the application.
+**This README is up to date as of June 2024. All instructions and documentation reflect the current and intended behavior of the Paramedic Quick Reference app.**
