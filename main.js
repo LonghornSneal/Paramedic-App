@@ -1,16 +1,39 @@
 // --- Diagnostic Logging ---
-console.log("ParamedicCategoriesData:", window.ParamedicCategoriesData);
-console.log("MedicationDetailsData:", window.MedicationDetailsData);
+// console.log("ParamedicCategoriesData:", window.ParamedicCategoriesData);
+// console.log("MedicationDetailsData:", window.MedicationDetailsData);
 
 // --- DOM Elements ---
-const searchInput       = document.getElementById('searchInput');
+let searchInput       = document.getElementById('searchInput');
 const contentArea       = document.getElementById('content-area');
 const patientSidebar    = document.getElementById('patient-sidebar');
 const openSidebarButton = document.getElementById('open-sidebar-button');
 const closeSidebarButton= document.getElementById('close-sidebar-button');
 const sidebarOverlay    = document.getElementById('sidebar-overlay');
-const navBackButton     = document.getElementById('nav-back-button');
-const navForwardButton  = document.getElementById('nav-forward-button');
+let navBackButton     = document.getElementById('nav-back-button');
+let navForwardButton  = document.getElementById('nav-forward-button');
+
+// --- Ensure Navigation/Search Bar Exists ---
+function ensureHeaderUI() {
+  const header = document.querySelector('header');
+  if (!header) return;
+  if (!document.getElementById('nav-back-button')) {
+    const navBar = document.createElement('div');
+    navBar.className = 'flex items-center space-x-2';
+    navBar.innerHTML = `
+      <button id="nav-back-button" class="p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 focus:ring-2 focus:ring-blue-400" aria-label="Back" title="Back">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+      </button>
+      <button id="nav-forward-button" class="p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 focus:ring-2 focus:ring-blue-400" aria-label="Forward" title="Forward">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+      </button>
+      <input id="searchInput" type="text" placeholder="Search..." class="ml-4 px-3 py-2 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 w-64" autocomplete="off" />
+    `;
+    header.appendChild(navBar);
+  }
+  navBackButton = document.getElementById('nav-back-button');
+  navForwardButton = document.getElementById('nav-forward-button');
+  searchInput = document.getElementById('searchInput');
+}
 
 // --- Event Utility ---
 function addTapListener(element, handler) {
@@ -97,6 +120,7 @@ function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceS
 
 // --- Navigation History Management ---
 function updateNavButtonsState() {
+    if (!navBackButton || !navForwardButton) return;
     navBackButton.disabled    = currentHistoryIndex <= 0;
     navForwardButton.disabled = currentHistoryIndex >= navigationHistory.length - 1;
 }
@@ -124,8 +148,10 @@ function navigateViaHistory(direction) {
     updateNavButtonsState();
     isNavigatingViaHistory = false;
 }
-addTapListener(navBackButton,    () => navigateViaHistory(-1));
-addTapListener(navForwardButton, () => navigateViaHistory(1));
+if (navBackButton && navForwardButton) {
+  addTapListener(navBackButton,    () => navigateViaHistory(-1));
+  addTapListener(navForwardButton, () => navigateViaHistory(1));
+}
 
 // --- Global Data Structures --- 
 // (Moved here from PatientInfo.js to ensure single source of truth)
@@ -235,72 +261,54 @@ function initializeData(categoriesData, medDetailsData) {
 }
 
 // --- Hierarchical List Rendering ---
-function createHierarchicalList(items, container) {
+function createHierarchicalList(items, container, level = 0) {
+    container.innerHTML = '';
     items.forEach(item => {
-        const listItem = document.createElement('div');
-        listItem.className = 'py-1';
+        const row = document.createElement('div');
+        row.className = 'flex items-center py-1 pl-' + (level * 4) + ' group';
         if (item.type === 'category') {
-            listItem.classList.add('category-item');
-            listItem.dataset.categoryId = item.id;
-            const header = document.createElement('div');
-            header.className = 'category-header';
-            header.innerHTML = `
-                <span>${item.title}</span>
-                <span class="icon-toggle">
-                    <svg class="w-5 h-5 icon-toggle-closed" ...>/* SVG plus icon */</svg>
-                    <svg class="w-5 h-5 icon-toggle-open" ...>/* SVG minus icon */</svg>
-                </span>`;
-            header.setAttribute('role', 'button');
-            header.setAttribute('aria-expanded', 'false');
-            header.setAttribute('tabindex', '0');
-            const childrenContainer = document.createElement('div');
-            childrenContainer.className = 'category-children';
-            childrenContainer.classList.add('hidden');  // start hidden, toggle on click
-            addTapListener(header, () => {
-                // Toggle expand/collapse
-                listItem.classList.toggle('expanded');
-                const expanded = listItem.classList.contains('expanded');
-                header.setAttribute('aria-expanded', expanded.toString());
-                // Show/hide children
-                if (expanded) {
-                    childrenContainer.classList.remove('hidden');
-                } else {
-                    childrenContainer.classList.add('hidden');
-                }
+            // Collapsible blue arrow
+            const arrow = document.createElement('button');
+            arrow.setAttribute('aria-label', 'Expand/collapse');
+            arrow.className = 'mr-2 focus:outline-none focus:ring-2 focus:ring-blue-400';
+            arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" style="transform: rotate(${item.expanded ? 90 : 0}deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`;
+            addTapListener(arrow, () => {
+                item.expanded = !item.expanded;
+                createHierarchicalList(items, container, level);
             });
-            header.addEventListener('keydown', e => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    header.click();
-                }
+            row.appendChild(arrow);
+            // Category label
+            const label = document.createElement('span');
+            label.className = 'cursor-pointer hover:underline flex-1 font-semibold';
+            label.textContent = item.title;
+            addTapListener(label, () => {
+                item.expanded = !item.expanded;
+                createHierarchicalList(items, container, level);
             });
-            listItem.appendChild(header);
-            listItem.appendChild(childrenContainer);
-            if (item.children && item.children.length > 0) {
-                createHierarchicalList(item.children, childrenContainer);
+            row.appendChild(label);
+            container.appendChild(row);
+            if (item.expanded && item.children && item.children.length > 0) {
+                const childContainer = document.createElement('div');
+                childContainer.className = 'ml-4 border-l border-blue-100 pl-2';
+                createHierarchicalList(item.children, childContainer, level + 1);
+                container.appendChild(childContainer);
             }
         } else if (item.type === 'topic') {
             const topicLink = document.createElement('a');
-            topicLink.className = 'topic-link-item';
+            topicLink.className = 'topic-link-item flex-1';
             topicLink.textContent = item.title;
             topicLink.href = `#${item.id}`;
             topicLink.dataset.topicId = item.id;
             topicLink.setAttribute('role', 'button');
             topicLink.setAttribute('tabindex', '0');
-            // When a topic is clicked, load its detail page
             addTapListener(topicLink, e => {
                 e.preventDefault();
                 renderDetailPage(item.id);
             });
-            topicLink.addEventListener('keydown', e => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    renderDetailPage(item.id);
-                }
-            });
-            listItem.appendChild(topicLink);
+            row.appendChild(document.createElement('span')); // spacer for arrow alignment
+            row.appendChild(topicLink);
+            container.appendChild(row);
         }
-        container.appendChild(listItem);
     });
 }
 
@@ -627,17 +635,15 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
     if (shouldAddHistory) {
         addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
     }
-    contentArea.innerHTML = `
-        <p class="text-gray-600 text-center mb-4 text-sm md:text-base">
-            Use the <svg /* (menu icon SVG) */></svg> button for patient info. Browse categories below or use search.
-        </p>
-        <div id="hierarchical-list-container" class="space-y-2"></div>`;
-    const listContainer = document.getElementById('hierarchical-list-container');
-    if (paramedicCategories.length > 0) {
-        createHierarchicalList(paramedicCategories, listContainer);
-    } else {
-        listContainer.innerHTML = '<p class="text-gray-500 text-center">No categories available.</p>';
-    }
+    contentArea.innerHTML = '';
+    const title = document.createElement('h2');
+    title.className = 'text-xl font-semibold mb-2';
+    title.textContent = 'Contents';
+    contentArea.appendChild(title);
+    // Render hierarchical list
+    const listContainer = document.createElement('div');
+    createHierarchicalList(paramedicCategories, listContainer, 0);
+    contentArea.appendChild(listContainer);
     openCategoriesAndHighlight(categoryPath, highlightId);
 }
 
@@ -727,6 +733,7 @@ function createWarningIcon(colorClass = 'text-yellow-600') {
 
 // --- Main App Initialization ---
 function initApp() {
+    ensureHeaderUI();
     // Initialize data structures with categories and medications
     initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
     // Set up sidebar toggles
@@ -739,13 +746,54 @@ function initApp() {
     setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions);
     setupAutocomplete('pt-indications','pt-indications-suggestions', indicationSuggestions);
     setupAutocomplete('pt-symptoms',    'pt-symptoms-suggestions',    symptomSuggestions);
-    // Enter key triggers search
-    searchInput.addEventListener('keydown', e => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            handleSearch(true);
-        }
+    // Add focus highlight to all textareas and inputs
+    document.querySelectorAll('textarea, input').forEach(el => {
+        el.addEventListener('focus', e => {
+            el.classList.add('ring', 'ring-blue-400', 'ring-2');
+        });
+        el.addEventListener('blur', e => {
+            el.classList.remove('ring', 'ring-blue-400', 'ring-2');
+        });
     });
+    // Navigation
+    if (navBackButton && navForwardButton) {
+      addTapListener(navBackButton,    () => navigateViaHistory(-1));
+      addTapListener(navForwardButton, () => navigateViaHistory(1));
+    }
+    // Search
+    if (searchInput) {
+        searchInput.addEventListener('input', e => {
+            const term = searchInput.value.trim().toLowerCase();
+            if (!term) {
+                renderInitialView(false);
+                return;
+            }
+            // Flat search: search all topics
+            const results = allSearchableTopics.filter(topic =>
+                (topic.title || topic.id || '').toLowerCase().includes(term) ||
+                (topic.path || '').toLowerCase().includes(term)
+            );
+            renderSearchResults(results, term, true);
+        });
+    }
+    // Enter key triggers search
+    if (searchInput) {
+        searchInput.addEventListener('keydown', e => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const term = searchInput.value.trim().toLowerCase();
+                if (!term) {
+                    renderInitialView(false);
+                    return;
+                }
+                const results = allSearchableTopics.filter(topic =>
+                    (topic.title || topic.id || '').toLowerCase().includes(term) ||
+                    (topic.path || '').toLowerCase().includes(term)
+                );
+                renderSearchResults(results, term, true);
+            }
+        });
+    }
     // Render initial category list view
     renderInitialView(true, null, []);
     // --- UI Fixes for Modern Look ---
