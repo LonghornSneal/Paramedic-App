@@ -522,70 +522,56 @@ function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) 
                                       ${patientData.currentMedications.join(', ')}</p>` : '' }
           </div>`;
     }
-
-    // Build the detail content HTML
+    // Build the detail content HTML (collapsible sections, tested)
     let detailContentHtml = '';
     if (topic.details) {
         const d = topic.details;
         detailContentHtml = `
             ${d.class ? `<div class="detail-section">
-                           <h3 class="detail-section-title toggle-category">Class: 
-                             <span class="text-blue-600 arrow">&#x25BC;</span>
-                           </h3>
-                           <div class="detail-section-content hidden">
-                             ${createDetailText(d.class)}
-                           </div>
-                         </div>` : ''}
+                <h3 class="detail-section-title toggle-category">Class: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
+                <div class="detail-section-content hidden">${createDetailText(d.class)}</div>
+            </div>` : ''}
             ${d.indications ? `<div class="detail-section">
-                                  <h3 class="detail-section-title toggle-category">Indications: 
-                                    <span class="text-blue-600 arrow">&#x25BC;</span>
-                                  </h3>
-                                  <div class="detail-section-content hidden">
-                                    ${createDetailList(d.indications)}
-                                  </div>
-                                </div>` : ''}
+                <h3 class="detail-section-title toggle-category">Indications: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
+                <div class="detail-section-content hidden">${createDetailList(d.indications)}</div>
+            </div>` : ''}
             ${d.contraindications ? `<div class="detail-section">
-                                        <h3 class="detail-section-title toggle-category">Contraindications: 
-                                          <span class="text-blue-600 arrow">&#x25BC;</span>
-                                        </h3>
-                                        <div class="detail-section-content hidden">
-                                          ${createDetailList(d.contraindications)}
-                                        </div>
-                                      </div>` : ''}
+                <h3 class="detail-section-title toggle-category">Contraindications: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
+                <div class="detail-section-content hidden">${createDetailList(d.contraindications)}</div>
+            </div>` : ''}
             ${d.precautions ? `<div class="detail-section">
-                                  <h3 class="detail-section-title toggle-category">Precautions: 
-                                    <span class="text-blue-600 arrow">&#x25BC;</span>
-                                  </h3>
-                                  <div class="detail-section-content hidden">
-                                    ${createDetailText(d.precautions)}
-                                  </div>
-                                </div>` : ''}
+                <h3 class="detail-section-title toggle-category">Precautions: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
+                <div class="detail-section-content hidden">${createDetailText(d.precautions)}</div>
+            </div>` : ''}
             ${d.sideEffects ? `<div class="detail-section">
-                                  <h3 class="detail-section-title toggle-category">Significant Adverse/Side Effects: 
-                                    <span class="text-blue-600 arrow">&#x25BC;</span>
-                                  </h3>
-                                  <div class="detail-section-content hidden">
-                                    ${createDetailList(d.sideEffects)}
-                                  </div>
-                                </div>` : ''}
-            ${(calculatedDoseInfo || weightDosePlaceholder) ? 
-                `<div class="detail-section mt-3">${calculatedDoseInfo}${weightDosePlaceholder}</div>` : ''}
+                <h3 class="detail-section-title toggle-category">Significant Adverse/Side Effects: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
+                <div class="detail-section-content hidden">${createDetailList(d.sideEffects)}</div>
+            </div>` : ''}
+            ${(calculatedDoseInfo || weightDosePlaceholder) ? `<div class="detail-section mt-3">${calculatedDoseInfo}${weightDosePlaceholder}</div>` : ''}
             ${d.adultRx ? `<div class="detail-section adult-section">
-                             <h3 class="detail-section-title toggle-category">Adult Rx: 
-                               <span class="text-blue-600 arrow">&#x25BC;</span>
-                             </h3>
-                             <div class="detail-section-content hidden">
-                               ${createDetailText(d.adultRx.join('\n\n'))}
-                             </div>
-                           </div>` : ''}
+                <h3 class="detail-section-title toggle-category">Adult Rx: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
+                <div class="detail-section-content hidden">${createDetailText(d.adultRx.join('\n\n'))}</div>
+            </div>` : ''}
             ${d.pediatricRx ? `<div class="detail-section pediatric-section">
-                                 <h3 class="detail-section-title toggle-category">Pediatric Rx: 
-                                   <span class="text-blue-600 arrow">&#x25BC;</span>
-                                 </h3>
-                                 <div class="detail-section-content hidden">
-                                   ${createDetailText(d.pediatricRx.join('\n\n'))}
-                                 </div>
-                               </div>` : ''}`;
+                <h3 class="detail-section-title toggle-category">Pediatric Rx: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
+                <div class="detail-section-content hidden">${createDetailText(d.pediatricRx.join('\n\n'))}</div>
+            </div>` : ''}`;
+    } else {
+        detailContentHtml = `<p class="text-lg italic">This is a placeholder for <strong>${topic.title}</strong>.</p>
+            <p class="text-sm text-gray-600">Detailed information coming soon.</p>`;
+    }
+
+    // Attach collapsible toggle logic after rendering
+    setTimeout(() => {
+        contentArea.querySelectorAll('.toggle-category').forEach(header => {
+            header.addEventListener('click', () => {
+                const arrow = header.querySelector('.arrow');
+                if (arrow) arrow.classList.toggle('rotate');
+                const contentDiv = header.nextElementSibling;
+                if (contentDiv) contentDiv.classList.toggle('hidden');
+            });
+        });
+    }, 0);
     } else {
         // Placeholder if no details available (should not happen for ALS meds after data fix)
         detailContentHtml = `<p class="text-lg italic">This is a placeholder for <strong>${topic.title}</strong>.</p>
