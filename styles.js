@@ -1,5 +1,9 @@
 // Tailwind configuration and custom styles
-tailwind.config = {
+// If this script runs before the Tailwind CDN script, `window.tailwind`
+// may not exist yet. Ensure the object is created to avoid ReferenceErrors
+// and allow the CDN script to pick up the configuration.
+window.tailwind = window.tailwind || {};
+window.tailwind.config = {
   theme: {
     extend: {
       // Ensure the Inter font is used as the sans-serif font
