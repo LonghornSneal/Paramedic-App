@@ -749,7 +749,6 @@ function createWarningIcon(colorClass = 'text-yellow-600') {
 
 // --- Main App Initialization ---
 function initApp() {
-    searchInput.addEventListener('input', showSearchSuggestions);
     // Initialize data structures with categories and medications
     initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
     // Set up sidebar toggles
