@@ -556,11 +556,6 @@ function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) 
                 <h3 class="detail-section-title toggle-category">Pediatric Rx: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
                 <div class="detail-section-content hidden">${createDetailText(d.pediatricRx.join('\n\n'))}</div>
             </div>` : ''}`;
-    } else {
-        detailContentHtml = `<p class="text-lg italic">This is a placeholder for <strong>${topic.title}</strong>.</p>
-            <p class="text-sm text-gray-600">Detailed information coming soon.</p>`;
-    }
-
     // Attach collapsible toggle logic after rendering
     setTimeout(() => {
         contentArea.querySelectorAll('.toggle-category').forEach(header => {
@@ -572,11 +567,6 @@ function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) 
             });
         });
     }, 0);
-    } else {
-        // Placeholder if no details available (should not happen for ALS meds after data fix)
-        detailContentHtml = `<p class="text-lg italic">This is a placeholder for <strong>${topic.title}</strong>.</p>
-                              <p class="text-sm text-gray-600">Detailed information coming soon.</p>`;
-    }
 
     // --- Anchor Navigation Helpers ---
 function generateSectionSlugs(topic) {
