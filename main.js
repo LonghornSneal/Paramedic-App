@@ -354,8 +354,54 @@ function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) 
     contentArea.innerHTML = '';
     contentArea.appendChild(title);
     // Collapsible sections for details (ALS Medications)
-    if (topic.details) {
-        const d = topic.details;
+    // --- Fix: Try to find medication details by alternate ID if not found ---
+    let details = topic.details;
+    if (!details && topic.id && topic.id.match(/^\d+-/)) {
+        // Try without the leading number
+        const altId = topic.id.replace(/^\d+-/, '');
+        details = allDisplayableTopicsMap[altId]?.details;
+    } else if (!details && topic.id && !topic.id.match(/^\d+-/)) {
+        // Try with a leading number (common for calcium-chloride, etc.)
+        const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
+        if (altId) details = allDisplayableTopicsMap[altId]?.details;
+    }
+    if (details) {
+        const d = details;
+        // --- Previous/Next navigation for ALS Medications ---
+        let prevId = null, nextId = null;
+        // Find ALS Medications list
+        const alsMedCat = paramedicCategories.find(cat => cat.title && cat.title.toLowerCase().includes('als medications'));
+        if (alsMedCat && alsMedCat.children) {
+            const idx = alsMedCat.children.findIndex(child => child.id === topic.id);
+            if (idx !== -1) {
+                if (idx > 0) prevId = alsMedCat.children[idx - 1].id;
+                if (idx < alsMedCat.children.length - 1) nextId = alsMedCat.children[idx + 1].id;
+            }
+        }
+        // Navigation row
+        if (prevId || nextId) {
+            const navRow = document.createElement('div');
+            navRow.className = 'flex justify-between items-center mb-4';
+            if (prevId) {
+                const prevBtn = document.createElement('button');
+                prevBtn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
+                prevBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>Previous`;
+                addTapListener(prevBtn, () => renderDetailPage(prevId));
+                navRow.appendChild(prevBtn);
+            } else {
+                navRow.appendChild(document.createElement('span'));
+            }
+            if (nextId) {
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
+                nextBtn.innerHTML = `Next<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`;
+                addTapListener(nextBtn, () => renderDetailPage(nextId));
+                navRow.appendChild(nextBtn);
+            } else {
+                navRow.appendChild(document.createElement('span'));
+            }
+            contentArea.appendChild(navRow);
+        }
         const sections = [
             { key: 'class', label: 'Class' },
             { key: 'indications', label: 'Indications' },
@@ -534,9 +580,22 @@ function initApp() {
     // Initialize data structures with categories and medications
     initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
     // Set up sidebar toggles
-    addTapListener(openSidebarButton, openSidebar);
-    addTapListener(closeSidebarButton, closeSidebar);
-    addTapListener(sidebarOverlay, closeSidebar);
+    // Sidebar open/close logic with proper class toggling
+    addTapListener(openSidebarButton, () => {
+        patientSidebar.classList.add('open');
+        sidebarOverlay.classList.add('active');
+        sidebarOverlay.classList.remove('hidden');
+    });
+    addTapListener(closeSidebarButton, () => {
+        patientSidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+        sidebarOverlay.classList.add('hidden');
+    });
+    addTapListener(sidebarOverlay, () => {
+        patientSidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+        sidebarOverlay.classList.add('hidden');
+    });
     // Set up autocomplete for each Patient Info field
     setupAutocomplete('pt-pmh',         'pt-pmh-suggestions',         pmhSuggestions);
     setupAutocomplete('pt-allergies',   'pt-allergies-suggestions',   allergySuggestions);
