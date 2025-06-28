@@ -51,7 +51,7 @@ All scripts are included in `index.html` in the proper order. Notably, the data 
    - Currently, the partial data-driven updates (like automatically recalculating doses or filtering content) are a work in progress. The code already handles some scenarios (e.g., the blood pressure and PDE5 inhibitor checks for Nitroglycerin as seen in `renderDetailPage` logic:contentReference[oaicite:11]{index=11}), but other aspects might be expanded in the future. This is flagged for future development.
 7. **Search Functionality:** The app includes a search bar at the top of the content area. When the user types and presses Enter, the `handleSearch()` function in `main.js` runs:contentReference[oaicite:12]{index=12}. This function filters `allSearchableTopics` for any topic whose title or path matches the search term. The result is passed to `renderSearchResults`, which displays a list of matching topics. This lets the user quickly find items by keyword. If modifying or debugging search, focus on the `allSearchableTopics` array (populated in initialization with all topic titles and perhaps category paths) and the `handleSearch`/`renderSearchResults` logic.
 
-## 2024-Paramedic-App UI/UX and Codebase Update Summary (June 2024)
+## 2024-Paramedic-App UI/UX and Codebase Update Summary (June 2025)
 
 ### Recent Fixes and Improvements
 
@@ -72,6 +72,7 @@ All scripts are included in `index.html` in the proper order. Notably, the data 
 - **UI Consistency:**
   - The main topic title in detail view now uses a consistent class and data attribute for reliable UI updates.
   - The `ensureHeaderUI` function in `main.js` was patched to always create and order navigation/search elements correctly, fixing header UI consistency.
+  - **Slug Anchors Initialization:** `slugAnchors.js` now waits for the DOM to load before inserting hidden anchor elements, ensuring the container is appended reliably.
 
 - **Testing:**
   - All Jest tests now pass. The `add.test.js` import path was fixed, and a minimal test for `slugify.js` was added. The test suite is clean and ready for further test additions.
@@ -92,4 +93,4 @@ All scripts are included in `index.html` in the proper order. Notably, the data 
 
 ---
 
-**This README is up to date as of June 2024. All instructions and documentation reflect the current and intended behavior of the Paramedic Quick Reference app.**
+**This README is up to date as of June 2025. All instructions and documentation reflect the current and intended behavior of the Paramedic Quick Reference app.**
