@@ -16,6 +16,13 @@ let navForwardButton  = document.getElementById('nav-forward-button');
 function ensureHeaderUI() {
   const header = document.querySelector('header');
   if (!header) return;
+  // Add app title if missing
+  if (!header.querySelector('.app-title')) {
+    const title = document.createElement('span');
+    title.className = 'app-title text-lg sm:text-xl md:text-2xl font-semibold flex-grow px-2';
+    title.textContent = 'Paramedic Quick Reference';
+    header.insertBefore(title, header.firstChild);
+  }
   if (!document.getElementById('nav-back-button')) {
     const navBar = document.createElement('div');
     navBar.className = 'flex items-center space-x-2';
@@ -35,20 +42,16 @@ function ensureHeaderUI() {
   searchInput = document.getElementById('searchInput');
 }
 
-// --- Event Utility ---
 function addTapListener(element, handler) {
     if (!element) return;
     const activate = (e) => {
-        if (e.pointerType === 'mouse' && e.button !== 0) return;
-        e.preventDefault();
-        handler(e);
+        if (e.type === 'click' || (e.type === 'keypress' && (e.key === 'Enter' || e.key === ' '))) {
+            e.preventDefault();
+            handler(e);
+        }
     };
     element.addEventListener('click', activate);
-    element.addEventListener('keypress', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            activate(e);
-        }
-    });
+    element.addEventListener('keypress', activate);
 }
 
 // --- Autocomplete Functionality ---
@@ -340,274 +343,68 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
 function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) {
     const topic = allDisplayableTopicsMap[topicId];
     if (!topic) {
-        // If topic not found (ID mismatch or missing data)
-        contentArea.innerHTML = `
-            <p class="text-red-600 text-center py-4">
-                Error: Topic not found (ID: ${topicId}).</p>
-            <button id="backButtonDetailError" 
-                    class="mt-4 block mx-auto px-6 py-2 bg-blue-500 text-white rounded-lg">
-                Back to List
-            </button>`;
-        addTapListener(document.getElementById('backButtonDetailError'), () => {
-            handleSearch(true);
-        });
+        contentArea.innerHTML = `<p class="text-red-600 text-center py-4">Error: Topic not found (ID: ${topicId}).</p>`;
         return;
     }
-    // If coming from a list view, update that history entry with this topic highlight
-    if (navigationHistory[currentHistoryIndex] && navigationHistory[currentHistoryIndex].viewType === 'list') {
-        navigationHistory[currentHistoryIndex].highlightTopicId = topicId;
-        navigationHistory[currentHistoryIndex].categoryPath    = topic.categoryPath || [];
-    }
-    if (scrollToTop) {
-        contentArea.scrollTop = 0;
-        window.scrollTo(0, Math.max(0, contentArea.offsetTop - 80));
-    }
-
-    // Generate any dynamic warnings based on patient info
-    let collectedWarnings = [];
-    if (topic.details) {
-        // Pediatric dose warning if no pediatric dose or contraindicated for peds
-        if (patientData.age !== null && patientData.age < PEDIATRIC_AGE_THRESHOLD) {
-            const pedsText = (topic.details.pediatricRx || []).join('').toLowerCase();
-            if (!topic.details.pediatricRx || pedsText.length === 0 ||
-                pedsText.includes("don’t give") || pedsText.includes("not approved")) {
-                collectedWarnings.push({ 
-                    type: 'orange', 
-                    text: `<strong>PEDIATRIC NOTE:</strong> No pediatric dosage listed or not recommended for pediatrics. Age: ${patientData.age}.`
-                });
-            }
-        }
-        // Contraindication warnings based on Patient Info
-        if (topic.details.contraindications) {
-            topic.details.contraindications.forEach(ci => {
-                const ciLower = ci.toLowerCase();
-                // Past Medical History matches
-                patientData.pmh.forEach(hist => {
-                    if (ciLower.includes(hist)) {
-                        collectedWarnings.push({ 
-                            type: 'red', 
-                            text: `<strong>CONTRAINDICATION:</strong> History of <strong>${hist}</strong> (relevant to "${ci}").` 
-                        });
-                    }
-                });
-                // Current Medications interactions
-                patientData.currentMedications.forEach(currMed => {
-                    if (ciLower.includes(currMed) && !PDE5_INHIBITORS.includes(currMed)) {
-                        collectedWarnings.push({ 
-                            type: 'red', 
-                            text: `<strong>CONTRAINDICATION:</strong> Patient is on <strong>${currMed}</strong> (conflicts with "${ci}").` 
-                        });
-                    }
-                });
-                // Specific NTG (Nitroglycerin) checks
-                if (topic.id === 'ntg') {
-                    if (ciLower.includes("sbp <100") && patientData.vitalSigns.bp) {
-                        const sbp = parseInt(patientData.vitalSigns.bp.split('/')[0]);
-                        if (!isNaN(sbp) && sbp < 100) {
-                            collectedWarnings.push({
-                                type: 'red',
-                                text: `<strong>CONTRAINDICATION:</strong> SBP is ${sbp} (NTG contraindicated if SBP < 100).`
-                            });
-                        }
-                    }
-                    if (ciLower.includes("phosphodiesterase") || 
-                        PDE5_INHIBITORS.some(drug => ciLower.includes(drug))) {
-                        const onPDE5 = patientData.currentMedications.find(med =>
-                            PDE5_INHIBITORS.includes(med.toLowerCase())
-                        );
-                        if (onPDE5) {
-                            collectedWarnings.push({
-                                type: 'red',
-                                text: `<strong>CONTRAINDICATION:</strong> Patient uses <strong>${onPDE5}</strong> (PDE5 inhibitor) – cannot give NTG.`
-                            });
-                        }
-                    }
-                }
-                // Allergy warning (if "hypersensitivity" listed and med name matches an allergy)
-                patientData.allergies.forEach(allergy => {
-                    if (ciLower.includes("hypersensitivity") && 
-                        topic.title.toLowerCase().includes(allergy)) {
-                        collectedWarnings.push({ 
-                            type: 'yellow', 
-                            text: `<strong>ALLERGY ALERT:</strong> Patient is allergic to <strong>${allergy}</strong> – use caution with this medication.` 
-                        });
-                    }
-                });
-            });
-        }
-    }
-    // Remove duplicate warnings and sort by severity
-    const uniqueWarnings = [];
-    const seenTexts = new Set();
-    collectedWarnings.forEach(w => {
-        if (!seenTexts.has(w.text)) {
-            uniqueWarnings.push(w);
-            seenTexts.add(w.text);
-        }
-    });
-    const severityRank = { red: 3, orange: 2, yellow: 1 };
-    uniqueWarnings.sort((a,b) => severityRank[b.type] - severityRank[a.type]);
-    const topSeverity = uniqueWarnings[0] ? uniqueWarnings[0].type : null;
-    let warningsHtml = "";
-    if (uniqueWarnings.length > 0) {
-        warningsHtml = `<div class="warning-box ${ topSeverity === 'red'
-                         ? 'warning-box-red' 
-                         : (topSeverity === 'orange' ? 'warning-box-orange' : 'warning-box-yellow') }">` +
-            uniqueWarnings.map(w => {
-                const iconColor = w.type === 'red' ? 'text-red-600' 
-                                : w.type === 'orange' ? 'text-orange-600' 
-                                : 'text-yellow-700';
-                return `<div>${createWarningIcon(iconColor)}<span>${w.text}</span></div>`;
-            }).join('<hr class="my-1 border-gray-300">') + 
-        `</div>`;
-    }
-
-    // Dose calculation (for weight-based doses in certain meds)
-    let weightInKg = patientData.weight;
-    if (patientData.weight && patientData.weightUnit === 'lbs') {
-        weightInKg = patientData.weight / 2.20462;
-    }
-    let calculatedDoseInfo = "", weightDosePlaceholder = "";
-    if (weightInKg && topic.details && topic.details.concentration) {
-        // Example: Fentanyl dose helper
-        if (topic.id === 'fentanyl-sublimaze' && topic.details.adultRx &&
-            topic.details.adultRx.some(rx => rx.toLowerCase().includes("1mcg/kg"))) {
-            const dosePerKg = 1;
-            const match = topic.details.concentration.match(/(\d+)mcg\/(\d+)ml/);
-            if (match) {
-                const drugAmount = parseFloat(match[1]), volume = parseFloat(match[2]);
-                const concMcgPerMl = drugAmount / volume;
-                const totalDoseMcg = weightInKg * dosePerKg;
-                const volumeToDraw  = totalDoseMcg / concMcgPerMl;
-                calculatedDoseInfo = 
-                  `<p class="text-sm text-green-700 bg-green-50 p-2 rounded-md">
-                      Calculated for ${weightInKg.toFixed(1)} kg: 
-                      <strong>Dose: ${totalDoseMcg.toFixed(1)} mcg; Volume: ${volumeToDraw.toFixed(2)} mL.</strong>
-                   </p>`;
-            }
-        }
-        // Example: Etomidate dose helper (0.3mg/kg with max)
-        if (topic.id === 'etomidate-amidate' && topic.details.adultRx &&
-            topic.details.adultRx.some(rx => rx.toLowerCase().includes("0.3mg/kg"))) {
-            const dosePerKg = 0.3;
-            const match = topic.details.concentration.match(/(\d+)mg\/(\d+)ml/);
-            if (match) {
-                const drugAmount = parseFloat(match[1]), volume = parseFloat(match[2]);
-                const concMgPerMl = drugAmount / volume;
-                let totalDoseMg = weightInKg * dosePerKg;
-                // Check if a max dose is mentioned in text (e.g. "Max = 20mg")
-                const maxMatch = topic.details.adultRx.join(' ').match(/Max\s*=\s*(\d+)mg/i);
-                const maxDose = maxMatch ? parseFloat(maxMatch[1]) : null;
-                if (maxDose && totalDoseMg > maxDose) totalDoseMg = maxDose;
-                const volumeToDraw = totalDoseMg / concMgPerMl;
-                calculatedDoseInfo = 
-                  `<p class="text-sm text-green-700 bg-green-50 p-2 rounded-md">
-                      Calculated for ${weightInKg.toFixed(1)} kg: 
-                      <strong>Dose: ${totalDoseMg.toFixed(1)} mg; Volume: ${volumeToDraw.toFixed(2)} mL.</strong>
-                   </p>`;
-            }
-        }
-    }
-    if (!calculatedDoseInfo && weightInKg) {
-        weightDosePlaceholder = 
-            `<p class="text-sm text-gray-600 italic">
-                (Patient weight ${weightInKg.toFixed(1)} kg – no auto-calculation for this drug.)
-             </p>`;
-    }
-
-    // Patient info summary (snapshot box)
-    let patientInfoSummary = '';
-    if (patientData.age || patientData.weight || patientData.allergies.length > 0 || patientData.currentMedications.length > 0) {
-        patientInfoSummary = `
-          <div class="mb-3 p-3 bg-blue-50 border border-blue-200 rounded-md text-sm">
-            <h4 class="font-semibold text-blue-700 mb-1">Current Patient Snapshot:</h4>
-            ${ patientData.age ? `<p><strong>Age:</strong> ${patientData.age} yrs</p>` : '' }
-            ${ patientData.weight ? `<p><strong>Weight:</strong> ${patientData.weight} ${patientData.weightUnit} 
-                                      ${ weightInKg ? `(~${weightInKg.toFixed(1)} kg)` : '' }</p>` : '' }
-            ${ patientData.allergies.length ? `<p><strong>Allergies:</strong> 
-                                      <span class="font-medium text-red-600">${patientData.allergies.join(', ')}</span></p>` : '' }
-            ${ patientData.currentMedications.length ? `<p><strong>Current Meds:</strong> 
-                                      ${patientData.currentMedications.join(', ')}</p>` : '' }
-          </div>`;
-    }
-    // Build the detail content HTML (collapsible sections, tested)
-    let detailContentHtml = '';
+    if (scrollToTop) window.scrollTo(0, 0);
+    // Title
+    const title = document.createElement('h2');
+    title.className = 'text-2xl font-bold mb-2';
+    title.textContent = topic.title || topic.name || topic.id;
+    contentArea.innerHTML = '';
+    contentArea.appendChild(title);
+    // Collapsible sections for details (ALS Medications)
     if (topic.details) {
         const d = topic.details;
-        detailContentHtml = `
-            ${d.class ? `<div class="detail-section">
-                <h3 class="detail-section-title toggle-category">Class: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                <div class="detail-section-content hidden">${createDetailText(d.class)}</div>
-            </div>` : ''}
-            ${d.indications ? `<div class="detail-section">
-                <h3 class="detail-section-title toggle-category">Indications: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                <div class="detail-section-content hidden">${createDetailList(d.indications)}</div>
-            </div>` : ''}
-            ${d.contraindications ? `<div class="detail-section">
-                <h3 class="detail-section-title toggle-category">Contraindications: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                <div class="detail-section-content hidden">${createDetailList(d.contraindications)}</div>
-            </div>` : ''}
-            ${d.precautions ? `<div class="detail-section">
-                <h3 class="detail-section-title toggle-category">Precautions: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                <div class="detail-section-content hidden">${createDetailText(d.precautions)}</div>
-            </div>` : ''}
-            ${d.sideEffects ? `<div class="detail-section">
-                <h3 class="detail-section-title toggle-category">Significant Adverse/Side Effects: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                <div class="detail-section-content hidden">${createDetailList(d.sideEffects)}</div>
-            </div>` : ''}
-            ${(calculatedDoseInfo || weightDosePlaceholder) ? `<div class="detail-section mt-3">${calculatedDoseInfo}${weightDosePlaceholder}</div>` : ''}
-            ${d.adultRx ? `<div class="detail-section adult-section">
-                <h3 class="detail-section-title toggle-category">Adult Rx: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                <div class="detail-section-content hidden">${createDetailText(d.adultRx.join('\n\n'))}</div>
-            </div>` : ''}
-            ${d.pediatricRx ? `<div class="detail-section pediatric-section">
-                <h3 class="detail-section-title toggle-category">Pediatric Rx: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                <div class="detail-section-content hidden">${createDetailText(d.pediatricRx.join('\n\n'))}</div>
-            </div>` : ''}`;
-    }
-    // Inject the detail page HTML into the content area
-    contentArea.innerHTML = `
-        <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-4 pb-3 border-b border-gray-200">
-            <h2 class="text-xl md:text-2xl font-bold text-blue-700 mb-2 sm:mb-0 topic-main-title" data-topic-id="${topic.id}">
-                ${topic.title} ${topic.details && topic.details.concentration ? `<span class="med-concentration">${topic.details.concentration}</span>` : ''}
-            </h2>
-            <button id="backToListButton" class="w-full sm:w-auto px-5 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">
-                Back to List View
-            </button>
-        </div>
-        ${patientInfoSummary}
-        ${warningsHtml}
-        <div class="bg-gray-50 p-4 rounded-lg shadow-inner space-y-3 text-gray-800">
-            ${detailContentHtml}
-        </div>`;
-    // Attach collapsible toggle logic after rendering
-    setTimeout(() => {
-        contentArea.querySelectorAll('.toggle-category').forEach(header => {
-            header.addEventListener('click', () => {
-                const arrow = header.querySelector('.arrow');
-                if (arrow) arrow.classList.toggle('rotate');
-                const contentDiv = header.nextElementSibling;
-                if (contentDiv) contentDiv.classList.toggle('hidden');
-            });
-        });
-    }, 0);
-    attachToggleInfoHandlers(contentArea);
-    attachToggleCategoryHandlers(contentArea);
-    addTapListener(document.getElementById('backToListButton'), () => {
-        // Navigate back to last list view in history, or fall back to initial view
-        for (let i = currentHistoryIndex - 1; i >= 0; i--) {
-            if (navigationHistory[i] && navigationHistory[i].viewType === 'list') {
-                isNavigatingViaHistory = true;
-                currentHistoryIndex = i;
-                searchInput.value = navigationHistory[i].contentId || '';
-                handleSearch(false, navigationHistory[i].highlightTopicId, navigationHistory[i].categoryPath || []);
-                updateNavButtonsState();
-                isNavigatingViaHistory = false;
-                return;
+        const sections = [
+            { key: 'class', label: 'Class' },
+            { key: 'indications', label: 'Indications' },
+            { key: 'contraindications', label: 'Contraindications' },
+            { key: 'precautions', label: 'Precautions' },
+            { key: 'sideEffects', label: 'Significant Adverse/Side Effects' },
+            { key: 'adultRx', label: 'Adult Rx' },
+            { key: 'pediatricRx', label: 'Pediatric Rx' }
+        ];
+        sections.forEach(section => {
+            if (d[section.key]) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'mb-2';
+                const header = document.createElement('div');
+                header.className = 'flex items-center cursor-pointer select-none toggle-category';
+                const arrow = document.createElement('span');
+                arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200 mr-2" style="transform: rotate(0deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`;
+                header.appendChild(arrow);
+                const label = document.createElement('span');
+                label.textContent = section.label;
+                header.appendChild(label);
+                wrapper.appendChild(header);
+                const body = document.createElement('div');
+                body.className = 'pl-6 py-2 hidden';
+                if (Array.isArray(d[section.key])) {
+                    body.innerHTML = d[section.key].map(item => `<div>${item}</div>`).join('');
+                } else {
+                    body.textContent = d[section.key];
+                }
+                wrapper.appendChild(body);
+                addTapListener(header, () => {
+                    const isOpen = !body.classList.contains('hidden');
+                    body.classList.toggle('hidden');
+                    const svg = arrow.querySelector('svg');
+                    if (svg) svg.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
+                });
+                contentArea.appendChild(wrapper);
             }
-        }
-        renderInitialView(true, null, []);
-    });
+        });
+    } else {
+        // Fallback: show description
+        const desc = document.createElement('div');
+        desc.className = 'mb-4';
+        desc.textContent = topic.description || '';
+        contentArea.appendChild(desc);
+    }
+    if (shouldAddHistory) {
+        addHistoryEntry({ type: 'detail', id: topicId });
+    }
 }
 
 // --- Utility: toggling hidden info text in detail view ---

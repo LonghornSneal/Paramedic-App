@@ -1,3 +1,6 @@
+--- This file is to be continually updated by the AI Agent with the updated text within {}. Nothing is to be ever deleted, only added! Updates must be designed to accurately describe how the app is supposed to appear & function, both currently and for future updates. Updates are also designed to change the behavior of the AI Agent, so that the AI Agent will successfully update the code without any errors or issues being present. Read both of the README.md files for guidance, and then continue coding/testing the code. You have all the tools available to fix ANY issue. Always run tests on newly created code and upon any & all code that is related to an issue. Before you are finsihed coding, you must Read this README.md once more to make updates to the README.md and to insure that all instructions where followed.---
+
+
 # Paramedic Quick Reference – App Overview and Structure
 
 This document provides an overview of the **Paramedic Quick Reference** application’s structure and components. It is meant to guide developers (and AI assistants) through the project, to prevent misunderstandings during updates. By outlining where each piece of functionality resides and highlighting known pitfalls, this README helps narrow down where code errors might occur and how to address them.
