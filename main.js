@@ -527,61 +527,65 @@ function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) 
     let detailContentHtml = '';
     if (topic.details) {
         const d = topic.details;
-        // Customize Indications header for specific meds (e.g., Atropine SLUDGEM note)
-        let indicationsTitle = 'Indications:';
-        if (topic.id === 'atropine-sulfate') {
-            indicationsTitle += ` <span class="toggle-info" style="color:#2563eb">&#x25BC;
-               <span class="info-text hidden" style="color:#15803d">SLUDGEM pt</span></span>`;
-        }
         detailContentHtml = `
-            ${ d.notes ? `<div class="detail-section">
-                              <p class="text-red-600 font-semibold">${d.notes.join('<br>')}</p>
-                           </div>` : '' }
-            ${ d.class ? `<div class="detail-section">
-                              <h3 class="detail-section-title toggle-category">Class: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                              <div class="detail-section-content hidden">
-                                  ${createDetailText(d.class)}
-                              </div>
-                           </div>` : '' }
-            ${ d.indications ? `<div class="detail-section">
-                                    <h3 class="detail-section-title toggle-category">${indicationsTitle} <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                                    <div class="detail-section-content hidden">
-                                        ${createDetailList(d.indications)}
-                                    </div>
-                                 </div>` : '' }
-            ${ d.contraindications ? `<div class="detail-section">
-                                          <h3 class="detail-section-title toggle-category">Contraindications: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                                          <div class="detail-section-content hidden">
-                                              ${createDetailList(d.contraindications)}
-                                          </div>
-                                      </div>` : '' }
-            ${ d.precautions ? `<div class="detail-section">
-                                    <h3 class="detail-section-title toggle-category">Precautions: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                                    <div class="detail-section-content hidden">
-                                        ${createDetailText(d.precautions)}
-                                    </div>
-                                </div>` : '' }
-            ${ d.sideEffects ? `<div class="detail-section">
-                                    <h3 class="detail-section-title toggle-category">Side Effects: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                                    <div class="detail-section-content hidden">
-                                        ${createDetailList(d.sideEffects)}
-                                    </div>
-                                </div>` : '' }
-            ${ (calculatedDoseInfo || weightDosePlaceholder) ? `<div class="detail-section mt-3">
-                                    ${calculatedDoseInfo || weightDosePlaceholder}
-                               </div>` : '' }
-            ${ d.adultRx ? `<div class="detail-section adult-section">
-                                <h3 class="detail-section-title toggle-category">Adult Rx: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                                <div class="detail-section-content hidden">
-                                    ${createDetailText(d.adultRx.join('\n\n'))}
-                                </div>
-                             </div>` : '' }
-            ${ d.pediatricRx ? `<div class="detail-section pediatric-section">
-                                   <h3 class="detail-section-title toggle-category">Pediatric Rx: <span class="text-blue-600 arrow">&#x25BC;</span></h3>
-                                   <div class="detail-section-content hidden">
-                                       ${createDetailText(d.pediatricRx.join('\n\n'))}
-                                   </div>
-                                </div>` : '' }`;
+            ${d.class ? `<div class="detail-section">
+                           <h3 class="detail-section-title toggle-category">Class: 
+                             <span class="text-blue-600 arrow">&#x25BC;</span>
+                           </h3>
+                           <div class="detail-section-content hidden">
+                             ${createDetailText(d.class)}
+                           </div>
+                         </div>` : ''}
+            ${d.indications ? `<div class="detail-section">
+                                  <h3 class="detail-section-title toggle-category">Indications: 
+                                    <span class="text-blue-600 arrow">&#x25BC;</span>
+                                  </h3>
+                                  <div class="detail-section-content hidden">
+                                    ${createDetailList(d.indications)}
+                                  </div>
+                                </div>` : ''}
+            ${d.contraindications ? `<div class="detail-section">
+                                        <h3 class="detail-section-title toggle-category">Contraindications: 
+                                          <span class="text-blue-600 arrow">&#x25BC;</span>
+                                        </h3>
+                                        <div class="detail-section-content hidden">
+                                          ${createDetailList(d.contraindications)}
+                                        </div>
+                                      </div>` : ''}
+            ${d.precautions ? `<div class="detail-section">
+                                  <h3 class="detail-section-title toggle-category">Precautions: 
+                                    <span class="text-blue-600 arrow">&#x25BC;</span>
+                                  </h3>
+                                  <div class="detail-section-content hidden">
+                                    ${createDetailText(d.precautions)}
+                                  </div>
+                                </div>` : ''}
+            ${d.sideEffects ? `<div class="detail-section">
+                                  <h3 class="detail-section-title toggle-category">Significant Adverse/Side Effects: 
+                                    <span class="text-blue-600 arrow">&#x25BC;</span>
+                                  </h3>
+                                  <div class="detail-section-content hidden">
+                                    ${createDetailList(d.sideEffects)}
+                                  </div>
+                                </div>` : ''}
+            ${(calculatedDoseInfo || weightDosePlaceholder) ? 
+                `<div class="detail-section mt-3">${calculatedDoseInfo}${weightDosePlaceholder}</div>` : ''}
+            ${d.adultRx ? `<div class="detail-section adult-section">
+                             <h3 class="detail-section-title toggle-category">Adult Rx: 
+                               <span class="text-blue-600 arrow">&#x25BC;</span>
+                             </h3>
+                             <div class="detail-section-content hidden">
+                               ${createDetailText(d.adultRx.join('\n\n'))}
+                             </div>
+                           </div>` : ''}
+            ${d.pediatricRx ? `<div class="detail-section pediatric-section">
+                                 <h3 class="detail-section-title toggle-category">Pediatric Rx: 
+                                   <span class="text-blue-600 arrow">&#x25BC;</span>
+                                 </h3>
+                                 <div class="detail-section-content hidden">
+                                   ${createDetailText(d.pediatricRx.join('\n\n'))}
+                                 </div>
+                               </div>` : ''}`;
     } else {
         // Placeholder if no details available (should not happen for ALS meds after data fix)
         detailContentHtml = `<p class="text-lg italic">This is a placeholder for <strong>${topic.title}</strong>.</p>
