@@ -1,3 +1,7 @@
+// --- Diagnostic Logging ---
+console.log("ParamedicCategoriesData:", window.ParamedicCategoriesData);
+console.log("MedicationDetailsData:", window.MedicationDetailsData);
+
 // --- DOM Elements ---
 const searchInput       = document.getElementById('searchInput');
 const contentArea       = document.getElementById('content-area');
