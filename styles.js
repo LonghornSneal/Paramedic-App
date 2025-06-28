@@ -3,7 +3,7 @@ tailwind.config = {
   theme: {
     extend: {
       // Ensure the Inter font is used as the sans-serif font
-      fontFamily: { sans: ["Inter", "sans-serif"] }
+      fontFamily: { sans: ["Inter", "sans-serif"] },
       // (You can add other theme extensions here if needed)
     }
   },
