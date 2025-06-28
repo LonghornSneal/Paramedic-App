@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Echo Toolset Ready",
+      "type": "shell",
+      "command": "echo AI All Tools Set Workspace is ready!",
+      "problemMatcher": []
+    }
+  ]
+}

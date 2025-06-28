@@ -1,0 +1,33 @@
+{
+  "tools": {
+    "editFiles": {},
+    "extensions": {},
+    "findTestFiles": {},
+    "runTests": {},
+    "insertCode": {},
+    "reviewCode": {},
+    "generateUnitTests": {},
+    "proposeFix": {},
+    "scaffoldCode": {},
+    "createJupyterNotebook": {},
+    "queryParameters": {},
+    "terminalCommands": {},
+    "githubRepo": {},
+    "new": {},
+    "problems": {},
+    "runCommands": {},
+    "runNotebooks": {},
+    "runTasks": {},
+    "search": {},
+    "searchResults": {},
+    "terminalLastCommand": {},
+    "terminalSelection": {},
+    "vscodeAPI": {},
+    "app-modernization-java-run-test-tool": {},
+    "Java App Modernization MCP Server": {},
+    "generate_tests_for_java": {},
+    "run_tests_for_java": {},
+    "validate_behavior_changes_for_java": {},
+    "buildFix_agent": {}
+  }
+}
