@@ -1,4 +1,7 @@
 // Data/ParamedicCategoriesData.js
+if (typeof window === 'undefined' || typeof window.slugify !== 'function') {
+  throw new Error('slugify is not defined on window. Ensure Utils/slugify.js is loaded before this file.');
+}
 window.ParamedicCategoriesData = [
                 {id: slugify("Abbreviations & References"), title: "Abbreviations & References", type: "category", children: [{ id: slugify("Abbott Approved Abbreviations"), title: "Abbott Approved Abbreviations", type: "topic" },{ id: slugify("Other Abbreviations"), title: "Other Abbreviations", type: "topic" }]},
                 {id: slugify("Introduction & Core Principles"), title: "Introduction & Core Principles", type: "category", children: [{ id: slugify("Introduction to Abbott"), title: "Introduction to Abbott", type: "topic" },{ id: slugify("Core Principles – Safety & Well-Being"), title: "Core Principles – Safety & Well-Being", type: "topic" },{ id: slugify("General Important Information"), title: "General Important Information", type: "topic" }]},
