@@ -3,7 +3,7 @@ tailwind.config = {
   theme: {
     extend: {
       // Ensure the Inter font is used as the sans-serif font
-      fontFamily: { sans: ["Inter", "sans-serif"] }
+      fontFamily: { sans: ["Inter", "sans-serif"] },
       // (You can add other theme extensions here if needed)
     }
   },
@@ -13,8 +13,9 @@ tailwind.config = {
       addBase({
         ":root": { "--vh": "1vh" },
         "html": {
-          "-webkit-text-size-adjust": "100%", // For Chrome, Safari, and newer Edge
-          "-moz-text-size-adjust": "100%",    // For Firefox
+          // Prevent text size adjustments in modern browsers
+          "-webkit-text-size-adjust": "100%", // Chrome/Safari/Edge
+          "-moz-text-size-adjust": "100%",    // Firefox
           "text-size-adjust": "100%"         // The standard property
         },
         "body": {
