@@ -107,10 +107,14 @@
        <footer class="text-center p-4 text-gray-500 text-sm mt-2">App Version 0.7</footer>
 </div>
 
+<!-- Add polyfills first -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.forEach%2CPromise%2CObject.assign%2CArray.prototype.includes"></script>
 <script src="Utils/slugify.js"></script>
+<!-- Then your data files -->
 <script src="Data/ParamedicCategoriesData.js"></script>
 <script src="Data/MedicationDetailsData.js"></script>
 <script src="Data/slugList.js"></script>
+<!-- Then your application scripts -->
 <script src="Features/PatientInfo.js"></script>
 <script src="slugAnchors.js"></script>
 <script src="main.js"></script>
