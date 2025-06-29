@@ -454,19 +454,25 @@ function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) 
             { key: 'adultRx', label: 'Adult Rx' },
             { key: 'pediatricRx', label: 'Pediatric Rx' }
         ];
+        const tocItems = [];
         sections.forEach(section => {
             if (d[section.key]) {
                 const wrapper = document.createElement('div');
-                wrapper.className = 'mb-2';
+                wrapper.className = 'detail-section mb-2';
+                const sectionId = typeof slugify === 'function' ? slugify(section.label) : section.label.toLowerCase().replace(/\s+/g, '-');
+                wrapper.id = sectionId;
+                wrapper.dataset.label = section.label;
+                tocItems.push({ label: section.label, id: sectionId });
+
                 const header = document.createElement('div');
                 header.className = 'flex items-center cursor-pointer select-none toggle-category';
                 const arrow = document.createElement('span');
                 arrow.className = 'arrow';
-                arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" style="transform: rotate(0deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`;
+                arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" style="transform: rotate(0deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`; 
                 header.appendChild(arrow);
-                const label = document.createElement('span');
-                label.textContent = section.label;
-                header.appendChild(label);
+                const labelEl = document.createElement('span');
+                labelEl.textContent = section.label;
+                header.appendChild(labelEl);
                 wrapper.appendChild(header);
                 const body = document.createElement('div');
                 body.className = 'pl-6 py-2 hidden';
@@ -485,6 +491,10 @@ function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) 
                 contentArea.appendChild(wrapper);
             }
         });
+
+        if (tocItems.length > 0 && typeof window.setupSlugAnchors === 'function') {
+            window.setupSlugAnchors(tocItems);
+        }
     } else {
         // Fallback: show description
         const desc = document.createElement('div');

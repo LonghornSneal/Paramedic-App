@@ -73,6 +73,7 @@ All scripts are included in `index.html` in the proper order. Notably, the data 
   - The main topic title in detail view now uses a consistent class and data attribute for reliable UI updates.
   - The `ensureHeaderUI` function in `main.js` was patched to always create and order navigation/search elements correctly, fixing header UI consistency.
   - **Slug Anchors Initialization:** `slugAnchors.js` now waits for the DOM to load before inserting hidden anchor elements, ensuring the container is appended reliably.
+  - **Detail Table of Contents:** Each medication detail page now shows a generated Table of Contents for its sections. `renderDetailPage` passes the section list to `setupSlugAnchors`, which builds the anchor list immediately on page load.
   - **Medication Detail Layout:** Section headers like *Indications* and *Precautions* now align directly beside the blue arrow instead of being spaced across the screen. This was fixed by updating the `.toggle-category` style to use `justify-content: flex-start`.
 
 - **Testing:**
