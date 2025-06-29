@@ -570,6 +570,19 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
     openCategoriesAndHighlight(categoryPath, highlightId);
 }
 
+function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
+    const term = searchInput.value.trim().toLowerCase();
+    if (!term) {
+        renderInitialView(false);
+        return;
+    }
+    const results = allSearchableTopics.filter(topic =>
+        (topic.title || topic.id || '').toLowerCase().includes(term) ||
+        (topic.path || '').toLowerCase().includes(term)
+    );
+    renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath);
+}
+
 // --- Text/Markup Helpers ---
 function parseTextMarkup(text) {
     // Escape HTML and replace special markup with styled spans
@@ -653,18 +666,8 @@ function initApp() {
     }
     // Search
     if (searchInput) {
-        searchInput.addEventListener('input', e => {
-            const term = searchInput.value.trim().toLowerCase();
-            if (!term) {
-                renderInitialView(false);
-                return;
-            }
-            // Flat search: search all topics
-            const results = allSearchableTopics.filter(topic =>
-                (topic.title || topic.id || '').toLowerCase().includes(term) ||
-                (topic.path || '').toLowerCase().includes(term)
-            );
-            renderSearchResults(results, term, true);
+        searchInput.addEventListener('input', () => {
+            handleSearch(true);
         });
     }
     // Enter key triggers search
@@ -672,16 +675,7 @@ function initApp() {
         searchInput.addEventListener('keydown', e => {
             if (e.key === 'Enter') {
                 e.preventDefault();
-                const term = searchInput.value.trim().toLowerCase();
-                if (!term) {
-                    renderInitialView(false);
-                    return;
-                }
-                const results = allSearchableTopics.filter(topic =>
-                    (topic.title || topic.id || '').toLowerCase().includes(term) ||
-                    (topic.path || '').toLowerCase().includes(term)
-                );
-                renderSearchResults(results, term, true);
+                handleSearch(true);
             }
         });
     }
