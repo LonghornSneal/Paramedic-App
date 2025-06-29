@@ -3,23 +3,23 @@
 // console.log("MedicationDetailsData:", window.MedicationDetailsData);
 
 // --- DOM Elements ---
-var searchInput       = document.getElementById('searchInput');
-var contentArea       = document.getElementById('content-area');
-const patientSidebar    = document.getElementById('patient-sidebar');
+var searchInput = document.getElementById('searchInput');
+var contentArea = document.getElementById('content-area');
+const patientSidebar = document.getElementById('patient-sidebar');
 const openSidebarButton = document.getElementById('open-sidebar-button');
 const closeSidebarButton= document.getElementById('close-sidebar-button');
-const sidebarOverlay    = document.getElementById('sidebar-overlay');
-let navBackButton     = document.getElementById('nav-back-button');
-let navForwardButton  = document.getElementById('nav-forward-button');
+const sidebarOverlay = document.getElementById('sidebar-overlay');
+let navBackButton = document.getElementById('nav-back-button');
+let navForwardButton = document.getElementById('nav-forward-button');
 
 // Navigation history state
 // These globals track the list of visited views so the header
 // back/forward buttons can navigate correctly. They were previously
 // only defined in PatientInfo.js which meant main.js could fail to
-// reference them if that script loaded differently.  Defining them
+// reference them if that script loaded differently. Defining them
 // here guarantees the navigation arrows always function.
-let navigationHistory    = [];
-let currentHistoryIndex  = -1;
+let navigationHistory = [];
+let currentHistoryIndex = -1;
 let isNavigatingViaHistory = false;
 
 // --- Ensure Navigation/Search Bar Exists ---
@@ -156,7 +156,7 @@ function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceS
 // --- Navigation History Management ---
 function updateNavButtonsState() {
     if (!navBackButton || !navForwardButton) return;
-    navBackButton.disabled    = currentHistoryIndex <= 0;
+    navBackButton.disabled = currentHistoryIndex <= 0;
     navForwardButton.disabled = currentHistoryIndex >= navigationHistory.length - 1;
 }
 function addHistoryEntry(entry) {
@@ -184,19 +184,49 @@ function navigateViaHistory(direction) {
     isNavigatingViaHistory = false;
 }
 if (navBackButton && navForwardButton) {
-  addTapListener(navBackButton,    () => navigateViaHistory(-1));
+  addTapListener(navBackButton, () => navigateViaHistory(-1));
   addTapListener(navForwardButton, () => navigateViaHistory(1));
 }
 
 // --- Global Data Structures --- 
 // (Moved here from PatientInfo.js to ensure single source of truth)
    // all categories/topics hierarchy
-let allSearchableTopics    = [];    // flat list of all topics for search
+let allSearchableTopics = [];    // flat list of all topics for search
 let allDisplayableTopicsMap = {};   // map from topic id -> topic object (with details)
 /* Note: patientData and suggestion Sets (pmhSuggestions, allergySuggestions, 
    medicationNameSuggestions, etc.) are defined in PatientInfo.js and used below. */
 
 // --- Data Initialization Function --- 
+
+function initApp() {
+    ensureHeaderUI();
+    // Initialize data structures with categories and medications
+    initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
+    // Call renderInitialView to build and display the content titles
+    renderInitialView();
+
+    // Set up sidebar toggles
+    addTapListener(openSidebarButton, () => {
+        patientSidebar.classList.add('open');
+        sidebarOverlay.classList.add('active');
+        sidebarOverlay.classList.remove('hidden');
+    });
+    addTapListener(closeSidebarButton, () => {
+        patientSidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+        sidebarOverlay.classList.add('hidden');
+    });
+    addTapListener(sidebarOverlay, () => {
+        patientSidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+        sidebarOverlay.classList.add('hidden');
+    });
+    // Set up autocomplete for each Patient Info field
+    setupAutocomplete('pt-pmh',         'pt-pmh-suggestions',         pmhSuggestions);
+    setupAutocomplete('pt-allergies',   'pt-allergies-suggestions',   allergySuggestions);
+    /*...*/
+}
+
 function initializeData(categoriesData, medDetailsData) {
     // Populate global structures from raw data files
     paramedicCategories = categoriesData || [];
@@ -224,22 +254,17 @@ Convert MedicationDetailsData (array or object) into a dictionary for quick look
     }
 
     // --- Preload common suggestions (Past Medical History, Allergies, Med Names) ---
-    const commonPmh       = ["hypertension","htn","diabetes","dm","asthma","copd",
-                             "heart failure","hf","cad","stroke","cva","seizure disorder",
-                             "renal insufficiency","ckd","hypothyroidism","hyperthyroidism",
-                             "glaucoma","peptic ulcer disease","gerd","schizophrenia",
-                             "anxiety","depression"];
-    const commonAllergies = ["penicillin","sulfa","aspirin","nsaids","morphine",
-                             "codeine","iodine","shellfish","latex","peanuts","tree nuts"];
+    const commonPmh = ["hypertension","htn","diabetes","dm","asthma","copd","heart failure","hf","cad","stroke","cva","seizure disorder","renal insufficiency","ckd","hypothyroidism","hyperthyroidism","glaucoma","peptic ulcer","anxiety","depression"];
+    const commonAllergies = ["penicillin","sulfa","aspirin","nsaids","morphine", "codeine","iodine","shellfish","latex","peanuts","tree nuts"];
     const commonMedNames  = ["lisinopril","metformin","atorvastatin","amlodipine",
                              "hydrochlorothiazide","hctz","simvastatin","albuterol",
                              "levothyroxine","gabapentin","omeprazole","losartan",
                              "sertraline","furosemide","lasix","insulin","warfarin",
                              "coumadin","aspirin","clopidogrel","plavix"];
     // Add these common terms to the suggestion sets (defined in PatientInfo.js)
-    commonPmh.forEach(term       => pmhSuggestions.add(term));
+    commonPmh.forEach(term => pmhSuggestions.add(term));
     commonAllergies.forEach(term => allergySuggestions.add(term));
-    commonMedNames.forEach(term  => medicationNameSuggestions.add(term));
+    commonMedNames.forEach(term => medicationNameSuggestions.add(term));
     PDE5_INHIBITORS.forEach(term => medicationNameSuggestions.add(term));  // from PatientInfo.js
 
     // --- Extract additional allergy keywords from medication contraindications ---
