@@ -295,8 +295,9 @@ function createHierarchicalList(items, container, level = 0) {
             // Collapsible blue arrow
             const arrow = document.createElement('button');
             arrow.setAttribute('aria-label', 'Expand/collapse');
-            arrow.className = 'mr-2 focus:outline-none focus:ring-2 focus:ring-blue-400';
-            arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" style="transform: rotate(${item.expanded ? 90 : 0}deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`;
+            arrow.className = 'arrow mr-2 focus:outline-none focus:ring-2 focus:ring-blue-400';
+            if (item.expanded) arrow.classList.add('rotate');
+            arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`;
             addTapListener(arrow, () => {
                 item.expanded = !item.expanded;
                 createHierarchicalList(items, container, level);
@@ -451,7 +452,8 @@ function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) 
                 const header = document.createElement('div');
                 header.className = 'flex items-center cursor-pointer select-none toggle-category';
                 const arrow = document.createElement('span');
-                arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200 mr-2" style="transform: rotate(0deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`;
+                arrow.className = 'arrow mr-2';
+                arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`;
                 header.appendChild(arrow);
                 const label = document.createElement('span');
                 label.textContent = section.label;
@@ -466,10 +468,8 @@ function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) 
                 }
                 wrapper.appendChild(body);
                 addTapListener(header, () => {
-                    const isOpen = !body.classList.contains('hidden');
                     body.classList.toggle('hidden');
-                    const svg = arrow.querySelector('svg');
-                    if (svg) svg.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
+                    arrow.classList.toggle('rotate');
                 });
                 contentArea.appendChild(wrapper);
             }

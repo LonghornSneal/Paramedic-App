@@ -258,7 +258,7 @@ window.tailwind.config = {
           marginLeft: "0.25rem"
         },
         ".arrow.rotate": {
-          transform: "rotate(-180deg)"
+          transform: "rotate(90deg)"
         },
 
         /* Header navigation buttons (top-right corner buttons) */

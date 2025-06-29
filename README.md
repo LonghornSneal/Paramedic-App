@@ -73,6 +73,7 @@ All scripts are included in `index.html` in the proper order. Notably, the data 
   - The main topic title in detail view now uses a consistent class and data attribute for reliable UI updates.
   - The `ensureHeaderUI` function in `main.js` was patched to always create and order navigation/search elements correctly, fixing header UI consistency.
   - **Slug Anchors Initialization:** `slugAnchors.js` now waits for the DOM to load before inserting hidden anchor elements, ensuring the container is appended reliably.
+  - **Collapsible Arrows:** Category and detail section arrows use a unified `.arrow` class with a `rotate` state, so the navigation arrows visibly rotate and expand/collapse content as expected.
 
 - **Testing:**
   - All Jest tests now pass. The `add.test.js` import path was fixed, and a minimal test for `slugify.js` was added. The test suite is clean and ready for further test additions.
