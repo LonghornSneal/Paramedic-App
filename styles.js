@@ -250,7 +250,7 @@ window.tailwind.config = {
         ".toggle-category": {
           cursor: "pointer",
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "flex-start",
           alignItems: "center"
         },
         ".arrow": {
