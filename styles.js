@@ -255,7 +255,7 @@ window.tailwind.config = {
         },
         ".arrow": {
           transition: "transform 0.2s",
-          marginLeft: "0.25rem"
+          marginRight: "0.5rem"
         },
         ".arrow.rotate": {
           transform: "rotate(-180deg)"
