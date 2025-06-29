@@ -3,8 +3,8 @@
 // console.log("MedicationDetailsData:", window.MedicationDetailsData);
 
 // --- DOM Elements ---
-let searchInput       = document.getElementById('searchInput');
-const contentArea       = document.getElementById('content-area');
+var searchInput       = document.getElementById('searchInput');
+var contentArea       = document.getElementById('content-area');
 const patientSidebar    = document.getElementById('patient-sidebar');
 const openSidebarButton = document.getElementById('open-sidebar-button');
 const closeSidebarButton= document.getElementById('close-sidebar-button');
@@ -76,12 +76,12 @@ function ensureHeaderUI() {
 
 function addTapListener(element, handler) {
     if (!element) return;
-    const activate = (e) => {
+    function activate(e) {
         if (e.type === 'click' || (e.type === 'keypress' && (e.key === 'Enter' || e.key === ' '))) {
             e.preventDefault();
             handler(e);
         }
-    };
+    }
     element.addEventListener('click', activate);
     element.addEventListener('keypress', activate);
 }
@@ -92,7 +92,7 @@ function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceS
     const suggestionsContainer = document.getElementById(suggestionsContainerId);
     let currentInputValueBeforeSelection = "";
 
-    textarea.addEventListener('input', e => {
+    textarea.addEventListener('input', function(e) {
         const inputText = e.target.value;
         const currentSegment = inputText.split(',').pop().trim().toLowerCase();
         currentInputValueBeforeSelection = inputText.substring(0, inputText.lastIndexOf(',') + 1).trim();
@@ -102,27 +102,27 @@ function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceS
             return;
         }
         const filtered = Array.from(suggestionSourceSet)
-                              .filter(s => s.toLowerCase().includes(currentSegment));
+                              .filter(function(s) { return s.toLowerCase().includes(currentSegment); });
         if (filtered.length > 0) {
-            suggestionsContainer.innerHTML = filtered.map(s =>
-                `<div class="autocomplete-suggestion-item" data-value="${s}">${s}</div>`
-            ).join('');
+            suggestionsContainer.innerHTML = filtered.map(function(s) {
+                return '<div class="autocomplete-suggestion-item" data-value="' + s + '">' + s + '</div>';
+            }).join('');
             suggestionsContainer.classList.remove('hidden');
         } else {
             suggestionsContainer.classList.add('hidden');
         }
     });
 
-    addTapListener(suggestionsContainer, e => {
+    addTapListener(suggestionsContainer, function(e) {
         if (e.target.classList.contains('autocomplete-suggestion-item')) {
             const selectedValue = e.target.dataset.value;
-            let existingValues = textarea.value.split(',').map(v => v.trim()).filter(v => v);
+            let existingValues = textarea.value.split(',').map(function(v) { return v.trim(); }).filter(function(v) { return v; });
             // Remove the segment currently being typed
             if (existingValues.length > 0 && textarea.value.trim().slice(-1) !== ',') {
                 existingValues.pop();
             }
             // Avoid duplicate entries (case-insensitive)
-            if (!existingValues.map(v => v.toLowerCase()).includes(selectedValue.toLowerCase())) {
+            if (!existingValues.map(function(v) { return v.toLowerCase(); }).includes(selectedValue.toLowerCase())) {
                 existingValues.push(selectedValue);
             }
             textarea.value = existingValues.join(', ') + (existingValues.length > 0 ? ", " : "");
@@ -133,20 +133,20 @@ function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceS
         }
     });
 
-    textarea.addEventListener('blur', () => {
+    textarea.addEventListener('blur', function() {
         // Delay hiding to allow click on suggestions
-        setTimeout(() => { suggestionsContainer.classList.add('hidden'); }, 150);
+        setTimeout(function() { suggestionsContainer.classList.add('hidden'); }, 150);
     });
-    textarea.addEventListener('focus', e => {
+    textarea.addEventListener('focus', function(e) {
         const inputText = e.target.value;
         const currentSegment = inputText.split(',').pop().trim().toLowerCase();
         if (currentSegment.length > 0) {
             const filtered = Array.from(suggestionSourceSet)
-                                   .filter(s => s.toLowerCase().includes(currentSegment));
+                                   .filter(function(s) { return s.toLowerCase().includes(currentSegment); });
             if (filtered.length > 0) {
-                suggestionsContainer.innerHTML = filtered.map(s =>
-                    `<div class="autocomplete-suggestion-item" data-value="${s}">${s}</div>`
-                ).join('');
+                suggestionsContainer.innerHTML = filtered.map(function(s) {
+                    return '<div class="autocomplete-suggestion-item" data-value="' + s + '">' + s + '</div>';
+                }).join('');
                 suggestionsContainer.classList.remove('hidden');
             }
         }
@@ -268,10 +268,12 @@ Convert MedicationDetailsData (array or object) into a dictionary for quick look
     });
 
     // --- Build topic list and attach details ---
-    function processItem(item, parentPath = '', parentIds = []) {
-        const currentPath = parentPath ? `${parentPath} > ${item.title}` : item.title;
-        const currentIds  = (item.type === 'category') 
-                              ? [...parentIds, item.id] 
+    function processItem(item, parentPath, parentIds) {
+        if (typeof parentPath === 'undefined') parentPath = '';
+        if (typeof parentIds === 'undefined') parentIds = [];
+        var currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
+        var currentIds  = (item.type === 'category')
+                              ? parentIds.slice().concat([item.id])
                               : parentIds;
         // Attach corresponding detail info if this item is a topic with a matching ID
         const detailsObj = medicationDataMap[item.id];
@@ -385,7 +387,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
 function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) {
     const topic = allDisplayableTopicsMap[topicId];
     if (!topic) {
-        contentArea.innerHTML = `<p class="text-red-600 text-center py-4">Error: Topic not found (ID: ${topicId}).</p>`;
+        contentArea.innerHTML = '<p class="text-red-600 text-center py-4">Error: Topic not found (ID: ' + topicId + ').</p>';
         return;
     }
     if (scrollToTop) window.scrollTo(0, 0);
@@ -697,13 +699,13 @@ function initApp() {
     }
     // Search
     if (searchInput) {
-        searchInput.addEventListener('input', () => {
+        searchInput.addEventListener('input', function() {
             handleSearch(true);
         });
     }
     // Enter key triggers search
     if (searchInput) {
-        searchInput.addEventListener('keydown', e => {
+        searchInput.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 handleSearch(true);

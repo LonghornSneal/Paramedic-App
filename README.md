@@ -79,6 +79,7 @@ All scripts are included in `index.html` in the proper order. Notably, the data 
 
 - **Testing:**
   - All Jest tests now pass. The `add.test.js` import path was fixed, and a minimal test for `slugify.js` was added. The test suite is clean and ready for further test additions.
+  - **Legacy Compatibility Update:** Key parts of `main.js` now avoid modern JavaScript features. DOM references use `var`, error messages use string concatenation, and category processing no longer relies on the spread operator.
 
 ### Current App Behavior
 
