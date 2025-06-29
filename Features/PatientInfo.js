@@ -19,9 +19,10 @@
         const ptInputs = ptInputIds.map(id => document.getElementById(id));
 
         // --- Navigation History ---
-        let navigationHistory = [];
-        let currentHistoryIndex = -1;
-        let isNavigatingViaHistory = false;
+        // Main navigation state is now defined in main.js so the header
+        // arrows work reliably.  These variables were left here previously
+        // but served no purpose, so they have been removed to avoid
+        // shadowing the globals.
 
         // --- Hierarchical Data, Flat Search List, Medication Details ---
 

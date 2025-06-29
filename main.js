@@ -12,6 +12,16 @@ const sidebarOverlay    = document.getElementById('sidebar-overlay');
 let navBackButton     = document.getElementById('nav-back-button');
 let navForwardButton  = document.getElementById('nav-forward-button');
 
+// Navigation history state
+// These globals track the list of visited views so the header
+// back/forward buttons can navigate correctly. They were previously
+// only defined in PatientInfo.js which meant main.js could fail to
+// reference them if that script loaded differently.  Defining them
+// here guarantees the navigation arrows always function.
+let navigationHistory    = [];
+let currentHistoryIndex  = -1;
+let isNavigatingViaHistory = false;
+
 // --- Ensure Navigation/Search Bar Exists ---
 function ensureHeaderUI() {
   const header = document.querySelector('header');
