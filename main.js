@@ -242,8 +242,7 @@ function initializeData(categoriesData, medDetailsData) {
         return;
     }
     // rest of the initialization code
-}
-Convert MedicationDetailsData (array or object) into a dictionary for quick lookup
+    // Convert MedicationDetailsData (array or object) into a dictionary for quick lookup
     const medicationDataMap = {};
     if (Array.isArray(medDetailsData)) {
         medDetailsData.forEach(med => { 
