@@ -243,7 +243,7 @@ function initializeData(categoriesData, medDetailsData) {
     }
     // rest of the initialization code
 }
-Convert MedicationDetailsData (array or object) into a dictionary for quick lookup
+// Convert MedicationDetailsData (array or object) into a dictionary for quick lookup
     const medicationDataMap = {};
     if (Array.isArray(medDetailsData)) {
         medDetailsData.forEach(med => { 
@@ -328,9 +328,9 @@ Convert MedicationDetailsData (array or object) into a dictionary for quick look
     }
     paramedicCategories.forEach(category => processItem(category, '', []));
 
-    // Data initialization complete. Now paramedicCategories, allSearchableTopics, 
+    // Data initialization complete. Now paramedicCategories, allSearchableTopics,
     // and allDisplayableTopicsMap are ready for use.
-}
+
 
 // --- Hierarchical List Rendering ---
 function createHierarchicalList(items, container, level = 0) {
