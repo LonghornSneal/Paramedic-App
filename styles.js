@@ -37,7 +37,7 @@ window.tailwind.config = {
           position: "fixed",
           top: "0", left: "0",
           width: "300px", maxWidth: "80%",
-          height: "calc(var(--vh, 1vh) * 100)",
+          height: "100vh",
           backgroundColor: theme("colors.gray.50"),
           borderRight: "1px solid " + theme("colors.gray.200"),
           padding: "1rem", overflowY: "auto",
@@ -67,6 +67,10 @@ window.tailwind.config = {
           flexGrow: "1",
           width: "100%",
           transition: "margin-left 0.3s ease-in-out"
+        },
+        "#content-area": {
+          display: "flex",
+          flexDirection: "column"
         },
 
         /* Hierarchical List (Categories/Topics) */

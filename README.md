@@ -87,6 +87,7 @@ All scripts are included in `index.html` in the proper order. Notably, the data 
 - **Patient Info Sidebar:** The sidebar can be opened from the main UI and closed via the escape button or overlay. Patient data updates trigger UI changes and warnings in medication detail views.
 - **Medication Details:** All medications listed in the ALS Medications section display their full details, including all associated data fields. Section anchors and in-page navigation work reliably.
 - **UI Layout:** All UI elements (navigation, search, sidebar, detail view) are in their correct locations and styled consistently with the rest of the app.
+- **IE Compatibility:** The CSS now avoids grid and custom viewport units. `#content-area` uses flexbox layout and `#patient-sidebar` has a fixed `100vh` height for better support in older browsers.
 - **Testing:** All available tests pass. The test suite is clean and ready for further expansion.
 
 ### Known Issues & Future Enhancements
