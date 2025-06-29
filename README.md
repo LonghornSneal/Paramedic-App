@@ -75,6 +75,7 @@ All scripts are included in `index.html` in the proper order. Notably, the data 
   - **Slug Anchors Initialization:** `slugAnchors.js` now waits for the DOM to load before inserting hidden anchor elements, ensuring the container is appended reliably.
   - **Detail Table of Contents:** Each medication detail page now shows a generated Table of Contents for its sections. `renderDetailPage` passes the section list to `setupSlugAnchors`, which builds the anchor list immediately on page load.
   - **Medication Detail Layout:** Section headers like *Indications* and *Precautions* now align directly beside the blue arrow instead of being spaced across the screen. This was fixed by updating the `.toggle-category` style to use `justify-content: flex-start`.
+  - **Table of Contents Loading:** `ParamedicCategoriesData.js` now exports its data via a constant before assigning to `window`. This prevents a runtime error and ensures the contents list loads on the first page view.
 
 - **Testing:**
   - All Jest tests now pass. The `add.test.js` import path was fixed, and a minimal test for `slugify.js` was added. The test suite is clean and ready for further test additions.
