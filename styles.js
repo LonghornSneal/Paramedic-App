@@ -17,8 +17,9 @@ window.tailwind.config = {
       addBase({
         ":root": { "--vh": "1vh" },
         "html": {
-          "-webkit-text-size-adjust": "100%", // For Chrome, Safari, and newer Edge
-          "-moz-text-size-adjust": "100%",    // For Firefox
+          // Prevent text size adjustments in modern browsers
+          "-webkit-text-size-adjust": "100%", // Chrome/Safari/Edge
+          "-moz-text-size-adjust": "100%",    // Firefox
           "text-size-adjust": "100%"         // The standard property
         },
         "body": {
