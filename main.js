@@ -203,7 +203,17 @@ function initializeData(categoriesData, medDetailsData) {
     allSearchableTopics = [];
     allDisplayableTopicsMap = {};
 
-    // Convert MedicationDetailsData (array or object) into a dictionary for quick lookup
+    // function initializeData(categoriesData, medDetailsData) {
+    if (!categoriesData || !medDetailsData) {
+        console.error('Missing required data:', {
+            categories: !!categoriesData,
+            medications: !!medDetailsData
+        });
+        return;
+    }
+    // rest of the initialization code
+}
+Convert MedicationDetailsData (array or object) into a dictionary for quick lookup
     const medicationDataMap = {};
     if (Array.isArray(medDetailsData)) {
         medDetailsData.forEach(med => { 
