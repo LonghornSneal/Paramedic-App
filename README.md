@@ -75,6 +75,8 @@ All scripts are included in `index.html` in the proper order. Notably, the data 
 
 - **Testing:**
   - All Jest tests now pass. The `add.test.js` import path was fixed, and a minimal test for `slugify.js` was added. The test suite is clean and ready for further test additions.
+ - **Tailwind Configuration:**
+   - `styles.js` now safely initializes `window.tailwind.config` so the file won't throw errors if loaded before the CDN script.
 
 ### Current App Behavior
 

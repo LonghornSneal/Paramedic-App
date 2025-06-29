@@ -1,5 +1,7 @@
+"use strict";
 // Tailwind configuration and custom styles
-tailwind.config = {
+window.tailwind = window.tailwind || {};
+window.tailwind.config = {
   theme: {
     extend: {
       // Ensure the Inter font is used as the sans-serif font
