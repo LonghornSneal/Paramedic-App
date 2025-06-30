@@ -25,9 +25,11 @@ and allow the CDN script to pick up the configuration. */
         */
         html {
           /* Prevent text size adjustments in modern browsers */
-          -moz-text-size-adjust: 100%;   /* Firefox */
-          -ms-text-size-adjust: 100%;
-          text-size-adjust: 100%; }      /* The standard property */
+          -webkit-text-size-adjust: 100%; /* Safari, iOS, Chrome */
+          -moz-text-size-adjust: 100%;    /* Firefox */
+          -ms-text-size-adjust: 100%;     /* IE, old Edge */
+          text-size-adjust: 100%;         /* Standard property */
+        }
         body {
           font-family: 'Inter', sans-serif;
           overscroll-behavior-y: contain;

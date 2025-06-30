@@ -36,7 +36,7 @@ if (typeof document !== 'undefined') {
 // console.log("MedicationDetailsData:", window.MedicationDetailsData);
 
 // --- DOM Elements ---
-var searchInput, contentArea, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
+let searchInput, contentArea, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
 
 function assignDomElements() {
   searchInput = document.getElementById('searchInput');
@@ -727,6 +727,7 @@ function createWarningIcon(colorClass = 'text-yellow-600') {
 
 // --- Main App Initialization ---
 function initApp() {
+    assignDomElements();
     ensureHeaderUI();
     // Initialize data structures with categories and medications
     initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
@@ -736,9 +737,9 @@ function initApp() {
         sidebarOverlay.classList.remove('active');
     }
     // Set up sidebar toggles
-    addTapListener(openSidebarButton, () => openSidebar());
-    addTapListener(closeSidebarButton, () => closeSidebar());
-    addTapListener(sidebarOverlay, () => closeSidebar());
+    if (openSidebarButton) addTapListener(openSidebarButton, () => openSidebar());
+    if (closeSidebarButton) addTapListener(closeSidebarButton, () => closeSidebar());
+    if (sidebarOverlay) addTapListener(sidebarOverlay, () => closeSidebar());
     // Set up autocomplete for each Patient Info field
     setupAutocomplete('pt-pmh',         'pt-pmh-suggestions',         pmhSuggestions);
     setupAutocomplete('pt-allergies',   'pt-allergies-suggestions',   allergySuggestions);
@@ -747,50 +748,14 @@ function initApp() {
     setupAutocomplete('pt-symptoms',    'pt-symptoms-suggestions',    symptomSuggestions);
     // Add focus highlight to all textareas and inputs
     document.querySelectorAll('textarea, input').forEach(el => {
-        el.addEventListener('focus', e => {
-            el.classList.add('ring', 'ring-blue-400', 'ring-2');
-        });
-        el.addEventListener('blur', e => {
-            el.classList.remove('ring', 'ring-blue-400', 'ring-2');
-        });
+        el.addEventListener('focus', () => el.classList.add('ring', 'ring-blue-300'));
+        el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300'));
     });
     // Navigation
     if (navBackButton && navForwardButton) {
-      addTapListener(navBackButton,    () => navigateViaHistory(-1));
-      addTapListener(navForwardButton, () => navigateViaHistory(1));
+        addTapListener(navBackButton, () => navigateViaHistory(-1));
+        addTapListener(navForwardButton, () => navigateViaHistory(1));
     }
-    // Search
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {
-            handleSearch(true);
-        });
-    }
-    // Enter key triggers search
-    if (searchInput) {
-        searchInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                handleSearch(true);
-            }
-        });
-    }
-    // Render initial category list view
-    renderInitialView(true, null, []);
-    // --- UI Fixes for Modern Look ---
-    document.body.style.fontFamily = 'Inter, sans-serif';
-    document.body.classList.add('bg-gray-100');
-    contentArea.classList.add('rounded-lg', 'shadow-lg', 'bg-white', 'p-4', 'md:p-6');
-    // Ensure sidebar is styled
-    patientSidebar.classList.add('bg-white', 'shadow-xl', 'p-6', 'rounded-lg', 'fixed', 'top-0', 'left-0', 'h-full', 'z-50', 'w-80', 'max-w-full', 'overflow-y-auto');
-    sidebarOverlay.classList.add('fixed', 'top-0', 'left-0', 'w-full', 'h-full', 'bg-black', 'bg-opacity-40', 'z-40', 'hidden');
-    // Responsive tweaks
-    window.addEventListener('resize', () => {
-        if (window.innerWidth < 640) {
-            patientSidebar.classList.add('w-full');
-        } else {
-            patientSidebar.classList.remove('w-full');
-        }
-    });
 }
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
