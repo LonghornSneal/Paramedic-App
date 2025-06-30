@@ -730,23 +730,15 @@ function initApp() {
     ensureHeaderUI();
     // Initialize data structures with categories and medications
     initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
+    // Ensure overlay is hidden on app start
+    if (sidebarOverlay) {
+        sidebarOverlay.classList.add('hidden');
+        sidebarOverlay.classList.remove('active');
+    }
     // Set up sidebar toggles
-    // Sidebar open/close logic with proper class toggling
-    addTapListener(openSidebarButton, () => {
-        patientSidebar.classList.add('open');
-        sidebarOverlay.classList.add('active');
-        sidebarOverlay.classList.remove('hidden');
-    });
-    addTapListener(closeSidebarButton, () => {
-        patientSidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('active');
-        sidebarOverlay.classList.add('hidden');
-    });
-    addTapListener(sidebarOverlay, () => {
-        patientSidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('active');
-        sidebarOverlay.classList.add('hidden');
-    });
+    addTapListener(openSidebarButton, () => openSidebar());
+    addTapListener(closeSidebarButton, () => closeSidebar());
+    addTapListener(sidebarOverlay, () => closeSidebar());
     // Set up autocomplete for each Patient Info field
     setupAutocomplete('pt-pmh',         'pt-pmh-suggestions',         pmhSuggestions);
     setupAutocomplete('pt-allergies',   'pt-allergies-suggestions',   allergySuggestions);
