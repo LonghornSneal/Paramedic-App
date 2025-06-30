@@ -16,7 +16,6 @@ and allow the CDN script to pick up the configuration. */
         :root { --vh: 1vh; }
         html {
           /* Prevent text size adjustments in modern browsers */
-          -webkit-text-size-adjust: 100%; /* Chrome/Safari/Edge */
           -moz-text-size-adjust: 100%;   /* Firefox */
           -ms-text-size-adjust: 100%;
           text-size-adjust: 100%; }      /* The standard property */
