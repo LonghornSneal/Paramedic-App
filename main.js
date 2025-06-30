@@ -1,16 +1,62 @@
+// --- Sidebar Overlay Button Event Listeners ---
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', function() {
+    var openBtn = document.getElementById('open-sidebar-button');
+    var closeBtn = document.getElementById('close-sidebar-button');
+    var overlay = document.getElementById('sidebar-overlay');
+    if (openBtn) openBtn.addEventListener('click', function() {
+      if (typeof openSidebar === 'function') openSidebar();
+    });
+    if (closeBtn) closeBtn.addEventListener('click', function() {
+      if (typeof closeSidebar === 'function') closeSidebar();
+    });
+    if (overlay) overlay.addEventListener('click', function(e) {
+      // Only close if clicking directly on the overlay, not a child
+      if (e.target === overlay && typeof closeSidebar === 'function') closeSidebar();
+    });
+  });
+}
+// --- Sidebar Overlay Initialization ---
+// Ensure overlay is hidden and not active on app start
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', function() {
+    var overlay = document.getElementById('sidebar-overlay');
+    if (overlay) {
+      overlay.classList.remove('active');
+      overlay.classList.add('hidden');
+    }
+    var sidebar = document.getElementById('patient-sidebar');
+    if (sidebar) {
+      sidebar.classList.remove('open');
+    }
+  });
+}
 // --- Diagnostic Logging ---
 // console.log("ParamedicCategoriesData:", window.ParamedicCategoriesData);
 // console.log("MedicationDetailsData:", window.MedicationDetailsData);
 
 // --- DOM Elements ---
-var searchInput = document.getElementById('searchInput');
-var contentArea = document.getElementById('content-area');
-const patientSidebar = document.getElementById('patient-sidebar');
-const openSidebarButton = document.getElementById('open-sidebar-button');
-const closeSidebarButton= document.getElementById('close-sidebar-button');
-const sidebarOverlay = document.getElementById('sidebar-overlay');
-let navBackButton = document.getElementById('nav-back-button');
-let navForwardButton = document.getElementById('nav-forward-button');
+var searchInput, contentArea, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
+
+function assignDomElements() {
+  searchInput = document.getElementById('searchInput');
+  contentArea = document.getElementById('content-area');
+  patientSidebar = document.getElementById('patient-sidebar');
+  openSidebarButton = document.getElementById('open-sidebar-button');
+  closeSidebarButton = document.getElementById('close-sidebar-button');
+  sidebarOverlay = document.getElementById('sidebar-overlay');
+  navBackButton = document.getElementById('nav-back-button');
+  navForwardButton = document.getElementById('nav-forward-button');
+}
+
+// Assign DOM elements on DOMContentLoaded
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', assignDomElements);
+  } else {
+    assignDomElements();
+  }
+}
 
 // Navigation history state
 // These globals track the list of visited views so the header

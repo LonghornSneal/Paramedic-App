@@ -48,16 +48,26 @@
         // yields "administrative-legal-essentials"
 
         // --- Sidebar Logic ---
+        /**
+         * Opens the Patient Info sidebar and displays the overlay.
+         */
         function openSidebar() {
-            patientSidebar.classList.add('open');
-            sidebarOverlay.classList.add('active');
-            sidebarOverlay.classList.remove('hidden');
-        }
+    if (patientSidebar) patientSidebar.classList.add('open');
+    if (sidebarOverlay) {
+        sidebarOverlay.classList.add('active');
+        sidebarOverlay.classList.remove('hidden');
+    }
+}
+        /**
+         * Closes the Patient Info sidebar and hides the overlay.
+         */
         function closeSidebar() {
-            patientSidebar.classList.remove('open');
-            sidebarOverlay.classList.remove('active');
-            sidebarOverlay.classList.add('hidden');
-        }
+    if (patientSidebar) patientSidebar.classList.remove('open');
+    if (sidebarOverlay) {
+        sidebarOverlay.classList.remove('active');
+        sidebarOverlay.classList.add('hidden');
+    }
+}
 
         function updatePatientData() {
             patientData.age = document.getElementById('pt-age').value ? parseInt(document.getElementById('pt-age').value) : null;
