@@ -13,7 +13,16 @@ and allow the CDN script to pick up the configuration. */
     function ({ addBase, addComponents, theme }) {
        Base styles for global elements and IDs (from styles.css) 
       addBase({ */
-        :root { --vh: 1vh; }
+                :root { --vh: 1vh; }
+        /* Add the following script in your HTML to update --vh for mobile browsers:
+        <script>
+          function setVh() {
+            document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+          }
+          window.addEventListener('resize', setVh);
+          setVh();
+        </script>
+        */
         html {
           /* Prevent text size adjustments in modern browsers */
           -moz-text-size-adjust: 100%;   /* Firefox */
