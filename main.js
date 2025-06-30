@@ -233,7 +233,7 @@ function initializeData(categoriesData, medDetailsData) {
     allSearchableTopics = [];
     allDisplayableTopicsMap = {};
 
-    // function initializeData(categoriesData, medDetailsData) {
+    // function initializeData(categoriesData, medDetailsData) { //
     if (!categoriesData || !medDetailsData) {
         console.error('Missing required data:', {
             categories: !!categoriesData,

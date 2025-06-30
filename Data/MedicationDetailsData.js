@@ -1,6 +1,5 @@
 // Attach medication details to the global scope so main.js can access them
-const MedicationDetailsData = [
-        {
+const MedicationDetailsData = [{
         id: '10-calcium-chloride',
         title: '10% Calcium Chloride',
         concentration: '(1,000mg/10ml)',
