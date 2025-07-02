@@ -25,7 +25,7 @@ if (typeof document !== 'undefined') {
 }
 
 // Initialize data structures with categories and medications
-    initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
+    initializeData(categoriesData, medDetailsData);
 // Ensure overlay is hidden on app start
     if (sidebarOverlay) {
         sidebarOverlay.classList.add('hidden');
@@ -76,7 +76,8 @@ if (document.readyState === 'loading') {
 
 function initializeData(categoriesData, medDetailsData) {
     // Populate global structures from raw data files
-    paramedicCategories = categoriesData || [];
+    paramedicCategories.forEach(category => processItem(category, '', []));
+    paramedicCategories = window.ParamedicCategoriesData || [];
     allSearchableTopics = [];
     allDisplayableTopicsMap = {};
 if (!categoriesData || !medDetailsData) {
@@ -170,7 +171,7 @@ if (!categoriesData || !medDetailsData) {
             );
         }
     }
-    paramedicCategories.forEach(category => processItem(category, '', []));
+   
 
     // Data initialization complete. Now paramedicCategories, allSearchableTopics, 
     // and allDisplayableTopicsMap are ready for use.
