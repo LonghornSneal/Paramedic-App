@@ -1,3 +1,138 @@
+// --- Data Initialization Function --- 
+
+function initApp() {
+    ensureHeaderUI();
+    // Initialize data structures with categories and medications
+    initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
+    // Call renderInitialView to build and display the content titles
+    renderInitialView();
+
+    // Set up sidebar toggles
+    addTapListener(openSidebarButton, () => {
+        patientSidebar.classList.add('open');
+        sidebarOverlay.classList.add('active');
+        sidebarOverlay.classList.remove('hidden');
+    });
+    addTapListener(closeSidebarButton, () => {
+        patientSidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+        sidebarOverlay.classList.add('hidden');
+    });
+    addTapListener(sidebarOverlay, () => {
+        patientSidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+        sidebarOverlay.classList.add('hidden');
+    });
+    // Set up autocomplete for each Patient Info field
+    setupAutocomplete('pt-pmh',         'pt-pmh-suggestions',         pmhSuggestions);
+    setupAutocomplete('pt-allergies',   'pt-allergies-suggestions',   allergySuggestions);
+    /*...*/
+}
+
+function initializeData(categoriesData, medDetailsData) {
+    // Populate global structures from raw data files
+    paramedicCategories = categoriesData || [];
+    allSearchableTopics = [];
+    allDisplayableTopicsMap = {};
+
+    // function initializeData(categoriesData, medDetailsData) { //
+    if (!categoriesData || !medDetailsData) {
+        console.error('Missing required data:', {
+            categories: !!categoriesData,
+            medications: !!medDetailsData
+        });
+        return;
+    }
+    // rest of the initialization code
+    // Convert MedicationDetailsData (array or object) into a dictionary for quick lookup
+    const medicationDataMap = {};
+    if (Array.isArray(medDetailsData)) {
+        medDetailsData.forEach(med => { 
+            medicationDataMap[med.id] = med; 
+        });
+    } else if (medDetailsData && typeof medDetailsData === 'object') {
+        Object.assign(medicationDataMap, medDetailsData);
+    }
+
+    // --- Preload common suggestions (Past Medical History, Allergies, Med Names) ---
+    const commonPmh = ["hypertension","htn","diabetes","dm","asthma","copd","heart failure","hf","cad","stroke","cva","seizure disorder","renal insufficiency","ckd","hypothyroidism","hyperthyroidism","glaucoma","peptic ulcer","anxiety","depression"];
+    const commonAllergies = ["penicillin","sulfa","aspirin","nsaids","morphine", "codeine","iodine","shellfish","latex","peanuts","tree nuts"];
+    const commonMedNames  = ["lisinopril","metformin","atorvastatin","amlodipine",
+                             "hydrochlorothiazide","hctz","simvastatin","albuterol",
+                             "levothyroxine","gabapentin","omeprazole","losartan",
+                             "sertraline","furosemide","lasix","insulin","warfarin",
+                             "coumadin","aspirin","clopidogrel","plavix"];
+    // Add these common terms to the suggestion sets (defined in PatientInfo.js)
+    commonPmh.forEach(term => pmhSuggestions.add(term));
+    commonAllergies.forEach(term => allergySuggestions.add(term));
+    commonMedNames.forEach(term => medicationNameSuggestions.add(term));
+    PDE5_INHIBITORS.forEach(term => medicationNameSuggestions.add(term));  // from PatientInfo.js
+
+    // --- Extract additional allergy keywords from medication contraindications ---
+    Object.values(medicationDataMap).forEach(med => {
+        if (med.contraindications && Array.isArray(med.contraindications)) {
+            med.contraindications.forEach(ci => {
+                const ciLower = ci.toLowerCase();
+                if (ciLower.includes("hypersensitivity") || ciLower.includes("allergy to")) {
+                    // Derive a generalized allergen term from text
+                    let allergen = ciLower.replace("known hypersensitivity to", "")
+                                           .replace("allergy to any nsaid (including asa)", "nsaid allergy")
+                                           .replace("allergy to", "").trim();
+                    if (allergen.includes("local anesthetic allergy in the amide class")) {
+                        allergen = "amide anesthetic allergy";
+                    } else if (allergen.includes("nsaid (including asa)")) {
+                        allergen = "nsaid allergy";
+                    } else {
+                        allergen = allergen.split('(')[0].trim();
+                    }
+                    if (allergen && allergen.length > 2 && allergen.length < 30) {
+                        allergySuggestions.add(allergen);
+                    }
+                }
+            });
+        }
+    });
+
+    // --- Build topic list and attach details ---
+    function processItem(item, parentPath, parentIds) {
+        if (typeof parentPath === 'undefined') parentPath = '';
+        if (typeof parentIds === 'undefined') parentIds = [];
+        var currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
+        var currentIds  = (item.type === 'category')
+                              ? parentIds.slice().concat([item.id])
+                              : parentIds;
+        // Attach corresponding detail info if this item is a topic with a matching ID
+        const detailsObj = medicationDataMap[item.id];
+        const fullItem = {
+            ...item,
+            path: currentPath,
+            details: detailsObj || null,      // attach medication details if available
+            categoryPath: parentIds
+        };
+        // Add to master map
+        allDisplayableTopicsMap[item.id] = fullItem;
+        if (item.type === 'topic') {
+            // Add to searchable list (for quick search by title/path)
+            allSearchableTopics.push({
+                id: item.id, 
+                title: item.title, 
+                path: currentPath, 
+                categoryPath: parentIds 
+            });
+        }
+        // Recurse into children if this is a category
+        if (item.children) {
+            item.children.forEach(child => 
+                processItem(child, currentPath, currentIds)
+            );
+        }
+    }
+    paramedicCategories.forEach(category => processItem(category, '', []));
+
+    // Data initialization complete. Now paramedicCategories, allSearchableTopics, 
+    // and allDisplayableTopicsMap are ready for use.
+}
+
 // --- Initial View Rendering ---
 function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     if (shouldAddHistory) {
@@ -314,141 +449,6 @@ let allSearchableTopics = [];    // flat list of all topics for search
 let allDisplayableTopicsMap = {};   // map from topic id -> topic object (with details)
 /* Note: patientData and suggestion Sets (pmhSuggestions, allergySuggestions, 
    medicationNameSuggestions, etc.) are defined in PatientInfo.js and used below. */
-
-// --- Data Initialization Function --- 
-
-function initApp() {
-    ensureHeaderUI();
-    // Initialize data structures with categories and medications
-    initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
-    // Call renderInitialView to build and display the content titles
-    renderInitialView();
-
-    // Set up sidebar toggles
-    addTapListener(openSidebarButton, () => {
-        patientSidebar.classList.add('open');
-        sidebarOverlay.classList.add('active');
-        sidebarOverlay.classList.remove('hidden');
-    });
-    addTapListener(closeSidebarButton, () => {
-        patientSidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('active');
-        sidebarOverlay.classList.add('hidden');
-    });
-    addTapListener(sidebarOverlay, () => {
-        patientSidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('active');
-        sidebarOverlay.classList.add('hidden');
-    });
-    // Set up autocomplete for each Patient Info field
-    setupAutocomplete('pt-pmh',         'pt-pmh-suggestions',         pmhSuggestions);
-    setupAutocomplete('pt-allergies',   'pt-allergies-suggestions',   allergySuggestions);
-    /*...*/
-}
-
-function initializeData(categoriesData, medDetailsData) {
-    // Populate global structures from raw data files
-    paramedicCategories = categoriesData || [];
-    allSearchableTopics = [];
-    allDisplayableTopicsMap = {};
-
-    // function initializeData(categoriesData, medDetailsData) { //
-    if (!categoriesData || !medDetailsData) {
-        console.error('Missing required data:', {
-            categories: !!categoriesData,
-            medications: !!medDetailsData
-        });
-        return;
-    }
-    // rest of the initialization code
-    // Convert MedicationDetailsData (array or object) into a dictionary for quick lookup
-    const medicationDataMap = {};
-    if (Array.isArray(medDetailsData)) {
-        medDetailsData.forEach(med => { 
-            medicationDataMap[med.id] = med; 
-        });
-    } else if (medDetailsData && typeof medDetailsData === 'object') {
-        Object.assign(medicationDataMap, medDetailsData);
-    }
-
-    // --- Preload common suggestions (Past Medical History, Allergies, Med Names) ---
-    const commonPmh = ["hypertension","htn","diabetes","dm","asthma","copd","heart failure","hf","cad","stroke","cva","seizure disorder","renal insufficiency","ckd","hypothyroidism","hyperthyroidism","glaucoma","peptic ulcer","anxiety","depression"];
-    const commonAllergies = ["penicillin","sulfa","aspirin","nsaids","morphine", "codeine","iodine","shellfish","latex","peanuts","tree nuts"];
-    const commonMedNames  = ["lisinopril","metformin","atorvastatin","amlodipine",
-                             "hydrochlorothiazide","hctz","simvastatin","albuterol",
-                             "levothyroxine","gabapentin","omeprazole","losartan",
-                             "sertraline","furosemide","lasix","insulin","warfarin",
-                             "coumadin","aspirin","clopidogrel","plavix"];
-    // Add these common terms to the suggestion sets (defined in PatientInfo.js)
-    commonPmh.forEach(term => pmhSuggestions.add(term));
-    commonAllergies.forEach(term => allergySuggestions.add(term));
-    commonMedNames.forEach(term => medicationNameSuggestions.add(term));
-    PDE5_INHIBITORS.forEach(term => medicationNameSuggestions.add(term));  // from PatientInfo.js
-
-    // --- Extract additional allergy keywords from medication contraindications ---
-    Object.values(medicationDataMap).forEach(med => {
-        if (med.contraindications && Array.isArray(med.contraindications)) {
-            med.contraindications.forEach(ci => {
-                const ciLower = ci.toLowerCase();
-                if (ciLower.includes("hypersensitivity") || ciLower.includes("allergy to")) {
-                    // Derive a generalized allergen term from text
-                    let allergen = ciLower.replace("known hypersensitivity to", "")
-                                           .replace("allergy to any nsaid (including asa)", "nsaid allergy")
-                                           .replace("allergy to", "").trim();
-                    if (allergen.includes("local anesthetic allergy in the amide class")) {
-                        allergen = "amide anesthetic allergy";
-                    } else if (allergen.includes("nsaid (including asa)")) {
-                        allergen = "nsaid allergy";
-                    } else {
-                        allergen = allergen.split('(')[0].trim();
-                    }
-                    if (allergen && allergen.length > 2 && allergen.length < 30) {
-                        allergySuggestions.add(allergen);
-                    }
-                }
-            });
-        }
-    });
-
-    // --- Build topic list and attach details ---
-    function processItem(item, parentPath, parentIds) {
-        if (typeof parentPath === 'undefined') parentPath = '';
-        if (typeof parentIds === 'undefined') parentIds = [];
-        var currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
-        var currentIds  = (item.type === 'category')
-                              ? parentIds.slice().concat([item.id])
-                              : parentIds;
-        // Attach corresponding detail info if this item is a topic with a matching ID
-        const detailsObj = medicationDataMap[item.id];
-        const fullItem = {
-            ...item,
-            path: currentPath,
-            details: detailsObj || null,      // attach medication details if available
-            categoryPath: parentIds
-        };
-        // Add to master map
-        allDisplayableTopicsMap[item.id] = fullItem;
-        if (item.type === 'topic') {
-            // Add to searchable list (for quick search by title/path)
-            allSearchableTopics.push({
-                id: item.id, 
-                title: item.title, 
-                path: currentPath, 
-                categoryPath: parentIds 
-            });
-        }
-        // Recurse into children if this is a category
-        if (item.children) {
-            item.children.forEach(child => 
-                processItem(child, currentPath, currentIds)
-            );
-        }
-    }
-    paramedicCategories.forEach(category => processItem(category, '', []));
-
-    // Data initialization complete. Now paramedicCategories, allSearchableTopics, 
-    // and allDisplayableTopicsMap are ready for use.
-}
 
 // --- Hierarchical List Rendering ---
 function createHierarchicalList(items, container, level = 0) {
