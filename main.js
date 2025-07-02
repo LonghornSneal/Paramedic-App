@@ -1,21 +1,81 @@
-// --- Sidebar Overlay Button Event Listeners ---
-if (typeof document !== 'undefined') {
-  document.addEventListener('DOMContentLoaded', function() {
-    var openBtn = document.getElementById('open-sidebar-button');
-    var closeBtn = document.getElementById('close-sidebar-button');
-    var overlay = document.getElementById('sidebar-overlay');
-    if (openBtn) openBtn.addEventListener('click', function() {
-      if (typeof openSidebar === 'function') openSidebar();
-    });
-    if (closeBtn) closeBtn.addEventListener('click', function() {
-      if (typeof closeSidebar === 'function') closeSidebar();
-    });
-    if (overlay) overlay.addEventListener('click', function(e) {
-      // Only close if clicking directly on the overlay, not a child
-      if (e.target === overlay && typeof closeSidebar === 'function') closeSidebar();
-    });
-  });
+// --- Initial View Rendering ---
+function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
+    if (shouldAddHistory) {
+        addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
+    }
+    updateNavButtonsState();
+    contentArea.innerHTML = '';
+    const title = document.createElement('h2');
+    title.className = 'text-xl font-semibold mb-2';
+    title.textContent = 'Contents';
+    contentArea.appendChild(title);
+    // Render hierarchical list
+    const listContainer = document.createElement('div');
+    createHierarchicalList(paramedicCategories, listContainer, 0);
+    contentArea.appendChild(listContainer);
+    openCategoriesAndHighlight(categoryPath, highlightId);
 }
+
+function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
+    if (shouldAddHistory) {
+        addHistoryEntry({ viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath });
+    }
+    updateNavButtonsState();
+    contentArea.innerHTML = `
+        <div class="flex justify-between items-center mb-3">
+            <p class="text-gray-700 font-medium">Results for "${searchTerm}":</p>
+            <button id="clear-search-button" class="text-sm text-blue-600 hover:underline">Show All Categories</button>
+        </div>
+        <div id="results-container" class="space-y-2"></div>`;
+    const resultsContainer = document.getElementById('results-container');
+    if (filteredTopics.length > 0) {
+        filteredTopics.forEach(topic => {
+            const item = document.createElement('div');
+            item.className = 'search-topic-item';
+            item.textContent = topic.title;
+            if (topic.path) {
+                const pathEl = document.createElement('div');
+                pathEl.className = 'text-xs text-gray-500 mt-1';
+                pathEl.textContent = topic.path.split(' > ').slice(0, -1).join(' > ');
+                item.appendChild(pathEl);
+            }
+            item.dataset.topicId = topic.id;
+            item.setAttribute('role', 'button');
+            item.setAttribute('tabindex', '0');
+            addTapListener(item, () => renderDetailPage(topic.id));
+            item.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    renderDetailPage(topic.id);
+                }
+            });
+            resultsContainer.appendChild(item);
+        });
+    } else {
+        resultsContainer.innerHTML = 
+            '<p class="text-gray-500 text-center py-4">No topics found matching your search.</p>';
+    }
+    addTapListener(document.getElementById('clear-search-button'), () => {
+        searchInput.value = '';
+        renderInitialView();
+    });
+    openCategoriesAndHighlight(categoryPath, highlightId);
+}
+
+function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
+    const term = searchInput.value.trim().toLowerCase();
+    if (!term) {
+        renderInitialView(false);
+        return;
+    }
+    const results = allSearchableTopics.filter(topic =>
+        (topic.title || topic.id || '').toLowerCase().includes(term) ||
+        (topic.path || '').toLowerCase().includes(term)
+    );
+    renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath);
+}
+
+// --- Sidebar Overlay Button Event Listeners ---
 // --- Sidebar Overlay Initialization ---
 // Ensure overlay is hidden and not active on app start
 if (typeof document !== 'undefined') {
@@ -28,7 +88,20 @@ if (typeof document !== 'undefined') {
     var sidebar = document.getElementById('patient-sidebar');
     if (sidebar) {
       sidebar.classList.remove('open');
-    }
+        var openBtn = document.getElementById('open-sidebar-button');
+    var closeBtn = document.getElementById('close-sidebar-button');
+    var overlay = document.getElementById('sidebar-overlay');
+    if (openBtn) openBtn.addEventListener('click', function() {
+      if (typeof openSidebar === 'function') openSidebar();
+    });
+    if (closeBtn) closeBtn.addEventListener('click', function() {
+      if (typeof closeSidebar === 'function') closeSidebar();
+    });
+    if (overlay) overlay.addEventListener('click', function(e) {
+      // Only close if clicking directly on the overlay, not a child
+      if (e.target === overlay && typeof closeSidebar === 'function') closeSidebar();
+    });
+  };
   });
 }
 // --- Diagnostic Logging ---
@@ -607,83 +680,6 @@ function attachToggleCategoryHandlers(container) {
             if (content) content.classList.toggle('hidden');
         });
     });
-}
-
-// --- Initial View Rendering ---
-function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    if (shouldAddHistory) {
-        addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
-    }
-    updateNavButtonsState();
-    contentArea.innerHTML = '';
-    const title = document.createElement('h2');
-    title.className = 'text-xl font-semibold mb-2';
-    title.textContent = 'Contents';
-    contentArea.appendChild(title);
-    // Render hierarchical list
-    const listContainer = document.createElement('div');
-    createHierarchicalList(paramedicCategories, listContainer, 0);
-    contentArea.appendChild(listContainer);
-    openCategoriesAndHighlight(categoryPath, highlightId);
-}
-
-function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    if (shouldAddHistory) {
-        addHistoryEntry({ viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath });
-    }
-    updateNavButtonsState();
-    contentArea.innerHTML = `
-        <div class="flex justify-between items-center mb-3">
-            <p class="text-gray-700 font-medium">Results for "${searchTerm}":</p>
-            <button id="clear-search-button" class="text-sm text-blue-600 hover:underline">Show All Categories</button>
-        </div>
-        <div id="results-container" class="space-y-2"></div>`;
-    const resultsContainer = document.getElementById('results-container');
-    if (filteredTopics.length > 0) {
-        filteredTopics.forEach(topic => {
-            const item = document.createElement('div');
-            item.className = 'search-topic-item';
-            item.textContent = topic.title;
-            if (topic.path) {
-                const pathEl = document.createElement('div');
-                pathEl.className = 'text-xs text-gray-500 mt-1';
-                pathEl.textContent = topic.path.split(' > ').slice(0, -1).join(' > ');
-                item.appendChild(pathEl);
-            }
-            item.dataset.topicId = topic.id;
-            item.setAttribute('role', 'button');
-            item.setAttribute('tabindex', '0');
-            addTapListener(item, () => renderDetailPage(topic.id));
-            item.addEventListener('keydown', e => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    renderDetailPage(topic.id);
-                }
-            });
-            resultsContainer.appendChild(item);
-        });
-    } else {
-        resultsContainer.innerHTML = 
-            '<p class="text-gray-500 text-center py-4">No topics found matching your search.</p>';
-    }
-    addTapListener(document.getElementById('clear-search-button'), () => {
-        searchInput.value = '';
-        renderInitialView();
-    });
-    openCategoriesAndHighlight(categoryPath, highlightId);
-}
-
-function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    const term = searchInput.value.trim().toLowerCase();
-    if (!term) {
-        renderInitialView(false);
-        return;
-    }
-    const results = allSearchableTopics.filter(topic =>
-        (topic.title || topic.id || '').toLowerCase().includes(term) ||
-        (topic.path || '').toLowerCase().includes(term)
-    );
-    renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath);
 }
 
 // --- Text/Markup Helpers ---
