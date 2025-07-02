@@ -2,8 +2,15 @@
 // --- Main App Initialization ---
 function initApp() {
     ensureHeaderUI();
-// --- DOM Elements ---
+// --- Global Variables ---
 let searchInput, contentArea, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
+let navigationHistory = [];
+let currentHistoryIndex = -1;
+let isNavigatingViaHistory = false;
+let allSearchableTopics = [];
+let allDisplayableTopicsMap = {};
+let paramedicCategories = []; // <-- Add this if you want it accessible globally
+
 function assignDomElements() {
   searchInput = document.getElementById('searchInput');
   contentArea = document.getElementById('content-area');
@@ -50,7 +57,7 @@ if (!categoriesData || !medDetailsData) {
         medications: !!medDetailsData
     });
     return;
-}
+}}
     // rest of the initialization code
     // Convert MedicationDetailsData (array or object) into a dictionary for quick lookup
     const medicationDataMap = {};
@@ -61,7 +68,7 @@ if (!categoriesData || !medDetailsData) {
     } else if (medDetailsData && typeof medDetailsData === 'object') {
         Object.assign(medicationDataMap, medDetailsData);
     }
-}
+
 // Render hierarchical list
     const listContainer = document.createElement('div');
     createHierarchicalList(paramedicCategories, listContainer, 0);
