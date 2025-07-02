@@ -37,6 +37,30 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
     title.className = 'text-xl font-semibold mb-2';
     title.textContent = 'Contents';
     contentArea.appendChild(title);
+    function initializeData(categoriesData, medDetailsData) {
+    // Populate global structures from raw data files
+    paramedicCategories.forEach(category => processItem(category, '', []));
+    let paramedicCategories = window.ParamedicCategoriesData || [];
+    allSearchableTopics = [];
+    allDisplayableTopicsMap = {};
+if (!categoriesData || !medDetailsData) {
+    console.error('Missing required data:', {
+        categories: !!categoriesData,
+        medications: !!medDetailsData
+    });
+    return;
+}
+    // rest of the initialization code
+    // Convert MedicationDetailsData (array or object) into a dictionary for quick lookup
+    const medicationDataMap = {};
+    if (Array.isArray(medDetailsData)) {
+        medDetailsData.forEach(med => { 
+            medicationDataMap[med.id] = med; 
+        });
+    } else if (medDetailsData && typeof medDetailsData === 'object') {
+        Object.assign(medicationDataMap, medDetailsData);
+    }
+}
 // Render hierarchical list
     const listContainer = document.createElement('div');
     createHierarchicalList(paramedicCategories, listContainer, 0);
@@ -136,30 +160,7 @@ if (document.readyState === 'loading') {
     });
 }
 
-function initializeData(categoriesData, medDetailsData) {
-    // Populate global structures from raw data files
-    paramedicCategories.forEach(category => processItem(category, '', []));
-    paramedicCategories = window.ParamedicCategoriesData || [];
-    allSearchableTopics = [];
-    allDisplayableTopicsMap = {};
-if (!categoriesData || !medDetailsData) {
-    console.error('Missing required data:', {
-        categories: !!categoriesData,
-        medications: !!medDetailsData
-    });
-    return;
-}
-    // rest of the initialization code
-    // Convert MedicationDetailsData (array or object) into a dictionary for quick lookup
-    const medicationDataMap = {};
-    if (Array.isArray(medDetailsData)) {
-        medDetailsData.forEach(med => { 
-            medicationDataMap[med.id] = med; 
-        });
-    } else if (medDetailsData && typeof medDetailsData === 'object') {
-        Object.assign(medicationDataMap, medDetailsData);
-    }
-}
+
     // --- Preload common suggestions (Past Medical History, Allergies, Med Names) ---
     const commonPmh = ["hypertension","htn","diabetes","dm","asthma","copd","heart failure","hf","cad","stroke","cva","seizure disorder","renal insufficiency","ckd","hypothyroidism","hyperthyroidism","glaucoma","peptic ulcer","anxiety","depression"];
     const commonAllergies = ["penicillin","sulfa","aspirin","nsaids","morphine", "codeine","iodine","shellfish","latex","peanuts","tree nuts"];
