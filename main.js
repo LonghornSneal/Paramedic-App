@@ -39,8 +39,9 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
     contentArea.appendChild(title);
     function initializeData(categoriesData, medDetailsData) {
     // Populate global structures from raw data files
-    paramedicCategories.forEach(category => processItem(category, '', []));
     let paramedicCategories = window.ParamedicCategoriesData || [];
+    paramedicCategories.forEach(category => processItem(category, '', []));
+
     allSearchableTopics = [];
     allDisplayableTopicsMap = {};
 if (!categoriesData || !medDetailsData) {
