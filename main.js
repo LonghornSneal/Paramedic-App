@@ -1,31 +1,52 @@
 // --- Data Initialization Function --- 
 // --- Main App Initialization ---
 function initApp() {
-    assignDomElements();
     ensureHeaderUI();
-    // Initialize data structures with categories and medications
+// --- DOM Elements ---
+let searchInput, contentArea, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
+function assignDomElements() {
+  searchInput = document.getElementById('searchInput');
+  contentArea = document.getElementById('content-area');
+  patientSidebar = document.getElementById('patient-sidebar');
+  openSidebarButton = document.getElementById('open-sidebar-button');
+  closeSidebarButton = document.getElementById('close-sidebar-button');
+  sidebarOverlay = document.getElementById('sidebar-overlay');
+  navBackButton = document.getElementById('nav-back-button');
+  navForwardButton = document.getElementById('nav-forward-button');
+}
+
+// Assign DOM elements on DOMContentLoaded
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', assignDomElements);
+  } else {
+    assignDomElements();
+  }
+}
+
+// Initialize data structures with categories and medications
     initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
-    // Ensure overlay is hidden on app start
+// Ensure overlay is hidden on app start
     if (sidebarOverlay) {
         sidebarOverlay.classList.add('hidden');
         sidebarOverlay.classList.remove('active');
     }
-    // Set up sidebar toggles
+// Set up sidebar toggles
     if (openSidebarButton) addTapListener(openSidebarButton, () => openSidebar());
     if (closeSidebarButton) addTapListener(closeSidebarButton, () => closeSidebar());
     if (sidebarOverlay) addTapListener(sidebarOverlay, () => closeSidebar());
-    // Set up autocomplete for each Patient Info field
+// Set up autocomplete for each Patient Info field
     setupAutocomplete('pt-pmh',         'pt-pmh-suggestions',         pmhSuggestions);
     setupAutocomplete('pt-allergies',   'pt-allergies-suggestions',   allergySuggestions);
     setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions);
     setupAutocomplete('pt-indications','pt-indications-suggestions', indicationSuggestions);
     setupAutocomplete('pt-symptoms',    'pt-symptoms-suggestions',    symptomSuggestions);
-    // Add focus highlight to all textareas and inputs
+// Add focus highlight to all textareas and inputs
     document.querySelectorAll('textarea, input').forEach(el => {
         el.addEventListener('focus', () => el.classList.add('ring', 'ring-blue-300'));
         el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300'));
     });
-    // Navigation
+// Navigation
     if (navBackButton && navForwardButton) {
         addTapListener(navBackButton, () => navigateViaHistory(-1));
         addTapListener(navForwardButton, () => navigateViaHistory(1));
@@ -37,14 +58,9 @@ if (document.readyState === 'loading') {
     initApp();
 }
 
-function initApp() {
-    ensureHeaderUI();
-    // Initialize data structures with categories and medications
-    initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
-    // Call renderInitialView to build and display the content titles
-    renderInitialView();
+ function initApp() {
 
-    // Set up sidebar toggles
+// Set up sidebar toggles
     addTapListener(openSidebarButton, () => {
         patientSidebar.classList.add('open');
         sidebarOverlay.classList.add('active');
@@ -60,10 +76,6 @@ function initApp() {
         sidebarOverlay.classList.remove('active');
         sidebarOverlay.classList.add('hidden');
     });
-    // Set up autocomplete for each Patient Info field
-    setupAutocomplete('pt-pmh',         'pt-pmh-suggestions',         pmhSuggestions);
-    setupAutocomplete('pt-allergies',   'pt-allergies-suggestions',   allergySuggestions);
-    /*...*/
 }
 
 function initializeData(categoriesData, medDetailsData) {
@@ -71,15 +83,13 @@ function initializeData(categoriesData, medDetailsData) {
     paramedicCategories = categoriesData || [];
     allSearchableTopics = [];
     allDisplayableTopicsMap = {};
-
-    // function initializeData(categoriesData, medDetailsData) { //
-    if (!categoriesData || !medDetailsData) {
-        console.error('Missing required data:', {
-            categories: !!categoriesData,
-            medications: !!medDetailsData
-        });
-        return;
-    }
+if (!categoriesData || !medDetailsData) {
+    console.error('Missing required data:', {
+        categories: !!categoriesData,
+        medications: !!medDetailsData
+    });
+    return;
+}
     // rest of the initialization code
     // Convert MedicationDetailsData (array or object) into a dictionary for quick lookup
     const medicationDataMap = {};
@@ -253,12 +263,12 @@ function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath 
 if (typeof document !== 'undefined') {
   document.addEventListener('DOMContentLoaded', function() {
     var overlay = document.getElementById('sidebar-overlay');
-    if (overlay) {
+if (overlay) {
       overlay.classList.remove('active');
       overlay.classList.add('hidden');
     }
     var sidebar = document.getElementById('patient-sidebar');
-    if (sidebar) {
+if (sidebar) {
       sidebar.classList.remove('open');
         var openBtn = document.getElementById('open-sidebar-button');
     var closeBtn = document.getElementById('close-sidebar-button');
@@ -280,35 +290,6 @@ if (typeof document !== 'undefined') {
 // console.log("ParamedicCategoriesData:", window.ParamedicCategoriesData);
 // console.log("MedicationDetailsData:", window.MedicationDetailsData);
 
-// --- DOM Elements ---
-let searchInput, contentArea, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
-
-function assignDomElements() {
-  searchInput = document.getElementById('searchInput');
-  contentArea = document.getElementById('content-area');
-  patientSidebar = document.getElementById('patient-sidebar');
-  openSidebarButton = document.getElementById('open-sidebar-button');
-  closeSidebarButton = document.getElementById('close-sidebar-button');
-  sidebarOverlay = document.getElementById('sidebar-overlay');
-  navBackButton = document.getElementById('nav-back-button');
-  navForwardButton = document.getElementById('nav-forward-button');
-}
-
-// Assign DOM elements on DOMContentLoaded
-if (typeof document !== 'undefined') {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', assignDomElements);
-  } else {
-    assignDomElements();
-  }
-}
-
-// Navigation history state
-// These globals track the list of visited views so the header
-// back/forward buttons can navigate correctly. They were previously
-// only defined in PatientInfo.js which meant main.js could fail to
-// reference them if that script loaded differently. Defining them
-// here guarantees the navigation arrows always function.
 let navigationHistory = [];
 let currentHistoryIndex = -1;
 let isNavigatingViaHistory = false;
