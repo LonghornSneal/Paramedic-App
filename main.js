@@ -56,10 +56,6 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
 } else {
     initApp();
-}
-
- function initApp() {
-
 // Set up sidebar toggles
     addTapListener(openSidebarButton, () => {
         patientSidebar.classList.add('open');
@@ -191,7 +187,7 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
     title.className = 'text-xl font-semibold mb-2';
     title.textContent = 'Contents';
     contentArea.appendChild(title);
-    // Render hierarchical list
+// Render hierarchical list
     const listContainer = document.createElement('div');
     createHierarchicalList(paramedicCategories, listContainer, 0);
     contentArea.appendChild(listContainer);
