@@ -1,4 +1,41 @@
 // --- Data Initialization Function --- 
+// --- Main App Initialization ---
+function initApp() {
+    assignDomElements();
+    ensureHeaderUI();
+    // Initialize data structures with categories and medications
+    initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
+    // Ensure overlay is hidden on app start
+    if (sidebarOverlay) {
+        sidebarOverlay.classList.add('hidden');
+        sidebarOverlay.classList.remove('active');
+    }
+    // Set up sidebar toggles
+    if (openSidebarButton) addTapListener(openSidebarButton, () => openSidebar());
+    if (closeSidebarButton) addTapListener(closeSidebarButton, () => closeSidebar());
+    if (sidebarOverlay) addTapListener(sidebarOverlay, () => closeSidebar());
+    // Set up autocomplete for each Patient Info field
+    setupAutocomplete('pt-pmh',         'pt-pmh-suggestions',         pmhSuggestions);
+    setupAutocomplete('pt-allergies',   'pt-allergies-suggestions',   allergySuggestions);
+    setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions);
+    setupAutocomplete('pt-indications','pt-indications-suggestions', indicationSuggestions);
+    setupAutocomplete('pt-symptoms',    'pt-symptoms-suggestions',    symptomSuggestions);
+    // Add focus highlight to all textareas and inputs
+    document.querySelectorAll('textarea, input').forEach(el => {
+        el.addEventListener('focus', () => el.classList.add('ring', 'ring-blue-300'));
+        el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300'));
+    });
+    // Navigation
+    if (navBackButton && navForwardButton) {
+        addTapListener(navBackButton, () => navigateViaHistory(-1));
+        addTapListener(navForwardButton, () => navigateViaHistory(1));
+    }
+}
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
+}
 
 function initApp() {
     ensureHeaderUI();
@@ -719,42 +756,4 @@ function createWarningIcon(colorClass = 'text-yellow-600') {
     return `<svg class="${colorClass} w-5 h-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
             </svg>`;
-}
-
-// --- Main App Initialization ---
-function initApp() {
-    assignDomElements();
-    ensureHeaderUI();
-    // Initialize data structures with categories and medications
-    initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
-    // Ensure overlay is hidden on app start
-    if (sidebarOverlay) {
-        sidebarOverlay.classList.add('hidden');
-        sidebarOverlay.classList.remove('active');
-    }
-    // Set up sidebar toggles
-    if (openSidebarButton) addTapListener(openSidebarButton, () => openSidebar());
-    if (closeSidebarButton) addTapListener(closeSidebarButton, () => closeSidebar());
-    if (sidebarOverlay) addTapListener(sidebarOverlay, () => closeSidebar());
-    // Set up autocomplete for each Patient Info field
-    setupAutocomplete('pt-pmh',         'pt-pmh-suggestions',         pmhSuggestions);
-    setupAutocomplete('pt-allergies',   'pt-allergies-suggestions',   allergySuggestions);
-    setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions);
-    setupAutocomplete('pt-indications','pt-indications-suggestions', indicationSuggestions);
-    setupAutocomplete('pt-symptoms',    'pt-symptoms-suggestions',    symptomSuggestions);
-    // Add focus highlight to all textareas and inputs
-    document.querySelectorAll('textarea, input').forEach(el => {
-        el.addEventListener('focus', () => el.classList.add('ring', 'ring-blue-300'));
-        el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300'));
-    });
-    // Navigation
-    if (navBackButton && navForwardButton) {
-        addTapListener(navBackButton, () => navigateViaHistory(-1));
-        addTapListener(navForwardButton, () => navigateViaHistory(1));
-    }
-}
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initApp);
-} else {
-    initApp();
 }
