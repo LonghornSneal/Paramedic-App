@@ -25,7 +25,70 @@ if (typeof document !== 'undefined') {
 }
 
 // Initialize data structures with categories and medications
-    initializeData(categoriesData, medDetailsData);
+    initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
+    // --- Initial View Rendering ---
+function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
+    if (shouldAddHistory) {
+        addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
+    }
+    updateNavButtonsState();
+    contentArea.innerHTML = '';
+    const title = document.createElement('h2');
+    title.className = 'text-xl font-semibold mb-2';
+    title.textContent = 'Contents';
+    contentArea.appendChild(title);
+// Render hierarchical list
+    const listContainer = document.createElement('div');
+    createHierarchicalList(paramedicCategories, listContainer, 0);
+    contentArea.appendChild(listContainer);
+    openCategoriesAndHighlight(categoryPath, highlightId);
+}
+
+function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
+    if (shouldAddHistory) {
+        addHistoryEntry({ viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath });
+    }
+    updateNavButtonsState();
+    contentArea.innerHTML = `
+        <div class="flex justify-between items-center mb-3">
+            <p class="text-gray-700 font-medium">Results for "${searchTerm}":</p>
+            <button id="clear-search-button" class="text-sm text-blue-600 hover:underline">Show All Categories</button>
+        </div>
+        <div id="results-container" class="space-y-2"></div>`;
+    const resultsContainer = document.getElementById('results-container');
+    if (filteredTopics.length > 0) {
+        filteredTopics.forEach(topic => {
+            const item = document.createElement('div');
+            item.className = 'search-topic-item';
+            item.textContent = topic.title;
+            if (topic.path) {
+                const pathEl = document.createElement('div');
+                pathEl.className = 'text-xs text-gray-500 mt-1';
+                pathEl.textContent = topic.path.split(' > ').slice(0, -1).join(' > ');
+                item.appendChild(pathEl);
+            }
+            item.dataset.topicId = topic.id;
+            item.setAttribute('role', 'button');
+            item.setAttribute('tabindex', '0');
+            addTapListener(item, () => renderDetailPage(topic.id));
+            item.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    renderDetailPage(topic.id);
+                }
+            });
+            resultsContainer.appendChild(item);
+        });
+    } else {
+        resultsContainer.innerHTML = 
+            '<p class="text-gray-500 text-center py-4">No topics found matching your search.</p>';
+    }
+    addTapListener(document.getElementById('clear-search-button'), () => {
+        searchInput.value = '';
+        renderInitialView();
+    });
+    openCategoriesAndHighlight(categoryPath, highlightId);
+}
 // Ensure overlay is hidden on app start
     if (sidebarOverlay) {
         sidebarOverlay.classList.add('hidden');
@@ -177,69 +240,7 @@ if (!categoriesData || !medDetailsData) {
     // and allDisplayableTopicsMap are ready for use.
 
 
-// --- Initial View Rendering ---
-function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    if (shouldAddHistory) {
-        addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
-    }
-    updateNavButtonsState();
-    contentArea.innerHTML = '';
-    const title = document.createElement('h2');
-    title.className = 'text-xl font-semibold mb-2';
-    title.textContent = 'Contents';
-    contentArea.appendChild(title);
-// Render hierarchical list
-    const listContainer = document.createElement('div');
-    createHierarchicalList(paramedicCategories, listContainer, 0);
-    contentArea.appendChild(listContainer);
-    openCategoriesAndHighlight(categoryPath, highlightId);
-}
 
-function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    if (shouldAddHistory) {
-        addHistoryEntry({ viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath });
-    }
-    updateNavButtonsState();
-    contentArea.innerHTML = `
-        <div class="flex justify-between items-center mb-3">
-            <p class="text-gray-700 font-medium">Results for "${searchTerm}":</p>
-            <button id="clear-search-button" class="text-sm text-blue-600 hover:underline">Show All Categories</button>
-        </div>
-        <div id="results-container" class="space-y-2"></div>`;
-    const resultsContainer = document.getElementById('results-container');
-    if (filteredTopics.length > 0) {
-        filteredTopics.forEach(topic => {
-            const item = document.createElement('div');
-            item.className = 'search-topic-item';
-            item.textContent = topic.title;
-            if (topic.path) {
-                const pathEl = document.createElement('div');
-                pathEl.className = 'text-xs text-gray-500 mt-1';
-                pathEl.textContent = topic.path.split(' > ').slice(0, -1).join(' > ');
-                item.appendChild(pathEl);
-            }
-            item.dataset.topicId = topic.id;
-            item.setAttribute('role', 'button');
-            item.setAttribute('tabindex', '0');
-            addTapListener(item, () => renderDetailPage(topic.id));
-            item.addEventListener('keydown', e => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    renderDetailPage(topic.id);
-                }
-            });
-            resultsContainer.appendChild(item);
-        });
-    } else {
-        resultsContainer.innerHTML = 
-            '<p class="text-gray-500 text-center py-4">No topics found matching your search.</p>';
-    }
-    addTapListener(document.getElementById('clear-search-button'), () => {
-        searchInput.value = '';
-        renderInitialView();
-    });
-    openCategoriesAndHighlight(categoryPath, highlightId);
-}
 
 function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     const term = searchInput.value.trim().toLowerCase();
