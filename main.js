@@ -51,7 +51,7 @@ if (typeof document !== 'undefined') {
         addTapListener(navBackButton, () => navigateViaHistory(-1));
         addTapListener(navForwardButton, () => navigateViaHistory(1));
     }
-}
+
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
 } else {
@@ -96,7 +96,7 @@ if (!categoriesData || !medDetailsData) {
     } else if (medDetailsData && typeof medDetailsData === 'object') {
         Object.assign(medicationDataMap, medDetailsData);
     }
-
+}}
     // --- Preload common suggestions (Past Medical History, Allergies, Med Names) ---
     const commonPmh = ["hypertension","htn","diabetes","dm","asthma","copd","heart failure","hf","cad","stroke","cva","seizure disorder","renal insufficiency","ckd","hypothyroidism","hyperthyroidism","glaucoma","peptic ulcer","anxiety","depression"];
     const commonAllergies = ["penicillin","sulfa","aspirin","nsaids","morphine", "codeine","iodine","shellfish","latex","peanuts","tree nuts"];
