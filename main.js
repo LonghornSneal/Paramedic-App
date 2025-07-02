@@ -26,7 +26,7 @@ if (typeof document !== 'undefined') {
 
 // Initialize data structures with categories and medications
     initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
-    // --- Initial View Rendering ---
+// --- Initial View Rendering ---
 function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     if (shouldAddHistory) {
         addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
@@ -118,7 +118,6 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
 } else {
-    initApp();
 // Set up sidebar toggles
     addTapListener(openSidebarButton, () => {
         patientSidebar.classList.add('open');
