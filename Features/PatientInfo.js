@@ -5,63 +5,48 @@
  * By separating this logic, the app can easily manage patient context and apply it across other features (diagnosis suggestions, warnings, etc.).
  */
         // --- Patient Data Object & Sidebar Inputs ---
-        let patientData = {
+let patientData = {
             age: null, weight: null, weightUnit: 'kg', pmh: [], allergies: [], currentMedications: [], indications: [],
             symptoms: [], // Changed to array for consistency if S/S also becomes tag-based
             vitalSigns: { bp: '', hr: null, spo2: null, etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: '' },
             ekg: ''
         };
-        const ptInputIds = [ /* IDs of all patient data inputs */
+const ptInputIds = [ /* IDs of all patient data inputs */
             'pt-age', 'pt-weight', 'pt-weight-unit', 'pt-pmh', 'pt-allergies', 'pt-medications', 'pt-indications', 'pt-symptoms',
             'vs-bp', 'vs-hr', 'vs-spo2', 'vs-etco2', 'vs-rr', 'vs-bgl', 'vs-eyes', 'vs-gcs',
             'vs-ao-status', 'vs-lung-sounds', 'pt-ekg'
         ];
-        const ptInputs = ptInputIds.map(id => document.getElementById(id));
-
-        // --- Navigation History ---
-        // Main navigation state is now defined in main.js so the header
-        // arrows work reliably.  These variables were left here previously
-        // but served no purpose, so they have been removed to avoid
-        // shadowing the globals.
+const ptInputs = ptInputIds.map(id => document.getElementById(id));
 
         // --- Hierarchical Data, Flat Search List, Medication Details ---
 
-        const PEDIATRIC_AGE_THRESHOLD = 18;
-        const PDE5_INHIBITORS = ["sildenafil", "viagra", "revatio", "vardenafil", "levitra", "tadalafil", "cialis", "adcirca"];
+const PEDIATRIC_AGE_THRESHOLD = 18;
+const PDE5_INHIBITORS = ["sildenafil", "viagra", "revatio", "vardenafil", "levitra", "tadalafil", "cialis", "adcirca"];
 
         // --- Autocomplete Data Stores ---
-        let pmhSuggestions = new Set();
-        let allergySuggestions = new Set();
-        let medicationNameSuggestions = new Set(); // For "Current Medications" field
-        let indicationSuggestions = new Set();
-        let symptomSuggestions = new Set([
+let pmhSuggestions = new Set();
+let allergySuggestions = new Set();
+let medicationNameSuggestions = new Set(); // For "Current Medications" field
+let indicationSuggestions = new Set();
+let symptomSuggestions = new Set([
             "chest pain", "shortness of breath", "sob", "dyspnea", "nausea", "vomiting", "diarrhea", "abdominal pain",
             "headache", "dizziness", "syncope", "altered mental status", "ams", "weakness", "fatigue", "fever",
             "chills", "rash", "seizure", "palpitations", "edema", "cough", "anxiety", "depression", "back pain", "trauma"
         ]); // Basic list, can be expanded
 
-
         // --- Utility Function ---
         // slugify is loaded from slugify.js
-        // You can also generate branch names with this helper:
-        //   node slugify.js "Administrative & Legal Essentials"
-        // yields "administrative-legal-essentials"
 
-        // --- Sidebar Logic ---
-        /**
-         * Opens the Patient Info sidebar and displays the overlay.
-         */
-        function openSidebar() {
+// --- Sidebar Logic --- Opens the Patient Info sidebar and displays the overlay.
+function openSidebar() {
     if (patientSidebar) patientSidebar.classList.add('open');
     if (sidebarOverlay) {
         sidebarOverlay.classList.add('active');
         sidebarOverlay.classList.remove('hidden');
     }
 }
-        /**
-         * Closes the Patient Info sidebar and hides the overlay.
-         */
-        function closeSidebar() {
+    // Closes the Patient Info sidebar and hides the overlay.
+function closeSidebar() {
     if (patientSidebar) patientSidebar.classList.remove('open');
     if (sidebarOverlay) {
         sidebarOverlay.classList.remove('active');
@@ -69,7 +54,7 @@
     }
 }
 
-        function updatePatientData() {
+function updatePatientData() {
             patientData.age = document.getElementById('pt-age').value ? parseInt(document.getElementById('pt-age').value) : null;
             patientData.weight = document.getElementById('pt-weight').value ? parseFloat(document.getElementById('pt-weight').value) : null;
             patientData.weightUnit = document.getElementById('pt-weight-unit').value;
@@ -77,7 +62,7 @@
             patientData.pmh = getArrayFromTextarea('pt-pmh');
             patientData.allergies = getArrayFromTextarea('pt-allergies');
             patientData.currentMedications = getArrayFromTextarea('pt-medications');
-            // Capture indications from textarea using same helper
+    // Capture indications from textarea using same helper
             patientData.indications = getArrayFromTextarea('pt-indications');
             patientData.symptoms = getArrayFromTextarea('pt-symptoms'); // Now an array
             patientData.vitalSigns = {
@@ -94,9 +79,9 @@
             };
             patientData.ekg = document.getElementById('pt-ekg').value.trim();
         }
-            // Filter medication list by selected indications
-            const topicLinks = document.querySelectorAll('a.topic-link-item');
-            topicLinks.forEach(link => {
+    // Filter medication list by selected indications
+const topicLinks = document.querySelectorAll('a.topic-link-item');
+topicLinks.forEach(link => {
                 const medId = link.dataset.topicId;
                 const med = allDisplayableTopicsMap[medId];
                 if (patientData.indications.length > 0 && med && med.details && med.details.indications) {
@@ -109,7 +94,7 @@
                 }
             });
 
-            const currentTopicTitleEl = contentArea.querySelector('h2.topic-main-title');
+const currentTopicTitleEl = contentArea.querySelector('h2.topic-main-title');
             if (currentTopicTitleEl) {
                 const currentTopicId = currentTopicTitleEl.dataset.topicId;
                 if (currentTopicId && allDisplayableTopicsMap[currentTopicId]) {
