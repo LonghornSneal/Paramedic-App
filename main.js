@@ -82,14 +82,13 @@ if (!categoriesData || !medDetailsData) {
         categories: !!categoriesData,
         medications: !!medDetailsData
     });
-    return;
 }}
     // --- Build topic list and attach details ---
     function processItem(item, parentPath, parentIds) {
         if (typeof parentPath === 'undefined') parentPath = '';
         if (typeof parentIds === 'undefined') parentIds = [];
-        var currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
-        var currentIds  = (item.type === 'category')
+        let currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
+        let currentIds  = (item.type === 'category')
                               ? parentIds.slice().concat([item.id])
                               : parentIds;
         // Attach corresponding detail info if this item is a topic with a matching ID
@@ -331,12 +330,10 @@ function addTapListener(element, handler) {
 function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceSet) {
     const textarea = document.getElementById(textareaId);
     const suggestionsContainer = document.getElementById(suggestionsContainerId);
-    let currentInputValueBeforeSelection = "";
 
     textarea.addEventListener('input', function(e) {
         const inputText = e.target.value;
         const currentSegment = inputText.split(',').pop().trim().toLowerCase();
-        currentInputValueBeforeSelection = inputText.substring(0, inputText.lastIndexOf(',') + 1).trim();
         if (currentSegment.length === 0) {
             suggestionsContainer.classList.add('hidden');
             suggestionsContainer.innerHTML = '';
@@ -513,6 +510,7 @@ function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) 
         return;
     }
     if (scrollToTop) window.scrollTo(0, 0);
+}
     // Title
     const title = document.createElement('h2');
     title.className = 'topic-main-title text-2xl font-bold mb-2';
@@ -639,7 +637,6 @@ function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) 
     if (shouldAddHistory) {
         addHistoryEntry({ viewType: 'detail', contentId: topicId });
     }
-}
 
 // --- Utility: toggling hidden info text in detail view ---
 function attachToggleInfoHandlers(container) {
@@ -685,8 +682,13 @@ function createDetailList(itemsArray) {
     if (!itemsArray || itemsArray.length === 0) {
         return '<p class="text-gray-500 italic">None listed.</p>';
     }
-    return `<ul class="detail-list">${ itemsArray.map(it => `<li>${parseTextMarkup(it)}</li>`).join('') }</ul>`;
+    const listItemsHtml = itemsArray.map(it => {
+        return `<li>${parseTextMarkup(it)}</li>`;
+    }).join('');
+
+    return `<ul class="detail-list">${listItemsHtml}</ul>`;
 }
+
 function createDetailText(textBlock) {
     if (!textBlock || textBlock.toString().trim() === '') {
         return '<p class="text-gray-500 italic">Not specified.</p>';
