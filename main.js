@@ -1,4 +1,12 @@
-// --- Data Initialization Function --- 
+// --- Global Variables ---
+let searchInput, contentArea, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
+let navigationHistory = [];
+let currentHistoryIndex = -1;
+let isNavigatingViaHistory = false;
+let allSearchableTopics = [];
+let allDisplayableTopicsMap = {};
+let paramedicCategories = []; // <-- Add this if you want it accessible globally
+
 // --- Main App Initialization ---
 function initApp() {
     ensureHeaderUI();
@@ -10,19 +18,10 @@ if (typeof document !== 'undefined') {
     assignDomElements();
   }
 }
-// --- Global Variables ---
-let searchInput, contentArea, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
-let navigationHistory = [];
-let currentHistoryIndex = -1;
-let isNavigatingViaHistory = false;
-let allSearchableTopics = [];
-let allDisplayableTopicsMap = {};
-let paramedicCategories = []; // <-- Add this if you want it accessible globally
-
 // Initialize data structures with categories and medications
-initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
+   initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
 // --- Initial View Rendering ---
-renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
+   renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     if (shouldAddHistory) {
         addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
     }
@@ -58,6 +57,8 @@ renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []
         addTapListener(navForwardButton, () => navigateViaHistory(1));
     }}
 }
+
+
 function assignDomElements() {
   searchInput = document.getElementById('searchInput');
   contentArea = document.getElementById('content-area');
