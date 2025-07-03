@@ -1,15 +1,16 @@
+/*
 html {
-          -webkit-text-size-adjust: 100%; /* Safari, iOS, Chrome */
-          -moz-text-size-adjust: 100%;    /* Firefox */
-          -ms-text-size-adjust: 100%;     /* IE, old Edge */
-           text-size-adjust: 100%;         /* Standard property */
-}
+          -webkit-text-size-adjust: 100%;      / Safari, iOS, Chrome /
+          -moz-text-size-adjust: 100%;         / Firefox /
+          -ms-text-size-adjust: 100%;          / IE, old Edge /
+           text-size-adjust: 100%;             / Standard property /
+} */ 
 /* Basic reset and typography 
   body, h1, h2, ul, li, p, button, input {
   margin: 0;
   padding: 0; */
 body {
-  font-family: sans-serif;
+  font-family: 'Inter', sans-serif;
   line-height: 1.5;
   background: #fdfdfd;  /* light background for readability */
   color: #000;
