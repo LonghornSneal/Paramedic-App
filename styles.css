@@ -38,9 +38,11 @@ body {
   #sidebar-overlay.active { opacity: 1; visibility: visible; }
   #app-container { display: flex; flex-direction: column; flex-grow: 1;
           width: 100%; transition: margin-left 0.3s ease-in-out; }
+  /*
   #content-area {
       display: flex;
       flex-direction: column; } 
+      */
 /* Header navigation buttons (top-right corner buttons) */
   .header-nav-button {
     padding: 0.5rem;
