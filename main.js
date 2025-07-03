@@ -20,8 +20,10 @@ if (typeof document !== 'undefined') {
 }
 // Initialize data structures with categories and medications
    initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
-// --- Initial View Rendering ---
-   renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
+   renderInitialView();
+}
+   // --- Initial View Rendering ---
+function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     if (shouldAddHistory) {
         addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
     }
@@ -31,6 +33,18 @@ if (typeof document !== 'undefined') {
     title.className = 'text-xl font-semibold mb-2';
     title.textContent = 'Contents';
     contentArea.appendChild(title);
+}
+
+function assignDomElements() {
+  searchInput = document.getElementById('searchInput');
+  contentArea = document.getElementById('content-area');
+  patientSidebar = document.getElementById('patient-sidebar');
+  openSidebarButton = document.getElementById('open-sidebar-button');
+  closeSidebarButton = document.getElementById('close-sidebar-button');
+  sidebarOverlay = document.getElementById('sidebar-overlay');
+  navBackButton = document.getElementById('nav-back-button');
+  navForwardButton = document.getElementById('nav-forward-button');
+}
 // Ensure overlay is hidden on app start
     if (sidebarOverlay) {
         sidebarOverlay.classList.add('hidden');
@@ -59,16 +73,6 @@ if (typeof document !== 'undefined') {
 }
 
 
-function assignDomElements() {
-  searchInput = document.getElementById('searchInput');
-  contentArea = document.getElementById('content-area');
-  patientSidebar = document.getElementById('patient-sidebar');
-  openSidebarButton = document.getElementById('open-sidebar-button');
-  closeSidebarButton = document.getElementById('close-sidebar-button');
-  sidebarOverlay = document.getElementById('sidebar-overlay');
-  navBackButton = document.getElementById('nav-back-button');
-  navForwardButton = document.getElementById('nav-forward-button');
-}
 
 
 function initializeData(categoriesData, medDetailsData) {
