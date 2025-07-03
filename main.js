@@ -2,6 +2,14 @@
 // --- Main App Initialization ---
 function initApp() {
     ensureHeaderUI();
+    // Assign DOM elements on DOMContentLoaded
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', assignDomElements);
+  } else {
+    assignDomElements();
+  }
+}
 // --- Global Variables ---
 let searchInput, contentArea, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
 let navigationHistory = [];
@@ -11,6 +19,45 @@ let allSearchableTopics = [];
 let allDisplayableTopicsMap = {};
 let paramedicCategories = []; // <-- Add this if you want it accessible globally
 
+// Initialize data structures with categories and medications
+initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
+// --- Initial View Rendering ---
+renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
+    if (shouldAddHistory) {
+        addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
+    }
+    updateNavButtonsState();
+    contentArea.innerHTML = '';
+    const title = document.createElement('h2');
+    title.className = 'text-xl font-semibold mb-2';
+    title.textContent = 'Contents';
+    contentArea.appendChild(title);
+// Ensure overlay is hidden on app start
+    if (sidebarOverlay) {
+        sidebarOverlay.classList.add('hidden');
+        sidebarOverlay.classList.remove('active');
+    }
+// Set up sidebar toggles
+    if (openSidebarButton) addTapListener(openSidebarButton, () => openSidebar());
+    if (closeSidebarButton) addTapListener(closeSidebarButton, () => closeSidebar());
+    if (sidebarOverlay) addTapListener(sidebarOverlay, () => closeSidebar());
+// Set up autocomplete for each Patient Info field
+    setupAutocomplete('pt-pmh',         'pt-pmh-suggestions',         pmhSuggestions);
+    setupAutocomplete('pt-allergies',   'pt-allergies-suggestions',   allergySuggestions);
+    setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions);
+    setupAutocomplete('pt-indications','pt-indications-suggestions', indicationSuggestions);
+    setupAutocomplete('pt-symptoms',    'pt-symptoms-suggestions',    symptomSuggestions);
+// Add focus highlight to all textareas and inputs
+    document.querySelectorAll('textarea, input').forEach(el => {
+        el.addEventListener('focus', () => el.classList.add('ring', 'ring-blue-300'));
+        el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300'));
+    });
+// Navigation
+    if (navBackButton && navForwardButton) {
+        addTapListener(navBackButton, () => navigateViaHistory(-1));
+        addTapListener(navForwardButton, () => navigateViaHistory(1));
+    }}
+}
 function assignDomElements() {
   searchInput = document.getElementById('searchInput');
   contentArea = document.getElementById('content-area');
@@ -22,33 +69,11 @@ function assignDomElements() {
   navForwardButton = document.getElementById('nav-forward-button');
 }
 
-// Assign DOM elements on DOMContentLoaded
-if (typeof document !== 'undefined') {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', assignDomElements);
-  } else {
-    assignDomElements();
-  }
-}
 
-// Initialize data structures with categories and medications
-    initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
-// --- Initial View Rendering ---
-function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    if (shouldAddHistory) {
-        addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
-    }
-    updateNavButtonsState();
-    contentArea.innerHTML = '';
-    const title = document.createElement('h2');
-    title.className = 'text-xl font-semibold mb-2';
-    title.textContent = 'Contents';
-    contentArea.appendChild(title);
-    function initializeData(categoriesData, medDetailsData) {
-    // Populate global structures from raw data files
+function initializeData(categoriesData, medDetailsData) {
+// Populate global structures from raw data files
     let paramedicCategories = window.ParamedicCategoriesData || [];
     paramedicCategories.forEach(category => processItem(category, '', []));
-
     allSearchableTopics = [];
     allDisplayableTopicsMap = {};
 if (!categoriesData || !medDetailsData) {
@@ -58,6 +83,39 @@ if (!categoriesData || !medDetailsData) {
     });
     return;
 }}
+
+        if (typeof parentPath === 'undefined') parentPath = '';
+        if (typeof parentIds === 'undefined') parentIds = [];
+        var currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
+        var currentIds  = (item.type === 'category')
+                              ? parentIds.slice().concat([item.id])
+                              : parentIds;
+        // Attach corresponding detail info if this item is a topic with a matching ID
+        const detailsObj = medicationDataMap[item.id];
+        const fullItem = {
+            ...item,
+            path: currentPath,
+            details: detailsObj || null,      // attach medication details if available
+            categoryPath: parentIds
+        };
+        // Add to master map
+        allDisplayableTopicsMap[item.id] = fullItem;
+        if (item.type === 'topic') {
+            // Add to searchable list (for quick search by title/path)
+            allSearchableTopics.push({
+                id: item.id, 
+                title: item.title, 
+                path: currentPath, 
+                categoryPath: parentIds 
+            });
+        }
+        // Recurse into children if this is a category
+        if (item.children) {
+            item.children.forEach(child => 
+                processItem(child, currentPath, currentIds)
+            );
+        }
+    }
     // rest of the initialization code
     // Convert MedicationDetailsData (array or object) into a dictionary for quick lookup
     const medicationDataMap = {};
@@ -121,31 +179,6 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
     });
     openCategoriesAndHighlight(categoryPath, highlightId);
 }
-// Ensure overlay is hidden on app start
-    if (sidebarOverlay) {
-        sidebarOverlay.classList.add('hidden');
-        sidebarOverlay.classList.remove('active');
-    }
-// Set up sidebar toggles
-    if (openSidebarButton) addTapListener(openSidebarButton, () => openSidebar());
-    if (closeSidebarButton) addTapListener(closeSidebarButton, () => closeSidebar());
-    if (sidebarOverlay) addTapListener(sidebarOverlay, () => closeSidebar());
-// Set up autocomplete for each Patient Info field
-    setupAutocomplete('pt-pmh',         'pt-pmh-suggestions',         pmhSuggestions);
-    setupAutocomplete('pt-allergies',   'pt-allergies-suggestions',   allergySuggestions);
-    setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions);
-    setupAutocomplete('pt-indications','pt-indications-suggestions', indicationSuggestions);
-    setupAutocomplete('pt-symptoms',    'pt-symptoms-suggestions',    symptomSuggestions);
-// Add focus highlight to all textareas and inputs
-    document.querySelectorAll('textarea, input').forEach(el => {
-        el.addEventListener('focus', () => el.classList.add('ring', 'ring-blue-300'));
-        el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300'));
-    });
-// Navigation
-    if (navBackButton && navForwardButton) {
-        addTapListener(navBackButton, () => navigateViaHistory(-1));
-        addTapListener(navForwardButton, () => navigateViaHistory(1));
-    }
 
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
@@ -210,38 +243,6 @@ if (document.readyState === 'loading') {
 
     // --- Build topic list and attach details ---
     function processItem(item, parentPath, parentIds) {
-        if (typeof parentPath === 'undefined') parentPath = '';
-        if (typeof parentIds === 'undefined') parentIds = [];
-        var currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
-        var currentIds  = (item.type === 'category')
-                              ? parentIds.slice().concat([item.id])
-                              : parentIds;
-        // Attach corresponding detail info if this item is a topic with a matching ID
-        const detailsObj = medicationDataMap[item.id];
-        const fullItem = {
-            ...item,
-            path: currentPath,
-            details: detailsObj || null,      // attach medication details if available
-            categoryPath: parentIds
-        };
-        // Add to master map
-        allDisplayableTopicsMap[item.id] = fullItem;
-        if (item.type === 'topic') {
-            // Add to searchable list (for quick search by title/path)
-            allSearchableTopics.push({
-                id: item.id, 
-                title: item.title, 
-                path: currentPath, 
-                categoryPath: parentIds 
-            });
-        }
-        // Recurse into children if this is a category
-        if (item.children) {
-            item.children.forEach(child => 
-                processItem(child, currentPath, currentIds)
-            );
-        }
-    }
    
 
     // Data initialization complete. Now paramedicCategories, allSearchableTopics, 
@@ -295,10 +296,6 @@ if (sidebar) {
 // --- Diagnostic Logging ---
 // console.log("ParamedicCategoriesData:", window.ParamedicCategoriesData);
 // console.log("MedicationDetailsData:", window.MedicationDetailsData);
-
-let navigationHistory = [];
-let currentHistoryIndex = -1;
-let isNavigatingViaHistory = false;
 
 // --- Ensure Navigation/Search Bar Exists ---
 function ensureHeaderUI() {
@@ -465,14 +462,6 @@ if (navBackButton && navForwardButton) {
   addTapListener(navBackButton, () => navigateViaHistory(-1));
   addTapListener(navForwardButton, () => navigateViaHistory(1));
 }
-
-// --- Global Data Structures --- 
-// (Moved here from PatientInfo.js to ensure single source of truth)
-   // all categories/topics hierarchy
-let allSearchableTopics = [];    // flat list of all topics for search
-let allDisplayableTopicsMap = {};   // map from topic id -> topic object (with details)
-/* Note: patientData and suggestion Sets (pmhSuggestions, allergySuggestions, 
-   medicationNameSuggestions, etc.) are defined in PatientInfo.js and used below. */
 
 // --- Hierarchical List Rendering ---
 function createHierarchicalList(items, container, level = 0) {
