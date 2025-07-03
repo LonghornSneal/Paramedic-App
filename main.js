@@ -269,35 +269,7 @@ function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath 
     renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath);
 }
 
-// --- Sidebar Overlay Button Event Listeners ---
-// --- Sidebar Overlay Initialization ---
-// Ensure overlay is hidden and not active on app start
-if (typeof document !== 'undefined') {
-  document.addEventListener('DOMContentLoaded', function() {
-    var overlay = document.getElementById('sidebar-overlay');
-if (overlay) {
-      overlay.classList.remove('active');
-      overlay.classList.add('hidden');
-    }
-    var sidebar = document.getElementById('patient-sidebar');
-if (sidebar) {
-      sidebar.classList.remove('open');
-        var openBtn = document.getElementById('open-sidebar-button');
-    var closeBtn = document.getElementById('close-sidebar-button');
-    var overlay = document.getElementById('sidebar-overlay');
-    if (openBtn) openBtn.addEventListener('click', function() {
-      if (typeof openSidebar === 'function') openSidebar();
-    });
-    if (closeBtn) closeBtn.addEventListener('click', function() {
-      if (typeof closeSidebar === 'function') closeSidebar();
-    });
-    if (overlay) overlay.addEventListener('click', function(e) {
-      // Only close if clicking directly on the overlay, not a child
-      if (e.target === overlay && typeof closeSidebar === 'function') closeSidebar();
-    });
-  };
-  });
-}
+
 // --- Diagnostic Logging ---
 // console.log("ParamedicCategoriesData:", window.ParamedicCategoriesData);
 // console.log("MedicationDetailsData:", window.MedicationDetailsData);
