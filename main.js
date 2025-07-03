@@ -69,11 +69,7 @@ function assignDomElements() {
     if (navBackButton && navForwardButton) {
         addTapListener(navBackButton, () => navigateViaHistory(-1));
         addTapListener(navForwardButton, () => navigateViaHistory(1));
-    }}
-}
-
-
-
+    }
 
 function initializeData(categoriesData, medDetailsData) {
 // Populate global structures from raw data files
@@ -88,7 +84,8 @@ if (!categoriesData || !medDetailsData) {
     });
     return;
 }}
-
+    // --- Build topic list and attach details ---
+    function processItem(item, parentPath, parentIds) {
         if (typeof parentPath === 'undefined') parentPath = '';
         if (typeof parentIds === 'undefined') parentIds = [];
         var currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
@@ -137,7 +134,6 @@ if (!categoriesData || !medDetailsData) {
     createHierarchicalList(paramedicCategories, listContainer, 0);
     contentArea.appendChild(listContainer);
     openCategoriesAndHighlight(categoryPath, highlightId);
-}
 
 function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
     if (shouldAddHistory) {
@@ -221,7 +217,7 @@ if (document.readyState === 'loading') {
     commonMedNames.forEach(term => medicationNameSuggestions.add(term));
     PDE5_INHIBITORS.forEach(term => medicationNameSuggestions.add(term));  // from PatientInfo.js
 
-    // --- Extract additional allergy keywords from medication contraindications ---
+// --- Extract additional allergy keywords from medication contraindications ---
     Object.values(medicationDataMap).forEach(med => {
         if (med.contraindications && Array.isArray(med.contraindications)) {
             med.contraindications.forEach(ci => {
@@ -246,15 +242,8 @@ if (document.readyState === 'loading') {
         }
     });
 
-    // --- Build topic list and attach details ---
-    function processItem(item, parentPath, parentIds) {
-   
-
     // Data initialization complete. Now paramedicCategories, allSearchableTopics, 
     // and allDisplayableTopicsMap are ready for use.
-
-
-
 
 function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     const term = searchInput.value.trim().toLowerCase();
@@ -709,5 +698,4 @@ function createWarningIcon(colorClass = 'text-yellow-600') {
     return `<svg class="${colorClass} w-5 h-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
             </svg>`;
-}
 }
