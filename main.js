@@ -44,6 +44,9 @@ function assignDomElements() {
   sidebarOverlay = document.getElementById('sidebar-overlay');
   navBackButton = document.getElementById('nav-back-button');
   navForwardButton = document.getElementById('nav-forward-button');
+  + // --- Sidebar DOM Elements ---
++ const patientSidebar = document.getElementById('patient-sidebar');
++ const sidebarOverlay = document.getElementById('sidebar-overlay');
 }
 // Ensure overlay is hidden on app start
     if (sidebarOverlay) {
