@@ -25,5 +25,4 @@ const ParamedicCategoriesData = [
                         { id: 'naloxone-narcan', title: "Naloxone (Narcan)", type: "topic" }, { id: 'ntg', title: "NTG", type: "topic" }, { id: 'ondansetron-zofran', title: "Ondansetron (Zofran)", type: "topic" }
                     ]}
             ];
-if (typeof module !== 'undefined') module.exports = ParamedicCategoriesData;
 if (typeof window !== 'undefined') window.ParamedicCategoriesData = ParamedicCategoriesData;

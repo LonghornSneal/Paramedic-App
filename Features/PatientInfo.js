@@ -1,7 +1,7 @@
 /**
  * Handles the Patient Info sidebar functionality in the Paramedic Quick Reference app.
  * Manages the patientData object (age, weight, medical history, vitals, etc.) and updates the app UI based on these inputs.
- * This module opens/closes the Patient Info sidebar and dynamically adjusts treatment content (e.g., strikethrough irrelevant info, auto-calc dosages, display warnings) according to the entered patient information.
+ * This file opens/closes the Patient Info sidebar and dynamically adjusts treatment content (e.g., strikethrough irrelevant info, auto-calc dosages, display warnings) according to the entered patient information.
  * By separating this logic, the app can easily manage patient context and apply it across other features (diagnosis suggestions, warnings, etc.).
  */
         // --- Patient Data Object & Sidebar Inputs ---
@@ -93,7 +93,7 @@
                 lungSounds: document.getElementById('vs-lung-sounds').value.trim()
             };
             patientData.ekg = document.getElementById('pt-ekg').value.trim();
-
+        }
             // Filter medication list by selected indications
             const topicLinks = document.querySelectorAll('a.topic-link-item');
             topicLinks.forEach(link => {
@@ -132,5 +132,4 @@
                             .forEach(el => el.classList.remove('strikethrough'));
                 }
             }
-        }
         ptInputs.forEach(input => { if (input) input.addEventListener('input', updatePatientData); });

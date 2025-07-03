@@ -31,9 +31,6 @@ function slugify(text) {
     .replace(/-+$/, '');
 }
 
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = slugify;
-}
 if (typeof window !== 'undefined') {
   window.slugify = slugify;
 }

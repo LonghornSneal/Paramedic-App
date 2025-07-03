@@ -18,7 +18,7 @@ The project is organized into several directories, each containing specific type
 - **`Data/`** – Contains JavaScript files with static data:
   - `ParamedicCategoriesData.js` – Defines the hierarchical list of categories and topics (e.g., sections like *ALS Medications*, *BLS Procedures*, etc., and the individual topics within them). This is loaded as a global object `window.ParamedicCategoriesData`.
   - `MedicationDetailsData.js` – Contains detailed information for each medication (primarily used for ALS medications in this app). It’s an array/object of detail entries loaded as `window.MedicationDetailsData`. Each entry typically includes fields like `id`, `description`, doses (`adultRx`, `pediatricRx`), indications, contraindications, side effects, etc.
-- **`Features/`** – Contains modules for specific functionality:
+- **`Features/`** – Contains features for specific functionality:
   - `PatientInfo.js` – Manages the Patient Info sidebar and related data. It defines the `patientData` object (age, weight, allergies, etc.) and handles updates to this data. It also controls contextual UI changes (e.g., striking through inapplicable treatments based on patient info). It declares global variables for data structures used by the app (like `paramedicCategories`, `allSearchableTopics`, `allDisplayableTopicsMap`, and a local `medicationDetailsData` reference that gets filled with the global data). This separation makes it easier to handle patient-specific logic independently.
 - **`Utils/`** – Utility scripts:
   - `slugify.js` – A helper that converts strings into URL-friendly “slugs.” For example, it turns a title like "Pediatric Dose" into `"pediatric-dose"`. This is used to generate consistent `id` attributes for sections or to create anchor links.

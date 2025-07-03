@@ -310,6 +310,4 @@ const MedicationDetailsData = [{
     },
 ]
 
-// Support both Node and browser environments
-if (typeof module !== 'undefined') module.exports = MedicationDetailsData;
 if (typeof window !== 'undefined') window.MedicationDetailsData = MedicationDetailsData;

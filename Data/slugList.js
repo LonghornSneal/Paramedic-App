@@ -137,5 +137,4 @@ const slugIDs = [
   'vf-pvt',
   'workers-compensation-process',
 ];
-if (typeof module !== 'undefined') module.exports = slugIDs;
 if (typeof window !== 'undefined') window.slugIDs = slugIDs;
