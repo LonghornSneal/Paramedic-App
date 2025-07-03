@@ -19,7 +19,28 @@ body {
   flex-direction: column;
   min-height: calc(var(--vh, 1vh) * 100); }
 /* .addComponents {  */
- 
+/* Sidebar and Overlay */
+  #patient-sidebar {
+      position: fixed; top: 0; left: 0;
+      width: 300px; max-width: 80%; height: 100vh;
+      background: #ffffff;                /* Tailwind gray-50 */
+      border-right: 1px solid #e5e7eb;     /* Tailwind gray-200 */
+      padding: 1rem; overflow-y: auto; z-index: 100;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1); }
+  #patient-sidebar.open { transform: translateX(0); }
+  #sidebar-overlay {
+          position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+          background-color: rgba(0, 0, 0, 0.5); z-index: 99;
+          opacity: 0; visibility: hidden;
+          transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
+  #sidebar-overlay.active { opacity: 1; visibility: visible; }
+  #app-container { display: flex; flex-direction: column; flex-grow: 1;
+          width: 100%; transition: margin-left 0.3s ease-in-out; }
+  #content-area {
+      display: flex;
+      flex-direction: column; } 
 /* Header navigation buttons (top-right corner buttons) */
   .header-nav-button {
     padding: 0.5rem;
@@ -106,40 +127,7 @@ body {
        border: 1px solid #d1d5db; /* Tailwind gray-200 */
        margin-bottom: 0.5rem; }
   .search-topic-item:hover { background: #e0f2fe; }       /* Tailwind sky-100 */
-/* Sidebar and Overlay */
-  #patient-sidebar {
-      position: fixed;
-      top: 0; left: 0;
-      width: 300px; max-width: 80%;
-      height: 100vh;
-      background: #ffffff;                /* Tailwind gray-50 */
-      border-right: 1px solid #e5e7eb;     /* Tailwind gray-200 */
-      padding: 1rem; overflow-y: auto;
-      z-index: 100;
-      transform: translateX(-100%);
-      transition: transform 0.3s ease-in-out;
-      box-shadow: 2px 0 10px rgba(0,0,0,0.1); }
-  #patient-sidebar.open {
-      transform: translateX(0); }
-  #sidebar-overlay {
-          position: fixed;
-          top: 0; left: 0;
-          width: 100%; height: 100%;
-          background: rgba(0, 0, 0, 0.5);
-          z-index: 99;
-          opacity: 0; visibility: hidden;
-          transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
-  #sidebar-overlay.active {
-      opacity: 1; visibility: visible;  }
-  #app-container {
-          display: flex;
-          flex-direction: column;
-          flex-grow: 1;
-          width: 100%;
-          transition: margin-left 0.3s ease-in-out; }
-  #content-area {
-      display: flex;
-      flex-direction: column; }
+
 
 /* Autocomplete suggestions dropdown */
   .autocomplete-container { position: relative; }
