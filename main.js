@@ -230,6 +230,14 @@ function assignDomElements() {
     contentArea.appendChild(listContainer);
     openCategoriesAndHighlight(categoryPath, highlightId);
 
+
+
+    addTapListener(topicLink, e => {
+    e.preventDefault();
+    renderDetailPage(item.id); // This function must exist!
+});
+
+
 function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
     if (shouldAddHistory) {
         addHistoryEntry({ viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath });
@@ -599,17 +607,99 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
 }
 
 
-    // --- Fix: Try to find medication details by alternate ID if not found ---
+
+
+
+    function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) {
+    const contentArea = document.getElementById('content-area');
+    if (!allDisplayableTopicsMap[topicId]) {
+        contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`;
+        return;
+    }
+    const topic = allDisplayableTopicsMap[topicId];
+
+    // Header/title
+    contentArea.innerHTML = '';
+    const header = document.createElement('h2');
+    header.textContent = topic.title || topic.name || topic.id;
+    header.className = 'topic-h2 font-semibold text-lg mb-4';
+    header.dataset.topicId = topic.id;
+    contentArea.appendChild(header);
+
+    // Show details if available
     let details = topic.details;
+    // Fallbacks for alternate IDs (numbered/un-numbered)
     if (!details && topic.id && topic.id.match(/^\d+-/)) {
-        // Try without the leading number
         const altId = topic.id.replace(/^\d+-/, '');
         details = allDisplayableTopicsMap[altId]?.details;
     } else if (!details && topic.id && !topic.id.match(/^\d+-/)) {
-        // Try with a leading number (common for calcium-chloride, etc.)
         const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
         if (altId) details = allDisplayableTopicsMap[altId]?.details;
     }
+
+    if (details) {
+        // Render each section if present
+        const sections = [
+            { key: 'class', label: 'Class' },
+            { key: 'indications', label: 'Indications' },
+            { key: 'contraindications', label: 'Contraindications' },
+            { key: 'precautions', label: 'Precautions' },
+            { key: 'sideEffects', label: 'Significant Adverse/Side Effects' },
+            { key: 'adultRx', label: 'Adult Rx' },
+            { key: 'pediatricRx', label: 'Pediatric Rx' }
+        ];
+        sections.forEach(section => {
+            if (details[section.key]) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'detail-section mb-3';
+                const title = document.createElement('div');
+                title.className = 'font-bold mb-1';
+                title.textContent = section.label;
+                wrapper.appendChild(title);
+
+                let body;
+                if (Array.isArray(details[section.key])) {
+                    body = document.createElement('ul');
+                    details[section.key].forEach(line => {
+                        const li = document.createElement('li');
+                        li.innerHTML = parseTextMarkup ? parseTextMarkup(line) : line;
+                        body.appendChild(li);
+                    });
+                } else {
+                    body = document.createElement('div');
+                    body.innerHTML = parseTextMarkup ? parseTextMarkup(details[section.key]) : details[section.key];
+                }
+                wrapper.appendChild(body);
+                contentArea.appendChild(wrapper);
+            }
+        });
+    } else {
+        contentArea.innerHTML += `<div class="text-gray-500 italic">No detail information found for this item.</div>`;
+    }
+
+    // History
+    if (shouldAddHistory) {
+        addHistoryEntry({ viewType: 'detail', contentId: topicId });
+    }
+
+    // Optionally scroll to top
+    if (scrollToTop) contentArea.scrollIntoView({ behavior: 'instant', block: 'start' });
+}
+
+
+
+
+    // --- Fix: Try to find medication details by alternate ID if not found ---
+//    let details = topic.details;
+//    if (!details && topic.id && topic.id.match(/^\d+-/)) {
+        // Try without the leading number
+//        const altId = topic.id.replace(/^\d+-/, '');
+//        details = allDisplayableTopicsMap[altId]?.details;
+//    } else if (!details && topic.id && !topic.id.match(/^\d+-/)) {
+        // Try with a leading number (common for calcium-chloride, etc.)
+//        const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
+//        if (altId) details = allDisplayableTopicsMap[altId]?.details;
+//    }
     if (details) {
         const d = details;
         // --- Previous/Next navigation for ALS Medications ---
@@ -657,52 +747,52 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
             }
             contentArea.appendChild(navRow);
         }
-        const sections = [
-            { key: 'class', label: 'Class' },
-            { key: 'indications', label: 'Indications' },
-            { key: 'contraindications', label: 'Contraindications' },
-            { key: 'precautions', label: 'Precautions' },
-            { key: 'sideEffects', label: 'Significant Adverse/Side Effects' },
-            { key: 'adultRx', label: 'Adult Rx' },
-            { key: 'pediatricRx', label: 'Pediatric Rx' }
-        ];
-        const tocItems = [];
-        sections.forEach(section => {
-            if (d[section.key]) {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'detail-section mb-2';
-                const sectionId = typeof slugify === 'function' ? slugify(section.label) : section.label.toLowerCase().replace(/\s+/g, '-');
-                wrapper.id = sectionId;
-                wrapper.dataset.label = section.label;
-                tocItems.push({ label: section.label, id: sectionId });
+    //    const sections = [
+    //        { key: 'class', label: 'Class' },
+    //        { key: 'indications', label: 'Indications' },
+    //        { key: 'contraindications', label: 'Contraindications' },
+     //       { key: 'precautions', label: 'Precautions' },
+      //      { key: 'sideEffects', label: 'Significant Adverse/Side Effects' },
+      //      { key: 'adultRx', label: 'Adult Rx' },
+     //       { key: 'pediatricRx', label: 'Pediatric Rx' }
+    //    ];
+   //     const tocItems = [];
+   //     sections.forEach(section => {
+   //         if (d[section.key]) {
+   //             const wrapper = document.createElement('div');
+   //             wrapper.className = 'detail-section mb-2';
+   //             const sectionId = typeof slugify === 'function' ? slugify(section.label) : section.label.toLowerCase().replace(/\s+/g, '-');
+   //             wrapper.id = sectionId;
+   //             wrapper.dataset.label = section.label;
+   //             tocItems.push({ label: section.label, id: sectionId });
 
-                const header = document.createElement('div');
-                header.className = 'flex items-center cursor-pointer select-none toggle-category';
-                const arrow = document.createElement('span');
-                arrow.className = 'arrow';
-                arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" style="transform: rotate(0deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`; 
-                header.appendChild(arrow);
-                const labelEl = document.createElement('span');
-                labelEl.textContent = section.label;
-                header.appendChild(labelEl);
-                wrapper.appendChild(header);
-                const body = document.createElement('div');
-                body.className = 'pl-6 py-2 hidden';
-                if (Array.isArray(d[section.key])) {
-                    body.innerHTML = d[section.key].map(item => `<div>${item}</div>`).join('');
-                } else {
-                    body.textContent = d[section.key];
-                }
-                wrapper.appendChild(body);
-                addTapListener(header, () => {
-                    const isOpen = !body.classList.contains('hidden');
-                    body.classList.toggle('hidden');
-                    const svg = arrow.querySelector('svg');
-                    if (svg) svg.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
-                });
-                contentArea.appendChild(wrapper);
-            }
-        });
+    //            const header = document.createElement('div');
+    //            header.className = 'flex items-center cursor-pointer select-none toggle-category';
+    //            const arrow = document.createElement('span');
+    //            arrow.className = 'arrow';
+    //            arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" style="transform: rotate(0deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`; 
+    //            header.appendChild(arrow);
+    //            const labelEl = document.createElement('span');
+    //            labelEl.textContent = section.label;
+    //            header.appendChild(labelEl);
+    //            wrapper.appendChild(header);
+    //            const body = document.createElement('div');
+    //            body.className = 'pl-6 py-2 hidden';
+    //            if (Array.isArray(d[section.key])) {
+     //               body.innerHTML = d[section.key].map(item => `<div>${item}</div>`).join('');
+      //          } else {
+       //             body.textContent = d[section.key];
+       //         }
+      //          wrapper.appendChild(body);
+     //           addTapListener(header, () => {
+     //               const isOpen = !body.classList.contains('hidden');
+     //               body.classList.toggle('hidden');
+      //              const svg = arrow.querySelector('svg');
+      //              if (svg) svg.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
+      //          });
+      //          contentArea.appendChild(wrapper);
+      //      }
+      //  });
 
         if (tocItems.length > 0 && typeof window.setupSlugAnchors === 'function') {
             window.setupSlugAnchors(tocItems);
@@ -714,8 +804,8 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
         desc.textContent = topic.description || '';
         contentArea.appendChild(desc);
     }
-    if (shouldAddHistory) { addHistoryEntry({ viewType: 'detail', contentId: topicId });
-    }
+ //   if (shouldAddHistory) { addHistoryEntry({ viewType: 'detail', contentId: topicId });
+ //   }
 
 // --- Utility: toggling hidden info text in detail view ---
 function attachToggleInfoHandlers(container) {
@@ -757,6 +847,7 @@ function parseTextMarkup(text) {
     safeText = safeText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
     return safeText;
 }
+
 function createDetailList(itemsArray) {
     if (!itemsArray || itemsArray.length === 0) {
         return '<p class="text-gray-500 italic">None listed.</p>';
