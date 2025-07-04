@@ -57,8 +57,7 @@ if (typeof document !== 'undefined') {
   }
 }
 
-if (typeof module !== 'undefined') {
-  module.exports = { setupSlugAnchors };
-} else if (typeof window !== 'undefined') {
+
+if (typeof window !== 'undefined') {
   window.setupSlugAnchors = setupSlugAnchors;
 }

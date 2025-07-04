@@ -58,7 +58,7 @@ function assignDomElements() {
     sidebarOverlay = document.getElementById('sidebar-overlay');
     navBackButton = document.getElementById('nav-back-button');
     navForwardButton = document.getElementById('nav-forward-button');
-
+}
 // Ensure overlay is hidden on app start
     if (sidebarOverlay) {
         sidebarOverlay.classList.add('hidden');
