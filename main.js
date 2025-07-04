@@ -1,7 +1,7 @@
 // @ts-check
 
 // --- Global Variables ---
-// searchInput, contentArea, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
+let searchInput, contentArea, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
 let navigationHistory = [];
 let currentHistoryIndex = -1;
 let isNavigatingViaHistory = false;
@@ -26,14 +26,13 @@ function escapeHTML(str) {
 // --- Main App Initialization ---
 function initApp() {
     ensureHeaderUI();
-    // Assign DOM elements on DOMContentLoaded
-if (typeof document !== 'undefined') {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', assignDomElements);
-  } else {
-    assignDomElements();
-  }
-}
+    if (typeof document !== 'undefined') {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', assignDomElements);
+        } else {
+            assignDomElements();
+        }
+    }
 // Initialize data structures with categories and medications
    initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
    renderInitialView();
@@ -49,15 +48,16 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
     contentArea.appendChild(title);
 }
 
-// function assignDomElements() {
-    const searchInput = document.getElementById('searchInput');
-    const contentArea = document.getElementById('content-area');
-    const patientSidebar = document.getElementById('patient-sidebar');
-    const openSidebarButton = document.getElementById('open-sidebar-button');
-    const closeSidebarButton = document.getElementById('close-sidebar-button');
-    const sidebarOverlay = document.getElementById('sidebar-overlay');
-    const navBackButton = document.getElementById('nav-back-button');
-    const navForwardButton = document.getElementById('nav-forward-button');
+// Assign DOM elements on DOMContentLoaded
+function assignDomElements() {
+    searchInput = document.getElementById('searchInput');
+    contentArea = document.getElementById('content-area');
+    patientSidebar = document.getElementById('patient-sidebar');
+    openSidebarButton = document.getElementById('open-sidebar-button');
+    closeSidebarButton = document.getElementById('close-sidebar-button');
+    sidebarOverlay = document.getElementById('sidebar-overlay');
+    navBackButton = document.getElementById('nav-back-button');
+    navForwardButton = document.getElementById('nav-forward-button');
 
 // Ensure overlay is hidden on app start
     if (sidebarOverlay) {
