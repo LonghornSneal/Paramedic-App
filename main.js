@@ -9,6 +9,20 @@ let allSearchableTopics = [];
 let allDisplayableTopicsMap = {};
 let paramedicCategories = []; // <-- Add this if you want it accessible globally
 
+// Utility function to escape HTML
+function escapeHTML(str) {
+    return str.replace(/[&<>"']/g, function (char) {
+        const escapeMap = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        };
+        return escapeMap[char] || char;
+    });
+}
+
 // --- Main App Initialization ---
 function initApp() {
     ensureHeaderUI();
@@ -141,7 +155,7 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
     updateNavButtonsState();
     contentArea.innerHTML = `
         <div class="flex justify-between items-center mb-3">
-            <p class="text-gray-700 font-medium">Results for "${searchTerm}":</p>
+            <p class="text-gray-700 font-medium">Results for "${escapeHTML(searchTerm)}":</p>
             <button id="clear-search-button" class="text-sm text-blue-600 hover:underline">Show All Categories</button>
         </div>
         <div id="results-container" class="space-y-2"></div>`;
