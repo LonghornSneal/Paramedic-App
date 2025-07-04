@@ -1,3 +1,5 @@
+// @ts-check
+
 // --- Global Variables ---
 // searchInput, contentArea, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
 let navigationHistory = [];
