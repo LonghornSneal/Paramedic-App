@@ -35,19 +35,16 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
     contentArea.appendChild(title);
 }
 
-function assignDomElements() {
-  searchInput = document.getElementById('searchInput');
-  contentArea = document.getElementById('content-area');
-  patientSidebar = document.getElementById('patient-sidebar');
-  openSidebarButton = document.getElementById('open-sidebar-button');
-  closeSidebarButton = document.getElementById('close-sidebar-button');
-  sidebarOverlay = document.getElementById('sidebar-overlay');
-  navBackButton = document.getElementById('nav-back-button');
-  navForwardButton = document.getElementById('nav-forward-button');
-  + // --- Sidebar DOM Elements ---
-+ const patientSidebar = document.getElementById('patient-sidebar');
-+ const sidebarOverlay = document.getElementById('sidebar-overlay');
-}
+// function assignDomElements() {
+    const searchInput = document.getElementById('searchInput');
+    const contentArea = document.getElementById('content-area');
+    const patientSidebar = document.getElementById('patient-sidebar');
+    const openSidebarButton = document.getElementById('open-sidebar-button');
+    const closeSidebarButton = document.getElementById('close-sidebar-button');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const navBackButton = document.getElementById('nav-back-button');
+    const navForwardButton = document.getElementById('nav-forward-button');
+
 // Ensure overlay is hidden on app start
     if (sidebarOverlay) {
         sidebarOverlay.classList.add('hidden');
@@ -637,8 +634,7 @@ function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) 
         desc.textContent = topic.description || '';
         contentArea.appendChild(desc);
     }
-    if (shouldAddHistory) {
-        addHistoryEntry({ viewType: 'detail', contentId: topicId });
+    if (shouldAddHistory) { addHistoryEntry({ viewType: 'detail', contentId: topicId });
     }
 
 // --- Utility: toggling hidden info text in detail view ---
