@@ -430,6 +430,25 @@ function addTapListener(element, handler) {
     element.addEventListener('keypress', activate);
 }
 
+
+
+
+
+searchInput.addEventListener('input', function() {
+    handleSearch(true);
+});
+searchInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        handleSearch(true);
+    }
+});
+
+
+
+
+
+
+
 // --- Autocomplete Functionality ---
 function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceSet) {
     const textarea = document.getElementById(textareaId);
@@ -510,6 +529,9 @@ function addHistoryEntry(entry) {
     currentHistoryIndex = navigationHistory.length - 1;
     updateNavButtonsState();
 }
+
+
+
 function navigateViaHistory(direction) {
     if ((direction === -1 && currentHistoryIndex <= 0) ||
         (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return;
@@ -678,13 +700,13 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
     }
 
     // History
-    if (shouldAddHistory) {
-        addHistoryEntry({ viewType: 'detail', contentId: topicId });
-    }
+  //  if (shouldAddHistory) {
+  //      addHistoryEntry({ viewType: 'detail', contentId: topicId });
+  //  }
 
     // Optionally scroll to top
-    if (scrollToTop) contentArea.scrollIntoView({ behavior: 'instant', block: 'start' });
-}
+  //  if (scrollToTop) contentArea.scrollIntoView({ behavior: 'instant', block: 'start' });
+//}
 
 
 
@@ -804,18 +826,36 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
         desc.textContent = topic.description || '';
         contentArea.appendChild(desc);
     }
- //   if (shouldAddHistory) { addHistoryEntry({ viewType: 'detail', contentId: topicId });
- //   }
 
-// --- Utility: toggling hidden info text in detail view ---
+
+
+
+ //function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) {
+ //   const contentArea = document.getElementById('content-area');
+
+
+    // ... (existing code to render details) ...
+    // After rendering all content:
+    attachToggleInfoHandlers(contentArea);
+    if (shouldAddHistory) addHistoryEntry({ viewType: 'detail', contentId: topicId });
+    if (scrollToTop) contentArea.scrollIntoView({ behavior: 'instant', block: 'start' });
+}
+
 function attachToggleInfoHandlers(container) {
     container.querySelectorAll('.toggle-info').forEach(el => {
-        addTapListener(el, () => {
+        el.onclick = function(e) {
+            e.stopPropagation();
             const info = el.querySelector('.info-text');
             if (info) info.classList.toggle('hidden');
-        });
+        };
     });
 }
+// --- Utility: toggling hidden info text in detail view ---
+
+ //   container.querySelectorAll('.toggle-info').forEach(el => {
+ //       addTapListener(el, () => {
+ //           const info = el.querySelector('.info-text');
+
 function attachToggleCategoryHandlers(container) {
     container.querySelectorAll('.toggle-category').forEach(header => {
         addTapListener(header, () => {
