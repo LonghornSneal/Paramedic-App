@@ -34,7 +34,7 @@ function initApp() {
         }
     }
 // Initialize data structures with categories and medications
-   initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
+   initializeData(ParamedicCategoriesData, window.MedicationDetailsData);
    renderInitialView();
 }
    // --- Initial View Rendering ---
