@@ -7,7 +7,7 @@ let currentHistoryIndex = -1;
 let isNavigatingViaHistory = false;
 let allSearchableTopics = [];
 let allDisplayableTopicsMap = {};
-let paramedicCategories = []; // <-- Add this if you want it accessible globally
+let paramedicCategories = []; 
 
 // Utility function to escape HTML
 function escapeHTML(str) {
@@ -69,11 +69,11 @@ function assignDomElements() {
     if (closeSidebarButton) addTapListener(closeSidebarButton, () => closeSidebar());
     if (sidebarOverlay) addTapListener(sidebarOverlay, () => closeSidebar());
 // Set up autocomplete for each Patient Info field
-    setupAutocomplete('pt-pmh',         'pt-pmh-suggestions',         pmhSuggestions);
-    setupAutocomplete('pt-allergies',   'pt-allergies-suggestions',   allergySuggestions);
+    setupAutocomplete('pt-pmh','pt-pmh-suggestions', pmhSuggestions);
+    setupAutocomplete('pt-allergies','pt-allergies-suggestions', allergySuggestions);
     setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions);
     setupAutocomplete('pt-indications','pt-indications-suggestions', indicationSuggestions);
-    setupAutocomplete('pt-symptoms',    'pt-symptoms-suggestions',    symptomSuggestions);
+    setupAutocomplete('pt-symptoms','pt-symptoms-suggestions', symptomSuggestions);
 // Add focus highlight to all textareas and inputs
     document.querySelectorAll('textarea, input').forEach(el => {
         el.addEventListener('focus', () => el.classList.add('ring', 'ring-blue-300'));
