@@ -34,7 +34,7 @@ function initApp() {
         }
     }
 // Initialize data structures with categories and medications
-   initializeData(ParamedicCategoriesData, window.MedicationDetailsData);
+   initializeData(ParamedicCategoriesData, MedicationDetailsData);
    renderInitialView();
 }
    // --- Initial View Rendering ---
@@ -87,7 +87,7 @@ function assignDomElements() {
 
 function initializeData(categoriesData, medDetailsData) {
 // Populate global structures from raw data files
-    let paramedicCategories = window.ParamedicCategoriesData || [];
+    let paramedicCategories = ParamedicCategoriesData || [];
     paramedicCategories.forEach(category => processItem(category, '', []));
     allSearchableTopics = [];
     allDisplayableTopicsMap = {};
