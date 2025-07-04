@@ -173,8 +173,10 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
         resultsContainer.innerHTML = 
             '<p class="text-gray-500 text-center py-4">No topics found matching your search.</p>';
     }
-    addTapListener(document.getElementById('clear-search-button').addEventListener('click',) () => {
-        searchInput.value = ''; renderInitialView(); });
+    addTapListener(document.getElementById('clear-search-button'), () => {
+    searchInput.value = '';
+    renderInitialView();
+});
     openCategoriesAndHighlight(categoryPath, highlightId);
 }
 
