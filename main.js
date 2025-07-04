@@ -1,5 +1,3 @@
-// @ts-check
-
 // --- Global Variables ---
 let searchInput, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
 let navigationHistory = [];
@@ -7,70 +5,142 @@ let currentHistoryIndex = -1;
 let isNavigatingViaHistory = false;
 let allSearchableTopics = [];
 let allDisplayableTopicsMap = {};
-let paramedicCategories = []; 
-
-// Utility function to escape HTML
-function escapeHTML(str) {
-    return str.replace(/[&<>"']/g, function (char) {
-        const escapeMap = {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#39;'
-        };
-        return escapeMap[char] || char;
-    });
-}
+let paramedicCategories = []; // This must be a global var!
 
 // --- Main App Initialization ---
 function initApp() {
-    ensureHeaderUI();
-    if (typeof document !== 'undefined') {
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', assignDomElements);
-        } else {
-            assignDomElements();
+    // Ensure DOM elements assigned first
+    assignDomElements();
+
+    // Now initialize data structures from globals
+    // These should be loaded BEFORE this script runs (by script order in index.html)
+    if (window.ParamedicCategoriesData && window.MedicationDetailsData) {
+        initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
+    } else {
+        // Defensive: Wait until both globals are present
+        setTimeout(() => {
+            if (window.ParamedicCategoriesData && window.MedicationDetailsData) {
+                initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
+            } else {
+                console.error("Category or medication data not loaded!");
+            }
+        }, 200); // fallback: try again after short delay
+    }
+
+    // Initial render
+    renderInitialView(true);
+}
+
+// --- Data Initialization (run ONCE) ---
+function initializeData(categoriesData, medDetailsData) {
+    // Assign the global category array
+    paramedicCategories = categoriesData;
+    // Wipe/prepare lookup maps
+    allDisplayableTopicsMap = {};
+    allSearchableTopics = [];
+    // Build med details map for quick lookups
+    const medicationDataMap = {};
+    if (Array.isArray(medDetailsData)) {
+        medDetailsData.forEach(med => { medicationDataMap[med.id] = med; });
+    } else if (medDetailsData && typeof medDetailsData === 'object') {
+        Object.assign(medicationDataMap, medDetailsData);
+    }
+
+    // Recursively walk all categories/topics to flatten for search and lookup
+    function processItem(item, parentPath = '', parentIds = []) {
+        let currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
+        let currentIds = (item.type === 'category') ? parentIds.concat([item.id]) : parentIds;
+        const detailsObj = medicationDataMap[item.id];
+        const fullItem = {
+            ...item,
+            path: currentPath,
+            details: detailsObj || null,
+            categoryPath: parentIds
+        };
+        allDisplayableTopicsMap[item.id] = fullItem;
+        if (item.type === 'topic') {
+            allSearchableTopics.push({
+                id: item.id,
+                title: item.title,
+                path: currentPath,
+                categoryPath: parentIds
+            });
+        }
+        if (item.children) {
+            item.children.forEach(child => processItem(child, currentPath, currentIds));
         }
     }
-   // initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
-} // Initialize data structures with categories and medications
+    paramedicCategories.forEach(cat => processItem(cat));
+}
 
-
-    const contentArea = document.getElementById('content-area');
-
-   // --- Initial View Rendering ---
+// --- Initial View Rendering ---
 function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
+    const contentArea = document.getElementById('content-area');
+    contentArea.innerHTML = ''; // Clear
+    // Render the hierarchical list of categories
+    const listContainer = document.createElement('div');
+    createHierarchicalList(paramedicCategories, listContainer, 0);
+    contentArea.appendChild(listContainer);
+    // Optionally expand/highlight
+    openCategoriesAndHighlight(categoryPath, highlightId);
     if (shouldAddHistory) addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
-    updateNavButtonsState()
+    updateNavButtonsState();
 }
-function initializeData(categoriesData, medDetailsData) {
+
+// --- Make Sure the DOM is ready ---
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
+}
+
+// ... rest of your code (ensure functions like createHierarchicalList, assignDomElements, etc. are defined)// @ts-check
+
+// Utility function to escape HTML
+//function escapeHTML(str) {
+//    return str.replace(/[&<>"']/g, function (char) {
+//        const escapeMap = {
+ //           '&': '&amp;',
+ //           '<': '&lt;',
+ //           '>': '&gt;',
+//            '"': '&quot;',
+//            "'": '&#39;'
+//        };
+//        return escapeMap[char] || char;
+//    });
+//}
+// Initialize data structures with categories and medications
+//    const contentArea = document.getElementById('content-area');
+   // --- Initial View Rendering ---
+//function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
+//    if (shouldAddHistory) addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
+//    updateNavButtonsState()
+//}
+//function initializeData(categoriesData, medDetailsData) {
 // Populate global structures from raw data files
-    let paramedicCategories = ParamedicCategoriesData || [];
-    paramedicCategories.forEach(category => processItem(category, '', []));
-    allSearchableTopics = [];
-    allDisplayableTopicsMap = {};
-if (!categoriesData || !medDetailsData) {
-    console.error('Missing required data:', {
-        categories: !!categoriesData,
-        medications: !!medDetailsData
-    });
-}}
+//    let paramedicCategories = ParamedicCategoriesData || [];
+//    paramedicCategories.forEach(category => processItem(category, '', []));
+//    allSearchableTopics = [];
+//    allDisplayableTopicsMap = {};
+//if (!categoriesData || !medDetailsData) {
+//    console.error('Missing required data:', {
+ //       categories: !!categoriesData,
+ //       medications: !!medDetailsData
+  //  });
+//}}
         // --- Detail Page Rendering ---
-function renderList(topicId, scrollToTop = true, shouldAddHistory = true) {
-    const ul = document.createElement('ul');
-    ul.id = 'ParamedicCategories-list';
+//function renderList(topicId, scrollToTop = true, shouldAddHistory = true) {
+//    const ul = document.createElement('ul');
+//    ul.id = 'ParamedicCategories-list';
   //  const topic = allDisplayableTopicsMap[topicId];
-}
+//}
     // Title
-    const title = document.createElement('h2');
-    title.textContent = topic.title || topic.name || topic.id;
-    title.dataset.topicId = topic.id;
-    title.className = 'topic-h2';
-
-
-    contentArea.innerHTML = '';
-    contentArea.appendChild(title);
+//    const title = document.createElement('h2');
+//    title.textContent = topic.title || topic.name || topic.id;
+//    title.dataset.topicId = topic.id;
+ //   title.className = 'topic-h2';
+ //   contentArea.innerHTML = '';
+ //   contentArea.appendChild(title);
     // Collapsible sections for details (ALS Medications)
 // Assign DOM elements on DOMContentLoaded
 function assignDomElements() {
