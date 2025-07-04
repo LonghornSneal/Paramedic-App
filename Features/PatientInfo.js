@@ -85,7 +85,7 @@ function updatePatientData() {
             });
 
         const contentArea = document.getElementById('content-area');
-        const currentTopicTitleEl = contentArea ? contentArea.querySelector('h2.topic-main-title') : null;
+        const currentTopicTitleEl = contentArea ? contentArea.querySelector('#content-area') : null;
             if (currentTopicTitleEl) {
                 const currentTopicId = currentTopicTitleEl.dataset.topicId;
                 if (currentTopicId && allDisplayableTopicsMap[currentTopicId]) {
@@ -109,3 +109,7 @@ function updatePatientData() {
                 }
             }
         ptInputs.forEach(input => { if (input) input.addEventListener('input', updatePatientData); });
+function newFunction() {
+    return 'content-area';
+}
+

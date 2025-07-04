@@ -33,25 +33,48 @@ function initApp() {
             assignDomElements();
         }
     }
-// Initialize data structures with categories and medications
-   initializeData(ParamedicCategoriesData, MedicationDetailsData);
-   renderInitialView();
-}
+   // initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
+} // Initialize data structures with categories and medications
+
+
+    const contentArea = document.getElementById('content-area');
+
    // --- Initial View Rendering ---
 function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     if (shouldAddHistory) addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
-    updateNavButtonsState();
-    contentArea.innerHTML = '';
-    const title = document.createElement('h2');
-    title.className = 'text-xl font-semibold mb-2';
-    title.textContent = 'Contents';
-    contentArea.appendChild(title);
+    updateNavButtonsState()
 }
+function initializeData(categoriesData, medDetailsData) {
+// Populate global structures from raw data files
+    let paramedicCategories = ParamedicCategoriesData || [];
+    paramedicCategories.forEach(category => processItem(category, '', []));
+    allSearchableTopics = [];
+    allDisplayableTopicsMap = {};
+if (!categoriesData || !medDetailsData) {
+    console.error('Missing required data:', {
+        categories: !!categoriesData,
+        medications: !!medDetailsData
+    });
+}}
+        // --- Detail Page Rendering ---
+function renderList(topicId, scrollToTop = true, shouldAddHistory = true) {
+    const ul = document.createElement('ul');
+    ul.id = 'ParamedicCategories-list';
+  //  const topic = allDisplayableTopicsMap[topicId];
+}
+    // Title
+    const title = document.createElement('h2');
+    title.textContent = topic.title || topic.name || topic.id;
+    title.dataset.topicId = topic.id;
+    title.className = 'topic-h2';
 
+
+    contentArea.innerHTML = '';
+    contentArea.appendChild(title);
+    // Collapsible sections for details (ALS Medications)
 // Assign DOM elements on DOMContentLoaded
 function assignDomElements() {
     searchInput = document.getElementById('searchInput');
-    contentArea = document.getElementById('content-area');
     patientSidebar = document.getElementById('patient-sidebar');
     openSidebarButton = document.getElementById('open-sidebar-button');
     closeSidebarButton = document.getElementById('close-sidebar-button');
@@ -85,18 +108,7 @@ function assignDomElements() {
         addTapListener(navForwardButton, () => navigateViaHistory(1));
     }
 
-function initializeData(categoriesData, medDetailsData) {
-// Populate global structures from raw data files
-    let paramedicCategories = ParamedicCategoriesData || [];
-    paramedicCategories.forEach(category => processItem(category, '', []));
-    allSearchableTopics = [];
-    allDisplayableTopicsMap = {};
-if (!categoriesData || !medDetailsData) {
-    console.error('Missing required data:', {
-        categories: !!categoriesData,
-        medications: !!medDetailsData
-    });
-}}
+
     // --- Build topic list and attach details ---
     function processItem(item, parentPath, parentIds) {
         if (typeof parentPath === 'undefined') parentPath = '';
@@ -516,23 +528,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
     }
 }
 
-// --- Detail Page Rendering ---
-function renderDetailPage(topicId, scrollToTop = true, shouldAddHistory = true) {
-    const topic = allDisplayableTopicsMap[topicId];
-    if (!topic) {
-        contentArea.innerHTML = '<p class="text-red-600 text-center py-4">Error: Topic not found (ID: ' + topicId + ').</p>';
-        return;
-    }
-    if (scrollToTop) window.scrollTo(0, 0);
-}
-    // Title
-    const title = document.createElement('h2');
-    title.className = 'topic-main-title text-2xl font-bold mb-2';
-    title.textContent = topic.title || topic.name || topic.id;
-    title.dataset.topicId = topic.id;
-    contentArea.innerHTML = '';
-    contentArea.appendChild(title);
-    // Collapsible sections for details (ALS Medications)
+
     // --- Fix: Try to find medication details by alternate ID if not found ---
     let details = topic.details;
     if (!details && topic.id && topic.id.match(/^\d+-/)) {
