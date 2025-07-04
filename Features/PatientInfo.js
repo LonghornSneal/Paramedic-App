@@ -84,7 +84,8 @@ function updatePatientData() {
                 }
             });
 
-        const currentTopicTitleEl = contentArea.querySelector('h2.topic-main-title');
+        const contentArea = document.getElementById('content-area');
+        const currentTopicTitleEl = contentArea ? contentArea.querySelector('h2.topic-main-title') : null;
             if (currentTopicTitleEl) {
                 const currentTopicId = currentTopicTitleEl.dataset.topicId;
                 if (currentTopicId && allDisplayableTopicsMap[currentTopicId]) {
