@@ -38,21 +38,11 @@ let symptomSuggestions = new Set([
         // slugify is loaded from slugify.js
 
 // --- Sidebar Logic --- Opens the Patient Info sidebar and displays the overlay.
-function openSidebar() {
-    if (patientSidebar) patientSidebar.classList.add('open');
-    if (sidebarOverlay) {
-        sidebarOverlay.classList.add('active');
-        sidebarOverlay.classList.remove('hidden');
-    }
-}
+function openSidebar() { patientSidebar.classList.add('open');
+        sidebarOverlay.classList.add('active'); }
     // Closes the Patient Info sidebar and hides the overlay.
-function closeSidebar() {
-    if (patientSidebar) patientSidebar.classList.remove('open');
-    if (sidebarOverlay) {
-        sidebarOverlay.classList.remove('active');
-        sidebarOverlay.classList.add('hidden');
-    }
-}
+function closeSidebar() { patientSidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active'); }
 
 function updatePatientData() {
             patientData.age = document.getElementById('pt-age').value ? parseInt(document.getElementById('pt-age').value) : null;
@@ -80,8 +70,8 @@ function updatePatientData() {
             patientData.ekg = document.getElementById('pt-ekg').value.trim();
         }
     // Filter medication list by selected indications
-const topicLinks = document.querySelectorAll('a.topic-link-item');
-topicLinks.forEach(link => {
+        const topicLinks = document.querySelectorAll('a.topic-link-item');
+        topicLinks.forEach(link => {
                 const medId = link.dataset.topicId;
                 const med = allDisplayableTopicsMap[medId];
                 if (patientData.indications.length > 0 && med && med.details && med.details.indications) {
@@ -94,7 +84,7 @@ topicLinks.forEach(link => {
                 }
             });
 
-const currentTopicTitleEl = contentArea.querySelector('h2.topic-main-title');
+        const currentTopicTitleEl = contentArea.querySelector('h2.topic-main-title');
             if (currentTopicTitleEl) {
                 const currentTopicId = currentTopicTitleEl.dataset.topicId;
                 if (currentTopicId && allDisplayableTopicsMap[currentTopicId]) {

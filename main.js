@@ -24,9 +24,7 @@ if (typeof document !== 'undefined') {
 }
    // --- Initial View Rendering ---
 function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    if (shouldAddHistory) {
-        addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
-    }
+    if (shouldAddHistory) addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
     updateNavButtonsState();
     contentArea.innerHTML = '';
     const title = document.createElement('h2');
@@ -173,10 +171,8 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
         resultsContainer.innerHTML = 
             '<p class="text-gray-500 text-center py-4">No topics found matching your search.</p>';
     }
-    addTapListener(document.getElementById('clear-search-button'), () => {
-        searchInput.value = '';
-        renderInitialView();
-    });
+    addTapListener(document.getElementById('clear-search-button').addEventListener('click',) () => {
+        searchInput.value = ''; renderInitialView(); });
     openCategoriesAndHighlight(categoryPath, highlightId);
 }
 
