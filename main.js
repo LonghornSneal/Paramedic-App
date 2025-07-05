@@ -13,7 +13,11 @@ function initApp() {
     ensureHeaderUI();
     // Ensure DOM elements assigned first
     assignDomElements();
-
+// Navigation
+    if (navBackButton && navForwardButton) {
+        addTapListener(navBackButton, () => navigateViaHistory(-1));
+        addTapListener(navForwardButton, () => navigateViaHistory(1));
+    }
     // Now initialize data structures from globals
     // These should be loaded BEFORE this script runs (by script order in index.html)
     if (window.ParamedicCategoriesData && window.MedicationDetailsData) {
@@ -176,11 +180,7 @@ function assignDomElements() {
         el.addEventListener('focus', () => el.classList.add('ring', 'ring-blue-300'));
         el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300'));
     });
-// Navigation
-    if (navBackButton && navForwardButton) {
-        addTapListener(navBackButton, () => navigateViaHistory(-1));
-        addTapListener(navForwardButton, () => navigateViaHistory(1));
-    }
+
 
 
  //                                            // --- Build topic list and attach details ---
@@ -340,10 +340,9 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
 
 function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     const term = searchInput.value.trim().toLowerCase();
-    if (!term) {
-        renderInitialView(false);
-        return;
-    }
+    if (!term) {    // If no search term, show the full list with any requested highlight/path
+        renderInitialView(false, highlightId, categoryPath);
+        return; }
     const results = allSearchableTopics.filter(topic =>
         (topic.title || topic.id || '').toLowerCase().includes(term) ||
         (topic.path || '').toLowerCase().includes(term)
@@ -600,30 +599,26 @@ function createHierarchicalList(items, container, level = 0) {
         }
     });
 }
-
+// Note: We also ensure contentArea is defined locally. The category list items still need a way to be identified by category ID if we ever wanted to manipulate them directly, so as an additional improvement, we can modify createHierarchicalList to set a data-category-id attribute on category rows: // Inside createHierarchicalList, in the category branch: row.dataset.categoryId = item.id;
 function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
-    // Expand all categories in the given path (to reveal the highlighted topic)
+    const contentArea = document.getElementById('content-area');
+    // Mark each category in the path as expanded
     categoryPath.forEach(catId => {
-        const catEl = contentArea.querySelector(`[data-category-id="${catId}"]`);
-        if (catEl && !catEl.classList.contains('expanded')) {
-            catEl.classList.add('expanded');
-            const header = catEl.querySelector('.category-header');
-            if (header) header.setAttribute('aria-expanded', 'true');
-            // Ensure children container is visible
-            const childList = catEl.querySelector('.category-children');
-            if (childList) childList.classList.remove('hidden');
-        }
+        const catItem = allDisplayableTopicsMap[catId];
+        if (catItem) catItem.expanded = true;
     });
-    // Remove any existing highlight
-    contentArea.querySelectorAll('.topic-link-item.recently-viewed').forEach(el => {
-        el.classList.remove('recently-viewed');
-    });
-    // Highlight the recently viewed topic, if specified
+    // Re-render the category list with updated expansion states
+    contentArea.innerHTML = ''; 
+    const listContainer = document.createElement('div');
+    createHierarchicalList(paramedicCategories, listContainer, 0);
+    contentArea.appendChild(listContainer);
+    // Highlight the specified topic, if provided
     if (highlightId) {
         const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
         if (topicEl) topicEl.classList.add('recently-viewed');
     }
 }
+
 
 
 
@@ -636,14 +631,13 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
         return;
     }
     const topic = allDisplayableTopicsMap[topicId];
-    
-    // Header/title
     contentArea.innerHTML = '';
-    const header = document.createElement('h2');
-    header.textContent = topic.title || topic.name || topic.id;
-    header.className = 'topic-h2 font-semibold text-lg mb-4';
-    header.dataset.topicId = topic.id;
-    contentArea.appendChild(header);
+
+    const headerEl = document.createElement('h2'); // Header/title
+    headerEl.textContent = topic.title || topic.name || topic.id;
+    headerEl.className = 'topic-h2 font-semibold text-lg mb-4';
+    headerEl.dataset.topicId = topic.id;
+    contentArea.appendChild(headerEl);
 
     // Show details if available
     let details = topic.details;
@@ -656,8 +650,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
         if (altId) details = allDisplayableTopicsMap[altId]?.details;
     }
 
-    if (details) {
-        // Render each section if present
+    if (details) {            // Render details sections if available
         const sections = [
             { key: 'class', label: 'Class' },
             { key: 'indications', label: 'Indications' },
@@ -667,14 +660,17 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
             { key: 'adultRx', label: 'Adult Rx' },
             { key: 'pediatricRx', label: 'Pediatric Rx' }
         ];
-        sections.forEach(section => {
-            if (details[section.key]) {
+        sections.forEach(sec => {
+            if (details[sec.key]) {
                 const wrapper = document.createElement('div');
                 wrapper.className = 'detail-section mb-3';
-                const title = document.createElement('div');
+                const title = document.createElement('div'); // section title
                 title.className = 'font-bold mb-1';
                 title.textContent = section.label;
                 wrapper.appendChild(title);
+                // section body (list or text)
+
+
          //     const tocItems = [];
          //     sections.forEach(section => {
      //         if (d[section.key]) {
@@ -698,99 +694,109 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
                                                            //     const body = document.createElement('div');
                                                                //     body.className = 'pl-6 py-2 hidden';
                 let body;
-                if (Array.isArray(details[section.key])) {                               //       /if (Array.isArray(d[section.key])) {
+                if (Array.isArray(details[sec.key])) {                               //       /if (Array.isArray(d[section.key])) {
                     body = document.createElement('ul');                                     //         /body.innerHTML = d[section.key].map(item => `<div>${item}</div>`).join('');
-                    details[section.key].forEach(line => {                                        //        } else {
+                    details[sec.key].forEach(line => {                                        //        } else {
                         const li = document.createElement('li');                                     //           /body.textContent = d[section.key];
                         li.innerHTML = parseTextMarkup ? parseTextMarkup(line) : line;                    //         }
-                        body.appendChild(li);                                                               //       /wrapper.appendChild(body);
-                    });                                                                                       //      addTapListener(header, () => {
+                        body.appendChild(li); });                                                              //       /wrapper.appendChild(body);                                                                                       //      addTapListener(header, () => {
                 } else {                                                                                        //     /const isOpen = !body.classList.contains('hidden');
                     body = document.createElement('div');                                                            //    /body.classList.toggle('hidden');
-                    body.innerHTML = parseTextMarkup ? parseTextMarkup(details[section.key]) : details[section.key];  //    /const svg = arrow.querySelector('svg');
-                }                                                                                                    //     /if (svg) svg.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
+                    body.innerHTML = parseTextMarkup ? parseTextMarkup(details[sec.key]) : details[sec.key]; } //    /const svg = arrow.querySelector('svg');                                                                                                  //     /if (svg) svg.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
                 wrapper.appendChild(body);                                                                           //     });
-                contentArea.appendChild(wrapper);                                                                     //    /contentArea.appendChild(wrapper);
-            }                                                                                                        //      }
+                contentArea.appendChild(wrapper); }                                                                    //    /contentArea.appendChild(wrapper);                                                                                                     //      }
         });                                                                                                           //     });
-    } else {
-        contentArea.innerHTML += `<div class="text-gray-500 italic">No detail information found for this item.</div>`;
-    }
+    } else { // If no detailed info, show a fallback message
+        contentArea.innerHTML += `<div class="text-gray-500 italic">No detail information found for this item.</div>`; }
 
-        if (shouldAddHistory) {addHistoryEntry({ viewType: 'detail', contentId: topicId }); }
-        if (scrollToTop) contentArea.scrollIntoView({ behavior: 'instant', block: 'start' });
-    }
- //   if (details) {
- //       const d = details;
+    attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
+
+
         // --- Previous/Next navigation for ALS Medications ---
-  //      let prevId = null, nextId = null;
-        // Find ALS Medications list
-        const alsMedCat = paramedicCategories.find(cat => cat.title?.toLowerCase().includes('als medications'));
-        if (alsMedCat?.children) {
-            // Try to match by topic.id or by alternate id (with/without number prefix)
+        let prevId = null, nextId = null;
+        const alsMedCat = paramedicCategories.find(cat => cat.title && cat.toLowerCase().includes('als medications'));
+        if (alsMedCat && alsMedCat.children) {   // find index of current topic in ALS Medications list
             let idx = alsMedCat.children.findIndex(child => child.id === topic.id);
-            if (idx === -1 && topic.id.match(/^\d+-/)) {
-                // Try without number prefix
-                const altId = topic.id.replace(/^\d+-/, '');
-                idx = alsMedCat.children.findIndex(child => child.id === altId);
-            } else if (idx === -1 && !topic.id.match(/^\d+-/)) {
-                // Try with number prefix
-                const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
-                if (altId) idx = alsMedCat.children.findIndex(child => child.id === altId);
-            }
-            if (idx !== -1) {
-                if (idx > 0) prevId = alsMedCat.children[idx - 1].id;
-                if (idx < alsMedCat.children.length - 1) nextId = alsMedCat.children[idx + 1].id;
-            }
-        }
-        attachToggleInfoHandlers(contentArea);
-    
-    
-        // Navigation row
+            if (idx === -1 && /^\d+-/.test(topic.id)) {
+            const altId = topic.id.replace(/^\d+-/, '');
+            idx = alsMedCat.children.findIndex(child => child.id === altId);
+        } else if (idx === -1) { // try with number prefix
+            const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
+            if (altId) idx = alsMedCat.children.findIndex(child => child.id === altId); }
+        if (idx !== -1) {
+            if (idx > 0) prevId = alsMedCat.children[idx - 1].id;
+            if (idx < alsMedCat.children.length - 1) nextId = alsMedCat.children[idx + 1].id; } }
+      
+            // Add Prev/Next buttons if applicable
         if (prevId || nextId) {
-            const navRow = document.createElement('div');
-            navRow.className = 'flex justify-between items-center mb-4';
-            if (prevId) {
-                const prevBtn = document.createElement('button');
-                prevBtn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
-                prevBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>Previous`;
-                addTapListener(prevBtn, () => renderDetailPage(prevId));
-                navRow.appendChild(prevBtn);
-            } else {
-                navRow.appendChild(document.createElement('span'));
-            }
-            if (nextId) {
-                const nextBtn = document.createElement('button');
-                nextBtn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
-                nextBtn.innerHTML = `Next<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`;
-                addTapListener(nextBtn, () => renderDetailPage(nextId));
-                navRow.appendChild(nextBtn);
-            } else {
-                navRow.appendChild(document.createElement('span'));
-            }
-            contentArea.appendChild(navRow);
-        }
+        const navRow = document.createElement('div');
+        navRow.className = 'flex justify-between items-center mb-4';
+        navRow.appendChild(prevId ? createNavButton('Previous', prevId) : document.createElement('span'));
+        navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
+        contentArea.appendChild(navRow);
+    }
 
-
-        if (tocItems.length > 0 && typeof window.setupSlugAnchors === 'function') {
-            window.setupSlugAnchors(tocItems);
-        
-    } else {
-        // Fallback: show description
+    // If a topic description exists and no slug anchors were added, show the description
+    if (topic.description) {
         const desc = document.createElement('div');
         desc.className = 'mb-4';
-        desc.textContent = topic.description || '';
+        desc.textContent = topic.description;
         contentArea.appendChild(desc);
-    }
+    }    
+        //if (prevId || nextId) {
+            //const navRow = document.createElement('div');
+           // navRow.className = 'flex justify-between items-center mb-4';
+           // if (prevId) {
+                //const prevBtn = document.createElement('button');
+                //prevBtn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
+                //prevBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>Previous`;
+                //addTapListener(prevBtn, () => renderDetailPage(prevId));
+               // navRow.appendChild(prevBtn);
+            //} else {
+                //navRow.appendChild(document.createElement('span')); }
+            //if (nextId) {
+               // const nextBtn = document.createElement('button');
+               // nextBtn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
+              //  nextBtn.innerHTML = `Next<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`;
+               // addTapListener(nextBtn, () => renderDetailPage(nextId));
+              //  navRow.appendChild(nextBtn);
+            //} else {
+                //navRow.appendChild(document.createElement('span')); }
+           // contentArea.appendChild(navRow); }
+
+        if (shouldAddHistory) {addHistoryEntry({ viewType: 'detail', contentId: topicId }); }
+        if (scrollToTop) { contentArea.scrollIntoView({ behavior: 'instant', block: 'start' }); }
+    }    
+    // Helper to create Prev/Next nav buttons:
+function createNavButton(label, targetId) {
+    const btn = document.createElement('button');
+    btn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
+    btn.innerHTML = (label === 'Previous')
+        ? `<svg ...>...</svg>${label}` 
+        : `${label}<svg ...>...</svg>`;
+    addTapListener(btn, () => renderDetailPage(targetId));
+    return btn;
+}
+ //   if (details) {
+ //       const d = details;
+
+       // if (tocItems.length > 0 && typeof window.setupSlugAnchors === 'function') {
+           // window.setupSlugAnchors(tocItems);
+        
+   // } else { // Fallback: show description
+        //const desc = document.createElement('div');
+       // desc.className = 'mb-4';
+       // desc.textContent = topic.description || '';
+        //contentArea.appendChild(desc); }
 
 
- //    /function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) {
+ //    /f, shouldAddHistory = true, scrollToTop = true) {
  //   /const contentArea = document.getElementById('content-area');
 
 
     // ... (existing code to render details) ...
     // After rendering all content:
-    attachToggleInfoHandlers(contentArea);
+   // attachToggleInfoHandlers(contentArea);
    // /if (shouldAddHistory) addHistoryEntry({ viewType: 'detail', contentId: topicId });
    // /if (scrollToTop) contentArea.scrollIntoView({ behavior: 'instant', block: 'start' });
 
