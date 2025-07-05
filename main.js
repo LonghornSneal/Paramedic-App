@@ -1,5 +1,6 @@
 // --- Global Variables ---
 let searchInput, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
+let medicationDataMap = {};
 let navigationHistory = [];
 let currentHistoryIndex = -1;
 let isNavigatingViaHistory = false;
@@ -44,7 +45,7 @@ function initializeData(categoriesData, medDetailsData) {
     allDisplayableTopicsMap = {};
     allSearchableTopics = [];
     // Build med details map for quick lookups
-    const medicationDataMap = {};
+    medicationDataMap = {};
     if (Array.isArray(medDetailsData)) {
         medDetailsData.forEach(med => { medicationDataMap[med.id] = med; });
     } else if (medDetailsData && typeof medDetailsData === 'object') {
@@ -205,7 +206,7 @@ function assignDomElements() {
     // Convert MedicationDetailsData (array or object) into a dictionary for quick lookup
 //    /const medicationDataMap = {};
 //    /if (Array.isArray(medDetailsData)) {medDetailsData.forEach(med => { 
-  //          /medicationDataMap[med.id] = med; });
+  //          /[med.id] = med; });
 //    /} else if (medDetailsData && typeof medDetailsData === 'object') {
  //       /Object.assign(medicationDataMap, medDetailsData); }
 
