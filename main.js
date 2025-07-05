@@ -550,22 +550,6 @@ function navigateViaHistory(direction) {
 }
 
 
-function navigateViaHistory(direction) {
-    if ((direction === -1 && currentHistoryIndex <= 0) ||
-        (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return;
-    isNavigatingViaHistory = true;
-    currentHistoryIndex += direction;
-    const state = navigationHistory[currentHistoryIndex];
-    if (state.viewType === 'list') {
-        searchInput.value = state.contentId || '';
-        handleSearch(false, state.highlightTopicId, state.categoryPath || []);
-    } else if (state.viewType === 'detail') {
-        renderDetailPage(state.contentId, true, false);
-    }
-    updateNavButtonsState();
-    isNavigatingViaHistory = false;
-}
-
 if (shouldAddHistory) {
     addHistoryEntry({ viewType: 'detail', contentId: topicId });
 }
