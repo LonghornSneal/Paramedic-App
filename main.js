@@ -1,6 +1,6 @@
 // --- Global Variables ---
 let searchInput, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
-let contentArea = ('content-area');
+// /let contentArea = ['content-area'];
 let medicationDataMap = {};
 let navigationHistory = [];
 let currentHistoryIndex = -1;
