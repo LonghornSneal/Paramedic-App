@@ -796,7 +796,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
     // ... (existing code to render details) ...
     // After rendering all content:
     attachToggleInfoHandlers(contentArea);
-    if (shouldAddHistory) addHistoryEntry({ viewType: 'detail', contentId: topicId });
+   // if (shouldAddHistory) addHistoryEntry({ viewType: 'detail', contentId: topicId });
     if (scrollToTop) contentArea.scrollIntoView({ behavior: 'instant', block: 'start' });
 
 
