@@ -754,7 +754,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
             }
         }
         attachToggleInfoHandlers(contentArea);
-    }
+    
     
         // Navigation row
         if (prevId || nextId) {
