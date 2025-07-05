@@ -257,8 +257,7 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
             item.addEventListener('keydown', e => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    renderDetailPage(topic.id);
-                }
+                    renderDetailPage(topic.id); }
             });
             resultsContainer.appendChild(item);
         });
@@ -268,9 +267,7 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
     }
     addTapListener(document.getElementById('clear-search-button'), () => {
     searchInput.value = '';
-    renderInitialView();
-});
-    openCategoriesAndHighlight(categoryPath, highlightId);
+    renderInitialView(); });
 }
 
 //if (document.readyState === 'loading') {
