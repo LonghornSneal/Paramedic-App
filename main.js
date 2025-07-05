@@ -179,56 +179,42 @@ function assignDomElements() {
     }
 
 
-    // --- Build topic list and attach details ---
-    function processItem(item, parentPath, parentIds) {
-        if (typeof parentPath === 'undefined') parentPath = '';
-        if (typeof parentIds === 'undefined') parentIds = [];
-        let currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
-        let currentIds  = (item.type === 'category')
-                              ? parentIds.slice().concat([item.id])
-                              : parentIds;
+ //                                            // --- Build topic list and attach details ---
+  //    /function processItem(item, parentPath, parentIds) {
+ //       /if (typeof parentPath === 'undefined') parentPath = '';
+ //       if (typeof parentIds === 'undefined') parentIds = [];
+ //       let currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
+ //       let currentIds  = (item.type === 'category') ? parentIds.slice().concat([item.id]): parentIds;
+
+
         // Attach corresponding detail info if this item is a topic with a matching ID
-        const detailsObj = medicationDataMap[item.id];
-        const fullItem = {
-            ...item,
-            path: currentPath,
-            details: detailsObj || null,      // attach medication details if available
-            categoryPath: parentIds
-        };
-        // Add to master map
-        allDisplayableTopicsMap[item.id] = fullItem;
-        if (item.type === 'topic') {
-            // Add to searchable list (for quick search by title/path)
-            allSearchableTopics.push({
-                id: item.id, 
-                title: item.title, 
-                path: currentPath, 
-                categoryPath: parentIds 
-            });
-        }
+//        const detailsObj = medicationDataMap[item.id]; const fullItem = { ...item, path: currentPath, details: detailsObj || null, categoryPath: parentIds };
+
+
+//                                                 // Add to master map
+//        /allDisplayableTopicsMap[item.id] = fullItem;
+       
+
+// Add to searchable list (for quick search by title/path)
+//       if (item.type === 'topic') { allSearchableTopics.push({ id: item.id, title: item.title, path: currentPath, categoryPath: parentIds }); }
         // Recurse into children if this is a category
-        if (item.children) {
-            item.children.forEach(child => 
-                processItem(child, currentPath, currentIds)
-            );
-        }
-    }
+//        if (item.children) {item.children.forEach(child => processItem(child, currentPath, currentIds) ); } }
+
+
+
     // rest of the initialization code
     // Convert MedicationDetailsData (array or object) into a dictionary for quick lookup
-    const medicationDataMap = {};
-    if (Array.isArray(medDetailsData)) {
-        medDetailsData.forEach(med => { 
-            medicationDataMap[med.id] = med; 
-        });
-    } else if (medDetailsData && typeof medDetailsData === 'object') {
-        Object.assign(medicationDataMap, medDetailsData);
-    }
+//    /const medicationDataMap = {};
+//    /if (Array.isArray(medDetailsData)) {medDetailsData.forEach(med => { 
+  //          /medicationDataMap[med.id] = med; });
+//    /} else if (medDetailsData && typeof medDetailsData === 'object') {
+ //       /Object.assign(medicationDataMap, medDetailsData); }
 
 // Render hierarchical list
-    const listContainer = document.createElement('div');
-    createHierarchicalList(paramedicCategories, listContainer, 0);
-    contentArea.appendChild(listContainer);
-    openCategoriesAndHighlight(categoryPath, highlightId);
+//    const listContainer = document.createElement('div');
+//    createHierarchicalList(paramedicCategories, listContainer, 0);
+//    contentArea.appendChild(listContainer);
+//    openCategoriesAndHighlight(categoryPath, highlightId);
 
 
 
