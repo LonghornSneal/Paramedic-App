@@ -262,9 +262,9 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
     openCategoriesAndHighlight(categoryPath, highlightId);
 }
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initApp);
-} else {
+//if (document.readyState === 'loading') {
+//    document.addEventListener('DOMContentLoaded', initApp);
+//} else {
 // Set up sidebar toggles
     addTapListener(openSidebarButton, () => {
         patientSidebar.classList.add('open');
