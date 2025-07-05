@@ -720,7 +720,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
         contentArea.innerHTML += `<div class="text-gray-500 italic">No detail information found for this item.</div>`;
     }
 
-   // /if (shouldAddHistory) {addHistoryEntry({ viewType: 'detail', contentId: topicId }); }
+   if (shouldAddHistory) {addHistoryEntry({ viewType: 'detail', contentId: topicId }); }
 
     // Optionally scroll to top
   //  if (scrollToTop) contentArea.scrollIntoView({ behavior: 'instant', block: 'start' });
