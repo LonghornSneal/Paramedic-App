@@ -93,19 +93,15 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
 }
 
 // --- Make Sure the DOM is ready ---
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initApp);
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initApp);
 } else {
-    initApp();
-}
-
-// ... rest of your code (ensure functions like createHierarchicalList, assignDomElements, etc. are defined)// @ts-check
+    initApp(); }                          //  @ts-check
 
 // Utility function to escape HTML
 function escapeHTML(str) {
     const escapeMap = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
-        return str.replace(/[&<>"']/g, char => escapeMap[char] || char; }
-//}
+        return str.replace(/[&<>"']/g, char => escapeMap[char] || char); }
+
 // Initialize data structures with categories and medications
 //    const contentArea = document.getElementById('content-area');
    // --- Initial View Rendering ---
@@ -274,22 +270,18 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
 //    document.addEventListener('DOMContentLoaded', initApp);
 //} else {
 // Set up sidebar toggles
-    addTapListener(openSidebarButton, () => {
-        patientSidebar.classList.add('open');
-        sidebarOverlay.classList.add('active');
-        sidebarOverlay.classList.remove('hidden');
-    });
-    addTapListener(closeSidebarButton, () => {
-        patientSidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('active');
-        sidebarOverlay.classList.add('hidden');
-    });
-    addTapListener(sidebarOverlay, () => {
-        patientSidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('active');
-        sidebarOverlay.classList.add('hidden');
-    });
-}
+ //   addTapListener(openSidebarButton, () => {
+        //patientSidebar.classList.add('open');
+        //sidebarOverlay.classList.add('active');
+        //sidebarOverlay.classList.remove('hidden'); });
+    //addTapListener(closeSidebarButton, () => {
+        //patientSidebar.classList.remove('open');
+        //sidebarOverlay.classList.remove('active');
+        //sidebarOverlay.classList.add('hidden'); });
+   // addTapListener(sidebarOverlay, () => {
+        //patientSidebar.classList.remove('open');
+        //sidebarOverlay.classList.remove('active');
+        //sidebarOverlay.classList.add('hidden'); });}
 
 
     // --- Preload common suggestions (Past Medical History, Allergies, Med Names) ---
@@ -415,10 +407,10 @@ function addTapListener(element, handler) {
 }
 
 
-//searchInput.addEventListener('input', function() {
-    //handleSearch(true); });
-//searchInput.addEventListener('keypress', function(e) {
-    //if (e.key === 'Enter') { handleSearch(true); } });
+//     //searchInput.addEventListener('input', function() {
+//    //handleSearch(true); });
+//     //searchInput.addEventListener('keypress', function(e) {
+//      //if (e.key === 'Enter') { handleSearch(true); } });
 
 
 // --- Autocomplete Functionality ---
