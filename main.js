@@ -718,8 +718,8 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
         desc.textContent = topic.description;
         contentArea.appendChild(desc);
     }    
-        //if (prevId || nextId) {
-            //const navRow = document.createElement('div');
+//        /if (prevId || nextId) {
+ //           //const navRow = document.createElement('div');
            // navRow.className = 'flex justify-between items-center mb-4';
            // if (prevId) {
                 //const prevBtn = document.createElement('button');
@@ -737,11 +737,11 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
               //  navRow.appendChild(nextBtn);
             //} else {
                 //navRow.appendChild(document.createElement('span')); }
-           // contentArea.appendChild(navRow); }
+//           // contentArea.appendChild(navRow); }
 
         if (shouldAddHistory) {addHistoryEntry({ viewType: 'detail', contentId: topicId }); }
         if (scrollToTop) { contentArea.scrollIntoView({ behavior: 'instant', block: 'start' }); }
-    }    
+    }
     // Helper to create Prev/Next nav buttons:
 function createNavButton(label, targetId) {
     const btn = document.createElement('button');
@@ -752,11 +752,11 @@ function createNavButton(label, targetId) {
     addTapListener(btn, () => renderDetailPage(targetId));
     return btn;
 }
- //   if (details) {
- //       const d = details;
+//   //   if (details) {
+//    //       const d = details;
 
        // if (tocItems.length > 0 && typeof window.setupSlugAnchors === 'function') {
-           // window.setupSlugAnchors(tocItems);
+//           // window.setupSlugAnchors(tocItems);
         
    // } else { // Fallback: show description
         //const desc = document.createElement('div');
