@@ -603,90 +603,54 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
     const contentArea = document.getElementById('content-area');
     if (!allDisplayableTopicsMap[topicId]) {
         contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`;
-        return;
-    }
+        return; }
     const topic = allDisplayableTopicsMap[topicId];
     contentArea.innerHTML = '';
-
     const headerEl = document.createElement('h2'); // Header/title
     headerEl.textContent = topic.title || topic.name || topic.id;
     headerEl.className = 'topic-h2 font-semibold text-lg mb-4';
-    headerEl.dataset.topicId = topic.id;
-    contentArea.appendChild(headerEl);
+    headerEl.dataset.topicId = topic.id; contentArea.appendChild(headerEl);
 
-    // Show details if available
-    let details = topic.details;
+    let details = topic.details;  // Show details if available
     // Fallbacks for alternate IDs (numbered/un-numbered)
     if (!details && topic.id && topic.id.match(/^\d+-/)) {
         const altId = topic.id.replace(/^\d+-/, '');
         details = allDisplayableTopicsMap[altId]?.details;
     } else if (!details && topic.id && !topic.id.match(/^\d+-/)) {
         const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
-        if (altId) details = allDisplayableTopicsMap[altId]?.details;
-    }
+        if (altId) details = allDisplayableTopicsMap[altId]?.details; }
 
     if (details) {            // Render details sections if available
-        const sections = [
-            { key: 'class', label: 'Class' },
+        const sections = [ { key: 'class', label: 'Class' },
             { key: 'indications', label: 'Indications' },
             { key: 'contraindications', label: 'Contraindications' },
             { key: 'precautions', label: 'Precautions' },
             { key: 'sideEffects', label: 'Significant Adverse/Side Effects' },
             { key: 'adultRx', label: 'Adult Rx' },
-            { key: 'pediatricRx', label: 'Pediatric Rx' }
-        ];
-        sections.forEach(sec => {
-            if (details[sec.key]) {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'detail-section mb-3';
-                const title = document.createElement('div'); // section title
-                title.className = 'font-bold mb-1';
-                title.textContent = section.label;
-                wrapper.appendChild(title);
-                // section body (list or text)
-
-
-         //     const tocItems = [];
-         //     sections.forEach(section => {
-     //         if (d[section.key]) {
-     //  //     const wrapper = document.createElement('div');
-   //           wrapper.className = 'detail-section mb-2';
-   //           const sectionId = typeof slugify === 'function' ? slugify(section.label) : section.label.toLowerCase().replace(/\s+/g, '-');
-   //           wrapper.id = sectionId;
-   //           wrapper.dataset.label = section.label;
-   //           tocItems.push({ label: section.label, id: sectionId });
-
-                                    //     /const header = document.createElement('div');
-                                     //    header.className = 'flex items-center cursor-pointer select-none toggle-category';
-                                     //      const arrow = document.createElement('span');
-                                        //     arrow.className = 'arrow';
-                                         //    arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" style="transform: rotate(0deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`; 
-                                          //     header.appendChild(arrow);
-                                           //     const labelEl = document.createElement('span');
-                                             //      labelEl.textContent = section.label;
-                                                 //     header.appendChild(labelEl);
-                                                     //   wrapper.appendChild(header);
-                                                           //     const body = document.createElement('div');
-                                                               //     body.className = 'pl-6 py-2 hidden';
+            { key: 'pediatricRx', label: 'Pediatric Rx' } ];
+        sections.forEach(sec => { if (details[sec.key]) { const wrapper = document.createElement('div');
+                wrapper.className = 'detail-section mb-3'; const title = document.createElement('div'); // section title
+                title.className = 'font-bold mb-1'; title.textContent = section.label; wrapper.appendChild(title);
+// /const tocItems = []; sections.forEach(section => { if (d[section.key]) { const wrapper = document.createElement('div'); wrapper.className = 'detail-section mb-2'; const sectionId = typeof slugify === 'function' ? slugify(section.label) : section.label.toLowerCase().replace(/\s+/g, '-'); wrapper.id = sectionId; wrapper.dataset.label = section.label; tocItems.push({ label: section.label, id: sectionId });
+// /const header = document.createElement('div'); header.className = 'flex items-center cursor-pointer select-none toggle-category'; const arrow = document.createElement('span'); arrow.className = 'arrow';
+// /arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" style="transform: rotate(0deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`; header.appendChild(arrow);
+// /const labelEl = document.createElement('span'); labelEl.textContent = section.label; header.appendChild(labelEl); wrapper.appendChild(header); const body = document.createElement('div'); body.className = 'pl-6 py-2 hidden';
                 let body;
-                if (Array.isArray(details[sec.key])) {                               //       /if (Array.isArray(d[section.key])) {
-                    body = document.createElement('ul');                                     //         /body.innerHTML = d[section.key].map(item => `<div>${item}</div>`).join('');
-                    details[sec.key].forEach(line => {                                        //        } else {
-                        const li = document.createElement('li');                                     //           /body.textContent = d[section.key];
-                        li.innerHTML = parseTextMarkup ? parseTextMarkup(line) : line;                    //         }
-                        body.appendChild(li); });                                                              //       /wrapper.appendChild(body);                                                                                       //      addTapListener(header, () => {
-                } else {                                                                                        //     /const isOpen = !body.classList.contains('hidden');
-                    body = document.createElement('div');                                                            //    /body.classList.toggle('hidden');
-                    body.innerHTML = parseTextMarkup ? parseTextMarkup(details[sec.key]) : details[sec.key]; } //    /const svg = arrow.querySelector('svg');                                                                                                  //     /if (svg) svg.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
-                wrapper.appendChild(body);                                                                           //     });
-                contentArea.appendChild(wrapper); }                                                                    //    /contentArea.appendChild(wrapper);                                                                                                     //      }
-        });                                                                                                           //     });
+                if (Array.isArray(details[sec.key])) {     // /if (Array.isArray(d[section.key])) {   /body.innerHTML = d[section.key].map(item => `<div>${item}</div>`).join('');   } else {
+                    body = document.createElement('ul');   // /body.textContent = d[section.key]; }  /wrapper.appendChild(body); // addTapListener(header, () => {
+                    details[sec.key].forEach(line => {     // /const isOpen = !body.classList.contains('hidden'); /body.classList.toggle('hidden');  /const svg = arrow.querySelector('svg'); // /if (svg) svg.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
+                        const li = document.createElement('li');
+                        li.innerHTML = parseTextMarkup ? parseTextMarkup(line) : line;
+                        body.appendChild(li); });
+                } else { body = document.createElement('div');
+                    body.innerHTML = parseTextMarkup ? parseTextMarkup(details[sec.key]) : details[sec.key]; }
+                wrapper.appendChild(body); contentArea.appendChild(wrapper); }
+        });
     } else { // If no detailed info, show a fallback message
         contentArea.innerHTML += `<div class="text-gray-500 italic">No detail information found for this item.</div>`; }
 
     attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
-
-
+    }
         // --- Previous/Next navigation for ALS Medications ---
         let prevId = null, nextId = null;
         const alsMedCat = paramedicCategories.find(cat => cat.title && cat.toLowerCase().includes('als medications'));
@@ -702,109 +666,46 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
             if (idx > 0) prevId = alsMedCat.children[idx - 1].id;
             if (idx < alsMedCat.children.length - 1) nextId = alsMedCat.children[idx + 1].id; } }
       
-            // Add Prev/Next buttons if applicable
-        if (prevId || nextId) {
+        if (prevId || nextId) {     // Add Prev/Next buttons if applicable
         const navRow = document.createElement('div');
         navRow.className = 'flex justify-between items-center mb-4';
         navRow.appendChild(prevId ? createNavButton('Previous', prevId) : document.createElement('span'));
         navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
-        contentArea.appendChild(navRow);
-    }
+        contentArea.appendChild(navRow); }
 
-    // If a topic description exists and no slug anchors were added, show the description
-    if (topic.description) {
-        const desc = document.createElement('div');
-        desc.className = 'mb-4';
-        desc.textContent = topic.description;
-        contentArea.appendChild(desc);
-    }    
-//        /if (prevId || nextId) {
- //           //const navRow = document.createElement('div');
-           // navRow.className = 'flex justify-between items-center mb-4';
-           // if (prevId) {
-                //const prevBtn = document.createElement('button');
-                //prevBtn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
-                //prevBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>Previous`;
-                //addTapListener(prevBtn, () => renderDetailPage(prevId));
-               // navRow.appendChild(prevBtn);
-            //} else {
-                //navRow.appendChild(document.createElement('span')); }
-            //if (nextId) {
-               // const nextBtn = document.createElement('button');
-               // nextBtn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
-              //  nextBtn.innerHTML = `Next<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`;
-               // addTapListener(nextBtn, () => renderDetailPage(nextId));
-              //  navRow.appendChild(nextBtn);
-            //} else {
-                //navRow.appendChild(document.createElement('span')); }
-//           // contentArea.appendChild(navRow); }
+    if (topic.description) { const desc = document.createElement('div');    // If a topic description exists and no slug anchors were added, show the description
+        desc.className = 'mb-4'; desc.textContent = topic.description; contentArea.appendChild(desc); }
 
         if (shouldAddHistory) {addHistoryEntry({ viewType: 'detail', contentId: topicId }); }
         if (scrollToTop) { contentArea.scrollIntoView({ behavior: 'instant', block: 'start' }); }
-    }
-    // Helper to create Prev/Next nav buttons:
-function createNavButton(label, targetId) {
+  
+function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons:
     const btn = document.createElement('button');
     btn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
     btn.innerHTML = (label === 'Previous')
         ? `<svg ...>...</svg>${label}` 
         : `${label}<svg ...>...</svg>`;
     addTapListener(btn, () => renderDetailPage(targetId));
-    return btn;
-}
-//   //   if (details) {
-//    //       const d = details;
-
-       // if (tocItems.length > 0 && typeof window.setupSlugAnchors === 'function') {
-//           // window.setupSlugAnchors(tocItems);
-        
-   // } else { // Fallback: show description
-        //const desc = document.createElement('div');
-       // desc.className = 'mb-4';
-       // desc.textContent = topic.description || '';
-        //contentArea.appendChild(desc); }
-
-
- //    /f, shouldAddHistory = true, scrollToTop = true) {
- //   /const contentArea = document.getElementById('content-area');
-
-
-    // ... (existing code to render details) ...
-    // After rendering all content:
-   // attachToggleInfoHandlers(contentArea);
-   // /if (shouldAddHistory) addHistoryEntry({ viewType: 'detail', contentId: topicId });
-   // /if (scrollToTop) contentArea.scrollIntoView({ behavior: 'instant', block: 'start' });
-
+    return btn; }
+  // if (tocItems.length > 0 && typeof window.setupSlugAnchors === 'function') { // window.setupSlugAnchors(tocItems);
 
 function attachToggleInfoHandlers(container) {
     container.querySelectorAll('.toggle-info').forEach(el => {
         el.onclick = function(e) {
             e.stopPropagation();
             const info = el.querySelector('.info-text');
-            if (info) info.classList.toggle('hidden');
-        };
-    });
-}
-// --- Utility: toggling hidden info text in detail view ---
+            if (info) info.classList.toggle('hidden'); }; }); }
+ //   container.querySelectorAll('.toggle-info').forEach(el => { addTapListener(el, () => { const info = el.querySelector('.info-text');
 
- //   container.querySelectorAll('.toggle-info').forEach(el => {
- //       addTapListener(el, () => {
- //           const info = el.querySelector('.info-text');
-
-function attachToggleCategoryHandlers(container) {
+function attachToggleCategoryHandlers(container) {      // --- Utility: toggling hidden info text in detail view ---
     container.querySelectorAll('.toggle-category').forEach(header => {
         addTapListener(header, () => {
             const arrow = header.querySelector('.arrow');
             if (arrow) arrow.classList.toggle('rotate');
             const content = header.nextElementSibling;
-            if (content) content.classList.toggle('hidden');
-        });
-    });
-}
+            if (content) content.classList.toggle('hidden'); }); }); }
 
-// --- Text/Markup Helpers ---
-function parseTextMarkup(text) {
-    // Escape HTML and replace special markup with styled spans
+function parseTextMarkup(text) {   // Escape HTML and replace special markup with styled spans
     let safeText = text.replace(/&/g, "&amp;")
                        .replace(/</g, "&lt;")
                        .replace(/>/g, "&gt;");
@@ -820,29 +721,23 @@ function parseTextMarkup(text) {
     safeText = safeText.replace(/\{\{blackul:(.+?)\}\}/g, 
                 (_, t) => `<span class="font-bold underline decoration-black">${t}</span>`);
     safeText = safeText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-    return safeText;
-}
+    return safeText; }
 
 function createDetailList(itemsArray) {
     if (!itemsArray || itemsArray.length === 0) {
-        return '<p class="text-gray-500 italic">None listed.</p>';
-    }
+        return '<p class="text-gray-500 italic">None listed.</p>'; }
     const listItemsHtml = itemsArray.map(it => {
         return `<li>${parseTextMarkup(it)}</li>`;
     }).join('');
-
-    return `<ul class="detail-list">${listItemsHtml}</ul>`;
-}
+    return `<ul class="detail-list">${listItemsHtml}</ul>`; }
 
 function createDetailText(textBlock) {
     if (!textBlock || textBlock.toString().trim() === '') {
-        return '<p class="text-gray-500 italic">Not specified.</p>';
-    }
+        return '<p class="text-gray-500 italic">Not specified.</p>'; }
     const safeText = parseTextMarkup(textBlock.toString());
-    return `<div class="detail-text">${safeText}</div>`;
-}
+    return `<div class="detail-text">${safeText}</div>`; }
+
 function createWarningIcon(colorClass = 'text-yellow-600') {
     return `<svg class="${colorClass} w-5 h-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
-            </svg>`;
-}
+            </svg>`; }
