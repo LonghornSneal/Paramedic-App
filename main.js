@@ -646,7 +646,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
         return;
     }
     const topic = allDisplayableTopicsMap[topicId];
-
+    
     // Header/title
     contentArea.innerHTML = '';
     const header = document.createElement('h2');
@@ -729,7 +729,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
 
         if (shouldAddHistory) {addHistoryEntry({ viewType: 'detail', contentId: topicId }); }
         if (scrollToTop) contentArea.scrollIntoView({ behavior: 'instant', block: 'start' });
-
+    }
  //   if (details) {
  //       const d = details;
         // --- Previous/Next navigation for ALS Medications ---
