@@ -9,6 +9,8 @@ let paramedicCategories = []; // This must be a global var!
 
 // --- Main App Initialization ---
 function initApp() {
+        // Ensure the header navigation UI (search box and nav buttons) exists
+    ensureHeaderUI();
     // Ensure DOM elements assigned first
     assignDomElements();
 
@@ -145,14 +147,24 @@ function assignDomElements() {
     navForwardButton = document.getElementById('nav-forward-button');
 }
 // Ensure overlay is hidden on app start
-    if (sidebarOverlay) {
-        sidebarOverlay.classList.add('hidden');
-        sidebarOverlay.classList.remove('active');
-    }
+    if (sidebarOverlay) { sidebarOverlay.classList.add('hidden');
+        sidebarOverlay.classList.remove('active'); }
 // Set up sidebar toggles
-    if (openSidebarButton) addTapListener(openSidebarButton, () => openSidebar());
-    if (closeSidebarButton) addTapListener(closeSidebarButton, () => closeSidebar());
-    if (sidebarOverlay) addTapListener(sidebarOverlay, () => closeSidebar());
+    if (openSidebarButton) { addTapListener(openSidebarButton, () => {
+        patientSidebar.classList.add('open');
+        sidebarOverlay.classList.add('active');
+        sidebarOverlay.classList.remove('hidden'); }); }
+
+    if (closeSidebarButton) {addTapListener(closeSidebarButton, () => {
+        patientSidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+        sidebarOverlay.classList.add('hidden'); }); }
+
+    if (sidebarOverlay) {addTapListener(sidebarOverlay, () => {
+        patientSidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+        sidebarOverlay.classList.add('hidden'); }); }
+
 // Set up autocomplete for each Patient Info field
     setupAutocomplete('pt-pmh','pt-pmh-suggestions', pmhSuggestions);
     setupAutocomplete('pt-allergies','pt-allergies-suggestions', allergySuggestions);
