@@ -779,7 +779,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
 
         if (tocItems.length > 0 && typeof window.setupSlugAnchors === 'function') {
             window.setupSlugAnchors(tocItems);
-        }
+        
     } else {
         // Fallback: show description
         const desc = document.createElement('div');
@@ -798,7 +798,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
     attachToggleInfoHandlers(contentArea);
     if (shouldAddHistory) addHistoryEntry({ viewType: 'detail', contentId: topicId });
     if (scrollToTop) contentArea.scrollIntoView({ behavior: 'instant', block: 'start' });
-}
+
 
 function attachToggleInfoHandlers(container) {
     container.querySelectorAll('.toggle-info').forEach(el => {
