@@ -547,6 +547,11 @@ function navigateViaHistory(direction) {
     updateNavButtonsState();
     isNavigatingViaHistory = false;
 }
+
+if (shouldAddHistory) {
+    addHistoryEntry({ viewType: 'detail', contentId: topicId });
+}
+
 if (navBackButton && navForwardButton) {
   addTapListener(navBackButton, () => navigateViaHistory(-1));
   addTapListener(navForwardButton, () => navigateViaHistory(1));
