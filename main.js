@@ -1,8 +1,8 @@
 // --- Global Variables ---
 let searchInput, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
-let navigationHistory = [];
-let currentHistoryIndex = -1;
-let isNavigatingViaHistory = false;
+// /let navigationHistory = [];
+// /let currentHistoryIndex = -1;
+// /let isNavigatingViaHistory = false;
 let allSearchableTopics = [];
 let allDisplayableTopicsMap = {};
 let paramedicCategories = []; // This must be a global var!
@@ -515,6 +515,10 @@ function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceS
 }
 
 // --- Navigation History Management ---
+let navigationHistory = [];
+let currentHistoryIndex = -1;
+let isNavigatingViaHistory = false;
+
 function updateNavButtonsState() {
     if (!navBackButton || !navForwardButton) return;
     navBackButton.disabled = currentHistoryIndex <= 0;
@@ -529,7 +533,21 @@ function addHistoryEntry(entry) {
     currentHistoryIndex = navigationHistory.length - 1;
     updateNavButtonsState();
 }
-
+function navigateViaHistory(direction) {
+    if ((direction === -1 && currentHistoryIndex <= 0) ||
+        (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return;
+    isNavigatingViaHistory = true;
+    currentHistoryIndex += direction;
+    const state = navigationHistory[currentHistoryIndex];
+    if (state.viewType === 'list') {
+        searchInput.value = state.contentId || '';
+        handleSearch(false, state.highlightTopicId, state.categoryPath || []);
+    } else if (state.viewType === 'detail') {
+        renderDetailPage(state.contentId, false, false);
+    }
+    updateNavButtonsState();
+    isNavigatingViaHistory = false;
+}
 
 
 function navigateViaHistory(direction) {
