@@ -1,5 +1,7 @@
+//     -@ts-check
 // --- Global Variables ---
 let searchInput, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
+let contentArea = [];
 let medicationDataMap = {};
 let navigationHistory = [];
 let currentHistoryIndex = -1;
@@ -81,7 +83,7 @@ function initializeData(categoriesData, medDetailsData) {
 
 // --- Initial View Rendering ---
 function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    const contentArea = document.getElementById('content-area');
+    contentArea = document.getElementById('content-area');
     contentArea.innerHTML = ''; // Clear
     // Render the hierarchical list of categories
     const listContainer = document.createElement('div');
@@ -96,7 +98,7 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
 // --- Make Sure the DOM is ready ---
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initApp);
 } else {
-    initApp(); }                          //  @ts-check
+    initApp(); }
 
 // Utility function to escape HTML
 function escapeHTML(str) {
@@ -104,7 +106,7 @@ function escapeHTML(str) {
         return str.replace(/[&<>"']/g, char => escapeMap[char] || char); }
 
 // Initialize data structures with categories and medications
-//    const contentArea = document.getElementById('content-area');
+//    contentArea = document.getElementById('content-area');
    // --- Initial View Rendering ---
 //function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
 //    if (shouldAddHistory) addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
@@ -577,7 +579,7 @@ function createHierarchicalList(items, container, level = 0) {
 }
 // Note: We also ensure contentArea is defined locally. The category list items still need a way to be identified by category ID if we ever wanted to manipulate them directly, so as an additional improvement, we can modify createHierarchicalList to set a data-category-id attribute on category rows: // Inside createHierarchicalList, in the category branch: row.dataset.categoryId = item.id;
 function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
-    const contentArea = document.getElementById('content-area');
+    contentArea = document.getElementById('content-area');
     // Mark each category in the path as expanded
     categoryPath.forEach(catId => {
         const catItem = allDisplayableTopicsMap[catId];
@@ -601,7 +603,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
 
 
     function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) {
-    const contentArea = document.getElementById('content-area');
+    contentArea = document.getElementById('content-area');
     if (!allDisplayableTopicsMap[topicId]) {
         contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`;
         return; }
