@@ -1,8 +1,8 @@
 // --- Global Variables ---
 let searchInput, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
-// /let navigationHistory = [];
-// /let currentHistoryIndex = -1;
-// /let isNavigatingViaHistory = false;
+let navigationHistory = [];
+let currentHistoryIndex = -1;
+let isNavigatingViaHistory = false;
 let allSearchableTopics = [];
 let allDisplayableTopicsMap = {};
 let paramedicCategories = []; // This must be a global var!
@@ -515,9 +515,9 @@ function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceS
 }
 
 // --- Navigation History Management ---
-let navigationHistory = [];
-let currentHistoryIndex = -1;
-let isNavigatingViaHistory = false;
+// /let navigationHistory = [];
+// /let currentHistoryIndex = -1;
+// /let isNavigatingViaHistory = false;
 
 function updateNavButtonsState() {
     if (!navBackButton || !navForwardButton) return;
