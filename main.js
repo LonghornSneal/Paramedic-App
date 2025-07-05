@@ -1,6 +1,6 @@
 // --- Global Variables ---
 let searchInput, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
-// /let contentArea = ['content-area'];
+let contentArea = ['content-area'];
 let medicationDataMap = {};
 let navigationHistory = [];
 let currentHistoryIndex = -1;
@@ -632,7 +632,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
             { key: 'pediatricRx', label: 'Pediatric Rx' } ];
         sections.forEach(sec => { if (details[sec.key]) { const wrapper = document.createElement('div');
                 wrapper.className = 'detail-section mb-3'; const title = document.createElement('div'); // section title
-                title.className = 'font-bold mb-1'; title.textContent = section.label; wrapper.appendChild(title);
+                title.className = 'font-bold mb-1'; title.textContent = sec.label; wrapper.appendChild(title);
 // /const tocItems = []; sections.forEach(section => { if (d[section.key]) { const wrapper = document.createElement('div'); wrapper.className = 'detail-section mb-2'; const sectionId = typeof slugify === 'function' ? slugify(section.label) : section.label.toLowerCase().replace(/\s+/g, '-'); wrapper.id = sectionId; wrapper.dataset.label = section.label; tocItems.push({ label: section.label, id: sectionId });
 // /const header = document.createElement('div'); header.className = 'flex items-center cursor-pointer select-none toggle-category'; const arrow = document.createElement('span'); arrow.className = 'arrow';
 // /arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" style="transform: rotate(0deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`; header.appendChild(arrow);
