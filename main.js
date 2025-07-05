@@ -9,10 +9,12 @@ let paramedicCategories = []; // This must be a global var!
 
 // --- Main App Initialization ---
 function initApp() {
-        // Ensure the header navigation UI (search box and nav buttons) exists
-    ensureHeaderUI();
-    // Ensure DOM elements assigned first
-    assignDomElements();
+    ensureHeaderUI();       // Ensure the header navigation UI (search box and nav buttons) exists
+    assignDomElements();    // Ensure DOM elements assigned first
+if (searchInput) {     // Inside initApp(), after other UI initialization:
+    searchInput.addEventListener('input', () => handleSearch(true));  // Filter as user types
+    searchInput.addEventListener('keypress', e => {    // Trigger search on Enter key
+        if (e.key === 'Enter') handleSearch(true); }); }
 // Navigation
     if (navBackButton && navForwardButton) {
         addTapListener(navBackButton, () => navigateViaHistory(-1));
@@ -28,13 +30,10 @@ function initApp() {
             if (window.ParamedicCategoriesData && window.MedicationDetailsData) {
                 initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
             } else {
-                console.error("Category or medication data not loaded!");
-            }
+                console.error("Category or medication data not loaded!"); }
         }, 200); // fallback: try again after short delay
     }
-
-    // Initial render
-    renderInitialView(true);
+    renderInitialView(true);    // Initial render
 }
 
 // --- Data Initialization (run ONCE) ---
@@ -412,30 +411,17 @@ function addTapListener(element, handler) {
     function activate(e) {
         if (e.type === 'click' || (e.type === 'keypress' && (e.key === 'Enter' || e.key === ' '))) {
             e.preventDefault();
-            handler(e);
-        }
+            handler(e); }
     }
     element.addEventListener('click', activate);
     element.addEventListener('keypress', activate);
 }
 
 
-
-
-
-searchInput.addEventListener('input', function() {
-    handleSearch(true);
-});
-searchInput.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        handleSearch(true);
-    }
-});
-
-
-
-
-
+//searchInput.addEventListener('input', function() {
+    //handleSearch(true); });
+//searchInput.addEventListener('keypress', function(e) {
+    //if (e.key === 'Enter') { handleSearch(true); } });
 
 
 // --- Autocomplete Functionality ---
