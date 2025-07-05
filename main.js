@@ -655,7 +655,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
     }
         // --- Previous/Next navigation for ALS Medications ---
         let prevId = null, nextId = null;
-        const alsMedCat = paramedicCategories.find(cat => cat.title && cat.toLowerCase().includes('als medications'));
+        const alsMedCat = paramedicCategories.find(cat => cat.title && cat.title.toLowerCase().includes('als medications'));
         if (alsMedCat && alsMedCat.children) {   // find index of current topic in ALS Medications list
             let idx = alsMedCat.children.findIndex(child => child.id === topic.id);
             if (idx === -1 && /^\d+-/.test(topic.id)) {
@@ -684,9 +684,16 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
 function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons:
     const btn = document.createElement('button');
     btn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
-    btn.innerHTML = (label === 'Previous')
-        ? `<svg ...>...</svg>${label}` 
-        : `${label}<svg ...>...</svg>`;
+btn.innerHTML = (label === 'Previous')
+    ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" 
+           viewBox="0 0 24 24" stroke="currentColor">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                 d="M15 19l-7-7 7-7" /></svg>${label}`
+    : `${label}<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" 
+           viewBox="0 0 24 24" stroke="currentColor">
+           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                 d="M9 5l7 7-7 7" /></svg>`;
+
     addTapListener(btn, () => renderDetailPage(targetId));
     return btn; }
   // if (tocItems.length > 0 && typeof window.setupSlugAnchors === 'function') { // window.setupSlugAnchors(tocItems);
