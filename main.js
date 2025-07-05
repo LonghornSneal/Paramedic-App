@@ -97,17 +97,9 @@ if (document.readyState === 'loading') {
 // ... rest of your code (ensure functions like createHierarchicalList, assignDomElements, etc. are defined)// @ts-check
 
 // Utility function to escape HTML
-//function escapeHTML(str) {
-//    return str.replace(/[&<>"']/g, function (char) {
-//        const escapeMap = {
- //           '&': '&amp;',
- //           '<': '&lt;',
- //           '>': '&gt;',
-//            '"': '&quot;',
-//            "'": '&#39;'
-//        };
-//        return escapeMap[char] || char;
-//    });
+function escapeHTML(str) {
+    const escapeMap = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+        return str.replace(/[&<>"']/g, char => escapeMap[char] || char; }
 //}
 // Initialize data structures with categories and medications
 //    const contentArea = document.getElementById('content-area');
