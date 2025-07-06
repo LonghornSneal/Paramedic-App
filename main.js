@@ -84,7 +84,7 @@ function initializeData(categoriesData, medDetailsData) {
 
 // --- Initial View Rendering ---
 function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    contentArea = document.getElementById('content-area');
+    let contentArea = document.getElementById('content-area');
     contentArea.innerHTML = ''; // Clear
     // Render the hierarchical list of categories
     const listContainer = document.createElement('div');
