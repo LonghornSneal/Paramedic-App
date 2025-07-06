@@ -11,8 +11,10 @@ let paramedicCategories = []; // This must be a global var!
 
 // --- Main App Initialization ---
 function initApp() {
-    ensureHeaderUI();       // Ensure the header navigation UI (search box and nav buttons) exists
-    assignDomElements();    // Ensure DOM elements assigned first
+        if (!searchInput || !navBackButton || !navForwardButton) {
+        ensureHeaderUI();
+        assignDomElements(); // re-assign now that we possibly created elements
+    }
 if (searchInput) {     // Inside initApp(), after other UI initialization:
     searchInput.addEventListener('input', () => handleSearch(true));  // Filter as user types
     searchInput.addEventListener('keypress', e => {    // Trigger search on Enter key
