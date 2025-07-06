@@ -1,6 +1,6 @@
 // --- Global Variables ---
 let searchInput, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
-let contentArea = ['content-area'];
+// /let contentArea = ['content-area'];
 let medicationDataMap = {};
 let navigationHistory = [];
 let currentHistoryIndex = -1;
@@ -518,7 +518,7 @@ function navigateViaHistory(direction) {
 }
 
 
-// if (shouldAddHistory) { addHistoryEntry({ viewType: 'detail', contentId: topicId }); }
+// /if (shouldAddHistory) { addHistoryEntry({ viewType: 'detail', contentId: topicId }); }
 
 if (navBackButton && navForwardButton) {
   addTapListener(navBackButton, () => navigateViaHistory(-1));
