@@ -142,6 +142,7 @@ function escapeHTML(str) {
 // Assign DOM elements on DOMContentLoaded
 function assignDomElements() {
     searchInput = document.getElementById('searchInput');
+    contentArea = document.getElementById('content-area');
     patientSidebar = document.getElementById('patient-sidebar');
     openSidebarButton = document.getElementById('open-sidebar-button');
     closeSidebarButton = document.getElementById('close-sidebar-button');
