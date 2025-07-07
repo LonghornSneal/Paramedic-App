@@ -25,12 +25,6 @@ html {
   #sidebar-overlay.active { opacity: 1; visibility: visible; }
   #app-container { display: flex; flex-direction: column; flex-grow: 1;
     width: 100%; transition: margin-left 0.3s ease-in-out; }
-  
-  /*
-  #content-area {
-      display: flex;
-      flex-direction: column; } 
-      */
 
 /* Hierarchical List (Categories/Topics) */
   .category-item > .category-header { display: flex; justify-content: space-between; align-items: center;
@@ -98,8 +92,8 @@ html {
   .toggle-info:hover { color: #065f46; background-color: #d1fae5; }
   .toggle-info .info-text { margin-left: 0.25rem; }
   .toggle-category { cursor: pointer; display: flex; justify-content: flex-start; align-items: center; }
-  .arrow { transition: transform 0.2s margin-right 0.5rem }
-  .arrow.rotate { transform: rotate(-180deg); }
+  .arrow { display: inline-block; margin-right: 0.5rem; transition: transform 0.2s; }
+    .arrow.rotate { transform: rotate(90deg); }
 
 /* Warning message boxes */
   .warning-box { margin-top: 1rem; margin-bottom: 1rem; padding: 0.75rem;

@@ -552,11 +552,10 @@ btn.innerHTML = (label === 'Previous')
   // if (tocItems.length > 0 && typeof window.setupSlugAnchors === 'function') { // window.setupSlugAnchors(tocItems);
 
 function attachToggleInfoHandlers(container) {
-    container.querySelectorAll('.toggle-info').forEach(el => {
-        el.onclick = function(e) {
-            e.stopPropagation();
-            const info = el.querySelector('.info-text');
-            if (info) info.classList.toggle('hidden'); }; }); }
+    container.querySelectorAll('.toggle-info').forEach(el => { el.onclick = function(e) { e.stopPropagation();
+        const info = el.querySelector('.info-text');
+        const arrow = el.querySelector('.arrow'); if (arrow) arrow.classList.toggle('rotate');
+        if (info) info.classList.toggle('hidden'); }; }); }
  //   container.querySelectorAll('.toggle-info').forEach(el => { addTapListener(el, () => { const info = el.querySelector('.info-text');
 
 function attachToggleCategoryHandlers(container) {      // --- Utility: toggling hidden info text in detail view ---
@@ -572,8 +571,9 @@ function parseTextMarkup(text) {   // Escape HTML and replace special markup wit
                        .replace(/</g, "&lt;")
                        .replace(/>/g, "&gt;");
     safeText = safeText.replace(/\n/g, "<br>");
-    safeText = safeText.replace(/\[\[(.+?)\|(.+?)\]\]/g, 
-                (_, display, info) => `<span class="toggle-info">${display}<span class="info-text hidden">${info}</span></span>`);
+    // AFTER: includes an arrow span with icon SVG before the display text
+    safeText = safeText.replace(/\[\[(.+?)\|(.+?)\]\]/g,
+        (_, display, info) => `<span class="toggle-info"><span class="arrow"></span>${display}<span class="info-text hidden">${info}</span></span>`);
     safeText = safeText.replace(/\{\{red:(.+?)\}\}/g, 
                 (_, t) => `<span class="text-red-600 font-semibold">${t}</span>`);
     safeText = safeText.replace(/\{\{redul:(.+?)\}\}/g, 
