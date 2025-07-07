@@ -82,7 +82,7 @@ function updatePatientData() {      // Read and parse inputs from the sidebar fi
                     link.classList.remove('strikethrough'); } } )
       
         // Update the currently open detail page (if any) to reflect new patient data
-  let contentArea = document.getElementById('content-area');
+  // /contentArea = document.getElementById('content-area');
   const currentTopicTitleEl = contentArea ? contentArea.querySelector('.topic-h2') : null;
     let topic = document.getElementById('content-area');
   

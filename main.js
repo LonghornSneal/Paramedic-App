@@ -1,5 +1,5 @@
 // --- Global Variables ---
-let searchInput, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
+let searchInput, patientSidebar, contentArea, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
 let medicationDataMap = {};
 let navigationHistory = [];
 let currentHistoryIndex = -1;
@@ -7,7 +7,17 @@ let isNavigatingViaHistory = false;
 let allSearchableTopics = [];
 let allDisplayableTopicsMap = {};
 let paramedicCategories = []; // This must be a global var!
-
+// Assign DOM elements on DOMContentLoaded
+function assignDomElements() {
+    searchInput = document.getElementById('searchInput');
+    contentArea = document.getElementById('content-area');
+    patientSidebar = document.getElementById('patient-sidebar');
+    openSidebarButton = document.getElementById('open-sidebar-button');
+    closeSidebarButton = document.getElementById('close-sidebar-button');
+    sidebarOverlay = document.getElementById('sidebar-overlay');
+    navBackButton = document.getElementById('nav-back-button');
+    navForwardButton = document.getElementById('nav-forward-button');
+}
 // ---function initApp() { if (!searchInput || !navBackButton || !navForwardButton) { assignDomElements();
 
 function initApp() {
@@ -92,7 +102,7 @@ function initializeData(categoriesData, medDetailsData) { paramedicCategories = 
 
 // --- Initial View Rendering ---
 function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    let contentArea = document.getElementById('content-area');
+    // /contentArea = document.getElementById('content-area');
     contentArea.innerHTML = ''; // Clear
 
     // Render the hierarchical list of categories
@@ -129,17 +139,7 @@ function escapeHTML(str) {
 //    allDisplayableTopicsMap = {};
 //if (!categoriesData || !medDetailsData) { console.error('Missing required data:', { categories: !!categoriesData, medications: !!medDetailsData }); }}
 
-// Assign DOM elements on DOMContentLoaded
-function assignDomElements() {
-    searchInput = document.getElementById('searchInput');
-    let contentArea = document.getElementById('content-area');
-    patientSidebar = document.getElementById('patient-sidebar');
-    openSidebarButton = document.getElementById('open-sidebar-button');
-    closeSidebarButton = document.getElementById('close-sidebar-button');
-    sidebarOverlay = document.getElementById('sidebar-overlay');
-    navBackButton = document.getElementById('nav-back-button');
-    navForwardButton = document.getElementById('nav-forward-button');
-}
+
 
 // let sidebareOverlay We rely on the correctly spelled sidebarOverlay variable, which is obtained via document.getElementById('sidebar-overlay').
 // Ensure overlay is hidden on app start
@@ -431,7 +431,7 @@ function createHierarchicalList(items, container, level = 0) {
     });
 }
 // Note: We also ensure contentArea is defined locally. The category list items still need a way to be identified by category ID if we ever wanted to manipulate them directly, so as an additional improvement, we can modify createHierarchicalList to set a data-category-id attribute on category rows: // Inside createHierarchicalList, in the category branch: row.dataset.categoryId = item.id;
-function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { let contentArea = document.getElementById('content-area');
+function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { contentArea = document.getElementById('content-area');
     // Mark each category in the path as expanded
     categoryPath.forEach(catId => { const catItem = allDisplayableTopicsMap[catId];
         if (catItem) catItem.expanded = true; });
@@ -446,7 +446,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { let
 
     // Collapsible sections for details (ALS Medications)
     function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) { // /function renderList(topicId, scrollToTop = true, shouldAddHistory = true) { const ul = document.createElement('ul');
-    let contentArea = document.getElementById('content-area');
+    contentArea = document.getElementById('content-area');
     if (!allDisplayableTopicsMap[topicId]) { contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; return; }
     const topic = allDisplayableTopicsMap[topicId];     // /ul.id = 'ParamedicCategories-list'; const topic = allDisplayableTopicsMap[topicId]; }
     contentArea.innerHTML = '';
