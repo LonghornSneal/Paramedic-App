@@ -1,5 +1,5 @@
 // --- Global Variables ---
-let searchInput, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
+let searchInput, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton, patientSidebarOverlay, opensidebar, closesidebar;
 let medicationDataMap = {};
 let navigationHistory = [];
 let currentHistoryIndex = -1;
@@ -149,6 +149,7 @@ function assignDomElements() {
     navBackButton = document.getElementById('nav-back-button');
     navForwardButton = document.getElementById('nav-forward-button');
 }
+let sidebareOverlay
 // Ensure overlay is hidden on app start
     if (sidebarOverlay) { sidebarOverlay.classList.add('hidden');
         sidebarOverlay.classList.remove('active'); }
