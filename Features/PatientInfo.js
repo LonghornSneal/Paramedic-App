@@ -54,7 +54,7 @@ function updatePatientData() {      // Read and parse inputs from the sidebar fi
             lungSounds: document.getElementById('vs-lung-sounds').value.trim() };
             patientData.ekg = document.getElementById('pt-ekg').value.trim(); }
 
-    const topic = contentarea;
+    const topic = contentArea;
     // Filter the medication/topic list based on selected indications
     const topicLinks = document.querySelectorAll('a.topic-link-item');
     topicLinks.forEach(link => { const medId = link.dataset.topicId; const med = allDisplayableTopicsMap[medId];
