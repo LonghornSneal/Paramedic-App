@@ -92,7 +92,7 @@ function initializeData(categoriesData, medDetailsData) { paramedicCategories = 
 
 // --- Initial View Rendering ---
 function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    contentArea = document.getElementById('content-area');
+    let contentArea = document.getElementById('content-area');
     contentArea.innerHTML = ''; // Clear
 
     // Render the hierarchical list of categories
@@ -132,7 +132,7 @@ function escapeHTML(str) {
 // Assign DOM elements on DOMContentLoaded
 function assignDomElements() {
     searchInput = document.getElementById('searchInput');
-    contentArea = document.getElementById('content-area');
+    let contentArea = document.getElementById('content-area');
     patientSidebar = document.getElementById('patient-sidebar');
     openSidebarButton = document.getElementById('open-sidebar-button');
     closeSidebarButton = document.getElementById('close-sidebar-button');
@@ -431,7 +431,7 @@ function createHierarchicalList(items, container, level = 0) {
     });
 }
 // Note: We also ensure contentArea is defined locally. The category list items still need a way to be identified by category ID if we ever wanted to manipulate them directly, so as an additional improvement, we can modify createHierarchicalList to set a data-category-id attribute on category rows: // Inside createHierarchicalList, in the category branch: row.dataset.categoryId = item.id;
-function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { contentArea = document.getElementById('content-area');
+function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { let contentArea = document.getElementById('content-area');
     // Mark each category in the path as expanded
     categoryPath.forEach(catId => { const catItem = allDisplayableTopicsMap[catId];
         if (catItem) catItem.expanded = true; });
@@ -446,7 +446,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { con
 
     // Collapsible sections for details (ALS Medications)
     function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) { // /function renderList(topicId, scrollToTop = true, shouldAddHistory = true) { const ul = document.createElement('ul');
-    contentArea = document.getElementById('content-area');
+    let contentArea = document.getElementById('content-area');
     if (!allDisplayableTopicsMap[topicId]) { contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; return; }
     const topic = allDisplayableTopicsMap[topicId];     // /ul.id = 'ParamedicCategories-list'; const topic = allDisplayableTopicsMap[topicId]; }
     contentArea.innerHTML = '';

@@ -38,10 +38,12 @@ function closeSidebar() { patientSidebar.classList.remove('open');
 function updatePatientData() {      // Read and parse inputs from the sidebar fields
             patientData.age = document.getElementById('pt-age').value 
     ? parseInt(document.getElementById('pt-age').value, 10) : null;
-  patientData.weight = document.getElementById('pt-weight').value 
+    patientData.weight = document.getElementById('pt-weight').value 
     ? parseFloat(document.getElementById('pt-weight').value) : null;
-  patientData.weightUnit = document.getElementById('pt-weight-unit').value;
-  const getArrayFromTextarea = (id) => {
+    const weightVal = document.getElementById('pt-weight') ? document.getElementById('pt-weight').value.trim() : '';
+    patientData.weight = weightVal && !isNaN(parseFloat(weightVal)) ? parseFloat(weightVal) : null;
+    patientData.weightUnit = document.getElementById('pt-weight-unit').value;
+    const getArrayFromTextarea = (id) => {
     const value = document.getElementById(id).value.trim();
     return value 
       ? value.split(',').map(item => item.trim().toLowerCase()).filter(item => item) : []; };
@@ -80,7 +82,7 @@ function updatePatientData() {      // Read and parse inputs from the sidebar fi
                     link.classList.remove('strikethrough'); } } )
       
         // Update the currently open detail page (if any) to reflect new patient data
-  const contentArea = document.getElementById('content-area');
+  let contentArea = document.getElementById('content-area');
   const currentTopicTitleEl = contentArea ? contentArea.querySelector('.topic-h2') : null;
   if (currentTopicTitleEl) {
     const currentTopicId = currentTopicTitleEl.dataset.topicId;
