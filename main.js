@@ -456,10 +456,18 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { con
     const headerEl = document.createElement('h2'); // Header/title  // /const title = document.createElement('h2'); title.textContent = topic.title || topic.name || topic.id; title.dataset.topicId = topic.id; title.className = 'topic-h2';
     headerEl.textContent = topic.title || topic.name || topic.id;  // /contentArea.innerHTML = ''; contentArea.appendChild(title);
     headerEl.className = 'topic-h2 font-semibold text-lg mb-4';
-    headerEl.dataset.topicId = topic.id; contentArea.appendChild(headerEl);
+    headerEl.dataset.topicId = topic.id; contentArea.appendChild(headerEl); }
 
-    let details = topic.details;  // Show details if available
-    // Fallbacks for alternate IDs (numbered/un-numbered)
+    // Insert warning boxes if any contraindications or allergies are present     // Check PDE5 inhibitor usage     // Check low BP
+    let warningsHtml = ""; if (patientData.allergies.length > 0) { const medKeywords = (topic.title + " " + topic.id).toLowerCase(); const allergy = patientData.allergies.find(a => a && medKeywords.includes(a));
+        if (allergy) { warningsHtml += `<div class="warning-box warning-box-red"><div>${createWarningIcon('text-red-600')}<span>Allergy Alert: Patient has an allergy to ${topic.title}.</span></div></div>`; } }
+    if (topic.id === 'ntg') { const hasPDE5 = patientData.currentMedications.some(med => PDE5_INHIBITORS.some(term => med.includes(term)) );
+        if (hasPDE5) { warningsHtml += `<div class="warning-box warning-box-red"><div>${createWarningIcon('text-red-600')}<span>Contraindication: Recent PDE5 inhibitor use – do NOT administer NTG.</span></div></div>`; }
+        if (patientData.vitalSigns.bp) { const bpMatch = patientData.vitalSigns.bp.match(/(\d+)/); const systolic = bpMatch ? parseInt(bpMatch[0], 10) : 0;
+        if (systolic && systolic < 100) { warningsHtml += `<div class="warning-box warning-box-red"><div>${createWarningIcon('text-red-600')}<span>Contraindication: Systolic BP < 100 mmHg – NTG is not advised.</span></div></div>`; } } }
+    if (warningsHtml) { contentArea.innerHTML += warningsHtml; }
+
+    let details = topic.details;  // Show details if available     // Fallbacks for alternate IDs (numbered/un-numbered)
     if (!details && topic.id && topic.id.match(/^\d+-/)) {
         const altId = topic.id.replace(/^\d+-/, '');
         details = allDisplayableTopicsMap[altId]?.details;
@@ -497,7 +505,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { con
         contentArea.innerHTML += `<div class="text-gray-500 italic">No detail information found for this item.</div>`; }
 
     attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
-    }
+
         // --- Previous/Next navigation for ALS Medications ---
         let prevId = null, nextId = null;
         const alsMedCat = paramedicCategories.find(cat => cat.title && cat.title.toLowerCase().includes('als medications'));
