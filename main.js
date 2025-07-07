@@ -1,5 +1,5 @@
 // --- Global Variables ---
-let searchInput, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton, patientSidebarOverlay, opensidebar, closesidebar;
+let searchInput, patientSidebar, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
 let medicationDataMap = {};
 let navigationHistory = [];
 let currentHistoryIndex = -1;
@@ -31,12 +31,12 @@ if (searchInput) {
         // Defensive: Wait until both globals are present
         setTimeout(() => { if (window.ParamedicCategoriesData && window.MedicationDetailsData) {
                 initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
-            } else { console.error("Category or medication data not loaded!"); } }, 200); }    // /fallback: try again after short delay
+            } else { console.error("Category or medication data not loaded!"); } }, 200); }      // /fallback: try again after short delay
     renderInitialView(true); }
 
 // --- Data Initialization (run ONCE) ---
-function initializeData(categoriesData, medDetailsData) {    // /Assign the global category array
-    paramedicCategories = categoriesData;
+function initializeData(categoriesData, medDetailsData) { paramedicCategories = categoriesData;    // /Assign the global category array
+
     // Wipe/prepare lookup maps
     allDisplayableTopicsMap = {};
     allSearchableTopics = [];
