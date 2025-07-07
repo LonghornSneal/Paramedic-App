@@ -445,7 +445,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { con
         if (topicEl) topicEl.classList.add('recently-viewed'); } }
 
     // Collapsible sections for details (ALS Medications)
-    function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) { //function renderList(topicId, scrollToTop = true, shouldAddHistory = true) { const ul = document.createElement('ul');
+    function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) { // /function renderList(topicId, scrollToTop = true, shouldAddHistory = true) { const ul = document.createElement('ul');
     contentArea = document.getElementById('content-area');
     if (!allDisplayableTopicsMap[topicId]) { contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; return; }
     const topic = allDisplayableTopicsMap[topicId];     // /ul.id = 'ParamedicCategories-list'; const topic = allDisplayableTopicsMap[topicId]; }
