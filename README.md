@@ -1,16 +1,22 @@
-# This file is to be continually updated by the AI Agent with the updated text within {}. Nothing is to be ever deleted, only added
+# -------------------------------------THIS FILE IS TO BE CONTINUALLY UPDATED BY AI-------------------------------------
+
+## PARAMEDIC QUICK REFERENCE APP README.md
+
+### TABLE OF CONTENTS: ## 1. GENERAL SCOPE   ## 2. APP OVERVIEW AND STRUCTURE   ## 3. PROJECT PURPOSE   ## 4. PROJECT STRUCTURE   ## 5. HOW THE PIECES/FILES/CODE FIT/WORK TOGETHER   ## 6. -----TOP PRIORITY TASKS-----   ## 7. CURRENT TASKS/GOALS   ## 8. RECENT FIXES/CHANGES   ## 9. TIMELINE SUMMARY  ## 10. FUTURE TASKS/GOALS/IDEAS
+
+## 1. GENERAL SCOPE
 
 Updates must be designed to accurately describe how the app is supposed to appear & function, both currently and for future updates. Updates are also designed to change the behavior of the AI Agent, so that the AI Agent will successfully update the code without any errors or issues being present. Read both of the README.md files for guidance, and then continue coding/testing the code. You have all the tools available to fix ANY issue. Always run tests on newly created code and upon any & all code that is related to an issue. Before you are finsihed coding, you must Read this README.md once more to make updates to the README.md and to insure that all instructions where followed.---
 
-## Paramedic Quick Reference – App Overview and Structure
+## 2. APP OVERVIEW AND STRUCTURE
 
 This document provides an overview of the **Paramedic Quick Reference** application’s structure and components. It is meant to guide developers (and AI assistants) through the project, to prevent misunderstandings during updates. By outlining where each piece of functionality resides and highlighting known pitfalls, this README helps narrow down where code errors might occur and how to address them.
 
-## Project Purpose
+## 3. PROJECT PUROPOSE
 
 **Paramedic Quick Reference** is a single-page web application that offers paramedics a quick-access guide to critical information. It includes hierarchical categories of topics (like protocols, medications, etc.), detailed medication information for ALS (Advanced Life Support) drugs, a patient info sidebar for contextual inputs, and dynamic features such as dosage calculations and warnings based on patient data. How about any that might be useful for incorporating into my Paramedic app that I am creating. My Paramedic app will have the following things coded for it. A main contents page that has a list of topics. A blue arrow (pointing towards the right) adjacent to the topic. When either the blue arrow (pointing to the right) or the topic title that is adjacent to this blue arrow is clicked upon, the blue arrow rotates to face downward and expands a list of subtopics. The subtopics will also have a blue arrow adjacent to itself if there are more subtopics within that subtopic. The subtopics without a blue arrow will be a clickable button that when clicked upon will open up a focused section dedicated to that specific subtopic. This dedicated section can contain: links, images, videos, hidden text that can be expanded (and collapsed after expanding) when the text that is hiding it is clicked upon, a expandible list of topics. The main contents page will have a title at the top center and a search bar underneath it. The search bar will begin populating with related options when the user begins typing in it. In the top left of the main contents page there will be a expandible button that brings up a section with different topics that the user can enter data into. This data that is entered in by the user will be able to have the following effects on the rest of the app: strikethrough text that is no longer appropriate, warnings, narrowed lists, focused lists, formulas will now have their calculations already performed with math to obtain to calculations visible to the user, new button options, faded topic buttons, the user entered data will have the most important data shown on the screen as the user navigates through the app afterwards, and this area will automatically collapse when the user clicks outside of this boxed in section. At all times in the top right of the app there will be a back navigation button, a forward navigation button, and a button underneath that takes the user to the home screen. When the user clicks the back navigation button, the user will be taken back to the prior screen with the last thing the user had clicked upon now being highlighted. The forward navigation button can only be used after the back navigation button has been used. Font will incorporate all the various style options. When the user exits the app and goes back into the app, the user will be able to easily access any information that the user had previously inputted into the app and there will be a history button that is on the screen at all times that will give a scrollable list, that starts from the most recent button that the user had clicked upon in the app session or in prior app sections, and this button can be clicked upon with the button having the full functionality of the button it represents. The code will be organized into separate files and folders, so information that is in one file may have to be accessed by one or more files. The code will incorporate only html, css, and javascript. Modules will not be used.
 
-## Project Structure
+## 4. PROJECT STRUCTURE
 
 The project is organized into several directories, each containing specific types of files:
 
@@ -36,67 +42,82 @@ The project is organized into several directories, each containing specific type
 
 All scripts are included in `index.html` in the proper order. Notably, the data files are included **before** the main application script. This ensures that by the time `main.js` runs, the global data (categories and medication details) is already available.
 
-## How the Pieces Work Together
+## 5. HOW THE PIECES/FILES/CODE FIT/WORK TOGETHER
 
 1. **Data Loading:** On page load, `ParamedicCategoriesData.js` and `MedicationDetailsData.js` execute, attaching large data objects to the `window` (global scope). For example, `window.ParamedicCategoriesData` might be an array of category objects (some of which contain nested topics), and `window.MedicationDetailsData` might be an array or object mapping each medication ID to its detail info. It’s important that each topic in the category data has a unique `id` that corresponds to a detail entry’s `id`. If these IDs don’t match, the detail page won’t know which data to display.
+
 2. **App Initialization:** When `main.js`’s `initApp()` runs (on DOMContentLoaded), it calls `initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData)` to merge the static data into the app’s dynamic structures. Internally, this may copy the data into the `paramedicCategories` array, build the `allSearchableTopics` list (for searching titles), and fill the `allDisplayableTopicsMap` – a dictionary mapping each topic ID to a combined object containing its title, category path, and `details` (if it’s a medication). After initialization, the app calls `renderInitialView()` to show the list of categories/topics.
+
 3. **Rendering the List:** The initial view iterates through `paramedicCategories` to create the expandable list in the UI. Categories can be clicked to reveal their topics. Topics (like specific drugs or procedures) appear as links. The code for building this list resides in `main.js` (a function like `createHierarchicalList` or within `renderInitialView`). Each topic link element gets a `data-topic-id` attribute equal to that topic’s `id` (slug).
+
 4. **Showing Details:** When a topic link is clicked, `renderDetailPage(topicId)` is invoked. This function looks up the topic in `allDisplayableTopicsMap` by its `id`. If it finds a match, it uses that data to construct an HTML detail view. For a medication, the detail view will include sections like **Description**, **Indications**, **Contraindications**, **Dosage** (often split into adult and pediatric sections), and possibly other notes. These sections likely have heading elements (e.g., `<h3>` or `<h2>` tags for each section title). The app uses consistent slug IDs for these sections – e.g., a section "Adult Dose" might have an element `<h3 id="adult-dose">Adult Dose</h3>` generated via the slugify utility.
+
 5. **Anchor Navigation:** If a medication detail page is long, the app provides an in-page navigation (anchors) to jump to sections. The combination of `slugList.js` and `slugAnchors.js` enables this:
    - `slugList.js` probably collects all section headings from the detail content (after it’s rendered) and creates a list of their `id` attributes (using `slugify` to mirror how the IDs were generated).
    - `slugAnchors.js` then takes that list and renders a clickable table of contents (for example, a list of anchor links at the top of the detail page or a floating menu). Each anchor link’s `href` corresponds to a section’s ID (e.g., `#adult-dose`). It also may handle smooth scrolling or highlight the current section.
    - **Important:** The slug generation must be consistent. The same `slugify` function is used both when assigning IDs to section headings and when creating the anchor `href`s. This consistency was enforced in recent fixes, so all anchors should align with their targets. If you need to modify or add new sections, use `slugify.js` to generate section IDs to maintain this consistency.
+
 6. **Patient Info Sidebar Integration:** The Patient Info sidebar inputs (age, weight, medications, etc.) allow dynamic filtering and warnings:
    - In `PatientInfo.js`, event listeners are set up on these inputs (see the `ptInputs.forEach(...)` at the bottom of the file attaching `updatePatientData` on input events). When the user enters data (e.g., adds an allergy or sets an age), the `updatePatientData()` function runs.
    - `updatePatientData()` (in **`PatientInfo.js`**) updates the global `patientData` object and then applies logic to the UI. For example, after updating, it goes through all topic links and adds a `.strikethrough` class if a medication is not indicated for the given conditions:contentReference[oaicite:9]{index=9}. It also re-renders the current open detail page (calling `renderDetailPage` again for the current topic) to apply any new age/weight-specific filtering (like striking out pediatric doses if the patient is an adult, and vice versa:contentReference[oaicite:10]{index=10}). Additionally, it checks contraindications: if the patient’s info suggests a contraindication (e.g., the patient is on a medication that conflicts with the drug in the detail view, or has an allergy), the code that builds the warnings in `renderDetailPage` will display those warnings in colored boxes.
    - Currently, the partial data-driven updates (like automatically recalculating doses or filtering content) are a work in progress. The code already handles some scenarios (e.g., the blood pressure and PDE5 inhibitor checks for Nitroglycerin as seen in `renderDetailPage` logic:contentReference[oaicite:11]{index=11}), but other aspects might be expanded in the future. This is flagged for future development.
+
 7. **Search Functionality:** The app includes a search bar at the top of the content area. When the user types and presses Enter, the `handleSearch()` function in `main.js` runs:contentReference[oaicite:12]{index=12}. This function filters `allSearchableTopics` for any topic whose title or path matches the search term. The result is passed to `renderSearchResults`, which displays a list of matching topics. This lets the user quickly find items by keyword. If modifying or debugging search, focus on the `allSearchableTopics` array (populated in initialization with all topic titles and perhaps category paths) and the `handleSearch`/`renderSearchResults` logic.
 
-## 2024-Paramedic-App UI/UX and Codebase Update Summary (June 2025)
-
-### Recent Fixes and Improvements
+## 6. -----TOP PRIORITY TASKS-----
 
 - **Navigation Buttons (ALS Medications):**
-  - The Previous/Next (blue arrow) navigation buttons in the ALS Medications section are now always present, visually match the Contents page, and function correctly for all medications.
-  - Navigation logic was refactored to ensure buttons are always rendered and event listeners are reliably attached after header creation.
+  - The Previous/Next (blue arrow) navigation buttons in the ALS Medications section are now always present, visually match the Contents page, and function correctly for all medications-------STILL CAN USE IMPROVEMENTS IN THE VISUAL DEPARTMENT-------.
+  - Navigation logic was refactored to ensure buttons are always rendered and event listeners are reliably attached after header creation -----DOUBLE CHECK THAT THIS IS CORRECT--------.
 
 - **Patient Info Sidebar:**
   - The quick escape (close) button and overlay now reliably close/hide the sidebar, regardless of how it was opened.
-  - Sidebar open/close logic was unified in both `main.js` and `Features/PatientInfo.js` for consistent overlay behavior.
+  - Sidebar open/close logic was unified in both `main.js` and `Features/PatientInfo.js` for consistent overlay behavior-----DOUBLE CHECK THAT THIS IS CORRECT--------.
 
 - **Medication Data Display:**
-  - All medications now display their associated data, regardless of whether their IDs have number prefixes or not. ID matching logic was made robust to handle both numbered and non-numbered IDs.
+  - All medications now display their associated data, regardless of whether their IDs have number prefixes or not. ID matching logic was made robust to handle both numbered and non-numbered IDs-------WORK IN PROGRESS-----------DOUBLE CHECK THAT THIS IS CORRECT--------.
 
 - **Navigation (Back/Forward) Buttons:**
-  - Navigation history and view rendering logic were updated to always update navigation button states and use consistent state objects.
+  - Navigation history and view rendering logic were updated to always update navigation button states and use consistent state objects----------LOGIC NEEDS TO BE IMPROVED STILL----------NAVIGATION IS NOT ALWAYS LOGICAL--------FUTURE UPDATE STILL NEEDS TO HIGHLIGHT THE AREA THE USER LAST CLICKED ON AFTER THE HIT THE BACK NAVIGATION ARROW (THE CODE SHOULD EXIST FOR THIS SO YOU MUST SEARCH FOR IT)--------STILL NEEDS CODE FOR A "HOME BUTTON" THAT IS PLACED RIGHT UNDERNEATH THE NAVIGATION ARROWS--------.
 
 - **UI Consistency:**
-  - The main topic title in detail view now uses a consistent class and data attribute for reliable UI updates.
-  - The `ensureHeaderUI` function in `main.js` was patched to always create and order navigation/search elements correctly, fixing header UI consistency.
-  - **Slug Anchors Initialization:** `slugAnchors.js` now waits for the DOM to load before inserting hidden anchor elements, ensuring the container is appended reliably.
+  - The main topic title in detail view now uses a consistent class and data attribute for reliable UI updates-----DOUBLE CHECK THAT THIS IS CORRECT--------.
+  - The `ensureHeaderUI` function in `main.js` was patched to always create and order navigation/search elements correctly, fixing header UI consistency-----DOUBLE CHECK THAT THIS IS CORRECT--------.
+  - **Slug Anchors Initialization:** `slugAnchors.js` now waits for the DOM to load before inserting hidden anchor elements, ensuring the container is appended reliably-----DOUBLE CHECK THAT THIS IS CORRECT--------.
   - **Detail Table of Contents:** Each medication detail page now shows a generated Table of Contents for its sections. `renderDetailPage` passes the section list to `setupSlugAnchors`, which builds the anchor list immediately on page load.
-  - **Medication Detail Layout:** Section headers like *Indications* and *Precautions* now align directly beside the blue arrow instead of being spaced across the screen. This was fixed by updating the `.toggle-category` style to use `justify-content: flex-start`.
-  - **Table of Contents Loading:** `ParamedicCategoriesData.js` now exports its data via a constant before assigning to `window`. This prevents a runtime error and ensures the contents list loads on the first page view.
+  - **Medication Detail Layout:** Section headers like *Indications* and *Precautions* now align directly beside the blue arrow instead of being spaced across the screen. This was fixed by updating the `.toggle-category` style to use `justify-content: flex-start`--------THIS STILL DOESN'T WORK--------.
+  - **Table of Contents Loading:** `ParamedicCategoriesData.js` now exports its data via a constant before assigning to `window`. This prevents a runtime error and ensures the contents list loads on the first page view-----DOUBLE CHECK THAT THIS IS CORRECT--------.
 
 - **Testing:**
-  - All Jest tests now pass. The `add.test.js` import path was fixed, and a minimal test for `slugify.js` was added. The test suite is clean and ready for further test additions.
-  - **Legacy Compatibility Update:** Key parts of `main.js` now avoid modern JavaScript features. DOM references use `var`, error messages use string concatenation, and category processing no longer relies on the spread operator.
+  - All Jest tests now pass. The `add.test.js` import path was fixed, and a minimal test for `slugify.js` was added. The test suite is clean and ready for further test additions-----DOUBLE CHECK THAT THIS IS CORRECT--------.
+  - **Legacy Compatibility Update:** Key parts of `main.js` now avoid modern JavaScript features. DOM references use `var`, error messages use string concatenation, and category processing no longer relies on the spread operator------THIS NEEDS TO BE EXPLAINED IN MORE DETAIL FOR WHAT IT ACTUALLY MEANS AND WHY ONE WAY IS BETTER THAN THE OTHER WAY----------.
 
-### Current App Behavior
+  Patient Weight Input: The sidebar now includes a weight input field, so users can input weight (kg/lb) which is used for dosage considerations-------NEEDS TO BE UPDATED TO HAVE BOTH FIELDS AVAILABLE ADJACENT TO EACH OTHER-------BOTH FIELDS MUST BE SIMULTANEOUSLY AVAILABLE FOR INPUT-------WHEN ONE FIELD GETS A WEIGHT PUT INTO IT, THE OTHER FIELD UPDATES WITH THE CORRECT VAULE FOR IT'S UNIT--------UNITS (kg/lb) MUST BE DIRECTLY NEXT TO THEIR RESPECTIVE NUMBERS-------.
 
-- **Navigation:** Users can always move to the previous/next ALS medication using blue arrow buttons at the top of the detail view. Back/forward browser navigation is supported and reliably updates the UI.
-- **Patient Info Sidebar:** The sidebar can be opened from the main UI and closed via the escape button or overlay. Patient data updates trigger UI changes and warnings in medication detail views.
-- **Medication Details:** All medications listed in the ALS Medications section display their full details, including all associated data fields. Section anchors and in-page navigation work reliably.
-- **UI Layout:** All UI elements (navigation, search, sidebar, detail view) are in their correct locations and styled consistently with the rest of the app.
-- **IE Compatibility:** The CSS now avoids grid and custom viewport units. `#content-area` uses flexbox layout and `#patient-sidebar` has a fixed `100vh` height for better support in older browsers.
-- **Testing:** All available tests pass. The test suite is clean and ready for further expansion.
+  Contraindication Warnings: The app now displays warning boxes on medication pages if patient data reveals contraindications (e.g., allergies, low BP, or recent medication conflicts like PDE5 inhibitors with NTG)--------WORK IN PROGRESS---------.
 
-### Known Issues & Future Enhancements
+  Toggle Arrows for Hidden Info: Green clickable text that reveals hidden information now has a small arrow icon that rotates when clicked, indicating expandable content. Likewise, the main Contents page shows blue arrows that turn downward when categories are expanded---------NEEDS FURTHER IMPROVEMENTS-----------.
 
+### 7. CURRENT TASKS/GOALS
+
+- **Navigation:** Users can always move to the previous/next ALS medication using blue arrow buttons at the top of the detail view. Back/forward browser navigation is supported and reliably updates the UI-----DOUBLE CHECK THAT THIS IS CORRECT--------.
+- **Patient Info Sidebar:** The sidebar can be opened from the main UI and closed via the escape button or overlay. Patient data updates trigger UI changes and warnings in medication detail views-----DOUBLE CHECK THAT THIS IS CORRECT--------.
+- **Medication Details:** All medications listed in the ALS Medications section display their full details, including all associated data fields. Section anchors and in-page navigation work reliably---------WORK IN PROGRESS----------.
+- **UI Layout:** All UI elements (navigation, search, sidebar, detail view) are in their correct locations and styled consistently with the rest of the app---------NEEDS FURTHER IMPROVEMENTS--------NEEDS VISUAL IMPROVEMENTS---------NEEDS A SETTINGS TAB PLACED IN THE FOOTER FOR CHANGING THE COLORS OF EVERYTHING--------NEEDS A DARK MODE OPTION IN THE SETTINGS-------SETTINGS BUTTON SHOULD BE COLOR CHANGING TO DRAW THE USERS ATTENTION WHEN THEY LOOK AT THE BOTTOM OF THE SCREEN----------PAGE ELEMENTS MOVE WIERD WHEN SCROLLING AROUND A BUNCH------------.
+- **IE Compatibility:** The CSS now avoids grid and custom viewport units. `#content-area` uses flexbox layout and `#patient-sidebar` has a fixed `100vh` height for better support in older browsers--------DESCRIPTION NEEDS TO BE MORE DETAILED ON WHY ONE WAY IS BETTER THAN ANOTHER WAY AND WHAT THE DIFFERENCE LOOKS LIKE----------.
+- **Testing:** All available tests pass. The test suite is clean and ready for further expansion-----DOUBLE CHECK THAT THIS IS CORRECT--------.
 - Some data-driven updates (like automatic recalculation of all medication doses based on patient info) are still a work in progress and flagged for future development.
 - The anchor navigation for long detail pages works, but could be enhanced with smooth scrolling or section highlighting.
 - Additional tests for more features (e.g., dosage calculations, contraindication warnings) are recommended.
 
+### 8. RECENT FIXES AND CHANGES
+
+## 9. TIMELINE SUMMARY
+
+## 10. FUTURE TASKS/GOALS/IDEAS
+
+  FUTURE IMPROVEMENTS-------ALWAYS GIVE A SUGGESTION BELOW FOR HOW THE APP CAN BE IMPROVED UPON IN TERMS OF ALIGNING WITH THE GOALS OF THE README.md-------------THE SUGGESTIONS THAT ARE BELOW ARE STRICTLY OFF-LIMITS TO WORK ON UNTIL THEY GET MOVED TO BE UNDERNEATH "KNOWN ISSUES"!!!!!!!!!!!!!!!!!!!!!!!!!!!--------------------------
+
 ---
 
-**This README is up to date as of June 2025. All instructions and documentation reflect the current and intended behavior of the Paramedic Quick Reference app.**
+**This README is up to date as of JuLY 7TH, 2025. All instructions and documentation reflect the current and intended behavior of the Paramedic Quick Reference app.**

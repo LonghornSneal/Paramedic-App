@@ -447,7 +447,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { con
     if (highlightId) { const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
         if (topicEl) topicEl.classList.add('recently-viewed'); } }
 
-    // Collapsible sections for details (ALS Medications)
+    // Collapsible sections for details (ALS Medications)---------ERROR---------CODE MUST BE FIXED TO INCLUDE THE BLUE ARROWS NEXT TO THE ALS MEDICATION DETAIL'S INDIVIDUAL SUBTOPICS THAT FUNCTION THE SAME AS THE BLUE ARROWS NEXT TO THE GREEN TEXT THAT REVEALS THE GREEN HIDDEN TEXT WHEN CLICK UPON (DON'T CHANGE ANY COLORS THOUGH)--------THERE SHOULD ALREADY EXIST CODE FOR THIS, SO YOU MUST ALSO SEARCH FOR THAT CODE---------
     function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) { // /function renderList(topicId, scrollToTop = true, shouldAddHistory = true) { const ul = document.createElement('ul');
     contentArea = document.getElementById('content-area');
     if (!allDisplayableTopicsMap[topicId]) { contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; return; }

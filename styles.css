@@ -43,8 +43,8 @@ html {
     cursor: pointer; transition: background-color 0.2s, transform 0.1s; }
   .topic-link-item:hover { background-color: #e0f2fe; }
   .topic-link-item:active { transform: scale(0.98); }     /* Slight scale down on click */
-  .topic-link-item.recently-viewed { background-color: #fef3c7; } /* not in old code */
-  .strikethrough { text-decoration: line-through; color: #6b7280; }  /* not in old code */
+  .topic-link-item.recently-viewed { background-color: #fef3c7; }
+  .strikethrough { text-decoration: line-through; color: #6b7280; }
 /* Search result item in sidebar */
   .search-topic-item { padding: 0.75rem 1rem; background-color: #f9fafb; border-radius: 0.375rem; 
     cursor: pointer; border: 1px solid #d1d5db; margin-bottom: 0.5rem; }
@@ -61,7 +61,7 @@ html {
     font-weight: 500; color: #374151; margin-bottom: 0.25rem; }
 
 /* Autocomplete suggestions dropdown */
-  .autocomplete-container { position: relative; } /* not in old code */
+  .autocomplete-container { position: relative; }
   .autocomplete-suggestions { position: absolute; border: 1px solid + #d1d5db;
     border-top: none; z-index: 101; max-height: 150px; overflow-y: auto;
     background: #ffffff; width: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -86,7 +86,7 @@ html {
   .header-nav-button:hover { background-color: #1d4ed8; }
   .header-nav-button:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* Toggle info links */ /* not in old code */
+/* Toggle info links */
   .toggle-info { color: #15803d; cursor: pointer; text-decoration-line: underline;
     text-decoration-color: #15803d; text-underline-offset: 2px; }
   .toggle-info:hover { color: #065f46; background-color: #d1fae5; }
