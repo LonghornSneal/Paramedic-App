@@ -82,9 +82,9 @@ function updatePatientData() {      // Read and parse inputs from the sidebar fi
                     link.classList.remove('strikethrough'); } } )
       
         // Update the currently open detail page (if any) to reflect new patient data
-  // /contentArea = document.getElementById('content-area');
+  // defer contentArea = document.getElementById('content-area');
   const currentTopicTitleEl = contentArea ? contentArea.querySelector('.topic-h2') : null;
-    let topic = document.getElementById('content-area');
+    let topic = content-area;
   
   if (currentTopicTitleEl) {
     const currentTopicId = currentTopicTitleEl.dataset.topicId;
