@@ -141,7 +141,7 @@ function assignDomElements() {
     navForwardButton = document.getElementById('nav-forward-button');
 }
 
-// let sidebareOverlay
+// let sidebareOverlay We rely on the correctly spelled sidebarOverlay variable, which is obtained via document.getElementById('sidebar-overlay').
 // Ensure overlay is hidden on app start
 //    if (sidebarOverlay) { sidebarOverlay.classList.add('hidden'); sidebarOverlay.classList.remove('active'); }
 // Set up sidebar toggles
