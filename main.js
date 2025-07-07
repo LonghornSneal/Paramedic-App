@@ -8,11 +8,12 @@ let allSearchableTopics = [];
 let allDisplayableTopicsMap = {};
 let paramedicCategories = []; // This must be a global var!
 
-// --- Main App Initialization ---
-function initApp() {
-        if (!searchInput || !navBackButton || !navForwardButton) { ensureHeaderUI(); assignDomElements(); } // re-assign now that we possibly created elements
+// ---function initApp() { if (!searchInput || !navBackButton || !navForwardButton) { assignDomElements();
 
- // Inside initApp(), after other UI initialization:
+function initApp() {
+    // Initialize header elements (they are already defined in index.html)
+    assignDomElements();
+    // ... attach event listeners next
 if (searchInput) {
     searchInput.addEventListener('input', () => handleSearch(true));  // Filter as user types // /.addEventListener('input', function() { handleSearch(true); });
     searchInput.addEventListener('keypress', e => {    // Trigger search on Enter key  // /.addEventListener('keyp', function(e)
