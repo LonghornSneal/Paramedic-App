@@ -31,6 +31,7 @@ if (sidebarOverlay) {
 // Sidebar toggle handlers
 if (openSidebarButton) {
     addTapListener(openSidebarButton, () => {
+        patientSidebar.classList.remove('hidden');
         patientSidebar.classList.add('open');
         sidebarOverlay.classList.add('active');
         sidebarOverlay.classList.remove('hidden');
