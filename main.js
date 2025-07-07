@@ -47,6 +47,8 @@ if (closeSidebarButton) {
 if (sidebarOverlay) {
     addTapListener(sidebarOverlay, () => {
         patientSidebar.classList.remove('open');
+        // Wait for slide-out transition (0.3s) to complete, then hide the sidebar
+        setTimeout(() => patientSidebar.classList.add('hidden'), 300);
         sidebarOverlay.classList.remove('active');
         sidebarOverlay.classList.add('hidden');
     });

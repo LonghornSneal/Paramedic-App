@@ -27,12 +27,16 @@ let symptomSuggestions = new Set([
             "headache", "dizziness", "syncope", "altered mental status", "ams", "weakness", "fatigue", "fever",
             "chills", "rash", "seizure", "palpitations", "edema", "cough", "anxiety", "depression", "back pain", "trauma" ]); // Basic list, can be expanded
 
-                                              // --- Sidebar Open/Close Logic ---
-function openSidebar() { patientSidebar.classList.add('open');
-        sidebarOverlay.classList.add('active'); }
-                                              // Closes the Patient Info sidebar and hides the overlay.
-function closeSidebar() { patientSidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('active'); }
+function openSidebar() { 
+    patientSidebar.classList.add('open');
+    sidebarOverlay.classList.add('active'); 
+}
+// Closes the Patient Info sidebar and hides the overlay.
+function closeSidebar() { 
+    patientSidebar.classList.remove('open');
+    sidebarOverlay.classList.remove('active'); 
+}
+
 
         // --- Update Patient Data and UI ---
 function updatePatientData() {      // Read and parse inputs from the sidebar fields
