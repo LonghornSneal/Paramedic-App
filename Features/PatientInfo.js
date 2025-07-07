@@ -54,6 +54,7 @@ function updatePatientData() {      // Read and parse inputs from the sidebar fi
             lungSounds: document.getElementById('vs-lung-sounds').value.trim() };
             patientData.ekg = document.getElementById('pt-ekg').value.trim(); }
 
+    const topic = contentarea;
     // Filter the medication/topic list based on selected indications
     const topicLinks = document.querySelectorAll('a.topic-link-item');
     topicLinks.forEach(link => { const medId = link.dataset.topicId; const med = allDisplayableTopicsMap[medId];
@@ -65,7 +66,7 @@ function updatePatientData() {      // Read and parse inputs from the sidebar fi
         } else { link.classList.remove('strikethrough'); } } )     // No patient indications given or no indications data on this topic – ensure it's not struck out
       
     const currentTopicTitleEl = contentArea ? contentArea.querySelector('.topic-h2') : null; 
-    const topic = contentarea;
+    
     if (currentTopicTitleEl) { const currentTopicId = currentTopicTitleEl.dataset.topicId;
     if (currentTopicId && allDisplayableTopicsMap[currentTopicId]) { // Re-render the detail page for the current topic without altering history or scroll
         renderDetailPage(currentTopicId, false, false); }
