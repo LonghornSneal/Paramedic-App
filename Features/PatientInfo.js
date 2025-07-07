@@ -64,7 +64,8 @@ function updatePatientData() {      // Read and parse inputs from the sidebar fi
         if (!hasIndication) { link.classList.add('strikethrough'); } else { link.classList.remove('strikethrough'); }
         } else { link.classList.remove('strikethrough'); } } )     // No patient indications given or no indications data on this topic – ensure it's not struck out
       
-    const currentTopicTitleEl = contentArea ? contentArea.querySelector('.topic-h2') : null; let topic = contentarea;
+    const currentTopicTitleEl = contentArea ? contentArea.querySelector('.topic-h2') : null; 
+    const topic = contentarea;
     if (currentTopicTitleEl) { const currentTopicId = currentTopicTitleEl.dataset.topicId;
     if (currentTopicId && allDisplayableTopicsMap[currentTopicId]) { // Re-render the detail page for the current topic without altering history or scroll
         renderDetailPage(currentTopicId, false, false); }
