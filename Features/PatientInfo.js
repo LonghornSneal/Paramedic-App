@@ -42,8 +42,8 @@ function closeSidebar() {
 function updatePatientData() {      // Read and parse inputs from the sidebar fields
             patientData.age = document.getElementById('pt-age').value 
     ? parseInt(document.getElementById('pt-age').value, 10) : null;
-    patientData.weight = document.getElementById('pt-weight').value 
-    ? parseFloat(document.getElementById('pt-weight').value) : null;
+    // /patientData.weight = document.getElementById('pt-weight').value 
+    // /? parseFloat(document.getElementById('pt-weight').value) : null;
     const weightVal = document.getElementById('pt-weight') ? document.getElementById('pt-weight').value.trim() : '';
     patientData.weight = weightVal && !isNaN(parseFloat(weightVal)) ? parseFloat(weightVal) : null;
     patientData.weightUnit = document.getElementById('pt-weight-unit').value;
@@ -88,7 +88,7 @@ function updatePatientData() {      // Read and parse inputs from the sidebar fi
         // Update the currently open detail page (if any) to reflect new patient data
   // defer contentArea = document.getElementById('content-area');
   const currentTopicTitleEl = contentArea ? contentArea.querySelector('.topic-h2') : null;
-    let topic = content-area;
+    let topic = contentarea;
   
   if (currentTopicTitleEl) {
     const currentTopicId = currentTopicTitleEl.dataset.topicId;
