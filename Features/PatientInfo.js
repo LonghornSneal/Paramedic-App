@@ -18,7 +18,7 @@ const PEDIATRIC_AGE_THRESHOLD = 18;
 const PDE5_INHIBITORS = ["sildenafil", "viagra", "revatio", "vardenafil", "levitra", "tadalafil", "cialis", "adcirca"];
 
         // --- Autocomplete Data Stores ---
-let pmhSuggestions = new Set([ "heart failure", "CAD", "Penis Enlargement" ]);
+let pmhSuggestions = new Set();
 let allergySuggestions = new Set();
 let medicationNameSuggestions = new Set();     // For "Current Medications" field
 let indicationSuggestions = new Set();
