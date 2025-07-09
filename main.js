@@ -24,47 +24,50 @@ function assignDomElements() {
 function initApp() {
     // Initialize header elements (they are already defined in index.html)
     assignDomElements();
-// Ensure overlay starts hidden
-if (sidebarOverlay) {
-    sidebarOverlay.classList.add('hidden');
-    sidebarOverlay.classList.remove('active');
-}
-// Sidebar toggle handlers
-if (openSidebarButton) {
-    addTapListener(openSidebarButton, () => {
-        patientSidebar.classList.remove('hidden');
-        patientSidebar.classList.add('open');
-        sidebarOverlay.classList.add('active');
-        sidebarOverlay.classList.remove('hidden');
-    });
-}
-if (closeSidebarButton) {
-    addTapListener(closeSidebarButton, () => {
-        patientSidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('active');
+    // Ensure overlay starts hidden
+    if (sidebarOverlay) {
         sidebarOverlay.classList.add('hidden');
-    });
-}
-if (sidebarOverlay) {
-    addTapListener(sidebarOverlay, () => {
-        patientSidebar.classList.remove('open');
-        // Wait for slide-out transition (0.3s) to complete, then hide the sidebar
-        setTimeout(() => patientSidebar.classList.add('hidden'), 300);
         sidebarOverlay.classList.remove('active');
-        sidebarOverlay.classList.add('hidden');
-    });
-}
+    }
+    // Sidebar toggle handlers
+    if (openSidebarButton) {
+        addTapListener(openSidebarButton, () => {
+            patientSidebar.classList.remove('hidden');
+            patientSidebar.classList.add('open');
+            sidebarOverlay.classList.add('active');
+            sidebarOverlay.classList.remove('hidden');
+        });
+    }
+    if (closeSidebarButton) {
+        addTapListener(closeSidebarButton, () => {
+            patientSidebar.classList.remove('open');
+            sidebarOverlay.classList.remove('active');
+            sidebarOverlay.classList.add('hidden');
+        });
+    }
+    if (sidebarOverlay) {
+        addTapListener(sidebarOverlay, () => {
+            patientSidebar.classList.remove('open');
+            // Wait for slide-out transition (0.3s) to complete, then hide the sidebar
+            setTimeout(() => patientSidebar.classList.add('hidden'), 300);
+            sidebarOverlay.classList.remove('active');
+            sidebarOverlay.classList.add('hidden');
+        });
+    }
 
     // ... attach event listeners next
-if (searchInput) {
-    searchInput.addEventListener('input', () => handleSearch(true));  // Filter as user types
-    searchInput.addEventListener('keypress', e => {    // Trigger search on Enter key
-        if (e.key === 'Enter') handleSearch(true); }); }
+    if (searchInput) {
+        searchInput.addEventListener('input', () => handleSearch(true));  // Filter as user types
+        searchInput.addEventListener('keypress', e => {    // Trigger search on Enter key
+            if (e.key === 'Enter') handleSearch(true); 
+        }); 
+    }
 
-// Navigation
+    // Navigation
     if (navBackButton && navForwardButton) {
         addTapListener(navBackButton, () => navigateViaHistory(-1));
-        addTapListener(navForwardButton, () => navigateViaHistory(1)); }
+        addTapListener(navForwardButton, () => navigateViaHistory(1)); 
+    }
 
     // Now initialize data structures from globals
     // These should be loaded BEFORE this script runs (by script order in index.html)
@@ -72,13 +75,19 @@ if (searchInput) {
         initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
     } else {
         // Defensive: Wait until both globals are present
-        setTimeout(() => { if (window.ParamedicCategoriesData && window.MedicationDetailsData) {
+        setTimeout(() => { 
+            if (window.ParamedicCategoriesData && window.MedicationDetailsData) {
                 initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
-            } else { console.error("Category or medication data not loaded!"); } }, 200); }      // /fallback: try again after short delay
-    renderInitialView(true); }
-
+            } else { 
+                console.error("Category or medication data not loaded!"); 
+            };
+        }, 200); 
+    }      // /fallback: try again after short delay
+    renderInitialView(true); 
+}
 // Initializes global data structures for categories and medications.
-function initializeData(categoriesData, medDetailsData) { paramedicCategories = categoriesData;    // /Assign the global category array
+function initializeData(categoriesData, medDetailsData) { 
+    paramedicCategories = categoriesData;    // /Assign the global category array
 
     // Wipe/prepare lookup maps
     allDisplayableTopicsMap = {};
@@ -86,71 +95,98 @@ function initializeData(categoriesData, medDetailsData) { paramedicCategories = 
 
     // Build med details map for quick lookups
     medicationDataMap = {};
-    if (Array.isArray(medDetailsData)) { medDetailsData.forEach(med => { medicationDataMap[med.id] = med; });
-    } else if (medDetailsData && typeof medDetailsData === 'object') { Object.assign(medicationDataMap, medDetailsData); }
-
+    if (Array.isArray(medDetailsData)) { 
+        medDetailsData.forEach(med => { 
+            medicationDataMap[med.id] = med; 
+        });
+    } else if (medDetailsData && typeof medDetailsData === 'object') { 
+        Object.assign(medicationDataMap, medDetailsData); 
+    }
+}
 // Recursively processes categories and topics to build search index and lookup map.
-    function processItem(item, parentPath = '', parentIds = []) {       // Add to searchable list (for quick search by title/path)
-        let currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
-        let currentIds = (item.type === 'category') ? parentIds.concat([item.id]) : parentIds;
-        const detailsObj = medicationDataMap[item.id];
-        const fullItem = { ...item, path: currentPath,
-            details: detailsObj || null,
-            categoryPath: parentIds };
-        allDisplayableTopicsMap[item.id] = fullItem;
-        if (item.type === 'topic') {
-            allSearchableTopics.push({ id: item.id, title: item.title, path: currentPath,
-                categoryPath: parentIds }); }
-        if (item.children) { item.children.forEach(child => processItem(child, currentPath, currentIds)); } }
-    paramedicCategories.forEach(cat => processItem(cat)); }
-
+function processItem(item, parentPath = '', parentIds = []) {       // Add to searchable list (for quick search by title/path)
+    let currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
+    let currentIds = (item.type === 'category') ? parentIds.concat([item.id]) : parentIds;
+    const detailsObj = medicationDataMap[item.id];
+    const fullItem = { 
+        ...item, path: currentPath,
+        details: detailsObj || null,
+        categoryPath: parentIds 
+    };
+    allDisplayableTopicsMap[item.id] = fullItem;
+    if (item.type === 'topic') {
+        allSearchableTopics.push({ 
+            id: item.id, title: item.title, path: currentPath,
+            categoryPath: parentIds 
+        }); 
+    }
+    if (item.children) { 
+        item.children.forEach(child => processItem(child, currentPath, currentIds)); 
+    } 
+    paramedicCategories.forEach(cat => processItem(cat)); 
+}
 // Renders the main category list view (home screen) and highlights a topic if provided.
 function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     contentArea.innerHTML = '';  // Clear
 
-// Render the hierarchical list of categories
+    // Render the hierarchical list of categories
     const listContainer = document.createElement('div');
     createHierarchicalList(paramedicCategories, listContainer, 0);
     contentArea.appendChild(listContainer);
 
-// Optionally expand/highlight
+    // Optionally expand/highlight
     openCategoriesAndHighlight(categoryPath, highlightId);
-    if (shouldAddHistory) addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
+    if (shouldAddHistory) addHistoryEntry({ 
+        viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath 
+    });
     updateNavButtonsState(); 
 
-// --- Make Sure the DOM is ready ---
-if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initApp);
-} else { initApp(); }
-
+    // --- Make Sure the DOM is ready ---
+    if (document.readyState === 'loading') { 
+        document.addEventListener('DOMContentLoaded', initApp);
+    } else {
+        initApp(); 
+    }
+}
 // Escapes special HTML characters in a string (e.g. `&`, `<`, `>`, quotes).
 function escapeHTML(str) {
-    const escapeMap = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
-        return str.replace(/[&<>"']/g, char => escapeMap[char] || char); }
+    const escapeMap = { 
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' 
+    };
+    return str.replace(/[&<>"']/g, char => escapeMap[char] || char); 
 
-// Set up autocomplete for each Patient Info field
+    // Set up autocomplete for each Patient Info field
     setupAutocomplete('pt-pmh','pt-pmh-suggestions', pmhSuggestions);
     setupAutocomplete('pt-allergies','pt-allergies-suggestions', allergySuggestions);
     setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions);
     setupAutocomplete('pt-indications','pt-indications-suggestions', indicationSuggestions);
     setupAutocomplete('pt-symptoms','pt-symptoms-suggestions', symptomSuggestions);
 
-// Add focus highlight to all textareas and inputs
+    // Add focus highlight to all textareas and inputs
     document.querySelectorAll('textarea, input').forEach(el => {
         el.addEventListener('focus', () => el.classList.add('ring', 'ring-blue-300'));
-        el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300')); });
-
+        el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300')); 
+    });
+}
 // Renders the list of topics matching the given search term in the content area.
 function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    if (shouldAddHistory) { addHistoryEntry({ viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath }); }
+    if (shouldAddHistory) { 
+        addHistoryEntry({ 
+            viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath 
+        }); 
+    }
     updateNavButtonsState(); contentArea.innerHTML = `<div class="flex justify-between items-center mb-3">
-            <p class="text-gray-700 font-medium">Results for "${escapeHTML(searchTerm)}":</p>
-            <button id="clear-search-button" class="text-sm text-blue-600 hover:underline">Show All Categories</button> </div>
+        <p class="text-gray-700 font-medium">Results for "${escapeHTML(searchTerm)}":</p>
+        <button id="clear-search-button" class="text-sm text-blue-600 hover:underline">Show All Categories</button> </div>
         <div id="results-container" class="space-y-2"></div>`;
     const resultsContainer = document.getElementById('results-container');
-    if (filteredTopics.length > 0) { filteredTopics.forEach(topic => { const item = document.createElement('div');
+    if (filteredTopics.length > 0) { 
+        filteredTopics.forEach(topic => { 
+            const item = document.createElement('div');
             item.className = 'search-topic-item';
             item.textContent = topic.title;
-            if (topic.path) { const pathEl = document.createElement('div');
+            if (topic.path) { 
+                const pathEl = document.createElement('div');
                 pathEl.className = 'text-xs text-gray-500 mt-1';
                 pathEl.textContent = topic.path.split(' > ').slice(0, -1).join(' > ');
                 item.appendChild(pathEl);
@@ -162,7 +198,8 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
             item.addEventListener('keydown', e => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    renderDetailPage(topic.id); }
+                    renderDetailPage(topic.id); 
+                }
             });
             resultsContainer.appendChild(item);
         });
@@ -171,8 +208,9 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
             '<p class="text-gray-500 text-center py-4">No topics found matching your search.</p>';
     }
     addTapListener(document.getElementById('clear-search-button'), () => {
-    searchInput.value = '';
-    renderInitialView(); });
+        searchInput.value = '';
+        renderInitialView(); 
+    });
 }
 
     // --- Preload common suggestions (Past Medical History, Allergies, Med Names) ---
@@ -190,211 +228,284 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
     PDE5_INHIBITORS.forEach(term => medicationNameSuggestions.add(term));
 
 // --- Extract additional allergy keywords from medication contraindications ---
-    Object.values(medicationDataMap).forEach(med => {
-        if (med.contraindications && Array.isArray(med.contraindications)) {
-            med.contraindications.forEach(ci => { const ciLower = ci.toLowerCase();
-                if (ciLower.includes("hypersensitivity") || ciLower.includes("allergy to")) {    // Derive a generalized allergen term from text
-                    let allergen = ciLower.replace("known hypersensitivity to", "")
-                                           .replace("allergy to any nsaid (including asa)", "nsaid allergy")
-                                           .replace("allergy to", "").trim();
-                    if (allergen.includes("local anesthetic allergy in the amide class")) { allergen = "amide anesthetic allergy";
-                    } else if (allergen.includes("nsaid (including asa)")) {
-                        allergen = "nsaid allergy";
-                    } else { allergen = allergen.split('(')[0].trim(); }
-                    if (allergen && allergen.length > 2 && allergen.length < 30) { allergySuggestions.add(allergen); } }
-            }); }
-    });
-
+Object.values(medicationDataMap).forEach(med => {
+    if (med.contraindications && Array.isArray(med.contraindications)) {
+        med.contraindications.forEach(ci => { const ciLower = ci.toLowerCase();
+            if (ciLower.includes("hypersensitivity") || ciLower.includes("allergy to")) {    // Derive a generalized allergen term from text
+                let allergen = ciLower.replace("known hypersensitivity to", "")
+                .replace("allergy to any nsaid (including asa)", "nsaid allergy")
+                .replace("allergy to", "").trim();
+                if (allergen.includes("local anesthetic allergy in the amide class")) { 
+                    allergen = "amide anesthetic allergy";
+                } else if (allergen.includes("nsaid (including asa)")) {
+                    allergen = "nsaid allergy";
+                } else { 
+                    allergen = allergen.split('(')[0].trim(); 
+                }
+                if (allergen && allergen.length > 2 && allergen.length < 30) { 
+                    allergySuggestions.add(allergen); 
+                } 
+            }
+        }); 
+    }
+});
 
 // Handles the search input: filters topics by the current search term and shows results (or full list if empty).
 function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     const term = searchInput.value.trim().toLowerCase();
     if (!term) {    // If no search term, show the full list with any requested highlight/path
-        renderInitialView(false, highlightId, categoryPath); return; }
+        renderInitialView(false, highlightId, categoryPath); return; 
+    }
     const results = allSearchableTopics.filter(topic =>
-        (topic.title || topic.id || '').toLowerCase().includes(term) ||
-        (topic.path || '').toLowerCase().includes(term) );
-    renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath); }
-
+    (topic.title || topic.id || '').toLowerCase().includes(term) ||
+    (topic.path || '').toLowerCase().includes(term) );
+    renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath); 
+}
 
 // Ensures the header contains nav buttons and search input, adding them if missing.
 function ensureHeaderUI() { const header = document.querySelector('header');
-  if (!header) return; // Add app title if missing // Always ensure nav buttons and search input are present and in correct order
-  let navBar = header.querySelector('.header-nav-bar');
-  if (!navBar) { navBar = document.createElement('div');
-    navBar.className = 'header-nav-bar flex items-center space-x-2';
-    header.appendChild(navBar); }
-  
-  // Clear navBar and re-add in correct order
-  navBar.innerHTML = '';
-  // Back button
-  let backBtn = document.getElementById('nav-back-button');
-  if (!backBtn) { backBtn = document.createElement('button');
-    backBtn.id = 'nav-back-button';
-    backBtn.className = 'header-nav-button p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 focus:ring-2 focus:ring-blue-400';
-    backBtn.setAttribute('aria-label', 'Back');
-    backBtn.setAttribute('title', 'Back');
-    backBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>';
-  }
-  navBar.appendChild(backBtn);
-
-  // Forward button
-  let forwardBtn = document.getElementById('nav-forward-button');
-  if (!forwardBtn) { forwardBtn = document.createElement('button');
-    forwardBtn.id = 'nav-forward-button';
-    forwardBtn.className = 'header-nav-button p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 focus:ring-2 focus:ring-blue-400';
-    forwardBtn.setAttribute('aria-label', 'Forward');
-    forwardBtn.setAttribute('title', 'Forward');
-    forwardBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>';
-  }
-  navBar.appendChild(forwardBtn);
-
-  // Search input
-  let search = document.getElementById('searchInput');
-  if (!search) { search = document.createElement('input');
-    search.id = 'searchInput';
-    search.type = 'text';
-    search.placeholder = 'Search...';
-    search.className = 'ml-4 px-3 py-2 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 w-64';
-    search.autocomplete = 'off'; }
-  navBar.appendChild(search);
-  navBackButton = backBtn;
-  navForwardButton = forwardBtn;
-  searchInput = search; }
+    if (!header) return; // Add app title if missing // Always ensure nav buttons and search input are present and in correct order
+    let navBar = header.querySelector('.header-nav-bar');
+    if (!navBar) { 
+        navBar = document.createElement('div');
+        navBar.className = 'header-nav-bar flex items-center space-x-2';
+        header.appendChild(navBar); 
+    }
+    // Clear navBar and re-add in correct order
+    navBar.innerHTML = '';
+    // Back button
+    let backBtn = document.getElementById('nav-back-button');
+    if (!backBtn) { 
+        backBtn = document.createElement('button');
+        backBtn.id = 'nav-back-button';
+        backBtn.className = 'header-nav-button p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 focus:ring-2 focus:ring-blue-400';
+        backBtn.setAttribute('aria-label', 'Back');
+        backBtn.setAttribute('title', 'Back');
+        backBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>';
+    }
+    navBar.appendChild(backBtn);
+    // Forward button
+    let forwardBtn = document.getElementById('nav-forward-button');
+    if (!forwardBtn) { 
+        forwardBtn = document.createElement('button');
+        forwardBtn.id = 'nav-forward-button';
+        forwardBtn.className = 'header-nav-button p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 focus:ring-2 focus:ring-blue-400';
+        forwardBtn.setAttribute('aria-label', 'Forward');
+        forwardBtn.setAttribute('title', 'Forward');
+        forwardBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>';
+    }
+    navBar.appendChild(forwardBtn);
+    // Search input
+    let search = document.getElementById('searchInput');
+    if (!search) { 
+        search = document.createElement('input');
+        search.id = 'searchInput';
+        search.type = 'text';
+        search.placeholder = 'Search...';
+        search.className = 'ml-4 px-3 py-2 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 w-64';
+        search.autocomplete = 'off'; 
+    }
+    navBar.appendChild(search);
+    navBackButton = backBtn;
+    navForwardButton = forwardBtn;
+    searchInput = search; 
+}
 
 // Adds a universal click/keypress listener to an element to trigger the given handler.
-function addTapListener(element, handler) { if (!element) return;
-    function activate(e) { if (e.type === 'click' || (e.type === 'keypress' && (e.key === 'Enter' || e.key === ' '))) {
-            e.preventDefault(); handler(e); } }
+function addTapListener(element, handler) { 
+    if (!element) return;
+}
+function activate(e) { 
+    if (e.type === 'click' || (e.type === 'keypress' && (e.key === 'Enter' || e.key === ' '))) {
+        e.preventDefault(); handler(e); 
+    } 
     element.addEventListener('click', activate);
-    element.addEventListener('keypress', activate); }
+    element.addEventListener('keypress', activate); 
+}
 
 // Enables autocomplete suggestions for a textarea input field.
 function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceSet) {
     const textarea = document.getElementById(textareaId);
     const suggestionsContainer = document.getElementById(suggestionsContainerId);
-
-    textarea.addEventListener('input', function(e) { const inputText = e.target.value;
+    textarea.addEventListener('input', function(e) { 
+        const inputText = e.target.value;
         const currentSegment = inputText.split(',').pop().trim().toLowerCase();
-        if (currentSegment.length === 0) { suggestionsContainer.classList.add('hidden');
-            suggestionsContainer.innerHTML = ''; return; }
-
+        if (currentSegment.length === 0) { 
+            suggestionsContainer.classList.add('hidden');
+            suggestionsContainer.innerHTML = ''; return; 
+        }
         const filtered = Array.from(suggestionSourceSet)
-                              .filter(function(s) { return s.toLowerCase().includes(currentSegment); });
-        if (filtered.length > 0) { suggestionsContainer.innerHTML = filtered.map(function(s) {
+        .filter(function(s) { return s.toLowerCase().includes(currentSegment); });
+        if (filtered.length > 0) { 
+            suggestionsContainer.innerHTML = filtered.map(function(s) {
                 return '<div class="autocomplete-suggestion-item" data-value="' + s + '">' + s + '</div>';
-            }).join(''); suggestionsContainer.classList.remove('hidden');
-        } else { suggestionsContainer.classList.add('hidden'); }
+            })
+            .join(''); 
+            suggestionsContainer.classList.remove('hidden');
+        } else { 
+            suggestionsContainer.classList.add('hidden'); 
+        }
     });
-
     addTapListener(suggestionsContainer, function(e) {
-        if (e.target.classList.contains('autocomplete-suggestion-item')) { const selectedValue = e.target.dataset.value;
-            let existingValues = textarea.value.split(',').map(function(v) { return v.trim(); }).filter(function(v) { return v; });
+        if (e.target.classList.contains('autocomplete-suggestion-item')) { 
+            const selectedValue = e.target.dataset.value;
+            let existingValues = textarea.value.split(',').map(function(v) { 
+                return v.trim(); 
+            })
+            .filter(function(v) { 
+                return v; 
+            });
             // Remove the segment currently being typed
-            if (existingValues.length > 0 && textarea.value.trim().slice(-1) !== ',') { existingValues.pop(); }
+            if (existingValues.length > 0 && textarea.value.trim().slice(-1) !== ',') { 
+                existingValues.pop(); 
+            }
             // Avoid duplicate entries (case-insensitive)
-            if (!existingValues.map(function(v) { return v.toLowerCase(); }).includes(selectedValue.toLowerCase())) {
-                existingValues.push(selectedValue); }
+            if (!existingValues.map(function(v) { 
+                return v.toLowerCase(); 
+            })
+            .includes(selectedValue.toLowerCase())) {
+                existingValues.push(selectedValue); 
+            }
             textarea.value = existingValues.join(', ') + (existingValues.length > 0 ? ", " : "");
             suggestionsContainer.classList.add('hidden');
             suggestionsContainer.innerHTML = '';
-            textarea.focus(); updatePatientData(); } // Update patient data after selection
+            textarea.focus(); updatePatientData(); 
+        } // Update patient data after selection
     });
-
     textarea.addEventListener('blur', function() {
         // Delay hiding to allow click on suggestions
-        setTimeout(function() { suggestionsContainer.classList.add('hidden'); }, 150); });
-    textarea.addEventListener('focus', function(e) { const inputText = e.target.value;
+        setTimeout(function() { 
+            suggestionsContainer.classList.add('hidden'); 
+        }, 150); 
+    });
+    textarea.addEventListener('focus', function(e) { 
+        const inputText = e.target.value;
         const currentSegment = inputText.split(',').pop().trim().toLowerCase();
-        if (currentSegment.length > 0) { const filtered = Array.from(suggestionSourceSet)
-                                   .filter(function(s) { return s.toLowerCase().includes(currentSegment); });
+        if (currentSegment.length > 0) { 
+            const filtered = Array.from(suggestionSourceSet)
+            .filter(function(s) { 
+                return s.toLowerCase().includes(currentSegment); 
+            });
             if (filtered.length > 0) {
-                suggestionsContainer.innerHTML = filtered.map(function(s) { return '<div class="autocomplete-suggestion-item" data-value="' + s + '">' + s + '</div>'; }).join('');
-                suggestionsContainer.classList.remove('hidden'); } }
-    }); }
+                suggestionsContainer.innerHTML = filtered.map(function(s) { 
+                    return '<div class="autocomplete-suggestion-item" data-value="' + s + '">' + s + '</div>'; 
+                })
+                .join('');
+                suggestionsContainer.classList.remove('hidden'); 
+            };
+        };
+    }); 
+}
 
 // Updates the disabled state of the Back/Forward navigation buttons based on history position.
-function updateNavButtonsState() { if (!navBackButton || !navForwardButton) return;
+function updateNavButtonsState() { 
+    if (!navBackButton || !navForwardButton) return;
     navBackButton.disabled = currentHistoryIndex <= 0;
-    navForwardButton.disabled = currentHistoryIndex >= navigationHistory.length - 1; }
+    navForwardButton.disabled = currentHistoryIndex >= navigationHistory.length - 1; 
+}
 
 // Adds a new entry to the navigation history and updates the current history index.
-function addHistoryEntry(entry) { if (isNavigatingViaHistory) return;
-    if (currentHistoryIndex < navigationHistory.length - 1) { navigationHistory = navigationHistory.slice(0, currentHistoryIndex + 1); }
+function addHistoryEntry(entry) { 
+    if (isNavigatingViaHistory) return;
+    if (currentHistoryIndex < navigationHistory.length - 1) { 
+        navigationHistory = navigationHistory.slice(0, currentHistoryIndex + 1); 
+    }
     navigationHistory.push(entry);
     currentHistoryIndex = navigationHistory.length - 1;
-    updateNavButtonsState(); }
+    updateNavButtonsState(); 
+}
 
     // Moves through navigation history by the given direction (-1 for back, 1 for forward) and renders the appropriate view.
 function navigateViaHistory(direction) {
     if ((direction === -1 && currentHistoryIndex <= 0) ||
-        (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return;
+    (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return;
     isNavigatingViaHistory = true;
     currentHistoryIndex += direction;
     const state = navigationHistory[currentHistoryIndex];
-    if (state.viewType === 'list') { searchInput.value = state.contentId || '';
+    if (state.viewType === 'list') { 
+        searchInput.value = state.contentId || '';
         handleSearch(false, state.highlightTopicId, state.categoryPath || []);
-    } else if (state.viewType === 'detail') { renderDetailPage(state.contentId, false, false); }
+    } else if (state.viewType === 'detail') { 
+        renderDetailPage(state.contentId, false, false); 
+    }
     updateNavButtonsState();
-    isNavigatingViaHistory = false; }
-
-if (navBackButton && navForwardButton) {
-  addTapListener(navBackButton, () => navigateViaHistory(-1));
-  addTapListener(navForwardButton, () => navigateViaHistory(1)); }
+    isNavigatingViaHistory = false; 
+    if (navBackButton && navForwardButton) {
+        addTapListener(navBackButton, () => navigateViaHistory(-1));
+        addTapListener(navForwardButton, () => navigateViaHistory(1)); 
+    };
+}
 
 // Builds a nested list of categories/topics and appends it to the given container (handles expandable categories).
 function createHierarchicalList(items, container, level = 0) {
     container.innerHTML = '';
-    items.forEach(item => { const row = document.createElement('div');
+    items.forEach(item => { 
+        const row = document.createElement('div');
         row.className = 'flex items-center py-1 pl-' + (level * 4) + ' group';
         if (item.type === 'category') {     // Collapsible blue arrow
             const arrow = document.createElement('button');
             arrow.setAttribute('aria-label', 'Expand/collapse');
             arrow.className = 'arrow mr-2 focus:outline-none focus:ring-2 focus:ring-blue-400';
             arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" style="transform: rotate(${item.expanded ? 90 : 0}deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`;
-            addTapListener(arrow, () => { item.expanded = !item.expanded;
-                createHierarchicalList(items, container, level); });
+            addTapListener(arrow, () => { 
+                item.expanded = !item.expanded;
+                createHierarchicalList(items, container, level); 
+            });
             row.appendChild(arrow);
             // Category label
             const label = document.createElement('span');
             label.className = 'cursor-pointer hover:underline flex-1 font-semibold';
             label.textContent = item.title;
-            addTapListener(label, () => { item.expanded = !item.expanded;
-                createHierarchicalList(items, container, level); });
+            addTapListener(label, () => { 
+                item.expanded = !item.expanded;
+                createHierarchicalList(items, container, level); 
+            });
             row.appendChild(label);
             container.appendChild(row);
-            if (item.expanded && item.children && item.children.length > 0) { const childContainer = document.createElement('div');
+            if (item.expanded && item.children && item.children.length > 0) { 
+                const childContainer = document.createElement('div');
                 childContainer.className = 'ml-4 border-l border-blue-100 pl-2';
                 createHierarchicalList(item.children, childContainer, level + 1);
-                container.appendChild(childContainer); }
-        } else if (item.type === 'topic') { const topicLink = document.createElement('a');
+                container.appendChild(childContainer); 
+            }
+        } else if (item.type === 'topic') { 
+            const topicLink = document.createElement('a');
             topicLink.className = 'topic-link-item flex-1';
             topicLink.textContent = item.title;
             topicLink.href = `#${item.id}`;
             topicLink.dataset.topicId = item.id;
             topicLink.setAttribute('role', 'button');
             topicLink.setAttribute('tabindex', '0');
-            addTapListener(topicLink, e => { e.preventDefault();
-                renderDetailPage(item.id); });
+            addTapListener(topicLink, e => { 
+                e.preventDefault();
+                renderDetailPage(item.id); 
+            });
             row.appendChild(document.createElement('span')); // spacer for arrow alignment
             row.appendChild(topicLink);
-            container.appendChild(row); }
+            container.appendChild(row); 
+        }
     });
 }
+
 // Expands categories along the given path and highlights the specified topic (then re-renders the list).
 // Note: We also ensure contentArea is defined locally. The category list items still need a way to be identified by category ID if we ever wanted to manipulate them directly, so as an additional improvement, we can modify createHierarchicalList to set a data-category-id attribute on category rows: // Inside createHierarchicalList, in the category branch: row.dataset.categoryId = item.id;
-function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { contentArea = document.getElementById('content-area');
+function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { 
+    contentArea = document.getElementById('content-area');
     // Mark each category in the path as expanded
-    categoryPath.forEach(catId => { const catItem = allDisplayableTopicsMap[catId];
-        if (catItem) catItem.expanded = true; });
+    categoryPath.forEach(catId => { 
+        const catItem = allDisplayableTopicsMap[catId];
+        if (catItem) catItem.expanded = true; 
+    });
     // Re-render the category list with updated expansion states
     contentArea.innerHTML = ''; 
     const listContainer = document.createElement('div');
     createHierarchicalList(paramedicCategories, listContainer, 0);
     contentArea.appendChild(listContainer);
     // Highlight the specified topic, if provided
-    if (highlightId) { const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
-        if (topicEl) topicEl.classList.add('recently-viewed'); } 
+    if (highlightId) { 
+        const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
+        if (topicEl) topicEl.classList.add('recently-viewed'); 
+    } 
 }
      
 // Renders the detailed view for a given topic (with all detail sections and warnings), and updates history if needed. 
@@ -418,24 +529,37 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
         const medKeywords = (topic.title + " " + topic.id).toLowerCase(); 
         const allergy = patientData.allergies.find(a => a && medKeywords.includes(a));
         if (allergy) { 
-            warningsHtml += `<div class="warning-box warning-box-red"><div>${createWarningIcon('text-red-600')}
-                <span>Allergy Alert: Patient has an allergy to ${topic.title}.</span></div>
-                </div>`; } 
+            warningsHtml += `<div class="warning-box warning-box-red"><div>${
+                createWarningIcon('text-red-600')
             }
+                <span>Allergy Alert: Patient has an allergy to ${
+                    topic.title
+                }
+                .</span></div>
+                </div>`; 
+        }
+    }
     if (topic.id === 'ntg') { 
         const hasPDE5 = patientData.currentMedications.some(med => PDE5_INHIBITORS.some(term => med.includes(term)) );
         if (hasPDE5) { 
-            warningsHtml += `<div class="warning-box warning-box-red"><div>${createWarningIcon('text-red-600')}<span>Contraindication: Recent PDE5 inhibitor use – do NOT administer NTG.</span></div></div>`; 
+            warningsHtml += `<div class="warning-box warning-box-red"><div>${
+                createWarningIcon('text-red-600')
+            }
+            <span>Contraindication: Recent PDE5 inhibitor use – do NOT administer NTG.</span></div></div>`; 
         }
         if (patientData.vitalSigns.bp) { 
             const bpMatch = patientData.vitalSigns.bp.match(/(\d+)/); 
             const systolic = bpMatch ? parseInt(bpMatch[0], 10) : 0;
         }
         if (systolic && systolic < 100) { 
-            warningsHtml += `<div class="warning-box warning-box-red"><div>${createWarningIcon('text-red-600')}<span>Contraindication: Systolic BP < 100 mmHg – NTG is not advised.</span></div></div>`; 
+            warningsHtml += `<div class="warning-box warning-box-red"><div>${
+                createWarningIcon('text-red-600')
+            }
+            <span>Contraindication: Systolic BP < 100 mmHg – NTG is not advised.</span></div></div>`; 
         } 
     }
-    if (warningsHtml) { contentArea.innerHTML += warningsHtml;
+    if (warningsHtml) { 
+        contentArea.innerHTML += warningsHtml;
     }
 
     let details = topic.details;  // Show details if available     // Fallbacks for alternate IDs (numbered/un-numbered)
@@ -444,9 +568,9 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
         details = allDisplayableTopicsMap[altId]?.details;
     } else if (!details && topic.id && !topic.id.match(/^\d+-/)) {
         const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
-        if (altId) details = allDisplayableTopicsMap[altId]?.details; }
+        if (altId) details = allDisplayableTopicsMap[altId]?.details; 
     }
- // Render details sections if available
+    // Render details sections if available
     if (details) {
         const sections = [ { key: 'class', label: 'Class' },
             { key: 'indications', label: 'Indications' },
@@ -488,6 +612,7 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
     } else { 
         contentArea.innerHTML += `<div class="text-gray-500 italic">No detail information found for this item.</div>`;
     }
+}
     attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
 
     // --- Previous/Next navigation for ALS Medications ---
@@ -505,9 +630,8 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
         if (idx !== -1) {
             if (idx > 0) prevId = alsMedCat.children[idx - 1].id;
             if (idx < alsMedCat.children.length - 1) nextId = alsMedCat.children[idx + 1].id; 
-        } 
+        }
     }
-      
     if (prevId || nextId) {     // Add Prev/Next buttons if applicable
         const navRow = document.createElement('div');
         navRow.className = 'flex justify-between items-center mb-4';
@@ -515,35 +639,39 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
         navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
         contentArea.appendChild(navRow); 
     }
-
     if (topic.description) { 
         const desc = document.createElement('div');    // If a topic description exists and no slug anchors were added, show the description
         desc.className = 'mb-4'; 
         desc.textContent = topic.description; 
         contentArea.appendChild(desc); 
     }
+    if (shouldAddHistory) {
+        addHistoryEntry({ 
+            viewType: 'detail', contentId: topicId 
+        }); 
+    }
+    if (scrollToTop) { 
+        contentArea.scrollIntoView({ 
+            behavior: 'instant', block: 'start' 
+        }); 
+    }
 
-    if (shouldAddHistory) {addHistoryEntry({ viewType: 'detail', contentId: topicId }); }
-    if (scrollToTop) { contentArea.scrollIntoView({ behavior: 'instant', block: 'start' }); }
-}
 // Creates a navigation button ("Previous" or "Next") that navigates to the specified topic.
 function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons:
     const btn = document.createElement('button');
     btn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
     btn.innerHTML = (label === 'Previous')
-        ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" 
-                viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                    d="M15 19l-7-7 7-7" /></svg>${label}`
-        : `${label}<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" 
-                viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                 d="M9 5l7 7-7 7" /></svg>`;
-
+    ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" 
+    viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+    d="M15 19l-7-7 7-7" /></svg>${label}`
+    : `${label}<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" 
+    viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+    d="M9 5l7 7-7 7" /></svg>`;
     addTapListener(btn, () => renderDetailPage(targetId));
     return btn; 
 }
-  // if (tocItems.length > 0 && typeof window.setupSlugAnchors === 'function') { // window.setupSlugAnchors(tocItems);
 
 // Attaches click handlers to elements with class `.toggle-info` to show or hide their hidden info text.
 function attachToggleInfoHandlers(container) {
@@ -594,24 +722,31 @@ function parseTextMarkup(text) {   // Escape HTML and replace special markup wit
 // Generates an HTML `<ul>` list for an array of detail items, or a placeholder if the array is empty.
 function createDetailList(itemsArray) {
     if (!itemsArray || itemsArray.length === 0) {
-        return '<p class="text-gray-500 italic">None listed.</p>'; }
+        return '<p class="text-gray-500 italic">None listed.</p>'; 
+    }
     const listItemsHtml = itemsArray.map(it => {
         return `<li>${parseTextMarkup(it)}</li>`;
-    }).join('');
+    })
+    .join('');
     return `<ul class="detail-list">${listItemsHtml}</ul>`; 
 }
 
 // Returns an HTML snippet for a detail text block, or a default "Not specified" message if empty.
 function createDetailText(textBlock) {
     if (!textBlock || textBlock.toString().trim() === '') {
-        return '<p class="text-gray-500 italic">Not specified.</p>'; }
+        return '<p class="text-gray-500 italic">Not specified.</p>'; 
+    }
     const safeText = parseTextMarkup(textBlock.toString());
-    return `<div class="detail-text">${safeText}</div>`; 
+    return `<div class="detail-text">${
+        safeText
+    }</div>`; 
 }
 
 // Returns an SVG string for a warning icon symbol, using the given color class for styling.
 function createWarningIcon(colorClass = 'text-yellow-600') {
-    return `<svg class="${colorClass} w-5 h-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+    return `<svg class="${
+        colorClass
+    } w-5 h-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+    <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
     </svg>`
 }
