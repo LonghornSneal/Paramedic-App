@@ -394,29 +394,49 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { con
     contentArea.appendChild(listContainer);
     // Highlight the specified topic, if provided
     if (highlightId) { const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
-        if (topicEl) topicEl.classList.add('recently-viewed'); } }
-
-        
+        if (topicEl) topicEl.classList.add('recently-viewed'); } 
+}
+     
 // Renders the detailed view for a given topic (with all detail sections and warnings), and updates history if needed. 
-    // Collapsible sections for details (ALS Medications)---------ERROR---------CODE MUST BE FIXED TO INCLUDE THE BLUE ARROWS NEXT TO THE ALS MEDICATION DETAIL'S INDIVIDUAL SUBTOPICS THAT FUNCTION THE SAME AS THE BLUE ARROWS NEXT TO THE GREEN TEXT THAT REVEALS THE GREEN HIDDEN TEXT WHEN CLICK UPON (DON'T CHANGE ANY COLORS THOUGH)--------THERE SHOULD ALREADY EXIST CODE FOR THIS, SO YOU MUST ALSO SEARCH FOR THAT CODE---------
-    function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) { // /{ const ul = document.createElement('ul');
+// Collapsible sections for details (ALS Medications)---------ERROR---------CODE MUST BE FIXED TO INCLUDE THE BLUE ARROWS NEXT TO THE ALS MEDICATION DETAIL'S INDIVIDUAL SUBTOPICS THAT FUNCTION THE SAME AS THE BLUE ARROWS NEXT TO THE GREEN TEXT THAT REVEALS THE GREEN HIDDEN TEXT WHEN CLICK UPON (DON'T CHANGE ANY COLORS THOUGH)--------THERE SHOULD ALREADY EXIST CODE FOR THIS, SO YOU MUST ALSO SEARCH FOR THAT CODE---------
+function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) {
     contentArea = document.getElementById('content-area');
-    if (!allDisplayableTopicsMap[topicId]) { contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; return; }
+    if (!allDisplayableTopicsMap[topicId]) { 
+        contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; return; 
+    }
     const topic = allDisplayableTopicsMap[topicId];
     contentArea.innerHTML = '';
-    const headerEl = document.createElement('h2'); // Header/title  // /const title = document.createElement('h2'); title.textContent = topic.title || topic.name || topic.id; title.dataset.topicId = topic.id; title.className = 'topic-h2';
+    const headerEl = document.createElement('h2'); // Header/title
     headerEl.textContent = topic.title || topic.name || topic.id;
     headerEl.className = 'topic-h2 font-semibold text-lg mb-4';
-    headerEl.dataset.topicId = topic.id; contentArea.appendChild(headerEl);
+    headerEl.dataset.topicId = topic.id; 
+    contentArea.appendChild(headerEl);
 
     // Insert warning boxes if any contraindications or allergies are present     // Check PDE5 inhibitor usage     // Check low BP
-    let warningsHtml = ""; if (patientData.allergies.length > 0) { const medKeywords = (topic.title + " " + topic.id).toLowerCase(); const allergy = patientData.allergies.find(a => a && medKeywords.includes(a));
-        if (allergy) { warningsHtml += `<div class="warning-box warning-box-red"><div>${createWarningIcon('text-red-600')}<span>Allergy Alert: Patient has an allergy to ${topic.title}.</span></div></div>`; } }
-    if (topic.id === 'ntg') { const hasPDE5 = patientData.currentMedications.some(med => PDE5_INHIBITORS.some(term => med.includes(term)) );
-        if (hasPDE5) { warningsHtml += `<div class="warning-box warning-box-red"><div>${createWarningIcon('text-red-600')}<span>Contraindication: Recent PDE5 inhibitor use – do NOT administer NTG.</span></div></div>`; }
-        if (patientData.vitalSigns.bp) { const bpMatch = patientData.vitalSigns.bp.match(/(\d+)/); const systolic = bpMatch ? parseInt(bpMatch[0], 10) : 0;
-        if (systolic && systolic < 100) { warningsHtml += `<div class="warning-box warning-box-red"><div>${createWarningIcon('text-red-600')}<span>Contraindication: Systolic BP < 100 mmHg – NTG is not advised.</span></div></div>`; } } }
-    if (warningsHtml) { contentArea.innerHTML += warningsHtml; }
+    let warningsHtml = ""; 
+    if (patientData.allergies.length > 0) { 
+        const medKeywords = (topic.title + " " + topic.id).toLowerCase(); 
+        const allergy = patientData.allergies.find(a => a && medKeywords.includes(a));
+        if (allergy) { 
+            warningsHtml += `<div class="warning-box warning-box-red"><div>${createWarningIcon('text-red-600')}
+                <span>Allergy Alert: Patient has an allergy to ${topic.title}.</span></div>
+                </div>`; } 
+            }
+    if (topic.id === 'ntg') { 
+        const hasPDE5 = patientData.currentMedications.some(med => PDE5_INHIBITORS.some(term => med.includes(term)) );
+        if (hasPDE5) { 
+            warningsHtml += `<div class="warning-box warning-box-red"><div>${createWarningIcon('text-red-600')}<span>Contraindication: Recent PDE5 inhibitor use – do NOT administer NTG.</span></div></div>`; 
+        }
+        if (patientData.vitalSigns.bp) { 
+            const bpMatch = patientData.vitalSigns.bp.match(/(\d+)/); 
+            const systolic = bpMatch ? parseInt(bpMatch[0], 10) : 0;
+        }
+        if (systolic && systolic < 100) { 
+            warningsHtml += `<div class="warning-box warning-box-red"><div>${createWarningIcon('text-red-600')}<span>Contraindication: Systolic BP < 100 mmHg – NTG is not advised.</span></div></div>`; 
+        } 
+    }
+    if (warningsHtml) { contentArea.innerHTML += warningsHtml;
+    }
 
     let details = topic.details;  // Show details if available     // Fallbacks for alternate IDs (numbered/un-numbered)
     if (!details && topic.id && topic.id.match(/^\d+-/)) {
@@ -568,7 +588,8 @@ function parseTextMarkup(text) {   // Escape HTML and replace special markup wit
     safeText = safeText.replace(/\{\{blackul:(.+?)\}\}/g, 
                 (_, t) => `<span class="font-bold underline decoration-black">${t}</span>`);
     safeText = safeText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-    return safeText; }
+    return safeText; 
+}
 
 // Generates an HTML `<ul>` list for an array of detail items, or a placeholder if the array is empty.
 function createDetailList(itemsArray) {
@@ -577,17 +598,20 @@ function createDetailList(itemsArray) {
     const listItemsHtml = itemsArray.map(it => {
         return `<li>${parseTextMarkup(it)}</li>`;
     }).join('');
-    return `<ul class="detail-list">${listItemsHtml}</ul>`; }
+    return `<ul class="detail-list">${listItemsHtml}</ul>`; 
+}
 
 // Returns an HTML snippet for a detail text block, or a default "Not specified" message if empty.
 function createDetailText(textBlock) {
     if (!textBlock || textBlock.toString().trim() === '') {
         return '<p class="text-gray-500 italic">Not specified.</p>'; }
     const safeText = parseTextMarkup(textBlock.toString());
-    return `<div class="detail-text">${safeText}</div>`; }
+    return `<div class="detail-text">${safeText}</div>`; 
+}
 
 // Returns an SVG string for a warning icon symbol, using the given color class for styling.
 function createWarningIcon(colorClass = 'text-yellow-600') {
     return `<svg class="${colorClass} w-5 h-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
-            </svg>`}
+        <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+    </svg>`
+}
