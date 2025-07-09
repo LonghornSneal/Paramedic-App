@@ -5,7 +5,8 @@
  * This is used to generate consistent slug IDs for topics/categories based on their titles, ensuring links and IDs are standardized.
  */
 
-+ // Converts a given string into a URL-friendly slug (lowercased, hyphenated, no special characters).
+// Converts a given string into a URL-friendly slug (lowercased, hyphenated, no special characters).
+
 const subscriptMap = {
   '₀': '0',
   '₁': '1',
