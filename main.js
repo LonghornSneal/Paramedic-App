@@ -435,88 +435,108 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { con
             { key: 'sideEffects', label: 'Significant Adverse/Side Effects' },
             { key: 'adultRx', label: 'Adult Rx' },
             { key: 'pediatricRx', label: 'Pediatric Rx' } ]; 
-        sections.forEach(sec => { if (!details[sec.key]) return; const wrapper = document.createElement('div');
+        sections.forEach(sec => { 
+            if (!details[sec.key]) return; 
+            const wrapper = document.createElement('div');
 
-                // ... inside renderDetailPage, iterating sections ...
-        wrapper.className = 'detail-section mb-3';
-        if (sec.key === 'adultRx') wrapper.classList.add('adult-section');
-        if (sec.key === 'pediatricRx') wrapper.classList.add('pediatric-section');
-        const title = document.createElement('div');
-        title.className = 'detail-section-title';
-        title.textContent = sec.label;
-        wrapper.appendChild(title);
-        let body; if (Array.isArray(details[sec.key])) 
-            { body = document.createElement('ul'); body.className = 'detail-list'; }
-      details[sec.key].forEach(line => {
+            // ... inside renderDetailPage, iterating sections ...
+            wrapper.className = 'detail-section mb-3';
+            if (sec.key === 'adultRx') wrapper.classList.add('adult-section');
+            if (sec.key === 'pediatricRx') wrapper.classList.add('pediatric-section');
+            const title = document.createElement('div');
+            title.className = 'detail-section-title';
+            title.textContent = sec.label;
+            wrapper.appendChild(title);
+            let body; 
+            if (Array.isArray(details[sec.key])) {
+                body = document.createElement('ul'); 
+                body.className = 'detail-list';
+                details[sec.key].forEach(line => {
                     const li = document.createElement('li');
                     li.innerHTML = parseTextMarkup ? parseTextMarkup(line) : line;
                     body.appendChild(li);
                 });
-        } else {
-            body = document.createElement('div');
-            body.className = 'detail-text';
-            // set innerHTML...
-        body.innerHTML = parseTextMarkup ? parseTextMarkup(details[sec.key]) : details[sec.key];
-            }
-        wrapper.appendChild(body);
-        contentArea.appendChild(wrapper); }
+            } else {
+                body = document.createElement('div');
+                body.className = 'detail-text';
+                // set innerHTML...
+                body.innerHTML = parseTextMarkup ? parseTextMarkup(details[sec.key]) : details[sec.key];
+            }        
+            wrapper.appendChild(body);
+            contentArea.appendChild(wrapper); 
         });  
-        } else { contentArea.innerHTML += `<div class="text-gray-500 italic">No detail information found for this item.</div>`; }
+    } else { 
+        contentArea.innerHTML += `<div class="text-gray-500 italic">No detail information found for this item.</div>`;
+    }
+    attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
 
-        attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
-
-        // --- Previous/Next navigation for ALS Medications ---
-        let prevId = null, nextId = null;
-        const alsMedCat = paramedicCategories.find(cat => cat.title && cat.title.toLowerCase().includes('als medications'));
-        if (alsMedCat && alsMedCat.children) {   // find index of current topic in ALS Medications list
-            let idx = alsMedCat.children.findIndex(child => child.id === topic.id);
-            if (idx === -1 && /^\d+-/.test(topic.id)) {
+    // --- Previous/Next navigation for ALS Medications ---
+    let prevId = null, nextId = null;
+    const alsMedCat = paramedicCategories.find(cat => cat.title && cat.title.toLowerCase().includes('als medications'));
+    if (alsMedCat && alsMedCat.children) {   // find index of current topic in ALS Medications list
+        let idx = alsMedCat.children.findIndex(child => child.id === topic.id);
+        if (idx === -1 && /^\d+-/.test(topic.id)) {
             const altId = topic.id.replace(/^\d+-/, '');
             idx = alsMedCat.children.findIndex(child => child.id === altId);
-        } else if (idx === -1) { // try with number prefix
+        } else if (idx === -1) {
             const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
-            if (altId) idx = alsMedCat.children.findIndex(child => child.id === altId); }
+            if (altId) idx = alsMedCat.children.findIndex(child => child.id === altId); 
+        }
         if (idx !== -1) {
             if (idx > 0) prevId = alsMedCat.children[idx - 1].id;
-            if (idx < alsMedCat.children.length - 1) nextId = alsMedCat.children[idx + 1].id; } }
+            if (idx < alsMedCat.children.length - 1) nextId = alsMedCat.children[idx + 1].id; 
+        } 
+    }
       
-        if (prevId || nextId) {     // Add Prev/Next buttons if applicable
+    if (prevId || nextId) {     // Add Prev/Next buttons if applicable
         const navRow = document.createElement('div');
         navRow.className = 'flex justify-between items-center mb-4';
         navRow.appendChild(prevId ? createNavButton('Previous', prevId) : document.createElement('span'));
         navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
-        contentArea.appendChild(navRow); }
-
-    if (topic.description) { const desc = document.createElement('div');    // If a topic description exists and no slug anchors were added, show the description
-        desc.className = 'mb-4'; desc.textContent = topic.description; contentArea.appendChild(desc); }
-
-        if (shouldAddHistory) {addHistoryEntry({ viewType: 'detail', contentId: topicId }); }
-        if (scrollToTop) { contentArea.scrollIntoView({ behavior: 'instant', block: 'start' }); }
+        contentArea.appendChild(navRow); 
     }
+
+    if (topic.description) { 
+        const desc = document.createElement('div');    // If a topic description exists and no slug anchors were added, show the description
+        desc.className = 'mb-4'; 
+        desc.textContent = topic.description; 
+        contentArea.appendChild(desc); 
+    }
+
+    if (shouldAddHistory) {addHistoryEntry({ viewType: 'detail', contentId: topicId }); }
+    if (scrollToTop) { contentArea.scrollIntoView({ behavior: 'instant', block: 'start' }); }
+}
 // Creates a navigation button ("Previous" or "Next") that navigates to the specified topic.
 function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons:
     const btn = document.createElement('button');
     btn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
-btn.innerHTML = (label === 'Previous')
-    ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" 
-           viewBox="0 0 24 24" stroke="currentColor">
-           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                 d="M15 19l-7-7 7-7" /></svg>${label}`
-    : `${label}<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" 
-           viewBox="0 0 24 24" stroke="currentColor">
-           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+    btn.innerHTML = (label === 'Previous')
+        ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" 
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                    d="M15 19l-7-7 7-7" /></svg>${label}`
+        : `${label}<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" 
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                  d="M9 5l7 7-7 7" /></svg>`;
 
     addTapListener(btn, () => renderDetailPage(targetId));
-    return btn; }
+    return btn; 
+}
   // if (tocItems.length > 0 && typeof window.setupSlugAnchors === 'function') { // window.setupSlugAnchors(tocItems);
 
 // Attaches click handlers to elements with class `.toggle-info` to show or hide their hidden info text.
 function attachToggleInfoHandlers(container) {
-    container.querySelectorAll('.toggle-info').forEach(el => { el.onclick = function(e) { e.stopPropagation();
-        const info = el.querySelector('.info-text');
-        const arrow = el.querySelector('.arrow'); if (arrow) arrow.classList.toggle('rotate');
-        if (info) info.classList.toggle('hidden'); }; }); }
+    container.querySelectorAll('.toggle-info').forEach(el => { 
+        el.onclick = function(e) { 
+            e.stopPropagation();
+            const info = el.querySelector('.info-text');
+            const arrow = el.querySelector('.arrow'); 
+            if (arrow) arrow.classList.toggle('rotate');
+            if (info) info.classList.toggle('hidden'); 
+        }; 
+    }); 
+}
 
 // Attaches click handlers to collapsible category headers in the detail view to toggle their visibility.
 function attachToggleCategoryHandlers(container) {      // --- Utility: toggling hidden info text in detail view ---
@@ -525,7 +545,10 @@ function attachToggleCategoryHandlers(container) {      // --- Utility: toggling
             const arrow = header.querySelector('.arrow');
             if (arrow) arrow.classList.toggle('rotate');
             const content = header.nextElementSibling;
-            if (content) content.classList.toggle('hidden'); }); }); }
+            if (content) content.classList.toggle('hidden'); 
+        }); 
+    }); 
+}
 
 // Converts special markup in a text (e.g. `**bold**`, `[[display|info]]`) into formatted HTML.
 function parseTextMarkup(text) {   // Escape HTML and replace special markup with styled spans
