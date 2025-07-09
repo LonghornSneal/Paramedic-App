@@ -57,8 +57,8 @@ if (sidebarOverlay) {
 
     // ... attach event listeners next
 if (searchInput) {
-    searchInput.addEventListener('input', () => handleSearch(true));  // Filter as user types // /.addEventListener('input', function() { handleSearch(true); });
-    searchInput.addEventListener('keypress', e => {    // Trigger search on Enter key  // /.addEventListener('keyp', function(e)
+    searchInput.addEventListener('input', () => handleSearch(true));  // Filter as user types
+    searchInput.addEventListener('keypress', e => {    // Trigger search on Enter key
         if (e.key === 'Enter') handleSearch(true); }); }
 
 // Navigation
@@ -85,7 +85,7 @@ function initializeData(categoriesData, medDetailsData) { paramedicCategories = 
     allSearchableTopics = [];
 
     // Build med details map for quick lookups
-    medicationDataMap = {};       //    /const medicationDataMap = {};
+    medicationDataMap = {};
     if (Array.isArray(medDetailsData)) { medDetailsData.forEach(med => { medicationDataMap[med.id] = med; });
     } else if (medDetailsData && typeof medDetailsData === 'object') { Object.assign(medicationDataMap, medDetailsData); }
 
@@ -98,32 +98,31 @@ function initializeData(categoriesData, medDetailsData) { paramedicCategories = 
             details: detailsObj || null,
             categoryPath: parentIds };
         allDisplayableTopicsMap[item.id] = fullItem;
-        if (item.type === 'topic') {     // /if (item.type === 'topic')
+        if (item.type === 'topic') {
             allSearchableTopics.push({ id: item.id, title: item.title, path: currentPath,
                 categoryPath: parentIds }); }
         if (item.children) { item.children.forEach(child => processItem(child, currentPath, currentIds)); } }
     paramedicCategories.forEach(cat => processItem(cat)); }
 
-// --- Initial View Rendering ---+ // Renders the main category list view (home screen) and highlights a topic if provided.
+// Renders the main category list view (home screen) and highlights a topic if provided.
 function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    // /contentArea = document.getElementById('content-area');
-    contentArea.innerHTML = ''; // Clear
+    contentArea.innerHTML = '';  // Clear
 
-    // Render the hierarchical list of categories
+// Render the hierarchical list of categories
     const listContainer = document.createElement('div');
     createHierarchicalList(paramedicCategories, listContainer, 0);
     contentArea.appendChild(listContainer);
 
-    // Optionally expand/highlight
+// Optionally expand/highlight
     openCategoriesAndHighlight(categoryPath, highlightId);
     if (shouldAddHistory) addHistoryEntry({ viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath });
-    updateNavButtonsState(); }
+    updateNavButtonsState(); 
 
 // --- Make Sure the DOM is ready ---
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initApp);
 } else { initApp(); }
 
-// Utility function to escape HTML + // Escapes special HTML characters in a string (e.g. `&`, `<`, `>`, quotes).
+// Escapes special HTML characters in a string (e.g. `&`, `<`, `>`, quotes).
 function escapeHTML(str) {
     const escapeMap = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
         return str.replace(/[&<>"']/g, char => escapeMap[char] || char); }
@@ -134,11 +133,11 @@ function escapeHTML(str) {
     setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions);
     setupAutocomplete('pt-indications','pt-indications-suggestions', indicationSuggestions);
     setupAutocomplete('pt-symptoms','pt-symptoms-suggestions', symptomSuggestions);
+
 // Add focus highlight to all textareas and inputs
     document.querySelectorAll('textarea, input').forEach(el => {
         el.addEventListener('focus', () => el.classList.add('ring', 'ring-blue-300'));
-        el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300'));
-    });
+        el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300')); });
 
 // Renders the list of topics matching the given search term in the content area.
 function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
@@ -205,8 +204,7 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
                     if (allergen && allergen.length > 2 && allergen.length < 30) { allergySuggestions.add(allergen); } }
             }); }
     });
-    // Data initialization complete. Now paramedicCategories, allSearchableTopics, 
-    // and allDisplayableTopicsMap are ready for use.
+
 
 // Handles the search input: filters topics by the current search term and shows results (or full list if empty).
 function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
@@ -218,7 +216,6 @@ function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath 
         (topic.path || '').toLowerCase().includes(term) );
     renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath); }
 
-// --- Diagnostic Logging --- console.log("ParamedicCategoriesData:", window.ParamedicCategoriesData); console.log("MedicationDetailsData:", window.MedicationDetailsData);
 
 // Ensures the header contains nav buttons and search input, adding them if missing.
 function ensureHeaderUI() { const header = document.querySelector('header');
@@ -227,7 +224,7 @@ function ensureHeaderUI() { const header = document.querySelector('header');
   if (!navBar) { navBar = document.createElement('div');
     navBar.className = 'header-nav-bar flex items-center space-x-2';
     header.appendChild(navBar); }
-
+  
   // Clear navBar and re-add in correct order
   navBar.innerHTML = '';
   // Back button
@@ -341,7 +338,6 @@ function navigateViaHistory(direction) {
     updateNavButtonsState();
     isNavigatingViaHistory = false; }
 
-// /if (shouldAddHistory) { addHistoryEntry({ viewType: 'detail', contentId: topicId }); }
 if (navBackButton && navForwardButton) {
   addTapListener(navBackButton, () => navigateViaHistory(-1));
   addTapListener(navForwardButton, () => navigateViaHistory(1)); }
@@ -403,15 +399,15 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { con
         
 // Renders the detailed view for a given topic (with all detail sections and warnings), and updates history if needed. 
     // Collapsible sections for details (ALS Medications)---------ERROR---------CODE MUST BE FIXED TO INCLUDE THE BLUE ARROWS NEXT TO THE ALS MEDICATION DETAIL'S INDIVIDUAL SUBTOPICS THAT FUNCTION THE SAME AS THE BLUE ARROWS NEXT TO THE GREEN TEXT THAT REVEALS THE GREEN HIDDEN TEXT WHEN CLICK UPON (DON'T CHANGE ANY COLORS THOUGH)--------THERE SHOULD ALREADY EXIST CODE FOR THIS, SO YOU MUST ALSO SEARCH FOR THAT CODE---------
-    function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) { // /function renderList(topicId, scrollToTop = true, shouldAddHistory = true) { const ul = document.createElement('ul');
+    function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) { // /{ const ul = document.createElement('ul');
     contentArea = document.getElementById('content-area');
     if (!allDisplayableTopicsMap[topicId]) { contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; return; }
-    const topic = allDisplayableTopicsMap[topicId];     // /ul.id = 'ParamedicCategories-list'; const topic = allDisplayableTopicsMap[topicId]; }
+    const topic = allDisplayableTopicsMap[topicId];
     contentArea.innerHTML = '';
     const headerEl = document.createElement('h2'); // Header/title  // /const title = document.createElement('h2'); title.textContent = topic.title || topic.name || topic.id; title.dataset.topicId = topic.id; title.className = 'topic-h2';
     headerEl.textContent = topic.title || topic.name || topic.id;
     headerEl.className = 'topic-h2 font-semibold text-lg mb-4';
-    headerEl.dataset.topicId = topic.id; contentArea.appendChild(headerEl); }
+    headerEl.dataset.topicId = topic.id; contentArea.appendChild(headerEl);
 
     // Insert warning boxes if any contraindications or allergies are present     // Check PDE5 inhibitor usage     // Check low BP
     let warningsHtml = ""; if (patientData.allergies.length > 0) { const medKeywords = (topic.title + " " + topic.id).toLowerCase(); const allergy = patientData.allergies.find(a => a && medKeywords.includes(a));
@@ -429,7 +425,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { con
     } else if (!details && topic.id && !topic.id.match(/^\d+-/)) {
         const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
         if (altId) details = allDisplayableTopicsMap[altId]?.details; }
-
+    }
  // Render details sections if available
     if (details) {
         const sections = [ { key: 'class', label: 'Class' },
@@ -438,8 +434,8 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { con
             { key: 'precautions', label: 'Precautions' },
             { key: 'sideEffects', label: 'Significant Adverse/Side Effects' },
             { key: 'adultRx', label: 'Adult Rx' },
-            { key: 'pediatricRx', label: 'Pediatric Rx' } ]; }
-        sections.forEach(sec => { if (details[sec.key]) { const wrapper = document.createElement('div'); } } )
+            { key: 'pediatricRx', label: 'Pediatric Rx' } ]; 
+        sections.forEach(sec => { if (!details[sec.key]) return; const wrapper = document.createElement('div');
 
                 // ... inside renderDetailPage, iterating sections ...
         wrapper.className = 'detail-section mb-3';
@@ -450,25 +446,21 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { con
         title.textContent = sec.label;
         wrapper.appendChild(title);
         let body; if (Array.isArray(details[sec.key])) 
-            { body = document.createElement('ul'); body.className = 'detail-list';
-        // append <li> items...
+            { body = document.createElement('ul'); body.className = 'detail-list'; }
+      details[sec.key].forEach(line => {
+                    const li = document.createElement('li');
+                    li.innerHTML = parseTextMarkup ? parseTextMarkup(line) : line;
+                    body.appendChild(li);
+                });
         } else {
             body = document.createElement('div');
             body.className = 'detail-text';
             // set innerHTML...
-        }
+        body.innerHTML = parseTextMarkup ? parseTextMarkup(details[sec.key]) : details[sec.key];
+            }
         wrapper.appendChild(body);
-        contentArea.appendChild(wrapper);
-
-// /const tocItems = []; sections.forEach(section => { if (d[section.key]) { const wrapper = document.createElement('div'); wrapper.className = 'detail-section mb-2'; const sectionId = typeof slugify === 'function' ? slugify(section.label) : section.label.toLowerCase().replace(/\s+/g, '-'); wrapper.id = sectionId; wrapper.dataset.label = section.label; tocItems.push({ label: section.label, id: sectionId });
-// /const header = document.createElement('div'); header.className = 'flex items-center cursor-pointer select-none toggle-category'; const arrow = document.createElement('span'); arrow.className = 'arrow';
-// /arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" style="transform: rotate(0deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`; header.appendChild(arrow);
-// /const labelEl = document.createElement('span'); labelEl.textContent = section.label; header.appendChild(labelEl); wrapper.appendChild(header); const body = document.createElement('div'); body.className = 'pl-6 py-2 hidden';
-        //       details[sec.key].forEach(line => {     // /const isOpen = !body.classList.contains('hidden'); /body.classList.toggle('hidden');  /const svg = arrow.querySelector('svg'); // /if (svg) svg.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
-          //              const li = document.createElement('li');
-            //            li.innerHTML = parseTextMarkup ? parseTextMarkup(line) : line;
-            //            body.appendChild(li); });
-             
+        contentArea.appendChild(wrapper); }
+        });  
         } else { contentArea.innerHTML += `<div class="text-gray-500 italic">No detail information found for this item.</div>`; }
 
         attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
@@ -500,7 +492,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { con
 
         if (shouldAddHistory) {addHistoryEntry({ viewType: 'detail', contentId: topicId }); }
         if (scrollToTop) { contentArea.scrollIntoView({ behavior: 'instant', block: 'start' }); }
-  
+    }
 // Creates a navigation button ("Previous" or "Next") that navigates to the specified topic.
 function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons:
     const btn = document.createElement('button');
@@ -525,7 +517,6 @@ function attachToggleInfoHandlers(container) {
         const info = el.querySelector('.info-text');
         const arrow = el.querySelector('.arrow'); if (arrow) arrow.classList.toggle('rotate');
         if (info) info.classList.toggle('hidden'); }; }); }
- //   container.querySelectorAll('.toggle-info').forEach(el => { addTapListener(el, () => { const info = el.querySelector('.info-text');
 
 // Attaches click handlers to collapsible category headers in the detail view to toggle their visibility.
 function attachToggleCategoryHandlers(container) {      // --- Utility: toggling hidden info text in detail view ---
@@ -536,7 +527,6 @@ function attachToggleCategoryHandlers(container) {      // --- Utility: toggling
             const content = header.nextElementSibling;
             if (content) content.classList.toggle('hidden'); }); }); }
 
-            
 // Converts special markup in a text (e.g. `**bold**`, `[[display|info]]`) into formatted HTML.
 function parseTextMarkup(text) {   // Escape HTML and replace special markup with styled spans
     let safeText = text.replace(/&/g, "&amp;")
@@ -577,4 +567,4 @@ function createDetailText(textBlock) {
 function createWarningIcon(colorClass = 'text-yellow-600') {
     return `<svg class="${colorClass} w-5 h-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
-            </svg>`; }
+            </svg>`}

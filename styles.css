@@ -6,14 +6,14 @@ html {
            text-size-adjust: 100%;             / Standard property /
 } */ 
 /* Basic reset and typography 
-  body, h1, h2, ul, li, p, button, input {
+  body, h1, h2, ul, li, p, button, input
   margin: 0;
   padding: 0; */
  body { font-family: 'Inter', sans-serif; line-height: 1.5; background: #fdfdfd;  /* light background for readability */
   color: #000; overscroll-behavior-y: contain; display: flex; flex-direction: column;
   min-height: calc(var(--vh, 1vh) * 100); }
 
-/* .addComponents {  */
+/* .addComponents  */
 /* Sidebar and Overlay */
  #patient-sidebar { position: fixed; top: 0; left: 0; width: 300px; max-width: 80%; height: 100vh; background: #ffffff;      
     border-right: 1px solid #e5e7eb; padding: 1rem; overflow-y: auto; z-index: 100;
@@ -62,7 +62,7 @@ html {
 
 /* Autocomplete suggestions dropdown */
   .autocomplete-container { position: relative; }
-  .autocomplete-suggestions { position: absolute; border: 1px solid + #d1d5db;
+  .autocomplete-suggestions { position: absolute; border: 1px solid #d1d5db;
     border-top: none; z-index: 101; max-height: 150px; overflow-y: auto;
     background: #ffffff; width: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     border-radius: 0 0 0.375rem 0.375rem; }  /* + theme("borderRadius.md") + " " + theme("borderRadius.md") */
@@ -110,3 +110,4 @@ html {
   ::-webkit-scrollbar-track { background-color: #f1f1f1; border-radius: 10px; }
   ::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 10px; }
   ::-webkit-scrollbar-thumb:hover { background-color: #94a3b8; }
+  
