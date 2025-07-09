@@ -1,5 +1,4 @@
-// Setup or update the table of contents for detail sections
-// Also inject hidden anchor elements for branch automation
+// Sets up a Table of Contents for detail sections and injects hidden anchor elements for external use (automation).
 function setupSlugAnchors(tocData) {
   if (typeof document === 'undefined') return;
 

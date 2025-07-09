@@ -24,12 +24,13 @@ let indicationSuggestions = new Set();
 let symptomSuggestions = new Set([ "chest pain", "shortness of breath", "sob", "dyspnea", "nausea", "vomiting", "diarrhea", "abdominal pain", "headache", "dizziness", "syncope", "altered mental status", "ams", "weakness", "fatigue", "fever",
     "chills", "rash", "seizure", "palpitations", "edema", "cough", "anxiety", "depression", "back pain", "trauma" ]); // Basic list, can be expanded
 
+// Opens the Patient Info sidebar panel and displays the overlay.
 function openSidebar() { patientSidebar.classList.add('open'); sidebarOverlay.classList.add('active'); }
 
-// Closes the Patient Info sidebar and hides the overlay. // Is this code just redundant and could be deleted??????????????
+// Closes the Patient Info sidebar and hides the overlay. // Is this code redundant deleted??????????????
 function closeSidebar() { patientSidebar.classList.remove('open'); sidebarOverlay.classList.remove('active'); }
 
-    // --- Update Patient Data and UI ---
+// Updates the patientData object based on sidebar inputs, then refreshes the UI (filters doses, strikes out irrelevant info).
 function updatePatientData() {      // Read and parse inputs from the sidebar fields
     patientData.age = document.getElementById('pt-age').value ? parseInt(document.getElementById('pt-age').value, 10) : null;
     const weightVal = document.getElementById('pt-weight') ? document.getElementById('pt-weight').value.trim() : '';
