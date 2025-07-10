@@ -452,25 +452,27 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
             navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
             contentArea.appendChild(navRow); 
         }
-
-
-
-    //** Description & History block: append topic description if present, update history state, and scroll to top if requested
-    if (topic.description) { 
-        const desc = document.createElement('div');    // If a topic description exists and no slug anchors were added, show the description
-        desc.className = 'mb-4'; 
-        desc.textContent = topic.description; 
-        contentArea.appendChild(desc); 
     }
-    if (shouldAddHistory) {
-        addHistoryEntry({ 
-            viewType: 'detail', contentId: topicId 
-        }); 
-    }
-    if (scrollToTop) { 
-        contentArea.scrollIntoView({ 
-            behavior: 'auto', block: 'start' 
-        }); 
+
+    {
+
+        // Description & History block: append topic description if present, update history state, and scroll to top if requested
+        if (topic.description) { 
+            const desc = document.createElement('div');    // If a topic description exists and no slug anchors were added, show the description
+            desc.className = 'mb-4'; 
+            desc.textContent = topic.description; 
+            contentArea.appendChild(desc); 
+        }
+        if (shouldAddHistory) {
+            addHistoryEntry({ 
+                viewType: 'detail', contentId: topicId 
+            }); 
+        }
+        if (scrollToTop) { 
+            contentArea.scrollIntoView({ 
+                behavior: 'auto', block: 'start' 
+            }); 
+        }
     }
 }
 // Creates a navigation button ("Previous" or "Next") that navigates to the specified topic.
