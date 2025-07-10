@@ -716,49 +716,82 @@ function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceS
     }); 
 }
 
-// Updates the disabled state of the Back/Forward navigation buttons based on history position.
-function updateNavButtonsState() { 
-    if (!navBackButton || !navForwardButton) return;
-    navBackButton.disabled = currentHistoryIndex <= 0;
-    navForwardButton.disabled = currentHistoryIndex >= navigationHistory.length - 1; 
+// Returns an SVG string for a warning icon symbol, using the given color class for styling.
+function createWarningIcon(colorClass = 'text-yellow-600') {
+    return `<svg class="${
+        colorClass
+    } w-5 h-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+    </svg>`;
 }
+
+// Adds a universal click/keypress listener to an element to trigger the given handler.
+function addTapListener(element, handler) { 
+    if (!element) return;
+    // Merged the activate logic into this function to ensure proper scope; both clicks and 'Enter/Space' keypresses will trigger the handler (fixes previously broken implementation).**
+    const activate = (e) => { 
+        if (e.type === 'click' || (e.type === 'keypress' && (e.key === 'Enter' || e.key === ' '))) {
+            e.preventDefault();
+            handler(e); 
+        } 
+    };
+    element.addEventListener('click', activate);
+    element.addEventListener('keypress', activate); 
+}
+
+// Kick off the application once DOM is ready
+if (document.readyState === 'loading') { 
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp(); 
+}
+
+
+
+
+
+
+// Updates the disabled state of the Back/Forward navigation buttons based on history position.
+//function updateNavButtonsState() { 
+//    if (!navBackButton || !navForwardButton) return;
+//    navBackButton.disabled = currentHistoryIndex <= 0;
+//    navForwardButton.disabled = currentHistoryIndex >= navigationHistory.length - 1; 
+//}
 
 // Adds a new entry to the navigation history and updates the current history index.
-function addHistoryEntry(entry) { 
-    if (isNavigatingViaHistory) return;
-    if (currentHistoryIndex < navigationHistory.length - 1) { 
-        navigationHistory = navigationHistory.slice(0, currentHistoryIndex + 1); 
-    }
-    navigationHistory.push(entry);
-    currentHistoryIndex = navigationHistory.length - 1;
-    updateNavButtonsState(); 
-}
-
+//function addHistoryEntry(entry) { 
+//    if (isNavigatingViaHistory) return;
+//    if (currentHistoryIndex < navigationHistory.length - 1) { 
+//        navigationHistory = navigationHistory.slice(0, currentHistoryIndex + 1); 
+//    }
+//    navigationHistory.push(entry);
+//    currentHistoryIndex = navigationHistory.length - 1;
+//    updateNavButtonsState(); 
+//}
+//
     // Moves through navigation history by the given direction (-1 for back, 1 for forward) and renders the appropriate view.
-function navigateViaHistory(direction) {
-    if ((direction === -1 && currentHistoryIndex <= 0) ||
-    (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return;
-    isNavigatingViaHistory = true;
-    currentHistoryIndex += direction;
-    const state = navigationHistory[currentHistoryIndex];
-    if (state.viewType === 'list') { 
-        searchInput.value = state.contentId || '';
-        handleSearch(false, state.highlightTopicId, state.categoryPath || []);
-    } else if (state.viewType === 'detail') { 
-        renderDetailPage(state.contentId, false, false); 
-    }
-    updateNavButtonsState();
-    isNavigatingViaHistory = false; 
-    if (navBackButton && navForwardButton) {
-        addTapListener(navBackButton, () => navigateViaHistory(-1));
-        addTapListener(navForwardButton, () => navigateViaHistory(1)); 
-    };
-}
-   
-
+//function navigateViaHistory(direction) {
+//    if ((direction === -1 && currentHistoryIndex <= 0) ||
+//    (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return;
+//    isNavigatingViaHistory = true;
+//    currentHistoryIndex += direction;
+//    const state = navigationHistory[currentHistoryIndex];
+//    if (state.viewType === 'list') { 
+//        searchInput.value = state.contentId || '';
+//        handleSearch(false, state.highlightTopicId, state.categoryPath || []);
+//    } else if (state.viewType === 'detail') { 
+//        renderDetailPage(state.contentId, false, false); 
+//    }
+//    updateNavButtonsState();
+//    isNavigatingViaHistory = false; 
+//    if (navBackButton && navForwardButton) {
+//        addTapListener(navBackButton, () => navigateViaHistory(-1));
+//        addTapListener(navForwardButton, () => navigateViaHistory(1)); 
+//    };
+//}
     // --- Make Sure the DOM is ready ---
-    if (document.readyState === 'loading') { 
-        document.addEventListener('DOMContentLoaded', initApp);
-    } else {
-        initApp(); 
-    }
+//    if (document.readyState === 'loading') { 
+//        document.addEventListener('DOMContentLoaded', initApp);
+//    } else {
+//        initApp(); 
+//    }
