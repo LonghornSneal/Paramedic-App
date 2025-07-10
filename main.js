@@ -739,12 +739,6 @@ function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceS
     }); 
 }
 
-
-
-
-
-
-
 // Updates the disabled state of the Back/Forward navigation buttons based on history position.
 function updateNavButtonsState() { 
     if (!navBackButton || !navForwardButton) return;
