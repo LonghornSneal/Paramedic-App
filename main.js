@@ -467,7 +467,7 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
     }
 }
 // Creates a navigation button ("Previous" or "Next") that navigates to the specified topic.
-function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons:
+function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons
     const btn = document.createElement('button');
     btn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
     btn.innerHTML = (label === 'Previous')
@@ -497,7 +497,7 @@ function attachToggleInfoHandlers(container) {
 }
 
 // Attaches click handlers to collapsible category headers in the detail view to toggle their visibility.
-function attachToggleCategoryHandlers(container) {      // --- Utility: toggling hidden info text in detail view ---
+function attachToggleCategoryHandlers(container) {      
     container.querySelectorAll('.toggle-category').forEach(header => {
         addTapListener(header, () => {
             const arrow = header.querySelector('.arrow');
