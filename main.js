@@ -612,7 +612,7 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
     } else { 
         contentArea.innerHTML += `<div class="text-gray-500 italic">No detail information found for this item.</div>`;
     }
-}
+
     attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
 
     // --- Previous/Next navigation for ALS Medications ---
@@ -655,7 +655,7 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
             behavior: 'instant', block: 'start' 
         }); 
     }
-
+}
 // Creates a navigation button ("Previous" or "Next") that navigates to the specified topic.
 function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons:
     const btn = document.createElement('button');
