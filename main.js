@@ -423,34 +423,35 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
         } else { 
             contentArea.insertAdjacentHTML('beforeend', `<div class="text-gray-500 italic">No detail information found for this item.</div>`);
         }
-
+    }
     attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
     // Attach handlers to enable collapsing/expanding of the new detail sections (blue arrow rotation and content toggle).
-    attachToggleCategoryHandlers(contentArea);
-    // --- Previous/Next navigation for ALS Medications ---
-    let prevId = null, nextId = null;
-    const alsMedCat = paramedicCategories.find(cat => cat.title && cat.title.toLowerCase().includes('als medications'));
-    if (alsMedCat && alsMedCat.children) {   // find index of current topic in ALS Medications list
-        let idx = alsMedCat.children.findIndex(child => child.id === topic.id);
-        if (idx === -1 && /^\d+-/.test(topic.id)) {
-            const altId = topic.id.replace(/^\d+-/, '');
-            idx = alsMedCat.children.findIndex(child => child.id === altId);
-        } else if (idx === -1) {
-            const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
-            if (altId) idx = alsMedCat.children.findIndex(child => child.id === altId); 
+    attachToggleCategoryHandlers(contentArea); {
+
+        // --- Previous/Next navigation for ALS Medications ---
+        let prevId = null, nextId = null;
+        const alsMedCat = paramedicCategories.find(cat => cat.title && cat.title.toLowerCase().includes('als medications'));
+        if (alsMedCat && alsMedCat.children) {   // find index of current topic in ALS Medications list
+            let idx = alsMedCat.children.findIndex(child => child.id === topic.id);
+            if (idx === -1 && /^\d+-/.test(topic.id)) {
+                const altId = topic.id.replace(/^\d+-/, '');
+                idx = alsMedCat.children.findIndex(child => child.id === altId);
+            } else if (idx === -1) {
+                const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
+                if (altId) idx = alsMedCat.children.findIndex(child => child.id === altId); 
+            }
+            if (idx !== -1) {
+                if (idx > 0) prevId = alsMedCat.children[idx - 1].id;
+                if (idx < alsMedCat.children.length - 1) nextId = alsMedCat.children[idx + 1].id; 
+            }
         }
-        if (idx !== -1) {
-            if (idx > 0) prevId = alsMedCat.children[idx - 1].id;
-            if (idx < alsMedCat.children.length - 1) nextId = alsMedCat.children[idx + 1].id; 
+        if (prevId || nextId) {     // Add Prev/Next buttons if applicable
+            const navRow = document.createElement('div');
+            navRow.className = 'flex justify-between items-center mb-4';
+            navRow.appendChild(prevId ? createNavButton('Previous', prevId) : document.createElement('span'));
+            navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
+            contentArea.appendChild(navRow); 
         }
-    }
-    if (prevId || nextId) {     // Add Prev/Next buttons if applicable
-        const navRow = document.createElement('div');
-        navRow.className = 'flex justify-between items-center mb-4';
-        navRow.appendChild(prevId ? createNavButton('Previous', prevId) : document.createElement('span'));
-        navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
-        contentArea.appendChild(navRow); 
-    }
 
 
 
