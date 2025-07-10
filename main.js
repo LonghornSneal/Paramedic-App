@@ -102,7 +102,6 @@ function initApp() {
 // Initializes global data structures for categories and medications.
 function initializeData(categoriesData, medDetailsData) { 
     paramedicCategories = categoriesData;    // /Assign the global category array
-
     // Wipe/prepare lookup maps
     allDisplayableTopicsMap = {};
     allSearchableTopics = [];
@@ -116,6 +115,44 @@ function initializeData(categoriesData, medDetailsData) {
     } else if (medDetailsData && typeof medDetailsData === 'object') { 
         Object.assign(medicationDataMap, medDetailsData); 
     }
+    categoriesData.forEach(cat => processItem(cat)); 
+    // Load common suggestion terms into suggestion sets
+    const commonPmh = ["hypertension","htn","diabetes","dm","asthma","copd","heart failure","hf","cad","stroke","cva","seizure disorder","renal insufficiency","ckd","hypothyroidism","hyperthyroidism","glaucoma","peptic ulcer","anxiety","depression"];
+    const commonAllergies = ["penicillin","sulfa","aspirin","nsaids","morphine", "codeine","iodine","shellfish","latex","peanuts","tree nuts"];
+    const commonMedNames  = ["lisinopril","metformin","atorvastatin","amlodipine","hydrochlorothiazide","hctz","simvastatin","albuterol","levothyroxine","gabapentin","omeprazole","losartan","sertraline","furosemide","lasix","insulin","warfarin","coumadin","aspirin","clopidogrel","plavix"];
+    // Add these common terms to the suggestion sets (defined in PatientInfo.js)
+    commonPmh.forEach(term => pmhSuggestions.add(term));
+    commonAllergies.forEach(term => allergySuggestions.add(term));
+    commonMedNames.forEach(term => medicationNameSuggestions.add(term));
+    PDE5_INHIBITORS.forEach(term => medicationNameSuggestions.add(term));
+    // Extract additional allergy keywords from medication contraindications
+    Object.values(medicationDataMap).forEach(med => {
+        if (med.contraindications && Array.isArray(med.contraindications)) {
+            med.contraindications.forEach(ci => { 
+                const ciLower = ci.toLowerCase();
+                if (ciLower.includes("hypersensitivity") || ciLower.includes("allergy to")) {    // Derive a generalized allergen term from text
+                    let allergen = ciLower.replace("known hypersensitivity to", "")
+                                          .replace("allergy to any nsaid (including asa)", "nsaid allergy")
+                                          .replace("allergy to", "").trim();
+                    if (allergen.includes("local anesthetic allergy in the amide class")) { 
+                        allergen = "amide anesthetic allergy";
+                    } else if (allergen.includes("nsaid (including asa)")) {
+                        allergen = "nsaid allergy";
+                    } else { 
+                        allergen = allergen.split('(')[0].trim(); 
+                    }
+                    if (allergen && allergen.length > 2 && allergen.length < 30) { 
+                        allergySuggestions.add(allergen); 
+                    } 
+                }
+            }); 
+        }
+    });
+}
+
+
+
+
 }
 // Recursively processes categories and topics to build search index and lookup map.
 function processItem(item, parentPath = '', parentIds = []) {       // Add to searchable list (for quick search by title/path)
@@ -137,7 +174,7 @@ function processItem(item, parentPath = '', parentIds = []) {       // Add to se
     if (item.children) { 
         item.children.forEach(child => processItem(child, currentPath, currentIds)); 
     } 
-    paramedicCategories.forEach(cat => processItem(cat)); 
+    
 }
 // Renders the main category list view (home screen) and highlights a topic if provided.
 function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
@@ -215,42 +252,17 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
     });
 }
 
-    // --- Preload common suggestions (Past Medical History, Allergies, Med Names) ---
-    const commonPmh = ["hypertension","htn","diabetes","dm","asthma","copd","heart failure","hf","cad","stroke","cva","seizure disorder","renal insufficiency","ckd","hypothyroidism","hyperthyroidism","glaucoma","peptic ulcer","anxiety","depression"];
-    const commonAllergies = ["penicillin","sulfa","aspirin","nsaids","morphine", "codeine","iodine","shellfish","latex","peanuts","tree nuts"];
-    const commonMedNames  = ["lisinopril","metformin","atorvastatin","amlodipine",
-                             "hydrochlorothiazide","hctz","simvastatin","albuterol",
-                             "levothyroxine","gabapentin","omeprazole","losartan",
-                             "sertraline","furosemide","lasix","insulin","warfarin",
-                             "coumadin","aspirin","clopidogrel","plavix"];
-    // Add these common terms to the suggestion sets (defined in PatientInfo.js)
-    commonPmh.forEach(term => pmhSuggestions.add(term));
-    commonAllergies.forEach(term => allergySuggestions.add(term));
-    commonMedNames.forEach(term => medicationNameSuggestions.add(term));
-    PDE5_INHIBITORS.forEach(term => medicationNameSuggestions.add(term));
 
-// --- Extract additional allergy keywords from medication contraindications ---
-Object.values(medicationDataMap).forEach(med => {
-    if (med.contraindications && Array.isArray(med.contraindications)) {
-        med.contraindications.forEach(ci => { const ciLower = ci.toLowerCase();
-            if (ciLower.includes("hypersensitivity") || ciLower.includes("allergy to")) {    // Derive a generalized allergen term from text
-                let allergen = ciLower.replace("known hypersensitivity to", "")
-                .replace("allergy to any nsaid (including asa)", "nsaid allergy")
-                .replace("allergy to", "").trim();
-                if (allergen.includes("local anesthetic allergy in the amide class")) { 
-                    allergen = "amide anesthetic allergy";
-                } else if (allergen.includes("nsaid (including asa)")) {
-                    allergen = "nsaid allergy";
-                } else { 
-                    allergen = allergen.split('(')[0].trim(); 
-                }
-                if (allergen && allergen.length > 2 && allergen.length < 30) { 
-                    allergySuggestions.add(allergen); 
-                } 
-            }
-        }); 
-    }
-});
+
+
+
+
+
+
+
+
+
+
 
 // Handles the search input: filters topics by the current search term and shows results (or full list if empty).
 function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
