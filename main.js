@@ -454,7 +454,7 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
         }
     }
 
-    {
+    
         // Description & History block: append topic description if present, update history state, and scroll to top if requested
         if (topic.description) { 
             const desc = document.createElement('div');    // If a topic description exists and no slug anchors were added, show the description
@@ -472,7 +472,7 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
                 behavior: 'auto', block: 'start' 
             }); 
         }
-    }
+    
 }
 // Creates a navigation button ("Previous" or "Next") that navigates to the specified topic.
 function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons
