@@ -759,14 +759,21 @@ function addHistoryEntry(entry) {
 
     // Moves through navigation history by the given direction (-1 for back, 1 for forward) and renders the appropriate view.
 function navigateViaHistory(direction) {
-    if ((direction === -1 && currentHistoryIndex <= 0) ||
-    (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return;
+    if ((direction === -1 && currentHistoryIndex <= 0) || (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return;
     isNavigatingViaHistory = true;
     currentHistoryIndex += direction;
     const state = navigationHistory[currentHistoryIndex];
-    if (state.viewType === 'list') { 
-        searchInput.value = state.contentId || '';
-        handleSearch(false, state.highlightTopicId, state.categoryPath || []);
+    if (state.viewType === 'list') {
+        //** override to highlight last viewed topic when going back: provide its ID and category path to handleSearch
+        if (direction === -1 && navigationHistory[currentHistoryIndex+1]?.viewType === 'detail') {
+            const prevTopicId = navigationHistory[currentHistoryIndex+1].contentId;
+            const prevCatPath = allDisplayableTopicsMap[prevTopicId]?.categoryPath || [];
+            searchInput.value = state.contentId || '';
+            handleSearch(false, state.highlightTopicId, state.categoryPath || []);
+        } else {
+            searchInput.value = state.contentId || '';
+            handleSearch(false, state.highlightTopicId, state.categoryPath || []);
+        }
     } else if (state.viewType === 'detail') { 
         renderDetailPage(state.contentId, false, false); 
     }
