@@ -327,22 +327,22 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
     headerEl.textContent = topic.title || topic.name || topic.id;
     headerEl.className = 'topic-h2 font-semibold text-lg mb-4';
     headerEl.dataset.topicId = topic.id; 
-    contentArea.appendChild(headerEl);
+    contentArea.appendChild(headerEl); {
 
-    // Insert warning boxes if any contraindications or allergies are present     // Check PDE5 inhibitor usage     // Check low BP
-    let warningsHtml = ""; 
-    if (patientData.allergies.length > 0) { 
-        const medKeywords = (topic.title + " " + topic.id).toLowerCase(); 
-        const allergy = patientData.allergies.find(a => a && medKeywords.includes(a));
-        if (allergy) { 
-            warningsHtml += `<div class="warning-box warning-box-red"><div>${
-                createWarningIcon('text-red-600')
+        // Insert warning boxes if any contraindications or allergies are present     // Check PDE5 inhibitor usage     // Check low BP
+        let warningsHtml = ""; 
+        if (patientData.allergies.length > 0) { 
+            const medKeywords = (topic.title + " " + topic.id).toLowerCase(); 
+            const allergy = patientData.allergies.find(a => a && medKeywords.includes(a));
+            if (allergy) { 
+                warningsHtml += `<div class="warning-box warning-box-red"><div>${
+                    createWarningIcon('text-red-600')
+                }
+                    <span>Allergy Alert: Patient has an allergy to ${
+                        topic.title
+                    }.</span></div>
+                    </div>`; 
             }
-                <span>Allergy Alert: Patient has an allergy to ${
-                    topic.title
-                }.</span></div>
-                </div>`; 
-        }
     }
     if (topic.id === 'ntg') { 
         const hasPDE5 = patientData.currentMedications.some(med => PDE5_INHIBITORS.some(term => med.includes(term)) );
@@ -449,6 +449,10 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
         navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
         contentArea.appendChild(navRow); 
     }
+
+
+
+    //** Description & History block: append topic description if present, update history state, and scroll to top if requested
     if (topic.description) { 
         const desc = document.createElement('div');    // If a topic description exists and no slug anchors were added, show the description
         desc.className = 'mb-4'; 
@@ -462,7 +466,7 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
     }
     if (scrollToTop) { 
         contentArea.scrollIntoView({ 
-            behavior: 'instant', block: 'start' 
+            behavior: 'auto', block: 'start' 
         }); 
     }
 }
