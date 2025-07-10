@@ -205,10 +205,12 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
             viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath 
         }); 
     }
-    updateNavButtonsState(); contentArea.innerHTML = `<div class="flex justify-between items-center mb-3">
+    updateNavButtonsState(); 
+    contentArea.innerHTML = `<div class="flex justify-between items-center mb-3">
         <p class="text-gray-700 font-medium">Results for "${escapeHTML(searchTerm)}":</p>
-        <button id="clear-search-button" class="text-sm text-blue-600 hover:underline">Show All Categories</button> </div>
-        <div id="results-container" class="space-y-2"></div>`;
+        <button id="clear-search-button" class="text-sm text-blue-600 hover:underline">Show All Categories</button>
+    </div>
+    <div id="results-container" class="space-y-2"></div>`;
     const resultsContainer = document.getElementById('results-container');
     if (filteredTopics.length > 0) { 
         filteredTopics.forEach(topic => { 
@@ -251,10 +253,6 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
 
 
 
-
-
-
-
 // Handles the search input: filters topics by the current search term and shows results (or full list if empty).
 function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     const term = searchInput.value.trim().toLowerCase();
@@ -267,15 +265,18 @@ function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath 
     renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath); 
 }
 
+
 // Ensures the header contains nav buttons and search input, adding them if missing.
-function ensureHeaderUI() { const header = document.querySelector('header');
-    if (!header) return; // Add app title if missing // Always ensure nav buttons and search input are present and in correct order
-    let navBar = header.querySelector('.header-nav-bar');
-    if (!navBar) { 
-        navBar = document.createElement('div');
-        navBar.className = 'header-nav-bar flex items-center space-x-2';
-        header.appendChild(navBar); 
-    }
+// function ensureHeaderUI() { const header = document.querySelector('header');
+//    if (!header) return; // Add app title if missing // Always ensure nav buttons and search input are present and in correct order
+//    let navBar = header.querySelector('.header-nav-bar');
+//    if (!navBar) { 
+//        navBar = document.createElement('div');
+//        navBar.className = 'header-nav-bar flex items-center space-x-2';
+//        header.appendChild(navBar); 
+//    }
+
+
     // Clear navBar and re-add in correct order
     navBar.innerHTML = '';
     // Back button
