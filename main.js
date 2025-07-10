@@ -154,7 +154,7 @@ function escapeHTML(str) {
         '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' 
     };
     return str.replace(/[&<>"']/g, char => escapeMap[char] || char); 
-
+}
     // Set up autocomplete for each Patient Info field
     setupAutocomplete('pt-pmh','pt-pmh-suggestions', pmhSuggestions);
     setupAutocomplete('pt-allergies','pt-allergies-suggestions', allergySuggestions);
@@ -167,7 +167,7 @@ function escapeHTML(str) {
         el.addEventListener('focus', () => el.classList.add('ring', 'ring-blue-300'));
         el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300')); 
     });
-}
+
 // Renders the list of topics matching the given search term in the content area.
 function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
     if (shouldAddHistory) { 
