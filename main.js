@@ -559,7 +559,30 @@ function createWarningIcon(colorClass = 'text-yellow-600') {
     } w-5 h-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
     </svg>`;
-}  
+}
+
+// Adds a universal click/keypress listener to an element to trigger the given handler.
+function addTapListener(element, handler) { 
+    if (!element) return;
+    // Merged the activate logic into this function to ensure proper scope; both clicks and 'Enter/Space' keypresses will trigger the handler (fixes previously broken implementation).**
+    const activate = (e) => { 
+        if (e.type === 'click' || (e.type === 'keypress' && (e.key === 'Enter' || e.key === ' '))) {
+            e.preventDefault();
+            handler(e); 
+        } 
+    };
+    element.addEventListener('click', activate);
+    element.addEventListener('keypress', activate); 
+}
+
+// Kick off the application once DOM is ready
+if (document.readyState === 'loading') { 
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp(); 
+}
+
+
 
 
 
@@ -591,160 +614,130 @@ function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath 
 
 
     // Clear navBar and re-add in correct order
-    navBar.innerHTML = '';
+//    navBar.innerHTML = '';
     // Back button
-    let backBtn = document.getElementById('nav-back-button');
-    if (!backBtn) { 
-        backBtn = document.createElement('button');
-        backBtn.id = 'nav-back-button';
-        backBtn.className = 'header-nav-button p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 focus:ring-2 focus:ring-blue-400';
-        backBtn.setAttribute('aria-label', 'Back');
-        backBtn.setAttribute('title', 'Back');
-        backBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>';
-    }
-    navBar.appendChild(backBtn);
+//    let backBtn = document.getElementById('nav-back-button');
+//    if (!backBtn) { 
+//        backBtn = document.createElement('button');
+//        backBtn.id = 'nav-back-button';
+//        backBtn.className = 'header-nav-button p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 focus:ring-2 focus:ring-blue-400';
+//        backBtn.setAttribute('aria-label', 'Back');
+//        backBtn.setAttribute('title', 'Back');
+//        backBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>';
+//    }
+//    navBar.appendChild(backBtn);
     // Forward button
-    let forwardBtn = document.getElementById('nav-forward-button');
-    if (!forwardBtn) { 
-        forwardBtn = document.createElement('button');
-        forwardBtn.id = 'nav-forward-button';
-        forwardBtn.className = 'header-nav-button p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 focus:ring-2 focus:ring-blue-400';
-        forwardBtn.setAttribute('aria-label', 'Forward');
-        forwardBtn.setAttribute('title', 'Forward');
-        forwardBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>';
-    }
-    navBar.appendChild(forwardBtn);
+//    let forwardBtn = document.getElementById('nav-forward-button');
+//    if (!forwardBtn) { 
+//        forwardBtn = document.createElement('button');
+//        forwardBtn.id = 'nav-forward-button';
+//        forwardBtn.className = 'header-nav-button p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 focus:ring-2 focus:ring-blue-400';
+//        forwardBtn.setAttribute('aria-label', 'Forward');
+//        forwardBtn.setAttribute('title', 'Forward');
+//        forwardBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>';
+//    }
+//    navBar.appendChild(forwardBtn);
     // Search input
-    let search = document.getElementById('searchInput');
-    if (!search) { 
-        search = document.createElement('input');
-        search.id = 'searchInput';
-        search.type = 'text';
-        search.placeholder = 'Search...';
-        search.className = 'ml-4 px-3 py-2 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 w-64';
-        search.autocomplete = 'off'; 
-    }
-    navBar.appendChild(search);
-    navBackButton = backBtn;
-    navForwardButton = forwardBtn;
-    searchInput = search; 
-
+//    let search = document.getElementById('searchInput');
+//    if (!search) { 
+//        search = document.createElement('input');
+//        search.id = 'searchInput';
+//        search.type = 'text';
+//        search.placeholder = 'Search...';
+//        search.className = 'ml-4 px-3 py-2 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 w-64';
+//        search.autocomplete = 'off'; 
+//   }
+//    navBar.appendChild(search);
+//    navBackButton = backBtn;
+//    navForwardButton = forwardBtn;
+//    searchInput = search; 
 
 // Adds a universal click/keypress listener to an element to trigger the given handler.
-function addTapListener(element, handler) { 
-    if (!element) return;
-}
-function activate(e) { 
-    if (e.type === 'click' || (e.type === 'keypress' && (e.key === 'Enter' || e.key === ' '))) {
-        e.preventDefault(); handler(e); 
-    } 
-    element.addEventListener('click', activate);
-    element.addEventListener('keypress', activate); 
-}
+//function addTapListener(element, handler) { 
+//    if (!element) return;
+//}
+//function activate(e) { 
+//    if (e.type === 'click' || (e.type === 'keypress' && (e.key === 'Enter' || e.key === ' '))) {
+//        e.preventDefault(); handler(e); 
+//    } 
+//    element.addEventListener('click', activate);
+//    element.addEventListener('keypress', activate); 
+//}
 
 // Enables autocomplete suggestions for a textarea input field.
-function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceSet) {
-    const textarea = document.getElementById(textareaId);
-    const suggestionsContainer = document.getElementById(suggestionsContainerId);
-    textarea.addEventListener('input', function(e) { 
-        const inputText = e.target.value;
-        const currentSegment = inputText.split(',').pop().trim().toLowerCase();
-        if (currentSegment.length === 0) { 
-            suggestionsContainer.classList.add('hidden');
-            suggestionsContainer.innerHTML = ''; return; 
-        }
-        const filtered = Array.from(suggestionSourceSet)
-        .filter(function(s) { return s.toLowerCase().includes(currentSegment); });
-        if (filtered.length > 0) { 
-            suggestionsContainer.innerHTML = filtered.map(function(s) {
-                return '<div class="autocomplete-suggestion-item" data-value="' + s + '">' + s + '</div>';
-            })
-            .join(''); 
-            suggestionsContainer.classList.remove('hidden');
-        } else { 
-            suggestionsContainer.classList.add('hidden'); 
-        }
-    });
-    addTapListener(suggestionsContainer, function(e) {
-        if (e.target.classList.contains('autocomplete-suggestion-item')) { 
-            const selectedValue = e.target.dataset.value;
-            let existingValues = textarea.value.split(',').map(function(v) { 
-                return v.trim(); 
-            })
-            .filter(function(v) { 
-                return v; 
-            });
-            // Remove the segment currently being typed
-            if (existingValues.length > 0 && textarea.value.trim().slice(-1) !== ',') { 
-                existingValues.pop(); 
-            }
-            // Avoid duplicate entries (case-insensitive)
-            if (!existingValues.map(function(v) { 
-                return v.toLowerCase(); 
-            })
-            .includes(selectedValue.toLowerCase())) {
-                existingValues.push(selectedValue); 
-            }
-            textarea.value = existingValues.join(', ') + (existingValues.length > 0 ? ", " : "");
-            suggestionsContainer.classList.add('hidden');
-            suggestionsContainer.innerHTML = '';
-            textarea.focus(); updatePatientData(); 
-        } // Update patient data after selection
-    });
-    textarea.addEventListener('blur', function() {
+//function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceSet) {
+//    const textarea = document.getElementById(textareaId);
+//    const suggestionsContainer = document.getElementById(suggestionsContainerId);
+//    textarea.addEventListener('input', function(e) { 
+//        const inputText = e.target.value;
+//        const currentSegment = inputText.split(',').pop().trim().toLowerCase();
+//        if (currentSegment.length === 0) { 
+//            suggestionsContainer.classList.add('hidden');
+//            suggestionsContainer.innerHTML = ''; return; 
+//        }
+//        const filtered = Array.from(suggestionSourceSet)
+//        .filter(function(s) { return s.toLowerCase().includes(currentSegment); });
+//        if (filtered.length > 0) { 
+//            suggestionsContainer.innerHTML = filtered.map(function(s) {
+//                return '<div class="autocomplete-suggestion-item" data-value="' + s + '">' + s + '</div>';
+//            })
+//            .join(''); 
+//            suggestionsContainer.classList.remove('hidden');
+//        } else { 
+//            suggestionsContainer.classList.add('hidden'); 
+//        }
+//   });
+//    addTapListener(suggestionsContainer, function(e) {
+//        if (e.target.classList.contains('autocomplete-suggestion-item')) { 
+//            const selectedValue = e.target.dataset.value;
+//            let existingValues = textarea.value.split(',').map(function(v) { 
+//                return v.trim(); 
+//            })
+//            .filter(function(v) { 
+//                return v; 
+//            });
+//            // Remove the segment currently being typed
+//            if (existingValues.length > 0 && textarea.value.trim().slice(-1) !== ',') { 
+//                existingValues.pop(); 
+//            }
+//            // Avoid duplicate entries (case-insensitive)
+//            if (!existingValues.map(function(v) { 
+//                return v.toLowerCase(); 
+//            })
+//            .includes(selectedValue.toLowerCase())) {
+//                existingValues.push(selectedValue); 
+//            }
+//            textarea.value = existingValues.join(', ') + (existingValues.length > 0 ? ", " : "");
+//            suggestionsContainer.classList.add('hidden');
+//            suggestionsContainer.innerHTML = '';
+//            textarea.focus(); updatePatientData(); 
+//        } // Update patient data after selection
+//    });
+//    textarea.addEventListener('blur', function() {
         // Delay hiding to allow click on suggestions
-        setTimeout(function() { 
-            suggestionsContainer.classList.add('hidden'); 
-        }, 150); 
-    });
-    textarea.addEventListener('focus', function(e) { 
-        const inputText = e.target.value;
-        const currentSegment = inputText.split(',').pop().trim().toLowerCase();
-        if (currentSegment.length > 0) { 
-            const filtered = Array.from(suggestionSourceSet)
-            .filter(function(s) { 
-                return s.toLowerCase().includes(currentSegment); 
-            });
-            if (filtered.length > 0) {
-                suggestionsContainer.innerHTML = filtered.map(function(s) { 
-                    return '<div class="autocomplete-suggestion-item" data-value="' + s + '">' + s + '</div>'; 
-                })
-                .join('');
-                suggestionsContainer.classList.remove('hidden'); 
-            };
-        };
-    }); 
-}
+//        setTimeout(function() { 
+//            suggestionsContainer.classList.add('hidden'); 
+//        }, 150); 
+//    });
+//    textarea.addEventListener('focus', function(e) { 
+//        const inputText = e.target.value;
+//        const currentSegment = inputText.split(',').pop().trim().toLowerCase();
+//        if (currentSegment.length > 0) { 
+//            const filtered = Array.from(suggestionSourceSet)
+//            .filter(function(s) { 
+//                return s.toLowerCase().includes(currentSegment); 
+//            });
+//            if (filtered.length > 0) {
+//                suggestionsContainer.innerHTML = filtered.map(function(s) { 
+//                    return '<div class="autocomplete-suggestion-item" data-value="' + s + '">' + s + '</div>'; 
+//                })
+//                .join('');
+//                suggestionsContainer.classList.remove('hidden'); 
+//            };
+//        };
+//    }); 
+//}
 
-// Returns an SVG string for a warning icon symbol, using the given color class for styling.
-function createWarningIcon(colorClass = 'text-yellow-600') {
-    return `<svg class="${
-        colorClass
-    } w-5 h-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
-    </svg>`;
-}
-
-// Adds a universal click/keypress listener to an element to trigger the given handler.
-function addTapListener(element, handler) { 
-    if (!element) return;
-    // Merged the activate logic into this function to ensure proper scope; both clicks and 'Enter/Space' keypresses will trigger the handler (fixes previously broken implementation).**
-    const activate = (e) => { 
-        if (e.type === 'click' || (e.type === 'keypress' && (e.key === 'Enter' || e.key === ' '))) {
-            e.preventDefault();
-            handler(e); 
-        } 
-    };
-    element.addEventListener('click', activate);
-    element.addEventListener('keypress', activate); 
-}
-
-// Kick off the application once DOM is ready
-if (document.readyState === 'loading') { 
-    document.addEventListener('DOMContentLoaded', initApp);
-} else {
-    initApp(); 
-}
 
 
 
