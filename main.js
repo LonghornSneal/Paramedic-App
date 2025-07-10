@@ -294,7 +294,27 @@ function createHierarchicalList(items, container, level = 0) {
         }
     });
 }
-
+// Expands categories along the given path and highlights the specified topic (then re-renders the list).
+// Note: We also ensure contentArea is defined locally. The category list items still need a way to be identified by category ID if we ever wanted to manipulate them directly, so as an additional improvement, we can modify createHierarchicalList to set a data-category-id attribute on category rows: // Inside createHierarchicalList, in the category branch: row.dataset.categoryId = item.id;
+function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { 
+    contentArea = document.getElementById('content-area');
+    // Mark each category in the path as expanded
+    categoryPath.forEach(catId => { 
+        const catItem = allDisplayableTopicsMap[catId];
+        if (catItem) catItem.expanded = true; 
+    });
+    // Re-render the category list with updated expansion states
+    contentArea.innerHTML = ''; 
+    const listContainer = document.createElement('div');
+    createHierarchicalList(paramedicCategories, listContainer, 0);
+    contentArea.appendChild(listContainer);
+    // Highlight the specified topic, if provided
+    if (highlightId) { 
+        const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
+        if (topicEl) topicEl.classList.add('recently-viewed'); 
+    } 
+}
+  
 
 
 
@@ -363,7 +383,7 @@ function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath 
     navBackButton = backBtn;
     navForwardButton = forwardBtn;
     searchInput = search; 
-}
+
 
 // Adds a universal click/keypress listener to an element to trigger the given handler.
 function addTapListener(element, handler) { 
@@ -489,30 +509,7 @@ function navigateViaHistory(direction) {
         addTapListener(navForwardButton, () => navigateViaHistory(1)); 
     };
 }
-
-
-
-// Expands categories along the given path and highlights the specified topic (then re-renders the list).
-// Note: We also ensure contentArea is defined locally. The category list items still need a way to be identified by category ID if we ever wanted to manipulate them directly, so as an additional improvement, we can modify createHierarchicalList to set a data-category-id attribute on category rows: // Inside createHierarchicalList, in the category branch: row.dataset.categoryId = item.id;
-function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { 
-    contentArea = document.getElementById('content-area');
-    // Mark each category in the path as expanded
-    categoryPath.forEach(catId => { 
-        const catItem = allDisplayableTopicsMap[catId];
-        if (catItem) catItem.expanded = true; 
-    });
-    // Re-render the category list with updated expansion states
-    contentArea.innerHTML = ''; 
-    const listContainer = document.createElement('div');
-    createHierarchicalList(paramedicCategories, listContainer, 0);
-    contentArea.appendChild(listContainer);
-    // Highlight the specified topic, if provided
-    if (highlightId) { 
-        const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
-        if (topicEl) topicEl.classList.add('recently-viewed'); 
-    } 
-}
-     
+   
 // Renders the detailed view for a given topic (with all detail sections and warnings), and updates history if needed. 
 // Collapsible sections for details (ALS Medications)---------ERROR---------CODE MUST BE FIXED TO INCLUDE THE BLUE ARROWS NEXT TO THE ALS MEDICATION DETAIL'S INDIVIDUAL SUBTOPICS THAT FUNCTION THE SAME AS THE BLUE ARROWS NEXT TO THE GREEN TEXT THAT REVEALS THE GREEN HIDDEN TEXT WHEN CLICK UPON (DON'T CHANGE ANY COLORS THOUGH)--------THERE SHOULD ALREADY EXIST CODE FOR THIS, SO YOU MUST ALSO SEARCH FOR THAT CODE---------
 function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) {
