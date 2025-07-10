@@ -333,94 +333,96 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
         let warningsHtml = ""; 
         if (patientData.allergies.length > 0) { 
             const medKeywords = (topic.title + " " + topic.id).toLowerCase(); 
-            const allergy = patientData.allergies.find(a => a && medKeywords.includes(a));
+            const allergy = patientData.allergies.find(a => a && medKeywords.includes(a.toLowerCase()));
             if (allergy) { 
                 warningsHtml += `<div class="warning-box warning-box-red"><div>${
                     createWarningIcon('text-red-600')
                 }
-                    <span>Allergy Alert: Patient has an allergy to ${
-                        topic.title
-                    }.</span></div>
-                    </div>`; 
+                <span>Allergy Alert: Patient has an allergy to ${
+                    topic.title
+                }.</span></div></div>`; 
             }
-    }
-    if (topic.id === 'ntg') { 
-        const hasPDE5 = patientData.currentMedications.some(med => PDE5_INHIBITORS.some(term => med.includes(term)) );
-        if (hasPDE5) { 
-            warningsHtml += `<div class="warning-box warning-box-red"><div>${
-                createWarningIcon('text-red-600')
-            }
-            <span>Contraindication: Recent PDE5 inhibitor use – do NOT administer NTG.</span></div></div>`; 
         }
-        if (patientData.vitalSigns.bp) { 
-            const bpMatch = patientData.vitalSigns.bp.match(/(\d+)/); 
-            const systolic = bpMatch ? parseInt(bpMatch[0], 10) : 0;
-            if (systolic && systolic < 100) { 
+        if (topic.id === 'ntg') { 
+            const hasPDE5 = patientData.currentMedications.some(med => PDE5_INHIBITORS.some(term => med.toLowerCase().includes(term.toLowerCase())) );
+            if (hasPDE5) { 
                 warningsHtml += `<div class="warning-box warning-box-red"><div>${
                     createWarningIcon('text-red-600')
                 }
-                <span>Contraindication: Systolic BP < 100 mmHg – NTG is not advised.</span></div></div>`; 
-            } 
+                <span>Contraindication: Recent PDE5 inhibitor use – do NOT administer NTG.</span></div></div>`; 
+            }
+            if (patientData.vitalSigns.bp) { 
+                const bpMatch = patientData.vitalSigns.bp.match(/(\d+)/); 
+                const systolic = bpMatch ? parseInt(bpMatch[0], 10) : 0;
+                if (systolic && systolic < 100) { 
+                    warningsHtml += `<div class="warning-box warning-box-red"><div>${
+                        createWarningIcon('text-red-600')
+                    }
+                    <span>Contraindication: Systolic BP < 100 mmHg – NTG is not advised.</span></div></div>`; 
+                } 
+            }
+        }
+        if (warningsHtml) { 
+            contentArea.insertAdjacentHTML('beforeend', warningsHtml); //** replaced use of `contentArea.innerHTML += ...` with `insertAdjacentHTML('beforeend', ...)` to append warnings without re-rendering or clearing existing content (preserves header element) 
         }
     }
-    if (warningsHtml) { 
-        contentArea.innerHTML += warningsHtml;
-    }
+    {    
 
-    let details = topic.details;  // Show details if available (Fallbacks for alternate IDs (numbered/un-numbered))
-    if (!details && topic.id && topic.id.match(/^\d+-/)) {
-        const altId = topic.id.replace(/^\d+-/, '');
-        details = allDisplayableTopicsMap[altId]?.details;
-    } else if (!details && topic.id && !topic.id.match(/^\d+-/)) {
-        const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
-        if (altId) details = allDisplayableTopicsMap[altId]?.details; 
-    }
-    // Render details sections if available
-    if (details) {
-        const sections = [ 
-            { key: 'class', label: 'Class' },
-            { key: 'indications', label: 'Indications' },
-            { key: 'contraindications', label: 'Contraindications' },
-            { key: 'precautions', label: 'Precautions' },
-            { key: 'sideEffects', label: 'Significant Adverse/Side Effects' },
-            { key: 'adultRx', label: 'Adult Rx' },
-            { key: 'pediatricRx', label: 'Pediatric Rx' } 
-        ]; 
-        sections.forEach(sec => { 
-            if (!details[sec.key]) return; 
-            const wrapper = document.createElement('div');
-            wrapper.className = 'detail-section mb-3';
-            if (sec.key === 'adultRx') wrapper.classList.add('adult-section');
-            if (sec.key === 'pediatricRx') wrapper.classList.add('pediatric-section');
-            const title = document.createElement('div');
-            // Added 'toggle-category' class and pointer/flex styling to make section headers clickable for collapsing.
-            title.className = 'detail-section-title toggle-category cursor-pointer flex items-center'; 
-            // Inserted a blue arrow SVG icon and then the section label text (replacing the plain text title) to indicate collapsible section.
-            title.innerHTML = `<svg class="arrow h-4 w-4 text-blue-600 transition-transform duration-200 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>${sec.label}`; 
-            wrapper.appendChild(title);
-            let body; 
-            if (Array.isArray(details[sec.key])) {
-                body = document.createElement('ul'); 
-                body.className = 'detail-list';
-                details[sec.key].forEach(line => {
-                    const li = document.createElement('li');
-                    li.innerHTML = parseTextMarkup ? parseTextMarkup(line) : line;
-                    body.appendChild(li);
-                });
-            } else {
-                body = document.createElement('div');
-                body.className = 'detail-text';
-                // set innerHTML...
-                body.innerHTML = parseTextMarkup ? parseTextMarkup(details[sec.key]) : details[sec.key];
-            }
-            // Hide the section content by default; it will be revealed when the section header is clicked.
-            body.classList.add('hidden'); 
-            wrapper.appendChild(body);
-            contentArea.appendChild(wrapper); 
-        });  
-    } else { 
-        contentArea.innerHTML += `<div class="text-gray-500 italic">No detail information found for this item.</div>`;
-    }
+        //** Details block: retrieve topic details (including alternate ID fallback) and render each detail section or show a placeholder if none
+        let details = topic.details;
+        if (!details && topic.id && topic.id.match(/^\d+-/)) {
+            const altId = topic.id.replace(/^\d+-/, '');
+            details = allDisplayableTopicsMap[altId]?.details;
+        } else if (!details && topic.id && !topic.id.match(/^\d+-/)) {
+            const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
+            if (altId) details = allDisplayableTopicsMap[altId]?.details; 
+        }
+        // Render details sections if available
+        if (details) {
+            const sections = [ 
+                { key: 'class', label: 'Class' },
+                { key: 'indications', label: 'Indications' },
+                { key: 'contraindications', label: 'Contraindications' },
+                { key: 'precautions', label: 'Precautions' },
+                { key: 'sideEffects', label: 'Significant Adverse/Side Effects' },
+                { key: 'adultRx', label: 'Adult Rx' },
+                { key: 'pediatricRx', label: 'Pediatric Rx' } 
+            ]; 
+            sections.forEach(sec => { 
+                if (!details[sec.key]) return; 
+                const wrapper = document.createElement('div');
+                wrapper.className = 'detail-section mb-3';
+                if (sec.key === 'adultRx') wrapper.classList.add('adult-section');
+                if (sec.key === 'pediatricRx') wrapper.classList.add('pediatric-section');
+                const title = document.createElement('div');
+                // Added 'toggle-category' class and pointer/flex styling to make section headers clickable for collapsing.
+                title.className = 'detail-section-title toggle-category cursor-pointer flex items-center'; 
+                // Inserted a blue arrow SVG icon and then the section label text (replacing the plain text title) to indicate collapsible section.
+                title.innerHTML = `<svg class="arrow h-4 w-4 text-blue-600 transition-transform duration-200 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>${sec.label}`; 
+                wrapper.appendChild(title);
+                let body; 
+                if (Array.isArray(details[sec.key])) {
+                    body = document.createElement('ul'); 
+                    body.className = 'detail-list';
+                    details[sec.key].forEach(line => {
+                        const li = document.createElement('li');
+                        li.innerHTML = parseTextMarkup ? parseTextMarkup(line) : line;
+                        body.appendChild(li);
+                    });
+                } else {
+                    body = document.createElement('div');
+                    body.className = 'detail-text';
+                    // set innerHTML...
+                    body.innerHTML = parseTextMarkup ? parseTextMarkup(details[sec.key]) : details[sec.key];
+                }
+                // Hide the section content by default; it will be revealed when the section header is clicked.
+                body.classList.add('hidden'); 
+                wrapper.appendChild(body);
+                contentArea.appendChild(wrapper); 
+            });  
+        } else { 
+            contentArea.insertAdjacentHTML('beforeend', `<div class="text-gray-500 italic">No detail information found for this item.</div>`);
+        }
 
     attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
     // Attach handlers to enable collapsing/expanding of the new detail sections (blue arrow rotation and content toggle).
