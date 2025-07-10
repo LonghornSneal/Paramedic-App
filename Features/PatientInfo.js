@@ -25,10 +25,10 @@ let symptomSuggestions = new Set([ "chest pain", "shortness of breath", "sob", "
     "chills", "rash", "seizure", "palpitations", "edema", "cough", "anxiety", "depression", "back pain", "trauma" ]); // Basic list, can be expanded
 
 // Opens the Patient Info sidebar panel and displays the overlay.
-function openSidebar() { patientSidebar.classList.add('open'); sidebarOverlay.classList.add('active'); }
+// function openSidebar() { patientSidebar.classList.add('open'); sidebarOverlay.classList.add('active'); }
 
 // Closes the Patient Info sidebar and hides the overlay. // Is this code redundant deleted??????????????
-function closeSidebar() { patientSidebar.classList.remove('open'); sidebarOverlay.classList.remove('active'); }
+// function closeSidebar() { patientSidebar.classList.remove('open'); sidebarOverlay.classList.remove('active'); }
 
 // Updates the patientData object based on sidebar inputs, then refreshes the UI (filters doses, strikes out irrelevant info).
 function updatePatientData() {      // Read and parse inputs from the sidebar fields

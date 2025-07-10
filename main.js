@@ -63,7 +63,7 @@ function initApp() {
         }); 
     }
 
-    // Navigation
+    // Navigation buttons
     if (navBackButton && navForwardButton) {
         addTapListener(navBackButton, () => navigateViaHistory(-1));
         addTapListener(navForwardButton, () => navigateViaHistory(1)); 
@@ -80,7 +80,7 @@ function initApp() {
                 initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
             } else { 
                 console.error("Category or medication data not loaded!"); 
-            };
+            }
         }, 200); 
     }      // /fallback: try again after short delay
     renderInitialView(true); 
