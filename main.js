@@ -150,10 +150,6 @@ function initializeData(categoriesData, medDetailsData) {
     });
 }
 
-
-
-
-}
 // Recursively processes categories and topics to build search index and lookup map.
 function processItem(item, parentPath = '', parentIds = []) {       // Add to searchable list (for quick search by title/path)
     let currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
