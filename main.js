@@ -156,7 +156,8 @@ function processItem(item, parentPath = '', parentIds = []) {       // Add to se
     let currentIds = (item.type === 'category') ? parentIds.concat([item.id]) : parentIds;
     const detailsObj = medicationDataMap[item.id];
     const fullItem = { 
-        ...item, path: currentPath,
+        ...item, 
+        path: currentPath,
         details: detailsObj || null,
         categoryPath: parentIds 
     };
@@ -170,7 +171,6 @@ function processItem(item, parentPath = '', parentIds = []) {       // Add to se
     if (item.children) { 
         item.children.forEach(child => processItem(child, currentPath, currentIds)); 
     } 
-    
 }
 // Renders the main category list view (home screen) and highlights a topic if provided.
 function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
@@ -183,17 +183,12 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
 
     // Optionally expand/highlight
     openCategoriesAndHighlight(categoryPath, highlightId);
-    if (shouldAddHistory) addHistoryEntry({ 
-        viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath 
-    });
-    updateNavButtonsState(); 
-
-    // --- Make Sure the DOM is ready ---
-    if (document.readyState === 'loading') { 
-        document.addEventListener('DOMContentLoaded', initApp);
-    } else {
-        initApp(); 
+    if (shouldAddHistory) {
+        addHistoryEntry({ 
+            viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath 
+        });
     }
+    updateNavButtonsState();
 }
 // Escapes special HTML characters in a string (e.g. `&`, `<`, `>`, quotes).
 function escapeHTML(str) {
@@ -760,3 +755,9 @@ function createWarningIcon(colorClass = 'text-yellow-600') {
     <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
     </svg>`
 }
+    // --- Make Sure the DOM is ready ---
+    if (document.readyState === 'loading') { 
+        document.addEventListener('DOMContentLoaded', initApp);
+    } else {
+        initApp(); 
+    }
