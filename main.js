@@ -768,8 +768,8 @@ function navigateViaHistory(direction) {
         if (direction === -1 && navigationHistory[currentHistoryIndex+1]?.viewType === 'detail') {
             const prevTopicId = navigationHistory[currentHistoryIndex+1].contentId;
             const prevCatPath = allDisplayableTopicsMap[prevTopicId]?.categoryPath || [];
-            searchInput.value = state.contentId || '';
-            handleSearch(false, state.highlightTopicId, state.categoryPath || []);
+            searchInput.value = prevTopicId || '';
+            handleSearch(false, prevTopicId, prevCatPath);
         } else {
             searchInput.value = state.contentId || '';
             handleSearch(false, state.highlightTopicId, state.categoryPath || []);
