@@ -19,8 +19,8 @@ function assignDomElements() {
     navBackButton = document.getElementById('nav-back-button');
     navForwardButton = document.getElementById('nav-forward-button');
 }
-// Initializes the application, setting up UI event handlers and loading data.
 
+// Initializes the application, setting up UI event handlers and loading data.
 function initApp() {
     // Initialize header elements (they are already defined in index.html)
     assignDomElements();
@@ -83,8 +83,22 @@ function initApp() {
             }
         }, 200); 
     }      // /fallback: try again after short delay
+        // Initialize autocomplete for Patient Info fields
+    setupAutocomplete('pt-pmh','pt-pmh-suggestions', pmhSuggestions);
+    setupAutocomplete('pt-allergies','pt-allergies-suggestions', allergySuggestions);
+    setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions);
+    setupAutocomplete('pt-indications','pt-indications-suggestions', indicationSuggestions);
+    setupAutocomplete('pt-symptoms','pt-symptoms-suggestions', symptomSuggestions);
+
+    // Add focus highlight to all textareas and inputs
+    document.querySelectorAll('textarea, input').forEach(el => {
+        el.addEventListener('focus', () => el.classList.add('ring', 'ring-blue-300'));
+        el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300')); 
+    });
+    // Finally, render the initial category list view
     renderInitialView(true); 
 }
+
 // Initializes global data structures for categories and medications.
 function initializeData(categoriesData, medDetailsData) { 
     paramedicCategories = categoriesData;    // /Assign the global category array
@@ -155,18 +169,6 @@ function escapeHTML(str) {
     };
     return str.replace(/[&<>"']/g, char => escapeMap[char] || char); 
 }
-    // Set up autocomplete for each Patient Info field
-    setupAutocomplete('pt-pmh','pt-pmh-suggestions', pmhSuggestions);
-    setupAutocomplete('pt-allergies','pt-allergies-suggestions', allergySuggestions);
-    setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions);
-    setupAutocomplete('pt-indications','pt-indications-suggestions', indicationSuggestions);
-    setupAutocomplete('pt-symptoms','pt-symptoms-suggestions', symptomSuggestions);
-
-    // Add focus highlight to all textareas and inputs
-    document.querySelectorAll('textarea, input').forEach(el => {
-        el.addEventListener('focus', () => el.classList.add('ring', 'ring-blue-300'));
-        el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300')); 
-    });
 
 // Renders the list of topics matching the given search term in the content area.
 function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
