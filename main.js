@@ -414,7 +414,7 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
                 body.innerHTML = parseTextMarkup ? parseTextMarkup(details[sec.key]) : details[sec.key];
             }
             // Hide the section content by default; it will be revealed when the section header is clicked.
-            
+            body.classList.add('hidden'); 
             wrapper.appendChild(body);
             contentArea.appendChild(wrapper); 
         });  
@@ -423,7 +423,8 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
     }
 
     attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
-
+    // Attach handlers to enable collapsing/expanding of the new detail sections (blue arrow rotation and content toggle).
+    attachToggleCategoryHandlers(contentArea);
     // --- Previous/Next navigation for ALS Medications ---
     let prevId = null, nextId = null;
     const alsMedCat = paramedicCategories.find(cat => cat.title && cat.title.toLowerCase().includes('als medications'));
