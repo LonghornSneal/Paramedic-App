@@ -364,23 +364,23 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
 }
 
 
-
+// commented this function out of the code because it was putting a previous and an next button at the bottom of the app which we don't want and we dont need.
 // Creates a navigation button ("Previous" or "Next") that navigates to the specified topic.
-function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons
-    const btn = document.createElement('button');
-    btn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
-    btn.innerHTML = (label === 'Previous')
-    ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" 
-    viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-    d="M15 19l-7-7 7-7" /></svg>${label}`
-    : `${label}<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" 
-    viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-    d="M9 5l7 7-7 7" /></svg>`;
-    addTapListener(btn, () => renderDetailPage(targetId));
-    return btn; 
-}
+//function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons
+//    const btn = document.createElement('button');
+//    btn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
+//    btn.innerHTML = (label === 'Previous')
+//    ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" 
+//    viewBox="0 0 24 24" stroke="currentColor">
+//    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+//    d="M15 19l-7-7 7-7" /></svg>${label}`
+//    : `${label}<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" 
+//    viewBox="0 0 24 24" stroke="currentColor">
+//    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+//    d="M9 5l7 7-7 7" /></svg>`;
+//    addTapListener(btn, () => renderDetailPage(targetId));
+//    return btn; 
+//}
 
 
 function appendAdjacentNavButtons(currentTopicId) {
