@@ -340,7 +340,10 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
     headerEl.className = 'topic-h2 font-semibold text-lg mb-4';
     headerEl.dataset.topicId = topic.id; 
     contentArea.appendChild(headerEl); 
-    appendTopicWarnings(topic);          // ← Add this call to insert any warnings
+       // FIX: Actually render warnings in the DOM
+    const warningsHtml = appendTopicWarnings(topic);
+    if (warningsHtml) contentArea.insertAdjacentHTML('beforeend', warningsHtml);
+
     appendTopicDetails(topic);
 
     appendAdjacentNavButtons(topic.id);  // ← Add this call to insert Prev/Next buttons if applicable
