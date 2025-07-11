@@ -630,10 +630,16 @@ function getPDE5Warning(topic, patientData) {
 }
 
 function getLowBPWarning(topic, patientData) {
-    if (topic.id !== 'ntg' || !patientData.vitalSigns.bp) return "";
-    // Add your low BP warning logic here, if needed
-    return ""; // Placeholder for actual warning
+    if (topic.id !== 'ntg' || !patientData?.vitalSigns?.bp) return "";
+    // Example logic: warn if systolic BP < 100
+    const systolicBP = parseInt(patientData.vitalSigns.bp.split('/')[0], 10);
+    if (systolicBP < 100) {
+        return '<div class="text-red-600 font-bold mb-2">Warning: Systolic BP is low. NTG may be contraindicated.</div>';
+    }
+    return "";
 }
+
+
 //        if (warningsHtml) { 
 //            contentArea.insertAdjacentHTML('beforeend', warningsHtml); //** replaced use of `contentArea.innerHTML += ...` with `insertAdjacentHTML('beforeend', ...)` to append warnings without re-rendering or clearing existing content (preserves header element) 
 //        }
