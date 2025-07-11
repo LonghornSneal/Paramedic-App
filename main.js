@@ -384,31 +384,41 @@ function createNavButton(label, targetId) {  // Helper to create Prev/Next nav b
 
 
 function appendAdjacentNavButtons(currentTopicId) {
-// --- Previous/Next navigation for ALS Medications ---
-    let prevId = null, nextId = null;
     const alsMedCat = paramedicCategories.find(cat => cat.title && cat.title.toLowerCase().includes('als medications'));
-    if (alsMedCat && alsMedCat.children) {   // find index of current topic in ALS Medications list
-        let idx = alsMedCat.children.findIndex(child => child.id === topic.id);
-        if (idx === -1 && /^\d+-/.test(topic.id)) {
-            const altId = topic.id.replace(/^\d+-/, '');
-            idx = alsMedCat.children.findIndex(child => child.id === altId);
-        } else if (idx === -1) {
-            const altId = Object.keys(allDisplayableTopicsMap)
-                                .find(k => k.endsWith(topic.id));
-            if (altId) idx = alsMedCat.children.findIndex(child => child.id === altId); 
-        }
-        if (idx !== -1) {
-            if (idx > 0) prevId = alsMedCat.children[idx - 1].id;
-            if (idx < alsMedCat.children.length - 1) nextId = alsMedCat.children[idx + 1].id; 
-        }
+    if (!alsMedCat || !alsMedCat.children) return;
+
+    const idx = findAlsMedTopicIndex(alsMedCat.children, currentTopicId);
+    if (idx === -1) return;
+
+    const prevId = idx > 0 ? alsMedCat.children[idx - 1].id : null;
+    const nextId = idx < alsMedCat.children.length - 1 ? alsMedCat.children[idx + 1].id : null;
+
+    if (!prevId && !nextId) return;
+
+    const navRow = document.createElement('div');
+    navRow.className = 'flex justify-between items-center mb-4';
+    navRow.appendChild(prevId ? createNavButton('Previous', prevId) : document.createElement('span'));
+    navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
+    contentArea.appendChild(navRow);
+}
+
+function findAlsMedTopicIndex(children, topicId) {
+    let idx = children.findIndex(child => child.id === topicId);
+    if (idx !== -1) return idx;
+
+    if (/^\d+-/.test(topicId)) {
+        const altId = topicId.replace(/^\d+-/, '');
+        idx = children.findIndex(child => child.id === altId);
+        if (idx !== -1) return idx;
     }
-    if (prevId || nextId) {     // Add Prev/Next buttons if applicable
-        const navRow = document.createElement('div');
-        navRow.className = 'flex justify-between items-center mb-4';
-        navRow.appendChild(prevId ? createNavButton('Previous', prevId) : document.createElement('span'));
-        navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
-        contentArea.appendChild(navRow); 
+
+    const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topicId));
+    if (altId) {
+        idx = children.findIndex(child => child.id === altId);
+        if (idx !== -1) return idx;
     }
+
+    return -1;
 }
 
 
