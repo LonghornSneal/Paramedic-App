@@ -15,7 +15,7 @@ const MedicationDetailsData = [{
         id: '2-lidocaine-xylocaine',
         title: "2% Lidocaine (Xylocaine)",
         concentration: "(100mg/5ml)",
-        class: "Antiarrhythmic",
+        "class": "Antiarrhythmic",
         indications: ["Symptomatic ↑HR & VF/pVT"],
         contraindications: ["Hypersensitivity or local anesthetic allergy in the amide class", "AV block >1º in the absence of a pacemaker", "Idioventricular escape rhythm s̄ a pacemaker", "Stokes-Adams syndrome", "WPW syndrome"],
         precautions: "[[Give ↓ Maintenance Infusions for:|Prolonged plasma half-life]] >70yo, CHF, or hepatic failure.\nDon’t Rx if idioventricular escape rhythm s̄ a pacemaker is present.",

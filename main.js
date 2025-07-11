@@ -327,48 +327,131 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
     headerEl.textContent = topic.title || topic.name || topic.id;
     headerEl.className = 'topic-h2 font-semibold text-lg mb-4';
     headerEl.dataset.topicId = topic.id; 
-    contentArea.appendChild(headerEl); {
+    contentArea.appendChild(headerEl); 
+    
+    attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
+    // Attach handlers to enable collapsing/expanding of the new detail sections (blue arrow rotation and content toggle).
+    attachToggleCategoryHandlers(contentArea);
 
-        // Insert warning boxes if any contraindications or allergies are present     // Check PDE5 inhibitor usage     // Check low BP
-        let warningsHtml = ""; 
-        if (patientData.allergies.length > 0) { 
-            const medKeywords = (topic.title + " " + topic.id).toLowerCase(); 
-            const allergy = patientData.allergies.find(a => a && medKeywords.includes(a.toLowerCase()));
-            if (allergy) { 
-                warningsHtml += `<div class="warning-box warning-box-red"><div>${
-                    createWarningIcon('text-red-600')
-                }
-                <span>Allergy Alert: Patient has an allergy to ${
-                    topic.title
-                }.</span></div></div>`; 
-            }
+    
+        // Description & History block: append topic description if present, update history state, and scroll to top if requested
+        if (topic.description) { 
+            const desc = document.createElement('div');    // If a topic description exists and no slug anchors were added, show the description
+            desc.className = 'mb-4'; 
+            desc.textContent = topic.description; 
+            contentArea.appendChild(desc); 
         }
-        if (topic.id === 'ntg') { 
-            const hasPDE5 = patientData.currentMedications.some(med => PDE5_INHIBITORS.some(term => med.toLowerCase().includes(term.toLowerCase())) );
-            if (hasPDE5) { 
-                warningsHtml += `<div class="warning-box warning-box-red"><div>${
-                    createWarningIcon('text-red-600')
-                }
-                <span>Contraindication: Recent PDE5 inhibitor use – do NOT administer NTG.</span></div></div>`; 
-            }
-            if (patientData.vitalSigns.bp) { 
-                const bpMatch = patientData.vitalSigns.bp.match(/(\d+)/); 
-                const systolic = bpMatch ? parseInt(bpMatch[0], 10) : 0;
-                if (systolic && systolic < 100) { 
-                    warningsHtml += `<div class="warning-box warning-box-red"><div>${
-                        createWarningIcon('text-red-600')
-                    }
-                    <span>Contraindication: Systolic BP < 100 mmHg – NTG is not advised.</span></div></div>`; 
-                } 
-            }
+        if (shouldAddHistory) {
+            addHistoryEntry({ 
+                viewType: 'detail', contentId: topicId 
+            }); 
         }
-        if (warningsHtml) { 
-            contentArea.insertAdjacentHTML('beforeend', warningsHtml); //** replaced use of `contentArea.innerHTML += ...` with `insertAdjacentHTML('beforeend', ...)` to append warnings without re-rendering or clearing existing content (preserves header element) 
+        if (scrollToTop) { 
+            contentArea.scrollIntoView({ 
+                behavior: 'auto', block: 'start' 
+            }); 
         }
-    }
-    {    
+    
+}
+// Creates a navigation button ("Previous" or "Next") that navigates to the specified topic.
+function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons
+    const btn = document.createElement('button');
+    btn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
+    btn.innerHTML = (label === 'Previous')
+    ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" 
+    viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+    d="M15 19l-7-7 7-7" /></svg>${label}`
+    : `${label}<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" 
+    viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+    d="M9 5l7 7-7 7" /></svg>`;
+    addTapListener(btn, () => renderDetailPage(targetId));
+    return btn; 
+}
 
-        //** Details block: retrieve topic details (including alternate ID fallback) and render each detail section or show a placeholder if none
+
+
+
+// --- Previous/Next navigation for ALS Medications ---
+        let prevId = null, nextId = null;
+        const alsMedCat = paramedicCategories.find(cat => cat.title && cat.title.toLowerCase().includes('als medications'));
+        if (alsMedCat && alsMedCat.children) {   // find index of current topic in ALS Medications list
+            let idx = alsMedCat.children.findIndex(child => child.id === topic.id);
+            if (idx === -1 && /^\d+-/.test(topic.id)) {
+                const altId = topic.id.replace(/^\d+-/, '');
+                idx = alsMedCat.children.findIndex(child => child.id === altId);
+            } else if (idx === -1) {
+                const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
+                if (altId) idx = alsMedCat.children.findIndex(child => child.id === altId); 
+            }
+            if (idx !== -1) {
+                if (idx > 0) prevId = alsMedCat.children[idx - 1].id;
+                if (idx < alsMedCat.children.length - 1) nextId = alsMedCat.children[idx + 1].id; 
+            }
+        }
+        if (prevId || nextId) {     // Add Prev/Next buttons if applicable
+            const navRow = document.createElement('div');
+            navRow.className = 'flex justify-between items-center mb-4';
+            navRow.appendChild(prevId ? createNavButton('Previous', prevId) : document.createElement('span'));
+            navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
+            contentArea.appendChild(navRow); 
+        }
+
+
+
+
+// Attaches click handlers to elements with class `.toggle-info` to show or hide their hidden info text.
+function attachToggleInfoHandlers(container) {
+    container.querySelectorAll('.toggle-info').forEach(el => { 
+        el.onclick = function(e) { 
+            e.stopPropagation();
+            const info = el.querySelector('.info-text');
+            const arrow = el.querySelector('.arrow'); 
+            if (arrow) arrow.classList.toggle('rotate');
+            if (info) info.classList.toggle('hidden'); 
+        }; 
+    }); 
+}
+
+// Attaches click handlers to collapsible category headers in the detail view to toggle their visibility.
+function attachToggleCategoryHandlers(container) {      
+    container.querySelectorAll('.toggle-category').forEach(header => {
+        addTapListener(header, () => {
+            const arrow = header.querySelector('.arrow');
+            if (arrow) arrow.classList.toggle('rotate');
+            const content = header.nextElementSibling;
+            if (content) content.classList.toggle('hidden'); 
+        }); 
+    }); 
+}
+
+// Converts special markup in a text (e.g. `**bold**`, `[[display|info]]`) into formatted HTML.
+function parseTextMarkup(text) {   // Escape HTML and replace special markup with styled spans
+    let safeText = text.replace(/&/g, "&amp;")
+                       .replace(/</g, "&lt;")
+                       .replace(/>/g, "&gt;");
+    safeText = safeText.replace(/\n/g, "<br>");
+    // AFTER: includes an arrow span with icon SVG before the display text
+    safeText = safeText.replace(/\[\[(.+?)\|(.+?)\]\]/g,
+        (_, display, info) => `<span class="toggle-info"><span class="arrow"></span>${display}<span class="info-text hidden">${info}</span></span>`);
+    safeText = safeText.replace(/\{\{red:(.+?)\}\}/g, 
+                (_, t) => `<span class="text-red-600 font-semibold">${t}</span>`);
+    safeText = safeText.replace(/\{\{redul:(.+?)\}\}/g, 
+                (_, t) => `<span class="text-red-600 font-semibold underline decoration-red-600">${t}</span>`);
+    safeText = safeText.replace(/\{\{orange:(.+?)\}\}/g, 
+                (_, t) => `<span class="text-orange-600">${t}</span>`);
+    safeText = safeText.replace(/\{\{blackul:(.+?)\}\}/g, 
+                (_, t) => `<span class="font-bold underline decoration-black">${t}</span>`);
+    safeText = safeText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    return safeText; 
+}
+
+
+
+
+
+//** Details block: retrieve topic details (including alternate ID fallback) and render each detail section or show a placeholder if none
         let details = topic.details;
         if (!details && topic.id && topic.id.match(/^\d+-/)) {
             const altId = topic.id.replace(/^\d+-/, '');
@@ -423,119 +506,10 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
         } else { 
             contentArea.insertAdjacentHTML('beforeend', `<div class="text-gray-500 italic">No detail information found for this item.</div>`);
         }
-    }
-    attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
-    // Attach handlers to enable collapsing/expanding of the new detail sections (blue arrow rotation and content toggle).
-    attachToggleCategoryHandlers(contentArea); {
 
-        // --- Previous/Next navigation for ALS Medications ---
-        let prevId = null, nextId = null;
-        const alsMedCat = paramedicCategories.find(cat => cat.title && cat.title.toLowerCase().includes('als medications'));
-        if (alsMedCat && alsMedCat.children) {   // find index of current topic in ALS Medications list
-            let idx = alsMedCat.children.findIndex(child => child.id === topic.id);
-            if (idx === -1 && /^\d+-/.test(topic.id)) {
-                const altId = topic.id.replace(/^\d+-/, '');
-                idx = alsMedCat.children.findIndex(child => child.id === altId);
-            } else if (idx === -1) {
-                const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
-                if (altId) idx = alsMedCat.children.findIndex(child => child.id === altId); 
-            }
-            if (idx !== -1) {
-                if (idx > 0) prevId = alsMedCat.children[idx - 1].id;
-                if (idx < alsMedCat.children.length - 1) nextId = alsMedCat.children[idx + 1].id; 
-            }
-        }
-        if (prevId || nextId) {     // Add Prev/Next buttons if applicable
-            const navRow = document.createElement('div');
-            navRow.className = 'flex justify-between items-center mb-4';
-            navRow.appendChild(prevId ? createNavButton('Previous', prevId) : document.createElement('span'));
-            navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
-            contentArea.appendChild(navRow); 
-        }
-    }
 
-    
-        // Description & History block: append topic description if present, update history state, and scroll to top if requested
-        if (topic.description) { 
-            const desc = document.createElement('div');    // If a topic description exists and no slug anchors were added, show the description
-            desc.className = 'mb-4'; 
-            desc.textContent = topic.description; 
-            contentArea.appendChild(desc); 
-        }
-        if (shouldAddHistory) {
-            addHistoryEntry({ 
-                viewType: 'detail', contentId: topicId 
-            }); 
-        }
-        if (scrollToTop) { 
-            contentArea.scrollIntoView({ 
-                behavior: 'auto', block: 'start' 
-            }); 
-        }
-    
-}
-// Creates a navigation button ("Previous" or "Next") that navigates to the specified topic.
-function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons
-    const btn = document.createElement('button');
-    btn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
-    btn.innerHTML = (label === 'Previous')
-    ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" 
-    viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-    d="M15 19l-7-7 7-7" /></svg>${label}`
-    : `${label}<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" 
-    viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-    d="M9 5l7 7-7 7" /></svg>`;
-    addTapListener(btn, () => renderDetailPage(targetId));
-    return btn; 
-}
 
-// Attaches click handlers to elements with class `.toggle-info` to show or hide their hidden info text.
-function attachToggleInfoHandlers(container) {
-    container.querySelectorAll('.toggle-info').forEach(el => { 
-        el.onclick = function(e) { 
-            e.stopPropagation();
-            const info = el.querySelector('.info-text');
-            const arrow = el.querySelector('.arrow'); 
-            if (arrow) arrow.classList.toggle('rotate');
-            if (info) info.classList.toggle('hidden'); 
-        }; 
-    }); 
-}
 
-// Attaches click handlers to collapsible category headers in the detail view to toggle their visibility.
-function attachToggleCategoryHandlers(container) {      
-    container.querySelectorAll('.toggle-category').forEach(header => {
-        addTapListener(header, () => {
-            const arrow = header.querySelector('.arrow');
-            if (arrow) arrow.classList.toggle('rotate');
-            const content = header.nextElementSibling;
-            if (content) content.classList.toggle('hidden'); 
-        }); 
-    }); 
-}
-
-// Converts special markup in a text (e.g. `**bold**`, `[[display|info]]`) into formatted HTML.
-function parseTextMarkup(text) {   // Escape HTML and replace special markup with styled spans
-    let safeText = text.replace(/&/g, "&amp;")
-                       .replace(/</g, "&lt;")
-                       .replace(/>/g, "&gt;");
-    safeText = safeText.replace(/\n/g, "<br>");
-    // AFTER: includes an arrow span with icon SVG before the display text
-    safeText = safeText.replace(/\[\[(.+?)\|(.+?)\]\]/g,
-        (_, display, info) => `<span class="toggle-info"><span class="arrow"></span>${display}<span class="info-text hidden">${info}</span></span>`);
-    safeText = safeText.replace(/\{\{red:(.+?)\}\}/g, 
-                (_, t) => `<span class="text-red-600 font-semibold">${t}</span>`);
-    safeText = safeText.replace(/\{\{redul:(.+?)\}\}/g, 
-                (_, t) => `<span class="text-red-600 font-semibold underline decoration-red-600">${t}</span>`);
-    safeText = safeText.replace(/\{\{orange:(.+?)\}\}/g, 
-                (_, t) => `<span class="text-orange-600">${t}</span>`);
-    safeText = safeText.replace(/\{\{blackul:(.+?)\}\}/g, 
-                (_, t) => `<span class="font-bold underline decoration-black">${t}</span>`);
-    safeText = safeText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-    return safeText; 
-}
 
 // Generates an HTML `<ul>` list for an array of detail items, or a placeholder if the array is empty.
 function createDetailList(itemsArray) {
@@ -568,6 +542,52 @@ function createWarningIcon(colorClass = 'text-yellow-600') {
         <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
     </svg>`;
 }
+
+
+
+
+
+        // Insert warning boxes if any contraindications or allergies are present     // Check PDE5 inhibitor usage     // Check low BP
+        let warningsHtml = ""; 
+        if (patientData.allergies.length > 0) { 
+            const medKeywords = (topic.title + " " + topic.id).toLowerCase(); 
+            const allergy = patientData.allergies.find(a => a && medKeywords.includes(a.toLowerCase()));
+            if (allergy) { 
+                warningsHtml += `<div class="warning-box warning-box-red"><div>${
+                    createWarningIcon('text-red-600')
+                }
+                <span>Allergy Alert: Patient has an allergy to ${
+                    topic.title
+                }.</span></div></div>`; 
+            }
+        }
+        if (topic.id === 'ntg') { 
+            const hasPDE5 = patientData.currentMedications.some(med => PDE5_INHIBITORS.some(term => med.toLowerCase().includes(term.toLowerCase())) );
+            if (hasPDE5) { 
+                warningsHtml += `<div class="warning-box warning-box-red"><div>${
+                    createWarningIcon('text-red-600')
+                }
+                <span>Contraindication: Recent PDE5 inhibitor use – do NOT administer NTG.</span></div></div>`; 
+            }
+            if (patientData.vitalSigns.bp) { 
+                const bpMatch = patientData.vitalSigns.bp.match(/(\d+)/); 
+                const systolic = bpMatch ? parseInt(bpMatch[0], 10) : 0;
+                if (systolic && systolic < 100) { 
+                    warningsHtml += `<div class="warning-box warning-box-red"><div>${
+                        createWarningIcon('text-red-600')
+                    }
+                    <span>Contraindication: Systolic BP < 100 mmHg – NTG is not advised.</span></div></div>`; 
+                } 
+            }
+        }
+        if (warningsHtml) { 
+            contentArea.insertAdjacentHTML('beforeend', warningsHtml); //** replaced use of `contentArea.innerHTML += ...` with `insertAdjacentHTML('beforeend', ...)` to append warnings without re-rendering or clearing existing content (preserves header element) 
+        }
+
+
+
+
+        
 
 // Adds a universal click/keypress listener to an element to trigger the given handler.
 function addTapListener(element, handler) { 
