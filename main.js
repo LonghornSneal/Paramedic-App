@@ -501,12 +501,12 @@ function parseTextMarkup(text) {   // Escape HTML and replace special markup wit
 function appendTopicDetails(topic) {
 //** Details block: retrieve topic details (including alternate ID fallback) and render each detail section or show a placeholder if none
         let details = topic.details;
-        if (!details && topic.id && topic.id.match(/^\d+-/)) {
+        if (!details && topic.id?.match(/^\d+-/)) {
             const altId = topic.id.replace(/^\d+-/, '');
             details = allDisplayableTopicsMap[altId]?.details;
         } else if (!details && topic.id && !topic.id.match(/^\d+-/)) {
             const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
-            if (altId) details = allDisplayableTopicsMap[altId]?.details; 
+            if (altId) details = allDisplayableTopicsMap[altId]?.details;
         }
         // Render details sections if available
         if (details) {
