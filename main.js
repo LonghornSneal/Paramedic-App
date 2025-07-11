@@ -335,7 +335,7 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
     contentArea.appendChild(headerEl); 
     appendTopicWarnings(topic);          // ← Add this call to insert any warnings
     appendTopicDetails(topic);
-    appendTopicDetails(topic);
+
     appendAdjacentNavButtons(topic.id);  // ← Add this call to insert Prev/Next buttons if applicable
 
     attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
