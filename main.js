@@ -638,15 +638,6 @@ function getLowBPWarning(topic, patientData) {
     }
     return "";
 }
-
-
-//        if (warningsHtml) { 
-//            contentArea.insertAdjacentHTML('beforeend', warningsHtml); //** replaced use of `contentArea.innerHTML += ...` with `insertAdjacentHTML('beforeend', ...)` to append warnings without re-rendering or clearing existing content (preserves header element) 
-//        }
-//}
-
-
-
         
 
 // Adds a universal click/keypress listener to an element to trigger the given handler.
@@ -664,15 +655,23 @@ function addTapListener(element, handler) {
 }
 
 // Handles the search input: filters topics by the current search term and shows results (or full list if empty).
-function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    const term = searchInput.value.trim().toLowerCase();
-    if (!term) {    // If no search term, show the full list with any requested highlight/path
-        renderInitialView(false, highlightId, categoryPath); return; 
+function renderInitialView(shouldAddHistory = false, highlightId = null, categoryPath = []) {
+    contentArea.innerHTML = '';
+    const listContainer = document.createElement('div');
+    createHierarchicalList(paramedicCategories, listContainer, 0);
+    contentArea.appendChild(listContainer);
+
+    // Optionally expand/highlight
+    openCategoriesAndHighlight?.(categoryPath, highlightId);
+    if (shouldAddHistory) {
+        addHistoryEntry({
+            viewType: 'list',
+            contentId: '',
+            highlightTopicId: highlightId,
+            categoryPath
+        });
     }
-    const results = allSearchableTopics.filter(topic =>
-    (topic.title || topic.id || '').toLowerCase().includes(term) ||
-    (topic.path || '').toLowerCase().includes(term) );
-    renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath); 
+    updateNavButtonsState?.();
 }
 
 
