@@ -333,7 +333,9 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
     headerEl.className = 'topic-h2 font-semibold text-lg mb-4';
     headerEl.dataset.topicId = topic.id; 
     contentArea.appendChild(headerEl); 
-    
+    appendTopicWarnings(topic);          // ← Add this call to insert any warnings
+    appendTopicDetails(topic);
+
     attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
     // Attach handlers to enable collapsing/expanding of the new detail sections (blue arrow rotation and content toggle).
     attachToggleCategoryHandlers(contentArea);
@@ -379,6 +381,7 @@ function createNavButton(label, targetId) {  // Helper to create Prev/Next nav b
 }
 
 
+function appendAdjacentNavButtons(currentTopicId) {
 // --- Previous/Next navigation for ALS Medications ---
     let prevId = null, nextId = null;
     const alsMedCat = paramedicCategories.find(cat => cat.title && cat.title.toLowerCase().includes('als medications'));
@@ -388,7 +391,8 @@ function createNavButton(label, targetId) {  // Helper to create Prev/Next nav b
             const altId = topic.id.replace(/^\d+-/, '');
             idx = alsMedCat.children.findIndex(child => child.id === altId);
         } else if (idx === -1) {
-            const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
+            const altId = Object.keys(allDisplayableTopicsMap)
+                                .find(k => k.endsWith(topic.id));
             if (altId) idx = alsMedCat.children.findIndex(child => child.id === altId); 
         }
         if (idx !== -1) {
@@ -403,7 +407,7 @@ function createNavButton(label, targetId) {  // Helper to create Prev/Next nav b
         navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
         contentArea.appendChild(navRow); 
     }
-
+}
 
 
 
