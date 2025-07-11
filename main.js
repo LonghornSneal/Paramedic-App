@@ -371,32 +371,30 @@ function createNavButton(label, targetId) {  // Helper to create Prev/Next nav b
 }
 
 
-
-
 // --- Previous/Next navigation for ALS Medications ---
-        let prevId = null, nextId = null;
-        const alsMedCat = paramedicCategories.find(cat => cat.title && cat.title.toLowerCase().includes('als medications'));
-        if (alsMedCat && alsMedCat.children) {   // find index of current topic in ALS Medications list
-            let idx = alsMedCat.children.findIndex(child => child.id === topic.id);
-            if (idx === -1 && /^\d+-/.test(topic.id)) {
-                const altId = topic.id.replace(/^\d+-/, '');
-                idx = alsMedCat.children.findIndex(child => child.id === altId);
-            } else if (idx === -1) {
-                const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
-                if (altId) idx = alsMedCat.children.findIndex(child => child.id === altId); 
-            }
-            if (idx !== -1) {
-                if (idx > 0) prevId = alsMedCat.children[idx - 1].id;
-                if (idx < alsMedCat.children.length - 1) nextId = alsMedCat.children[idx + 1].id; 
-            }
+    let prevId = null, nextId = null;
+    const alsMedCat = paramedicCategories.find(cat => cat.title && cat.title.toLowerCase().includes('als medications'));
+    if (alsMedCat && alsMedCat.children) {   // find index of current topic in ALS Medications list
+        let idx = alsMedCat.children.findIndex(child => child.id === topic.id);
+        if (idx === -1 && /^\d+-/.test(topic.id)) {
+            const altId = topic.id.replace(/^\d+-/, '');
+            idx = alsMedCat.children.findIndex(child => child.id === altId);
+        } else if (idx === -1) {
+            const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
+            if (altId) idx = alsMedCat.children.findIndex(child => child.id === altId); 
         }
-        if (prevId || nextId) {     // Add Prev/Next buttons if applicable
-            const navRow = document.createElement('div');
-            navRow.className = 'flex justify-between items-center mb-4';
-            navRow.appendChild(prevId ? createNavButton('Previous', prevId) : document.createElement('span'));
-            navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
-            contentArea.appendChild(navRow); 
+        if (idx !== -1) {
+            if (idx > 0) prevId = alsMedCat.children[idx - 1].id;
+            if (idx < alsMedCat.children.length - 1) nextId = alsMedCat.children[idx + 1].id; 
         }
+    }
+    if (prevId || nextId) {     // Add Prev/Next buttons if applicable
+        const navRow = document.createElement('div');
+        navRow.className = 'flex justify-between items-center mb-4';
+        navRow.appendChild(prevId ? createNavButton('Previous', prevId) : document.createElement('span'));
+        navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
+        contentArea.appendChild(navRow); 
+    }
 
 
 
@@ -776,7 +774,7 @@ function navigateViaHistory(direction) {
         if (direction === -1 && navigationHistory[currentHistoryIndex+1]?.viewType === 'detail') {
             const prevTopicId = navigationHistory[currentHistoryIndex+1].contentId;
             const prevCatPath = allDisplayableTopicsMap[prevTopicId]?.categoryPath || [];
-            searchInput.value = prevTopicId || '';
+            searchInput.value =  '';        // **Cleared input**     prevTopicId || '';
             handleSearch(false, prevTopicId, prevCatPath);
         } else {
             searchInput.value = state.contentId || '';
