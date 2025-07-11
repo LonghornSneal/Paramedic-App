@@ -462,7 +462,7 @@ function parseTextMarkup(text) {   // Escape HTML and replace special markup wit
 
 
 
-
+function appendTopicDetails(topic) {
 //** Details block: retrieve topic details (including alternate ID fallback) and render each detail section or show a placeholder if none
         let details = topic.details;
         if (!details && topic.id && topic.id.match(/^\d+-/)) {
@@ -518,7 +518,7 @@ function parseTextMarkup(text) {   // Escape HTML and replace special markup wit
         } else { 
             contentArea.insertAdjacentHTML('beforeend', `<div class="text-gray-500 italic">No detail information found for this item.</div>`);
         }
-
+}
 
 
 
