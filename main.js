@@ -410,14 +410,14 @@ function createNavButton(label, targetId) {  // Helper to create Prev/Next nav b
 
 
 function appendAdjacentNavButtons(currentTopicId) {
-    const alsMedCat = paramedicCategories.find(cat => cat.title && cat.title.toLowerCase().includes('als medications'));
-    if (!alsMedCat || !alsMedCat.children) return;
+    const alsMedCat = paramedicCategories.find(cat => cat.title?.toLowerCase().includes('als medications'));
+    if (!alsMedCat?.children) return;
 
     const idx = findAlsMedTopicIndex(alsMedCat.children, currentTopicId);
     if (idx === -1) return;
 
-    const prevId = idx > 0 ? alsMedCat.children[idx - 1].id : null;
-    const nextId = idx < alsMedCat.children.length - 1 ? alsMedCat.children[idx + 1].id : null;
+    const prevId = idx > 0 ? alsMedCat.children[idx - 1]?.id : null;
+    const nextId = idx < alsMedCat.children.length - 1 ? alsMedCat.children[idx + 1]?.id : null;
 
     if (!prevId && !nextId) return;
 
