@@ -180,7 +180,7 @@ function processItem(item, parentPath = '', parentIds = []) {       // Add to se
     } 
 }
 // Renders the main category list view (home screen) and highlights a topic if provided.
-function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
+function renderInitialView() {
     contentArea.innerHTML = '';  // Clear
 
     // Render the hierarchical list of categories
