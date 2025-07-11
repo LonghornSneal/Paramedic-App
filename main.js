@@ -409,7 +409,7 @@ function createNavButton(label, targetId) {  // Helper to create Prev/Next nav b
 
 
 
-//function appendAdjacentNavButtons(currentTopicId) {
+function appendAdjacentNavButtons(currentTopicId) {
     const alsMedCat = paramedicCategories.find(cat => cat.title && cat.title.toLowerCase().includes('als medications'));
     if (!alsMedCat || !alsMedCat.children) return;
 
@@ -426,7 +426,7 @@ function createNavButton(label, targetId) {  // Helper to create Prev/Next nav b
     navRow.appendChild(prevId ? createNavButton('Previous', prevId) : document.createElement('span'));
     navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
     contentArea.appendChild(navRow);
-//}
+}
 
 function findAlsMedTopicIndex(children, topicId) {
     let idx = children.findIndex(child => child.id === topicId);
