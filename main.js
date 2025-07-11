@@ -651,19 +651,7 @@ function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath 
 //    navBar.appendChild(search);
 //    navBackButton = backBtn;
 //    navForwardButton = forwardBtn;
-//    searchInput = search; 
-
-// Adds a universal click/keypress listener to an element to trigger the given handler.
-//function addTapListener(element, handler) { 
-//    if (!element) return;
-//}
-//function activate(e) { 
-//    if (e.type === 'click' || (e.type === 'keypress' && (e.key === 'Enter' || e.key === ' '))) {
-//        e.preventDefault(); handler(e); 
-//    } 
-//    element.addEventListener('click', activate);
-//    element.addEventListener('keypress', activate); 
-//}
+//    searchInput = search;
 
 // Enables autocomplete suggestions for a textarea input field.
 function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceSet) {
