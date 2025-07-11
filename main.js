@@ -20,6 +20,13 @@ function assignDomElements() {
     navForwardButton = document.getElementById('nav-forward-button');
 }
 
+// Kick off the application once DOM is ready
+if (document.readyState === 'loading') { 
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp(); 
+}
+
 // Initializes the application, setting up UI event handlers and loading data.
 function initApp() {
     // Initialize header elements (they are already defined in index.html)
@@ -629,13 +636,6 @@ function addTapListener(element, handler) {
     };
     element.addEventListener('click', activate);
     element.addEventListener('keypress', activate); 
-}
-
-// Kick off the application once DOM is ready
-if (document.readyState === 'loading') { 
-    document.addEventListener('DOMContentLoaded', initApp);
-} else {
-    initApp(); 
 }
 
 // Handles the search input: filters topics by the current search term and shows results (or full list if empty).
