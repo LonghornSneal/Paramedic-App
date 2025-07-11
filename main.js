@@ -182,13 +182,13 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
     contentArea.appendChild(listContainer);
 
     // Optionally expand/highlight
-    openCategoriesAndHighlight(categoryPath, highlightId);
-    if (shouldAddHistory) {
-        addHistoryEntry({ 
-            viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath 
-        });
-    }
-    updateNavButtonsState();
+//    openCategoriesAndHighlight(categoryPath, highlightId);
+//    if (shouldAddHistory) {
+//        addHistoryEntry({ 
+//            viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath 
+//        });
+//    }
+//    updateNavButtonsState();
 }
 // Escapes special HTML characters in a string (e.g. `&`, `<`, `>`, quotes).
 function escapeHTML(str) {
