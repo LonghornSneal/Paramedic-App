@@ -309,10 +309,15 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
     createHierarchicalList(paramedicCategories, listContainer, 0);
     contentArea.appendChild(listContainer);
     // Highlight the specified topic, if provided
-    if (highlightId) { 
-        const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
-        if (topicEl) topicEl.classList.add('recently-viewed'); 
-    } 
+//    if (highlightId) { 
+//        const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
+//        if (topicEl) topicEl.classList.add('recently-viewed'); 
+//    } 
+//}
+    if (highlightId) {
+        const item = resultsContainer.querySelector(`[data-topic-id="${highlightId}"]`);
+        if (item) item.classList.add('recently-viewed');
+    }
 }
 // Renders the detailed view for a given topic (with all detail sections and warnings), and updates history if needed. 
 // Collapsible sections for details (ALS Medications)---------ERROR---------CODE MUST BE FIXED TO INCLUDE THE BLUE ARROWS NEXT TO THE ALS MEDICATION DETAIL'S INDIVIDUAL SUBTOPICS THAT FUNCTION THE SAME AS THE BLUE ARROWS NEXT TO THE GREEN TEXT THAT REVEALS THE GREEN HIDDEN TEXT WHEN CLICK UPON (DON'T CHANGE ANY COLORS THOUGH)--------THERE SHOULD ALREADY EXIST CODE FOR THIS, SO YOU MUST ALSO SEARCH FOR THAT CODE---------
@@ -353,6 +358,9 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
         }
     
 }
+
+
+
 // Creates a navigation button ("Previous" or "Next") that navigates to the specified topic.
 function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons
     const btn = document.createElement('button');
@@ -546,6 +554,7 @@ function createWarningIcon(colorClass = 'text-yellow-600') {
 
 
         // Insert warning boxes if any contraindications or allergies are present     // Check PDE5 inhibitor usage     // Check low BP
+function appendTopicWarnings(topic) {
         let warningsHtml = ""; 
         if (patientData.allergies.length > 0) { 
             const medKeywords = (topic.title + " " + topic.id).toLowerCase(); 
@@ -581,7 +590,7 @@ function createWarningIcon(colorClass = 'text-yellow-600') {
         if (warningsHtml) { 
             contentArea.insertAdjacentHTML('beforeend', warningsHtml); //** replaced use of `contentArea.innerHTML += ...` with `insertAdjacentHTML('beforeend', ...)` to append warnings without re-rendering or clearing existing content (preserves header element) 
         }
-
+}
 
 
 
