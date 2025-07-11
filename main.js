@@ -561,42 +561,47 @@ function createWarningIcon(colorClass = 'text-yellow-600') {
 
         // Insert warning boxes if any contraindications or allergies are present     // Check PDE5 inhibitor usage     // Check low BP
 function appendTopicWarnings(topic) {
-        let warningsHtml = ""; 
-        if (patientData.allergies.length > 0) { 
-            const medKeywords = (topic.title + " " + topic.id).toLowerCase(); 
-            const allergy = patientData.allergies.find(a => a && medKeywords.includes(a.toLowerCase()));
-            if (allergy) { 
-                warningsHtml += `<div class="warning-box warning-box-red"><div>${
-                    createWarningIcon('text-red-600')
-                }
-                <span>Allergy Alert: Patient has an allergy to ${
-                    topic.title
-                }.</span></div></div>`; 
-            }
-        }
-        if (topic.id === 'ntg') { 
-            const hasPDE5 = patientData.currentMedications.some(med => PDE5_INHIBITORS.some(term => med.toLowerCase().includes(term.toLowerCase())) );
-            if (hasPDE5) { 
-                warningsHtml += `<div class="warning-box warning-box-red"><div>${
-                    createWarningIcon('text-red-600')
-                }
-                <span>Contraindication: Recent PDE5 inhibitor use – do NOT administer NTG.</span></div></div>`; 
-            }
-            if (patientData.vitalSigns.bp) { 
-                const bpMatch = patientData.vitalSigns.bp.match(/(\d+)/); 
-                const systolic = bpMatch ? parseInt(bpMatch[0], 10) : 0;
-                if (systolic && systolic < 100) { 
-                    warningsHtml += `<div class="warning-box warning-box-red"><div>${
-                        createWarningIcon('text-red-600')
-                    }
-                    <span>Contraindication: Systolic BP < 100 mmHg – NTG is not advised.</span></div></div>`; 
-                } 
-            }
-        }
-        if (warningsHtml) { 
-            contentArea.insertAdjacentHTML('beforeend', warningsHtml); //** replaced use of `contentArea.innerHTML += ...` with `insertAdjacentHTML('beforeend', ...)` to append warnings without re-rendering or clearing existing content (preserves header element) 
-        }
+    let warningsHtml = "";
+
+    warningsHtml += getAllergyWarning(topic, patientData);
+    warningsHtml += getPDE5Warning(topic, patientData);
+    warningsHtml += getLowBPWarning(topic, patientData);
+
+    return warningsHtml;
 }
+
+function getAllergyWarning(topic, patientData) {
+    if (!patientData.allergies.length) return "";
+    const medKeywords = (topic.title + " " + topic.id).toLowerCase();
+    const allergy = patientData.allergies.find(a => a && medKeywords.includes(a.toLowerCase()));
+    if (!allergy) return "";
+    return `<div class="warning-box warning-box-red"><div>${
+        createWarningIcon('text-red-600')
+    }
+    <span>Allergy Alert: Patient has an allergy to ${topic.title}.</span></div></div>`;
+}
+
+function getPDE5Warning(topic, patientData) {
+    if (topic.id !== 'ntg') return "";
+    const hasPDE5 = patientData.currentMedications.some(med =>
+        PDE5_INHIBITORS.some(term => med.toLowerCase().includes(term.toLowerCase()))
+    );
+    if (!hasPDE5) return "";
+    return `<div class="warning-box warning-box-red"><div>${
+        createWarningIcon('text-red-600')
+    }
+    <span>Contraindication: Recent PDE5 inhibitor use – do NOT administer NTG.</span></div></div>`;
+}
+
+function getLowBPWarning(topic, patientData) {
+    if (topic.id !== 'ntg' || !patientData.vitalSigns.bp) return "";
+    // Add your low BP warning logic here, if needed
+    return ""; // Placeholder for actual warning
+}
+//        if (warningsHtml) { 
+//            contentArea.insertAdjacentHTML('beforeend', warningsHtml); //** replaced use of `contentArea.innerHTML += ...` with `insertAdjacentHTML('beforeend', ...)` to append warnings without re-rendering or clearing existing content (preserves header element) 
+//        }
+//}
 
 
 
