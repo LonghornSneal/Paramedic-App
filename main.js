@@ -215,12 +215,14 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
 
 
 // Renders the list of topics matching the given search term in the content area.
-function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    if (shouldAddHistory) { 
-        addHistoryEntry({ 
-            viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath 
-        }); 
-    }
+//function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
+//    if (shouldAddHistory) { 
+//        addHistoryEntry({ 
+//            viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath 
+//        }); 
+//    }
+
+
 // Handles the search input: filters topics by the current search term and shows results (or full list if empty).
 function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     const term = searchInput.value.trim().toLowerCase();
@@ -334,7 +336,13 @@ function escapeHTML(str) {
     return str.replace(/[&<>"']/g, char => escapeMap[char] || char); 
 }
 
-
+// Renders the list of topics matching the given search term in the content area.
+function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
+    if (shouldAddHistory) { 
+        addHistoryEntry({ 
+            viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath 
+        }); 
+    }
     updateNavButtonsState(); 
     contentArea.innerHTML = `<div class="flex justify-between items-center mb-3">
         <p class="text-gray-700 font-medium">Results for "${escapeHTML(searchTerm)}":</p>
