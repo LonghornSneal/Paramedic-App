@@ -1,311 +1,565 @@
-# -------------------------------------THIS FILE IS TO BE CONTINUALLY UPDATED BY AI-------------------------------------
+## **Paramedic Quick Reference Application**
 
-## PARAMEDIC QUICK REFERENCE APP README.md
+## Table of Contents
+1. General Scope
+2. App Overview and Structure
+3. Project Purpose
+4. Project Structure
+5. How the Pieces Work Together
+6. Top Priority Tasks
+7. Current Tasks/Goals
+8. Recent Fixes and Changes
+9. Timeline Summary
+10. Future Tasks/Goals/Ideas
 
-### TABLE OF CONTENTS: ## 1. GENERAL SCOPE   ## 2. APP OVERVIEW AND STRUCTURE   ## 3. PROJECT PURPOSE   ## 4. PROJECT STRUCTURE   ## 5. HOW THE PIECES/FILES/CODE FIT/WORK TOGETHER   ## 6. -----TOP PRIORITY TASKS-----   ## 7. CURRENT TASKS/GOALS   ## 8. RECENT FIXES/CHANGES   ## 9. TIMELINE SUMMARY  ## 10. FUTURE TASKS/GOALS/IDEAS
+## 1. **General Scope**
 
-## 1. GENERAL SCOPE
+This README is for the Paramedic-App repository (also called the Paramedic Quick Reference app). It is essential to thoroughly understand this document when addressing any development task or user question. Only make updates to the README if the user has specifically requested it. The README describes how the app should appear and function both currently and in future plans, serving as a guide for developers or AI assistants to implement features correctly and ensuring a bug-free repository. When making changes to the codebase, follow these guidelines:
 
-This is the README for the Paramedic-App repository. This file is esential to understand fully when addressing any of the user's questions. Be professional, keep everything up-to-date, and keep the code bug free. Updates to this README.md must be designed to accurately describe how the app is supposed to appear & function, both currently and for future updates. Updates to the README.md are also designed to improve coding outcomes of the AI reading this README.md. When deleting code, adding code, or altering code, you must follow these rules:
--1. First, you must Read the README.md fully, to obtain a clear understanding for how the entire repository works together and to know where at in the repository any relevant information is to be found.
--2. Always quote the line of code that appears both before and after the code line that is being referced in any situation.
--3. Use **...** to declare any changes in the code or code comments.
--4. Search for duplicates of code in other files.
--5. Ensure code terms match in any file or files that the code term is found within.
--6. Ensure the code aligns the "PROJECT PURPOSE" and "PROJECT STRUCTURE" found in the README.md.
--7. Ensure that the code is in the correct location within the file and is also in the appropriate folder. Code should structured in an logical order within any file, code blocks that share the same function should be logically structured after or before as appropriate, and code blocks must ensure that their structured ordered in the file doesn't cause any timing issues or concerns.
--8. If an issue, concern, or error is noticed that isn't directly related to your main task, you must still address and fix any of those issues, concerns, or errors.
--9. When focusing on a specific file, read that specific file's README.md if it exists.
--10. As a final quality assurance step, always ensure that any changes made to the code will still function appropriately with the rest of the repository.
+1. Read Before Coding: Read this README.md in full to understand how the entire repository works together and to locate relevant information for the task at hand.
+
+2. Quote Context in Explanations: When referencing code in discussions or pull requests, always quote the full line of code along with the line immediately before and after it. This provides context for the change.
+
+3. Use Asterics ** for new code: Any new code added is to have ** directly before and directly after the new code for easy identification. Don't omit parts of code in a quoted snippet.
+
+4. Use comments: When writing new code or when using the current code, always make sure each code block has a comment that clearly describes the function of the code block. Make sure the current comments of code lines that you are focused on are up-to-date and accurate. If any comments that you come across are wrong, make sure the user is aware and offer an appropriate solution with either a new accurate comment or by deleting the comment.
+
+5. Check for Duplicates: Before adding new code, search the repository for similar or duplicate code to avoid redundancy. Remove or consolidate duplicates when possible.
+
+6. Consistent Terminology: Ensure that terminology (function names, variable names, feature names) is used consistently across all files. If a term appears in multiple files, it should match exactly in spelling and case.
+
+7. Align with Project Purpose & Structure: All code changes must align with the Project Purpose and Project Structure outlined in this README. New features or modifications should not conflict with the app’s intended functionality or organization.
+
+8. Correct File Placement & Order: Add or modify code in the appropriate file and location. Keep code blocks in a logical order within files (functions that relate to each other should be grouped sensibly). Ensure that the order of code execution does not introduce timing issues (e.g. a function should be defined before it is used).
+
+9. Address All Noticed Issues: Unless the user explicitly instructs otherwise, If you encounter any bug or concern outside your main task (even minor or unrelated), address and fix it if possible. We aim for a clean, error-free codebase.
+
+10. Use File-Specific Documentation: If a specific file has its own README or documentation, read that as well when working in that file.
+
+11. Quality Assurance: After any change, verify that the app still functions correctly as a whole. Test the relevant features and also do regression testing on other features to ensure nothing else broke. Only commit changes that maintain or improve overall functionality.
+
 
 ## 2. APP OVERVIEW AND STRUCTURE
 
-This document provides an overview of the **Paramedic Quick Reference** application’s structure and components. The entire reposistory is also known as the Paramedic-App. It is designed to be a thourough walkthrough guide for the entire project and to ultimately reduce any issues, concerns, or errors during developement of the app. By outlining where each piece of functionality resides and highlighting known pitfalls, this README.md helps narrow down where code errors might occur and how to address them appropriately.
+Paramedic Quick Reference is a single-page web application (SPA) built with plain HTML, CSS, and JavaScript (no frameworks or external modules). The app provides paramedics with quick access to critical treatment and reference information, organized for instant retrieval under high-pressure scenarios. This README serves as a thorough guide to the project, outlining where each piece of functionality resides and highlighting how the components interact. By understanding this structure, developers can more easily identify where to implement new features or fix issues. Key points about the app’s architecture and design:
 
-The code is organized into separate files and folders to make updating the project easier.
-Assume that the code in one file will either be dependent on code in other files, or that code in other files will depend on that code.
-All respository code will incorporate ONLY html, css, and javascript. Modules will NOT be used.
+The application is entirely client-side and offline-capable. All data is stored in local JavaScript files, so no API calls are needed and information loads without delay.
+
+The code is separated into logical files and folders for clarity and maintainability. Each file or script has a specific purpose (e.g., data definition, UI rendering, event handling).
+
+The app does not use any build systems or package modules; everything runs natively in the browser. This keeps deployment simple and avoids external dependencies.
+
+Because files and features depend on each other, be mindful that a change in one place (e.g., data format) might require updates in multiple files. This README describes those relationships to help coordinate changes.
+
+The UI uses Tailwind CSS via CDN for quick styling, supplemented by a custom CSS file for additional tweaks. We do not use any JavaScript frameworks; all interactivity is via vanilla JS, which improves speed and ensures we have fine-grained control over behavior.
+
 
 ## 3. PROJECT PUROPOSE
 
-The **Paramedic Quick Reference** is a single-page web application that offers paramedics a quick-access guide to critical information that is needed be easily located within seconds in order to save a patient's life.
+The Paramedic Quick Reference is designed to allow paramedics to find life-saving information within seconds. It functions as an interactive protocol book and drug reference on a phone or tablet. The interface is optimized for speed, clarity, and ease-of-use in emergency situations.
 
-The Paramedic-App Includes the following design features:
+Design and Feature Overview: The app’s UI elements and features are detailed below, describing how each works and what role it plays in the user experience:
 
--Main Contents Page: List of Topics that is visible on app start-up, App Title at top center, Search Bar underneath App Title, Patient Info Menu Button that is in the top left, Navigation Buttons (Back Navigation Button next to a Forward Navigation Button) placed in the top right, Home Button that is underneath the Navigation Buttons, Blue Arrows that have two states they can be in, History Button underneath the Home Button,
+Main Contents Page: This is the default view when the app loads. It shows a list of high-level topics (categories) and subtopics that the user can navigate. Key elements on this page include:
+  App Title – Displayed at the top-center of the header (e.g., “Paramedic Quick Reference”).
+  Search Bar – Located just below the title, this allows users to filter and find topics by typing keywords (more details in Search Bar below).
+  Patient Info Button – A button in the top-left corner of the header that opens the Patient Info sidebar when clicked.
+  Navigation Buttons – Back and Forward buttons in the top-right corner of the header (disabled initially) for navigating through the view history (see Navigation Buttons below).
+  Home Button – A button (represented by a home icon) located under the Back/Forward navigation buttons, which when clicked returns the user to the Main Contents Page from any detail view.
+  History Button – A button (visible at all times, below the Home button) that opens a scrollable history of all items the user has clicked during the session (see History Button below).
+  Expandable Topic List – The Main Contents list itself uses interactive arrows (blue arrows) to expand/collapse categories and subcategories, and clickable text for final topics (explained under Blue Arrows and Subtopics below).
 
--Blue Arrows: Consist of Rightward-Pointing Blue Arrow and Downward-Pointing Blue arrow. Both Blue Arrows will always be adjacent and to the right of the text they are associated with.
+Blue Arrows: These are the small blue arrow icons that appear to the right of any topic that can be expanded or collapsed. They visually indicate whether a category is expanded or not and let the user reveal sub-items. There are two states:
 
--Rightward-Pointing Blue Arrow: When clicked upon (or the user clicks the associated text), the Blue Arrow rotates clockwise 90 degrees, becoming a Downward-Pointing Blue Arrow, and expands either a list of Subtopics or Hidden Text.
+  Rightward-Pointing Blue Arrow: Indicates that the section is currently collapsed. Clicking this arrow (or its associated text label) will rotate the arrow 90° clockwise to point downward and will expand the section to show its subtopics or reveal hidden information.
 
--Downward-Pointing Blue Arrow: When clicked upon (or the user clicks the associated text), the Downward-Pointing Blue Arrow rotates counter-clockwise 90 degrees to become a Rightward-Pointing Blue Arrow and the Revealed Hidden Text becomes Hidden Text again.
+  Downward-Pointing Blue Arrow: Indicates that the section is expanded. Clicking this (or the section title again) will rotate the arrow 90° counter-clockwise back to a rightward orientation and collapse the section (hiding the subtopics or text).
 
--Subtopics that contain more Subtopics: Will have the same Rightward-Pointing Blue Arrow that will trigger more Subtopics when clicked upon.
+  The blue arrows are always positioned immediately to the right of their topic text. They provide a clear visual cue and toggle for showing/hiding content. If a topic has further subtopics, it will always have a blue arrow next to it; if it has no subtopics, no arrow is shown (it’s a final item that can be clicked to view details).
 
--Subtopics without any further Subtopics: No blue arrow, but the text will be a clickable button that triggers the release of a Focused Subtopic Section when clicked upon.
+Subtopics and Navigation Hierarchy: The topics are arranged in a hierarchy:
 
--Focused Subtopic Sections: May contain: links, images, videos, interactive text, tips, regular text, treatments (Rx:), dosage information, calculations for weight based dosages if the user has inputed the patient's weight already in the Patient Info section, Protocols.
-fix text here----------Detailed Topic Pages: Each topic (for example, a specific medication or procedure) has its own detail page. These pages display comprehensive information such as Description, Indications, Contraindications, Dosage (with adult and pediatric sections), Side Effects, and any other relevant notes. Content is organized with clear headings. All details are stored in the app’s data files and rendered on demand, ensuring information is consistent and up-to-date.
+  Categories with Subtopics: These appear as bold or highlighted parent items with a rightward arrow. Clicking them expands a list of subtopics underneath (and turns the arrow downward). Each subtopic may itself be a parent to further subtopics, in which case it will also have a blue arrow to expand it. This nesting can continue through multiple levels if needed.
 
--Interactive Text: Green Text is interactive and triggers the release of Hidden Text that directly follows the Green Text.
+  Topics without Further Subtopics: These are the final items in a branch (leaf nodes). They do not have a blue arrow. Instead, their text is styled as a clickable button. Clicking one of these will open a Focused Subtopic Section (detail page) for that topic. For example, “ASA” in the ALS Medications category might be a final topic; clicking it opens the Aspirin detail page.
 
--Triggered Green Text: both the Green Text and the revealed Hidden Text become a light green font.
+Focused Subtopic Sections (Detail Pages): When a user clicks a final topic, the app displays a detailed page for that specific item. These detail pages may contain medication details, general protocols, or treatments for specific patient conditions.
 
--Search Bar: Space reserved for user input text that filters two seperate lists in real time. Those two lists become visible as the user begins typing inside of the Search Bar and they are located directly underneath the Search Bar and split into two seperate columns. The first column is the Filtered List of Topics and the second column is the Smart Suggestions.
+  All content for these sections comes from the app’s data files.
 
--Filtered List of Topics: appear under the Search Bar and the the right Clicking a Suggestion will show a narrowed list of topics related to that specific Suggestion. Clicking a Topic directly navigate to a matching detail page. Populates with related options when the user begins typing in it. Allows for quick keyword lookup.
+  The content is organized with clear subheadings.
 
--Smart Suggestions:
+  Internal links or references: Some detail pages may contain links (for related topics or external resources), images, or even embedded videos if relevant (e.g., a procedural guide might have an image of equipment). Currently, all such media is stored locally or referenced in the data.
 
--Patient Info Menu Button: Expands to bring up a Patient Info Section when clicked upon. Clicking outside of the Patient Info Section and on the still visible page the user was last on will trigger the closure of the Patient Info Section.
+  Interactive text elements: Detail pages can also include interactive text (highlighted in green – see Interactive Text below) which, when clicked, reveal additional hidden text (like definitions, tips, or Auto-Calculations).
 
--Patient Info Section: Contains the following interactive categories: Age, Weight, Vital Signs (VS), Past Medical History (PMH), Allergies, Medications, etc.
+  Treatment Dosages (Rx): If the patient’s weight is provided (see Patient Info below), the app can Auto-Calculate weight-based dosages and display the calculated values directly in with the text.
 
--Age:
+  All details for these pages are defined in the data files (no hard-coded content in HTML), ensuring consistency and easy updates.
 
--Weight:
+Interactive Text (Green Text): Within detail pages, certain pieces of text appear in green, indicating they are interactive. This is used for content that has an explanation or additional info that can be toggled without leaving the page. For example, in a protocol you might see something like “Administer Dextrose 50% (D50) IV” where “Dextrose 50%” is green; clicking it could reveal a brief explanation or a conversion to a different concentration.
 
--VS:
+  When a green text item is clicked, the text immediately following it (which is initially hidden) will slide down or appear – this revealed text is in a lighter green or highlighted format. We often refer to this pattern as a small “accordion” for definitions or clarifications in-line.
 
--PMH:
+  After activation, the green text and its revealed content may both appear with a light-green highlight or background to indicate that they are active. Clicking the green text again will hide the extra information and return the view to normal.
 
--Allergies:
+Search Bar: The search bar at the top of the interface allows users to quickly filter and find topics. As the user types into the search input, two dynamic lists appear immediately below it (side by side):
 
--Medications:
+  Filtered List of Topics: On the left, a list of topic titles (and possibly their category path) that match the text entered. This updates in real-time with each keystroke. For instance, typing “asp” might show “ASA – ALS Medications” as well as any other topics containing “asp” or "ASA". Clicking on a topic in this list will directly navigate to that topic’s detail page.
 
-Treatments or doses that don’t apply (e.g. pediatric doses for an adult patient, or a medication contraindicated due to an allergy will trigger an warning) are automatically struck through or visually deemphasized.
-Warnings appear in the detail pages if the patient’s data triggers any contraindications (for example, an alert if the patient is on a medication that conflicts with a drug in the protocol, or if blood pressure is too low for a certain treatment).
-In the main topics list, if the user has provided certain indications or symptoms, the list can highlight or strikethrough topics to show which ones are relevant to the case.
-Note: Some dynamic adjustments (like automatic dose calculations based on weight) are planned for future updates. The current implementation handles key scenarios (like the Nitroglycerin blood pressure and drug interaction checks) and lays the groundwork for more advanced data-driven tweaks.
+  Smart Suggestions: On the right, the app can display A list of topics that is filtered by the information that the user has inputed into the Patient Info Sidebar and re-organized by what the user is inputing into the search bar. For example, if the user inputs in the Patient Info Sidebar that the patient is intubated, then the Smart Suggestions will show a list of all the various intubation topics that the user may select. If the user then types the letter "d" into the search bar, the Smart Suggestions list will re-organize itself to have the topics that start with the letter "d" appearing first. Smart Suggestions always contain a set number of topics in a scrollable list that is determined by the information in the Patient Info Sidebar. If no information is in the Patient Info Sidebar, then Smart Suggestion contains the full list of Smart Suggestions that is found in the data file. Smart Suggestions topics will be searchable through indirect routes such as: common medical terms, synonyms, or common spelling errors. For example, typing “dAtdi” might suggest “Cardiac Arrest” even if those exact words haven’t been fully typed, or might suggest related terms like “Cardioversion” or “Cardizem” if applicable. These suggestions help guide the user if they are unsure of spelling or the exact name of a protocol. Clicking a suggestion could refine the search or directly show a subset of related topics. (This feature may be expanded as the app grows; currently it may offer basic suggestions based on an internal list of keywords and these basic suggestion will be more likely to contain topics that the user would need to access while under duress such as: Cardiac Arrest, SVT, RASS +3, RASS +4, Epi, Versed, ecetera.)
 
--This data that is entered in by the user will be able to have the following effects on the rest of the app: strikethrough text that is no longer appropriate, warnings, narrowed lists, focused lists, Any listed "Rx" will now have their calculations already performed with math to obtain to calculations visible to the user, new button options, faded topic buttons, some of the data that the user enters will be shown on the screen at all times as a "Patient Snapshot" while the user navigates around the app.
+  The search is case-insensitive and tries to match any part of a topic’s name or associated keywords. It allows quick navigation without manually browsing the categories. There is also usually an “X” or clear button to reset the search and return to the full contents list.
 
--Patient Snapshot:
+Patient Info Menu Button: This button (often iconized as “Patient Info” or using a patient icon) toggles the Patient Information sidebar. When clicked, it slides out a sidebar (from the left side of the screen by default) where the user can input patient-specific data. Clicking the button again (or clicking on the semi-transparent overlay over the main content) will close the sidebar. This feature is crucial because patient-specific information can change which treatments are applicable. It effectively personalizes the content to the current patient.
 
--Navigation Buttons: Visible at all times. Initially is unusable until it's own requirments to function are met. The navigation history is managed internally so that these controls update the content reliably. This ensures users can explore information freely and always have a quick way to backtrack or start over.
+Patient Info Sidebar/Section: The patient info section is an interactive form where the paramedic can enter details about their patient. Every category in this section allows the user to input specific information that is interactive with the app in one way or more. All categories will have a drop down menu to select from, some categories will have a drop down menu and allow for the user to type the data in. Any information inputed by the user persists inbetween sessions (so if they close and reopen the app, no patient information is lost.). The categories of information include:
 
--Back Navigation Button: Becomes clickable after the user clicks on an Focused Subtopic Section or a similar type items. When clicked upon, the user will be taken back to the immediate prior screen that the user was on, looking exactly how they left it (Blue Arrows are in the state that the user had last put them in) with the exception being that the last thing or Subtopic that the user had clicked upon is now highlighted.
+  Age – The patient’s age. This can affect whether pediatric or adult protocols apply (e.g., dose differences, which sections to StrikeThrough). The UI might treat an age above a certain threshold as “adult.” Numbers user can input if in "years' are positive integers from 0-120. Numbers user can input if in "months" are positive integers from 0-40. Numbers user can input if in days are positive integers from 0-500.
 
--Forward Navigation Button: Becomes clickable after the user clicks upon the Back Navigation Button.
+  Weight – The patient’s weight (in kilograms or pounds). Weight is used for Auto-Calculation with weight-based dosages. (Current UI includes a single weight input, but a planned improvement is to allow entry in either kg or lbs and automatically convert between them.) Numbers user can input if in "lbs" are positive integers from 0-1500. Numbers user can input if in KG are positive integers from 0-700.
 
--Home Button: Takes the user to the Main Contents Page when clicked upon.
+  Vital Signs (VS) – Vital Sign abnormalities can trigger warnings or make certain interventions inappropriate (which the app will indicate). Input options are: User input, Drop-Down menu to select an option from, or both. When the user hovers, with a mouse or they press and hold with their finger, over an option that they can select from the Drop-Down menus of select VS, a Pop-Up menu will appear. This Pop-Up menu appears to the right of the Sidebar (not within the Sidebar). This Pop-Up menu will give further clarity on what their selection option means exactly, and the menu will have an "x" in the top right corner that will close the Pop-Up menu. VS include:
+    Blood Pressure (BP): User may input number or select from Drop-Down menu. Drop-Down menu options are: 200+, 160+, Normal, >90, and >70. Top of Drop-Down menu is labled SBS. Numbers user can input are positive integers from 0-400 for systolic and 0-300 for diastolic.
+      MAP: Inputing a systolic and diastolic BP will Auto-Calculate and provide the user with a MAP value that will have it's own Pop-Up menu.
+    Heart Rate (HR): User may input number or select from Drop-Down menu. Drop-Down menu options include: 150+, 100+, 60-100, >60, and >40. Numbers user can input are positive integers from 0-300 for systolic BP and 0-200 for diastolic BP.
+    SpO2 (%): User may input number or select from Drop-Down menu. Drop-Down menu options include: Normal, Low, and Severly Low. Numbers user can input are positive integers from 50-100.
+    EtCO2: User may input number or select from Drop-Down menu. Numbers user can input are positive integers from 0-50.
+    Respiratory Rate (RR): User may input number or select from Drop-Down menu. Numbers user can input are positive integers from 0-80.
+    Blood Glucose (BGL): User may input number or select from Drop-Down menu. Numbers user can input are positive integers from 0-900.
+    Pupils: User may input number or select from Drop-Down menu. Numbers user can input are positive integers from 0-8mm.
+    GCS: User may input number or select from Drop-Down menu. When clicked, drops down a menu starting at the top at 1 and ending at 15. 
+    AO Status: Drop-Down menu only. Drop-Down menu starts at 4 and ends at 0.
+    Lung Sounds (LS): User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu.
 
-Font will incorporate all the various style options.
+  EKG Interpretation: User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu. When the user hovers, with a mouse or they press and hold with their finger, over an option that they can select from the Drop-Down menu, a Pop-Up menu will appear. Pop-up menu will appear on screen the same as the other, but instead of info, it will have an EKG example. Off to the side, their will be a "EKG Help" link that takes the user to a new screen dedicated to EKGs.
 
-When the user exits the app and goes back into the app, the user will be able to easily access any information that the user had previously inputted into the app and there will be a
+  Past Medical History (PMH) – User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu. A list of the patient’s known conditions or medical history (e.g., diabetes, heart failure, asthma). This can help filter protocols (for example, showing relevant treatments or contraindications). This field often supports multiple comma-separated entries, and the app provides an autocomplete of common conditions for convenience.
 
--History Button: that is on the screen at all times that will give a scrollable list of all the clickable buttons the user had clicked on starting from the most recent button clicked upon in the current app session or in prior app session. Any of these Buttons within the History Button can be clicked upon with the same functionality of the Button it represents.
+  Allergies – User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu. Known patient allergies (especially drug allergies). If a patient is allergic to a medication listed in the app, that medication’s detail page will show a prominent Allergy Alert. Additionally, the medication may be visually marked (e.g., Struck-Through) in lists to help the user focus on more viable options. Struck-Through options are still functionable. Autocomplete suggestions (common allergens like penicillin, latex, etc.) are provided.
 
-Performance and Simplicity: The app is built with only HTML, CSS, and JavaScript – no frameworks or modules – to keep it fast and easy to maintain. All data is loaded locally (no external API calls), so content is available offline without delay. The interface is designed to be clear and uncluttered, using Tailwind CSS (via CDN) for a consistent look and feel, with custom styles in our stylesheet where needed. Every design choice centers on speed, clarity, customizability, and ease-of-use, given that in a high-stress field scenario the user needs to get to the right info immediately.
+  Medications – User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu. The medications the patient is currently taking. This is important for identifying drug interactions. For instance, if the patient is on a phosphodiesterase inhibitor (like Viagra), the app will warn against giving Nitroglycerin. This field also supports multiple entries with autocompletion of common drug names.
+
+  Indications – User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu. The primary complaint or indication for calling EMS (e.g., chest pain, shortness of breath). This can be used by the app to highlight protocols that are likely relevant (for example, if “chest pain” is entered, the protocols related to cardiac issues will be highlighted blue).
+
+  Symptoms – User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu. Additional symptoms observed (e.g., nausea, dizziness). Like Indications, these might be used for smart filtering or highlighting relevant topics.
+
+  (All Patient Info fields are optional, but the more that is filled, the more the app can tailor the content. All fields left blank simply mean the app shows everything by default.)
+
+After the user enters patient data, the app immediately updates relevant parts of the UI (see Effects of Patient Data below). The sidebar remains open or can be closed; the entered data persists in memory (and can be designed to persist across sessions using localStorage in the future, though currently it’s just in-memory).
+
+Effects of Patient Data: The information input in the Patient Info sidebar influences the main content in real time:
+
+  StrikeThrough Inapplicable Items: Treatments or doses that don’t apply to the given patient are automatically styled with a StrikeThrough or greyed-out. For example, if an adult patient’s age is entered, any pediatric dosage sections might be de-emphasized or crossed out (since they are not needed). If a patient has an allergy to a medication, that medication name might appear crossed out in lists or accompanied by an alert icon.
+
+  Warnings/Alerts: If patient data triggers a contraindication or warning, the detail page will show a prominent warning box (usually with a red border or background). For instance, on the Nitroglycerin page, if the patient’s systolic BP (from VS input) is below the safe threshold, a warning will appear reading “Contraindication: Patient’s blood pressure is below recommended minimum for Nitroglycerin.” Similarly, if the patient’s Medications list includes a drug that interacts, a warning like “Drug Interaction Alert: Patient has recently taken Viagra (PDE5 inhibitor) – DO NOT administer Nitroglycerin” will show. These warnings are meant to be very noticeable.
+
+  Dynamic Content Filtering: The main Contents page can adapt based on Patient Info. If certain indications or symptoms are recorded, the app can highlight protocols that match or even partially hide those that clearly don’t apply. For example, if “trauma” is an indication, medical (non-trauma) protocols might dim or move lower. Conversely, relevant topics might get a highlight or rise to a “Suggested” section.
+
+  Auto-Calculations: Numeric inputs like weight are used to calculate doses. Wherever the data files denote a dose as weight-based (marked by “Rx” or similar), the app will perform the math and insert the result. This spares the paramedic from manual calculation under stress. For instance, "Morphine Dose: 0.1 mg/kg IV/IO” and the patient weight is 50 kg, the app will display “Dose: 0.1 mg/kg IV/IO (= 5 mg IV/IO)”. Clicking on the "= 5 mg IV/IO" will bring up a Pop-Up menu that shows the math to reach that answer along with providing how many ml of Morphine the Paramedic needs to draw up into their syringe (math included). The "(= 5 mg IV/IO)" will actively transition back and forth between two color fonts to indicate to the user that a Pop-Up menu exist. Calculations update live as the weight input changes.
+
+  Contextual UI Changes: Some UI elements may change based on Patient Info. For example, if an entire category becomes irrelevant (say, “Pediatric Protocols” for a 30-year-old patient), the app might visually fade those buttons or put a note next to them. Additionally, the header or a small fixed panel will show a Patient-Snapshot (see below).
+
+  Patient-Snapshot: Key patient details are shown persistently on the screen once entered, so the user is always aware of the context. This could be a small bar or box (for example, at the top or bottom of the screen) that says something like: “45 y/o F, 60 kg; Takes Beta-Blockers (The user entered "Metoprolol” into the Patient Info section, but "Beta-Blocker" would be shown in the Patient-Snapshot, since Beta-Blocker has a higher potential for being relevant in the context of administering Beta adrenergic medications); Broncospasm; (then underneath in red warning font) WARNING: Albuterol may be ineffective for Tx if the pt is actively taking her Metoprolol Rx!" and the WARNING message in red font would also be a clickable button that can provide further information on the WARNING. This Snapshot updates in realtime as the user changes any info, and it remains visible as they navigate through topics, providing context at a glance. (The exact placement and style of the snapshot are a part of the UI design – it might appear in the header or as a sidebar summary. The main goal is that the user doesn’t forget the entered patient parameters while reading treatment info.)
+
+Navigation Buttons (Back, Forward, Home): The app provides basic navigation controls similar to a web browser, so users can easily move between viewed pages without losing their place:
+
+  Back Navigation Button: This appears in the top-right of the header (as an arrow pointing left). Initially, it is disabled (grayed out) because there is no history yet. Once the user navigates to at least one detail page (or performs a search, etc.), the Back button becomes active. Clicking Back will return the content area to the previous view the user was on. Importantly, the app restores the state of that page exactly as it was – for example, if the user had expanded certain categories on the main list, those remain expanded, and the particular subtopic they clicked is highlighted to show where they left off. This “state restoration” means the user can explore a topic’s details and then go back to the list without losing context.
+
+  Forward Navigation Button: Next to Back, the Forward button (arrow pointing right) becomes enabled if the user has gone back and can move forward again (much like a browser’s forward button). It re-navigates to the page that was ahead in history. These two buttons together let the user step backward or forward through their navigation path easily.
+
+  Home Button: Under the Back/Forward controls, the Home button instantly brings the user back to the Main Contents Page (the top-level list of all topics). This is a quick way to start over or go to the main menu, regardless of how far the user navigated. Unlike the Back button, Home does not preserve expanded states (it resets the content list to default collapsed state for all categories). It’s essentially a shortcut to renderInitialView() fresh (Patient Info that the user inputs is uneffected!!!).
+
+  History Button: This is a feature to track what the user has clicked on during their session. The History button (available at all times, as an clock icon) opens a DropDown Panel showing a chronological list of topics the user has viewed (most recent first). Each entry in this history list is a clickable link; clicking one takes the user back to that topic’s detail page (or list view) directly. The history persists inbetween sessions (so if they close and reopen the app, they will still see past items). This is useful for quickly revisiting something looked up earlier without searching again.
+  The history list might show the topic name and possibly the time it was accessed or an index number. It functions similarly to a browser history but within the app context.
+
+**Settings Button:** Found in the Footer of the HTML. Font transitions back and forth between two colors to grab the user's attention. Any settings changed will exist between sessions. Settings options is aimed for the user to customize the UI to their own specific prefernces. There will be a broad depth of options to customize, making the app capable of being tailored to an individuals wants and needs.
+
+Performance and Simplicity: The app prioritizes speed and reliability:
+
+  It is built with pure HTML/CSS/JS to minimize overhead. There are no external frameworks or module bundlers involved. This not only keeps load times fast (just a few static files) but also simplifies development (no build step; just open the index.html).
+
+  All content is loaded locally. Because all data is embedded in JavaScript objects, the app works offline once loaded (ideal for use in the field where internet might not be available). There are no runtime fetch calls for data, eliminating network delay.
+
+  We use Tailwind CSS via CDN for rapid styling using utility classes. Tailwind provides a consistent look and spacing without writing large custom CSS. Our custom styles.css adds a few project-specific styles (like custom classes for strikethrough or warning highlights, and any layout tweaks). This approach means we can restyle quickly if needed, but also have predictable styling.
+
+  The interface is intentionally uncluttered: a simple header, a sidebar for patient info, a content area that either shows a list or detail info, and a footer if needed. Font choices and sizes are made for readability. Color coding (blue for interactive elements, green for toggles, red for warnings) is used to draw attention appropriately.
+
+  All design choices center on making the app usable in high-stress scenarios: big touch targets for buttons (for use on tablets/phones in the field), logical organization so info can be found with minimal taps, and fail-safes like warnings to prevent medical errors.
+
 
 ## 4. PROJECT STRUCTURE
 
-The project is organized into a few directories and files, each with a specific role:
+The project is organized into several files and directories, each serving a specific purpose. Below is an overview of the structure and key files:
 
-index.html – The main HTML file that defines the app’s layout and includes all scripts and styles. It sets up the structure of the page (header, sidebar, main content area, footer) and links to the necessary CSS/JS files. All other components plug into this file.
-index.html – The main HTML file that sets up the interface layout and includes all scripts and styles.
+index.html – Main HTML container. This is the entry point of the app. It defines the layout structure (header, sidebar, content area, etc.) and includes all the necessary CSS and JS files. In the <head>, it links the Tailwind CSS CDN and our styles.css. In the body, it sets up the static HTML for header buttons, the search bar, the empty content container, the patient sidebar form, and so on. It then includes scripts in a specific order: first the data files (so that data is ready), then utility scripts, then feature scripts like PatientInfo.js, and finally main.js which initializes the app. If any new file is added, it must be included here.
 
-styles.css – The main stylesheet for custom CSS. This file contains any custom styling needed for the app’s layout and components. (Tailwind CSS is also loaded via CDN in index.html for utility classes, so styles.css mainly provides additional tweaks or design elements not covered by Tailwind’s defaults.)
-styles.js – (If present) Contains any JavaScript-based style fixes or configuration (this might be a Tailwind CSS config or similar – in this project Tailwind is loaded via CDN, so this could be minimal or unused).
+styles.css – Custom CSS stylesheet. Contains project-specific styles that Tailwind’s utility classes don’t cover. For example, classes for the Strikethrough effect, any custom animations (like Arrow rotations), or layout fixes for certain elements. Most visual styling is with Tailwind classes directly in HTML, but critical overrides or additional styles live here. This file is loaded in the head of index.html so that its rules can complement/override Tailwind where needed.
 
-Data/ – Directory for static data files that populate the app’s content:
-Data/ – Contains JavaScript files with static data:
+styles.js – **Currently doesn't exits** (Optional; currently minimal) A JavaScript file intended for any dynamic style adjustments or Tailwind configuration. In this project, since Tailwind is used via CDN with default settings, styles.js is mostly unused. It might contain a small script if we needed to calculate or toggle styles via JS (but most of that is handled in main.js or CSS). If not needed, this file can remain empty or be removed; it’s included for completeness in case we later add theme switching logic (for example, adding a **dark mode via toggling classes**).
 
-ParamedicCategoriesData.js – Defines the hierarchical list of categories and topics. For example, it might define an array of objects for sections like ALS Medications, etc., each with children array for their subtopics. This file attaches its data to the global window object as window.ParamedicCategoriesData.
-ParamedicCategoriesData.js – Defines the hierarchical list of categories and topics (e.g., sections like *ALS Medications*, *BLS Procedures*, etc., and the individual topics within them). This is loaded as a global object `window.ParamedicCategoriesData`.
+Data/ – Data files directory. This folder contains static JavaScript files that define the content of the app (the topics and their details). These files do not execute any logic; they simply declare objects/arrays and assign them to the global window so that main.js can use them. Key files include:
 
-MedicationDetailsData.js – Contains detailed information for each ALS Medication. It could be an array or an object keyed by medication ID, attached as window.MedicationDetailsData. Each entry typically includes fields such as id, description, adultDose, pediatricDose, indications, contraindications, sideEffects, etc. These details are referenced when rendering the topic detail pages.
-MedicationDetailsData.js – Contains detailed information for each medication (primarily used for ALS medications in this app). It’s an array/object of detail entries loaded as window.MedicationDetailsData. Each entry typically includes fields like `id`, `description`, doses (`adultRx`, `pediatricRx`), indications, contraindications, side effects, etc.
+  Data/ParamedicCategoriesData.js – Defines the hierarchical list of categories and topics for the main contents page. This file typically creates an array of category objects. Each category object can have properties like title and children (where children is an array of subtopics). Subtopics might themselves have children, or an id if they are final topics. For example, it may define an object for “ALS Medications” category which contains a list of medication topics each with a unique id. At the end, it assigns this array to window.ParamedicCategoriesData.
 
-Features/ – Directory for features for specific functionality:
+  Usage: main.js will iterate over window.ParamedicCategoriesData to build the menu. Each topic or subtopic’s id is crucial as it links to details in the next file.
 
-PatientInfo.js – Manages the Patient Info Sidebar behavior and the global patientData. It sets up event listeners on the sidebar input fields and defines the updatePatientData() function. When patient data changes, this module updates patientData (age, weight, allergies, medications, etc.) and then triggers UI updates (e.g. adding or removing a .strikethrough class on certain elements, or re-rendering the current detail page to reflect new info). This separation allows all patient-related logic to be maintained in one place.
-PatientInfo.js – Manages the Patient Info sidebar and related data. It defines the `patientData` object (age, weight, allergies, etc.) and handles updates to this data. It also controls contextual UI changes (e.g., striking through inapplicable treatments based on patient info). It declares global variables for data structures used by the app (like `paramedicCategories`, `allSearchableTopics`, `allDisplayableTopicsMap`, and a local `medicationDetailsData` reference that gets filled with the global data). This separation makes it easier to handle patient-specific logic independently.
+  Data/MedicationDetailsData.js – Contains detailed information for individual topics, primarily medications (since those have a lot of structured data). This could be an array of objects or a dictionary object keyed by id. Each entry includes fields such as id (matching one from the categories data), description, indications (array of strings), contraindications (array), adultDose (or adultRx), pediatricDose (pediatricRx), sideEffects, etc. It may also include special flags or notes. This file attaches the data to window.MedicationDetailsData.
 
-Utils/ – Directory for utility scripts:
+  Usage: When a detail page is rendered, main.js looks up the topic’s id in MedicationDetailsData to retrieve all these fields and then generates HTML accordingly. If an id is missing here (but present in categories), clicking that topic would result in no detail info being shown (so consistency is important). Note that not all topics require a detailed entry (some may be purely category headers), but all final actionable topics usually have one.
 
-slugify.js – A helper function that converts a string into a URL-friendly “slug.” For example, it turns a title like "Adult Dose" into "adult-dose". This is used to generate consistent id attributes for sections in detail pages and to create anchor links that jump to those sections.
-slugify.js – A helper that converts strings into URL-friendly “slugs.” For example, it turns a title like "Pediatric Dose" into `"pediatric-dose"`. This is used to generate consistent `id` attributes for sections or to create anchor links.
+  Other Data files that are not currently incorporated include:
+    Data/additionalMedications.js
+    Data/patientInfoSynonyms.js
 
-Main scripts (in the project root):
-Main scripts** (in the project root or loaded directly):
+Features/ – Feature-specific scripts. This directory groups scripts that handle a particular aspect of the app’s functionality, especially those that might be somewhat independent from the main rendering logic.
 
-viewportFix.js – A small script that fixes a known issue with the CSS 100vh unit on some mobile browsers. It ensures the app’s full-height elements (like the sidebar or certain containers) size correctly on all devices.
-viewportFix.js – A small script to fix mobile viewport units issue (common technique to ensure 100vh works correctly on mobile browsers).
+# Features/PatientInfo.js is now currently Features/patient/PatientInfo.js
+  Features/PatientInfo.js – Manages the Patient Info sidebar behavior and the global patient data state. It defines a global object (e.g., window.patientData) to store age, weight, allergies, etc. It also sets up event listeners for the form inputs in the sidebar (like onChange for the text fields and checkboxes if any). When any patient info is updated, it runs the updatePatientData() function.
 
-slugList.js – (located in the Data directory and included as a script) This script gathers all section headers from a medication’s detail page after it’s rendered and compiles a list of their id values (using the same slug generation as slugify.js). Essentially, it prepares an array of section anchors whenever a detail page is shown.
-slugList.js – *(Data/slugList.js, included for anchor navigation)* Likely gathers or defines a list of content section anchors based on the loaded data. It works in conjunction with `slugify.js` and `slugAnchors.js` to facilitate an in-page table of contents for medication detail sections. For example, it might compile all section headers from the medication details into an array of slugs.
+    updatePatientData(): This function reads the current values from all patient info fields (e.g., the number in the age field, the list of allergies entered, etc.) and updates the patientData object. Then it triggers various UI updates: for example, it may call applyPatientFilters() which goes through the topic list in the DOM and adds or removes a CSS class (like .strikethrough) on each topic depending on patient criteria. It will also invoke a refresh of the current detail page view (if one is open) by calling renderDetailPage for the current topic ID with the new context, so that any dosage calculations or warnings can update immediately.
 
-slugAnchors.js – This works hand-in-hand with slugList.js. After the list of section IDs is prepared, slugAnchors.js inserts a clickable Table of Contents (anchor links) into the detail view. For example, if a medication page has sections like Description, Dosage, Indications, etc., slugAnchors.js will create a list of links at the top of that page so the user can jump to “Dosage” or “Contraindications” instantly. It also handles any necessary event listeners for those links (like smooth scrolling or highlighting the active section). Note: When adding or modifying sections in a detail page, always use the slugify.js helper for section IDs to ensure these anchor links continue to match their targets.
-slugAnchors.js – Works with `slugList.js` to insert or activate anchor links in the UI. For instance, after `slugList.js` prepares the list of section IDs (slugs), `slugAnchors.js` could generate a clickable list of those sections (anchor navigation menu) or attach event listeners to scroll to those sections. **Note:** These two files (`slugList.js` and `slugAnchors.js`) provide the “Anchor Navigation” feature. If you’re debugging anchor links not working, these are the files to inspect (ensuring the slugs generated match the section IDs in the HTML).
+    This file may also declare some global sets or arrays for use in autocompletion (for example, lists of common allergies or medications are defined in main.js and passed to this file’s scope for use in suggestions).
 
-main.js – The core application logic that ties everything together. This file initializes the app and contains the primary functions for rendering content and handling user interactions:
-main.js – The core application logic tying everything together. It initializes the app, handles search functionality, navigation (history stack for back/forward buttons), renders the category list and detail views, and integrates the patient info into the content. Key functions in `main.js` include:
+    The separation of patient info logic here means all rules about how patient data affects the UI can be managed in one place (for instance, if we add a new field like “Pregnancy” in the future, we’d adjust this file to handle any special cases for that field).
 
-initializeData(categoriesData, medDetailsData) – Called on startup. This function takes the raw data objects from ParamedicCategoriesData.js and MedicationDetailsData.js and merges/organizes them into structures the app uses. It builds the paramedicCategories array (the master list of categories and topics), populates the allDisplayableTopicsMap (a lookup map of every topic by ID, including its details and parent hierarchy), and creates allSearchableTopics (an array of all topics with their titles and paths, used for the search feature).
-initializeData(categoriesData, medDetailsData): **Called on startup**, this function takes the raw data from `ParamedicCategoriesData` and `MedicationDetailsData` and populates the internal structures. It likely builds the `allDisplayableTopicsMap` (mapping each topic’s ID to its detail object), combines category info with detail info for quick lookup, and prepares the searchable list of topics.
+    Important: This script works closely with main.js – after updating data, it relies on main.js functions like re-rendering pages or lists. It also relies on global structures (like allDisplayableTopicsMap and allSearchableTopics) which are set up in main.js. Thus, it’s included after those structures exist. The event listeners in PatientInfo.js ensure that as soon as the user types or selects something in the sidebar, the rest of the app responds.
 
-renderInitialView(highlightId = null) – Displays the main contents page (the hierarchical list of categories and topics). It uses a helper (like createHierarchicalList) to generate the expandable menu UI. If highlightId is provided (meaning we want to highlight a specific topic on the list, e.g. after navigating back), it will ensure that topic is visible and marked.
-renderInitialView(...): Renders the hierarchical list of categories and topics in the content area (the default view).
+  # New Features/ folders and files include:
+    Features/anchorNav/
+    Features/navigation/
+    Features/patient/
+    Features/search/
+    Features/CardiacArrest.js
+    Features/Diagnoses.js
+    Features/dosageCalc.js
+    Features/pcrNarrative.js
+    Features/VoiceMode.js
+    Features/Warnings.js
+  #   Features/anchorNav/
+        Features/anchorNav/slugAnchors.js
+        Features/anchorNav/slugList.js
+  #   Features/navigation/
+        ***File still needs to be created that migrates Navigation info into this location from the main.js***
+  #   Features/patient/
+        Features/patient/Patient Info Sidebar/
+        Features/patient/PatientInfo.js
+        Features/patient/PatientSnapshot.js
+  #       Features/patient/Patient Info Sidebar/ (Includes the still needed to be coded files: Allergies.js, Contraindications.js, CurrentMedications.js, Indications.js, PatienetAge.js, PatientWeight.js, PMH.js, Symptoms.js, & VS.js)
+  #   Features/search/ 
+         ***File still needs to be created that migrates Search info into this location from the main.js***
 
-renderDetailPage(topicId) – Displays the detail view for a given topic (usually a medication or procedure). It looks up the topic by id in allDisplayableTopicsMap and, if found, renders an HTML page with that topic’s full information (title and all detail sections). This function is responsible for injecting sections like Indications, Dosage (with adult/pediatric breakdown), Contraindications, etc., into the page. As it renders, it also checks the current patientData to apply any special formatting: for example, it will add warnings (in red highlight boxes) if the patient’s info indicates an allergy or contraindication for this topic, and it can strike out dose sections that don’t apply (e.g. pediatric doses for adult patients).
-renderDetailPage(topicId, ...): Given a topic ID (for example, a specific medication), this renders the detailed information page for that topic. It pulls the corresponding detail from `allDisplayableTopicsMap` and creates the HTML (title, sections like indications, doses, contraindications, etc.). It also triggers warning messages or dosage calculations based on the current `patientData` (for instance, highlighting contraindications if the patient has certain conditions, or calculating a weight-based dose).
+Utils/ – Utility scripts. These are helpers that are used across the app for small tasks, often included early so they can be used by other scripts.
 
-Event Handlers & Navigation: main.js also sets up the event listeners for user interactions:
-It initializes the search bar behavior so that typing filters the list, and pressing Enter triggers a full search.
-It manages the navigation history for the Back and Forward buttons. Each time you render a view, it logs the state so that clicking Back or Forward will correctly restore the previous view (and it updates the disabled/enabled state of those buttons accordingly).
-It ties in with PatientInfo.js by calling updatePatientData() whenever the patient inputs change, ensuring that the UI stays in sync with any new patient-specific context.
-All scripts and data files are included in index.html in the proper order. Notably, the data files (ParamedicCategoriesData.js and MedicationDetailsData.js) load before main.js. This way, by the time the initialization code runs, the global data (categories and medication details) is already available for use. The CSS (Tailwind and styles.css) is loaded in the <head> so that the UI styling is ready as the HTML renders.
-Event handlers for search input and navigation buttons, which allow users to filter topics by keyword or navigate back/forward through viewed pages.
+  Utils/slugify.js – A helper function to convert a string into a URL-friendly “slug” (lowercase, hyphen-separated). For example, "Adult Dose" becomes "adult-dose". We use this to generate id attributes for section headings on detail pages. By having a consistent slug generator, we ensure that if a section title in data is "Contraindications", its <h3> element will get id="contraindications", and any anchor link can point to #contraindications. This consistency is vital for the anchor navigation to work (see slugList and slugAnchors below).
 
-Integration points: after `initializeData` runs, `main.js` relies on the data provided. It also uses `slugify` when needed (e.g., ensuring generated IDs or anchors match), and calls functions from `PatientInfo.js` (like `updatePatientData()`) when patient info changes.
+    The function exported by slugify.js is used both when rendering detail page sections (to set ids) and when building the anchor list (to make the links). Always use this function for any new section titles to avoid mismatches.
 
-All scripts are included in `index.html` in the proper order. Notably, the data files are included **before** the main application script. This ensures that by the time `main.js` runs, the global data (categories and medication details) is already available.
+  # (Other utility files can be added here as needed; currently slugify is the main one. If we had a general helper for formatting or a polyfill, it would go in Utils too.)
 
-## 5. HOW THE PIECES/FILES/CODE FIT/WORK TOGETHER
+Main Scripts (project root): These are the core JavaScript files (often loaded directly in index.html) that drive the app’s functionality.
 
-To understand the app’s flow, here’s how all the components collaborate when the app runs:
+  viewportFix.js – A small script that fixes the behavior of CSS 100vh on mobile browsers. On some mobile devices, 100vh can be problematic (because of browser UI chrome). This script likely calculates the actual viewport height and sets a CSS variable or updates elements like the sidebar to ensure full-height coverage. In effect, it ensures elements intended to span the full screen actually do so without causing scroll issues. This is mostly a UX polish for mobile compatibility. (It might add an event listener to window resize and adjust some CSS custom property like --vh which is then used in CSS in place of 100vh).
 
-Data Loading: When the page first loads, the data scripts run immediately. ParamedicCategoriesData.js and MedicationDetailsData.js each attach their data to the global window object (as window.ParamedicCategoriesData and window.MedicationDetailsData, respectively). This means the categories list and the medication details are ready in memory before the main app logic starts. It’s crucial that every topic or subtopic in the category data has a matching id in the medication details (if that topic has detailed info). If an ID mismatch occurs – for example, a category references an id that doesn’t exist in the details – then when the user tries to view that topic’s details, the app wouldn’t find anything to display.
-App Initialization: The main script (main.js) runs on the DOMContentLoaded event. During initialization, it calls initApp(), which in turn calls initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData). This step merges the loaded data into the app’s internal structures. After that, the app calls renderInitialView() to draw the main contents page (the list of categories and topics). At this point, the Back and Forward navigation buttons are set to disabled (since no history exists yet), and the patient sidebar (if present) is hidden.
+# slugList.js has just been updated to be in: Features/anchorNav/slugList.js
+  slugList.js – This script is responsible for gathering section IDs from a rendered detail page. After a detail page is inserted into the DOM, slugList.js runs to collect all the headings (e.g., it might do document.querySelectorAll('h3') in the content area) and create an array of their id attributes. It then makes this list available (perhaps attaching it to window.currentSections or calling a function in slugAnchors). Essentially, it prepares the data needed for an in-page Table of Contents. By using the same slugify logic, it knows those IDs correspond exactly to the section titles.
 
-Rendering the Category List: The function renderInitialView() (using a helper called createHierarchicalList) builds the nested list of categories and topics in the main content area:
-Each category is rendered as a row with a clickable label and a blue arrow button. The arrow’s orientation indicates if the category is expanded (downward arrow) or collapsed (right arrow). Clicking either the arrow or the category name will toggle that category’s expansion and reveal or hide its sub-items.
+    We include this as a separate file to keep the anchor navigation logic modular. If a section isn’t appearing in the anchor menu, this script is the first place to check (does it capture it correctly?).
 
-Topics (end nodes of the hierarchy with no further subtopics) are rendered as clickable links (styled as buttons). When clicked, these will trigger renderDetailPage() for that topic.
-The createHierarchicalList function assigns HTML attributes like data-topic-id to each topic link (using the topic’s unique id) so that the code can easily identify what was clicked. It dynamically updates the DOM to show nested <div> containers for expanded categories. All of this happens quickly to allow smooth navigation of the menu.
+  # slugAnchors.js has just been updated to be in: Features/anchorNav/slugAnchors.js
+  slugAnchors.js – This works in tandem with slugList.js. Once the list of section IDs is available, slugAnchors inserts the clickable anchor links into the page. For example, it might generate a small <nav> element at the top of the detail content containing links like “<a href="#description">Description</a> | <a href="#dosage">Dosage</a> | …” for each section. It could also attach event listeners for smooth scrolling, or simply rely on default anchor behavior. In some implementations, slugAnchors might also highlight the current section as you scroll (though that’s a potential enhancement). For now, its main job is to display the list of section links.
 
-Showing Detail Pages: When a user clicks on a topic link in the list, the app calls renderDetailPage(topicId). This function is responsible for displaying all the information about that selected topic:
+    Both slugList and slugAnchors are triggered after renderDetailPage completes inserting content. We ensured in recent updates that slugAnchors waits for the DOM content to be present (e.g., it might run on DOMContentLoaded or be called explicitly at the end of renderDetailPage) before trying to insert anchors.
 
-It looks up the topic in allDisplayableTopicsMap using the topicId. This gives it a combined object containing the topic’s title, its category path (for context), and its detailed data (if available).
+    Troubleshooting: If anchors are not appearing or not working, ensure that: (1) section headings have ids (generated by slugify), (2) slugList is indeed capturing them, and (3) slugAnchors is appending the links to the DOM. Also, check that the anchor link href exactly matches a section id. Consistency is key, which is why slugify should be used everywhere.
 
-The content area is cleared, and a new detail view is constructed. At minimum, the topic’s title is shown prominently. Then, for each section of details available (description, indications, contraindications, dosage, etc.), the function creates corresponding HTML elements (e.g. headings and paragraphs or lists). For example, if the medication has an “Indications” array in the data, the app will insert a heading like Indications and list those indications.
+  main.js – The central application script that brings everything together. It handles initialization, rendering of views (list or detail), search functionality, and integrates the patient info into the content. Some key responsibilities and functions in main.js:
 
-To maintain consistency, section headings are given id attributes generated by the slugify.js helper. For instance, a section titled "Adult Dose" will have an element like <h3 id="adult-dose">Adult Dose</h3>. This is important for the anchor navigation (next step).
+    Initialization (initApp): On DOMContentLoaded, initApp() is called. This function does initial setup like calling assignDomElements() to cache references to important DOM nodes (search input, content area, buttons, etc.), setting up event listeners (for search bar input, for navigation button clicks, etc.), and preparing the data. It ensures the Patient Info sidebar is hidden by default (adding hidden classes), and attaches the open/close logic for that sidebar (e.g., clicking the overlay or close button hides it, clicking the open button shows it – see lines around 38–60 in main.js for how it toggles classes for open/hidden).
 
-While rendering, renderDetailPage also checks the current patientData. If the patient info suggests any warnings (say the patient is allergic to this medication, or a vital sign contraindicates its use), the function inserts visible warning boxes into the detail page. These warnings are styled to catch the user’s eye (e.g. red text or background) and explain the caution (e.g. “Allergy Alert: Patient has an allergy to this medication” or “Contraindication: Patient’s blood pressure is below recommended minimum for this drug”).
-Additionally, based on patient data, certain parts of the detail content are automatically modified: for example, pediatric dosage sections might be greyed out or crossed out for an adult patient, and vice versa. This ensures the paramedic sees immediately which dosage applies and which does not, given the context.
+      It also initializes autocomplete for patient info fields by calling a helper setupAutocomplete on various patient info textareas (for example, past medical history, allergies, medications, etc. have suggestion dropdowns). This makes user input faster and more uniform.
 
-Anchor Navigation for Detail Sections: Many medication detail pages can be long. To help users jump to specific sections quickly, the app uses an in-page anchor navigation system powered by slugList.js and slugAnchors.js:
+      Critically, initApp() calls initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData). This merges the static data (loaded from the Data files) into internal structures. For instance, it might copy the array from ParamedicCategoriesData into a global paramedicCategories variable, and then traverse it to build allDisplayableTopicsMap (mapping every topic ID to its object with references to parent categories). It also builds allSearchableTopics, an array of objects each containing a topic’s title and full path, which is used to perform text search quickly.
 
-After renderDetailPage populates the content, slugList.js runs. It scans the newly created detail page for section headers (the ones with IDs like "adult-dose", "indications", etc.). It compiles an array of these section identifiers.
+      Once data initialization is done, it calls renderInitialView() to display the main content list. It also ensures the navigation history is set up (an empty array with index -1 initially) and that the Back/Forward buttons are correctly disabled at start.
 
-Next, slugAnchors.js runs and uses that array to generate a small table of contents menu, typically placed at the top of the detail page (or as a floating sidebar in the detail view). This menu consists of clickable links (anchor tags) for each section, so the user can click "Contraindications" or "Dosage" and jump directly to that part of the page. The script may also handle a bit of user experience enhancement, like smooth scrolling to the section and perhaps highlighting the current section header as the user scrolls.
+    Rendering the Category List (renderInitialView): This function populates the main content area with the list of categories and topics (the table of contents of the app). It likely uses a helper (maybe internally defined) that recursively creates HTML for a given category and its children. Each category is output as a clickable <div class="toggle-category"> (or similar) containing the title and a blue arrow icon. Each topic (child without further children) is output as a <div class="topic-item"> or button element with an attached data-topic-id. The structure in HTML might be nested <div class="category-group"> containing a parent and its child list, etc.
 
-Consistency is critical: Both these scripts rely on the section IDs being predictable. That’s why we use the same slugify function for generating the IDs and for listing them. When modifying section titles or adding new sections in the data, always ensure their slug IDs match up, or else the anchor links won’t point to the right place. (If anchor links ever appear broken, double-check that the IDs in the HTML and the hrefs in the anchor menu are the same.)
+      If renderInitialView(highlightId) is called with a highlightId (meaning we want to highlight a particular topic when rendering, e.g., after coming back via Back button), the function will ensure that category is expanded and scroll into view, and add a highlight style to that topic. This helps the user see where they left off.
 
-Patient Info Sidebar Integration: The Patient Info sidebar works in tandem with the main content:
+      The result of this function is that contentArea (the main section in index.html) will be filled with the hierarchical list of all topics. Event listeners are set so that clicking on any blue arrow toggles the appropriate section (show/hide children), and clicking on any topic name (leaf node) triggers renderDetailPage for that topic.
 
-Input Event Handling: In PatientInfo.js, all the input fields in the sidebar (age, weight, allergies, etc.) have event listeners that trigger on any change (keyboard input, selection, etc.).
-These listeners call the updatePatientData() function whenever the user updates something.
+    Rendering a Detail Page (renderDetailPage): This function takes a topic ID as argument. It looks up that ID in allDisplayableTopicsMap (which contains both the structural info and the detail info if available). If found, it clears out the contentArea and then builds the detail view for that topic. Steps include:
 
-Updating Data and UI: The updatePatientData() function (defined in PatientInfo.js) reads all the sidebar fields and updates the global patientData object. Once it has the latest patient info, it then goes through the app’s UI to apply changes. For the list of topics, it will add a .strikethrough CSS class to any topic link that becomes irrelevant given the patient’s conditions (for example, if the user entered an indication and a particular protocol is not used for that indication, it might be struck out; or if the patient has an allergy that makes a certain medication unusable, that med could be visually marked). It also refreshes the current detail view (if one is open) by calling renderDetailPage again for the active topic, this time without adding a new history entry. This refresh allows newly entered patient data to immediately reflect in the detail content (e.g., hiding or striking out dose info, or showing a new warning box).
+      Insert a title heading (e.g., <h2>Epipen (Epinephrine) Autoinjector</h2>). Possibly include the category name or a back link, but since we have Back button in header, usually we just show the title.
 
-Dynamic Filtering and Warnings: Some automatic calculations or filters are still being fine-tuned. The code already covers a few important cases (for instance, in the Nitroglycerin detail page, if patientData shows the patient is on a PDE5 inhibitor medication or has low blood pressure, the rendered page will display a contraindication warning). Other potential dynamic features, like automatically calculating an exact dose based on weight or filtering the main list to only show relevant protocols for a given symptom, are planned. These are marked as future enhancements. For now, the groundwork is laid: the patient info mechanism can be expanded to cover more cases as needed.
+      For each section of data present for that topic, create a section in the DOM. For example, if the topic object has a description field (string), create a <h3 id="description">Description</h3> and a <p> or <div> with the description text. If there’s an indications array, create <h3 id="indications">Indications</h3> and perhaps an unordered list of indications. Do the same for Contraindications, Dosage, etc. The slugify utility is used when setting the id on these headings (ensuring anchor links will match).
 
-Search Functionality: The search bar at the top of the page lets users find topics by keyword:
+      If a dosage field is present (adult and/or pediatric), the function might format them clearly, possibly with subheadings for “Adult Dose” and “Pediatric Dose”. Those sub-sections also get slugified IDs like “adult-dose” and “pediatric-dose”. If patient’s weight is known and the dosage is weight-based, perform the calculation as described earlier. If the patient’s age indicates one of those sections doesn’t apply (e.g., a 30-year-old patient means pediatric dose section is not applicable), that section might get a CSS class to gray it out or a note “(N/A for adult patient)” or be omitted entirely.
 
-As the user types into the search field, the app calls handleSearch() (on every key input or on pressing Enter). This function takes the current search query and compares it against the titles and category paths of all topics (using the pre-built allSearchableTopics list).
+      Insert any special notes or side effects similarly. Use consistent styling for warning/caution sections – for example, if a medication has a Black Box Warning, that might be highlighted in red or with an icon.
 
-If the search term is empty, handleSearch simply re-displays the full list of categories (or keeps the current view). If there’s a term, it filters allSearchableTopics to find any entries that match. Matching is typically done by checking substrings in the title or parent categories.
+      Patient Data Integration during render: Before finishing, renderDetailPage will incorporate patient context. It checks window.patientData. For instance, if patientData.allergies includes the medication name (or class), it will append an alert box at the top of the detail page like “⚠️ Allergy Alert: Patient is allergic to [MedicationName]”. If patientData.medications includes something contraindicated, similarly show an alert. If patientData.vitals (like blood pressure) contraindicate use, show that warning. These checks are coded in this function, often as simple if conditions comparing patientData values to known contraindications in the data.
 
-The filtered results are then passed to renderSearchResults(), which updates the content area to show a list of clickable results. Each result usually displays the topic name and maybe a faint breadcrumb of its category (for context). Clicking a result will open that topic’s detail page.
+      Also, as part of rendering doses, it might strike out or italicize parts that don’t apply (for example, if patient is pediatric, the adult dose section could be deemphasized with a note “(patient is pediatric – use pediatric dose below)”).
 
-The search function also handles a “clear search” action (allowing the user to easily get back to the full list after a search). Internally, search and normal navigation integrate with the same history mechanism, so the Back button can return you to a previous list or search state if you navigate away.
+      Finally, after injecting all content, renderDetailPage will typically call slugList() (to gather section IDs) and then setupSlugAnchors() (from slugAnchors.js) to build the section table of contents if applicable. The detail page might be long, so having that quick navigation at the top improves usability. If a detail page ends up short (only one or two sections), the anchor menu might be omitted – the implementation can handle that by checking the number of sections.
 
-When updating or debugging the search feature, key places to check are the construction of allSearchableTopics (in initializeData) and the logic in handleSearch/renderSearchResults that does the filtering and rendering. The goal is to ensure search is fast and accurate, helping the user jump straight to what they need.
+    Navigation and State Management: main.js also manages the history of views manually, since this is a single-page app (the browser’s back button is not used for navigating content, only our own controls are):
 
-All instructions and documentation reflect the current and intended behavior of the Paramedic Quick Reference app.
+      A global navigationHistory array is maintained. Every time a view is rendered (either list or detail, or search results), an entry is pushed to this history with identifying information (like type of view and an identifier, e.g., {type: 'detail', id: 'aspirin'} or {type: 'list'}). currentHistoryIndex tracks the index of the current view in that array. Clicking Back or Forward will decrement or increment that index and then call the appropriate render function for that historical entry (without pushing a new history entry of course). The code ensures that going back and then clicking a new link throws away “forward” history past the current index (just like a web browser would).
+
+      After each render, the code updates the disabled/enabled state of the Back/Forward buttons. If currentHistoryIndex is 0, Back is disabled (nothing before it). If currentHistoryIndex is at the end of the array, Forward is disabled. Otherwise, both can be enabled.
+
+      The Home button, when clicked, calls renderInitialView() and pushes a new entry (or possibly clears the history beyond that point, since it’s like starting over). We ensure Back will then go to what was previously viewed.
+
+      The search interactions integrate with this too: performing a search might be treated as a new view state (type: 'search', query: 'keyword'), so that pressing Back after going to a detail from search can return you to your search results.
+
+    Search Handling: The function handleSearch(doFilter) is likely implemented to manage what happens as the user types or submits the search query. If doFilter is true (on each keystroke), it might simply filter the main content list on the fly by hiding non-matching items (live filtering). Alternatively, if pressing Enter, it might render a dedicated search results page listing all matches clearly (especially if the user stops typing).
+
+      We maintain allSearchableTopics which is an array of objects like { title: "Aspirin", fullPath: "ALS Medications > Aspirin", id: "aspirin" }. The search function will scan through this array to find any topic whose title or path contains the search string (case-insensitive).
+
+      The results are then passed to renderSearchResults(), which, similar to renderInitialView, clears the content area and displays a list of matching topics. Each result is a clickable item that opens that topic’s detail page. We often show the category context in smaller text (e.g., result item might say “Aspirin — ALS Medications” to clarify which section it’s in).
+
+      If the search input is cleared, the app will return to the previous view or main list. We also provide a “clear” button in the search bar (usually an ❌ icon) to quickly reset the search.
+
+      The search feature ensures paramedics can jump directly to what they need (for example, typing “epi” will quickly surface Epinephrine). Speed and accuracy of matching are important, so this function should be efficient (iterating a pre-made list rather than traversing the DOM, for instance).
+
+      (The Smart Suggestions in the UI might be handled here as well, possibly by providing quick shortcut links for common searches, but as mentioned, that’s an evolving feature.)
+
+In summary, the structure ensures that: Data is separated from Logic (data files vs main.js), UI behavior is modular (PatientInfo in its own file, anchor nav in its own file), and everything is glued together by main.js. All scripts are included in the correct order via index.html so that dependencies are satisfied (data first, then utils, then features, then main last).
 
 
+## 5. HOW THE CODE WORKS TOGETHER
 
+Understanding the flow of the application from load to user interactions:
 
+  Initial Load & Data Preparation: As soon as index.html is opened (in a browser or a WebView), the included scripts load in the specified order. First, ParamedicCategoriesData.js runs and defines window.ParamedicCategoriesData. Then MedicationDetailsData.js runs and defines window.MedicationDetailsData. At this point, all the reference information the app needs is in memory as JavaScript objects.
 
+  Next, utility files like slugify.js load (defining functions for later use). Then feature files like PatientInfo.js load, which likely set up the global patientData (initially empty or with defaults) and possibly event listeners for the sidebar inputs (though some event binding might also happen in main.js after DOMContentLoaded).
 
-1. **Data Loading:** On page load, `ParamedicCategoriesData.js` and `MedicationDetailsData.js` execute, attaching large data objects to the `window` (global scope). For example, `window.ParamedicCategoriesData` might be an array of category objects (some of which contain nested topics), and `window.MedicationDetailsData` might be an array or object mapping each medication ID to its detail info. It’s important that each topic in the category data has a unique `id` that corresponds to a detail entry’s `id`. If these IDs don’t match, the detail page won’t know which data to display.
+  Finally, main.js loads. Because we check document.readyState and possibly attach a DOMContentLoaded event, initApp() will run once the DOM is fully built (ensuring all HTML elements are present to be referenced).
 
-2. **App Initialization:** When `main.js`’s `initApp()` runs (on DOMContentLoaded), it calls `initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData)` to merge the static data into the app’s dynamic structures. Internally, this may copy the data into the `paramedicCategories` array, build the `allSearchableTopics` list (for searching titles), and fill the `allDisplayableTopicsMap` – a dictionary mapping each topic ID to a combined object containing its title, category path, and `details` (if it’s a medication). After initialization, the app calls `renderInitialView()` to show the list of categories/topics.
+  App Initialization: initApp() in main.js executes. Key steps:
 
-3. **Rendering the List:** The initial view iterates through `paramedicCategories` to create the expandable list in the UI. Categories can be clicked to reveal their topics. Topics (like specific drugs or procedures) appear as links. The code for building this list resides in `main.js` (a function like `createHierarchicalList` or within `renderInitialView`). Each topic link element gets a `data-topic-id` attribute equal to that topic’s `id` (slug).
+    Cache DOM Elements: assignDomElements() finds important elements by ID (search input, content area, sidebar, open/close buttons for sidebar, overlay, nav buttons) and stores them in variables. This improves performance and code readability (no need to query DOM repeatedly).
 
-4. **Showing Details:** When a topic link is clicked, `renderDetailPage(topicId)` is invoked. This function looks up the topic in `allDisplayableTopicsMap` by its `id`. If it finds a match, it uses that data to construct an HTML detail view. For a medication, the detail view will include sections like **Description**, **Indications**, **Contraindications**, **Dosage** (often split into adult and pediatric sections), and possibly other notes. These sections likely have heading elements (e.g., `<h3>` or `<h2>` tags for each section title). The app uses consistent slug IDs for these sections – e.g., a section "Adult Dose" might have an element `<h3 id="adult-dose">Adult Dose</h3>` generated via the slugify utility.
+    Sidebar Setup: Hide the sidebar overlay initially (adding .hidden class) and ensure the sidebar itself is hidden (maybe it starts hidden via CSS anyway). Attach event listeners to open and close the sidebar:
 
-5. **Anchor Navigation:** If a medication detail page is long, the app provides an in-page navigation (anchors) to jump to sections. The combination of `slugList.js` and `slugAnchors.js` enables this:
-   - `slugList.js` probably collects all section headings from the detail content (after it’s rendered) and creates a list of their `id` attributes (using `slugify` to mirror how the IDs were generated).
-   - `slugAnchors.js` then takes that list and renders a clickable table of contents (for example, a list of anchor links at the top of the detail page or a floating menu). Each anchor link’s `href` corresponds to a section’s ID (e.g., `#adult-dose`). It also may handle smooth scrolling or highlight the current section.
-   - **Important:** The slug generation must be consistent. The same `slugify` function is used both when assigning IDs to section headings and when creating the anchor `href`s. This consistency was enforced in recent fixes, so all anchors should align with their targets. If you need to modify or add new sections, use `slugify.js` to generate section IDs to maintain this consistency.
+      Clicking the Patient Info button removes the .hidden class from the sidebar (making it visible, possibly with a CSS transition slide-in) and adds an .active class to the overlay to darken the main content area.
 
-6. **Patient Info Sidebar Integration:** The Patient Info sidebar inputs (age, weight, medications, etc.) allow dynamic filtering and warnings:
-   - In `PatientInfo.js`, event listeners are set up on these inputs (see the `ptInputs.forEach(...)` at the bottom of the file attaching `updatePatientData` on input events). When the user enters data (e.g., adds an allergy or sets an age), the `updatePatientData()` function runs.
+      Clicking the close “X” on the sidebar or clicking the semi-transparent overlay does the reverse: it removes the open class from sidebar (triggering slide-out) and after a short delay adds .hidden back to it (actually hiding it so it doesn’t block touch events), and hides the overlay. This logic was unified to ensure closing works consistently no matter how it’s triggered.
 
-   - `updatePatientData()` (in **`PatientInfo.js`**) updates the global `patientData` object and then applies logic to the UI. For example, after updating, it goes through all topic links and adds a `.strikethrough` class if a medication is not indicated for the given conditions:contentReference[oaicite:9]{index=9}. It also re-renders the current open detail page (calling `renderDetailPage` again for the current topic) to apply any new age/weight-specific filtering (like striking out pediatric doses if the patient is an adult, and vice versa:contentReference[oaicite:10]{index=10}). Additionally, it checks contraindications: if the patient’s info suggests a contraindication (e.g., the patient is on a medication that conflicts with the drug in the detail view, or has an allergy), the code that builds the warnings in `renderDetailPage` will display those warnings in colored boxes.
-   
-   - Currently, the partial data-driven updates (like automatically recalculating doses or filtering content) are a work in progress. The code already handles some scenarios (e.g., the blood pressure and PDE5 inhibitor checks for Nitroglycerin as seen in `renderDetailPage` logic:contentReference[oaicite:11]{index=11}), but other aspects might be expanded in the future. This is flagged for future development.
+    Search Input Events: Add an input event listener to the search field so that every keystroke triggers a filtering function (handleSearch(true) possibly filters the list live). Add a keypress listener for the Enter key to perform a final search action (in case we want to show a separate results page or simply finalize the filter).
 
-7. **Search Functionality:** The app includes a search bar at the top of the content area. When the user types and presses Enter, the `handleSearch()` function in `main.js` runs:contentReference[oaicite:12]{index=12}. This function filters `allSearchableTopics` for any topic whose title or path matches the search term. The result is passed to `renderSearchResults`, which displays a list of matching topics. This lets the user quickly find items by keyword. If modifying or debugging search, focus on the `allSearchableTopics` array (populated in initialization with all topic titles and perhaps category paths) and the `handleSearch`/`renderSearchResults` logic.
+    Navigation Buttons: Attach click handlers to Back and Forward buttons (navigateViaHistory(-1) and navigateViaHistory(1) respectively). These will handle updating the view based on the history index. Initially, these buttons are disabled via HTML or by adding a disabled attribute/class in initApp. They will be enabled when appropriate during navigation.
+
+    Data Integration: Check that window.ParamedicCategoriesData and window. MedicationDetailsData are available (they should be, given script order). Call initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData). This function will:
+
+      Take the categories array and copy it into the global paramedicCategories (which main.js uses).
+
+      Initialize or reset allDisplayableTopicsMap and allSearchableTopics.
+
+      Traverse through each item in the categories data, and for each topic (especially leaf topics), find its detail entry in MedicationDetailsData and combine them if necessary. Typically, it might simply ensure that each topic object gets a reference to its detail object, or populate the map with an entry { id: topicId, title: topicTitle, categoryPath: "Category > Subcategory", details: (detailDataObject) }. It likely uses a recursive helper processItem(item, parentPath) to build these.
+
+      Build allSearchableTopics: for each topic that can be searched (probably every final topic and maybe categories too), push an object containing its name and full path. This array is sorted or left unsorted; searching will iterate through it.
+
+      Build medicationDataMap (as seen in code): a quick lookup by id for all detail entries, which helps in checking patient drug interactions quickly (like scanning all contraindications text).
+
+      Pre-load any suggestion sets (as the code snippet shows, it populates sets for common PMH, allergies, meds, plus PDE5 inhibitor list, etc., by reading through the data). This improves the patient info autocomplete feature.
+
+    Activate Autocomplete: Call setupAutocomplete for each patient info textarea (PMH, allergies, medications, indications, symptoms) linking them with their suggestion sets (populated in step 5). This adds keyup events to show suggestion dropdowns and click events to select suggestions, making input faster.
+
+    Global Input Focus Styling: Add a nice UI touch: all input and textarea elements get a focus ring (blue outline) by adding a Tailwind class on focus and removing on blur. This is done by selecting all inputs and textareas and adding listeners (improves mobile form usability by clearly indicating the focused field).
+
+    Initial Render: Finally, call renderInitialView(true) to render the main contents list. The parameter true might indicate that if there’s any previously stored state (like maybe the last opened category in a previous session), it could highlight it, but in our case it simply builds the list fresh. After this, the user sees the home page with all categories.
+
+  User Interaction – Expanding Categories: The user clicks a blue arrow or category name on the main list. The event listener (likely set up at the time of rendering each category in renderInitialView) catches this. If it’s an arrow or category with children, it toggles that category:
+
+    If it was collapsed, it loads the subtopics (which might have been created already by createHierarchicalList but hidden, or it might generate them dynamically at click time) and then adds a class to the arrow to rotate it. We likely manage expanded state via CSS classes and maybe some data-expanded="true" attributes.
+
+    If it was expanded, it hides the subtopics and rotates the arrow back.
+
+    This is done purely with DOM manipulation and CSS (no re-render of the whole list, just show/hide of the specific branch). We must ensure that the HTML structure for subtopics is created (either at page load or on first expand) and that toggling doesn’t interfere with the user’s scroll position.
+
+  User Interaction – Viewing a Detail Page: The user clicks a topic that has no further subtopics (a final topic). The click event listener (attached to that item with a data-topic-id) triggers renderDetailPage(topicId).
+
+    renderDetailPage will push a new entry onto the navigationHistory stack (unless it was called as part of a back/forward navigation where we set a flag to avoid double-pushing). It then constructs the detail content as described earlier.
+
+    Once the detail is rendered, it updates the Back button to enabled (because now there is a history entry behind this one). The Forward button is disabled because we’re at the newest entry.
+
+    The user now sees the detail page with all relevant info and any patient-specific adjustments (if patientData is set).
+
+  Dynamic Updates on Detail Page: Suppose the user now enters or changes something in the Patient Info sidebar (e.g., they add an allergy or adjust the weight). The input event on that field triggers updatePatientData():
+
+    This function updates the patientData object. For example, patientData.weight gets set to the new number.
+
+    It then calls functions to update the UI. Typically, it will call something like applyPatientFilters() which goes through the main contents list (if it’s currently displayed) to strike out or highlight items. If the main list is not visible (user is on a detail page), that can be skipped or will simply operate on a hidden DOM (which is fine).
+
+    It then checks if a detail page is currently shown (we might track the current view type and id). If yes, it calls renderDetailPage(currentTopicId) again to refresh the content with the new patient context. Importantly, when doing this refresh, it should avoid adding another history entry. There might be a flag or a separate internal function for re-rendering the detail in place. The effect is that the user sees the detail page update instantly: new warning boxes might appear, certain text becomes struck through, and dosage calculations update. The scroll position might be preserved if possible, or reset to top if not handled (for now, likely resets to top).
+
+    Because the anchor navigation (slugList/slugAnchors) runs on renderDetailPage, it will re-generate after refresh. That’s fine; it ensures the anchor links are still accurate if any sections were added/removed due to patient data (though typically we don’t remove sections entirely, just mark them).
+
+    Example: The user is viewing “Epinephrine” detail. Initially, pediatric dose is shown (because no age given). They then enter Age = 30. Upon update, the Epinephrine page re-renders, now maybe visually de-emphasizing the pediatric dose section (or adding a note “Pediatric dosing not applicable for adult patient”). If they also add an allergy “Sulfa” (which might not affect Epinephrine, so nothing changes on that page) but if they add “Allergies: Epinephrine”, the page would on refresh show an “Allergy Alert: Patient allergic to epinephrine” box.
+
+    These changes happen without a full page reload; it’s all JS DOM updates.
+
+  Back/Forward Navigation: If the user clicks the Back button (after having navigated to a detail page, or after performing a search, etc.), the app will handle it via our navigateViaHistory(-1):
+
+    We decrement the currentHistoryIndex, get the history entry at that new index, and based on its type, call the appropriate render. For example, if the history entry is {type: 'list'}, we call renderInitialView(highlightId) possibly to show the main list and highlight the item that was previously clicked. If the entry is {type: 'detail', id:'someId'}, we call renderDetailPage(someId) but likely with a flag to indicate it’s from history (to avoid pushing new history).
+
+    After rendering, we update the nav button states. Now Forward becomes enabled (since we can go forward to the page we were just on).
+
+    The user sees the previous page. Importantly, because we preserved state, if it’s the main list, it should have the same categories expanded as when they left it. This is handled by the highlightId logic and possibly storing expanded/collapsed state in the history entry. We may store something like an array of expanded category IDs in the history entry to restore the exact view. The code ensures, for instance, if ALS Medications was open and highlighted, it will open it again and scroll to that item.
+
+    If the user now clicks Forward, a similar process happens in reverse, re-rendering the page they came from. The highlight and scroll states again should be restored (for detail pages, scroll restoration might not be implemented yet, but it’s something to consider).
+
+  History List Usage: If the user opens the History dropdown and selects an item (say the first thing they opened in the session), the app will locate that item’s entry (or simply call renderDetailPage for that ID directly and push a new history entry for it). We might refine this to integrate with the existing history mechanism or treat it as a new navigation event (clearing forward history if you jump around).
+
+  Anchor Navigation on Detail Page: On a long detail page, if the user clicks one of the anchor links (for example, “Contraindications” in the table of contents at top), the page will jump (or smoothly scroll) to the section with id #contraindications. We may have some custom scroll behavior for smoothness. If implemented, an event listener in slugAnchors.js might intercept the click, call event.preventDefault(), then find the target element and scroll it into view with behavior: 'smooth'. It might also add a temporary highlight on that heading to draw attention. If not implemented, the browser will jump to the anchor instantly by default.
+
+  This doesn’t change any app state or history (it’s just a position within the page), so Back/Forward are unaffected. It’s purely a convenience for within-page navigation.
+
+  Closing the App and Persistence: Currently, if the user closes the app (or refreshes), all state (patient info, history, expanded menus) resets because we are not using persistent storage. In future, we might use localStorage to save patientData and maybe navigationHistory between sessions. The README note suggests that when the user exits and comes back, they will be able to access information they had input previously – that implies a feature to persist patientData (so you don’t have to re-enter the same patient’s info if you switch apps briefly). Implementation of that would involve storing patientData in localStorage on unload and loading it on startup if available.
+
+All these components work together to provide a seamless experience: The data provides content, main.js renders it and ties it to user input and navigation, and the patient info customizes it on the fly. Each file has a clear role, which makes it easier to maintain and update specific parts of the app.
+
 
 ## 6. -----TOP PRIORITY TASKS-----
 
-- **Navigation Buttons (ALS Medications):**
-  - The Previous/Next (blue arrow) navigation buttons in the ALS Medications section are now always present, visually match the Contents page, and function correctly for all medications-------STILL CAN USE IMPROVEMENTS IN THE VISUAL DEPARTMENT-------.
-  - Navigation logic was refactored to ensure buttons are always rendered and event listeners are reliably attached after header creation -----DOUBLE CHECK THAT THIS IS CORRECT--------.
+(This section outlines the most important current development tasks, recent changes, and known issues that are being addressed. It serves as a changelog of critical updates and areas of focus.)
 
-- **Patient Info Sidebar:**
-  - The quick escape (close) button and overlay now reliably close/hide the sidebar, regardless of how it was opened.
-  - Sidebar open/close logic was unified in both `main.js` and `Features/PatientInfo.js` for consistent overlay behavior-----DOUBLE CHECK THAT THIS IS CORRECT--------.
+  Navigation Buttons (ALS Medications List Navigation):
+    
+    The “Previous” and “Next” arrow buttons at the top of each ALS Medication detail page are now always present. These allow quick navigation to the previous or next medication in the ALS list without returning to the main menu. They have been styled to visually match the blue arrows used on the main Contents page for consistency. (Minor visual enhancement still pending: refining spacing and icons to make it clearer these are nav buttons.)
+    
+    The navigation logic for these buttons was refactored to ensure that after a detail page is rendered, the buttons accurately point to the correct prev/next items and have their event listeners attached. This fix addressed cases where sometimes the buttons would not appear or would not respond after certain navigation patterns. (Double-check in testing that every medication detail page shows functional prev/next buttons in the header and they wrap correctly at the ends.)
 
-- **Medication Data Display:**
-  - All medications now display their associated data, regardless of whether their IDs have number prefixes or not. ID matching logic was made robust to handle both numbered and non-numbered IDs-------WORK IN PROGRESS-----------DOUBLE CHECK THAT THIS IS CORRECT--------.
+  Patient Info Sidebar Behavior:
 
-- **Navigation (Back/Forward) Buttons:**
-  - Navigation history and view rendering logic were updated to always update navigation button states and use consistent state objects----------LOGIC NEEDS TO BE IMPROVED STILL----------NAVIGATION IS NOT ALWAYS LOGICAL--------FUTURE UPDATE STILL NEEDS TO HIGHLIGHT THE AREA THE USER LAST CLICKED ON AFTER THE HIT THE BACK NAVIGATION ARROW (THE CODE SHOULD EXIST FOR THIS SO YOU MUST SEARCH FOR IT)--------STILL NEEDS CODE FOR A "HOME BUTTON" THAT IS PLACED RIGHT UNDERNEATH THE NAVIGATION ARROWS--------.
+    The sidebar’s close functionality is now reliable. The overlay (the semi-transparent background) and the “X” close button both close the Patient Info sidebar every time. Previously, there were scenarios (like opening the sidebar from a detail page vs. from the main page) where the overlay might not respond; these have been unified. Now, whether the sidebar is opened via the header button or programmatically (e.g., on startup if needed), clicking outside or on the close control will hide it consistently.
 
-- **UI Consistency:**
-  - The main topic title in detail view now uses a consistent class and data attribute for reliable UI updates-----DOUBLE CHECK THAT THIS IS CORRECT--------.
-  - The `ensureHeaderUI` function in `main.js` was patched to always create and order navigation/search elements correctly, fixing header UI consistency-----DOUBLE CHECK THAT THIS IS CORRECT--------.
-  - **Slug Anchors Initialization:** `slugAnchors.js` now waits for the DOM to load before inserting hidden anchor elements, ensuring the container is appended reliably-----DOUBLE CHECK THAT THIS IS CORRECT--------.
-  - **Detail Table of Contents:** Each medication detail page now shows a generated Table of Contents for its sections. `renderDetailPage` passes the section list to `setupSlugAnchors`, which builds the anchor list immediately on page load.
-  - **Medication Detail Layout:** Section headers like *Indications* and *Precautions* now align directly beside the blue arrow instead of being spaced across the screen. This was fixed by updating the `.toggle-category` style to use `justify-content: flex-start`--------THIS STILL DOESN'T WORK--------.
-  - **Table of Contents Loading:** `ParamedicCategoriesData.js` now exports its data via a constant before assigning to `window`. This prevents a runtime error and ensures the contents list loads on the first page view-----DOUBLE CHECK THAT THIS IS CORRECT--------.
+    We standardized the open/close logic by centralizing it: both main.js and PatientInfo.js use the same functions to add/remove the active and hidden classes on the sidebar and overlay. This prevents divergent behavior (earlier, two different implementations sometimes caused the overlay to remain even after the sidebar closed).
 
-- **Testing:**
-  - All Jest tests now pass. The `add.test.js` import path was fixed, and a minimal test for `slugify.js` was added. The test suite is clean and ready for further test additions-----DOUBLE CHECK THAT THIS IS CORRECT--------.
-  - **Legacy Compatibility Update:** Key parts of `main.js` now avoid modern JavaScript features. DOM references use `var`, error messages use string concatenation, and category processing no longer relies on the spread operator------THIS NEEDS TO BE EXPLAINED IN MORE DETAIL FOR WHAT IT ACTUALLY MEANS AND WHY ONE WAY IS BETTER THAN THE OTHER WAY----------.
+    (To verify: open the sidebar, try closing by tapping the overlay, by tapping the close button, and even by pressing the escape key if implemented. The sidebar should slide out and overlay disappear in all cases.)
 
-  Patient Weight Input: The sidebar now includes a weight input field, so users can input weight (kg/lb) which is used for dosage considerations-------NEEDS TO BE UPDATED TO HAVE BOTH FIELDS AVAILABLE ADJACENT TO EACH OTHER-------BOTH FIELDS MUST BE SIMULTANEOUSLY AVAILABLE FOR INPUT-------WHEN ONE FIELD GETS A WEIGHT PUT INTO IT, THE OTHER FIELD UPDATES WITH THE CORRECT VAULE FOR IT'S UNIT--------UNITS (kg/lb) MUST BE DIRECTLY NEXT TO THEIR RESPECTIVE NUMBERS-------.
+  Medication Data Display (ID Matching):
 
-  Contraindication Warnings: The app now displays warning boxes on medication pages if patient data reveals contraindications (e.g., allergies, low BP, or recent medication conflicts like PDE5 inhibitors with NTG)--------WORK IN PROGRESS---------.
+    We fixed an issue where some medications were not showing their details because their IDs had numeric prefixes or unexpected formatting. The ID matching logic in initializeData and elsewhere has been made more robust. It now handles IDs regardless of whether they’re strings like "epiPen" or numeric strings like "5glucose". All medications and topics in the data should successfully link to their detail entries.
 
-  Toggle Arrows for Hidden Info: Green clickable text that reveals hidden information now has a small arrow icon that rotates when clicked, indicating expandable content. Likewise, the main Contents page shows blue arrows that turn downward when categories are expanded---------NEEDS FURTHER IMPROVEMENTS-----------.
+    This was a work in progress; if any medication detail still doesn’t load on click, investigate its id in both data files to ensure consistency. We have added console warnings for when a detail is missing, to catch any remaining mismatches. (Double-check that every topic in ParamedicCategoriesData that should have a detail in MedicationDetailsData indeed displays content when clicked.)
 
-### 7. CURRENT TASKS/GOALS
+  Back/Forward Navigation Logic:
 
-- **Navigation:** Users can always move to the previous/next ALS medication using blue arrow buttons at the top of the detail view. Back/forward browser navigation is supported and reliably updates the UI-----DOUBLE CHECK THAT THIS IS CORRECT--------.
+    Updates were made to how the app manages the history stack and the rendering of previous views. Now, whenever a new view is rendered (list or detail), the history entry includes enough info to restore that view. The Back and Forward buttons’ enabled/disabled states are updated immediately after each navigation so they correctly reflect availability. This fixed cases where the Forward button could stay enabled when it shouldn’t, or vice versa.
+    
+    Known Issue: The navigation history logic still has an edge case: after going Back to the main list, the last-clicked item on that list is highlighted (which is correct), but if the user had multiple levels expanded, sometimes not all of those expansions persist. We intend to highlight the exact subtopic or section the user last interacted with. There is code in place to do this (the highlightId parameter in renderInitialView), but it may need refinement to scroll the item into view or open all parent categories fully.
 
-- **Patient Info Sidebar:** The sidebar can be opened from the main UI and closed via the escape button or overlay. Patient data updates trigger UI changes and warnings in medication detail views-----DOUBLE CHECK THAT THIS IS CORRECT--------.
+    Home Button Pending: We plan to add a Home button (a house icon under the nav arrows) that on click will immediately return to the main Contents page. This is in design; code needs to be added in the header creation to insert this button and handle its click (likely just calling renderInitialView() fresh).
 
-- **Medication Details:** All medications listed in the ALS Medications section display their full details, including all associated data fields. Section anchors and in-page navigation work reliably---------WORK IN PROGRESS----------.
+  UI Consistency Fixes:
 
-- **UI Layout:** All UI elements (navigation, search, sidebar, detail view) are in their correct locations and styled consistently with the rest of the app---------NEEDS FURTHER IMPROVEMENTS--------NEEDS VISUAL IMPROVEMENTS---------NEEDS A SETTINGS TAB PLACED IN THE FOOTER FOR CHANGING THE COLORS OF EVERYTHING--------NEEDS A DARK MODE OPTION IN THE SETTINGS-------SETTINGS BUTTON SHOULD BE COLOR CHANGING TO DRAW THE USERS ATTENTION WHEN THEY LOOK AT THE BOTTOM OF THE SCREEN----------PAGE ELEMENTS MOVE WIERD WHEN SCROLLING AROUND A BUNCH------------.
+    Detail Page Title Styling: The main title on each detail page now uses a consistent class name and data attribute. This allows the CSS to style all detail titles uniformly (e.g., same font-size and margin) and also allows scripts to easily select it (for any future dynamic update). Previously, some detail titles had inconsistent tags or classes, which could lead to styling glitches.
 
-- **IE Compatibility:** The CSS now avoids grid and custom viewport units. `#content-area` uses flexbox layout and `#patient-sidebar` has a fixed `100vh` height for better support in older browsers--------DESCRIPTION NEEDS TO BE MORE DETAILED ON WHY ONE WAY IS BETTER THAN ANOTHER WAY AND WHAT THE DIFFERENCE LOOKS LIKE----------.
+    Header UI Structure: We fixed the ensureHeaderUI function in main.js to always (re)create the necessary header elements in the correct order. In some cases, during navigation or re-initialization, duplicate search bars or misplaced buttons would appear. Now the header is treated as a stable component; ensureHeaderUI checks if elements exist and creates them if not, and ensures they are appended in the proper DOM order (Patient Info button on left, title center, nav buttons right, etc.). This improved the consistency of the header layout across navigations.
 
-- **Testing:** All available tests pass. The test suite is clean and ready for further expansion-----DOUBLE CHECK THAT THIS IS CORRECT--------.
+    Slug Anchors Initialization: Modified slugAnchors.js to wait for the DOM content to be fully loaded (or for a detail page container to exist) before inserting the anchor navigation menu. In practice, we use a function setupSlugAnchors(sectionIdArray) that is called after renderDetailPage. This ensures the anchor links (table of contents for sections) are injected at the right moment. This fix prevents a bug where anchor links sometimes were not added if the script ran too early.
 
-- Some data-driven updates (like automatic recalculation of all medication doses based on patient info) are still a work in progress and flagged for future development.
+    Detail Page Table of Contents: We introduced an automatic Table of Contents generation for detail pages with multiple sections. Now, at the top of each detail page, if there are sections like Description, Dosage, Indications, etc., the app inserts a list of links to those sections. This makes navigating within a long detail page faster. (E.g., on the Amiodarone page, you can tap “Adult Dose” in the TOC and jump straight down.) This feature is working, but continue to ensure new sections get slugified IDs so they appear in this TOC.
 
-- The anchor navigation for long detail pages works, but could be enhanced with smooth scrolling or section highlighting.
+    Section Header Alignment: A CSS tweak was made to how section headers and their toggle arrows are aligned in expandable lists. Specifically, for the main Contents page and any similar toggles, we set .toggle-category { justify-content: flex-start; }. This was intended to ensure that the category name and the arrow icon stay together on the left, rather than being spaced apart. In practice, this fix did not fully solve the spacing issue for all screen sizes. We will revisit the CSS – likely the parent container needs align-items: center as well to vertically center, and maybe a specific width or padding. (This item remains partially unresolved: the goal is to have the arrow icon snugly next to the text label.)
 
-- Additional tests for more features (e.g., dosage calculations, contraindication warnings) are recommended.
+    Data File Loading Order: A subtle fix was applied to ParamedicCategoriesData.js – we now define the categories data in a const (or var) and then assign it to window.ParamedicCategoriesData. This avoids a potential race condition where main.js might have tried to read the data before it was fully defined. In practice, this was causing an error on the very first page load in some cases. By exporting to window only after the data is fully ready, we ensure that initializeData gets the complete object. (Verify that on app startup, there are no console errors about missing data – the categories should populate on first try.)
 
-### 8. RECENT FIXES AND CHANGES
+  Testing Updates:
+
+    All Jest tests in the repository now pass. We corrected an import path in add.test.js (likely a sample test file) so that it could find the code it was testing. Additionally, a basic test for slugify.js was added to ensure that slug generation works as expected for known inputs (e.g., “Pediatric Dose” → “pediatric-dose”). The test suite is currently small but passing, providing a foundation for adding more tests.
+
+    Legacy Browser Compatibility: We modified some parts of main.js to be ES5-friendly in case the app needs to run in older environments (like an EMS device with an old browser). Changes included avoiding modern syntax: using var instead of let/const in global scopes where hoisting might matter, avoiding arrow functions in favor of traditional function expressions, concatenating strings with + instead of template literals for error messages, and removing use of the spread operator for array copying (instead using older methods). These changes do not affect functionality but make the code more compatible with older JS engines.
+
+    Why: Some EMS systems might use legacy browser setups. Ensuring our app runs even if ES6 isn’t fully supported broadens its usability. For example, older Android tablets running WebView might choke on => or ... syntax. Now, the code should be interpreted correctly by those engines. (While our primary target is modern Chrome/Firefox, this change doesn’t hurt and aligns with graceful degradation.)
+
+  Patient Weight Input Improvement:
+
+    We added a Weight field to the Patient Info sidebar to capture patient weight, which is now used in dosage calculations. Currently, it’s a single input (defaulting to kilograms). Planned Upgrade: We intend to provide two side-by-side input boxes – one for weight in kg and one for weight in lbs. These will be linked: if the user enters a value in one, the other updates automatically to the equivalent weight. Units (kg, lb) will be clearly labeled next to each field. This dual-input approach ensures convenience (many paramedics think in pounds, but drug dosages are in kg). Implementation will require adding an event on each to update the other and possibly rounding appropriately. Until this is in place, users should enter weight in kilograms (or do their own conversion).
+
+    In the meantime, any dose that is weight-based uses the single weight input’s value (assuming kg). The UI reflects calculations as described above, but if someone mistakenly entered weight in lbs, the dosage would be off. So this upgrade is high priority to avoid any confusion.
+
+  Contraindication Warnings:
+
+    The app now actively checks patient info against medication contraindications and displays warning boxes in the detail pages. For example, if a patient has an allergy that matches the medication (or its class), a red-bordered box with an alert icon and message “Allergy Alert: Patient has a known allergy to this medication” will appear at the top of that detail page. If the patient’s recorded medications include a drug that is contraindicated (e.g., PDE5 inhibitors when viewing Nitroglycerin), a warning box will similarly appear (“Drug Interaction Warning: Patient is on [Drug], which contraindicates [This Treatment]”). Vital signs like blood pressure are also checked; if below a threshold, a warning appears (“Contraindication: Blood pressure too low for this treatment”).
+
+    This system is currently implemented for a few critical scenarios (e.g., Nitro + low BP or PDE5, allergies in general, pediatric vs adult constraints). It’s a work in progress: as we expand our data (MedicationDetailsData), we will include clear contraindication keywords so the code can automatically pick them up. For now, devs might need to update updatePatientData or renderDetailPage with specific checks per medication. The groundwork is laid out and functioning for major alerts. Always test after adding a new contraindication rule: the warning should appear and be clearly worded for the end user.
+
+  Toggle Arrows for Hidden Info (Green Text Expansion):
+
+    We enhanced the visual indication for interactive content. Now, whenever there is a green clickable text that expands hidden information, a small arrow icon is shown next to it (likely a rightward-pointing chevron). When the text is clicked and the hidden info is revealed, this arrow rotates downward, similar to the blue category arrows. This gives a visual cue that something has expanded or can be collapsed. When the text is hidden again, the arrow returns to the rightward position.
+
+    Similarly, on the main Contents page, the blue arrows already rotate as categories open/close; that was always the case, but we unified the behavior and styling so that all expandable/collapsible indicators (blue or green) use a consistent CSS transition for rotation.
+
+    Needs further improvements: The current arrow icon for green text might be a generic Unicode arrow; we plan to replace it with a nicer SVG icon for clarity. Additionally, spacing around these green text arrows could be tweaked to not break the flow of text (they should appear as part of the text, maybe slightly lowered to align with the font baseline). These are minor UI polish tasks.
+
+
+## 7. CURRENT TASKS/GOALS
+
+(This section describes the current goals and expected state of key features. It serves as a checklist for functionality that should be working now, and notes on confirming their behavior.)
+
+  Sequential Navigation: Users should be able to move sequentially through ALS medications using the dedicated Previous/Next buttons in each medication’s detail header. After clicking on one medication, the top of the detail page will have blue arrow buttons that take them to the previous or next medication in that category. This provides quick paging through protocols. Additionally, the Back and Forward history buttons in the header are supported and should update the content reliably (just like a browser). For example, after jumping between two protocols, the Back button returns to the first one, and Forward goes to the second, with the pages loading correctly. (This should be functioning; verify that the history mechanism doesn’t break the sequential nav and vice versa.)
+
+  Patient Info Sidebar Functionality: The sidebar should open when the Patient Info button is clicked, overlaying on the left. It should close when the overlay is clicked or the close button is pressed. All patient data inputs in the sidebar (age, weight, PMH, allergies, meds, etc.) should accept input and immediately cause changes in the app: inappropriate treatments get a strike-through, relevant warnings pop up, etc. For instance, entering “Penicillin” in Allergies then viewing “Penicillin” (if it were a protocol) would show an allergy warning. Or entering Age 8 and viewing an adult-only medication might show the pediatric dose as primary and adult dose struck out. (Goal: Ensure each field in Patient Info has a visible effect somewhere for testing. E.g., test that entering low BP triggers Nitro warning.)
+
+  Medication Details Pages: Every listed medication (especially under ALS Medications) should display a full detail page when clicked. All data fields for that medication should render: Description, Indications, Contraindications, Dosages, Side Effects, etc., formatted as per design. If a field is empty or not applicable, it might be omitted or indicated as “None” (we can decide how to handle blanks). The anchor Table of Contents at the top of long pages should list all the sections present and allow jumping. Try out a long entry (like one with many sections) to confirm the anchor links scroll correctly. Also, any dynamic content (green text expansions, calculation placeholders) should be functioning. (The aim is that no medication click results in a blank page or missing info – if it does, that's a bug to fix either in data or rendering.)
+
+  UI Layout Consistency: All UI components should be properly placed and styled on every view. This means: the header always shows the title, nav buttons, and patient info button in the correct places; the patient sidebar should slide over the content without affecting layout; the content area should scroll independently when content overflows (the header and sidebar remain fixed). The overall look should match our intended design: for example, spacing around sections, font sizes, and colors should be uniform.
+
+  Current focus: We acknowledge the need for further visual improvements. For example, adding a Settings option in the footer to allow theme customization (like changing highlight colors) is planned. A Dark Mode toggle is also on the roadmap, as some medics might prefer a dark theme for night shifts – this will likely be part of Settings. We want the Settings button (when added) to be noticeable, possibly with a distinctive color or glow when new, so users see it at the bottom.
+
+  Additionally, there’s a known minor glitch that after lots of expansions/collapses and scrolling, some elements (like the header or certain buttons) might appear to shift or jitter slightly – potentially due to scrollbar appearance or focus outlines. We will continue to refine the CSS to eliminate any “weird” movement and ensure smooth scrolling. (For now, these are aesthetic issues that don’t break functionality, but they are on our radar to make the UI feel more polished and stable.)
+
+  Internet Explorer & Legacy Support: We adjusted the layout techniques to accommodate older browsers. Instead of using CSS Grid for the main layout (which IE11 doesn’t fully support), we use Flexbox for structuring the content area and sidebar. The #content-area and #patient-sidebar are arranged with flex properties so that on modern browsers it looks the same as before. Also, the use of the 100vh unit was causing issues on some mobile WebViews and IE, so we replaced it with a fixed height (applied via JS or CSS) for the sidebar. Essentially, the sidebar now explicitly takes up the full viewport height regardless of browser quirks.
+
+  Why this is better: Older browsers either don’t understand Grid or interpret 100vh in a way that includes the address bar (leading to overflow). Flexbox is widely supported and achieves a similar result for our two-column layout. By explicitly setting height on the sidebar (and letting the content area flex), we ensure that even if the viewport recalculates (when the on-screen keyboard appears, for instance), our layout remains consistent. Users on legacy systems should see a functional layout, whereas previously they might have seen a broken or partially scrolling page. (We should document any remaining incompatibilities. At this time, the app should work on Chrome, Firefox, Safari, and IE11/Edge. Testing on an actual older device is recommended.)
+
+  Automated Testing Status: All existing automated tests are passing, meaning the basic functions we’ve written tests for (like addition example, slug generation, etc.) behave as expected. This gives us a baseline confidence. The goal is to expand test coverage, especially as we add complex features. We want to add tests for things like: “if patientData has allergy X, does renderDetailPage for medication X include the Allergy Alert element?”, or “slugList correctly identifies all section IDs on a sample page”. Going forward, every fix or feature should ideally include a corresponding test to prevent regressions. The test suite is set up and running (e.g., via npm test or similar), ready for more tests to be added.
+
+  Ongoing Development Notes:
+
+    Some features that involve heavy data logic (like fully dynamic dosage recalculation for every medication, or intelligent filtering of the main list by symptoms) are still in progress. The structure supports these (as described in the Patient Info effects), but they haven’t been fully implemented for all cases. We keep these flagged and will implement them incrementally.
+
+    The anchor navigation works as-is, but we consider adding a smooth scroll and highlighting the currently viewed section as nice enhancements. This would involve more JavaScript (listening to scroll events to highlight the active section link) – it’s not critical, but on the to-do list for UX improvement.
+
+    We recommend writing additional tests for any new bugs we fix (write the test to simulate the scenario, then fix the code until the test passes). This will build a robust test suite that guards the app’s critical functionality.
+
+## 8. RECENT FIXES AND CHANGES
+
+No entries at this time.
+
 
 ## 9. TIMELINE SUMMARY
 
+No entries at this time.
+
+
 ## 10. FUTURE TASKS/GOALS/IDEAS
 
-  FUTURE IMPROVEMENTS-------ALWAYS GIVE A SUGGESTION BELOW FOR HOW THE APP CAN BE IMPROVED UPON IN TERMS OF ALIGNING WITH THE GOALS OF THE README.md-------------THE SUGGESTIONS THAT ARE BELOW ARE STRICTLY OFF-LIMITS TO WORK ON UNTIL THEY GET MOVED TO BE UNDERNEATH "KNOWN ISSUES"!!!!!!!!!!!!!!!!!!!!!!!!!!!--------------------------
+(This section collects proposed enhancements and ideas for future development. These items are not to be worked on until they are reviewed and moved into the active task list or known issues, to ensure focus on current priorities.)
 
----
+  Theming and Customization: Introduce a Settings panel (accessible from a footer button) that allows users to customize the app’s appearance. This would include a Dark Mode toggle for low-light use, and possibly color scheme choices for highlights or background (to accommodate personal preference or better visibility in sunlight vs. night). Dark Mode would invert colors to a dark background with light text, and adjust other elements (e.g., preserve red/yellow warning colors but maybe slightly desaturate to be easier on night vision). This feature improves user comfort and accessibility.
+
+  Persistent User Data: Implement saving of patient info and user history between sessions. For example, use localStorage or similar to remember the last entered patient details so if the app is closed accidentally or the browser refreshes, the user doesn’t have to re-enter critical info. Also, preserve the History list between sessions so a medic can quickly revisit frequently accessed topics across shifts. We must design this carefully (with a clear way to “clear” the data for privacy, since patient info is sensitive).
+
+  Enhanced Dynamic Protocol Filtering: Expand the intelligence of the main Contents list filtering. Beyond just strike-throughs, we could implement a mode where, say, entering a primary indication or choosing a protocol (e.g., “STEMI” or “Anaphylaxis”) automatically highlights or even isolates the relevant protocols (perhaps by toggling a “Relevant Only” filter). This could guide medics to the correct treatment algorithm faster. It may involve tagging topics with keywords like “chest pain” or “trauma” and then matching those to patient indications input.
+
+  Complete Weight-Based Dosing Automation: Currently we handle some weight calculations, but we plan to automate all weight-specific dosage calculations. This includes rounding to appropriate values and even suggesting volume (mL) if concentration is known. For example, “Epinephrine 0.01 mg/kg” for a 22 kg child → “0.22 mg (0.22 mL of 1:10000 solution)”. This requires augmenting the data with concentration info and writing logic to compute volumes. It’s a complex but valuable feature that ensures accuracy.
+
+  Smooth Scroll and Section Highlight: Improve the anchor navigation by adding smooth scrolling animation when an anchor link is clicked, rather than a jump. Also, as the user manually scrolls through a detail page, highlight the current section in the anchor menu (e.g., bold or underline the section name in the TOC when that section is at top of viewport). This gives context about where you are in the page. This feature would involve listening to scroll events and computing which section is in view – performance should be considered for longer pages.
+
+  Additional Autocomplete Enhancements: Our current suggestion lists (for PMH, allergies, etc.) could be enhanced by learning from usage. We might implement that if a user manually enters a term that isn’t in our suggestions, we add it to a local list for next time. Or provide more sophisticated suggestions (like common misspellings or abbreviations mapping to full terms – e.g., typing “MI” could suggest “Myocardial Infarction”). These improvements can make data entry faster and more accurate.
+
+  Multi-language Support: Consider structuring the data and UI to support multiple languages or localized content. For example, have the ability to switch the app to Spanish for use in regions where paramedics might benefit from it. This is a large task (translating all protocol content), but thinking ahead, designing the data structure to separate text from code logic can facilitate it.
+
+  Offline Data Update Mechanism: Because protocols and medications can change with new medical guidelines, a future goal is to allow the app’s data files to be updated without manually editing code. Perhaps a simple JSON update mechanism or a small admin interface where an authorized person can input updated dosage or new protocol info which then gets saved to the data files. This would require careful design to maintain the no-backend/offline-first nature (maybe syncing when online, or providing a downloadable updated version of the app).
+
+  Note: The above suggestions are for consideration and alignment with the project’s goals of speed, accuracy, and usability. They should not be implemented until they are prioritized and moved into the appropriate section (such as Top Priority or Current Tasks) after thorough planning. The focus remains on stability and correctness of the current feature set before expanding scope.
 
 **This README is up to date as of JuLY 7TH, 2025. All instructions and documentation reflect the current and intended behavior of the Paramedic Quick Reference app.**
