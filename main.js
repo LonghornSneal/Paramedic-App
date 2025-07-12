@@ -189,13 +189,16 @@ function renderInitialView() {
     contentArea.appendChild(listContainer);
 
     // Optionally expand/highlight
-//    openCategoriesAndHighlight(categoryPath, highlightId);
-//    if (shouldAddHistory) {
-//        addHistoryEntry({ 
-//            viewType: 'list', contentId: '', highlightTopicId: highlightId, categoryPath 
-//        });
-//    }
-//    updateNavButtonsState();
+    openCategoriesAndHighlight(categoryPath, highlightId);
+    if (shouldAddHistory) {
+        addHistoryEntry({ 
+            viewType: 'list', 
+            contentId: '', 
+            highlightTopicId: highlightId, 
+            categoryPath 
+        });
+    }
+    updateNavButtonsState();
 }
 // Escapes special HTML characters in a string (e.g. `&`, `<`, `>`, quotes).
 function escapeHTML(str) {
@@ -655,24 +658,16 @@ function addTapListener(element, handler) {
 }
 
 // Handles the search input: filters topics by the current search term and shows results (or full list if empty).
-function renderInitialView(shouldAddHistory = false, highlightId = null, categoryPath = []) {
-    contentArea.innerHTML = '';
-    const listContainer = document.createElement('div');
-    createHierarchicalList(paramedicCategories, listContainer, 0);
-    contentArea.appendChild(listContainer);
-
-    // Optionally expand/highlight
-    openCategoriesAndHighlight?.(categoryPath, highlightId);
-    if (shouldAddHistory) {
-        addHistoryEntry({
-            viewType: 'list',
-            contentId: '',
-            highlightTopicId: highlightId,
-            categoryPath
-        });
-    }
-    updateNavButtonsState?.();
-}
+//function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
+//    const term = searchInput.value.trim().toLowerCase();
+//    if (!term) {    // If no search term, show the full list with any requested highlight/path
+//        renderInitialView(false, highlightId, categoryPath); return; 
+//    }
+//    const results = allSearchableTopics.filter(topic =>
+//    (topic.title || topic.id || '').toLowerCase().includes(term) ||
+//    (topic.path || '').toLowerCase().includes(term) );
+//    renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath); 
+//}
 
 
 // Ensures the header contains nav buttons and search input, adding them if missing.
