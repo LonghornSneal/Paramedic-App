@@ -70,11 +70,21 @@ function initApp() {
         }); 
     }
 
+
+
+
+
+
     // Navigation buttons
     if (navBackButton && navForwardButton) {
         addTapListener(navBackButton, () => navigateViaHistory(-1));
         addTapListener(navForwardButton, () => navigateViaHistory(1)); 
     }
+
+
+
+
+
 
     // Now initialize data structures from globals
     // These should be loaded BEFORE this script runs (by script order in index.html)
@@ -223,28 +233,28 @@ function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath 
     renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath); 
 }
 
+// --- NOT TOP RIGHT: ADJACENT NAVIGATION ARROWS (PREV/NEXT) ---
+//function appendAdjacentNavButtons(currentTopicId) {
+//    const alsMedCat = paramedicCategories.find(cat => cat.title?.toLowerCase().includes('als medications'));
+//    if (!alsMedCat?.children) return;
+//
+//    const idx = findAlsMedTopicIndex(alsMedCat.children, currentTopicId);
+//    if (idx === -1) return;
+//
+//    const prevId = idx > 0 ? alsMedCat.children[idx - 1]?.id : null;
+//    const nextId = idx < alsMedCat.children.length - 1 ? alsMedCat.children[idx + 1]?.id : null;
+//
+//    if (!prevId && !nextId) return;
+//
+//    const navRow = document.createElement('div');
+//    navRow.className = 'flex justify-between items-center mb-4';
+//    navRow.appendChild(prevId ? createNavButton('Previous', prevId) : document.createElement('span'));
+//    navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
+//    contentArea.appendChild(navRow);
+//}
 
-function appendAdjacentNavButtons(currentTopicId) {
-    const alsMedCat = paramedicCategories.find(cat => cat.title?.toLowerCase().includes('als medications'));
-    if (!alsMedCat?.children) return;
 
-    const idx = findAlsMedTopicIndex(alsMedCat.children, currentTopicId);
-    if (idx === -1) return;
-
-    const prevId = idx > 0 ? alsMedCat.children[idx - 1]?.id : null;
-    const nextId = idx < alsMedCat.children.length - 1 ? alsMedCat.children[idx + 1]?.id : null;
-
-    if (!prevId && !nextId) return;
-
-    const navRow = document.createElement('div');
-    navRow.className = 'flex justify-between items-center mb-4';
-    navRow.appendChild(prevId ? createNavButton('Previous', prevId) : document.createElement('span'));
-    navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
-    contentArea.appendChild(navRow);
-}
-
-
-
+// Top Right Navigation arrows
 // Updates the disabled state of the Back/Forward navigation buttons based on history position.
 function updateNavButtonsState() { 
     if (!navBackButton || !navForwardButton) return;
@@ -465,22 +475,23 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
 
 
 
+// --- NOT TOP RIGHT: ADJACENT NAVIGATION ARROWS (PREV/NEXT) ---
 // Creates a navigation button ("Previous" or "Next") that navigates to the specified topic.
-function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons
-    const btn = document.createElement('button');
-    btn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
-    btn.innerHTML = (label === 'Previous')
-    ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" 
-    viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-    d="M15 19l-7-7 7-7" /></svg>${label}`
-    : `${label}<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" 
-    viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-    d="M9 5l7 7-7 7" /></svg>`;
-    addTapListener(btn, () => renderDetailPage(targetId));
-    return btn; 
-}
+//function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons
+//    const btn = document.createElement('button');
+//    btn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
+//    btn.innerHTML = (label === 'Previous')
+//    ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" 
+//    viewBox="0 0 24 24" stroke="currentColor">
+//    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+//    d="M15 19l-7-7 7-7" /></svg>${label}`
+//    : `${label}<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" 
+//    viewBox="0 0 24 24" stroke="currentColor">
+//    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+//    d="M9 5l7 7-7 7" /></svg>`;
+//    addTapListener(btn, () => renderDetailPage(targetId));
+//    return btn; 
+//}
 
 
 
