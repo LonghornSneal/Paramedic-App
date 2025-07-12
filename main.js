@@ -179,8 +179,10 @@ function processItem(item, parentPath = '', parentIds = []) {       // Add to se
         item.children.forEach(child => processItem(child, currentPath, currentIds)); 
     } 
 }
+
+
 // Renders the main category list view (home screen) and highlights a topic if provided.
-function renderInitialView() {
+function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     contentArea.innerHTML = '';  // Clear
 
     // Render the hierarchical list of categories
@@ -200,6 +202,27 @@ function renderInitialView() {
     }
     updateNavButtonsState();
 }
+
+
+// Renders the list of topics matching the given search term in the content area.
+function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
+    if (shouldAddHistory) { 
+        addHistoryEntry({ 
+            viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath 
+        }); 
+    }
+// Handles the search input: filters topics by the current search term and shows results (or full list if empty).
+function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
+    const term = searchInput.value.trim().toLowerCase();
+    if (!term) {    // If no search term, show the full list with any requested highlight/path
+        renderInitialView(false, highlightId, categoryPath); return; 
+    }
+    const results = allSearchableTopics.filter(topic =>
+    (topic.title || topic.id || '').toLowerCase().includes(term) ||
+    (topic.path || '').toLowerCase().includes(term) );
+    renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath); 
+}
+
 
 function appendAdjacentNavButtons(currentTopicId) {
     const alsMedCat = paramedicCategories.find(cat => cat.title?.toLowerCase().includes('als medications'));
@@ -301,13 +324,7 @@ function escapeHTML(str) {
     return str.replace(/[&<>"']/g, char => escapeMap[char] || char); 
 }
 
-// Renders the list of topics matching the given search term in the content area.
-function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    if (shouldAddHistory) { 
-        addHistoryEntry({ 
-            viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath 
-        }); 
-    }
+
     updateNavButtonsState(); 
     contentArea.innerHTML = `<div class="flex justify-between items-center mb-3">
         <p class="text-gray-700 font-medium">Results for "${escapeHTML(searchTerm)}":</p>
@@ -685,17 +702,6 @@ function addTapListener(element, handler) {
     element.addEventListener('keypress', activate); 
 }
 
-// Handles the search input: filters topics by the current search term and shows results (or full list if empty).
-function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    const term = searchInput.value.trim().toLowerCase();
-    if (!term) {    // If no search term, show the full list with any requested highlight/path
-        renderInitialView(false, highlightId, categoryPath); return; 
-    }
-    const results = allSearchableTopics.filter(topic =>
-    (topic.title || topic.id || '').toLowerCase().includes(term) ||
-    (topic.path || '').toLowerCase().includes(term) );
-    renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath); 
-}
 
 
 // Ensures the header contains nav buttons and search input, adding them if missing.
