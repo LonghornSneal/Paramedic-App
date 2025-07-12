@@ -349,43 +349,35 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
 
     appendTopicDetails(topic);
 
-    appendAdjacentNavButtons(topic.id);  // ← Add this call to insert Prev/Next buttons if applicable
+    //appendAdjacentNavButtons(topic.id);  // ← Add this call to insert Prev/Next buttons if applicable
 
     attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
     // Attach handlers to enable collapsing/expanding of the new detail sections (blue arrow rotation and content toggle).
     attachToggleCategoryHandlers(contentArea);
 
     
-        // Description & History block: append topic description if present, update history state, and scroll to top if requested
-        if (topic.description) { 
-            const desc = document.createElement('div');    // If a topic description exists and no slug anchors were added, show the description
-            desc.className = 'mb-4'; 
-            desc.textContent = topic.description; 
-            contentArea.appendChild(desc); 
-        }
-        if (shouldAddHistory) {
-            addHistoryEntry({ 
-                viewType: 'detail', contentId: topicId 
-            }); 
-        }
-        if (scrollToTop) { 
-            contentArea.scrollIntoView({ 
-                behavior: 'auto', block: 'start' 
-            }); 
-        }
+    // Description & History block: append topic description if present, update history state, and scroll to top if requested
+    if (topic.description) { 
+        const desc = document.createElement('div');    // If a topic description exists and no slug anchors were added, show the description
+        desc.className = 'mb-4'; 
+        desc.textContent = topic.description; 
+        contentArea.appendChild(desc); 
+    }
+    if (shouldAddHistory) {
+        addHistoryEntry({ 
+            viewType: 'detail', contentId: topicId 
+        }); 
+    }
+    if (scrollToTop) { 
+        contentArea.scrollIntoView({ 
+            behavior: 'auto', block: 'start' 
+        }); 
+    }
     
 }
 
 
 
-
-
-
-
-
-
-
-// commented this function out of the code because it was putting a previous and an next button at the bottom of the app which we don't want and we dont need.
 // Creates a navigation button ("Previous" or "Next") that navigates to the specified topic.
 function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons
     const btn = document.createElement('button');
@@ -402,10 +394,6 @@ function createNavButton(label, targetId) {  // Helper to create Prev/Next nav b
     addTapListener(btn, () => renderDetailPage(targetId));
     return btn; 
 }
-
-
-
-
 
 
 
@@ -434,22 +422,18 @@ function appendAdjacentNavButtons(currentTopicId) {
 function findAlsMedTopicIndex(children, topicId) {
     let idx = children.findIndex(child => child.id === topicId);
     if (idx !== -1) return idx;
-
     if (/^\d+-/.test(topicId)) {
         const altId = topicId.replace(/^\d+-/, '');
         idx = children.findIndex(child => child.id === altId);
         if (idx !== -1) return idx;
     }
-
     const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topicId));
     if (altId) {
         idx = children.findIndex(child => child.id === altId);
         if (idx !== -1) return idx;
     }
-
     return -1;
 }
-
 
 
 // Attaches click handlers to elements with class `.toggle-info` to show or hide their hidden info text.
@@ -497,8 +481,6 @@ function parseTextMarkup(text) {   // Escape HTML and replace special markup wit
     safeText = safeText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
     return safeText; 
 }
-
-
 
 
 function appendTopicDetails(topic) {
@@ -560,8 +542,6 @@ function appendTopicDetails(topic) {
 }
 
 
-
-
 // Generates an HTML `<ul>` list for an array of detail items, or a placeholder if the array is empty.
 function createDetailList(itemsArray) {
     if (!itemsArray || itemsArray.length === 0) {
@@ -595,10 +575,7 @@ function createWarningIcon(colorClass = 'text-yellow-600') {
 }
 
 
-
-
-
-        // Insert warning boxes if any contraindications or allergies are present     // Check PDE5 inhibitor usage     // Check low BP
+// Insert warning boxes if any contraindications or allergies are present
 function appendTopicWarnings(topic) {
     let warningsHtml = "";
 
@@ -619,7 +596,6 @@ function getAllergyWarning(topic, patientData) {
     }
     <span>Allergy Alert: Patient has an allergy to ${topic.title}.</span></div></div>`;
 }
-
 function getPDE5Warning(topic, patientData) {
     if (topic.id !== 'ntg') return "";
     const hasPDE5 = patientData.currentMedications.some(med =>
@@ -631,7 +607,6 @@ function getPDE5Warning(topic, patientData) {
     }
     <span>Contraindication: Recent PDE5 inhibitor use – do NOT administer NTG.</span></div></div>`;
 }
-
 function getLowBPWarning(topic, patientData) {
     if (topic.id !== 'ntg' || !patientData?.vitalSigns?.bp) return "";
     // Example logic: warn if systolic BP < 100
@@ -658,16 +633,16 @@ function addTapListener(element, handler) {
 }
 
 // Handles the search input: filters topics by the current search term and shows results (or full list if empty).
-//function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
-//    const term = searchInput.value.trim().toLowerCase();
-//    if (!term) {    // If no search term, show the full list with any requested highlight/path
-//        renderInitialView(false, highlightId, categoryPath); return; 
-//    }
-//    const results = allSearchableTopics.filter(topic =>
-//    (topic.title || topic.id || '').toLowerCase().includes(term) ||
-//    (topic.path || '').toLowerCase().includes(term) );
-//    renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath); 
-//}
+function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
+    const term = searchInput.value.trim().toLowerCase();
+    if (!term) {    // If no search term, show the full list with any requested highlight/path
+        renderInitialView(false, highlightId, categoryPath); return; 
+    }
+    const results = allSearchableTopics.filter(topic =>
+    (topic.title || topic.id || '').toLowerCase().includes(term) ||
+    (topic.path || '').toLowerCase().includes(term) );
+    renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath); 
+}
 
 
 // Ensures the header contains nav buttons and search input, adding them if missing.
