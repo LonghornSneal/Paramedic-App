@@ -200,6 +200,99 @@ function renderInitialView() {
     }
     updateNavButtonsState();
 }
+
+function appendAdjacentNavButtons(currentTopicId) {
+    const alsMedCat = paramedicCategories.find(cat => cat.title?.toLowerCase().includes('als medications'));
+    if (!alsMedCat?.children) return;
+
+    const idx = findAlsMedTopicIndex(alsMedCat.children, currentTopicId);
+    if (idx === -1) return;
+
+    const prevId = idx > 0 ? alsMedCat.children[idx - 1]?.id : null;
+    const nextId = idx < alsMedCat.children.length - 1 ? alsMedCat.children[idx + 1]?.id : null;
+
+    if (!prevId && !nextId) return;
+
+    const navRow = document.createElement('div');
+    navRow.className = 'flex justify-between items-center mb-4';
+    navRow.appendChild(prevId ? createNavButton('Previous', prevId) : document.createElement('span'));
+    navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
+    contentArea.appendChild(navRow);
+}
+
+
+
+// Updates the disabled state of the Back/Forward navigation buttons based on history position.
+function updateNavButtonsState() { 
+    if (!navBackButton || !navForwardButton) return;
+    navBackButton.disabled = currentHistoryIndex <= 0;
+    navForwardButton.disabled = currentHistoryIndex >= navigationHistory.length - 1; 
+}
+
+// Adds a new entry to the navigation history and updates the current history index.
+function addHistoryEntry(entry) { 
+    if (isNavigatingViaHistory) return;
+    if (currentHistoryIndex < navigationHistory.length - 1) { 
+        navigationHistory = navigationHistory.slice(0, currentHistoryIndex + 1); 
+    }
+    navigationHistory.push(entry);
+    currentHistoryIndex = navigationHistory.length - 1;
+    updateNavButtonsState(); 
+}
+
+
+// Expands categories along the given path and highlights the specified topic (then re-renders the list).
+// Note: We also ensure contentArea is defined locally. The category list items still need a way to be identified by category ID if we ever wanted to manipulate them directly, so as an additional improvement, we can modify createHierarchicalList to set a data-category-id attribute on category rows: // Inside createHierarchicalList, in the category branch: row.dataset.categoryId = item.id;
+function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { 
+    // Mark each category in the path as expanded
+    categoryPath.forEach(catId => { 
+        const catItem = allDisplayableTopicsMap[catId];
+        if (catItem) catItem.expanded = true; 
+    });
+    // Re-render the category list with updated expansion states
+    contentArea.innerHTML = ''; 
+    const listContainer = document.createElement('div');
+    createHierarchicalList(paramedicCategories, listContainer, 0);
+    contentArea.appendChild(listContainer);
+    // Highlight the specified topic, if provided
+    if (highlightId) { 
+        const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
+        if (topicEl) topicEl.classList.add('recently-viewed'); 
+    } 
+}
+//    /if (highlightId) {
+//        /const item = resultsContainer.querySelector(`[data-topic-id="${highlightId}"]`);
+//        /if (item) item.classList.add('recently-viewed');
+//    /}
+//}
+
+
+    // Moves through navigation history by the given direction (-1 for back, 1 for forward) and renders the appropriate view.
+function navigateViaHistory(direction) {
+    if ((direction === -1 && currentHistoryIndex <= 0) || (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return;
+    isNavigatingViaHistory = true;
+    currentHistoryIndex += direction;
+    const state = navigationHistory[currentHistoryIndex];
+    if (state.viewType === 'list') {
+        //  highlight last viewed topic when going back: provide its ID and category path to handleSearch
+        if (direction === -1 && navigationHistory[currentHistoryIndex+1]?.viewType === 'detail') {
+            const prevTopicId = navigationHistory[currentHistoryIndex+1].contentId;
+            const prevCatPath = allDisplayableTopicsMap[prevTopicId]?.categoryPath || [];
+            searchInput.value =  '';
+            handleSearch(false, prevTopicId, prevCatPath);
+        } else {
+            searchInput.value = state.contentId || '';
+            handleSearch(false, state.highlightTopicId, state.categoryPath || []);
+        }
+    } else if (state.viewType === 'detail') { 
+        renderDetailPage(state.contentId, false, false); 
+    }
+    updateNavButtonsState();
+    isNavigatingViaHistory = false; 
+}
+
+
+
 // Escapes special HTML characters in a string (e.g. `&`, `<`, `>`, quotes).
 function escapeHTML(str) {
     const escapeMap = { 
@@ -304,31 +397,8 @@ function createHierarchicalList(items, container, level = 0) {
         }
     });
 }
-// Expands categories along the given path and highlights the specified topic (then re-renders the list).
-// Note: We also ensure contentArea is defined locally. The category list items still need a way to be identified by category ID if we ever wanted to manipulate them directly, so as an additional improvement, we can modify createHierarchicalList to set a data-category-id attribute on category rows: // Inside createHierarchicalList, in the category branch: row.dataset.categoryId = item.id;
-function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { 
-    contentArea = document.getElementById('content-area');
-    // Mark each category in the path as expanded
-    categoryPath.forEach(catId => { 
-        const catItem = allDisplayableTopicsMap[catId];
-        if (catItem) catItem.expanded = true; 
-    });
-    // Re-render the category list with updated expansion states
-    contentArea.innerHTML = ''; 
-    const listContainer = document.createElement('div');
-    createHierarchicalList(paramedicCategories, listContainer, 0);
-    contentArea.appendChild(listContainer);
-    // Highlight the specified topic, if provided
-//    if (highlightId) { 
-//        const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
-//        if (topicEl) topicEl.classList.add('recently-viewed'); 
-//    } 
-//}
-    if (highlightId) {
-        const item = resultsContainer.querySelector(`[data-topic-id="${highlightId}"]`);
-        if (item) item.classList.add('recently-viewed');
-    }
-}
+
+
 // Renders the detailed view for a given topic (with all detail sections and warnings), and updates history if needed. 
 // Collapsible sections for details (ALS Medications)---------ERROR---------CODE MUST BE FIXED TO INCLUDE THE BLUE ARROWS NEXT TO THE ALS MEDICATION DETAIL'S INDIVIDUAL SUBTOPICS THAT FUNCTION THE SAME AS THE BLUE ARROWS NEXT TO THE GREEN TEXT THAT REVEALS THE GREEN HIDDEN TEXT WHEN CLICK UPON (DON'T CHANGE ANY COLORS THOUGH)--------THERE SHOULD ALREADY EXIST CODE FOR THIS, SO YOU MUST ALSO SEARCH FOR THAT CODE---------
 function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) {
@@ -400,24 +470,7 @@ function createNavButton(label, targetId) {  // Helper to create Prev/Next nav b
 
 
 
-function appendAdjacentNavButtons(currentTopicId) {
-    const alsMedCat = paramedicCategories.find(cat => cat.title?.toLowerCase().includes('als medications'));
-    if (!alsMedCat?.children) return;
 
-    const idx = findAlsMedTopicIndex(alsMedCat.children, currentTopicId);
-    if (idx === -1) return;
-
-    const prevId = idx > 0 ? alsMedCat.children[idx - 1]?.id : null;
-    const nextId = idx < alsMedCat.children.length - 1 ? alsMedCat.children[idx + 1]?.id : null;
-
-    if (!prevId && !nextId) return;
-
-    const navRow = document.createElement('div');
-    navRow.className = 'flex justify-between items-center mb-4';
-    navRow.appendChild(prevId ? createNavButton('Previous', prevId) : document.createElement('span'));
-    navRow.appendChild(nextId ? createNavButton('Next', nextId) : document.createElement('span'));
-    contentArea.appendChild(navRow);
-}
 
 function findAlsMedTopicIndex(children, topicId) {
     let idx = children.findIndex(child => child.id === topicId);
@@ -769,44 +822,4 @@ function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceS
     }); 
 }
 
-// Updates the disabled state of the Back/Forward navigation buttons based on history position.
-function updateNavButtonsState() { 
-    if (!navBackButton || !navForwardButton) return;
-    navBackButton.disabled = currentHistoryIndex <= 0;
-    navForwardButton.disabled = currentHistoryIndex >= navigationHistory.length - 1; 
-}
 
-// Adds a new entry to the navigation history and updates the current history index.
-function addHistoryEntry(entry) { 
-    if (isNavigatingViaHistory) return;
-    if (currentHistoryIndex < navigationHistory.length - 1) { 
-        navigationHistory = navigationHistory.slice(0, currentHistoryIndex + 1); 
-    }
-    navigationHistory.push(entry);
-    currentHistoryIndex = navigationHistory.length - 1;
-    updateNavButtonsState(); 
-}
-
-    // Moves through navigation history by the given direction (-1 for back, 1 for forward) and renders the appropriate view.
-function navigateViaHistory(direction) {
-    if ((direction === -1 && currentHistoryIndex <= 0) || (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return;
-    isNavigatingViaHistory = true;
-    currentHistoryIndex += direction;
-    const state = navigationHistory[currentHistoryIndex];
-    if (state.viewType === 'list') {
-        //** override to highlight last viewed topic when going back: provide its ID and category path to handleSearch
-        if (direction === -1 && navigationHistory[currentHistoryIndex+1]?.viewType === 'detail') {
-            const prevTopicId = navigationHistory[currentHistoryIndex+1].contentId;
-            const prevCatPath = allDisplayableTopicsMap[prevTopicId]?.categoryPath || [];
-            searchInput.value =  '';        // **Cleared input**     prevTopicId || '';
-            handleSearch(false, prevTopicId, prevCatPath);
-        } else {
-            searchInput.value = state.contentId || '';
-            handleSearch(false, state.highlightTopicId, state.categoryPath || []);
-        }
-    } else if (state.viewType === 'detail') { 
-        renderDetailPage(state.contentId, false, false); 
-    }
-    updateNavButtonsState();
-    isNavigatingViaHistory = false; 
-}
