@@ -62,16 +62,8 @@ function initApp() {
         });
     }
 
-    // ... attach event listeners next
-    //if (searchInput) {
-    //    searchInput.addEventListener('input', () => handleSearch(true));  // Filter as user types
-    //    searchInput.addEventListener('keypress', e => {    // Trigger search on Enter key
-    //        if (e.key === 'Enter') handleSearch(true); 
-    //    }); 
-    //}
-
-
     attachSearchHandlers();  // Calls the function from Features/search/Search.js
+
 
     // Navigation buttons
     if (navBackButton && navForwardButton) {
@@ -80,9 +72,7 @@ function initApp() {
     }
 
 
-
-    // Now initialize data structures from globals
-    // These should be loaded BEFORE this script runs (by script order in index.html)
+    // Now initialize data structures from globals   // These should be loaded BEFORE this script runs (by script order in index.html)
     if (window.ParamedicCategoriesData && window.MedicationDetailsData) {
         initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
     } else {
@@ -95,7 +85,7 @@ function initApp() {
             }
         }, 200); 
     }      // /fallback: try again after short delay
-        // Initialize autocomplete for Patient Info fields
+    // Initialize autocomplete for Patient Info fields
     setupAutocomplete('pt-pmh','pt-pmh-suggestions', pmhSuggestions);
     setupAutocomplete('pt-allergies','pt-allergies-suggestions', allergySuggestions);
     setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions);
@@ -162,30 +152,6 @@ function initializeData(categoriesData, medDetailsData) {
     });
 }
 
-// Recursively processes categories and topics to build search index and lookup map.
-//function processItem(item, parentPath = '', parentIds = []) {       // Add to searchable list (for quick search by title/path)
-//    let currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
-//    let currentIds = (item.type === 'category') ? parentIds.concat([item.id]) : parentIds;
-//    const detailsObj = medicationDataMap[item.id];
-//    const fullItem = { 
-//        ...item, 
-//        path: currentPath,
-//        details: detailsObj || null,
-//        categoryPath: parentIds 
-//    };
-//    allDisplayableTopicsMap[item.id] = fullItem;
-//    if (item.type === 'topic') {
-//        allSearchableTopics.push({ 
-//            id: item.id, title: item.title, path: currentPath,
-//            categoryPath: parentIds 
-//        }); 
-//    }
-//    if (item.children) { 
-//        item.children.forEach(child => processItem(child, currentPath, currentIds)); 
-//    } 
-//}
-
-
 // Renders the main category list view (home screen) and highlights a topic if provided.
 function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     contentArea.innerHTML = '';  // Clear
@@ -207,19 +173,6 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
     }
     updateNavButtonsState();
 }
-
-
-// Handles the search input: filters topics by the current search term and shows results (or full list if empty).
-//function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
-//    const term = searchInput.value.trim().toLowerCase();
-//    if (!term) {    // If no search term, show the full list with any requested highlight/path
-//        renderInitialView(false, highlightId, categoryPath); return; 
-//    }
-//    const results = allSearchableTopics.filter(topic =>
-//    (topic.title || topic.id || '').toLowerCase().includes(term) ||
-//    (topic.path || '').toLowerCase().includes(term) );
-//    renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath); 
-//}
 
 
 // Top Right Navigation arrows
@@ -288,7 +241,6 @@ function navigateViaHistory(direction) {
 }
 
 
-
 // Escapes special HTML characters in a string (e.g. `&`, `<`, `>`, quotes).
 function escapeHTML(str) {
     const escapeMap = { 
@@ -297,52 +249,7 @@ function escapeHTML(str) {
     return str.replace(/[&<>"']/g, char => escapeMap[char] || char); 
 }
 
-// Renders the list of topics matching the given search term in the content area.
-//function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
-//    if (shouldAddHistory) { 
-//        addHistoryEntry({ 
-//            viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath 
-//        }); 
-//    }
-//    updateNavButtonsState(); 
-//    contentArea.innerHTML = `<div class="flex justify-between items-center mb-3">
-//        <p class="text-gray-700 font-medium">Results for "${escapeHTML(searchTerm)}":</p>
-//        <button id="clear-search-button" class="text-sm text-blue-600 hover:underline">Show All Categories</button>
-//    </div>
-//    <div id="results-container" class="space-y-2"></div>`;
-//    const resultsContainer = document.getElementById('results-container');
-//    if (filteredTopics.length > 0) { 
-//        filteredTopics.forEach(topic => { 
-//            const item = document.createElement('div');
-//            item.className = 'search-topic-item';
-//            item.textContent = topic.title;
-//            if (topic.path) { 
-//                const pathEl = document.createElement('div');
-//                pathEl.className = 'text-xs text-gray-500 mt-1';
-//                pathEl.textContent = topic.path.split(' > ').slice(0, -1).join(' > ');
-//                item.appendChild(pathEl);
-//            }
-//            item.dataset.topicId = topic.id;
-//            item.setAttribute('role', 'button');
-//            item.setAttribute('tabindex', '0');
-//            addTapListener(item, () => renderDetailPage(topic.id));
-//            item.addEventListener('keydown', e => {
-//                if (e.key === 'Enter' || e.key === ' ') {
-//                    e.preventDefault();
-//                    renderDetailPage(topic.id); 
-//                }
-//            });
-//            resultsContainer.appendChild(item);
-//        });
-//    } else {
-//        resultsContainer.innerHTML = 
-//            '<p class="text-gray-500 text-center py-4">No topics found matching your search.</p>';
-//    }
-//    addTapListener(document.getElementById('clear-search-button'), () => {
-//        searchInput.value = '';
-//        renderInitialView(); 
-//    });
-//}
+
 // Builds a nested list of categories/topics and appends it to the given container (handles expandable categories).
 function createHierarchicalList(items, container, level = 0) {
     container.innerHTML = '';
@@ -396,7 +303,7 @@ function createHierarchicalList(items, container, level = 0) {
 
 
 // Renders the detailed view for a given topic (with all detail sections and warnings), and updates history if needed. 
-// Collapsible sections for details (ALS Medications)---------ERROR---------CODE MUST BE FIXED TO INCLUDE THE BLUE ARROWS NEXT TO THE ALS MEDICATION DETAIL'S INDIVIDUAL SUBTOPICS THAT FUNCTION THE SAME AS THE BLUE ARROWS NEXT TO THE GREEN TEXT THAT REVEALS THE GREEN HIDDEN TEXT WHEN CLICK UPON (DON'T CHANGE ANY COLORS THOUGH)--------THERE SHOULD ALREADY EXIST CODE FOR THIS, SO YOU MUST ALSO SEARCH FOR THAT CODE---------
+// Collapsible sections for details (ALS Medications)
 function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) {
     if (!allDisplayableTopicsMap[topicId]) { 
         contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; 
@@ -416,8 +323,7 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
     }
     appendTopicDetails(topic);
 
-    //appendAdjacentNavButtons(topic.id);  // ← Add this call to insert Prev/Next buttons if applicable
-
+   
     attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
     // Attach handlers to enable collapsing/expanding of the new detail sections (blue arrow rotation and content toggle).
     attachToggleCategoryHandlers(contentArea);
@@ -442,32 +348,6 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
     }
     
 }
-
-
-
-// --- NOT TOP RIGHT: ADJACENT NAVIGATION ARROWS (PREV/NEXT) ---
-// Creates a navigation button ("Previous" or "Next") that navigates to the specified topic.
-//function createNavButton(label, targetId) {  // Helper to create Prev/Next nav buttons
-//    const btn = document.createElement('button');
-//    btn.className = 'p-2 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 flex items-center';
-//    btn.innerHTML = (label === 'Previous')
-//    ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" 
-//    viewBox="0 0 24 24" stroke="currentColor">
-//    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-//    d="M15 19l-7-7 7-7" /></svg>${label}`
-//    : `${label}<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" 
-//    viewBox="0 0 24 24" stroke="currentColor">
-//    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-//    d="M9 5l7 7-7 7" /></svg>`;
-//    addTapListener(btn, () => renderDetailPage(targetId));
-//    return btn; 
-//}
-
-
-
-
-
-
 
 
 function findAlsMedTopicIndex(children, topicId) {
@@ -756,5 +636,3 @@ function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceS
         };
     }); 
 }
-
-
