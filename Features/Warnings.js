@@ -9,7 +9,7 @@ function createWarningIcon(colorClass = 'text-yellow-600') {
     </svg>`;
 }
 
-// Insert warning boxes if any contraindications or allergies are present
+// Generates HTML for all applicable warning boxes for the given topic.
 function appendTopicWarnings(topic) {
     let warningsHtml = "";
 
@@ -19,7 +19,7 @@ function appendTopicWarnings(topic) {
 
     return warningsHtml;
 }
-
+// Allergy Alert – shows if patient has an allergy matching this medication
 function getAllergyWarning(topic, patientData) {
     if (!patientData.allergies.length) return "";
     const medKeywords = (topic.title + " " + topic.id).toLowerCase();
@@ -27,28 +27,30 @@ function getAllergyWarning(topic, patientData) {
     if (!allergy) return "";
     return `<div class="warning-box warning-box-red"><div>${
         createWarningIcon('text-red-600')
-    }
-    <span>Allergy Alert: Patient has an allergy to ${topic.title}.</span></div></div>`;
+    }<span>Allergy Alert: Patient has a known allergy to ${topic.title}.</span></div></div>`;
 }
-
+// PDE5 Inhibitor Warning – shows if the topic is NTG and patient is on a PDE5 inhibitor
 function getPDE5Warning(topic, patientData) {
     if (topic.id !== 'ntg') return "";
-    const hasPDE5 = patientData.currentMedications.some(med =>
+    const foundMed = patientData.currentMedications.find(med =>
         PDE5_INHIBITORS.some(term => med.toLowerCase().includes(term.toLowerCase()))
     );
-    if (!hasPDE5) return "";
+    if (!foundMed) return "";
+    // Capitalize the medication name for display
+    const medDisplay = foundMed.charAt(0).toUpperCase() + foundMed.slice(1);
     return `<div class="warning-box warning-box-red"><div>${
         createWarningIcon('text-red-600')
-    }
-    <span>Contraindication: Recent PDE5 inhibitor use – do NOT administer NTG.</span></div></div>`;
+    }<span>Contraindication: Patient has recently taken ${medDisplay} (PDE5 inhibitor) – DO NOT administer ${topic.title}.</span></div></div>`;
 }
-
 function getLowBPWarning(topic, patientData) {
     if (topic.id !== 'ntg' || !patientData?.vitalSigns?.bp) return "";
     // Example logic: warn if systolic BP < 100
     const systolicBP = parseInt(patientData.vitalSigns.bp.split('/')[0], 10);
+    if (isNaN(systolicBP)) return "";
     if (systolicBP < 100) {
-        return '<div class="text-red-600 font-bold mb-2">Warning: Systolic BP is low. NTG may be contraindicated.</div>';
+        return `<div class="warning-box warning-box-red"><div>${
+            createWarningIcon('text-red-600')
+        }<span>Contraindication: Patient’s blood pressure is below recommended minimum for ${topic.title}.</span></div></div>`;
     }
     return "";
 }
