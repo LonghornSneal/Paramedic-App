@@ -4,7 +4,7 @@ let medicationDataMap = {};
 let navigationHistory = [];
 let currentHistoryIndex = -1;
 let isNavigatingViaHistory = false;
-let allSearchableTopics = [];
+//let allSearchableTopics = [];
 let allDisplayableTopicsMap = {};
 let paramedicCategories = []; // This must be a global var!
 
@@ -63,26 +63,21 @@ function initApp() {
     }
 
     // ... attach event listeners next
-    if (searchInput) {
-        searchInput.addEventListener('input', () => handleSearch(true));  // Filter as user types
-        searchInput.addEventListener('keypress', e => {    // Trigger search on Enter key
-            if (e.key === 'Enter') handleSearch(true); 
-        }); 
-    }
+    //if (searchInput) {
+    //    searchInput.addEventListener('input', () => handleSearch(true));  // Filter as user types
+    //    searchInput.addEventListener('keypress', e => {    // Trigger search on Enter key
+    //        if (e.key === 'Enter') handleSearch(true); 
+    //    }); 
+    //}
 
 
-
-
-
+    attachSearchHandlers();  // Calls the function from Features/search/Search.js
 
     // Navigation buttons
     if (navBackButton && navForwardButton) {
         addTapListener(navBackButton, () => navigateViaHistory(-1));
         addTapListener(navForwardButton, () => navigateViaHistory(1)); 
     }
-
-
-
 
 
 
@@ -168,27 +163,27 @@ function initializeData(categoriesData, medDetailsData) {
 }
 
 // Recursively processes categories and topics to build search index and lookup map.
-function processItem(item, parentPath = '', parentIds = []) {       // Add to searchable list (for quick search by title/path)
-    let currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
-    let currentIds = (item.type === 'category') ? parentIds.concat([item.id]) : parentIds;
-    const detailsObj = medicationDataMap[item.id];
-    const fullItem = { 
-        ...item, 
-        path: currentPath,
-        details: detailsObj || null,
-        categoryPath: parentIds 
-    };
-    allDisplayableTopicsMap[item.id] = fullItem;
-    if (item.type === 'topic') {
-        allSearchableTopics.push({ 
-            id: item.id, title: item.title, path: currentPath,
-            categoryPath: parentIds 
-        }); 
-    }
-    if (item.children) { 
-        item.children.forEach(child => processItem(child, currentPath, currentIds)); 
-    } 
-}
+//function processItem(item, parentPath = '', parentIds = []) {       // Add to searchable list (for quick search by title/path)
+//    let currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
+//    let currentIds = (item.type === 'category') ? parentIds.concat([item.id]) : parentIds;
+//    const detailsObj = medicationDataMap[item.id];
+//    const fullItem = { 
+//        ...item, 
+//        path: currentPath,
+//        details: detailsObj || null,
+//        categoryPath: parentIds 
+//    };
+//    allDisplayableTopicsMap[item.id] = fullItem;
+//    if (item.type === 'topic') {
+//        allSearchableTopics.push({ 
+//            id: item.id, title: item.title, path: currentPath,
+//            categoryPath: parentIds 
+//        }); 
+//    }
+//    if (item.children) { 
+//        item.children.forEach(child => processItem(child, currentPath, currentIds)); 
+//    } 
+//}
 
 
 // Renders the main category list view (home screen) and highlights a topic if provided.
@@ -215,16 +210,16 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
 
 
 // Handles the search input: filters topics by the current search term and shows results (or full list if empty).
-function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    const term = searchInput.value.trim().toLowerCase();
-    if (!term) {    // If no search term, show the full list with any requested highlight/path
-        renderInitialView(false, highlightId, categoryPath); return; 
-    }
-    const results = allSearchableTopics.filter(topic =>
-    (topic.title || topic.id || '').toLowerCase().includes(term) ||
-    (topic.path || '').toLowerCase().includes(term) );
-    renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath); 
-}
+//function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath = []) {
+//    const term = searchInput.value.trim().toLowerCase();
+//    if (!term) {    // If no search term, show the full list with any requested highlight/path
+//        renderInitialView(false, highlightId, categoryPath); return; 
+//    }
+//    const results = allSearchableTopics.filter(topic =>
+//    (topic.title || topic.id || '').toLowerCase().includes(term) ||
+//    (topic.path || '').toLowerCase().includes(term) );
+//    renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath); 
+/}
 
 
 // Top Right Navigation arrows
@@ -303,51 +298,51 @@ function escapeHTML(str) {
 }
 
 // Renders the list of topics matching the given search term in the content area.
-function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
-    if (shouldAddHistory) { 
-        addHistoryEntry({ 
-            viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath 
-        }); 
-    }
-    updateNavButtonsState(); 
-    contentArea.innerHTML = `<div class="flex justify-between items-center mb-3">
-        <p class="text-gray-700 font-medium">Results for "${escapeHTML(searchTerm)}":</p>
-        <button id="clear-search-button" class="text-sm text-blue-600 hover:underline">Show All Categories</button>
-    </div>
-    <div id="results-container" class="space-y-2"></div>`;
-    const resultsContainer = document.getElementById('results-container');
-    if (filteredTopics.length > 0) { 
-        filteredTopics.forEach(topic => { 
-            const item = document.createElement('div');
-            item.className = 'search-topic-item';
-            item.textContent = topic.title;
-            if (topic.path) { 
-                const pathEl = document.createElement('div');
-                pathEl.className = 'text-xs text-gray-500 mt-1';
-                pathEl.textContent = topic.path.split(' > ').slice(0, -1).join(' > ');
-                item.appendChild(pathEl);
-            }
-            item.dataset.topicId = topic.id;
-            item.setAttribute('role', 'button');
-            item.setAttribute('tabindex', '0');
-            addTapListener(item, () => renderDetailPage(topic.id));
-            item.addEventListener('keydown', e => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    renderDetailPage(topic.id); 
-                }
-            });
-            resultsContainer.appendChild(item);
-        });
-    } else {
-        resultsContainer.innerHTML = 
-            '<p class="text-gray-500 text-center py-4">No topics found matching your search.</p>';
-    }
-    addTapListener(document.getElementById('clear-search-button'), () => {
-        searchInput.value = '';
-        renderInitialView(); 
-    });
-}
+//function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
+//    if (shouldAddHistory) { 
+//        addHistoryEntry({ 
+//            viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath 
+//        }); 
+//    }
+//    updateNavButtonsState(); 
+//    contentArea.innerHTML = `<div class="flex justify-between items-center mb-3">
+//        <p class="text-gray-700 font-medium">Results for "${escapeHTML(searchTerm)}":</p>
+//        <button id="clear-search-button" class="text-sm text-blue-600 hover:underline">Show All Categories</button>
+//    </div>
+//    <div id="results-container" class="space-y-2"></div>`;
+//    const resultsContainer = document.getElementById('results-container');
+//    if (filteredTopics.length > 0) { 
+//        filteredTopics.forEach(topic => { 
+//            const item = document.createElement('div');
+//            item.className = 'search-topic-item';
+//            item.textContent = topic.title;
+//            if (topic.path) { 
+//                const pathEl = document.createElement('div');
+//                pathEl.className = 'text-xs text-gray-500 mt-1';
+//                pathEl.textContent = topic.path.split(' > ').slice(0, -1).join(' > ');
+//                item.appendChild(pathEl);
+//            }
+//            item.dataset.topicId = topic.id;
+//            item.setAttribute('role', 'button');
+//            item.setAttribute('tabindex', '0');
+//            addTapListener(item, () => renderDetailPage(topic.id));
+//            item.addEventListener('keydown', e => {
+//                if (e.key === 'Enter' || e.key === ' ') {
+//                    e.preventDefault();
+//                    renderDetailPage(topic.id); 
+//                }
+//            });
+//            resultsContainer.appendChild(item);
+//        });
+//    } else {
+//        resultsContainer.innerHTML = 
+//            '<p class="text-gray-500 text-center py-4">No topics found matching your search.</p>';
+//    }
+//    addTapListener(document.getElementById('clear-search-button'), () => {
+//        searchInput.value = '';
+//        renderInitialView(); 
+//    });
+/}
 // Builds a nested list of categories/topics and appends it to the given container (handles expandable categories).
 function createHierarchicalList(items, container, level = 0) {
     container.innerHTML = '';
