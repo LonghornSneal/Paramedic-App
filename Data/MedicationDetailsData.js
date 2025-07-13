@@ -129,7 +129,7 @@ const MedicationDetailsData = [
         pediatricRx: ["Not approved for Pediatric Pts"]
     },
     {
-        id: 'epi-1-1000-adrenaline', title: "Epi 1:1,000 (Adrenaline)", // check epi name with other files
+        id: 'epi-1-1000-adrenaline', title: "Epi 1:1,000 (Adrenaline)", 
         concentration: "(10mg/10ml)",
         class: "Endogenous Catecholamine",
         indications: ["Anaphylaxis", "Bronchospasm"],
@@ -139,7 +139,7 @@ const MedicationDetailsData = [
         pediatricRx: ["Intervention: Anaphylaxis <10kg = 0.01mg/kg IM  (0.01ml/kg IM)\n   10-25kg = 0.15mg IM   (0.15ml IM)\n   25-60kg = 0.3mg IM   (0.3ml IM)\n   >60kg = 0.5mg IM   (0.5ml IM)", "*All weight classes: give prn every 5-15min   (max = 3 doses)", "Consultation → Epi IV Infusion p̄ 3rd dose of Epi", "Consultation: Bronchospasm = 0.3mg IM (0.3ml IM)"] // Fixed typo 'does' to 'dose'
     },
     {
-        id: 'epi-1-10000', title: "Epi 1:10,000",   //check epi name with other files
+        id: 'epi-1-10000', title: "Epi 1:10,000", 
         concentration: "(1mg/10ml)",
         class: "Endogenous Catecholamine",
         indications: ["VF or pVT", "Symptomatic ↓HR", "Cardiogenic Shock", "Post-ROSC Stabilization"],
@@ -149,7 +149,7 @@ const MedicationDetailsData = [
         pediatricRx: ["Cardiogenic Shock/Post Arrest Stabilization PEDIATRIC p157 - epinephrine 1mcg/kg IO or IVP"] // where did this p157 come from?????
     },
     {
-        id: 'epi-1-100000-push-dose-epi',  title: "Epi 1:100,000 \"Push-Dose Epi\"",  // check epi name with other files
+        id: 'epi-1-100000-push-dose-epi',  title: "Epi 1:100,000 \"Push-Dose Epi\"", 
         concentration: "(100mcg/10ml)",
         class: "Endogenous Catecholamine",
         indications: ["Symptomatic ↓HR", "Cardiogenic Shock", "Post-ROSC Stabilization"],
