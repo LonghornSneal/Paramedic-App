@@ -116,7 +116,7 @@ function initializeData(categoriesData, medDetailsData) {
     paramedicCategories = categoriesData;    // /Assign the global category array
     // Wipe/prepare lookup maps
     allDisplayableTopicsMap = {};
-    allSearchableTopics = [];
+//    /allSearchableTopics = []; //maybe need still maybe not
 
     // Build med details map for quick lookups
     medicationDataMap = {};
@@ -219,7 +219,7 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
 //    (topic.title || topic.id || '').toLowerCase().includes(term) ||
 //    (topic.path || '').toLowerCase().includes(term) );
 //    renderSearchResults(results, term, shouldAddHistory, highlightId, categoryPath); 
-/}
+//}
 
 
 // Top Right Navigation arrows
@@ -342,7 +342,7 @@ function escapeHTML(str) {
 //        searchInput.value = '';
 //        renderInitialView(); 
 //    });
-/}
+//}
 // Builds a nested list of categories/topics and appends it to the given container (handles expandable categories).
 function createHierarchicalList(items, container, level = 0) {
     container.innerHTML = '';
