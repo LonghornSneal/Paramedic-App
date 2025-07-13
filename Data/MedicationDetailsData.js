@@ -139,7 +139,7 @@ const MedicationDetailsData = [
         pediatricRx: ["Intervention: Anaphylaxis <10kg = 0.01mg/kg IM  (0.01ml/kg IM)\n   10-25kg = 0.15mg IM   (0.15ml IM)\n   25-60kg = 0.3mg IM   (0.3ml IM)\n   >60kg = 0.5mg IM   (0.5ml IM)", "*All weight classes: give prn every 5-15min   (max = 3 doses)", "Consultation → Epi IV Infusion p̄ 3rd dose of Epi", "Consultation: Bronchospasm = 0.3mg IM (0.3ml IM)"] // Fixed typo 'does' to 'dose'
     },
     {
-        id: 'epi-1-10,000', title: "Epi 1:10,000",   //check epi name with other files
+        id: 'epi-1-10000', title: "Epi 1:10,000",   //check epi name with other files
         concentration: "(1mg/10ml)",
         class: "Endogenous Catecholamine",
         indications: ["VF or pVT", "Symptomatic ↓HR", "Cardiogenic Shock", "Post-ROSC Stabilization"],
