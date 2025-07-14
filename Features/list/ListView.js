@@ -18,7 +18,7 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
         });
     }
     updateNavButtonsState();
-}:contentReference[oaicite:5]{index=5}:contentReference[oaicite:6]{index=6}:contentReference[oaicite:7]{index=7}
+} //:contentReference[oaicite:5]{index=5}:contentReference[oaicite:6]{index=6}:contentReference[oaicite:7]{index=7}
 
 // Expands categories along the given path and highlights the specified topic, then re-renders the list.
 function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { 
@@ -37,7 +37,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
         const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
         if (topicEl) topicEl.classList.add('recently-viewed'); 
     } 
-}:contentReference[oaicite:8]{index=8}:contentReference[oaicite:9]{index=9}
+} //:contentReference[oaicite:8]{index=8}:contentReference[oaicite:9]{index=9}
 
 // Builds a nested list of categories and topics, appending it to the given container. Handles expandable categories.
 function createHierarchicalList(items, container, level = 0) {
@@ -90,4 +90,4 @@ function createHierarchicalList(items, container, level = 0) {
             container.appendChild(row); 
         }
     });
-}:contentReference[oaicite:10]{index=10}:contentReference[oaicite:11]{index=11}:contentReference[oaicite:12]{index=12}:contentReference[oaicite:13]{index=13}:contentReference[oaicite:14]{index=14}:contentReference[oaicite:15]{index=15}
+} //:contentReference[oaicite:10]{index=10}:contentReference[oaicite:11]{index=11}:contentReference[oaicite:12]{index=12}:contentReference[oaicite:13]{index=13}:contentReference[oaicite:14]{index=14}:contentReference[oaicite:15]{index=15}
