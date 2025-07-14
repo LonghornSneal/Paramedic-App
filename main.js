@@ -208,17 +208,17 @@ function initializeData(categoriesData, medDetailsData) {
 //}
 
 // Attaches click handlers to elements with class `.toggle-info` to show or hide their hidden info text.
-function attachToggleInfoHandlers(container) {
-    container.querySelectorAll('.toggle-info').forEach(el => { 
-        el.onclick = function(e) { 
-            e.stopPropagation();
-            const info = el.querySelector('.info-text');
-            const arrow = el.querySelector('.arrow'); 
-            if (arrow) arrow.classList.toggle('rotate');
-            if (info) info.classList.toggle('hidden'); 
-        }; 
-    }); 
-}
+//function attachToggleInfoHandlers(container) {
+//    container.querySelectorAll('.toggle-info').forEach(el => { 
+//        el.onclick = function(e) { 
+//            e.stopPropagation();
+//            const info = el.querySelector('.info-text');
+//            const arrow = el.querySelector('.arrow'); 
+//            if (arrow) arrow.classList.toggle('rotate');
+//            if (info) info.classList.toggle('hidden'); 
+//        }; 
+//    }); 
+//}
 
 // Attaches click handlers to collapsible category headers in the detail view to toggle their visibility.
 //function attachToggleCategoryHandlers(container) {      
