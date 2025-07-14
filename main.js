@@ -314,16 +314,16 @@ function attachToggleInfoHandlers(container) {
 
 
 // Generates an HTML `<ul>` list for an array of detail items, or a placeholder if the array is empty.
-function createDetailList(itemsArray) {
-    if (!itemsArray || itemsArray.length === 0) {
-        return '<p class="text-gray-500 italic">None listed.</p>'; 
-    }
-    const listItemsHtml = itemsArray.map(it => {
-        return `<li>${parseTextMarkup(it)}</li>`;
-    })
-    .join('');
-    return `<ul class="detail-list">${listItemsHtml}</ul>`; 
-}
+//function createDetailList(itemsArray) {
+//    if (!itemsArray || itemsArray.length === 0) {
+//        return '<p class="text-gray-500 italic">None listed.</p>'; 
+//    }
+//    const listItemsHtml = itemsArray.map(it => {
+//        return `<li>${parseTextMarkup(it)}</li>`;
+//    })
+//    .join('');
+//    return `<ul class="detail-list">${listItemsHtml}</ul>`; 
+//}
 
 // Returns an HTML snippet for a detail text block, or a default "Not specified" message if empty.
 //function createDetailText(textBlock) {
