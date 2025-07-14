@@ -177,22 +177,22 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
 
 // Top Right Navigation arrows
 // Updates the disabled state of the Back/Forward navigation buttons based on history position.
-function updateNavButtonsState() { 
-    if (!navBackButton || !navForwardButton) return;
-    navBackButton.disabled = currentHistoryIndex <= 0;
-    navForwardButton.disabled = currentHistoryIndex >= navigationHistory.length - 1; 
-}
+//function updateNavButtonsState() { 
+//    if (!navBackButton || !navForwardButton) return;
+//    navBackButton.disabled = currentHistoryIndex <= 0;
+//    navForwardButton.disabled = currentHistoryIndex >= navigationHistory.length - 1; 
+//}
 
 // Adds a new entry to the navigation history and updates the current history index.
-function addHistoryEntry(entry) { 
-    if (isNavigatingViaHistory) return;
-    if (currentHistoryIndex < navigationHistory.length - 1) { 
-        navigationHistory = navigationHistory.slice(0, currentHistoryIndex + 1); 
-    }
-    navigationHistory.push(entry);
-    currentHistoryIndex = navigationHistory.length - 1;
-    updateNavButtonsState(); 
-}
+//function addHistoryEntry(entry) { 
+//    if (isNavigatingViaHistory) return;
+//    if (currentHistoryIndex < navigationHistory.length - 1) { 
+//        navigationHistory = navigationHistory.slice(0, currentHistoryIndex + 1); 
+//    }
+//    navigationHistory.push(entry);
+//    currentHistoryIndex = navigationHistory.length - 1;
+//    updateNavButtonsState(); 
+//}
 
 
 // Expands categories along the given path and highlights the specified topic (then re-renders the list).
