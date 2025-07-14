@@ -1,9 +1,6 @@
 // --- Global Variables ---
 let searchInput, patientSidebar, contentArea, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
 let medicationDataMap = {};
-// //let navigationHistory = [];
-// //let currentHistoryIndex = -1;
-// //let isNavigatingViaHistory = false;
 let allDisplayableTopicsMap = {};
 let paramedicCategories = []; // This must be a global var!
 
@@ -63,14 +60,6 @@ function initApp() {
 
     attachSearchHandlers();  // Calls the function from Features/search/Search.js
     attachNavHandlers();
-    // Now initialize data structures from globals   // These should be loaded BEFORE this script runs (by script order in index.html)
-
-    // Navigation buttons
- //   if (navBackButton && navForwardButton) {
-//        addTapListener(navBackButton, () => navigateViaHistory(-1));
-//        addTapListener(navForwardButton, () => navigateViaHistory(1)); 
-//    }
-
 
     // Now initialize data structures from globals   // These should be loaded BEFORE this script runs (by script order in index.html)
     if (window.ParamedicCategoriesData && window.MedicationDetailsData) {
@@ -175,26 +164,6 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
 }
 
 
-// Top Right Navigation arrows
-// Updates the disabled state of the Back/Forward navigation buttons based on history position.
-//function updateNavButtonsState() { 
-//    if (!navBackButton || !navForwardButton) return;
-//    navBackButton.disabled = currentHistoryIndex <= 0;
-//    navForwardButton.disabled = currentHistoryIndex >= navigationHistory.length - 1; 
-//}
-
-// Adds a new entry to the navigation history and updates the current history index.
-//function addHistoryEntry(entry) { 
-//    if (isNavigatingViaHistory) return;
-//    if (currentHistoryIndex < navigationHistory.length - 1) { 
-//        navigationHistory = navigationHistory.slice(0, currentHistoryIndex + 1); 
-//    }
-//    navigationHistory.push(entry);
-//    currentHistoryIndex = navigationHistory.length - 1;
-//    updateNavButtonsState(); 
-//}
-
-
 // Expands categories along the given path and highlights the specified topic (then re-renders the list).
 // Note: We also ensure contentArea is defined locally. The category list items still need a way to be identified by category ID if we ever wanted to manipulate them directly, so as an additional improvement, we can modify createHierarchicalList to set a data-category-id attribute on category rows: // Inside createHierarchicalList, in the category branch: row.dataset.categoryId = item.id;
 function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { 
@@ -214,32 +183,6 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
         if (topicEl) topicEl.classList.add('recently-viewed'); 
     } 
 }
-
-
-    // Moves through navigation history by the given direction (-1 for back, 1 for forward) and renders the appropriate view.
-//function navigateViaHistory(direction) {
-//    if ((direction === -1 && currentHistoryIndex <= 0) || (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return;
-//    isNavigatingViaHistory = true;
-//    currentHistoryIndex += direction;
-//    const state = navigationHistory[currentHistoryIndex];
-//    if (state.viewType === 'list') {
-//        //  highlight last viewed topic when going back: provide its ID and category path to handleSearch
-//        if (direction === -1 && navigationHistory[currentHistoryIndex+1]?.viewType === 'detail') {
-//            const prevTopicId = navigationHistory[currentHistoryIndex+1].contentId;
-//            const prevCatPath = allDisplayableTopicsMap[prevTopicId]?.categoryPath || [];
-//            searchInput.value =  '';
-//            handleSearch(false, prevTopicId, prevCatPath);
-//        } else {
-//            searchInput.value = state.contentId || '';
-//            handleSearch(false, state.highlightTopicId, state.categoryPath || []);
-//        }
-//    } else if (state.viewType === 'detail') { 
-//        renderDetailPage(state.contentId, false, false); 
-//    }
-//    updateNavButtonsState();
-//    isNavigatingViaHistory = false; 
-//}
-
 
 // Escapes special HTML characters in a string (e.g. `&`, `<`, `>`, quotes).
 function escapeHTML(str) {
@@ -301,7 +244,6 @@ function createHierarchicalList(items, container, level = 0) {
     });
 }
 
-
 // Renders the detailed view for a given topic (with all detail sections and warnings), and updates history if needed. 
 // Collapsible sections for details (ALS Medications)
 function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) {
@@ -349,7 +291,6 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
     
 }
 
-
 function findAlsMedTopicIndex(children, topicId) {
     let idx = children.findIndex(child => child.id === topicId);
     if (idx !== -1) return idx;
@@ -365,7 +306,6 @@ function findAlsMedTopicIndex(children, topicId) {
     }
     return -1;
 }
-
 
 // Attaches click handlers to elements with class `.toggle-info` to show or hide their hidden info text.
 function attachToggleInfoHandlers(container) {
@@ -510,58 +450,6 @@ function addTapListener(element, handler) {
     element.addEventListener('click', activate);
     element.addEventListener('keypress', activate); 
 }
-
-
-
-// Ensures the header contains nav buttons and search input, adding them if missing.
-// function ensureHeaderUI() { const header = document.querySelector('header');
-//    if (!header) return; // Add app title if missing // Always ensure nav buttons and search input are present and in correct order
-//    let navBar = header.querySelector('.header-nav-bar');
-//    if (!navBar) { 
-//        navBar = document.createElement('div');
-//        navBar.className = 'header-nav-bar flex items-center space-x-2';
-//        header.appendChild(navBar); 
-//    }
-
-
-    // Clear navBar and re-add in correct order
-//    navBar.innerHTML = '';
-    // Back button
-//    let backBtn = document.getElementById('nav-back-button');
-//    if (!backBtn) { 
-//        backBtn = document.createElement('button');
-//        backBtn.id = 'nav-back-button';
-//        backBtn.className = 'header-nav-button p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 focus:ring-2 focus:ring-blue-400';
-//        backBtn.setAttribute('aria-label', 'Back');
-//        backBtn.setAttribute('title', 'Back');
-//        backBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>';
-//    }
-//    navBar.appendChild(backBtn);
-    // Forward button
-//    let forwardBtn = document.getElementById('nav-forward-button');
-//    if (!forwardBtn) { 
-//        forwardBtn = document.createElement('button');
-//        forwardBtn.id = 'nav-forward-button';
-//        forwardBtn.className = 'header-nav-button p-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 focus:ring-2 focus:ring-blue-400';
-//        forwardBtn.setAttribute('aria-label', 'Forward');
-//        forwardBtn.setAttribute('title', 'Forward');
-//        forwardBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>';
-//    }
-//    navBar.appendChild(forwardBtn);
-    // Search input
-//    let search = document.getElementById('searchInput');
-//    if (!search) { 
-//        search = document.createElement('input');
-//        search.id = 'searchInput';
-//        search.type = 'text';
-//        search.placeholder = 'Search...';
-//        search.className = 'ml-4 px-3 py-2 rounded-md border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 w-64';
-//        search.autocomplete = 'off'; 
-//   }
-//    navBar.appendChild(search);
-//    navBackButton = backBtn;
-//    navForwardButton = forwardBtn;
-//    searchInput = search;
 
 // Enables autocomplete suggestions for a textarea input field.
 function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceSet) {
