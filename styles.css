@@ -1,14 +1,3 @@
-/*
-html {
-          -webkit-text-size-adjust: 100%;      / Safari, iOS, Chrome /
-          -moz-text-size-adjust: 100%;         / Firefox /
-          -ms-text-size-adjust: 100%;          / IE, old Edge /
-           text-size-adjust: 100%;             / Standard property /
-} */ 
-/* Basic reset and typography 
-  body, h1, h2, ul, li, p, button, input
-  margin: 0;
-  padding: 0; */
  body { font-family: 'Inter', sans-serif; line-height: 1.5; background: #fdfdfd;  /* light background for readability */
   color: #000; overscroll-behavior-y: contain; display: flex; flex-direction: column;
   min-height: calc(var(--vh, 1vh) * 100); }
@@ -91,7 +80,14 @@ html {
     text-decoration-color: #15803d; text-underline-offset: 2px; }
   .toggle-info:hover { color: #065f46; background-color: #d1fae5; }
   .toggle-info .info-text { margin-left: 0.25rem; }
-  .toggle-category { cursor: pointer; display: flex; justify-content: flex-start; align-items: center; }
+  .toggle-category {
+    display: flex;
+    justify-content: flex-start; /* place arrow icon next to the text (was space-between) */
+    align-items: center;  /* vertically center the icon and text */
+  }
+
+
+/*   //{ cursor: pointer; display: flex; justify-content: flex-start; align-items: center; }/   */
   .arrow { display: inline-block; margin-right: 0.5rem; transition: transform 0.2s; }
     .arrow.rotate { transform: rotate(90deg); }
 
