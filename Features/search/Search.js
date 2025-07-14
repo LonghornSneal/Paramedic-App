@@ -56,7 +56,10 @@ function handleSearch(shouldAddHistory = true, highlightId = null, categoryPath 
 function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
     if (shouldAddHistory) {
         addHistoryEntry({ 
-            viewType: 'list', contentId: searchTerm, highlightTopicId: highlightId, categoryPath 
+            viewType: 'list', 
+            contentId: searchTerm, 
+            highlightTopicId: highlightId, 
+            categoryPath 
         });
     }
     updateNavButtonsState();  // refresh back/forward button state
