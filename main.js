@@ -352,75 +352,75 @@ function addTapListener(element, handler) {
 }
 
 // Enables autocomplete suggestions for a textarea input field.
-function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceSet) {
-    const textarea = document.getElementById(textareaId);
-    const suggestionsContainer = document.getElementById(suggestionsContainerId);
-    textarea.addEventListener('input', function(e) { 
-        const inputText = e.target.value;
-        const currentSegment = inputText.split(',').pop().trim().toLowerCase();
-        if (currentSegment.length === 0) { 
-            suggestionsContainer.classList.add('hidden');
-            suggestionsContainer.innerHTML = ''; return; 
-        }
-        const filtered = Array.from(suggestionSourceSet)
-        .filter(function(s) { return s.toLowerCase().includes(currentSegment); });
-        if (filtered.length > 0) { 
-            suggestionsContainer.innerHTML = filtered.map(function(s) {
-                return '<div class="autocomplete-suggestion-item" data-value="' + s + '">' + s + '</div>';
-            })
-            .join(''); 
-            suggestionsContainer.classList.remove('hidden');
-        } else { 
-            suggestionsContainer.classList.add('hidden'); 
-        }
-   });
-    addTapListener(suggestionsContainer, function(e) {
-        if (e.target.classList.contains('autocomplete-suggestion-item')) { 
-            const selectedValue = e.target.dataset.value;
-            let existingValues = textarea.value.split(',').map(function(v) { 
-                return v.trim(); 
-            })
-            .filter(function(v) { 
-                return v; 
-            });
-            // Remove the segment currently being typed
-            if (existingValues.length > 0 && textarea.value.trim().slice(-1) !== ',') { 
-                existingValues.pop(); 
-            }
-            // Avoid duplicate entries (case-insensitive)
-            if (!existingValues.map(function(v) { 
-                return v.toLowerCase(); 
-            })
-            .includes(selectedValue.toLowerCase())) {
-                existingValues.push(selectedValue); 
-            }
-            textarea.value = existingValues.join(', ') + (existingValues.length > 0 ? ", " : "");
-            suggestionsContainer.classList.add('hidden');
-            suggestionsContainer.innerHTML = '';
-            textarea.focus(); updatePatientData(); 
-        } // Update patient data after selection
-    });
-    textarea.addEventListener('blur', function() {
-        // Delay hiding to allow click on suggestions
-        setTimeout(function() { 
-            suggestionsContainer.classList.add('hidden'); 
-        }, 150); 
-    });
-    textarea.addEventListener('focus', function(e) { 
-        const inputText = e.target.value;
-        const currentSegment = inputText.split(',').pop().trim().toLowerCase();
-        if (currentSegment.length > 0) { 
-            const filtered = Array.from(suggestionSourceSet)
-            .filter(function(s) { 
-                return s.toLowerCase().includes(currentSegment); 
-            });
-            if (filtered.length > 0) {
-                suggestionsContainer.innerHTML = filtered.map(function(s) { 
-                    return '<div class="autocomplete-suggestion-item" data-value="' + s + '">' + s + '</div>'; 
-                })
-                .join('');
-                suggestionsContainer.classList.remove('hidden'); 
-            };
-        };
-    }); 
-}
+//function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceSet) {
+//    const textarea = document.getElementById(textareaId);
+//    const suggestionsContainer = document.getElementById(suggestionsContainerId);
+//    textarea.addEventListener('input', function(e) { 
+//        const inputText = e.target.value;
+//        const currentSegment = inputText.split(',').pop().trim().toLowerCase();
+//        if (currentSegment.length === 0) { 
+//            suggestionsContainer.classList.add('hidden');
+//            suggestionsContainer.innerHTML = ''; return; 
+//        }
+//        const filtered = Array.from(suggestionSourceSet)
+//        .filter(function(s) { return s.toLowerCase().includes(currentSegment); });
+//        if (filtered.length > 0) { 
+//            suggestionsContainer.innerHTML = filtered.map(function(s) {
+//                return '<div class="autocomplete-suggestion-item" data-value="' + s + '">' + s + '</div>';
+//            })
+//            .join(''); 
+//            suggestionsContainer.classList.remove('hidden');
+//        } else { 
+//            suggestionsContainer.classList.add('hidden'); 
+//        }
+//   });
+//    addTapListener(suggestionsContainer, function(e) {
+//        if (e.target.classList.contains('autocomplete-suggestion-item')) { 
+//            const selectedValue = e.target.dataset.value;
+//            let existingValues = textarea.value.split(',').map(function(v) { 
+//                return v.trim(); 
+//            })
+//            .filter(function(v) { 
+//                return v; 
+//            });
+//            // Remove the segment currently being typed
+//            if (existingValues.length > 0 && textarea.value.trim().slice(-1) !== ',') { 
+//                existingValues.pop(); 
+//            }
+//            // Avoid duplicate entries (case-insensitive)
+//            if (!existingValues.map(function(v) { 
+//                return v.toLowerCase(); 
+//            })
+//            .includes(selectedValue.toLowerCase())) {
+//                existingValues.push(selectedValue); 
+//            }
+//            textarea.value = existingValues.join(', ') + (existingValues.length > 0 ? ", " : "");
+//            suggestionsContainer.classList.add('hidden');
+//            suggestionsContainer.innerHTML = '';
+//            textarea.focus(); updatePatientData(); 
+//        } // Update patient data after selection
+//    });
+//    textarea.addEventListener('blur', function() {
+//        // Delay hiding to allow click on suggestions
+//        setTimeout(function() { 
+//            suggestionsContainer.classList.add('hidden'); 
+//        }, 150); 
+//    });
+//    textarea.addEventListener('focus', function(e) { 
+//        const inputText = e.target.value;
+//        const currentSegment = inputText.split(',').pop().trim().toLowerCase();
+//        if (currentSegment.length > 0) { 
+//            const filtered = Array.from(suggestionSourceSet)
+//            .filter(function(s) { 
+//                return s.toLowerCase().includes(currentSegment); 
+//            });
+//            if (filtered.length > 0) {
+//                suggestionsContainer.innerHTML = filtered.map(function(s) { 
+//                    return '<div class="autocomplete-suggestion-item" data-value="' + s + '">' + s + '</div>'; 
+//                })
+//                .join('');
+//                suggestionsContainer.classList.remove('hidden'); 
+//            };
+//        };
+//    }); 
+//}
