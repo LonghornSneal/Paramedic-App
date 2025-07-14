@@ -87,7 +87,7 @@ function initApp() {
         el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300')); 
     });
     // Finally, render the initial category list view
-    renderInitialView(true); 
+//    renderInitialView(true); 
 }
 
 // Initializes global data structures for categories and medications.
