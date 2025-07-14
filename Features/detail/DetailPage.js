@@ -25,7 +25,10 @@ function parseTextMarkup(text) {
     safeText = safeText.replace(/\{\{redul:(.+?)\}\}/g, (_, t) => `<span class="text-red-600 font-semibold underline decoration-red-600">${t}</span>`);
     safeText = safeText.replace(/\{\{orange:(.+?)\}\}/g, (_, t) => `<span class="text-orange-600">${t}</span>`);
     safeText = safeText.replace(/\{\{blackul:(.+?)\}\}/g, (_, t) => `<span class="font-bold underline decoration-black">${t}</span>`);
-    safeText = safeText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    safeText = safeText.replace(/\[\[(.+?)\|(.+?)\]\]/g,  
+        (_, display, info) => `<span class="toggle-info">**<svg class="arrow h-4 w-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>**${display}<span class="info-text hidden">${info}</span></span>`);  
+    safeText = safeText.replace(/\{\{red:(.+?)\}\}/g, (_, t) => `<span class="text-red-600 font-semibold">${t}</span>`);
+
     return safeText; 
 }//:contentReference[oaicite:16]{index=16}:contentReference[oaicite:17]{index=17}:contentReference[oaicite:18]{index=18}
 
