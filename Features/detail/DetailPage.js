@@ -7,6 +7,9 @@
 // appendTopicWarnings(topic) is already defined in Features/Warnings.js, 
 // and functions like addHistoryEntry and updateNavButtonsState are in Navigation.js. 
 // Ensure those scripts are loaded beforehand.
+// Placement in HTML: 
+// Include this script before main.js and before Features/search/Search.js 
+// (since the search module calls renderDetailPage).
 
 // Converts special markup in text (e.g. **bold**, [[display|info]]) into formatted HTML, and escapes HTML characters.
 function parseTextMarkup(text) {
