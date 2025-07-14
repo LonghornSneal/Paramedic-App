@@ -1,22 +1,34 @@
 // Sets up a Table of Contents for detail sections and injects hidden anchor elements for external use (automation).
-function setupSlugAnchors(tocData) {
-  if (typeof document === 'undefined') return;
-
-  // Hidden container of slug IDs for external automation
-  if (typeof slugIDs !== 'undefined' && Array.isArray(slugIDs)) {
-    if (!document.getElementById('slug-id-container')) {
-      const container = document.createElement('div');
-      container.id = 'slug-id-container';
-      container.classList.add('hidden');
-      slugIDs.forEach(id => {
-        const div = document.createElement('div');
-        div.id = id;
-        div.dataset.branch = id;
-        container.appendChild(div);
-      });
-      document.body.appendChild(container);
-    }
+function setupSlugAnchors(sectionIds) {
+  if (!sectionIds || sectionIds.length === 0) return;  // nothing to do if no sections
+  var tocNav = document.createElement('nav');
+  tocNav.id = 'section-toc';
+  tocNav.className = 'section-toc';
+  // Generate anchor links for each section**  
+  tocNav.innerHTML = sectionIds.map(function(id) {
+    var titleText = id.replace(/-/g, ' ');  // e.g., "adult-dose" -> "adult dose"**  
+      return '<a href="#' + id + '">' + titleText + '</a>';
+    }).join(' | ');
+    var contentDiv = document.getElementById('content-area'); 
+    contentDiv.insertBefore(tocNav, contentDiv.firstChild);
   }
+//function setupSlugAnchors(tocData) {
+//  if (typeof document === 'undefined') return;
+  // Hidden container of slug IDs for external automation
+//  if (typeof slugIDs !== 'undefined' && Array.isArray(slugIDs)) {
+//    if (!document.getElementById('slug-id-container')) {
+//      const container = document.createElement('div');
+//      container.id = 'slug-id-container';
+//      container.classList.add('hidden');
+//      slugIDs.forEach(id => {
+//        const div = document.createElement('div');
+//        div.id = id;
+//        div.dataset.branch = id;
+//        container.appendChild(div);
+//      });
+//      document.body.appendChild(container);
+//    }
+//  }
 
   if (Array.isArray(tocData) && tocData.length > 0) {
     const contentArea = document.getElementById('content-area');
