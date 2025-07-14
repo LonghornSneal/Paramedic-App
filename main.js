@@ -141,49 +141,6 @@ function initializeData(categoriesData, medDetailsData) {
     });
 }
 
-// Renders the main category list view (home screen) and highlights a topic if provided.
-//function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
-//    contentArea.innerHTML = '';  // Clear
-
-    // Render the hierarchical list of categories
- //   const listContainer = document.createElement('div');
-//    createHierarchicalList(paramedicCategories, listContainer, 0);
-//    contentArea.appendChild(listContainer);
-
-    // Optionally expand/highlight
-//    openCategoriesAndHighlight(categoryPath, highlightId);
-//    if (shouldAddHistory) {
-//        addHistoryEntry({ 
-//            viewType: 'list', 
-//            contentId: '', 
-//            highlightTopicId: highlightId, 
-//            categoryPath 
-//        });
-//    }
-//    updateNavButtonsState();
-//}
-
-
-// Expands categories along the given path and highlights the specified topic (then re-renders the list).
-// Note: We also ensure contentArea is defined locally. The category list items still need a way to be identified by category ID if we ever wanted to manipulate them directly, so as an additional improvement, we can modify createHierarchicalList to set a data-category-id attribute on category rows: // Inside createHierarchicalList, in the category branch: row.dataset.categoryId = item.id;
-//function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { 
-    // Mark each category in the path as expanded
-//    categoryPath.forEach(catId => { 
-//        const catItem = allDisplayableTopicsMap[catId];
-//        if (catItem) catItem.expanded = true; 
-//    });
-    // Re-render the category list with updated expansion states
-//    contentArea.innerHTML = ''; 
-//    const listContainer = document.createElement('div');
-//    createHierarchicalList(paramedicCategories, listContainer, 0);
-//    contentArea.appendChild(listContainer);
-    // Highlight the specified topic, if provided
-//    if (highlightId) { 
-//        const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
-//        if (topicEl) topicEl.classList.add('recently-viewed'); 
-//    } 
-//}
-
 // Escapes special HTML characters in a string (e.g. `&`, `<`, `>`, quotes).
 function escapeHTML(str) {
     const escapeMap = { 
@@ -192,120 +149,63 @@ function escapeHTML(str) {
     return str.replace(/[&<>"']/g, char => escapeMap[char] || char); 
 }
 
-
-// Builds a nested list of categories/topics and appends it to the given container (handles expandable categories).
-//function createHierarchicalList(items, container, level = 0) {
-//    container.innerHTML = '';
-//    items.forEach(item => { 
-//        const row = document.createElement('div');
-//        row.className = 'flex items-center py-1 pl-' + (level * 4) + ' group';
-//        if (item.type === 'category') {     // Collapsible blue arrow
-//            const arrow = document.createElement('button');
-//            arrow.setAttribute('aria-label', 'Expand/collapse');
-//            arrow.className = 'arrow mr-2 focus:outline-none focus:ring-2 focus:ring-blue-400';
-//            arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" style="transform: rotate(${item.expanded ? 90 : 0}deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>`;
-//            addTapListener(arrow, () => { 
-//                item.expanded = !item.expanded;
-//                createHierarchicalList(items, container, level); 
-//            });
-//            row.appendChild(arrow);
-//            // Category label
-//            const label = document.createElement('span');
-//            label.className = 'cursor-pointer hover:underline flex-1 font-semibold';
-//            label.textContent = item.title;
-//            addTapListener(label, () => { 
-//                item.expanded = !item.expanded;
-//                createHierarchicalList(items, container, level); 
-//            });
-//            row.appendChild(label);
-//            container.appendChild(row);
-//            if (item.expanded && item.children && item.children.length > 0) { 
-//                const childContainer = document.createElement('div');
-//                childContainer.className = 'ml-4 border-l border-blue-100 pl-2';
-//                createHierarchicalList(item.children, childContainer, level + 1);
-//                container.appendChild(childContainer); 
-//            }
-//        } else if (item.type === 'topic') { 
-//            const topicLink = document.createElement('a');
-//            topicLink.className = 'topic-link-item flex-1';
-//            topicLink.textContent = item.title;
-//            topicLink.href = `#${item.id}`;
-//            topicLink.dataset.topicId = item.id;
-//            topicLink.setAttribute('role', 'button');
-//            topicLink.setAttribute('tabindex', '0');
-//            addTapListener(topicLink, e => { 
-//                e.preventDefault();
-//                renderDetailPage(item.id); 
-//            });
-//            row.appendChild(document.createElement('span')); // spacer for arrow alignment
-//            row.appendChild(topicLink);
-//            container.appendChild(row); 
-//        }
-//    });
-//}
-
 // Renders the detailed view for a given topic (with all detail sections and warnings), and updates history if needed. 
 // Collapsible sections for details (ALS Medications)
-function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) {
-    if (!allDisplayableTopicsMap[topicId]) { 
-        contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; 
-        return; 
-    }
-    const topic = allDisplayableTopicsMap[topicId];
-    contentArea.innerHTML = '';
-    const headerEl = document.createElement('h2'); // Header/title
-    headerEl.textContent = topic.title || topic.name || topic.id;
-    headerEl.className = 'topic-h2 font-semibold text-lg mb-4';
-    headerEl.dataset.topicId = topic.id; 
-    contentArea.appendChild(headerEl); 
-    // Insert warning alerts (if any) at the top of the detail page
-    const warningsHtml = appendTopicWarnings(topic);
-    if (warningsHtml) {
-        contentArea.insertAdjacentHTML('beforeend', warningsHtml);
-    }
-    appendTopicDetails(topic);
-
-   
-    attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
+//function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) {
+//    if (!allDisplayableTopicsMap[topicId]) { 
+//        contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; 
+//        return; 
+//    }
+//    const topic = allDisplayableTopicsMap[topicId];
+//    contentArea.innerHTML = '';
+//    const headerEl = document.createElement('h2'); // Header/title
+//    headerEl.textContent = topic.title || topic.name || topic.id;
+//    headerEl.className = 'topic-h2 font-semibold text-lg mb-4';
+//    headerEl.dataset.topicId = topic.id; 
+//    contentArea.appendChild(headerEl); 
+//    // Insert warning alerts (if any) at the top of the detail page
+//    const warningsHtml = appendTopicWarnings(topic);
+//    if (warningsHtml) {
+//        contentArea.insertAdjacentHTML('beforeend', warningsHtml);
+//    }
+//    appendTopicDetails(topic); 
+//    attachToggleInfoHandlers(contentArea);   // Attach click handlers for any toggleable info sections (if present)
     // Attach handlers to enable collapsing/expanding of the new detail sections (blue arrow rotation and content toggle).
-    attachToggleCategoryHandlers(contentArea);
+//    attachToggleCategoryHandlers(contentArea);  
+//    // Description & History block: append topic description if present, update history state, and scroll to top if requested
+//    if (topic.description) { 
+//        const desc = document.createElement('div');    // If a topic description exists and no slug anchors were added, show the description
+//        desc.className = 'mb-4'; 
+//        desc.textContent = topic.description; 
+//        contentArea.appendChild(desc); 
+//    }
+//    if (shouldAddHistory) {
+//        addHistoryEntry({ 
+//            viewType: 'detail', contentId: topicId 
+//        }); 
+//    }
+//    if (scrollToTop) { 
+//        contentArea.scrollIntoView({ 
+//            behavior: 'auto', block: 'start' 
+//        }); 
+//    }   
+//}
 
-    
-    // Description & History block: append topic description if present, update history state, and scroll to top if requested
-    if (topic.description) { 
-        const desc = document.createElement('div');    // If a topic description exists and no slug anchors were added, show the description
-        desc.className = 'mb-4'; 
-        desc.textContent = topic.description; 
-        contentArea.appendChild(desc); 
-    }
-    if (shouldAddHistory) {
-        addHistoryEntry({ 
-            viewType: 'detail', contentId: topicId 
-        }); 
-    }
-    if (scrollToTop) { 
-        contentArea.scrollIntoView({ 
-            behavior: 'auto', block: 'start' 
-        }); 
-    }
-    
-}
-
-function findAlsMedTopicIndex(children, topicId) {
-    let idx = children.findIndex(child => child.id === topicId);
-    if (idx !== -1) return idx;
-    if (/^\d+-/.test(topicId)) {
-        const altId = topicId.replace(/^\d+-/, '');
-        idx = children.findIndex(child => child.id === altId);
-        if (idx !== -1) return idx;
-    }
-    const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topicId));
-    if (altId) {
-        idx = children.findIndex(child => child.id === altId);
-        if (idx !== -1) return idx;
-    }
-    return -1;
-}
+// //function findAlsMedTopicIndex(children, topicId) {
+//    let idx = children.findIndex(child => child.id === topicId);
+//    if (idx !== -1) return idx;
+//    if (/^\d+-/.test(topicId)) {
+//        const altId = topicId.replace(/^\d+-/, '');
+//        idx = children.findIndex(child => child.id === altId);
+//        if (idx !== -1) return idx;
+//    }
+//    const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topicId));
+//    if (altId) {
+//        idx = children.findIndex(child => child.id === altId);
+//        if (idx !== -1) return idx;
+//    }
+//    return -1;
+//}
 
 // Attaches click handlers to elements with class `.toggle-info` to show or hide their hidden info text.
 function attachToggleInfoHandlers(container) {
@@ -321,96 +221,96 @@ function attachToggleInfoHandlers(container) {
 }
 
 // Attaches click handlers to collapsible category headers in the detail view to toggle their visibility.
-function attachToggleCategoryHandlers(container) {      
-    container.querySelectorAll('.toggle-category').forEach(header => {
-        addTapListener(header, () => {
-            const arrow = header.querySelector('.arrow');
-            if (arrow) arrow.classList.toggle('rotate');
-            const content = header.nextElementSibling;
-            if (content) content.classList.toggle('hidden'); 
-        }); 
-    }); 
-}
+//function attachToggleCategoryHandlers(container) {      
+//    container.querySelectorAll('.toggle-category').forEach(header => {
+//        addTapListener(header, () => {
+//            const arrow = header.querySelector('.arrow');
+//            if (arrow) arrow.classList.toggle('rotate');
+//            const content = header.nextElementSibling;
+//            if (content) content.classList.toggle('hidden'); 
+//        }); 
+//    }); 
+//}
 
 // Converts special markup in a text (e.g. `**bold**`, `[[display|info]]`) into formatted HTML.
-function parseTextMarkup(text) {   // Escape HTML and replace special markup with styled spans
-    let safeText = text.replace(/&/g, "&amp;")
-                       .replace(/</g, "&lt;")
-                       .replace(/>/g, "&gt;");
-    safeText = safeText.replace(/\n/g, "<br>");
-    // AFTER: includes an arrow span with icon SVG before the display text
-    safeText = safeText.replace(/\[\[(.+?)\|(.+?)\]\]/g,
-        (_, display, info) => `<span class="toggle-info"><span class="arrow"></span>${display}<span class="info-text hidden">${info}</span></span>`);
-    safeText = safeText.replace(/\{\{red:(.+?)\}\}/g, 
-                (_, t) => `<span class="text-red-600 font-semibold">${t}</span>`);
-    safeText = safeText.replace(/\{\{redul:(.+?)\}\}/g, 
-                (_, t) => `<span class="text-red-600 font-semibold underline decoration-red-600">${t}</span>`);
-    safeText = safeText.replace(/\{\{orange:(.+?)\}\}/g, 
-                (_, t) => `<span class="text-orange-600">${t}</span>`);
-    safeText = safeText.replace(/\{\{blackul:(.+?)\}\}/g, 
-                (_, t) => `<span class="font-bold underline decoration-black">${t}</span>`);
-    safeText = safeText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-    return safeText; 
-}
+//function parseTextMarkup(text) {   // Escape HTML and replace special markup with styled spans
+//    let safeText = text.replace(/&/g, "&amp;")
+//                       .replace(/</g, "&lt;")
+//                       .replace(/>/g, "&gt;");
+//    safeText = safeText.replace(/\n/g, "<br>");
+//    // AFTER: includes an arrow span with icon SVG before the display text
+//    safeText = safeText.replace(/\[\[(.+?)\|(.+?)\]\]/g,
+//        (_, display, info) => `<span class="toggle-info"><span class="arrow"></span>${display}<span class="info-text hidden">${info}</span></span>`);
+//    safeText = safeText.replace(/\{\{red:(.+?)\}\}/g, 
+//                (_, t) => `<span class="text-red-600 font-semibold">${t}</span>`);
+//    safeText = safeText.replace(/\{\{redul:(.+?)\}\}/g, 
+//                (_, t) => `<span class="text-red-600 font-semibold underline decoration-red-600">${t}</span>`);
+//    safeText = safeText.replace(/\{\{orange:(.+?)\}\}/g, 
+//                (_, t) => `<span class="text-orange-600">${t}</span>`);
+//    safeText = safeText.replace(/\{\{blackul:(.+?)\}\}/g, 
+//                (_, t) => `<span class="font-bold underline decoration-black">${t}</span>`);
+//    safeText = safeText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+//    return safeText; 
+//}
 
 
-function appendTopicDetails(topic) {
+//function appendTopicDetails(topic) {
 //** Details block: retrieve topic details (including alternate ID fallback) and render each detail section or show a placeholder if none
-        let details = topic.details;
-        if (!details && topic.id?.match(/^\d+-/)) {
-            const altId = topic.id.replace(/^\d+-/, '');
-            details = allDisplayableTopicsMap[altId]?.details;
-        } else if (!details && topic.id && !topic.id.match(/^\d+-/)) {
-            const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
-            if (altId) details = allDisplayableTopicsMap[altId]?.details;
-        }
-        // Render details sections if available
-        if (details) {
-            const sections = [ 
-                { key: 'class', label: 'Class' },
-                { key: 'indications', label: 'Indications' },
-                { key: 'contraindications', label: 'Contraindications' },
-                { key: 'precautions', label: 'Precautions' },
-                { key: 'sideEffects', label: 'Significant Adverse/Side Effects' },
-                { key: 'adultRx', label: 'Adult Rx' },
-                { key: 'pediatricRx', label: 'Pediatric Rx' } 
-            ]; 
-            sections.forEach(sec => { 
-                if (!details[sec.key]) return; 
-                const wrapper = document.createElement('div');
-                wrapper.className = 'detail-section mb-3';
-                if (sec.key === 'adultRx') wrapper.classList.add('adult-section');
-                if (sec.key === 'pediatricRx') wrapper.classList.add('pediatric-section');
-                const title = document.createElement('div');
-                // Added 'toggle-category' class and pointer/flex styling to make section headers clickable for collapsing.
-                title.className = 'detail-section-title toggle-category cursor-pointer flex items-center'; 
-                // Inserted a blue arrow SVG icon and then the section label text (replacing the plain text title) to indicate collapsible section.
-                title.innerHTML = `<svg class="arrow h-4 w-4 text-blue-600 transition-transform duration-200 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>${sec.label}`; 
-                wrapper.appendChild(title);
-                let body; 
-                if (Array.isArray(details[sec.key])) {
-                    body = document.createElement('ul'); 
-                    body.className = 'detail-list';
-                    details[sec.key].forEach(line => {
-                        const li = document.createElement('li');
-                        li.innerHTML = parseTextMarkup ? parseTextMarkup(line) : line;
-                        body.appendChild(li);
-                    });
-                } else {
-                    body = document.createElement('div');
-                    body.className = 'detail-text';
-                    // set innerHTML...
-                    body.innerHTML = parseTextMarkup ? parseTextMarkup(details[sec.key]) : details[sec.key];
-                }
-                // Hide the section content by default; it will be revealed when the section header is clicked.
-                body.classList.add('hidden'); 
-                wrapper.appendChild(body);
-                contentArea.appendChild(wrapper); 
-            });  
-        } else { 
-            contentArea.insertAdjacentHTML('beforeend', `<div class="text-gray-500 italic">No detail information found for this item.</div>`);
-        }
-}
+//        let details = topic.details;
+//        if (!details && topic.id?.match(/^\d+-/)) {
+//            const altId = topic.id.replace(/^\d+-/, '');
+//            details = allDisplayableTopicsMap[altId]?.details;
+//        } else if (!details && topic.id && !topic.id.match(/^\d+-/)) {
+//            const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
+//            if (altId) details = allDisplayableTopicsMap[altId]?.details;
+//        }
+//        // Render details sections if available
+//        if (details) {
+//            const sections = [ 
+//                { key: 'class', label: 'Class' },
+//                { key: 'indications', label: 'Indications' },
+//                { key: 'contraindications', label: 'Contraindications' },
+//                { key: 'precautions', label: 'Precautions' },
+//                { key: 'sideEffects', label: 'Significant Adverse/Side Effects' },
+//                { key: 'adultRx', label: 'Adult Rx' },
+//                { key: 'pediatricRx', label: 'Pediatric Rx' } 
+//            ]; 
+//            sections.forEach(sec => { 
+//                if (!details[sec.key]) return; 
+//                const wrapper = document.createElement('div');
+//                wrapper.className = 'detail-section mb-3';
+//                if (sec.key === 'adultRx') wrapper.classList.add('adult-section');
+//                if (sec.key === 'pediatricRx') wrapper.classList.add('pediatric-section');
+//                const title = document.createElement('div');
+//                // Added 'toggle-category' class and pointer/flex styling to make section headers clickable for collapsing.
+//                title.className = 'detail-section-title toggle-category cursor-pointer flex items-center'; 
+//                // Inserted a blue arrow SVG icon and then the section label text (replacing the plain text title) to indicate collapsible section.
+//                title.innerHTML = `<svg class="arrow h-4 w-4 text-blue-600 transition-transform duration-200 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>${sec.label}`; 
+//                wrapper.appendChild(title);
+//                let body; 
+//                if (Array.isArray(details[sec.key])) {
+//                    body = document.createElement('ul'); 
+//                    body.className = 'detail-list';
+//                    details[sec.key].forEach(line => {
+//                        const li = document.createElement('li');
+//                        li.innerHTML = parseTextMarkup ? parseTextMarkup(line) : line;
+//                        body.appendChild(li);
+//                    });
+//                } else {
+//                    body = document.createElement('div');
+//                    body.className = 'detail-text';
+//                    // set innerHTML...
+//                    body.innerHTML = parseTextMarkup ? parseTextMarkup(details[sec.key]) : details[sec.key];
+//                }
+//                // Hide the section content by default; it will be revealed when the section header is clicked.
+//                body.classList.add('hidden'); 
+//                wrapper.appendChild(body);
+//                contentArea.appendChild(wrapper); 
+//            });  
+//        } else { 
+//            contentArea.insertAdjacentHTML('beforeend', `<div class="text-gray-500 italic">No detail information found for this item.</div>`);
+//        }
+//}
 
 
 // Generates an HTML `<ul>` list for an array of detail items, or a placeholder if the array is empty.
@@ -426,15 +326,15 @@ function createDetailList(itemsArray) {
 }
 
 // Returns an HTML snippet for a detail text block, or a default "Not specified" message if empty.
-function createDetailText(textBlock) {
-    if (!textBlock || textBlock.toString().trim() === '') {
-        return '<p class="text-gray-500 italic">Not specified.</p>'; 
-    }
-    const safeText = parseTextMarkup(textBlock.toString());
-    return `<div class="detail-text">${
-        safeText
-    }</div>`; 
-}
+//function createDetailText(textBlock) {
+//    if (!textBlock || textBlock.toString().trim() === '') {
+//        return '<p class="text-gray-500 italic">Not specified.</p>'; 
+//    }
+//    const safeText = parseTextMarkup(textBlock.toString());
+//    return `<div class="detail-text">${
+//        safeText
+//    }</div>`; 
+//}
     
 
 // Adds a universal click/keypress listener to an element to trigger the given handler.
