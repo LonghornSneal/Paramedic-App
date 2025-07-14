@@ -182,7 +182,7 @@ function initializeData(categoriesData, medDetailsData) {
 //        const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
 //        if (topicEl) topicEl.classList.add('recently-viewed'); 
 //    } 
-/}
+//}
 
 // Escapes special HTML characters in a string (e.g. `&`, `<`, `>`, quotes).
 function escapeHTML(str) {
