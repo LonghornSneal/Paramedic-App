@@ -1,10 +1,9 @@
 // --- Global Variables ---
 let searchInput, patientSidebar, contentArea, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
 let medicationDataMap = {};
-let navigationHistory = [];
-let currentHistoryIndex = -1;
-let isNavigatingViaHistory = false;
-//let allSearchableTopics = [];
+// //let navigationHistory = [];
+// //let currentHistoryIndex = -1;
+// //let isNavigatingViaHistory = false;
 let allDisplayableTopicsMap = {};
 let paramedicCategories = []; // This must be a global var!
 
@@ -63,13 +62,14 @@ function initApp() {
     }
 
     attachSearchHandlers();  // Calls the function from Features/search/Search.js
-
+    attachNavHandlers();
+    // Now initialize data structures from globals   // These should be loaded BEFORE this script runs (by script order in index.html)
 
     // Navigation buttons
-    if (navBackButton && navForwardButton) {
-        addTapListener(navBackButton, () => navigateViaHistory(-1));
-        addTapListener(navForwardButton, () => navigateViaHistory(1)); 
-    }
+ //   if (navBackButton && navForwardButton) {
+//        addTapListener(navBackButton, () => navigateViaHistory(-1));
+//        addTapListener(navForwardButton, () => navigateViaHistory(1)); 
+//    }
 
 
     // Now initialize data structures from globals   // These should be loaded BEFORE this script runs (by script order in index.html)
@@ -217,28 +217,28 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
 
 
     // Moves through navigation history by the given direction (-1 for back, 1 for forward) and renders the appropriate view.
-function navigateViaHistory(direction) {
-    if ((direction === -1 && currentHistoryIndex <= 0) || (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return;
-    isNavigatingViaHistory = true;
-    currentHistoryIndex += direction;
-    const state = navigationHistory[currentHistoryIndex];
-    if (state.viewType === 'list') {
-        //  highlight last viewed topic when going back: provide its ID and category path to handleSearch
-        if (direction === -1 && navigationHistory[currentHistoryIndex+1]?.viewType === 'detail') {
-            const prevTopicId = navigationHistory[currentHistoryIndex+1].contentId;
-            const prevCatPath = allDisplayableTopicsMap[prevTopicId]?.categoryPath || [];
-            searchInput.value =  '';
-            handleSearch(false, prevTopicId, prevCatPath);
-        } else {
-            searchInput.value = state.contentId || '';
-            handleSearch(false, state.highlightTopicId, state.categoryPath || []);
-        }
-    } else if (state.viewType === 'detail') { 
-        renderDetailPage(state.contentId, false, false); 
-    }
-    updateNavButtonsState();
-    isNavigatingViaHistory = false; 
-}
+//function navigateViaHistory(direction) {
+//    if ((direction === -1 && currentHistoryIndex <= 0) || (direction === 1 && currentHistoryIndex >= navigationHistory.length - 1)) return;
+//    isNavigatingViaHistory = true;
+//    currentHistoryIndex += direction;
+//    const state = navigationHistory[currentHistoryIndex];
+//    if (state.viewType === 'list') {
+//        //  highlight last viewed topic when going back: provide its ID and category path to handleSearch
+//        if (direction === -1 && navigationHistory[currentHistoryIndex+1]?.viewType === 'detail') {
+//            const prevTopicId = navigationHistory[currentHistoryIndex+1].contentId;
+//            const prevCatPath = allDisplayableTopicsMap[prevTopicId]?.categoryPath || [];
+//            searchInput.value =  '';
+//            handleSearch(false, prevTopicId, prevCatPath);
+//        } else {
+//            searchInput.value = state.contentId || '';
+//            handleSearch(false, state.highlightTopicId, state.categoryPath || []);
+//        }
+//    } else if (state.viewType === 'detail') { 
+//        renderDetailPage(state.contentId, false, false); 
+//    }
+//    updateNavButtonsState();
+//    isNavigatingViaHistory = false; 
+//}
 
 
 // Escapes special HTML characters in a string (e.g. `&`, `<`, `>`, quotes).
