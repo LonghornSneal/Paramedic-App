@@ -142,12 +142,12 @@ function initializeData(categoriesData, medDetailsData) {
 }
 
 // Escapes special HTML characters in a string (e.g. `&`, `<`, `>`, quotes).
-function escapeHTML(str) {
-    const escapeMap = { 
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' 
-    };
-    return str.replace(/[&<>"']/g, char => escapeMap[char] || char); 
-}
+//function escapeHTML(str) {
+//    const escapeMap = { 
+//        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' 
+//    };
+//    return str.replace(/[&<>"']/g, char => escapeMap[char] || char); 
+//}
 
 // Renders the detailed view for a given topic (with all detail sections and warnings), and updates history if needed. 
 // Collapsible sections for details (ALS Medications)
@@ -338,18 +338,18 @@ function attachToggleInfoHandlers(container) {
     
 
 // Adds a universal click/keypress listener to an element to trigger the given handler.
-function addTapListener(element, handler) { 
-    if (!element) return;
-    // Merged the activate logic into this function to ensure proper scope; both clicks and 'Enter/Space' keypresses will trigger the handler (fixes previously broken implementation).**
-    const activate = (e) => { 
-        if (e.type === 'click' || (e.type === 'keypress' && (e.key === 'Enter' || e.key === ' '))) {
-            e.preventDefault();
-            handler(e); 
-        } 
-    };
-    element.addEventListener('click', activate);
-    element.addEventListener('keypress', activate); 
-}
+//function addTapListener(element, handler) { 
+//    if (!element) return;
+//    // Merged the activate logic into this function to ensure proper scope; both clicks and 'Enter/Space' keypresses will trigger the handler (fixes previously broken implementation).**
+//    const activate = (e) => { 
+//        if (e.type === 'click' || (e.type === 'keypress' && (e.key === 'Enter' || e.key === ' '))) {
+//            e.preventDefault();
+//            handler(e); 
+//        } 
+//    };
+//    element.addEventListener('click', activate);
+//    element.addEventListener('keypress', activate); 
+//}
 
 // Enables autocomplete suggestions for a textarea input field.
 //function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceSet) {
