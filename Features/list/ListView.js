@@ -49,7 +49,8 @@ function createHierarchicalList(items, container, level = 0) {
             const arrow = document.createElement('button');
             arrow.setAttribute('aria-label', 'Expand/collapse');
             arrow.className = 'arrow mr-2 focus:outline-none focus:ring-2 focus:ring-blue-400';
-            arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" style="transform: rotate(${item.expanded ? 90 : 0}deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />**</svg>`;  
+            arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" style="transform: rotate(${item.expanded ? 90 : 0}deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />**</svg>`;  // blue arrows on homepage
             addTapListener(arrow, () => { 
                 item.expanded = !item.expanded;
                 createHierarchicalList(items, container, level); 
