@@ -1,5 +1,8 @@
 // Features/detail/DetailPage.js – Detailed topic view rendering
 
+// group the logic for rendering a topic’s detailed view and associated helpers 
+// (warning toggles, text formatting, etc.):
+
 // Note: 
 // appendTopicWarnings(topic) is already defined in Features/Warnings.js, 
 // and functions like addHistoryEntry and updateNavButtonsState are in Navigation.js. 
