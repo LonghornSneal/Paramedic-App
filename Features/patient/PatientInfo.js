@@ -75,8 +75,8 @@ function updatePatientData() {
         ekg: getInputValue('pt-ekg')
     };
     // ...refresh UI logic...
-}
-//function updatePatientData() {      // Read and parse inputs from the sidebar fields
+
+// /function updatePatientData() {      // Read and parse inputs from the sidebar fields
 //    patientData.age = document.getElementById('pt-age').value ? parseInt(document.getElementById('pt-age').value, 10) : null;
 //    const weightVal = document.getElementById('pt-weight') ? document.getElementById('pt-weight').value.trim() : '';
 //    patientData.weight = weightVal && !isNaN(parseFloat(weightVal)) ? parseFloat(weightVal) : null;
@@ -145,7 +145,7 @@ function updatePatientData() {
                 .forEach(el => el.classList.remove('strikethrough'));
         }
     }
-
+}
 
 // Attach update handler to all patient info inputs (instant update on any field change)
 ptInputs.forEach(input => {
