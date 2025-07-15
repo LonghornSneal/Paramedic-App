@@ -1,5 +1,5 @@
 // --- Global Variables ---
-let searchInput, patientSidebar, contentArea, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton, navHomeButton;
+let searchInput, patientSidebar, contentArea, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton, navHomeButton, settingsButton, settingsPanel;
 let medicationDataMap = {};
 let allDisplayableTopicsMap = {};
 let paramedicCategories = []; // This must be a global var!
@@ -15,7 +15,8 @@ function assignDomElements() {
     navBackButton = document.getElementById('nav-back-button');
     navForwardButton = document.getElementById('nav-forward-button');
     navHomeButton = document.getElementById('nav-home-button');
-}
+}   settingsButton = document.getElementById('settings-button');
+    settingsPanel = document.getElementById('settings-panel');
 
 // Kick off the application once DOM is ready
 if (document.readyState === 'loading') { 
@@ -54,6 +55,9 @@ function initApp() {
             patientSidebar.classList.remove('open');
             // Wait for slide-out transition (0.3s) to complete, then hide the sidebar
             setTimeout(() => patientSidebar.classList.add('hidden'), 300);
+            if (settingsPanel && !settingsPanel.classList.contains('hidden')) {
+                settingsPanel.classList.add('hidden');
+            }
             sidebarOverlay.classList.remove('active');
             sidebarOverlay.classList.add('hidden');
         });
