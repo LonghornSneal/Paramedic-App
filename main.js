@@ -1,5 +1,5 @@
 // --- Global Variables ---
-let searchInput, patientSidebar, contentArea, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton;
+let searchInput, patientSidebar, contentArea, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton, navHomeButton;
 let medicationDataMap = {};
 let allDisplayableTopicsMap = {};
 let paramedicCategories = []; // This must be a global var!
@@ -14,6 +14,7 @@ function assignDomElements() {
     sidebarOverlay = document.getElementById('sidebar-overlay');
     navBackButton = document.getElementById('nav-back-button');
     navForwardButton = document.getElementById('nav-forward-button');
+    navHomeButton = document.getElementById('nav-home-button');
 }
 
 // Kick off the application once DOM is ready
@@ -60,7 +61,7 @@ function initApp() {
 
     attachSearchHandlers();  // Calls the function from Features/search/Search.js
     attachNavHandlers();
-
+    attachHomeHandler();
     // Now initialize data structures from globals   // These should be loaded BEFORE this script runs (by script order in index.html)
     if (window.ParamedicCategoriesData && window.MedicationDetailsData) {
         initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
