@@ -11,7 +11,7 @@ function setupSlugAnchors(sectionIds) {
     }).join(' | ');
     var contentDiv = document.getElementById('content-area'); 
     contentDiv.insertBefore(tocNav, contentDiv.firstChild);
-  }
+  
 //function setupSlugAnchors(tocData) {
 //  if (typeof document === 'undefined') return;
   // Hidden container of slug IDs for external automation
