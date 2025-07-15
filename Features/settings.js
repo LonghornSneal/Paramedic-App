@@ -6,6 +6,7 @@
  */
 
 // Get references to relevant DOM elements
+
 const settingsButton = document.getElementById('settings-button');
 const settingsPanel = document.getElementById('settings-panel');
 const closeSettingsButton = document.getElementById('close-settings-button');
@@ -16,40 +17,37 @@ const patientSidebarEl = document.getElementById('patient-sidebar');
 // Load any saved dark mode preference and apply it on startup
 if (localStorage.getItem('darkMode') === 'true') {
     document.body.classList.add('dark-mode');
-    darkModeToggle.checked = true;
+    darkModeToggle?.checked = true;
 }
 
 // Open the Settings panel when the Settings button is clicked
-if (settingsButton) {
-    addTapListener(settingsButton, () => {
-        // If the Patient Info sidebar is open, close it to avoid overlap
-        if (patientSidebarEl && patientSidebarEl.classList.contains('open')) {
-            patientSidebarEl.classList.remove('open');
-            setTimeout(() => patientSidebarEl.classList.add('hidden'), 300);
-        }
-        // Show the Settings panel and overlay
-        if (settingsPanel) {
-            settingsPanel.classList.remove('hidden');
-        }
-        if (overlay) {
-            overlay.classList.add('active');
-            overlay.classList.remove('hidden');
-        }
-    });
-}
+settingsButton?.addEventListener('click', () => {
+    // If the Patient Info sidebar is open, close it to avoid overlap
+    if (patientSidebarEl?.classList.contains('open')) {
+        patientSidebarEl.classList.remove('open');
+        setTimeout(() => patientSidebarEl?.classList.add('hidden'), 300);
+    }
+    // Show the Settings panel and overlay
+    settingsPanel?.classList.remove('hidden');
+    overlay?.classList.add('active');
+    overlay?.classList.remove('hidden');
+});
 
 // Close the Settings panel when the close (X) button is clicked
-if (closeSettingsButton) {
-    addTapListener(closeSettingsButton, () => {
-        if (settingsPanel) {
-            settingsPanel.classList.add('hidden');
-        }
-        if (overlay) {
-            overlay.classList.remove('active');
-            overlay.classList.add('hidden');
-        }
-    });
-}
+closeSettingsButton?.addEventListener('click', () => {
+    settingsPanel?.classList.add('hidden');
+    overlay?.classList.remove('active');
+    overlay?.classList.add('hidden');
+});
+//    /darkModeToggle.checked = true;
+//if (settingsButton) { addTapListener(settingsButton, () => {
+//        if (patientSidebarEl && patientSidebarEl.classList.contains('open')) { patientSidebarEl.classList.remove('open'); setTimeout(() => patientSidebarEl.classList.add('hidden'), 300); }
+//        if (settingsPanel) { settingsPanel.classList.remove('hidden'); }
+//        if (overlay) { overlay.classList.add('active'); overlay.classList.remove('hidden'); } }); }
+
+// Close the Settings panel when the close (X) button is clicked
+//if (closeSettingsButton) { addTapListener(closeSettingsButton, () => { if (settingsPanel) { settingsPanel.classList.add('hidden'); }
+//        if (overlay) { overlay.classList.remove('active'); overlay.classList.add('hidden'); } }); }
 
 // Toggle Dark Mode on or off when the checkbox is changed
 if (darkModeToggle) {
