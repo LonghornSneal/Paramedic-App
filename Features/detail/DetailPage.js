@@ -105,6 +105,7 @@ function appendTopicDetails(topic) {
             title.className = 'detail-section-title toggle-category cursor-pointer flex items-center';
             title.innerHTML = `<svg class="arrow h-4 w-4 text-blue-600 transition-transform duration-200 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>${sec.label}`; // blue arrows within main page categories
+            title.id = window.slugify(sec.label);  // Assign unique ID for anchor navigation
             wrapper.appendChild(title);
             // Section body (list or text)
             let body;
@@ -173,6 +174,12 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
     // Attach toggle handlers for collapsible info and category sections
     attachToggleInfoHandlers(contentArea);
     attachToggleCategoryHandlers(contentArea);
+    // Inject in-page Table of Contents for detail sections
+    if (typeof setupSlugAnchors === 'function') {
+        const tocSections = Array.from(contentArea.querySelectorAll('.detail-section-title'))
+            .map(el => ({ id: el.id, label: el.textContent }));
+        setupSlugAnchors(tocSections);
+    }
     // If a description exists (and no slug anchors were inserted), append it below details
     if (topic.description) { 
         const desc = document.createElement('div');
