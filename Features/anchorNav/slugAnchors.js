@@ -12,23 +12,10 @@ function setupSlugAnchors(sectionIds) {
     var contentDiv = document.getElementById('content-area'); 
     contentDiv.insertBefore(tocNav, contentDiv.firstChild);
   
-//function setupSlugAnchors(tocData) {
-//  if (typeof document === 'undefined') return;
-  // Hidden container of slug IDs for external automation
-//  if (typeof slugIDs !== 'undefined' && Array.isArray(slugIDs)) {
-//    if (!document.getElementById('slug-id-container')) {
-//      const container = document.createElement('div');
-//      container.id = 'slug-id-container';
-//      container.classList.add('hidden');
-//      slugIDs.forEach(id => {
-//        const div = document.createElement('div');
-//        div.id = id;
-//        div.dataset.branch = id;
-//        container.appendChild(div);
-//      });
-//      document.body.appendChild(container);
-//    }
-//  }
+// /function setupSlugAnchors(tocData) { if (typeof document === 'undefined') return;  // Hidden container of slug IDs for external automation
+//  if (typeof slugIDs !== 'undefined' && Array.isArray(slugIDs)) { if (!document.getElementById('slug-id-container')) { const container = document.createElement('div');
+//      container.id = 'slug-id-container'; container.classList.add('hidden'); slugIDs.forEach(id => { const div = document.createElement('div');
+//        div.id = id; div.dataset.branch = id; container.appendChild(div); }); document.body.appendChild(container); } }
 
   if (Array.isArray(tocData) && tocData.length > 0) {
     const contentArea = document.getElementById('content-area');
@@ -59,7 +46,6 @@ function setupSlugAnchors(sectionIds) {
     contentArea.insertBefore(nav, insertPoint);
   }
 }
-
 if (typeof document !== 'undefined') {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => setupSlugAnchors());
@@ -67,8 +53,6 @@ if (typeof document !== 'undefined') {
     setupSlugAnchors();
   }
 }
-
-
 if (typeof window !== 'undefined') {
   window.setupSlugAnchors = setupSlugAnchors;
 }

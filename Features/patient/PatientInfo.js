@@ -76,32 +76,6 @@ function updatePatientData() {
     };
     // ...refresh UI logic...
 
-// /function updatePatientData() {      // Read and parse inputs from the sidebar fields
-//    patientData.age = document.getElementById('pt-age').value ? parseInt(document.getElementById('pt-age').value, 10) : null;
-//    const weightVal = document.getElementById('pt-weight') ? document.getElementById('pt-weight').value.trim() : '';
-//    patientData.weight = weightVal && !isNaN(parseFloat(weightVal)) ? parseFloat(weightVal) : null;
-//    patientData.weightUnit = document.getElementById('pt-weight-unit').value;
-//    const getArrayFromTextarea = (id) => { 
-//        const value = document.getElementById(id).value.trim();
-//        return value ? value.split(',').map(item => item.trim().toLowerCase()).filter(item => item) : []; 
-//    };
-//    patientData.pmh = getArrayFromTextarea('pt-pmh');
-//    patientData.allergies = getArrayFromTextarea('pt-allergies');
-//    patientData.currentMedications = getArrayFromTextarea('pt-medications');
-//    patientData.indications = getArrayFromTextarea('pt-indications');
-//    patientData.symptoms = getArrayFromTextarea('pt-symptoms'); // Now an array
-//    patientData.vitalSigns = {
-//        bp: document.getElementById('vs-bp').value.trim(),
-//        hr: document.getElementById('vs-hr').value ? parseInt(document.getElementById('vs-hr').value, 10) : null,
-//        spo2: document.getElementById('vs-spo2').value ? parseInt(document.getElementById('vs-spo2').value, 10) : null,
-//        etco2: document.getElementById('vs-etco2').value ? parseInt(document.getElementById('vs-etco2').value, 10) : null,
-//        rr: document.getElementById('vs-rr').value ? parseInt(document.getElementById('vs-rr').value, 10) : null,
-//        bgl: document.getElementById('vs-bgl').value.trim(), eyes: document.getElementById('vs-eyes').value.trim(),
-//        gcs: document.getElementById('vs-gcs').value ? parseInt(document.getElementById('vs-gcs').value, 10) : null,
-//        aoStatus: document.getElementById('vs-ao-status').value.trim(),
-//        lungSounds: document.getElementById('vs-lung-sounds').value.trim() 
-//    };    patientData.ekg = document.getElementById('pt-ekg').value.trim(); 
-
 // Filter the topic list based on patient indications (strike through irrelevant topics)
     const topicLinks = document.querySelectorAll('a.topic-link-item');
     topicLinks.forEach(link => {

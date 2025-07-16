@@ -10,4 +10,4 @@ function addTapListener(element, handler) {
     };
     element.addEventListener('click', activate);
     element.addEventListener('keypress', activate); 
-}//:contentReference[oaicite:48]{index=48}:contentReference[oaicite:49]{index=49}
+}
