@@ -33,22 +33,22 @@ function populateHistoryList() {
 // Open the History panel when the History button is clicked
 historyButton?.addEventListener('click', () => {
     // Close Patient Info sidebar or Settings panel if either is open
-    if (patientSidebarEl && patientSidebarEl.classList.contains('open')) {
+    if (patientSidebarEl?.classList.contains('open')) {
         patientSidebarEl.classList.remove('open');
-        setTimeout(() => patientSidebarEl.classList.add('hidden'), 200);
+        setTimeout(() => patientSidebarEl?.classList.add('hidden'), 200);
     }
-    if (settingsPanelEl && !settingsPanelEl.classList.contains('hidden')) {
-        settingsPanelEl.classList.add('hidden');
+    if (!settingsPanelEl?.classList.contains('hidden')) {
+        settingsPanelEl?.classList.add('hidden');
     }
     populateHistoryList();
-    historyPanel.classList.remove('hidden');
-    sidebarOverlay.classList.add('active');
-    sidebarOverlay.classList.remove('hidden');
+    historyPanel?.classList.remove('hidden');
+    sidebarOverlay?.classList.add('active');
+    sidebarOverlay?.classList.remove('hidden');
 });
 
 // Close the History panel when the close (X) button is clicked
 closeHistoryButton?.addEventListener('click', () => {
-    historyPanel.classList.add('hidden');
-    sidebarOverlay.classList.remove('active');
-    sidebarOverlay.classList.add('hidden');
+    historyPanel?.classList.add('hidden');
+    sidebarOverlay?.classList.remove('active');
+    sidebarOverlay?.classList.add('hidden');
 });
