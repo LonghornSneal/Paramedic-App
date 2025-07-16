@@ -19,6 +19,11 @@ if (localStorage.getItem('darkMode') === 'true') {
     document.body.classList.add('dark-mode');
     darkModeToggle?.checked = true;
 }
+// Attaches the click/tap listener to the Home button element.
+//function attachsettingsHandler() {
+//   if (!settingButton) return;  // Ensure the Home button exists
+//    addTapListener(settingsButton, () => handlesettingsClick());
+//}
 
 // Open the Settings panel when the Settings button is clicked
 settingsButton?.addEventListener('click', () => {
@@ -40,14 +45,18 @@ closeSettingsButton?.addEventListener('click', () => {
     overlay?.classList.add('hidden');
 });
 //    /darkModeToggle.checked = true;
-//if (settingsButton) { addTapListener(settingsButton, () => {
-//        if (patientSidebarEl && patientSidebarEl.classList.contains('open')) { patientSidebarEl.classList.remove('open'); setTimeout(() => patientSidebarEl.classList.add('hidden'), 300); }
+//if (settingsButton) { 
+// addTapListener(settingsButton, () => {
+//        if (patientSidebarEl && patientSidebarEl.classList.contains('open')) { 
+// patientSidebarEl.classList.remove('open'); 
+// setTimeout(() => patientSidebarEl.classList.add('hidden'), 300); }
 //        if (settingsPanel) { settingsPanel.classList.remove('hidden'); }
 //        if (overlay) { overlay.classList.add('active'); overlay.classList.remove('hidden'); } }); }
 
-// Close the Settings panel when the close (X) button is clicked
-//if (closeSettingsButton) { addTapListener(closeSettingsButton, () => { if (settingsPanel) { settingsPanel.classList.add('hidden'); }
-//        if (overlay) { overlay.classList.remove('active'); overlay.classList.add('hidden'); } }); }
+// /if (closeSettingsButton) { 
+// addTapListener(closeSettingsButton, () => { if (settingsPanel) { settingsPanel.classList.add('hidden'); }
+//        if (overlay) { 
+//          overlay.classList.remove('active'); overlay.classList.add('hidden'); } }); }
 
 // Toggle Dark Mode on or off when the checkbox is changed
 if (darkModeToggle) {

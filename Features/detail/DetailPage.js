@@ -1,4 +1,4 @@
-// Features/detail/DetailPage.js – Detailed topic view rendering
+// Detailed topic view rendering
 
 // group the logic for rendering a topic’s detailed view and associated helpers 
 // (warning toggles, text formatting, etc.):
@@ -9,7 +9,7 @@
 // Ensure those scripts are loaded beforehand.
 // Placement in HTML: 
 // Include this script before main.js and before Features/search/Search.js 
-// (since the search module calls renderDetailPage).
+// (since the search calls renderDetailPage).
 
 // Converts special markup in text (e.g. **bold**, [[display|info]]) into formatted HTML, and escapes HTML characters.
 function parseTextMarkup(text) {
@@ -26,11 +26,11 @@ function parseTextMarkup(text) {
     safeText = safeText.replace(/\{\{orange:(.+?)\}\}/g, (_, t) => `<span class="text-orange-600">${t}</span>`);
     safeText = safeText.replace(/\{\{blackul:(.+?)\}\}/g, (_, t) => `<span class="font-bold underline decoration-black">${t}</span>`);
     safeText = safeText.replace(/\[\[(.+?)\|(.+?)\]\]/g,  
-        (_, display, info) => `<span class="toggle-info">**<svg class="arrow h-4 w-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>**${display}<span class="info-text hidden">${info}</span></span>`);  
+        (_, display, info) => `<span class="toggle-info"><svg class="arrow h-4 w-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>${display}<span class="info-text hidden">${info}</span></span>`);  
     safeText = safeText.replace(/\{\{red:(.+?)\}\}/g, (_, t) => `<span class="text-red-600 font-semibold">${t}</span>`);
 
     return safeText; 
-}//:contentReference[oaicite:16]{index=16}:contentReference[oaicite:17]{index=17}:contentReference[oaicite:18]{index=18}
+}
 
 // Generates an HTML `<ul>` list for an array of detail items, or a placeholder if none.
 function createDetailList(itemsArray) {
@@ -39,7 +39,7 @@ function createDetailList(itemsArray) {
     }
     const listItemsHtml = itemsArray.map(it => `<li>${parseTextMarkup(it)}</li>`).join('');
     return `<ul class="detail-list">${listItemsHtml}</ul>`; 
-}//:contentReference[oaicite:19]{index=19}:contentReference[oaicite:20]{index=20}
+}
 
 // Returns an HTML snippet for a detail text block, or a default "Not specified" message if empty.
 function createDetailText(textBlock) {
@@ -48,7 +48,7 @@ function createDetailText(textBlock) {
     }
     const safeText = parseTextMarkup(textBlock.toString());
     return `<div class="detail-text">${safeText}</div>`; 
-}//:contentReference[oaicite:21]{index=21}
+}
 
 // Attaches click handlers to elements with class `.toggle-info` (additional info spans) to show or hide their hidden text.
 function attachToggleInfoHandlers(container) {
@@ -61,7 +61,7 @@ function attachToggleInfoHandlers(container) {
             if (info) info.classList.toggle('hidden'); 
         }; 
     }); 
-}//:contentReference[oaicite:22]{index=22}:contentReference[oaicite:23]{index=23}
+}
 
 // Attaches click handlers to collapsible detail section headers (elements with `.toggle-category` class) to toggle their visibility.
 function attachToggleCategoryHandlers(container) {      
@@ -73,7 +73,7 @@ function attachToggleCategoryHandlers(container) {
             if (content) content.classList.toggle('hidden'); 
         }); 
     }); 
-}//:contentReference[oaicite:24]{index=24}:contentReference[oaicite:25]{index=25}
+}
 
 // Appends all detail sections for a topic into the content area, including “Class”, “Indications”, “Contraindications”, etc.
 // If the topic has no details, a placeholder message is inserted.
@@ -108,7 +108,7 @@ function appendTopicDetails(topic) {
             const title = document.createElement('div');
             title.className = 'detail-section-title toggle-category cursor-pointer flex items-center';
             title.innerHTML = `<svg class="arrow h-4 w-4 text-blue-600 transition-transform duration-200 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />**</svg>${sec.label}`; // blue arrows within main page categories
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>${sec.label}`; // blue arrows within main page categories
             wrapper.appendChild(title);
             // Section body (list or text)
             let body;
@@ -133,7 +133,7 @@ function appendTopicDetails(topic) {
     } else { 
         contentArea.insertAdjacentHTML('beforeend', `<div class="text-gray-500 italic">No detail information found for this item.</div>`);
     }
-}//:contentReference[oaicite:26]{index=26}:contentReference[oaicite:27]{index=27}:contentReference[oaicite:28]{index=28}:contentReference[oaicite:29]{index=29}:contentReference[oaicite:30]{index=30}:contentReference[oaicite:31]{index=31}
+}
 
 // (Optional helper) Finds the index of a topic in a list of children by matching IDs (including alternate ID forms).
 function findAlsMedTopicIndex(children, topicId) {
@@ -150,7 +150,7 @@ function findAlsMedTopicIndex(children, topicId) {
         if (idx !== -1) return idx;
     }
     return -1;
-}//:contentReference[oaicite:32]{index=32}:contentReference[oaicite:33]{index=33}
+}
 
 // Renders the detailed view for a given topic, including the title, any warning alerts, and detail sections. 
 // Also updates history (unless disabled) and scrolls to top if requested.
@@ -192,4 +192,4 @@ function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) 
     if (scrollToTop) { 
         contentArea.scrollIntoView({ behavior: 'auto', block: 'start' }); 
     }
-}//:contentReference[oaicite:34]{index=34}:contentReference[oaicite:35]{index=35}:contentReference[oaicite:36]{index=36}:contentReference[oaicite:37]{index=37}:contentReference[oaicite:38]{index=38}:contentReference[oaicite:39]{index=39}
+}

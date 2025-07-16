@@ -4,9 +4,9 @@ function setupSlugAnchors(sectionIds) {
   var tocNav = document.createElement('nav');
   tocNav.id = 'section-toc';
   tocNav.className = 'section-toc';
-  // Generate anchor links for each section**  
+  // Generate anchor links for each section 
   tocNav.innerHTML = sectionIds.map(function(id) {
-    var titleText = id.replace(/-/g, ' ');  // e.g., "adult-dose" -> "adult dose"**  
+    var titleText = id.replace(/-/g, ' ');  // e.g., "adult-dose" -> "adult dose"
       return '<a href="#' + id + '">' + titleText + '</a>';
     }).join(' | ');
     var contentDiv = document.getElementById('content-area'); 

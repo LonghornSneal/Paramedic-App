@@ -31,7 +31,7 @@ function navigateViaHistory(direction) {
     currentHistoryIndex += direction;
     const state = navigationHistory[currentHistoryIndex];
     if (state.viewType === 'list') {
-        // Highlight last-viewed topic when navigating Back**  
+        // Highlight last-viewed topic when navigating Back
         if (direction === -1 && navigationHistory[currentHistoryIndex+1]?.viewType === 'detail') {
             const prevTopicId = navigationHistory[currentHistoryIndex+1].contentId;
             const prevCatPath = allDisplayableTopicsMap[prevTopicId]?.categoryPath || [];
