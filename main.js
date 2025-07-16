@@ -46,6 +46,7 @@ function initApp() {
     if (closeSidebarButton) {
         addTapListener(closeSidebarButton, () => {
             patientSidebar.classList.remove('open');
+            setTimeout(() => patientSidebar.classList.add('hidden'), 200);
             sidebarOverlay.classList.remove('active');
             sidebarOverlay.classList.add('hidden');
         });
@@ -53,8 +54,8 @@ function initApp() {
     if (sidebarOverlay) {
         addTapListener(sidebarOverlay, () => {
             patientSidebar.classList.remove('open');
-            // Wait for slide-out transition (0.3s) to complete, then hide the sidebar
-            setTimeout(() => patientSidebar.classList.add('hidden'), 300);
+            // Wait for slide-out transition (0.2s) to complete, then hide the sidebar
+            setTimeout(() => patientSidebar.classList.add('hidden'), 200);
             if (settingsPanel && !settingsPanel.classList.contains('hidden')) {
                 settingsPanel.classList.add('hidden');
             }

@@ -17,19 +17,15 @@ function parseTextMarkup(text) {
                        .replace(/</g, "&lt;")
                        .replace(/>/g, "&gt;");
     safeText = safeText.replace(/\n/g, "<br>");
-    // Replace [[display|info]] with a toggle-able info span
+    // Replace [[display|info]] with a toggle-able info span including an arrow icon and hidden info text
     safeText = safeText.replace(/\[\[(.+?)\|(.+?)\]\]/g,
-        (_, display, info) => `<span class="toggle-info"><span class="arrow"></span>${display}<span class="info-text hidden">${info}</span></span>`);
+        (_, display, info) => `<span class="toggle-info"><svg class="arrow h-4 w-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>${display}<span class="info-text hidden">${info}</span></span>`);
     // Replace custom markup for colored/underlined text
     safeText = safeText.replace(/\{\{red:(.+?)\}\}/g, (_, t) => `<span class="text-red-600 font-semibold">${t}</span>`);
     safeText = safeText.replace(/\{\{redul:(.+?)\}\}/g, (_, t) => `<span class="text-red-600 font-semibold underline decoration-red-600">${t}</span>`);
     safeText = safeText.replace(/\{\{orange:(.+?)\}\}/g, (_, t) => `<span class="text-orange-600">${t}</span>`);
     safeText = safeText.replace(/\{\{blackul:(.+?)\}\}/g, (_, t) => `<span class="font-bold underline decoration-black">${t}</span>`);
-    safeText = safeText.replace(/\[\[(.+?)\|(.+?)\]\]/g,  
-        (_, display, info) => `<span class="toggle-info"><svg class="arrow h-4 w-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>${display}<span class="info-text hidden">${info}</span></span>`);  
-    safeText = safeText.replace(/\{\{red:(.+?)\}\}/g, (_, t) => `<span class="text-red-600 font-semibold">${t}</span>`);
-
-    return safeText; 
+    return safeText;
 }
 
 // Generates an HTML `<ul>` list for an array of detail items, or a placeholder if none.
