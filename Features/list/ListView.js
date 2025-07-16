@@ -21,7 +21,7 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
 }
 
 // Expands categories along the given path and highlights the specified topic, then re-renders the list.
-function openCategoriesAndHighlight(categoryPath = [], highlightId = null) { 
+function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
     // Mark each category in the path as expanded
     categoryPath.forEach(catId => { 
         const catItem = allDisplayableTopicsMap[catId];
@@ -38,7 +38,8 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
         if (topicEl) {
             topicEl.classList.add('recently-viewed'); 
             topicEl.scrollIntoView({ block: 'center' });
-        } 
+        }
+    }
     // Scroll highlighted topic into view (if any)**
     if (highlightId && topicEl) {
         topicEl.scrollIntoView({ block: 'center' });
