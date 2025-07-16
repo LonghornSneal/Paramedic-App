@@ -39,9 +39,9 @@ function setupSlugAnchors(tocData) {
             targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
             const contentEl = targetEl.nextElementSibling;
             const arrowEl = targetEl.querySelector('.arrow');
-            if (contentEl && contentEl.classList.contains('hidden')) {
+            if (contentEl?.classList.contains('hidden')) {
                 contentEl.classList.remove('hidden');
-                if (arrowEl) arrowEl.classList.add('rotate');
+                arrowEl?.classList.add('rotate');
             }
         });
     });
