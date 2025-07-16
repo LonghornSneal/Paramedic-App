@@ -59,6 +59,11 @@ function initApp() {
             if (settingsPanel && !settingsPanel.classList.contains('hidden')) {
                 settingsPanel.classList.add('hidden');
             }
+                // If History panel is open, close it
+            const histPanel = document.getElementById('history-panel');
+            if (histPanel && !histPanel.classList.contains('hidden')) {
+                histPanel.classList.add('hidden');
+            }
             sidebarOverlay.classList.remove('active');
             sidebarOverlay.classList.add('hidden');
         });
