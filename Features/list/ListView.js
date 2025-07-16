@@ -35,8 +35,10 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
     // Highlight the specified topic, if provided
     if (highlightId) { 
         const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
-        if (topicEl) topicEl.classList.add('recently-viewed'); 
-    } 
+        if (topicEl) {
+            topicEl.classList.add('recently-viewed'); 
+            topicEl.scrollIntoView({ block: 'center' });
+        } 
     // Scroll highlighted topic into view (if any)**
     if (highlightId && topicEl) {
         topicEl.scrollIntoView({ block: 'center' });
@@ -95,4 +97,4 @@ function createHierarchicalList(items, container, level = 0) {
             container.appendChild(row);
         }
     });
-}
+};
