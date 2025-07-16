@@ -423,4 +423,4 @@ window.ParamedicCategoriesData = [
     ]
   }
 ];
-// /if (typeof window !== 'undefined') window.ParamedicCategoriesData = ParamedicCategoriesData;
+ if (typeof window !== 'undefined') window.ParamedicCategoriesData = ParamedicCategoriesData;
