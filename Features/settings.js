@@ -1,4 +1,4 @@
-/* Features/navigation/settings.js
+/* Features/settings.js
  * Manages the Settings button and panel (including dark mode toggle).
  * The Settings button in the footer blinks between two colors (see CSS animation).
  * Clicking the Settings button opens a modal panel with user settings.
@@ -6,7 +6,6 @@
  */
 
 // Get references to relevant DOM elements
-
 const settingsButton = document.getElementById('settings-button');
 const settingsPanel = document.getElementById('settings-panel');
 const closeSettingsButton = document.getElementById('close-settings-button');
