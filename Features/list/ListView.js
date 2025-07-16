@@ -37,6 +37,10 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
         const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
         if (topicEl) topicEl.classList.add('recently-viewed'); 
     } 
+    // Scroll highlighted topic into view (if any)**
+    if (highlightId && topicEl) {
+        topicEl.scrollIntoView({ block: 'center' });
+    }
 }
 
 // Builds a nested list of categories and topics, appending it to the given container. Handles expandable categories.
