@@ -59,8 +59,8 @@ function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceS
                 suggestionsContainer.innerHTML = filtered.map(s => 
                     `<div class="autocomplete-suggestion-item" data-value="${s}">${s}</div>`
                 ).join('');
-                suggestionsContainer.classList.remove('hidden'); 
+                suggestionsContainer.classList.remove('hidden');
             }
         }
-    }); 
-}//:contentReference[oaicite:40]{index=40}:contentReference[oaicite:41]{index=41}:contentReference[oaicite:42]{index=42}:contentReference[oaicite:43]{index=43}:contentReference[oaicite:44]{index=44}:contentReference[oaicite:45]{index=45}:contentReference[oaicite:46]{index=46}:contentReference[oaicite:47]{index=47}
+    });
+}

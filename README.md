@@ -234,10 +234,32 @@ Performance and Simplicity: The app prioritizes speed and reliability:
   **Features/anchorNav/slugList.js** – This script is responsible for gathering section IDs from a rendered detail page. After a detail page is inserted into the DOM, slugList.js runs to collect all the headings (e.g., it might do document.querySelectorAll('h3') in the content area) and create an array of their id attributes. It then makes this list available (perhaps attaching it to window.currentSections or calling a function in slugAnchors). Essentially, it prepares the data needed for an in-page Table of Contents. By using the same slugify logic, it knows those IDs correspond exactly to the section titles. If a section isn’t appearing in the anchor menu, this script is the first place to check (does it capture it correctly?).
 
 
+  **Features/detail/DetailPage.js** - Here are some of the functions of this file:
+    Converts special markup in text (e.g. **bold**, [[display|info]]) into formatted HTML, and escapes HTML characters.
+    Generates an HTML `<ul>` list for an array of detail items, or a placeholder if none.
+    Returns an HTML snippet for a detail text block, or a default "Not specified" message if empty.
+    Attaches click handlers to elements with class `.toggle-info` (additional info spans) to show or hide their hidden text.
+    Attaches click handlers to collapsible detail section headers (elements with `.toggle-category` class) to toggle their visibility.
+    Appends all detail sections for a topic into the content area, including “Class”, “Indications”, “Contraindications”, etc.
+    If the topic has no details, a placeholder message is inserted.
+    Renders the detailed view for a given topic, including the title, any warning alerts, and detail sections. 
+    Updates *History* (unless disabled) and scrolls to top if requested.
+
+
+  **Features/list/ListView.js** – Category list rendering and some functions include: 
+    Renders the main category list view (home screen) and highlights a topic if provided.
+    Expands categories along the given path and highlights the specified topic, then re-renders the list.
+    Builds a nested list of categories and topics, appending it to the given container. Handles expandable categories.
+
+
+
   **Features/navigation/Navigation.js** – Contains the navigation history state and Back/Forward Navigation Button's functionality.
 
 
   **Features/navigation/Home.js** – Implements the Home button functionality to return to the main Contents page.
+
+
+  **Features/patient/Autocomplete.js** – Autocomplete suggestion handling for Patient Info fields. Enables autocomplete suggestions for a textarea input field.
 
 
   **Features/patient/PatientInfo.js** – Manages the Patient Info sidebar behavior and the global patient data state Manages the Patient Info sidebar behavior and the global patient data state. It defines a global object (e.g., window.patientData) to store age, weight, allergies, etc. It also sets up event listeners for the form inputs in the sidebar (like onChange for the text fields and checkboxes if any). When any patient info is updated, it runs the updatePatientData() function.
@@ -255,6 +277,13 @@ Performance and Simplicity: The app prioritizes speed and reliability:
 
 
   **Features/search/Search.js** – Implements the search functionality (migrated from main.js), including building the searchable topics index and filtering topics based on the user’s query.
+
+
+  **Features/settings.js** -
+    Manages the Settings button and panel (including dark mode toggle).
+    The Settings button in the footer blinks between two colors (see CSS animation).
+    Clicking the Settings button opens a modal panel with user settings.
+    Currently includes a Dark Mode toggle which persists across sessions.
 
 
   **Features/Warnings.js** - Produces warnings when appropriate after the user begins inputing information into the Patient Info section. For instance, if the user inputs the pt's age as "8", then when they go in the medication detail for Etomidate, they will see a red Warning message up top that says, "Warning, pt's age is 8 years old! Etomidate is contraindicted for pt's less than 10 years old!!!"
@@ -279,13 +308,35 @@ Performance and Simplicity: The app prioritizes speed and reliability:
       /VS.js
  
 
+*Content/* - Includes the following folders: (Files still need to be created within each of the folders)
+  **Content/Abbreviations & References/**
+  **Content/Administrative & Legal Essentials/**
+  **Content/Adult Protocols/**
+  **Content/Introduction & Core Principles/**
+  **Content/Operational Protocols/**
+  **Content/Pediatric Protocols/**
+  **Content/Skills and Equipment/**
+
+
+*Assets/* - Includes the following folders: (files still need to be created within each of the folders)
+  **Assets/Images/**
+  **Assets/Videos/**
+
+
 *Utils/ – Utility scripts. These are helpers that are used across the app for small tasks, often included early so they can be used by other scripts.*
+
+
+  **Utils/addTapListener.js** – Utility to handle click or keypress (Enter/Space) on an element.
+
+
+  **Utils/escapeHTML.js** – Utility to escape HTML special characters in a string.
+
 
   **Utils/slugify.js** – A helper function to convert a string into a URL-friendly “slug” (lowercase, hyphen-separated). For example, "Adult Dose" becomes "adult-dose". We use this to generate id attributes for section headings on detail pages. By having a consistent slug generator, we ensure that if a section title in data is in "Contraindications", its <h3> element will get id="contraindications", and any anchor link can point to #contraindications. This consistency is vital for the anchor navigation to work (see slugList and slugAnchors below).
 
     The function exported by slugify.js is used both when rendering detail page sections (to set ids) and when building the anchor list (to make the links). Always use this function for any new section titles to avoid mismatches.
 
-  # (Other utility files can be added here as needed; currently slugify is the main one. If we had a general helper for formatting or a polyfill, it would go in Utils too.)
+
 
 
 *Main Scripts (project root): These are the core JavaScript files (often loaded directly in index.html) that drive the app’s functionality.*
