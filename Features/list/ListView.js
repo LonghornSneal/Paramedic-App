@@ -1,6 +1,6 @@
 // Features/list/ListView.js – Category list rendering
-import { addHistoryEntry, updateNavButtonsState } from '/Features/navigation/Navigation.js';
-import { renderDetailPage } from '../detail/DetailPage.js';
+import { addHistoryEntry, updateNavButtonsState, attachNavHandlers } from './Features/navigation/Navigation.js';
+import { renderDetailPage } from './Features/detail/DetailPage.js';
 import { addTapListener } from '../../Utils/addTapListener.js';
 
 // Renders the main category list view (home screen) and highlights a topic if provided.
@@ -10,7 +10,7 @@ export function renderInitialView(shouldAddHistory = true, highlightId = null, c
     const listContainer = document.createElement('div');
     createHierarchicalList(window.paramedicCategories, listContainer, 0);
     contentArea.appendChild(listContainer);
-    // Optionally expand categories along a path and highlight a specific topic
+    // Expand categories along path and highlight topic if provided
     openCategoriesAndHighlight(categoryPath, highlightId);
     if (shouldAddHistory) {
         addHistoryEntry({ 
@@ -25,12 +25,12 @@ export function renderInitialView(shouldAddHistory = true, highlightId = null, c
 
 // Expands categories along the given path and highlights the specified topic, then re-renders the list.
 function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
-    // Mark each category in the path as expanded
+    // Collapse or expand categories along the given path
     categoryPath.forEach(catId => { 
         const catItem = window.allDisplayableTopicsMap[catId];
         if (catItem) catItem.expanded = true; 
     });
-    // Re-render the category list with updated expansion states
+    // Re-render list with updated expansion states
     contentArea.innerHTML = '';
     const listContainer = document.createElement('div');
     createHierarchicalList(window.paramedicCategories, listContainer, 0);
@@ -56,12 +56,12 @@ function createHierarchicalList(items, container, level = 0) {
         const row = document.createElement('div');
         row.className = 'flex items-center py-1 pl-' + (level * 4) + ' group';
         if (item.type === 'category') {  // Category with collapsible children
-            const arrow = document.createElement('button');
-            arrow.setAttribute('aria-label', 'Expand/collapse');
-            arrow.className = 'arrow mr-2 focus:outline-none focus:ring-2 focus:ring-blue-400';
-            arrow.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" style="transform: rotate(${item.expanded ? 90 : 0}deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            const arrowBtn = document.createElement('button');
+            arrowBtn.setAttribute('aria-label', 'Expand/collapse');
+            arrowBtn.className = 'arrow mr-2 focus:outline-none focus:ring-2 focus:ring-blue-400';
+            arrowBtn.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" style="transform: rotate(${item.expanded ? 90 : 0}deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M9 5l7 7-7 7" /></svg>`;  // blue arrows on homepage
-            addTapListener(arrow, () => { 
+            addTapListener(arrowBtn, () => { 
                 item.expanded = !item.expanded;
                 createHierarchicalList(items, container, level); 
             });

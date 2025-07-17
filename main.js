@@ -1,8 +1,13 @@
 import { ParamedicCategoriesData } from './Data/ParamedicCategoriesData.js';
 import { MedicationDetailsData } from './Data/MedicationDetailsData.js';
 import { addTapListener } from './Utils/addTapListener.js';
-import { attachNavHandlers } from './Features/navigation/Navigation.js';
+import { attachNavHandlers, addHistoryEntry, navigateViaHistory, navigationHistory, currentHistoryIndex } from '../navigation/Navigation.js';
 import { attachHomeHandler } from './Features/navigation/Home.js';
+import { renderInitialView } from './Features/list/ListView.js';
+import { renderDetailPage } from './Features/detail/DetailPage.js';
+import { pmhSuggestions, allergySuggestions, medicationNameSuggestions, indicationSuggestions, symptomSuggestions, PDE5_INHIBITORS } from './Features/patient/PatientInfo.js';
+import { setupAutocomplete } from './Features/patient/Autocomplete.js';
+
 
 // --- Global Variables ---
 let searchInput, patientSidebar, contentArea, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton, navHomeButton, settingsButton, settingsPanel;

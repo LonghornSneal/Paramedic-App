@@ -4,10 +4,11 @@
 // Import needed functions at the top:
 // import { addTapListener } from '../../Utils/addTapListener.js';
 // Import needed functions at the top:
+import { renderDetailPage } from './Features/detail/DetailPage.js';
 import { addTapListener } from '../../Utils/addTapListener.js';
 // Navigation history state variables
-export let navigationHistory = [];
-export let currentHistoryIndex = -1;
+export const navigationHistory = [];
+export const currentHistoryIndex = -1;
 let isNavigatingViaHistory = false;
 
 // Updates the disabled state of the Back/Forward navigation buttons based on history position. 
@@ -49,7 +50,7 @@ export function navigateViaHistory(direction) {
             window.handleSearch(false, state.highlightTopicId, state.categoryPath || []);
         }
     } else if (state.viewType === 'detail') {
-        window.renderDetailPage(state.contentId, false, false);
+        renderDetailPage(state.contentId, false, false);
     }
     updateNavButtonsState();
     isNavigatingViaHistory = false;
@@ -65,9 +66,7 @@ export function attachNavHandlers() {
 
 // Temporary global exposure (optional)
 if (typeof window !== 'undefined') {
-    window.updateNavButtonsState = updateNavButtonsState;
     window.addHistoryEntry = addHistoryEntry;
     window.navigateViaHistory = navigateViaHistory;
-    window.attachNavHandlers = attachNavHandlers;
 }
 

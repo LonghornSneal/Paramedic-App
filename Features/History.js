@@ -1,4 +1,5 @@
 // Features/History.js – Handles the History button and panel dropdown
+import { renderDetailPage } from './Features/detail/DetailPage.js';
 const historyButton = document.getElementById('history-button');
 const historyPanel = document.getElementById('history-panel');
 const closeHistoryButton = document.getElementById('close-history-button');

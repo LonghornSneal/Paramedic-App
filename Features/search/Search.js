@@ -1,5 +1,5 @@
 // Features/search/Search.js
-
+import { renderDetailPage } from './Features/detail/DetailPage.js';
 // Global list of all topics (by title/path) for quick search filtering:
 let allSearchableTopics = [];
 

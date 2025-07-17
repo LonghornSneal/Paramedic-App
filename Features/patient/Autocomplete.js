@@ -1,62 +1,66 @@
-// Features/patient/Autocomplete.js – Autocomplete suggestion handling for Patient Info fields
+// Features/patient/Autocomplete.js – Autocomplete suggestions for Patient Info fields
+import { addTapListener } from '../../Utils/addTapListener.js';
+import { patientData } from './PatientInfo.js';  // to call updatePatientData if needed (we might call it via window for simplicity)
 
-// Enables autocomplete suggestions for a textarea input field.
-function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceSet) {
+export function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceSet) {
     const textarea = document.getElementById(textareaId);
     const suggestionsContainer = document.getElementById(suggestionsContainerId);
-    textarea.addEventListener('input', function(e) { 
+    textarea.addEventListener('input', e => {
         const inputText = e.target.value;
         const currentSegment = inputText.split(',').pop().trim().toLowerCase();
-        if (currentSegment.length === 0) { 
+        if (currentSegment.length === 0) {
             suggestionsContainer.classList.add('hidden');
             suggestionsContainer.innerHTML = '';
-            return; 
+            return;
         }
         const filtered = Array.from(suggestionSourceSet)
             .filter(s => s.toLowerCase().includes(currentSegment));
-        if (filtered.length > 0) { 
+        if (filtered.length > 0) {
             suggestionsContainer.innerHTML = filtered.map(s =>
                 `<div class="autocomplete-suggestion-item" data-value="${s}">${s}</div>`
-            ).join(''); 
+            ).join('');
             suggestionsContainer.classList.remove('hidden');
-        } else { 
-            suggestionsContainer.classList.add('hidden'); 
+        } else {
+            suggestionsContainer.classList.add('hidden');
         }
     });
-    // Handle clicks on suggestion items:
-    addTapListener(suggestionsContainer, function(e) {
-        if (e.target.classList.contains('autocomplete-suggestion-item')) { 
+    // Click on suggestion to accept it
+    addTapListener(suggestionsContainer, e => {
+        if (e.target.classList.contains('autocomplete-suggestion-item')) {
             const selectedValue = e.target.dataset.value;
-            // Parse existing comma-separated values and remove the current incomplete segment
+            // Build array from existing comma-separated list
             let existingValues = textarea.value.split(',').map(v => v.trim()).filter(v => v);
-            if (existingValues.length > 0 && textarea.value.trim().slice(-1) !== ',') { 
-                existingValues.pop(); 
+            if (existingValues.length > 0 && textarea.value.trim().slice(-1) !== ',') {
+                // Remove the last incomplete entry if it's not followed by a comma
+                existingValues.pop();
             }
-            // Avoid duplicates (case-insensitive)
+            // Avoid duplicate entries (case-insensitive)
             if (!existingValues.map(v => v.toLowerCase()).includes(selectedValue.toLowerCase())) {
-                existingValues.push(selectedValue); 
+                existingValues.push(selectedValue);
             }
             textarea.value = existingValues.join(', ') + (existingValues.length > 0 ? ", " : "");
-            // Hide suggestions and refocus the textarea
+            // Hide suggestions and refocus
             suggestionsContainer.classList.add('hidden');
             suggestionsContainer.innerHTML = '';
             textarea.focus();
-            updatePatientData();  // Update patient data after selection
+            // Update patient data now that a new item is added
+            // (We can call window.updatePatientData if we exposed it, or simply trigger input event)
+            textarea.dispatchEvent(new Event('input'));  // trigger the input event to update data
         }
     });
-    // Hide suggestions on blur (with slight delay to allow click)
-    textarea.addEventListener('blur', function() {
-        setTimeout(() => { suggestionsContainer.classList.add('hidden'); }, 150); 
+    // Hide suggestions on blur (with slight delay to allow click selection)
+    textarea.addEventListener('blur', () => {
+        setTimeout(() => { suggestionsContainer.classList.add('hidden'); }, 150);
     });
-    // Show suggestions again on focus if input contains a segment
-    textarea.addEventListener('focus', function(e) { 
+    // If focusing back in and there's a segment, show suggestions again
+    textarea.addEventListener('focus', e => {
         const inputText = e.target.value;
         const currentSegment = inputText.split(',').pop().trim().toLowerCase();
-        if (currentSegment.length > 0) { 
+        if (currentSegment.length > 0) {
             const filtered = Array.from(suggestionSourceSet)
                 .filter(s => s.toLowerCase().includes(currentSegment));
             if (filtered.length > 0) {
-                suggestionsContainer.innerHTML = filtered.map(s => 
+                suggestionsContainer.innerHTML = filtered.map(s =>
                     `<div class="autocomplete-suggestion-item" data-value="${s}">${s}</div>`
                 ).join('');
                 suggestionsContainer.classList.remove('hidden');

@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-
+import { renderDetailPage } from './Features/detail/DetailPage.js';
 describe('Features/History.js', () => {
     let historyButton, historyPanel, closeHistoryButton, sidebarOverlay, patientSidebarEl, settingsPanelEl, historyListEl;
     let navigationHistory, allDisplayableTopicsMap, renderDetailPage, addTapListener;
@@ -39,10 +39,10 @@ describe('Features/History.js', () => {
         addTapListener = (el, fn) => el.addEventListener('click', fn);
 
         // Attach to global for tested code
-        global.navigationHistory = navigationHistory;
-        global.allDisplayableTopicsMap = allDisplayableTopicsMap;
-        global.renderDetailPage = renderDetailPage;
-        global.addTapListener = addTapListener;
+//        global.navigationHistory = navigationHistory;
+//        global.allDisplayableTopicsMap = allDisplayableTopicsMap;
+//        global.renderDetailPage = renderDetailPage;
+//        global.addTapListener = addTapListener;
 
         // Re-define tested functions in test scope
         global.populateHistoryList = function populateHistoryList() {

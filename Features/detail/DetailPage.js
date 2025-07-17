@@ -5,12 +5,12 @@
 
 // Note: 
 // appendTopicWarnings(topic) is already defined in Features/Warnings.js, 
-// and functions like addHistoryEntry and updateNavButtonsState are in Navigation.js. 
-// Ensure those scripts are loaded beforehand.
-// Placement in HTML: 
-// Include this script before main.js and before Features/search/Search.js 
-// (since the search calls renderDetailPage).
 
+// (since the search calls renderDetailPage).
+import { addHistoryEntry } from '../navigation/Navigation.js';
+import { addTapListener } from '../../Utils/addTapListener.js';
+import { appendTopicWarnings } from '../Warnings.js';
+import { setupSlugAnchors } from '../anchorNav/slugAnchors.js';
 // Converts special markup in text (e.g. **bold**, [[display|info]]) into formatted HTML, and escapes HTML characters.
 function parseTextMarkup(text) {
     let safeText = text.replace(/&/g, "&amp;")
@@ -49,12 +49,12 @@ function createDetailText(textBlock) {
 // Attaches click handlers to elements with class `.toggle-info` (additional info spans) to show or hide their hidden text.
 function attachToggleInfoHandlers(container) {
     container.querySelectorAll('.toggle-info').forEach(el => { 
-        el.onclick = function(e) { 
+        el.onclick = e => { 
             e.stopPropagation();
             const info = el.querySelector('.info-text');
             const arrow = el.querySelector('.arrow'); 
-            if (arrow) arrow.classList.toggle('rotate');
-            if (info) info.classList.toggle('hidden'); 
+            arrow?.classList.toggle('rotate');
+            info?.classList.toggle('hidden'); 
         }; 
     }); 
 }
@@ -77,11 +77,11 @@ function appendTopicDetails(topic) {
     // If the topic has an alternate ID (e.g., "123-Name"), use its base ID to find details
     let details = topic.details;
     if (!details && topic.id?.match(/^\d+-/)) {
-        const altId = topic.id.replace(/^\d+-/, '');
-        details = allDisplayableTopicsMap[altId]?.details;
-    } else if (!details && topic.id && !topic.id.match(/^\d+-/)) {
-        const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topic.id));
-        if (altId) details = allDisplayableTopicsMap[altId]?.details;
+        const baseId = topic.id.replace(/^\d+-/, '');
+        details = window.allDisplayableTopicsMap?.[baseId]?.details;
+    } else if (!details && topic.id) {
+        const altIdKey = Object.keys(window.allDisplayableTopicsMap || {}).find(k => k.endsWith(topic.id));
+        if (altIdKey) details = window.allDisplayableTopicsMap[altIdKey]?.details;
     }
     // Render each detail section if available, otherwise insert "No detail information" message
     if (details) {
@@ -101,12 +101,13 @@ function appendTopicDetails(topic) {
             if (sec.key === 'adultRx') wrapper.classList.add('adult-section');
             if (sec.key === 'pediatricRx') wrapper.classList.add('pediatric-section');
             // Section header element (clickable to collapse/expand)
-            const title = document.createElement('div');
-            title.className = 'detail-section-title toggle-category cursor-pointer flex items-center';
-            title.innerHTML = `<svg class="arrow h-4 w-4 text-blue-600 transition-transform duration-200 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            const titleEl = document.createElement('div');
+            titleEl.className = 'detail-section-title toggle-category cursor-pointer flex items-center';
+            titleEl.innerHTML = `<svg class="arrow h-4 w-4 text-blue-600 transition-transform duration-200 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>${sec.label}`; // blue arrows within main page categories
-            title.id = window.slugify(sec.label);  // Assign unique ID for anchor navigation
-            wrapper.appendChild(title);
+            // Use slugify to set an ID on the section header for anchor navigation:
+            titleEl.id = slugify(sec.label);  // Assign unique ID for anchor navigation
+            wrapper.appendChild(titleEl);
             // Section body (list or text)
             let body;
             if (Array.isArray(details[sec.key])) {
@@ -152,11 +153,11 @@ function findAlsMedTopicIndex(children, topicId) {
 // Renders the detailed view for a given topic, including the title, any warning alerts, and detail sections. 
 // Also updates history (unless disabled) and scrolls to top if requested.
 export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) {
-    if (!allDisplayableTopicsMap[topicId]) { 
+    if (!window.allDisplayableTopicsMap[topicId]) { 
         contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; 
         return; 
     }
-    const topic = allDisplayableTopicsMap[topicId];
+    const topic = window.allDisplayableTopicsMap[topicId];
     contentArea.innerHTML = '';
     // Header (topic title)
     const headerEl = document.createElement('h2');
@@ -165,29 +166,29 @@ export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop =
     headerEl.dataset.topicId = topic.id;
     contentArea.appendChild(headerEl);
     // Insert any warning alerts at the top of the page
-    const warningsHtml = appendTopicWarnings(topic);
+    const warningsHtml = appendTopicWarnings(topic, window.patientData);
     if (warningsHtml) {
         contentArea.insertAdjacentHTML('beforeend', warningsHtml);
     }
-    // Append all detail sections for this topic
+    // Detail sections for this topic
     appendTopicDetails(topic);
     // Attach toggle handlers for collapsible info and category sections
     attachToggleInfoHandlers(contentArea);
     attachToggleCategoryHandlers(contentArea);
-    // Inject in-page Table of Contents for detail sections
-    if (typeof setupSlugAnchors === 'function') {
-        const tocSections = Array.from(contentArea.querySelectorAll('.detail-section-title'))
-            .map(el => ({ id: el.id, label: el.textContent }));
+    // Insert table of contents for detail sections (if any sections exist)
+    const tocSections = Array.from(contentArea.querySelectorAll('.detail-section-title'))
+                        .map(el => ({ id: el.id, label: el.textContent }));
+    if (tocSections.length > 0) {
         setupSlugAnchors(tocSections);
     }
-    // If a description exists (and no slug anchors were inserted), append it below details
+    // Description text (if any)
     if (topic.description) { 
         const desc = document.createElement('div');
         desc.className = 'mb-4'; 
         desc.textContent = topic.description; 
         contentArea.appendChild(desc); 
     }
-    // Update history state for this detail view
+    // Add history entry for this detail view
     if (shouldAddHistory) {
         addHistoryEntry({ viewType: 'detail', contentId: topicId });
     }
@@ -195,4 +196,11 @@ export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop =
     if (scrollToTop) { 
         contentArea.scrollIntoView({ behavior: 'auto', block: 'start' }); 
     }
+}
+// Import slugify for use in setting section IDs
+import { slugify } from '../../Utils/slugify.js';
+
+// Temporary global exposure for compatibility
+if (typeof window !== 'undefined') {
+    window.renderDetailPage = renderDetailPage;
 }
