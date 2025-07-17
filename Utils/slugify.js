@@ -20,7 +20,8 @@ const subscriptMap = {
   '₉': '9',
 };
 
-function slugify(text) {
+// Utils/slugify.js – Utility to convert text to URL-friendly slug
+export function slugify(text) {
   if (!text) return '';
   return text.toString().toLowerCase()
     .replace(/\s+/g, '-')
@@ -34,9 +35,11 @@ function slugify(text) {
     .replace(/-+$/, '');
 }
 
+// Attach to window for backward compatibility (can remove later if not needed)
 if (typeof window !== 'undefined') {
-  window.slugify = slugify;
+    window.slugify = slugify;
 }
+
 
 // Allow CLI usage: `node slugify.js "Some Text"`
 if (typeof require !== 'undefined' && require.main === module) {
