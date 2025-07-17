@@ -36,9 +36,9 @@ export function slugify(text) {
 }
 
 // Attach to window for backward compatibility (can remove later if not needed)
-if (typeof window !== 'undefined') {
-    window.slugify = slugify;
-}
+// if (typeof window !== 'undefined') {
+//    window.slugify = slugify;
+// }
 
 
 // Allow CLI usage: `node slugify.js "Some Text"`

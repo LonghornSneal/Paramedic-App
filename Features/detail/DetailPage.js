@@ -151,7 +151,7 @@ function findAlsMedTopicIndex(children, topicId) {
 
 // Renders the detailed view for a given topic, including the title, any warning alerts, and detail sections. 
 // Also updates history (unless disabled) and scrolls to top if requested.
-function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) {
+export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) {
     if (!allDisplayableTopicsMap[topicId]) { 
         contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; 
         return; 

@@ -1,5 +1,5 @@
 // Utils/addTapListener.js – Utility to handle click or keypress (Enter/Space) on an element
-function addTapListener(element, handler) { 
+export function addTapListener(element, handler) { 
     if (!element) return;
     // Unified handler for click or keyboard "activate" events
     const activate = (e) => { 

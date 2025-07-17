@@ -1,10 +1,17 @@
 import { ParamedicCategoriesData } from './Data/ParamedicCategoriesData.js';
 import { MedicationDetailsData } from './Data/MedicationDetailsData.js';
+import { addTapListener } from './Utils/addTapListener.js';
+import { attachNavHandlers } from './Features/navigation/Navigation.js';
+import { attachHomeHandler } from './Features/navigation/Home.js';
+
 // --- Global Variables ---
 let searchInput, patientSidebar, contentArea, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton, navHomeButton, settingsButton, settingsPanel;
 let medicationDataMap = {};
 let allDisplayableTopicsMap = {};
 let paramedicCategories = []; // This must be a global var!
+
+
+
 
 // Assigns key UI elements to global variables for easy access.
 function assignDomElements() {
@@ -31,6 +38,18 @@ if (document.readyState === 'loading') {
 function initApp() {
     // Initialize header elements (they are already defined in index.html)
     assignDomElements();
+    // Make these DOM element references global for other modules/scripts to use
+    window.searchInput = searchInput;
+    window.contentArea = contentArea;
+    window.patientSidebar = patientSidebar;
+    window.openSidebarButton = openSidebarButton;
+    window.closeSidebarButton = closeSidebarButton;
+    window.sidebarOverlay = sidebarOverlay;
+    window.navBackButton = navBackButton;
+    window.navForwardButton = navForwardButton;
+    window.navHomeButton = navHomeButton;
+    window.settingsButton = settingsButton;
+    window.settingsPanel = settingsPanel;
     // Ensure overlay starts hidden
     if (sidebarOverlay) {
         sidebarOverlay.classList.add('hidden');
@@ -72,7 +91,6 @@ function initApp() {
     }
 
     attachSearchHandlers();  // Calls the function from Features/search/Search.js
-    attachNavHandlers();
     attachHomeHandler();
     // Now initialize data structures from globals   // These should be loaded BEFORE this script runs (by script order in index.html)
     if (ParamedicCategoriesData && MedicationDetailsData) {
@@ -80,8 +98,12 @@ function initApp() {
     } else {
         console.error("Category or medication data not loaded!");
     } 
-          // /fallback: try again after short delay
-    // Initialize autocomplete for Patient Info fields
+        // After data initialization, expose data maps globally for now
+    window.paramedicCategories = paramedicCategories;
+    window.medicationDataMap = medicationDataMap;
+    window.allDisplayableTopicsMap = allDisplayableTopicsMap;
+
+    // Initialize autocomplete suggestions
     setupAutocomplete('pt-pmh','pt-pmh-suggestions', pmhSuggestions);
     setupAutocomplete('pt-allergies','pt-allergies-suggestions', allergySuggestions);
     setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions);

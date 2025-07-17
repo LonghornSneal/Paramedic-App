@@ -1,11 +1,14 @@
 // Features/list/ListView.js – Category list rendering
+import { addHistoryEntry, updateNavButtonsState } from '/Features/navigation/Navigation.js';
+import { renderDetailPage } from '../detail/DetailPage.js';
+import { addTapListener } from '../../Utils/addTapListener.js';
 
 // Renders the main category list view (home screen) and highlights a topic if provided.
-function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
+export function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     contentArea.innerHTML = '';  // Clear current content
     // Render the hierarchical list of all categories
     const listContainer = document.createElement('div');
-    createHierarchicalList(paramedicCategories, listContainer, 0);
+    createHierarchicalList(window.paramedicCategories, listContainer, 0);
     contentArea.appendChild(listContainer);
     // Optionally expand categories along a path and highlight a specific topic
     openCategoriesAndHighlight(categoryPath, highlightId);
@@ -24,13 +27,13 @@ function renderInitialView(shouldAddHistory = true, highlightId = null, category
 function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
     // Mark each category in the path as expanded
     categoryPath.forEach(catId => { 
-        const catItem = allDisplayableTopicsMap[catId];
+        const catItem = window.allDisplayableTopicsMap[catId];
         if (catItem) catItem.expanded = true; 
     });
     // Re-render the category list with updated expansion states
     contentArea.innerHTML = '';
     const listContainer = document.createElement('div');
-    createHierarchicalList(paramedicCategories, listContainer, 0);
+    createHierarchicalList(window.paramedicCategories, listContainer, 0);
     contentArea.appendChild(listContainer);
     // Highlight the specified topic, if provided
     if (highlightId) { 
@@ -62,7 +65,7 @@ function createHierarchicalList(items, container, level = 0) {
                 item.expanded = !item.expanded;
                 createHierarchicalList(items, container, level); 
             });
-            row.appendChild(arrow);
+            row.appendChild(arrowBtn);
             // Category label
             const label = document.createElement('span');
             label.className = 'cursor-pointer hover:underline flex-1 font-semibold';
@@ -73,11 +76,12 @@ function createHierarchicalList(items, container, level = 0) {
             });
             row.appendChild(label);
             container.appendChild(row);
-            if (item.expanded && item.children && item.children.length > 0) { 
+            // If expanded, render children
+            if (item.expanded && item.children?.length) {
                 const childContainer = document.createElement('div');
                 childContainer.className = 'ml-4 border-l border-blue-100 pl-2';
                 createHierarchicalList(item.children, childContainer, level + 1);
-                container.appendChild(childContainer); 
+                container.appendChild(childContainer);
             }
         } else if (item.type === 'topic') { 
             // Topic item
@@ -92,10 +96,15 @@ function createHierarchicalList(items, container, level = 0) {
                 e.preventDefault();
                 renderDetailPage(item.id); 
             });
-            // spacer for arrow alignment
+            // Add a placeholder span for alignment (for arrow spacing)
             row.appendChild(document.createElement('span'));
             row.appendChild(topicLink);
             container.appendChild(row);
         }
     });
 };
+
+// Temporary global exposure
+if (typeof window !== 'undefined') {
+    window.renderInitialView = renderInitialView;
+}
