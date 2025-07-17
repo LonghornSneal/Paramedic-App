@@ -1,16 +1,14 @@
 // Detailed topic view rendering
 
-// group the logic for rendering a topic’s detailed view and associated helpers 
 // (warning toggles, text formatting, etc.):
-
-// Note: 
-// appendTopicWarnings(topic) is already defined in Features/Warnings.js, 
 
 // (since the search calls renderDetailPage).
 import { addHistoryEntry } from '../navigation/Navigation.js';
 import { addTapListener } from '../../Utils/addTapListener.js';
 import { appendTopicWarnings } from '../Warnings.js';
 import { setupSlugAnchors } from '../anchorNav/slugAnchors.js';
+// Import slugify for use in setting section IDs
+import { slugify } from '../../Utils/slugify.js';
 // Converts special markup in text (e.g. **bold**, [[display|info]]) into formatted HTML, and escapes HTML characters.
 function parseTextMarkup(text) {
     let safeText = text.replace(/&/g, "&amp;")
@@ -197,8 +195,7 @@ export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop =
         contentArea.scrollIntoView({ behavior: 'auto', block: 'start' }); 
     }
 }
-// Import slugify for use in setting section IDs
-import { slugify } from '../../Utils/slugify.js';
+
 
 // Temporary global exposure for compatibility
 if (typeof window !== 'undefined') {

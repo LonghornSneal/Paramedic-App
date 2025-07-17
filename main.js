@@ -7,6 +7,8 @@ import { renderInitialView } from './Features/list/ListView.js';
 import { renderDetailPage } from './Features/detail/DetailPage.js';
 import { pmhSuggestions, allergySuggestions, medicationNameSuggestions, indicationSuggestions, symptomSuggestions, PDE5_INHIBITORS } from './Features/patient/PatientInfo.js';
 import { setupAutocomplete } from './Features/patient/Autocomplete.js';
+import { attachSearchHandlers, processItem } from './Features/search/Search.js';
+import './Features/History.js';
 
 
 // --- Global Variables ---
