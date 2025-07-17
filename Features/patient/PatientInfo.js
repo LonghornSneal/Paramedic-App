@@ -62,7 +62,7 @@ function updatePatientData() {
         spo2: getParsedInt('vs-spo2'),
         etco2: getParsedInt('vs-etco2'),
         rr: getParsedInt('vs-rr'),
-        bgl: getInputValue('vs-bgl'),  // note: BGL might not be numeric (could be "High/Low")
+        bgl: getInputValue('vs-bgl'),  // note: BGL might not be numeric (could be "High/Normal/Low")
         eyes: getInputValue('vs-eyes'),
         gcs: getParsedInt('vs-gcs'),
         aoStatus: getInputValue('vs-ao-status'),
