@@ -2,7 +2,7 @@
 const historyButton = document.getElementById('history-button');
 const historyPanel = document.getElementById('history-panel');
 const closeHistoryButton = document.getElementById('close-history-button');
-// const sidebarOverlay = document.getElementById('sidebar-overlay');
+// /const sidebarOverlay = document.getElementById('sidebar-overlay');
 const patientSidebarEl = document.getElementById('patient-sidebar');
 const settingsPanelEl = document.getElementById('settings-panel');
 
