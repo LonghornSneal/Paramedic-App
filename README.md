@@ -289,6 +289,8 @@ Performance and Simplicity: The app prioritizes speed and reliability:
   **Features/Warnings.js** - Produces warnings when appropriate after the user begins inputing information into the Patient Info section. For instance, if the user inputs the pt's age as "8", then when they go in the medication detail for Etomidate, they will see a red Warning message up top that says, "Warning, pt's age is 8 years old! Etomidate is contraindicted for pt's less than 10 years old!!!"
 
 
+  **Features/History.js** -
+
 # New Features/ folders and files include: (All files still need to have code placed within them) 
     Features/CardiacArrest.js
     Features/Diagnoses.js
@@ -335,7 +337,6 @@ Performance and Simplicity: The app prioritizes speed and reliability:
   **Utils/slugify.js** – A helper function to convert a string into a URL-friendly “slug” (lowercase, hyphen-separated). For example, "Adult Dose" becomes "adult-dose". We use this to generate id attributes for section headings on detail pages. By having a consistent slug generator, we ensure that if a section title in data is in "Contraindications", its <h3> element will get id="contraindications", and any anchor link can point to #contraindications. This consistency is vital for the anchor navigation to work (see slugList and slugAnchors below).
 
     The function exported by slugify.js is used both when rendering detail page sections (to set ids) and when building the anchor list (to make the links). Always use this function for any new section titles to avoid mismatches.
-
 
 
 
@@ -471,7 +472,7 @@ Understanding the flow of the application from load to user interactions:
 
     Because the anchor navigation (slugList/slugAnchors) runs on renderDetailPage, it will re-generate after refresh. That’s fine; it ensures the anchor links are still accurate if any sections were added/removed due to patient data (though typically we don’t remove sections entirely, just mark them).
 
-    Example: The user is viewing “Epinephrine” detail. Initially, pediatric dose is shown (because no age given). They then enter Age = 30. Upon update, the Epinephrine page re-renders, now maybe visually de-emphasizing the pediatric dose section (or adding a note “Pediatric dosing not applicable for adult patient”). If they also add an allergy “Sulfa” (which might not affect Epinephrine, so nothing changes on that page) but if they add “Allergies: Epinephrine”, the page would on refresh show an “Allergy Alert: Patient allergic to epinephrine” box.
+    Example: The user is viewing “Epinephrine” detail. Initially, pediatric dose is shown (because no age given). They then enter Age = 30. Upon update, the Epinephrine page re-renders, now visually de-emphasizing the pediatric dose section (or adding a note “Pediatric dosing not applicable for adult patient”). If they also add an allergy “Sulfa” (which might not affect Epinephrine, so nothing changes on that page) but if they add “Allergies: Epinephrine”, the page would on refresh show an “Allergy Alert: Patient allergic to epinephrine” box.
 
     These changes happen without a full page reload; it’s all JS DOM updates.
 
@@ -513,7 +514,6 @@ All these components work together to provide a seamless experience: The data pr
     Known Issue: The navigation history logic still has an edge case: after going Back to the main list, the last-clicked item on that list is highlighted (which is correct), but if the user had multiple levels expanded, sometimes not all of those expansions persist. We intend to highlight the exact subtopic or section the user last interacted with. There is code in place to do this (the highlightId parameter in renderInitialView), but it may need refinement to scroll the item into view or open all parent categories fully.
 
 
-
   UI Consistency Fixes:
 
     Detail Page Title Styling: The main title on each detail page now uses a consistent class name and data attribute. This allows the CSS to style all detail titles uniformly (e.g., same font-size and margin) and also allows scripts to easily select it (for any future dynamic update). Previously, some detail titles had inconsistent tags or classes, which could lead to styling glitches.
@@ -521,8 +521,6 @@ All these components work together to provide a seamless experience: The data pr
     Header UI Structure: We fixed the ensureHeaderUI function in main.js to always (re)create the necessary header elements in the correct order. In some cases, during navigation or re-initialization, duplicate search bars or misplaced buttons would appear. Now the header is treated as a stable component; ensureHeaderUI checks if elements exist and creates them if not, and ensures they are appended in the proper DOM order (Patient Info button on left, title center, nav buttons right, etc.). This improved the consistency of the header layout across navigations.
 
     Slug Anchors Initialization: Modified slugAnchors.js to wait for the DOM content to be fully loaded (or for a detail page container to exist) before inserting the anchor navigation menu. In practice, we use a function setupSlugAnchors(sectionIdArray) that is called after renderDetailPage. This ensures the anchor links (table of contents for sections) are injected at the right moment. This fix prevents a bug where anchor links sometimes were not added if the script ran too early.
-
-    Detail Page Table of Contents: We introduced an automatic Table of Contents generation for detail pages with multiple sections. Now, at the top of each detail page, if there are sections like Description, Dosage, Indications, etc., the app inserts a list of links to those sections. This makes navigating within a long detail page faster. (E.g., on the Amiodarone page, you can tap “Adult Dose” in the TOC and jump straight down.) This feature is working, but continue to ensure new sections get slugified IDs so they appear in this TOC.
 
     Section Header Alignment: A CSS tweak was made to how section headers and their toggle arrows are aligned in expandable lists. Specifically, for the main Contents page and any similar toggles, we set .toggle-category { justify-content: flex-start; }. This was intended to ensure that the category name and the arrow icon stay together on the left, rather than being spaced apart. In practice, this fix did not fully solve the spacing issue for all screen sizes. We will revisit the CSS – likely the parent container needs align-items: center as well to vertically center, and maybe a specific width or padding. (This item remains partially unresolved: the goal is to have the arrow icon snugly next to the text label.)
 
@@ -548,10 +546,7 @@ All these components work together to provide a seamless experience: The data pr
 
     This system is currently implemented for a few critical scenarios (e.g., Nitro + low BP or PDE5, allergies in general, pediatric vs adult constraints). It’s a work in progress: as we expand our data (MedicationDetailsData), we will include clear contraindication keywords so the code can automatically pick them up. For now, devs might need to update updatePatientData or renderDetailPage with specific checks per medication. The groundwork is laid out and functioning for major alerts. Always test after adding a new contraindication rule: the warning should appear and be clearly worded for the end user.
 
-Toggle Arrows for Hidden Info (Green Text Expansion):
-
-
-
+Toggle Arrows for Hidden Info (Green Text Expansion, but all the green text should become black with a green tint until the text is hidden again.):
 
 
 SVG arrow icon: Ensure that the SVG arrow icon is used for current green text;  
