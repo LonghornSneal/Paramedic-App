@@ -1,3 +1,5 @@
+import { ParamedicCategoriesData } from './Data/ParamedicCategoriesData.js';
+import { MedicationDetailsData } from './Data/MedicationDetailsData.js';
 // --- Global Variables ---
 let searchInput, patientSidebar, contentArea, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton, navHomeButton, settingsButton, settingsPanel;
 let medicationDataMap = {};
@@ -73,18 +75,12 @@ function initApp() {
     attachNavHandlers();
     attachHomeHandler();
     // Now initialize data structures from globals   // These should be loaded BEFORE this script runs (by script order in index.html)
-    if (window.ParamedicCategoriesData && window.MedicationDetailsData) {
-        initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
+    if (ParamedicCategoriesData && MedicationDetailsData) {
+        initializeData(ParamedicCategoriesData, MedicationDetailsData);
     } else {
-        // Defensive: Wait until both globals are present
-        setTimeout(() => { 
-            if (window.ParamedicCategoriesData && window.MedicationDetailsData) {
-                initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData);
-            } else { 
-                console.error("Category or medication data not loaded!"); 
-            }
-        }, 200); 
-    }      // /fallback: try again after short delay
+        console.error("Category or medication data not loaded!");
+    } 
+          // /fallback: try again after short delay
     // Initialize autocomplete for Patient Info fields
     setupAutocomplete('pt-pmh','pt-pmh-suggestions', pmhSuggestions);
     setupAutocomplete('pt-allergies','pt-allergies-suggestions', allergySuggestions);

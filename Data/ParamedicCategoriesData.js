@@ -1,8 +1,9 @@
 // Data/ParamedicCategoriesData.js
+import { slugify } from '../Utils/slugify.js';
 if (typeof window === 'undefined' || typeof window.slugify !== 'function') {
   throw new Error('slugify is not defined on window. Ensure Utils/slugify.js is loaded before this file.');
 }
-window.ParamedicCategoriesData = [
+export const ParamedicCategoriesData = [
   {
     id: slugify("Abbreviations & References"), title: "Abbreviations & References", 
     type: "category", 
