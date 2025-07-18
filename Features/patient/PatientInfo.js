@@ -4,6 +4,7 @@
  * Opens/closes the Patient Info sidebar and adjusts content (strikethrough irrelevant info, auto-calc dosages, warnings) according to entered patient information.
  */
 // Features/patient/PatientInfo.js – Patient Info sidebar functionality
+import { renderDetailPage } from '../detail/DetailPage.js';
 export const patientData = {
     age: null, weight: null, weightUnit: 'kg',
     pmh: [], allergies: [], currentMedications: [], indications: [], symptoms: [],
