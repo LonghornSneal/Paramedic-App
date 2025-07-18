@@ -3,7 +3,6 @@
  * Manages the patientData object (age, weight, medical history, vitals, etc.) and updates the app UI based on these inputs.
  * Opens/closes the Patient Info sidebar and adjusts content (strikethrough irrelevant info, auto-calc dosages, warnings) according to entered patient information.
  */
-import { renderDetailPage } from './Features/detail/DetailPage.js';
 // Features/patient/PatientInfo.js – Patient Info sidebar functionality
 export const patientData = {
     age: null, weight: null, weightUnit: 'kg',

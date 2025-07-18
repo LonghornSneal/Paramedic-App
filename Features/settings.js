@@ -1,5 +1,4 @@
 // Features/settings.js – Settings panel (dark mode toggle, etc.)
-import { addTapListener } from '../Utils/addTapListener.js';
 
 const settingsButtonEl = document.getElementById('settings-button');
 const settingsPanelEl = document.getElementById('settings-panel');

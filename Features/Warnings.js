@@ -1,5 +1,5 @@
 // Features/Warnings.js – Warning box generation logic
-import { PEDIATRIC_AGE_THRESHOLD, PDE5_INHIBITORS } from './patient/PatientInfo.js';
+import { PDE5_INHIBITORS } from './patient/PatientInfo.js';
 
 function createWarningIcon(colorClass = 'text-yellow-600') {
     return `<svg class="${colorClass} w-5 h-5 mr-2 inline-block" xmlns="http://www.w3.org/2000/svg" 

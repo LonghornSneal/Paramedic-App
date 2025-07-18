@@ -1,7 +1,7 @@
 import { ParamedicCategoriesData } from './Data/ParamedicCategoriesData.js';
 import { MedicationDetailsData } from './Data/MedicationDetailsData.js';
 import { addTapListener } from './Utils/addTapListener.js';
-import { attachNavHandlers, addHistoryEntry, navigateViaHistory, navigationHistory, currentHistoryIndex } from '../navigation/Navigation.js';
+import { attachNavHandlers } from './Features/navigation/Navigation.js';
 import { attachHomeHandler } from './Features/navigation/Home.js';
 import { renderInitialView } from './Features/list/ListView.js';
 import { renderDetailPage } from './Features/detail/DetailPage.js';
@@ -11,7 +11,7 @@ import { attachSearchHandlers, processItem } from './Features/search/Search.js';
 import './Features/History.js';
 import './Features/settings.js';
 import { escapeHTML } from './Utils/escapeHTML.js';
-import { setupSlugAnchors } from './anchorNav/slugAnchors.js';
+import { setupSlugAnchors } from './Features/anchorNav/slugAnchors.js';
 
 // --- Global Variables ---
 let searchInput, patientSidebar, contentArea, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton, navHomeButton, settingsButton, settingsPanel;
@@ -23,19 +23,19 @@ let paramedicCategories = []; // This must be a global var!
 
 
 // Assigns key UI elements to global variables for easy access.
-// /function assignDomElements() {
-//    /searchInput = document.getElementById('searchInput');
-//    contentArea = document.getElementById('content-area');
-//    patientSidebar = document.getElementById('patient-sidebar');
-//    openSidebarButton = document.getElementById('open-sidebar-button');
-//    closeSidebarButton = document.getElementById('close-sidebar-button');
-//    sidebarOverlay = document.getElementById('sidebar-overlay');
-//    navBackButton = document.getElementById('nav-back-button');
-//    navForwardButton = document.getElementById('nav-forward-button');
-//    navHomeButton = document.getElementById('nav-home-button');
-//    settingsButton = document.getElementById('settings-button');
-//    settingsPanel = document.getElementById('settings-panel');
-//}
+ function assignDomElements() {
+    searchInput = document.getElementById('searchInput');
+    contentArea = document.getElementById('content-area');
+    patientSidebar = document.getElementById('patient-sidebar');
+    openSidebarButton = document.getElementById('open-sidebar-button');
+    closeSidebarButton = document.getElementById('close-sidebar-button');
+    sidebarOverlay = document.getElementById('sidebar-overlay');
+    navBackButton = document.getElementById('nav-back-button');
+    navForwardButton = document.getElementById('nav-forward-button');
+    navHomeButton = document.getElementById('nav-home-button');
+    settingsButton = document.getElementById('settings-button');
+    settingsPanel = document.getElementById('settings-panel');
+}
 // Kick off the application once DOM is ready
 if (document.readyState === 'loading') { 
     document.addEventListener('DOMContentLoaded', initApp);
@@ -60,6 +60,7 @@ function initApp() {
     window.settingsButton = settingsButton;
     window.settingsPanel = settingsPanel;
     // Ensure overlay starts hidden
+    attachNavHandlers();
     if (sidebarOverlay) {
         sidebarOverlay.classList.add('hidden');
         sidebarOverlay.classList.remove('active');

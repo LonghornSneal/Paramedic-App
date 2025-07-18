@@ -422,4 +422,3 @@ export const ParamedicCategoriesData = [
     ]
   }
 ];
-// if (typeof window !== 'undefined') window.ParamedicCategoriesData = ParamedicCategoriesData;

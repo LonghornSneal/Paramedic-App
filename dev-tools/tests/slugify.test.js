@@ -1,4 +1,4 @@
-const slugify = require('../../Utils/slugify');
+const { slugify } = require('../../Utils/slugify');
 
 describe('slugify', () => {
   it('should convert spaces and uppercase to hyphenated lowercase', () => {
