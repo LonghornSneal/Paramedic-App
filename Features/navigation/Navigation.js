@@ -2,10 +2,10 @@
 // Manages navigation history and Back/Forward button functionality (migrated from main.js).
 
 // Import needed functions at the top:
-// import { addTapListener } from '../../Utils/addTapListener.js';
+ import { addTapListener } from '../../Utils/addTapListener.js';
 // Import needed functions at the top:
 import { renderDetailPage } from '../detail/DetailPage.js';
-import { addTapListener } from '../Utils/addTapListener.js';
+//import { addTapListener } from '../Utils/addTapListener.js';
 // Navigation history state variables
 export let navigationHistory = [];
 export let currentHistoryIndex = -1;
@@ -22,7 +22,7 @@ export function updateNavButtonsState() {
 export function addHistoryEntry(entry) {
     if (isNavigatingViaHistory) return;
     if (currentHistoryIndex < navigationHistory.length - 1) {
-        navigationHistory = navigationHistory.slice(0, currentHistoryIndex + 1);
+        navigationHistory.splice(currentHistoryIndex + 1);
     }
     navigationHistory.push(entry);
     currentHistoryIndex = navigationHistory.length - 1;

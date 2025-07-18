@@ -1,7 +1,10 @@
 // Features/list/ListView.js – Category list rendering
-import './Features/navigation/Navigation.js';
-import './Features/detail/DetailPage.js';
-import './Utils/addTapListener'
+//import './Features/navigation/Navigation.js';
+//import './Features/detail/DetailPage.js';
+//import './Utils/addTapListener'
+import { addHistoryEntry, updateNavButtonsState } from '../navigation/Navigation.js';
+import { renderDetailPage } from '../detail/DetailPage.js';
+import { addTapListener } from '../../Utils/addTapListener.js'
 // import { addHistoryEntry, updateNavButtonsState, attachNavHandlers } from './Features/navigation/Navigation.js';
 // import { renderDetailPage } from './Features/detail/DetailPage.js';
 // import { addTapListener } from '../../Utils/addTapListener.js';
@@ -39,16 +42,16 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
     contentArea.appendChild(listContainer);
     // Highlight the specified topic, if provided
     if (highlightId) { 
-        const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}"]`);
+        const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}\"]`);
         if (topicEl) {
             topicEl.classList.add('recently-viewed'); 
             topicEl.scrollIntoView({ block: 'center' });
         }
     }
     // Scroll highlighted topic into view (if any)**
-    if (highlightId && topicEl) {
-        topicEl.scrollIntoView({ block: 'center' });
-    }
+//    if (highlightId && topicEl) {
+//        topicEl.scrollIntoView({ block: 'center' });
+//    }
 }
 
 // Builds a nested list of categories and topics, appending it to the given container. Handles expandable categories.
