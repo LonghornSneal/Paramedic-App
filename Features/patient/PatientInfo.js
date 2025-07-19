@@ -12,7 +12,11 @@
 // Import renderDetailPage to allow re-rendering of the detail view when patient data changes.
 // Although we refer to window.renderDetailPage inside updatePatientData for historical reasons,
 // importing it here keeps the dependency explicit and ensures tree‑shaking tools include it.
-import { renderDetailPage } from '../detail/DetailPage.js';
+
+
+//import { renderDetailPage } from '../detail/DetailPage.js';
+
+
 
 // The central patient data object. All fields are initialized to null or sensible defaults. The
 // weightUnit property remains for potential future use but the code currently always stores weight
