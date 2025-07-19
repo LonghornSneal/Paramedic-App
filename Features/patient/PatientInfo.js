@@ -1,10 +1,22 @@
 /**
  * Handles the Patient Info sidebar functionality in the Paramedic Quick Reference app.
- * Manages the patientData object (age, weight, medical history, vitals, etc.) and updates the app UI based on these inputs.
- * Opens/closes the Patient Info sidebar and adjusts content (strikethrough irrelevant info, auto-calc dosages, warnings) according to entered patient information.
+ *
+ * This module manages the patientData object (age, weight, medical history, vitals, etc.) and updates
+ * the app UI based on these inputs. It exposes the patientData object globally for backward
+ * compatibility but also exports it for ES module consumers. A major improvement in this version
+ * is support for dual weight inputs (kilograms and pounds). When the user enters a weight in one
+ * unit, the other field automatically updates to the equivalent value. Internally we always store
+ * weight in kilograms. See updatePatientData() and synchronizeWeights() for details.
  */
-// Features/patient/PatientInfo.js – Patient Info sidebar functionality
+
+// Import renderDetailPage to allow re-rendering of the detail view when patient data changes.
+// Although we refer to window.renderDetailPage inside updatePatientData for historical reasons,
+// importing it here keeps the dependency explicit and ensures tree‑shaking tools include it.
 import { renderDetailPage } from '../detail/DetailPage.js';
+
+// The central patient data object. All fields are initialized to null or sensible defaults. The
+// weightUnit property remains for potential future use but the code currently always stores weight
+// in kilograms.
 export const patientData = {
     age: null, weight: null, weightUnit: 'kg',
     pmh: [], allergies: [], currentMedications: [], indications: [], symptoms: [],
@@ -13,14 +25,19 @@ export const patientData = {
     },
     ekg: ''
 };
-
+// IDs of inputs we want to monitor for changes. Exclude the weight unit select (no longer used) and
+// include the new kilogram and pound inputs. When any of these inputs fires an input event, we call
+// updatePatientData() to refresh patientData and update the UI.
 const ptInputIds = [ 'pt-age', 'pt-weight', 'pt-weight-unit', 'pt-pmh', 'pt-allergies', 'pt-medications', 'pt-indications', 'pt-symptoms',
                      'vs-bp', 'vs-hr', 'vs-spo2', 'vs-etco2', 'vs-rr', 'vs-bgl', 'vs-eyes', 'vs-gcs', 'vs-ao-status', 'vs-lung-sounds', 'pt-ekg' ];
 const ptInputs = ptInputIds.map(id => document.getElementById(id));
-
+// Constants related to warnings and suggestions. PEDIATRIC_AGE_THRESHOLD defines the minimum age
+// considered adult for protocol purposes. PDE5_INHIBITORS lists medications that may interact
+// dangerously with nitroglycerin and similar treatments.
 export const PEDIATRIC_AGE_THRESHOLD = 18;
 export const PDE5_INHIBITORS = ["sildenafil","viagra","revatio","vardenafil","levitra","tadalafil","cialis","adcirca"];
-
+// Suggestion sets used by the autocomplete component. These sets are populated elsewhere (see
+// main.js) with common terms, allergies, medications, indications and symptoms.
 export const pmhSuggestions = new Set();
 export const allergySuggestions = new Set();
 export const medicationNameSuggestions = new Set();
@@ -30,26 +47,113 @@ export const symptomSuggestions = new Set([
     "dizziness","syncope","altered mental status","ams","weakness","fatigue","fever","chills","rash","seizure",
     "palpitations","edema","cough","anxiety","depression","back pain","trauma"
 ]);
-
+/**
+ * Retrieves the trimmed string value of an input by its DOM id. Returns an empty string if the
+ * element does not exist. This helper ensures updatePatientData() can safely read values even if
+ * some inputs haven’t been rendered yet.
+ *
+ * @param {string} id The id of the input element to read.
+ * @returns {string} The trimmed value of the input or an empty string.
+ */
 function getInputValue(id) {
     return document.getElementById(id)?.value?.trim() ?? '';
 }
+/**
+ * Parses an integer value from the input with the given id. Returns null if parsing fails or
+ * the value is empty. This helps avoid NaN creeping into patientData.
+ *
+ * @param {string} id The id of the input element to parse.
+ * @returns {number|null} The parsed integer or null.
+ */
 function getParsedInt(id) {
     const val = getInputValue(id);
     return val ? parseInt(val, 10) : null;
 }
+/**
+ * Parses a floating point value from the input with the given id. Returns null if parsing fails
+ * or the value is empty. This helper is used for weight inputs where decimals are allowed.
+ *
+ * @param {string} id The id of the input element to parse.
+ * @returns {number|null} The parsed float or null.
+ */
 function getParsedFloat(id) {
     const val = getInputValue(id);
     return val && !isNaN(parseFloat(val)) ? parseFloat(val) : null;
 }
+/**
+ * Splits a comma‑separated textarea into an array of lower‑cased values. Returns an empty
+ * array if the textarea is empty. This normalization step ensures that matching against
+ * medication indications and allergies is case‑insensitive.
+ *
+ * @param {string} id The id of the textarea to process.
+ * @returns {string[]} An array of trimmed, lower‑cased strings.
+ */
 function getArrayFromTextarea(id) {
     const value = getInputValue(id);
     return value ? value.split(',').map(v => v.trim().toLowerCase()).filter(Boolean) : [];
 }
+// Weight conversion factor used when synchronizing kilogram and pound inputs. 1 kilogram equals
+// 2.20462 pounds. We round converted values to one decimal place for display purposes.
+const WEIGHT_CONVERSION_FACTOR = 2.20462;
 
+/**
+ * Synchronizes the kg and lb weight inputs. When called with a source of 'kg', the function
+ * converts the kilogram input into pounds and updates the pound input. When called with a
+ * source of 'lb', the pound input is converted back to kilograms and the kilogram input is
+ * updated. If the source input is empty or invalid, the target input is cleared as well.
+ *
+ * @param {string} source Either 'kg' or 'lb' indicating which input triggered the change.
+ */
+function synchronizeWeights(source) {
+  const kgEl = document.getElementById('pt-weight-kg');
+  const lbEl = document.getElementById('pt-weight-lb');
+  if (!kgEl || !lbEl) return;
+  if (source === 'kg') {
+    const kg = parseFloat(kgEl.value);
+    if (!isNaN(kg)) {
+      const lb = kg * WEIGHT_CONVERSION_FACTOR;
+      lbEl.value = lb ? lb.toFixed(1) : '';
+    } else {
+      lbEl.value = '';
+    }
+  } else if (source === 'lb') {
+    const lb = parseFloat(lbEl.value);
+    if (!isNaN(lb)) {
+      const kg = lb / WEIGHT_CONVERSION_FACTOR;
+      kgEl.value = kg ? kg.toFixed(1) : '';
+    } else {
+      kgEl.value = '';
+    }
+  }
+}
+
+/**
+ * Updates the global patientData object by reading all current inputs. This function is called on
+ * every input event for monitored fields. It also handles striking through irrelevant topics in
+ * the list, re‑rendering the detail page when necessary, and applying pediatric/adult section
+ * strikeouts based on the patient’s age. Weight handling has been updated to support dual inputs
+ * – see the weight section near the top of this function.
+ */
 function updatePatientData() {
     patientData.age = getParsedInt('pt-age');
-    patientData.weight = getParsedFloat('pt-weight');
+    // Weight: determine which input has data. Prefer kilograms if both exist. We always store weight
+    // internally in kilograms for dosing calculations. If neither field has a valid value, weight is
+    // set to null.
+    const kgVal = getParsedFloat('pt-weight-kg');
+    const lbVal = getParsedFloat('pt-weight-lb');
+    if (kgVal !== null) {
+    patientData.weight = kgVal;
+    patientData.weightUnit = 'kg';
+    } else if (lbVal !== null) {
+    // Convert pounds to kilograms and round to two decimals
+    patientData.weight = parseFloat((lbVal / WEIGHT_CONVERSION_FACTOR).toFixed(2));
+    patientData.weightUnit = 'kg';
+    } else {
+    patientData.weight = null;
+    patientData.weightUnit = 'kg';
+    }
+      // Other patient fields
+    //patientData.weight = getParsedFloat('pt-weight');
     patientData.weightUnit = getInputValue('pt-weight-unit');
     patientData.pmh = getArrayFromTextarea('pt-pmh');
     patientData.allergies = getArrayFromTextarea('pt-allergies');
@@ -68,7 +172,10 @@ function updatePatientData() {
         aoStatus: getInputValue('vs-ao-status'),
         lungSounds: getInputValue('vs-lung-sounds')
     };
-    // If any indications are entered, strike through irrelevant topics in list
+     // If any indications are entered, strike through irrelevant topics in the list. We compare the
+      // patient’s indications against each topic’s indications to determine relevance. This logic
+      // originally lived in the ListView module but has been centralized here to respond to patient
+      // input changes immediately.
     const topicLinks = document.querySelectorAll('a.topic-link-item');
     topicLinks.forEach(link => {
         const topicId = link.dataset.topicId;
