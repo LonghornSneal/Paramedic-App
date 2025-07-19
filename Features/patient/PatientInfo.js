@@ -193,7 +193,8 @@ function updatePatientData() {
             link.classList.remove('strikethrough');
         }
     });
-    // If a detail page is open, re-render it to update warnings/dosages based on new patient info
+    // If a detail page is open, re-render it to update warnings/dosages based on new patient info. We
+  // identify a detail page by checking for an element with class .topic-h2 which stores the topic id.
     const currentTopicTitleEl = window.contentArea?.querySelector('.topic-h2');
     if (currentTopicTitleEl) {
         const currentTopicId = currentTopicTitleEl.dataset.topicId;
@@ -204,10 +205,10 @@ function updatePatientData() {
         if (patientData.age !== null) {
             if (patientData.age >= PEDIATRIC_AGE_THRESHOLD) {
                 document.querySelectorAll('.pediatric-section .detail-section-title, .pediatric-section .detail-text, .pediatric-section .detail-list')
-                        .forEach(el => el.classList.add('strikethrough'));
+                    .forEach(el => el.classList.add('strikethrough'));
             } else {
                 document.querySelectorAll('.adult-section .detail-section-title, .adult-section .detail-text, .adult-section .detail-list')
-                        .forEach(el => el.classList.add('strikethrough'));
+                    .forEach(el => el.classList.add('strikethrough'));
             }
         } else {
             // No age provided, remove any age-based strikethroughs
@@ -217,16 +218,35 @@ function updatePatientData() {
     }
 }
 
-// Attach input event listeners for live updates
+// Attach input event listeners for live updates. Each monitored input triggers updatePatientData().
 ptInputs.forEach(input => {
-    input?.addEventListener('input', updatePatientData);
+  input?.addEventListener('input', updatePatientData);
 });
 
-// Global exposure for compatibility
+// Additional listeners for weight inputs to synchronize kg and lb values. We attach these
+// separately because synchronizeWeights() must be called before updatePatientData() to ensure
+// patientData.weight is based on the latest conversion.
+const kgInputEl = document.getElementById('pt-weight-kg');
+const lbInputEl = document.getElementById('pt-weight-lb');
+if (kgInputEl) {
+  kgInputEl.addEventListener('input', () => {
+    synchronizeWeights('kg');
+    updatePatientData();
+  });
+}
+if (lbInputEl) {
+  lbInputEl.addEventListener('input', () => {
+    synchronizeWeights('lb');
+    updatePatientData();
+  });
+}
+
+// Expose our important values and functions globally for legacy scripts. This allows older code
+// that references window.patientData, window.PEDIATRIC_AGE_THRESHOLD, etc. to continue working
+// even though this module exports them. Once the entire app uses ES modules, these exposures can
+// be removed.
 if (typeof window !== 'undefined') {
-    window.patientData = patientData;
-    window.PEDIATRIC_AGE_THRESHOLD = PEDIATRIC_AGE_THRESHOLD;
-    window.PDE5_INHIBITORS = PDE5_INHIBITORS;
-    // We don't strictly need to expose suggestion sets or updatePatientData globally, 
-    // because main will import suggestions and detail uses window.patientData already.
+  window.patientData = patientData;
+  window.PEDIATRIC_AGE_THRESHOLD = PEDIATRIC_AGE_THRESHOLD;
+  window.PDE5_INHIBITORS = PDE5_INHIBITORS;
 }
