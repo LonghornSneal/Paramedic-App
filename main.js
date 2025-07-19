@@ -134,6 +134,8 @@ function initializeData(categoriesData, medDetailsData) {
     paramedicCategories = categoriesData;    // /Assign the global category array
     // Wipe/prepare lookup maps
     allDisplayableTopicsMap = {};
+    // Make sure the global map exists BEFORE processItem uses it
+    window.allDisplayableTopicsMap = allDisplayableTopicsMap;
 //    /allSearchableTopics = []; //maybe need still maybe not
 
     // Build med details map for quick lookups
@@ -145,7 +147,8 @@ function initializeData(categoriesData, medDetailsData) {
     } else if (medDetailsData && typeof medDetailsData === 'object') { 
         Object.assign(medicationDataMap, medDetailsData); 
     }
-    categoriesData.forEach(cat => processItem(cat)); 
+    // populate allDisplayableTopicsMap safely
+    categoriesData.forEach(cat => processItem(cat));
     // Load common suggestion terms into suggestion sets
     const commonPmh = ["hypertension","htn","diabetes","dm","asthma","copd","heart failure","hf","cad","stroke","cva","seizure disorder","renal insufficiency","ckd","hypothyroidism","hyperthyroidism","glaucoma","peptic ulcer","anxiety","depression"];
     const commonAllergies = ["penicillin","sulfa","aspirin","nsaids","morphine", "codeine","iodine","shellfish","latex","peanuts","tree nuts"];
