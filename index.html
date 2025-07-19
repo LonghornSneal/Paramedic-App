@@ -36,14 +36,12 @@
     <h2 class="sidebar-section-title">Patient Details</h2>
     <label for="pt-age" class="sidebar-label">Age:</label>
     <input type="number" id="pt-age" class="sidebar-input w-full mb-3" placeholder="Age in years" />
-    <label for="pt-weight" class="sidebar-label">Weight:</label>
+    <label for="pt-weight-kg" class="sidebar-label">Weight:</label>
+    <!-- Dual weight inputs: kilograms and pounds. When the user enters a value in one field,
+         the other field automatically updates via JavaScript (see Features/patient/PatientInfo.js). -->
     <div class="flex items-center space-x-2 mb-3">
-    <input type="number" id="pt-weight" class="sidebar-input w-full" placeholder="Weight" />
-    <label for="pt-weight-unit" class="sidebar-label sr-only">Weight Unit</label>
-    <select id="pt-weight-unit" class="sidebar-input" aria-label="Weight Unit">
-        <option value="kg" selected>kg</option>
-        <option value="lb">lb</option>
-      </select>
+      <input type="number" id="pt-weight-kg" class="sidebar-input w-full" placeholder="kg" />
+      <input type="number" id="pt-weight-lb" class="sidebar-input w-full" placeholder="lbs" />
     </div>
   </div>
   <!-- Section: Medical History -->
@@ -184,30 +182,13 @@
     <!-- Application Footer -->
     <footer class="text-center p-4 text-gray-500 text-sm">
       App Version 0.7
-        <button id="settings-button" class="ml-4">Settings</button>
+        <button id="settings-button" class="ml-4">Settings
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
       </button>
     </footer>
 </div>
-/* "Utils/slugify.js" */
-/* "Features/anchorNav/slugList.js" */
-/* "Data/MedicationDetailsData.js" */
-/* "Data/ParamedicCategoriesData.js" */
-/* "Utils/addTapListener.js" */
-/* "Utils/escapeHTML.js" */
-/* "Features/anchorNav/slugAnchors.js" */
-/* "Features/navigation/Navigation.js" */
-/* "Features/navigation/Home.js" */
-/* src="Features/settings.js" */
-/* src="Features/list/ListView.js" */
-/* src="Features/detail/DetailPage.js" */
-/* src="Features/patient/PatientInfo.js" */
-/* src="Features/patient/Autocomplete.js" */
-/* src="Features/Warnings.js" */
-/* src="Features/search/Search.js" */
-/* src="Features/History.js" */
 <script type="module" src="main.js"></script>
 </body>
 </html>

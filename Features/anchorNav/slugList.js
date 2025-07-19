@@ -137,4 +137,13 @@ const slugIDs = [
   'vf-pvt',
   'workers-compensation-process',
 ];
-if (typeof window !== 'undefined') window.slugIDs = slugIDs;
+
+// Expose slugIDs to the global window object for backward compatibility. This ensures that older scripts relying on
+// window.slugIDs continue to function. Once all code has been migrated to ES modules, this exposure can be removed.
+if (typeof window !== 'undefined') {
+  window.slugIDs = slugIDs;
+}
+
+// Export the slugIDs array so other ES modules can import it. Without this export, slugList.js would not provide
+// any values to the module system. Tests that import slugIDs will fail if this is omitted.
+export { slugIDs };
