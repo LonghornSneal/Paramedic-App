@@ -5,6 +5,9 @@ import { patientData } from './PatientInfo.js';  // to call updatePatientData if
 export function setupAutocomplete(textareaId, suggestionsContainerId, suggestionSourceSet) {
     const textarea = document.getElementById(textareaId);
     const suggestionsContainer = document.getElementById(suggestionsContainerId);
+    // If either element does not exist, return early. This prevents a runtime error when the
+    // autocomplete is initialized before its corresponding inputs have been rendered.
+    if (!textarea || !suggestionsContainer) return;
     textarea.addEventListener('input', e => {
         const inputText = e.target.value;
         const currentSegment = inputText.split(',').pop().trim().toLowerCase();
@@ -43,8 +46,7 @@ export function setupAutocomplete(textareaId, suggestionsContainerId, suggestion
             suggestionsContainer.classList.add('hidden');
             suggestionsContainer.innerHTML = '';
             textarea.focus();
-            // Update patient data now that a new item is added
-            // (We can call window.updatePatientData if we exposed it, or simply trigger input event)
+            // Trigger input event to update patient data
             textarea.dispatchEvent(new Event('input'));  // trigger the input event to update data
         }
     });

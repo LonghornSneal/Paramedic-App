@@ -58,5 +58,33 @@ export function appendTopicWarnings(topic, patientData) {
     warningsHtml += getAllergyWarning(topic, patientData);
     warningsHtml += getPDE5Warning(topic, patientData);
     warningsHtml += getLowBPWarning(topic, patientData);
+    // Include any other contraindications defined in MedicationDetailsData that aren’t allergy-specific
+    warningsHtml += getGeneralContraindicationsWarning(topic);
     return warningsHtml;
+ }
+
+/**
+ * Builds warning messages from a medication's contraindications array.
+ * Skips entries that mention allergies or hypersensitivity (handled elsewhere).
+ * This allows new contraindication keywords in MedicationDetailsData to show up automatically.
+ *
+ * @param {object} topic The topic object (medication).
+ * @returns {string} HTML snippet of additional warnings.
+ */
+function getGeneralContraindicationsWarning(topic) {
+  const med = window.medicationDataMap?.[topic.id];
+  if (!med || !Array.isArray(med.contraindications)) return ;
+  let warnings = "";
+  med.contraindications.forEach(ci => {
+    const ciLower = ci.toLowerCase();
+    if (ciLower.includes("allergy") || ciLower.includes("hypersensitivity")) {
+      return;
+    }
+    warnings += `
+      ${createWarningIcon('text-red-600')}
+      Contraindication: ${ci}. 
+      
+    `;
+  });
+  return warnings;
 }

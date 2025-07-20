@@ -9,15 +9,6 @@
  * weight in kilograms. See updatePatientData() and synchronizeWeights() for details.
  */
 
-// Import renderDetailPage to allow re-rendering of the detail view when patient data changes.
-// Although we refer to window.renderDetailPage inside updatePatientData for historical reasons,
-// importing it here keeps the dependency explicit and ensures tree‑shaking tools include it.
-
-
-//import { renderDetailPage } from '../detail/DetailPage.js';
-
-
-
 // The central patient data object. All fields are initialized to null or sensible defaults. The
 // weightUnit property remains for potential future use but the code currently always stores weight
 // in kilograms.
@@ -32,8 +23,25 @@ export const patientData = {
 // IDs of inputs we want to monitor for changes. Exclude the weight unit select (no longer used) and
 // include the new kilogram and pound inputs. When any of these inputs fires an input event, we call
 // updatePatientData() to refresh patientData and update the UI.
-const ptInputIds = [ 'pt-age', 'pt-weight', 'pt-weight-unit', 'pt-pmh', 'pt-allergies', 'pt-medications', 'pt-indications', 'pt-symptoms',
-                     'vs-bp', 'vs-hr', 'vs-spo2', 'vs-etco2', 'vs-rr', 'vs-bgl', 'vs-eyes', 'vs-gcs', 'vs-ao-status', 'vs-lung-sounds', 'pt-ekg' ];
+const ptInputIds = [ 'pt-age', 
+    'pt-weight-kg', 'pt-weight-lb', // dual weight inputs
+    'pt-pmh', 
+    'pt-allergies', 
+    'pt-medications', 
+    'pt-indications', 
+    'pt-symptoms',
+        'vs-bp', 
+        'vs-hr', 
+        'vs-spo2', 
+        'vs-etco2', 
+        'vs-rr', 
+        'vs-bgl', 
+        'vs-eyes', 
+        'vs-gcs', 
+        'vs-ao-status', 
+        'vs-lung-sounds', 
+        'pt-ekg' 
+];
 const ptInputs = ptInputIds.map(id => document.getElementById(id));
 // Constants related to warnings and suggestions. PEDIATRIC_AGE_THRESHOLD defines the minimum age
 // considered adult for protocol purposes. PDE5_INHIBITORS lists medications that may interact
@@ -136,7 +144,6 @@ function synchronizeWeights(source) {
  * every input event for monitored fields. It also handles striking through irrelevant topics in
  * the list, re‑rendering the detail page when necessary, and applying pediatric/adult section
  * strikeouts based on the patient’s age. Weight handling has been updated to support dual inputs
- * – see the weight section near the top of this function.
  */
 function updatePatientData() {
     patientData.age = getParsedInt('pt-age');
@@ -146,19 +153,18 @@ function updatePatientData() {
     const kgVal = getParsedFloat('pt-weight-kg');
     const lbVal = getParsedFloat('pt-weight-lb');
     if (kgVal !== null) {
-    patientData.weight = kgVal;
-    patientData.weightUnit = 'kg';
+        patientData.weight = kgVal;
+        patientData.weightUnit = 'kg';
     } else if (lbVal !== null) {
-    // Convert pounds to kilograms and round to two decimals
-    patientData.weight = parseFloat((lbVal / WEIGHT_CONVERSION_FACTOR).toFixed(2));
-    patientData.weightUnit = 'kg';
+        // Convert pounds to kilograms and round to two decimals
+        patientData.weight = parseFloat((lbVal / WEIGHT_CONVERSION_FACTOR).toFixed(2));
+        patientData.weightUnit = 'kg';
     } else {
-    patientData.weight = null;
-    patientData.weightUnit = 'kg';
+        patientData.weight = null;
+        patientData.weightUnit = 'kg';
     }
-      // Other patient fields
-    //patientData.weight = getParsedFloat('pt-weight');
-    patientData.weightUnit = getInputValue('pt-weight-unit');
+    // Other patient fields
+    // Removed obsolete weight inputs; weight unit is now always 'kg'.
     patientData.pmh = getArrayFromTextarea('pt-pmh');
     patientData.allergies = getArrayFromTextarea('pt-allergies');
     patientData.currentMedications = getArrayFromTextarea('pt-medications');
@@ -198,7 +204,7 @@ function updatePatientData() {
         }
     });
     // If a detail page is open, re-render it to update warnings/dosages based on new patient info. We
-  // identify a detail page by checking for an element with class .topic-h2 which stores the topic id.
+    // identify a detail page by checking for an element with class .topic-h2 which stores the topic id.
     const currentTopicTitleEl = window.contentArea?.querySelector('.topic-h2');
     if (currentTopicTitleEl) {
         const currentTopicId = currentTopicTitleEl.dataset.topicId;
