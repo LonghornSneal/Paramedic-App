@@ -501,14 +501,14 @@ All these components work together to provide a seamless experience: The data pr
 **This section provides a list of tasks that must be worked on now unless explicitly told otherwise. Once this section is empty, proceed to the “CURRENT TASKS/GOALS” section in this README for additional tasks.**
 
 
-  Currently the app will not load the main contents page at all and is stuck on "Loading Categories...", This task must be completed first before the rest of the app's functionality is able to be tested properly.
+  Currently the app will load the main contents page, but when the user clicks to open up the medication details, either no information is dispalyed, or a contraindication warning appears. This task must be completed first before the rest of the app's functionality is able to be tested properly.
 
 
-  UI Consistency Fixes: Header elements (title, nav buttons, patient info button) must always appear in the correct location. The patient sidebar should slide farther over the content without affecting layout.
+  When Dark-Mode is toggled on in Settings, the font of the detailed text needs to be improved for readability. 
 
 
-  Weight Input Improvement: The user input area for the pt's weight should be split down the middle. The left side should be the pt's weight in kg and the right side should be the pt's weight in lbs, These will be linked: if the user enters a value in one, the other updates automatically to the equivalent weight. Units (kg, lb) will be clearly labeled next to each field. Implementation will require adding an event on each to update the other and possibly rounding appropriately. Both the pt's weight in kg and in lbs need to be visible.
-
+  Indications in the Patient Info section needs to have some options to select from that interact with the rest of the app.
+  
 
   Contraindication Warnings:     
   
@@ -522,51 +522,40 @@ All these components work together to provide a seamless experience: The data pr
 
   Navigation History Logic: The back and forward navigation buttons should reliably traverse the user’s history without breaking the sequential order. Verify that navigationHistory, currentHistoryIndex, updateNavButtonsState and related logic work correctly.
 
-    The navigation history logic still has an edge case: after going Back to the main list, the last-clicked item on that list is highlighted (which is correct), but if the user had multiple levels expanded, sometimes not all of those expansions persist. We intend to highlight the exact subtopic or section the user last interacted with. There is code in place to do this (the highlightId parameter in renderInitialView), but it may need refinement to scroll the item into view or open all parent categories fully.
-
-    Currently when the user types a word into the search bar and clicks on the Back Navigation Button, it goes back by a single character of that word they just typed out. The Back and Forward Navigation arrows should exclude the text in the search bar. For example, if the user was looking at topic "X", then they type in the search bar, then/or types in patient information, and after any doing any combination of those the user goes into topic "Y", now when the user hits the Back Navigation Arrow/Button, the use should be brought back to topic "X". If they hit the Forward Navigation Arrow/Button, the user should be brought to topic "Y" again. This new functionality is to only apply to the Search Bar and to the Patient Info Section.
+    When the user goes back to the main list, ensure the last‑clicked item is highlighted and all parent levels expand correctly. Also exclude search‑bar keystrokes and patient‑info edits from navigation history so that Back/Forward moves between viewed topics rather than between individual characters typed.
 
 
-  The following in () is to be ignored for now, other updates are needed to be done first.
-  (Patient Info Sidebar Functionality: (Goal: Ensure each field in Patient Info has a visible effect somewhere for testing. E.g., test that entering low BP triggers Nitro warning.)
-
-    All sidebar patient data inputs (age, weight, PMH, allergies, meds, etc.) should accept input and immediately cause changes in the app: inappropriate treatments get a strike-through, relevant warnings pop up, etc. For instance, entering “Penicillin” in Allergies then viewing “Penicillin” (if it were a protocol) would show an allergy warning. Or entering Age 8 and viewing an adult-only medication would give a warnings stating, "Warning! Pt is 8 years old and Rx is for adults only!")
+  Patient Info Sidebar Functionality (deferred): Each field in the Patient Info sidebar should cause visible changes in the app: inappropriate treatments get a strike‑through, relevant warnings pop up, etc. For example, entering “Penicillin” in Allergies and viewing a penicillin protocol should show an allergy warning; entering age 8 and viewing an adult‑only medication should display a warning about pediatric use. (This task can be resumed once top priorities are complete.)
 
 
-  Medication Data Display: Ensure that (medications) brand vs generic names correctly match the ID in MedicationDetailsData. If paramedicCategories references a medication slug that does not exist in medicationDataMap, update either the data or the slug so they align.
+  Medication Data Display: Ensure that brand vs. generic names correctly match the id fields in MedicationDetailsData. If a slug in ParamedicCategoriesData does not exist in medicationDataMap, update either the data or the slug so they align.
 
 
-  Settings Button: Needs to have the word "Settings" incoporate a bubbly-letter looking font.
+  Settings Button Font: Use a bubbly‑letter font for the word “Settings” in the footer.
 
 
-  Tests: As we add features, we will want to add tests for things like: “if patientData has allergy X, does renderDetailPage for medication X include the Allergy Alert element?”, or “slugList correctly identifies all section IDs on a sample page”. Going forward, every fix or feature should ideally include a corresponding test to prevent regressions. The test suite is set up and running (e.g., via npm test or similar), ready for more tests to be added.
-
-    Write additional tests for any new bugs we fix (write the test to simulate the scenario, then fix the code until the test passes).
-
-      Organize all of the current tests in the repository. This may mean creating or deleting new files/folders or it may mean relocating files/folders.
-
-        Ensure at the top of each test file that their exists a comment explaining exactly how to run the tests and what the requirements must be met before initiating any tests (What external things does the user need to do before initiating any tests).
+  Tests: Add tests for any new bugs that are fixed. Tests should simulate the bug scenario and should be written before fixing the bug; after adding a feature or fix, add corresponding tests to prevent regressions. Organize existing tests logically, ensure each test file includes a comment explaining how to run the tests and any prerequisites.
 
  
-  Fully dynamic dosage recalculation for every medication is still needed.
-  
-
-  Search Bar needs to be split into two separate sections that filter through topics simultaneously.
+  Dynamic Dosage Recalculation: Implement fully dynamic dosage calculations for every medication.
 
 
-  Toggle Arrows for Hidden Info (Green Text in detail pages): Ensure that the SVG arrow spacing does not break the flow of text and that the arrow rotates smoothly when the section is expanded.
+  Search Bar Split: Split the search bar into two separate sections that filter through topics simultaneously.
+
+
+  Toggle Arrows for Hidden Info: Ensure that the SVG arrow spacing does not break the flow of text and that the arrow rotates smoothly when sections are expanded.
 
 
   If any medication detail still doesn’t load on click: investigate its id in both data files to ensure consistency. We have added console warnings for when a detail is missing, to catch any remaining mismatches.
 
 
-  Section Header Alignment: the goal is to have the arrow icon snugly next to the text label.
-    
+  Section Header Alignment: Ensure that the arrow icon sits snugly next to its section label.
+
  
-  Data File Loading Order: By exporting to window only after the data is fully ready, we ensure that initializeData gets the complete object. (Verify that on app startup, there are no console errors about missing data – the categories should populate on first try.)
+  Data File Loading Order: Export data to the window only after it is fully ready to ensure initializeData receives a complete object and categories populate without errors.
 
 
-  When patient info contains contraindications (allergies, conflicting medications, low blood pressure, etc.) the detail pages should display clear warning boxes in the detail pages. Red colored font should be used for any warning messages. Examples:
+  Contraindication Warnings Visuals: When patient info contains contraindications (allergies, conflicting medications, low blood pressure, etc.) the detail pages should display clear warning boxes in red font. For example, an allergy alert should show a red‑bordered box with a warning icon and message; drug interaction warnings and vital sign warnings should also appear as distinct boxes.
 
     If a patient has an allergy that matches the medication (or its class), a red-bordered box with an alert icon and message “Allergy Alert: Patient has a known allergy to this medication” will appear at the top of that detail page. 
    
@@ -582,10 +571,7 @@ Home Button: Added a Home button (House Icon under the nav arrows) that on click
 
 Settings Button: Dark Mode toggle is functioning. The Settings Button transitions back and forth between two colors.
 
-
-Patient Info Sidebar Behavior: The overlay's semi-transparent background, and the “X” close button both close the Patient Info sidebar.
-
-  We standardized the open/close logic by centralizing it: both main.js and PatientInfo.js use the same functions to add/remove the active and hidden classes on the sidebar and overlay. This prevents divergent behavior.
+Settings button cleaned up. The footer’s “Settings” button no longer drags along a hitchhiking SVG. The HTML now reads simply:
 
 
 A CSS tweak was made to how section headers and their toggle arrows are aligned in expandable lists. For the main Contents page and any similar toggles, we set .toggle-category { justify-content: flex-start; }. This was to ensure that the category name and the arrow icon stay together on the left, rather than being spaced apart. This fix did not fully solve the spacing issue for all screen sizes.
@@ -600,15 +586,9 @@ UI Layout Consistency: All UI components should be properly placed and styled on
 Internet Explorer & Legacy Support: We use Flexbox for structuring the content area and sidebar. By explicitly setting height on the sidebar (and letting the content area flex), we ensure that even if the viewport recalculates, our layout remains consistent. 
 
 
-Sidebar: Gave it a fixed height (applied via JS or CSS). The sidebar now explicitly takes up the full viewport height regardless of browser quirks.
-
-
 Green text: Green clickable text expands hidden information. A small arrow icon is shown next to it (rightward-pointing chevron). When the text is clicked and the hidden info is revealed, this arrow rotates downward, similar to the blue category arrows. When the text is hidden again, the arrow returns to the rightward position.
 
   Unified the behavior and styling so that all expandable/collapsible indicators (blue or green) use a consistent CSS transition for rotation.
-
-
-We added a Weight field to the Patient Info sidebar to capture patient weight, which is now used in dosage calculations.
 
 
 ES Module Conversion: Continued migrating scripts to ES modules. Many utilities and features now use export/import rather than attaching functions to window. This change allows tests and other ES Modules to import slugIDs directly.
@@ -623,6 +603,15 @@ Rendering: whenever a new view is rendered (list or detail), the history entry i
 Slug Anchors Initialization: Modified slugAnchors.js to wait for the DOM content to be fully loaded (or for a detail page container to exist) before inserting the anchor navigation menu. In practice, we use a function setupSlugAnchors(sectionIdArray) that is called after renderDetailPage. This ensures the anchor links (table of contents for sections) are injected at the right moment. This fix prevents a bug where anchor links sometimes were not added if the script ran too early.
 
   Medication Data Display (ID Matching): The ID matching logic in initializeData and elsewhere now handles IDs regardless of whether they’re strings like "epiPen" or numeric strings like "5glucose".
+
+
+Sidebar: Gave it a fixed height (applied via JS or CSS). The sidebar now explicitly takes up the full viewport height regardless of browser quirks.
+
+Patient Sidebar Weight field: Dual weight fields work together. I cleaned up the patient weight logic. The old pt-weight and pt-weight-unit inputs are gone in favor of two synchronized fields—kilograms on the left, pounds on the right. The ptInputIds list now references pt-weight-kg and pt-weight-lb, and the stale weightUnit retrieval has been removed. Both fields stay in sync, and the underlying patientData.weightUnit remains "kg" throughout.
+
+Patient Info Sidebar Behavior: The overlay's semi-transparent background, and the “X” close button both close the Patient Info sidebar.
+
+  We standardized the open/close logic by centralizing it: both main.js and PatientInfo.js use the same functions to add/remove the active and hidden classes on the sidebar and overlay. This prevents divergent behavior.
 
 
 ## 9. TIMELINE SUMMARY
