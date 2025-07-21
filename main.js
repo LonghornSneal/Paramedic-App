@@ -137,7 +137,6 @@ function initializeData(categoriesData, medDetailsData) {
     // Make sure the global map exists BEFORE processItem uses it
     window.allDisplayableTopicsMap = allDisplayableTopicsMap;
 //    /allSearchableTopics = []; //maybe need still maybe not
-
     // Build med details map for quick lookups
     medicationDataMap = {};
     if (Array.isArray(medDetailsData)) { 
@@ -147,6 +146,8 @@ function initializeData(categoriesData, medDetailsData) {
     } else if (medDetailsData && typeof medDetailsData === 'object') { 
         Object.assign(medicationDataMap, medDetailsData); 
     }
+    // ✅ Ensure the global map is set *before* processing items
+    window.medicationDataMap = medicationDataMap; 
     // populate allDisplayableTopicsMap safely
     categoriesData.forEach(cat => processItem(cat));
     // Load common suggestion terms into suggestion sets
