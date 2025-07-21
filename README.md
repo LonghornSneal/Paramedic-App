@@ -504,15 +504,18 @@ All these components work together to provide a seamless experience: The data pr
   Currently the app will load the main contents page, but when the user clicks to open up the medication details, either no information is dispalyed, or a contraindication warning appears. This task must be completed first before the rest of the app's functionality is able to be tested properly.
 
 
-  When Dark-Mode is toggled on in Settings, the font of the detailed text needs to be improved for readability. 
+Settings: Dark Mode needs adjusted. Need to have various sliders that are accessible in Settings that allow the user to customize how the looks with examples of what the slider affects next to the slider. These examples next to the slider change in real time as the user moves the slider.
 
 
-  Indications in the Patient Info section needs to have some options to select from that interact with the rest of the app.
-  
+Medications in the Patient Info section needs to include all of the Class options from all of the medications in the app. These Class options should be selectable in the drop down menu.
+
+
+"Pt Info Snapshot" needs to be coded.
+
 
   Contraindication Warnings:     
   
-    This system is currently implemented for a few critical scenarios (e.g., Nitro + low BP or PDE5, allergies in general, pediatric vs adult constraints). It’s a work in progress: as we expand our data (MedicationDetailsData), we will include clear contraindication keywords so the code can automatically pick them up. For now, devs might need to update updatePatientData or renderDetailPage with specific checks per medication. Always test after adding a new contraindication rule: the warning should appear and be clearly worded for the end user. The groundwork for this system is in place; add more contraindication keywords to MedicationDetailsData and update the checks in updatePatientData() and renderDetailPage() as new medications are added. Add comments to indicate where the user is add more contraindication keywords and what else needs to be updated when a new contraindication is added.
+   add more contraindication keywords to MedicationDetailsData and update the checks in updatePatientData() and renderDetailPage() as new medications are added. Add comments to indicate where the user is add more contraindication keywords and what else needs to be updated when a new contraindication is added.
 
 
 ## 7. CURRENT TASKS/GOALS

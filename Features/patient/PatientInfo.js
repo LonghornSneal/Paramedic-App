@@ -53,7 +53,14 @@ export const PDE5_INHIBITORS = ["sildenafil","viagra","revatio","vardenafil","le
 export const pmhSuggestions = new Set();
 export const allergySuggestions = new Set();
 export const medicationNameSuggestions = new Set();
-export const indicationSuggestions = new Set();
+// Features/patient/PatientInfo.js – after existing symptomSuggestions
+export const indicationSuggestions = new Set([
+    // previously existing suggestions …
+    "chest pain","shortness of breath","syncope","seizure",
+    // 🆕 common indications
+    "mi", "acs", "bronchospasm", "hypoglycemia", "asthma"
+]);
+
 export const symptomSuggestions = new Set([ 
     "chest pain","shortness of breath","sob","dyspnea","nausea","vomiting","diarrhea","abdominal pain","headache",
     "dizziness","syncope","altered mental status","ams","weakness","fatigue","fever","chills","rash","seizure",

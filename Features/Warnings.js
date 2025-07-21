@@ -54,12 +54,16 @@ function getLowBPWarning(topic, patientData) {
 }
 
 export function appendTopicWarnings(topic, patientData) {
+    if (!patientData) patientData = { 
+        allergies: [], currentMedications: [], vitalSigns: {} 
+    };
     let warningsHtml = "";
     warningsHtml += getAllergyWarning(topic, patientData);
     warningsHtml += getPDE5Warning(topic, patientData);
     warningsHtml += getLowBPWarning(topic, patientData);
-    // Include any other contraindications defined in MedicationDetailsData that aren’t allergy-specific
-    warningsHtml += getGeneralContraindicationsWarning(topic);
+    // Only append if a string is returned
+    const gen = getGeneralContraindicationsWarning(topic);
+    if (gen) warningsHtml += gen;
     return warningsHtml;
  }
 
@@ -73,7 +77,7 @@ export function appendTopicWarnings(topic, patientData) {
  */
 function getGeneralContraindicationsWarning(topic) {
   const med = window.medicationDataMap?.[topic.id];
-  if (!med || !Array.isArray(med.contraindications)) return ;
+  if (!med || !Array.isArray(med.contraindications)) return "";
   let warnings = "";
   med.contraindications.forEach(ci => {
     const ciLower = ci.toLowerCase();
@@ -83,7 +87,6 @@ function getGeneralContraindicationsWarning(topic) {
     warnings += `
       ${createWarningIcon('text-red-600')}
       Contraindication: ${ci}. 
-      
     `;
   });
   return warnings;

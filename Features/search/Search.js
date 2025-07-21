@@ -101,9 +101,12 @@ export function handleSearch(shouldAddHistory = true, highlightId = null, catego
 // Attach event listeners to the search input field
 export function attachSearchHandlers() {
     if (!window.searchInput) return;
+    // Typing should NOT push to navigation history
     window.searchInput.addEventListener('input', () => handleSearch(true));
+    // Pressing Enter records the search in history
     window.searchInput.addEventListener('keypress', e => {
         if (e.key === 'Enter') {
+            e.preventDefault();
             handleSearch(true);
         }
     });
