@@ -518,14 +518,12 @@ Medications in the Patient Info section needs to include all of the Class option
    add more contraindication keywords to MedicationDetailsData and update the checks in updatePatientData() and renderDetailPage() as new medications are added. Add comments to indicate where the user is add more contraindication keywords and what else needs to be updated when a new contraindication is added.
 
 
+Finish migrating remaining scripts to ES modules, and add test coverage for new features.
+
+
 ## 7. CURRENT TASKS/GOALS
 
 **This section describes the current goals and tasks that need focus only after all of the TOP PRIORITY TASKS have been completed.**
-
-
-  Navigation History Logic: The back and forward navigation buttons should reliably traverse the user’s history without breaking the sequential order. Verify that navigationHistory, currentHistoryIndex, updateNavButtonsState and related logic work correctly.
-
-    When the user goes back to the main list, ensure the last‑clicked item is highlighted and all parent levels expand correctly. Also exclude search‑bar keystrokes and patient‑info edits from navigation history so that Back/Forward moves between viewed topics rather than between individual characters typed.
 
 
   Patient Info Sidebar Functionality (deferred): Each field in the Patient Info sidebar should cause visible changes in the app: inappropriate treatments get a strike‑through, relevant warnings pop up, etc. For example, entering “Penicillin” in Allergies and viewing a penicillin protocol should show an allergy warning; entering age 8 and viewing an adult‑only medication should display a warning about pediatric use. (This task can be resumed once top priorities are complete.)
@@ -543,19 +541,15 @@ Medications in the Patient Info section needs to include all of the Class option
   Dynamic Dosage Recalculation: Implement fully dynamic dosage calculations for every medication.
 
 
-  Search Bar Split: Split the search bar into two separate sections that filter through topics simultaneously.
+  Search Bar Split: Split the search bar into two separate sections that filter through topics simultaneously. The split search bar on the left will remain unchanged, and the split bar on the right will be the new "Smart Suggestions" that will have functionality coded for it later.
 
+
+  Section Header Alignment: Ensure that the arrow icon sits snugly next to its section label.
 
   Toggle Arrows for Hidden Info: Ensure that the SVG arrow spacing does not break the flow of text and that the arrow rotates smoothly when sections are expanded.
 
 
   If any medication detail still doesn’t load on click: investigate its id in both data files to ensure consistency. We have added console warnings for when a detail is missing, to catch any remaining mismatches.
-
-
-  Section Header Alignment: Ensure that the arrow icon sits snugly next to its section label.
-
- 
-  Data File Loading Order: Export data to the window only after it is fully ready to ensure initializeData receives a complete object and categories populate without errors.
 
 
   Contraindication Warnings Visuals: When patient info contains contraindications (allergies, conflicting medications, low blood pressure, etc.) the detail pages should display clear warning boxes in red font. For example, an allergy alert should show a red‑bordered box with a warning icon and message; drug interaction warnings and vital sign warnings should also appear as distinct boxes.
@@ -615,6 +609,14 @@ Patient Sidebar Weight field: Dual weight fields work together. I cleaned up the
 Patient Info Sidebar Behavior: The overlay's semi-transparent background, and the “X” close button both close the Patient Info sidebar.
 
   We standardized the open/close logic by centralizing it: both main.js and PatientInfo.js use the same functions to add/remove the active and hidden classes on the sidebar and overlay. This prevents divergent behavior.
+
+
+Fixed medication detail pages not loading by assigning `window.medicationDataMap` before indexing categories.
+
+
+Search bar input no longer pollutes navigation history; only committed searches are stored.
+
+Added default indication suggestions (“MI”, “ACS”, “Bronchospasm”, “Hypoglycemia”, “Asthma”). 
 
 
 ## 9. TIMELINE SUMMARY
