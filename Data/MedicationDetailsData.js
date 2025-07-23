@@ -1,7 +1,7 @@
 // Attach medication details to the global scope so main.js can access them
 export const MedicationDetailsData = [
     {
-        id: slugify('Zoll EMV731 - General Information'), title: 'Zoll EMV731 – General Information',
+        id: 'general-information', title: 'General Information',
         class: `<< full text of general-information.md >>`,
         indications: [
             'Durable, portable mechanical ventilator for hospital and field use.',
@@ -10,7 +10,7 @@ export const MedicationDetailsData = [
         ]
     },
     {
-        id: slugify('Zoll EMV731 - Product Overview'), title: 'Zoll EMV731 – Product Overview',
+        id: 'zoll-emv731-product-overview', title: 'Zoll EMV731 – Product Overview',
         class: `<< full text of product-overview.md >>`,
         indications: [
             'Describes models AEV, EMV+ and Eagle II with AC, SIMV, CPAP, and BL modes to support prehospital and hospital transport.',
@@ -19,7 +19,7 @@ export const MedicationDetailsData = [
         ]
     },
     {
-        id: slugify('Zoll EMV731 - Setting Up the Ventilator'), title: 'Zoll EMV731 – Setting Up the Ventilator',
+        id: 'zoll-emv731-setting-up-the-ventilator', title: 'Zoll EMV731 – Setting Up the Ventilator',
         class: `<< full text of setting-up-ventilator.md >>`,
         indications: [
             'Lists step-by-step tasks for safe setup: attach ventilator circuit; optional high‑pressure oxygen supply; inspect filters; connect fresh gas attachments; select power source; power on; select default values; choose operating mode; adjust parameters; perform operational test; attach pulse oximeter; and connect patient.',
@@ -28,7 +28,7 @@ export const MedicationDetailsData = [
         ]
     },
     {
-        id: slugify('Zoll EMV731 - Using the Ventilator'), title: 'Zoll EMV731 – Using the Ventilator',
+        id: 'zoll-emv731-using-the-ventilator', title: 'Zoll EMV731 – Using the Ventilator',
         class: `<< full text of using-ventilator.md >>`,
         indications: [
             'Introduces ventilator interface with GUI showing parameter windows (Mode, BPM, Vt, PIP, FIO₂, SpO₂, HR) and context menus for settings.',
@@ -37,7 +37,7 @@ export const MedicationDetailsData = [
         ]
     },
     {
-        id: slugify('Zoll EMV731 - Alarms'), title: 'Zoll EMV731 – Alarms',
+        id: 'zoll-emv731-alarms', title: 'Zoll EMV731 – Alarms',
         class: `<< full text of alarms.md >>`,
         indications: [
             'Explains ZOLL’s Smart Help system that continuously monitors patient, device, and environment, displaying alarm messages with mitigation instructions in the Alarm Message Center.',
@@ -46,7 +46,7 @@ export const MedicationDetailsData = [
         ]
     },
     {
-        id: slugify('Zoll EMV731 - Operating Environments'), title: 'Zoll EMV731 – Operating Environments',
+        id: 'zoll-emv731-operating-environments', title: 'Zoll EMV731 – Operating Environments',
         class: `<< full text of operating-environments.md >>`,
         indications: [
             'Provides guidelines for operating the ventilator in harsh (prehospital and transport), hazardous (chemical/biological), and MRI environments.',
@@ -55,7 +55,7 @@ export const MedicationDetailsData = [
         ]
     },
     {
-        id: slugify('Zoll EMV731 - Maintenance'), title: 'Zoll EMV731 – Maintenance',
+        id: 'zoll-emv731-maintenance', title: 'Zoll EMV731 – Maintenance',
         class: `<< full text of maintenance.md >>`,
         indications: [
             'Emphasizes regular inspection for cleanliness, damage, and wear on accessories, hoses, circuits, filters, and power cables; replace defective items.',
@@ -64,7 +64,7 @@ export const MedicationDetailsData = [
         ]
     },
     {
-        id: slugify('Zoll EMV731 - Specifications'), title: 'Zoll EMV731 – Specifications',
+        id: 'zoll-emv731-specifications', title: 'Zoll EMV731 – Specifications',
         class: `<< full text of specifications.md >>`,
         indications: [
             'Lists ventilator modes: EMV+ and Eagle II support AC, SIMV, CPAP, BL with pressure support and leak compensation; AEV supports AC, CPAP, BL with leak compensation.',
@@ -73,8 +73,8 @@ export const MedicationDetailsData = [
         ]
     },
     {
-        id: slugify('Zoll EMV731 - Accessories'), title: 'Zoll EMV731 – Accessories',
-        class: `<< full text of accessories.md >>`,
+        id: 'zoll-emv731-accessories', title: 'Zoll EMV731 – Accessories',
+        class: `accessories.md`,
         indications: [
             'Lists available accessories with part numbers, including AC/DC power supplies, power cords, battery packs, extension cords, padded carry case, bacterial/viral filters, heat and moisture exchangers, metered dose inhaler adaptors, oxygen reservoir kits, and DC power cables.',
             'Notes that part numbers may vary by country for cords and connectors; contact manufacturer or distributor for ordering.',
@@ -82,7 +82,7 @@ export const MedicationDetailsData = [
         ]
     },
     {
-        id: slugify('Zoll EMV731 - Pulse Oximeter Principles'), title: 'Zoll EMV731 – Pulse Oximeter Principles',
+        id: 'zoll-emv731-pulse-oximeter-principles', title: 'Zoll EMV731 – Pulse Oximeter Principles',
         class: `<< full text of pulse-oximeter-principles.md >>`,
         indications: [
             'Explains that pulse oximetry is based on differential absorption of red and infrared light by oxyhemoglobin vs deoxyhemoglobin, and changes in arterial blood volume during pulsation.',
@@ -91,7 +91,7 @@ export const MedicationDetailsData = [
         ]
     },
     {
-        id: slugify('Zoll EMV731 - Patient Circuits'), title: 'Zoll EMV731 – Patient Circuits',
+        id: 'zoll-emv731-patient-circuits', title: 'Zoll EMV731 – Patient Circuits',
         class: `<< full text of patient-circuits.md >>`,
         indications: [
             'Describes single-limb, Wye patient circuits for pediatric/adult use with ZOLL ventilators (6 ft and 12 ft versions) designed to transfer gases from ventilator to patient and exhalation to atmosphere; not intended for heated humidification.',

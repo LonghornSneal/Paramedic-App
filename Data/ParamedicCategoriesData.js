@@ -127,17 +127,17 @@ export const ParamedicCategoriesData = [
       id: slugify("Zoll EMV731"), title: "Zoll EMV731",
       type: "category",
       children: [
-        { id: slugify("Zoll EMV731 - General Information"), title: "General Information", type: "topic" },
-        { id: slugify("Zoll EMV731 - Product Overview"), title: "Product Overview", type: "topic" },
-        { id: slugify("Zoll EMV731 - Setting Up the Ventilator"), title: "Setting Up the Ventilator", type: "topic" },
-        { id: slugify("Zoll EMV731 - Using the Ventilator"), title: "Using the Ventilator", type: "topic" },
-        { id: slugify("Zoll EMV731 - Alarms"), title: "Alarms", type: "topic" },
-        { id: slugify("Zoll EMV731 - Operating Environments"), title: "Operating Environments", type: "topic" },
-        { id: slugify("Zoll EMV731 - Maintenance"), title: "Maintenance", type: "topic" },
-        { id: slugify("Zoll EMV731 - Specifications"), title: "Specifications", type: "topic" },
-        { id: slugify("Zoll EMV731 - Accessories"), title: "Accessories", type: "topic" },
-        { id: slugify("Zoll EMV731 - Pulse Oximeter Principles"), title: "Pulse Oximeter Principles", type: "topic" },
-        { id: slugify("Zoll EMV731 - Patient Circuits"), title: "Patient Circuits", type: "topic" }
+        { id: ("general-information"), title: "General Information", type: "topic" },
+        { id: slugify("zoll-emv731-product-overview"), title: "Product Overview", type: "topic" },
+        { id: slugify("zoll-emv731-setting-up-the-ventilator"), title: "Setting Up the Ventilator", type: "topic" },
+        { id: slugify("zoll-emv731-using-the-ventilator"), title: "Using the Ventilator", type: "topic" },
+        { id: slugify("zoll-emv731-alarms"), title: "Alarms", type: "topic" },
+        { id: slugify("zoll-emv731-operating-environments"), title: "Operating Environments", type: "topic" },
+        { id: slugify("zoll-emv731-maintenance"), title: "Maintenance", type: "topic" },
+        { id: slugify("zoll-emv731-specifications"), title: "Specifications", type: "topic" },
+        { id: slugify("zoll-emv731-accessories"), title: "Accessories", type: "topic" },
+        { id: slugify("zoll-emv731-pulse-oximeter-principles"), title: "Pulse Oximeter Principles", type: "topic" },
+        { id: slugify("zoll-emv731-patient-circuits"), title: "Patient Circuits", type: "topic" }
       ]
 
     },{ 
