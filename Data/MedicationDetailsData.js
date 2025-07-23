@@ -1,6 +1,105 @@
 // Attach medication details to the global scope so main.js can access them
 export const MedicationDetailsData = [
     {
+        id: slugify('Zoll EMV731 - General Information'), title: 'Zoll EMV731 – General Information',
+        class: `<< full text of general-information.md >>`,
+        indications: [
+            'Durable, portable mechanical ventilator for hospital and field use.',
+            'Manual covers product description, indications for use, symbols, warnings, FDA tracking, warranty, and service contact information.',
+            'Always inspect shipping container and device for damage, and read warnings before operation.'
+        ]
+    },
+    {
+        id: slugify('Zoll EMV731 - Product Overview'), title: 'Zoll EMV731 – Product Overview',
+        class: `<< full text of product-overview.md >>`,
+        indications: [
+            'Describes models AEV, EMV+ and Eagle II with AC, SIMV, CPAP, and BL modes to support prehospital and hospital transport.',
+            'Highlights common features: rugged 10‑lb design, 10‑hour battery life, internal compressor, SpO₂ monitoring, daylight-visible display, and oxygen efficiency.',
+            'Introduces controls, indicators, display screen, pneumatic design, connector panel, circuits, pulse oximeter, and power sources.'
+        ]
+    },
+    {
+        id: slugify('Zoll EMV731 - Setting Up the Ventilator'), title: 'Zoll EMV731 – Setting Up the Ventilator',
+        class: `<< full text of setting-up-ventilator.md >>`,
+        indications: [
+            'Lists step-by-step tasks for safe setup: attach ventilator circuit; optional high‑pressure oxygen supply; inspect filters; connect fresh gas attachments; select power source; power on; select default values; choose operating mode; adjust parameters; perform operational test; attach pulse oximeter; and connect patient.',
+            'Emphasizes warnings: always prepare to bag the patient; do not start the ventilator with the patient attached; select appropriate circuit for patient and environment.',
+            'Describes how to attach ventilator circuit components (corrugated hose, pressure line, exhalation valve control line) and optional high-pressure oxygen supply.'
+        ]
+    },
+    {
+        id: slugify('Zoll EMV731 - Using the Ventilator'), title: 'Zoll EMV731 – Using the Ventilator',
+        class: `<< full text of using-ventilator.md >>`,
+        indications: [
+            'Introduces ventilator interface with GUI showing parameter windows (Mode, BPM, Vt, PIP, FIO₂, SpO₂, HR) and context menus for settings.',
+            'Explains how to change parameter values using single press (primary parameter), multiple presses (secondary parameter & alarms), or press and hold (context menu).',
+            'Discusses ventilation modes: AC (assisted/controlled), SIMV (synchronized intermittent mandatory ventilation), CPAP (continuous positive airway pressure), BL (Bi-Level), and options for volume vs pressure targeting and leak compensation.'
+        ]
+    },
+    {
+        id: slugify('Zoll EMV731 - Alarms'), title: 'Zoll EMV731 – Alarms',
+        class: `<< full text of alarms.md >>`,
+        indications: [
+            'Explains ZOLL’s Smart Help system that continuously monitors patient, device, and environment, displaying alarm messages with mitigation instructions in the Alarm Message Center.',
+            'Describes alarm types and priorities: High priority (mechanical ventilation no longer possible – requires immediate intervention), Medium priority (ventilation possible but fault requires action; mute button silences for 30 seconds), and Low priority (advisory; safe ventilation but requires monitoring).',
+            'Outlines alarm display components, including alarm names, mitigation instructions, service codes, icons indicating number of active alarms, and warning icons for severity.'
+        ]
+    },
+    {
+        id: slugify('Zoll EMV731 - Operating Environments'), title: 'Zoll EMV731 – Operating Environments',
+        class: `<< full text of operating-environments.md >>`,
+        indications: [
+            'Provides guidelines for operating the ventilator in harsh (prehospital and transport), hazardous (chemical/biological), and MRI environments.',
+            'For harsh environments, recommends using disposable bacterial/viral filters to protect internal filters from airborne particulates and inspecting filters regularly; also notes use of padded case to protect device.',
+            'Details operation in extreme temperatures and altitudes: monitors battery charging/discharging temperature limits (-25 °C to 49 °C), instructs adjusting compliance values, and warns about altitude >25,000 ft; notes device is not intended for hyperbaric chambers.'
+        ]
+    },
+    {
+        id: slugify('Zoll EMV731 - Maintenance'), title: 'Zoll EMV731 – Maintenance',
+        class: `<< full text of maintenance.md >>`,
+        indications: [
+            'Emphasizes regular inspection for cleanliness, damage, and wear on accessories, hoses, circuits, filters, and power cables; replace defective items.',
+            'Outlines cleaning procedures: keep ventilator clean, avoid liquids, use damp soapy cloth or 10% bleach solution, avoid abrasives and chlorinated solvents, and dry thoroughly; warns against using oil or grease with oxygen equipment.',
+            'Describes replacing intake filters (foam and disk) and performing preventative maintenance/calibration annually, which should be done by ZOLL‑trained personnel using the RCS system.'
+        ]
+    },
+    {
+        id: slugify('Zoll EMV731 - Specifications'), title: 'Zoll EMV731 – Specifications',
+        class: `<< full text of specifications.md >>`,
+        indications: [
+            'Lists ventilator modes: EMV+ and Eagle II support AC, SIMV, CPAP, BL with pressure support and leak compensation; AEV supports AC, CPAP, BL with leak compensation.',
+            'Provides operational ranges: flow rates up to 100 LPM, breath rates 1–80 BPM, tidal volumes 50–2000 ml, FIO₂ 21–100%, PEEP/EPAP 0–30 cm H₂O, PIP 10–80 cm H₂O, pressure support 0–60 cm H₂O.',
+            'Specifies oxygen input pressure (55 psig) and measurement resolutions for various parameters.'
+        ]
+    },
+    {
+        id: slugify('Zoll EMV731 - Accessories'), title: 'Zoll EMV731 – Accessories',
+        class: `<< full text of accessories.md >>`,
+        indications: [
+            'Lists available accessories with part numbers, including AC/DC power supplies, power cords, battery packs, extension cords, padded carry case, bacterial/viral filters, heat and moisture exchangers, metered dose inhaler adaptors, oxygen reservoir kits, and DC power cables.',
+            'Notes that part numbers may vary by country for cords and connectors; contact manufacturer or distributor for ordering.',
+            'Highlights that filters include B/V and HME/B/V options and that some accessories come in case quantities.'
+        ]
+    },
+    {
+        id: slugify('Zoll EMV731 - Pulse Oximeter Principles'), title: 'Zoll EMV731 – Pulse Oximeter Principles',
+        class: `<< full text of pulse-oximeter-principles.md >>`,
+        indications: [
+            'Explains that pulse oximetry is based on differential absorption of red and infrared light by oxyhemoglobin vs deoxyhemoglobin, and changes in arterial blood volume during pulsation.',
+            'Describes the ratio-of-ratios (R) method used in traditional oximetry and the Masimo SET algorithm, which compensates for venous noise by decomposing signals into arterial and noise components and uses an adaptive correlation canceller to compute SpO₂.',
+            'Notes that the algorithm updates SpO₂ every two seconds using a Discrete Saturation Transform across possible saturation values and selects the peak corresponding to the higher saturation.'
+        ]
+    },
+    {
+        id: slugify('Zoll EMV731 - Patient Circuits'), title: 'Zoll EMV731 – Patient Circuits',
+        class: `<< full text of patient-circuits.md >>`,
+        indications: [
+            'Describes single-limb, Wye patient circuits for pediatric/adult use with ZOLL ventilators (6 ft and 12 ft versions) designed to transfer gases from ventilator to patient and exhalation to atmosphere; not intended for heated humidification.',
+            'Provides specifications such as internal diameter (22 mm), inspiratory/exhalatory resistance, compliance, deadspace, maximum working pressure, and temperature operating range (-40 °C to 70 °C).',
+            'Warns about compressible volume reducing delivered ventilation, the need to maintain PEEP ≥5 cm H₂O, and potential inability of 12 ft circuits to trap PEEP; emphasizes handling circuits carefully to avoid cross‑contamination and replacing circuits showing wear.'
+        ]
+    },
+    {
         id: '10-calcium-chloride', title: '10% Calcium Chloride',
         concentration: '(1,000mg/10ml)',
         "class": 'Electrolyte',
