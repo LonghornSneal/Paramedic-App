@@ -161,7 +161,7 @@ function initializeData(categoriesData, medDetailsData) {
     // ✅ Ensure the global map is set *before* processing items
     window.medicationDataMap = medicationDataMap; 
     // populate allDisplayableTopicsMap safely
-//    categoriesData.forEach(cat => processItem(cat));
+    categoriesData.forEach(cat => processItem(cat));
 
     // Pass the merged details map to processItem so detail pages can find topic details.
     categories.forEach(item => processItem(item, allDisplayableTopicsMap, detailsDataMap));
