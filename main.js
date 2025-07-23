@@ -1,5 +1,6 @@
 import { ParamedicCategoriesData } from './Data/ParamedicCategoriesData.js';
 import { MedicationDetailsData } from './Data/MedicationDetailsData.js';
+import { VentilationDetailsData } from './Data/VentilationDetailsData.js';
 import { addTapListener } from './Utils/addTapListener.js';
 import { attachNavHandlers } from './Features/navigation/Navigation.js';
 import { attachHomeHandler } from './Features/navigation/Home.js';
@@ -138,11 +139,19 @@ function initializeData(categoriesData, medDetailsData) {
     window.allDisplayableTopicsMap = allDisplayableTopicsMap;
 //    /allSearchableTopics = []; //maybe need still maybe not
     // Build med details map for quick lookups
-    medicationDataMap = {};
-    if (Array.isArray(medDetailsData)) { 
-        medDetailsData.forEach(med => { 
-            medicationDataMap[med.id] = med; 
-        });
+//    medicationDataMap = {};
+//    if (Array.isArray(medDetailsData)) { 
+//        medDetailsData.forEach(med => { 
+//            medicationDataMap[med.id] = med; 
+//        });
+
+
+    // Merge medication and ventilation details into a single map.  This ensures that
+    // topics defined under the ventilation category have matching details entries.
+    const detailsDataMap = {};
+    [...MedicationDetailsData, ...VentilationDetailsData].forEach(item => {
+      detailsDataMap[item.id] = item;
+    });
     } else if (medDetailsData && typeof medDetailsData === 'object') { 
         Object.assign(medicationDataMap, medDetailsData); 
     }

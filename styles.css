@@ -126,3 +126,9 @@ body.dark-mode header { background-color: #5c91db; }
 body.dark-mode #content-area { background-color: #5c90e3; }
 body.dark-mode #content-area, body.dark-mode p, body.dark-mode li, body.dark-mode span { color: #1270ce; }
 body.dark-mode footer { background-color: #1f2937; color: #9ca3af; }
+
+/* When dark mode is active, apply a CSS variable for brightness (default 1). */
+body.dark-mode {
+  --brightness: 1;
+  filter: brightness(var(--brightness));
+}

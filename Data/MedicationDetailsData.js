@@ -1,15 +1,6 @@
 // Attach medication details to the global scope so main.js can access them
 export const MedicationDetailsData = [
     {
-        id: 'general-information', title: 'General Information',
-        class: `<< full text of general-information.md >>`,
-        indications: [
-            'Durable, portable mechanical ventilator for hospital and field use.',
-            'Manual covers product description, indications for use, symbols, warnings, FDA tracking, warranty, and service contact information.',
-            'Always inspect shipping container and device for damage, and read warnings before operation.'
-        ]
-    },
-    {
         id: 'zoll-emv731-product-overview', title: 'Zoll EMV731 – Product Overview',
         class: `<< full text of product-overview.md >>`,
         indications: [
