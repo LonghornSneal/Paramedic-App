@@ -131,22 +131,27 @@ function initApp() {
 }
 
 // Initializes global data structures for categories and medications.
-function initializeData(categoriesData, medDetailsData) { 
+function initializeData(categoriesData, medDetailsData) {
     paramedicCategories = categoriesData;    // /Assign the global category array
     // Wipe/prepare lookup maps
     allDisplayableTopicsMap = {};
     // Make sure the global map exists BEFORE processItem uses it
     window.allDisplayableTopicsMap = allDisplayableTopicsMap;
-//    /allSearchableTopics = []; //maybe need still maybe not
-    // Build med details map for quick lookups
-//    medicationDataMap = {};
+    //allSearchableTopics = []; //  //maybe need still maybe not
+     //Build med details map for quick lookups
+    medicationDataMap = {};
 //    if (Array.isArray(medDetailsData)) { 
 //        medDetailsData.forEach(med => { 
 //            medicationDataMap[med.id] = med; 
 //        });
 
 
-    // Merge medication and ventilation details into a single map.  This ensures that
+
+
+    // ✅ Ensure the global map is set *before* processing items
+    window.medicationDataMap = medicationDataMap; 
+
+        // Merge medication and ventilation details into a single map.  This ensures that
     // topics defined under the ventilation category have matching details entries.
     const detailsDataMap = {};
     [...MedicationDetailsData, ...VentilationDetailsData].forEach(item => {
@@ -156,10 +161,6 @@ function initializeData(categoriesData, medDetailsData) {
 //        Object.assign(medicationDataMap, medDetailsData); 
 //    }
 
-
-
-    // ✅ Ensure the global map is set *before* processing items
-    window.medicationDataMap = medicationDataMap; 
     // populate allDisplayableTopicsMap safely
     categoriesData.forEach(cat => processItem(cat));
 
