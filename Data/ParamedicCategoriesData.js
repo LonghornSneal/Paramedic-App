@@ -127,7 +127,7 @@ export const ParamedicCategoriesData = [
       id: slugify("Zoll EMV731"), title: "Zoll EMV731",
       type: "category",
       children: [
-        { id: ("general-information"), title: "General Information", type: "topic" },
+        { id: ("zoll-emv731-general-information"), title: "Zoll EMV731 – General Information", type: "topic" },
         { id: slugify("zoll-emv731-product-overview"), title: "Product Overview", type: "topic" },
         { id: slugify("zoll-emv731-setting-up-the-ventilator"), title: "Setting Up the Ventilator", type: "topic" },
         { id: slugify("zoll-emv731-using-the-ventilator"), title: "Using the Ventilator", type: "topic" },

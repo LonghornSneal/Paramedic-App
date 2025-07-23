@@ -152,13 +152,22 @@ function initializeData(categoriesData, medDetailsData) {
     [...MedicationDetailsData, ...VentilationDetailsData].forEach(item => {
       detailsDataMap[item.id] = item;
     });
-    } else if (medDetailsData && typeof medDetailsData === 'object') { 
-        Object.assign(medicationDataMap, medDetailsData); 
-    }
+//    } else if (medDetailsData && typeof medDetailsData === 'object') { 
+//        Object.assign(medicationDataMap, medDetailsData); 
+//    }
+
+
+
     // ✅ Ensure the global map is set *before* processing items
     window.medicationDataMap = medicationDataMap; 
     // populate allDisplayableTopicsMap safely
-    categoriesData.forEach(cat => processItem(cat));
+//    categoriesData.forEach(cat => processItem(cat));
+
+    // Pass the merged details map to processItem so detail pages can find topic details.
+    categories.forEach(item => processItem(item, allDisplayableTopicsMap, detailsDataMap));
+
+
+
     // Load common suggestion terms into suggestion sets
     const commonPmh = ["hypertension","htn","diabetes","dm","asthma","copd","heart failure","hf","cad","stroke","cva","seizure disorder","renal insufficiency","ckd","hypothyroidism","hyperthyroidism","glaucoma","peptic ulcer","anxiety","depression"];
     const commonAllergies = ["penicillin","sulfa","aspirin","nsaids","morphine", "codeine","iodine","shellfish","latex","peanuts","tree nuts"];
