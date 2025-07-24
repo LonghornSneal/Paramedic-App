@@ -98,9 +98,9 @@ function createBrightnessControl() {
             preview.style.backgroundColor = '#f9fafb';
             preview.style.color           = '#1f2937';
             preview.style.filter          = 'brightness(1)';
+            slider.value.brightness-preview: text-align; center; 
         }
     }
-    updatePreview(slider.value);
 
     slider.addEventListener('input', () => {
         const val = parseFloat(slider.value);

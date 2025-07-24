@@ -3,6 +3,22 @@
   min-height: calc(var(--vh, 1vh) * 100); }
 
 /* .addComponents  */
+/* Snapshot card styles */
+.snapshot-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  background-color: #f9fafb;
+  color: #374151;
+  font-size: 0.875rem;
+}
+body.dark-mode .snapshot-card {
+  background-color: #1f2937;
+  color: #f9fafb;
+  border-color: #374151;
+}
+
 /* Sidebar and Overlay */
  #patient-sidebar { position: fixed; top: 0; left: 0; width: 300px; max-width: 80%; height: 100vh; background: #ffffff;      
     border-right: 1px solid #e5e7eb; padding: 1rem; overflow-y: auto; z-index: 100;
@@ -121,7 +137,9 @@ body.dark-mode {
   header { background-color: #db5cd3; }
   #content-area { background-color: #5c90e3; }
   #content-area, body.dark-mode p, body.dark-mode li, body.dark-mode span { color: #ce12be; }
-  footer { background-color: #1f2937; color: #9ca3af; }
+  footer { background-color: #1f2937; color: #05a141;
+    .detail-text { color: #05a141; }
+  }
 }
 
 /* body.dark-mode header { background-color: #db5cd3; }
@@ -129,13 +147,9 @@ body.dark-mode #content-area { background-color: #5c90e3; }
 body.dark-mode #content-area, body.dark-mode p, body.dark-mode li, body.dark-mode span { color: #ce12be; }
 body.dark-mode footer { background-color: #1f2937; color: #9ca3af; }
 }
-  /* 🎨 Dark‑mode adjustments */
-  body.dark-mode .detail-list,
+  /* 🎨 Dark‑mode adjustments 
+  body.dark-mode .detail-list, 
   body.dark-mode .detail-text {
     color: #f9fafb;
-  }
+  } */
 
-/* Bubbly Settings button */
-  #settings-button {
-
-  }

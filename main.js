@@ -60,6 +60,12 @@ function initApp() {
     window.navHomeButton = navHomeButton;
     window.settingsButton = settingsButton;
     window.settingsPanel = settingsPanel;
+    window.paramedicCategories     = paramedicCategories;
+    window.medicationDataMap       = medicationDataMap;
+    window.allDisplayableTopicsMap = allDisplayableTopicsMap;
+
+// Now that medicationDataMap exists, build the class dropdown
+insertMedicationClassDropdown();
     // Ensure overlay starts hidden
     attachNavHandlers();
     if (sidebarOverlay) {
@@ -120,7 +126,10 @@ function initApp() {
     setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions);
     setupAutocomplete('pt-indications','pt-indications-suggestions', indicationSuggestions);
     setupAutocomplete('pt-symptoms','pt-symptoms-suggestions', symptomSuggestions);
-
+    // Render the initial patient snapshot once the dropdown is ready
+    if (typeof window.renderPatientSnapshot === 'function') {
+        window.renderPatientSnapshot();
+    }
     // Add focus highlight to all textareas and inputs
     document.querySelectorAll('textarea, input').forEach(el => {
         el.addEventListener('focus', () => el.classList.add('ring', 'ring-blue-300'));
@@ -167,6 +176,70 @@ function initializeData(categoriesData, medDetailsData) {
     // Pass the merged details map to processItem so detail pages can find topic details.
     categories.forEach(item => processItem(item, allDisplayableTopicsMap, detailsDataMap));
 
+function stripMarkup(str) {
+    if (typeof str !== 'string') return '';
+    return str.replace(/\[\[(.+?)\|(.+?)\]\]/g, '$1');
+}
+
+/**
+ * Insert the Medication Class dropdown into the patient sidebar.  Gathers all
+ * unique classes from `window.medicationDataMap` and dispatches a custom
+ * event once inserted so that PatientInfo can attach listeners.
+ */
+function insertMedicationClassDropdown() {
+    const sidebar = document.getElementById('patient-sidebar');
+    if (!sidebar) return;
+    if (document.getElementById('pt-medication-class')) return; // avoid duplicates
+
+    // Collect unique classes (stripped of markup)
+    const classesSet = new Set();
+    Object.values(window.medicationDataMap || {}).forEach(med => {
+        const cls = med.class;
+        if (Array.isArray(cls)) {
+            cls.forEach(c => classesSet.add(stripMarkup(c)));
+        } else if (cls) {
+            classesSet.add(stripMarkup(cls));
+        }
+    });
+    const classes = Array.from(classesSet).filter(Boolean)
+        .sort((a, b) => a.localeCompare(b));
+
+    // Build the section
+    const section = document.createElement('div');
+    section.className = 'sidebar-section';
+    const title = document.createElement('div');
+    title.className = 'sidebar-section-title';
+    title.textContent = 'Medication Class';
+    const select = document.createElement('select');
+    select.id    = 'pt-medication-class';
+    select.className = 'sidebar-input w-full mt-1';
+
+    const defaultOption    = document.createElement('option');
+    defaultOption.value    = '';
+    defaultOption.textContent = 'Select class';
+    select.appendChild(defaultOption);
+
+    classes.forEach(cls => {
+        const opt = document.createElement('option');
+        opt.value = cls.toLowerCase();
+        opt.textContent = cls;
+        select.appendChild(opt);
+    });
+
+    section.appendChild(title);
+    section.appendChild(select);
+
+    // Insert the new section right after the current medications section, if present
+    const medsSection = sidebar.querySelector('[id=\"pt-medications\"]')?.closest('.sidebar-section');
+    if (medsSection) {
+        medsSection.insertAdjacentElement('afterend', section);
+    } else {
+        sidebar.appendChild(section);
+    }
+
+    // Dispatch custom event so PatientInfo can attach the change listener
+    document.dispatchEvent(new Event('medClassInserted'));
+}
 
 
     // Load common suggestion terms into suggestion sets

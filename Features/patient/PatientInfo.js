@@ -12,9 +12,11 @@
 // The central patient data object. All fields are initialized to null or sensible defaults. The
 // weightUnit property remains for potential future use but the code currently always stores weight
 // in kilograms.
+import { renderPatientSnapshot } from './PatientSnapshot.js';
+
 export const patientData = {
     age: null, weight: null, weightUnit: 'kg',
-    pmh: [], allergies: [], currentMedications: [], indications: [], symptoms: [],
+    pmh: [], allergies: [], currentMedications: [], indications: [], symptoms: [], medicationClasses: [], // <— new field
     vitalSigns: {
         bp: '', hr: null, spo2: null, etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: ''
     },
@@ -159,6 +161,14 @@ function updatePatientData() {
     // set to null.
     const kgVal = getParsedFloat('pt-weight-kg');
     const lbVal = getParsedFloat('pt-weight-lb');
+    // Medication class selection: read from the dynamically inserted select
+  const medClassEl = document.getElementById('pt-medication-class');
+  if (medClassEl && medClassEl.value) {
+      patientData.medicationClasses = [medClassEl.value.toLowerCase()];
+  } else {
+      patientData.medicationClasses = [];
+  }
+
     if (kgVal !== null) {
         patientData.weight = kgVal;
         patientData.weightUnit = 'kg';
@@ -233,6 +243,8 @@ function updatePatientData() {
                     .forEach(el => el.classList.remove('strikethrough'));
         }
     }
+    // Refresh the patient snapshot to reflect current data
+  renderPatientSnapshot();
 }
 
 // Attach input event listeners for live updates. Each monitored input triggers updatePatientData().
@@ -256,6 +268,23 @@ if (lbInputEl) {
     synchronizeWeights('lb');
     updatePatientData();
   });
+}
+
+function attachMedClassListener() {
+    const medClassEl = document.getElementById('pt-medication-class');
+    if (medClassEl) {
+        medClassEl.addEventListener('change', updatePatientData);
+    }
+}
+// Try attaching immediately
+attachMedClassListener();
+
+// Also reattach after DOMContentLoaded, or when main.js dispatches
+// a custom event if the element is inserted later.
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', attachMedClassListener);
+} else {
+    document.addEventListener('medClassInserted', attachMedClassListener);
 }
 
 // Expose our important values and functions globally for legacy scripts. This allows older code
