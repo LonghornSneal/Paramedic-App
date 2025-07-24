@@ -68,17 +68,7 @@
   .detail-list { list-style-type: disc; list-style-position: inside; padding-left: 0.5rem; color: #374151; }                
   .detail-list li + li { margin-top: 0.25rem; }
   .detail-text { color: #374151; white-space: pre-wrap; }
-  /* 🎨 Dark‑mode adjustments */
-  body.dark-mode .detail-list,
-  body.dark-mode .detail-text {
-    color: #f9fafb;
-  }
 
-/* Bubbly Settings button */
-  #settings-button {
-    font-family: 'Baloo 2', cursive;
-    font-size: 1.5rem;
-  }
   .med-concentration { font-size: 0.875rem; line-height: 1.25rem; color: #6b7280; margin-left: 0.5rem; } 
 
 /* Header navigation buttons (top-right corner buttons) */
@@ -119,16 +109,33 @@
   ::-webkit-scrollbar-thumb:hover { background-color: #94a3b8; }
   /* Dark mode logic */
 @keyframes textColorTransition { 0%, 100% { color: #2563eb; } 50% { color: #16a34a; } }
-#settings-button { animation: textColorTransition 2s ease-in-out infinite; }
+#settings-button { font-family: 'Baloo 2', cursive;
+                   font-size: 1.5rem;
+                   animation: textColorTransition 2s ease-in-out infinite; }
 #settings-panel { z-index: 110; }
-body.dark-mode { background-color: #638dd2; color: #1279e1; }
-body.dark-mode header { background-color: #5c91db; }
-body.dark-mode #content-area { background-color: #5c90e3; }
-body.dark-mode #content-area, body.dark-mode p, body.dark-mode li, body.dark-mode span { color: #1270ce; }
-body.dark-mode footer { background-color: #1f2937; color: #9ca3af; }
-
+/* //body.dark-mode { background-color: #638dd2; color: #1279e1; } 
 /* When dark mode is active, apply a CSS variable for brightness (default 1). */
 body.dark-mode {
   --brightness: 1;
   filter: brightness(var(--brightness));
+  header { background-color: #db5cd3; }
+  #content-area { background-color: #5c90e3; }
+  #content-area, body.dark-mode p, body.dark-mode li, body.dark-mode span { color: #ce12be; }
+  footer { background-color: #1f2937; color: #9ca3af; }
 }
+
+/* body.dark-mode header { background-color: #db5cd3; }
+body.dark-mode #content-area { background-color: #5c90e3; }
+body.dark-mode #content-area, body.dark-mode p, body.dark-mode li, body.dark-mode span { color: #ce12be; }
+body.dark-mode footer { background-color: #1f2937; color: #9ca3af; }
+}
+  /* 🎨 Dark‑mode adjustments */
+  body.dark-mode .detail-list,
+  body.dark-mode .detail-text {
+    color: #f9fafb;
+  }
+
+/* Bubbly Settings button */
+  #settings-button {
+
+  }
