@@ -287,8 +287,7 @@ function initializeData(categoriesData, medDetailsData) { // /Assign the global 
 
     // Populate allDisplayableTopicsMap safely and build the searchable index
     categoriesData.forEach(cat => processItem(cat));
-    // Build the medication class dropdown now that details are available
-    insertMedicationClassDropdown();
+    // Removed: Medication Class dropdown (no longer part of Patient Info sidebar)
 
 
 

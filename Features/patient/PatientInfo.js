@@ -16,7 +16,7 @@ import { renderPatientSnapshot } from './PatientSnapshot.js';
 
 export const patientData = {
     age: null, weight: null, weightUnit: 'kg',
-    pmh: [], allergies: [], currentMedications: [], indications: [], symptoms: [], medicationClasses: [], // <— new field
+    pmh: [], allergies: [], currentMedications: [], indications: [], symptoms: [],
     vitalSigns: {
         bp: '', hr: null, spo2: null, etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: ''
     },
@@ -161,13 +161,7 @@ function updatePatientData() {
     // set to null.
     const kgVal = getParsedFloat('pt-weight-kg');
     const lbVal = getParsedFloat('pt-weight-lb');
-    // Medication class selection: read from the dynamically inserted select
-  const medClassEl = document.getElementById('pt-medication-class');
-  if (medClassEl && medClassEl.value) {
-      patientData.medicationClasses = [medClassEl.value.toLowerCase()];
-  } else {
-      patientData.medicationClasses = [];
-  }
+    // Medication class dropdown removed; no medicationClasses in patientData
 
     if (kgVal !== null) {
         patientData.weight = kgVal;
@@ -270,22 +264,7 @@ if (lbInputEl) {
   });
 }
 
-function attachMedClassListener() {
-    const medClassEl = document.getElementById('pt-medication-class');
-    if (medClassEl) {
-        medClassEl.addEventListener('change', updatePatientData);
-    }
-}
-// Try attaching immediately
-attachMedClassListener();
-
-// Also reattach after DOMContentLoaded, or when main.js dispatches
-// a custom event if the element is inserted later.
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', attachMedClassListener);
-} else {
-    document.addEventListener('medClassInserted', attachMedClassListener);
-}
+// Removed Medication Class dropdown integration
 
 // Expose our important values and functions globally for legacy scripts. This allows older code
 // that references window.patientData, window.PEDIATRIC_AGE_THRESHOLD, etc. to continue working

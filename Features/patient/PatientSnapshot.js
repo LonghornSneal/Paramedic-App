@@ -26,7 +26,6 @@ export function renderPatientSnapshot() {
     const weight  = patientData.weight != null ? `${patientData.weight} kg` : '—';
     const allergies = formatList(patientData.allergies);
     const meds    = formatList(patientData.currentMedications);
-    const medClass= formatList(patientData.medicationClasses || []);
     const vitals  = patientData.vitalSigns || {};
     const bp      = vitals.bp || '—';
     const hr      = vitals.hr != null ? vitals.hr : '—';
@@ -38,7 +37,7 @@ export function renderPatientSnapshot() {
         <p><span class="font-medium">Weight:</span> ${weight}</p>
         <p><span class="font-medium">Allergies:</span> ${allergies}</p>
         <p><span class="font-medium">Medications:</span> ${meds}</p>
-        <p><span class="font-medium">Med Class:</span> ${medClass}</p>
+        
         <p><span class="font-medium">BP:</span> ${bp} | <span class="font-medium">HR:</span> ${hr}</p>
       </div>`;
 }
