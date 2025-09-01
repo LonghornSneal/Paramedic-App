@@ -15,7 +15,7 @@ import { pmhSuggestions,
         } from './Features/patient/PatientInfo.js';
 import { setupAutocomplete } from './Features/patient/Autocomplete.js';
 import { attachSearchHandlers, processItem } from './Features/search/Search.js';
-import { initHistory } from './Features/History.js';
+import './Features/History.js';
 import './Features/settings.js';
 import { escapeHTML } from './Utils/escapeHTML.js';
 import { setupSlugAnchors } from './Features/anchorNav/slugAnchors.js';
@@ -146,7 +146,6 @@ function initApp() {
 
     attachSearchHandlers();  // Calls the function from Features/search/Search.js
     attachHomeHandler();
-    initHistory();
     // Now initialize data structures from globals   // These should be loaded BEFORE this script runs (by script order in index.html)
     if (ParamedicCategoriesData && MedicationDetailsData) {
         initializeData(ParamedicCategoriesData, MedicationDetailsData);

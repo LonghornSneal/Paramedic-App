@@ -27,8 +27,8 @@ body.dark-mode .snapshot-card {
     box-shadow: 2px 0 10px rgba(0,0,0,0.1); }
   #patient-sidebar.open { transform: translateX(0); }
   #sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); z-index: 99; opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
-  #sidebar-overlay.active { opacity: 1; visibility: visible; }
+    background-color: rgba(0, 0, 0, 0.5); z-index: 40; opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; pointer-events: none; }
+  #sidebar-overlay.active { opacity: 1; visibility: visible; pointer-events: auto; }
   #app-container { display: flex; flex-direction: column; flex-grow: 1;
     width: 100%; transition: margin-left 0.3s ease-in-out; }
 
@@ -132,8 +132,14 @@ body.dark-mode .snapshot-card {
 #settings-panel { z-index: 110; }
 /* When dark mode is active, apply brightness filter using the root variable. */
 body.dark-mode { filter: brightness(var(--brightness)); }
-body.dark-mode header { background-color: #db5cd3; }
-body.dark-mode #content-area { background-color: #5c90e3; }
-body.dark-mode #content-area, body.dark-mode p, body.dark-mode li, body.dark-mode span { color: #ce12be; }
-body.dark-mode footer { background-color: #1f2937; color: #05a141; }
-body.dark-mode .detail-text { color: #05a141; }
+/* Sane dark mode palette */
+/* Keep header blue (Tailwind), focus on content readability */
+body.dark-mode #content-area { background-color: #111827; }
+body.dark-mode #content-area, body.dark-mode p, body.dark-mode li, body.dark-mode span { color: #e5e7eb; }
+body.dark-mode .detail-text, body.dark-mode .detail-list { color: #e5e7eb; }
+body.dark-mode .topic-link-item { background-color: #111827; border-color: #374151; color: #e5e7eb; }
+body.dark-mode .topic-link-item:hover { background-color: #1f2937; }
+body.dark-mode .sidebar-label { color: #e5e7eb; }
+body.dark-mode .sidebar-input { background-color: #1f2937; color: #e5e7eb; border-color: #374151; }
+body.dark-mode .sidebar-input::placeholder { color: #9ca3af; }
+body.dark-mode footer { background-color: #111827; color: #9ca3af; }
