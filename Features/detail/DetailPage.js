@@ -229,18 +229,19 @@ async function renderEquipmentFromMarkdown(details, contentArea, topic){
     const md = await res.text();
     const { cheat, sections } = parseMdSections(md, topic.id);
     if (details.originalPdf) {
+      const pdfUrl = details.pdfPage ? `${details.originalPdf}#page=${details.pdfPage}` : details.originalPdf;
       const embedId = `pdf-embed-${slugify(topic.id)}`;
       const btnId = `pdf-toggle-${slugify(topic.id)}`;
-      const toolbar = document.createElement('div');
-      toolbar.className = 'mb-3 flex items-center gap-2';
-      toolbar.innerHTML = `
-        <a href="${details.originalPdf}" target="_blank" rel="noopener" class="text-blue-600 underline">Open Original PDF</a>
-        <button id="${btnId}" class="text-sm px-2 py-1 border rounded text-blue-600 border-blue-300 hover:bg-blue-50">View Inline</button>
-        <div id="${embedId}" class="hidden w-full"><object data="${details.originalPdf}" type="application/pdf" width="100%" height="640px"></object></div>
+      const html = `
+        <div class="mb-2">
+          <a href="${pdfUrl}" target="_blank" rel="noopener" class="text-blue-600 underline">Open Original PDF</a>
+          <button id="${btnId}" class="ml-2 text-sm px-2 py-1 border rounded text-blue-600 border-blue-300 hover:bg-blue-50">View Inline</button>
+        </div>
+        <div id="${embedId}" class="hidden w-full"><object data="${pdfUrl}" type="application/pdf" width="100%" height="640px"></object></div>
       `;
-      contentArea.appendChild(toolbar);
-      const btn = toolbar.querySelector('#'+btnId);
-      const embed = toolbar.querySelector('#'+embedId);
+      insertEquipmentSection(contentArea, 'Original Documentation', html);
+      const btn = document.getElementById(btnId);
+      const embed = document.getElementById(embedId);
       if (btn && embed) {
         addTapListener(btn, () => {
           embed.classList.toggle('hidden');
