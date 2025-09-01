@@ -232,6 +232,16 @@ async function renderEquipmentFromMarkdown(details, contentArea, topic){
     insertEquipmentSection(contentArea, 'Cheat Sheet', cheat);
     // Then other sections
     sections.forEach(sec => insertEquipmentSection(contentArea, sec.title, sec.html));
+    // Bind expand/collapse after insertion
+    attachToggleCategoryHandlers(contentArea);
+    // Build TOC for long pages
+    const tocSections = [
+      { id: slugify('Cheat Sheet'), label: 'Cheat Sheet' },
+      ...sections.map(s => ({ id: slugify(s.title), label: s.title }))
+    ];
+    if (tocSections.length >= 6) {
+      setupSlugAnchors(tocSections);
+    }
   } catch(err){
     contentArea.insertAdjacentHTML('beforeend', `<div class="text-red-700">Unable to load content: ${escapeHtml(err.message)}</div>`);
   }
@@ -276,6 +286,15 @@ function parseMdSections(md, topicId){
   return { cheat, sections };
 }
 
+function emphasizeImportant(html){
+  // critical terms → red, cautionary → yellow
+  const critical = /(high\s*priority|failure|failures|do not|never|gas intake failure|self check failure|exhalation system failure)/gi;
+  const caution  = /(warning|caution|alarm|mute|muting|attention)/gi;
+  return html
+    .replace(critical, m => `<span class="text-red-600 font-semibold">${m}</span>`)
+    .replace(caution, m => `<span class="text-yellow-600 font-semibold">${m}</span>`);
+}
+
 function renderMdBlock(lines){
   // Convert bullets and paragraphs into HTML
   let html='';
@@ -283,10 +302,11 @@ function renderMdBlock(lines){
   for(const ln of lines){
     if (/^\s*[-*]\s+/.test(ln)){
       if (!inList){ html += '<ul class="detail-list">'; inList=true; }
-      html += `<li>${inlineMd(ln.replace(/^\s*[-*]\s+/,''))}</li>`;
+      const inner = inlineMd(ln.replace(/^\s*[-*]\s+/,''));
+      html += `<li>${emphasizeImportant(inner)}</li>`;
     } else {
       if (inList){ html += '</ul>'; inList=false; }
-      if (ln.trim().length){ html += `<p>${inlineMd(ln.trim())}</p>`; }
+      if (ln.trim().length){ const inner = inlineMd(ln.trim()); html += `<p>${emphasizeImportant(inner)}</p>`; }
     }
   }
   if (inList) html += '</ul>';
@@ -305,7 +325,7 @@ function inlineMd(t){
 function renderCheatSheet(md, topicId){
   const lines = md.split(/\r?\n/);
   const picks = [];
-  const key = /(high\s*priority|failure|failures|warning|caution|alarm|mute|muting|do not|never)/i;
+  const key = /(high\s*priority|failure|failures|warning|caution|alarm|mute|muting|do not|never|gas intake|self check|exhalation system)/i;
   for (const ln of lines){
     if (key.test(ln)){
       picks.push(ln.trim());
