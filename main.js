@@ -191,13 +191,15 @@ function insertMedicationClassDropdown() {
     if (document.getElementById('pt-medication-class')) return; // avoid duplicates
 
     // Collect unique classes (stripped of markup)
+    // IMPORTANT: Only use MedicationDetailsData (drugs). Do NOT include
+    // classes from equipment/ventilation data to avoid polluting the list.
     const classesSet = new Set();
-    Object.values(window.medicationDataMap || {}).forEach(med => {
+    (MedicationDetailsData || []).forEach(med => {
         const cls = med.class;
         if (Array.isArray(cls)) {
-            cls.forEach(c => classesSet.add(stripMarkup(c)));
+            cls.forEach(c => classesSet.add(cleanClassName(c)));
         } else if (cls) {
-            classesSet.add(stripMarkup(cls));
+            classesSet.add(cleanClassName(cls));
         }
     });
     const classes = Array.from(classesSet).filter(Boolean)
@@ -243,6 +245,20 @@ function insertMedicationClassDropdown() {
 function stripMarkup(str) {
     if (typeof str !== 'string') return '';
     return str.replace(/\[\[(.+?)\|(.+?)\]\]/g, '$1');
+}
+
+// Clean up a medication class string to remove markup and extra notes.
+// - Removes wiki-style [[display|info]] markup (keeping display)
+// - Trims whitespace
+// - Drops trailing parenthetical notes
+// - Drops trailing dashes/em-dashes notes
+function cleanClassName(str) {
+    const noMarkup = stripMarkup(String(str));
+    // Remove parenthetical notes
+    const noParens = noMarkup.replace(/\s*\([^)]*\)\s*/g, ' ').trim();
+    // Cut at common separators that indicate extra description
+    const cutAtDash = noParens.split(/\s[-–—]\s/)[0].trim();
+    return cutAtDash;
 }
 
 // Initializes global data structures for categories and medications.
