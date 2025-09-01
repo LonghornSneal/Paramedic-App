@@ -15,7 +15,7 @@ import { pmhSuggestions,
         } from './Features/patient/PatientInfo.js';
 import { setupAutocomplete } from './Features/patient/Autocomplete.js';
 import { attachSearchHandlers, processItem } from './Features/search/Search.js';
-import './Features/History.js';
+import { initHistory } from './Features/History.js';
 import './Features/settings.js';
 import { escapeHTML } from './Utils/escapeHTML.js';
 import { setupSlugAnchors } from './Features/anchorNav/slugAnchors.js';
@@ -59,6 +59,18 @@ if (document.readyState === 'loading') {
 
 // Initializes the application, setting up UI event handlers and loading data.
 function initApp() {
+    // Warn if loaded from file:// which breaks ES module imports in browsers
+    if (location.protocol === 'file:') {
+        const el = document.getElementById('content-area');
+        if (el) {
+            el.innerHTML = `<div class="p-4 text-red-700 bg-red-50 border border-red-200 rounded">
+                This app must be opened over HTTP due to browser module security.
+                Please run a local server (e.g., <code>python -m http.server</code>)
+                and open <code>http://localhost:3001/</code>.
+            </div>`;
+        }
+        return;
+    }
     // Initialize header elements (they are already defined in index.html)
     assignDomElements();
     // Make these DOM element references global for other modules/scripts to use
@@ -118,8 +130,23 @@ function initApp() {
         });
     }
 
+    // Global error surface to help catch runtime issues
+    window.addEventListener('error', (e) => {
+        try {
+            const area = window.contentArea || document.getElementById('content-area');
+            if (area) {
+                area.innerHTML = `<div class="p-4 text-red-700 bg-red-50 border border-red-200 rounded">
+                    A runtime error occurred: ${escapeHTML(e.message || 'Unknown error')}
+                </div>`;
+            }
+            // eslint-disable-next-line no-console
+            console.error('Runtime error:', e.error || e.message, e);
+        } catch { /* ignore */ }
+    }, { once: true });
+
     attachSearchHandlers();  // Calls the function from Features/search/Search.js
     attachHomeHandler();
+    initHistory();
     // Now initialize data structures from globals   // These should be loaded BEFORE this script runs (by script order in index.html)
     if (ParamedicCategoriesData && MedicationDetailsData) {
         initializeData(ParamedicCategoriesData, MedicationDetailsData);
@@ -150,7 +177,13 @@ function initApp() {
         el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300')); 
     });
     // Finally, render the initial category list view
-    renderInitialView(true); 
+    if (Array.isArray(paramedicCategories) && paramedicCategories.length > 0) {
+        renderInitialView(true);
+    } else {
+        contentArea.innerHTML = `<div class="p-4 text-yellow-700 bg-yellow-50 border border-yellow-200 rounded">
+            No categories available to display.
+        </div>`;
+    }
 }
 
 function insertMedicationClassDropdown() {

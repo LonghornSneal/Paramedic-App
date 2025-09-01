@@ -43,12 +43,11 @@ closeSettingsButton?.addEventListener('click', () => {
 const savedDarkMode   = localStorage.getItem('darkMode');
 const savedBrightness = parseFloat(localStorage.getItem('darkModeBrightness'));
 
+// Set brightness variable from saved preference (applies when dark mode is toggled on)
+document.documentElement.style.setProperty('--brightness', (!isNaN(savedBrightness) ? savedBrightness : 1));
 if (savedDarkMode === 'true') {
     document.body.classList.add('dark-mode');
     if (darkModeToggle) darkModeToggle.checked = true;
-    // Apply previously saved brightness level; default to 1 if invalid
-    const brightnessVal = !isNaN(savedBrightness) ? savedBrightness : 1;
-    document.documentElement.style.setProperty('--brightness', brightnessVal);
 }
 
 darkModeToggle?.addEventListener('change', () => {
@@ -90,29 +89,25 @@ function createBrightnessControl() {
     preview.textContent = 'Preview';
 
     function updatePreview(val) {
-        if (document.body.classList.contains('dark-mode')) {
-            preview.style.backgroundColor = '#111827';
-            preview.style.color           = '#f9fafb';
-            preview.style.filter          = `brightness(${val})`;
-        } else {
-            preview.style.backgroundColor = '#f9fafb';
-            preview.style.color           = '#1f2937';
-            preview.style.filter          = 'brightness(1)';
-        }
+        const dm = document.body.classList.contains('dark-mode');
+        preview.style.backgroundColor = dm ? '#111827' : '#f9fafb';
+        preview.style.color           = dm ? '#f9fafb' : '#1f2937';
+        preview.style.filter          = dm ? `brightness(${val})` : 'brightness(1)';
     }
 
     slider.addEventListener('input', () => {
         const val = parseFloat(slider.value);
-        if (document.body.classList.contains('dark-mode')) {
-            document.documentElement.style.setProperty('--brightness', val);
-            localStorage.setItem('darkModeBrightness', val.toString());
-        }
+        // Always update root variable so dark mode immediately reflects changes
+        document.documentElement.style.setProperty('--brightness', val);
+        localStorage.setItem('darkModeBrightness', val.toString());
         updatePreview(val);
     });
 
     wrapper.appendChild(label);
     wrapper.appendChild(slider);
     wrapper.appendChild(preview);
+    // Initialize preview to the current slider value
+    updatePreview(parseFloat(slider.value));
 
     // Insert after the dark mode toggle container
     const darkModeContainer = darkModeToggle?.parentElement;

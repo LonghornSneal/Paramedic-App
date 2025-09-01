@@ -10,6 +10,7 @@ import { addTapListener } from '../../Utils/addTapListener.js'
 // import { addTapListener } from '../../Utils/addTapListener.js';
 // Renders the main category list view (home screen) and highlights a topic if provided.
 export function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
+    const contentArea = window.contentArea || document.getElementById('content-area');
     contentArea.innerHTML = '';  // Clear current content
     // Render the hierarchical list of all categories
     const listContainer = document.createElement('div');
@@ -30,6 +31,7 @@ export function renderInitialView(shouldAddHistory = true, highlightId = null, c
 
 // Expands categories along the given path and highlights the specified topic, then re-renders the list.
 function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
+    const contentArea = window.contentArea || document.getElementById('content-area');
     // Collapse or expand categories along the given path
     categoryPath.forEach(catId => { 
         const catItem = window.allDisplayableTopicsMap[catId];

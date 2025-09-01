@@ -1,3 +1,4 @@
+:root { --brightness: 1; }
  body { font-family: 'Inter', sans-serif; line-height: 1.5; background: #fdfdfd;  /* light background for readability */
   color: #000; overscroll-behavior-y: contain; display: flex; flex-direction: column;
   min-height: calc(var(--vh, 1vh) * 100); }
@@ -129,8 +130,8 @@ body.dark-mode .snapshot-card {
                    font-size: 1.5rem;
                    animation: textColorTransition 2s ease-in-out infinite; }
 #settings-panel { z-index: 110; }
-/* When dark mode is active, apply a CSS variable for brightness (default 1). */
-body.dark-mode { --brightness: 1; filter: brightness(var(--brightness)); }
+/* When dark mode is active, apply brightness filter using the root variable. */
+body.dark-mode { filter: brightness(var(--brightness)); }
 body.dark-mode header { background-color: #db5cd3; }
 body.dark-mode #content-area { background-color: #5c90e3; }
 body.dark-mode #content-area, body.dark-mode p, body.dark-mode li, body.dark-mode span { color: #ce12be; }

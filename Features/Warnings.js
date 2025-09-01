@@ -63,6 +63,22 @@ function getLowBPWarning(topic, patientData) {
     return '';
 }
 
+// Etomidate pediatric age warning (<10 years old)
+function getEtomidatePedsWarning(topic, patientData) {
+    if (!topic || topic.id !== 'etomidate-amidate') return '';
+    const age = patientData?.age;
+    if (typeof age === 'number' && age < 10) {
+        return `
+          <div class="warning-box warning-box-red mb-2">
+            <div class="flex items-start">
+              ${createWarningIcon('text-red-600')}
+              <span>Contraindication: Patient age (${age}) is under 10 years — Etomidate not recommended.</span>
+            </div>
+          </div>`;
+    }
+    return '';
+}
+
 // General contraindications from MedicationDetailsData (excluding allergies)
 function getGeneralContraindicationsWarning(topic) {
     const med = window.medicationDataMap?.[topic.id];
@@ -107,6 +123,7 @@ export function appendTopicWarnings(topic, patientData) {
     warnings += getAllergyWarning(topic, patientData);
     warnings += getPDE5Warning(topic, patientData);
     warnings += getLowBPWarning(topic, patientData);
+    warnings += getEtomidatePedsWarning(topic, patientData);
     warnings += getGeneralContraindicationsWarning(topic);
     warnings += getAgeWarning(topic, patientData);
     return warnings;

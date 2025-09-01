@@ -77,7 +77,7 @@ function attachToggleCategoryHandlers(container) {
 
 // Appends all detail sections for a topic into the content area, including “Class”, “Indications”, “Contraindications”, etc.
 // If the topic has no details, a placeholder message is inserted.
-function appendTopicDetails(topic) {
+function appendTopicDetails(topic, contentArea) {
     // If the topic has an alternate ID (e.g., "123-Name"), use its base ID to find details
     let details = topic.details;
     if (!details && topic.id?.match(/^\d+-/)) {
@@ -146,7 +146,7 @@ function findAlsMedTopicIndex(children, topicId) {
         idx = children.findIndex(child => child.id === altId);
         if (idx !== -1) return idx;
     }
-    const altId = Object.keys(allDisplayableTopicsMap).find(k => k.endsWith(topicId));
+    const altId = Object.keys(window.allDisplayableTopicsMap || {}).find(k => k.endsWith(topicId));
     if (altId) {
         idx = children.findIndex(child => child.id === altId);
         if (idx !== -1) return idx;
@@ -157,6 +157,7 @@ function findAlsMedTopicIndex(children, topicId) {
 // Renders the detailed view for a given topic, including the title, any warning alerts, and detail sections. 
 // Also updates history (unless disabled) and scrolls to top if requested.
 export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) {
+    const contentArea = window.contentArea || document.getElementById('content-area');
     if (!window.allDisplayableTopicsMap[topicId]) { 
         contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; 
         return; 
@@ -175,14 +176,15 @@ export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop =
         contentArea.insertAdjacentHTML('beforeend', warningsHtml);
     }
     // Detail sections for this topic
-    appendTopicDetails(topic);
+    appendTopicDetails(topic, contentArea);
     // Attach toggle handlers for collapsible info and category sections
     attachToggleInfoHandlers(contentArea);
     attachToggleCategoryHandlers(contentArea);
     // Insert table of contents for detail sections (if any sections exist)
     const tocSections = Array.from(contentArea.querySelectorAll('.detail-section-title'))
                         .map(el => ({ id: el.id, label: el.textContent }));
-    if (tocSections.length > 0) {
+    // Only show a Table of Contents for long pages (avoid duplicate-looking headers on short pages)
+    if (typeof window !== 'undefined' && window.ENABLE_DETAIL_TOC && tocSections.length >= 6) {
         setupSlugAnchors(tocSections);
     }
     // Description text (if any)
