@@ -13,6 +13,13 @@ export const VentilationDetailsData = [
     title: 'Zoll EMV731 - General Information',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/general-information.md',
+    cheat: [
+      'Read Warnings/Cautions thoroughly before use.',
+      'Portable, rugged, full-featured ventilator for prehospital/transport.',
+      'Keep product documentation current; check ZOLL website for updates.',
+      'Symbols: understand alarm, mute/cancel, DC power, exhalation valve, O2 connector.',
+      'If shipping damage or failed self-test: contact ZOLL support before use.'
+    ],
     class: `
 This section introduces the ZOLL EMV731 ventilator and its operator's guide.  It
 describes the ventilator as a small, durable, full‑featured mechanical device
@@ -36,6 +43,13 @@ and instructions for obtaining manual updates are also included.
     title: 'Zoll EMV731 - Product Overview',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/product-overview.md',
+    cheat: [
+      'Models: AEV, EMV+, Eagle II — transport/hospital/prehospital.',
+      'Rugged, lightweight; internal compressor, long-life battery, daylight-visible GUI.',
+      'Ventilation modes: AC, SIMV, CPAP, Bi-Level; integrated SpO2.',
+      'Know connector panel: fresh gas intake, power, patient circuit, exhalation valve.',
+      'Understand GUI parameter windows and indicators before patient use.'
+    ],
     class: `
 This overview summarises the available EMV731 models – AEV, EMV+ and Eagle II –
 and their intended applications in prehospital, transport and hospital settings.  It
@@ -57,6 +71,13 @@ ventilator circuits, pulse oximeter and power sources.
     title: 'Zoll EMV731 - Setting Up the Ventilator',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/setting-up-ventilator.md',
+    cheat: [
+      'Never start ventilator with patient attached; be ready to bag.',
+      'Attach circuit; optionally connect high-pressure O2; verify filters/accessories.',
+      'Select power source; power on; choose startup defaults and mode.',
+      'Perform operational test before connecting patient.',
+      'Attach pulse-oximeter probe as required; confirm alarms and settings.'
+    ],
     class: `
 This section provides step‑by‑step instructions for preparing the ventilator for use.
 Key tasks include attaching the ventilator circuit, optionally connecting a high‑pressure
@@ -82,6 +103,13 @@ chemical/biological filters.
     title: 'Zoll EMV731 - Using the Ventilator',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/using-ventilator.md',
+    cheat: [
+      'GUI shows parameter windows for Mode, BPM, VT, PIP, FIO2, SpO2, HR.',
+      'Single press = primary; multiple = secondary/alarm; press/hold = context menu.',
+      'Select breath target (V or P) as appropriate for patient/strategy.',
+      'Pop Up protects against out-of-range settings — read and confirm intentionally.',
+      'Leak Compensation reduces nuisance alarms (Incomplete Exhalation/Insufficient Flow).'
+    ],
     class: `
 This chapter explains operation of the EMV731.  It describes the graphical user
 interface with parameter windows for Mode, Breaths Per Minute (BPM), Tidal Volume
@@ -106,6 +134,17 @@ managing alarms and notifications.
     title: 'Zoll EMV731 - Alarms',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/alarms.md',
+    cheat: [
+      'Alarm Message Center (AMC) shows name, mitigation steps, if-not-resolved steps.',
+      'High Priority: ventilation under user control not possible — immediate action; cannot mute.',
+      'Medium Priority: ventilation possible but failure exists — mute 30s; fix cause.',
+      'Low Priority: safe ventilation active; audible cancels with Mute; LED stays yellow if unresolved.',
+      'Preemptive Mute for 30s before procedures that trigger alarms.',
+      'Startup Mute: patient safety alarms suspended ~2 min during setup (exceptions apply).',
+      'Multiple alarms: turn Dial to cycle; solid bell indicates alarm shown; max 6 without plot.',
+      'Service codes (1###, 2###, 3###) map to priority; report when contacting support.',
+      'Pop Up Messages protect from unsafe settings; read and act accordingly.'
+    ],
     class: `
 This section details the ventilator’s Smart Help alarm system.  The ventilator
 continuously monitors patient status, device performance and environmental conditions.
@@ -129,6 +168,11 @@ technical support.
     title: 'Zoll EMV731 - Operating Environments',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/operating-environments.md',
+    cheat: [
+      'Confirm temperature, barometric pressure, and altitude are within device specs.',
+      'Monitor device and ambient temperature; avoid overheating/condensation.',
+      'Use appropriate power/O2 sources for the environment (field vs transport).'
+    ],
     class: `
 Guidelines in this chapter address operating the ventilator in environments outside
 of the typical hospital setting.  For harsh prehospital and transport environments it
@@ -153,6 +197,11 @@ ventilator is not intended for use in hyperbaric chambers.
     title: 'Zoll EMV731 - Maintenance',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/maintenance.md',
+    cheat: [
+      'Follow preventive maintenance schedule; heed PM alarms.',
+      'Inspect/replace filters and accessories per schedule; check exhalation valve diaphragm.',
+      'If self-test fails or damage suspected: remove from service and contact support.'
+    ],
     class: `
 This chapter outlines maintenance procedures to ensure the ventilator remains ready for
 use.  It recommends regular inspection for cleanliness, damage and wear on the unit,
@@ -176,6 +225,11 @@ personnel using the RCS system.
     title: 'Zoll EMV731 - Specifications',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/specifications.md',
+    cheat: [
+      'Know operational ranges: flow rate, BPM, VT, FIO2, PEEP/EPAP, PIP, pressure support.',
+      'Max PIP ~80 cmH2O; pressure support up to 60 cmH2O; O2 input ~55 psig.',
+      'Review measurement resolutions/tolerances; set alarms accordingly.'
+    ],
     class: `
 This appendix summarises the ventilator’s technical specifications.  It lists the
 operating modes available on the EMV+ and Eagle II models (Assist/Control,
@@ -200,6 +254,11 @@ pressure (MAP) are also provided.
     title: 'Zoll EMV731 - Accessories',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/accessories.md',
+    cheat: [
+      'AC/DC supplies, region-specific power cords, battery packs/cables.',
+      'Carrying cases, bacterial/viral filters, HMEs, compressor foam filters.',
+      'O2 reservoir kits; part numbers vary by country — confirm before ordering.'
+    ],
     class: `
 This appendix enumerates accessories available for the ventilator, including AC/DC
 power supplies, various power cords for different regions, battery packs, extension
@@ -222,6 +281,11 @@ ensuring appropriate circuit connections for different patient sizes.
     title: 'Zoll EMV731 - Pulse Oximeter Principles',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/pulse-oximeter-principles.md',
+    cheat: [
+      'SpO2 relies on differential absorption (red 660nm, IR 905nm) and pulsatile volume.',
+      'Masimo SET separates arterial signal from noise (motion/low perfusion) for accuracy.',
+      'SpO2 computed every ~2s via discrete saturation transform.'
+    ],
     class: `
 This appendix explains the operating principles of the Masimo SET pulse oximeter used
 with the ventilator.  Pulse oximetry relies on two phenomena: oxyhemoglobin and
@@ -245,6 +309,11 @@ every two seconds, enhancing accuracy in the presence of motion or low perfusion
     title: 'Zoll EMV731 - Patient Circuits',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/patient-circuits.md',
+    cheat: [
+      'Choose correct single-limb Wye circuit (adult/ped/infant; 6 or 12 ft).',
+      'Maintain PEEP ≥ 5 cmH2O; correct for compressible volume; beware long circuits.',
+      'Inspect and reseat exhalation valve diaphragm if alarms occur; test with lung.'
+    ],
     class: `
 This appendix describes the ventilator’s patient circuits.  It covers single‑limb,
 Wye circuits for pediatric/adult patients in 6 ft and 12 ft lengths and for

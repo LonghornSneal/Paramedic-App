@@ -228,8 +228,11 @@ async function renderEquipmentFromMarkdown(details, contentArea, topic){
     if (!res.ok) throw new Error(`Failed to load ${details.mdPath}`);
     const md = await res.text();
     const { cheat, sections } = parseMdSections(md, topic.id);
-    // Insert Cheat Sheet first
-    insertEquipmentSection(contentArea, 'Cheat Sheet', cheat);
+    // Insert Cheat Sheet first (prefer curated if present on details)
+    const cheatHtml = details.cheat && Array.isArray(details.cheat) && details.cheat.length
+      ? renderMdBlock(details.cheat)
+      : cheat;
+    insertEquipmentSection(contentArea, 'Cheat Sheet', cheatHtml);
     // Then other sections
     sections.forEach(sec => insertEquipmentSection(contentArea, sec.title, sec.html));
     // Bind expand/collapse after insertion
