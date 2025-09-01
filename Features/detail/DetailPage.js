@@ -87,6 +87,11 @@ function appendTopicDetails(topic, contentArea) {
         const altIdKey = Object.keys(window.allDisplayableTopicsMap || {}).find(k => k.endsWith(topic.id));
         if (altIdKey) details = window.allDisplayableTopicsMap[altIdKey]?.details;
     }
+    // Equipment topics: render from Markdown, omit medication sections
+    if (details?.equipment && details?.mdPath) {
+        renderEquipmentFromMarkdown(details, contentArea, topic);
+        return;
+    }
     // Render each detail section if available, otherwise insert "No detail information" message
     if (details) {
         const sections = [ 
@@ -208,4 +213,110 @@ export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop =
 // Temporary global exposure for compatibility
 if (typeof window !== 'undefined') {
     window.renderDetailPage = renderDetailPage;
+}
+
+// -- Equipment (ZOLL EMV731) rendering helpers --
+function escapeHtml(s){
+  return String(s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+async function renderEquipmentFromMarkdown(details, contentArea, topic){
+  try {
+    const res = await fetch(details.mdPath);
+    if (!res.ok) throw new Error(`Failed to load ${details.mdPath}`);
+    const md = await res.text();
+    const { cheat, sections } = parseMdSections(md, topic.id);
+    // Insert Cheat Sheet first
+    insertEquipmentSection(contentArea, 'Cheat Sheet', cheat);
+    // Then other sections
+    sections.forEach(sec => insertEquipmentSection(contentArea, sec.title, sec.html));
+  } catch(err){
+    contentArea.insertAdjacentHTML('beforeend', `<div class="text-red-700">Unable to load content: ${escapeHtml(err.message)}</div>`);
+  }
+}
+
+function insertEquipmentSection(container, title, html){
+  const wrapper = document.createElement('div');
+  wrapper.className = 'detail-section mb-3';
+  const titleEl = document.createElement('div');
+  titleEl.className = 'detail-section-title toggle-category cursor-pointer flex items-center';
+  titleEl.innerHTML = `<svg class="arrow h-4 w-4 text-blue-600 transition-transform duration-200 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>${escapeHtml(title)}`;
+  titleEl.id = slugify(title);
+  wrapper.appendChild(titleEl);
+  const body = document.createElement('div');
+  body.className = 'detail-text hidden';
+  body.innerHTML = html;
+  wrapper.appendChild(body);
+  container.appendChild(wrapper);
+}
+
+function parseMdSections(md, topicId){
+  // Very simple parser: split by H2 headings (## )
+  const lines = md.split(/\r?\n/);
+  const sections=[]; let cur={ title: 'Overview', content: []};
+  for(const ln of lines){
+    const m = ln.match(/^##\s+(.+)/);
+    if (m){
+      if (cur.content.length) sections.push({ title: cur.title, html: renderMdBlock(cur.content) });
+      cur = { title: m[1].trim(), content: []};
+    } else {
+      cur.content.push(ln);
+    }
+  }
+  if (cur.content.length) sections.push({ title: cur.title, html: renderMdBlock(cur.content) });
+  // Cheat sheet: collect important lines
+  const cheat = renderCheatSheet(md, topicId);
+  // Reorder for Alarms to preferred sequence if present
+  if (topicId === 'zoll-emv731-alarms') {
+    const order = ['Alarm Overview','Alarm Name','Alarm Priorities','Muting Alarms','Alarm Groups','High Priority Alarms','Gas Intake Failures','High O2 Failures','Self Check Failures','Exhalation System Failures'];
+    sections.sort((a,b)=> order.indexOf(a.title) - order.indexOf(b.title));
+  }
+  return { cheat, sections };
+}
+
+function renderMdBlock(lines){
+  // Convert bullets and paragraphs into HTML
+  let html='';
+  let inList=false;
+  for(const ln of lines){
+    if (/^\s*[-*]\s+/.test(ln)){
+      if (!inList){ html += '<ul class="detail-list">'; inList=true; }
+      html += `<li>${inlineMd(ln.replace(/^\s*[-*]\s+/,''))}</li>`;
+    } else {
+      if (inList){ html += '</ul>'; inList=false; }
+      if (ln.trim().length){ html += `<p>${inlineMd(ln.trim())}</p>`; }
+    }
+  }
+  if (inList) html += '</ul>';
+  return html || '<p class="text-gray-500 italic">No content</p>';
+}
+
+function inlineMd(t){
+  // Minimal inline handling: bold **, italic *, code `
+  let s = escapeHtml(t);
+  s = s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  s = s.replace(/\*(.+?)\*/g,'<em>$1</em>');
+  s = s.replace(/`([^`]+)`/g,'<code>$1</code>');
+  return s;
+}
+
+function renderCheatSheet(md, topicId){
+  const lines = md.split(/\r?\n/);
+  const picks = [];
+  const key = /(high\s*priority|failure|failures|warning|caution|alarm|mute|muting|do not|never)/i;
+  for (const ln of lines){
+    if (key.test(ln)){
+      picks.push(ln.trim());
+      if (picks.length >= 12) break;
+    }
+  }
+  if (!picks.length){
+    // fallback: first 8 non-empty lines
+    for (const ln of lines){
+      if (ln.trim()){ picks.push(ln.trim()); if (picks.length>=8) break; }
+    }
+  }
+  return renderMdBlock(picks);
 }

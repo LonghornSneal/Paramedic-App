@@ -10,9 +10,11 @@
 export const VentilationDetailsData = [
   {
     id: 'zoll-emv731-general-information',
-    title: 'Zoll EMV731 – General Information',
+    title: 'Zoll EMV731 - General Information',
+    equipment: true,
+    mdPath: 'Content/Skills & Equipment/Zoll EMV731/general-information.md',
     class: `
-This section introduces the ZOLL EMV731 ventilator and its operator’s guide.  It
+This section introduces the ZOLL EMV731 ventilator and its operator's guide.  It
 describes the ventilator as a small, durable, full‑featured mechanical device
 designed for use in hospitals as well as harsh and under‑resourced environments.  The
 operator’s guide explains how to use and care for the ventilator safely and
@@ -31,7 +33,9 @@ and instructions for obtaining manual updates are also included.
   },
   {
     id: 'zoll-emv731-product-overview',
-    title: 'Zoll EMV731 – Product Overview',
+    title: 'Zoll EMV731 - Product Overview',
+    equipment: true,
+    mdPath: 'Content/Skills & Equipment/Zoll EMV731/product-overview.md',
     class: `
 This overview summarises the available EMV731 models – AEV, EMV+ and Eagle II –
 and their intended applications in prehospital, transport and hospital settings.  It
@@ -50,7 +54,9 @@ ventilator circuits, pulse oximeter and power sources.
   },
   {
     id: 'zoll-emv731-setting-up-the-ventilator',
-    title: 'Zoll EMV731 – Setting Up the Ventilator',
+    title: 'Zoll EMV731 - Setting Up the Ventilator',
+    equipment: true,
+    mdPath: 'Content/Skills & Equipment/Zoll EMV731/setting-up-ventilator.md',
     class: `
 This section provides step‑by‑step instructions for preparing the ventilator for use.
 Key tasks include attaching the ventilator circuit, optionally connecting a high‑pressure
@@ -73,7 +79,9 @@ chemical/biological filters.
   },
   {
     id: 'zoll-emv731-using-the-ventilator',
-    title: 'Zoll EMV731 – Using the Ventilator',
+    title: 'Zoll EMV731 - Using the Ventilator',
+    equipment: true,
+    mdPath: 'Content/Skills & Equipment/Zoll EMV731/using-ventilator.md',
     class: `
 This chapter explains operation of the EMV731.  It describes the graphical user
 interface with parameter windows for Mode, Breaths Per Minute (BPM), Tidal Volume
@@ -95,7 +103,9 @@ managing alarms and notifications.
   },
   {
     id: 'zoll-emv731-alarms',
-    title: 'Zoll EMV731 – Alarms',
+    title: 'Zoll EMV731 - Alarms',
+    equipment: true,
+    mdPath: 'Content/Skills & Equipment/Zoll EMV731/alarms.md',
     class: `
 This section details the ventilator’s Smart Help alarm system.  The ventilator
 continuously monitors patient status, device performance and environmental conditions.
@@ -116,7 +126,9 @@ technical support.
   },
   {
     id: 'zoll-emv731-operating-environments',
-    title: 'Zoll EMV731 – Operating Environments',
+    title: 'Zoll EMV731 - Operating Environments',
+    equipment: true,
+    mdPath: 'Content/Skills & Equipment/Zoll EMV731/operating-environments.md',
     class: `
 Guidelines in this chapter address operating the ventilator in environments outside
 of the typical hospital setting.  For harsh prehospital and transport environments it
@@ -138,7 +150,9 @@ ventilator is not intended for use in hyperbaric chambers.
   },
   {
     id: 'zoll-emv731-maintenance',
-    title: 'Zoll EMV731 – Maintenance',
+    title: 'Zoll EMV731 - Maintenance',
+    equipment: true,
+    mdPath: 'Content/Skills & Equipment/Zoll EMV731/maintenance.md',
     class: `
 This chapter outlines maintenance procedures to ensure the ventilator remains ready for
 use.  It recommends regular inspection for cleanliness, damage and wear on the unit,
@@ -159,7 +173,9 @@ personnel using the RCS system.
   },
   {
     id: 'zoll-emv731-specifications',
-    title: 'Zoll EMV731 – Specifications',
+    title: 'Zoll EMV731 - Specifications',
+    equipment: true,
+    mdPath: 'Content/Skills & Equipment/Zoll EMV731/specifications.md',
     class: `
 This appendix summarises the ventilator’s technical specifications.  It lists the
 operating modes available on the EMV+ and Eagle II models (Assist/Control,
@@ -181,7 +197,9 @@ pressure (MAP) are also provided.
   },
   {
     id: 'zoll-emv731-accessories',
-    title: 'Zoll EMV731 – Accessories',
+    title: 'Zoll EMV731 - Accessories',
+    equipment: true,
+    mdPath: 'Content/Skills & Equipment/Zoll EMV731/accessories.md',
     class: `
 This appendix enumerates accessories available for the ventilator, including AC/DC
 power supplies, various power cords for different regions, battery packs, extension
@@ -201,7 +219,9 @@ ensuring appropriate circuit connections for different patient sizes.
   },
   {
     id: 'zoll-emv731-pulse-oximeter-principles',
-    title: 'Zoll EMV731 – Pulse Oximeter Principles',
+    title: 'Zoll EMV731 - Pulse Oximeter Principles',
+    equipment: true,
+    mdPath: 'Content/Skills & Equipment/Zoll EMV731/pulse-oximeter-principles.md',
     class: `
 This appendix explains the operating principles of the Masimo SET pulse oximeter used
 with the ventilator.  Pulse oximetry relies on two phenomena: oxyhemoglobin and
@@ -222,7 +242,9 @@ every two seconds, enhancing accuracy in the presence of motion or low perfusion
   },
   {
     id: 'zoll-emv731-patient-circuits',
-    title: 'Zoll EMV731 – Patient Circuits',
+    title: 'Zoll EMV731 - Patient Circuits',
+    equipment: true,
+    mdPath: 'Content/Skills & Equipment/Zoll EMV731/patient-circuits.md',
     class: `
 This appendix describes the ventilator’s patient circuits.  It covers single‑limb,
 Wye circuits for pediatric/adult patients in 6 ft and 12 ft lengths and for
