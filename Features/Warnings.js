@@ -21,7 +21,7 @@ function getAllergyWarning(topic, patientData) {
     return `
       <div class="warning-box warning-box-red mb-2">
         <div class="flex items-start">
-          ${createWarningIcon('red-600')}
+          ${createWarningIcon('text-red-600')}
           <span>Allergy Alert: Patient has a known allergy to ${topic.title}.</span>
         </div>
       </div>`;
@@ -38,7 +38,7 @@ function getPDE5Warning(topic, patientData) {
     return `
       <div class="warning-box warning-box-red mb-2">
         <div class="flex items-start">
-          ${createWarningIcon('red-600')}
+          ${createWarningIcon('text-red-600')}
           <span>Contraindication: Patient has recently taken ${medDisplay} (PDE5 inhibitor) – do not administer ${topic.title}.</span>
         </div>
       </div>`;
@@ -55,7 +55,7 @@ function getLowBPWarning(topic, patientData) {
         return `
           <div class="warning-box warning-box-red mb-2">
             <div class="flex items-start">
-              ${createWarningIcon('red-600')}
+              ${createWarningIcon('text-red-600')}
               <span>Contraindication: Patient’s blood pressure (${systolic} mmHg) is below the recommended minimum for ${topic.title}.</span>
             </div>
           </div>`;
@@ -74,7 +74,7 @@ function getGeneralContraindicationsWarning(topic) {
         warnings += `
           <div class="warning-box warning-box-red mb-2">
             <div class="flex items-start">
-              ${createWarningIcon('red-600')}
+              ${createWarningIcon('text-red-600')}
               <span>Contraindication: ${ci}.</span>
             </div>
           </div>`;
@@ -83,7 +83,7 @@ function getGeneralContraindicationsWarning(topic) {
 }
 
 // (Optional) Age warnings: future support for age ranges, if defined in data
-//function getAgeWarning(topic, patientData) {
+function getAgeWarning(topic, patientData) {
     if (!patientData || patientData.age == null) return '';
     const med = window.medicationDataMap?.[topic.id];
     if (!med || !med.ageRange) return '';
@@ -93,13 +93,13 @@ function getGeneralContraindicationsWarning(topic) {
         return `
           <div class="warning-box warning-box-yellow mb-2">
             <div class="flex items-start">
-              ${createWarningIcon('yellow-600')}
-              <span>Caution: ${topic.title} is recommended for ages ${min}–${max} years.</span>
+              ${createWarningIcon('text-yellow-600')}
+              <span>Caution: ${topic.title} is recommended for ages ${min}-${max} years.</span>
             </div>
           </div>`;
     }
     return '';
-//}
+}
 
 // Main function: collate all warnings
 export function appendTopicWarnings(topic, patientData) {

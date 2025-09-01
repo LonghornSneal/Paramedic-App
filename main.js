@@ -6,7 +6,13 @@ import { attachNavHandlers } from './Features/navigation/Navigation.js';
 import { attachHomeHandler } from './Features/navigation/Home.js';
 import { renderInitialView } from './Features/list/ListView.js';
 import { renderDetailPage } from './Features/detail/DetailPage.js';
-import { pmhSuggestions, allergySuggestions, medicationNameSuggestions, indicationSuggestions, symptomSuggestions, PDE5_INHIBITORS } from './Features/patient/PatientInfo.js';
+import { pmhSuggestions, 
+         allergySuggestions, 
+         medicationNameSuggestions, 
+         indicationSuggestions, 
+         symptomSuggestions, 
+         PDE5_INHIBITORS 
+        } from './Features/patient/PatientInfo.js';
 import { setupAutocomplete } from './Features/patient/Autocomplete.js';
 import { attachSearchHandlers, processItem } from './Features/search/Search.js';
 import './Features/History.js';
@@ -15,13 +21,20 @@ import { escapeHTML } from './Utils/escapeHTML.js';
 import { setupSlugAnchors } from './Features/anchorNav/slugAnchors.js';
 
 // --- Global Variables ---
-let searchInput, patientSidebar, contentArea, openSidebarButton, closeSidebarButton, sidebarOverlay, navBackButton, navForwardButton, navHomeButton, settingsButton, settingsPanel;
+let searchInput, 
+    patientSidebar, 
+    contentArea, 
+    openSidebarButton, 
+    closeSidebarButton, 
+    sidebarOverlay, 
+    navBackButton, 
+    navForwardButton, 
+    navHomeButton, 
+    settingsButton, 
+    settingsPanel;
 let medicationDataMap = {};
 let allDisplayableTopicsMap = {};
-let paramedicCategories = []; // This must be a global var!
-
-
-
+let paramedicCategories = [];
 
 // Assigns key UI elements to global variables for easy access.
  function assignDomElements() {
@@ -60,12 +73,10 @@ function initApp() {
     window.navHomeButton = navHomeButton;
     window.settingsButton = settingsButton;
     window.settingsPanel = settingsPanel;
-    window.paramedicCategories     = paramedicCategories;
-    window.medicationDataMap       = medicationDataMap;
-    window.allDisplayableTopicsMap = allDisplayableTopicsMap;
 
 // Now that medicationDataMap exists, build the class dropdown
-insertMedicationClassDropdown();
+//insertMedicationClassDropdown();
+
     // Ensure overlay starts hidden
     attachNavHandlers();
     if (sidebarOverlay) {
@@ -113,7 +124,7 @@ insertMedicationClassDropdown();
     if (ParamedicCategoriesData && MedicationDetailsData) {
         initializeData(ParamedicCategoriesData, MedicationDetailsData);
     } else {
-        console.error("Category or medication data not loaded!");
+        console.error('Category or medication data not loaded!');
     } 
         // After data initialization, expose data maps globally for now
     window.paramedicCategories = paramedicCategories;
@@ -126,10 +137,13 @@ insertMedicationClassDropdown();
     setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions);
     setupAutocomplete('pt-indications','pt-indications-suggestions', indicationSuggestions);
     setupAutocomplete('pt-symptoms','pt-symptoms-suggestions', symptomSuggestions);
+
     // Render the initial patient snapshot once the dropdown is ready
     if (typeof window.renderPatientSnapshot === 'function') {
         window.renderPatientSnapshot();
     }
+
+
     // Add focus highlight to all textareas and inputs
     document.querySelectorAll('textarea, input').forEach(el => {
         el.addEventListener('focus', () => el.classList.add('ring', 'ring-blue-300'));
@@ -139,53 +153,6 @@ insertMedicationClassDropdown();
     renderInitialView(true); 
 }
 
-// Initializes global data structures for categories and medications.
-function initializeData(categoriesData, medDetailsData) {
-    paramedicCategories = categoriesData;    // /Assign the global category array
-    // Wipe/prepare lookup maps
-    allDisplayableTopicsMap = {};
-    // Make sure the global map exists BEFORE processItem uses it
-    window.allDisplayableTopicsMap = allDisplayableTopicsMap;
-    //allSearchableTopics = []; //  //maybe need still maybe not
-     //Build med details map for quick lookups
-    medicationDataMap = {};
-//    if (Array.isArray(medDetailsData)) { 
-//        medDetailsData.forEach(med => { 
-//            medicationDataMap[med.id] = med; 
-//        });
-
-
-
-
-    // ✅ Ensure the global map is set *before* processing items
-    window.medicationDataMap = medicationDataMap; 
-
-        // Merge medication and ventilation details into a single map.  This ensures that
-    // topics defined under the ventilation category have matching details entries.
-    const detailsDataMap = {};
-    [...MedicationDetailsData, ...VentilationDetailsData].forEach(item => {
-      detailsDataMap[item.id] = item;
-    });
-//    } else if (medDetailsData && typeof medDetailsData === 'object') { 
-//        Object.assign(medicationDataMap, medDetailsData); 
-//    }
-
-    // populate allDisplayableTopicsMap safely
-    categoriesData.forEach(cat => processItem(cat));
-
-    // Pass the merged details map to processItem so detail pages can find topic details.
-    categories.forEach(item => processItem(item, allDisplayableTopicsMap, detailsDataMap));
-
-function stripMarkup(str) {
-    if (typeof str !== 'string') return '';
-    return str.replace(/\[\[(.+?)\|(.+?)\]\]/g, '$1');
-}
-
-/**
- * Insert the Medication Class dropdown into the patient sidebar.  Gathers all
- * unique classes from `window.medicationDataMap` and dispatches a custom
- * event once inserted so that PatientInfo can attach listeners.
- */
 function insertMedicationClassDropdown() {
     const sidebar = document.getElementById('patient-sidebar');
     if (!sidebar) return;
@@ -230,7 +197,7 @@ function insertMedicationClassDropdown() {
     section.appendChild(select);
 
     // Insert the new section right after the current medications section, if present
-    const medsSection = sidebar.querySelector('[id=\"pt-medications\"]')?.closest('.sidebar-section');
+    const medsSection = sidebar.querySelector('#pt-medications')?.closest('.sidebar-section');
     if (medsSection) {
         medsSection.insertAdjacentElement('afterend', section);
     } else {
@@ -241,11 +208,84 @@ function insertMedicationClassDropdown() {
     document.dispatchEvent(new Event('medClassInserted'));
 }
 
+function stripMarkup(str) {
+    if (typeof str !== 'string') return '';
+    return str.replace(/\[\[(.+?)\|(.+?)\]\]/g, '$1');
+}
+
+// Initializes global data structures for categories and medications.
+function initializeData(categoriesData, medDetailsData) { // /Assign the global category array
+    paramedicCategories = categoriesData;
+    // Reset maps
+    allDisplayableTopicsMap = {};
+    // Make sure the global map exists BEFORE processItem uses it
+    window.allDisplayableTopicsMap = allDisplayableTopicsMap;
+//allSearchableTopics = []; //  //maybe need still maybe not
+     //Build med details map for quick lookups
+    medicationDataMap = {};
+      // Build the medicationDataMap by merging medication and ventilation details.  This map
+    // is used by the search/indexing code to attach detail information to each topic.
+    [...MedicationDetailsData, ...VentilationDetailsData].forEach(item => {
+        medicationDataMap[item.id] = item;
+    });
+    // ✅ Ensure the global map is set *before* processing items
+    window.medicationDataMap = medicationDataMap; 
+    // Build the searchable index and allDisplayableTopicsMap using the provided categories
+//    categoriesData.forEach(cat => processItem(cat));
+
+
+
+        // Details merged above; no separate map required.
+
+    // Populate allDisplayableTopicsMap safely and build the searchable index
+    categoriesData.forEach(cat => processItem(cat));
+    // Build the medication class dropdown now that details are available
+    insertMedicationClassDropdown();
+
+
+
+/**
+ * Insert the Medication Class dropdown into the patient sidebar.  Gathers all
+ * unique classes from `window.medicationDataMap` and dispatches a custom
+ * event once inserted so that PatientInfo can attach listeners.
+ */
+
+
 
     // Load common suggestion terms into suggestion sets
-    const commonPmh = ["hypertension","htn","diabetes","dm","asthma","copd","heart failure","hf","cad","stroke","cva","seizure disorder","renal insufficiency","ckd","hypothyroidism","hyperthyroidism","glaucoma","peptic ulcer","anxiety","depression"];
-    const commonAllergies = ["penicillin","sulfa","aspirin","nsaids","morphine", "codeine","iodine","shellfish","latex","peanuts","tree nuts"];
-    const commonMedNames  = ["lisinopril","metformin","atorvastatin","amlodipine","hydrochlorothiazide","hctz","simvastatin","albuterol","levothyroxine","gabapentin","omeprazole","losartan","sertraline","furosemide","lasix","insulin","warfarin","coumadin","aspirin","clopidogrel","plavix"];
+    const commonPmh = ['hypertension','htn',
+                       'diabetes','dm',
+                       'asthma','copd',
+                       'heart failure','hf',
+                       'cad',
+                       'stroke','cva',
+                       'seizure disorder',
+                       'renal insufficiency','ckd',
+                       'hypothyroidism',
+                       'hyperthyroidism',
+                       'glaucoma',
+                       'peptic ulcer',
+                       'anxiety',
+                       'depression'];
+    const commonAllergies = ['penicillin','sulfa',
+                             'aspirin','nsaids',
+                             'morphine', 'codeine',
+                             'iodine','shellfish','latex',
+                             'peanuts','tree nuts'];
+    const commonMedNames  = ['lisinopril','metformin',
+                             'atorvastatin',
+                             'amlodipine',
+                             'hydrochlorothiazide','hctz',
+                             'simvastatin',
+                             'albuterol',
+                             'levothyroxine',
+                             'gabapentin',
+                             'omeprazole',
+                             'losartan',
+                             'sertraline',
+                             'furosemide','lasix',
+                             'insulin',
+                             'warfarin','coumadin','aspirin','clopidogrel','plavix'];
     // Add these common terms to the suggestion sets (defined in PatientInfo.js)
     commonPmh.forEach(term => pmhSuggestions.add(term));
     commonAllergies.forEach(term => allergySuggestions.add(term));
@@ -256,14 +296,15 @@ function insertMedicationClassDropdown() {
         if (med.contraindications && Array.isArray(med.contraindications)) {
             med.contraindications.forEach(ci => { 
                 const ciLower = ci.toLowerCase();
-                if (ciLower.includes("hypersensitivity") || ciLower.includes("allergy to")) {    // Derive a generalized allergen term from text
-                    let allergen = ciLower.replace("known hypersensitivity to", "")
-                                          .replace("allergy to any nsaid (including asa)", "nsaid allergy")
-                                          .replace("allergy to", "").trim();
-                    if (allergen.includes("local anesthetic allergy in the amide class")) { 
-                        allergen = "amide anesthetic allergy";
-                    } else if (allergen.includes("nsaid (including asa)")) {
-                        allergen = "nsaid allergy";
+                if (ciLower.includes('hypersensitivity') || ciLower.includes('allergy to')) {    // Derive a generalized allergen term from text
+                    let allergen = ciLower.replace('known hypersensitivity to', '')
+                                          .replace('allergy to any nsaid (including asa)', 'nsaid allergy')
+                                          .replace('allergy to', '')
+                                          .trim();
+                    if (allergen.includes('local anesthetic allergy in the amide class')) { 
+                        allergen = 'amide anesthetic allergy';
+                    } else if (allergen.includes('nsaid (including asa)')) {
+                        allergen = 'nsaid allergy';
                     } else { 
                         allergen = allergen.split('(')[0].trim(); 
                     }

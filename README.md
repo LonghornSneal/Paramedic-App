@@ -501,16 +501,16 @@ All these components work together to provide a seamless experience: The data pr
 **This section provides a list of tasks that must be worked on now unless explicitly told otherwise. Once this section is empty, proceed to the “CURRENT TASKS/GOALS” section in this README for additional tasks.**
 
 
-  Currently the app will load the main contents page, but when the user clicks to open up the medication details, either no information is dispalyed, or a contraindication warning appears. This task must be completed first before the rest of the app's functionality is able to be tested properly.
+  FIXED (Sept 1, 2025): The detail page now renders correctly when a topic is selected. Root causes were invalid initialization in `main.js` and a broken `Features/Warnings.js` module. We cleaned up data map building, implemented `getAgeWarning`, and corrected event wiring so details display reliably.
 
 
-Settings: Dark Mode needs adjusted. Need to have various sliders that are accessible in Settings that allow the user to customize how the looks with examples of what the slider affects next to the slider. These examples next to the slider change in real time as the user moves the slider.
+Settings: Dark Mode improvements in progress. Added a brightness slider (persists with `localStorage`) and fixed CSS so dark mode styles apply correctly. A live preview is shown beside the slider.
 
 
-Medications in the Patient Info section needs to include all of the Class options from all of the medications in the app. These Class options should be selectable in the drop down menu.
+FIXED (Sept 1, 2025): The Patient Info section now includes a Medication Class dropdown populated from all medication classes in the data. It updates suggestions and filters context.
 
 
-"Pt Info Snapshot" needs to be coded.
+FIXED (Sept 1, 2025): Patient Info Snapshot implemented (`Features/patient/PatientSnapshot.js`) and rendered on load and after changes.
 
 
   Contraindication Warnings:     
@@ -616,7 +616,18 @@ Fixed medication detail pages not loading by assigning `window.medicationDataMap
 
 Search bar input no longer pollutes navigation history; only committed searches are stored.
 
-Added default indication suggestions (“MI”, “ACS”, “Bronchospasm”, “Hypoglycemia”, “Asthma”). 
+Added default indication suggestions ("MI", "ACS", "Bronchospasm", "Hypoglycemia", "Asthma"). 
+
+
+Sept 1, 2025 — App stabilization and UI polish
+
+- Detail Rendering: Fixed `main.js` data wiring and `Features/Warnings.js` so medication/equipment details load reliably; implemented `getAgeWarning`.
+- Navigation/Home: Hooked up Home button handler to reset to the Contents view.
+- Medication Classes: Added dynamic Medication Class dropdown (built from data) in Patient Info; wired change listener.
+- Patient Snapshot: Implemented snapshot card and render on load and on any patient data update.
+- Autocomplete Seeds: Cleaned up common medication list and added PDE5 inhibitors.
+- Settings/Dark Mode: Corrected invalid CSS and added a brightness slider with live preview and persistence.
+- CSS Cleanup: Fixed focus ring styling, arrow alignment, and removed invalid nested rules to prevent style parsing issues.
 
 
 ## 9. TIMELINE SUMMARY

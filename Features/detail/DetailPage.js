@@ -11,14 +11,20 @@ import { setupSlugAnchors } from '../anchorNav/slugAnchors.js';
 import { slugify } from '../../Utils/slugify.js';
 // Converts special markup in text (e.g. **bold**, [[display|info]]) into formatted HTML, and escapes HTML characters.
 function parseTextMarkup(text) {
-    let safeText = text.replace(/&/g, "&amp;")
-                       .replace(/</g, "&lt;")
-                       .replace(/>/g, "&gt;");
-    safeText = safeText.replace(/\n/g, "<br>");
+    let safeText = text
+        .toString()
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    safeText = safeText.replace(/\n/g, ' ');
     // Replace [[display|info]] with a toggle-able info span including an arrow icon and hidden info text
     safeText = safeText.replace(/\[\[(.+?)\|(.+?)\]\]/g,
-        (_, display, info) => `<span class="toggle-info"><svg class="arrow h-4 w-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>${display}<span class="info-text hidden">${info}</span></span>`);
-    // Replace custom markup for colored/underlined text
+        (_, display, info) => {
+            return `<span class="toggle-info"><svg class="arrow h-4 w-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>${display}<span class="info-text hidden">${info}</span></span>`;
+        });
+            // Replace custom markup for colored/underlined text
     safeText = safeText.replace(/\{\{red:(.+?)\}\}/g, (_, t) => `<span class="text-red-600 font-semibold">${t}</span>`);
     safeText = safeText.replace(/\{\{redul:(.+?)\}\}/g, (_, t) => `<span class="text-red-600 font-semibold underline decoration-red-600">${t}</span>`);
     safeText = safeText.replace(/\{\{orange:(.+?)\}\}/g, (_, t) => `<span class="text-orange-600">${t}</span>`);

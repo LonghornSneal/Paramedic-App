@@ -60,8 +60,8 @@ body.dark-mode .snapshot-card {
   .sidebar-section-title { font-size: 1.125rem; font-weight: 600; color: #2563eb; margin-bottom: 0.5rem; }
 /* Form inputs in sidebar */
   .sidebar-input:focus { width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; 
-    border-radius: 0.875rem; font-size: 0.875rem; line-height: 1.25rem; outline: none; }
-  .sidebar-input:focus:focus { box-shadow: 0 0 0 2px #3b82f6 border-color #3b82f6; }
+    border-radius: 0.875rem; font-size: 0.875rem; line-height: 1.25rem; outline: none; 
+    box-shadow: 0 0 0 2px #3b82f6; border-color: #3b82f6; }
   .sidebar-label { display: block; font-size: 0.875rem; line-height: 1.25rem;
     font-weight: 500; color: #374151; margin-bottom: 0.25rem; }
 
@@ -129,27 +129,10 @@ body.dark-mode .snapshot-card {
                    font-size: 1.5rem;
                    animation: textColorTransition 2s ease-in-out infinite; }
 #settings-panel { z-index: 110; }
-/* //body.dark-mode { background-color: #638dd2; color: #1279e1; } 
 /* When dark mode is active, apply a CSS variable for brightness (default 1). */
-body.dark-mode {
-  --brightness: 1;
-  filter: brightness(var(--brightness));
-  header { background-color: #db5cd3; }
-  #content-area { background-color: #5c90e3; }
-  #content-area, body.dark-mode p, body.dark-mode li, body.dark-mode span { color: #ce12be; }
-  footer { background-color: #1f2937; color: #05a141;
-    .detail-text { color: #05a141; }
-  }
-}
-
-/* body.dark-mode header { background-color: #db5cd3; }
+body.dark-mode { --brightness: 1; filter: brightness(var(--brightness)); }
+body.dark-mode header { background-color: #db5cd3; }
 body.dark-mode #content-area { background-color: #5c90e3; }
 body.dark-mode #content-area, body.dark-mode p, body.dark-mode li, body.dark-mode span { color: #ce12be; }
-body.dark-mode footer { background-color: #1f2937; color: #9ca3af; }
-}
-  /* 🎨 Dark‑mode adjustments 
-  body.dark-mode .detail-list, 
-  body.dark-mode .detail-text {
-    color: #f9fafb;
-  } */
-
+body.dark-mode footer { background-color: #1f2937; color: #05a141; }
+body.dark-mode .detail-text { color: #05a141; }
