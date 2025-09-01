@@ -15,7 +15,7 @@
 import { renderPatientSnapshot } from './PatientSnapshot.js';
 
 export const patientData = {
-    age: null, weight: null, weightUnit: 'kg',
+    age: null, weight: null, weightUnit: 'kg', gender: '',
     pmh: [], allergies: [], currentMedications: [], indications: [], symptoms: [],
     vitalSigns: {
         bp: '', hr: null, spo2: null, etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: ''
@@ -155,6 +155,7 @@ function synchronizeWeights(source) {
  * strikeouts based on the patient’s age. Weight handling has been updated to support dual inputs
  */
 function updatePatientData() {
+    patientData.gender = getInputValue('pt-gender');
     patientData.age = getParsedInt('pt-age');
     // Weight: determine which input has data. Prefer kilograms if both exist. We always store weight
     // internally in kilograms for dosing calculations. If neither field has a valid value, weight is

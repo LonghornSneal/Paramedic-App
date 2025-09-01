@@ -132,6 +132,9 @@ body.dark-mode .snapshot-card {
 #settings-panel { z-index: 110; }
 /* When dark mode is active, apply brightness filter using the root variable. */
 body.dark-mode { filter: brightness(var(--brightness)); }
+/* Snapshot bar styling */
+#patient-snapshot-bar { min-height: 1.5rem; }
+body.dark-mode #patient-snapshot-bar { color: #e5e7eb; }
 /* Sane dark mode palette */
 /* Keep header blue (Tailwind), focus on content readability */
 body.dark-mode #content-area { background-color: #111827; }
