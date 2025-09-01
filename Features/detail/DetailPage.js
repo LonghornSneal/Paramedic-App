@@ -228,6 +228,26 @@ async function renderEquipmentFromMarkdown(details, contentArea, topic){
     if (!res.ok) throw new Error(`Failed to load ${details.mdPath}`);
     const md = await res.text();
     const { cheat, sections } = parseMdSections(md, topic.id);
+    if (details.originalPdf) {
+      const embedId = `pdf-embed-${slugify(topic.id)}`;
+      const btnId = `pdf-toggle-${slugify(topic.id)}`;
+      const toolbar = document.createElement('div');
+      toolbar.className = 'mb-3 flex items-center gap-2';
+      toolbar.innerHTML = `
+        <a href="${details.originalPdf}" target="_blank" rel="noopener" class="text-blue-600 underline">Open Original PDF</a>
+        <button id="${btnId}" class="text-sm px-2 py-1 border rounded text-blue-600 border-blue-300 hover:bg-blue-50">View Inline</button>
+        <div id="${embedId}" class="hidden w-full"><object data="${details.originalPdf}" type="application/pdf" width="100%" height="640px"></object></div>
+      `;
+      contentArea.appendChild(toolbar);
+      const btn = toolbar.querySelector('#'+btnId);
+      const embed = toolbar.querySelector('#'+embedId);
+      if (btn && embed) {
+        addTapListener(btn, () => {
+          embed.classList.toggle('hidden');
+          btn.textContent = embed.classList.contains('hidden') ? 'View Inline' : 'Hide PDF';
+        });
+      }
+    }
     // Insert Cheat Sheet first (prefer curated if present on details)
     const cheatHtml = details.cheat && Array.isArray(details.cheat) && details.cheat.length
       ? renderMdBlock(details.cheat)
@@ -268,7 +288,7 @@ function insertEquipmentSection(container, title, html){
 function parseMdSections(md, topicId){
   // Very simple parser: split by H2 headings (## )
   const lines = md.split(/\r?\n/);
-  const sections=[]; let cur={ title: 'Overview', content: []};
+  const sections=[]; let cur={ title: 'Original Documentation', content: []};
   for(const ln of lines){
     const m = ln.match(/^##\s+(.+)/);
     if (m){
@@ -283,7 +303,7 @@ function parseMdSections(md, topicId){
   const cheat = renderCheatSheet(md, topicId);
   // Reorder for Alarms to preferred sequence if present
   if (topicId === 'zoll-emv731-alarms') {
-    const order = ['Alarm Overview','Alarm Name','Alarm Priorities','Muting Alarms','Alarm Groups','High Priority Alarms','Gas Intake Failures','High O2 Failures','Self Check Failures','Exhalation System Failures'];
+    const order = ['Original Documentation','Alarm Overview','Alarm Name','Alarm Priorities','Muting Alarms','Alarm Groups','High Priority Alarms','Gas Intake Failures','High O2 Failures','Self Check Failures','Exhalation System Failures'];
     sections.sort((a,b)=> order.indexOf(a.title) - order.indexOf(b.title));
   }
   return { cheat, sections };
@@ -322,6 +342,10 @@ function inlineMd(t){
   s = s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
   s = s.replace(/\*(.+?)\*/g,'<em>$1</em>');
   s = s.replace(/`([^`]+)`/g,'<code>$1</code>');
+  // Images ![alt](src)
+  s = s.replace(/!\[([^\]]*)\]\(([^\)]+)\)/g, (m,alt,src)=> `<img src="${src}" alt="${escapeHtml(alt)}" class="max-w-full inline-block" />`);
+  // Links [text](href)
+  s = s.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, (m,text,href)=> `<a href="${href}" class="text-blue-600 underline" target="_blank" rel="noopener">${escapeHtml(text)}</a>`);
   return s;
 }
 

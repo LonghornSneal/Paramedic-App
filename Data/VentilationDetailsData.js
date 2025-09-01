@@ -13,6 +13,7 @@ export const VentilationDetailsData = [
     title: 'Zoll EMV731 - General Information',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/general-information.md',
+    originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf',
     cheat: [
       'Read Warnings/Cautions thoroughly before use.',
       'Portable, rugged, full-featured ventilator for prehospital/transport.',
@@ -43,6 +44,7 @@ and instructions for obtaining manual updates are also included.
     title: 'Zoll EMV731 - Product Overview',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/product-overview.md',
+    originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf',
     cheat: [
       'Models: AEV, EMV+, Eagle II — transport/hospital/prehospital.',
       'Rugged, lightweight; internal compressor, long-life battery, daylight-visible GUI.',
@@ -71,6 +73,7 @@ ventilator circuits, pulse oximeter and power sources.
     title: 'Zoll EMV731 - Setting Up the Ventilator',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/setting-up-ventilator.md',
+    originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf',
     cheat: [
       'Never start ventilator with patient attached; be ready to bag.',
       'Attach circuit; optionally connect high-pressure O2; verify filters/accessories.',
@@ -103,6 +106,7 @@ chemical/biological filters.
     title: 'Zoll EMV731 - Using the Ventilator',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/using-ventilator.md',
+    originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf',
     cheat: [
       'GUI shows parameter windows for Mode, BPM, VT, PIP, FIO2, SpO2, HR.',
       'Single press = primary; multiple = secondary/alarm; press/hold = context menu.',
@@ -134,6 +138,7 @@ managing alarms and notifications.
     title: 'Zoll EMV731 - Alarms',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/alarms.md',
+    originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf',
     cheat: [
       'Alarm Message Center (AMC) shows name, mitigation steps, if-not-resolved steps.',
       'High Priority: ventilation under user control not possible — immediate action; cannot mute.',
@@ -168,6 +173,7 @@ technical support.
     title: 'Zoll EMV731 - Operating Environments',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/operating-environments.md',
+    originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf',
     cheat: [
       'Confirm temperature, barometric pressure, and altitude are within device specs.',
       'Monitor device and ambient temperature; avoid overheating/condensation.',
@@ -197,6 +203,7 @@ ventilator is not intended for use in hyperbaric chambers.
     title: 'Zoll EMV731 - Maintenance',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/maintenance.md',
+    originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf',
     cheat: [
       'Follow preventive maintenance schedule; heed PM alarms.',
       'Inspect/replace filters and accessories per schedule; check exhalation valve diaphragm.',
@@ -225,6 +232,7 @@ personnel using the RCS system.
     title: 'Zoll EMV731 - Specifications',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/specifications.md',
+    originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf',
     cheat: [
       'Know operational ranges: flow rate, BPM, VT, FIO2, PEEP/EPAP, PIP, pressure support.',
       'Max PIP ~80 cmH2O; pressure support up to 60 cmH2O; O2 input ~55 psig.',
@@ -254,6 +262,7 @@ pressure (MAP) are also provided.
     title: 'Zoll EMV731 - Accessories',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/accessories.md',
+    originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf',
     cheat: [
       'AC/DC supplies, region-specific power cords, battery packs/cables.',
       'Carrying cases, bacterial/viral filters, HMEs, compressor foam filters.',
@@ -281,6 +290,7 @@ ensuring appropriate circuit connections for different patient sizes.
     title: 'Zoll EMV731 - Pulse Oximeter Principles',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/pulse-oximeter-principles.md',
+    originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf',
     cheat: [
       'SpO2 relies on differential absorption (red 660nm, IR 905nm) and pulsatile volume.',
       'Masimo SET separates arterial signal from noise (motion/low perfusion) for accuracy.',
@@ -309,6 +319,7 @@ every two seconds, enhancing accuracy in the presence of motion or low perfusion
     title: 'Zoll EMV731 - Patient Circuits',
     equipment: true,
     mdPath: 'Content/Skills & Equipment/Zoll EMV731/patient-circuits.md',
+    originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf',
     cheat: [
       'Choose correct single-limb Wye circuit (adult/ped/infant; 6 or 12 ft).',
       'Maintain PEEP ≥ 5 cmH2O; correct for compressible volume; beware long circuits.',
