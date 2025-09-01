@@ -87,9 +87,15 @@ function appendTopicDetails(topic, contentArea) {
         const altIdKey = Object.keys(window.allDisplayableTopicsMap || {}).find(k => k.endsWith(topic.id));
         if (altIdKey) details = window.allDisplayableTopicsMap[altIdKey]?.details;
     }
-    // Equipment topics: render from Markdown, omit medication sections
-    if (details?.equipment && details?.mdPath) {
-        renderEquipmentFromMarkdown(details, contentArea, topic);
+    // Equipment topics:
+    // - If mdPath provided: render Cheat Sheet + sections from Markdown and include PDF tools
+    // - If only originalPdf provided: render a PDF-only section
+    if (details?.equipment) {
+        if (details.mdPath) {
+            renderEquipmentFromMarkdown(details, contentArea, topic);
+        } else if (details.originalPdf) {
+            renderOriginalPdfSection(details, contentArea, topic);
+        }
         return;
     }
     // Render each detail section if available, otherwise insert "No detail information" message
@@ -247,8 +253,30 @@ async function renderEquipmentFromMarkdown(details, contentArea, topic){
           embed.classList.toggle('hidden');
           btn.textContent = embed.classList.contains('hidden') ? 'View Inline' : 'Hide PDF';
         });
-      }
     }
+}
+
+function renderOriginalPdfSection(details, contentArea, topic){
+  const pdfUrl = details.pdfPage ? `${details.originalPdf}#page=${details.pdfPage}` : details.originalPdf;
+  const embedId = `pdf-embed-${slugify(topic.id)}-only`;
+  const btnId = `pdf-toggle-${slugify(topic.id)}-only`;
+  const html = `
+    <div class="mb-2">
+      <a href="${pdfUrl}" target="_blank" rel="noopener" class="text-blue-600 underline">Open Original PDF</a>
+      <button id="${btnId}" class="ml-2 text-sm px-2 py-1 border rounded text-blue-600 border-blue-300 hover:bg-blue-50">View Inline</button>
+    </div>
+    <div id="${embedId}" class="hidden w-full"><object data="${pdfUrl}" type="application/pdf" width="100%" height="640px"></object></div>
+  `;
+  insertEquipmentSection(contentArea, 'Original Documentation', html);
+  const btn = document.getElementById(btnId);
+  const embed = document.getElementById(embedId);
+  if (btn && embed) {
+    addTapListener(btn, () => {
+      embed.classList.toggle('hidden');
+      btn.textContent = embed.classList.contains('hidden') ? 'View Inline' : 'Hide PDF';
+    });
+  }
+}
     // Insert Cheat Sheet first (prefer curated if present on details)
     const cheatHtml = details.cheat && Array.isArray(details.cheat) && details.cheat.length
       ? renderMdBlock(details.cheat)
@@ -289,7 +317,7 @@ function insertEquipmentSection(container, title, html){
 function parseMdSections(md, topicId){
   // Very simple parser: split by H2 headings (## )
   const lines = md.split(/\r?\n/);
-  const sections=[]; let cur={ title: 'Original Documentation', content: []};
+  const sections=[]; let cur={ title: 'Edited Documentation', content: []};
   for(const ln of lines){
     const m = ln.match(/^##\s+(.+)/);
     if (m){
