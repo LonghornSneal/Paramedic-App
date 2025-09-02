@@ -94,7 +94,30 @@ function appendTopicDetails(topic, contentArea) {
         if (details.mdPath) {
             renderEquipmentFromMarkdown(details, contentArea, topic);
         } else if (details.originalPdf) {
-            renderOriginalPdfSection(details, contentArea, topic);
+            // Prefer helper if present; otherwise inline fallback to avoid runtime errors
+            if (typeof renderOriginalPdfSection === 'function') {
+                renderOriginalPdfSection(details, contentArea, topic);
+            } else {
+                const pdfUrl = details.pdfPage ? `${details.originalPdf}#page=${details.pdfPage}` : details.originalPdf;
+                const embedId = `pdf-embed-${slugify(topic.id)}-only`;
+                const btnId = `pdf-toggle-${slugify(topic.id)}-only`;
+                const html = `
+                  <div class="mb-2">
+                    <a href="${pdfUrl}" target="_blank" rel="noopener" class="text-blue-600 underline">Open Original PDF</a>
+                    <button id="${btnId}" class="ml-2 text-sm px-2 py-1 border rounded text-blue-600 border-blue-300 hover:bg-blue-50">View Inline</button>
+                  </div>
+                  <div id="${embedId}" class="hidden w-full"><object data="${pdfUrl}" type="application/pdf" width="100%" height="640px"></object></div>
+                `;
+                insertEquipmentSection(contentArea, 'Original Documentation', html);
+                const btn = document.getElementById(btnId);
+                const embed = document.getElementById(embedId);
+                if (btn && embed) {
+                  addTapListener(btn, () => {
+                    embed.classList.toggle('hidden');
+                    btn.textContent = embed.classList.contains('hidden') ? 'View Inline' : 'Hide PDF';
+                  });
+                }
+            }
         }
         return;
     }
