@@ -368,61 +368,62 @@ function renderQuickVentSetup(contentArea){
   const wrap = document.createElement('div');
   wrap.className = 'mb-4';
   wrap.innerHTML = `
-    <div class="text-center mb-3"><span class="font-semibold underline">Zoll Set Up</span></div>
-    <div class="text-center mb-2 font-semibold">Input Pt Info</div>
+    <div class="text-center mb-3"><span class="font-semibold underline text-2xl md:text-3xl">Zoll Set Up</span></div>
+    <div class="text-center mb-2 font-semibold underline">Input Pt Info</div>
     <div class="flex flex-wrap justify-center items-end gap-3 mb-3">
       <div>
-        <label class="block text-sm font-medium mb-1">Sex</label>
-        <select id="qv-sex" class="sidebar-input w-40">
-          <option value="">--</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
+        <label class="block text-sm font-medium mb-1 underline">Sex</label>
+        <div id="qv-sex" class="flex flex-col gap-1">
+          <button data-val="male" class="px-2 py-1 border rounded">Male</button>
+          <button data-val="female" class="px-2 py-1 border rounded">Female</button>
+        </div>
       </div>
       <div>
-        <label class="block text-sm font-medium mb-1">Weight</label>
+        <label class="block text-sm font-medium mb-1 underline">Weight</label>
         <div class="flex items-center gap-2">
-          <input type="number" step="any" id="qv-weight-kg" class="sidebar-input w-28" placeholder="kg" />
-          <input type="number" step="any" id="qv-weight-lb" class="sidebar-input w-28" placeholder="lb" />
+          <input type="number" step="any" id="qv-weight-kg" class="sidebar-input w-24" placeholder="kg" />
+          <input type="number" step="any" id="qv-weight-lb" class="sidebar-input w-24" placeholder="lb" />
           <button id="qv-weight-clear" class="text-xs px-2 py-1 border rounded">Clear</button>
         </div>
       </div>
       <div>
-        <label class="block text-sm font-medium mb-1">Height</label>
-        <div class="flex items-center space-x-2">
-          <div class="flex items-center gap-1"><input type="number" id="qv-height-ft" class="sidebar-input w-16" placeholder="ft" /><span class="text-xs">ft</span></div>
-          <div class="flex items-center gap-1"><input type="number" id="qv-height-in" class="sidebar-input w-16" placeholder="in" /><span class="text-xs">in</span></div>
+        <label class="block text-sm font-medium mb-1 underline">Height</label>
+        <div class="flex items-center space-x-3">
+          <div class="flex items-center gap-2 border border-gray-600 rounded px-2 py-1">
+            <div class="flex items-center gap-1"><input type="number" id="qv-height-ft" class="sidebar-input w-14" placeholder="ft" /><span class="text-xs">ft</span></div>
+            <span class="text-xs">&amp;</span>
+            <div class="flex items-center gap-1"><input type="number" id="qv-height-in" class="sidebar-input w-14" placeholder="in" /><span class="text-xs">in</span></div>
+          </div>
           <span class="text-xs text-gray-500">or</span>
           <div class="flex items-center gap-1"><input type="number" id="qv-height-inches" class="sidebar-input w-24" placeholder="inches" /><span class="text-xs">Total Inches</span></div>
         </div>
       </div>
       <div>
-        <label class="block text-sm font-medium mb-1">ARDS?</label>
-        <select id="qv-ards" class="sidebar-input w-40">
-          <option value="">--</option>
-          <option value="no">No</option>
-          <option value="yes">Yes</option>
-          <option value="unsure">Not Sure</option>
-        </select>
+        <label class="block text-sm font-medium mb-1 underline">ARDS?</label>
+        <div id="qv-ards" class="flex flex-col gap-1">
+          <button data-val="yes" class="px-2 py-1 border rounded">Yes</button>
+          <button data-val="no" class="px-2 py-1 border rounded">No</button>
+          <button data-val="unsure" class="px-2 py-1 border rounded">Not Sure</button>
+        </div>
       </div>
     </div>
     <div class="md:col-span-2 text-center">
-      <label class="block text-sm font-medium mb-1">Suggested Tidal Volume</label>
+      <label class="block text-sm font-bold mb-1">Suggested Tidal Volume</label>
       <div id="qv-tv" class="text-xl font-bold" style="color:#ff6a00" title="Hover to see math"></div>
     </div>
     <div class="mt-4 text-sm">
       <ul class="list-disc ml-5">
         <li>IFT = Obtain vent setting from respiratory therapist</li>
         <li>New ventilator pt = Use Ideal Body Weight (IBW) to find the Tidal Volume</li>
-        <li>${parseTextMarkup('Attach circuit to [[circuit tube hole|big tube covered by red cap on right]]')}</li>
-        <li>${parseTextMarkup('Attach green tube to top [[transducer port|top left]]')}</li>
-        <li>${parseTextMarkup('Attach clear tube to bottom port [[exhalation valve|bottom left]]')}</li>
+        <li><span class="qv-toggle text-green-700 cursor-pointer">Attach circuit to circuit tube hole<span class="qv-info hidden">big tube covered by red cap on right</span></span></li>
+        <li><span class="qv-toggle text-green-700 cursor-pointer">Attach green tube to top transducer port<span class="qv-info hidden">top left</span></span></li>
+        <li><span class="qv-toggle text-green-700 cursor-pointer">Attach clear tube to bottom port exhalation valve<span class="qv-info hidden">bottom left</span></span></li>
         <li>Turn on → Let self test run → Patient disconnect should display</li>
         <li>Check high pressure alarm by putting gloved hand against end of vent circuit</li>
         <li>Select mode - Assistant Control (AC) or SIMV</li>
         <li>Select breath type - Volume or Pressure</li>
         <li>Adjust settings &amp; alarms prn</li>
-        <li>${parseTextMarkup('Attach filter &amp; Capnography [[Place filter closer to pt &amp; place Capno on the other side of the filter that is farther from the pt|Place filter closer to pt &amp; place Capno on the other side of the filter that is farther from the pt]]')}</li>
+        <li><span class="qv-toggle text-green-700 cursor-pointer">Attach filter &amp; Capnography<span class="qv-info hidden">Place filter closer to pt &amp; place Capno on the other side of the filter that is farther from the pt</span></span></li>
         <li>Attach circuit to the pt</li>
         <li>Assess the pt\'s reaction to the vent &amp; document settings on Vent Form</li>
         <li>If any changes are needed, then discuss those changes with the Respiratory Therapist and document the changes on the Vent Form.</li>
@@ -431,20 +432,27 @@ function renderQuickVentSetup(contentArea){
   `;
   contentArea.appendChild(wrap);
   attachToggleInfoHandlers(contentArea);
+  // Quick vent specific toggles (no underline, no arrow)
+  wrap.querySelectorAll('.qv-toggle').forEach(el => {
+    el.addEventListener('click', (e)=>{
+      const info = el.querySelector('.qv-info');
+      if (info) info.classList.toggle('hidden');
+    });
+  });
 
   // Prefill from patientData
-  const sexEl = wrap.querySelector('#qv-sex');
+  const sexContainer = wrap.querySelector('#qv-sex');
   const wtKgEl = wrap.querySelector('#qv-weight-kg');
   const wtLbEl = wrap.querySelector('#qv-weight-lb');
   const wtClrEl = wrap.querySelector('#qv-weight-clear');
   const ftEl = wrap.querySelector('#qv-height-ft');
   const inEl = wrap.querySelector('#qv-height-in');
   const totalEl = wrap.querySelector('#qv-height-inches');
-  const ardsEl = wrap.querySelector('#qv-ards');
+  const ardsContainer = wrap.querySelector('#qv-ards');
   const tvEl = wrap.querySelector('#qv-tv');
 
   if (window.patientData) {
-    if (window.patientData.gender) sexEl.value = window.patientData.gender;
+    if (window.patientData.gender) selectOption(sexContainer, window.patientData.gender);
     if (window.patientData.weight != null) wtKgEl.value = window.patientData.weight;
     if (window.patientData.weight != null) wtLbEl.value = (window.patientData.weight * 2.20462).toFixed(1);
     if (window.patientData.heightIn != null) {
@@ -493,13 +501,17 @@ function renderQuickVentSetup(contentArea){
     };
   }
 
+  function getSelected(container){ const btn=container.querySelector('button.selected'); return btn?btn.dataset.val:''; }
+  function setSelected(container, val){ container.querySelectorAll('button').forEach(b=>{ b.classList.toggle('selected', b.dataset.val===val); b.classList.toggle('bg-blue-600', b.dataset.val===val); b.classList.toggle('text-white', b.dataset.val===val); }); }
+  function selectOption(container, val){ if (!val) return; setSelected(container, val); }
+
   function compute() {
-    const sex = sexEl.value;
+    const sex = getSelected(sexContainer);
     const wkg = parseFloat(wtKgEl.value || 'NaN');
     const wlb = parseFloat(wtLbEl.value || 'NaN');
     const w = !isNaN(wkg) ? wkg : (!isNaN(wlb) ? (wlb/2.20462) : NaN);
     const total = parseInt(totalEl.value || (parseInt(ftEl.value||'0',10)*12 + parseInt(inEl.value||'0',10)), 10);
-    const ards = ardsEl.value;
+    const ards = getSelected(ardsContainer);
     let usedKg = null;
     let mathHtml = '';
     if (!isNaN(w)) {
@@ -553,14 +565,28 @@ function renderQuickVentSetup(contentArea){
   }
 
   // Event wiring
-  sexEl.addEventListener('change', ()=>{ updateSidebarFromQV(); compute(); });
+  sexContainer.querySelectorAll('button').forEach(btn=> btn.addEventListener('click', ()=>{ setSelected(sexContainer, btn.dataset.val); updateSidebarFromQV(); compute(); }));
   wtKgEl.addEventListener('input', ()=>{ wtLbEl.value = wtKgEl.value ? (parseFloat(wtKgEl.value)*2.20462).toFixed(1):''; updateSidebarFromQV(); compute(); });
   wtLbEl.addEventListener('input', ()=>{ wtKgEl.value = wtLbEl.value ? (parseFloat(wtLbEl.value)/2.20462).toFixed(2):''; updateSidebarFromQV(); compute(); });
   wtClrEl.addEventListener('click', (e)=>{ e.preventDefault(); wtKgEl.value=''; wtLbEl.value=''; updateSidebarFromQV(); compute(); });
   ftEl.addEventListener('input', ()=>{ totalEl.value=''; updateSidebarFromQV(); compute(); });
   inEl.addEventListener('input', ()=>{ totalEl.value=''; updateSidebarFromQV(); compute(); });
   totalEl.addEventListener('input', ()=>{ updateSidebarFromQV(); compute(); });
-  ardsEl.addEventListener('change', ()=> compute());
+  ardsContainer.querySelectorAll('button').forEach(btn=> btn.addEventListener('click', ()=>{ setSelected(ardsContainer, btn.dataset.val); compute(); }));
+
+  // Height syncing between total and ft/in inside Quick Vent
+  totalEl.addEventListener('input', ()=>{
+    const total = parseInt(totalEl.value||'NaN',10);
+    if (!isNaN(total)) { ftEl.value = Math.floor(total/12); inEl.value = total%12; }
+  });
+  ftEl.addEventListener('input', ()=>{
+    const ft = parseInt(ftEl.value||'0',10); const inc = parseInt(inEl.value||'0',10);
+    totalEl.value = (ft*12 + inc) || '';
+  });
+  inEl.addEventListener('input', ()=>{
+    const ft = parseInt(ftEl.value||'0',10); const inc = parseInt(inEl.value||'0',10);
+    totalEl.value = (ft*12 + inc) || '';
+  });
 
   compute();
 }
