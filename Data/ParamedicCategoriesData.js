@@ -128,17 +128,110 @@ export const ParamedicCategoriesData = [
       type: "category",
       children: [
         { id: slugify("zoll-emv731-original-documentation"), title: "Original Documentation", type: "topic" },
-        { id: ("zoll-emv731-general-information"), title: "Zoll EMV731 - General Information", type: "topic" },
-        { id: slugify("zoll-emv731-product-overview"), title: "Product Overview", type: "topic" },
-        { id: slugify("zoll-emv731-setting-up-the-ventilator"), title: "Setting Up the Ventilator", type: "topic" },
-        { id: slugify("zoll-emv731-using-the-ventilator"), title: "Using the Ventilator", type: "topic" },
-        { id: slugify("zoll-emv731-alarms"), title: "Alarms", type: "topic" },
-        { id: slugify("zoll-emv731-operating-environments"), title: "Operating Environments", type: "topic" },
-        { id: slugify("zoll-emv731-maintenance"), title: "Maintenance", type: "topic" },
-        { id: slugify("zoll-emv731-specifications"), title: "Specifications", type: "topic" },
-        { id: slugify("zoll-emv731-accessories"), title: "Accessories", type: "topic" },
-        { id: slugify("zoll-emv731-pulse-oximeter-principles"), title: "Pulse Oximeter Principles", type: "topic" },
-        { id: slugify("zoll-emv731-patient-circuits"), title: "Patient Circuits", type: "topic" }
+        { id: ("zoll-emv731-general-information"), title: "Zoll EMV731 - General Information", type: "category", children: [
+          { id: 'zoll-emv731-general-information-all', title: 'All Content', type: 'topic' },
+          { id: 'zoll-emv731-general-information-purpose-manual', title: 'Purpose & Manual Use', type: 'topic' },
+          { id: 'zoll-emv731-general-information-symbols', title: 'Symbols', type: 'topic' },
+          { id: 'zoll-emv731-general-information-indications', title: 'Indications for Use', type: 'topic' },
+          { id: 'zoll-emv731-general-information-warnings', title: 'Warnings & Cautions', type: 'topic' },
+          { id: 'zoll-emv731-general-information-warranty', title: 'Warranty & Tracking', type: 'topic' },
+          { id: 'zoll-emv731-general-information-contact', title: 'Contact Information', type: 'topic' }
+        ] },
+        { id: slugify("zoll-emv731-product-overview"), title: "Product Overview", type: "category", children: [
+          { id: 'zoll-emv731-product-overview-all', title: 'All Content', type: 'topic' },
+          { id: 'zoll-emv731-product-overview-models', title: 'Models & Intended Use', type: 'topic' },
+          { id: 'zoll-emv731-product-overview-controls', title: 'Controls & Indicators', type: 'topic' },
+          { id: 'zoll-emv731-product-overview-gui', title: 'GUI Overview', type: 'topic' },
+          { id: 'zoll-emv731-product-overview-pneumatic', title: 'Pneumatic Design', type: 'topic' },
+          { id: 'zoll-emv731-product-overview-fresh-gas', title: 'Fresh Gas Intake', type: 'topic' },
+          { id: 'zoll-emv731-product-overview-connector', title: 'Connector Panel', type: 'topic' },
+          { id: 'zoll-emv731-product-overview-circuits', title: 'Ventilator Circuits', type: 'topic' },
+          { id: 'zoll-emv731-product-overview-oximeter', title: 'Pulse Oximeter Module', type: 'topic' },
+          { id: 'zoll-emv731-product-overview-power', title: 'Power Sources', type: 'topic' }
+        ] },
+        { id: slugify("zoll-emv731-setting-up-the-ventilator"), title: "Setting Up the Ventilator", type: "category", children: [
+          { id: 'zoll-emv731-setting-up-all', title: 'All Content', type: 'topic' },
+          { id: 'zoll-emv731-setting-up-circuit', title: 'Circuit Attachment', type: 'topic' },
+          { id: 'zoll-emv731-setting-up-hp-o2', title: 'High-Pressure O₂ Connection', type: 'topic' },
+          { id: 'zoll-emv731-setting-up-filters', title: 'Filters & Accessories', type: 'topic' },
+          { id: 'zoll-emv731-setting-up-power', title: 'Power Source Selection', type: 'topic' },
+          { id: 'zoll-emv731-setting-up-power-on', title: 'Power On & Defaults', type: 'topic' },
+          { id: 'zoll-emv731-setting-up-mode', title: 'Mode Selection', type: 'topic' },
+          { id: 'zoll-emv731-setting-up-op-test', title: 'Operational Test', type: 'topic' },
+          { id: 'zoll-emv731-setting-up-oximeter', title: 'Attach Pulse Oximeter', type: 'topic' },
+          { id: 'zoll-emv731-setting-up-connect', title: 'Connect Patient', type: 'topic' }
+        ] },
+        { id: slugify("zoll-emv731-using-the-ventilator"), title: "Using the Ventilator", type: "category", children: [
+          { id: 'zoll-emv731-using-all', title: 'All Content', type: 'topic' },
+          { id: 'zoll-emv731-using-interface', title: 'Interface & Parameter Windows', type: 'topic' },
+          { id: 'zoll-emv731-using-change-values', title: 'Changing Parameter Values', type: 'topic' },
+          { id: 'zoll-emv731-using-mode-ac', title: 'Ventilation Modes (AC)', type: 'topic' },
+          { id: 'zoll-emv731-using-mode-simv', title: 'Ventilation Modes (SIMV)', type: 'topic' },
+          { id: 'zoll-emv731-using-mode-cpap', title: 'Ventilation Modes (CPAP)', type: 'topic' },
+          { id: 'zoll-emv731-using-mode-bilevel', title: 'Ventilation Modes (Bi-Level)', type: 'topic' },
+          { id: 'zoll-emv731-using-breath-target', title: 'Breath Target (V/P)', type: 'topic' },
+          { id: 'zoll-emv731-using-oximeter', title: 'Pulse Oximeter Use', type: 'topic' },
+          { id: 'zoll-emv731-using-popups', title: 'Pop Up Messages', type: 'topic' },
+          { id: 'zoll-emv731-using-manage-alarms', title: 'Managing Alarms', type: 'topic' }
+        ] },
+        { id: slugify("zoll-emv731-alarms"), title: "Alarms", type: "category", children: [
+          { id: 'zoll-emv731-alarms-all', title: 'All Content', type: 'topic' },
+          { id: 'zoll-emv731-alarms-overview', title: 'Alarm Overview', type: 'topic' },
+          { id: 'zoll-emv731-alarms-amc', title: 'Alarm Message Center (AMC)', type: 'topic' },
+          { id: 'zoll-emv731-alarms-priorities', title: 'Alarm Priorities', type: 'topic' },
+          { id: 'zoll-emv731-alarms-icons', title: 'Alarm Icons & Service Codes', type: 'topic' },
+          { id: 'zoll-emv731-alarms-muting', title: 'Muting Alarms', type: 'topic' },
+          { id: 'zoll-emv731-alarms-types-patient', title: 'Alarm Types: Patient Safety', type: 'topic' },
+          { id: 'zoll-emv731-alarms-types-environment', title: 'Alarm Types: Environment', type: 'topic' },
+          { id: 'zoll-emv731-alarms-types-selfcheck', title: 'Alarm Types: Self Check', type: 'topic' },
+          { id: 'zoll-emv731-alarms-groups', title: 'Alarm Groups', type: 'topic' },
+          { id: 'zoll-emv731-alarms-popups', title: 'Pop Up Messages', type: 'topic' }
+        ] },
+        { id: slugify("zoll-emv731-operating-environments"), title: "Operating Environments", type: "category", children: [
+          { id: 'zoll-emv731-operating-all', title: 'All Content', type: 'topic' },
+          { id: 'zoll-emv731-operating-conditions', title: 'Environmental Conditions', type: 'topic' },
+          { id: 'zoll-emv731-operating-transport', title: 'Transport Use', type: 'topic' },
+          { id: 'zoll-emv731-operating-noise', title: 'High Noise Environments', type: 'topic' },
+          { id: 'zoll-emv731-operating-emc', title: 'EMC & Safety', type: 'topic' }
+        ] },
+        { id: slugify("zoll-emv731-maintenance"), title: "Maintenance", type: "category", children: [
+          { id: 'zoll-emv731-maintenance-all', title: 'All Content', type: 'topic' },
+          { id: 'zoll-emv731-maintenance-pm', title: 'Preventive Maintenance', type: 'topic' },
+          { id: 'zoll-emv731-maintenance-filters', title: 'Filter Maintenance', type: 'topic' },
+          { id: 'zoll-emv731-maintenance-exhalation', title: 'Exhalation Valve Diaphragm', type: 'topic' },
+          { id: 'zoll-emv731-maintenance-selftest', title: 'Self Test & Service', type: 'topic' },
+          { id: 'zoll-emv731-maintenance-cleaning', title: 'Cleaning & Storage', type: 'topic' }
+        ] },
+        { id: slugify("zoll-emv731-specifications"), title: "Specifications", type: "category", children: [
+          { id: 'zoll-emv731-specifications-all', title: 'All Content', type: 'topic' },
+          { id: 'zoll-emv731-specifications-ranges', title: 'Operating Ranges', type: 'topic' },
+          { id: 'zoll-emv731-specifications-resolution', title: 'Measurement Resolution & Tolerances', type: 'topic' },
+          { id: 'zoll-emv731-specifications-o2', title: 'Oxygen Input Pressure', type: 'topic' }
+        ] },
+        { id: slugify("zoll-emv731-accessories"), title: "Accessories", type: "category", children: [
+          { id: 'zoll-emv731-accessories-all', title: 'All Content', type: 'topic' },
+          { id: 'zoll-emv731-accessories-power', title: 'Power Supplies & Cables', type: 'topic' },
+          { id: 'zoll-emv731-accessories-battery', title: 'Battery Packs', type: 'topic' },
+          { id: 'zoll-emv731-accessories-cases', title: 'Carrying Cases', type: 'topic' },
+          { id: 'zoll-emv731-accessories-filters', title: 'Filters & HMEs', type: 'topic' },
+          { id: 'zoll-emv731-accessories-reservoir', title: 'Reservoir Kits', type: 'topic' },
+          { id: 'zoll-emv731-accessories-country', title: 'Country Variations', type: 'topic' }
+        ] },
+        { id: slugify("zoll-emv731-pulse-oximeter-principles"), title: "Pulse Oximeter Principles", type: "category", children: [
+          { id: 'zoll-emv731-oximeter-all', title: 'All Content', type: 'topic' },
+          { id: 'zoll-emv731-oximeter-principles', title: 'Principles of Pulse Oximetry', type: 'topic' },
+          { id: 'zoll-emv731-oximeter-traditional', title: 'Traditional Ratio Method', type: 'topic' },
+          { id: 'zoll-emv731-oximeter-masimo', title: 'Masimo SET Algorithm', type: 'topic' },
+          { id: 'zoll-emv731-oximeter-rate-noise', title: 'Update Rate & Noise Handling', type: 'topic' }
+        ] },
+        { id: slugify("zoll-emv731-patient-circuits"), title: "Patient Circuits", type: "category", children: [
+          { id: 'zoll-emv731-circuits-all', title: 'All Content', type: 'topic' },
+          { id: 'zoll-emv731-circuits-types', title: 'Circuit Types & Lengths', type: 'topic' },
+          { id: 'zoll-emv731-circuits-specs', title: 'Technical Specifications', type: 'topic' },
+          { id: 'zoll-emv731-circuits-directions', title: 'Directions for Use', type: 'topic' },
+          { id: 'zoll-emv731-circuits-troubleshooting', title: 'Troubleshooting', type: 'topic' },
+          { id: 'zoll-emv731-circuits-warnings', title: 'Warnings & Notes', type: 'topic' }
+        ] }
       ]
 
     },{ 

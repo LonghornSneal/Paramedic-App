@@ -14,6 +14,109 @@ export const VentilationDetailsData = [
     equipment: true,
     originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf'
   },
+  // ---- General Information children ----
+  { id: 'zoll-emv731-general-information-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 7, mdPath: 'Content/Skills & Equipment/Zoll EMV731/general-information.md' },
+  { id: 'zoll-emv731-general-information-purpose-manual', title: 'Purpose & Manual Use', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 7 },
+  { id: 'zoll-emv731-general-information-symbols', title: 'Symbols', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 8 },
+  { id: 'zoll-emv731-general-information-indications', title: 'Indications for Use', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 7 },
+  { id: 'zoll-emv731-general-information-warnings', title: 'Warnings & Cautions', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 7 },
+  { id: 'zoll-emv731-general-information-warranty', title: 'Warranty & Tracking', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 7 },
+  { id: 'zoll-emv731-general-information-contact', title: 'Contact Information', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 7 },
+
+  // ---- Product Overview children ----
+  { id: 'zoll-emv731-product-overview-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 27, mdPath: 'Content/Skills & Equipment/Zoll EMV731/product-overview.md' },
+  { id: 'zoll-emv731-product-overview-models', title: 'Models & Intended Use', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 27 },
+  { id: 'zoll-emv731-product-overview-controls', title: 'Controls & Indicators', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 27 },
+  { id: 'zoll-emv731-product-overview-gui', title: 'GUI Overview', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 27 },
+  { id: 'zoll-emv731-product-overview-pneumatic', title: 'Pneumatic Design', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 27 },
+  { id: 'zoll-emv731-product-overview-fresh-gas', title: 'Fresh Gas Intake', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 27 },
+  { id: 'zoll-emv731-product-overview-connector', title: 'Connector Panel', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 27 },
+  { id: 'zoll-emv731-product-overview-circuits', title: 'Ventilator Circuits', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 27 },
+  { id: 'zoll-emv731-product-overview-oximeter', title: 'Pulse Oximeter Module', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 27 },
+  { id: 'zoll-emv731-product-overview-power', title: 'Power Sources', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 27 },
+
+  // ---- Setting Up children ----
+  { id: 'zoll-emv731-setting-up-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 43, mdPath: 'Content/Skills & Equipment/Zoll EMV731/setting-up-ventilator.md' },
+  { id: 'zoll-emv731-setting-up-circuit', title: 'Circuit Attachment', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 43 },
+  { id: 'zoll-emv731-setting-up-hp-o2', title: 'High-Pressure O₂ Connection', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 43 },
+  { id: 'zoll-emv731-setting-up-filters', title: 'Filters & Accessories', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 43 },
+  { id: 'zoll-emv731-setting-up-power', title: 'Power Source Selection', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 43 },
+  { id: 'zoll-emv731-setting-up-power-on', title: 'Power On & Defaults', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 43 },
+  { id: 'zoll-emv731-setting-up-mode', title: 'Mode Selection', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 43 },
+  { id: 'zoll-emv731-setting-up-op-test', title: 'Operational Test', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 43 },
+  { id: 'zoll-emv731-setting-up-oximeter', title: 'Attach Pulse Oximeter', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 43 },
+  { id: 'zoll-emv731-setting-up-connect', title: 'Connect Patient', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 43 },
+
+  // ---- Using children ----
+  { id: 'zoll-emv731-using-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 57, mdPath: 'Content/Skills & Equipment/Zoll EMV731/using-ventilator.md' },
+  { id: 'zoll-emv731-using-interface', title: 'Interface & Parameter Windows', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 57 },
+  { id: 'zoll-emv731-using-change-values', title: 'Changing Parameter Values', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 57 },
+  { id: 'zoll-emv731-using-mode-ac', title: 'Ventilation Modes (AC)', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 57 },
+  { id: 'zoll-emv731-using-mode-simv', title: 'Ventilation Modes (SIMV)', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 57 },
+  { id: 'zoll-emv731-using-mode-cpap', title: 'Ventilation Modes (CPAP)', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 57 },
+  { id: 'zoll-emv731-using-mode-bilevel', title: 'Ventilation Modes (Bi-Level)', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 57 },
+  { id: 'zoll-emv731-using-breath-target', title: 'Breath Target (V/P)', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 57 },
+  { id: 'zoll-emv731-using-oximeter', title: 'Pulse Oximeter Use', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 57 },
+  { id: 'zoll-emv731-using-popups', title: 'Pop Up Messages', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 57 },
+  { id: 'zoll-emv731-using-manage-alarms', title: 'Managing Alarms', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 57 },
+
+  // ---- Alarms children ----
+  { id: 'zoll-emv731-alarms-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 81, mdPath: 'Content/Skills & Equipment/Zoll EMV731/alarms.md' },
+  { id: 'zoll-emv731-alarms-overview', title: 'Alarm Overview', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 81 },
+  { id: 'zoll-emv731-alarms-amc', title: 'Alarm Message Center (AMC)', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 81 },
+  { id: 'zoll-emv731-alarms-priorities', title: 'Alarm Priorities', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 81 },
+  { id: 'zoll-emv731-alarms-icons', title: 'Alarm Icons & Service Codes', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 81 },
+  { id: 'zoll-emv731-alarms-muting', title: 'Muting Alarms', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 81 },
+  { id: 'zoll-emv731-alarms-types-patient', title: 'Alarm Types: Patient Safety', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 81 },
+  { id: 'zoll-emv731-alarms-types-environment', title: 'Alarm Types: Environment', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 81 },
+  { id: 'zoll-emv731-alarms-types-selfcheck', title: 'Alarm Types: Self Check', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 81 },
+  { id: 'zoll-emv731-alarms-groups', title: 'Alarm Groups', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 81 },
+  { id: 'zoll-emv731-alarms-popups', title: 'Pop Up Messages', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 81 },
+
+  // ---- Operating Environments children ----
+  { id: 'zoll-emv731-operating-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 113, mdPath: 'Content/Skills & Equipment/Zoll EMV731/operating-environments.md' },
+  { id: 'zoll-emv731-operating-conditions', title: 'Environmental Conditions', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 113 },
+  { id: 'zoll-emv731-operating-transport', title: 'Transport Use', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 113 },
+  { id: 'zoll-emv731-operating-noise', title: 'High Noise Environments', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 113 },
+  { id: 'zoll-emv731-operating-emc', title: 'EMC & Safety', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 113 },
+
+  // ---- Maintenance children ----
+  { id: 'zoll-emv731-maintenance-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 121, mdPath: 'Content/Skills & Equipment/Zoll EMV731/maintenance.md' },
+  { id: 'zoll-emv731-maintenance-pm', title: 'Preventive Maintenance', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 121 },
+  { id: 'zoll-emv731-maintenance-filters', title: 'Filter Maintenance', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 121 },
+  { id: 'zoll-emv731-maintenance-exhalation', title: 'Exhalation Valve Diaphragm', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 121 },
+  { id: 'zoll-emv731-maintenance-selftest', title: 'Self Test & Service', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 121 },
+  { id: 'zoll-emv731-maintenance-cleaning', title: 'Cleaning & Storage', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 121 },
+
+  // ---- Specifications children ----
+  { id: 'zoll-emv731-specifications-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 131, mdPath: 'Content/Skills & Equipment/Zoll EMV731/specifications.md' },
+  { id: 'zoll-emv731-specifications-ranges', title: 'Operating Ranges', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 131 },
+  { id: 'zoll-emv731-specifications-resolution', title: 'Measurement Resolution & Tolerances', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 131 },
+  { id: 'zoll-emv731-specifications-o2', title: 'Oxygen Input Pressure', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 131 },
+
+  // ---- Accessories children ----
+  { id: 'zoll-emv731-accessories-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139, mdPath: 'Content/Skills & Equipment/Zoll EMV731/accessories.md' },
+  { id: 'zoll-emv731-accessories-power', title: 'Power Supplies & Cables', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139 },
+  { id: 'zoll-emv731-accessories-battery', title: 'Battery Packs', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139 },
+  { id: 'zoll-emv731-accessories-cases', title: 'Carrying Cases', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139 },
+  { id: 'zoll-emv731-accessories-filters', title: 'Filters & HMEs', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139 },
+  { id: 'zoll-emv731-accessories-reservoir', title: 'Reservoir Kits', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139 },
+  { id: 'zoll-emv731-accessories-country', title: 'Country Variations', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139 },
+
+  // ---- Pulse Oximeter children ----
+  { id: 'zoll-emv731-oximeter-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 143, mdPath: 'Content/Skills & Equipment/Zoll EMV731/pulse-oximeter-principles.md' },
+  { id: 'zoll-emv731-oximeter-principles', title: 'Principles of Pulse Oximetry', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 143 },
+  { id: 'zoll-emv731-oximeter-traditional', title: 'Traditional Ratio Method', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 143 },
+  { id: 'zoll-emv731-oximeter-masimo', title: 'Masimo SET Algorithm', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 143 },
+  { id: 'zoll-emv731-oximeter-rate-noise', title: 'Update Rate & Noise Handling', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 143 },
+
+  // ---- Patient Circuits children ----
+  { id: 'zoll-emv731-circuits-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 145, mdPath: 'Content/Skills & Equipment/Zoll EMV731/patient-circuits.md' },
+  { id: 'zoll-emv731-circuits-types', title: 'Circuit Types & Lengths', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 145 },
+  { id: 'zoll-emv731-circuits-specs', title: 'Technical Specifications', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 145 },
+  { id: 'zoll-emv731-circuits-directions', title: 'Directions for Use', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 145 },
+  { id: 'zoll-emv731-circuits-troubleshooting', title: 'Troubleshooting', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 145 },
+  { id: 'zoll-emv731-circuits-warnings', title: 'Warnings & Notes', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 145 },
   {
     id: 'zoll-emv731-general-information',
     title: 'Zoll EMV731 - General Information',

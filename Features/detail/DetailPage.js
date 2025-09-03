@@ -118,6 +118,8 @@ function appendTopicDetails(topic, contentArea) {
                   });
                 }
             }
+        } else if (details.placeholder) {
+            renderPlaceholder(details, contentArea, topic);
         }
         return;
     }
@@ -335,6 +337,17 @@ function insertEquipmentSection(container, title, html){
   body.innerHTML = html;
   wrapper.appendChild(body);
   container.appendChild(wrapper);
+}
+
+function renderPlaceholder(details, contentArea, topic){
+  const pdfUrl = details.originalPdf && details.pdfPage ? `${details.originalPdf}#page=${details.pdfPage}` : details.originalPdf || '';
+  const link = pdfUrl ? `<a href="${pdfUrl}" target="_blank" rel="noopener" class="text-blue-600 underline">View source PDF (chapter)</a>` : '';
+  const html = `
+    <p class="text-gray-700">Edited Documentation placeholder for <strong>${escapeHtml(topic.title || topic.id)}</strong>.</p>
+    <p class="text-gray-600">Content will be inserted here after your PDF edits are finalized.</p>
+    ${link}
+  `;
+  insertEquipmentSection(contentArea, 'Edited Documentation', html);
 }
 
 function parseMdSections(md, topicId){
