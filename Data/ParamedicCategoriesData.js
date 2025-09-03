@@ -128,6 +128,17 @@ export const ParamedicCategoriesData = [
       type: "category",
       children: [
         { id: slugify("zoll-emv731-original-documentation"), title: "Original Documentation", type: "topic" },
+        { id: slugify("zoll-emv731-quick-vent-guide"), title: "Quick Vent Guide", type: "category", children: [
+          { id: 'zoll-quick-vent-zoll-setup', title: 'Zoll Set Up', type: 'topic' },
+          { id: 'zoll-quick-vent-operational-notes', title: 'General Operational Notes', type: 'topic' },
+          { id: 'zoll-quick-vent-volume-mode', title: 'Volume Mode', type: 'topic' },
+          { id: 'zoll-quick-vent-pressure-mode', title: 'Pressure Mode', type: 'topic' },
+          { id: 'zoll-quick-vent-other-vent-alarms', title: 'Other Vent Alarms', type: 'topic' },
+          { id: 'zoll-quick-vent-cpap', title: 'CPAP', type: 'topic' },
+          { id: 'zoll-quick-vent-bi-level', title: 'Bi-Level', type: 'topic' },
+          { id: 'zoll-quick-vent-terms-settings', title: 'Terms & Settings', type: 'topic' },
+          { id: 'zoll-quick-vent-tidal-volume-calculator', title: 'Tidal Volume Calculator', type: 'topic' }
+        ] },
         { id: ("zoll-emv731-general-information"), title: "Zoll EMV731 - General Information", type: "category", children: [
           { id: 'zoll-emv731-general-information-all', title: 'All Content', type: 'topic' },
           { id: 'zoll-emv731-general-information-purpose-manual', title: 'Purpose & Manual Use', type: 'topic' },

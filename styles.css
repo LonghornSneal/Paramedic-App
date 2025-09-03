@@ -93,6 +93,19 @@ body.dark-mode .snapshot-card {
   .header-nav-button:hover { background-color: #1d4ed8; }
   .header-nav-button:disabled { opacity: 0.5; cursor: not-allowed; }
 
+/* Quick Vent Guide title color */
+.quick-vent-title { color: #8b5cf6; } /* violet-500 */
+body.dark-mode .quick-vent-title { color: #fbbf24; } /* amber-400 */
+
+/* Tooltip/modal styles for calculator */
+.qv-tooltip { position: absolute; z-index: 100; background: #fff; color: #111827; border: 1px solid #d1d5db; padding: 0.5rem; border-radius: 0.375rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+body.dark-mode .qv-tooltip { background: #1f2937; color: #e5e7eb; border-color: #374151; }
+.qv-modal { position: fixed; top: 20%; left: 50%; transform: translateX(-50%); width: 480px; max-width: 90vw; background: #fff; color: #111827; border: 1px solid #d1d5db; border-radius: 0.375rem; box-shadow: 0 10px 20px rgba(0,0,0,0.35); z-index: 110; resize: both; overflow: auto; }
+body.dark-mode .qv-modal { background: #111827; color: #e5e7eb; border-color: #374151; }
+.qv-modal-header { cursor: move; display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0.75rem; border-bottom: 1px solid #d1d5db; }
+body.dark-mode .qv-modal-header { border-color: #374151; }
+.qv-close { cursor: pointer; }
+
 /* Toggle info links */
   .toggle-info { color: #15803d; cursor: pointer; text-decoration-line: underline;
     text-decoration-color: #15803d; text-underline-offset: 2px; }

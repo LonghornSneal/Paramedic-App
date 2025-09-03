@@ -15,7 +15,7 @@
 import { renderPatientSnapshot } from './PatientSnapshot.js';
 
 export const patientData = {
-    age: null, weight: null, weightUnit: 'kg', gender: '',
+    age: null, weight: null, weightUnit: 'kg', gender: '', heightIn: null,
     pmh: [], allergies: [], currentMedications: [], indications: [], symptoms: [],
     vitalSigns: {
         bp: '', hr: null, spo2: null, etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: ''
@@ -27,6 +27,7 @@ export const patientData = {
 // updatePatientData() to refresh patientData and update the UI.
 const ptInputIds = [ 'pt-age', 
     'pt-weight-kg', 'pt-weight-lb', // dual weight inputs
+    'pt-height-ft','pt-height-in','pt-height-inches',
     'pt-pmh', 
     'pt-allergies', 
     'pt-medications', 
@@ -157,6 +158,16 @@ function synchronizeWeights(source) {
 function updatePatientData() {
     patientData.gender = getInputValue('pt-gender');
     patientData.age = getParsedInt('pt-age');
+    // Height sync: if inches given, use that; else compute from ft/in
+    const ft = getParsedInt('pt-height-ft');
+    const inch = getParsedInt('pt-height-in');
+    const inches = getParsedInt('pt-height-inches');
+    let totalIn = null;
+    if (inches != null) totalIn = inches;
+    else if (ft != null || inch != null) {
+        totalIn = (ft || 0) * 12 + (inch || 0);
+    }
+    patientData.heightIn = totalIn;
     // Weight: determine which input has data. Prefer kilograms if both exist. We always store weight
     // internally in kilograms for dosing calculations. If neither field has a valid value, weight is
     // set to null.
@@ -276,3 +287,29 @@ if (typeof window !== 'undefined') {
   window.PEDIATRIC_AGE_THRESHOLD = PEDIATRIC_AGE_THRESHOLD;
   window.PDE5_INHIBITORS = PDE5_INHIBITORS;
 }
+// Sync height inputs both ways
+function syncHeightsFromFtIn() {
+  const ftEl = document.getElementById('pt-height-ft');
+  const inEl = document.getElementById('pt-height-in');
+  const totalEl = document.getElementById('pt-height-inches');
+  if (ftEl && inEl && totalEl) {
+    const ft = parseInt(ftEl.value || '0', 10);
+    const inc = parseInt(inEl.value || '0', 10);
+    if (!isNaN(ft) && !isNaN(inc)) totalEl.value = (ft*12 + inc) || '';
+  }
+}
+function syncHeightsFromTotal() {
+  const ftEl = document.getElementById('pt-height-ft');
+  const inEl = document.getElementById('pt-height-in');
+  const totalEl = document.getElementById('pt-height-inches');
+  if (ftEl && inEl && totalEl) {
+    const total = parseInt(totalEl.value || 'NaN', 10);
+    if (!isNaN(total)) {
+      ftEl.value = Math.floor(total/12);
+      inEl.value = total % 12;
+    }
+  }
+}
+document.getElementById('pt-height-ft')?.addEventListener('input', () => { syncHeightsFromFtIn(); updatePatientData(); });
+document.getElementById('pt-height-in')?.addEventListener('input', () => { syncHeightsFromFtIn(); updatePatientData(); });
+document.getElementById('pt-height-inches')?.addEventListener('input', () => { syncHeightsFromTotal(); updatePatientData(); });

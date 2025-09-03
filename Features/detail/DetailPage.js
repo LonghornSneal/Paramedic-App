@@ -121,6 +121,11 @@ function appendTopicDetails(topic, contentArea) {
         } else if (details.placeholder) {
             renderPlaceholder(details, contentArea, topic);
         }
+        if (details.quickVent === 'setup') {
+            renderQuickVentSetup(contentArea);
+        } else if (details.quickVent === 'calculator') {
+            renderQuickVentCalculator(contentArea);
+        }
         return;
     }
     // Render each detail section if available, otherwise insert "No detail information" message
@@ -348,6 +353,187 @@ function renderPlaceholder(details, contentArea, topic){
     ${link}
   `;
   insertEquipmentSection(contentArea, 'Edited Documentation', html);
+}
+
+function renderQuickVentSetup(contentArea){
+  const wrap = document.createElement('div');
+  wrap.className = 'mb-4';
+  wrap.innerHTML = `
+    <div class="text-center mb-3"><span class="font-semibold underline">Zoll Set Up</span></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div>
+        <label class="block text-sm font-medium mb-1">Pt Sex</label>
+        <select id="qv-sex" class="sidebar-input w-full">
+          <option value="">--</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Pt Weight (kg)</label>
+        <input type="number" id="qv-weight" class="sidebar-input w-full" placeholder="kg" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Pt Height</label>
+        <div class="flex items-center space-x-2">
+          <input type="number" id="qv-height-ft" class="sidebar-input w-20" placeholder="ft" />
+          <input type="number" id="qv-height-in" class="sidebar-input w-20" placeholder="in" />
+          <span class="text-xs text-gray-500">or</span>
+          <input type="number" id="qv-height-inches" class="sidebar-input w-24" placeholder="inches" />
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">ARDS Pt?</label>
+        <select id="qv-ards" class="sidebar-input w-full">
+          <option value="">--</option>
+          <option value="no">No</option>
+          <option value="yes">Yes</option>
+          <option value="unsure">Not Sure</option>
+        </select>
+      </div>
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium mb-1">Suggested Tidal Volume</label>
+        <div id="qv-tv" class="text-lg font-semibold text-orange-600 cursor-pointer" title="Hover to see math"></div>
+      </div>
+    </div>
+    <div class="mt-4 text-sm">
+      <ul class="list-disc ml-5">
+        <li>IFT = Obtain vent setting from respiratory therapist</li>
+        <li>New ventilator pt = Use ideal body weight to find Tidal Volume</li>
+        <li>Attach circuit to [[circuit tube hole|big tube covered by red cap on right]]</li>
+        <li>Attach green tube to top [[transducer port|top left]]</li>
+        <li>Attach clear tube to bottom port [[exhalation valve|bottom left]]</li>
+        <li>Turn on → Let self test run → Patient disconnect should display</li>
+        <li>Check high pressure alarm by putting gloved hand against end of vent circuit</li>
+      </ul>
+    </div>
+  `;
+  contentArea.appendChild(wrap);
+  attachToggleInfoHandlers(contentArea);
+
+  // Prefill from patientData
+  const sexEl = wrap.querySelector('#qv-sex');
+  const wtEl = wrap.querySelector('#qv-weight');
+  const ftEl = wrap.querySelector('#qv-height-ft');
+  const inEl = wrap.querySelector('#qv-height-in');
+  const totalEl = wrap.querySelector('#qv-height-inches');
+  const ardsEl = wrap.querySelector('#qv-ards');
+  const tvEl = wrap.querySelector('#qv-tv');
+
+  if (window.patientData) {
+    if (window.patientData.gender) sexEl.value = window.patientData.gender;
+    if (window.patientData.weight != null) wtEl.value = window.patientData.weight;
+    if (window.patientData.heightIn != null) {
+      const h = window.patientData.heightIn;
+      totalEl.value = h;
+      ftEl.value = Math.floor(h/12);
+      inEl.value = h % 12;
+    }
+  }
+
+  function updateSidebarFromQV() {
+    // Update sidebar fields to keep in sync
+    const g = sexEl.value;
+    const w = parseFloat(wtEl.value || '');
+    const ft = parseInt(ftEl.value || '0',10);
+    const inc = parseInt(inEl.value || '0',10);
+    const total = parseInt(totalEl.value || ((ft*12 + inc)||''), 10);
+    const sg = document.getElementById('pt-gender'); if (sg) sg.value = g;
+    const sw = document.getElementById('pt-weight-kg'); if (sw && !isNaN(w)) sw.value = w;
+    const shft = document.getElementById('pt-height-ft'); if (shft) shft.value = isNaN(total)? '' : Math.floor(total/12);
+    const shin = document.getElementById('pt-height-in'); if (shin) shin.value = isNaN(total)? '' : (total%12);
+    const shinTot = document.getElementById('pt-height-inches'); if (shinTot) shinTot.value = isNaN(total)? '' : total;
+    // Trigger update
+    document.getElementById('pt-height-inches')?.dispatchEvent(new Event('input'));
+    document.getElementById('pt-weight-kg')?.dispatchEvent(new Event('input'));
+    document.getElementById('pt-gender')?.dispatchEvent(new Event('input'));
+  }
+
+  function ibwKg(sex, heightIn) {
+    if (!sex || !heightIn) return null;
+    const over60 = Math.max(0, heightIn - 60);
+    const base = sex === 'male' ? 50 : 45.5;
+    return +(base + 2.3 * over60).toFixed(1);
+  }
+  function tvRange(kg, ards) {
+    if (!kg) return null;
+    // mL/kg ranges
+    const normal = [6,8];
+    const ardsR = [4,6];
+    if (ards === 'yes') return [Math.round(kg*ardsR[0]), Math.round(kg*ardsR[1])];
+    if (ards === 'no') return [Math.round(kg*normal[0]), Math.round(kg*normal[1])];
+    // unsure → return both as string later
+    return {
+      normal: [Math.round(kg*normal[0]), Math.round(kg*normal[1])],
+      ards: [Math.round(kg*ardsR[0]), Math.round(kg*ardsR[1])]
+    };
+  }
+
+  function compute() {
+    const sex = sexEl.value;
+    const w = parseFloat(wtEl.value || 'NaN');
+    const total = parseInt(totalEl.value || (parseInt(ftEl.value||'0',10)*12 + parseInt(inEl.value||'0',10)), 10);
+    const ards = ardsEl.value;
+    let usedKg = null;
+    let math = '';
+    if (!isNaN(w)) { usedKg = w; math = `Using weight: ${w} kg`; }
+    else if (sex && !isNaN(total)) { const ibw = ibwKg(sex,total); if (ibw) { usedKg = ibw; math = `Using IBW (${sex}, ${total}\" → ${ibw} kg)`; } }
+    let display = '';
+    if (usedKg != null) {
+      const rng = tvRange(usedKg, ards);
+      if (rng && Array.isArray(rng)) {
+        display = `${rng[0]} – ${rng[1]} mL`;
+      } else if (rng && rng.normal) {
+        display = `${rng.normal[0]}–${rng.normal[1]} mL (no ARDS) · ${rng.ards[0]}–${rng.ards[1]} mL (ARDS)`;
+      } else {
+        display = '';
+      }
+    }
+    tvEl.textContent = display;
+    tvEl.dataset.math = math + (usedKg!=null ? `; Range rule = ${ards||'not sure'}`: '');
+    // hover tooltip
+    tvEl.onmouseenter = (e)=>{
+      if (!tvEl.textContent) return;
+      const tip = document.createElement('div'); tip.className='qv-tooltip'; tip.id='qv-tip';
+      tip.textContent = tvEl.dataset.math || '';
+      document.body.appendChild(tip);
+      const r = tvEl.getBoundingClientRect(); tip.style.left = (r.left+window.scrollX)+'px'; tip.style.top=(r.bottom+window.scrollY+6)+'px';
+    };
+    tvEl.onmouseleave = ()=>{ document.getElementById('qv-tip')?.remove(); };
+    tvEl.onclick = ()=>{
+      if (!tvEl.textContent) return;
+      const modal = document.createElement('div'); modal.className='qv-modal'; modal.id='qv-modal';
+      modal.innerHTML = `<div class="qv-modal-header"><span>Calculation Details</span><span id="qv-close" class="qv-close">✕</span></div><div class="p-3 text-sm whitespace-pre-wrap">${tvEl.dataset.math||''}</div>`;
+      document.body.appendChild(modal);
+      const close = modal.querySelector('#qv-close'); close?.addEventListener('click', ()=> modal.remove());
+      // basic drag
+      const hdr = modal.querySelector('.qv-modal-header');
+      let sx=0, sy=0, dragging=false, offX=0, offY=0;
+      hdr?.addEventListener('mousedown', (ev)=>{ dragging=true; sx=ev.clientX; sy=ev.clientY; const rect=modal.getBoundingClientRect(); offX=ev.clientX-rect.left; offY=ev.clientY-rect.top; ev.preventDefault(); });
+      window.addEventListener('mousemove', (ev)=>{ if(!dragging) return; modal.style.left=(ev.clientX-offX)+'px'; modal.style.top=(ev.clientY-offY)+'px'; modal.style.transform='none'; });
+      window.addEventListener('mouseup', ()=> dragging=false);
+    };
+  }
+
+  // Event wiring
+  sexEl.addEventListener('change', ()=>{ updateSidebarFromQV(); compute(); });
+  wtEl.addEventListener('input', ()=>{ updateSidebarFromQV(); compute(); });
+  ftEl.addEventListener('input', ()=>{ totalEl.value=''; updateSidebarFromQV(); compute(); });
+  inEl.addEventListener('input', ()=>{ totalEl.value=''; updateSidebarFromQV(); compute(); });
+  totalEl.addEventListener('input', ()=>{ updateSidebarFromQV(); compute(); });
+  ardsEl.addEventListener('change', ()=> compute());
+
+  compute();
+}
+
+function renderQuickVentCalculator(contentArea){
+  const wrap = document.createElement('div');
+  wrap.className = 'mb-4';
+  wrap.innerHTML = `<div class="text-center mb-3"><span class="font-semibold underline">Tidal Volume Calculator</span></div>`;
+  contentArea.appendChild(wrap);
+  // reuse setup UI minimal
+  const fake = { quickVent: 'setup' };
+  renderQuickVentSetup(contentArea);
 }
 
 function parseMdSections(md, topicId){

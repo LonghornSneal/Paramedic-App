@@ -14,6 +14,16 @@ export const VentilationDetailsData = [
     equipment: true,
     originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf'
   },
+  // ---- Quick Vent Guide ----
+  { id: 'zoll-quick-vent-zoll-setup', title: 'Zoll Set Up', quickVent: 'setup', equipment: true },
+  { id: 'zoll-quick-vent-operational-notes', title: 'General Operational Notes', equipment: true, placeholder: true },
+  { id: 'zoll-quick-vent-volume-mode', title: 'Volume Mode', equipment: true, placeholder: true },
+  { id: 'zoll-quick-vent-pressure-mode', title: 'Pressure Mode', equipment: true, placeholder: true },
+  { id: 'zoll-quick-vent-other-vent-alarms', title: 'Other Vent Alarms', equipment: true, placeholder: true },
+  { id: 'zoll-quick-vent-cpap', title: 'CPAP', equipment: true, placeholder: true },
+  { id: 'zoll-quick-vent-bi-level', title: 'Bi-Level', equipment: true, placeholder: true },
+  { id: 'zoll-quick-vent-terms-settings', title: 'Terms & Settings', equipment: true, placeholder: true },
+  { id: 'zoll-quick-vent-tidal-volume-calculator', title: 'Tidal Volume Calculator', quickVent: 'calculator', equipment: true },
   // ---- General Information children ----
   { id: 'zoll-emv731-general-information-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 7, mdPath: 'Content/Skills & Equipment/Zoll EMV731/general-information.md' },
   { id: 'zoll-emv731-general-information-purpose-manual', title: 'Purpose & Manual Use', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 7 },

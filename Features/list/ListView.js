@@ -76,6 +76,9 @@ function createHierarchicalList(items, container, level = 0) {
             // Category label
             const label = document.createElement('span');
             label.className = 'cursor-pointer hover:underline flex-1 font-semibold';
+            if (item.title === 'Quick Vent Guide') {
+                label.classList.add('quick-vent-title');
+            }
             label.textContent = item.title;
             addTapListener(label, () => { 
                 item.expanded = !item.expanded;
