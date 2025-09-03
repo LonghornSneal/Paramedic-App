@@ -177,7 +177,19 @@ body.dark-mode .qv-legend { background: #111827; }
 .qv input[type=number] { -moz-appearance: textfield; }
 
 /* Arrow styling */
-.qv-arrow { color: #000; margin-right: 0.5ch; }
+.qv-arrow { color: #000; margin-right: 0.5ch; display: none; }
+.qv-toggle.open .qv-arrow { display: inline; }
+
+/* Sex symbol buttons (male/female) */
+#qv-sex button { background: transparent; border: 1px solid #9ca3af; }
+#qv-sex button[data-val="male"]::before { content: '♂'; color: #2563eb; }
+#qv-sex button[data-val="female"]::before { content: '♀'; color: #ec4899; }
+#qv-sex button.selected { outline: none; color: #000 !important; }
+#qv-sex button[data-val="male"].selected { background-color: #2563eb; }
+#qv-sex button[data-val="female"].selected { background-color: #ec4899; }
+#qv-sex button.selected::before { color: #000; }
+#qv-sex button[data-val="male"]::before { content: "\2642" !important; }
+#qv-sex button[data-val="female"]::before { content: "\2640" !important; }
 /* Sane dark mode palette */
 /* Keep header blue (Tailwind), focus on content readability */
 body.dark-mode #content-area { background-color: #111827; }

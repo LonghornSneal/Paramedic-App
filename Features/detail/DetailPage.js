@@ -471,6 +471,7 @@ function renderQuickVentSetup(contentArea){
     el.addEventListener('click', (e)=>{
       const info = el.querySelector('.qv-info');
       if (info) info.classList.toggle('hidden');
+      el.classList.toggle('open', !info?.classList.contains('hidden'));
     });
   });
 
@@ -572,7 +573,7 @@ function renderQuickVentSetup(contentArea){
   }
 
   function getSelected(container){ const btn=container.querySelector('button.selected'); return btn?btn.dataset.val:''; }
-  function setSelected(container, val){ container.querySelectorAll('button').forEach(b=>{ b.classList.toggle('selected', b.dataset.val===val); b.classList.toggle('bg-blue-600', b.dataset.val===val); b.classList.toggle('text-white', b.dataset.val===val); }); }
+  function setSelected(container, val){ container.querySelectorAll('button').forEach(b=>{ b.classList.toggle('selected', b.dataset.val===val); }); }
   function selectOption(container, val){ if (!val) return; setSelected(container, val); }
 
   function compute() {
