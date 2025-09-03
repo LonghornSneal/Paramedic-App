@@ -162,9 +162,10 @@ body.dark-mode .qv-legend { background: #111827; }
 .qv-num { text-align: right; }
 .qv-suffix { font-size: 0.75rem; }
 
-.qv-weight { display: inline-flex; align-items: baseline; border: 1px solid #9ca3af; padding-left: 3ch; padding-right: 0; padding-top: 0; padding-bottom: 0; column-gap: 3ch; }
+.qv-weight { display: inline-flex; align-items: baseline; border: 1px solid #9ca3af; padding-left: 2ch; padding-right: 0; padding-top: 0; padding-bottom: 0; column-gap: 3ch; }
 .qv-height { display: inline-flex; align-items: baseline; column-gap: 1ch; }
-.qv-height-pair { display: inline-flex; align-items: baseline; border: 1px solid #9ca3af; padding-left: 1ch; padding-right: 0; padding-top: 0; padding-bottom: 0; column-gap: 2ch; }
+.qv-height-pair { display: inline-flex; align-items: baseline; border: 1px solid #9ca3af; padding-left: 2ch; padding-right: 0; padding-top: 0; padding-bottom: 0; column-gap: 1ch; }
+.qv-height-pair .qv-sep { margin-right: 2ch; }
 .qv-height-total { display: inline-flex; align-items: baseline; border: 1px solid #9ca3af; padding-left: 2ch; padding-right: 0; padding-top: 0; padding-bottom: 0; }
 .qv-sep { font-size: 0.75rem; }
 .qv-equals { margin: 0 0.5ch; }
