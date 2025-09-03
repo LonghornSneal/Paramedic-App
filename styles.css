@@ -148,6 +148,12 @@ body.dark-mode { filter: brightness(var(--brightness)); }
 /* Snapshot bar styling */
 #patient-snapshot-bar { min-height: 1.5rem; }
 body.dark-mode #patient-snapshot-bar { color: #e5e7eb; }
+
+/* Quick Vent fieldset legend background for dark mode */
+.qv-legend { background: #ffffff; }
+body.dark-mode .qv-legend { background: #111827; }
+
+.selected { outline: 2px solid #2563eb; background-color: #2563eb; color: #fff; }
 /* Sane dark mode palette */
 /* Keep header blue (Tailwind), focus on content readability */
 body.dark-mode #content-area { background-color: #111827; }

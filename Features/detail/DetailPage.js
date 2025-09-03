@@ -369,43 +369,45 @@ function renderQuickVentSetup(contentArea){
   wrap.className = 'mb-4';
   wrap.innerHTML = `
     <div class="text-center mb-3"><span class="font-semibold underline text-2xl md:text-3xl">Zoll Set Up</span></div>
-    <div class="text-center mb-2 font-semibold underline">Input Pt Info</div>
-    <div class="flex flex-wrap justify-center items-end gap-3 mb-3">
+    <div class="relative max-w-3xl mx-auto border border-gray-400 rounded px-3 pt-4 pb-3 mb-4">
+      <div class="qv-legend absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-2 text-sm font-semibold underline">Input Pt Info</div>
+    <div class="flex flex-wrap justify-center items-end gap-4">
       <div>
-        <label class="block text-sm font-medium mb-1 underline">Sex</label>
+        <label class="block text-sm font-medium mb-1 underline text-center">Sex</label>
         <div id="qv-sex" class="flex flex-col gap-1">
           <button data-val="male" class="px-2 py-1 border rounded">Male</button>
           <button data-val="female" class="px-2 py-1 border rounded">Female</button>
         </div>
       </div>
       <div>
-        <label class="block text-sm font-medium mb-1 underline">Weight</label>
-        <div class="flex items-center gap-2">
-          <input type="number" step="any" id="qv-weight-kg" class="sidebar-input w-24" placeholder="kg" />
-          <input type="number" step="any" id="qv-weight-lb" class="sidebar-input w-24" placeholder="lb" />
+        <label class="block text-sm font-medium mb-1 underline text-center">Weight</label>
+        <div class="flex items-center gap-2 justify-center">
+          <div class="flex items-center gap-1"><input type="number" step="any" id="qv-weight-kg" class="sidebar-input w-20 text-right" placeholder="" /><span class="text-xs">kg</span></div>
+          <div class="flex items-center gap-1"><input type="number" step="any" id="qv-weight-lb" class="sidebar-input w-20 text-right" placeholder="" /><span class="text-xs">lb</span></div>
           <button id="qv-weight-clear" class="text-xs px-2 py-1 border rounded">Clear</button>
         </div>
       </div>
       <div>
-        <label class="block text-sm font-medium mb-1 underline">Height</label>
+        <label class="block text-sm font-medium mb-1 underline text-center">Height</label>
         <div class="flex items-center space-x-3">
           <div class="flex items-center gap-2 border border-gray-600 rounded px-2 py-1">
-            <div class="flex items-center gap-1"><input type="number" id="qv-height-ft" class="sidebar-input w-14" placeholder="ft" /><span class="text-xs">ft</span></div>
+            <div class="flex items-center gap-1"><input type="number" id="qv-height-ft" class="sidebar-input w-12 text-right" placeholder="" /><span class="text-xs">ft</span></div>
             <span class="text-xs">&amp;</span>
-            <div class="flex items-center gap-1"><input type="number" id="qv-height-in" class="sidebar-input w-14" placeholder="in" /><span class="text-xs">in</span></div>
+            <div class="flex items-center gap-1"><input type="number" id="qv-height-in" class="sidebar-input w-12 text-right" placeholder="" /><span class="text-xs">in</span></div>
           </div>
           <span class="text-xs text-gray-500">or</span>
-          <div class="flex items-center gap-1"><input type="number" id="qv-height-inches" class="sidebar-input w-24" placeholder="inches" /><span class="text-xs">Total Inches</span></div>
+          <div class="flex items-center gap-1"><input type="number" id="qv-height-inches" class="sidebar-input w-24 text-right" placeholder="" /><span class="text-xs">Total Inches</span></div>
         </div>
       </div>
       <div>
-        <label class="block text-sm font-medium mb-1 underline">ARDS?</label>
+        <label class="block text-sm font-medium mb-1 underline text-center">ARDS?</label>
         <div id="qv-ards" class="flex flex-col gap-1">
           <button data-val="yes" class="px-2 py-1 border rounded">Yes</button>
           <button data-val="no" class="px-2 py-1 border rounded">No</button>
           <button data-val="unsure" class="px-2 py-1 border rounded">Not Sure</button>
         </div>
       </div>
+    </div>
     </div>
     <div class="md:col-span-2 text-center">
       <label class="block text-sm font-bold mb-1">Suggested Tidal Volume</label>
@@ -415,15 +417,15 @@ function renderQuickVentSetup(contentArea){
       <ul class="list-disc ml-5">
         <li>IFT = Obtain vent setting from respiratory therapist</li>
         <li>New ventilator pt = Use Ideal Body Weight (IBW) to find the Tidal Volume</li>
-        <li><span class="qv-toggle text-green-700 cursor-pointer">Attach circuit to circuit tube hole<span class="qv-info hidden">big tube covered by red cap on right</span></span></li>
-        <li><span class="qv-toggle text-green-700 cursor-pointer">Attach green tube to top transducer port<span class="qv-info hidden">top left</span></span></li>
-        <li><span class="qv-toggle text-green-700 cursor-pointer">Attach clear tube to bottom port exhalation valve<span class="qv-info hidden">bottom left</span></span></li>
+        <li><span class="qv-toggle text-green-700 cursor-pointer">Attach circuit to circuit tube hole <span class="qv-arrow">→</span><span class="qv-info hidden">big tube covered by red cap on right</span></span></li>
+        <li><span class="qv-toggle text-green-700 cursor-pointer">Attach green tube to top transducer port <span class="qv-arrow">→</span><span class="qv-info hidden">top left</span></span></li>
+        <li><span class="qv-toggle text-green-700 cursor-pointer">Attach clear tube to bottom port exhalation valve <span class="qv-arrow">→</span><span class="qv-info hidden">bottom left</span></span></li>
         <li>Turn on → Let self test run → Patient disconnect should display</li>
         <li>Check high pressure alarm by putting gloved hand against end of vent circuit</li>
         <li>Select mode - Assistant Control (AC) or SIMV</li>
         <li>Select breath type - Volume or Pressure</li>
         <li>Adjust settings &amp; alarms prn</li>
-        <li><span class="qv-toggle text-green-700 cursor-pointer">Attach filter &amp; Capnography<span class="qv-info hidden">Place filter closer to pt &amp; place Capno on the other side of the filter that is farther from the pt</span></span></li>
+        <li><span class="qv-toggle text-green-700 cursor-pointer">Attach filter &amp; Capnography <span class="qv-arrow">→</span><span class="qv-info hidden">Place filter closer to pt &amp; place Capno on the other side of the filter that is farther from the pt</span></span></li>
         <li>Attach circuit to the pt</li>
         <li>Assess the pt\'s reaction to the vent &amp; document settings on Vent Form</li>
         <li>If any changes are needed, then discuss those changes with the Respiratory Therapist and document the changes on the Vent Form.</li>
