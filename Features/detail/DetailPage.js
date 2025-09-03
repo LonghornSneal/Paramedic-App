@@ -369,49 +369,48 @@ function renderQuickVentSetup(contentArea){
   wrap.className = 'mb-4';
   wrap.innerHTML = `
     <div class="text-center mb-3"><span class="font-semibold underline text-2xl md:text-3xl">Zoll Set Up</span></div>
-    <div class="relative max-w-3xl mx-auto border border-gray-400 rounded px-3 pt-4 pb-3 mb-4">
+    <div class="qv relative max-w-3xl mx-auto border border-gray-400 rounded px-3 pt-4 pb-3 mb-4">
       <div class="qv-legend absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-2 text-sm font-semibold underline">Input Pt Info</div>
-    <div class="flex flex-wrap justify-center items-end gap-4">
-      <div>
+    <div class="flex flex-wrap justify-between items-end gap-2">
+      <div class="min-w-[120px]">
         <label class="block text-sm font-medium mb-1 underline text-center">Sex</label>
-        <div id="qv-sex" class="flex flex-col gap-1">
-          <button data-val="male" class="px-2 py-1 border rounded">Male</button>
-          <button data-val="female" class="px-2 py-1 border rounded">Female</button>
+        <div id="qv-sex" class="flex flex-col gap-1 items-center border border-gray-600 rounded px-2 py-1">
+          <button data-val="male" class="text-sm border border-gray-500 rounded px-1 leading-tight">♂</button>
+          <button data-val="female" class="text-sm border border-gray-500 rounded px-1 leading-tight">♀</button>
         </div>
       </div>
-      <div>
+      <div class="min-w-[220px]">
         <label class="block text-sm font-medium mb-1 underline text-center">Weight</label>
-        <div class="flex items-center gap-2 justify-center">
-          <div class="flex items-center gap-1"><input type="number" step="any" id="qv-weight-kg" class="sidebar-input w-20 text-right" placeholder="" /><span class="text-xs">kg</span></div>
-          <div class="flex items-center gap-1"><input type="number" step="any" id="qv-weight-lb" class="sidebar-input w-20 text-right" placeholder="" /><span class="text-xs">lb</span></div>
-          <button id="qv-weight-clear" class="text-xs px-2 py-1 border rounded">Clear</button>
+        <div class="flex items-center gap-2 justify-center border border-gray-600 rounded px-2 py-1">
+          <div class="flex items-center qv-unit"><input type="number" step="any" id="qv-weight-kg" class="sidebar-input w-16 text-right" placeholder="" /><span class="text-xs">kg</span></div>
+          <div class="flex items-center qv-unit"><input type="number" step="any" id="qv-weight-lb" class="sidebar-input w-16 text-right" placeholder="" /><span class="text-xs">lb</span></div>
         </div>
       </div>
-      <div>
+      <div class="min-w-[280px]">
         <label class="block text-sm font-medium mb-1 underline text-center">Height</label>
         <div class="flex items-center space-x-3">
           <div class="flex items-center gap-2 border border-gray-600 rounded px-2 py-1">
-            <div class="flex items-center gap-1"><input type="number" id="qv-height-ft" class="sidebar-input w-12 text-right" placeholder="" /><span class="text-xs">ft</span></div>
+            <div class="flex items-center qv-unit"><input type="number" id="qv-height-ft" class="sidebar-input w-10 text-right" placeholder="" /><span class="text-xs">ft</span></div>
             <span class="text-xs">&amp;</span>
-            <div class="flex items-center gap-1"><input type="number" id="qv-height-in" class="sidebar-input w-12 text-right" placeholder="" /><span class="text-xs">in</span></div>
+            <div class="flex items-center qv-unit"><input type="number" id="qv-height-in" class="sidebar-input w-10 text-right" placeholder="" /><span class="text-xs">in</span></div>
           </div>
           <span class="text-xs text-gray-500">or</span>
-          <div class="flex items-center gap-1"><input type="number" id="qv-height-inches" class="sidebar-input w-24 text-right" placeholder="" /><span class="text-xs">Total Inches</span></div>
+          <div class="flex items-center qv-unit border border-gray-600 rounded px-2 py-1"><input type="number" id="qv-height-inches" class="sidebar-input w-20 text-right" placeholder="" /><span class="text-xs">in</span><span class="text-xs ml-1">Total Inches</span></div>
         </div>
       </div>
-      <div>
+      <div class="min-w-[140px]">
         <label class="block text-sm font-medium mb-1 underline text-center">ARDS?</label>
-        <div id="qv-ards" class="flex flex-col gap-1">
-          <button data-val="yes" class="px-2 py-1 border rounded">Yes</button>
-          <button data-val="no" class="px-2 py-1 border rounded">No</button>
-          <button data-val="unsure" class="px-2 py-1 border rounded">Not Sure</button>
+        <div id="qv-ards" class="flex flex-col gap-1 items-center border border-gray-600 rounded px-2 py-1">
+          <button data-val="yes" class="text-sm border border-gray-500 rounded px-1 leading-tight">Yes</button>
+          <button data-val="no" class="text-sm border border-gray-500 rounded px-1 leading-tight">No</button>
+          <button data-val="unsure" class="text-sm border border-gray-500 rounded px-1 leading-tight">Not Sure</button>
         </div>
       </div>
     </div>
     </div>
     <div class="md:col-span-2 text-center">
       <label class="block text-sm font-bold mb-1">Suggested Tidal Volume</label>
-      <div id="qv-tv" class="text-xl font-bold" style="color:#ff6a00" title="Hover to see math"></div>
+      <div id="qv-tv" class="text-xl font-bold" style="color:#a78bfa" title="Hover to see math"></div>
     </div>
     <div class="mt-4 text-sm">
       <ul class="list-disc ml-5">
@@ -567,7 +566,15 @@ function renderQuickVentSetup(contentArea){
   }
 
   // Event wiring
-  sexContainer.querySelectorAll('button').forEach(btn=> btn.addEventListener('click', ()=>{ setSelected(sexContainer, btn.dataset.val); updateSidebarFromQV(); compute(); }));
+  sexContainer.querySelectorAll('button').forEach(btn=> {
+    btn.addEventListener('click', ()=>{ setSelected(sexContainer, btn.dataset.val); updateSidebarFromQV(); compute(); });
+    btn.addEventListener('mouseenter', ()=>{
+      const tip = document.createElement('div'); tip.className='qv-tooltip'; tip.id='qv-sex-tip'; tip.textContent = btn.dataset.val==='male'?'Male':'Female';
+      document.body.appendChild(tip);
+      const r = btn.getBoundingClientRect(); tip.style.left = (r.left+window.scrollX)+'px'; tip.style.top=(r.bottom+window.scrollY+6)+'px';
+    });
+    btn.addEventListener('mouseleave', ()=>{ document.getElementById('qv-sex-tip')?.remove(); });
+  });
   wtKgEl.addEventListener('input', ()=>{ wtLbEl.value = wtKgEl.value ? (parseFloat(wtKgEl.value)*2.20462).toFixed(1):''; updateSidebarFromQV(); compute(); });
   wtLbEl.addEventListener('input', ()=>{ wtKgEl.value = wtLbEl.value ? (parseFloat(wtLbEl.value)/2.20462).toFixed(2):''; updateSidebarFromQV(); compute(); });
   wtClrEl.addEventListener('click', (e)=>{ e.preventDefault(); wtKgEl.value=''; wtLbEl.value=''; updateSidebarFromQV(); compute(); });
