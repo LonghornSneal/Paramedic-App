@@ -205,12 +205,21 @@ export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop =
     }
     const topic = window.allDisplayableTopicsMap[topicId];
     contentArea.innerHTML = '';
-    // Header (topic title)
-    const headerEl = document.createElement('h2');
-    headerEl.textContent = topic.title || topic.name || topic.id;
-    headerEl.className = 'topic-h2 font-semibold text-lg mb-4';
-    headerEl.dataset.topicId = topic.id;
-    contentArea.appendChild(headerEl);
+    // Header (topic title) — skip for Quick Vent pages (they render their own centered title)
+    const isQuickVent = /^zoll-quick-vent-/.test(topicId);
+    if (!isQuickVent) {
+        const headerEl = document.createElement('h2');
+        headerEl.textContent = topic.title || topic.name || topic.id;
+        headerEl.className = 'topic-h2 font-semibold text-lg mb-4';
+        headerEl.dataset.topicId = topic.id;
+        contentArea.appendChild(headerEl);
+    } else {
+        // Still store topic id for updatePatientData refresh detection
+        const hidden = document.createElement('div');
+        hidden.className = 'topic-h2 hidden';
+        hidden.dataset.topicId = topic.id;
+        contentArea.appendChild(hidden);
+    }
     // Insert any warning alerts at the top of the page
     const warningsHtml = appendTopicWarnings(topic, window.patientData);
     if (warningsHtml) {
@@ -360,51 +369,63 @@ function renderQuickVentSetup(contentArea){
   wrap.className = 'mb-4';
   wrap.innerHTML = `
     <div class="text-center mb-3"><span class="font-semibold underline">Zoll Set Up</span></div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+    <div class="text-center mb-2 font-semibold">Input Pt Info</div>
+    <div class="flex flex-wrap justify-center items-end gap-3 mb-3">
       <div>
-        <label class="block text-sm font-medium mb-1">Pt Sex</label>
-        <select id="qv-sex" class="sidebar-input w-full">
+        <label class="block text-sm font-medium mb-1">Sex</label>
+        <select id="qv-sex" class="sidebar-input w-40">
           <option value="">--</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
         </select>
       </div>
       <div>
-        <label class="block text-sm font-medium mb-1">Pt Weight (kg)</label>
-        <input type="number" id="qv-weight" class="sidebar-input w-full" placeholder="kg" />
-      </div>
-      <div>
-        <label class="block text-sm font-medium mb-1">Pt Height</label>
-        <div class="flex items-center space-x-2">
-          <input type="number" id="qv-height-ft" class="sidebar-input w-20" placeholder="ft" />
-          <input type="number" id="qv-height-in" class="sidebar-input w-20" placeholder="in" />
-          <span class="text-xs text-gray-500">or</span>
-          <input type="number" id="qv-height-inches" class="sidebar-input w-24" placeholder="inches" />
+        <label class="block text-sm font-medium mb-1">Weight</label>
+        <div class="flex items-center gap-2">
+          <input type="number" step="any" id="qv-weight-kg" class="sidebar-input w-28" placeholder="kg" />
+          <input type="number" step="any" id="qv-weight-lb" class="sidebar-input w-28" placeholder="lb" />
+          <button id="qv-weight-clear" class="text-xs px-2 py-1 border rounded">Clear</button>
         </div>
       </div>
       <div>
-        <label class="block text-sm font-medium mb-1">ARDS Pt?</label>
-        <select id="qv-ards" class="sidebar-input w-full">
+        <label class="block text-sm font-medium mb-1">Height</label>
+        <div class="flex items-center space-x-2">
+          <div class="flex items-center gap-1"><input type="number" id="qv-height-ft" class="sidebar-input w-16" placeholder="ft" /><span class="text-xs">ft</span></div>
+          <div class="flex items-center gap-1"><input type="number" id="qv-height-in" class="sidebar-input w-16" placeholder="in" /><span class="text-xs">in</span></div>
+          <span class="text-xs text-gray-500">or</span>
+          <div class="flex items-center gap-1"><input type="number" id="qv-height-inches" class="sidebar-input w-24" placeholder="inches" /><span class="text-xs">Total Inches</span></div>
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">ARDS?</label>
+        <select id="qv-ards" class="sidebar-input w-40">
           <option value="">--</option>
           <option value="no">No</option>
           <option value="yes">Yes</option>
           <option value="unsure">Not Sure</option>
         </select>
       </div>
-      <div class="md:col-span-2">
-        <label class="block text-sm font-medium mb-1">Suggested Tidal Volume</label>
-        <div id="qv-tv" class="text-lg font-semibold text-orange-600 cursor-pointer" title="Hover to see math"></div>
-      </div>
+    </div>
+    <div class="md:col-span-2 text-center">
+      <label class="block text-sm font-medium mb-1">Suggested Tidal Volume</label>
+      <div id="qv-tv" class="text-xl font-bold" style="color:#ff6a00" title="Hover to see math"></div>
     </div>
     <div class="mt-4 text-sm">
       <ul class="list-disc ml-5">
         <li>IFT = Obtain vent setting from respiratory therapist</li>
-        <li>New ventilator pt = Use ideal body weight to find Tidal Volume</li>
-        <li>Attach circuit to [[circuit tube hole|big tube covered by red cap on right]]</li>
-        <li>Attach green tube to top [[transducer port|top left]]</li>
-        <li>Attach clear tube to bottom port [[exhalation valve|bottom left]]</li>
+        <li>New ventilator pt = Use Ideal Body Weight (IBW) to find the Tidal Volume</li>
+        <li>${parseTextMarkup('Attach circuit to [[circuit tube hole|big tube covered by red cap on right]]')}</li>
+        <li>${parseTextMarkup('Attach green tube to top [[transducer port|top left]]')}</li>
+        <li>${parseTextMarkup('Attach clear tube to bottom port [[exhalation valve|bottom left]]')}</li>
         <li>Turn on → Let self test run → Patient disconnect should display</li>
         <li>Check high pressure alarm by putting gloved hand against end of vent circuit</li>
+        <li>Select mode - Assistant Control (AC) or SIMV</li>
+        <li>Select breath type - Volume or Pressure</li>
+        <li>Adjust settings &amp; alarms prn</li>
+        <li>${parseTextMarkup('Attach filter &amp; Capnography [[Place filter closer to pt &amp; place Capno on the other side of the filter that is farther from the pt|Place filter closer to pt &amp; place Capno on the other side of the filter that is farther from the pt]]')}</li>
+        <li>Attach circuit to the pt</li>
+        <li>Assess the pt\'s reaction to the vent &amp; document settings on Vent Form</li>
+        <li>If any changes are needed, then discuss those changes with the Respiratory Therapist and document the changes on the Vent Form.</li>
       </ul>
     </div>
   `;
@@ -413,7 +434,9 @@ function renderQuickVentSetup(contentArea){
 
   // Prefill from patientData
   const sexEl = wrap.querySelector('#qv-sex');
-  const wtEl = wrap.querySelector('#qv-weight');
+  const wtKgEl = wrap.querySelector('#qv-weight-kg');
+  const wtLbEl = wrap.querySelector('#qv-weight-lb');
+  const wtClrEl = wrap.querySelector('#qv-weight-clear');
   const ftEl = wrap.querySelector('#qv-height-ft');
   const inEl = wrap.querySelector('#qv-height-in');
   const totalEl = wrap.querySelector('#qv-height-inches');
@@ -422,7 +445,8 @@ function renderQuickVentSetup(contentArea){
 
   if (window.patientData) {
     if (window.patientData.gender) sexEl.value = window.patientData.gender;
-    if (window.patientData.weight != null) wtEl.value = window.patientData.weight;
+    if (window.patientData.weight != null) wtKgEl.value = window.patientData.weight;
+    if (window.patientData.weight != null) wtLbEl.value = (window.patientData.weight * 2.20462).toFixed(1);
     if (window.patientData.heightIn != null) {
       const h = window.patientData.heightIn;
       totalEl.value = h;
@@ -434,19 +458,19 @@ function renderQuickVentSetup(contentArea){
   function updateSidebarFromQV() {
     // Update sidebar fields to keep in sync
     const g = sexEl.value;
-    const w = parseFloat(wtEl.value || '');
+    const wkg = parseFloat(wtKgEl.value || '');
+    const wlb = parseFloat(wtLbEl.value || '');
+    const w = !isNaN(wkg) ? wkg : (!isNaN(wlb) ? +(wlb/2.20462).toFixed(2) : NaN);
     const ft = parseInt(ftEl.value || '0',10);
     const inc = parseInt(inEl.value || '0',10);
     const total = parseInt(totalEl.value || ((ft*12 + inc)||''), 10);
-    const sg = document.getElementById('pt-gender'); if (sg) sg.value = g;
-    const sw = document.getElementById('pt-weight-kg'); if (sw && !isNaN(w)) sw.value = w;
-    const shft = document.getElementById('pt-height-ft'); if (shft) shft.value = isNaN(total)? '' : Math.floor(total/12);
-    const shin = document.getElementById('pt-height-in'); if (shin) shin.value = isNaN(total)? '' : (total%12);
-    const shinTot = document.getElementById('pt-height-inches'); if (shinTot) shinTot.value = isNaN(total)? '' : total;
-    // Trigger update
-    document.getElementById('pt-height-inches')?.dispatchEvent(new Event('input'));
-    document.getElementById('pt-weight-kg')?.dispatchEvent(new Event('input'));
-    document.getElementById('pt-gender')?.dispatchEvent(new Event('input'));
+    // Update patientData directly to avoid full re-render while typing
+    if (window.patientData) {
+      window.patientData.gender = g || window.patientData.gender;
+      window.patientData.weight = !isNaN(w) ? w : window.patientData.weight;
+      window.patientData.heightIn = isNaN(total) ? window.patientData.heightIn : total;
+      if (typeof window.renderPatientSnapshot === 'function') window.renderPatientSnapshot();
+    }
   }
 
   function ibwKg(sex, heightIn) {
@@ -471,31 +495,44 @@ function renderQuickVentSetup(contentArea){
 
   function compute() {
     const sex = sexEl.value;
-    const w = parseFloat(wtEl.value || 'NaN');
+    const wkg = parseFloat(wtKgEl.value || 'NaN');
+    const wlb = parseFloat(wtLbEl.value || 'NaN');
+    const w = !isNaN(wkg) ? wkg : (!isNaN(wlb) ? (wlb/2.20462) : NaN);
     const total = parseInt(totalEl.value || (parseInt(ftEl.value||'0',10)*12 + parseInt(inEl.value||'0',10)), 10);
     const ards = ardsEl.value;
     let usedKg = null;
-    let math = '';
-    if (!isNaN(w)) { usedKg = w; math = `Using weight: ${w} kg`; }
-    else if (sex && !isNaN(total)) { const ibw = ibwKg(sex,total); if (ibw) { usedKg = ibw; math = `Using IBW (${sex}, ${total}\" → ${ibw} kg)`; } }
+    let mathHtml = '';
+    if (!isNaN(w)) {
+      usedKg = +w.toFixed(1);
+      mathHtml = `Using actual weight: <strong>${usedKg} kg</strong><br/>`;
+    } else if (sex && !isNaN(total)) {
+      const ibw = ibwKg(sex,total);
+      if (ibw) {
+        usedKg = ibw;
+        const base = sex === 'male' ? 50 : 45.5;
+        mathHtml = `IBW (${sex}) = ${base} + 2.3 × (${total} − 60) = <strong>${ibw} kg</strong><br/>`;
+      }
+    }
     let display = '';
     if (usedKg != null) {
       const rng = tvRange(usedKg, ards);
       if (rng && Array.isArray(rng)) {
         display = `${rng[0]} – ${rng[1]} mL`;
+        mathHtml += `TV range = <strong>[${ards==='yes'?'4–6':'6–8'} mL/<s>kg</s>]</strong> × <strong>${usedKg} <s>kg</s></strong> → <strong>${rng[0]}–${rng[1]} mL</strong>`;
       } else if (rng && rng.normal) {
         display = `${rng.normal[0]}–${rng.normal[1]} mL (no ARDS) · ${rng.ards[0]}–${rng.ards[1]} mL (ARDS)`;
+        mathHtml += `No ARDS: [6–8 mL/<s>kg</s>] × ${usedKg} <s>kg</s> → <strong>${rng.normal[0]}–${rng.normal[1]} mL</strong><br/>ARDS: [4–6 mL/<s>kg</s>] × ${usedKg} <s>kg</s> → <strong>${rng.ards[0]}–${rng.ards[1]} mL</strong>`;
       } else {
         display = '';
       }
     }
     tvEl.textContent = display;
-    tvEl.dataset.math = math + (usedKg!=null ? `; Range rule = ${ards||'not sure'}`: '');
+    tvEl.dataset.math = mathHtml;
     // hover tooltip
     tvEl.onmouseenter = (e)=>{
       if (!tvEl.textContent) return;
       const tip = document.createElement('div'); tip.className='qv-tooltip'; tip.id='qv-tip';
-      tip.textContent = tvEl.dataset.math || '';
+      tip.innerHTML = tvEl.dataset.math || '';
       document.body.appendChild(tip);
       const r = tvEl.getBoundingClientRect(); tip.style.left = (r.left+window.scrollX)+'px'; tip.style.top=(r.bottom+window.scrollY+6)+'px';
     };
@@ -503,7 +540,7 @@ function renderQuickVentSetup(contentArea){
     tvEl.onclick = ()=>{
       if (!tvEl.textContent) return;
       const modal = document.createElement('div'); modal.className='qv-modal'; modal.id='qv-modal';
-      modal.innerHTML = `<div class="qv-modal-header"><span>Calculation Details</span><span id="qv-close" class="qv-close">✕</span></div><div class="p-3 text-sm whitespace-pre-wrap">${tvEl.dataset.math||''}</div>`;
+      modal.innerHTML = `<div class=\"qv-modal-header\"><span>Calculation Details</span><span id=\"qv-close\" class=\"qv-close\">✕</span></div><div class=\"p-3 text-sm\">${tvEl.dataset.math||''}</div>`;
       document.body.appendChild(modal);
       const close = modal.querySelector('#qv-close'); close?.addEventListener('click', ()=> modal.remove());
       // basic drag
@@ -517,7 +554,9 @@ function renderQuickVentSetup(contentArea){
 
   // Event wiring
   sexEl.addEventListener('change', ()=>{ updateSidebarFromQV(); compute(); });
-  wtEl.addEventListener('input', ()=>{ updateSidebarFromQV(); compute(); });
+  wtKgEl.addEventListener('input', ()=>{ wtLbEl.value = wtKgEl.value ? (parseFloat(wtKgEl.value)*2.20462).toFixed(1):''; updateSidebarFromQV(); compute(); });
+  wtLbEl.addEventListener('input', ()=>{ wtKgEl.value = wtLbEl.value ? (parseFloat(wtLbEl.value)/2.20462).toFixed(2):''; updateSidebarFromQV(); compute(); });
+  wtClrEl.addEventListener('click', (e)=>{ e.preventDefault(); wtKgEl.value=''; wtLbEl.value=''; updateSidebarFromQV(); compute(); });
   ftEl.addEventListener('input', ()=>{ totalEl.value=''; updateSidebarFromQV(); compute(); });
   inEl.addEventListener('input', ()=>{ totalEl.value=''; updateSidebarFromQV(); compute(); });
   totalEl.addEventListener('input', ()=>{ updateSidebarFromQV(); compute(); });
