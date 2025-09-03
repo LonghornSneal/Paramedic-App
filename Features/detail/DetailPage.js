@@ -371,36 +371,36 @@ function renderQuickVentSetup(contentArea){
     <div class="text-center mb-3"><span class="font-semibold underline text-2xl md:text-3xl">Zoll Set Up</span></div>
     <div class="qv relative max-w-3xl mx-auto border border-gray-400 rounded px-3 pt-4 pb-3 mb-4">
       <div class="qv-legend absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-2 text-sm font-semibold underline">Input Pt Info</div>
-    <div class="flex flex-wrap justify-between items-end gap-2">
-      <div class="min-w-[120px]">
+    <div class="qv-row">
+      <div class="qv-field">
         <label class="block text-sm font-medium mb-1 underline text-center">Sex</label>
-        <div id="qv-sex" class="flex flex-col gap-1 items-center border border-gray-600 rounded px-2 py-1">
+        <div id="qv-sex" class="flex flex-col gap-1 items-center">
           <button data-val="male" class="text-sm border border-gray-500 rounded px-1 leading-tight">♂</button>
           <button data-val="female" class="text-sm border border-gray-500 rounded px-1 leading-tight">♀</button>
         </div>
       </div>
-      <div class="min-w-[220px]">
+      <div class="qv-field">
         <label class="block text-sm font-medium mb-1 underline text-center">Weight</label>
-        <div class="flex items-center gap-2 justify-center border border-gray-600 rounded px-2 py-1">
-          <div class="flex items-center qv-unit"><input type="number" step="any" id="qv-weight-kg" class="sidebar-input w-16 text-right" placeholder="" /><span class="text-xs">kg</span></div>
-          <div class="flex items-center qv-unit"><input type="number" step="any" id="qv-weight-lb" class="sidebar-input w-16 text-right" placeholder="" /><span class="text-xs">lb</span></div>
+        <div class="qv-weight">
+          <div class="qv-unit"><input type="text" inputmode="decimal" id="qv-weight-kg" class="qv-input qv-num" placeholder="" aria-label="Weight kilograms" /><span class="qv-suffix">kg</span></div>
+          <div class="qv-unit"><input type="text" inputmode="decimal" id="qv-weight-lb" class="qv-input qv-num" placeholder="" aria-label="Weight pounds" /><span class="qv-suffix">lb</span></div>
         </div>
       </div>
-      <div class="min-w-[280px]">
+      <div class="qv-field">
         <label class="block text-sm font-medium mb-1 underline text-center">Height</label>
-        <div class="flex items-center space-x-3">
-          <div class="flex items-center gap-2 border border-gray-600 rounded px-2 py-1">
-            <div class="flex items-center qv-unit"><input type="number" id="qv-height-ft" class="sidebar-input w-10 text-right" placeholder="" /><span class="text-xs">ft</span></div>
-            <span class="text-xs">&amp;</span>
-            <div class="flex items-center qv-unit"><input type="number" id="qv-height-in" class="sidebar-input w-10 text-right" placeholder="" /><span class="text-xs">in</span></div>
+        <div class="qv-height">
+          <div class="qv-height-pair">
+            <div class="qv-unit"><input type="text" inputmode="numeric" id="qv-height-ft" class="qv-input qv-num" placeholder="" aria-label="Height feet" /><span class="qv-suffix">ft</span></div>
+            <span class="qv-sep">&amp;</span>
+            <div class="qv-unit"><input type="text" inputmode="numeric" id="qv-height-in" class="qv-input qv-num" placeholder="" aria-label="Height inches" /><span class="qv-suffix">in</span></div>
           </div>
-          <span class="text-xs text-gray-500">or</span>
-          <div class="flex items-center qv-unit border border-gray-600 rounded px-2 py-1"><input type="number" id="qv-height-inches" class="sidebar-input w-20 text-right" placeholder="" /><span class="text-xs">in</span><span class="text-xs ml-1">Total Inches</span></div>
+          <span class="qv-equals">=</span>
+          <div class="qv-height-total"><input type="text" inputmode="numeric" id="qv-height-inches" class="qv-input qv-num" placeholder="" aria-label="Total inches" /><span class="qv-total-label">Total Inches</span></div>
         </div>
       </div>
-      <div class="min-w-[140px]">
+      <div class="qv-field">
         <label class="block text-sm font-medium mb-1 underline text-center">ARDS?</label>
-        <div id="qv-ards" class="flex flex-col gap-1 items-center border border-gray-600 rounded px-2 py-1">
+        <div id="qv-ards" class="flex flex-col gap-1 items-center">
           <button data-val="yes" class="text-sm border border-gray-500 rounded px-1 leading-tight">Yes</button>
           <button data-val="no" class="text-sm border border-gray-500 rounded px-1 leading-tight">No</button>
           <button data-val="unsure" class="text-sm border border-gray-500 rounded px-1 leading-tight">Not Sure</button>
@@ -409,7 +409,7 @@ function renderQuickVentSetup(contentArea){
     </div>
     </div>
     <div class="md:col-span-2 text-center">
-      <label class="block text-sm font-bold mb-1">Suggested Tidal Volume</label>
+      <label class="block text-sm font-bold mb-1 qv-tv-label">Suggested Tidal Volume</label>
       <div id="qv-tv" class="text-xl font-bold" style="color:#a78bfa" title="Hover to see math"></div>
     </div>
     <div class="mt-4 text-sm">
@@ -432,6 +432,39 @@ function renderQuickVentSetup(contentArea){
     </div>
   `;
   contentArea.appendChild(wrap);
+  // Transform specific list items: make the leading instruction text non-interactive
+  try {
+    const patterns = [
+      { prefix: 'Attach circuit to ', clickable: 'circuit tube hole' },
+      { prefix: 'Attach green tube to ', clickable: 'top transducer port' },
+      { prefix: 'Attach clear tube to ', clickable: 'bottom port exhalation valve' },
+    ];
+    wrap.querySelectorAll('.qv-toggle').forEach(span => {
+      const li = span.closest('li');
+      if (!li) return;
+      const textBeforeArrow = Array.from(span.childNodes)
+        .filter(n => n.nodeType === Node.TEXT_NODE)
+        .map(n => n.textContent || '')
+        .join('')
+        .trim();
+      for (const p of patterns) {
+        if (textBeforeArrow.startsWith(p.prefix) && textBeforeArrow.includes(p.clickable)) {
+          // Inject non-interactive prefix before span
+          const prefixNode = document.createTextNode(p.prefix);
+          li.insertBefore(prefixNode, span);
+          // Reduce span's leading text to just the clickable segment
+          // Replace first text node's content
+          const t = span.childNodes[0];
+          if (t && t.nodeType === Node.TEXT_NODE) {
+            t.textContent = p.clickable + ' ';
+          }
+          const arrow = span.querySelector('.qv-arrow');
+          if (arrow) { arrow.textContent = '→'; arrow.style.color = '#000'; }
+          break;
+        }
+      }
+    });
+  } catch(e) { /* ignore */ }
   attachToggleInfoHandlers(contentArea);
   // Quick vent specific toggles (no underline, no arrow)
   wrap.querySelectorAll('.qv-toggle').forEach(el => {
@@ -452,6 +485,42 @@ function renderQuickVentSetup(contentArea){
   const ardsContainer = wrap.querySelector('#qv-ards');
   const tvEl = wrap.querySelector('#qv-tv');
 
+  // Input helpers for validation/formatting
+  function clamp(num, min, max){ if (isNaN(num)) return NaN; return Math.min(max, Math.max(min, num)); }
+  function setInputSize(el){ try { el.size = Math.max(1, (el.value||'').length || 1); } catch(e){} }
+  function sanitizeIntInRange(str, min, max){
+    const onlyDigits = String(str || '').replace(/[^0-9]/g, '');
+    if (!onlyDigits) return '';
+    let n = parseInt(onlyDigits, 10);
+    if (isNaN(n)) return '';
+    n = clamp(n, min, max);
+    return String(n);
+  }
+  function sanitizeWeight(str, unit){
+    // allow only digits and optional single decimal with one digit
+    let s = String(str || '').toLowerCase().replace(/[^0-9.]/g, '');
+    const firstDot = s.indexOf('.');
+    if (firstDot !== -1){
+      // keep only first dot, remove any others
+      s = s.slice(0, firstDot+1) + s.slice(firstDot+1).replace(/\./g, '');
+    }
+    // limit to one decimal place
+    s = s.replace(/^(\d+)(\.(\d)?).*$/, '$1$2$3');
+    // remove leading zeros if any (except keep single zero before decimal)
+    s = s.replace(/^0+(\d)/, '$1');
+    // clamp to realistic max
+    const max = unit === 'kg' ? 300 : 660;
+    const val = parseFloat(s);
+    if (!isNaN(val)) {
+      const clamped = clamp(val, 0, max);
+      // preserve one decimal if present, else as integer string
+      s = (s.includes('.') ? clamped.toFixed(1) : String(Math.trunc(clamped)));
+    } else {
+      s = '';
+    }
+    return s;
+  }
+
   if (window.patientData) {
     if (window.patientData.gender) selectOption(sexContainer, window.patientData.gender);
     if (window.patientData.weight != null) wtKgEl.value = window.patientData.weight;
@@ -466,7 +535,7 @@ function renderQuickVentSetup(contentArea){
 
   function updateSidebarFromQV() {
     // Update sidebar fields to keep in sync
-    const g = sexEl.value;
+    const g = getSelected(sexContainer);
     const wkg = parseFloat(wtKgEl.value || '');
     const wlb = parseFloat(wtLbEl.value || '');
     const w = !isNaN(wkg) ? wkg : (!isNaN(wlb) ? +(wlb/2.20462).toFixed(2) : NaN);
@@ -565,6 +634,9 @@ function renderQuickVentSetup(contentArea){
     };
   }
 
+  // Set initial input sizes
+  [wtKgEl, wtLbEl, ftEl, inEl, totalEl].forEach(el => setInputSize(el));
+
   // Event wiring
   sexContainer.querySelectorAll('button').forEach(btn=> {
     btn.addEventListener('click', ()=>{ setSelected(sexContainer, btn.dataset.val); updateSidebarFromQV(); compute(); });
@@ -575,12 +647,26 @@ function renderQuickVentSetup(contentArea){
     });
     btn.addEventListener('mouseleave', ()=>{ document.getElementById('qv-sex-tip')?.remove(); });
   });
-  wtKgEl.addEventListener('input', ()=>{ wtLbEl.value = wtKgEl.value ? (parseFloat(wtKgEl.value)*2.20462).toFixed(1):''; updateSidebarFromQV(); compute(); });
-  wtLbEl.addEventListener('input', ()=>{ wtKgEl.value = wtLbEl.value ? (parseFloat(wtLbEl.value)/2.20462).toFixed(2):''; updateSidebarFromQV(); compute(); });
-  wtClrEl.addEventListener('click', (e)=>{ e.preventDefault(); wtKgEl.value=''; wtLbEl.value=''; updateSidebarFromQV(); compute(); });
-  ftEl.addEventListener('input', ()=>{ totalEl.value=''; updateSidebarFromQV(); compute(); });
-  inEl.addEventListener('input', ()=>{ totalEl.value=''; updateSidebarFromQV(); compute(); });
-  totalEl.addEventListener('input', ()=>{ updateSidebarFromQV(); compute(); });
+  wtKgEl.addEventListener('input', ()=>{
+    wtKgEl.value = sanitizeWeight(wtKgEl.value, 'kg');
+    setInputSize(wtKgEl);
+    const kg = parseFloat(wtKgEl.value||'NaN');
+    wtLbEl.value = !isNaN(kg) ? (kg*2.20462).toFixed(1) : '';
+    setInputSize(wtLbEl);
+    updateSidebarFromQV(); compute();
+  });
+  wtLbEl.addEventListener('input', ()=>{
+    wtLbEl.value = sanitizeWeight(wtLbEl.value, 'lb');
+    setInputSize(wtLbEl);
+    const lb = parseFloat(wtLbEl.value||'NaN');
+    wtKgEl.value = !isNaN(lb) ? (lb/2.20462).toFixed(1) : '';
+    setInputSize(wtKgEl);
+    updateSidebarFromQV(); compute();
+  });
+  wtClrEl?.addEventListener('click', (e)=>{ e.preventDefault(); wtKgEl.value=''; wtLbEl.value=''; setInputSize(wtKgEl); setInputSize(wtLbEl); updateSidebarFromQV(); compute(); });
+  ftEl.addEventListener('input', ()=>{ ftEl.value = sanitizeIntInRange(ftEl.value, 0, 9); setInputSize(ftEl); totalEl.value=''; updateSidebarFromQV(); compute(); });
+  inEl.addEventListener('input', ()=>{ inEl.value = sanitizeIntInRange(inEl.value, 0, 11); setInputSize(inEl); totalEl.value=''; updateSidebarFromQV(); compute(); });
+  totalEl.addEventListener('input', ()=>{ totalEl.value = sanitizeIntInRange(totalEl.value, 0, 99); setInputSize(totalEl); updateSidebarFromQV(); compute(); });
   ardsContainer.querySelectorAll('button').forEach(btn=> btn.addEventListener('click', ()=>{ setSelected(ardsContainer, btn.dataset.val); compute(); }));
 
   // Height syncing between total and ft/in inside Quick Vent

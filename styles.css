@@ -154,6 +154,30 @@ body.dark-mode #patient-snapshot-bar { color: #e5e7eb; }
 body.dark-mode .qv-legend { background: #111827; }
 
 .selected { outline: 2px solid #2563eb; background-color: #2563eb; color: #fff; }
+/* Quick Vent: Zoll Set Up input styling */
+.qv-row { display: flex; align-items: flex-end; flex-wrap: nowrap; column-gap: 1ch; }
+.qv-field { min-width: max-content; }
+
+.qv-input { border: none; outline: none; padding: 0; margin: 0; background: transparent; font-size: 0.875rem; }
+.qv-num { text-align: right; }
+.qv-suffix { font-size: 0.75rem; }
+
+.qv-weight { display: inline-flex; align-items: baseline; border: 1px solid #9ca3af; padding-left: 3ch; padding-right: 0; padding-top: 0; padding-bottom: 0; column-gap: 3ch; }
+.qv-height { display: inline-flex; align-items: baseline; column-gap: 1ch; }
+.qv-height-pair { display: inline-flex; align-items: baseline; border: 1px solid #9ca3af; padding-left: 1ch; padding-right: 0; padding-top: 0; padding-bottom: 0; column-gap: 2ch; }
+.qv-height-total { display: inline-flex; align-items: baseline; border: 1px solid #9ca3af; padding-left: 2ch; padding-right: 0; padding-top: 0; padding-bottom: 0; }
+.qv-sep { font-size: 0.75rem; }
+.qv-equals { margin: 0 0.5ch; }
+.qv-total-label { font-size: 0.75rem; margin-left: 0.5ch; }
+.qv-tv-label { color: #a78bfa; }
+
+/* Remove number input spinners */
+.qv input[type=number]::-webkit-outer-spin-button,
+.qv input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.qv input[type=number] { -moz-appearance: textfield; }
+
+/* Arrow styling */
+.qv-arrow { color: #000; margin-right: 0.5ch; }
 /* Sane dark mode palette */
 /* Keep header blue (Tailwind), focus on content readability */
 body.dark-mode #content-area { background-color: #111827; }
