@@ -155,7 +155,7 @@ body.dark-mode .qv-legend { background: #111827; }
 
 .selected { outline: 2px solid #2563eb; background-color: #2563eb; color: #fff; }
 /* Quick Vent: Zoll Set Up input styling */
-.qv-row { display: flex; align-items: flex-start; flex-wrap: nowrap; column-gap: 1ch; }
+.qv-row { display: flex; align-items: flex-start; flex-wrap: nowrap; justify-content: center; column-gap: 4ch; }
 .qv-field { min-width: max-content; }
 
 .qv-input { border: none; outline: none; padding: 0; margin: 0; background: transparent; font-size: 0.875rem; }
@@ -226,4 +226,9 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 #qv-weight-lb { width: 4.5ch; }
 #qv-height-ft { width: 2ch; }
 #qv-height-in { width: 2ch; }
-#qv-height-inches { width: 2ch; }
+#qv-height-inches { width: 2.5ch; }
+
+/* Slightly shorter height inputs for Height column */
+#qv-height-ft,
+#qv-height-in,
+#qv-height-inches { height: 1rem; line-height: 1rem; }
