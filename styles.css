@@ -164,16 +164,18 @@ body.dark-mode .qv-legend { background: #111827; }
 /* Only inputs have borders; units sit outside */
 .qv-unit { display: inline-flex; align-items: baseline; }
 .qv-unit .qv-input { border: 1px solid #9ca3af; border-radius: 0.125rem; padding: 0 0.1ch; }
-.qv-unit .qv-suffix { margin-left: 0.25ch; }
+.qv-unit .qv-suffix { margin-left: 0.1ch; }
+/* Ensure total-inches input has its own border like other units */
+.qv-height-total .qv-input { border: 1px solid #9ca3af; border-radius: 0.125rem; padding: 0 0.1ch; }
 
 .qv-weight { display: flex; flex-direction: column; align-items: flex-start; row-gap: 0.25rem; border: none; padding: 0; }
 .qv-weight .qv-input { height: 1.25rem; line-height: 1.25rem; }
 .qv-height { display: flex; flex-direction: column; align-items: flex-start; row-gap: 0.25rem; }
-.qv-height-pair { display: inline-flex; align-items: baseline; border: none; padding: 0; column-gap: 3ch; }
+.qv-height-pair { display: inline-flex; align-items: baseline; border: none; padding: 0; column-gap: 1ch; }
 .qv-height-total { display: inline-flex; align-items: baseline; border: none; padding: 0; }
 .qv-sep { font-size: 0.75rem; }
 .qv-equals { margin: 0 1ch; }
-.qv-total-label { font-size: 0.75rem; margin-left: 0.5ch; }
+.qv-total-label { font-size: 0.75rem; margin-left: 0.1ch; }
 .qv-tv-label { color: #a78bfa; }
 
 /* Remove number input spinners */
@@ -216,12 +218,12 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 #qv-sex button.selected::before { color: #ffffff; }
 
 /* Ensure Weight field container uses vertical layout */
-.qv-weight { border-radius: 0.125rem; padding-left: 0.1ch; padding-right: 0.1ch; align-items: flex-start; border-style: solid; border-color: #9ca3af; border-top-width: 0.25px; border-right-width: 0.5px; border-bottom-width: 0.5px; border-left-width: 0.5px; row-gap: 0.25rem; }
+.qv-weight { border: none; padding: 0; align-items: flex-start; row-gap: 0.25rem; }
 .qv-weight .qv-input { height: 1.25rem; line-height: 1.25rem; }
 
 /* Fixed-width numeric input boxes by expected digit count */
-#qv-weight-kg { width: 3ch; }
-#qv-weight-lb { width: 3ch; }
+#qv-weight-kg { width: 4ch; }
+#qv-weight-lb { width: 4ch; }
 #qv-height-ft { width: 1ch; }
 #qv-height-in { width: 2ch; }
 #qv-height-inches { width: 2ch; }
