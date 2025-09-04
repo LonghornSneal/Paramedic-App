@@ -430,6 +430,8 @@ function renderQuickVentSetup(contentArea){
     </div>
   `;
   contentArea.appendChild(wrap);
+  // Ensure sex buttons have no stray inner text (control chars) so only ::before icons show
+  try { wrap.querySelectorAll('#qv-sex button').forEach(b => { b.textContent = ''; }); } catch(e) {}
   // Transform specific list items: make the leading instruction text non-interactive
   try {
     const patterns = [
