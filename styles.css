@@ -240,8 +240,8 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 #qv-height-inches { height: 1rem; line-height: 1rem; }
 
 /* TV title and answer layout */
-.qv-tv-row { display: flex; align-items: baseline; justify-content: flex-start; gap: 1ch; margin-top: -1ch; }
-.qv-tv-title { font-weight: 700; color: #a78bfa; }
-#qv-tv { font-size: 1.125rem; font-weight: 700; color: #a78bfa; }
+.qv-tv-row { display: flex; align-items: flex-start; justify-content: flex-start; gap: 1ch; margin-top: -1ch; }
+.qv-tv-title { font-weight: 700; color: #a78bfa; white-space: nowrap; }
+#qv-tv { display: inline-flex; flex-direction: column; gap: 0.125rem; font-size: 1rem; font-weight: 700; color: #8b5cf6; }
 .qv-tv-ans-line { line-height: 1.1; }
 .qv-tv-ans-label { color: #6b7280; margin-right: 0.25ch; }
