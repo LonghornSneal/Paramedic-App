@@ -369,7 +369,7 @@ function renderQuickVentSetup(contentArea){
   wrap.className = 'mb-4';
   wrap.innerHTML = `
     <div class="text-center mb-3"><span class="font-semibold underline text-2xl md:text-3xl">Zoll Set Up</span></div>
-    <div class="qv relative max-w-3xl mx-auto border border-gray-400 rounded px-3 pt-1 pb-2 mb-4">
+    <div class="qv relative max-w-3xl mx-auto border border-gray-400 rounded pt-1 pb-2 mb-4">
       <div class="qv-legend absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-2 text-sm font-semibold underline">Input Pt Info</div>
     <div class="qv-row">
       <div class="qv-field">
