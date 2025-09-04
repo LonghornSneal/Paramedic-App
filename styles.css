@@ -210,10 +210,10 @@ body.dark-mode .sidebar-input::placeholder { color: #9ca3af; }
 body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 
 /* Quick Vent overrides: fix duplicated Sex symbols, normalize Weight box size */
-#content-area .qv { padding-left: 2ch; padding-right: 2ch; }
+#content-area .qv { display: inline-block; width: -moz-fit-content; width: fit-content; margin-left: auto; margin-right: auto; padding-left: 2ch; padding-right: 2ch; }
 #content-area .qv.pt-4 { padding-top: 0.25rem; }
-#qv-sex button { font-size: 0; position: relative; width: 1.5ch; height: 1.5ch; display: inline-flex; align-items: center; justify-content: center; }
-#qv-sex button::before { display: inline-block; font-size: 1.05rem; line-height: 1; }
+#qv-sex button { font-size: 0; position: relative; width: 2ch; height: 2ch; display: inline-flex; align-items: center; justify-content: center; border: 1px solid #9ca3af; box-sizing: content-box; }
+#qv-sex button::before { display: inline-block; font-size: 1.2rem; line-height: 1; }
 #qv-sex button[data-val="male"]::before { content: "\2642"; color: #2563eb; }
 #qv-sex button[data-val="female"]::before { content: "\2640"; color: #ec4899; }
 #qv-sex button.selected::before { color: #ffffff; }
