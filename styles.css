@@ -162,7 +162,8 @@ body.dark-mode .qv-legend { background: #111827; }
 .qv-num { text-align: right; }
 .qv-suffix { font-size: 0.75rem; }
 
-.qv-weight { display: inline-flex; align-items: baseline; border: 1px solid #9ca3af; padding-left: 2ch; padding-right: 0; padding-top: 0; padding-bottom: 0; column-gap: 3ch; }
+.qv-weight { display: inline-flex; align-items: center; border: 1px solid #9ca3af; border-radius: 0.25rem; padding: 0 0.25rem; column-gap: 0.5rem; height: 1.25rem; line-height: 1.25rem; }
+.qv-weight .qv-input { height: 1.25rem; line-height: 1.25rem; }
 .qv-height { display: inline-flex; align-items: baseline; column-gap: 1ch; }
 .qv-height-pair { display: inline-flex; align-items: baseline; border: 1px solid #9ca3af; padding-left: 2ch; padding-right: 0; padding-top: 0; padding-bottom: 0; column-gap: 1ch; }
 .qv-height-pair .qv-sep { margin-right: 2ch; }
@@ -202,3 +203,14 @@ body.dark-mode .sidebar-label { color: #e5e7eb; }
 body.dark-mode .sidebar-input { background-color: #1f2937; color: #e5e7eb; border-color: #374151; }
 body.dark-mode .sidebar-input::placeholder { color: #9ca3af; }
 body.dark-mode footer { background-color: #111827; color: #9ca3af; }
+
+/* Quick Vent overrides: fix duplicated Sex symbols, normalize Weight box size */
+#qv-sex button { font-size: 0; position: relative; }
+#qv-sex button::before { display: inline-block; font-size: 0.875rem; line-height: 1; }
+#qv-sex button[data-val="male"]::before { content: "\2642"; color: #2563eb; }
+#qv-sex button[data-val="female"]::before { content: "\2640"; color: #ec4899; }
+#qv-sex button.selected::before { color: #ffffff; }
+
+/* Ensure Weight field border box matches ARDS button height */
+.qv-weight { border-radius: 0.25rem; padding: 0 0.25rem; column-gap: 0.5rem; height: 1.25rem; line-height: 1.25rem; align-items: center; }
+.qv-weight .qv-input { height: 1.25rem; line-height: 1.25rem; }
