@@ -184,24 +184,14 @@ body.dark-mode .qv-legend { background: #111827; }
 
 /* Remove number input spinners */
 .qv input[type=number]::-webkit-outer-spin-button,
-.qv input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-.qv input[type=number] { -moz-appearance: textfield; }
+.qv input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; appearance: none; margin: 0; }
+.qv input[type=number] { -moz-appearance: textfield; appearance: textfield; }
 
 /* Arrow styling */
 .qv-arrow { color: #000; margin-right: 0.5ch; display: none; }
 .qv-toggle.open .qv-arrow { display: inline; }
 
-/* Sex symbol buttons (male/female) */
-#qv-sex button { background: transparent; border: 1px solid #9ca3af; }
-#qv-sex button[data-val="male"]::before { content: '♂'; color: #2563eb; }
-#qv-sex button[data-val="female"]::before { content: '♀'; color: #ec4899; }
-#qv-sex button.selected { outline: none; color: #000 !important; }
-#qv-sex button[data-val="male"].selected { background-color: #2563eb; }
-#qv-sex button[data-val="female"].selected { background-color: #ec4899; }
-#qv-sex button.selected::before { color: #000; }
-#qv-sex button[data-val="male"]::before { content: "\2642" !important; }
-#qv-sex button[data-val="female"]::before { content: "\2640" !important; }
-/* Sane dark mode palette */
+/* Legacy sex symbol rules removed *//* Sane dark mode palette */
 /* Keep header blue (Tailwind), focus on content readability */
 body.dark-mode #content-area { background-color: #111827; }
 body.dark-mode #content-area, body.dark-mode p, body.dark-mode li, body.dark-mode span { color: #e5e7eb; }
@@ -215,7 +205,6 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 
 /* Quick Vent overrides: fix duplicated Sex symbols, normalize Weight box size */
 #content-area .qv { display: inline-block; width: -moz-fit-content; width: fit-content; margin-left: auto; margin-right: auto; padding-left: 2ch; padding-right: 2ch; }
-#content-area .qv.pt-4 { /* unused after pt-1 change */ }
 #qv-sex { display: flex; flex-direction: column; row-gap: 0.25rem; align-items: center; }
 #qv-sex button { font-size: 0; position: relative; width: 1.6rem; height: 1.6rem; display: inline-flex; align-items: center; justify-content: center; border: 1px solid #9ca3af; box-sizing: border-box; margin: 0; padding: 0; background: #fff; flex-shrink: 0; border-radius: 0.125rem; }
 #qv-sex button::before { display: inline-block; font-size: 1.2rem; line-height: 1; font-weight: 800; -webkit-text-stroke: 0.015em currentColor; text-shadow: 0 0 0 currentColor, 0.01em 0 currentColor, -0.01em 0 currentColor, 0 0.01em currentColor, 0 -0.01em currentColor; }
