@@ -488,7 +488,7 @@ function renderQuickVentSetup(contentArea){
 
   // Input helpers for validation/formatting
   function clamp(num, min, max){ if (isNaN(num)) return NaN; return Math.min(max, Math.max(min, num)); }
-  function setInputSize(el){ try { el.size = Math.max(1, (el.value||'').length || 1); } catch(e){} }
+  function setInputSize(el){ /* disabled autosizing to keep inputs fixed */ }
   function sanitizeIntInRange(str, min, max){
     const onlyDigits = String(str || '').replace(/[^0-9]/g, '');
     if (!onlyDigits) return '';
