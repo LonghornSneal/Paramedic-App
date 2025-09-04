@@ -382,8 +382,8 @@ function renderQuickVentSetup(contentArea){
       <div class="qv-field">
         <label class="block text-sm font-medium mb-1 underline text-center">Weight</label>
         <div class="qv-weight">
-          <div class="qv-unit"><input type="text" inputmode="decimal" id="qv-weight-kg" class="qv-input qv-num" placeholder="" aria-label="Weight kilograms" /><span class="qv-suffix">kg</span></div>
           <div class="qv-unit"><input type="text" inputmode="decimal" id="qv-weight-lb" class="qv-input qv-num" placeholder="" aria-label="Weight pounds" /><span class="qv-suffix">lb</span></div>
+          <div class="qv-unit"><input type="text" inputmode="decimal" id="qv-weight-kg" class="qv-input qv-num" placeholder="" aria-label="Weight kilograms" /><span class="qv-suffix">kg</span></div>
         </div>
       </div>
       <div class="qv-field">
@@ -394,7 +394,6 @@ function renderQuickVentSetup(contentArea){
             <span class="qv-sep">&amp;</span>
             <div class="qv-unit"><input type="text" inputmode="numeric" id="qv-height-in" class="qv-input qv-num" placeholder="" aria-label="Height inches" /><span class="qv-suffix">in</span></div>
           </div>
-          <span class="qv-equals">=</span>
           <div class="qv-height-total"><input type="text" inputmode="numeric" id="qv-height-inches" class="qv-input qv-num" placeholder="" aria-label="Total inches" /><span class="qv-total-label">Total Inches</span></div>
         </div>
       </div>

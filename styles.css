@@ -162,9 +162,9 @@ body.dark-mode .qv-legend { background: #111827; }
 .qv-num { text-align: right; }
 .qv-suffix { font-size: 0.75rem; }
 
-.qv-weight { display: inline-flex; align-items: center; border-style: solid; border-color: #9ca3af; border-width: 0.25px 0.5px 0.5px 0.5px; border-radius: 0.125rem; padding-left: 0.1ch; padding-right: 0.1ch; column-gap: 3ch; height: 1.25rem; line-height: 1.25rem; }
+.qv-weight { display: flex; flex-direction: column; align-items: flex-start; row-gap: 0.25rem; border-style: solid; border-color: #9ca3af; border-width: 0.25px 0.5px 0.5px 0.5px; border-radius: 0.125rem; padding-left: 0.1ch; padding-right: 0.1ch; }
 .qv-weight .qv-input { height: 1.25rem; line-height: 1.25rem; }
-.qv-height { display: inline-flex; align-items: baseline; column-gap: 0; }
+.qv-height { display: flex; flex-direction: column; align-items: flex-start; row-gap: 0.25rem; }
 .qv-height-pair { display: inline-flex; align-items: baseline; border: 1px solid #9ca3af; padding-left: 0.1ch; padding-right: 0; padding-top: 0; padding-bottom: 0; column-gap: 0; }
 .qv-height-pair .qv-sep { margin: 0; margin-right: 3ch; }
 .qv-height-total { display: inline-flex; align-items: baseline; border: 1px solid #9ca3af; padding-left: 0.1ch; padding-right: 0; padding-top: 0; padding-bottom: 0; }
@@ -212,8 +212,8 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 #qv-sex button[data-val="female"]::before { content: "\2640"; color: #ec4899; }
 #qv-sex button.selected::before { color: #ffffff; }
 
-/* Ensure Weight field border box matches desired spacing */
-.qv-weight { border-radius: 0.125rem; padding-left: 0.1ch; padding-right: 0.1ch; column-gap: 3ch; height: 1.25rem; line-height: 1.25rem; align-items: center; border-style: solid; border-color: #9ca3af; border-top-width: 0.25px; border-right-width: 0.5px; border-bottom-width: 0.5px; border-left-width: 0.5px; }
+/* Ensure Weight field container uses vertical layout */
+.qv-weight { border-radius: 0.125rem; padding-left: 0.1ch; padding-right: 0.1ch; align-items: flex-start; border-style: solid; border-color: #9ca3af; border-top-width: 0.25px; border-right-width: 0.5px; border-bottom-width: 0.5px; border-left-width: 0.5px; row-gap: 0.25rem; }
 .qv-weight .qv-input { height: 1.25rem; line-height: 1.25rem; }
 
 /* Fixed-width numeric input boxes by expected digit count */
