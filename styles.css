@@ -162,7 +162,7 @@ body.dark-mode .qv-legend { background: #111827; }
 .qv-num { text-align: right; }
 .qv-suffix { font-size: 0.75rem; }
 
-.qv-weight { display: inline-flex; align-items: center; border: 1px solid #9ca3af; border-radius: 0.25rem; padding: 0 0.25rem; column-gap: 0.5rem; height: 1.25rem; line-height: 1.25rem; }
+.qv-weight { display: inline-flex; align-items: center; border: 0.5px solid #9ca3af; border-radius: 0.125rem; padding: 0 0.0625rem; column-gap: 0.25rem; height: 1.25rem; line-height: 1.25rem; }
 .qv-weight .qv-input { height: 1.25rem; line-height: 1.25rem; }
 .qv-height { display: inline-flex; align-items: baseline; column-gap: 1ch; }
 .qv-height-pair { display: inline-flex; align-items: baseline; border: 1px solid #9ca3af; padding-left: 2ch; padding-right: 0; padding-top: 0; padding-bottom: 0; column-gap: 1ch; }
@@ -212,5 +212,5 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 #qv-sex button.selected::before { color: #ffffff; }
 
 /* Ensure Weight field border box matches ARDS button height */
-.qv-weight { border-radius: 0.25rem; padding: 0 0.25rem; column-gap: 0.5rem; height: 1.25rem; line-height: 1.25rem; align-items: center; }
+.qv-weight { border-radius: 0.125rem; padding: 0 0.0625rem; column-gap: 0.25rem; height: 1.25rem; line-height: 1.25rem; align-items: center; border-width: 0.5px; }
 .qv-weight .qv-input { height: 1.25rem; line-height: 1.25rem; }
