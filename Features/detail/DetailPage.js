@@ -616,6 +616,8 @@ function renderQuickVentSetup(contentArea){
     // Render any a/b segments as stacked fractions in the math details
     try {
       mathHtml = mathHtml.replace(/(\d+(?:-\d+)?\s*mL)\s*\/\s*(<s>kg<\/s>|kg)/g, (_, numer, denom) => frac(numer, denom));
+      // Replace any right-arrow markers with equals for final values
+      mathHtml = mathHtml.replace(/\u001a/g, ' = ');
     } catch(e) { /* ignore */ }
     // Reformat TV range explanation into formula + min/max with equals, and adjust the displayed answer block
     try {
