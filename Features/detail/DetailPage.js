@@ -613,6 +613,16 @@ function renderQuickVentSetup(contentArea){
       }
     }
     tvEl.innerHTML = display;
+    // Enforce exact placement of the pastel-purple answer text
+    try {
+      const rng2 = tvRange(usedKg, ards);
+      if (rng2 && Array.isArray(rng2)) {
+        tvEl.innerHTML = `<span class=\"qv-tv-ans-val\">${rng2[0]}-${rng2[1]} mL</span>`;
+      } else if (rng2 && rng2.normal) {
+        tvEl.innerHTML = `<div class=\"qv-tv-ans-line\"><span class=\"qv-tv-ans-val\">${rng2.normal[0]}-${rng2.normal[1]} mL</span></div>`+
+                         `<div class=\"qv-tv-ans-line\"><span class=\"qv-tv-ans-val\">${rng2.ards[0]}-${rng2.ards[1]} mL</span></div>`;
+      }
+    } catch(e) { /* ignore */ }
     // Render any a/b segments as stacked fractions in the math details
     try {
       mathHtml = mathHtml.replace(/(\d+(?:-\d+)?\s*mL)\s*\/\s*(<s>kg<\/s>|kg)/g, (_, numer, denom) => frac(numer, denom));
