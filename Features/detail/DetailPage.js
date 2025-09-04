@@ -406,9 +406,9 @@ function renderQuickVentSetup(contentArea){
       </div>
     </div>
     </div>
-    <div class="md:col-span-2 text-center">
-      <label class="block text-sm font-bold mb-1 qv-tv-label">Suggested Tidal Volume</label>
-      <div id="qv-tv" class="text-xl font-bold" style="color:#a78bfa" title="Hover to see math"></div>
+    <div class="md:col-span-2 qv-tv-row">
+      <div class="qv-tv-title">Suggested Tidal Volume =</div>
+      <div id="qv-tv" class="qv-tv-ans" title="Hover to see math"></div>
     </div>
     <div class="mt-4 text-sm">
       <ul class="list-disc ml-5">
@@ -488,6 +488,9 @@ function renderQuickVentSetup(contentArea){
 
   // Input helpers for validation/formatting
   function clamp(num, min, max){ if (isNaN(num)) return NaN; return Math.min(max, Math.max(min, num)); }
+  function frac(numer, denom){
+    return `<span class=\"frac\"><span class=\"frac-num\">${numer}</span><span class=\"frac-bar\"></span><span class=\"frac-den\">${denom}</span></span>`;
+  }
   function setInputSize(el){ /* disabled autosizing to keep inputs fixed */ }
   function sanitizeIntInRange(str, min, max){
     const onlyDigits = String(str || '').replace(/[^0-9]/g, '');
@@ -609,7 +612,34 @@ function renderQuickVentSetup(contentArea){
         display = '';
       }
     }
-    tvEl.textContent = display;
+    tvEl.innerHTML = display;
+    // Render any a/b segments as stacked fractions in the math details
+    try {
+      mathHtml = mathHtml.replace(/(\d+(?:-\d+)?\s*mL)\s*\/\s*(<s>kg<\/s>|kg)/g, (_, numer, denom) => frac(numer, denom));
+    } catch(e) { /* ignore */ }
+    // Reformat TV range explanation into formula + min/max with equals, and adjust the displayed answer block
+    try {
+      const single = mathHtml.match(/TV range = [\s\S]*?\[([0-9]+)-([0-9]+) mL[\s\S]*?\] [\s\S]*?<strong>([0-9]+)-([0-9]+) mL<\/strong>/);
+      if (single && usedKg != null) {
+        const rmin = single[1], rmax = single[2], vmin = single[3], vmax = single[4];
+        const title = 'Formula: TV = [mL/<s>kg</s>] × kg';
+        const body = `Min: [${rmin} mL/<s>kg</s>] × ${usedKg} <s>kg</s> = <strong>${vmin} mL</strong><br/>Max: [${rmax} mL/<s>kg</s>] × ${usedKg} <s>kg</s> = <strong>${vmax} mL</strong>`;
+        mathHtml = mathHtml.replace(/TV range =[\s\S]*?<strong>[0-9]+-[0-9]+ mL<\/strong>/, `${title}<br/>${body}`);
+        display = `<span class="qv-tv-ans-val">${vmin}-${vmax} mL</span>`;
+      } else {
+        const noMatch = mathHtml.match(/No ARDS:[\s\S]*?<strong>([0-9]+)-([0-9]+) mL<\/strong>/);
+        const ardsMatch = mathHtml.match(/ARDS:[\s\S]*?<strong>([0-9]+)-([0-9]+) mL<\/strong>/);
+        if (noMatch && ardsMatch && usedKg != null) {
+          const nMin=noMatch[1], nMax=noMatch[2], aMin=ardsMatch[1], aMax=ardsMatch[2];
+          const title = 'Formula: TV = [mL/<s>kg</s>] × kg';
+          const body = `No ARDS Min: [6 mL/<s>kg</s>] × ${usedKg} <s>kg</s> = <strong>${nMin} mL</strong><br/>No ARDS Max: [8 mL/<s>kg</s>] × ${usedKg} <s>kg</s> = <strong>${nMax} mL</strong><br/>ARDS Min: [4 mL/<s>kg</s>] × ${usedKg} <s>kg</s> = <strong>${aMin} mL</strong><br/>ARDS Max: [6 mL/<s>kg</s>] × ${usedKg} <s>kg</s> = <strong>${aMax} mL</strong>`;
+          mathHtml = `${title}<br/>${body}`;
+          display = `<div class=\"qv-tv-ans-line\"><span class=\"qv-tv-ans-label\">no ARDS:</span> <span class=\"qv-tv-ans-val\">${nMin}-${nMax} mL</span></div>`+
+                    `<div class=\"qv-tv-ans-line\"><span class=\"qv-tv-ans-label\">ARDS:</span> <span class=\"qv-tv-ans-val\">${aMin}-${aMax} mL</span></div>`;
+        }
+      }
+      tvEl.innerHTML = display;
+    } catch(e) { /* ignore */ }
     tvEl.dataset.math = mathHtml;
     // hover tooltip
     tvEl.onmouseenter = (e)=>{

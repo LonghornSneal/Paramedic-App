@@ -168,6 +168,11 @@ body.dark-mode .qv-legend { background: #111827; }
 /* Ensure total-inches input has its own border like other units */
 .qv-height-total .qv-input { border: 1px solid #9ca3af; border-radius: 0.125rem; padding: 0 0.1ch; }
 
+/* Inline fraction formatting for math details */
+.frac { display: inline-grid; grid-auto-flow: row; align-items: center; justify-items: center; vertical-align: middle; }
+.frac-num, .frac-den { display: block; line-height: 1.05; padding: 0 0.15em; }
+.frac-bar { display: block; width: 100%; border-top: 1px solid currentColor; margin: 0.08em 0; }
+
 .qv-weight { display: flex; flex-direction: column; align-items: flex-start; row-gap: 0.25rem; border: none; padding: 0; }
 .qv-weight .qv-input { height: 1.25rem; line-height: 1.25rem; }
 .qv-height { display: flex; flex-direction: column; align-items: flex-start; row-gap: 0.25rem; }
@@ -213,7 +218,7 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 #content-area .qv.pt-4 { /* unused after pt-1 change */ }
 #qv-sex { display: flex; flex-direction: column; row-gap: 0.25rem; align-items: center; }
 #qv-sex button { font-size: 0; position: relative; width: 1.6rem; height: 1.6rem; display: inline-flex; align-items: center; justify-content: center; border: 1px solid #9ca3af; box-sizing: border-box; margin: 0; padding: 0; background: #fff; flex-shrink: 0; border-radius: 0.125rem; }
-#qv-sex button::before { display: inline-block; font-size: 1.2rem; line-height: 1; font-weight: 800; }
+#qv-sex button::before { display: inline-block; font-size: 1.2rem; line-height: 1; font-weight: 800; -webkit-text-stroke: 0.015em currentColor; text-shadow: 0 0 0 currentColor, 0.01em 0 currentColor, -0.01em 0 currentColor, 0 0.01em currentColor, 0 -0.01em currentColor; }
 #qv-sex button[data-val="male"]::before { content: "\2642"; color: #2563eb; }
 #qv-sex button[data-val="female"]::before { content: "\2640"; color: #ec4899; }
 #qv-sex button.selected::before { color: #ffffff; }
@@ -233,3 +238,10 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 #qv-height-ft,
 #qv-height-in,
 #qv-height-inches { height: 1rem; line-height: 1rem; }
+
+/* TV title and answer layout */
+.qv-tv-row { display: flex; align-items: baseline; justify-content: flex-start; gap: 1ch; margin-top: -1ch; }
+.qv-tv-title { font-weight: 700; color: #a78bfa; }
+#qv-tv { font-size: 1.125rem; font-weight: 700; color: #a78bfa; }
+.qv-tv-ans-line { line-height: 1.1; }
+.qv-tv-ans-label { color: #6b7280; margin-right: 0.25ch; }
