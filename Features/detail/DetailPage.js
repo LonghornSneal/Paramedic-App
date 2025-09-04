@@ -391,10 +391,9 @@ function renderQuickVentSetup(contentArea){
         <div class="qv-height">
           <div class="qv-height-pair">
             <div class="qv-unit"><input type="text" inputmode="numeric" id="qv-height-ft" class="qv-input qv-num" placeholder="" aria-label="Height feet" /><span class="qv-suffix">ft</span></div>
-            <span class="qv-sep">&amp;</span>
             <div class="qv-unit"><input type="text" inputmode="numeric" id="qv-height-in" class="qv-input qv-num" placeholder="" aria-label="Height inches" /><span class="qv-suffix">in</span></div>
           </div>
-          <div class="qv-height-total"><input type="text" inputmode="numeric" id="qv-height-inches" class="qv-input qv-num" placeholder="" aria-label="Total inches" /><span class="qv-total-label">Total Inches</span></div>
+          <div class="qv-height-total"><input type="text" inputmode="numeric" id="qv-height-inches" class="qv-input qv-num" placeholder="" aria-label="Total inches" /><span class="qv-total-label">in</span></div>
         </div>
       </div>
       <div class="qv-field">
