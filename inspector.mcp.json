@@ -49,6 +49,20 @@
       "args": [
         "./node_modules/mcp-smart-crawler/build/index.js"
       ]
+    },
+    "fetch": {
+      "command": "node",
+      "args": [
+        "./node_modules/@kazuph/mcp-fetch/dist/index.js"
+      ],
+      "env": {}
+    },
+    "fetcher": {
+      "command": "node",
+      "args": [
+        "./node_modules/fetcher-mcp/build/index.js"
+      ],
+      "env": {}
     }
   }
 }
