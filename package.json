@@ -1,0 +1,23 @@
+{
+  "name": "paramedic-app",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "lint:css": "stylelint styles.css",
+    "validate:css": "csstree-validator styles.css",
+    "lint:html": "html-validate index.html",
+    "lint:js": "eslint . --ext .js",
+    "hint": "hint .",
+    "lint": "npm run lint:css && npm run validate:css && npm run lint:html && npm run lint:js && npm run hint"
+  },
+  "devDependencies": {
+    "csstree-validator": "^4.0.1",
+    "eslint": "^9.34.0",
+    "eslint-plugin-compat": "^6.0.2",
+    "hint": "^7.1.13",
+    "html-validate": "^10.0.0",
+    "stylelint": "^16.23.1",
+    "stylelint-config-standard": "^39.0.0",
+    "stylelint-no-unsupported-browser-features": "^8.0.4"
+  }
+}

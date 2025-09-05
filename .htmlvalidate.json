@@ -1,0 +1,10 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "require-sri": "off",
+    "no-trailing-whitespace": "warn",
+    "void-style": "warn",
+    "element-permitted-content": "warn"
+  }
+}
+

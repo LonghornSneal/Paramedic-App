@@ -1,0 +1,30 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "plugins": ["stylelint-no-unsupported-browser-features"],
+  "rules": {
+    "plugin/no-unsupported-browser-features": [true, {
+      "severity": "warning",
+      "browsers": [
+        "last 2 chrome versions",
+        "last 2 firefox versions",
+        "last 2 edge versions",
+        "last 2 safari versions",
+        "ios_saf >= 15.4",
+        "not op_mini all"
+      ]
+    }],
+    "selector-pseudo-element-no-unknown": [true, {
+      "ignorePseudoElements": [
+        "-webkit-scrollbar",
+        "-webkit-scrollbar-thumb",
+        "-webkit-scrollbar-track"
+      ]
+    }],
+    "rule-empty-line-before": null,
+    "comment-empty-line-before": null,
+    "declaration-block-single-line-max-declarations": null,
+    "font-family-name-quotes": null,
+    "no-descending-specificity": null
+  }
+}
+
