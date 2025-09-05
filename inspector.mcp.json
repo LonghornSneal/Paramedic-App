@@ -28,6 +28,27 @@
         "./node_modules/@modelcontextprotocol/server-memory/dist/index.js"
       ],
       "env": {}
+    },
+    "git": {
+      "env": {},
+      "command": "node",
+      "args": [
+        "./node_modules/@cyanheads/git-mcp-server/dist/index.js"
+      ]
+    },
+    "webpick": {
+      "env": {},
+      "command": "node",
+      "args": [
+        "./node_modules/mcp-web-content-pick/dist/index.js"
+      ]
+    },
+    "crawler": {
+      "env": {},
+      "command": "node",
+      "args": [
+        "./node_modules/mcp-smart-crawler/build/index.js"
+      ]
     }
   }
 }
