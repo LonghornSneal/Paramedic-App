@@ -2,7 +2,31 @@
   "mcpServers": {
     "fs": {
       "command": "node",
-      "args": ["./node_modules/@modelcontextprotocol/server-filesystem/dist/index.js", "."],
+      "args": [
+        "./node_modules/@modelcontextprotocol/server-filesystem/dist/index.js",
+        "."
+      ],
+      "env": {}
+    },
+    "everything": {
+      "command": "node",
+      "args": [
+        "./node_modules/@modelcontextprotocol/server-everything/dist/index.js"
+      ],
+      "env": {}
+    },
+    "seq": {
+      "command": "node",
+      "args": [
+        "./node_modules/@modelcontextprotocol/server-sequential-thinking/dist/index.js"
+      ],
+      "env": {}
+    },
+    "memory": {
+      "command": "node",
+      "args": [
+        "./node_modules/@modelcontextprotocol/server-memory/dist/index.js"
+      ],
       "env": {}
     }
   }
