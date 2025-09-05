@@ -3,7 +3,6 @@
   "hints": {
     "compat-api/html": ["warning"],
     "compat-api/css": ["warning"],
-    "compat-api/js": ["warning"],
     "no-inline-styles": "off",
     "no-broken-links": ["off", {"severity": "warning"}]
   }
