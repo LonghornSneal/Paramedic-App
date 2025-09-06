@@ -5,8 +5,10 @@ const { chromium, firefox, webkit } = require('playwright');
     try { return await firefox.launch({ headless: true }); } catch { return await webkit.launch({ headless: true }); }
   });
   const page = await browser.newPage();
-  await page.goto('http://localhost:5173/#zoll-quick-vent-zoll-setup');
-  // Wait for the calculator to render
+  await page.goto('http://localhost:5173/');
+  // Render the detail page directly via exposed function
+  await page.waitForFunction(() => typeof window.renderDetailPage === 'function', { timeout: 10000 });
+  await page.evaluate(() => window.renderDetailPage('zoll-quick-vent-zoll-setup', false, false));
   await page.waitForSelector('#qv-weight-kg', { timeout: 10000 });
   await page.fill('#qv-weight-kg', '70');
   // Click ARDS Not Sure
@@ -29,4 +31,3 @@ const { chromium, firefox, webkit } = require('playwright');
   }
   await browser.close();
 })();
-
