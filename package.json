@@ -11,7 +11,9 @@
     "lint": "npm run lint:css && npm run validate:css && npm run lint:html && npm run lint:js && npm run hint",
     "preview": "http-server -p 5173 -c-1",
     "scan:dead": "knip --json",
-    "scan:deps": "depcheck --json"
+    "scan:deps": "depcheck --json",
+    "test:vent": "playwright test dev-tools/tests/ventilation.spec.js",
+    "test": "npm run test:vent"
   },
   "devDependencies": {
     "@cyanheads/git-mcp-server": "^2.3.2",
@@ -45,6 +47,7 @@
     "mcp-smart-crawler": "^1.0.10",
     "mcp-web-content-pick": "^0.0.25",
     "playwright": "^1.53.1",
+    "@playwright/test": "^1.53.1",
     "stylelint": "^16.23.1",
     "stylelint-config-standard": "^39.0.0",
     "stylelint-no-unsupported-browser-features": "^8.0.4"

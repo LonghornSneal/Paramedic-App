@@ -481,3 +481,13 @@ longer circuits can trap PEEP in patients with short expiratory times.
 
 // Default export for convenience
 export default VentilationDetailsData;
+/*
+  Data/VentilationDetailsData.js
+  Purpose: Static content map for ZOLL EMV731 equipment topics and Quick Vent Guide entries
+  (including the Zoll Set Up and Tidal Volume Calculator topics). Used by the app to render
+  details via Features/detail/DetailPage.js.
+
+  Tests:
+  - The Quick Vent topics are covered by E2E tests (ventilation.spec.js) that drive the UI and
+    verify computed values and layout.
+*/

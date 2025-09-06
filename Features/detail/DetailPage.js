@@ -869,3 +869,19 @@ function renderCheatSheet(md, topicId){
 
 
 
+/*
+  Features/detail/DetailPage.js
+  Purpose: Renders topic detail views, including equipment pages and the Quick Vent Guide
+  (Zoll Set Up + Tidal Volume calculator). Provides helpers for parsing inline markup,
+  building collapsible sections, and computing Tidal Volume ranges (No ARDS / ARDS / Not Sure).
+
+  Key functions:
+  - renderDetailPage(topicId): orchestrates per-topic rendering and warnings
+  - renderQuickVentSetup(contentArea): renders the Zoll Set Up UI and wires events
+  - compute(): calculates TV ranges using actual weight or IBW (sex + height) and populates UI
+  - tvRange(kg, ards): returns per-case ranges in mL for normal (6–8 mL/kg) and ARDS (4–6 mL/kg)
+
+  Tests:
+  - E2E coverage: dev-tools/tests/ventilation.spec.js verifies Not Sure stacked answers,
+    explicit min/max formulas in the Calculation Details popup, and sex indicator visibility.
+*/

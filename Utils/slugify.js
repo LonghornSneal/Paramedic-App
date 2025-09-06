@@ -14,3 +14,10 @@ export function slugify(text) {
 if (typeof window !== 'undefined') {
     window.slugify = slugify;
 }
+/*
+  Utils/slugify.js
+  Purpose: Converts strings to URL/ID-friendly slugs used for anchors and element IDs.
+
+  Tests:
+  - No dedicated tests; behavior can be validated by checking generated IDs in rendered sections.
+*/

@@ -70,3 +70,16 @@ if (typeof window !== 'undefined') {
     window.navigateViaHistory = navigateViaHistory;
 }
 
+/*
+  Features/navigation/Navigation.js
+  Purpose: Back/Forward/Home nav state, history stack management, and event wiring for app navigation.
+
+  Exposed:
+  - addHistoryEntry(entry)
+  - updateNavButtonsState()
+  - attachNavHandlers()
+
+  Tests:
+  - Currently covered indirectly by Playwright E2E flows which navigate to detail pages and back.
+  - No standalone unit tests for history stack manipulation yet.
+*/

@@ -363,3 +363,19 @@ function initializeData(categoriesData, medDetailsData) { // /Assign the global 
         }
     });
 }
+/*
+  main.js
+  Purpose: Application bootstrap. Wires core UI elements, loads data (categories, meds, vent),
+  attaches navigation/search/settings handlers, and renders the initial ListView.
+
+  Functional coverage:
+  - DOM readiness + global references (window.*)
+  - Sidebar open/close and focus rings
+  - Navigation buttons, History panel, Settings panel
+  - Initializes searchable maps (allDisplayableTopicsMap, medicationDataMap)
+  - Renders initial categories via ListView
+
+  Tests:
+  - End-to-end checks live in Playwright tests under dev-tools/tests (see ventilation.spec.js for Quick Vent flows).
+  - No unit test harness present for this file.
+*/

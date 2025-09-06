@@ -313,3 +313,15 @@ function syncHeightsFromTotal() {
 document.getElementById('pt-height-ft')?.addEventListener('input', () => { syncHeightsFromFtIn(); updatePatientData(); });
 document.getElementById('pt-height-in')?.addEventListener('input', () => { syncHeightsFromFtIn(); updatePatientData(); });
 document.getElementById('pt-height-inches')?.addEventListener('input', () => { syncHeightsFromTotal(); updatePatientData(); });
+/*
+  Features/patient/PatientInfo.js
+  Purpose: Manages patient sidebar inputs (sex, age, weight, height, PMH, allergies, meds, indications, symptoms)
+  and exposes derived helpers (e.g., suggestions/autocomplete data) used across the app.
+
+  Notes:
+  - Synchronizes sidebar values with window.patientData so other features (Quick Vent) can consume them.
+
+  Tests:
+  - Sidebar synchronization is exercised by E2E tests that change sex/weight and then compute TV.
+  - No unit test harness present; consider adding a small DOM test for weight lb↔kg sync.
+*/

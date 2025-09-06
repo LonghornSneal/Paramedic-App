@@ -118,3 +118,16 @@ function createHierarchicalList(items, container, level = 0) {
 if (typeof window !== 'undefined') {
     window.renderInitialView = renderInitialView;
 }
+/*
+  Features/list/ListView.js
+  Purpose: Renders hierarchical category/topic list, toggles expansion, and routes to details.
+
+  Core:
+  - renderInitialView(shouldAddHistory, highlightId, categoryPath)
+  - createHierarchicalList(items, container, level)
+  - openCategoriesAndHighlight(categoryPath, highlightId)
+
+  Tests:
+  - Indirectly validated by E2E tests that call renderDetailPage and by user navigation.
+  - TODO: add a lightweight DOM test to assert expansion/collapse and deep-link highlight.
+*/

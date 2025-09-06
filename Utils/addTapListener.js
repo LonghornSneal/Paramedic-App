@@ -11,3 +11,10 @@ export function addTapListener(element, handler) {
     element.addEventListener('click', activate);
     element.addEventListener('keypress', activate); 
 }
+/*
+  Utils/addTapListener.js
+  Purpose: Cross-device click/tap helper to reduce 300ms delays and unify pointer interactions.
+
+  Tests:
+  - Indirect via E2E flows; no unit test harness.
+*/
