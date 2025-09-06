@@ -1,7 +1,8 @@
 @echo off
 setlocal
 cd /d C:\Users\HhsJa\OneDrive\Documents\GitHub\Paramedic-App
-start "mcp-inspector" cmd /c "npx @modelcontextprotocol/inspector node .\node_modules\@modelcontextprotocol\server-memory\dist\index.js"
+REM Launch Inspector using config and auto-start the 'memory' server
+start "mcp-inspector" cmd /c "npx @modelcontextprotocol/inspector --config inspector.mcp.json --server memory"
 ping -n 3 127.0.0.1 >nul
 start "mcp-ui" "http://localhost:6274/"
 exit /b 0

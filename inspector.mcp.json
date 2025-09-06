@@ -63,6 +63,41 @@
         "./node_modules/fetcher-mcp/build/index.js"
       ],
       "env": {}
+    },
+    "playwright": {
+      "command": "node",
+      "args": [
+        "./node_modules/@playwright/mcp/cli.js"
+      ],
+      "env": {}
+    },
+    "shell": {
+      "command": "node",
+      "args": [
+        "./node_modules/mcp-shell-execute/dist/cli.js"
+      ],
+      "env": {}
+    },
+    "firecrawl": {
+      "command": "node",
+      "args": [
+        "./node_modules/firecrawl-mcp/dist/index.js"
+      ],
+      "env": {}
+    },
+    "lighthouse": {
+      "command": "node",
+      "args": [
+        "./node_modules/lighthouse-mcp/build/index.js"
+      ],
+      "env": {}
+    },
+    "a11y": {
+      "command": "node",
+      "args": [
+        "./node_modules/a11y-mcp/src/index.js"
+      ],
+      "env": {}
     }
   }
 }
