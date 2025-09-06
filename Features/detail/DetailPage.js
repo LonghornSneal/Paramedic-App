@@ -694,7 +694,7 @@ function renderQuickVentSetup(contentArea){
                     `<div class=\"qv-tv-ans-line\"><span class=\"qv-tv-ans-val\">${aMin}-${aMax} mL</span><span class=\"qv-tv-ans-label\"> (ARDS)</span></div>`;
         }
       }
-      tvEl.innerHTML = display;
+      if (!isUnsure && display) tvEl.innerHTML = display;
     } catch(e) { /* ignore */ }
     tvEl.dataset.math = mathHtml;
     // hover tooltip
