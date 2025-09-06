@@ -236,3 +236,16 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 #qv-tv { display: inline-flex; flex-direction: column; gap: 0.125rem; font-size: 1rem; font-weight: 700; color: #8b5cf6; }
 .qv-tv-ans-line { line-height: 1.1; }
 .qv-tv-ans-label { color: #6b7280; margin-right: 0.25ch; }
+
+/* Small devices (e.g., Galaxy Fold cover screen ~300-360 CSS px) */
+@media (max-width: 360px) {
+  /* Allow title and answer to wrap so nothing overflows */
+  .qv-tv-row { flex-wrap: wrap; gap: 0.5ch; }
+  .qv-tv-title { white-space: normal; flex: 1 1 100%; margin-bottom: 0.25rem; }
+  /* Tighten paddings so the calculator fits comfortably */
+  #content-area .qv { padding-left: 1ch; padding-right: 1ch; }
+  /* Sidebar width slightly smaller on very narrow screens */
+  #patient-sidebar { width: 85vw; max-width: 85vw; }
+  /* Sex buttons layout horizontally to save vertical space */
+  #qv-sex { flex-direction: row; column-gap: 0.5rem; }
+}

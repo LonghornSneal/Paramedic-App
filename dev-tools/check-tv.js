@@ -5,6 +5,7 @@ const { chromium, firefox, webkit } = require('playwright');
     try { return await firefox.launch({ headless: true }); } catch { return await webkit.launch({ headless: true }); }
   });
   const page = await browser.newPage();
+  await page.setViewportSize({ width: 320, height: 844 });
   await page.goto('http://localhost:5173/');
   // Render the detail page directly via exposed function
   await page.waitForFunction(() => typeof window.renderDetailPage === 'function', { timeout: 10000 });
@@ -31,3 +32,4 @@ const { chromium, firefox, webkit } = require('playwright');
   }
   await browser.close();
 })();
+
