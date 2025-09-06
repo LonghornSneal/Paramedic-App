@@ -600,6 +600,7 @@ function renderQuickVentSetup(contentArea){
       }
     }
     let display = '';
+    const isUnsure = ards === 'unsure';
     if (usedKg != null) {
       const rng = tvRange(usedKg, ards);
       if (rng && Array.isArray(rng)) {
