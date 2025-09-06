@@ -686,7 +686,7 @@ function renderQuickVentSetup(contentArea){
         const noMatch = mathHtml.match(/No ARDS:[\s\S]*?<strong>([0-9]+)-([0-9]+) mL<\/strong>/);
         const ardsMatch = mathHtml.match(/ARDS:[\s\S]*?<strong>([0-9]+)-([0-9]+) mL<\/strong>/);
         if (noMatch && ardsMatch && usedKg != null) {
-          const nMin=noMatch[1], nMax=noMatch[2], aMin=ardsMatch[1], aMax=ardsMatch[2];
+          const nMinVal = Math.round(usedKg * 6), nMaxVal = Math.round(usedKg * 8), aMinVal = Math.round(usedKg * 4), aMaxVal = Math.round(usedKg * 6);
           const title = 'Formula: TV = [mL/<s>kg</s>] × kg';
           const body = `No ARDS Min: [6 mL/<s>kg</s>] × ${usedKg} <s>kg</s> = <strong>${nMin} mL</strong><br/>No ARDS Max: [8 mL/<s>kg</s>] × ${usedKg} <s>kg</s> = <strong>${nMax} mL</strong><br/>ARDS Min: [4 mL/<s>kg</s>] × ${usedKg} <s>kg</s> = <strong>${aMin} mL</strong><br/>ARDS Max: [6 mL/<s>kg</s>] × ${usedKg} <s>kg</s> = <strong>${aMax} mL</strong>`;
           mathHtml += (mathHtml.endsWith('<br/>') ? '' : '<br/>') + `${title}<br/>${body}`;
@@ -865,5 +865,7 @@ function renderCheatSheet(md, topicId){
   }
   return renderMdBlock(picks);
 }
+
+
 
 
