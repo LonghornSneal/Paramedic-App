@@ -623,6 +623,42 @@ function renderQuickVentSetup(contentArea){
                          `<div class=\"qv-tv-ans-line\"><span class=\"qv-tv-ans-val\">${rng2.ards[0]}-${rng2.ards[1]} mL</span></div>`;
       }
     } catch(e) { /* ignore */ }
+    // Ensure explicit formulas are always shown (min/max per case)
+    try {
+      if (usedKg != null && !/TV min/.test(mathHtml)) {
+        const both = tvRange(usedKg, ards);
+        let detail = '';
+        if (both && Array.isArray(both)) {
+          const minPerKg = ards==='yes'?4:6;
+          const maxPerKg = ards==='yes'?6:8;
+          const tvMin = Math.round(usedKg * minPerKg);
+          const tvMax = Math.round(usedKg * maxPerKg);
+          detail += `<div><strong>TV min</strong> = <strong>${minPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${tvMin} mL</strong></div>`;
+          detail += `<div><strong>TV max</strong> = <strong>${maxPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${tvMax} mL</strong></div>`;
+          detail += `<div class=\"mt-1\"><em>Range</em> = <strong>${tvMin}-${tvMax} mL</strong></div>`;
+        } else if (both && both.normal) {
+          const nMinPerKg = 6, nMaxPerKg = 8;
+          const aMinPerKg = 4, aMaxPerKg = 6;
+          const nMin = Math.round(usedKg * nMinPerKg);
+          const nMax = Math.round(usedKg * nMaxPerKg);
+          const aMin = Math.round(usedKg * aMinPerKg);
+          const aMax = Math.round(usedKg * aMaxPerKg);
+          detail += `<div><u>No ARDS</u></div>`;
+          detail += `<div><strong>TV min</strong> = <strong>${nMinPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${nMin} mL</strong></div>`;
+          detail += `<div><strong>TV max</strong> = <strong>${nMaxPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${nMax} mL</strong></div>`;
+          detail += `<div class=\"mt-1\"><em>Range</em> = <strong>${nMin}-${nMax} mL</strong></div>`;
+          detail += `<br/>`;
+          detail += `<div><u>ARDS</u></div>`;
+          detail += `<div><strong>TV min</strong> = <strong>${aMinPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${aMin} mL</strong></div>`;
+          detail += `<div><strong>TV max</strong> = <strong>${aMaxPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${aMax} mL</strong></div>`;
+          detail += `<div class=\"mt-1\"><em>Range</em> = <strong>${aMin}-${aMax} mL</strong></div>`;
+        }
+        if (detail) {
+          mathHtml += (mathHtml.endsWith('<br/>') ? '' : '<br/>') + detail;
+        }
+      }
+    } catch(e) { /* ignore */ }
+
     // Render any a/b segments as stacked fractions in the math details
     try {
       mathHtml = mathHtml.replace(/(\d+(?:-\d+)?\s*mL)\s*\/\s*(<s>kg<\/s>|kg)/g, (_, numer, denom) => frac(numer, denom));
