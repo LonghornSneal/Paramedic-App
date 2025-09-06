@@ -211,6 +211,8 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 #qv-sex button[data-val="male"]::before { content: "\2642"; color: #2563eb; }
 #qv-sex button[data-val="female"]::before { content: "\2640"; color: #ec4899; }
 #qv-sex button.selected::before { color: #ffffff; }
+#qv-sex button.selected[data-val="male"] { background: #2563eb; border-color: #2563eb; }
+#qv-sex button.selected[data-val="female"] { background: #ec4899; border-color: #ec4899; }
 
 /* Ensure Weight field container uses vertical layout */
 .qv-weight { border: none; padding: 0; align-items: flex-start; row-gap: 0.25rem; }

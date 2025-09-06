@@ -619,8 +619,8 @@ function renderQuickVentSetup(contentArea){
       if (rng2 && Array.isArray(rng2)) {
         tvEl.innerHTML = `<span class=\"qv-tv-ans-val\">${rng2[0]}-${rng2[1]} mL</span>`;
       } else if (rng2 && rng2.normal) {
-        tvEl.innerHTML = `<div class=\"qv-tv-ans-line\"><span class=\"qv-tv-ans-val\">${rng2.normal[0]}-${rng2.normal[1]} mL</span></div>`+
-                         `<div class=\"qv-tv-ans-line\"><span class=\"qv-tv-ans-val\">${rng2.ards[0]}-${rng2.ards[1]} mL</span></div>`;
+        tvEl.innerHTML = `<div class=\"qv-tv-ans-line\"><span class=\"qv-tv-ans-val\">${rng2.normal[0]}-${rng2.normal[1]} mL</span><span class=\"qv-tv-ans-label\"> (no ARDS)</span></div>`+
+                         `<div class=\"qv-tv-ans-line\"><span class=\"qv-tv-ans-val\">${rng2.ards[0]}-${rng2.ards[1]} mL</span><span class=\"qv-tv-ans-label\"> (ARDS)</span></div>`;
       }
     } catch(e) { /* ignore */ }
     // Ensure explicit formulas are always shown (min/max per case)
@@ -659,6 +659,13 @@ function renderQuickVentSetup(contentArea){
       }
     } catch(e) { /* ignore */ }
 
+    // Normalize ranges to "6 mL/kg - 8 mL/kg" format before fraction styling
+    try {
+      mathHtml = mathHtml
+        .replace(/\[6-8 mL\/<s>kg<\/s>\]/g, '[6 mL/<s>kg</s> - 8 mL/<s>kg</s>]')
+        .replace(/\[4-6 mL\/<s>kg<\/s>\]/g, '[4 mL/<s>kg</s> - 6 mL/<s>kg</s>]');
+    } catch(e) { /* ignore */ }
+
     // Render any a/b segments as stacked fractions in the math details
     try {
       mathHtml = mathHtml.replace(/(\d+(?:-\d+)?\s*mL)\s*\/\s*(<s>kg<\/s>|kg)/g, (_, numer, denom) => frac(numer, denom));
@@ -682,8 +689,8 @@ function renderQuickVentSetup(contentArea){
           const title = 'Formula: TV = [mL/<s>kg</s>] × kg';
           const body = `No ARDS Min: [6 mL/<s>kg</s>] × ${usedKg} <s>kg</s> = <strong>${nMin} mL</strong><br/>No ARDS Max: [8 mL/<s>kg</s>] × ${usedKg} <s>kg</s> = <strong>${nMax} mL</strong><br/>ARDS Min: [4 mL/<s>kg</s>] × ${usedKg} <s>kg</s> = <strong>${aMin} mL</strong><br/>ARDS Max: [6 mL/<s>kg</s>] × ${usedKg} <s>kg</s> = <strong>${aMax} mL</strong>`;
           mathHtml += (mathHtml.endsWith('<br/>') ? '' : '<br/>') + `${title}<br/>${body}`;
-          display = `<div class=\"qv-tv-ans-line\"><span class=\"qv-tv-ans-val\">${nMin}-${nMax} mL</span></div>`+
-                    `<div class=\"qv-tv-ans-line\"><span class=\"qv-tv-ans-val\">${aMin}-${aMax} mL</span></div>`;
+          display = `<div class=\"qv-tv-ans-line\"><span class=\"qv-tv-ans-val\">${nMin}-${nMax} mL</span><span class=\"qv-tv-ans-label\"> (no ARDS)</span></div>`+
+                    `<div class=\"qv-tv-ans-line\"><span class=\"qv-tv-ans-val\">${aMin}-${aMax} mL</span><span class=\"qv-tv-ans-label\"> (ARDS)</span></div>`;
         }
       }
       tvEl.innerHTML = display;
