@@ -1,4 +1,4 @@
-## **Paramedic Quick Reference Application**
+---`n## **Paramedic Quick Reference Application**
 
 # *Full Code Context with any code Changes and with any code references:*
   *When proposing code alterations or additions, always provide the complete updated code for the affected segment or file, including the entire line immediately before and after the change. Likewise, whenever referencing specific lines of code in explanations, quote the entire line (not partial fragments). This ensures changes are clear and can be copied into the codebase with proper context.*
@@ -648,6 +648,8 @@ FIXED (Sept 1, 2025): The Patient Info section now includes a Medication Class d
 
 
 **This README is up to date as of JuLY 19TH, 2025. All instructions and documentation reflect the current and intended behavior of the Paramedic Quick Reference app.**
+
+---
 # Paramedic Quick Reference — Developer Guide (Updated)
 
 Single‑page reference app for paramedics. It includes searchable topics, a patient sidebar, and a Quick Vent Guide with a Zoll Set Up flow and Tidal Volume (TV) calculator.
@@ -713,3 +715,4 @@ This repo is wired to auto‑deploy to GitHub Pages from `main` via `.github/wor
 - If it shows 404 initially, wait for the Pages workflow to finish (Actions tab), or check Settings → Pages to confirm the deployment.
 - Not Sure shows two stacked answers (no ARDS first, ARDS second); pop‑up shows explicit formulas and correct ranges — verified by E2E.
 - Sex icon remains visible when selected (selected state background/border) — verified by E2E.
+
