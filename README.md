@@ -501,16 +501,7 @@ All these components work together to provide a seamless experience: The data pr
 **This section provides a list of tasks that must be worked on now unless explicitly told otherwise. Once this section is empty, proceed to the “CURRENT TASKS/GOALS” section in this README for additional tasks.**
 
 
-  FIXED (Sept 1, 2025): The detail page now renders correctly when a topic is selected. Root causes were invalid initialization in `main.js` and a broken `Features/Warnings.js` module. We cleaned up data map building, implemented `getAgeWarning`, and corrected event wiring so details display reliably.
-
-
 Settings: Dark Mode improvements in progress. Added a brightness slider (persists with `localStorage`) and fixed CSS so dark mode styles apply correctly. A live preview is shown beside the slider.
-
-
-FIXED (Sept 1, 2025): The Patient Info section now includes a Medication Class dropdown populated from all medication classes in the data. It updates suggestions and filters context.
-
-
-FIXED (Sept 1, 2025): Patient Info Snapshot implemented (`Features/patient/PatientSnapshot.js`) and rendered on load and after changes.
 
 
   Contraindication Warnings:     
@@ -518,38 +509,20 @@ FIXED (Sept 1, 2025): Patient Info Snapshot implemented (`Features/patient/Patie
    add more contraindication keywords to MedicationDetailsData and update the checks in updatePatientData() and renderDetailPage() as new medications are added. Add comments to indicate where the user is add more contraindication keywords and what else needs to be updated when a new contraindication is added.
 
 
-Finish migrating remaining scripts to ES modules, and add test coverage for new features.
-
+  Search Bar Split: Split the search bar into two separate sections that filter through topics simultaneously. The split search bar on the left will remain unchanged, and the split bar on the right will be the new "Smart Suggestions" that will have functionality coded for it later.
 
 ## 7. CURRENT TASKS/GOALS
 
 **This section describes the current goals and tasks that need focus only after all of the TOP PRIORITY TASKS have been completed.**
 
 
-  Patient Info Sidebar Functionality (deferred): Each field in the Patient Info sidebar should cause visible changes in the app: inappropriate treatments get a strike‑through, relevant warnings pop up, etc. For example, entering “Penicillin” in Allergies and viewing a penicillin protocol should show an allergy warning; entering age 8 and viewing an adult‑only medication should display a warning about pediatric use. (This task can be resumed once top priorities are complete.)
-
-
-  Medication Data Display: Ensure that brand vs. generic names correctly match the id fields in MedicationDetailsData. If a slug in ParamedicCategoriesData does not exist in medicationDataMap, update either the data or the slug so they align.
-
-
-  Settings Button Font: Use a bubbly‑letter font for the word “Settings” in the footer.
+  Patient Info Sidebar Functionality: Each field in the Patient Info sidebar should cause visible changes in the app: inappropriate treatments get a strike‑through, relevant warnings pop up, etc. For example, entering “Morphine” in Allergies and viewing a chest pain or pain protocol should show an allergy warning, and "Morphine" under the medications menue would receive a strike-through (still is accessible though); entering age 8 and viewing an adult‑only medication should display a warning about pediatric use.
 
 
   Tests: Add tests for any new bugs that are fixed. Tests should simulate the bug scenario and should be written before fixing the bug; after adding a feature or fix, add corresponding tests to prevent regressions. Organize existing tests logically, ensure each test file includes a comment explaining how to run the tests and any prerequisites.
 
  
   Dynamic Dosage Recalculation: Implement fully dynamic dosage calculations for every medication.
-
-
-  Search Bar Split: Split the search bar into two separate sections that filter through topics simultaneously. The split search bar on the left will remain unchanged, and the split bar on the right will be the new "Smart Suggestions" that will have functionality coded for it later.
-
-
-  Section Header Alignment: Ensure that the arrow icon sits snugly next to its section label.
-
-  Toggle Arrows for Hidden Info: Ensure that the SVG arrow spacing does not break the flow of text and that the arrow rotates smoothly when sections are expanded.
-
-
-  If any medication detail still doesn’t load on click: investigate its id in both data files to ensure consistency. We have added console warnings for when a detail is missing, to catch any remaining mismatches.
 
 
   Contraindication Warnings Visuals: When patient info contains contraindications (allergies, conflicting medications, low blood pressure, etc.) the detail pages should display clear warning boxes in red font. For example, an allergy alert should show a red‑bordered box with a warning icon and message; drug interaction warnings and vital sign warnings should also appear as distinct boxes.
@@ -628,6 +601,9 @@ Sept 1, 2025 — App stabilization and UI polish
 - Autocomplete Seeds: Cleaned up common medication list and added PDE5 inhibitors.
 - Settings/Dark Mode: Corrected invalid CSS and added a brightness slider with live preview and persistence.
 - CSS Cleanup: Fixed focus ring styling, arrow alignment, and removed invalid nested rules to prevent style parsing issues.
+
+
+FIXED (Sept 1, 2025): The Patient Info section now includes a Medication Class dropdown populated from all medication classes in the data. It updates suggestions and filters context.
 
 
 ## 9. TIMELINE SUMMARY
@@ -726,5 +702,14 @@ Ad‑hoc check: `node dev-tools/check-tv.js` prints the live answer and modal co
 - If TV logic expands, consider extracting to `Features/ventilation/tv.js` with unit tests.
 
 ## Recent fixes (verified)
+
+## Hosted URL (GitHub Pages)
+
+This repo is wired to auto‑deploy to GitHub Pages from `main` via `.github/workflows/pages.yml`.
+
+- After pushing to `main`, the workflow builds `dist/` and publishes it.
+- Your site will be available at:
+  - https://LonghornSneal.github.io/Paramedic-App/
+- If it shows 404 initially, wait for the Pages workflow to finish (Actions tab), or check Settings → Pages to confirm the deployment.
 - Not Sure shows two stacked answers (no ARDS first, ARDS second); pop‑up shows explicit formulas and correct ranges — verified by E2E.
 - Sex icon remains visible when selected (selected state background/border) — verified by E2E.
