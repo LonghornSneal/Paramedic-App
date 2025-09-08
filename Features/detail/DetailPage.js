@@ -273,6 +273,16 @@ async function renderEquipmentFromMarkdown(details, contentArea, topic){
     if (!res.ok) throw new Error(`Failed to load ${details.mdPath}`);
     const md = await res.text();
     const { cheat, sections } = parseMdSections(md, topic.id);
+    // For General Operational Notes, do not insert a Cheat Sheet section
+    if (topic.id === 'zoll-quick-vent-operational-notes') {
+      sections.forEach(sec => insertEquipmentSection(contentArea, sec.title, sec.html));
+      attachToggleCategoryHandlers(contentArea);
+      const tocSections = sections.map(s => ({ id: slugify(s.title), label: s.title }));
+      if (tocSections.length >= 6) {
+        setupSlugAnchors(tocSections);
+      }
+      return;
+    }
     if (details.originalPdf) {
       const pdfUrl = details.pdfPage ? `${details.originalPdf}#page=${details.pdfPage}` : details.originalPdf;
       const embedId = `pdf-embed-${slugify(topic.id)}`;
