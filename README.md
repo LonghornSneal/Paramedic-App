@@ -46,7 +46,17 @@ Whenever modifying the codebase, please follow these guidelines:
 
 ## 2. APP OVERVIEW AND STRUCTURE
 
-Paramedic Quick Reference is a single-page web application (SPA) built with plain HTML, CSS, and JavaScript. ES Modules are currently being incorporated into the code. The app provides paramedics with quick access to critical treatment and reference information, organized for instant retrieval under high-pressure scenarios. This README serves as a thorough guide to the project, outlining where each piece of functionality resides and highlighting how the components interact. By understanding this structure, developers can more easily identify where to implement new features or fix issues. Key points about the app’s architecture and design:
+Paramedic Quick Reference is a single-page web application (SPA) built with plain HTML, CSS, and JavaScript. ES Modules are currently being incorporated into the code. The app provides paramedics with quick access to critical treatment and reference information, organized for instant retrieval under high-pressure scenarios. This README serves as a thorough guide to the project, outlining where each piece of functionality resides and highlighting how the components interact. By understanding this structure, developers can more easily identify where to implement new features or fix issues. Key points about the app's architecture and design:
+
+<<<MODIFY BEGIN (lines 49–57)>>>
+Original: This section mentions that ES Modules are “currently being incorporated”, that the app is client‑side and offline‑capable, code is separated into logical files, and Tailwind + vanilla JS are used.
+
+Proposed (reflects current state):
+- The app is vanilla JS with ES Modules across `main.js` and `Features/*`; no bundler is required for preview or GitHub Pages hosting.
+- Quick Vent Guide + Zoll Set Up is a primary feature; it uses sidebar patient data and shows explicit min/max TV formulas (Not‑Sure stacks No ARDS and ARDS lines).
+- Assisted development uses MCP (filesystem, git, playwright, memory) via Inspector; Playwright E2E tests validate Quick Vent flows.
+- Styling uses Tailwind CDN plus `styles.css` overrides; a small‑screen media query (≤360px) improves layout on the Galaxy Fold cover screen.
+<<<MODIFY END>>>
 
 The application is entirely client-side and offline-capable. All data is stored in local JavaScript files, so no API calls are needed and information loads without delay.
 
@@ -58,6 +68,11 @@ The UI uses Tailwind CSS via CDN for quick styling, supplemented by a custom CSS
 
 
 ## 3. PROJECT PUROPOSE
+
+<<<MODIFY BEGIN (line 60: heading spelling)>>>
+Original heading: "PROJECT PUROPOSE"
+Proposed heading: "PROJECT PURPOSE" (spelling correction). Keep original visible for review.
+<<<MODIFY END>>>
 
 The Paramedic Quick Reference is designed to allow paramedics to find life-saving information within seconds. It functions as an interactive protocol book and drug reference on a phone or tablet. The interface is optimized for speed, clarity, and ease-of-use in emergency situations.
 
@@ -196,13 +211,15 @@ Performance and Simplicity: The app prioritizes speed and reliability:
 *The project is organized into several files and directories, each serving a specific purpose. Below is an overview of the structure and key files along with their associated folders:*
 
 
-**index.html** – Main HTML container. This is the entry point of the app. It defines the layout structure (header, sidebar, content area, etc.) and includes all the necessary CSS and JS files. In the <head>, it links the Tailwind CSS CDN and our styles.css. In the body, it sets up the static HTML for header buttons, the search bar, the empty content container, the patient sidebar form, and so on. It then includes scripts in a specific order: first the data files (so that data is ready), then utility scripts, then feature scripts like PatientInfo.js, and finally main.js which initializes the app; *file order may change depending upon project needs, so if the file order appears incorrect you must: Never change the file order without doing a thorough investigation into all of the files that will be now run before or after with the updated file order (files that dont change from running before to after or after to before the main file getting moved around are to be excluded); In the main file and all of the files you are to be investigating, you must do a thorough order of operations check to verify that the code will still function the same or better, which must be done on all the files and the entire code within the files; the number of positive or negative results obtained from the operations check will never be a factor in when to conclude the investigation, the operations check verification investigation can only be complete after each code line within each of the files has been independently investigated. Any new file must be included in the index.html.
+**index.html** - Main HTML container. This is the entry point of the app. It defines the layout structure (header, sidebar, content area, etc.) and includes Tailwind CDN and `styles.css`. The body sets up header buttons, search, content container, and patient sidebar. Modules are loaded via ES modules (see `main.js`).
+
+--- Deletion Candidate (line 199 long paragraph): exhaustive file‑order policy belongs in a contributor guide; with ES modules, keep `main.js` last and import dependencies where needed. ---
 
 
 **styles.css** – Custom CSS stylesheet. Contains project-specific styles that Tailwind’s utility classes don’t cover. For example, classes for the Strikethrough effect, any custom animations (like Arrow rotations), or layout fixes for certain elements. Most visual styling is with Tailwind classes directly in HTML, but critical overrides or additional styles live here. This file is loaded in the head of index.html so that its rules can complement/override Tailwind where needed.
 
 
-*styles.js – **File path currently doesn't exist and File may never need to be created** In this project, since Tailwind is used via CDN with default settings, styles.js is mostly unused. It might contain a small script if we needed to calculate or toggle styles via JS (but most of that is handled in main.js or CSS). If not needed, this file can remain empty or be removed; it’s included for completeness in case we later add theme switching logic (for example, adding a dark mode via toggling classes).*
+--- Deletion Candidate (line 205): `styles.js` does not exist and is not planned; theme toggles live in CSS/JS within existing files. ---
 
 
 *Data/ – Data files directory. This folder contains static JavaScript files that define the content of the app (the topics and their details). These files do not execute any logic; they simply declare objects/arrays and assign them to the global window so that main.js can use them.*
@@ -219,6 +236,9 @@ Performance and Simplicity: The app prioritizes speed and reliability:
   *Other Data files that still need to have code placed within them include:*
     **Data/additionalMedications.js**
     **Data/patientInfoSynonyms.js**
+
+<<<MOVE SUGGESTION (lines 219–221)>>> Move these items into "7. Current Tasks/Goals" as TODOs to implement. (Keep the note here but track progress in Current Tasks.)
+<<<END MOVE>>>
 
 
 *Features/ – Feature-specific scripts. This directory groups scripts that handle a particular aspect of the app’s functionality.*
@@ -403,6 +423,10 @@ In summary, the structure ensures that: Data is separated from Logic (data files
 
 ## 5. HOW THE CODE WORKS TOGETHER
 
+<<<MODIFY BEGIN (section preface)>>>
+Proposed addition: The Quick Vent calculator uses `window.patientData` (from PatientInfo) to compute IBW if no weight is entered or to use actual weight if provided. The `compute()` function in `Features/detail/DetailPage.js` calculates and renders explicit TV min/max values; when ARDS status is "Not Sure", two lines are stacked (No ARDS first, ARDS second). Playwright E2E tests in `dev-tools/tests/ventilation.spec.js` verify this flow.
+<<<MODIFY END>>>
+
 Understanding the flow of the application from load to user interactions:
 
   Initial Load & Data Preparation: As soon as index.html is opened (in a browser or a WebView), the included scripts load in the specified order. First, ParamedicCategoriesData.js runs and defines window.ParamedicCategoriesData. Then MedicationDetailsData.js runs and defines window.MedicationDetailsData. At this point, all the reference information the app needs is in memory as JavaScript objects.
@@ -498,6 +522,17 @@ All these components work together to provide a seamless experience: The data pr
 
 ## 6. -----TOP PRIORITY TASKS-----
 
+<<<MODIFY BEGIN (Settings clarification)>>>
+Add: Settings should include:
+- Dark mode toggle (persisted)
+- Font size scaling / readability preset
+- Accessibility profile (high contrast, reduced motion)
+<<<MODIFY END>>>
+
+<<<MODIFY BEGIN (Search Bar Split / Smart Suggestions)>>> 
+Clarify: Smart Suggestions should include quick links based on common queries (e.g., "epi", "VT", "CPAP"), show parent category context, and rank exact id/title matches first. Suggestions should be keyboard‑navigable and touch‑friendly.
+<<<MODIFY END>>>
+
 **This section provides a list of tasks that must be worked on now unless explicitly told otherwise. Once this section is empty, proceed to the “CURRENT TASKS/GOALS” section in this README for additional tasks.**
 
 
@@ -512,6 +547,14 @@ Settings: Dark Mode improvements in progress. Added a brightness slider (persist
   Search Bar Split: Split the search bar into two separate sections that filter through topics simultaneously. The split search bar on the left will remain unchanged, and the split bar on the right will be the new "Smart Suggestions" that will have functionality coded for it later.
 
 ## 7. CURRENT TASKS/GOALS
+
+<<<ADD BEGIN>>> 
+- Implement data entries for:
+  - Data/additionalMedications.js
+  - Data/patientInfoSynonyms.js
+- Track which medications support auto‑calculated dosing; add TODO markers for the remainder.
+- Implement Smart Suggestions as clarified in section 6.
+<<<ADD END>>>
 
 **This section describes the current goals and tasks that need focus only after all of the TOP PRIORITY TASKS have been completed.**
 
@@ -535,6 +578,11 @@ Settings: Dark Mode improvements in progress. Added a brightness slider (persist
 
 
 ## 8. RECENT FIXES AND CHANGES
+
+<<<MODIFY BEGIN (verified)>>> 
+- Quick Vent “Not Sure” now shows two distinct ranges (no ARDS first, ARDS second); Calculation Details includes explicit min/max formulas — verified by Playwright E2E.
+- Sex icon remains visible when selected — verified by E2E.
+<<<MODIFY END>>>
 
 Home Button: Added a Home button (House Icon under the nav arrows) that on click will immediately return the user to the main Contents page.
 
@@ -608,12 +656,20 @@ FIXED (Sept 1, 2025): The Patient Info section now includes a Medication Class d
 
 ## 9. TIMELINE SUMMARY
 
+<<<MODIFY BEGIN (format)>>> 
+Keep this as a concise dated list of milestones (feature adds, fixes verified). Avoid long narrative; link to the relevant sections above when needed.
+<<<MODIFY END>>>
+
 7/16/25-App is almost far enough along to actually be useful during work, but still need to update a lot of stuff and double check all the medication info. 
 
 7/18/25- ES Module conversion is looking good. Categories still are not loading in, but Dark Mode in Settings is working properly.
 
 
 ## 10. FUTURE TASKS/GOALS/IDEAS
+
+<<<MODIFY BEGIN (move items)>>> 
+Move items already in progress to "7. Current Tasks/Goals". Keep this section for net‑new ideas only (e.g., complete dosing automation with concentration awareness, long‑page anchor TOC, persisted user data, multi‑language support, expanded accessibility presets).
+<<<MODIFY END>>>
 
 *This section proposes enhancements/ideas for future development. Nothing in this section is to be worked on or looked at until they are moved into TOP PRIORITY TASKS or CURRENT TASKS/GOALS.*
 
