@@ -16,7 +16,7 @@ export const VentilationDetailsData = [
   },
   // ---- Quick Vent Guide ----
   { id: 'zoll-quick-vent-zoll-setup', title: 'Zoll Set Up', quickVent: 'setup', equipment: true },
-  { id: 'zoll-quick-vent-operational-notes', title: 'General Operational Notes', equipment: true, placeholder: true },
+  { id: 'zoll-quick-vent-operational-notes', title: 'General Operational Notes', equipment: true, mdPath: 'Content/Skills & Equipment/Zoll EMV731/quick-vent-operational-notes.md' },
   { id: 'zoll-quick-vent-volume-mode', title: 'Volume Mode', equipment: true, placeholder: true },
   { id: 'zoll-quick-vent-pressure-mode', title: 'Pressure Mode', equipment: true, placeholder: true },
   { id: 'zoll-quick-vent-other-vent-alarms', title: 'Other Vent Alarms', equipment: true, placeholder: true },

@@ -203,6 +203,9 @@ body.dark-mode .sidebar-input { background-color: #1f2937; color: #e5e7eb; borde
 body.dark-mode .sidebar-input::placeholder { color: #9ca3af; }
 body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 
+/* Center title for General Operational Notes section */
+#general-operational-notes { text-align: center; }
+
 /* Quick Vent overrides: fix duplicated Sex symbols, normalize Weight box size */
 #content-area .qv { display: inline-block; width: -moz-fit-content; width: fit-content; margin-left: auto; margin-right: auto; padding-left: 2ch; padding-right: 2ch; }
 #qv-sex { display: flex; flex-direction: column; row-gap: 0.25rem; align-items: center; }

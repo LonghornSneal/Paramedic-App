@@ -844,6 +844,14 @@ function inlineMd(t){
   s = s.replace(/!\[([^\]]*)\]\(([^\)]+)\)/g, (m,alt,src)=> `<img src="${src}" alt="${escapeHtml(alt)}" class="max-w-full inline-block" />`);
   // Links [text](href)
   s = s.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, (m,text,href)=> `<a href="${href}" class="text-blue-600 underline" target="_blank" rel="noopener">${escapeHtml(text)}</a>`);
+  // Color tokens {{green:...}}, {{orange:...}}, {{blue:...}}
+  s = s.replace(/\{\{green:(.+?)\}\}/g, (m,txt)=> `<span class="text-green-600">${txt}</span>`);
+  s = s.replace(/\{\{orange:(.+?)\}\}/g, (m,txt)=> `<span class="text-orange-400">${txt}</span>`);
+  s = s.replace(/\{\{blue:(.+?)\}\}/g, (m,txt)=> `<span class="text-sky-400">${txt}</span>`);
+  // Toggle markup [[display|info]] -> clickable reveal
+  s = s.replace(/\[\[(.+?)\|(.+?)\]\]/g, (m, display, info) => {
+    return `<span class="toggle-info"><svg class="arrow h-4 w-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>${display}<span class="info-text hidden">${info}</span></span>`;
+  });
   return s;
 }
 
