@@ -14,7 +14,7 @@
     "scan:deps": "depcheck --json",
     "test:vent": "playwright test dev-tools/tests/ventilation.spec.js",
     "test": "npm run test:vent",
-    "mcp:fs": "mcp-server-filesystem || npx @modelcontextprotocol/server-filesystem",
+    "mcp:fs": "mcp-server-filesystem .",
     "mcp:everything": "mcp-server-everything || npx @modelcontextprotocol/server-everything",
     "mcp:git": "git-mcp-server || npx @cyanheads/git-mcp-server"
   },

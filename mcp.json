@@ -1,6 +1,6 @@
 {
   "servers": {
-    "filesystem": { "command": "npx", "args": ["@modelcontextprotocol/server-filesystem"] },
+    "filesystem": { "command": "npx", "args": ["@modelcontextprotocol/server-filesystem", "."] },
     "everything": { "command": "npx", "args": ["@modelcontextprotocol/server-everything"] },
     "git":        { "command": "npx", "args": ["@cyanheads/git-mcp-server"] }
   }
