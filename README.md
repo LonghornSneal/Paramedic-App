@@ -1,5 +1,8 @@
 ---`n## **Paramedic Quick Reference Application**
 
+<<<MOVE SUGGESTION (line 199)>>> Copy the detailed file-order paragraph to a new subsection "### 4.1 Developer Notes: Script & Module Loading Order" inserted at line 404 (just before the "## 5. HOW THE CODE WORKS TOGETHER" heading). Keep the original text here for review. <<<END MOVE>>>
+---`n## **Paramedic Quick Reference Application**
+
 # *Full Code Context with any code Changes and with any code references:*
   *When proposing code alterations or additions, always provide the complete updated code for the affected segment or file, including the entire line immediately before and after the change. Likewise, whenever referencing specific lines of code in explanations, quote the entire line (not partial fragments). This ensures changes are clear and can be copied into the codebase with proper context.*
 
@@ -53,7 +56,7 @@ Original: This section mentions that ES Modules are “currently being incorpora
 
 Proposed (reflects current state):
 - The app is vanilla JS with ES Modules across `main.js` and `Features/*`; no bundler is required for preview or GitHub Pages hosting.
-- Quick Vent Guide + Zoll Set Up is a primary feature; it uses sidebar patient data and shows explicit min/max TV formulas (Not‑Sure stacks No ARDS and ARDS lines).
+- Quick Vent Guide + Zoll Set Up is one of many features; it uses sidebar patient data and shows explicit min/max TV formulas (Not‑Sure stacks No ARDS and ARDS lines).
 - Assisted development uses MCP (filesystem, git, playwright, memory) via Inspector; Playwright E2E tests validate Quick Vent flows.
 - Styling uses Tailwind CDN plus `styles.css` overrides; a small‑screen media query (≤360px) improves layout on the Galaxy Fold cover screen.
 <<<MODIFY END>>>
@@ -233,6 +236,7 @@ Performance and Simplicity: The app prioritizes speed and reliability:
     **Data/additionalMedications.js**
     **Data/patientInfoSynonyms.js**
 
+<<<ADD TO CURRENT TASKS (lines 219–221)>>> Keep these files listed under Project Structure. Also, add a Current Task to implement or populate: additionalMedications.js (add data entries, structure), patientInfoSynonyms.js (map common synonyms to patient fields). <<<END ADD>>>
 <<<MOVE SUGGESTION (lines 219–221)>>> Move these items into "7. Current Tasks/Goals" as TODOs to implement. (Keep the note here but track progress in Current Tasks.)
 <<<END MOVE>>>
 
@@ -767,4 +771,5 @@ This repo is wired to auto‑deploy to GitHub Pages from `main` via `.github/wor
 - If it shows 404 initially, wait for the Pages workflow to finish (Actions tab), or check Settings → Pages to confirm the deployment.
 - Not Sure shows two stacked answers (no ARDS first, ARDS second); pop‑up shows explicit formulas and correct ranges — verified by E2E.
 - Sex icon remains visible when selected (selected state background/border) — verified by E2E.
+
 
