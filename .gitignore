@@ -1,1 +1,25 @@
-node_modules
+node_modules/
+
+# IDE/editor caches
+.vs/
+.vscode/
+
+# Tool outputs and reports
+hint-report/
+coverage/
+dev-tools/coverage/
+
+# Build output (if used)
+dist/
+
+# Logs
+*.log
+
+# Temporary/scratch files
+temp_*.txt
+styles.*.txt
+tmp-*.ps1
+docs/*.vsix
+
+# Archived logs
+archive/java-upgrade/202506281358/logs/
