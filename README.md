@@ -1,8 +1,31 @@
----`n## **Paramedic Quick Reference Application**
+--- **Paramedic Quick Reference Application**
 
-# *Full Code Context with any code Changes and with any code references:*
-  *When proposing code alterations or additions, always provide the complete updated code for the affected segment or file, including the entire line immediately before and after the change. Likewise, whenever referencing specific lines of code in explanations, quote the entire line (not partial fragments). This ensures changes are clear and can be copied into the codebase with proper context.*
 
+Always follow these guidelines:
+
+  1. Read Before Coding: Read this README.md in full to understand how the entire repository works together and to locate relevant information for the task at hand. Chapters 1-5 are essential to understanding everything about the app and must be thoroughly read before beginning user's request. Chapters 6-7 are were you find tasks to work on. Chapters 8-9 are mostly for the user. Chapter 10 is where future tasks will eventually become the current tasks.
+
+  2. Modifying the README.md: After you have finished all of the user's requests, update the README.md to reflect the current state of the app. Fix any spelling errors. Changes should be surrounded by double asterics with the original line in square brackets for easy identification. Ensure everything is located in their appropriate locations, one example of this would be when you finish a task and it passes the test you run on it, then it would logically be moved out of the tasks category and placed at the end of Chapter 8 (additionally placed in Chapter 9 if the change is a major change), and it would be re-written to conform to the style of that Chapter.
+
+    2.1 Chapters 6,7, & 10: If you discover errors that involve features that should already be functional, then specify what the issue is in Chapter 6. If a task is known, but isn't in Chapter 7, then place it in Chapter 7 (unless it is currently the task that the user requested and it is the first time the user has requested this task). When the user's request is simple, research potential future tasks to place in Chapter 10 by looking through other code bases online and ensuring that the future task is appropriate for this specific Paramedic-App and that the user would want the future task added to the README.md.
+
+  3. Quote full line + neighbor: When referencing code (for any reason), always quote the entire line and include the line immediately before and after it. Reference the line numbers. 
+
+  4. Identify new code in explanations: Wrap new code with double asterisks in explanations only (not in source)
+
+  5. Comment new code: Explain why and how; update or remove stale comments you encounter.
+
+  6. Avoid duplication: Search first; consolidate or remove duplicates; keep names consistent across files.
+
+  7. Align with scope and structure: Changes must align with sections 1–5; do not introduce frameworks or backends.
+
+  8. Place Code Correctly: Add or modify code in the appropriate file and maintain logical ordering so that definitions appear before use. This avoids timing or hoisting issues.
+
+  9. Fix what you see: If you notice a bug while working here, fix it unless explicitly told not to.
+
+  10. File-specific docs: If a file mentions local rules or notes, read and follow them.
+
+  11. Verify: Manually verify features still work after changes; run available tests as appropriate. If no appropriate test exists, then create an appropriate test and ensure it is functional and passes the test.
 
 ## Table of Contents
 1. General Scope
@@ -18,44 +41,31 @@
 
 ## 1. **General Scope**
 
-This repository contains the Paramedic Quick Reference application – an offline, single‑page web application written with plain HTML, CSS and JavaScript. All data is stored locally in JavaScript modules so there are no external API calls and information loads instantly even without a network connection. Files are organized into logical folders (Data, Features, Utils, etc.) and functionality is broken down into ES modules to aid maintainability.
+Single-page, offline app in HTML/CSS/vanilla JS (ES Modules).
 
-Whenever modifying the codebase, please follow these guidelines:
+All data is local (no APIs). Instant load, no network required.
 
-  1. Read Before Coding: Read this README.md in full to understand how the entire repository works together and to locate relevant information for the task at hand.
+Files are organized into logical folders (Data, Features, Utils, etc.).
 
-  2. Quote Context in Explanations: When referencing code in discussions or pull requests, always quote the full line of code along with the line immediately before and after it. This provides context for the change.
+Scope strictly reflects current functionality of this repo (nothing external or future-ware).
 
-  3. Identify New Code: In explanations, wrap any new code with ** on either side to clearly delineate it from existing code. (Do not include the asterisks in the actual source files.)
 
-  4. Use Comments: All new code should include clear comments explaining its purpose. Keep existing comments accurate; if they are outdated or incorrect, update them appropriately.
-
-  5. Check for Duplicates: Before adding new code, search the repository for similar or duplicate code to avoid redundancy. Remove or consolidate duplicates when possible. Search for duplicate functions or variables before adding new ones. Use consistent names for functions, variables and features across all files.
-
-  6. Consistent Terminology: Ensure that terminology (function names, variable names, feature names) is used consistently across all files. If a term appears in multiple files, it should match exactly in spelling and case.
-
-  7. Align with Project Purpose & Structure: All code changes must align with the Project Purpose and Project Structure outlined in this README. New features or modifications should not conflict with the app’s intended functionality or organization.
-
-  8. Place Code Correctly: Add or modify code in the appropriate file and maintain logical ordering so that definitions appear before use. This avoids timing or hoisting issues.
-
-  9. Address All Noticed Issues: Unless the user explicitly instructs otherwise, If you encounter any bug or concern outside your main task (even minor or unrelated), fix it rather than leaving it unresolved.
-
-  10. Use File-Specific Documentation: If a specific file has its own README or documentation, read that as well when working in that file.
-
-  11. Quality Assurance: After any change, verify that the app still functions correctly. Test the relevant feature and run any existing tests (see npm test if a test suite is configured).
 
 ## 2. APP OVERVIEW AND STRUCTURE
 
-Paramedic Quick Reference is a single-page web application (SPA) built with plain HTML, CSS, and JavaScript. ES Modules are currently being incorporated into the code. The app provides paramedics with quick access to critical treatment and reference information, organized for instant retrieval under high-pressure scenarios. This README serves as a thorough guide to the project, outlining where each piece of functionality resides and highlighting how the components interact. By understanding this structure, developers can more easily identify where to implement new features or fix issues. Key points about the app’s architecture and design:
+Built with: HTML, CSS, JavaScript, & ES Modules.
 
-The application is entirely client-side and offline-capable. All data is stored in local JavaScript files, so no API calls are needed and information loads without delay.
+Paramedic Protocols: This app encompasses the user's Paramedic Protocols along with additional information, features, and functions.
 
-The code is separated into logical files and folders for clarity and maintainability. Each file or script has a specific purpose (e.g., data definition, UI rendering, event handling).
+App philosphy: Relevant and/or more important information should naturally be easier for the user to access. Pt Treatments that are relevant, relevant warnings, and other relevant information automatically should have the app focus on that information to ensure timely pt care.
 
-Because files and features depend on each other, be mindful that a change in one place (e.g., data format) might require updates in multiple files. This README describes those relationships to help coordinate changes.
+This README serves as a thorough guide to the project, outlining where each piece of functionality resides and highlighting how the components interact. By understanding this structure, developers can more easily identify where to implement new features or fix issues.
 
-The UI uses Tailwind CSS via CDN for quick styling, supplemented by a custom CSS file for additional tweaks. We do not use any JavaScript frameworks; all interactivity is via vanilla JS, which improves speed and ensures we have fine-grained control over behavior.
+Logical File/Folder seperation of Codebase: Each file/script has a specific purpose (e.g., data definition, UI rendering, event handling).
 
+Some updates will require updates in multiple files, even with a single minor change. 
+
+Styling: Tailwind via CDN + styles.css (custom rules).
 
 ## 3. PROJECT PUROPOSE
 
@@ -500,119 +510,153 @@ All these components work together to provide a seamless experience: The data pr
 **This section provides a list of tasks that must be worked on now unless explicitly told otherwise. Once this section is empty, proceed to the “CURRENT TASKS/GOALS” section in this README for additional tasks.**
 
 
-Settings: Sliders for changing colors in the app. A separate slider is needed for: Main-Background, Category-Background, Main-Text, Category-Text, Warnings, Pop-up Comments, Other Pop-ups, etcetera. These sliders should allow the user to choose any color they want. Warnings should display if the user selects a text color that is similar or close to the color of the selected background that the text will be in front of.
+Settings: Color sliders for the app.
+  
+  Independent sliders for: main background, category background, main text, category text, warnings, pop‑up comments, other pop‑ups.
+  
+  Allow any color selection. Warn when selected text color is similar to the chosen background.
 
 
-  Contraindication Warnings: add more contraindication keywords to MedicationDetailsData and update the checks in updatePatientData() and renderDetailPage() as new medications are added. Add comments to indicate where the user is add more contraindication keywords and what else needs to be updated when a new contraindication is added.
+Contraindication Warnings: expand keywords
 
-Search Bar: The search bar at the top of the interface allows users to quickly filter and find topics. As the user types into the search input, two dynamic lists appear immediately below it (side by side):
+  Add more contraindication keywords to Data/MedicationDetailsData.js.
 
-  Filtered List of Topics: On the left, a list of topic titles (and possibly their category path) that match the text entered. This updates in real-time with each keystroke. For instance, typing “asp” might show “ASA – ALS Medications” as well as any other topics containing “asp” or "ASA". Clicking on a topic in this list will directly navigate to that topic’s detail page.
+  Update checks in updatePatientData() and renderDetailPage() as new medications are added.
 
-  Smart Suggestions: On the right, the app can display A list of topics that is filtered by   the information that the user has inputed into the Patient Info Sidebar and re-organized by what the user is inputing into the search bar. For example, if the user inputs in the Patient Info Sidebar that the patient is intubated, then the Smart Suggestions will show a list of all the various intubation topics that the user may select. If the user then types the letter "d" into the search bar, the Smart Suggestions list will re-organize itself to have the topics that start with the letter "d" appearing first. Smart Suggestions always contain a set number of topics in a scrollable list that is determined by the information in the Patient Info Sidebar. If no information is in the Patient Info Sidebar, then Smart Suggestion contains the full list of Smart Suggestions that is found in the data file. Smart Suggestions topics will be searchable through indirect routes such as: common medical terms, synonyms, or common spelling errors. For example, typing “dAtdi” might suggest “Cardiac Arrest” even if those exact words haven’t been fully typed, or might suggest related terms like “Cardioversion” or “Cardizem” if applicable. These suggestions help guide the user if they are unsure of spelling or the exact name of a protocol. Clicking a suggestion could refine the search or directly show a subset of related topics. (This feature may be expanded as the app grows; currently it may offer basic suggestions based on an internal list of keywords and these basic suggestion will be more likely to contain topics that the user would need to access while under duress such as: Cardiac Arrest, SVT, RASS +3, RASS +4, Epi, Versed, ecetera.)
+  Add comments indicating where to extend keywords and what else to update when adding a contraindication.
 
-  The search is case-insensitive and tries to match any part of a topic’s name or associated keywords. It allows quick navigation without manually browsing the categories. There is also usually an “X” or clear button to reset the search and return to the full contents list.
+
+Search Bar: dual lists (Filtered + Smart Suggestions).
+
+  Filtered: On the left.
+   
+   Filtered list of topics matching the input (case‑insensitive; match any part of name/keywords). Updates per keystroke. Clicking navigates to detail.
+
+    Example: typing “asp” might show “ASA – ALS Medications” as well as any other topics containing “asp” or "ASA".
+
+
+  Smart Suggestions: On the right.
+  
+  scrollable list influenced by Patient Info (e.g., intubated → show intubation topics first), re‑ordered as the user types
+  
+    Example: typing "d" into the search bar will cause the Smart Suggestions list to re-organize itself to have the topics that start with the letter "d" & that are related to the user inputed Patient Info, be at the top of the list. After will be other topics related to the information found in Patient Info in a higher to lower of importance order.
+  
+  If no Patient Info entered: show the baseline full Smart Suggestions list from data that is ordered from the closest match to least closest match based upon what the user types in the search bar.
+  
+  Smart Suggestions follow indirect routes (common terms, synonyms, misspellings). Example: typing “dAtdi” might surface “Cardiac Arrest” or “Cardioversion/Cardizem” when applicable.
+  
+  Unsure spelling: Users should be able to find what they are looking for without spelling it out exactly or even if they use a similar word instead.
+  
+  Right Clicking or Holding down on a topic from the Smart Suggestions List: shows a subset of related topics.
+  
+  Higher priority topics: Include topics like Cardiac Arrest, SVT, RASS +3, RASS +4, (Narcotic medication), and other topics that have a higher potential for negative patient care with the more time wasted using the app instead of treating the patient.
+
+  Matching: Case-insensitive, and tries to match any part of a topic’s name or associated keywords.
+
 
 ## 7. CURRENT TASKS/GOALS
 
-**This section describes the current goals and tasks that need focus only after all of the TOP PRIORITY TASKS have been completed.**
+**TOP PRIORITY TASKS must all be completed before attempting any of the following Tasks.**
+
+When a task here is completed: add a short, concise note to Chapter 8.
+
+  Replace the completed item (here) with a new task to create tests, if not already present, that verify the completed change.
+
+  Tests: Add tests for any new bug (before the fix) and for new features.
+
+    Organize test files; include minimal “how to run” notes when not obvious.
 
 
-  Patient Info Sidebar Functionality: Each field in the Patient Info sidebar should cause visible changes in the app: inappropriate treatments get a strike‑through, relevant warnings pop up, etc. For example, entering “Morphine” in Allergies and viewing a chest pain or pain protocol should show an allergy warning, and "Morphine" under the medications menue would receive a strike-through (still is accessible though); entering age 8 and viewing an adult‑only medication should display a warning about pediatric use.
+Patient Info Sidebar: visible app‑wide effects.
 
+  Every field should drive visible UI changes: strike‑through inappropriate treatments, warnings pop, and adapt content.
 
-  Tests: Add tests for any new bugs that are fixed. Tests should simulate the bug scenario and should be written before fixing the bug; after adding a feature or fix, add corresponding tests to prevent regressions. Organize existing tests logically, ensure each test file includes a comment explaining how to run the tests and any prerequisites.
+  Examples: Enter “Morphine” in Allergies → viewing chest pain/pain protocols shows allergy warning; “Morphine” item is strike‑through (still accessible).
+
+    Enter age 8 → viewing adult‑only medication should show pediatric warning
 
  
   Dynamic Dosage Recalculation: Implement fully dynamic dosage calculations for every medication.
 
 
-  Contraindication Warnings Visuals: When patient info contains contraindications (allergies, conflicting medications, low blood pressure, etc.) the detail pages should display clear warning boxes in red font. For example, an allergy alert should show a red‑bordered box with a warning icon and message; drug interaction warnings and vital sign warnings should also appear as distinct boxes.
+Contraindication Warnings: visuals.
 
-    If a patient has an allergy that matches the medication (or its class), a red-bordered box with an alert icon and message “Allergy Alert: Patient has a known allergy to this medication” will appear at the top of that detail page. 
+  When Patient Info contains contraindications (allergies, conflicting medications, low BP, etc.) the detail pages should display clear warning boxes in red font. For example, an allergy alert should show a red‑bordered box with a warning icon and message; drug interaction warnings and vital sign warnings should also appear as distinct boxes.
+
+    If a patient has an allergy that matches the medication (or its class), a red-bordered box with an alert icon and message.
+    
+      Allergy Alert: "Patient has a known allergy to this medication” will appear at the top of that detail page. 
    
-    If the patient’s recorded medications include a drug that is contraindicated (e.g., PDE5 inhibitors when viewing Nitroglycerin), a warning box will similarly appear (“Drug Interaction Warning: Patient is on [Drug], which contraindicates [This Treatment]”). 
+      If the patient’s recorded medications include a drug that is contraindicated (e.g., PDE5 inhibitors when viewing Nitroglycerin), a warning box will similarly appear.
+    
+        Drug Interaction Warning: "Patient is on [Drug], which contraindicates [This Treatment]”). 
+         
+         VS Warning: "BP too low for this treatment!”.
    
-    VS like BP are also checked; if below a threshold, a warning appears (“VS Warning: BP too low for this treatment!”).
+   "
+## 8. RECENT FIXES AND CHANGES (Short & Specific)
 
+Home button (house icon): jumps to main Contents.
 
-## 8. RECENT FIXES AND CHANGES
+Settings: Dark Mode toggle; animated Settings button; brightness slider with live preview/persistence.
 
-Home Button: Added a Home button (House Icon under the nav arrows) that on click will immediately return the user to the main Contents page.
+Header/UI: ensureHeaderUI stabilizes header layout across navigations.
+  Toggle alignment: Category name + arrow now left‑aligned; spacing improved (all sizes).
 
+  Header UI Structure: ensureHeaderUI checks if elements exist and creates them if not, and ensures they are appended in the proper DOM order.
 
-Settings Button: Dark Mode toggle is functioning. The Settings Button transitions back and forth between two colors.
+  UI Layout Consistency: content area scrolls independently when content overflows.
 
-Settings button cleaned up. The footer’s “Settings” button no longer drags along a hitchhiking SVG. The HTML now reads simply:
+Flexbox: structuring the content area & sidebar. By explicitly setting height on the sidebar (and letting the content area flex), we ensure that even if the viewport recalculates, our layout remains consistent. (Not sure if we are even still using this or something else now)**
 
+Green text: Green clickable text expands hidden green fonted text.
 
-A CSS tweak was made to how section headers and their toggle arrows are aligned in expandable lists. For the main Contents page and any similar toggles, we set .toggle-category { justify-content: flex-start; }. This was to ensure that the category name and the arrow icon stay together on the left, rather than being spaced apart. This fix did not fully solve the spacing issue for all screen sizes.
+ES Module Conversion: Continued migrating scripts to ES modules. This change allows tests and other ES Modules to import slugIDs directly.
 
+Detail Page Title Styling: The main title on each detail page now uses a consistent class name & data attribute (Allows uniform CSS styles and allows scripts to easily select it).
 
-Header UI Structure: Now the header is treated as a stable component; ensureHeaderUI checks if elements exist and creates them if not, and ensures they are appended in the proper DOM order (Patient Info button on left, title center, nav buttons right, etc.). This improved the consistency of the header layout across navigations.
+Rendering: whenever a new view is rendered (list or detail), the history entry includes enough info to restore that view. Navigation Buttons enabled/disabled states are updated immediately after each navigation so they correctly reflect availability.
 
+Slug anchors: Initialize after renderDetailPage to ensure TOC appears when applicable
 
-UI Layout Consistency: All UI components should be properly placed and styled on every view. This means: the header always shows the title, nav buttons, and patient info button in the correct places; the patient sidebar slides over the content without affecting layout; the content area should scroll independently when content overflows (the header and sidebar remain fixed). The overall look should match our intended design: for example, spacing around sections, font sizes, and colors should be uniform.
-
-
-Internet Explorer & Legacy Support: We use Flexbox for structuring the content area and sidebar. By explicitly setting height on the sidebar (and letting the content area flex), we ensure that even if the viewport recalculates, our layout remains consistent. 
-
-
-Green text: Green clickable text expands hidden information. A small arrow icon is shown next to it (rightward-pointing chevron). When the text is clicked and the hidden info is revealed, this arrow rotates downward, similar to the blue category arrows. When the text is hidden again, the arrow returns to the rightward position.
-
-  Unified the behavior and styling so that all expandable/collapsible indicators (blue or green) use a consistent CSS transition for rotation.
-
-
-ES Module Conversion: Continued migrating scripts to ES modules. Many utilities and features now use export/import rather than attaching functions to window. This change allows tests and other ES Modules to import slugIDs directly.
-
-
-Detail Page Title Styling: The main title on each detail page now uses a consistent class name and data attribute. This allows the CSS to style all detail titles uniformly and also allows scripts to easily select it (for any future dynamic update).
-
-
-Rendering: whenever a new view is rendered (list or detail), the history entry includes enough info to restore that view. The Back and Forward Navigation Buttons’ enabled/disabled states are updated immediately after each navigation so they correctly reflect availability.
-
-
-Slug Anchors Initialization: Modified slugAnchors.js to wait for the DOM content to be fully loaded (or for a detail page container to exist) before inserting the anchor navigation menu. In practice, we use a function setupSlugAnchors(sectionIdArray) that is called after renderDetailPage. This ensures the anchor links (table of contents for sections) are injected at the right moment. This fix prevents a bug where anchor links sometimes were not added if the script ran too early.
-
-  Medication Data Display (ID Matching): The ID matching logic in initializeData and elsewhere now handles IDs regardless of whether they’re strings like "epiPen" or numeric strings like "5glucose".
-
+Medication Data Display (ID Matching): The ID matching logic in initializeData (& elsewhere) now handles IDs regardless of whether they’re strings like epiPen or numeric strings like 5glucose.
 
 Sidebar: Gave it a fixed height (applied via JS or CSS). The sidebar now explicitly takes up the full viewport height regardless of browser quirks.
 
-Patient Sidebar Weight field: Dual weight fields work together. I cleaned up the patient weight logic. The old pt-weight and pt-weight-unit inputs are gone in favor of two synchronized fields—kilograms on the left, pounds on the right. The ptInputIds list now references pt-weight-kg and pt-weight-lb, and the stale weightUnit retrieval has been removed. Both fields stay in sync, and the underlying patientData.weightUnit remains "kg" throughout.
+Patient Sidebar weight: Dual KG/LB fields synchronized; internal unit stays kg.
 
 Patient Info Sidebar Behavior: The overlay's semi-transparent background, and the “X” close button both close the Patient Info sidebar.
 
   We standardized the open/close logic by centralizing it: both main.js and PatientInfo.js use the same functions to add/remove the active and hidden classes on the sidebar and overlay. This prevents divergent behavior.
 
+Data wiring: Build window.medicationDataMap before indexing categories → detail pages load reliably.
 
-Fixed medication detail pages not loading by assigning `window.medicationDataMap` before indexing categories.
+Search: Typing no longer pollutes history; only committed searches recorded.
+
+Added basic default indication suggestions. 
+
+Detail Rendering: Fixed main.js data wiring & Features/Warnings.js so medication/equipment details load reliably; implemented `getAgeWarning`.
+
+Navigation/Home: Hooked up Home button handler to reset to the Contents view.
+
+Medication Classes: Added dynamic Medication Class dropdown (built from data) in Patient Info; wired change listener.
+
+Patient Snapshot: Implemented and updates on load/changes.
+
+Autocomplete seeds: Added common terms and PDE5 inhibitors.
+
+Settings/Dark Mode: Corrected CSS & added brightness slider.
+
+CSS: Focus rings and arrow rotation transitions unified; invalid nested rules removed
+
+Sept 1, 2025: The Patient Info section now has a Medication Class dropdown populated from all medication classes in the data. It updates suggestions and filters context.
 
 
-Search bar input no longer pollutes navigation history; only committed searches are stored.
+## 9. TIMELINE SUMMARY (Short & Specific)
 
-Added default indication suggestions ("MI", "ACS", "Bronchospasm", "Hypoglycemia", "Asthma"). 
+07/16/25 — Nearly useful for field work; more data review pending.
 
-
-Sept 1, 2025 — App stabilization and UI polish
-
-- Detail Rendering: Fixed `main.js` data wiring and `Features/Warnings.js` so medication/equipment details load reliably; implemented `getAgeWarning`.
-- Navigation/Home: Hooked up Home button handler to reset to the Contents view.
-- Medication Classes: Added dynamic Medication Class dropdown (built from data) in Patient Info; wired change listener.
-- Patient Snapshot: Implemented snapshot card and render on load and on any patient data update.
-- Autocomplete Seeds: Cleaned up common medication list and added PDE5 inhibitors.
-- Settings/Dark Mode: Corrected invalid CSS and added a brightness slider with live preview and persistence.
-- CSS Cleanup: Fixed focus ring styling, arrow alignment, and removed invalid nested rules to prevent style parsing issues.
-
-
-FIXED (Sept 1, 2025): The Patient Info section now includes a Medication Class dropdown populated from all medication classes in the data. It updates suggestions and filters context.
-
-
-## 9. TIMELINE SUMMARY
-
-7/16/25-App is almost far enough along to actually be useful during work, but still need to update a lot of stuff and double check all the medication info. 
-
-7/18/25- ES Module conversion is looking good. Categories still are not loading in, but Dark Mode in Settings is working properly.
+07/18/25 — ES Modules progressing; categories not yet loading at that time; Dark Mode working.
 
 
 ## 10. FUTURE TASKS/GOALS/IDEAS
