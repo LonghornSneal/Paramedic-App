@@ -71,36 +71,21 @@ Styling: Tailwind via CDN + styles.css (custom rules).
 
 The Paramedic Quick Reference is designed to allow paramedics to find life-saving information within seconds. It functions as an interactive protocol book and drug reference on a phone or tablet. The interface is optimized for speed, clarity, and ease-of-use in emergency situations.
 
-Design and Feature Overview: The app’s UI elements and features are detailed below, describing how each works and what role it plays in the user experience:
+Design & Feature Overview: The app’s UI elements & features.
+  Detailed below, describing the function & role it plays in the app.
 
-Main Contents Page: This is the default view when the app loads. It shows a list of high-level topics (categories) and subtopics that the user can navigate. Key elements on this page include:
-  App Title – Displayed at the top-center of the header (e.g., “Paramedic Quick Reference”).
-  Search Bar – Located just below the title, this allows users to filter and find topics by typing keywords (more details in Search Bar below).
-  Patient Info Button – A button in the top-left corner of the header that opens the Patient Info sidebar when clicked.
-  Navigation Buttons – Back and Forward buttons in the top-right corner of the header (disabled initially) for navigating through the view history (see Navigation Buttons below).
-  Home Button – A button (represented by a home icon) located under the Back/Forward navigation buttons, which when clicked returns the user to the Main Contents Page from any detail view.
-  History Button – A button (visible at all times, below the Home button) that opens a scrollable history of all items the user has clicked during the session (see History Button below).
-  Expandable Topic List – The Main Contents list itself uses interactive arrows (blue arrows) to expand/collapse categories and subcategories, and clickable text for final topics (explained under Blue Arrows and Subtopics below).
+  Main Contents Page: The default view that shows categories & subtopics.
+    The header: shows the app title centered with the search bar directly below; the Patient Info button is top‑left; Back/Forward arrows are top‑right (disabled initially), with the Home button beneath them and the History button below Home. 
+    The hierarchical Contents list renders in the main content area: blue chevrons expand/collapse categories; clicking a final topic opens its detailed page.
+    Entering patient data in the sidebar immediately updates the experience: irrelevant list items are strike‑through by indications, detail pages re‑render, and relevant warnings appear at the top of details. 
+    All rendering is local, IDs are stable, taps are minimal, and flows are simple.
+    Expandable Topic List: The Main Contents list itself uses interactive arrows (blue arrows) to expand/collapse categories and subcategories, and clickable text for final topics (explained under Blue Arrows and Subtopics below).
 
-Blue Arrows: These are the small blue arrow icons that appear to the right of any topic that can be expanded or collapsed. They visually indicate whether a category is expanded or not and let the user reveal sub-items. There are two states:
+  Blue Arrows: On the Contents list.
+    A small blue chevron is shown to the left of any expandable category. When collapsed, the chevron points right; clicking the chevron or the category label toggles the section open and rotates the chevron 90° downward. When expanded, clicking again collapses the section and returns the chevron to the rightward orientation. Leaf topics (final items) do not display a chevron; their text is clickable and opens the detail page.
 
-  Rightward-Pointing Blue Arrow: Indicates that the section is currently collapsed. Clicking this arrow (or its associated text label) will rotate the arrow 90° clockwise to point downward and will expand the section to show its subtopics or reveal hidden information.
-
-  Downward-Pointing Blue Arrow: Indicates that the section is expanded. Clicking this (or the section title again) will rotate the arrow 90° counter-clockwise back to a rightward orientation and collapse the section (hiding the subtopics or text).
-
-  The blue arrows are always positioned immediately to the right of their topic text. They provide a clear visual cue and toggle for showing/hiding content. If a topic has further subtopics, it will always have a blue arrow next to it; if it has no subtopics, no arrow is shown (it’s a final item that can be clicked to view details).
-
-Subtopics and Navigation Hierarchy: The topics are arranged in a hierarchy:
-
-  Categories with Subtopics: These appear as bold or highlighted parent items with a rightward arrow. Clicking them expands a list of subtopics underneath (and turns the arrow downward). Each subtopic may itself be a parent to further subtopics, in which case it will also have a blue arrow to expand it. This nesting can continue through multiple levels if needed.
-
-  Topics without Further Subtopics: These are the final items in a branch (leaf nodes). They do not have a blue arrow. Instead, their text is styled as a clickable button. Clicking one of these will open a Focused Subtopic Section (detail page) for that topic. For example, “ASA” in the ALS Medications category might be a final topic; clicking it opens the Aspirin detail page.
-
-Focused Subtopic Sections (Detail Pages): When a user clicks a final topic, the app displays a detailed page for that specific item. These detail pages may contain medication details, general protocols, or treatments for specific patient conditions.
-
-  All content for these sections comes from the app’s data files.
-
-  The content is organized with clear subheadings.
+  Subtopics and Navigation Hierarchy: Topics are organized as a tree.
+    Parent items (type "category") render with a bold label and a blue chevron to the left; clicking the chevron or label toggles the section. Nested categories are supported recursively, so multiple levels can expand as needed. Final items (type "topic") do not show a chevron; their text is a clickable link that opens the corresponding detail page (the link carries data-topic-id and routes to renderDetailPage(id)).
 
   Internal links or references: Some detail pages may contain links (for related topics or external resources), images, or even embedded videos if relevant (e.g., a procedural guide might have an image of equipment). Currently, all such media is stored locally or referenced in the data.
 
