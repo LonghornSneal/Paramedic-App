@@ -106,44 +106,79 @@ Design & Feature Overview: The app’s UI elements & features.
     Close sidebar: by clicking its close (X) button or by clicking the overlay.
   The sidebar provides fields for sex, age, weight (KG/LB), height, PMH, allergies, current meds, indications, symptoms, VS, & EKG. Entered values update patientData immediately, which personalizes the app by striking through less‑relevant list items, re‑rendering the current detail page, & showing patient‑specific warnings.
 
-  Patient Info Sidebar/Section: The sidebar is an interactive form that updates patientData as you type. 
-  It includes: Sex, Age, Weight (kg/lb), Height, VS,
-     
-    Sex, Age: This can affect whether pediatric or adult protocols apply (e.g., dose differences, which sections to StrikeThrough). The UI might treat an age above a certain threshold as “adult.” Numbers user can input if in "years' are positive integers from 0-120. Numbers user can input if in "months" are positive integers from 0-40. Numbers user can input if in days are positive integers from 0-500.
-
-    Weight (kg/lb): Used for Auto-Calculation with weight-based dosages.  Numbers user can input if in "lbs" are positive integers from 0-1500. Numbers user can input if in KG are positive integers from 0-700.
-
+  Patient Info Sidebar/Section: The sidebar is an interactive form that updates patientData as you type. All Categories will Auto-Update if the information is filled out elsewhere from within the app.
+    Includes: Sex, Age, Weight (kg/lb), Height, PMH, Allergies, Medications, Indications, S/S, & VS.
+      Note: pain scale still needs to be coded into app.
+    VS Categories: BP (MAP is automatically calculated)HR, %SpO2, EtCO2, RR, BGL, Pupils, GCS, A&O Status, LS, & EKG Interpretation.
+    Sex: Select 'Male' or 'Female' selection currently (task update available). Currently used for the Zoll Ventilator Calculation.
+    Age: Affects surfaced treatments (e.g., dose differences, which sections to StrikeThrough).
+    18 & up equals “adult.”
+      Inputs: whole numbers only, years 0–120, months 0–40, days 0–500.
+    Weight (kg/lb): Used for Auto-Calculation with weight-based dosages.  Whole numbers only. Ranges: lb 0–1500; kg 0–700.
     Height: either ft+in or total inches; values sync both ways.
 
-    Vital Signs (VS): Vital Sign abnormalities can trigger warnings or make certain interventions inappropriate (which the app will indicate). Input options are: User input, Drop-Down menu to select an option from, or both. When the user hovers, with a mouse or they press and hold with their finger, over an option that they can select from the Drop-Down menus of select VS, a Pop-Up menu will appear. This Pop-Up menu appears to the right of the Sidebar (not within the Sidebar). This Pop-Up menu will give further clarity on what their selection option means exactly, and the menu will have an "x" in the top right corner that will close the Pop-Up menu. VS include:
-      Blood Pressure (BP): User may input number or select from Drop-Down menu. Drop-Down menu options are: 200+, 160+, Normal, >90, and >70. Top of Drop-Down menu is labled SBS. Numbers user can input are positive integers from 0-400 for systolic and 0-300 for diastolic.
-      MAP: Inputing a systolic and diastolic BP will Auto-Calculate and provide the user with a MAP value that will have it's own Pop-Up menu.
-      Heart Rate (HR): User may input number or select from Drop-Down menu. Drop-Down menu options include: 150+, 100+, 60-100, >60, and >40. Numbers user can input are positive integers from 0-300 for systolic BP and 0-200 for diastolic BP.
-      SpO2 (%): User may input number or select from Drop-Down menu. Drop-Down menu options include: Normal, Low, and Severly Low. Numbers user can input are positive integers from 50-100.
-      EtCO2: User may input number or select from Drop-Down menu. Numbers user can input are positive integers from 0-50.
-      Respiratory Rate (RR): User may input number or select from Drop-Down menu. Numbers user can input are positive integers from 0-80.
-      Blood Glucose (BGL): User may input number or select from Drop-Down menu. Numbers user can input are positive integers from 0-900.
-      Pupils: User may input number or select from Drop-Down menu. Numbers user can input are positive integers from 0-8mm.
-      GCS: User may input number or select from Drop-Down menu. When clicked, drops down a menu starting at the top at 1 and ending at 15. 
-      AO Status: Drop-Down menu only. Drop-Down menu starts at 4 and ends at 0.
-      Lung Sounds (LS): User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu.
+    Past Medical History (PMH): Free‑text, comma‑separated (#pt‑pmh) with autocomplete (e.g., diabetes, CHF, asthma). Parsed to an array on input. 
+      Snapshot: Shows only most relevant (abbrev.). Informational only.
+      Smart Suggestions: (Currently needs to be coded for)
+        Roadmap: will filter Smart Suggestions’ Topic List (lower priority than Indications).
+      Strike-Through: (Currently needs to be coded for) Adds a Strike-Through on innappropriate treatment options based upon PMH.
 
-    EKG Interpretation: The EKG field is a free‑text input in the Patient Info sidebar (#pt-ekg). There is no dropdown menu, pop‑up preview, or “EKG Help” view at this time. The snapshot area can display the EKG text with mild severity coloring (e.g., entries containing “tachy” or “brady”), contingent on patientData.ekg being populated. Note: current code does not set patientData.ekg in updatePatientData(); adding that assignment will enable snapshot display and any future EKG‑aware behavior.
-     
-    Past Medical History (PMH): PMH is a free‑text, comma‑separated textarea (#pt-pmh) with autocomplete suggestions (e.g., “diabetes,” “CHF,” “asthma”). Entered values are parsed into an array on each input and shown concisely in the patient snapshot (first two items, abbreviated). PMH provides clinical context but does not currently drive list filtering; list strike‑throughs are based on Indications.
-      Planned future update: PMH will be used to filter Topic List in Smart Suggestions (Lower priority than Indications).
+    Allergies: Type‑to‑filter or choose from dropdown.
+      Allergy Alert: listed medication matches an allergy, then it's detail page shows an Allergy Alert & innappropriate treatments are struck‑through.
+        Struck‑Through Items: Remain selectable.
+      Autocomplete: Suggests available Paramedic medications first.
 
-    Allergies: User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu. Known patient allergies (especially drug allergies). If a patient is allergic to a medication listed in the app, that medication’s detail page will show a prominent Allergy Alert. Additionally, the medication may be visually marked (e.g., Struck-Through) in lists to help the user focus on more viable options. Struck-Through options are still functionable. Autocomplete suggestions (common allergens like penicillin, latex, etc.) are provided.
+    Medications: Current pt medications. Type‑to‑filter or choose from dropdown.
+      Autocomplete: Suggests common medications that may be relevant to pt care first and foremost.
+      Interaction Checks: Identifies Rx interactions and applies Alerts/Warnings (e.g., PDE‑5 inhibitor → warn against nitroglycerin).
 
-    Medications: User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu. The medications the patient is currently taking. This is important for identifying drug interactions. For instance, if the patient is on a phosphodiesterase inhibitor (like Viagra), the app will warn against giving Nitroglycerin. This field also supports multiple entries with autocompletion of common drug names.
+    Indications: Type‑to‑filter or choose from dropdown. Chief Complaint (e.g., chest pain, SOB).
+      Highlights: Topics related to the Indications are highlighted.
 
-    Indications: User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu. The primary complaint or indication for calling EMS (e.g., chest pain, shortness of breath). This can be used by the app to highlight protocols that are likely relevant (for example, if “chest pain” is entered, the protocols related to cardiac issues will be highlighted blue).
+    Signs & Symptoms (S/S): Same mechanics as Indications; adds nuance for smart filtering/highlighting.
 
-    Symptoms: User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu. Additional symptoms observed (e.g., nausea, dizziness). Like Indications, these might be used for smart filtering or highlighting relevant topics.
+    Vital Signs (VS): Manual entry or dropdowns. Abnormal values trigger warnings or Strike-Through contraindicated actions.
+      Selectable Options: Hover/press‑and‑hold on dropdown option opens a right‑of‑sidebar pop‑up with definitions; close via “×”.
+    VS include:
+      Blood Pressure (BP): Number entry or dropdown.
+        Drop-Down Menu Options: 200+, 160+, Normal (90-160 SBP), 70-90, & 70-.
+        Inpute Range: SBP 0–400; diastolic 0–300. Integers.
+        MAP: Auto‑calculated from SBP/DBP; has its own pop‑up.
+      Heart Rate (HR): Number entry or dropdown.
+        Drop-Down Menu Options: 150+, 100+, 60–100, >60, >40.
+        Inpute Range: Integers. SBP 0–300 bpm. Diastolic BP 0-200
+      SpO₂ (%): Number or dropdown.
+        Drop-Down Menu Options: (Normal, Low, Severely Low).
+        Inpute Range: Integers 50–100.
+      EtCO₂: Number or dropdown.
+        Drop-Down Menu Options:
+        Inpute Range: Integers 0–50.
+      RR: Number or dropdown.
+        Drop-Down Menu Options: 
+        Inpute Range: Integers 0–80.
+      BGL: Number or dropdown.
+        Drop-Down Menu Options:
+        Inpute Range: Integers 0–900.
+      Pupils (mm): Number or dropdown.
+        Drop-Down Menu Options:
+        Inpute Range: Integers 0–8.
+        Note: future updates needed to access other eye issues.
+      GCS: Number or dropdown.
+        Drop-Down Menu Options:
+        Inpute Range: list runs 3–15.
+      A&O: Dropdown only.
+        Drop-Down Menu Options: 0, 1, 2, 3, & 4.
+      Lung Sounds (LS): Type‑to‑filter or dropdown.
+        Drop-Down Menu Options:
 
-  Note: (All Patient Info fields are optional, but the more that is filled, the more the app can tailor the content. All fields left blank simply mean the app shows everything by default.)
+    EKG: Free text in sidebar (#pt‑ekg).
+      Future Tasks: dropdowns, pop‑ups, or “help.” Snapshot can tint entries containing “tachy”/“brady” if patientData.ekg is set. Current code doesn’t set it in updatePatientData(); add that assignment to enable snapshot and future EKG logic.
 
-After the user enters patient data, the app immediately updates relevant parts of the UI (see Effects of Patient Data below). The sidebar remains open or can be closed; the entered data persists in memory (and can be designed to persist across sessions using localStorage in the future, though currently it’s just in-memory).
+  Defaults & Behavior: All fields are optional.
+    More Data: = tighter tailoring.
+    No Data: = No UI/app effects/changes.
+    Data input: UI updates instantly on input.
+    Stored Data: Data persists in memory; session persistence via localStorage is on the roadmap.
 
 Effects of Patient Data: The information input in the Patient Info sidebar influences the main content in real time:
 
@@ -493,6 +528,7 @@ All these components work together to provide a seamless experience: The data pr
 
 **This section provides a list of tasks that must be worked on now unless explicitly told otherwise. Once this section is empty, proceed to the “CURRENT TASKS/GOALS” section in this README for additional tasks.**
 
+Sex: Update the "Sex" field in the Patient Info Sidebar/Section to incoporate the symbols that get highlighted when selected, like in our "Zoll Set Up" Detail Page.
 
 Settings: Color sliders for the app.
   Independent sliders for: main background, category background, main text, category text, warnings, pop‑up comments, other pop‑ups.
