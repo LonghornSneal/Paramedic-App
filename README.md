@@ -93,19 +93,27 @@ Design & Feature Overview: The app’s UI elements & features.
       Warnings: are injected at the top of the page based on patientData (e.g., allergy match, PDE5 + NTG, low BP for NTG, pediatric Etomidate). The app re-renders details on patient updates so context stays current.
         Note: broad, automatic medication administration math is planned (see Current Tasks); some detail content may include calculations, but universal dose auto-calculation is not yet implemented across all Rx's.
 
-  Search Bar: The search bar at the top of the interface allows users to quickly filter and find topics. As the user types into the search input, two dynamic lists appear immediately below it (side by side):
+  Search Bar: dual lists (Filtered + Smart Suggestions) & only one location for user input.
+    Matching: Case-insensitive, and tries to match any part of a topic’s name or associated keywords. Updates per keystroke. Clicking navigates to detail. Both lists are scrollable.
+    Two dynamic lists: Two side-by-side list of topics (Appears as the user types into the search input).
+      Displayed: immediately below the Search Bar (side by side).
+    Filtered List of Topics: On the left.
+     This is that standard search bar that is currently implemented.
+    Smart Suggestions: On the right.
+      Displays: Filtered (by Patient Info & Search Bar text) list of topics.
 
-    Filtered List of Topics: On the left, a list of topic titles (and possibly their category path) that match the text entered. This updates in real-time with each keystroke. For instance, typing “asp” might show “ASA – ALS Medications” as well as any other topics containing “asp” or "ASA". Clicking on a topic in this list will directly navigate to that topic’s detail page.
+  Patient Info Menu Button: The Patient Info button (#open-sidebar-button) opens the Patient Information sidebar (#patient-sidebar) & activates the dim overlay (#sidebar-overlay).
+    Close sidebar: by clicking its close (X) button or by clicking the overlay.
+  The sidebar provides fields for sex, age, weight (KG/LB), height, PMH, allergies, current meds, indications, symptoms, VS, & EKG. Entered values update patientData immediately, which personalizes the app by striking through less‑relevant list items, re‑rendering the current detail page, & showing patient‑specific warnings.
 
-    Smart Suggestions: On the right, the app can display A list of topics that is filtered by the information that the user has inputed into the Patient Info Sidebar and re-organized by what the user is inputing into the search bar. For example, if the user inputs in the Patient Info Sidebar that the patient is intubated, then the Smart Suggestions will show a list of all the various intubation topics that the user may select. If the user then types the letter "d" into the search bar, the Smart Suggestions list will re-organize itself to have the topics that start with the letter "d" appearing first. Smart Suggestions always contain a set number of topics in a scrollable list that is determined by the information in the Patient Info Sidebar. If no information is in the Patient Info Sidebar, then Smart Suggestion contains the full list of Smart Suggestions that is found in the data file. Smart Suggestions topics will be searchable through indirect routes such as: common medical terms, synonyms, or common spelling errors. For example, typing “dAtdi” might suggest “Cardiac Arrest” even if those exact words haven’t been fully typed, or might suggest related terms like “Cardioversion” or “Cardizem” if applicable. These suggestions help guide the user if they are unsure of spelling or the exact name of a protocol. Clicking a suggestion could refine the search or directly show a subset of related topics. (This feature may be expanded as the app grows; currently it may offer basic suggestions based on an internal list of keywords and these basic suggestion will be more likely to contain topics that the user would need to access while under duress such as: Cardiac Arrest, SVT, RASS +3, RASS +4, Epi, Versed, ecetera.)
+  Patient Info Sidebar/Section: The sidebar is an interactive form that updates patientData as you type. 
+  It includes: Sex, Age, Weight (kg/lb), Height, VS,
+     
+    Sex, Age: This can affect whether pediatric or adult protocols apply (e.g., dose differences, which sections to StrikeThrough). The UI might treat an age above a certain threshold as “adult.” Numbers user can input if in "years' are positive integers from 0-120. Numbers user can input if in "months" are positive integers from 0-40. Numbers user can input if in days are positive integers from 0-500.
 
-  Patient Info Menu Button: The Patient Info button (#open-sidebar-button) opens the Patient Information sidebar (#patient-sidebar) and activates the dim overlay (#sidebar-overlay). Close the sidebar by clicking its close (X) button or by clicking the overlay; the open button does not toggle it closed. The sidebar provides fields for sex, age, weight (KG/LB), height, PMH, allergies, current meds, indications, symptoms, VS, and EKG. Entered values update patientData immediately, which personalizes the app by striking through less‑relevant list items, re‑rendering the current detail page, and showing patient‑specific warnings.
+    Weight (kg/lb): Used for Auto-Calculation with weight-based dosages.  Numbers user can input if in "lbs" are positive integers from 0-1500. Numbers user can input if in KG are positive integers from 0-700.
 
-  Patient Info Sidebar/Section: The patient info section is an interactive form where the paramedic can enter details about their patient. Every category in this section allows the user to input specific information that is interactive with the app in one way or more. All categories will have a drop down menu to select from, some categories will have a drop down menu and allow for the user to type the data in. Any information inputed by the user persists inbetween sessions (so if they close and reopen the app, no patient information is lost.). The categories of information include:
-
-    Age: The patient’s age. This can affect whether pediatric or adult protocols apply (e.g., dose differences, which sections to StrikeThrough). The UI might treat an age above a certain threshold as “adult.” Numbers user can input if in "years' are positive integers from 0-120. Numbers user can input if in "months" are positive integers from 0-40. Numbers user can input if in days are positive integers from 0-500.
-
-    Weight: The patient’s weight (in kilograms or pounds). Weight is used for Auto-Calculation with weight-based dosages. (Current UI includes a single weight input, but a planned improvement is to allow entry in either kg or lbs and automatically convert between them.) Numbers user can input if in "lbs" are positive integers from 0-1500. Numbers user can input if in KG are positive integers from 0-700.
+    Height: either ft+in or total inches; values sync both ways.
 
     Vital Signs (VS): Vital Sign abnormalities can trigger warnings or make certain interventions inappropriate (which the app will indicate). Input options are: User input, Drop-Down menu to select an option from, or both. When the user hovers, with a mouse or they press and hold with their finger, over an option that they can select from the Drop-Down menus of select VS, a Pop-Up menu will appear. This Pop-Up menu appears to the right of the Sidebar (not within the Sidebar). This Pop-Up menu will give further clarity on what their selection option means exactly, and the menu will have an "x" in the top right corner that will close the Pop-Up menu. VS include:
       Blood Pressure (BP): User may input number or select from Drop-Down menu. Drop-Down menu options are: 200+, 160+, Normal, >90, and >70. Top of Drop-Down menu is labled SBS. Numbers user can input are positive integers from 0-400 for systolic and 0-300 for diastolic.
@@ -120,9 +128,10 @@ Design & Feature Overview: The app’s UI elements & features.
       AO Status: Drop-Down menu only. Drop-Down menu starts at 4 and ends at 0.
       Lung Sounds (LS): User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu.
 
-    EKG Interpretation: User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu. When the user hovers, with a mouse or they press and hold with their finger, over an option that they can select from the Drop-Down menu, a Pop-Up menu will appear. Pop-up menu will appear on screen the same as the other, but instead of info, it will have an EKG example. Off to the side, their will be a "EKG Help" link that takes the user to a new screen dedicated to EKGs.
-
-    Past Medical History (PMH): User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu. A list of the patient’s known conditions or medical history (e.g., diabetes, heart failure, asthma). This can help filter protocols (for example, showing relevant treatments or contraindications). This field often supports multiple comma-separated entries, and the app provides an autocomplete of common conditions for convenience.
+    EKG Interpretation: The EKG field is a free‑text input in the Patient Info sidebar (#pt-ekg). There is no dropdown menu, pop‑up preview, or “EKG Help” view at this time. The snapshot area can display the EKG text with mild severity coloring (e.g., entries containing “tachy” or “brady”), contingent on patientData.ekg being populated. Note: current code does not set patientData.ekg in updatePatientData(); adding that assignment will enable snapshot display and any future EKG‑aware behavior.
+     
+    Past Medical History (PMH): PMH is a free‑text, comma‑separated textarea (#pt-pmh) with autocomplete suggestions (e.g., “diabetes,” “CHF,” “asthma”). Entered values are parsed into an array on each input and shown concisely in the patient snapshot (first two items, abbreviated). PMH provides clinical context but does not currently drive list filtering; list strike‑throughs are based on Indications.
+      Planned future update: PMH will be used to filter Topic List in Smart Suggestions (Lower priority than Indications).
 
     Allergies: User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu. Known patient allergies (especially drug allergies). If a patient is allergic to a medication listed in the app, that medication’s detail page will show a prominent Allergy Alert. Additionally, the medication may be visually marked (e.g., Struck-Through) in lists to help the user focus on more viable options. Struck-Through options are still functionable. Autocomplete suggestions (common allergens like penicillin, latex, etc.) are provided.
 
@@ -486,88 +495,53 @@ All these components work together to provide a seamless experience: The data pr
 
 
 Settings: Color sliders for the app.
-  
   Independent sliders for: main background, category background, main text, category text, warnings, pop‑up comments, other pop‑ups.
-  
-  Allow any color selection. Warn when selected text color is similar to the chosen background.
+  Allow any color selection. Warn when the selected text color is similar to the chosen background.
 
+Contraindication Warnings: Expand keywords, Add more contraindication keywords to Data/MedicationDetailsData.js, Update checks in updatePatientData() and renderDetailPage() as new medications are added, & Add comments indicating where to extend keywords and what else to update when adding a contraindication.
 
-Contraindication Warnings: expand keywords
-
-  Add more contraindication keywords to Data/MedicationDetailsData.js.
-
-  Update checks in updatePatientData() and renderDetailPage() as new medications are added.
-
-  Add comments indicating where to extend keywords and what else to update when adding a contraindication.
-
-
-Search Bar: dual lists (Filtered + Smart Suggestions).
-
-  Filtered: On the left.
-   
-   Filtered list of topics matching the input (case‑insensitive; match any part of name/keywords). Updates per keystroke. Clicking navigates to detail.
-
-    Example: typing “asp” might show “ASA – ALS Medications” as well as any other topics containing “asp” or "ASA".
-
-
+Search Bar: dual lists (Filtered + Smart Suggestions) & only one location for user input.
+  Matching: Case-insensitive, and tries to match any part of a topic’s name or associated keywords. Updates per keystroke. Clicking navigates to detail. Both lists are scrollable.
+  Two dynamic lists: Two side-by-side list of topics (Appears as the user types into the search input).
+    Displayed: immediately below the Search Bar (side by side).
+  Filtered List of Topics: On the left.
+     This is that standard search bar that is currently implemented.
   Smart Suggestions: On the right.
-  
-  scrollable list influenced by Patient Info (e.g., intubated → show intubation topics first), re‑ordered as the user types
-  
-    Example: typing "d" into the search bar will cause the Smart Suggestions list to re-organize itself to have the topics that start with the letter "d" & that are related to the user inputed Patient Info, be at the top of the list. After will be other topics related to the information found in Patient Info in a higher to lower of importance order.
-  
-  If no Patient Info entered: show the baseline full Smart Suggestions list from data that is ordered from the closest match to least closest match based upon what the user types in the search bar.
-  
-  Smart Suggestions follow indirect routes (common terms, synonyms, misspellings). Example: typing “dAtdi” might surface “Cardiac Arrest” or “Cardioversion/Cardizem” when applicable.
-  
-  Unsure spelling: Users should be able to find what they are looking for without spelling it out exactly or even if they use a similar word instead.
-  
-  Right Clicking or Holding down on a topic from the Smart Suggestions List: shows a subset of related topics.
-  
-  Higher priority topics: Include topics like Cardiac Arrest, SVT, RASS +3, RASS +4, (Narcotic medication), and other topics that have a higher potential for negative patient care with the more time wasted using the app instead of treating the patient.
-
-  Matching: Case-insensitive, and tries to match any part of a topic’s name or associated keywords.
+    Displays: Filtered (by Patient Info & Search Bar text) list of topics.
+    Topic List: Dynamically updates list from modification of Patient Info/Search Bar text.
+      Example: User inputs "intubated" into Patient Info, and then inputs "d" into the Search Bar.
+        Displays: Returns a list of topics that start with the letter "d" and involve Intubation or Intubated pt's, followed by the alphabatized list of Intubation related topics. Other Patient Info related topics will be prioritized afterwards. After all the Patient Info related topics are displayed first, the list will end with the rest of the baseline full Smart Suggestions list.
+      No Patient Info: Display baseline full Smart Suggestions list (Search Bar text dynamically updates list order).
+      Indirect Search Bar Routes: Topics may be found using common terms, synonyms, common spelling errors, or key-stroke errors.
+        Key-Stroke Error Example: typing “dAtdi” might surface “Cardiac Arrest” even if those exact words haven’t been fully typed, or might suggest “Cardioversion/Cardizem”.
+      Right Clicking/Long press on a Smart Suggestions Topic: Displays topics related the interacted topic (Interacted Topic remains at the top and the user is able to display the prior list by completing the action again).
+      Higher Priority Topics: Cardiac Arrest, SVT, RASS +3, RASS +4, (Narcotic medication), ecetera. Higher Priority Topics may be classified by those which have a higher potential for patient harm if treatments are not quickly given.
 
 
 ## 7. CURRENT TASKS/GOALS
 
 **TOP PRIORITY TASKS must all be completed before attempting any of the following Tasks.**
 
-When a task here is completed: add a short, concise note to Chapter 8.
-
-  Replace the completed item (here) with a new task to create tests, if not already present, that verify the completed change.
-
-  Tests: Add tests for any new bug (before the fix) and for new features.
-
-    Organize test files; include minimal “how to run” notes when not obvious.
-
+Current Task/Goal completed: Add a short, concise note to Chapter 8.
+  Replace original Task/Goal location with Testing (if not already present).
+  Tests: Add tests for any new bug (before the fix), for new features, and to test any completed Task/Goal.
+    Organize test files: include minimal “how to run” notes when not obvious.
 
 Patient Info Sidebar: visible app‑wide effects.
-
   Every field should drive visible UI changes: strike‑through inappropriate treatments, warnings pop, and adapt content.
-
   Examples: Enter “Morphine” in Allergies → viewing chest pain/pain protocols shows allergy warning; “Morphine” item is strike‑through (still accessible).
-
     Enter age 8 → viewing adult‑only medication should show pediatric warning
-
  
   Dynamic Dosage Recalculation: Implement fully dynamic dosage calculations for every medication.
 
-
-Contraindication Warnings: visuals.
-
-  When Patient Info contains contraindications (allergies, conflicting medications, low BP, etc.) the detail pages should display clear warning boxes in red font. For example, an allergy alert should show a red‑bordered box with a warning icon and message; drug interaction warnings and vital sign warnings should also appear as distinct boxes.
-
+Warnings/Alerts: Visually shown under Search Bar.
+  Contraindication Warnings: visuals.
+    When Patient Info contains contraindications (allergies, conflicting medications, low BP, etc.) the detail pages should display clear warning boxes in red font. For example, an allergy alert should show a red‑bordered box with a warning icon and message; drug interaction warnings and vital sign warnings should also appear as distinct boxes.
     If a patient has an allergy that matches the medication (or its class), a red-bordered box with an alert icon and message.
-    
-      Allergy Alert: "Patient has a known allergy to this medication” will appear at the top of that detail page. 
-   
-      If the patient’s recorded medications include a drug that is contraindicated (e.g., PDE5 inhibitors when viewing Nitroglycerin), a warning box will similarly appear.
-    
-        Drug Interaction Warning: "Patient is on [Drug], which contraindicates [This Treatment]”). 
-         
-         VS Warning: "BP too low for this treatment!”.
-   
+  Allergy Alert: "Patient has a known allergy to this medication” will appear at the top of that detail page.
+    If the patient’s recorded medications include a drug that is contraindicated (e.g., PDE5 inhibitors when viewing Nitroglycerin), a warning box will similarly appear.
+      Drug Interaction Warning: "Patient is on [Drug], which contraindicates [This Treatment]”).   
+  VS Warning: "BP too low for this treatment!”.
    "
 ## 8. RECENT FIXES AND CHANGES (Short & Specific)
 
@@ -638,29 +612,23 @@ Sept 1, 2025: Patient Info given Medication Class dropdown populated from all me
 
 *This section proposes enhancements/ideas for future development. Nothing in this section is to be worked on or looked at until they are moved into TOP PRIORITY TASKS or CURRENT TASKS/GOALS.*
 
-
   Minor glitch that after lots of expansions/collapses and scrolling, some elements (like the header or certain buttons) might appear to shift or jitter slightly – potentially due to scrollbar appearance or focus outlines. We will continue to refine the CSS to eliminate any “weird” movement and ensure smooth scrolling.
 
-
   Slug Anchors & Section Headers: Long detail pages should include a Table of Contents generated from section headings (slugAnchors.js); currently no detail page is long enough to need this implimentation.
-  
     The anchor Table of Contents at the top of long pages should list all the sections present and allow jumping. Try out a long entry (like one with many sections) to confirm the anchor links scroll correctly. Ensure that anchors appear correctly and that clicking them scrolls smoothly to the section.
 
-
   Persistent User Data: Implement saving of patient info and user history between sessions. For example, use localStorage or similar to remember the last entered patient details so if the app is closed accidentally or the browser refreshes, the user doesn’t have to re-enter critical info. Also, preserve the History list between sessions so a medic can quickly revisit frequently accessed topics across shifts.
-
+  Any information inputed by the user persists inbetween sessions (so if they close and reopen the app, no patient information is lost.).
 
   Enhanced Dynamic Protocol Filtering: Expand the intelligence of the main Contents list filtering. Beyond just strike-throughs, we could implement a mode where, say, entering a primary indication or choosing a protocol (e.g., “STEMI” or “Anaphylaxis”) automatically highlights or even isolates the relevant protocols (perhaps by toggling a “Relevant Only” filter). This could guide medics to the correct treatment algorithm faster. It may involve tagging topics with keywords like “chest pain” or “trauma” and then matching those to patient indications input.
 
-
   Complete Weight-Based Dosing Automation: Currently we handle some weight calculations, but we plan to automate all weight-specific dosage calculations. This includes rounding to appropriate values and even suggesting volume (mL) if concentration is known. For example, “Epinephrine 0.01 mg/kg” for a 22 kg child → “0.22 mg (0.22 mL of 1:10000 solution)”. This requires augmenting the data with concentration info and writing logic to compute volumes. 
-
 
   Smooth Scroll and Section Highlight: Improve the anchor navigation by adding smooth scrolling animation when an anchor link is clicked, rather than a jump. Also, as the user manually scrolls through a detail page, highlight the current section in the anchor menu (e.g., bold or underline the section name in the TOC when that section is at top of viewport). This gives context about where you are in the page. This feature would involve listening to scroll events and computing which section is in view – performance should be considered for longer pages.
 
-
   Additional Autocomplete Enhancements: Our current suggestion lists (for PMH, allergies, etc.) could be enhanced by learning from usage. We might implement that if a user manually enters a term that isn’t in our suggestions, we add it to a local list for next time. Or provide more sophisticated suggestions (like common misspellings or abbreviations mapping to full terms – e.g., typing “MI” could suggest “Myocardial Infarction”). These improvements can make data entry faster and more accurate.
 
+  EKGs: User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu. When the user hovers, with a mouse or they press and hold with their finger, over an option that they can select from the Drop-Down menu, a Pop-Up menu will appear. Pop-up menu will appear on screen the same as the other, but instead of info, it will have an EKG example. Off to the side, their will be a "EKG Help" link that takes the user to a new screen dedicated to EKGs.
 
 **This README is up to date as of JuLY 19TH, 2025. All instructions and documentation reflect the current and intended behavior of the Paramedic Quick Reference app.**
 
