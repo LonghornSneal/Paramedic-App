@@ -238,34 +238,22 @@ Performance and Simplicity: The app prioritizes speed and reliability. It is bui
 
 
 ## 4. PROJECT STRUCTURE
+The project is organized into several files and directories, each serving a specific purpose.
+Overview of the structure & key files along with their associated folders:
+  index.html: The app’s entry document.
+    Header: Links Tailwind CDN and styles.css, & defers viewportFix.js for mobile --vh fixes.
+    Body: Defines the overlay, Patient Info sidebar, header (Patient button left; title + #searchInput + #patient-snapshot-bar center; Back/Forward → Home → History right), the #content-area, the footer with #settings-button, & the #settings-panel.
+    Script loading is ESM: a single <script type="module" src="main.js"> bootstraps the app; all Data/Features/Utils modules are imported from there. If you ever add another top‑level script or change load order, perform a full order‑of‑operations audit across affected files (ensure data maps build before indexing; indexing before first render; DOM refs before handler binding) and include the new file in index.html only if it must run before bootstrap.
 
-*The project is organized into several files and directories, each serving a specific purpose. Below is an overview of the structure and key files along with their associated folders:*
-
-
-
-
-
-**index.html** – Main HTML container. This is the entry point of the app. It defines the layout structure (header, sidebar, content area, etc.) and includes all the necessary CSS and JS files. In the <head>, it links the Tailwind CSS CDN and our styles.css. In the body, it sets up the static HTML for header buttons, the search bar, the empty content container, the patient sidebar form, and so on. It then includes scripts in a specific order: first the data files (so that data is ready), then utility scripts, then feature scripts like PatientInfo.js, and finally main.js which initializes the app; *file order may change depending upon project needs, so if the file order appears incorrect you must: Never change the file order without doing a thorough investigation into all of the files that will be now run before or after with the updated file order (files that dont change from running before to after or after to before the main file getting moved around are to be excluded); In the main file and all of the files you are to be investigating, you must do a thorough order of operations check to verify that the code will still function the same or better, which must be done on all the files and the entire code within the files; the number of positive or negative results obtained from the operations check will never be a factor in when to conclude the investigation, the operations check verification investigation can only be complete after each code line within each of the files has been independently investigated. Any new file must be included in the index.html.
-
-The app’s entry document. Head links Tailwind CDN and styles.css, and defers viewportFix.js for mobile --vh fixes. The body defines the overlay, Patient Info sidebar, header (Patient button left; title + #searchInput + #patient-snapshot-bar center; Back/Forward → Home → History right), the #content-area, the footer with #settings-button, and the #settings-panel. Script loading is ESM: a single <script type="module" src="main.js"> bootstraps the app; all Data/Features/Utils modules are imported from there. If you ever add another top‑level script or change load order, perform a full order‑of‑operations audit across affected files (ensure data maps build before indexing; indexing before first render; DOM refs before handler binding) and include the new file in index.html only if it must run before bootstrap
-
-
-
-
-
-
-styles.css: Custom CSS stylesheet.
-  Augments Tailwind with focused rules:
-    Lists & links: .topic-link-item hover/active states; .recently-viewed highlight; .strikethrough to de‑emphasize list items.
-    Detail sections: .detail-section-title headings; .arrow rotation (.arrow.rotate); .toggle-info (green) with hover/inline “info-text”; .warning-box variants (red/orange/yellow).
-    Sidebar & overlay: slide‑in patient sidebar (#patient-sidebar.open), dim overlay (#sidebar-overlay.active), and inputs/focus rings.
-    Autocomplete: .autocomplete-suggestions dropdown layout and visibility.
-    Snapshot: .snapshot-card class (present for potential card styling); dark‑mode adjustments.
-    Dark mode & brightness: body.dark-mode sets a filter using --brightness (persisted via Settings); selected components have dark‑mode color overrides.
-    Quick Vent (ZOLL) UI: .qv-* classes for title, answer layout, modal/tooltip, and input sizing.
-    Settings button: #settings-button animated color transition (CSS keyframes).
-Loaded in the head of index.html to complement Tailwind utilities and provide precise behavior Tailwind can’t address cleanly (e.g., rotation states, overlays, brightness filter)
-
+styles.css: Custom CSS stylesheet. Loaded in the head of index.html to complement Tailwind utilities & provide precise behavior Tailwind can’t address cleanly (e.g., rotation states, overlays, brightness filter). Augments Tailwind with focused rules.
+  Lists & links: .topic-link-item hover/active states; .recently-viewed highlight; .strikethrough to de‑emphasize list items.
+  Detail sections: .detail-section-title headings; .arrow rotation (.arrow.rotate); .toggle-info (green) with hover/inline “info-text”; .warning-box variants (red/orange/yellow).
+  Sidebar & overlay: slide‑in patient sidebar (#patient-sidebar.open), dim overlay (#sidebar-overlay.active), and inputs/focus rings.
+  Autocomplete: .autocomplete-suggestions dropdown layout and visibility.
+  Snapshot: .snapshot-card class (present for potential card styling); dark‑mode adjustments.
+  Dark mode & brightness: body.dark-mode sets a filter using --brightness (persisted via Settings); selected components have dark‑mode color overrides.
+  Quick Vent (ZOLL) UI: .qv-* classes for title, answer layout, modal/tooltip, & input sizing.
+  Settings button: #settings-button animated color transition (CSS keyframes).
 
 
 
