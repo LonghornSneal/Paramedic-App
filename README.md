@@ -111,29 +111,28 @@ Design & Feature Overview: The app’s UI elements & features.
       Note: pain scale still needs to be coded into app.
     VS Categories: BP (MAP is automatically calculated)HR, %SpO2, EtCO2, RR, BGL, Pupils, GCS, A&O Status, LS, & EKG Interpretation.
     Sex: Select 'Male' or 'Female' selection currently (task update available). Currently used for the Zoll Ventilator Calculation.
-    Age: Affects surfaced treatments (e.g., dose differences, which sections to StrikeThrough).
-    18 & up equals “adult.”
-      Inputs: whole numbers only, years 0–120, months 0–40, days 0–500.
+    Age: Affects surfaced treatments (e.g., dose differences, which sections to StrikeThrough). 18 & up equals “adult.”
+        Inputs: whole numbers only, years 0–120, months 0–40, days 0–500.
     Weight (kg/lb): Used for Auto-Calculation with weight-based dosages.  Whole numbers only. Ranges: lb 0–1500; kg 0–700.
     Height: either ft+in or total inches; values sync both ways.
 
     Past Medical History (PMH): Free‑text, comma‑separated (#pt‑pmh) with autocomplete (e.g., diabetes, CHF, asthma). Parsed to an array on input. 
-      Snapshot: Shows only most relevant (abbrev.). Informational only.
-      Smart Suggestions: (Currently needs to be coded for)
-        Roadmap: will filter Smart Suggestions’ Topic List (lower priority than Indications).
-      Strike-Through: (Currently needs to be coded for) Adds a Strike-Through on innappropriate treatment options based upon PMH.
+        Snapshot: Shows only most relevant (abbrev.). Informational only.
+        Smart Suggestions: (Currently needs to be coded for)
+          Roadmap: will filter Smart Suggestions’ Topic List (lower priority than Indications).
+        Strike-Through: (Currently needs to be coded for) Adds a Strike-Through on innappropriate treatment options based upon PMH.
 
     Allergies: Type‑to‑filter or choose from dropdown.
-      Allergy Alert: listed medication matches an allergy, then it's detail page shows an Allergy Alert & innappropriate treatments are struck‑through.
-        Struck‑Through Items: Remain selectable.
-      Autocomplete: Suggests available Paramedic medications first.
+        Allergy Alert: listed medication matches an allergy, then it's detail page shows an Allergy Alert & innappropriate treatments are struck‑through.
+          Struck‑Through Items: Remain selectable.
+        Autocomplete: Suggests available Paramedic medications first.
 
     Medications: Current pt medications. Type‑to‑filter or choose from dropdown.
-      Autocomplete: Suggests common medications that may be relevant to pt care first and foremost.
-      Interaction Checks: Identifies Rx interactions and applies Alerts/Warnings (e.g., PDE‑5 inhibitor → warn against nitroglycerin).
+        Autocomplete: Suggests common medications that may be relevant to pt care first and foremost.
+        Interaction Checks: Identifies Rx interactions and applies Alerts/Warnings (e.g., PDE‑5 inhibitor → warn against nitroglycerin).
 
     Indications: Type‑to‑filter or choose from dropdown. Chief Complaint (e.g., chest pain, SOB).
-      Highlights: Topics related to the Indications are highlighted.
+        Highlights: Topics related to the Indications are highlighted.
 
     Signs & Symptoms (S/S): Same mechanics as Indications; adds nuance for smart filtering/highlighting.
 
@@ -141,35 +140,35 @@ Design & Feature Overview: The app’s UI elements & features.
       Selectable Options: Hover/press‑and‑hold on dropdown option opens a right‑of‑sidebar pop‑up with definitions; close via “×”.
     VS include:
       Blood Pressure (BP): Number entry or dropdown.
-        Drop-Down Menu Options: 200+, 160+, Normal (90-160 SBP), 70-90, & 70-.
-        Inpute Range: SBP 0–400; diastolic 0–300. Integers.
+          Drop-Down Menu Options: 200+, 160+, Normal (90-160 SBP), 70-90, & 70-.
+          Inpute Range: SBP 0–400; diastolic 0–300. Integers.
         MAP: Auto‑calculated from SBP/DBP; has its own pop‑up.
       Heart Rate (HR): Number entry or dropdown.
-        Drop-Down Menu Options: 150+, 100+, 60–100, >60, >40.
-        Inpute Range: Integers. SBP 0–300 bpm. Diastolic BP 0-200
+          Drop-Down Menu Options: 150+, 100+, 60–100, >60, >40.
+          Inpute Range: Integers. SBP 0–300 bpm. Diastolic BP 0-200
       SpO₂ (%): Number or dropdown.
-        Drop-Down Menu Options: (Normal, Low, Severely Low).
-        Inpute Range: Integers 50–100.
+          Drop-Down Menu Options: (Normal, Low, Severely Low).
+          Inpute Range: Integers 50–100.
       EtCO₂: Number or dropdown.
-        Drop-Down Menu Options:
-        Inpute Range: Integers 0–50.
+          Drop-Down Menu Options:
+          Inpute Range: Integers 0–50.
       RR: Number or dropdown.
-        Drop-Down Menu Options: 
-        Inpute Range: Integers 0–80.
+          Drop-Down Menu Options: 
+          Inpute Range: Integers 0–80.
       BGL: Number or dropdown.
-        Drop-Down Menu Options:
-        Inpute Range: Integers 0–900.
+          Drop-Down Menu Options:
+          Inpute Range: Integers 0–900.
       Pupils (mm): Number or dropdown.
-        Drop-Down Menu Options:
-        Inpute Range: Integers 0–8.
+          Drop-Down Menu Options:
+          Inpute Range: Integers 0–8.
         Note: future updates needed to access other eye issues.
       GCS: Number or dropdown.
-        Drop-Down Menu Options:
-        Inpute Range: list runs 3–15.
+          Drop-Down Menu Options:
+          Inpute Range: list runs 3–15.
       A&O: Dropdown only.
-        Drop-Down Menu Options: 0, 1, 2, 3, & 4.
+          Drop-Down Menu Options: 0, 1, 2, 3, & 4.
       Lung Sounds (LS): Type‑to‑filter or dropdown.
-        Drop-Down Menu Options:
+          Drop-Down Menu Options:
 
     EKG: Free text in sidebar (#pt‑ekg).
       Future Tasks: dropdowns, pop‑ups, or “help.” Snapshot can tint entries containing “tachy”/“brady” if patientData.ekg is set. Current code doesn’t set it in updatePatientData(); add that assignment to enable snapshot and future EKG logic.
@@ -180,131 +179,62 @@ Design & Feature Overview: The app’s UI elements & features.
     Data input: UI updates instantly on input.
     Stored Data: Data persists in memory; session persistence via localStorage is on the roadmap.
 
-Effects of Patient Data: The information input in the Patient Info sidebar influences the main content in real time:
-
-  StrikeThrough Inapplicable Items: Treatments or doses that don’t apply to the given patient are automatically styled with a StrikeThrough or greyed-out. For example, if an adult patient’s age is entered, any pediatric dosage sections might be de-emphasized or crossed out (since they are not needed). If a patient has an allergy to a medication, that medication name might appear crossed out in lists or accompanied by an alert icon.
-
-  When Indications are present, the Contents list visually de‑emphasizes non‑matching topics by applying a strike‑through style; matching topics remain normal. On detail pages, age inputs apply strike‑through to the opposite‑age sections (Adult Rx vs Pediatric Rx) to reduce noise. Allergy input does not alter the list; instead, the corresponding detail page shows a prominent Allergy Alert at the top.
-
-
-
-
-  Warnings/Alerts: If patient data triggers a contraindication or warning, the detail page will show a prominent warning box (usually with a red border or background). For instance, on the Nitroglycerin page, if the patient’s systolic BP (from VS input) is below the safe threshold, a warning will appear reading “Contraindication: Patient’s blood pressure is below recommended minimum for Nitroglycerin.” Similarly, if the patient’s Medications list includes a drug that interacts, a warning like “Drug Interaction Alert: Patient has recently taken Viagra (PDE5 inhibitor) – DO NOT administer Nitroglycerin” will show. These warnings are meant to be very noticeable.
-
-  Detail pages render prominent warning boxes at the top when patient context triggers a contraindication or caution. Current checks include:
-Allergy Alert: if an entered allergy matches the topic title/id.
-NTG-specific: low systolic BP (< 100 mmHg) and PDE5 inhibitor usage both trigger red contraindication warnings (“do not administer …”).
-Pediatric Etomidate: age < 10 triggers a contraindication warning for Etomidate.
-General Contraindications: non‑allergy entries from the medication’s contraindications list are displayed as individual warnings.
-Warnings are intentionally noticeable (red/yellow boxes) and appear only on the detail page.
-
-
-
-
-
-  Dynamic Content Filtering: The main Contents page can adapt based on Patient Info. If certain indications or symptoms are recorded, the app can highlight protocols that match or even partially hide those that clearly don’t apply. For example, if “trauma” is an indication, medical (non-trauma) protocols might dim or move lower. Conversely, relevant topics might get a highlight or rise to a “Suggested” section.
-
-When Indications are present, the Contents list visually de‑emphasizes non‑matching topics by applying a strike‑through; all topics remain visible and in their original order. Symptoms do not currently affect the list. Highlighting, hiding, or reordering into a “Suggested” section is not implemented yet and is tracked as a future enhancement (see Enhanced Dynamic Protocol Filtering in Chapter 10).
-
-
-
-
-  Auto-Calculations: Numeric inputs like weight are used to calculate doses. Wherever the data files denote a dose as weight-based (marked by “Rx” or similar), the app will perform the math and insert the result. This spares the paramedic from manual calculation under stress. For instance, "Morphine Dose: 0.1 mg/kg IV/IO” and the patient weight is 50 kg, the app will display “Dose: 0.1 mg/kg IV/IO (= 5 mg IV/IO)”. Clicking on the "= 5 mg IV/IO" will bring up a Pop-Up menu that shows the math to reach that answer along with providing how many ml of Morphine the Paramedic needs to draw up into their syringe (math included). The "(= 5 mg IV/IO)" will actively transition back and forth between two color fonts to indicate to the user that a Pop-Up menu exist. Calculations update live as the weight input changes.
-
-  The app supports live calculations for the Quick Vent Tidal Volume calculator (equipment flow): it computes tidal‑volume ranges (No ARDS, ARDS, Not‑Sure) using entered weight or IBW (sex + height), and shows explicit math on demand. For medication dosing, universal automatic mg/kg → mg (and mL) computations are not yet implemented. Medication detail sections render dose text from data (with markup) but do not perform global dose math. A dedicated medication dosage calculator module is planned (see Current Tasks), which will compute mg/kg and mL values with step‑by‑step math and update as patient weight changes.
-
-
-
-
-
-
-  Contextual UI Changes: Some UI elements may change based on Patient Info. For example, if an entire category becomes irrelevant (say, “Pediatric Protocols” for a 30-year-old patient), the app might visually fade those buttons or put a note next to them. Additionally, the header or a small fixed panel will show a Patient-Snapshot (see below).
-
-  The app reflects patient context in three ways today: (1) Indications apply a strike‑through to non‑matching topics in the Contents list; (2) detail pages de‑emphasize Adult vs Pediatric Rx sections based on age; and (3) a compact patient snapshot appears below the search bar showing key details (age/sex/weight, indications, relevant allergies, vitals, and EKG). Category‑level fading or notes (e.g., hiding or dimming entire “Pediatric Protocols” for adults) is not implemented.
-
-
-
-
-
-
-  Patient-Snapshot: Key patient details are shown persistently on the screen once entered, so the user is always aware of the context. This could be a small bar or box (for example, at the top or bottom of the screen) that says something like: “45 y/o F, 60 kg; Takes Beta-Blockers (The user entered "Metoprolol” into the Patient Info section, but "Beta-Blocker" would be shown in the Patient-Snapshot, since Beta-Blocker has a higher potential for being relevant in the context of administering Beta adrenergic medications); Broncospasm; (then underneath in red warning font) WARNING: Albuterol may be ineffective for Tx if the pt is actively taking her Metoprolol Rx!" and the WARNING message in red font would also be a clickable button that can provide further information on the WARNING. This Snapshot updates in realtime as the user changes any info, and it remains visible as they navigate through topics, providing context at a glance. (The exact placement and style of the snapshot are a part of the UI design – it might appear in the header or as a sidebar summary. The main goal is that the user doesn’t forget the entered patient parameters while reading treatment info.)
-
-  A compact summary bar (#patient-snapshot-bar) appears below the search and updates as patient info changes. It includes:
-Age/sex/weight (e.g., “45yo … 60kg”)
-Indications (underlined blue, abbreviated where possible)
-Allergies: “NKA” if none; otherwise a concise subset relevant to the current context (e.g., “ASA” for chest‑pain‑like indications)
-PMH (up to two items, abbreviated)
-Vitals (BP; HR/RR/BGL with subtle severity coloring when clearly high/low)
-EKG (shown with mild severity coloring for “tachy”/“brady”) when patientData.ekg is populated
-The snapshot does not currently perform drug‑class mapping or show embedded warnings; those appear on detail pages. It is intended as a persistent context line while navigating.
-
-
-
-
-
-
-Navigation Buttons (Back, Forward, Home): The app provides basic navigation controls similar to a web browser, so users can easily move between viewed pages without losing their place:
-
-  Back Navigation Button: This appears in the top-right of the header (as an arrow pointing left). Initially, it is disabled (grayed out) because there is no history yet. Once the user navigates to at least one detail page (or performs a search, etc.), the Back button becomes active. Clicking Back will return the content area to the previous view the user was on. Importantly, the app restores the state of that page exactly as it was – for example, if the user had expanded certain categories on the main list, those remain expanded, and the particular subtopic they clicked is highlighted to show where they left off. This “state restoration” means the user can explore a topic’s details and then go back to the list without losing context.
-
-  The Back button (top‑right, left arrow) is disabled until there is at least one history entry. After you view a detail page (or commit a search), Back becomes active. Clicking Back restores the previous state precisely: if returning to the Contents list, the app re‑expands the relevant category path and highlights the previously viewed topic, scrolling it into view. If the previous state was a detail page, it re‑renders that page directly.
-
-
-
-
-
-
-  Forward Navigation Button: Next to Back, the Forward button (arrow pointing right) becomes enabled if the user has gone back and can move forward again (much like a browser’s forward button). It re-navigates to the page that was ahead in history. These two buttons together let the user step backward or forward through their navigation path easily.
-
-  The Forward button (top‑right, right arrow) is enabled only when a “next” view exists in the navigation history (typically after pressing Back). Clicking it advances to that next view, restoring either the list (with the appropriate expansion/highlight) or a detail page, mirroring browser‑style forward navigation.
-
-
-
-
-
-
-  Home Button: Under the Back/Forward controls, the Home button instantly brings the user back to the Main Contents Page (the top-level list of all topics). This is a quick way to start over or go to the main menu, regardless of how far the user navigated. Unlike the Back button, Home does not preserve expanded states (it resets the content list to default collapsed state for all categories). It’s essentially a shortcut to renderInitialView() fresh (Patient Info that the user inputs is uneffected!!!).
-
-  The Home button (under Back/Forward) resets the interface to the top‑level Contents view. It clears the search field, collapses all expanded categories, and renders a fresh list (renderInitialView(true)). Patient Info entries are not affected by Home.
-
-
-
-
-
-
-  History Button: This is a feature to track what the user has clicked on during their session. The History button (available at all times, as an clock icon) opens a DropDown Panel showing a chronological list of topics the user has viewed (most recent first). Each entry in this history list is a clickable link; clicking one takes the user back to that topic’s detail page (or list view) directly. The history persists inbetween sessions (so if they close and reopen the app, they will still see past items). This is useful for quickly revisiting something looked up earlier without searching again.
-  The history list might show the topic name and possibly the time it was accessed or an index number. It functions similarly to a browser history but within the app context.
-
-  The History button (clock icon) opens a modal panel listing viewed items for the current session. Entries are clickable and navigate directly to that detail page; the panel closes and the overlay clears when an entry is selected or when the panel’s close (X) is clicked. History is session‑only (not persisted across reloads).
-
-
-
-
-
-
-**Settings Button:** Found in the Footer of the HTML. Font transitions back and forth between two colors to grab the user's attention. Any settings changed will exist between sessions. Settings options is aimed for the user to customize the UI to their own specific prefernces. There will be a broad depth of options to customize, making the app capable of being tailored to an individuals wants and needs.
-
-The footer “Settings” button (#settings-button) opens a modal #settings-panel over the overlay. The button text cycles between two colors (CSS animation) to draw attention. The panel currently includes:
-Dark Mode toggle (persists via localStorage('darkMode'))
-Dark‑mode brightness slider with live preview (persists via localStorage('darkModeBrightness'), applied through CSS --brightness)
-Opening Settings automatically closes the Patient Info sidebar if it’s open to avoid overlap. Settings changes persist between sessions; other customization options can be added to this panel over time.
-
-
-
-
-
-
-Performance and Simplicity: The app prioritizes speed and reliability:
-
-  It is built using HTML/CSS/JS and ES Modules.
-
-  All content is loaded locally. Because all data is embedded in JavaScript objects, the app works offline once loaded (ideal for use in the field where internet might not be available). There are no runtime fetch calls for data, eliminating network delay.
-
-  We use Tailwind CSS via CDN for rapid styling using utility classes. Tailwind provides a consistent look and spacing without writing large custom CSS. Our custom styles.css adds a few project-specific styles (like custom classes for strikethrough or warning highlights, and any layout tweaks). This approach means we can restyle quickly if needed, but also have predictable styling.
-
-  The interface is intentionally uncluttered: a simple header, a sidebar for patient info, a content area that either shows a list or detail info, and a footer if needed. Font choices and sizes are made for readability. Color coding (blue for interactive elements, green for toggles, red for warnings) is used to draw attention appropriately.
-
-  All design choices center on making the app usable in high-stress scenarios: big touch targets for buttons (for use on tablets/phones in the field), logical organization so info can be found with minimal taps, and fail-safes like warnings to prevent medical errors.
+Effects of Patient Data: The information input in the Patient Info sidebar influences the main content in real time (Section needs lot of improvements still).
+  StrikeThrough Inapplicable Items: Occurs when certain Patient Info has been entered.
+    Contents List Topic Titles: Irrelevant Topic Titles are visually de‑emphasized by applying a strike‑through style (relevant topics remain normal).
+    Detail Page Sections: Irrelevant sections are visually de-emphasized by applying a faded strike-through style (relevant info remains normal).
+      Age Patient Info Example: Entering in an Adult age will cause information specific to Pediatric patients to have a faded strike-through style.
+  Warnings/Alerts: Warnings are meant to be more noticeable than Alerts, which should also be noticeable.
+  If patient data triggers a contraindication or warning, the detail page will show a prominent warning box (usually with a red border or background). Warnings are intentionally noticeable (red/yellow boxes) and appear only on the detail page.
+    Warnings/Alerts are capable of being triggered by:
+      Patient Info that may cause a Strike-through effect:
+      Patient Info that may cause a Warning effect:
+      Allergy Input: Corresponding detail page shows a prominent Allergy Alert at the top.
+      Detail pages render prominent warning boxes at the top when patient context triggers a contraindication or caution. Current checks include:
+      Allergy Alert: if an entered allergy matches the topic title/id.
+      NTG-specific: low systolic BP (< 100 mmHg) and PDE5 inhibitor usage both trigger red contraindication warnings (“do not administer …”).
+      Pediatric Etomidate: age < 10 triggers a contraindication warning for Etomidate.
+      General Contraindications: non‑allergy entries from the medication’s contraindications list are displayed as individual warnings.
+  Dynamic Content Filtering: When Patient Info (or Patient Data) is present, the Contents list visually de‑emphasizes non‑matching topics by applying a strike‑through; all topics remain visible and in their original order. Symptoms do not currently affect the list. Highlighting, hiding, or reordering into a “Suggested” section is not implemented yet and is tracked as a future enhancement (see Enhanced Dynamic Protocol Filtering in Chapter 10).
+The app reflects patient context in three ways today: (1) Indications apply a strike‑through to non‑matching topics in the Contents list; (2) detail pages de‑emphasize Adult vs Pediatric Rx sections based on age; and (3) a compact patient snapshot appears below the search bar showing key details (age/sex/weight, indications, relevant allergies, vitals, and EKG). Category‑level fading or notes (e.g., hiding or dimming entire “Pediatric Protocols” for adults) is not implemented.
+
+Patient-Snapshot: A compact summary bar (#patient-snapshot-bar) appears below the Search Bar. Updates in realtime as Patient Info changes. It is a persistent context line while navigating. It includes:
+  Age/sex: (e.g., “45yo Male (Use symbol instead)")
+  weight: (e.g., “60kg”)
+  Indications: Underlined blue, Abbreviated where possible.
+  Allergies: “NKA” if none; otherwise a concise subset relevant to the current context (e.g., “ASA” for chest‑pain‑like indications).
+  PMH: Most relevant. Abbreviated.
+  Vitals: BP/HR/RR/BGL with subtle severity coloring when clearly high/low.
+  EKG: Shown with mild severity coloring for “tachy”/“brady”) when patientData.ekg is populated. (Feature description does not reflect what user will eventually have coded).
+  Examples: “45 y/o F, 60 kg; Takes Beta-Blockers (The user entered "Metoprolol” into the Patient Info section, but "Beta-Blocker" would be shown in the Patient-Snapshot, since Beta-Blocker has a higher potential for being relevant in the context of administering Beta adrenergic medications); Broncospasm; (then underneath in red warning font) WARNING: Albuterol may be ineffective for Tx if the pt is actively taking her Metoprolol Rx!" and the WARNING message in red font would also be a clickable button that can provide further information on the WARNING. 
+  Note: The snapshot does not currently perform drug‑class mapping or show embedded warnings; those appear on detail pages. 
+
+Auto-Calculations: For Rx dosing, universal automatic mg/kg → mg (and mL) computations are not yet implemented. Medication detail sections render dose text from data (with markup) but do not perform global dose math. A dedicated medication dosage calculator module is planned (see Current Tasks), which will compute mg/kg and mL values with step‑by‑step math shown in Pop-ups, & will all have live updates as patient weight changes.
+  Quick Vent Tidal Volume calculator: Computes tidal‑volume ranges (No ARDS, ARDS, Not‑Sure) using entered weight or IBW (sex + height), and shows explicit math on demand. 
+
+
+
+
+Navigation Buttons (Back, Forward, Home, History): Appears in the top-right of the header. The app provides basic navigation controls similar to a web browser, so users can easily move between viewed pages without losing their place:
+
+  Back Navigation Button: Left arrow. Initially disabled & grayed out (because there is no history yet). Once the user navigates to at least one detail page (or performs a search, etc.), the Back button becomes active.
+    To Activate: View a detail page or commit a search.
+    Clicking Back Navigation Button:  Clicking Back restores the previous state precisely: if returning to the Contents list, the app re‑expands the relevant category path and highlights the previously viewed topic, scrolling it into view. If the previous state was a detail page, it re‑renders that page directly.
+  Forward Navigation Button: Right arrow. Adjacent to Back Navigation Button. 
+    To Enable: is enabled only when a “next” view exists in the navigation history (typically after pressing Back). Clicking it advances to that next view, restoring either the list (with the appropriate expansion/highlight) or a detail page, mirroring browser‑style forward navigation. It re-navigates to the page that was ahead in history. 
+  Home Button: Under the Back/Forward Navigation Buttons. Resets interface to the top‑level Contents view. Clears search field, collapses all expanded categories, and renders a fresh list (renderInitialView(true)). Patient Info entries are not affected by the Home Button. Does not preserve expanded states. Essentially a shortcut to renderInitialView() fresh.
+  History Button (Clock icon): Located under the Home Button. Opens a modal panel listing viewed items for the current session. Entries are clickable and navigate directly to that detail page; the panel closes and the overlay clears when an entry is selected or when the panel’s close (X) is clicked. History is currently session‑only, but is planned to be updated to persist through sessions (so if they close and reopen the app, they will still see past items).
+
+Settings Button: Located in the footer (#settings-button). Opens a modal #settings-panel over the overlay. The button text cycles between two colors (CSS animation) to draw attention. Opening Settings automatically closes the Patient Info sidebar if it’s open to avoid overlap. Settings changes persist between sessions; The panel currently includes:
+  Dark Mode toggle: Persists via localStorage('darkMode').
+  Dark‑mode brightness slider with live preview: Persists via localStorage ('darkModeBrightness'), applied through CSS --brightness.
+  Future Updates: Other customization options will be added to this panel over time. There will be a broad depth of options to customize, making the app capable of being tailored to an individuals wants and needs.
+
+Performance and Simplicity: The app prioritizes speed and reliability. It is built using HTML/CSS/JS and ES Modules. All content is loaded locally. Because all data is embedded in JavaScript objects, the app works offline once loaded (ideal for use in the field where internet might not be available). There are no runtime fetch calls for data, eliminating network delay.
+  Tailwind CSS: We use Tailwind CSS via CDN for rapid styling using utility classes. Tailwind provides a consistent look and spacing without writing large custom CSS. Our custom styles.css adds a few project-specific styles (like custom classes for strikethrough or warning highlights, and any layout tweaks). This approach means we can restyle quickly if needed, but also have predictable styling.
+  Interface: Intentionally uncluttered. Simple header, a sidebar for patient info, a content area that either shows a list or detail info, and a footer if needed. Font choices & sizes are made for readability.
+    Color coding: Blue for interactive elements, green for toggles, red for warnings, yellow for Alerts (used to draw attention appropriately). Future tasks may add more color coding options.
+  Design Choices: Center on making the app usable in high-stress scenarios. Big touch targets for buttons (for use on tablets/phones in the field), logical organization so info can be found with minimal taps, & fail-safes like Warnings or Alerts to help prevent medical errors.
 
 
 ## 4. PROJECT STRUCTURE
