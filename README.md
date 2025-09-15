@@ -339,7 +339,7 @@ These files currently contain descriptive comments only & no runtime behavior.
 
 
 
-  
+
  
 updatePatientData(): This script works closely with main.js, reads the current values from all patient info fields (e.g., age field number, list of allergies entered, etc.) & updates the patientData object. After updating data, it relies on main.js functions like re-rendering pages or lists. It also relies on global structures (like allDisplayableTopicsMap and allSearchableTopics) which are set up in main.js. Thus, it’s included after those structures exist. The event listeners in PatientInfo.js ensure that as soon as the user types or selects something in the sidebar, the rest of the app responds.
   Triggers various UI updates: (for example) May call applyPatientFilters() which goes through the topic list in the DOM & adds or removes a CSS class (like .strikethrough) on each topic depending on patient criteria. It will also invoke a refresh of the current detail page view (if one is open) by calling renderDetailPage for the current topic ID with the new context, so that any dosage calculations or warnings can update immediately.
@@ -503,139 +503,37 @@ Understanding the flow of the application from load to user interactions:
       Proposed rewrite (final)
 Data Integration
 
-main.js imports ParamedicCategoriesData, MedicationDetailsData, and VentilationDetailsData as ES modules. During initialization, it:
-Merges medication + ventilation detail entries into window.medicationDataMap keyed by id, exposing it before indexing so search/detail code can resolve details quickly.
-Recursively indexes the categories via Features/search/Search.js processItem(item, parentPath, parentIds), which:
-Attaches the resolved details to each item,
-Populates window.allDisplayableTopicsMap[id] = { … item, path, details, categoryPath }, and
-Fills an internal allSearchableTopics array used for search (title/id/path matching).
-The IDs in ParamedicCategoriesData must match the id fields in the detail arrays for the detail pages to render.
+main.js imports ParamedicCategoriesData, MedicationDetailsData, and VentilationDetailsData as ES modules.
+  During initialization, it: Merges medication + ventilation detail entries into window.medicationDataMap keyed by id, exposing it before indexing so search/detail code can resolve details quickly.
+  Recursively indexes the categories via Features/search/Search.js processItem(item, parentPath, parentIds), which: Attaches the resolved details to each item, Populates window.allDisplayableTopicsMap[id] = { … item, path, details, categoryPath }, & Fills an internal allSearchableTopics array used for search (title/id/path matching).
+  The IDs in ParamedicCategoriesData must match the id fields in the detail arrays for the detail pages to render.
 
-
-
-
-
-
-    Activate Autocomplete: Call setupAutocomplete for each patient info textarea (PMH, allergies, medications, indications, symptoms) linking them with their suggestion sets (populated in step 5). This adds keyup events to show suggestion dropdowns and click events to select suggestions, making input faster.
-
-    Global Input Focus Styling: Add a nice UI touch: all input and textarea elements get a focus ring (blue outline) by adding a Tailwind class on focus and removing on blur. This is done by selecting all inputs and textareas and adding listeners (improves mobile form usability by clearly indicating the focused field).
-
-    Initial Render: Finally, call renderInitialView(true) to render the main contents list. The parameter true might indicate that if there’s any previously stored state (like maybe the last opened category in a previous session), it could highlight it, but in our case it simply builds the list fresh. After this, the user sees the home page with all categories.
-
-Proposed rewrite (final)
-Activate Autocomplete, Focus Styling, Initial Render
-
-Autocomplete is attached to the PMH, Allergies, Medications, Indications, and Symptoms textareas via setupAutocomplete(). It filters suggestions against the current comma‑separated segment, shows a clickable list, inserts unique selections with a trailing “, ”, refocuses the field, and dispatches an input event to refresh patientData. Suggestion sets are seeded during init (common PMH/allergies/meds + PDE5 inhibitors; additional allergens extracted from contraindications).
-For usability, all inputs/textareas gain a blue focus ring on focus and remove it on blur.
+Activate Autocomplete, Focus Styling, Initial Render: Autocomplete is attached to the PMH, Allergies, Medications, Indications, and Symptoms textareas via setupAutocomplete(). It filters suggestions against the current comma‑separated segment, shows a clickable list, inserts unique selections with a trailing “, ”, refocuses the field, & dispatches an input event to refresh patientData. Suggestion sets are seeded during init (common PMH/allergies/meds + PDE5 inhibitors; additional allergens extracted from contraindications).
+For usability, all inputs/textareas gain a blue focus ring on focus & remove it on blur.
 After data maps and indexes are ready, renderInitialView(true) renders the main Contents list in #content-area (or a “No categories available” message if categories are empty).
 
+Expanding Categories (User Interaction): Clicking a category’s blue chevron or label toggles its expanded state & re-renders that branch via createHierarchicalList(). When expanded, children are rendered into a nested container; when collapsed, the branch re-renders without children. The chevron’s rotation (0° vs 90°) is set inline during render based on the current item.expanded value. Expanded/collapsed state is stored on the category item (not in data attributes). Normal toggles do not alter overall scroll position; when restoring state from history, the list re-expands the path and scrolls the previously viewed topic into view.
 
+Viewing a Detail Page (User Interaction): Clicking a final topic (leaf) invokes renderDetailPage(topicId). This replaces #content-area with the topic’s detail view, injects any applicable patient‑aware warnings at the top, & (by default) adds a new “detail” entry to navigationHistory. Adding the entry updates Back/Forward button states (Back becomes enabled; Forward remains disabled because you’re at the newest entry). If renderDetailPage is called from Back/Forward navigation, the call sets shouldAddHistory = false to avoid pushing a duplicate history entry.
 
-
-
-  User Interaction – Expanding Categories: The user clicks a blue arrow or category name on the main list. The event listener (likely set up at the time of rendering each category in renderInitialView) catches this. If it’s an arrow or category with children, it toggles that category:
-
-    If it was collapsed, it loads the subtopics (which might have been created already by createHierarchicalList but hidden, or it might generate them dynamically at click time) and then adds a class to the arrow to rotate it. We likely manage expanded state via CSS classes and maybe some data-expanded="true" attributes.
-
-    If it was expanded, it hides the subtopics and rotates the arrow back.
-
-    This is done purely with DOM manipulation and CSS (no re-render of the whole list, just show/hide of the specific branch). We must ensure that the HTML structure for subtopics is created (either at page load or on first expand) and that toggling doesn’t interfere with the user’s scroll position.
-
-Proposed rewrite (final)
-User Interaction — Expanding Categories
-
-Clicking a category’s blue chevron or label toggles its expanded state and re-renders that branch via createHierarchicalList(). When expanded, children are rendered into a nested container; when collapsed, the branch re-renders without children. The chevron’s rotation (0° vs 90°) is set inline during render based on the current item.expanded value. Expanded/collapsed state is stored on the category item (not in data attributes). Normal toggles do not alter overall scroll position; when restoring state from history, the list re-expands the path and scrolls the previously viewed topic into view.
-
-
-
-
-
-
-  User Interaction – Viewing a Detail Page: The user clicks a topic that has no further subtopics (a final topic). The click event listener (attached to that item with a data-topic-id) triggers renderDetailPage(topicId).
-
-    renderDetailPage will push a new entry onto the navigationHistory stack (unless it was called as part of a back/forward navigation where we set a flag to avoid double-pushing). It then constructs the detail content as described earlier.
-
-    Once the detail is rendered, it updates the Back button to enabled (because now there is a history entry behind this one). The Forward button is disabled because we’re at the newest entry.
-
-    The user now sees the detail page with all relevant info and any patient-specific adjustments (if patientData is set).
-
-    Proposed rewrite (final)
-User Interaction — Viewing a Detail Page
-
-Clicking a final topic (leaf) invokes renderDetailPage(topicId). This replaces #content-area with the topic’s detail view, injects any applicable patient‑aware warnings at the top, and (by default) adds a new “detail” entry to navigationHistory. Adding the entry updates Back/Forward button states (Back becomes enabled; Forward remains disabled because you’re at the newest entry). If renderDetailPage is called from Back/Forward navigation, the call sets shouldAddHistory = false to avoid pushing a duplicate history entry.
-
-
-
-
-
-
-  Dynamic Updates on Detail Page: Suppose the user now enters or changes something in the Patient Info sidebar (e.g., they add an allergy or adjust the weight). The input event on that field triggers updatePatientData():
-
-    This function updates the patientData object. For example, patientData.weight gets set to the new number.
-
-    It then calls functions to update the UI. Typically, it will call something like applyPatientFilters() which goes through the main contents list (if it’s currently displayed) to strike out or highlight items. If the main list is not visible (user is on a detail page), that can be skipped or will simply operate on a hidden DOM (which is fine).
-
+Dynamic Updates on Detail Page: Patient Info changes trigger updatePatientData(), which updates the patientData object, applies Indications‑based strike‑throughs to the list (if visible), re‑renders the current detail page in place (without adding a history entry), applies age‑based strike‑throughs to Adult/Pediatric Rx sections, and refreshes the snapshot under the search. If the page has many sections and window.ENABLE_DETAIL_TOC is true, the in‑page TOC is rebuilt from the updated section headers. Warnings (e.g., allergy, PDE5 + NTG, low BP + NTG, pediatric Etomidate, general contraindications) are re‑evaluated and injected at the top of the detail. 
+  It then calls functions to update the UI. Typically, it will call something like applyPatientFilters() which goes through the main contents list (if it’s currently displayed) to strike out or highlight items. If the main list is not visible (user is on a detail page), that can be skipped or will simply operate on a hidden DOM (which is fine).
     It then checks if a detail page is currently shown (we might track the current view type and id). If yes, it calls renderDetailPage(currentTopicId) again to refresh the content with the new patient context. Importantly, when doing this refresh, it should avoid adding another history entry. There might be a flag or a separate internal function for re-rendering the detail in place. The effect is that the user sees the detail page update instantly: new warning boxes might appear, certain text becomes struck through, and dosage calculations update. The scroll position might be preserved if possible, or reset to top if not handled (for now, likely resets to top).
+     Because the anchor navigation (slugList/slugAnchors) runs on renderDetailPage, it will re-generate after refresh. That’s fine; it ensures the anchor links are still accurate if any sections were added/removed due to patient data (though typically we don’t remove sections entirely, just mark them).
+        Example: The user is viewing “Epinephrine” detail. Initially, pediatric dose is shown (because no age given). They then enter Age = 30. Upon update, the Epinephrine page re-renders, now visually de-emphasizing the pediatric dose section (or adding a note “Pediatric dosing not applicable for adult patient”). If they also add an allergy “Sulfa” (which might not affect Epinephrine, so nothing changes on that page) but if they add “Allergies: Epinephrine”, the page would on refresh show an “Allergy Alert: Patient allergic to epinephrine” box.
 
-    Because the anchor navigation (slugList/slugAnchors) runs on renderDetailPage, it will re-generate after refresh. That’s fine; it ensures the anchor links are still accurate if any sections were added/removed due to patient data (though typically we don’t remove sections entirely, just mark them).
+Back/Forward Navigation: Back/Forward use a view‑state stack. Clicking Back decrements the index and restores either:
+  a list state by re‑rendering the Contents & expanding the relevant category path, highlighting & scrolling the previously viewed topic into view, or
+  a detail state by re‑rendering the corresponding detail page (without adding a new history entry).
+  Back/Forward button enabled states are updated after each move. Detail‑page scroll position is not currently preserved; list restoration scrolls to the highlighted topic.
 
-    Example: The user is viewing “Epinephrine” detail. Initially, pediatric dose is shown (because no age given). They then enter Age = 30. Upon update, the Epinephrine page re-renders, now visually de-emphasizing the pediatric dose section (or adding a note “Pediatric dosing not applicable for adult patient”). If they also add an allergy “Sulfa” (which might not affect Epinephrine, so nothing changes on that page) but if they add “Allergies: Epinephrine”, the page would on refresh show an “Allergy Alert: Patient allergic to epinephrine” box.
+History List Usage: History List Usage & Anchor Navigation: Opening the History modal shows a list of previously viewed detail pages from this session. Clicking an entry calls renderDetailPage(id) directly; this is treated as a new navigation event and adds a fresh “detail” entry to the history stack. The panel and overlay close immediately after navigation.
+  On long detail pages with a Table of Contents, clicking an anchor smoothly scrolls to the target section and auto‑expands it if needed. This does not alter app state or the history stack.
 
-    These changes happen without a full page reload; it’s all JS DOM updates.
+Closing the App & Persistence: Currently, if the user closes the app (or refreshes), all state (patient info, history, expanded menus) resets because we are not using persistent storage. In future, we might use localStorage to save patientData & maybe navigationHistory between sessions. 
+  Future coding task: Code features to persist patientData (so you don’t have to re-enter the same patient’s info if you switch apps briefly). Implementation of that would involve storing patientData in localStorage on unload and loading it on startup if available.
 
-    Proposed rewrite (final)
-Dynamic Updates on Detail Page
-
-Patient Info changes trigger updatePatientData(), which updates the patientData object, applies Indications‑based strike‑throughs to the list (if visible), re‑renders the current detail page in place (without adding a history entry), applies age‑based strike‑throughs to Adult/Pediatric Rx sections, and refreshes the snapshot under the search. If the page has many sections and window.ENABLE_DETAIL_TOC is true, the in‑page TOC is rebuilt from the updated section headers. Warnings (e.g., allergy, PDE5 + NTG, low BP + NTG, pediatric Etomidate, general contraindications) are re‑evaluated and injected at the top of the detail.
-
-
-
-
-
-
-  Back/Forward Navigation: If the user clicks the Back button (after having navigated to a detail page, or after performing a search, etc.), the app will handle it via our navigateViaHistory(-1):
-
-    We decrement the currentHistoryIndex, get the history entry at that new index, and based on its type, call the appropriate render. For example, if the history entry is {type: 'list'}, we call renderInitialView(highlightId) possibly to show the main list and highlight the item that was previously clicked. If the entry is {type: 'detail', id:'someId'}, we call renderDetailPage(someId) but likely with a flag to indicate it’s from history (to avoid pushing new history).
-
-    After rendering, we update the nav button states. Now Forward becomes enabled (since we can go forward to the page we were just on).
-
-    The user sees the previous page. Importantly, because we preserved state, if it’s the main list, it should have the same categories expanded as when they left it. This is handled by the highlightId logic and possibly storing expanded/collapsed state in the history entry. We may store something like an array of expanded category IDs in the history entry to restore the exact view. The code ensures, for instance, if ALS Medications was open and highlighted, it will open it again and scroll to that item.
-
-    If the user now clicks Forward, a similar process happens in reverse, re-rendering the page they came from. The highlight and scroll states again should be restored (for detail pages, scroll restoration might not be implemented yet, but it’s something to consider).
-
-    Proposed rewrite (final)
-Back/Forward Navigation
-
-Back/Forward use a view‑state stack. Clicking Back decrements the index and restores either:
-a list state by re‑rendering the Contents and expanding the relevant category path, highlighting and scrolling the previously viewed topic into view, or
-a detail state by re‑rendering the corresponding detail page (without adding a new history entry).
-Back/Forward button enabled states are updated after each move. Detail‑page scroll position is not currently preserved; list restoration scrolls to the highlighted topic.
-
-
-
-
-
-
-  History List Usage: If the user opens the History dropdown and selects an item (say the first thing they opened in the session), the app will locate that item’s entry (or simply call renderDetailPage for that ID directly and push a new history entry for it). We might refine this to integrate with the existing history mechanism or treat it as a new navigation event (clearing forward history if you jump around).
-
-  Proposed rewrite (final)
-History List Usage and Anchor Navigation
-
-Opening the History modal shows a list of previously viewed detail pages from this session. Clicking an entry calls renderDetailPage(id) directly; this is treated as a new navigation event and adds a fresh “detail” entry to the history stack. The panel and overlay close immediately after navigation.
-On long detail pages with a Table of Contents, clicking an anchor smoothly scrolls to the target section and auto‑expands it if needed. This does not alter app state or the history stack.
-
-
-
-
-
-
-  Anchor Navigation on Detail Page: On a long detail page, if the user clicks one of the anchor links (for example, “Contraindications” in the table of contents at top), the page will jump (or smoothly scroll) to the section with id #contraindications. We may have some custom scroll behavior for smoothness. If implemented, an event listener in slugAnchors.js might intercept the click, call event.preventDefault(), then find the target element and scroll it into view with behavior: 'smooth'. It might also add a temporary highlight on that heading to draw attention. If not implemented, the browser will jump to the anchor instantly by default.
-
-  This doesn’t change any app state or history (it’s just a position within the page), so Back/Forward are unaffected. It’s purely a convenience for within-page navigation.
-
-  Closing the App and Persistence: Currently, if the user closes the app (or refreshes), all state (patient info, history, expanded menus) resets because we are not using persistent storage. In future, we might use localStorage to save patientData and maybe navigationHistory between sessions. The README note suggests that when the user exits and comes back, they will be able to access information they had input previously – that implies a feature to persist patientData (so you don’t have to re-enter the same patient’s info if you switch apps briefly). Implementation of that would involve storing patientData in localStorage on unload and loading it on startup if available.
-
-All these components work together to provide a seamless experience: The data provides content, main.js renders it and ties it to user input and navigation, and the patient info customizes it on the fly. Each file has a clear role, which makes it easier to maintain and update specific parts of the app.
+All these components work together to provide a seamless experience: The data provides content, main.js renders it & ties it to user input & navigation, & the patient info customizes it on the fly. Each file has a clear role.
 
 
 ## 6. -----TOP PRIORITY TASKS-----
