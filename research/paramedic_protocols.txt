@@ -1,0 +1,4141 @@
+Table of Contents
+Abbreviations Used in Document	8
+Section 1: EMS	8
+Intro to Abbott	8
+Core Principles  Safety & Well-Being	8
+ALS Ground Rules	8
+General Important Information	8
+Scope Violations & Possible Consequences	8
+Suspension/Revocation	8
+On-Scene Authority	8
+Response Mode	8
+Transfer to Lesser Credential	8
+EMR Accompanying Critically Ill	8
+Consulting OLMC	8
+On-Scene Healthcare Professionals	8
+Dispatching MD [200]	8
+AIR AMBULANCE UTILIZATION	8
+Applies to both Adults & Pediatrics	8
+Restraints of Agitated/Combative Pts	8
+Richmond Agitation Sedation Scale (RASS)	8
+Rule of 9s & Rule of Palms for estimating BSA	8
+Smith-Modified Sgarbossa Criteria	8
+Crime Scene	8
+PCR Requirements	8
+Clinical Errors & Reporting	8
+Mandatory Reporting	8
+Medication Administration Cross Check	8
+BLS MACC	8
+CDC Field Triage  	Guidelines for Trauma	8
+Rehabilitation  Emergency Incidents; Municipal partners	8
+Skills	8
+Ventilator Set-Up Procedure: ParaPAC Plus	8
+I-gel Supraglottic Airway (SGA)	8
+Thermometer: using the Braun ThermoScan	8
+GlucometerMcKesson True Metrix Pro	8
+Diltiazem Add-Vantage directions for use	8
+EZ-IO Insertion	8
+PUSH-DOSE EPI	8
+Mucosal Atomization Device (M.A.D.)	8
+Minutes of Oxygen by Cylinder Size	8
+Understanding Ratios, %s, & Solution Mixtures	8
+Adult Protocols	8
+Airway/Breathing	8
+AIRWAY	8
+BREATHING	8
+BRONCHOSPASM	8
+COMA/OD	8
+CPAP or BiPAP	8
+SAI	8
+Nasal Intubation	8
+ET Intubation	8
+VENTILATOR Pt; Intubated & Sedated	8
+TRACHEOSTOMY CARE	8
+Cricothyrotomy	8
+Tension Pneumo	8
+SGA  Cardiac Arrest = Use 1st	8
+Circulation/Cardiology	8
+CIRCULATION	8
+BRADYCARDIA	8
+PUSH-DOSE EPI	8
+CARDIOGENIC SHOCK (NON- POST- ARREST)	8
+LVAD PT	8
+MI or Acute Coronary Syndrome (ACS)	8
+PEA or Asystole	8
+Pulmonary Edema	8
+ROSC Stabilization	8
+Symptomatic Tachycardia	8
+V-FIB or PULSELESS V-TACH	8
+Medical	8
+ALLERGIC REACTION	8
+ANAPHYLAXIS	8
+CPR Initiation & Termination	8
+DEATH Documentation; body Temp.	8
+FALL OR WEAKNESS	8
+HYPERGLYCEMIA	8
+HYPOGLYCEMIA / INSULIN SHOCK	8
+HYPERKALEMIA	8
+N/V	8
+Organophosphate or Carbamate Poisoning	8
+PAIN MANAGEMENT	8
+SEIZURE	8
+SEPSIS	8
+Sickle Cell Crisis	8
+Stroke Centers; Missouri Certified (Greater St. Louis Region)	8
+Suspected Acute STROKE	8
+TOXIC INGESTION	8
+VIOLENT/COMBATIVE PT  RASS +4	8
+RASS +1, +2, or +3    Agitated/Anxious Pt	8
+OB/GYN	8
+Delivery OOH/Pre-eclampsia/Eclampsia	8
+Trauma	8
+Riot Control (Incapacitating Agent)	8
+Spinal Motion Restriction (SMR)	8
+TASER  p-deployment	8
+TRAUMA  Major (Level 1)	8
+Traumatic Arrest???????	8
+Refusals	8
+Consent & Refusal	8
+Refusals & Suicidal Pts	8
+Pediatric Protocols	8
+Pediatric VS	8
+Low SBP Pediatric	8
+Pediatric Initial pt Assessment	8
+Airway & Breathing	8
+AIRWAY	8
+BREATHING / Respiratory Failure	8
+BRONCHOSPASM	8
+Brief Resolved Unexplained Event (BRUE)	8
+CONTINUOUS POSITIVE AIRWAY PRESSURE (CPAP)	8
+CPAP Set-up: FlowSafe II System	8
+BiPAP Set-up: FlowSafe II System	8
+Directions For Providing CPAP:	8
+Circulation/Cardiac	8
+CIRCULATION / Shock	8
+Newborn Resuscitation  Inverted Pyramid Model	8
+Inverted Pyramid Model for Newborn Resuscitation	8
+Cardiogenic Shock or p Arrest Stabilization	8
+PEDIATRIC ADVANCED LIFE SUPPORT	8
+NEONATAL RESUSCITATION	8
+Medical	8
+AMS/Suspected Opioid OD	8
+ALLERGIC REACTION	8
+ANAPHYLAXIS	8
+Hyperglycemia/DKA or Nonketotic Hyperosmolar Coma	8
+Hypoglycemia / Insulin OD	8
+N/V	8
+Organophosphate or Carbamate Poisoning	8
+PAIN MANAGEMENT	8
+SEIZURE	8
+SICKLE CELL CRISIS	8
+TOXIC INGESTION	8
+Violent Pt	8
+Refusals	8
+Minor Consent/Refusal Details	8
+Trauma	8
+TRAUMA, major	8
+Traumatic Arrest????????????????	8
+Special Needs Children	8
+Central IV Catheters  Indwelling IV access:	8
+CSF Shunt (Ventriculoperitoneal or V-P Shunt):	8
+Gastrostomy	8
+Colostomy of Ileostomy  Fecal Drainage:	8
+Ureterostomy or Nephrostomy Tube or Foley:	8
+SPECIAL HEALTH CARE NEEDS	8
+Special needs Tracking & Awareness Response System (STARS)	8
+TracheostomyTube	8
+Needle Decompression	8
+Workers Compensation Process	8
+Pediatric References	8
+Abbreviations for PCR  Approved list	8
+ALS Medications	8
+Adenosine  (6mg/2ml)	8
+Drug Info:	8
+Adult Rx:	8
+Albuterol  (2.5mg/3cc)	8
+Drug Info:	8
+Adult Rx:	8
+Pediatric Rx:	8
+ASA    (81mg/tab)	8
+Drug Info:	8
+Adult Rx:	8
+Atropine  (1mg/10ml)	8
+Drug Info:	8
+Adult Rx:	8
+Pediatric Rx:	8
+Calcium Chloride  (1,000mg/10ml)	8
+Drug Info:	8
+Adult Rx:	8
+Dexamethasone (Decadron)  (10mg/ml)	8
+Adult Rx:	8
+Pediatric Rx:	8
+D5  (5g/100ml bag)   &    D10  (25g/250ml bag)	8
+Rx:	8
+Benadryl  (50mg/ml)	8
+Adult Rx:	8
+Pediatric Rx:	8
+Droperidol (Inapsine)  (5mg/2ml)	8
+Adult Rx:	8
+Epi 1:1,000 (Adrenaline)  (10mg/10ml)	8
+Adult Rx:	8
+Pediatric Rx:	8
+Epi 1:10,000  (1mg/10ml)	8
+Adult Rx:	8
+Epi 1:100,000  (100mcg/10ml) Push-Dose Epi	8
+Push-Dose Epi Preparation:	8
+Epi Continuous Infusion:	8
+Epi Continuous Infusion Drip Rates c 60-Drip (Micro-Drip):	8
+Adult Rx:	8
+Pediatric Rx:	8
+Etomidate  (40mg/20ml)	8
+Adult Rx:	8
+Fentanyl  (100mcg/2ml)	8
+Adult Rx:	8
+Pediatric Rx:	8
+Ipratropium  (0.5mg/3cc)	8
+Adult Rx:	8
+Ketamine  (500mg/5ml)	8
+Adult Rx:	8
+Pediatric Rx:	8
+Ketorolac  (Toradol) (30mg/ml)	8
+17yo Rx:	8
+Lidocaine  (100mg/5ml)	8
+Adult Rx:	8
+MgSO4  (1g/2ml)	8
+Adult Rx:	8
+Pediatric Rx:	8
+Metoprolol (Lopressor)  (5mg/5ml)	8
+Adult Rx:	8
+Midazolam (Versed)  (10mg/2ml)	8
+Adult Rx:	8
+Pediatric Rx:	8
+Morphine  (4mg/2ml)	8
+Drug Info:	8
+Adult Rx:	8
+Pediatric Rx:	8
+Narcan  (2mg/2ml)	8
+Drug Info:	8
+Adult Rx:	8
+Pediatric Rx:	8
+NTG  (0.4mg/spray)	8
+Drug Info:	8
+Adult Rx:	8
+Zofran  (4mg/2ml)	8
+Drug Info:	8
+Adult Rx:	8
+Pediatric Rx:	8
+8.4% Bicarb  (NaHCO3)  (50mEq/50ml)	8
+Drug Info:	8
+Adult Rx:	8
+Pediatric Rx:	8
+Abbreviations Used in Document
+a = before
+c = with
+s = without
+p = after
+q = every
+x = except
+MD = Medical Director
+COG
+OLMC
+MAC
+CES Manager
+S&R Manager
+SMR
+SGA
+MPDS
+CIR = Certificate of Informed Refusal
+(RRWCT) = Regular Regular Wide Complex Tachycardia
+Differences between SQ and IM
+Section 1: EMS
+Intro to Abbott
+EMS is about reducing the suffering of others.
+EMS = Pt Advocate for Safety/Medical Monitoring/Pt Care.
+Start-of-Shift
+Verify vehicle (stock, batteries, O2, lights, siren, safe)
+Related policy: V998877 Rig Checklist, P875960 Vehicle Repair Request, P000125 Equipment Service Order, P000127 Medical Equipment
+Medical Oversight
+All care authorized by MD (Direct/Indirect).
+Medical Directive = Describes specific clinical Changes/Updates by MD.
+Quality & Medical Oversight Team
+MD, CES Manager, Ops Mgr, Comm Mgr, S&R Mgr, & MAC Physicians  Reviews clinical issues/data (COG/Event/Performance). Final decision-making group.
+Focus  on improvement, not discipline.
+MD may modify criteria in Unusual/Extreme conditions.
+Research/Trial
+GMR/MD may request research/trials for new equip, Rxs, or procedures.
+C MAC consent, MD may add trial directives not in current COG.
+Only involved units carry trial docs.
+Post-trial items may integrate into COG.
+Knowledge, Skills, & Abilities (KSA) Drills
+Knowledge is a body of info applied directly to the performance of a function.
+Emergency Medical Knowledge = Paramedic Certificate
+Skills = Proficient Physical/Verbal/Mental Manipulation of Data
+or Things (turning data into info)
+Examples of proficient manipulation of things
+Simultaneous use of Laryngoscope Blade & Magill Forceps to
+open an obstructed airway
+Operating a Scoop Stretcher or Stair Chair
+Examples of proficient manipulation of data
+Recognizing 3 seemingly unrelated issues & recognizing them as
+an opiate toxidrome. (unconscious, apnea, & pinpoint pupils)
+Calculating mg/kg of a Rx & properly giving the Rx.
+Skill = Certificate of Completion from the Written/Practical
+portion of the NREMT &/or State License
+Ability = Power to Perform an Observable Activity at the Present
+Time.
+Evidenced through Activities/Behaviors, in real time, similar to
+those required on the job.
+Plan & Organize a driving route to a call
+Manage a stretcher tip-over Incident
+Perform CCR or Manage a Trauma Incident
+Adequate ability c Abbott EMS/MD  Observation in NEOP c
+3rd person rides, PAT, & in-person scenario assessments.
+QA & CQI efforts have revealed the need to assist employees c
+KSA into real-world application.
+We ask all employees to actively engage & participate in the KSA Drills throughout the year.
+Skills/Interventions
+EMD = 24hr NAED course
+EMT-B = Basic Airway, O2, AED, SMR, assist Pre-Prescribed Rxs, Triage, Bleed Control, Splint/Bandage, Assessment, Assist Paramedics.
+EMT-P = All EMT-B + Magill Forceps, Direct Laryngoscopy, CPR, Childbirth, Adv. Airways, Trach Suction, Topical Nasal Vasoconstrictors, G-Tube Insertion, BG, 12-Lead + Interpretation, Nebs, CPAP/BiPAP, IV/IO (+ Jugular Vein), Needle/Surgical Cric, Needle-D, Cardioversion/Defib/Pacing, Pronouncements
+SCT = All EMT-P + RSI, Adv. Rxs/Ventilator mgmt, Adv. decision-making
+Related Policy, P987667 Identification, Employee, AMR Caregiver Credentials Policy v6.0
+Credentialing Requirements
+ALL Require  Interview/Background Check, Good standing c Abbott, License/Credentials (Final approval by GMR & MD), CPR, Cornerstones, Prior requirements.
+EMT-B
+EMT-P  ACLS, PHTLS/ITLS
+SCT  Interview/Selection Process c MD/Ops, MD approved SCT course, Adv. PHTLS/ITLS, SCT Skills q12wks c MD, SCT Quarterly Training, Quarterly MAC Approval p any Pt Care Scrutiny Inquiry
+Core Principles  Safety & Well-Being
+Scene secure  Scene Survey  Hazards/Additional Resources?
+Evaluate the scene upon approach
+Balance need for pt access & clinician/pt safety
+On-scene  Continually Evaluate/Judge the situation accordingly
+Examples: Downed power lines, Fuel spills, Unstable vehicles, Water hazards, Crowds (large, unruly, threatening), Weapons involved
+Infection Control
+Well-known infectious agents  Hepatitis B, influenza, etc
+Employ basic infection control measures on q single incident
+Basic Protection Guidelines & Immunizations
+Six links in the Chain of Infection  Pathogen  Reservoir  Portal of exit  Mode of transmission  Portal of entry  Susceptible host
+Healthcare Workers  Recommended Immunizations:
+COVID-19, Measles, Mumps, Rubella, Varicella, Tetanus, Diphtheria, Pertussis, Influenza (seasonal), Hepatitis A & B
+Hand Washing: Contact c contaminated surfaces (fomites) provides a way for you to become infected and to infect others. Hands washed p pt contact, gloves changed, & Equipment cleaned
+No soap/water  Alcohol-based hand cleaners
+Effective hand washing  Soap & water  20sec Min  Vigorous rubbing followed by thorough rinsing
+Waterless hand wash/wipe should be used. Wash hands c soap and water when able.
+Conduct self-checks of skin prior to pt contact. Cover all open and scabbed wounds c bandages
+PPE
+Gloves worn c all pt contact. Latex free c sensitivity/allergy
+Airway Management Procedure or Splash Fluids = Eye Shield &
+Mask/N95 + Goggles
+Bodily Splash Fluids = Gowns
+Gloves (& possibly gown) + Respiratory Protection are required c these S/S  Productive Cough (c or s blood), Fever/Chills c Coughing, Night Sweats, Dramatic (>10%) unexplained weight loss, Fatigue (Along c other Sx), Hemoptysis, Nuchal rigidity, & Chest/Upper Torso Rash
+N95 protects against airborne particles (TB, measles, chicken pox, COVID-19, etc). Use also a entering area c pts & these S/S
+Eye shield + Mask = Larger Droplets (Meningitis, Flu, RSV, etc)
+Pt c S/S of larger droplets disease = N95 mask or eye shield + surgical mask anytime within 6ft of pt
+c Airborne/Droplet precautions  place surgical mask on pt as long as it does not interfere c respiratory function.
+If O2 is needed, then use a NRM to deliver O2 which helps limit the amount of aerosolized agent emitted.
+An N95 mask should not be placed on the pt.
+	If Sputum, try to dispose of it properly & use an 4X4
+	If doubt = Maximal PPE
+Sharps Hazards
+Needles c human tissue contact should not be recapped, re-sheathed, bent, broken, or separated from disposable syringes
+	Used needles = sharps containers
+Cleaning & Disinfecting Equipment & Work Areas
+Disinfect p removing large organic material.
+Be thorough & consider goggles if possible splashing.
+Clean surfaces your gloved hand contacted.
+P applying disinfectant, let it air dry
+Wiping dry the wet disinfected surface will negate the effects & render it useless.
+Upon completion of the cleaning, make sure you wash your hands
+Exposure Follow-up
+	Withdraw from pt care as soon as soon as its appropriate. Usually p pt care but may be sooner in some cases.
+	Take self-care steps & cleanse Wound/Irrigate
+Do not milk any needle stick injuries.
+	Exposures require immediate intervention.
+Report suspected exposure to communicable diseases to Sup ASAP
+If you think you need medical evaluation, testing, follow-up, &/or Rxs, report this to the Supervisor for further instruction.
+AMR Infection Control policies: SRM #1205 & #1225.
+MVCs  Lights & Siren Driving
+The #1 cause of EMS occupational death is ambulance crashes. A 2019 study found that among 2268 US counties, EMS response times were associated c rates of MVCs/Mortality.
+Most crashes occur c lights & sirens at intersections.
+Acceptable Code 3
+Time Critical  STEMI, Lvl 1 Trauma/acute stroke/septic shock
+Critical VS are not responding to intervention
+Need for immediate ED care
+ABCs are not intact & are unmanageable
+Maybe Code 3
+Need for definitive Dx  low back/Abd pain but c concern for leaking AAA
+Clinician Concern/Discretion
+Often tied to abnormal VS
+Post-ROSC but ABCs are being managed
+2004 data of 103 reported firefighter deaths, 34% occurred while responding/returning from alarms. Of the 35 response related deaths  17 firefighters died from injuries directly related to vehicle crashes. Failure to wear seat belts & speeding remain listed as major contributing factors in crash related deaths.
+Abbott personnel will wear seatbelts whenever possible & will come to a complete stop at intersections, regardless of traffic light indication, & clear each lane prior to proceeding through the intersection.
+Violence Against Clinicians
+It is Acceptable/Expected that EMS crews do not place themselves in any situation that has a high likelihood of causing harm to themselves.
+Staging & Retreat
+Stage, wait, & request PD if something just doesnt feel right.
+Use your partner in a contact and cover mode & rapidly transition out to the truck & away from the scene.
+LE should be part of managing these scenes.
+Medical Care in a Threat Environment
+Direct Threat Environment  Immediately cease all medical care  Get crew & pt to safety (or relative). Re-establish care when the direct threat is no longer present.
+Indirect Risk/Threat Environment  Limit medical assessment, interventions, & procedures to lifesaving &/or necessary steps to expedite movement to a secure/cold zone
+Indirect Risk/Threat examples include (but are not limited to)  Contained criminal, crime scene relatively safe c adequate LE protection/presence, controlled flame/fire, structure/vehicle that has been reinforced/stabilized, MVC on roadway c active traffic
+Situations that pose risks that are not immediately dangerous to life &/or health or pose an imminent threat.
+Resume normal medical care in the cold zone
+In some instances (MCIs) the crew may pass the pt off to a different set of care givers in the cold zone.
+Handoff report  Complete as possible & PCR should reflect the findings/care provided a handoff.
+Transporting clinicians in the cold zone of a MCI should consider bringing pts to different hospitals for load distribution &/or safety, Provided that pts are transported to an appropriate facility & pt agrees to the transport destination
+Revised Statutes of Missouri, Chapter 190, Section 243, paragraphs 1 through 4 [RSMo 190.243]
+Psychological Stress & Burnout
+Excessive stress &/or inadequate coping strategies are associated c poor situational reasoning & judgment, tunnel vision, impaired driving skills, impulsiveness, injuries, & poor communication c pts/others on-scene
+Lack of sleep/exercise, addiction, & relationship/financial stress can overwhelm ones ability to cope effectively.
+Managing those can improve work performance/happiness
+ALS Ground Rules
+INTERVENTION  What we do a calling Med-Control
+CONSULTATION  The paramedic must:
+a.	Contact Med-Control
+b.	Report pt info
+c.	Inform Med-Control
+d.	Ask permission to perform these actions
+CONTINUITY 1 failed attempt to contact Med-Control
+Dont interrupt pt care  Keep trying to contact Med-Control
+Document All attempts to contact Med-Control
+Ground Rules
+1.	The ABC protocols apply to all pts who consent to Tx.
+ABCs a moving the pt to the ambulance
+2.	Move pt into ambulance early  Transport quickly
+3.	Dont Rx if  Hypersensitivity Hx, Allergic, or Rx Hx prohibits its use
+4.	Rx c Rx Administration Cross Check (MACC)
+5.	Wear appropriate BSI prn
+6.	Document S/S a/p Tx  Reassess p Tx
+7.	VS/15min  Unstable VS/5min  or prn
+8.	EKG  Required c Open IV Rx Drips/Acutely ill/Injured
+9.	Actions are only legal while on duty at Abbott EMS
+10.	MD may restrict use of any orders
+General Important Information
+Scope Violations & Possible Consequences
+Out-Of-Scope (actions) = Performing Txs s credential
+or Tx c Non-Prescriptive/Approved Rx
+ Suspension/Revocation Possible
+Practitioner & on-duty Ops-Sup may both File Incident Report to Clinical Mgr & MD  Not reporting if told may be considered Falsification
+ Regional Director Review may result in Suspension/Termination
+Suspension/Revocation
+Decredential (19 CSR 30-40.303)   by MD
+Causes  Falsification/Lapse of PCR/Licenses/Certs,
+Withheld/Impaired Care, Harming Pt,
+Failing Remediation/Required-Edu/Review,
+Criminal/Reg Issues,
+or Threats to Pts/Company/Public Health
+Report Criminal Arrests  To Ops Mgr & MD by or on 1st
+Business day p-Arrest or Risk Suspension
+Suspension/Revocation  By Regional Dir, Ops Mgr, & MD
+Based on  Requirements/Circumstances/System Impact
+DHSS Notification = Your Responsibility
+Failure = Possible Suspension of Credentials
+DHSS Review/Suspension/Revocation
+ Must be Reported to Ops & MD (Decides Credential Status)
+ Regional Director Notified
+On-Scene Authority
+Focus on pts Best Interest, No Delays
+Scene/Transport Authority
+Municipal = Senior Fire Officer
+Outside Municipal = Senior Credential Decides
+Credential Seniority = EMT-B  EMT-P  on-scene
+Physician (Non-EMS)  OLMC  MD or Designee
+Non-Pt Issues  Incident Cmd.
+Major Conflict  Quality & Medical Oversight Team Review
+Response Mode
+MPDS may or may not be used
+Transfer to Lesser Credential
+Senior Credentialed Decides if immediate transport or if lesser credential can maintain care within scope
+MCI Transport  On-Scene Command
+Leave Pts On-Scene only if it Maximizes Outcome
+(e.g. Critical Pt Must Go Now)
+Transfer care only if not beyond the Lower Credentials Scope (e.g. Intubated Pt cannot be left c EMT-B)
+All pts accounted for, triaged, & resources requested a transporting a Critical Pt
+No pt needing Adv. Stabilization (Needle-D, Intubation, Defib, etc.) Left unless properly credentialed EMR present
+EMR Accompanying Critically Ill
+EMR, Ops supervisor, or other available resources may ride c Critical Pts
+Rendezvous c Additional Resources may help.
+Consulting OLMC
+Contact Receiving/Specialized ED for physician Input/Approval per PSO (Pts personal physician, OLMC, or 200 = MD on scene if needed)
+Once OLMC engaged, follow within your scope
+Document Orders; typically transport to that ED unless otherwise arranged
+On-Scene Healthcare Professionals
+Crew Acts under MD/OLMC & responsible for overall pt Mgmt
+Persons claiming to be physicians must show a valid MO Physician & Surgeon License or be Recognized by Crew.
+2 On-Scene Physician Types:
+Pts Personal Physician (Established Relationship)
+Intervener Physician (No Established Relationship)
+If Pts Personal Physician is On-Scene & Assumes Care:
+Notify OLMC (Scene & ED Arrival) & Defer to physicians orders
+Physician Documents in your PCR
+Conflict c COGs  Physician Contacts OLMC  Disagrees
+ Physician must Ride/Take Pt-care to ED
+or defer to OLMC.      LE prn
+If Intervener Physician is On-Scene:
+Must  Valid MO license & Willing to Assume Pt Care
+OLMC decides whether to:
+Manage Exclusively
+Collaborate c Intervener
+Allow Intervener Full Pt Responsibility
+Disagreement between Intervener & OLMC
+ Follow OLMC & Intervener talks c OLMC.
+Intervener Must  Document Txs/Orders in your PCR
+& have OLMC Approval to Leave the Pt
+No Non-Physician Orders unless OLMC Explicitly Approves
+Acceptable Practitioners Only  (MO) No specific physician rules
+the most qualified manages the pt
+Dispatching MD [200]
+Dispatching the MD [200] for Scene Response
+Certain Situations/Conditions warrant an MD scene response
+Multi-alarm fires requiring extensive Emergency Incident Rehab
+operations
+Rescue incidents that require specialty team intervention
+High Angle/Trench/Swift Water/Confined Space/Structural
+Collapse & Heavy Rescue
+Rescue incidents where there is prolonged entrapment of a
+victim &/or the victim may require amputation or specialized
+medical care during rescue operations
+HazMat situations c exigent circumstances that may benefit
+from a physician on scene working c Unified Command
+Prolonged police actions where LE has requested EMS staging or
+when tactical Rx considerations are a major component of
+incident mitigation
+Disaster scenes requiring Adv Triage & Tx  Discretion of IC
+To request 200  Contact Abbott to activate MD scene response.
+AIR AMBULANCE UTILIZATION
+Air ambulance activation assumes a pt is critical in nature.  Use of an air ambulance may be appropriate in the following conditions:
+a)	Ground Transportation >20min,
+b)	Delayed scene time & Rapid transport is necessary,
+c)	Ground Transportation is a No-Go
+Notify Abbott 1st p deciding to activate air ambulance
+Helicopter staff  Indicates when to approach the helicopter.
+Never approach a helicopter from the rear of the aircraft
+Receiving ED should be notified ASAP c pt report
+All uses reviewed within 24hrs by MD, Ops Manager, & Clinical Manager
+Review will include, but will not be limited to, pt condition, documentation of care, & appropriateness of resource utilization
+Applicability of the COG
+Pt = Any Person c an Illness/Injury c/c or any circumstance suggesting potential Illness/Injury
+If Any Doubt, Tx pt
+Adult 18yo (Unless legally Incompetent/Emancipated)
+Minor <18yo
+Pediatric <15yo (for transport guidelines)
+C Pt  Evaluate/PCR/Tx Prn  Unless Not a Pt
+Pt definition Involves both the Individuals Input & the Clinicians Assessment (Including why 911 was called)
+Missouri does not define Emancipated, but common case law references exist
+Restraints of Agitated/Combative Pts
+Assessment/Tx  Identify Hypoxia, BGL, Alcohol/Drug,
+Stroke, Seizure, TBI, & Agitation c delirium. Consider early
+High-Flow O2 to Tx hypoxic pts too agitated to obtain VS.
+Severe Agitation c Delirium  Associated c To, K+,
+Rhabdomyolysis, & cardiac arrest  Rapid Rx to pt safety
+Indications  Lacks Capacity + Needs Care or Danger to
+Self/Others  Safe/Humane LE-Assisted Restraint.
+Confirm if Potentially harmful MOI/NOI?
+Does Pt Comprehend Consequences & Alternatives?
+BP, To, Intoxication, CVA, Psych Decomp?
+ Physically Restrain c LE help
+ If Unsafe for EMS  Only LE should restrain
+Techniques  Verbal-De-Escalation/Physical/Rx  when used,
+by whom, & if direct medical oversight is needed.
+Do Not  Sedate to Help LE take pt to jail.
+Use least restrictive restraint needed. Protect pt Dignity.
+Dont  Place pt Under Backboards/Mattresses/Prone, leave pt
+alone c any type of Restraint, hands & feet tied together behind
+back, c ways Compromising the Airway or Constrict Neck/Cx,
+or use weapons as adjuncts to restrain a pt.
+De-Escalate over Physical/Chemical Restraint when able
+No Paralytics x to Tx an Medical/Traumatic condition.
+Physical Restraints must allow for rapid removal if ABCs
+becomes compromised.
+Rigid restraints (handcuffs) should not be used by EMS.
+If LE handcuffs pt, aim for the least Restrictive/Safest Method
+Physical restraints easily removed s a key are preferred.
+Restrained c Key devices  Key Remains c pt
+Rapid Onset Rx Preferred to Risk ASAP c Agitated Delirium
+& Serious Self-Injurious Behavior
+Preoxygenation  Beneficial if pt is sedated. Tx may Agitation
+Sedation  Likely Ketamine or Midazolam or Droperidol or
+ These may be Combined prn
+May Cause Respiratory Depression  Monitor q 5-10min
+Must Transport to ED for Assessment/Tx
+Restraint Reviewed for  Appropriate? Type, Frequency
+Monitored, Protocol/Documentation Compliance, & Rx use.
+Reassess  Physical/Chemical Restraints, Assessments,
+Respiratory/Hemodynamic/Neurovascular Status of all
+restrained Extremities (Done ASAP & at recurring intervals)
+PCR  Pt Behavior/Assessment, Reason, Types, Methods,
+Attempts, Monitoring Frequency, Transport Care, RASS a & p
+Direct Medical Oversight of Txs performed may be needed
+c Restraints or c Combative pts refusing Tx.
+MD decides when EMS must contact physician  should be
+educated on EMS protocols & options
+EMS authorized to function in a LE capacity (or vice versa)
+must stick to their current Role c pt encounters.
+LE prn c Active HI  Scene not safe = Stage for LE.
+Unable to Retreat = Defend against pt as permitted by law.
+LE Refuses to Help  Note LEs Name, Badge #, Agency, Reason. Document pt lacks capacity & RSMo 632.305 Requested.
+Have LE sign Certificate of Release as Substituted Consent
+If LE Uses Techniques/Restraints not in our protocols 
+LE stays c EMS while EMS Assesses/Manages the pt.
+or Switch Restraint to one in our protocols.
+Under Arrest  LE must be c EMS transport
+Richmond Agitation Sedation Scale (RASS)
+Richmond Agitation Sedation Scale
+Rule of 9s & Rule of Palms for estimating BSA
+Smith-Modified Sgarbossa Criteria
+Crime Scene
+Preserve evidence s compromising pt care. Any Pulseless/Apneic scene may be a crime scene
+1st arriving credentialed clinician  Quickly see if CPR is indicated. If LE blocks entry, notify all units
+All Refusals to allow access to pts  Retro Review c LE
+If no CPR: leave area the same way, dont disturb items
+Any EMR s proper credentials to pronounce an obvious Dead on Scene (DOS), Should Immediately Leave the area the same way entry was made s touching anything
+When confirmation of death is required, only 1 properly credentialed EMR should make entry to the area
+Weapons: Handle Only prn for safety & no LE present; wear gloves, note Original/New Location, inform LE
+Dont use scene items (phones, towels, etc.)
+Deter assault victims from cleaning up
+If unknown ID, label John/Jane Doe c  age.
+Focus on pt care, not demos. Only get pt info from LE
+Suicide ligature: cut away from knots, keep intact if able
+Ingested substances: leave in place unless needed by ED;
+Minimize Handling c gloves
+Leave used disposables (tubes, IV lines, sharps in container) on-scene. Keep unsuccessful IV lines, ETTs & all other disposable equipment used, successfully or unsuccessfully, are to remain in place &/or on-scene
+Mark failed IV/Needle-D attempts on body c pen & circle
+P pronounced, Body = ME property. Dont alter s ME permission
+Protect dignity (block public view)
+If transporting, Clothing/Jewelry removed stays on-scene; Doc location changes & tell LE
+If pt on a sheet, Inform ED it may be evidence
+Acceptable to share pt care info c LE if pronounced dead
+No resuscitation initiated:
+If you cant pronounce DOS, leave as you came; only 1 properly credentialed person confirms death
+Unsuccessful resuscitation:
+Once pronouncement obtained, vacate area
+ME must differentiate resuscitation punctures vs. prior injuriesmark unsuccessful attempts c pen
+Sharps used in resuscitation: store in an appropriate container & leave on-scene
+Obtain pronouncement times per CPR guidelines
+PCR Requirements
+Must be Truthful, Accurate, Objective, Complete, & Timely; only approved Abbreviations/Grammar
+Reflect:
+Full Hx/Event sequence
+Initial findings/VS/Details of Abnormalities
+Ongoing Monitoring/Changes
+All Interventions/Changes/Results (EKG, ETCO2, SPO2), & rationale for omissions
+Explanation for any Intuitively Indicated Action (per COG or PSO) that was NOT done
+Complex/Unusual circumstances
+Minimal Data: date/time, location, crewith trip #, pt name (or John/Jane Doe), gender, CC, VS, assessment (trauma category if any), witness accounts, Tx (incl. EKG, ETCO2), destination, refusal if applicable
+Must be available in an acceptable timeframe, remain confidential, & only shared c lawful entities
+CES Manager & MD define minimum PCR data.
+All documents Scanned/Stored electronically for QA/QI
+HIPAA compliance is mandatory
+Clinical Errors & Reporting
+Goal = improvement, not blame
+3 steps if error occurs:
+Care for pt & manage consequences ASAP
+Report to receiving ED & on-duty Supervisor (Anonymously prn)
+Learn: Non-punitive approach to fix System
+OMD & Clinical Manager review all incidents/Data; lessons shared prn
+Clinical Review Process
+Investigates potential incidents/near misses.
+Event = any assertion of incident/near miss (valid or not)
+Incident = event c actual harm or inappropriate care (Sentinel/Non-Sentinel)
+Near Miss = Error almost Hurt pt (Chance/Intervention)
+Sentinel = Unanticipated incident causing Death/Serious Harm not from natural disease (or Device Failure, Theft/Diversion, Major Wrongdoing, etc)
+Non-Sentinel = lesser harm
+Must foster self-reporting to improve
+Report Sentinel Immediately, Non-Sentinel ASAP, Near Misses ASAP
+All are confidential; no destroying notes/logs or speaking to outside investigators s approval from S&R or counsel
+Clinical Review Process
+Abbotts Quality & Medical Oversight Team uses this process to ensure timely system improvement, feedback, education, & track performance (as current clinical issues arise)
+Focus: ID opportunities for system clinical performance improvement
+All credentialed clinicians Must Participate/Support
+Purpose
+Clinical Event Review process is focused on opportunities for clinical performance improvement
+Has the following desired outcomes:
+     Emphasize avoidance/prevention of potentially adverse events
+     Identify System trends at the earliest possible point in time
+     Compile experience data in a single location
+     Share experiences within the System to prevent repeat events
+Clinical event review process:
+1.         Self-reporting yields potential improvement opportunities
+2.	Clinical Manager will develop/Implement a process for
+Identifying/Reporting/Reviewing clinical events
+4.	OMD has knowledge of significant events, collects event
+data & resolves conflicts in clinical findings prn
+5.	Pt Care Scrutiny Reports are reported to Abbotts Medical
+Advisory Committee, physicians from both MO & IL
+Confidentiality Discussions
+1.	Clinical performance Concerns/Complaints & limited to
+those directly involved in review/investigation process
+2.	Discussions among crew members regarding event details
+should be avoided & strongly discouraged by Abbott
+3.	Review Outcomes should be limited to those directly
+involved in the process until the review is completed &
+approved by the MD & CES Manager
+Additional Definitions
+Event  assertion made that a clinical incident or near miss may have occurred
+Designation as an event =  valid or invalid
+Near Miss  Error did not result in pt harm due to chance or immediate intervention.
+Harm to the pt nearly occurred
+A near miss is considered when the event/situation is likely to result in harm if this event occurs in the future s any System action taken to prevent this from occurring. Some refer to this as a Close Call or Near Hit
+A near miss DOES NOT meet the definition of a Sentinel Incident or Non-Sentinel Incident
+Near misses are a subset of Events
+Event Review: systematic investigation of actions/omissions (c a specific event/situation) vs. accepted standards, to find improvement ops. Doesnt require actual harm or negative pt outcome. Complexity varies by situation
+Incident  an event in which there is evidence that pt harm or inappropriate clinical performance were involved
+Incidents are further classified as either Sentinel Incidents or Non-Sentinel Incidents
+Incidents are a subset of Events
+Sentinel Incident (expanded by MD): includes pt death p-intervention (airway attempt, Rx admin, restraint, Needle-D), device/equipment failure (Medical device, Cardiac Monitoring, Adv-or-basic Airway/Vent device) during pt care (Even if no harm occurred), suspicion of theft/diversion of controlled Rx, pt appears harmed due to a clinicians action/omission, or any action consistent c potential decredentialing
+1 of 5 potential decredentialing issues:
+a.	Falsification of PCR or Credentials
+b.	Intentional harm to a pt
+c.	Intentionally withholding pt care
+d.	Pt care on Drugs/Alcohol
+e.	Failure to remediate
+Non-Sentinel Incident: no serious injury but possible harm (outside COGs scope, performance concerns/complaints (No Sentinel criteria), lost controlled Rxs s theft/diversion suspicion).
+Event Review Process: Used by the Clinical Manager to determine if improvements can be found c reported concern
+Process Steps
+When: Always review sentinel, non-sentinel, near miss. Clinical Mgr can review other events as needed.
+Notification:
+Sentinel: Initiate Immediate p pt care  on-duty Ops Sup  Ops Mgr  Clinical Mgr/MD  Regional Dir & S&R Mgr. Also notify OMD (~1hr)
+Include: Name/Abbott/Contact-Info/Summary/Why Sentinel & the OMD primary contact for review
+Non-sentinel: notify on-duty Sup ASAP, then MD within ~48hrs. Provide summary & available info.
+Include: Name/Abbott/Summary/Specifics
+Near miss: to Clinical Mgr ASAP. They confirm its not sentinel/non-sentinel & document it
+Review Progress:
+Primary reviewer updates Ops Mgr/MD weekly on sentinel events, immediate update if new sentinel evidence
+Monthly near-miss report
+Methods:
+Clinical Mgr focuses on root causes
+Review should consider all aspects of the event
+May review Comms/Dispatch/Logis logs, PCR, written statements, etc. (for sentinel/non-sentinel)
+Reports:
+Clinical Mgr (c completed review)  Ops, S&R, MD c summary, root causes, recommended actions, timeline
+Review documents may include: Voice recordings, Electronic/Paper documents, PCR, Maps, Photos, Visuals (other), event summary c root causes and contributing factors, Actions (or recommended actions) for improvement c estimated timelines,
+OMD checks for Completeness/Comprehensive (root causes, improvement actions, timeline). May approve or send back to Clinical (CES) Manager
+Investigative Obligation
+Employees must NOT speak c non-Abbott/GMR investigators (detectives, insurers, lawyers, etc) unless specifically directed. Usually involves the S&R Mgr or counsel
+No destroying notes/logs or other written records from the event
+Mandatory Reporting
+We are mandated reporters for suspected abuse/endangerment (adults/children)
+Telling hospital alone = fulfilling legal duty
+Must notify MO DHSS (adult/elder, preferred online) or DSS (child)
+Adult/Elder: www.health.mo.gov/abuse   # 800-392-0210
+Questions
+DSDSOfficeOfConstituentServices@health.mo.gov
+Child Emergency (24/7): DSS hotline # 800-392-0210
+The phone number to the Missouri Child Abuse and Neglect Hotline is 800-392-3738
+Non-Emergency: https://apps.dss.mo.gov/OnlineCanReporting
+apps.dss.mo.gov/OnlineCanReporting/default.aspx
+DSS response times
+Emergency: High risk  visited within 3hrs
+Urgent: visited within 24hrs
+Routine: possibly within 72hrs
+If child is in imminent danger, request LE/Physician to take custody & transport to peds ED. Only LE, Court Deputy/Juvenile officer, or physician can do so
+Civilians can remain anonymous, but Abbott EMS employees must provide name/phone for investigator follow-up
+Thorough PCR doc is crucial; DHSS/DSS often subpoena PCR. EMS sees hazards a they can be concealed or changed
+Professional Practice
+Move c purpose, arrive c needed equipment (especially if pre-arrival info suggests the possible need)
+Always focus on pts best interest
+Medication Administration Cross Check
+Executing the Procedure
+Scenario:
+EMR 1 would like to give 75mcg of Fentanyl for pain
+EMR 1 Initiates Procedure by stating 1 of the following:
+Crosscheck or Safetycheck or Med-check
+EMR 2 responds ready
+EMR 1 states I am going to give & Provides
+ Dose, Drug Name, Route, Rate, & Reason
+Example: Im going to give 75mcg of Fentanyl IV slow push for pain
+If EMR 2 doesnt agree  EMR 1 starts over p conflict resolves
+If EMR 2 agrees  Contraindications?
+EMR 1  Checks Expiration date, Verifies appropriate VS,
+& Checks for any drug allergies
+EMR 1  no contraindications or state contraindications
+EMR 2 Agrees  volume?
+EMR 1 States  Drug Concentration, Volume to give, & should
+show the vial to EMR 2   (if appropriate)
+Example:
+EMR 1 States  50mcg/mL, Im going to give 1.5mL
+EMR 2 agrees c visual verification  I agree & says give it
+Contraindications Include
+Verify Appropriate VS
+Known pt allergies
+Expiration date
+If Discrepancy/Disagreement/Confusion  Resolved a MACC
+Only EMR 2 can allow giving the Rx
+Complete MACC a giving any Rx
+Interruption/Change c pt Condition  EMR 1 Restarts MACC
+Visualize vials diluent is in
+CRM  Avoid Ambiguity & use closed loop/Effective
+communication between partners.
+The MACC was presented to EMRs in conjunction c an introduction to Crew Resource Management (CRM)
+BLS MACC
+BLS EMRs
+Positive Visual Verification of Info on drug label
+Drug name, Concentration, & Expiration Date
+Procedure still requires an OutLoud Verbal/Visual Verification
+Strategic Error Traps
+EMR 1 Initiates an attentional check c EMR 2
+Says  Med-Check/Safety-Check/Cross-Check
+EMR 2 says  Ready
+EMR 1 Affirms that they have full attention of EMR 2
+EMR 1 States  Dose, Drug Name, Route, Rate, & Reason
+Contraindications Verification  Expired Rx, Pt drug allergies, PMH, Prescription Rx Interactions
+Not required to Verbalize Contraindications unless Present
+Some EMRs choose to verify Appropriate VS, Pt drug Allergy
+Status, & Expiration date out loud anyway.
+The last & final steps in the process were designed to catch
+Errors of action  Behavior Slips/Lapses that may not have been
+Corrected c  Both EMRs Verify Volume EMR-1 will give
+Vial = Dose
+Avoid terms like  Amp or Vial
+Visual verification  Prevents wrong drug errors
+Abbott  Doesnt require Visual Verification if EMR 2 is driving
+In summary, this procedure was designed to catch
+Wrong Drug       (Skill Based Error)
+Wrong Dose            (Skill/Rule/Knowledge Based Error)
+Wrong Concentration (Skill/Rule Based Error)
+Wrong Volume to give      (Knowledge Based Error)
+Wrong Duration                     (Rule Based Error)
+Wrong Situation or reason          (Rule Based Error)
+Absolute/Relative Contraindications Allergies/Interactions/Expired
+(Rule Based Error)
+CDC Field Triage  	Guidelines for Trauma
+Rehabilitation  Emergency Incidents; Municipal partners
+PURPOSE:
+(IMS) Provide guidance on Implementation/Use of Rehabilitation at the scene of a fire, other emergency, or training exercise.
+Personnel who might be suffering the effects of metabolic heat buildup, dehydration, physical exertion, &/or extreme weather receive Evaluation/Rehabilitation during emergency operations
+SCOPE:
+All personnel attending or operating at the scene of a fire/emergency or training exercise
+GUIDELINES:
+Phase I rehab  Commence upon the crews 1st bottle change,
+or the Company Officers discretion. Rehabilitation should
+consist of each member consuming 12-16ounces of water
+Phase II rehab  Consists of medical monitoring by assigned on
+scene personnel
+Phase III  IC shall establish Rehabilitation according to the circumstances of the incident & assigns a Rehabilitation Manager.
+Rehabilitation is established c any incident c  2 alarms, any incident/training that requires PPE for 1hr or as directed by IC.
+Phase III Rehabilitation shall include the following as environmental conditions dictate:
+a)	Rest  Minimum 10min
+b)	Hydration to replace body fluids  water/sports drinks
+c)	Cooling  passive &/or active
+d)	Warming
+e)	Restrooms/Personal hygiene prn
+f)	Medical monitoring
+g)	Emergency medical care prn
+h)	Relief from extreme climatic conditions
+i)	Calorie &/or Electrolyte Replacement
+j)	Accountability
+k)	Release
+RESPONSIBILITIES:
+INCIDENT COMMANDER
+1.  Include rehabilitation in incident/event size-up
+2.  Establish a rehabilitation group to  adverse physical
+effects on firefighters while operating during
+fire/emergencies, training exercises & extreme weather
+3.  Designate/Assign a supervisor to manage rehabilitation
+4.  Ensure sufficient resources are assigned to rehabilitation
+5.  Ensure EMS available for emergency medical care of FD
+REHABILITATION MANAGER (If Assigned)
+1.   Don the rehabilitation manager vest
+2.   Select location for rehabilitation c site characteristics:
+a)   Large enough to fit the # of personnel expected c a
+separate area for members to remove PPE
+b)   Accessible for an EMS/Ambulance
+c)   Removed from hazardous atmospheres including exhaust
+fumes/smoke/toxins
+d)   Shade in summer & protection from inclement weather
+e)   Portable water supply access for hydration & cooling
+f)   Away from Spectators/Media
+3.   Ensure personnel in rehabilitation dress down by removing
+their bunker coats, helmets/hoods & opening their bunker
+pants to promote cooling a entering rehab area.
+Once in rehabilitation area bunker pants should be lowered to
+boot level to improve cooling &  potential for additional
+physical problems related to heat retention.
+4.   Ensure PASS devices deactivated to  noxious noise exposure.
+5.   Time personnel in rehabilitation to ensure they receive a
+Minimum of 10min of rest.
+6.   Ensure personnel rehydrate themselves.
+7.   Ensure personnel can be actively cooled prn
+8.   Maintain accountability/Remain in rehabilitation at all times
+9.   Document members entering/leaving rehabilitation.
+10.   Inform IC/Accountability-Officer/EMS if a member requires
+Transportation/Tx to medical facility.
+11.   Serve as liaison c EMS personnel
+COMPANY OFFICERS
+1.   Be familiar c the S/S of heat/cold stress.
+2.   Monitor the company members for S/S of heat/cold stress.
+3.   Notify the IC when stressed members require relief, rotation or
+reassignment according to conditions.
+4.   Ensure that the company is properly checked in c the
+rehabilitation manger & accountability officer & that the
+company remains intact.
+CREW MEMBERS
+1.   Be familiar c the S/S of Heat/Cold stress.
+2.   Maintain awareness of themselves/company members for S/S
+of heat/cold stress.
+3.   Promptly inform their company officer when members require
+rehabilitation &/or relief from assigned duties.
+Phase II Rehabilitation Assigned Personnel
+1.   Report to IC & obtain Rehabilitation requirements.
+2.   Coordinate c the rehabilitation manager (if assigned)
+3.   Identify EMS personnel requirements.
+4.   Check/Document VS, monitor for S/S of Heat/Cold related
+stress & medical issues.
+5.   Provide emergency medical care & transportation to medical
+facilities as required.
+6.   Inform IC & Rehabilitation Manager when personnel require
+transportation to & Tx at a medical facility.
+PROCEDURES
+1.   Everyone is responsible for continuously staying hydrated
+P the 2nd SCBA bottle has been expended & or 1hr of continuous strenuous activity in PPE, a sports drink containing between 50-80 calories, 100-170mg Na+ and 4-6% concentration of carbohydrates (Gatorade G2, Gatorade, PowerAde, Accelorade) shall be provided in either a dry or premixed form.
+Fluids shall be available on each response vehicle c a minimum of 3 bottles of water & 1 electrolyte replacement solution (powder or premix) per riding position.
+Upon IC declaring a Phase III rehab sector all specified fluids should be consolidated in the rehab sector to facilitate rehab.
+2.   Members sent to rehabilitation prn
+3.   All members sent to Phase II/III rehabilitation following the use of two 45min SCBA cylinders, or p 1hr of strenuous work. Shorter times might be considered during extreme weather conditions.
+4.   Ensure PASS devices are deactivated to noxious noise
+5.   In hot/humid conditions, Min of 10min of active cooling p the use of the 2nd & each subsequent SCBA cylinders. Ensure personnel in rehabilitation dress down by removing their bunker coats/helmets/hoods & opening their bunker pants to promote cooling a entering rehab area.  Once in rehabilitation area bunker pants should be lowered to boot level to improve cooling &  potential for additional physical problems related to heat retention.
+Active cooling (wet towels, forearm immersion, misting fans/streams) should be applied where temperatures/conditions &/or workload create the potential for heat stress.
+6.   Personnel in rehabilitation shall rest for at least 10min a being reassigned/released.
+7.   Nutritional snacks/meals shall be provided during longer duration incidents as conditions warrant.
+Medical Monitoring Criteria
+Phase II/III Rehabilitation Assigned Personnel shall provide medical monitoring & emergency medical care as per medical protocol & in accordance c (IAW) the following parameters:
+ Crew members who initially enter the Rehab Sector should be diverted to the Medical Evaluation & Tx Area (META) if they have any of the following:
+Immediate transport to ED initiated for items indicated by:
+HR>120
+BP >200 or DBP >110
+BP <90  or DBP <40
+Temp > 101oF
+Injuries of any type
+Priority signs = Confusion, Emesis, Syncope, Resp-distress,
+any positive element of the Stroke Scale
+Priority symptoms = Cx pain, unusual dyspnea, nausea, H/A,
+focal neurologic deficit
+Reassignment/Release
+Crew members may report for re-assignment p a minimum 10min
+cycle in the Rehab Sector UNLESS:
+HR>100     (Transport to ED if >140)
+BP >160 or DBP >90 (Transport to ED >200 DBP>130)
+BP <100 or DBP <50 (Transport to ED <90 DBP<40)
+Crew members not able to return for re-assignment, must remain
+for another 10min cycle in Rehab Sector for re-evaluation. P a
+total of 4 cycles or 40min, if VS still do not allow a crew
+member to return for re-assignment, then they should be
+removed from further duty &/or transported for further
+evaluation at ED.
+Personnel transported to a medical facility for Tx shall be accompanied & attended to by a department representative.
+INCIDENT REHAB  INDIVIDUAL REHABILITATION REPORT
+Skills
+Ventilator Set-Up Procedure: ParaPAC Plus
+ParaPAC Vent use:
+For reference  Typical initial settings for an adult is
+FiO2  100%
+PEEP  5cm H2O
+RR  12
+TV  6-8ml/kg (Ideal body weight)
+To ventilate the pt
+1.	Connect supply Hose to O2
+2.	Ensure O2 is on & has adequate pressure
+3.	Connect Vent circuit to ParaPAC Plus
+4.	Connect ETCO2 detector to vent circuit
+5.	Connect filter to Vent Circuit unless facility filter in place
+6.	Set Frequency & Tidal Volume to match facility vent (if able)
+7.	Set Air Mix to 50% or 100%
+8.	Set Relief pressure Volume to match facility Vent (if able)
+9.	Turn the vent dial to VENTILATE
+10.	Place Vent Circuit on pt & monitor Comfort, SPO2,
+ETCO2, VS, & EKG
+11.	P, turn PEEP until it matches facility, typically 5
+Remember to:
+Get a signed Vent form & scan to the computer.
+Monitor, Print, & Import ETCO2 waveform (not just the #)
+frequently throughout transport
+Document VS q 10 minutes (Sooner if Unstable)
+ALWAYS have a BVM available at the pts side
+Always have 2 O2 tanks available during Vent transport to & from the ambulance If problems develop check for:
+Dislodgement  ETT dislodged? Re-confirm capnography
+Obstruction  Suctioning? Kinked? Other Obstructions?
+Patient Assessment  Need for sedation, pain control, etc
+Pneumothorax  Difficult to ventilate? Equal BS? Crepitus?
+Equipment failure  Check O2, Tube placement, batteries, etc
+Pt is Agitated or Decompensate  Remove pt from Vent  Ventilate c BVM  Determine lung compliance while simultaneously checking for causes (DOPE)
+I-gel Supraglottic Airway (SGA)
+PROCEDURE
+Grasp Lubed I-gel.
+Position  I-gel cuff outlet is facing towards the chin of the pt.
+Pt in sniffing position c head extended & neck flexed unless contraindicated
+Gently press chin down a proceeding.
+Place soft tip into mouth in a direction towards the hard palate.
+Glide SGA downwards & backwards along the hard palate c a continuous but gentle push until a definitive resistance is felt.
+If early resistance during insertion  Jaw thrust is recommended
+PEARLS of USE
+Insertion can be achieved in < 5sec
+Sometimes a give-way is felt a the end point resistance is met
+This is due to passage of the bowl through the faucial pillars.
+Important  Continue inserting until definitive resistance is felt
+p insertion & teeth are located on the integral bite block, do not repeatedly push down or apply excessive force during insertion
+Secure c provided hook ring & strap or tape  (Adult Sizes 3, 4 & 5)
+(Pediatric sizes 1.5 & 2)
+Not necessary to insert fingers/thumbs into mouth during insertion
+HME Airway Filter & ETCO2  utilized c I-gel ventilation
+Thermometer: using the Braun ThermoScan
+1.	Lens filter
+2.	Probe
+3.	Lens filter detector
+4.	Lens filter ejector
+5.	Display
+6.	I/O button (On/memory functionIRT 4520 Only)
+7.	ExacTemp light
+8.	Start button
+9.	Battery door
+10.	Protective cover  IRT 4520
+11.	Protective cap  IRT 4020
+Accurate  New/Clean lens filter (1) in place a measurement
+IRT 4020  Push Start button (8)
+IRT 4520  Push I/O button (6)
+Internal self-check
+Last To taken will be displayed together c MEM
+Ready Signal Beep & Ready Symbol in Display
+Fit Probe into Ear Canal
+Push & Release Start button (8)
+If Securely in Ear Canal  Long Beep Signals the end
+The result is shown on display (5)
+ExacTemp light (7) Flashes if securely positioned
+Lights stay on c accurate measurement
+Bad Placement = Sequence of short beeps
+Light goes out & Displays POS = Position Error
+Next Measurement
+ Eject Used Lens Filter (push ejector (4))
+Put on New/Clean lens filter
+Clear Display by pushing Start button once  IRT 4020
+Clear Display by pushing I/O button once  IRT 4520
+Wait for Ready Signal
+Fit Probe Snuggly into Ear Canal
+Push & Release Start button
+GlucometerMcKesson True Metrix Pro
+In 2009, there were 1,579 ambulance crash injuries (2), and most EMS vehicle crashes occur when driving c lights and siren (L&S) (3). When compared c other similar-sized vehicles, ambulance crashes are more often at intersections, more often at traffic signals, and more often c multiple injuries, including 84% involving three or more people (4). From 1996 to 2012, there were 137 civilian fatalities and 228 civilian injuries resulting from fire service vehicle incidents and 64 civilian fatalities and 217 civilian injuries resulting from ambulance incidents. According to the U.S. Fire Administration (USFA), 179 firefighters died as the result of vehicle crashes from 2004 to 2013 (5). The National EMS Memorial Service reports that approximately 97 EMS practitioners were killed in ambulance collisions from 1993 to 2010 in the United States (6). Traffic-related fatality rates for law enforcement officers, firefighters, and EMS practitioners are estimated to be 2.5 to 4.8 times higher than the national average among all occupations (7).
+In a recent survey of 675 EMS practitioners, 7.7% reported being involved in an EMS vehicle crash, c 100% of those occurring in clear weather and while using L&S. 80% reported a broadside strike as the type of MVC (8). Additionally, one survey found estimates of approximately four wake effect collisions (defined as collisions caused by, but not involving the L&S operating emergency vehicle) for q crash involving an emergency vehicle (9).
+For EMS, the purpose of using L&S is to improve patient outcomes by decreasing the time to care at the scene or to arrival at a hospital for additional care, but only a small percentage of medical emergencies have better outcomes from L&S use. Over a dozen studies show that the average time saved c L&S response or transport ranges from 42 seconds to 3.8 minutes. Alternatively, L&S response increases the chance of an EMS vehicle crash by 50% and almost triples the chance of crash during patient transport (11). Emergency vehicle crashes cause delays to care and injuries to patients, EMS practitioners, and the public. These crashes also increase emergency vehicle resource use through the need for additional vehicle responses, have long-lasting effects on the reputation of an emergency organization, and increases stress and anxiety among emergency services personnel.
+Despite these alarming statistics, L&S continue to be used in 74% of EMS responses, and 21.6% of
+EMS transports, c a wide variation in L&S use among agencies and among census districts in the United States (10). Although L&S response is currently common to medical calls, few (6.9%) of these result in a potentially lifesaving intervention by emergency practitioners (12). Some agencies have used an evidence-based or quality improvement approach to reduce their use of L&S during responses to medical calls to 20-33%, s any discernable harmful effect on patient outcome. Additionally, many EMS agencies transport very few patients to the hospital c L&S.
+Emergency medical dispatch (EMD) protocols have been proven to safely and effectively categorize requests for medical response by types of call and level of medical acuity and urgency. Emergency response agencies have successfully used these EMD categorizations to prioritize the calls that justify a L&S response. Physician medical oversight, formal quality improvement programs, and collaboration c responding emergency services agencies to understand outcomes is essential to effective, safe, consistent, and high-quality EMD.
+The sponsoring organizations of this statement believe that the following principles should guide L&S use during emergency vehicle response to medical calls and initiatives to safely decrease the use of L&S when appropriate:
+	The primary mission of the EMS system is to provide out-of-hospital health care, saving lives and improving patient outcomes, when possible, while promoting safety and health in communities. In selected time-sensitive medical conditions, the difference in response time c L&S may improve the patients outcome.   EMS vehicle operations using L&S pose a significant risk to both EMS practitioners and the public. Therefore, during response to emergencies or transport of patients by EMS, L&S should only be used for situations where the time saved by L&S operations is anticipated to be clinically important to a patients outcome. They should not be used when returning to station or posting on stand-by assignments.   Communication centers should use EMD programs developed, maintained, and approved by national standard-setting organizations c structured call triage and call categorization to identify subsets of calls based upon response resources needed and medical urgency of the call. Active physician medical oversight is critical in developing response configurations and modes for these EMD protocols. These programs should be closely monitored by a formal quality assurance (QA) program for accurate use and response outcomes, c such QA programs being in collaboration c the EMS agency physician medical director.   Responding emergency agencies should use response based EMD categories and other local policies to further identify and operationalize the situations where L&S response or transport are clinically justified. Response agencies should use these dispatch categories to prioritize expected L&S response modes. The EMS agency physician medical director and QA programs must be engaged in developing these agency operational policies/guidelines.
+	Emergency response agency leaderships, including physician medical oversight and QA personnel should monitor the rates of use, appropriateness, EMD protocol compliance, and medical outcomes related to L&S use during response and patient transport.
+	Emergency response assignments based upon approved protocols should be developed at the local/department/agency level. A thorough community risk assessment, including risk reduction analysis, should be conducted, and used in conjunction c local physician medical oversight to develop and establish safe response policies.
+	All emergency vehicle operators should successfully complete a robust initial emergency vehicle driver training program, and all operators should have required regular continuing education on emergency vehicle driving and appropriate L&S use.
+	Municipal government leaders should be aware of the increased risk of crashes associated c L&S response to the public, emergency responders, and patients. Service agreements c emergency medical response agencies can mitigate this risk by using tiered response time expectations based upon EMD categorization of calls. Quality care metrics, rather than time metrics, should drive these contract agreements.   Emergency vehicle crashes and near misses should trigger clinical and operational QA reviews. States and provinces should monitor and report on emergency medical vehicle crashes for better understanding of the use and risks of these warning devices.
+	EMS and fire agency leaders should work to understand public perceptions and expectations regarding L&S use. These leaders should work toward improving public education about the risks of L&S use to create safer expectations of the public and government officials.
+In most settings, L&S response or transport saves less than a few minutes during an emergency medical response, and there are few time-sensitive medical emergencies where an immediate intervention or treatment in those minutes is lifesaving. These time-sensitive emergencies can usually be identified through utilization of high-quality dispatcher call prioritization using approved EMD protocols. For many medical calls, a prompt response by EMS practitioners cout L&S provides high-quality patient care cout the risk of L&S-related crashes. EMS care is part of the much broader spectrum of acute health care, and efficiencies in the emergency department, operative, and hospital phases of care can compensate for any minutes lost c non-L&S response or transport.
+Diltiazem Add-Vantage directions for use
+Supplies  Usually includes vial of Diltiazem, Add-Vantage IV
+fluid bag, alcohol wipes, syringe, & an IV set/kit
+Check    Expiration date
+Inspect   Clarity, particulate matter, discoloration, & integrity
+Remove Cap  From vial, exposing central rubber stopper
+Activate IV Solution  Hold IV solution containers base
+ Gently grasp pull ring  Pull up to break tie membrane
+ Then pull back to remove cover
+Connect The Vial to the IV Bag  Screw Vial into Vial Port
+Until it will go no further
+Mix the Medication c the IVF  Hold IV container c one hand
+ Invert vial & push it down into the solution container
+ Grasp inner vial plug through the IV bag & pull the
+inner plug into the IV bag
+Check the mixture  Look
+ Ensure Diltiazem has fully mixed c the IV fluid
+Attach the administration set  Invert the IV bag
+(Administration port pointing up)
+ Pull white administration port cover off & spike bag
+Give Rx  p mixed  Bag provides 1mg/ml
+WARNING  Give Diltiazem SLOWLY over 2min
+Knowledge is a body of info applied directly to the performance of a function.
+Emergency Medical Knowledge = Paramedic Certificate
+Skills = Proficient Physical/Verbal/Mental Manipulation of Data
+or Things (turning data into info)
+Examples of proficient manipulation of things
+Simultaneous use of Laryngoscope Blade & Magill Forceps to
+open an obstructed airway
+Operating a Scoop Stretcher or Stair Chair
+Examples of proficient manipulation of data
+Recognizing 3 seemingly unrelated issues & recognizing them as
+an opiate toxidrome. (unconscious, apnea, & pinpoint pupils)
+Calculating mg/kg of a Rx & properly giving the Rx.
+Skill = Certificate of Completion from the Written/Practical
+portion of the NREMT &/or State License
+Ability = Power to Perform an Observable Activity at the Present
+Time.
+Evidenced through Activities/Behaviors, in real time, similar to
+those required on the job.
+Plan & Organize a driving route to a call
+Manage a stretcher tip-over Incident
+Perform CCR or Manage a Trauma Incident
+Adequate ability c Abbott EMS/MD  Observation in NEOP c
+3rd person rides, PAT, & in-person scenario assessments.
+QA & CQI efforts have revealed the need to assist employees c
+KSA into real-world application.
+We ask all employees to actively engage & participate in the KSA Drills throughout the year.
+EZ-IO Insertion
+Choose Needle Size
+Ensure Needle/Driver set are securely seated
+Control pt movement a/During Needle insertion
+Hold Needle at 90o to Insertion Site
+Gently press needle to bone
+5mm of needle must be visible
+Proximal black line on needle
+Squeeze Trigger & Apply Gentle/Steady/Downward pressure
+ Release Trigger once in bone marrow
+Remove Driver/Stylet
+Confirm Needle Stability
+Aspirate Marrow to Confirm Placement
+Flush c NS to facilitate flow
+Cant Confirm Placement = Try a different site
+P Confirmed  Attach Stabilizer  Attach Primed Tubing
+to Needle  Infuse Emergency Rxs/Fluids
+Pressure bag prn to Infuse Saline/Rxs
+Needle Insertion = Almost Painless
+Fluid/Rx = Very painful if pt is awake & can feel pain
+If pt requires site numbing:
+a.     Remove tubing & Infuse Lidocaine over 60-90sec
+Most Adults Start at 2mL
+b.	   Flush Rapidly c 5-10mL NS
+c.     Infuse Subsequent Lower Doses of Lidocaine over 30sec
+Most Adults  this will be 1mL
+d.     Reattach Tubing & Infuse Rxs/Fluids under pressure
+e.	   Remind pt that pain is  c Lidocaine
+but may not be eliminated
+PUSH-DOSE EPI
+Goal Concentration = 10mcg/mL (1:100,000)
+Waste 1mL from NS Flush  Draw 1mL Epi 1:10,000 back in flush
+Epi Continuous Infusion              .
+Goal Concentration = 4mcg/mL
+Waste 10mL from 250mL NS bag
+Place 10mL 1:10,000 Epi (1mg) into bag
+Using a 60-Drop Micro Drip set
+2mcg/min = 0.5gtts/sec
+4mcg/min = 1gtts/sec
+6mcg/min = 1.5gtts/sec
+8mcg/min = 2gtts/sec
+10mcg/min = 2.5gtts/sec
+12mcg/min = 3gtts/sec
+14mcg/min = 3.5gtts/sec
+16mcg/min = 4gtts/sec
+Mucosal Atomization Device (M.A.D.)
+Procedure
+Aspirate the proper volume of Rx required to Tx the pt
+An Extra 0.1ml should be drawn up to account for dead space
+Twist Off/Remove Syringe from needle(less) device
+Attach Atomizer tip via Luer lock  Twists into place
+Slip Luer is also effective as long as tip is firmly on the syringe tip
+Hold head stable
+ Place tip against nostril aiming slightly up
+& inward towards the top of the opposite ear
+Briskly deliver half of the Rx into the nostril
+Give Rest of Rx in the other Nostril
+Ideal volume per nostril is 0.2-0.3ml to a Max of 1mL per Nostril
+Factors affecting absorption
+-Vasoconstrictors (Afrin nasal spray, cocaine abuse)
+-Obstructions:  Epistaxis, Congestion, Mucous, FBO
+Contraindications
+-Epistaxis, Obstructions, Major Nasal Trauma/Septal Abnormality, Congestion/Discharge
+-Destruction of nasal mucosa from surgery or past cocaine abuse
+Minutes of Oxygen by Cylinder Size
+All based on full 2200 PSI Cylinders
+Flow 		 D Cylinder 		    M Cylinder
+LPM 		Portable 		Ambulance
+5 		64min 			624min
+6 		53min 			520min
+8 		40min 			390min
+10 		32min 			312min
+12 		26min 			260min
+15 		21min 			208min
+20 		16min 			156min
+25 		2min 			124min
+Understanding Ratios, %s, & Solution Mixtures
+Calculations based on water weight
+Water is most dense at 4oC (39.2F)  0.9998395 g/ml  1g/mL
+1:1 = 1g in 1mL = 100g in 100mL
+100% = 100g in 100mL
+X100 = 100g in 100mL
+Real-life applications
+D100 = 100g of Dextrose in 100mL
+D50 = 50g of Dextrose in 100mL
+D10 = 10g of Dextrose in 100mL of solution
+An amp of D50 = 50mL
+There are 25g of Dextrose in an amp of D50
+1:1 = 1g/mL
+1:10 = 1g/10mL
+1:100 = 1g/100mL
+1:1000 = 1g/1000mL      == 1mg/mL
+1:10,000 = 1g/10,000mL   = 0.1mg/mL
+1:100,000 = 1g/100,000mL = 0.01mg/mL = 10mcg/mL
+% Solutions
+100% = 100g/100mL = 1g/1mL
+1% = 1g/100mL
+2% = 2g/100mL
+1% Lidocaine = 1g of Lidocaine in 100mL = 1:100 ratio
+or 1000mg in 100mL
+or 10mg/mL
+VALSALVA, Modified Maneuver
+Vasopressor Mixing Procedure
+Adult Protocols
+Airway/Breathing
+AIRWAY
+Intervention
+Assess Airway open or obstructed?
+Breathing = Evidence the airway is open.
+Stridor = Obstructed.
+Apnea  Use PPV to determine if the airway is open
+Conscious + Complete Airway Obstruction  Use BLS Txs
+OR
+Unconscious + FBAO  Direct Laryngoscopy/Mcgill Forceps
+BREATHING
+Intervention
+Assess Breathing  Apnea, (In)adequacy
+Abnormal Rate + Shallow Depth/Rate + Abnormal Breath Sounds  Provide PPV or CPAP if criteria is met
+If AMV & VSS + No reported volume loss + Pt reports Dyspnea or Cx pn = 2-4LPM O2 by NC If RA SPO2 < 94%
+General Weakness/Dizziness (& Acute Stroke is not suspected) = 2-4LPM O2 by NC
+AMV appears normal + Reported Volume Loss (Hematocrit, or objective sign of distress (BP, HR, pallor, diaphoresis, abnormal BS/RR, etc.))
+= 15L O2 via NRM
+Adjust flow so the Reservoir Collapses Partially Upon Inspiration
+Emphysema/COPD Hx + SPO2 < 90%
+= 2L O2 NC  titrate up (NRM prn) until 90-92% SPO2
+*SPO2 > 92% c these pts can cause Hyperoxia*
+Severely Labored Breathing + O2 (regardless of SPO2)  Give PPV + ET Intubation
+Shortly p ETT placement  Decompress the Stomach
+BRONCHOSPASM
+Labored Breathing OR Wheezing/Diminished Breath Sounds
+(Bronchospasm may be the cause or part of the distress)
+Not all bronchospastic processes will benefit from Albuterol
+Albuterol may Harm pts c  Hyperthyroidism/Cardiovascular Disorders
+Albuterol will not help relieve other causes of dyspnea
+Intervention
+Albuterol 2.5mg in 3cc via Neb    (O2  6L/min)
+Discontinue if  Respiratory Distress, Cx pn, or HR >150
+Use ETCO2
+Decadron 10mg IVP/IM
+2g MgSO4 slow IV drip for Severe Asthmatics or Asthmatics c Intubation Hx
+*Giving Mg too fast can result in Mg toxicity & respiratory/CNS depression
+If this occurs  Ca 1g IV*
+Status Asthmaticus or Severe Bronchoconstriction + pt requires ET Intubation
+= Ketamine 2mg/kg IV  Instead of Etomidate
+Consultation
+If n/c c Albuterol  Epi (1:1000) 0.5mg IM for Severe Asthmatics
+Continuity
+Labored Breathing + Wheezing/Diminished Breath Sounds  Give a 2nd Albuterol Dose or Duo-Neb
+COMA/OD
+BGL >100
+or it was below & the pt remains comatose p giving Dextrose
+Intervention
+High flow O2
+Check SPO2
+BVM prn
+Narcan  2mg IN
+0.4mg IVP
+IM prn
+Consultation
+Discuss possible causes based on pts Hx & current circumstances
+CPAP or BiPAP
+Too ill for NRB, Not ill enough for Intubation (non-invasive PPV)
+Intervention
+Ensure proper Mask Fit/Seal  Start pt on 5cm H2O (CPAP)
+Cant protect their own airway = Airway PSOs
+IFTs  BiPAP or CPAP & confirm settings c RT, R.N, etc
+CPAP  Match Settings  Use CPAP Original Facility Settings
+BiPAP  Please seek consultation a converting to CPAP
+Set  Flow (LPM)    CPAP PEEP Pressure
+6 			2.0 - 3.0
+10 			6.0-7.0
+12 			8.0 - 9.0
+15 			11.0 - 12.0
+If you need >15L  Insert pressure gauge in your circuit & flow until desired pressure is obtained
+Consultation
+A changing a pt from BIPAP to CPAP, consult Med-Control
+If on BiPAP  Start CPAP setting to the Expiratory Pressure
+Example  BiPAP settings of 10 & 5  Set your pressure to 5
+If pt does not seem to tolerate CPAP intervention, discuss:
+1)	Sedation
+2)	Increased or Decreased pressure setting
+SAI
+SAI = Pre-Intubation + Awake or Gag/Bite Reflex or not flaccid
+(SGA prn)
+Rx: Etomidate 0.3mg/kg IVP (max = 40mg)
+*Etomidate is contraindicated  10yo*
+If Status Asthmaticus or Severe Bronchoconstriction or if cant do Etomidate  Ketamine 2mg/kg IV
+*Dont Intubate If fasciculations or trismus p Rx  BVM*
+High-flow O2 via NRM/BVM/Vent & mask prn
+Suction/Intubation Equipment prn & Suction Oropharynx
+Connect Vent (if able) & O2  Set Controls  Have mask ready
+Attach NS bag to IV/IO  Flows briskly + No Extravasation
+Turn on Vent  Partner  good mask seal  pt sedated enough
+When pt is Sedated  Hyperventilate  Intubate  Confirm
+2 failed Intubations = Suction prn  Transport c BVM
+Versed 2.5-5mg IV prn following successful intubation
+Nasal Intubation
+Nasal Intubation = Awake (or not completely apneic) + Cant use ETT/SGA + Unable to quickly Obtain IV Access
+Nasal Intubation 	(use any method)
+ET Intubation
+ET Intubation  Required c
+Newly unresponsive + unable to protect Airway
+(x c Cardiac Arrest)
+OR
+Impaired Consciousness/Breathing & BLS doesnt work
+OR
+Conscious + Needs BVM for few min (or longer)
+Withhold Intubation if Readily Reversible Causes:
+BGL
+Suspected Opioid OD
+Single Seizure  Consciousness Expected to Improve soon
+(Gum Elastic Bougie for ETT placement  Highly encouraged)
+VENTILATOR Pt; Intubated & Sedated
+ParaPAC Vent use:
+For reference  Typical initial settings for an adult is
+FiO2  100%
+PEEP  5cm H2O
+RR  12
+TV  6-8ml/kg (Ideal body weight)
+Transporting Vent Pt  Use the settings that the pt is on.
+Ask RT to assist in matching the settings c the ParaPAC Vent
+Intervention
+Pt is Agitated or Decompensate  Remove pt from Vent  Ventilate c BVM  Determine lung compliance while simultaneously checking for causes (DOPE)
+Dislodgement  ETT dislodged? Re-confirm capnography
+Obstruction  Requires Suctioning? Other Obstructions?
+Pneumothorax  Difficult to ventilate? Equal BS? Crepitus?
+Equipment failure  Check O2, Tube placement, batteries, etc.
+No obvious cause for the Agitation or Decompensation is found
+ Versed 5mg IV/IO  Reassess VS & D.O.P.E
+Consultation
+Pt remains Agitated or Unstable c no obvious cause
+ Discuss Sedation or other potential solutions.
+TRACHEOSTOMY CARE
+Trach Pts in Respiratory Distress
+Assume Trach is Problem  Collect pts Trach Equipment
+Go Bag  Unique emergency equipment to manage Airway
+ Must be c the pt at all times
+Check Airway Patency  DOPE
+Dislodgement  Dislodged Trach Tube?
+Obstruction  Trach require Suctioning?
+Suction depth  No more than 3-6cm in depth
+Instill 2-3mL of NS  A Suctioning
+Max = 10sec/attempt  Pre-Oxygenate between attempts
+Pulm.  Pneumo, Pneumonia, Aspiration, Reactive Airway,
+etc. Difficult to Ventilate? Equal Breath Sounds? Crepitus?
+Equipment  Vent issue, Empty O2 Tank, Tube Kinked, etc.
+Check Tube displacement, batteries, etc.
+If Pt is good c suction, O2, BVM  Monitor
+n/c or Pt Worsens  Emergency Trach Replace/Changeout
+EMS does procedure if Regular Caregiver is not present
+O2 via BVM over mouth/nose unless previous laryngectomy
+Other rescuer  Deflate Trach Tube Cuff if present
+ Hyperextend neck by padding under shoulders
+Prepare new Trach Tube/ETT & one 0.5 size smaller
+ Make sure Tracheostomy ties are untied
+Remove old Tube while other person installs new Tube
+P  Remove Obturator if present
+Attach BVM  O2 & Ventilate pt through new Trach Tube
+New Trach Ties should be secured to avoid dislodgement
+Reinflate Trach tube cuff if present
+Assess RR, lung sounds, SPO2, Capno, color, tone, VS, etc.
+If trouble changing Trach  BVM over mouth/nose or over the stoma  Troubleshoot  Attempt smaller Trach Tube, Cut-&-Size-Match ETT, or other ways to secure Airway.
+Tracheostoma c No/Uncuffed Appliance  Insert ETT just far enough that the cuff is in the Trachea  Auscultate Epigastrium/Lungs  Verify c ETCO2 + waveform  Secure tube  Decompress stomach c NG/OG Tube
+Cricothyrotomy
+Surgical Cricothyrotomy = No FBO + PPV doesnt Inflate Cx (C proper pt positioning) + cant use Rescue Airway Device or
+Tension Pneumo
+Tension Pneumo  PPV difficulty c  JVD or Hyper-Expanded Cx or Tracheal Deviation = Needle-D
+Needle Decompression
+Indications:
+Known or suspected tension pneumothorax as evidenced by blunt thoracic trauma c severe dyspnea c or s subcutaneous emphysema; blunt trauma c profound shock or cardiac arrest; penetrating trauma c severe dyspnea.   Other clinical clues might include: JVD, hypotension, muffled heart tones, diminished/absent breath sounds on affected side.  Tracheal deviation will rarely, if ever, be evident.
+Contraindications:
+Dyspnea that is unlikely to be caused by a tension pneumothorax.
+Procedure:
+Insert a large bore needle of at least 3.25 inch length into the affected hemithorax, 90 degrees
+(perpendicular) to the skin, at the mid-clavicular line of the 2nd intercostal space (typically at the Angle of Louis).  (Remember: the mid-clavicular line is usually more lateral than most people would guess.  Dont be too medial.)  The needle should be inserted over the rib to avoid the neurovascular bundle that runs inferior to the rib margin.
+SGA  Cardiac Arrest = Use 1st
+&  Use P 2 failed ET Intubation Attempts
+P placed  Insert OG/NG Tube into the stomach
+(Via Gastric Decompression Port)
+Suction Airway prn for Suspected aspiration, Pulmonary Edema, or excess secretions
+Look for Thick/Dry Airway Secretions c long-term O2 pts
+(especially c a Trach Pt)
+Or for Aspiration c  ALOC or Stroke Hx pts
+Circulation/Cardiology
+CIRCULATION
+Intervention
+Airway & Breathing are good
+Awake = Palpate Radial pulse
+Unconscious = Palpate Carotid pulse
+If no pulse  Begin CPR + Check EKG Rhythm
+Tx = Cardiac Arrest Protocol & look for Treatable causes
+Obtain IV Access If  Volume, Shock Signs, Any New Deficit, Metabolic Imbalance, New Systemic Complaint, New Uncontrolled pn, or a condition that may require Tx
+Contact Med-Control if a 3rd attempt is needed
+No Immediate IV needed = Attempt IV en route
+Non-Hemorrhagic Volume + Symptomatic or SBP <100
+= 500mL NS Bolus & Reassess  Otherwise Saline Lock
+Authorization for IO Access:
+1st Route  Arrests, Critical pts, or Bad Traumas
+Exsanguinating hemorrhage  Standard attempts fail to stop bleeding  Place TQ proximal to wound
+Do not remove the TQ once placed & bleeding controlled
+Consultation
+Med-Control  Additional IV attempts are needed
+Shock Signs  Discuss IV flow rate, 2nd 500mL bol, & an 2nd IV
+Continuity
+Med-Control  Additional IV attempts needed during transport
+Non-Cardiogenic Shock Signs  1L IVF WO Reassess p
+BP + one IV Established  Discuss for 2nd IV attempt
+Always document the quantity of IVF used
+BRADYCARDIA
+Athletes may have a resting HR in the upper 40s or low 50s
+If bradycardic due to Hypoxia, then  ABCs 1st
+HTN is not an indication to Tx HR
+Intervention
+Bradycardia + serious S/S of poor perfusion
+= Attempt Pacing on scene while establishing IV access
+Pacing Successful + Pt is Uncomfortable = Versed 5mg IV/IO
+Pt Symptomatic p IV Access = Atropine 1mg IVP/IO
+If n/c p 5min  Repeat Atropine
+Transport Immediately p the 2nd Atropine dose
+If symptomatic p 2nd Atropine Dose + NO Hypovolemia  Epi 10mcg IVP (1ml of Push-Dose Epi)  Then 2mcg/min IV Infusion
+Consultation
+Discuss Titrating Epi up by 2mcg/min q min prn
+Max = 16mcg/min
+Always consider Hyperkalemia in Bradycardic pts
+If Hyperkalemia is likely  DO NOT Pace or give Epi (intervene per Hyperkalemia PSO 1st)
+PUSH-DOSE EPI
+Goal Concentration = 10mcg/mL (1:100,000)
+Waste 1mL from NS Flush  Draw 1mL Epi 1:10,000 back in flush
+CARDIOGENIC SHOCK (NON- POST- ARREST)
+Recognized by Pulmonary Edema c Shock Signs &/or BP often c normal HR
+*For cardiogenic shock related to cardiac arrest, see Cardiac Arrest/CCR orders
+Intervention
+Assess airway frequently for PPV needs
+If any chance of concurrent hypovolemia  250cc NS IVF
+Epi 10mcg IVP (1ml of Push-Dose Epi) followed by  2mcg/min IV Infusion
+ Titrate up by 2mcg/min (max = 10mcg/min) BP goal of   90
+Consultation
+Report pt's condition, Tx progress, & any changes.
+LVAD PT
+Intervention
+Transport only to  St. Louis = Barnes-South & Wash-U Medical Center	 (LVAD capable ED)
+(Transport to hospital that placed LVAD)
+Bring  All Batteries, Chargers, & any other devices
+Back-up controller & spare batteries always in pts travel bag
+If able  Bring Power Module, Cable, & Display Module
+All pts should carry a Spare Pump Controller c them
+BP  Hard to obtain c Automatic cuffs due to narrow pulse
+pressure created by the continuous flow pump
+If obtained  MAP is usually accurate
+LVAD flow  Usually NO Palpable Pulse & Inaccurate SPO2
+*Pulseless = cardiac arrest*
+Typical LVAD Flow = 4-6L/min
+Pts usually knows their normal flow rate
+< 4L/min indicates Hypovolemia  Consider IVF
+Low flow Alarm indicates Hypovolemia  Give IVFs
+Typical occurs at flows < 2.5L/min
+Common LVAD Alarm Causes = low flow alarm
+or low Batteries/Battery failures
+*Flow  0.5L/min  Indicates Cardiac Arrest  CPR
+Consult c LVAD coordinator to provide care
+C non-LVAD issues  Obtain Hx/physical
+Tx the cause  Low Volume = Give Volume
+If volume  Give Push-Dose Pressors (Avoid Volume)
+Perfusion Status  Use ETCO2 + Mental Status Assessments
+VF/VT or Asystole/PEA  May be Normal Rhythm
+Do NOT Shock VT/VF if the Pt appears Well-Perfused
+Dont disconnect Controller/Batteries to Defib/Cardiovert/EKG
+Consultation
+Report  Pt's condition, Tx progress, & any changes/problems.
+www.myLVAD.com
+MI or Acute Coronary Syndrome (ACS)
+Pt interview
++ Substernal/Epigastric/Back/Left-Arm Pn/Pressure
++ Relevant Cardiac Hx or Suspicion in Elderly/Dm/Female pts
+Intervention
+Give O2 Starting at 2L NC If  SPO2 < 94%
+Titrate SPO2 To  95-98%
+Rapidly Obtain IV/IO  EKG  Look for dysrhythmias/STEMI
+12-lead EKG should be obtained within 5min of pt contact
+If  STEMI or LBBB + Modified Sgarbossa
+Transport ASAP to nearest STEMI center ED
+Transmit EKG to ED & call to activate Cardiac Cath team
+*12-lead EKG must be in PCR*
+Unless absolutely confident, DO NOT activate Code STEMI for wide QRS/BBB rhythms
+Rx  ASA 324mg PO   Priority Rx given ASAP
+Absolute Contraindications = Anaphylaxis Hx & Active GI bleed
+ASA given prior to EMS arrival, counts
+Document in PCR
+NTG 0.4mg SL if BP >100 or >110 if pt never had NTG
+Repeat prn q 5min for angina (Max = 3 doses)
+Dont Give if ED Rxs within last 48hrs (i.e. Viagra & Cialis)
+NTG is not contraindicated c Inferior STEMI
+Though  May get profoundly BP
+If this occur  Infuse NS until BP >90
+Pts c RV infarctions are preload dependent
+Fentanyl 1mcg/kg slow IVP (over 3-5min) If 
+Pain persists p the 3rd dose of NTG
+or
+Pt in pain & unable to receive NTG
+*Morphine 4mg slow IVP may be used if cant do Fentanyl*
+Consultation
+Discuss additional Fentanyl until the pain is gone
+Continuity
+Repeat NTG q 5min if BP >100 & pain is still present
+PEA or Asystole
+No pulse + EKG rhythm = VF/VT + Not Trauma pt
+If apparent Asystole  Check another lead
+If apparent PEA  Attempt to verify Pulselessness
+Intervention
+Begin CCR protocols     (see VF/pVT PSO)
+Attempt to identify treatable causes
+*Do NOT give Atropine*
+Check BGL
+Begin transport upon ROSC
+or if Appropriate sometime p the 1st 30min of CCR
+(According to algorithm) (whichever comes 1st)
+Consultation
+Report pts condition, Tx progress, & any changes
+Discuss the possibilities of a treatable cause
+Pulmonary Edema
+Intervention
+Rales/Crackles + RR = NTG 0.4mg if BP >100
+or >120 if pt has never had NTG
+HTN Crisis + Flash Pulm-Edema +  IV = NTG 0.4mg SL
+Lasix Diuretic effects may not begin for 10-15min
+Cardiogenic Pulm-Edema = Double the pts daily Lasix Dose
+NTG = Priority Rx due to rapid onset
+Lasix may cause BP or K+
+Consultation
+Flash Pulm-Edema from HTN Crisis = NTG 0.8-1.2mg SL
+Inform Med-Control if an IV is not yet established
+ROSC Stabilization
+Optimize Oxygenation & Ventilation  Avoid Hyperventilation
+Tx SBP < 90 c crystalloids 1st  prn
+2mcg/min Epi Infusion Titrating 2mcg/min q min (Max = 16mcg/min)
+(0.02-0.2mcg/kg/min)
+Obtain & Transmit 12-lead EKG to receiving ED
+If STEMI  Transport to STEMI center
+Symptomatic Tachycardia
+Sinus Tach  p-waves, regular PRI, & HR < 150
+SVT  HR > 150          (exceptions do exist)
+Any doubt  Med-Control
+Intervention
+Sinus-Tach  Tx the underlying problem
+Hyperkalemia (Assume)  HR < 150 + RRWCT (QRS >5mm)
+ *Lidocaine should Not be given*
+ 1g Ca IVP & 50mEq Bicarb IVP (Separate IV/20mL NS
+If QRS Narrows  Repeat Ca & Bicarb (Dont give Lidocaine)
+SVT/Mono-VT + Unstable or Severe Cx pn/Dyspnea  Sync
+& latest cardiac life support protocols
+Pt speaks or is alert  Versed 5mg IVP a Sync
+Sync at  75J/biphasic        (50J for A-flutter)
+If n/c  Sync at  100  200  360J/biphasic
+SVT (Stable Symptomatic)  Vagal
+If n/c  Adenosine 6mg rapid IVP
+(Always get EKG strip during vagal maneuvers or drug pushes)
+If n/c  Adenosine 12mg rapid IVP  If n/c  Repeat
+If Unstable or ALOC (at any time)  Sync
+Adenosine pushes accompanied by nearly simultaneous 10mL flushes
+A-Fib RVR or A-flutter (Stable Symptomatic)  Metoprolol 0.15mg/kg (max = 10mg) slow IVP (over 2min)
+Multifocal Atrial Tachycardia (MAT) (Stable Symptomatic)  (Irregularly irregular tachycardia + different p-waves of)
+No Tx is normally needed (Besides Tx of underlying conditions)
+Evaluation is required  (Poor sign in the setting of acute illness) Discus c Med-Control.
+VT (Assumed)  Stable + Regular + Monomorphic + Wide QRS Tachycardia
+ Lidocaine 1-1.5mg/kg slow IVP over 2-3min
+If n/c p 5min  Lidocaine 0.5-0.75mg/kg (max = 3mg/kg)
+Torsades (Assumed)  Stable + Regular + Polymorphic + Wide QRS Tachycardia
+ 2g Mg IV Infusion over 2min  Then  5mg/min Mg Infusion
+Unstable Mono-VT + pulse  Immediately Sync
+Unstable Poly-VT (Torsades)  Immediately Defib
+Consultation
+Report pts condition, Tx progress, & any changes.
+Discuss any further pre-hospital modalities  Especially if the pt is not responding to Tx
+For stable narrow complex tachycardia, discuss additional adenosine, or metoprolol
+Continuity
+If narrow QRS & condition remains unchanged  Repeat 12mg Adenosine during transport
+If the complex is narrow and the condition remains unchanged, administer diltiazem (Cardizem) 0.25 mg/kg (up to 20 mg) slow IVP over 2 minutes. Should we be using Metoprolol instead of Diltiazem?
+V-FIB or PULSELESS V-TACH
+Adult Non-Trauma Cardiocerebral Resuscitation (CCR)
+Absent pulse & VF/VT & recognized c EKG monitor
+Work pt where they are found (Unless unsafe/Impractical)
+ Minimize CPR Interruptions for rhythm check, shock delivery, Adv Airway insertion, vascular access, or Rx delivery
+Intervention
+Follow CCR algorithm
+Active Airway management
+(BVM/ET intubation, Magill forceps for FBO, SGA, etc.)
+ May Replace c 15L NRB O2 in cases of cardiac arrest that was
+ Unwitnessed/Unk down time, due to trauma, accidental hypothermia, Primary Respiratory Arrest such as  Drowning, Choking, Status Asthmaticus, etc
+If still in VF/VT p 3 consecutive shocks  Resume CPR, charge to 360J & Apply new Replacement Set of pads adjacent & NOT TOUCHING the current pad set
+(Goal = Obtain a different vector of current delivery)
+ Defib at 360j p clearing pt  Resume 2min CPR a rechecking the rhythm & give another dose of Epi 1mg IVP during CPR.
+(Always begin 2min of CPR a rechecking the rhythm between each Defib)
+If still in VF/VT p 4th shock  Resume CPR & prepare for Double Sequential Defibrillation (DSD) procedure
+(if a 2nd defibrillator/AED is available)
+DSD:
+Attach 2nd Defib pad adjacent to & NOT TOUCHING the pad set currently in use = 4 live pads on pt
+Assure Controls, for both cardiac monitors, next to Defib Person
+Charge both cardiac monitors to Max joules (usually 360J each)
+When appropriate  Push Both Shock Buttons (Synchronously as Possible) & Defib at 720J (or max of each defibrillator) p clearing pt
+ Resume 2min CPR a rechecking the rhythm
+*In the event that 1 of the 2 defibrillators is an AED because a standard monitor/defibrillator is unavailable, push the shock button on the AED 1st
+Transport upon ROSC  But p a period of stabilization
+Evaluate for  Transport or Field Termination Of Resuscitation (TOR) p 30min of CCR
+30min mark = Decision Phase, Reassess Progress & Goals
+Consultation
+Report pts condition, Tx progress, & any changes
+Discuss the possibilities of treatable causes
+If pulse has resumed  Request to Give  Lidocaine 2mg/min IV maintenance infusion
+(All joules listed are via biphasic delivery system)
+Medical
+ALLERGIC REACTION
+Not Anaphylaxis
+Allergen Exposure resulting in  Itching/Rash/hives/flushing
+Intervention
+Benadryl 50mg IVP
+(Monitor for anaphylaxis)
+Consultation  Report pt's condition, Tx progress, & any changes
+ANAPHYLAXIS
+Wheezing/Stridor, Airway Swelling, Urticaria or Flushing
+Itching, Dyspnea, Difficulty Swallowing, Nausea, or Weakness.
+Food anaphylaxis  Emesis + Abdominal pn & no Urticaria
+Rx if  Pt meets 1 of 3 Criterion for Anaphylaxis
+Intervention
+0.5mg Epi (1:1000) IM (Lateral Mid-Thigh)  1st Tx
+n/c p 5min or Gets worse or Re-appears  Repeat Epi
+50mg IVP Benadryl p Epi
+10mg Dexamethasone PO/IV/IM
+Consultation  Report pt's condition, Tx progress, & any changes
+Discuss a 3rd Epi dose if S/S persists 5mins p 2nd Epi dose (Should now be long be en route to ED)
+Anaphylaxis Criteria
+Respiratory Compromise = Dyspnea, wheeze-bronchospasm, stridor, hypoxemia
+End-Organ Dysfunction Sx = Hypotonia, Collapse, Syncope, Incontinence
+Skin-Mucosal Tissue = Generalized hives, pruritus or flushing, swollen lips-tongue-uvula
+Anaphylaxis  Highly likely c any 1 of the 3 criteria:
+Criteria 1
+Acute + c Skin-Mucosal Tissue Involvement & Either
+ Respiratory Compromise or BP or End-Organ
+Dysfunction Sxs
+Criteria 2
+ 2 of the Following & Occur Rapidly p Likely Allergen
+Exposure:
+A) Skin-Mucosal Tissue
+B) Respiratory Compromise
+C) BP or End-Organ Dysfunction
+D) Persistent GI Sx (Crampy abdominal pn, emesis)
+Criteria 3
+BP p exposure to a KNOWN allergen:
+Adults = SBP < 90 or > 30%  From Pts Baseline
+CPR Initiation & Termination
+When in doubt, Start CPR
+Do NOT initiate if:
+Decomposition
+Obvious Mortal Wounds (massive burns, destroyed organs, etc)
+Severe Extremity damage alone = mortal wound unless coexistent Injury/Illness
+No evidence of signs of life, Specifically Pupillary Reflexes or Spontaneous Movement
+Valid OOH DNR (Original/Copy/Electronic) or physician (On Scene/Phone) orders no resuscitation
+Certain blunt/penetrating trauma arrests (no RR p BLS airway, no rhythm >40, no signs of life, >20min from arrival)
+Additional Trauma Criteria (unless pt arrests during transport), Do Not Initiate CPR for:
+Blunt Cardiopulmonary Arrest c clear MOI to Head/Torso + No Spontaneous RR p-BLS airway
+Penetrating Cardiopulmonary Arrest c MOI to Head/Torso + No RR p-BLS + No Organized Rhythm >40 + No Life Signs & >20min from 1st ALS arrival if applicable
+OLMC may give time of death
+MO = Barnes-South,     IL = Belleville Mem
+PCR  Incl. OLMC physician name
+Pts <18  Call Childrens for OLMC
+Contact OLMC a stopping & Keep Resuscitating while requesting pronouncement
+Keep doing CPR if needed for special circumstances (hypothermia, Persistent VF/VT, PEA >40, Intubated c ETCO2 >20)
+Transport prn for death in public places or other reasons
+OOH DNR not honored if:
+Pt/Rep Revokes/Destroys Form/Device
+Pt is known Pregnant
+Pt or pts Representative expresses to such personnel in any manner, a or p the onset of Arrest, the desire to be resuscitated
+If there is Confusion  call OLMC
+If a DNR is not honored, doc reason
+Palliative/Supportive care is never withheld
+Honoring a DNR provides legal protection (RSMo 190.606)
+If Valid POA, they decide when pt is Incapacitated
+In the absence of a valid POA, Missouri recognizes surrogate decision makers to make decisions when the pt is incapacitated in the following order:
+Spouse  Adult Child  Parent  Adult Sibling  Grandparent or Adult Grandchild  Next Nearest Adult Relative  Religious Person (pts community member)  Person Unanimously Agreed Upon by those in priority list
+Always rule out a non-traumatic cause in traumatic arrests (e.g. primary V-Fib resulting in a minor car crash)
+DEATH Documentation; body Temp.
+STL City Health Department requires a Body Temp. when the
+Death in city limits during a Heat Advisory/Warning
+Declared by the National Weather Service
+Not required if the body shows signs of decomposition
+Intervention
+Any death declared in St. Louis City during an official heat emergency  Record & document a body Temp.
+Document  Name/Badge # of the officer you gave this Info
+FALL OR WEAKNESS
+Pt unable to get up s assistance
+or New Reported Weakness
+Intervention
+Investigate/Document  Cause of Fall/Weakness
+Any loss of consciousness?
+Does the pt need any form of SMR?
+BP > 90 & pt is capable  Assess Orthostatic VS, BGL, EKG
+Watch for STROKE signs!
+Consultation
+Report pts condition, Tx progress, & any changes
+Continuity
+Immobile & Pressure Sores + Pulseless = Bicarb 1mEq/kg IVP as part of resuscitation process
+Watch for Hyperkalemia S/S
+HYPERGLYCEMIA
+BGL > 300mg/dL + Abnormal Mental Status
+Intervention
+Infuse 1L NS then Recheck BGL
+Consultation
+Report pts condition Including
+ LOC, BGL, Rate/Depth of breathing, & Presence/Absence of Ketones/Dehydration Signs
+Report progress, Discuss options
+HYPOGLYCEMIA / INSULIN SHOCK
+BGL < 90 + Abnormal Mental Status
+Intervention
+Attempt IV  Give 100ml Increments of D10 until BGL >100
+PO glucose if appropriate
+If  IV/PO Dextrose  IO D10
+Consultation
+Report pts condition, Tx progress, & any changes
+Continuity
+3rd IV attempt may be made during transport
+If IV  100ml Increments of D10 until BGL >100
+*10g of Dextrose = 100mL of D10
+Hypoglycemic Pediatric Pts
+< 2 months = 2ml/kg D10
+> 2 months = 3ml/kg D10
+HYPERKALEMIA
+Chronic Renal Failure pts c Sxs
+Cardiac Arrest + Rhabdomyolysis
+Bradycardia c  Peaked T-Waves + Widened/Flat/Absent P-Waves/Conduction blocks or Bizarre/Widened or slightly widened QRS complexes
+Sine-Wave EKG suggests imminent Cardiac Arrest
+Intervention
+Electrolyte Imbalances, Especially K+  IV & EKG monitoring
+Hyperkalemia/Hyperkalemic Cardiac Arrest
+ Ca+ 1g IVP/IO & Bicarb 50mEq IVP/IO
+2 separate IVs or Flush in-between Rxs
+May give  Albuterol 2.5mg Neb p Ca+/Bicarb
+If Unable to Establish IV/IO  Give Albuterol
+Consultation
+Report pts condition, Tx progress, & any changes.
+Continuity
+BP + Wide-QRS Symptomatic Rhythm  Ca+ 1g IVP
+N/V
+Gastric upset/motion sickness
+Pt is conscious & uncomfortable
+N/V may occur c Abdominal/Head Injury, Acidosis, Adrenal Crisis, AMI, Bowel Obstruction, Digitalis OD, Food Allergy, Hepatitis, Ca+, To, Intoxication, Ketoacidosis, Meningitis, Pancreatitis, Peritonitis, Sickle Cell Crisis, Stroke, Toxic Ingestion, or Uremia
+Intervention
+Zofran 4mg IVP over 60sec
+or Droperidol 1.25mg IV
+If no IV  Zofran 8mg PO
+(Zofran/Droperidol may be given IM)
+Consultation
+If N/V continues  Ask Med-Control to give a 2nd dose of either
+Organophosphate or Carbamate Poisoning
+Pesticide exposure c Symptomatic HR or SLUDGEM pt (Assume organophosphate or carbamate (insecticide))
+Intervention
+Protect yourself from exposure
+If able  Decontaminate the pt
+If unable  Request FD to Decon pt a you make contact
+Symptomatic HR = Atropine 2mg IVP/IO
+Repeat prn until secretions dry out
+Give IO/IM if Initial IV attempt is unsuccessful
+If seizures occurs  Versed 5mg IV/IM
+Transport ASAP  Notify ED of possible HazMat situation
+Consultation
+Report pt's condition, Tx progress, & any changes
+Discuss the appropriateness of any further pre-hospital modalities
+Continuity
+Crew Contamination  Decon procedures & change uniform
+PAIN MANAGEMENT
+Pain or Pain S/S
+Intervention
+Rx sickle cell disease
+Rx if  Pt not already on Long-Term pn Rxs
+Choose ONE of the following:
+Fentanyl  1mcg/kg Slow IVP/IM/IN   (Max =150mcg)
+Morphine  2-4mg IVP
+Ketorolac (Toradol)  15mg IV/IM
+Ketamine  0.2mg/kg IV/IN   (Max = 25mg)
+If able  Document pain-scale/VS a & p each dose
+Monitor/Document SPO2, ETCO2, LOC & EKG continuously
+Pain from H/A or Abdominal-pn  Droperidol 2.5mg IV
+*Droperidol is NOT authorized for other types of pain
+Consultation
+Severe pn persists p Rx or NSAID/Opioid Rx is contraindicated  Discuss the appropriateness of repeat dosing
+SEIZURE
+BGL  >100
+or  Seizure continues p D10 is given
+Intervention
+Actively Seizing  Versed 0.1mg/kg IV   (Max = 5mg IV)
+or  10mg IM
+or  0.1mg/kg c MAD (Max = 10mg IN)
+High-flow O2 & EKG
+Manage Airway
+Consultation
+Request repeat dose if  Seizure still active 3min p 1st dose
+SEPSIS
+Due to  Infection
+Recognized by at least 2 of the following 3 acute criteria
+1)	Temp >38C (100.4F)
+or  <36.0 C
+2)	RR >20 or Minute Volume >10L or PaCO2 < 32
+3)	HR >90 s heart disease or Rx/chemical HR
+&
+ETCO2  25
+&
+Infection
+Intervention
+High-flow O2 via NRM & an 2nd large-bore IV
+10cc/kg IV NS in 500cc Boluses 
+          Up to 30cc/kg if BP < 90 or MAP < 65
+Reassess BP & Breath Sounds p each Bolus
+Maximize each IV line infusion
+Pre-alert ED of inbound Sepsis pt
+If Sepsis related Organ Failure evidence  Sepsis Alert
+Renal Failure or AMS or Cardiac Ischemia
+Consultation
+Report pts condition, Tx progress, & any changes
+Discuss Pressor Rx if MAP remains < 65 p 30cc/kg bolus is completed
+Sickle Cell Crisis
+Severe pn similar to previous Crisis + Clear LS + No Heart Failure Hx
+Intervention
+Establish IV  150cc/hr NS Drip
+Encourage PO Fluids if available
+2L/min O2 by NC
+Fentanyl  1mcg/kg  slow IVP      (Max = 150mcg)
+Stroke Centers; Missouri Certified (Greater St. Louis Region)
+Level I
+Barnes-South**
+DePaul**
+Mercy STL
+SLUH
+St. Clare
+Mercy South
+Level II
+Barnes St. Peters
+Christian NE
+Mercy Washington
+MoBap
+Progress West
+SSM St. Josephs (both)
+SSM St. Lukes
+SSM St. Marys
+Level III
+Mercy Jefferson
+**indicates Comprehensive Stroke Center
+STROKE SCALES
+Los Angeles Motor Stroke Scale (LAMS)
+Cincinnati Pre-hospital Stroke Scale
+Suspected Acute STROKE
+Acute  Numbness/Weakness especially on one side, Dizziness + Balance/Coordination, Trouble Speaking/Understanding/Seeing, Vertigo + Double Vision, Severe H/A, Acute AMS, or a Positive Cincinnati Stroke Scale
+Intervention
+Document Exact time of onset or LKW
+Stroke Scale  Facial Droop, Pronator Drift, & Speech Deficit
+*Normal results do not rule out stroke*
+Obtain BGL & LAMS score
+Score  4 suggests large vessel occlusion
+Do NOT give O2 unless  SPO2 < 94%
+EKG & IV
+Using the Info gathered above  Classify your pt as follows:
+Emergent  Immediate life-threatening condition
+Group 1  LAMS  4; ED ETA from LKW < 6hrs
+Group 2  LAMS  3; ED ETA from LKW < 4.5hrs
+Group 3  Out of Therapeutic Window
+LAMS  4; ED ETA from LKW > 6hrs
+LAMS  3; ED ETA from LKW > 4.5hrs
+Emergent  Closest appropriate facility for stabilization
+Group 1  Closest Level I Stroke Center
+If  > 20min  Then Closest Level II or III
+Worst H/A, loss of consciousness + H/A or stiff neck,
+coma, or obvious (Mute + unable to move arm/leg)
+Group 2  Closest Level I, II, or III
+Goal  Appropriate pt Tx within the Tx window
+Group 3: Closest Level I, II, III, or IV
+Call ED ASAP c pt report, ETA Include the following:
+  Facial droop  Does both sides of face move equally?
+  Pronator drift  Do both arms move equally or arm drift?
+  Speech  Pt speaks + uses correct words + no slurring?
+  LKW
+  BGL
+  Any reports of seizure activity?
+  Does the pt take Warfarin (Coumadin, Jantoven)?
+  LAMS score
+C IFTs who have received or are receiving Thrombolytics
+Record VS q 15min or sooner
+Diligently Monitor Neuro Status
+Look for Cerebral Hemorrhage Signs
+(Acute H/A, Emesis, or Mental Status)
+Pt decompensates  Stop thrombolytic if applicable
+& Manage pts emergent needs
+Notify ED of Status Change
+Continuity
+Improvement or Deterioration in Mental Status/Neuro exam?
+ Impacts Tx decisions in ED
+Continue Reassessing ABCs
+TOXIC INGESTION
+Poisoning/Drug OD (Accidental or Intentional) + Potential for harm
+Intervention
+Scene Safety  Toxin in environment? Violent pt?
+Obtain Info on the ingestion + Type/Time-of-ingestion/Amount
+Consider possibility of multiple ingestions
+Variety/Quantity of intentional ingestions may be underreported
+Attempt to collect all Rx bottles on scene for the ED
+Consultation
+Contact Med-Control ASAP during transport
+(even if the above is not yet complete)
+Discuss drug therapies that may be helpful for specific ingestions
+Continuity
+These therapies may be beneficial if serious S/S are present:
+Ca+/Beta-Blocker OD c HR  Ca 1g slow IVP
+Haloperidol use c Acute Extrapyramidal Reaction  Benadryl 50mg IM/IVP
+Plant Ingestion c HR  Atropine 2mg IVP repeat prn
+Tricyclic Antidepressant OD + wide-QRS rhythm + BP or pulseless  Bicarb 1mEq/kg IVP
+(Several doses may be required)
+VIOLENT/COMBATIVE PT  RASS +4
+RASS +4 often exhibit the following Behaviors/Hx (PRIORITY)
+	Psychological Issues/Psych Hx
+	Recent substance use (drugs/alcohol)
+	Incoherent Speech/Thought processing
+	Off c clothing (stripping naked or taking clothes off)
+	Resistant to Negotiations/Redirection/Restraint,
+Police/EMS Presence
+	Anger towards Shiny Items/Objects/Reflections
+	Almost Super-Human Strength
+	Yelling or Screaming Incoherently
+RASS +4 can be Life-Threatening (due to ongoing metabolic injury)  Can lead to cardiac arrest
+Intervention
+Try to rule out Medical/Trauma causes of Agitation/Violence
+BGL/Hypoxia may cause RASS +4  Obtain BGL if able
+If the pt cannot be calmed & continues to be RASS +4
+ Ketamine 4mg/kg IM (>65yo = 2mg/kg) (all  max = 500mg IM)
+Document RASS q 5min
+Physically restrain as Reasonably/Safely as possible  Avoid measures that may Impact/Inhibit pts ability to breathe. PD prn
+Restraint procedures should follow National Association of EMS Physicians (see Appendix)
+Suspected/Known Hyperthermic  Ice Pack Axilla, Groin, & Neck to To. If able  Obtain IV access & Infuse 1000mL NS
+Watch for  Signs of Acidosis or Respiratory Compromise, monitor SpO2/ETCO2 continuously as possible
+Look for Hyperkalemia If possible  Obtain 12-Lead & Tx accordingly (Peaked T-Waves or widened QRS)
+Give high flow O2 if unable to confirm adequate SPO2
+Consultation
+If more sedation needed  Consult to give Versed 5mg IV/IM/IN
+RASS +1, +2, or +3    Agitated/Anxious Pt
+Caution c  OBS call or EDP (Emotionally Disturbed Person)
+ Request PD prn   Ensure the scene is safe prior to your encounter c a violent pt
+Intervention
+Attempt to rule out Medical/Trauma causes of Agitation/Violence
+Obtain BGL if possible
+Try to talk down an Agitated/Anxious pt
+Do Not be Confrontational or Reflect Hostility back at pt
+If these methods Fail & Safety is in question  Then Rx:
+RASS +1 = Versed 0.02mg/kg IV (single Max dose = 2.5mg IV or 5mg IM)
+or  Droperidol 5mg IM
+RASS +2, +3 = Droperidol 10mg IM, may repeat once in 10min
+Pts > 65yo  Droperidol 5mg IM
+Document RASS q 5min
+Watch for respiratory compromise & monitor SpO2 & ETCO2 continuously as possible
+OB/GYN
+Delivery OOH/Pre-eclampsia/Eclampsia
+Normal Delivery
+Precipitous births = Morbidity/Mortality Risks
+Make q attempt to get pt to a hospital prior to delivery.
+Intervention
+Pertinent Hx  Gravida, Para, Abortions, due date
+Delivery Not Imminent = Left Lateral Recumbent Position, High-flow O2, monitor for crowning or signs of imminent delivery
+If delivery is imminent:
+Assemble OB kit  Sterile techniques (if possible)
+Support perineum (avoid episiotomy)
+Control delivery of head  Do Not Delay delivery
+Suction mouth  Nose, c bulb syringe
+ONLY prn (not part of routine care)
+Nuchal Cord  gently slip overhead
+If unable  Clamp & Cut
+Deliver Anterior then Posterior shoulder
+Keep Infant level c perineum
+Dry c towel & wrap in blanket
+Record APGAR  Resuscitate prn
+Stimulation/Warming/Blow-by O2 = 1st
+2 Clamps  8-10inches between stomach & 1st clamp 
+Cut between the clamps
+Transport now  Do not wait for placenta delivery.
+If placenta delivers  Bring to the ED (NO PULLING)
+Complicated Delivery
+Manage any complications as follows while initiating immediate transport:
+Shoulder Dystocia  Transport/Notify ED ASAP
+ Place Mom on 12-15LPM O2 via NRM
+McRoberts Maneuver  Hyperflex Hips
+ Severe Supine,  Knee-Cx position
+Apply firm Suprapubic Pressure to attempt to dislodge shoulder
+Breech  Abnormal part Presents (foot, arm, buttocks, etc.)  Transport/Notify ED ASAP. Place Mom on 12-15LPM O2 via NRM
+Dont pull baby  When level to umbilicus  Keep babys sacrum parallel to the ceiling if possible
+Frank/Complete Breech presentation
+You may assist freeing the legs  then arms once the
+baby is out level to the shoulders
+All but head delivered  Keep butt parallel to the ceiling
+C baby resting on your hand & forearm 
+Insert index & middle fingers into the birth canal to
+rest upon the fetal maxilla (Helps flexion the head) Avoid placing fingers into the mouth or pushing the neck hard (tears may occur).
+EMT may place firm, downward pressure suprapubically
+(not on fundus) (promotes head flexion & getting
+head under the pubic symphysis)
+Hook 2 fingers from other hand on both sides of neck  Grasp shoulders & apply downward traction until the subocciput appears beneath the pubic symphysis. Elevates baby toward moms belly
+Keep its head flexed c delivery (mouth, nose, & occiput) & beyond the perineum.
+Keep baby warm  Clamp & Cut cord as above.
+Prolapsed Cord  Transport, call ED ASAP, &
+Give 12-15LPM O2 via NRM.
+Elevate Moms hips to knee-chest position
+(McRoberts Maneuver)
+Gently push baby up vagina several inches 
+maintain position into ED (Keep pressure off cord)
+Eclampsia  Protect pt from injury during seizure if present
+Monitor SPO2 & Airway
+12-15LPM O2 via NRM
+Begin Mg 4g slow IVP (over 3-5min) in NS
+Pushing Mg too fast can result in Mg toxicity
+Mg OD = Ca 1g IV
+Start an IV piggy back drip  Mg 1-2g/hr
+BP Diagnostic criteria  Pre-Eclampsia
+	SBP  140 or DBP  90 on 2 occasions & at least 4hrs apart p 20 weeks of gestation in a woman c a previously normal BP
+	SBP  160 or DBP  110
+Severe HTN can be confirmed within minutes to facilitate timely antihypertensive therapy
+&
+Protein in urine
+Or  in the absence of proteinuria:
+New-onset HTN c  New onset of any of the following:
+	Platelet count <100
+Impaired Liver Function
+	Pulmonary Edema
+ 	New-onset H/A unresponsive to Rxs & Not Accounted
+for by other Dx/Visual Sx
+Consultation
+Report progress & any problems encountered.
+Trauma
+Riot Control (Incapacitating Agent)
+CS/CN/OC
+AKA  Tear Gas, Mace, Pepper Spray, or Bear Repellant, etc.
+or similar Riot Control agents
+c/o  Skin burning, Lacrimation, Eyelid Twitching/Spasm, Sneezing, &/or coughing
+Intervention
+BSI & Be cautious of Contact Exposure
+Remove Contaminated Clothing/Belongings
+Expose Affected Tissues/Mucous membranes to air as feasible
+Then Irrigate it c water/NS
+Try not to Contaminate unaffected parts
+Assess Airway
+To Hasten Recovery  Consider washing exposed parts c baby shampoo or similar non-irritating cleanser followed by copious irrigation
+Consultation
+Report pts condition, Tx progress, & any changes
+Spinal Motion Restriction (SMR)
+Should be considered in any trauma pt.
+If SMR is indicated  use C-Collar & stretcher
+We do not use backboards for SMR
+TASER  p-deployment
+Intervention
+Evaluate  Medical/Trauma/Toxic/Psych Issues, what attracted LE, & why was TASER needed  Stabilize Accordingly
+If RASS +4 criteria, refer to that Standing Order
+12-Lead If  Concerns for Cx Trauma, Dysrhythmia, Toxic/Metabolic abnormality, or ACS
+Do Not remove TASER barbs located in  Head/Neck, Hands, Feet, or Genitalia
+Do NOT remove barbs that were deployed by the TASER 7   Requires a special barb removal tool
+Other barbs removed at crew/LE discretion
+To remove  Stabilize skin around barb & pull out rapidly
+A Sharping  Ask PD if barbs are needed for evidence
+Barbs are treated as contaminated biohazard sharp
+IF LE wants to keep pt:
+ Advise of Non-Transport risks + In-Custody Death
+ Have Custodial Officer sign Refusal Form
+TRAUMA  Major (Level 1)
+Trauma c  1 of the following:
+GCS<14, SBP <105, RR <10 or >20, Airway Compromise, Breathing Difficulty, shock (or Shock Index of 0.9), AMS, Exsanguinating Hemorrhage,
+Penetrating Injury (to head/neck/t-shirt area/boxer shorts area),
+>20% BSA burns,
+>2 long bone Fx, Limb Amputation, or Cardiac Arrest
+Intervention
+Tx Exsanguinating Hemorrhage = 1st priority
+Make 1 Intubation Attempt if indicated on scene
+ Further attempts during transport
+Consider making no IV attempts on scene
+Txs done on scene = Those required a moving pt (including SMR)
+or Procedure Expected to quickly cause a Dramatic Improvement
+(such as Bilateral Needle-D)
+Major Trauma Pt Level 1  Handle appropriately
+ Transport ASAP c scene time of 10min to closest ED
+Head injury pts + Needs ETT = Dont Hyperventilated unless
+ Clear Signs of active herniation  Newly Fixed & Dilated Pupil, Cushings Reflex, or Posturing
+Ventilate c 100% O2 at 20-24LPM
+ Dont Allow <30 ETCO2 or <94% SPO2
+All efforts made to avoid CO2, O2, & BP in Head Injury pt
+Major Trauma + BP  105 (110 if >65yo) = Nearest Trauma ED
+Major Trauma + Shock Index (SI)  0.9 = Nearest Trauma ED
+SI = (HR/SBP)
+Allow for permissive BP (SBP < 90)
+Only if pt is awake & Answers questions appropriately
+If BP < 90 c significant head injury or pt not alert
+ Give Infusions to maintain 100-110 BP
+Traumatic Arrest???????
+Refusals
+Consent & Refusal
+ 18yo + Competent + Present Mental Capacity
+ May Consent/Refuse Evaluation/Tx/Transport & can AMA
+p giving Refusal Risks, Alternatives, & Actions to take if Conditions Persist/Worsen & ensure they understand them.
++ No SI/HI     If in Doubt/Conflict  OLMC
+Present mental capacity  Assessed by EMS
+Understand/Appreciate Consequences & make rational choices
+Offer Evaluation/Tx for those who cant decide
+If able to consent  Respect pts choice
+Red Flags  Head Injury + GCS, Hypoxia, BP, Abnormal Thoughts/Behavior, Noticeably Impaired
+Lacks Capacity + Implied Consent doesnt apply  call OLMC
+Document Mental Status findings (not just conclusions)
+Consent/Refuse Assessment  Rational Responses, & ability to Apply Given Info
+LOC: Avoid Sternal Rub, May use Mild Noxious Stimuli
+(Ammonia Inhalant, Fingernail Pressure)
+Orientation: A&OX4?
+Registration: Pt repeats 3 Unrelated Words & ask pt to recall later
+Attention/Calculation: Spell 5-letter word backward
+or subtract 7s from 100
+Recall: Pt recalls those 3 items.
+Language: Pt Repeats Short Phrase or Follows Simple Command
+[Pts c Impaired Capacity may be treated under Implied Consent. If legal Competency/Capacity is Lacking & Implied consent doesnt apply, Contact OLMC for orders & transport for further eval]These two sentences contradict each other.....................
+Competency  presumed unless already declared otherwise
+Legal term only a Judge can Declare
+ Minimum Cognitive/Behavioral Ability needed to Perform a legal Act or assume some Legal Role
+Incompetent  Guardian decides Consent/Refusal
+3 Forms of Consent
+Informed  Aware/Understands the Risks/Benefits & consequences of refusing
+Implied  Pt Cant communicate because of an MOI/NOI
+or Unconscious + Life-Threat or AMS or Minor + Possible Life-Threat + No Consenting adults present.
+Substituted: When Someone Else Legally Consents for
+ Minors, Incapacitated/Incarcerated, or Legally Incompetent pts
+Property Owner/Pt may deny entry to Land/Home if no Immediate Life Threat
+Refusals & Suicidal Pts
+Suicidal Pts  May have taken Substance/Toxin a EMS Arrival.
+Pts should be Medically Evaluated/Monitored en route ED.
+Med-Control okays Refusal  Document on CIR & leave scene
+Call OLMC if Transporting Against the pts will
+Document Findings/pts mental Status/Comprehension
+Physical Force  MO Chapter 563.061, paragraph 4, of the Revised Statutes of Missouri (RSMo 563.061)
+A Physician or EMS at his direction, can use physical force in an
+Emergency Situation, c a medically acceptable form of pt Tx,
+for the pts Physical/Mental Health.
+ Force is justified c reasonable belief that the pt is about to
+Commit Suicide or Inflict serious physical self-harm.
+Likelihood of serious harm  RSMo Chapter 632.005, paragraph 10
+ Recent Threats/Verbal Threats/self-Harm/Suicide Attempts
+Evidence of Substantial Risk  Also includes pt behavior Hx
+that had resulted in serious pt self-harm.
+96hr-Hold Affidavit RSMo Chapter 632.305.1
+ Any adult on behalf of a respondent c a mental
+health disorder that may cause serious harm to Self/Others
+ May Allege under oath/Writing, s notarization, to apply for
+Mental Health Detention
+Suicidality Entails Brain Chemistry/Physiology Changes, Usually
+from a stressor & may show as various chemical imbalances
+Occurs When Stress Induces Psych-Pain so Unbearable that
+Death is seen as the only relief.
+A this point = Suicidal Risk
+P Expressing SI = Risk of Completing Suicide
+Becoming Suicidal = Crisis = Traumatic stress
+Suicidal Pts  Dont qualify for Certificate of Informed Refusal
+If they want to refuse transport  Contact Med-Control
+If no receiving ED Identified, then Abbott Policy P000145
+ Contact Memorial Belleville in IL & Barnes-South in STL
+Suicidal Pt Refuses Transport + Med-Control Orders Transport
+ Document as provided for on CIR & Attempt to Convince
+pt to go to the ED
+Peace Officer Chapter 192.2465, Chapter 632.440, Abbott Policy P528855, RSMo Section 632.305
+PO can Transport/Arrange Transport for a pt c
+imminent likelihood of serious harm.
+Gives the PO Immunity from civil liability as long as he
+is acting in good faith & s gross negligence.
+Physically Resists Transport + Crew threat = Request LE
+Inform PO  Pts Condition, ED Order, & the need to
+Restrain/Assist c transporting pt to ED
+If PO Refuses  Document Request, POs
+Name/Badge #, Risks/Benefits, & Obtain PO Refusal.
+Have that officer sign the CIR as Substituted Consent.
+EMS leaves scene s pt.
+Pediatric Protocols
+Pediatric VS
+Low SBP Pediatric
+Low SBP for children
+1month-1yo  =  <70
+1-10yo        =  <(70 + [2 x age])
+11-17yo     =  <90
+Pediatric Initial pt Assessment
+A length-based resuscitation tape is recommended to help EMS personnel quickly determine appropriate equipment size, normal VS, & correct Rx dosages
+1)	Ensure scene safety.
+2)	Perform  Scene Survey (to assess environmental conditions & MOI/NOI) If hazardous conditions
+(swift water, hazardous materials, electrical hazard, or confined space)  Have specialist secure scene & pt
+3) 	Form a 1st impression of the pts condition.
+4) 	Standard Precautions.
+5)	Establish pt responsiveness. If C-Spine trauma is suspected  Manual Stabilization.
+6)	Pts airway patent? Protective Reflexes? Advanced Airway prn. Airway obstruction?
+7)	Open Airway  Head Tilt/Chin Lift (no spinal trauma)  Jaw Thrust (spinal trauma is suspected)
+8)	Suction prn
+9)	Consider OPA or NPA airway adjunct (Unable to maintain Airway c positioning + pt is unconscious)
+10)	Assess Breathing  Rate, Sound, Look, Effort, & adequacy of ventilation. Obtain SPO2
+11)	If Cx rise indicates Inadequate Ventilation  Reposition Airway & reassess.
+12)	If Inadequate Cx rise is noted p Repositioning Airway  Suspect a FBO in Airway.
+13)	Assess for signs of airway compromise & respiratory distress, failure, or arrest.
+If present  Refer to the Airway & Breathing protocols
+14)	Airway Patent + Good Breathing  Place pt in position of comfort & give 100% high-
+flow O2 prn. 	Use a NRM or blow-by as tolerated
+15)	Control hemorrhage  Direct Pressure (or pressure dressing)
+Exsanguinating Hemorrhage = TQ
+16)	Assess Circulation & Perfusion by  HR & Observing skin color & temperature, Cap-
+Refill-Time, & the quality of Central/Peripheral pulses. BP should be measured only in
+children >3yo.  Cardiac Monitoring. Refer to the Circulation/Shock protocol.
+17)	Evaluate Mental Status (Including  Pupillary reaction, distal function & sensation, & AVPU)
+18)	Suspected Spinal Trauma  Continue Manual Stabilization  C-Collar & begin SMR
+(using a long spine board or similar device)
+19)	Expose child only prn for assessments while maintaining body temperature throughout exam
+20)	Critical/Unstable pt  Transport ASAP  Focused Hx & detailed physical en route if able.
+21)	Stable pt  Perform focused Hx & detailed physical on scene  Then transport.
+22)	Reassess the pt frequently.
+23)	Contact Med-Control for additional instructions prn.
+Airway & Breathing
+AIRWAY
+Pediatric Airway Identified as:
+Clear
+Or  Maintainable c repositioning
+Or  Unmaintainable s foreign body removal or active airway management.
+Intervention
+Assess Airway open or obstructed?
+Breathing = Evidence the airway is open.
+Stridor = Obstructed.
+Apnea  Use PPV to determine if the airway is open
+[Conscious + Complete Airway Obstruction  Use BLS Txs
+OR
+Unconscious + FBAO  Direct Laryngoscopy/Mcgill Forceps] Does this need to be in here???
+Basic airway maneuvers Used to open & maintain Pediatric Airway
+OPA/NPA placement
+Or  Neutral, in-line positioning (Head, neck & shoulders)
+Or  Anterior displacement of chin/Jaw to open mouth
+Remove Foreign bodies if present
+Do not attempt nasotracheal intubation of the pediatric pt
+Withhold Intubation if Readily Reversible Causes:
+BGL
+Suspected Opioid OD
+Single Seizure  Consciousness Expected to Improve soon
+[(Gum Elastic Bougie for ETT placement  Highly encouraged) ]
+Perform ET Intubation  Cannot maintain the Airway
+Consider giving Rx to aid c intubation as permitted by Med-Control
+Confirm placement of ETT c Assessments & ETCO2 monitoring.
+ET intubation should be considered in pts 8yo if:
+1)	Newly unconscious + c/s a gag reflex
+2)	Conscious + Impaired Breathing
+3)	Conscious + Requires PPV for a few min or more
+Examples of Emergencies that may benefit from intubation:
+Respiratory distress not quickly reversed using lesser measures
+or responsive only to pain
+Coma/Unconsciousness c inability to maintain airway
+Status epilepticus
+Head trauma
+Shock c severely impaired consciousness
+SGA  Cardiac Arrest = Use 1st
+SGA if  Difficult Intubation is Anticipated
+or p Use P 2 failed ET Intubation Attempts
+P placed  Insert OG/NG Tube into the stomach
+(Via Gastric Decompression Port)
+SAI = Pre-Intubation + Awake or Gag/Bite Reflex or not flaccid
+(SGA prn)
+Steps:
+High-flow O2 via NRM/BVM/Vent & mask prn
+SGA available prn if child is >5kg or 11lbs
+Neonates <5kg should receive BVM
+Suction/Intubation Equipment prn & Suction Oropharynx
+Connect Vent (if able) & O2  Set Controls  Have mask ready
+Attach NS bag to IV/IO  Flows briskly + No Extravasation
+Sedate c Ketamine 2mg/kg IV
+Ketamine 1mg/kg IV  If BP s Cardiogenic Shock
+Ketamine 0.5mg/kg IV  c Cardiogenic Shock
+*Dont Intubate If fasciculations or trismus p Rx  BVM*
+Turn on Vent  Partner  good mask seal  pt sedated enough
+When pt is Sedated  Hyperventilate  Intubate  Confirm
+2 failed Intubations = Suction prn  Transport c BVM
+Versed 0.1mg/kg IV prn p successful intubation Max = 5mg
+Confirm c Auscultation of the Epigastrium & lungs
+Verify c ETCO2 & document waveform
+Tension Pneumo  PPV difficulty c  JVD or Hyper-Expanded Cx or Tracheal Deviation = Needle-D
+[ Tracheostoma c No/Uncuffed Appliance  Insert ETT just far enough that the cuff is in the Trachea  Auscultate Epigastrium/Lungs  Verify c ETCO2 + waveform  Secure tube  Decompress stomach c NG/OG Tube
+Pts c tracheostoma:  See Special Health Care Needs Standing Order, page 194. ]
+Suction Airway prn for Suspected aspiration, Pulmonary Edema, or excess secretions
+Look for Thick/Dry Airway Secretions c long-term O2 pts
+(especially c a Trach Pt)
+Or for Aspiration c  ALOC or Stroke Hx pts
+Meconium c newborn  Suction mouth, nose & manage airway prn
+*Avoid using Meconium Aspirator Adaptor & ETT to perform Tracheal Suctioning as previously recommended
+Consultation
+Discuss ET Intubation in pts < 8yo c Med-Control
+Pediatric field Intubation is no longer considered standard of care & EMS may elect to transport using adjunctive airway measures rather than calling in for Intubation orders
+P the SGA is placed  Decompress the stomach c OG tube
+Cricothyrotomy shouldnt be performed on any child < 12yo
+Surgical Cricothyrotomy = No FBO + PPV doesnt Inflate Cx (C proper pt positioning) + cant use Rescue Airway Device	(use any method)
+Then Access the trachea through the cricothyroid membrane
+BREATHING / Respiratory Failure
+RR + Effort, BS (air entry) & skin color will be assessed as measures of O2 & ventilation.
+A RR >60 or <10 suggest respiratory distress or failure
+Accessory muscles  supraclavicular/intercostal, subcostal/sternal retractions, along c grunting/nasal flaring, are signs of work of breathing
+Auscultation of BS provides a sense of tidal volume
+Pale, mottled, or blue skin color suggests respiratory failure
+Normal RR (breaths/min)
+Age 	 	 	  	Rate
+Infant (< 1yo) 	 	            30-60
+Toddler (1-3yo) 	 	 	24-40
+Preschooler (4-5yo) 	 	 	22-34
+School-age Child (6-12yo) 	 	18-30
+Adolescent (13-18yo) 	 	 	12-16
+Intervention
+No RR or inadequate breathing  BVM c high-flow, 100% O2
+If abdominal distention arises  Consider placing a NG Tube
+BRONCHOSPASM
+If breathing is Labored/Diminished or pt has Stridor/Wheezing, Bronchospasm may be the cause or part of the distress.
+Not all bronchospastic processes will benefit from albuterol
+Intervention
+albuterol may help c bronchospasm but not c other dyspnea causes
+Unless contraindicated, Give 1 dose Albuterol
+Discontinue if the pt experiences Respiratory distress, or Cx pain
+1)	Albuterol 2.5mg in 3cc via Neb c 6LPM O2
+2)	Dexamethasone 0.6 mg/kg PO/IV/IM
+Consultation
+Report pts condition, Tx progress, & any changes.
+Discuss giving Epi 1:1000 0.3mg IM
+Discuss giving Mg slow IV drip for severe asthmatics or those c prior Intubation Hx for asthma.
+Only for >2yo who have had Beta Agonists & steroid therapy
+Mg 40mg/kg diluted c NS to a concentration of 100mg/ml
+Infuse over 20min c rate not to exceed 150mg/min (Max = 2g)
+Contraindications for Mg:
+1)	Acute Pulm-Disease besides asthma (foreign body
+aspiration, croup, bronchiolitis, lobar pneumonia, etc)
+2)	Chronic Pulm-Disease besides asthma (cystic fibrosis,
+broncho-pulmonary dysplasia, Pulm-HTN, sickle cell
+disease, etc)
+3)	Congenital heart disease
+4)	Renal/hepatic disease
+5)	Pregnancy
+6)	Hypocalcemia
+7)	Muscle Dx  Myasthenia Gravis, muscular dystrophy, etc
+Continuity
+If breathing is labored & BS are Wheezing/Diminished, give a 2nd dose of albuterol. Refer to dosing as above
+Brief Resolved Unexplained Event (BRUE)
+Formerly  Apparent Life-Threatening Event (ALTE)
+BRUE  Events lasting <1min in <1yo that are associated c
+1 of the following:
+	Absent, , or Irregular Breathing
+	Cyanosis/Pallor
+	Altered level of Responsiveness
+	Marked change in Muscle Tone (hypertonia or hypotonia)
++
+Must appear well & be back at baseline by the time EMS arrives on scene p the initial event.
+Infants who are febrile, coughing, or showing any signs of distress or other abnormalities are not considered to have BRUE!
+Intervention
+Obtain Hx of events to ensure inclusion criteria are met.
+If not  Proceed to most appropriate Standing Order.
+Have a high index of suspicion for:
+	GERD or Dysphagia associated c laryngospasm/aspiration
+	Neurologic Dx (seizures, breath holding, hydrocephalus,
+brain malformations)
+	Respiratory Infections (RSV, Flu, pertussis)
+	Infectious  Sepsis, meningitis
+	Cardiac/Metabolic, Airway abnormalities, Rxs,
+Anaphylaxis, Abuse, etc
+Because BRUE is a Dx of exclusion, all caregivers Must be strongly advised that ED evaluation is necessary
+Consultation
+Call Med-Control if Parent/Guardian refusing transport
+CONTINUOUS POSITIVE AIRWAY PRESSURE (CPAP)
+Too ill for NRB, Not ill enough for Intubation (non-invasive PPV)
+Intervention
+Ensure proper Mask Fit/Seal  Start pt on 5cm H2O (CPAP)
+Cant protect their own airway = Airway PSOs
+IFTs  BiPAP or CPAP & confirm settings c RT, R.N, etc
+CPAP  Match Settings  Use CPAP Original Facility Settings
+BiPAP  Please seek consultation a converting to CPAP
+Set  Flow (LPM)    CPAP PEEP Pressure
+6 			2.0 - 3.0
+10 			6.0-7.0
+12 			8.0 - 9.0
+15 			11.0 - 12.0
+If you need >15L  Insert pressure gauge in your circuit & flow until desired pressure is obtained
+Consultation
+A changing a pt from BIPAP to CPAP, consult Med-Control
+A child must have spontaneous respiratory drive & good respiratory effort for CPAP to be effective.
+If on BiPAP  Start CPAP setting to the Expiratory Pressure
+Example  BiPAP settings of 10 & 5  Set your pressure to 5
+If pt does not seem to tolerate CPAP intervention, discuss:
+1)	Sedation
+2)	Increased or Decreased pressure setting
+CPAP Set-up: FlowSafe II System
+BiPAP Set-up: FlowSafe II System
+Directions For Providing CPAP:
+Set CPAP Mode-Green Switch to CPAP
+Connect O2 tubing to gas source & Turn on O2
+Secure face mask to pts face c head harness
+Slowly gas flow to 6-8LPM
+Check mask fit & for leaks
+Adjust flowmeter until desired pressure is obtained
+Flow of 12-14LPM is required to reach CPAP pressure of 8.5-10
+Directions For Providing BiLevel:
+Ensure device set to BiLevel mode by rotating Green switch
+Connect O2 tubing nipple to gas source & Turn on
+Secure face mask to pts face c head harness
+Slowly gas flow to reach  8 IPAP
+8 IPAP = Min IPAP pressure required for device to function
+properly in the BiLevel mode
+Check mask fit & for leaks
+Adjust flowmeter until desired IPAP pressure is obtained
+Flow of 17LPM is required to reach Max IPAP pressure of 12-13
+To EPAP pressure rotate EPAP knob counterclockwise
+To EPAP pressure rotate EPAP knob clockwise
+Effective mask seal required to shift from IPAP  EPAP mode
+Circulation/Cardiac
+CIRCULATION / Shock
+Shock Present if perfusion is inadequate for tissue demands
+Perfusion info through HR & quality, LOC, Cap-Refill, extremity To, skin color, urine output & BP
+HR may be associated c shock
+HR provides inadequate CO & is an ominous finding
+Pulse quality reflects cardiac output.
+Compare HR quality at proximal & distal sites &
+Compare skin To at the trunk c To at an extremity to judge peripheral perfusion
+Check Cap-Refill c the hand elevated slightly above the heart
+Normal Range by Age:
+Age 	             Awake HR 	        Mean  	        Sleeping HR
+0-3months 	       85-205 	         140 	            80-160
+3months-2yo	     100-190 	         130 	 	75-160
+2-10yo 	                   60-140 	           80 	 	  60-90
+>10yo 	 	       60-100 	           75 	 	  50-90
+BP
+1)	Typical SBP for 1-10yo: 90 + (age in years x2)
+2)	Lower limits of SBP for 1-10yo: 70 + (age in years x2)
+3)	Lower range of normal SBP for >10yo:  90
+4)	Typical MAP: 55 + (age in years x 1.5)
+Intervention
+If Evidence of shock  Obtain IV access c 18G.
+If no IV access p 90sec  IO access in the proximal tibia.
+If no IO p the 1st attempt  Transport a any further attempts
+1)	NS 20ml/kg IV/IO bolus (Min time = < 20min)
+2)	NS 20ml/kg IV/IO may be repeated (Max dose = 40ml/kg)
+3)	Consider 10ml/kg if poor cardiac function suspected
+Reassess p each bolus
+BP is inadequate strategy to identify early signs of shock. Narrowing pulse pressure & HR are 1st subtle signs of shock. Look for LOC,  (skin) To, poor color, & delayed Cap-Refill
+Aggressive volume resuscitation (for non-cardiogenic shock) & rapid transport should be initiated
+Newborn Resuscitation  Inverted Pyramid Model
+All Newborns
+Few Newborns*
+*RISK FACTORS PREDICTING POSSIBLE NEED FOR RESUSCITATION
+Inverted Pyramid Model for Newborn Resuscitation
+SOME NEWBORNS
+FEW NEWBORNS
+ALL NEWBORNS
+Risk factors predicting possible need for newborn resuscitation
+Cardiogenic Shock or p Arrest Stabilization
+Pulm-Edema c shock signs or BP c normal HR or BP p ROSC
+Intervention
+Titrate FiO2 to maintain SPO2 >94%
+Consider Adv airway placement & Capno (if available)
+Identify & Tx contributing factors (Hypovolemia, O2, Acidosis, Hypoglycemia, Hypo/Hyperkalemia, Hypothermia, Tension pneumothorax, Cardiac Tamponade, Drug OD, Trauma)
+1)	NS 20ml/kg IV/IO bolus (minimum <20min)
+2)	NS 20ml/kg IV/IO may be repeated (Max dose 40 ml/kg)
+3)	Consider 10ml/kg if poor cardiac function suspected
+Consultation
+Report pts condition, Tx progress, & any changes.
+Discuss additional fluid bolus vs Push Dose Epi 1mcg/kg IO/IVP
+1:100,000 Epi = 10mcg/mL
+A 10kg child would get 1mL
+15kg child would get 1.5mL
+PEDIATRIC ADVANCED LIFE SUPPORT
+Primary Pediatric cardiac arrest way less common than in adults
+ Usually from progressive  in Resp./Cardiovascular function.
+To prevent  Detect & Tx Respiratory failure/Arrest, & shock
+Intervention
+Tx according to the ABCs Standing Orders
+Refer to the appropriate AHA Pediatric ALS (PALS) algorithm
+Consultation
+Report pts condition, Tx progress, & any changes
+NEONATAL RESUSCITATION
+Neonates are < 28 days & may require resuscitation, typically at the time of childbirth.
+Most newborns respond to Tactile Stimulation & Airway opening
+Intervention
+Keep environment as warm as possible to avoid hypothermia which inhibits resuscitation efforts
+In the 1st 60sec of management, perform the following:
+ Stimulate to encourage spontaneous breathing by drying
+If drying Initiates breathing or crying within 5-10sec, proceed to routine care.
+If not, stop stimulation & proceed below to opening the airway.
+If  32 weeks EGA premature, then do NOT dry
+& place in a wet warming bag (like a Ziploc gallon size bag)
+& maintain head/airway access to continue resuscitation
+ Open the airway
+Lay Neonate on back c head in neutral position
+c 3 goals  Aligning face parallel to the ceiling
+Opening the anterior neck space
+Aligning external auditory meatus/sternal notch
+Avoid flexion/hyperextension of neck, this can obstruct the airway
+Vigorous/Deep suction can elicit a vagal response leading to Apnea/HR
+Suctioning is not a routine part of neonatal resuscitation & should be used if copious secretions causing airway compromise
+In such cases  Suction mouth (Max depth = 2cm from the lips)
+c a bulb syringe for  5sec
+Still not breathing/breathing well  More vigorous stimulation
+ Stimulate the neonate
+Rub back & soles of feet vigorously
+If still having difficulty breathing or not breathing p 5sec
+ Stop active stimulation
+& BVM p managing the umbilical cord
+ Clamp & cut cord
+See CHILDBIRTH standing order in adult PSO
+ Auscultate HR
+If HR <100  BVM for 30sec & reassess
+If HR <60  BVM 30sec & then begin CPR if no improvement
+If BVM is required:
+Fit mask over nose & mouth
+Press firmly to prevent air leaks & Ensure good seal
+Bag  30-60breaths/min for 60sec c just enough volume to obtain Cx rise & fall
+Ventilation = priority  have partner connect O2
+To avoid hyperventilation  Say squeeze, 2, 3, squeeze, 2, 3, etc
+If cardiac arrest  1 & 2 & 3 & squeeze; 1 & 2 & 3 & squeeze, c CPR occurring on 1 & 2 & 3
+WARNING: excessive ventilation pressure & over-ventilation can cause a pneumothorax from barotrauma.
+If the Cx fails to rise, do not just squeeze harder.
+Instead  Check connection between bag & mask
+Correct the position of the mask on the face
+Correct the head position.
+Mask position
+Head positioning
+If simple extension of the head & neck position is insufficient to achieve the 3 goals of aligning the pt
+Then  Addition of a shoulder roll & headrest may be necessary
+Check q min for spontaneous respiratory effort (Cx movement)
+do not take mask off to check for spontaneous breathing
+Continue BVM until there is spontaneous respiratory effort
+P resuscitation  Record APGAR & BGL & Reassess
+Medical
+AMS/Suspected Opioid OD
+AMS of unk etiology or from suspected Opioid OD
+Intervention
+Evaluate the ABCs according to Standing Orders.
+Determine the BGL.
+If BGL is 50  Hypoglycemia/Insulin OD Standing Order
+Give Narcan 0.1mg/kg IV/IO/ETT/IM (Max dose = 2.0mg)
+Opioid OD is a common cause of pediatric AMS/Responsiveness
+If Evidence of shock or a Hx of dehydration, give a fluid bolus Refer to the Circulation/Shock Standing Order
+Consultation
+Report pts condition, Tx progress, & any changes
+Continuity
+Reassess pts mental status.
+Expose the child only as necessary to perform further assessments. Maintain the childs body To throughout the examination. Consider other causes of AMS  Chemical/Drug intoxication, toxic exposure, head trauma or seizure
+Contact Med-Control for additional instructions
+ALLERGIC REACTION
+Not Anaphylaxis
+Allergen Exposure resulting in  Itching/Rash/hives/flushing
+Intervention
+Benadryl 1mg/kg IVP  (Max = 50mg)
+(Monitor for anaphylaxis)
+Consultation  Report pt's condition, Tx progress, & any changes
+ANAPHYLAXIS
+Wheezing/Stridor, Airway Swelling, Hives or Flushing
+Itching, Dyspnea, Difficulty Swallowing, scratchy throat Nausea, or Weakness
+May also observe signs of GI distress such as vomiting & diarrhea
+Food anaphylaxis  Emesis + Abdominal pn & no Urticaria
+Rx if  Pt meets 1 of 3 Criterion for Anaphylaxis
+Intervention
+Give Epi 1:1000 based on this chart
+< 10kg  = 0.01mg/kg IM
+10-25kg = 0.15mg IM
+25-60kg = 0.3mg IM (preferred)
+ 60kg  = 0.5mg IM
+Benadryl 1mg/kg IVP (Max = 50mg) p Epi is given
+Dexamethasone 0.6mg/kg  IV/IM
+BP = NS 20cc/kg Bolus
+Anaphylaxis Persists  Transport ASAP & repeat Epi q 5-15min up to 2 additional doses (3 doses total)
+Consultation
+Discuss IV Epi Infusion if Anaphylaxis Persists p 3 IM Epi doses
+Anaphylaxis Criteria
+Respiratory Compromise = Dyspnea, wheeze-bronchospasm, stridor, hypoxemia
+End-Organ Dysfunction Sx = Hypotonia, Collapse, Syncope, Incontinence
+Skin-Mucosal Tissue = Generalized hives, pruritus or flushing, swollen lips-tongue-uvula
+Anaphylaxis  Highly likely c any 1 of the 3 criteria:
+Criteria 1
+Acute + c Skin-Mucosal Tissue Involvement & Either
+ Respiratory Compromise or BP or End-Organ
+Dysfunction Sxs
+Criteria 2
+ 2 of the Following & Occur Rapidly p Likely Allergen
+Exposure:
+A) Skin-Mucosal Tissue
+B) Respiratory Compromise
+C) BP or End-Organ Dysfunction
+D) Persistent GI Sx (Crampy abdominal pn, emesis)
+Criteria 3
+BP p exposure to a KNOWN allergen:
+Infants/Children  SBP (age specific) or > 30%  in SBP
+Adults  SBP < 90 or > 30%  From Pts Baseline
+Hyperglycemia/DKA or Nonketotic Hyperosmolar Coma
+BGL >250 & Abnormal mental status
+Intervention
+1)	NS 10ml/kg IV WO  Up to 1L Infused
+2)	NS 10ml/kg IV may be repeated (Max = 20ml/kg)
+Consultation
+Report pts condition, include Arousal, BGL, Breathing Rate/Depth, Presence/Absence of ketone breath odor, & Presence/Absence of signs of dehydration.
+Report progress & Discuss options
+Hypoglycemia / Insulin OD
+BGL 50 & AMS
+Intervention
+BGL 50 or BGL is so low it cannot be determined,
+ Give Dextrose IV/IO as follows:
+	< 2months =  2mL/kg IV/IO of D10
+	 2months =  3mL/kg IV/IO of D10
+Repeat BGL 1-2min p dextrose
+Dextrose may be repeated once at the same dosage if BGL remains <50 or if the BGL cannot be determined & there is no change in the pts mental status p the initial dose
+Consultation
+Report pts condition, Tx progress, & any changes
+Continuity
+A 3rd IV attempt may be made during transport.
+If access is obtained & the IV fluid flows briskly s extravasation, Give dextrose as outlined above
+N/V
+N/V may be the by-product of serious emergency conditions.
+Examples in children include abdominal or head injury, adrenal crisis, bowel obstruction, food allergy, ketoacidosis, meningitis, UTI, peritonitis, sickle cell crisis, brain tumor, or toxic ingestion.
+Intervention
+Zofran 0.15 mg/kg IV over 60sec (Max = 4mg)
+If no IV  then give
+4-11yo = Zofran 4mg PO
+ 12yo = Zofran 8mg PO
+Droperidol is not approved in pediatric pts at this time
+Organophosphate or Carbamate Poisoning
+Pesticide Exposure c Symptomatic HR or SLUDGEM syndrome should be assumed to involve organophosphate or carbamate
+Intervention
+Protect yourself from exposure.
+If FD on scene, allow them to Decon pt a you make contact.
+For Symptomatic HR give Atropine. Transport/Notify ED ASAP
+Atropine 0.05mg/kg IV (preferred) or IM
+Repeat prn
+Monitor for seizures & Tx accordingly c Versed 0.2mg/kg IV/IO
+(Max = 5mg)         or Versed 0.5mg/kg IN
+Consultation
+Report pts condition, Tx progress, & any changes.
+Discuss the appropriateness of any further pre-hospital modalities
+Continuity
+If crew contamination  Decon & Change uniform
+PAIN MANAGEMENT
+pts who require pain management in addition to other Txs.
+Pain Rxs often causes sedation & affects a pts mental status.
+Analgesia should not be given to a pediatric pt c head trauma
+Intervention
+Evaluate the ABCs according to Standing Order.
+Assess pts pain using # scale or visual analogue scale as appropriate to the childs abilities
+Give Morphine or Fentanyl
+Morphine 0.1mg/kg IV/SQ        (max = 4mg)
+or
+Fentanyl 0.5-1.0mcg/kg IV/IN   (max = 50mcg)
+Consultation
+If pt still in pain, discuss c Med-Control options such as repeating morphine or fentanyl or alternatives such as ketamine or ketorolac
+Ketorolac is not FDA-approved for <17yo
+but may be given off-label c Med-Control authorization.
+Continuity
+P drug administration, reassess the pts pain scale.
+Carefully note the adequacy of ventilation & perfusion.
+Reassess the pt frequently.
+Contact Med-Control for further instructions.
+SEIZURE
+BGL >100 & seizure continues or seizure continues p giving D10
+Intervention
+High-flow O2 & cardiac monitor
+Give Benzo using one of the options below:
+Versed 0.2mg/kg IV/IO (Max = 5mg)
+May repeat for max of 10mg IV
+Versed 0.5 mg/kg IN to a max of 10mg initially.
+May repeat for max total dose of 20mg IN
+Support ABCs prn
+Transport ASAP
+Consultation
+Request to repeat Benzo if seizure is still active 5min p the 1st dose
+SICKLE CELL CRISIS
+Determined by pts report of severe pain similar to previous sickle cell crises, clear lung sounds & No Heart Failure/Stroke Hx
+Intervention
+Establish IV & run NS to KVO
+Give O2 at 2L/min by NC
+Consultation
+If granted permission, give Morphine or Fentanyl
+Morphine 0.1mg/kg IV/SQ (max = 4mg)
+Fentanyl 0.5-1.0mcg/kg IV or SQ (max = 50mcg)
+Caution used in giving narcotics to sickle cell pts c AMS
+TOXIC INGESTION
+Poisoning/Drug OD + Accidental/Intentional + Harm Potential
+Intervention
+Safety  Toxin may still be around &/or pt may be violent
+Collect info on Ingestion + Type/Time/Amount
+Possibility of multiple ingestions
+Intentional Ingestions may under-report Variety & Quantity
+Attempt to collect all Rx bottles on scene for ED
+Consultation
+Contact Med-Control ASAP during transport, even c the above not
+yet complete
+Discuss drug therapies that may be helpful for specific ingestions.
+Continuity
+These therapies may be beneficial if serious S/S are present:
+Propranolol OD c wide QRS = Bicarb 1-2 mEq/kg IV/IO bolus
+Ca+ Blocker or -Blocker OD c HR
+Ca+-Chloride = Not for pediatrics  Does not enter the cell & can necrotize the extremity if IV extravasates
+Haldol c acute Extrapyramidal Reaction
+= Benadryl 1mg/kg IV/IM/IO
+Plant Ingestion c HR
+<12yo = Atropine 0.02-0.05mg/kg
+Repeat q 20-30min until effects observed (dry mouth, HR,
+mydriasis) or Sxs Reverse
+12yo = Atropine 0.05mg/kg IV/IO
+Repeat q 20-30min until effects observed (dry mouth, HR,
+mydriasis) or Sxs Reverse
+Tricyclic Antidepressant OD c BP or No Pulse or wide QRS
+= Bicarb 1-2mEq/kg IV/IO
+Methadone Ingestion = Narcan 0.2mg/kg (Max = 2mg)
+Acute withdrawal S/S  Not a concern unless on opiates
+for chronic pain
+Violent Pt
+Exercise caution c Organic-Brain-Syndrome (OBS) call, Emotionally-Disturbed-Person (EDP) or for any situation when a violent pt is encountered.
+Wait for LE or facility security to ensure the scene is safe prior to your attempted encounter c a violent pt.
+Intervention
+Attempt to rule out Medical/Traumatic causes of Agitation/Violence since hypoxia & BGL may mimic a Psych condition or be a part of the agitation.
+Try to talk down an agitated pt
+Do not be confrontational or reflect hostility back at the pt.
+If these methods fail & the safety of the pt &/or crew is in question or if the pt requires physical restraint, then Rx c Versed
+Versed 0.05-0.1mg/kg IV
+or             0.1-0.2 mg/kg IM (max = 5mg)
+May repeat for total max of 10mg IV
+or                   0.5mg/kg IN (max = 20mg)
+May repeat for max of 20mg IN
+If RASS +4 then give:
+KETAMINE 4mg/kg IM
+Do not exceed 5ml per injection site (Entire Ketamine Vial)
+Droperidol is not approved in pediatric pts at this time
+Refusals
+Minor Consent/Refusal Details
+Pediatric Refusals
+All Pediatric Refusals are High Risks Refusals & require calling Med-Control.
+Ped Refusal Checklist
+VS Normal for Age
+Normal Mental status for age
+No SI/HI
+No Obvious Injury or Distress
+Parent/Guardian has Capacity & understands the risks of Refusal
+Parent/Guardian is Capable of Caring for the pt at Home
+No Concerns for Home Abuse
+Pt Instructed to Call Back at Any Time
+Med-Control has been Contacted
+All of the above is Fully Documented
+Next section................................
+Informed/Substituted Consent for Minors Questions how
+decisions should be made
+Parents/Guardians are entitled to provide consent due to
+legality, & (Absence of Abuse/Neglect) are assumed to
+act in the Best Interests of the Child
+Minor Consent/Refusal
+Typically Parent/Guardian.
+Some minors (Emancipated or certain medical Emancipation situations) may Self Consent
+Parents/Guardians Cannot Refuse Life-Saving Tx on Religious/Other Grounds
+Who may Consent/Decline c a minor: Parent, grandparent, adult siblings, adult Aunt/Uncle, caretaker c written authorization, juvenile court, peace officer c reason (or physician), Managing/Possessory conservator, or Guardian
+Some minors 16yo living apart & self-supporting or unmarried c a child in their custody
+Always attempt an interactive process that involves minors in their care decisions, as developmentally appropriate
+A Parent/Guardian might deny EMS access to minor children if theres no obvious life threat, but they cannot refuse Life-Saving Therapy
+<18yo c capacity may refuse if Emancipated
+Emancipation does not always = Medical Emancipation (some conditions allow minors to consent specifically for STDs, Addiction, Pregnancy, or Gynecologic issues, or Infectious/Contagious/Communicable disease that is required by law to be tested & Txed) or is on active duty
+A Pregnant minor must have adult consent unless she falls under one of those x-ions
+If Treating Minors, Involve their input (age-appropriate)
+Trauma
+TRAUMA, major
+Defined as Trauma c  Airway compromise, breathing difficulty, shock, mental status change, >9% BSA burns, or cardiac arrest
+Intervention
+Tx ABCs & Transport as early as possible
+IV en route
+Txs to do on scene include those done a moving pt (SMR) or is expected to quickly cause Dramatic Improvement (Needle-D)
+Herniation Risk = Potential Head Injury & needs Intubated
+Hyperventilate, ETCO2  30-35
+Only if pt has signs of active herniation such as
+ Newly fixed & Dilated Pupil, Cushings reflex, or posturing
+Hyperventilation is defined as
+Adult = 20/min
+Child = 25/min
+Infant <1yo = 30/min
+Consultation
+Contact Med-Control early during transport
+Discuss therapies that may be indicated by pts condition
+Continuity
+Pt has AMS p initial contact, contact Med-Control
+[is this part correct??????????]
+Traumatic Arrest????????????????
+Special Needs Children
+Central IV Catheters  Indwelling IV access:
+For Rx & parenteral (IV) Hydration/Nutrition administration
+May be totally Implanted (such as Mediport)
+or multilumen catheters (such as Hickman or Broviac catheters)
+Evaluate for DOPE & Infection
+Displaced  Total/Partial dislodgement or movement out of vein
+into internal tissues
+Obstructed  Blood clot, protein, crystallized Rxs/IV nutrition
+Pericardial Tamponade  Pericardial Sac Fluid (catheter perforation)
+Pulmonary Problems  Pneumothorax, PE (from clot or catheter shear)
+Equipment  Tubing Kinked/Cracked, infusion pump failure
+Tubing is Leaking  Direct pressure at site or Clamp/Tie
+Give O2 prn
+Do not Access/Flush central venous catheters s consultation
+CSF Shunt (Ventriculoperitoneal or V-P Shunt):
+For p meningitis, brain injury/surgery/tumors, & hydrocephalus.
+Drains excess fluid from brain through tubing c from brain ventricles to abdomen or heart
+Evaluate for DOPE & Infection
+1)Displaced  Movement of tip into abdominal or heart lining
+2)Obstructed  Blood clot, protein, kinked tubing causing ICP
+3)Peritonitis, Perforation, or Pseudocyst  of stomach/bowel
+4)Equipment  Damaged or separated tubing reservoir
+Give O2 prn
+Hyperventilate if signs of brain herniation
+such as unresponsiveness c unequal pupils, fixed dilated or unresponsive pupils, or BP & HR
+May attempt to pump shunt reservoir once per Med-Control
+Gastrostomy
+Feeding tube
+For Total/Enhanced Feeding &/or Rx in children c Abd/GI problems or neurological or neuromuscular disorders such as muscular dystrophy, brain damage, etc
+Button/Catheter type G-Tube (stomach) or Jejunal J-Tube (intestine)
+Evaluate for DOPE & Infection
+Displaced  Total or Partial removal of tube
+Obstructed  Blood, crystallized Feeding/Rxs, Abd tissues
+Peritonitis/Perforation  Of Stomach/Bowel
+Equipment  Tubing kinked/Cracked, feeding pump failure
+Direct pressure  If bleeding at site
+DSD  If Dislodged or tape if partially dislodged tube
+If tube is blocked  Stop feeding & plug tube
+Transport for  abd evaluation or tube reinsertion/replacement
+(Stoma can close off within hrs)
+If abd Distention/Vomiting  Leave tube open & drain into cup
+Bring old tube  To ED for sizing purposes
+IV/IO fluids  If signs of Dehydration/Shock
+Colostomy of Ileostomy  Fecal Drainage:
+For Temporary/Permanent Malfunction/Obstruction of intestine. Typically  Open stomas that drain into plastic pouches
+Evaluate for  Infection, Irritation/Trauma Peritonitis
+Bleeding at site = Direct Pressure
+Exposed Stoma = Moistened sterile dressing covered by DSD
+Signs of Dehydration/Shock = IV/IO Fluids
+Ureterostomy or Nephrostomy Tube or Foley:
+For Temporary/Permanent Malfunction of the urinary system. Typically are open stomas that drain into plastic pouches or through a catheter
+Intervention
+Evaluate for Infection, Irritation/Trauma, Peritonitis, Blocked Urinary Drainage
+Bleeding at site = Direct Pressure
+Exposed Stoma = Moistened sterile dressing covered by DSD
+Signs of Dehydration/Shock = IV/IO Fluids
+Consultation
+Report pts condition, Tx progress, & any changes
+Discuss the appropriateness of any further pre-hospital modalities
+SPECIAL HEALTH CARE NEEDS
+Intervention
+1)	Listen to caregivers, they know pt the best.
+Inquire about:
+Childs baseline abilities
+Syndromes/diseases
+What is different today
+Devices & meds
+Usual VS
+Sx
+2)	Bring Care Plans or Emergency Info Forms to ED c the pt
+3)	Assess/Communicate c pt based on developmental age
+4)	Look for Medic Alert jewelry or health forms
+if usual caregiver is not present
+5)	Bring necessary specialized Equipment to the ED c the pt
+if possible  Ventilator, Trach or G-tube, etc
+6)	Ask caregivers  Best way to move pt
+Particularly if  Pt is very prone to Fxs such as c
+osteogenesis imperfecta
+If pt suffers a Fx & has a brace on the affected area, leave
+the brace on & immobilize around it
+7)	Down Syndrome pts may have upper Cervical Instability
+& may be prone to spinal cord injury.
+Immobilization is important c any MOI c significant
+neck movement
+8)	Cardiac pts may have absent pulses in limbs
+& may be chronically hypoxic or have hypoxic spells
+Special needs Tracking & Awareness Response System (STARS)
+Identified by various sources
+Specifically registered special needs pts
+c unique medical conditions
+Pre-prescribed Interventions/Orders
+ Specific to their condition       (May not be in PSO)
+ Should be carried out in Emergency cases
+Intervention
+ Is specific condition relevant to current EMS request?
+ Obtain/Review medical-Info/Intervention-guide in guidebook
+Carry out any Interventions/Orders required to mitigate the emergency as directed by guidebook
+Do not Hesitate to call Med-Control at any time for Guidance/Assistance
+Consultation
+Report pts condition, Tx progress, & any changes
+Continuity
+Carry out any Interventions/Orders required to mitigate the emergency as directed by the guidebook
+Continue attempting to contact Med-Control
+Initiate transport ASAP
+TracheostomyTube
+Trach Pts in Respiratory Distress
+Assume Trach is Problem  Collect pts Trach Equipment
+Go Bag  Unique emergency equipment to manage Airway
+ Must be c the pt at all times
+Check Airway Patency  DOPE
+Dislodgement  Dislodged Trach Tube?
+Obstruction  Trach require Suctioning?
+Suction depth  No more than 3-6cm in depth
+Instill 2-3mL of NS  A Suctioning
+Max = 10sec/attempt  Pre-Oxygenate between attempts
+Pulm.  Pneumo, Pneumonia, Aspiration, Reactive Airway,
+etc. Difficult to Ventilate? Equal Breath Sounds? Crepitus?
+Equipment  Vent issue, Empty O2 Tank, Tube Kinked, etc.
+Check Tube displacement, batteries, etc.
+If Pt is good c suction, O2, BVM  Monitor
+n/c or Pt Worsens  Emergency Trach Replace/Changeout
+EMS does procedure if Regular Caregiver is not present
+O2 via BVM over mouth/nose unless previous laryngectomy
+Other rescuer  Deflate Trach Tube Cuff if present
+ Hyperextend neck by padding under shoulders
+Prepare new Trach Tube/ETT & one 0.5 size smaller
+ Make sure Tracheostomy ties are untied
+Remove old Tube while other person installs new Tube
+P  Remove Obturator if present
+Attach BVM  O2 & Ventilate pt through new Trach Tube
+New Trach Ties should be secured to avoid dislodgement
+Reinflate Trach tube cuff if present
+Assess RR, lung sounds, SPO2, Capno, color, tone, VS, etc.
+If trouble changing Trach  BVM over mouth/nose or over the stoma  Troubleshoot  Attempt smaller Trach Tube, Cut-&-Size-Match ETT, or other ways to secure Airway.
+Overall Goal = Avoid Hypoxia
+Any attempts to re-cannulate Trachea Must use O2
+(to avoid any hypoxic events)
+Techniques Include  High-flow O2 over stoma c BVM c O2 over Mouth/Nose
+ or combinations thereof to deliver O2 throughout
+Trach Tubes  Respiratory problems  Narrow/Obstructed Airways, Bronchopulmonary dysplasia (chronic lung disease seen in premature babies), etc
+ & Neuro conditions  Brain damage, muscular dystrophy, etc
+May be totally or partially Vent dependent or may breathe on own
+Types of tracheostomy tubes include:
+1)	Uncuffed  Infant & young child
+2)	Cuffed  Older, Usually >8yo & Adolescent
+3)	Fenestrated  Hole in stem for breathing through vocal
+cords to permit Talking/Weaning off tracheostomy
+4)	Single Tube or c Inner Cannula (Removed/Cleaned)
+Evaluate for DOPE & Infection (tracheal or pulmonary)
+Reassess HR/RR frequently
+Displaced  Total or partial removal of tube
+Obstructed  Mucus plug, blood, FBO or against soft tissue
+Pulmonary  pneumo(nia), reactive airway, aspiration
+Equipment  Vent malfunction, Low O2, tubing kinked
+If on a Vent  Disconnect & O2 c BVM c Trach Adaptor (if able)
+or Infant Mask over trach Opening/Stoma
+Suction prn  10sec
+Insert no more than 34 length of neck
+If unable to suction (Thick Secretions)  Instill 2-3ml of NS
+ Then suction
+If inner cannula present  May remove & clean c NS
+(or 12 strength peroxide)
+If Unable to Vent  Plug opening & Vent over Mouth & Nose
+If these do not work  May remove tube
+& either reinsert new tube or use ETT of same  Size
+Unable to Find Opening  Thread suction catheter through tube
+ Use catheter tip to probe opening
+ Sliding tube over catheter into opening
+ Then removing catheter
+Gum Elastic Bougies typically are NOT as helpful in the management of pediatric tracheostomies due to the relative fragility & Small Size of the Pediatric Airways
+A smaller trach tube or (in some instances) a pediatric stylet may be used to assist guiding a tube, including smaller ETTs, into the trachea, but the trach tube itself is the best airway
+Workers Compensation Process
+New Claims Management & Care Process Takes Effect as of December 1, 2021
+Employees will call a single hotline # to report a claim
+GMR no longer uses the STARS software program for initial claim reporting
+How to File a Report
+To Report an Injury/Illness, follow these steps.
+	Notify Supervisor 1st
+	Call Hotline at 1-833-467-1860 & choose option 1
+Then follow the prompts.
+	Nurse will Triage your Injury/Illness & work to
+Identify the most Effective/Suitable Tx.
+Note:
+Continue to contact GMR Nurse Navigation Line (NNL) for COVID Screenings & Vivify enrollment.
+If a COVID-Related Claim, the NNL will direct you to Sedgwick  1-833-467-1860 for Claims Management & Care as appropriate.
+Pediatric References
+_____04/12//2024_______
+Missouri Department of Health and Senior Services Bureau of Emergency Medical Services.
+Missouri Pediatric Trauma Triage and Transport Protocol (PDF document).
+Retrieved from http://health.mo.gov/living/healthcondiseases/chronic/tcdsystem/pdf/2.2.Pediatric_Trauma_Field_Triage_511-10.pdf
+National Association of EMS Physicians, (2003). Model Pediatric Protocols.
+Retrieved from http://www.kdheks.gov/cphp/download/cacs_template/ModelPediatricProtocols.pdf
+Neonatal Resuscitation (5th ed.). (2006).
+United States of America: American Academy of Pediatrics and American Heart Association.
+New York State Department of Health. Children c Special Health Care Needs  PreHospital Care Reference Card (PDF Document).
+Retrieved from http://www.health.ny.gov/ nysdoh/ems/emsc/resources.htm
+NYU Langone Medical Center Department of Pediatrics Center for Pediatric Emergency Medicine.
+Paramedic TRIPP version 1.0 Teaching Resources for Instructors in PreHospital Pediatrics (PDF Document).
+Retrieved from
+http://cpem.med.nyu.edu/teaching-materials/paramedic-tripp
+Pediatric Trauma Life Support for Prehospital Care Providers (3rd ed.). (2009).
+Downers Grove, Illinois: International Trauma Life Support.
+PHTLS Prehospital Trauma Life Support (7th ed.). (2011). St. Louis, Missouri: Mosby JEMS Elsevier. Roberts, J., Hedges, J.
+Surgical Cricothyrotomy. In: Clinical Procedures in Emergency Medicine. (5th ed.). Philadelphia, Pennsylvania: Saunders Elsevier; 2010: Chapter 6.
+St. Louis Childrens Hospital Emergency Unit. (2007). Magnesium Sulfate Intravenous Protocol for Emergency Unit. St. Louis, Missouri: EU Clinical Practice Team.
+2010 Handbook of Emergency Cardiovascular Care for Healthcare Providers. (2010).
+United States of America: American Heart Association.
+Abbreviations for PCR  Approved list
+To ensure consistency in patient care reporting, only Abbott approved abbreviations will be acceptable for documentation of the Patient Care Report (PCR).  If in doubt, unabbreviated, plain English documentation should be utilized.  The following are approved:
+A&Ox3   	Alert & oriented to name, date, and place
+AAA  	Abdominal aortic aneurysm
+Abd  	Abdomen
+AB  	Abortion
+ABC  	 	Airway, breathing, circulation
+ABG  	 	Arterial blood gas
+a.c.  	 	A meals
+A/C  	 	Aircraft
+ACE  	 	Angiotensin-converting enzyme
+ACS  	 	Acute Coronary Syndrome
+a.d.  	 	Right ear (auris dexter)
+ADD  	 	Attention deficit disorder
+A.E.  	 	Above elbow (amputation)
+AED  	 	Automated external defibrillator
+A Fib  	 	Atrial fibrillation
+Af  	 	Atrial flutter
+AIDS  	 	Acquired immunodeficiency syndrome
+AIVR  	 	Accelerated Idioventricular rhythm
+A.K.  	 	Above knee (amputation)
+ALS  	 	Advanced Life Support
+AMI  	 	Acute myocardial infarction
+Ant  	 	Anterior
+AOS TF  	Arrived On Scene To Find
+APAP   	Acetaminophen (APAP)
+APS  	 	Adult Protective Services
+APGAR   	Appearance, Pulse, Grimace, Activity, Respiratory effort
+ARDS   	Adult respiratory distress syndrome
+AS  	 	Left ear (auris sinistra)
+ASA  	 	Acetyl salicylic acid (Aspirin)
+ATF  	 	Arrived to find
+AV  	 	Atrioventricular
+AVA  	 	Alternate vascular access
+AVM  	 	Arteriovenous malformation
+BBBB  	Bundle branch block
+BBS  	 	Bilateral breath sounds
+B.E.  	 	Below elbow (amputation)
+BGL  	 	Blood glucose level
+b.i.d.  	 	Twice a day
+BiPAP  	Bi-level Positive Airway Pressure
+B.K.  	 	Below knee (amputation)
+BLS  	 	Basic life support
+BM  	 	Bowel movement
+BP  	 	Blood Pressure
+BS  	 	Breath, bowel sounds
+BSA  	 	Body surface area
+BVM  	 	Bag valve mask
+c 	 	c
+Co  	 	Centigrade
+C/C  		Chief complaint
+c/o  		Complains / complaining of
+CA  		Carcinoma, cancer
+Ca++  		Calcium
+CABG  	Coronary artery bypass graft
+CAD  		Coronary artery disease
+CAO x 3 or 4  	Conscious, Alert, & Oriented to Person, Place, Time & Events
+CAT/CT  	Computerized axial tomography scanner
+CBC  	 	Complete blood count
+Cc  	 	Cubic centimeter
+CCR 	 	Cardiocerebral Resuscitation
+Cm  	 	Centimeter
+CCB  	 	Calcium channel blocker
+CCU  	 	Coronary / critical care unit
+CHF  	 	Congestive heart failure
+CHI  	 	Closed head injury
+CID  	 	Cervical Immobilization Device
+CK  	 	Creatine kinase
+CK-MB   	Creatine kinase myocardial band
+CI  	 	Chlorine
+CMO 	 	Chief Medical Officer
+CNS  	 	Central nervous system
+COPD   	Chronic obstructive pulmonary disease
+CO  	 	Cardiac output / carbon monoxide
+CO2 	 	Carbon dioxide
++CMS   	Positive circulatory, motor & sensory function
+CNS  	 	Central nervous system
+CP  	 	Chest pain
+CPAP   	Continuous positive airway pressure
+CPR  	 	Cardiopulmonary resuscitation
+CPS  	 	Child Protective Services
+CRT  	 	Capillary refill time
+C-spine  	Cervical spine
+CSF  	 	Cerebrospinal fluid
+CSM  	 	Carotid sinus massage
+CTA  	 	Clear to auscultation
+CVA  	 	Cerebrovascular accident
+CVP  	 	Central venous pressure
+Cx  	 	Chest
+CXR  	 	Chest x-ray
+DCAPBTLS 	Deformities, Contusions, Abrasions, Penetrations,Paradoxical movements, Burns, Tenderness, Lacerations,
+Swelling
+DIC  	 	Disseminating intravascular coagulation
+Diff  	 	Difficulty
+Disch   	Discharge
+D&C  	 	Dilatation & curettage
+dL  	 	Deciliter (1/10 liter: 100 ml)
+DAE  	 	Dysbaric air embolism
+DKA  	 	Diabetic ketoacidosis
+DM  	 	Diabetes mellitus
+DNAR   	Did not attempt resuscitation
+DNR  	 	Do-not-resuscitate
+DO 	 	Doctor of Osteopathy
+DOB  	 	Date of birth
+DOE  	 	Dyspnea on exertion
+DOS  	 	Dead on scene
+DPT  	 	Diphtheria, pertussis, tetanus
+DTs  	 	Delirium tremens
+D5W  	 	Dextrose 5% in water
+D10W   	Dextrose 10% in water
+D25W   	Dextrose 25% in water
+D50  	 	50% Dextrose
+DVT  	 	Deep vein thrombosis
+Dx 	 	Diagnosis
+ECG/EKG 	Electrocardiogram
+EDC  		Estimated date of confinement
+EEG  		Electroencephalogram
+EF  		Ejection fraction
+e.g.  		For example
+EGA 	 	Estimated Gestational Age
+EMS 	 	Emergency Medical Services
+EOR 	 	End of Report
+EPS  	 	Electrophysiological study
+ER/ED   	Emergency room/department
+Epi  	 	Epinephrine
+Est.  	 	Estimated
+ESRD   	End stage renal disease
+ETA  	 	Estimated time of arrival
+ET  	 	Endotracheal
+ETC02   	End-tidal carbon dioxide
+ETOH   	Ethyl alcohol, alcoholic beverage
+ETT  	 	Endotracheal tube
+ExDS 	 	Excited Delirium Syndrome
+EXP  	 	Expansion
+EXT  	 	Extremity(s)
+Fo  	 	Fahrenheit
+FBAO   	Foreign body airway obstruction
+FHx  	 	Family history
+FHR  	 	Fetal heart rate
+Fr  	 	French
+FSP  	 	Full spinal precaution
+FUO  	 	Fever of unknown origin
+Fx 	 	Fracture
+GCS  	 	Glasgow coma scale/score
+GERD   	Gastroesophageal reflux disease
+GI 	 	Gastrointestinal
+Gm, g   	Gram
+Gtts  	 	Drops
+GU  	 	Genitourinary
+GYN  	 	Gynecology
+Hr 	 	 Hour
+H/A  	 	Headache
+HAV  	 	Hepatitis A virus
+HBV  	 	Hepatitis B virus
+HCTZ   	Hydrochlorothiazide
+HCV  	 	Hepatitis C virus
+HEENT   	Head, eyes, ears, nose, throat
+H&H  	 	Hemoglobin and hematocrit
+Hg  	 	Mercury
+HIV  	 	Human immunodeficiency virus
+HR  	 	Heart rate
+HRT  	 	Hormone replacement therapy
+hs  	 	hora somni; hour of sleep; at bedtime
+HTN  	 	Hypertension
+Hx  	 	History
+AICD   	Automatic Implanted Cardioverter Defibrillator
+ICP 	 	Intracranial pressure
+ICU  	 	Intensive care unit
+IDDM/DM I  	Insulin dependent diabetes mellitus (Type I)
+ILS  	 	Intermediate life support
+IM  	 	Intramuscular
+IMV  	 	Intermittent mechanical ventilation
+Inf  	 	Inferior
+IO 	              Intraosseous
+IPPB 		Intermittent positive pressure breathing
+IU  		International units
+IV  		Intravenous
+IVP  		IV push IVR Idioventricular rhythm
+J  		Joules
+JVD 	 	Jugular venous distention
+K+ 	 	Potassium
+KED  	 	Kendrick extrication device
+KTD  	 	Kendrick traction device
+KVO  	 	Keep vein open
+Kg  	 	Kilogram
+L 	 	Left or Liter
+L spine  	Lumbar spine
+L&D  	 	Labor and delivery
+L/S  	 	Lung sounds
+Lac  	 	Laceration
+LAD  	 	Left axis deviation / left anterior descending
+Lbs  	 	Pounds
+LBBB   	Left bundle branch block
+Liq  	 	Liquid
+LLQ  	 	Lower left quadrant
+LMA  	 	Laryngeal Mask Airway
+LMP  	 	Last menstrual period
+LOC  	 	Level/loss of consciousness
+Lpm  	 	Liter per minute
+LR  	 	Lactated Ringers
+LSB  	 	Long spine board
+LSD  	 	Lysergic acid diethylamide
+LSV 	 	Life Support Vehicle (ambulance)
+LUQ  	 	Left upper quadrant
+LVAD  	Left Ventricular Assist Device
+LVH  	 	Left ventricular hypertrophy
+mA  	 	Milliamperes
+mg  	 	Milligram
+MAE  	 	Moves all extremities
+MAP  	 	Mean arterial pressure
+Mcg  	 	Microgram
+MCL  	 	Midclavicular line, modified chest lead
+MD 	 	Medical Doctor
+MDI  	 	Metered dose inhaler
+mEq  	 	Milliequivalent
+mL  	 	Milliliter
+mm  	 	Millimeter
+MMR  	 	Measles, mumps, rubella
+MOI 	 	Mechanism of injury
+Mph  	 	Miles per hour
+MS  	 	Morphine Sulfate, Multiple Sclerosis
+MVC  	 	Motor vehicle crash
+MVP  	 	Mitral valve prolapse
+Na+ 	 	Sodium
+NAD  	 	No apparent / acute distress
+N/C  	 	Nasal canula
+NES  	 	Non-English Speaking
+NGT  	 	Nasogastric tube
+NH  	 	Nursing home
+NICU  	 	Neurological, neonatal intensive care unit
+NIDDM/DM II 	Non-insulin dependent diabetes mellitus (Type II)
+NKA  	 	No known allergies
+NKDA   	No known drug allergies
+NMB  	 	Neuromuscular blockade
+NOI  	 	No obvious injury
+NP  		Nurse Practitioner
+NPA  		Nasopharyngeal airway
+NPO  		Nothing by mouth
+NRB  		Non-rebreather mask
+NS  		Normal saline
+NSAID  	Non-steroidal anti-inflammatory drug
+NT  		Nasotracheal
+NTG  	 	Nitroglycerin
+N/V/D   	Nausea, vomiting, diarrhea
+02  	 	Oxygen
+OB  	 	Obstetrics
+OBS 	 	Organic brain syndrome
+OBV  	 	Obvious
+OD  	 	Overdose, right eye (oculus dexter)
+OLMC   	On-line medical consultation/control
+OMD 	 	Office of the Medical Director
+OOH  	 	Out of hospital
+OPA  	 	Oropharyngeal airway
+OPP  	 	Organophosphate poisoning
+OR  	 	Operating room
+OS  	 	Left eye (oculus sinister)
+oz.  	 	Ounce
+  	 	No or none
+P (+ #)   	Parity (P3, P4 etc)
+PA  	 	Physician assistant, pulmonary artery
+PAI  	 	Pharmacologically assisted intubation, Pre-Arrival Instructions
+PCI  	 	Percutaneous coronary intervention
+pC02  	 	Carbon dioxide pressure
+PCP  	 	Phencyclidine, Primary Care Physician
+PE  	 	Physical exam, pulmonary emboli, pulmonary edema
+PEA  	 	Pulseless electrical activity
+PEEP   	Positive end expiratory pressure
+PERRL   	Pupils equal round reactive to light
+PICU  	 	Pediatric intensive care unit
+PID  	 	Pelvic inflammatory disease
+PMD  	 	Primary/Private medical doctor
+Pn  	 	Pain
+PND  	 	Paroxysmal nocturnal dyspnea
+P02  	 	Partial pressure of oxygen
+PO  	 	By mouth
+POC  	 	Position of comfort
+post.  	 	Posterior
+POV  	 	Privately operated/owned vehicle
+PPV 	 	Positive Pressure Ventilation
+p.r.  	 	Per rectum
+PRBCs  	Packed red blood cells
+PRN  	 	As needed
+PSO 	 	Paramedic Standing Orders / Patient Safety Organization
+PSVT   	Paroxysmal supraventricular tachycardia
+Pt.  	 	Patient
+PTA/PTOA  	Prior to (our) arrival
+PTS  	 	Pediatric trauma score
+PVC  	 	Premature ventricular contraction
+PVT  	 	Polymorphic ventricular tachycardia
+P/CD   	Pink warm and dry
+Q 	 	Q
+Qh  	 	Q hour
+q.i.d.  	 	Four times a day
+R 	 	Right
+RAD  	 	Right axis deviation, reactive airway disease
+RBBB   		Right bundle branch block
+Rbc  	 	Red blood cell, red blood (cell) count
+RCA  		Right coronary artery
+RHD  		Rheumatic heart disease
+RLQ  		Right lower quadrant
+ROSC  	Return of spontaneous circulation
++ROM  	Positive range of motion
+RN  		Registered nurse
+RR  		Respiratory rate
+RRT 	 	Registered Respiratory Therapist
+RSV  	 	Respiratory syncytial virus
+RTS 	 	Revised trauma score
+RUQ  	 	Right upper quadrant
+Rx  	 	Prescription
+s 	 	Cout
+s/s  	 	Signs / symptoms
+SA02  	 	Oxygen saturation of arterial oxyhemoglobin
+SARS   	Severe acute respiratory syndrome
+SBP  	 	Systolic blood pressure
+SC, SQ   	Subcutaneous
+SCI  	 	Spinal cord injury
+SCUBA   	Self-contained underwater breathing apparatus
+SIDS  	 	Sudden infant death syndrome
+SL  	 	Sublingual, Saline Lock
+SOAPE   	Subjective, Objective, Assessment, Plan, Enroute
+SOB  	 	Shortness of breath
+SROM   	Spontaneous Rupture of Membranes
+STD 	 	Sexually transmitted disease
+SUV  	 	Sport utility vehicle
+SVT  	 	Supraventricular tachycardia
+Sx  	 	Symptoms
+TASER  	Thomas A. Swift Electric Rifle
+T spine   	Thoracic spine
+TBI  	 	Traumatic brain injury
+Temp  	 	Temperature
+tab  	 	Tablet
+TB  	 	Tuberculosis
+Tbsp  	 	Tablespoon
+TCP  	 	Transcutaneous pacing
+TCA  	 	Tricyclic antidepressant
+TIA  	 	Transient ischemic attack
+t.i.d.  	 	Three times a day
+TKO  	 	To keep open
+Tsp  	 	Teaspoon
+Tx  	 	Treatment
+U 	 	Unit
+U/A 	 	Upon arrival, urine analysis
+URI 	 	Upper respiratory infection
+UTI  	 	Urinary tract infection
+UTL  	 	Unable to locate
+UTO  	 	Unable to obtain
+Vol  	 	Volume
+VO  	 	Verbal order
+VF  	 	Ventricular fibrillation
+VS  	 	Vital signs
+Vt  	 	Tidal volume
+VT  	 	Ventricular tachycardia
+co  	 	Cout, wide open
+WDWN   	Well developed, well nourished
+WPW  	 	Wolf-Parkinson-White
+Xfer  	 	Transfer
+X-prt  	 	Transport
+y/o  	 	Years old
+-Symbols-
+ 	 Alpha
+  	Beta
+@  	At
+?  	Questionable, possible
+Female
+ 	Male
+1  	First degree or Primary
+2  	Second degree or Secondary
+3  	Third degree or Tertiary
+x  	Times
+  	Delta (change)
++  	Positive
+  	Negative
+= 	Equal
+Not equal to
+Approximately
+  	Decreased / below / lower
+  	Elevated / increased / upper
+  	Move/went to
+  	Between
+#  	Number
+c 	c
+s 	cout
+a 	a
+p 	p
+q 	each
+> 	greater than
+< 	less than
+  	No or none
+ALS Medications
+10% Calcium Chloride (1,000mg/10ml)
+2% Lidocaine (Xylocaine) (100mg/5ml)
+8.4% Sodium Bicarbonate (NaHCO3) (50mEq/50ml)
+Adenosine (Adenocard) (6mg/2ml)
+Albuterol  (2.5mg)
+ASA  (81mg/tab)
+Atropine Sulfate (1mg/10ml)
+D10 (25g/250ml bag)
+D5 (5g/100ml bag)
+Dexamethasone (Decadron) (10mg/ml)
+Diphenydramine (Benadryl) (50mg/ml)
+Droperidol (Inapsine) (5mg/2ml)
+Epi 1:1,000 (Adrenaline) (10mg/10ml)
+Epi 1:10,000 (1mg/10ml)
+Epi 1:100,000 Push-Dose Epi (100mcg/10ml)
+Etomidate (Amidate) (40mg/20ml)
+Fentanyl (Sublimaze) (100mcg/2ml)
+Ipratropium (0.5mg)
+Ketamine (Ketalar) (500mg/5ml)
+Ketorolac Tromethamine (Toradol) (30mg/ml)
+Magnesium sulfate (MgSO4) (1g/2ml)
+Metoprolol tartrate (Lopressor) (5mg/5ml)
+Midazolam (Versed) (10mg/2ml)
+Morphine (4mg/2ml)
+Naloxone (Narcan) (2mg/2ml)
+NTG (0.4mg/Spray)
+Ondansetron (Zofran) (4mg/2ml)
+10% Calcium Chloride  (1,000mg/10ml)
+Drug Info:
+Class:
+Electrolyte
+Indications:
+Hyperkalemia
+Symptomatic HR
+Toxic Ingestion
+Contraindications:
+Known hypersensitivity
+Digitalis toxicity
+Precautions:
+Rx slowly unless  Cardiac Arrest.
+Significant adverse/side effects:
+HR
+VF
+Extravasation Necrosis
+Abdominal Pain
+N/V
+Adult Rx:
+Intervention: Mg OD from Bronchospasm IN Eclampsia 1g IV
+(clarify how this is written)
+Intervention: Hyperkalemia 1g IVP/IO
+Continuity: BP + Wide-QRS symptomatic rhythm  1g IVP
+Intervention: RRWCT >5mm c HR <150 Implies Hyperkalemia 1gIVP
+Repeat Rx if QRS Narrows p Ca
+*do not give Lidocaine
+Continuity: Ca/-Blocker OD c HR 1g slow IVP
+Pediatric Rx  Dont give Calcium Chloride to Pediatric pts
+2% Lidocaine  (100mg/5ml)
+Class:
+Antiarrhythmic
+Indications:
+Symptomatic HR & VF/pVT
+Contraindications:
+Hypersensitivity or Local anesthetic allergy in the amide class
+AV block >1o in the absence of a pacemaker
+Idioventricular escape rhythm s pacemaker
+Stokes-Adams syndrome
+WPW syndrome
+Precautions:
+Prolonged Plasma half-life c  >70yo, CHF, or hepatic failure
+ Give  Maintenance Infusions.
+Dont Rx if Idioventricular escape rhythm s a pacemaker is
+Present.
+Significant adverse/side effects:
+Drowsiness
+Paresthesia
+Slurred speech
+Nystagmus (early sign of toxicity)
+Seizures (severe toxicity)
+Adult Rx:
+2% Lidocaine = 2g of Lidocaine in 100ml = 1g/50ml
+These come from local in hospital things and can be deleted
+Max dose c Epi = 7mg/kg
+Max dose s Epi = 5mg/kg
+Intervention: VT = 1-1.5mg/kg slow IVP over 2-3min
+If n/c p 5min  0.5-0.75mg/kg              Max = 3mg/kg
+Consultation: P-ROSC Stabilization = 2mg/min IV Maintenance Infusion
+Intervention: EZ-IO = 2ml over 60-90sec
+ Flush c 5-10ml NS rapidly over 5sec
+ Then give 1ml over 30sec
+8.4% Bicarb  (NaHCO3)  (50mEq/50ml)
+***Given separately from other drugs***
+Drug Info:
+Class:
+Alkalizing (buffering) agent
+Indications:
+Fall or Weakness (probably only if for suspected hyperkalemia)
+Hyperkalemia
+Symptomatic HR
+Toxic Ingestion
+Precautions:
+Bicarb precipitates/Interacts c multiple Rxs  Dont Mix
+Flush IV line a & p administration.
+In neonates and children <2yo  4.2% slowly used instead.
+Bicarb may cause tissue necrosis, ulceration, & sloughing.
+Significant adverse/side effects:
+Metabolic alkalosis
+Paradoxical acidosis
+Exacerbation of HF
+Hypernatremia
+Hypokalemia
+Hypocalcemia
+Adult Rx:
+Continuity: Dead + Bed Sores from Immobility  Suggests Hyperkalemia
+= 1mEq/kg
+Intervention: Hyperkalemia = 50mEq  IVP/IO
+Intervention: RRWCT >5mm  c  HR <150  Suggests Hyperkalemia
+= 50mEq IVP  If QRS narrows  Give 2nd dose
+Continuity: Tricyclic OD  c  Wide-QRS & BP or Pulseless
+= 1mEq/kg  IVP   Several doses may be needed
+Pediatric Rx:
+Neonates & Children <2yo = 4.2% Bicarb given slowly
+Continuity: Propranolol OD  c  Widened QRS
+= 1-2mEq/kg   IV/IO  Bolus
+Continuity: Tricyclic OD  c  BP or Pulseless or Wide-QRS
+= 1-2mEq/kg   IV/IO
+Adenosine  (6mg/2ml)
+Drug Info:
+Class:
+Antiarrhythmic
+Indication:
+SVT
+Contraindications:
+Known hypersensitivity
+A-Fib associated  c  WPW Syndrome
+Precautions:
+Rx in a pt c A-Fib & WPW may result in VF
+Rx may induce Airway Hyperresponsiveness & should be used
+c caution in pts c a RAD Hx (asthma)
+Significant adverse/side effects:
+H/A
+Cx pn
+Flushing
+Dyspnea/Bronchoconstriction
+HR
+AV block
+Sinus Pause/Asystole
+Adult Rx:
+Intervention: SVT   6mg   Fast IVP  c 10ml Flush
+If n/c  12mg  Fast IVP  c 10ml Flush
+If n/c  12mg  Fast IVP  c 10ml Flush
+n/c = Stable Pt & Rhythm is unchanged
+Consultation: Med-Control for additional doses
+Continuity: If n/c  Repeat 12mg  Fast IVP  during transport
+Albuterol  (2.5mg/3cc)
+Drug Info:
+Class:
+Beta Adrenergic Agonist (2 selective)
+Indications:
+Bronchospasm
+Contraindications:
+Known hypersensitivity
+Significant adverse/side effects:
+HR
+Palpitations/Cardiac Ectopy
+Tremor
+H/A
+N/V
+Adult Rx:
+Intervention: Bronchospasm = 2.5mg in 3cc Neb c O2  6LPM
+Continuity  Repeat Dose or Give Duo-Neb
+Intervention: Hyperkalemia = 2.5mg Neb Given p Ca & Bicarb
+Pediatric Rx:
+Intervention: Bronchospasm = 2.5mg Neb c O2  6LPM
+Continuity  Repeat dose
+ASA    (81mg/tab)
+Drug Info:
+Classification:
+NSAID
+Indications:
+MI or ACS
+Contraindications:
+Known hypersensitivity
+Environmental hyperthermia ???????
+Peptic ulcer disease (relative for cardiac indications)
+Pediatric/Adolescent  Due to Reyes Syndrome
+Precautions:
+Reyes Syndrome S/S = CNS damage, liver injury, & BGL
+Significant adverse/side effects:
+Gastritis
+N/V
+Upper GI bleeding
+ Bleeding
+Adult Rx:
+Intervention: MI or ACS  = 324mg PO
+Atropine  (1mg/10ml)
+Drug Info:
+Class:
+Anticholinergic & more specifically  Antimuscarinic
+Indication:
+Symptomatic HR
+Organophosphate Poisoning
+Contraindications:
+Known hypersensitivity
+Glaucoma (relative c  life threatening HR)
+Precautions:
+Caution c MI & Hypoxia  O2 Heart Demand
+Rx should not delay external pacing for pts c poor perfusion
+May not be effective for Type II AV block & new 3o block c
+Wide QRS where the location of block is likely to be in the
+bundle of His or more distal conduction system
+Donor hearts are denervated & are not responsive to Atropine
+Significant adverse/side effects:
+HR (may worsen myocardial ischemia)
+Blurred vision c high doses
+Confusion c high doses
+Acute angle closure glaucoma (relative)
+Adult Rx:
+Intervention: Symptomatic HR c  IV Access = 1mg IVP/IO
+If n/c p 5min  Repeat Rx
+Intervention: SLUDGEM Pt S/S = 2mg IVP/IO
+If Initial IV attempt is unsuccessful  May be given IO/IM
+Continuity: Plant Ingestion c HR = 2mg IVP  Repeat prn
+Pediatric Rx:
+Intervention: SLUDGEM Pt S/S = 0.05mg/kg  IV    ( IM prn )
+ Repeat prn
+Continuity: Plant Ingestion c HR:
+<12yo  0.02-0.05mg/kg  IV/IO  q 20-30min  until Pt Dries up
+12yo ----- 0.05mg/kg  IV/IO  q 20-30min  until Pt Dries up
+Drug Info:
+Class:
+Electrolyte
+Indications:
+Hyperkalemia
+Symptomatic HR
+Toxic Ingestion
+Contraindications:
+Known hypersensitivity
+Digitalis toxicity
+Precautions:
+Rx slowly unless  Cardiac Arrest.
+Significant adverse/side effects:
+HR
+VF
+Extravasation Necrosis
+Abdominal Pain
+N/V
+Adult Rx:
+Intervention: Mg OD from Bronchospasm IN Eclampsia 1g IV
+(clarify how this is written)
+Intervention: Hyperkalemia 1g IVP/IO
+Continuity: BP + Wide-QRS symptomatic rhythm  1g IVP
+Intervention: RRWCT >5mm c HR <150 Implies Hyperkalemia 1gIVP
+Repeat Rx if QRS Narrows p Ca
+*do not give Lidocaine
+Continuity: Ca/-Blocker OD c HR 1g slow IVP
+Pediatric Rx  Dont give Calcium Chloride to Pediatric pts
+D5  (5g/100ml bag)   &    D10  (25g/250ml bag)
+Class:
+Carbohydrate
+Indications:
+BGL/Insulin Shock
+Contraindications:
+Avoid D5W c ICP
+Precautions:
+Use D10% for the management of BGL.
+Higher concentration are hypertonic and extravasation may
+lead to tissue injury.
+Verify Patency & Function of IV line a Rx
+Check BGL p giving Rx
+Significant adverse/side effects:
+Local skin irritation
+Thrombophlebitis
+Extravasation c subsequent tissue necrosis
+BGL
+Osmotic diuresis
+Rx:
+Give D10 in 10g increments until BGL  >100mg/dL
+Dexamethasone (Decadron)  (10mg/ml)
+Class:
+corticosteroid, anti-inflammatory
+Indications:
+Anaphylaxis
+Bronchospasm
+Contraindications:
+Known hypersensitivity
+Precautions:
+Give Slowly
+Significant adverse/side effects:
+Agitation
+Perineal/body burning sensation
+Pruritis
+N/V
+Adult Rx:
+Intervention: Anaphylaxis = 10mg IV/IM/PO         *Oral tastes bitter*
+Intervention: Bronchospasm = 10mg IVP/IM
+Pediatric Rx:
+Intervention: Anaphylaxis = 0.6mg/kg IV/IM
+Intervention: Bronchospasm = 0.6mg/kg IV/IM/PO
+Benadryl  (50mg/ml)
+Class:
+Antihistamine   (H1)
+Indications:
+Allergic Reaction
+Anaphylaxis
+Toxic Ingestion (probable about treating dystonic reactions)
+Contraindications:
+Known hypersensitivity
+Narrow angle glaucoma
+Prostatic hypertrophy or bladder neck obstruction
+Precautions:
+The drug of choice for anaphylaxis is Epi, not Benadryl
+Significant adverse/side effects:
+Sedation
+BP (rare)
+May cause paradoxical excitation in young children
+Adult Rx:
+Intervention: Allergic RXN or c Anaphylaxis p Epi = 50mg IVP
+Continuity: Extrapyramidal RXN from Haldol use = 50mg IVP/IM
+Pediatric Rx:
+Intervention: Allergic RXN or c Anaphylaxis p Epi = 1mg/kg IVP
+Continuity: Extrapyramidal RXN from Haldol = 1mg/kg IV/IM/IO
+Droperidol (Inapsine)  (5mg/2ml)
+Class:
+Sedative/Hypnotic/Antiemetic
+Indications:
+N/V
+Pain Management
+Violent/Agitated/ &/or Anxious pt
+Contraindications:
+Known hypersensitivity
+SBP <100mmHg
+Significant adverse/side effects:
+Transient BP
+Hyperactivity/Anxiety
+Neuroleptic Malignant Syndrome
+Adult Rx:
+Intervention: N/V = 1.25mg IV/IM  Consultation for a 2nd dose*
+Intervention: H/A or abdominal pain = 2.5mg IV
+Intervention: RASS+1 = 5mg IM
+Intervention: RASS+2/3 = 10mg IM  Repeat once prn p 10min
+>65yo = 5mg IM
+Not approved for Pediatric Pts
+(might need to do an EKG due to QT elongation)
+Epi 1:1,000 (Adrenaline)  (10mg/10ml)
+Class:
+Endogenous Catecholamine
+Indications:
+Anaphylaxis
+Bronchospasm
+these are probably epi 1:10,000 instead
+o	Symptomatic BRADYCARDIA
+o	Cardiogenic Shock
+o	VF or pVT:
+o	Post-ROSC Stabilization
+Contraindications:
+Known hypersensitivity
+Significant adverse/side effects:
+Tachycardia and arrhythmias
+Myocardial ischemia/infarction
+HTN
+Tremor
+Anxiety
+H/A
+N/V
+Adult Rx:
+Intervention: Anaphylaxis = 0.5mg IM
+n/c p 5min  Repeat once
+Consultation  May give 3rd dose 5min p the 2nd dose
+Consultation: Bronchospasm c severe asthmatics = 0.5mg IM
+Pediatric Rx:
+Intervention: Anaphylaxis <10kg = 0.01mg/kg IM  (0.01ml/kg IM)
+10-25kg = 0.15mg IM    (0.15ml IM)
+25-60kg = 0.3mg IM    (0.3ml IM)
+>60kg = 0.5mg IM    (0.5ml IM)
+*All weight classes: give prn every 5-15min   (max = 3 doses)
+Consultation  Epi IV Infusion p 3rd does of Epi
+Consultation: Bronchospasm = 0.3mg IM (0.3ml IM)
+Epi 1:10,000  (1mg/10ml)
+Class:
+Endogenous Catecholamine
+Indications:
+VF or pVT
+Symptomatic HR
+Cardiogenic Shock
+Post-ROSC Stabilization
+Contraindications:
+1.	Known hypersensitivity
+2.	  50yo (asthma) usually for the 1:1,000 for bronchospam
+Significant adverse/side effects:
+HR & arrhythmias
+Myocardial ischemia/infarction
+HTN
+Tremor
+Anxiety
+H/A
+N/V
+Rx:
+Ventricular Fibrillation or Pulseless Ventricular Tachycardia: Page 70
+Cardiogenic Shock/Post Arrest Stabilization PEDIATRIC p157- epinephrine 1mcg/kg IO or IVP
+Adult Rx:
+Intervention: VF/VT 1mg IVP during CPR
+Epi 1:100,000  (100mcg/10ml) Push-Dose Epi
+Class:
+Endogenous Catecholamine
+Indications:
+Symptomatic HR
+Cardiogenic Shock
+Post-ROSC Stabilization
+Contraindications:
+Known hypersensitivity
+50yo (asthma) usually for the 1:1,000 for bronchospam
+Significant adverse/side effects:
+HR & arrhythmias
+Myocardial ischemia/infarction
+HTN
+Tremor
+Anxiety
+H/A
+N/V
+Push-Dose Epi Preparation:
+Waste 1ml from NS Flush
+ Draw 1ml Epi 1:10,000 into NS Flush
+Concentration = 10mcg/ml & total Epi = 100mcg/Flush
+Epi Continuous Infusion:
+Waste 10ml from 250ml NS bag
+ Add 10ml of 1:10,000 Epi into the NS bag
+= 4mcg/ml Epi Concentration
+Epi Continuous Infusion Drip Rates c 60-Drip (Micro-Drip):
+2mcg/min = 1gtt/2sec
+4mcg/min = 1gtt/sec
+8mcg/min = 2gtts/sec
+12mcg/min = 3gtts/sec
+16mcg/min = 4gtts/sec
+Adult Rx:
+Intervention: Symptomatic HR (En route & s hypovolemia)
+= 10mcg IVP followed by 2mcg/min Infusion
+Consultation: Titrate up by 2mcg/min q min prn     Max = 16mcg/min
+Intervention: Cardiogenic Shock 10mcg IVP followed by
+ 2mcg/min Infusion  Titrate up 2mcg/min q min
+Max = 10mcg/min         SBP Goal 90
+Intervention: Post-ROSC Stabilization Infused at 2mcg/min
+ Titrate up by 2mcg/min q min         Max = 16mcg/min
+Pediatric Rx:
+Consultation: Cardiogenic Shock or Post-ROSC Stabilization	            = 1mcg/kg IVP/IO    From Push-Dose Epi
+10kg child = 1ml      From Push-Dose Epi
+15kg child = 1.5ml    From Push-Dose Epi
+Etomidate  (40mg/20ml)
+Class:
+Sedative-hypnotic
+Indications:
+SAI
+Contraindications:
+Known allergy or hypersensitivity
+Significant adverse/side effects:
+Pain on injection (secondary to propylene glycol diluent, may be  by administering through a rapidly flowing IV placed in a large vein).
+Myoclonus (not of clinical significance), can be  or mitigated by the co-Rx of an opioid or benzodiazepine.
+Adult Rx:
+Intervention: SAI for >10yo = 0.3mg/kg IVP           Max = 40mg
+Fentanyl  (100mcg/2ml)
+Class:
+Synthetic opioid
+Indications:
+MI
+Pain Management
+Sickle Cell Crisis
+Contraindications:
+Known hypersensitivity &  SBP <100
+Precautions:
+Fentanyl should be administered slowly.
+Careful monitoring (including the use of waveform capnography) is warranted when co- administering c benzodiazepines or to pts who have consumed alcohol as these pts are at risk for ventilatory depression.
+Significant adverse/side effects:
+Respiratory depression
+BP
+Cx Rigidity (Extremely rare c Rapid Rx + Dose >5mcg/kg)
+Adult Rx:
+Intervention: MI/ACS 1mcg/kg slow over 3-5min IVP
+ Consultation needed for repeated doses
+Intervention: Pain 1mcg/kg slow IVP/IM/IN     Max = 150mcg
+Intervention: Sickle Cell Crisis 1mcg/kg slow IVP   Max = 150mcg
+Pediatric Rx:
+Intervention: Pain 0.5-1mcg/kg IV/IN      Max = 50mcg
+ Consultation needed for repeated doses
+Consultation: Sickle Cell Crisis 1mcg/kg slow IVP/SQ
+Max = 50mcg
+Ipratropium  (0.5mg/3cc)
+Class:
+Anticholinergic
+Parasympatholytic used in the Tx of respiratory emergencies.
+Causes bronchodilation & dries Respiratory tract secretions.
+Blocks Acetylcholine. 15% of dose reaches lower airway.
+Indications:
+Bronchospasm
+Contraindications:
+Known Hypersensitivity
+Significant adverse/side effects:
+Palpitation
+Anxiety
+Dizziness
+H/A
+N/V
+Adult Rx:
+Continuity: Bronchospasm = 0.5mg or Duo-Neb
+Ketamine  (500mg/5ml)
+Class:
+Dissociative general anesthetic
+Indications:
+SAI
+Bronchospasm
+Pain Management
+Violent/Combative Pt
+Contraindications:
+Cardiac ischemia/infarction or Hx of CAD (relative)
+Penetrating ocular injury
+Pt  3 months of age
+Schizophrenia
+Precautions:
+IV ketamine should be administered over 60sec
+When not used in conjunction c a neuromuscular blocking agent, the most common respiratory side effect associated c ketamine is laryngeal spasm. It is usually transitory and easily managed c PPV.
+Significant adverse/side effects:
+Emergence reaction
+HR
+BP/HTN
+Hypersalivation
+Laryngospasm
+ Intraocular Pressure
+N/V
+Transient apnea (if given rapidly via IV route)
+Adult Rx:
+Intervention: Combative pt = 4mg/kg IM          >65yo = 2mg/kg IM
+Max = 500mg IM          RASS score q 5min
+Intervention: SAI/Bronchospasm = 2mg/kg IV/IO
+Intervention: Pain = 0.2mg/kg IV/IO       Max = 25mg
+Pediatric Rx:
+Intervention: Combative = 4mg/kg IM
+Dont exceed Entire Vial/Site
+Intervention: SAI/Bronchospasm = 2mg/kg IV/IO
+Intervention: SAI c BP s Cardiogenic Shock = 1mg/kg IV
+Intervention: SAI c suspected Cardiogenic Shock = 0.5mg/kg IV
+Ketorolac  (Toradol) (30mg/ml)
+Class:
+NSAID
+Indications:
+Pain Control for pts >17yo
+Contraindications:
+Known hypersensitivity
+Allergy to any NSAID (including ASA)
+Asthma
+Renal insufficiency
+Peptic ulcer disease or GI bleeding
+Pregnancy
+Hypovolemia
+Trauma other than isolated extremity trauma
+Anticipated major surgery (within 7 days)
+Precautions:
+Ketorolac Tx is not indicated for abdominal/Cx pain.
+ By 50% in pts >65yo due to  Renal Function Concerns
+Significant adverse/side effects:
+GI bleeding
+H/A
+Drowsiness
+Abdominal pain
+Dyspepsia
+17yo Rx:
+Intervention: For Pain = 15mg IV/IM         If >65yo = 7.5mg IV/IM
+(Not for abdominal/Chest pain)
+May be given off-label with med control approval for <17yo
+Magnesium sulfate (MgSO4) (1g/2ml)
+Class:
+Electrolyte
+Indications:
+Bronchospasm
+Childbirth
+Symptomatic HR
+Contraindications:
+Known hypersensitivity
+Precautions:
+BP, HR, & Conduction issues may occur if given too fast.
+Rx c caution c HR.
+Toxicity is associated c CNS & neuromuscular depression.
+A  in deep tendon reflexes (DTRs) = Early Toxicity sign
+& may indicate impending respiratory depression.
+Ca+ reverses respiratory depression associated c Mg toxicity.
+Significant adverse/side effects:
+BP
+HR/Conduction disturbance (Rx c caution in pts c HR)
+Respiratory depression
+Flushing
+Adult Rx:
+Intervention: Bronchospasm  for Severe Asthmatics or c PMH
+of Intubation for asthma = 2g slow IV drip
+Slow IV Drip = 1gtt/(1-2sec) c a 10-Drip Set & 250ml NS bag
+Intervention: Eclampsia = 4g  slow IVP over 3-5min c NS
+ followed by IV piggyback Drip at 1-2g/hr
+IV piggyback Drip at 1-2g/hr = 0.7gtts/sec
+or  2gtts/3sec c a 10-Drip Set & 250ml NS bag
+Intervention: Torsades = 2g IV Infusion over 2min
+ Followed by 5mg/min Infusion
+2g IV Infusion over 2min = 1g in 10ml Flush over 1min
+ repeat once
+5mg/min Infusion = Mix 1g in c  250ml NS bag c 60-Drip Micro Set
+ Ran at 1.25gtts/sec or 5gtts/4sec
+Pediatric Rx:
+Consultation: Bronchospasm  For >2yo c Severe Asthmatics
+or c PMH of Intubation for asthma
+= 40mg/kg diluted c NS to a concentration of 100mg/ml
+ Infuse over 20min c rate < 150mg/min           Max = 2g
+Prepared Syringe c a concentration of 100mg/ml:
+= Draw 10ml out of 250ml NS bag c 10cc syringe
+ Waste 2ml from syringe
+ Draw up into the syringe 1g (2ml) of MgSO4
+(Pediatric Weight (in kg))/2.5 = # of mls added
+to our 250ml NS bag from our prepared syringe
+Run MgSO4 Infused NS bag over 20min c  10-Drip Set at 2gtts/sec
+Note: 50kg Child = 2g MgSO4 (our max dose) = 2 Vials of MgSO4
+25kg child = 1g MgSO4 = 1 Vial of MgSO4
+Never exceed 3gtts/sec
+Never exceed 2 Vials of our 1g/2ml MgSO4
+Metoprolol (Lopressor)  (5mg/5ml)
+Class:
+Beta antagonist (1 selective)
+Indications:
+Symptomatic HR
+Contraindications:
+Known hypersensitivity
+HR < 60
+AV block >1o s a pacemaker
+SBP <100
+Acute decompensated heart failure
+Significant adverse/side effects:
+BP
+HR
+AV block
+Dizziness
+Bronchospasm
+Heart failure
+Adult Rx:
+Intervention: A-Fib c RVR or A-Flutter
+= 0.15mg/kg  slow IVP  over 2min           Max = 10mg
+Consultation: Stable SVT
+ Discuss for use as an additionally used dose for SVT
+Midazolam (Versed)  (10mg/2ml)
+Class:
+Benzo
+Indications:
+SAI
+Symptomatic HR
+Seizure
+Symptomatic HR
+Vent Pt
+Violent/Combative Pt
+Contraindications:
+Known hypersensitivity
+2.	Hypotension (SBP <100 mmHg) probabky relative??
+Acute angle glaucoma (relative)
+Precautions:
+Respiratory Depression Risk c Opioids, old age, or c
+Respiratory Conditions.  Rx c in these pts.
+Rx c a non-intubated pt  Monitor the airway & ventilation
+ Use Capno.
+BP may occur c fast Rx to low volume pts,
+or to pts c hemodynamic instability.
+Significant adverse/side effects:
+Respiratory depression
+BP
+Confusion
+Adult Rx:
+Intervention: HR c BP If  Pacing Works + Uncomfortable pt
+= 5mg  IV/IO
+Intervention: HR c BP = 5mg IV/IO a Cardioversion  if  IV
+Intervention: Vent pt c BP = 5mg IV/IO
+Intervention: RASS +1 Adult 65yo = 0.02mg/kg IV
+Single Max Dose = 2.5mg IV or 5mg IM
+Consultation: RASS+4 p Ketamine or RASS+1 Adult 65yo
+= 5mg IM
+Come back and check this one out more
+Intervention: SAI = 2.5-5mg IV
+Intervention: Seizure = 10mg IM or 0.1mg/kg IV/IN
+Max = 5mg IV & 10mg IM
+Intervention: Seizure from Organophosphate OD = 5mg IV/IN
+Pediatric Rx:
+Intervention: SAI = 0.1mg/kg IV            Max = 5mg
+Intervention: Seizure = 0.5mg/kg  IN
+Initial Max =10mg & Total Dose Max = 20mg
+or 0.2mg/kg  IV/IO  c  Max = 5mg & prn until Total Max = 10mg IV
+Intervention: Seizure from Organophosphate OD
+= 0.2mg/kg  IV/IO       Max = 5mg
+or 0.5mg/kg  IN
+Intervention: RASS+3 safety or  physical restraint
+=   0.1-0.2mg/kg  IM          Max = 5mg  IM
+or 0.05-0.1mg/kg  IV           Max = 10mg  IV
+or    0.02mg/kg  IN           Max = 20mg  IN
+prn until Max Dose is Reached
+Morphine  (4mg/2ml)
+Drug Info:
+Class:
+Indications:
+Contraindications:
+Precautions:
+Significant Adverse/Side Effects:
+Adult Rx:
+Intervention: MI/ACS = 4mg  Slow IVP
+Only if  Fentanyl  is Unavailable or Contraindicated
+Intervention: Pain = 2-4mg  IVP
+Pediatric Rx:
+Intervention: Pain = 0.1mg/kg  IV/SQ      Max = 4mg
+ Consult for further doses
+Consultation: Sickle Cell Crisis = 0.1mg/kg  IV/SQ     Max = 4mg
+Narcan  (2mg/2ml)
+Drug Info:
+Class:
+Indications:
+Contraindications:
+Precautions:
+Significant Adverse/Side Effects:
+Adult Rx:
+Intervention: Coma/Opioid OD = 2mg  IM/IN
+or 0.4mg  IVP
+Pediatric Rx:
+Intervention: AMS/Opioid OD = 0.1mg/kg  IV/IO/ETT/IM
+Max = 2.0mg
+Continuity: Methadone OD = 0.2mg/kg        Max = 2.0mg
+NTG  (0.4mg/spray)
+Drug Info:
+Class:
+Organic nitrate
+Indications:
+MI or ACS
+Pulmonary Edema
+Contraindications:
+Known hypersensitivity
+SBP <100
+Recent use of a phosphodiesterase type 5 inhibitor (sildenafil [Viagra, Revatio] or vardenafil [Levitra] within 24 hours or tadalafil [Cialis, Adcirca]) cin 36 hours.
+Right ventricular infarction (RVI)
+Tachycardia (HR>100) in the absence of HF (not universal)
+ICP
+Precautions:
+Pts c RVI are preload sensitive & can develop severe BP in
+response to Preload-reducing agents. If BP develops
+following Rx  IVF may be necessary.
+Inferior STEMI  Do right sided EKG to look for RVI evidence
+Pts c aortic stenosis are very preload dependent to maintain
+cardiac output. NTG c aortic stenosis or murmur should be
+judicious & carefully titrated.
+Significant adverse/side effects:
+Hypotension
+H/A
+Tachycardia (reflex)
+Bradycardia
+Methmemoglobinemia  nitrate ions oxidize hemoglobin
+long term effect & unlikely seen in EMS setting
+Adult Rx:
+Dont give if pt had Viagra/Cialis within the past 48hrs
+NTG is NOT contraindicated c Inferior STEMI
+ Should the pt become profoundly Hypotensive
+ Infuse NS until BP >90
+Be cautious c Aortic Stenosis or Murmurs
+Intervention: MI/ACS = 0.4mg SL q 5min prn only if BP >100
+or  >110 if pt Never had NTG a
+Max = 3 doses
+Continuity: Repeat  q  5min  if  SBP >100 & pain still present
+Intervention: Pulmonary Edema = 0.4mg  SL  if BP  >100
+or  >120  if pt Never had NTG a
+Intervention: Flash Pulm-Edema from Hypertensive Crisis  s  IV
+= 0.4mg  SL
+Consultation: 0.8-1.2mg  SL & Inform Med-Control if no IV yet
+Zofran  (4mg/2ml)
+Drug Info:
+Class:
+Antiemetic
+Indications:
+N/V
+Contraindications:
+Known hypersensitivity
+Prolonged QTI (male >440msec, female >450msec
+(probably more of a precaution)
+Pregnancy (1st trimester)
+Precautions:
+Use c caution c other agents that may cause QTI prolongation.
+Significant adverse/side effects:
+H/A (particularly in those prone to migraine headaches)
+QTI prolongation
+AV conduction disturbance (associated c rapid Rx)
+Sedation
+Diarrhea
+Dry mouth
+Serotonin syndrome
+Adult Rx:
+Intervention: N/V = 4mg  IVP over  60sec
+Pediatric Rx:
+Intervention: N/V = 0.15mg/kg  IVP over  60sec      Max = 4mg
+Intervention: N/V s  IV   4-11yo = 4mg tab PO
+12yo = 8mg tab PO

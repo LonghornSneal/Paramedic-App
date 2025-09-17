@@ -1,0 +1,174 @@
+[
+  {
+    "repo": "openai/agents.md",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/openai/agents.md/main/AGENTS.md",
+    "title": "AGENTS Guidelines for This Repository"
+  },
+  {
+    "repo": "MrLesk/Backlog.md",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/MrLesk/Backlog.md/main/AGENTS.md",
+    "title": "\u26a0\ufe0f **IMPORTANT**"
+  },
+  {
+    "repo": "golbin/AGENTS.md",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/golbin/AGENTS.md/main/AGENTS.md",
+    "title": "AGENTS.md"
+  },
+  {
+    "repo": "knavillus1/codex_bootstrap",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/knavillus1/codex_bootstrap/main/AGENTS.md",
+    "title": "Contributor Guide"
+  },
+  {
+    "repo": "Lewenhaupt/ctx",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/Lewenhaupt/ctx/main/AGENTS.md",
+    "title": "ctx rules/markdown splicing tool mono-repo"
+  },
+  {
+    "repo": "cortesi/agentsmd",
+    "branch": "main",
+    "path": ".agents.md",
+    "raw_url": "https://raw.githubusercontent.com/cortesi/agentsmd/main/.agents.md",
+    "title": "Project Overview"
+  },
+  {
+    "repo": "cortesi/agentsmd",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/cortesi/agentsmd/main/AGENTS.md",
+    "title": "Project Overview"
+  },
+  {
+    "repo": "konturio/AGENTS.md",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/konturio/AGENTS.md/main/AGENTS.md",
+    "title": "Important rules for agents"
+  },
+  {
+    "repo": "leonardsellem/codex-subagents-mcp",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/leonardsellem/codex-subagents-mcp/main/AGENTS.md",
+    "title": "Agents"
+  },
+  {
+    "repo": "joggrdocs/agents.md",
+    "branch": "main",
+    "path": "examples/tanstack-start/.windsurf/rules/agents.md",
+    "raw_url": "https://raw.githubusercontent.com/joggrdocs/agents.md/main/examples/tanstack-start/.windsurf/rules/agents.md"
+  },
+  {
+    "repo": "joggrdocs/agents.md",
+    "branch": "main",
+    "path": "examples/tanstack-start/AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/joggrdocs/agents.md/main/examples/tanstack-start/AGENTS.md"
+  },
+  {
+    "repo": "ivawzh/agents-md",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/ivawzh/agents-md/main/AGENTS.md",
+    "title": "Design"
+  },
+  {
+    "repo": "louisbrulenaudet/bodyboard",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/louisbrulenaudet/bodyboard/main/AGENTS.md",
+    "title": "Bodyboard Agents Instructions"
+  },
+  {
+    "repo": "siraustin/newsletter-gemini",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/siraustin/newsletter-gemini/main/AGENTS.md",
+    "title": "AGENTS.md"
+  },
+  {
+    "repo": "llmspec/llms-spec",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/llmspec/llms-spec/main/AGENTS.md"
+  },
+  {
+    "repo": "Rich43/codexagentsmd",
+    "branch": "main",
+    "path": "python_agents/AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/Rich43/codexagentsmd/main/python_agents/AGENTS.md",
+    "title": "AGENTS.md"
+  },
+  {
+    "repo": "eggboy/agent-instruction",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/eggboy/agent-instruction/main/AGENTS.md",
+    "title": "Coding Agent Instructions"
+  },
+  {
+    "repo": "franckparienti/agents-md",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/franckparienti/agents-md/main/AGENTS.md",
+    "title": "AGENTS.md"
+  },
+  {
+    "repo": "tooppoo/template-with-agents",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/tooppoo/template-with-agents/main/AGENTS.md",
+    "title": "AI\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u5411\u3051\u6307\u793a\uff08\u500b\u4eba\u958b\u767a\u7528\u30fb\u4e8c\u5c64\u7248\uff09"
+  },
+  {
+    "repo": "DiscreteTom/agents.md",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/DiscreteTom/agents.md/main/AGENTS.md",
+    "title": "Global Rules"
+  },
+  {
+    "repo": "ales27pm/AGENTS.md",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/ales27pm/AGENTS.md/main/AGENTS.md",
+    "title": "AGENTS.md \u2014 Contract for Repo-Native AI Agents"
+  },
+  {
+    "repo": "walterf3/agents",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/walterf3/agents/main/AGENTS.md",
+    "title": "Global UI/UX Intelligence"
+  },
+  {
+    "repo": "Marcus-Jenshaug/AGENTS.md",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/Marcus-Jenshaug/AGENTS.md/main/AGENTS.md",
+    "title": "AGENTS.md \u2014 Implementation Agent"
+  },
+  {
+    "repo": "schubergphilis/agents.md",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/schubergphilis/agents.md/main/AGENTS.md",
+    "title": "Agent System and Tag-Based Prompts"
+  },
+  {
+    "repo": "jerrynim/AGENTS.md",
+    "branch": "main",
+    "path": "AGENTS.md",
+    "raw_url": "https://raw.githubusercontent.com/jerrynim/AGENTS.md/main/AGENTS.md",
+    "title": "Tone and Behavior"
+  }
+]
