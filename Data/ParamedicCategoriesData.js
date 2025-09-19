@@ -376,7 +376,6 @@ export const ParamedicCategoriesData = [
             { id: 'zoll-emv731-using-manage-alarms', title: 'Managing Alarms', type: 'topic' }
           ] },
           { id: slugify("zoll-emv731-alarms"), title: "Alarms", type: "category", children: [
-            { id: 'zoll-emv731-alarms-all', title: 'All Content', type: 'topic' },
             { id: 'zoll-emv731-alarms-overview', title: 'Alarm Overview', type: 'topic' },
             { id: 'zoll-emv731-alarms-amc', title: 'Alarm Message Center (AMC)', type: 'topic' },
             { id: 'zoll-emv731-alarms-priorities', title: 'Alarm Priorities', type: 'topic' },

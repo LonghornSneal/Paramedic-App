@@ -1,309 +1,61 @@
-Chapter 5
-Alarms
-This chapter provides a detailed description and comprehensive reference for the ZOLL
-Ventilator’s alarms and Pop Up Messages. This chapter
-• Describes the display format of ZOLL’s Smart Help messages in detail.
-• Describes alarm types and priorities.
-• Provides a comprehensive list of alarms and Pop Up messages.
+## Alarm Overview
+The EMV731 constantly audits the patient, ventilator hardware, and surrounding environment. Any deviation generates a Smart Help alert that highlights the issue and points you toward corrective actions. The alarm list is sorted by clinical risk, so the most dangerous condition always appears first. Work the alarms in order, confirming the patient each time before you silence the tone or move on. (*Source: Rev. P, Chapter 5-1 through 5-2*)
 
+- Smart Help binds device diagnostics to bedside tasks, making it easier to translate the alert into patient care steps.
+- Consider every alarm a patient-safety event until proven otherwise; even advisory banners can foreshadow loss of ventilation.
 
-ZOLL Ventilator Operator’s Guide
+## Alarm Message Center (AMC)
+The Smart Help banner in the upper-left corner functions as the Alarm Message Center. It layers the alarm name, stepwise mitigation guidance, and a bold Message line that tells you what to do if the first suggestions fail. Use the control dial to page through active alarms; the solid bell icon marks the alarm you are viewing, while outlined bells show the remaining stack. The waveform icon shares the list so you can review the current trace when you need more context. (*Source: Rev. P, Chapter 5-2 through 5-3*)
 
-5-1
+- Line 1 names the alarm and mirrors the priority color seen on the LED column.
+- The next lines list corrective actions in order; carry them out sequentially.
+- The final bold Message prompt lays out the contingency plan (often switching to manual ventilation or calling for service) if the alarm does not clear.
+- Every alarm carries a four-digit service code. The leading digit mirrors the alarm priority and becomes the shorthand you should quote to ZOLL support (for example, a 2### code signals a medium-level event).
 
-ALARMS
+## Alarm Priorities
+Alarm priorities describe how threatened the patient's ventilation is and how aggressively you must intervene. (*Source: Rev. P, Chapter 5-3 through 5-4*)
 
-Alarm Overview
-To safeguard the patient, the ZOLL Ventilator continuously monitors the patient, device, and
-environment to ensure that all of the systems are functioning as intended. When device detects
-a problem, it triggers an alarm and displays a Smart Help message to alert you.
+- High priority: The ventilator can no longer guarantee breaths under user control. Assume the patient is unsupported, begin manual ventilation, troubleshoot power and hardware, and expect the alarm to continue until the fault is resolved or the ventilator is powered down.
+- Medium priority: Ventilation continues, but a circuit, pneumatic, or monitoring fault needs rapid attention. Pressing Mute gives a 30-second pause; if the problem persists, the tone restarts after three seconds.
+- Low priority (advisory): Ventilation is stable, yet a configuration or monitoring issue requires follow-up. Mute silences the tone, but the yellow LED stays lit until you fix the condition.
 
-On the Smart Help message, a multi-line message screen appears in the upper left-hand corner
-of the display screen. This screen area is the Alarm Message Center (AMC). The AMC displays
-the alarm name with a series of messages to help you resolve the alarm. The device prioritizes
-alarms based on the risk to the patient and always presents the alarm with the greatest risk to the
-patient first. All messages are context-based and suggest what is causing the alarm and how it
-can be resolved.
-The Alarm Message Center (AMC) contains the information and instructions for all active
-alarms, as in the following example:
+## Alarm Icons & Service Codes
+The alarm banner uses consistent iconography so severity is obvious at a glance. A column of bell icons appears for every active alarm; the filled bell reflects the line you are reading, and up to six alarms can display before the waveform icon is pushed off the list. Priority triangles (yellow, orange, or red) match the Chapter 1 legend for low, medium, and high alerts. Provide the accompanying four-digit service code when calling technical support; the leading digit communicates the same priority you see on screen and speeds remote troubleshooting. (*Source: Rev. P, Chapter 5-2 through 5-3*)
 
-Smart Help Alarm Display
+## Muting Alarms
+The Mute key is a short-term sound control, not a fix. Most alarms silence for 30 seconds, but high-priority events ignore the command. Use mute deliberately so you can hear new alarms and complete parameter changes without interruption. (*Source: Rev. P, Chapter 5-4*)
 
-a.
+- Preemptive mute: Tap before suctioning, circuit changes, or other planned disconnections; patient-safety alarms stay quiet for 30 seconds while you work.
+- Startup mute: When you launch from the Start Menu, the ventilator suspends most patient alarms for up to two minutes (or 15 seconds once the patient is connected) so you can finish setup without nuisance tones; critical faults still break through.
+- High-noise environments: Leaving the alarm active causes the tone to retrigger with every breath and can cancel adjustments. Hit mute, solve the problem, and verify the alarm clears instead of letting it cycle endlessly.
 
-b.
-c.
+## Alarm Types: Patient Safety
+Patient safety alarms watch everything that directly influences ventilation and oxygenation. They commonly appear as high or medium priority cues that require bedside intervention. (*Source: Rev. P, Chapter 5-4 through 5-6*)
 
-5-2
+- Airway pressure, AutoPEEP, leak, and tubing compliance alarms point to disconnections, kinks, or compliance shifts. Inspect the patient interface and circuit before altering settings.
+- Apnea, breath-rate, inspiratory-demand, and insufficient-flow alarms flag when the patient is not receiving or generating adequate breaths; reassess sedation, trigger sensitivity, and backup rates immediately.
+- Exhalation valve, patient-detected, and circuit fault alarms indicate hardware that needs replacement to restore proper cycling.
+- Integrated SpO2 and heart-rate alarms keep oxygenation information beside ventilator faults so you can correct hypoxia alongside mechanical issues.
 
-Alarm Name: describes the type or cause of the alarm. The Alarm Name appears
-at the top of the AMC. When more than one alarm occurs at the same time, the
-device prioritizes the alarms based on the highest risk to the patient.
-Mitigation/Resolution Instructions: prioritized instructions that describe how to
-resolve the alarm state.
-If not Resolved Instructions: Instructions on what to do you cannot resolve the
-alarm state. The instruction is always shown in the following format
-**Message...**.
+## Alarm Types: Environment
+Environment alarms oversee the resources that keep the ventilator running. They usually start as advisory or medium-priority events but escalate if supplies are exhausted. (*Source: Rev. P, Chapter 5-5 through 5-6*)
 
+- Power and battery alerts warn of reversed DC leads, depleted batteries, or charger faults. Secure stable power or swap batteries before ventilation stops.
+- High-pressure O2 and fresh-gas inlet messages reveal supply restrictions; check cylinder pressure, hose connections, filters, and reservoir mode.
+- Ambient pressure and temperature alarms surface when the operating environment drifts outside the ventilator's certified range; adjust positioning or transport the patient to a safer location.
 
+## Alarm Types: Self Check
+Self Check alarms report internal diagnostic faults. They may allow temporary support, but crews should be ready to change ventilators and notify maintenance. (*Source: Rev. P, Chapter 5-5 through 5-6*)
 
+- Internal communication, firmware mismatch, or processor errors show that the controller and Smart Pneumatic Module disagree. Switch to manual ventilation and arrange a replacement ventilator.
+- Pneumatic sensor or system alarms indicate the unit cannot verify flow or pressure accurately; treat the reading as unreliable until the hardware is serviced.
+- Power-system, pulse-oximeter module, and preventive-maintenance alarms document hardware that needs technical follow-up; capture the service code and escalate per agency policy.
 
-d.
+## Alarm Groups
+Chapter 5 clusters every alarm into Patient Safety, Environment, or Self Check groupings so you can find them quickly in the reference tables. Patient Safety covers airway pressure, breathing frequency, circuit integrity, oximetry, and leak detection items. Environment catalogues batteries, external power, high-pressure oxygen, fresh-gas flow, ambient pressure, and temperature limits. Self Check captures firmware mismatches, internal communications, pneumatic modules, power converters, and scheduled maintenance needs. Mirror these groupings in the app so field crews can jump straight to the appropriate section. (*Source: Rev. P, Chapter 5-5 through 5-7*)
 
-e.
-
-f.
-
-
-Alarm Icons: For each active alarm, an alarm bell appears. When multiple alarms
-are active, the number of bells corresponds to the number of alarms. The alarm in
-the AMC is displayed as the solid bell. To view each active alarm, turn the Dial to
-scroll through all active alarms. The plot icon is also in this list. It allows you to see
-the current waveform to better assess the nature of the failure. A maximum of six
-alarms can be displayed without the plot icon.
-Service Code: Each alarm has a 4 digit number associated with it, which helps the
-operator indicate the specific alarm when communicating with technical support.
-The service codes appear in the following format:
-1###
-
-High Priority Alarm
-
-2###
-
-Medium Priority Alarm
-
-3###
-
-High Priority Alarm
-
-Attention Warning Icon: Identifies the severity of the alarm: Low, Medium, or
-High priority. See the Symbols table in Chapter 1 for the appearance of the warning
-triangle for each of these three alarms.
-
-ZOLL Ventilator Operator’s Guide
-
-5-3
-
-ALARMS
-
-Alarm Priorities
-Alarm priorities define the operational status of the device and its ability to provide mechanical
-ventilation. The alarm priorities are as follows:
-
-High Priority
-Mechanical ventilation under user control is no longer possible. This alarm priority requires
-immediate intervention. This includes system failure alarms where the CPU has failed and a
-backup has taken over to sound the audible and visual alarms. It also includes when the device
-is turned on and there is no internal or external power source.
-Pressing the Mute button has no effect on a high priority alarm. The alarm can only be silenced
-by turning off the ventilator.
-
-Medium Priority
-Mechanical ventilation is active or is possible (maybe for a finite period of time) but, there is a
-failure or fault with the patient, ventilator circuit, a pneumatic subsystem, or pulse oximeter.
-This alarm priority requires immediate intervention by the user.
-Pressing the Mute button mutes medium priority alarms for 30 seconds. If the alarm trigger still
-exists after 3 seconds, the audible alarm recurs until you mute it again for another 30 second
-period or the alarm is resolved.
-
-Low Priority (Advisory)
-Safe mechanical ventilation is active but, there is a fault that you must be aware of to ensure
-safe management of the patient or ventilator. Low priority alarms present with both an audible
-and yellow LED alarm signal alerting you to the condition. Pressing the Mute button cancels
-the audible signal. If the alarm is not resolved, the yellow LED remains illuminated to remind
-you of the fault or failure.
-Note:
-
-Some Low Priority alarms are canceled and the Alarm LED turns green when you
-push the Mute button. For others, the audible alarm is canceled but the Alarm LED
-stay yellow to remind you that the device is operating in a state that needs careful
-monitoring.
-
-Popup Messages
-These alerts appear whenever you attempt to adjust that device in a way that is outside clinical
-norms or is outside the performance range of the ventilator. Pop Up Messages also appear when
-you are required to confirm their action before you proceed.For example, if you try to set the
-low breath rate alarm below 4 that would, practically, disable the alarm. If the desired value is
-outside the performance range, the Pop Up message alerts you to why cannot make the change.
-(Example: trying to set the PEEP level greater than the PIP setting).
-
-5-4
-
-
-
-Muting Alarms
-Under most conditions, pressing the Mute button mutes the audible alarm for 30 seconds. As
-describe in the previous section, pressing the Mute button when a high priority alarm is active
-does not. Using the ZOLL Ventilator, muting functions as follows:
-Preemptive Mute -- to prevent excessive noise in the patient care environment patient, safety
-alarms, such as Patient Disconnect, PEEP Leak, and so on, can be preemptively muted for 30
-seconds. This enables you to prevent the audible alarm, by pressing the Mute button, before
-initiating a procedure that could trigger an alarm.
-2-Minute Startup Mute -- at start up, the ventilator suspends active patient safety alarms, with
-the exception of those alarms that could affect the performance of the device. This prevents
-nuisance alarms during start up while you configure the ventilator. When the Start Menu is
-used, the 2-minute countdown starts once you select a start option. Once the patient connected,
-the mute cancels automatically after 15 seconds when there are no active alarms.
-Use in High Noise Environments -- in high noise environments, you may be inclined not to
-mute the alarm while addressing the problem. Not pressing Mute limits the user's ability to
-resolve the alarm because with each breath the alarm is retriggered and any parameter changes
-you are attempting are canceled as the alarm retriggers
-
-Alarms Types
-The ZOLL Ventilator’s alarm types provide a framework for you to see the scope and range of
-the alarms that the device uses. The alarm types are:
-• Patient Safety -- Patient Safety Alarms address the ventilation of the patient and their
-
-respiratory effort. Pulse oximetry monitoring and circuit/exhalation valve issues are also
-part of this group.
-• Environment - Environment Alarms address the device inputs: external power, battery,
-high pressure O2 supply, and the fresh gas intake. Ambient and device temperature,
-barometric pressure, and altitude are also part of this group.
-• Self Check -- Self Check Alarms address the performance of the device systems and
-include
-1.
-
-Internal Communication (Comm): faults/failures of interdevice communication, cyclic
-redundancy checking, or processor-related issues
-
-2.
-
-Pneumatic Sensor: faults/failures of the pneumotachographs that measure gas flow or the
-pressure transducers.
-
-3.
-4.
-
-Pneumatic System: faults/failures of the compressor of O2 supply proportional valve.
-
-5.
-
-Pulse Oximeter (Ox) Module: faults/failures of the pulse oximeter module that are not related
-to monitoring of the patient, a fault or failure of the module.
-
-6.
-
-Preventive Maintenance: alarms that occur when device is due for preventive maintenance.
-
-Power System: faults/failures of the power system that render the device unable to operate
-from external power or charge/operate from the internal rechargeable battery.
-
-
-ZOLL Ventilator Operator’s Guide
-
-
-5-5
-
-ALARMS
-
-Alarm Groups
-The following table displays the ZOLL Ventilator’s Alarm Groups:
-
-Alarm Groups
-Patient Safety
-
-Environment
-
-Self Check
-
-Airway Pressure
--- High/Low
-
-Battery
--- Battery Drained
--- Battery Nearly Drained
--- Battery Low
--- Discharge Fault
--- Too Hot/Cold
-
-Ambient Pressure
--- High/Low
-
-Apnea
-
-External Power
--- Current High
--- DC Power Reversed
--- High
--- Low/Disconnect
-
-Firmware Mismatch
-
-AutoPEEP
-
-Gas Intake
--- Blocked
--- Restricted
-
-Internal Comm
--- Fault/Failures
-
-Breath Rate (BPM)
--- High/Low
-
-O2 Supply
--- High/Low - Disconnect
-
-Pneumatic Sensor
--- Airway
--- Autocal
--- Pneumotach
--- Transducer
-
-Exhalation
--- Fault/Failure
-
-Pneumatic System
--- Compressor
--- O2 Valve
-
-Heart Rate (HR)
--- High/Low
-
-Power Cycle Needed
-
-Inspiratory Demand
-
-Preventive Maintenance
-
-Insufficient Flow
-
-Pulse Oximeter
--- Comm Failure
--- Module Failure
-
-Patient Detected
-
-Temperature
--- High/Low
--- Sensor Failure
-
-PEEP Leak
-
-5-6
-
-
-
-Alarm Groups
-SpO2
--- Low
--- Disconnect
--- Defective Sensor
--- Not Connected
--- Invalid Sensor
--- Light Contamination
--- Low Perfusion
--- Search
-Tidal Volume
--- High/Low
-Tubing Compliance
-
-
-ZOLL Ventilator Operator’s Guide
-
-5-7
-
-ALARMS
+## Pop Up Messages
+Pop ups act as guardrails whenever you attempt to enter a value outside the ventilator's safe envelope or when the device needs a deliberate confirmation. They freeze the adjustment, explain why the change is blocked, and tell you which key sequence will accept or cancel the request. Many overrides, such as inverse I:E ratios, high EPAP or IPAP targets, or circuit mismatches, demand a second press of Accept to acknowledge the risk; skipping the confirmation leaves the prior setting in place. Some pop ups temporarily disable related alarms until you reconfigure limits, so complete the requested steps before returning to other tasks. (*Source: Rev. P, Chapter 5-4 and 5-23 through 5-31*)
 
 High Priority Alarms
 

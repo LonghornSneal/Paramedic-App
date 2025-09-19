@@ -865,7 +865,7 @@ function parseMdSections(md, topicId){
   const cheat = renderCheatSheet(md, topicId);
   // Reorder for Alarms to preferred sequence if present
   if (topicId === 'zoll-emv731-alarms') {
-    const order = ['Original Documentation','Alarm Overview','Alarm Name','Alarm Priorities','Muting Alarms','Alarm Groups','High Priority Alarms','Gas Intake Failures','High O2 Failures','Self Check Failures','Exhalation System Failures'];
+    const order = ['Original Documentation','Alarm Overview','Alarm Message Center (AMC)','Alarm Name','Alarm Priorities','Alarm Icons & Service Codes','Muting Alarms','Alarm Types: Patient Safety','Alarm Types: Environment','Alarm Types: Self Check','Alarm Groups','Pop Up Messages','High Priority Alarms','Medium Priority Alarms','Low Priority Alarms','Gas Intake Failures','High O2 Failures','Self Check Failures','Exhalation System Failures'];
     sections.sort((a,b)=> order.indexOf(a.title) - order.indexOf(b.title));
   }
   return { cheat, sections };

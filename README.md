@@ -604,9 +604,11 @@ Warnings/Alerts: Visually shown under Search Bar.
       Drug Interaction Warning: "Patient is on [Drug], which contraindicates [This Treatment]”).   
   VS Warning: "BP too low for this treatment!”.
    "
-## 8. RECENT FIXES AND CHANGES (Short & Specific)
+**[2025-09-17 EMV731 general information, product overview, setup, and operations condensed into section summaries with citations for in-app navigation (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapters 1-4).]**
 
 **[2025-03-09 UI polish: Show/Hide badge toggles now replace chevrons across lists and detail sections, aligning styles.css with dev-tools/als-medication-detail.png and preserving cross-browser number-input behavior.]**
+**[2025-03-09 EMV731 alarms chapter summarized: alarm overview, alarm message center, priorities, icon/service code cues, muting behaviors, patient/environment/self-check groupings, and pop ups distilled for field crews (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapter 5-1 through 5-31).]**
+**[2025-03-09 EMV731 alarms navigation: removed the All Content topic and linked each subsection to chapter-specific summaries with navigation/slug updates (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapter 5-1 through 5-31).]**
 
 
 
@@ -876,4 +878,5 @@ This repo is wired to auto‑deploy to GitHub Pages from `main` via `.github/wor
 - If it shows 404 initially, wait for the Pages workflow to finish (Actions tab), or check Settings → Pages to confirm the deployment.
 - Not Sure shows two stacked answers (no ARDS first, ARDS second); pop‑up shows explicit formulas and correct ranges — verified by E2E.
 - Sex icon remains visible when selected (selected state background/border) — verified by E2E.
+
 
