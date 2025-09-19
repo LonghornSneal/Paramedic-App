@@ -866,6 +866,7 @@ Ad‑hoc check: `node dev-tools/check-tv.js` prints the live answer and modal co
 ## Recent fixes (verified)
 
 - **[2025-09-18 MCP stack hardened: updated ~/.codex/config.toml, added dev-tools/mcp-health-check.js, and wired npm run mcp:health so MCP clients fail fast when binaries or env vars are missing (source: user request).]**
+- **[2025-09-19 mcp:health now marks optional MCP servers as [OK]/[SKIP], ignores commented config entries, and confirms firecrawl remains disabled until credentials exist (dev-tools/mcp-health-check.js; verified with npm run mcp:health).]**
 
 
 ## Hosted URL (GitHub Pages)

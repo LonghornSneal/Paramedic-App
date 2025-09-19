@@ -4,6 +4,13 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
+const STATUS_SYMBOLS = {
+  ok: '[OK]',
+  warn: '[WARN]',
+  error: '[FAIL]',
+  skip: '[SKIP]'
+};
+
 const repoRoot = path.resolve(__dirname, '..');
 const codexConfigPath = path.join(os.homedir(), '.codex', 'config.toml');
 const configText = fs.existsSync(codexConfigPath)
@@ -163,8 +170,15 @@ function binaryExists(binaryName) {
 
 function configHasServer(key) {
   if (!configText) return false;
-  const pattern = new RegExp(`\[mcp_servers\.${key}\]`);
-  return pattern.test(configText);
+  return configText
+    .split(/\r?\n/)
+    .some((line) => {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) {
+        return false;
+      }
+      return trimmed === `[mcp_servers.${key}]`;
+    });
 }
 
 function formatLine({ status, label, detail }) {
@@ -179,6 +193,8 @@ function assess(serversList, { optional } = {}) {
     const binOk = pkgOk && binaryExists(server.binary);
     const inConfig = configHasServer(server.configKey);
     const envOk = !server.envVar || Boolean(process.env[server.envVar]);
+    const enabled = server.required || inConfig;
+
     const problems = [];
 
     if (!pkgOk) {
@@ -187,31 +203,49 @@ function assess(serversList, { optional } = {}) {
     if (pkgOk && !binOk) {
       problems.push('binary shim missing');
     }
-    if (!optional && server.required && !inConfig) {
+    if (server.required && !inConfig) {
       problems.push('not referenced in ~/.codex/config.toml');
     }
-    if (!optional && server.required && !envOk) {
+    if (enabled && server.envVar && !envOk) {
       problems.push(`${server.envVar} not set`);
     }
 
-    const status = problems.length === 0
-      ? (server.required ? '✅' : '⚠️')
-      : '❌';
+    let statusKey;
+    if (problems.length === 0) {
+      if (server.required) {
+        statusKey = 'ok';
+      } else {
+        statusKey = inConfig ? 'ok' : 'skip';
+      }
+    } else {
+      statusKey = server.required ? 'error' : 'warn';
+    }
 
     const detailParts = [];
+
     if (problems.length === 0) {
       detailParts.push(server.notes);
       if (!server.required) {
-        detailParts.push(optional ? 'Optional - configure when needed.' : 'Optional server available.');
+        detailParts.push(
+          inConfig
+            ? 'Optional server ready.'
+            : optional ? 'Optional - configure when needed.' : 'Optional server installed but disabled.'
+        );
       }
     } else {
       detailParts.push(problems.join('; '));
+      if (!server.required && !inConfig) {
+        detailParts.push('Enable in ~/.codex/config.toml when required.');
+      }
     }
+
     const detail = detailParts.join(' ');
+    const status = STATUS_SYMBOLS[statusKey];
 
     checks.push({
       server,
       status,
+      statusKey,
       problems,
       detail,
       optional,
@@ -228,6 +262,7 @@ function assess(serversList, { optional } = {}) {
     }));
   }
 }
+
 
 console.log('=== MCP Health Check ===');
 console.log(`Repo: ${repoRoot}`);
