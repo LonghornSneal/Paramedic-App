@@ -1,4 +1,4 @@
-// Features/Warnings.js – Warning box generation logic
+// Features/Warnings.js - Warning box generation logic
 import { PDE5_INHIBITORS } from './patient/PatientInfo.js';
 
 // Helper: build a warning icon with a configurable colour
@@ -39,12 +39,12 @@ function getPDE5Warning(topic, patientData) {
       <div class="warning-box warning-box-red mb-2">
         <div class="flex items-start">
           ${createWarningIcon('text-red-600')}
-          <span>Contraindication: Patient has recently taken ${medDisplay} (PDE5 inhibitor) – do not administer ${topic.title}.</span>
+          <span>Contraindication: Patient has recently taken ${medDisplay} (PDE5 inhibitor) - do not administer ${topic.title}.</span>
         </div>
       </div>`;
 }
 
-// Low blood‑pressure warnings (for nitroglycerin)
+// Low blood-pressure warnings (for nitroglycerin)
 function getLowBPWarning(topic, patientData) {
     if (!topic || topic.id !== 'ntg') return '';
     const bpStr = patientData?.vitalSigns?.bp;
@@ -56,7 +56,7 @@ function getLowBPWarning(topic, patientData) {
           <div class="warning-box warning-box-red mb-2">
             <div class="flex items-start">
               ${createWarningIcon('text-red-600')}
-              <span>Contraindication: Patient’s blood pressure (${systolic} mmHg) is below the recommended minimum for ${topic.title}.</span>
+              <span>Contraindication: Patient's blood pressure (${systolic} mmHg) is below the recommended minimum for ${topic.title}.</span>
             </div>
           </div>`;
     }
@@ -72,7 +72,7 @@ function getEtomidatePedsWarning(topic, patientData) {
           <div class="warning-box warning-box-red mb-2">
             <div class="flex items-start">
               ${createWarningIcon('text-red-600')}
-              <span>Contraindication: Patient age (${age}) is under 10 years — Etomidate not recommended.</span>
+              <span>Contraindication: Patient age (${age}) is under 10 years - Etomidate not recommended.</span>
             </div>
           </div>`;
     }
@@ -80,21 +80,50 @@ function getEtomidatePedsWarning(topic, patientData) {
 }
 
 // General contraindications from MedicationDetailsData (excluding allergies)
-function getGeneralContraindicationsWarning(topic) {
+function getGeneralContraindicationsWarning(topic, patientData) {
     const med = window.medicationDataMap?.[topic.id];
     if (!med || !Array.isArray(med.contraindications)) return '';
-    let warnings = '';
-    med.contraindications.forEach(ci => {
+    if (!patientData) return '';
+
+    const patientTokens = [];
+    const collect = value => {
+        if (!value) return;
+        if (Array.isArray(value)) {
+            value.forEach(item => collect(item));
+            return;
+        }
+        if (typeof value === 'string') {
+            const trimmed = value.trim();
+            if (trimmed) patientTokens.push(trimmed.toLowerCase());
+        }
+    };
+
+    collect(patientData.pmh);
+    collect(patientData.allergies);
+    collect(patientData.currentMedications);
+    collect(patientData.indications);
+    collect(patientData.symptoms);
+    if (patientData.vitalSigns) {
+        Object.values(patientData.vitalSigns).forEach(val => collect(val));
+    }
+    collect(patientData.ekg);
+
+    if (patientTokens.length === 0) return '';
+
+    const warnings = med.contraindications.reduce((acc, ci) => {
         const ciLower = ci.toLowerCase();
-        if (ciLower.includes('allergy') || ciLower.includes('hypersensitivity')) return;
-        warnings += `
+        if (ciLower.includes('allergy') || ciLower.includes('hypersensitivity')) return acc;
+        const matched = patientTokens.some(token => token && ciLower.includes(token));
+        if (!matched) return acc;
+        return acc + `
           <div class="warning-box warning-box-red mb-2">
             <div class="flex items-start">
               ${createWarningIcon('text-red-600')}
               <span>Contraindication: ${ci}.</span>
             </div>
           </div>`;
-    });
+    }, '');
+
     return warnings;
 }
 
@@ -124,7 +153,7 @@ export function appendTopicWarnings(topic, patientData) {
     warnings += getPDE5Warning(topic, patientData);
     warnings += getLowBPWarning(topic, patientData);
     warnings += getEtomidatePedsWarning(topic, patientData);
-    warnings += getGeneralContraindicationsWarning(topic);
+    warnings += getGeneralContraindicationsWarning(topic, patientData);
     warnings += getAgeWarning(topic, patientData);
     return warnings;
 }

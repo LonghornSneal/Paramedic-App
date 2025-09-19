@@ -19,10 +19,10 @@ function parseTextMarkup(text) {
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
     safeText = safeText.replace(/\n/g, ' ');
-    // Replace [[display|info]] with a toggle-able info span including an arrow icon and hidden info text
+    // Replace [[display|info]] with a toggle-able info span including a Show/Hide indicator and hidden info text
     safeText = safeText.replace(/\[\[(.+?)\|(.+?)\]\]/g,
         (_, display, info) => {
-            return `<span class="toggle-info"><svg class="arrow h-4 w-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>${display}<span class="info-text hidden">${info}</span></span>`;
+            return `<span class="toggle-info" role="button" tabindex="0" aria-expanded="false"><span class="toggle-info-label">${display}</span><span class="toggle-info-indicator" aria-hidden="true">Show</span><span class="info-text hidden">${info}</span></span>`;
         });
             // Replace custom markup for colored/underlined text
     safeText = safeText.replace(/\{\{red:(.+?)\}\}/g, (_, t) => `<span class="text-red-600 font-semibold">${t}</span>`);
@@ -51,26 +51,33 @@ function createDetailText(textBlock) {
 }
 
 // Attaches click handlers to elements with class `.toggle-info` (additional info spans) to show or hide their hidden text.
-function attachToggleInfoHandlers(container) {
-    container.querySelectorAll('.toggle-info').forEach(el => { 
-        el.onclick = e => { 
+function attachToggleInfoHandlers(container) {      
+    container.querySelectorAll('.toggle-info').forEach(el => {  
+        el.onclick = e => {  
             e.stopPropagation();
             const info = el.querySelector('.info-text');
-            const arrow = el.querySelector('.arrow'); 
-            arrow?.classList.toggle('rotate');
-            info?.classList.toggle('hidden'); 
-        }; 
-    }); 
+            if (!info) return;
+            const indicator = el.querySelector('.toggle-info-indicator');
+            const isHidden = info.classList.toggle('hidden');
+            const expanded = !isHidden;
+            if (indicator) indicator.textContent = expanded ? 'Hide' : 'Show';
+            el.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+            el.classList.toggle('is-expanded', expanded);
+        };  
+    });  
 }
-
 // Attaches click handlers to collapsible detail section headers (elements with `.toggle-category` class) to toggle their visibility.
 function attachToggleCategoryHandlers(container) {      
     container.querySelectorAll('.toggle-category').forEach(header => {
         addTapListener(header, () => {
-            const arrow = header.querySelector('.arrow');
-            if (arrow) arrow.classList.toggle('rotate');
             const content = header.nextElementSibling;
-            if (content) content.classList.toggle('hidden'); 
+            if (!content) return;
+            const indicator = header.querySelector('.section-indicator');
+            const isHidden = content.classList.toggle('hidden');
+            const expanded = !isHidden;
+            if (indicator) indicator.textContent = expanded ? 'Hide' : 'Show';
+            header.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+            header.classList.toggle('is-expanded', expanded);
         }); 
     }); 
 }
@@ -146,13 +153,35 @@ function appendTopicDetails(topic, contentArea) {
             if (sec.key === 'adultRx') wrapper.classList.add('adult-section');
             if (sec.key === 'pediatricRx') wrapper.classList.add('pediatric-section');
             // Section header element (clickable to collapse/expand)
+
             const titleEl = document.createElement('div');
-            titleEl.className = 'detail-section-title toggle-category cursor-pointer flex items-center';
-            titleEl.innerHTML = `<svg class="arrow h-4 w-4 text-blue-600 transition-transform duration-200 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>${sec.label}`; // blue arrows within main page categories
-            // Use slugify to set an ID on the section header for anchor navigation:
+
+            titleEl.className = 'detail-section-title toggle-category';
+
+            titleEl.setAttribute('role', 'button');
+
+            titleEl.setAttribute('tabindex', '0');
+
+            titleEl.setAttribute('aria-expanded', 'false');
+
+            const titleLabel = document.createElement('span');
+
+            titleLabel.className = 'detail-section-label';
+
+            titleLabel.textContent = sec.label;
+
+            const indicatorEl = document.createElement('span');
+
+            indicatorEl.className = 'section-indicator';
+
+            indicatorEl.textContent = 'Show';
+
             titleEl.id = slugify(sec.label);  // Assign unique ID for anchor navigation
+
+            titleEl.append(titleLabel, indicatorEl);
+
             wrapper.appendChild(titleEl);
+
             // Section body (list or text)
             let body;
             if (Array.isArray(details[sec.key])) {
@@ -342,9 +371,18 @@ function insertEquipmentSection(container, title, html){
   const wrapper = document.createElement('div');
   wrapper.className = 'detail-section mb-3';
   const titleEl = document.createElement('div');
-  titleEl.className = 'detail-section-title toggle-category cursor-pointer flex items-center';
-  titleEl.innerHTML = `<svg class="arrow h-4 w-4 text-blue-600 transition-transform duration-200 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>${escapeHtml(title)}`;
+  titleEl.className = 'detail-section-title toggle-category';
+  titleEl.setAttribute('role', 'button');
+  titleEl.setAttribute('tabindex', '0');
+  titleEl.setAttribute('aria-expanded', 'false');
+  const titleLabel = document.createElement('span');
+  titleLabel.className = 'detail-section-label';
+  titleLabel.textContent = title;
+  const indicatorEl = document.createElement('span');
+  indicatorEl.className = 'section-indicator';
+  indicatorEl.textContent = 'Show';
   titleEl.id = slugify(title);
+  titleEl.append(titleLabel, indicatorEl);
   wrapper.appendChild(titleEl);
   const body = document.createElement('div');
   body.className = 'detail-text hidden';
@@ -414,15 +452,15 @@ function renderQuickVentSetup(contentArea){
       <ul class="list-disc ml-5">
         <li>IFT = Obtain vent setting from respiratory therapist</li>
         <li>New ventilator pt = Use Ideal Body Weight (IBW) to find the Tidal Volume</li>
-        <li><span class="qv-toggle text-green-700 cursor-pointer">Attach circuit to circuit tube hole <span class="qv-arrow">→</span><span class="qv-info hidden">big tube covered by red cap on right</span></span></li>
-        <li><span class="qv-toggle text-green-700 cursor-pointer">Attach green tube to top transducer port <span class="qv-arrow">→</span><span class="qv-info hidden">top left</span></span></li>
-        <li><span class="qv-toggle text-green-700 cursor-pointer">Attach clear tube to bottom port exhalation valve <span class="qv-arrow">→</span><span class="qv-info hidden">bottom left</span></span></li>
+        <li><span class="qv-toggle text-green-700 cursor-pointer" role="button" tabindex="0" aria-expanded="false">Attach circuit to circuit tube hole <span class="qv-indicator" aria-hidden="true">Show</span><span class="qv-info hidden">big tube covered by red cap on right</span></span></li>
+        <li><span class="qv-toggle text-green-700 cursor-pointer" role="button" tabindex="0" aria-expanded="false">Attach green tube to top transducer port <span class="qv-indicator" aria-hidden="true">Show</span><span class="qv-info hidden">top left</span></span></li>
+        <li><span class="qv-toggle text-green-700 cursor-pointer" role="button" tabindex="0" aria-expanded="false">Attach clear tube to bottom port exhalation valve <span class="qv-indicator" aria-hidden="true">Show</span><span class="qv-info hidden">bottom left</span></span></li>
         <li>Turn on → Let self test run → Patient disconnect should display</li>
         <li>Check high pressure alarm by putting gloved hand against end of vent circuit</li>
         <li>Select mode - Assistant Control (AC) or SIMV</li>
         <li>Select breath type - Volume or Pressure</li>
         <li>Adjust settings &amp; alarms prn</li>
-        <li><span class="qv-toggle text-green-700 cursor-pointer">Attach filter &amp; Capnography <span class="qv-arrow">→</span><span class="qv-info hidden">Place filter closer to pt &amp; place Capno on the other side of the filter that is farther from the pt</span></span></li>
+        <li><span class="qv-toggle text-green-700 cursor-pointer" role="button" tabindex="0" aria-expanded="false">Attach filter &amp; Capnography <span class="qv-indicator" aria-hidden="true">Show</span><span class="qv-info hidden">Place filter closer to pt &amp; place Capno on the other side of the filter that is farther from the pt</span></span></li>
         <li>Attach circuit to the pt</li>
         <li>Assess the pt\'s reaction to the vent &amp; document settings on Vent Form</li>
         <li>If any changes are needed, then discuss those changes with the Respiratory Therapist and document the changes on the Vent Form.</li>
@@ -433,45 +471,71 @@ function renderQuickVentSetup(contentArea){
   // Ensure sex buttons have no stray inner text (control chars) so only ::before icons show
   try { wrap.querySelectorAll('#qv-sex button').forEach(b => { b.textContent = ''; }); } catch(e) {}
   // Transform specific list items: make the leading instruction text non-interactive
+
   try {
+
     const patterns = [
+
       { prefix: 'Attach circuit to ', clickable: 'circuit tube hole' },
+
       { prefix: 'Attach green tube to ', clickable: 'top transducer port' },
+
       { prefix: 'Attach clear tube to ', clickable: 'bottom port exhalation valve' },
+
     ];
+
     wrap.querySelectorAll('.qv-toggle').forEach(span => {
+
       const li = span.closest('li');
+
       if (!li) return;
-      const textBeforeArrow = Array.from(span.childNodes)
+
+      const textBeforeToggle = Array.from(span.childNodes)
+
         .filter(n => n.nodeType === Node.TEXT_NODE)
+
         .map(n => n.textContent || '')
+
         .join('')
+
         .trim();
+
       for (const p of patterns) {
-        if (textBeforeArrow.startsWith(p.prefix) && textBeforeArrow.includes(p.clickable)) {
-          // Inject non-interactive prefix before span
+
+        if (textBeforeToggle.startsWith(p.prefix) && textBeforeToggle.includes(p.clickable)) {
+
           const prefixNode = document.createTextNode(p.prefix);
+
           li.insertBefore(prefixNode, span);
-          // Reduce span's leading text to just the clickable segment
-          // Replace first text node's content
-          const t = span.childNodes[0];
-          if (t && t.nodeType === Node.TEXT_NODE) {
-            t.textContent = p.clickable + ' ';
+
+          const firstNode = span.childNodes[0];
+
+          if (firstNode && firstNode.nodeType === Node.TEXT_NODE) {
+
+            firstNode.textContent = `${p.clickable} `;
+
           }
-          const arrow = span.querySelector('.qv-arrow');
-          if (arrow) { arrow.textContent = '→'; arrow.style.color = '#000'; }
+
           break;
+
         }
+
       }
+
     });
+
   } catch(e) { /* ignore */ }
-  attachToggleInfoHandlers(contentArea);
-  // Quick vent specific toggles (no underline, no arrow)
+
   wrap.querySelectorAll('.qv-toggle').forEach(el => {
-    el.addEventListener('click', (e)=>{
+    addTapListener(el, () => {
       const info = el.querySelector('.qv-info');
-      if (info) info.classList.toggle('hidden');
-      el.classList.toggle('open', !info?.classList.contains('hidden'));
+      if (!info) return;
+      const indicator = el.querySelector('.qv-indicator');
+      const isHidden = info.classList.toggle('hidden');
+      const expanded = !isHidden;
+      if (indicator) indicator.textContent = expanded ? 'Hide' : 'Show';
+      el.classList.toggle('open', expanded);
+      el.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     });
   });
 
@@ -670,7 +734,7 @@ function renderQuickVentSetup(contentArea){
     // Render any a/b segments as stacked fractions in the math details
     try {
       mathHtml = mathHtml.replace(/(\d+(?:-\d+)?\s*mL)\s*\/\s*(<s>kg<\/s>|kg)/g, (_, numer, denom) => frac(numer, denom));
-      // Replace any right-arrow markers with equals for final values
+      // Replace any legacy arrow markers with equals for final values
       mathHtml = mathHtml.replace(/\u001a/g, ' = ');
     } catch(e) { /* ignore */ }
     // Reformat TV range explanation into formula + min/max with equals, and adjust the displayed answer block

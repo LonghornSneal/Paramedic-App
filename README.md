@@ -76,13 +76,13 @@ Design & Feature Overview: The app’s UI elements & features.
 
   Main Contents Page: The default view that shows categories & subtopics.
     The header: shows the app title centered with the search bar directly below; the Patient Info button is top‑left; Back/Forward arrows are top‑right (disabled initially), with the Home button beneath them and the History button below Home. 
-    The hierarchical Contents list renders in the main content area: blue chevrons expand/collapse categories; clicking a final topic opens its detailed page.
+    **[The hierarchical Contents list renders in the main content area: rounded Show/Hide badges expand or collapse categories, and selecting a final topic opens its detailed page.]**
     Entering patient data in the sidebar immediately updates the experience: irrelevant list items are strike‑through by indications, detail pages re‑render, and relevant warnings appear at the top of details. 
     All rendering is local, IDs are stable, taps are minimal, and flows are simple.
-    Expandable Topic List: The Main Contents list itself uses interactive arrows (blue arrows) to expand/collapse categories and subcategories, and clickable text for final topics (explained under Blue Arrows and Subtopics below).
+    **[Expandable Topic List: Each category row uses a Show/Hide badge to toggle its section, while final topics render as cards that open the detail page (see Show/Hide Badges below).]**
 
-  Blue Arrows: On the Contents list.
-    A small blue chevron is shown to the left of any expandable category. When collapsed, the chevron points right; clicking the chevron or the category label toggles the section open and rotates the chevron 90° downward. When expanded, clicking again collapses the section and returns the chevron to the rightward orientation. Leaf topics (final items) do not display a chevron; their text is clickable and opens the detail page.
+  **[Show/Hide Badges: On the Contents list.]**
+    **[Each expandable category includes a pill-shaped Show/Hide badge on the right edge. Tapping the badge or the category card opens or collapses the children. Leaf topics omit the badge; tapping the card opens the detail page immediately.]**
 
   Subtopics and Navigation Hierarchy: Topics are organized as a tree.
     Parent items (type "category") render with a bold label and a blue chevron to the left; clicking the chevron or label toggles the section. Nested categories are supported recursively, so multiple levels can expand as needed. Final items (type "topic") do not show a chevron; their text is a clickable link that opens the corresponding detail page (the link carries data-topic-id and routes to renderDetailPage(id)).
@@ -247,7 +247,7 @@ Overview of the structure & key files along with their associated folders:
 
 styles.css: Custom CSS stylesheet. Loaded in the head of index.html to complement Tailwind utilities & provide precise behavior Tailwind can’t address cleanly (e.g., rotation states, overlays, brightness filter). Augments Tailwind with focused rules.
   Lists & links: .topic-link-item hover/active states; .recently-viewed highlight; .strikethrough to de‑emphasize list items.
-  Detail sections: .detail-section-title headings; .arrow rotation (.arrow.rotate); .toggle-info (green) with hover/inline “info-text”; .warning-box variants (red/orange/yellow).
+  **[Detail sections: .detail-section-title uses Show/Hide badges; .toggle-info (green) reveals inline panels; .warning-box variants (red/orange/yellow).]**
   Sidebar & overlay: slide‑in patient sidebar (#patient-sidebar.open), dim overlay (#sidebar-overlay.active), and inputs/focus rings.
   Autocomplete: .autocomplete-suggestions dropdown layout and visibility.
   Snapshot: .snapshot-card class (present for potential card styling); dark‑mode adjustments.
@@ -274,14 +274,14 @@ Data/ (Data files directory): Holds static ES modules that define application co
     main.js merges these entries with medication details into window.medicationDataMap so detail views can be rendered consistently. The Quick Vent calculator logic and section rendering are handled in Features/detail/DetailPage.js (equipment flow).
 
 Features/ : Feature-specific scripts. This directory groups scripts that handle a particular aspect of the app’s functionality.
-  Features/anchorNav/slugAnchors.js: Provides setupSlugAnchors(tocData) which inserts a “Table of Contents” <nav id="detail-toc"> into the detail view and renders a list of anchor links for each section. Clicking an anchor scrolls smoothly to the target, and if that section is collapsed, it auto‑expands the section and rotates the arrow icon. tocData is built by the detail renderer from .detail-section-title elements (using slugify ids). Current behavior does not highlight the active section while scrolling (though that’s a potential enhancement). For now, its main job is to display the list of section links. Both slugList and slugAnchors are triggered after renderDetailPage completes inserting content.
+  Features/anchorNav/slugAnchors.js: Provides setupSlugAnchors(tocData) which inserts a "Table of Contents" <nav id="detail-toc"> into the detail view and renders a list of anchor links for each section. Clicking an anchor scrolls smoothly to the target; if that section is collapsed, it auto-expands the section, updates the Show/Hide badge, and marks the header as expanded. tocData is built by the detail renderer from .detail-section-title elements (using slugify ids). Current behavior does not highlight the active section while scrolling (though that's a potential enhancement). For now, its main job is to display the list of section links. Both slugList and slugAnchors are triggered after renderDetailPage completes inserting content.
     Troubleshooting If anchors are not appearing or not working, ensure that: (1) section headings have ids (generated by slugify), (2) slugList is capturing them, and (3) slugAnchors is appending the links to the DOM. Also, check that the anchor link href exactly matches a section id. Consistency is key, which is why slugify should be used everywhere.
   Features/anchorNav/slugList.js: Provides a static slugIDs array of topic slugs (primarily for developer tooling and legacy anchors). It exposes the array to window.slugIDs for backward compatibility and exports it for ES‑module consumers. It does not scrape the DOM or gather section IDs at runtime. The in‑page Table of Contents is built by the detail renderer from .detail-section-title elements and passed to setupSlugAnchors().
     Troubleshooting: If a section isn’t appearing in the anchor menu, this script is the first place to check (does it capture it correctly?).
   Features/detail/DetailPage.js: Renders the detailed view for a selected topic.
-    Escapes HTML and converts inline markup: [[display|info]] produces green, clickable “toggle-info” spans with a small arrow and hidden text; colored emphasis tokens (e.g., {{red:...}}) are supported.
+    Escapes HTML and converts inline markup: [[display|info]] produces green, clickable “toggle-info” spans with Show/Hide chips and hidden text; colored emphasis tokens (e.g., {{red:...}}) are supported.
     Builds lists and text blocks with sensible defaults: empty arrays render “None listed.”; empty text renders “Not specified.”
-    Composes collapsible sections: (e.g., Class, Indications, Contraindications, Side Effects, Adult Rx, Pediatric Rx). Each section header includes a left blue arrow that rotates on toggle; “Adult Rx” and “Pediatric Rx” are marked with .adult-section / .pediatric-section.
+    Composes collapsible sections: (e.g., Class, Indications, Contraindications, Side Effects, Adult Rx, Pediatric Rx). Each section header includes a Show/Hide badge for toggling; “Adult Rx” and “Pediatric Rx” are marked with .adult-section / .pediatric-section.
     Assigns stable id values to section titles via slugify(): enabling optional in‑page TOC injection on long pages (window.ENABLE_DETAIL_TOC and ≥ 6 sections) using setupSlugAnchors.
     Inserts patient‑aware warnings at the top: (allergies, PDE5 + NTG, low BP + NTG, pediatric Etomidate, and non‑allergy contraindications) using appendTopicWarnings.
     Writes a .topic-h2 header (with data-topic-id) and updates navigation history unless disabled; optionally scrolls to the top of the content area.
@@ -415,11 +415,11 @@ All Data/Features/Utils are imported as ES modules; index.html includes only <sc
 
 
 
-    Rendering the Category List (renderInitialView): This function populates the main content area with the list of categories and topics (the table of contents of the app). It likely uses a helper (maybe internally defined) that recursively creates HTML for a given category and its children. Each category is output as a clickable <div class="toggle-category"> (or similar) containing the title and a blue arrow icon. Each topic (child without further children) is output as a <div class="topic-item"> or button element with an attached data-topic-id. The structure in HTML might be nested <div class="category-group"> containing a parent and its child list, etc.
+    Rendering the Category List (renderInitialView): This function populates the main content area with the list of categories and topics (the table of contents of the app). It likely uses a helper (maybe internally defined) that recursively creates HTML for a given category and its children. Each category is output as a clickable card that displays its title alongside a Show/Hide badge. Each topic (child without further children) is output as a <div class="topic-item"> or button element with an attached data-topic-id. The structure in HTML might be nested <div class="category-group"> containing a parent and its child list, etc.
 
       If renderInitialView(highlightId) is called with a highlightId (meaning we want to highlight a particular topic when rendering, e.g., after coming back via Back button), the function will ensure that category is expanded and scroll into view, and add a highlight style to that topic. This helps the user see where they left off.
 
-      The result of this function is that contentArea (the main section in index.html) will be filled with the hierarchical list of all topics. Event listeners are set so that clicking on any blue arrow toggles the appropriate section (show/hide children), and clicking on any topic name (leaf node) triggers renderDetailPage for that topic.
+      The result of this function is that contentArea (the main section in index.html) will be filled with the hierarchical list of all topics. Event listeners are set so that clicking on any Show/Hide badge toggles the appropriate section (show/hide children), and clicking on any topic name (leaf node) triggers renderDetailPage for that topic.
 
     Rendering a Detail Page (renderDetailPage): This function takes a topic ID as argument. It looks up that ID in allDisplayableTopicsMap (which contains both the structural info and the detail info if available). If found, it clears out the contentArea and then builds the detail view for that topic. Steps include:
 
@@ -606,12 +606,16 @@ Warnings/Alerts: Visually shown under Search Bar.
    "
 ## 8. RECENT FIXES AND CHANGES (Short & Specific)
 
+**[2025-03-09 UI polish: Show/Hide badge toggles now replace chevrons across lists and detail sections, aligning styles.css with dev-tools/als-medication-detail.png and preserving cross-browser number-input behavior.]**
+
+
+
 Home button (house icon): jumps to main Contents.
 
 Settings: Dark Mode toggle; animated Settings button; brightness slider with live preview/persistence.
 
 Header/UI: ensureHeaderUI stabilizes header layout across navigations.
-  Toggle alignment: Category name + arrow now left‑aligned; spacing improved (all sizes).
+  **[Toggle alignment: Category cards align titles with Show/Hide badges; spacing improved across sizes.]**
 
   Header UI Structure: ensureHeaderUI checks if elements exist and creates them if not, and ensures they are appended in the proper DOM order.
 
@@ -657,7 +661,7 @@ Autocomplete seeds: Added common terms and PDE5 inhibitors.
 
 Settings/Dark Mode: Corrected CSS & added brightness slider.
 
-CSS: Focus rings & arrow rotation transitions unified; invalid nested rules removed.
+CSS: Focus rings & Show/Hide badge transitions unified; invalid nested rules removed.
 
 Sept 1, 2025: Patient Info given Medication Class dropdown populated from all medication classes in the data (updates suggestions & filters context).
 
@@ -747,7 +751,7 @@ Debounce updates on scroll (requestAnimationFrame) to avoid churn.
 Keep behavior integrated with the existing smooth scroll and auto‑expand logic; do not alter history.
 Verification:
 Open a long detail page with TOC; scroll by wheel/touch. Confirm active TOC entry updates smoothly without jank.
-Click anchors; confirm smooth scroll and both TOC highlight and section arrow state reflect the target.
+Click anchors; confirm smooth scroll and ensure the TOC link and Show/Hide badge reflect the target section.
 
 
 
@@ -825,13 +829,21 @@ Contents
 Config: `inspector.mcp.json`. Servers: `fs`, `git`, `everything`, `seq`, `memory`, `webpick`, `crawler`, `fetch`, `fetcher`, `playwright`, `shell`, `a11y`, `lighthouse`.
 
 Launchers:
-- `dev-tools/start-inspector-all.cmd` (UI only — select server)
+- `dev-tools/start-inspector-all.cmd` (UI only - select server)
 - `dev-tools/start-inspector-playwright.cmd`, `-shell.cmd`, `-git.cmd`, etc.
+
+**[CLI client config: `~/.codex/config.toml` mirrors the Inspector roster. Keep `filesystem`, `git`, and `shell` enabled; enable optional servers (`everything`, `seq`, `memory`, `webpick`, `crawler`, `fetch`, `fetcher`, `playwright`, `lighthouse`, `a11y`) when the task needs them.]**
+**[`firecrawl` stays commented until a `FIRECRAWL_API_KEY` is available; uncomment the stub in `~/.codex/config.toml` when you have credentials.]**
+**[Install dependencies with `npm install` so the bundled MCP binaries are available on the local PATH before launching Codex.]**
+**[Startup health check: run `npm run mcp:health` before coding. The script verifies local packages, `.bin` shims, and warns about missing env vars; fix issues, restart Codex, then reconnect servers.]**
+**[Connectivity sanity check: after the Codex session opens, call `filesystem.read_text_file` and `git_status` via MCP tools to confirm the repo is wired correctly.]**
+**[If a server fails mid-session, repair it (reinstall, set env vars, or disable optional entries) and restart Codex. Use direct shell commands only as a temporary bridge while restoring MCP coverage.]**
 
 Good practice
 - Connect only servers needed for the current task.
+- **[Default to MCP tools for edits, diffs, searches, and command execution; drop to direct shell only when MCP servers are being restored.]**
 - Filesystem edits: `fs.edit_file` for surgical line edits; confirm with `git_status` + `git_diff`.
-- Preview locally with `shell.execute.command` → `npm run preview`.
+- Preview locally with `shell.execute.command` -> `npm run preview`.
 - Validate flows with Playwright tools (or run `npm run test:vent`). On Windows, run `browser_install` once; Administrator may be required for Chrome.
 - Persist decisions in `memory` during large refactors.
 
@@ -850,6 +862,9 @@ Ad‑hoc check: `node dev-tools/check-tv.js` prints the live answer and modal co
 - If TV logic expands, consider extracting to `Features/ventilation/tv.js` with unit tests.
 
 ## Recent fixes (verified)
+
+- **[2025-09-18 MCP stack hardened: updated ~/.codex/config.toml, added dev-tools/mcp-health-check.js, and wired npm run mcp:health so MCP clients fail fast when binaries or env vars are missing (source: user request).]**
+
 
 ## Hosted URL (GitHub Pages)
 

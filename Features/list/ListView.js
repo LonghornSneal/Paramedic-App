@@ -60,43 +60,41 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
 function createHierarchicalList(items, container, level = 0) {
     container.innerHTML = '';
     items.forEach(item => { 
-        const row = document.createElement('div');
-        row.className = 'flex items-center py-1 pl-' + (level * 4) + ' group';
+        const group = document.createElement('div');
+        group.className = 'category-group';
+        group.style.setProperty('--category-level', level);
         if (item.type === 'category') {  // Category with collapsible children
-            const arrowBtn = document.createElement('button');
-            arrowBtn.setAttribute('aria-label', 'Expand/collapse');
-            arrowBtn.className = 'arrow mr-2 focus:outline-none focus:ring-2 focus:ring-blue-400';
-            arrowBtn.innerHTML = `<svg class="h-4 w-4 text-blue-600 transition-transform duration-200" style="transform: rotate(${item.expanded ? 90 : 0}deg);" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M9 5l7 7-7 7" /></svg>`;  // blue arrows on homepage
-            addTapListener(arrowBtn, () => { 
-                item.expanded = !item.expanded;
-                createHierarchicalList(items, container, level); 
-            });
-            row.appendChild(arrowBtn);
-            // Category label
+            const card = document.createElement('button');
+            card.type = 'button';
+            card.className = 'category-card';
+            if (item.expanded) card.classList.add('is-expanded');
+            card.setAttribute('aria-expanded', item.expanded ? 'true' : 'false');
             const label = document.createElement('span');
-            label.className = 'cursor-pointer hover:underline flex-1 font-semibold';
+            label.className = 'category-card-title';
+            label.textContent = item.title;
             if (item.title === 'Quick Vent Guide') {
                 label.classList.add('quick-vent-title');
             }
-            label.textContent = item.title;
-            addTapListener(label, () => { 
+            const indicator = document.createElement('span');
+            indicator.className = 'category-card-indicator';
+            indicator.textContent = item.expanded ? 'Hide' : 'Show';
+            indicator.setAttribute('aria-hidden', 'true');
+            card.append(label, indicator);
+            addTapListener(card, () => { 
                 item.expanded = !item.expanded;
                 createHierarchicalList(items, container, level); 
             });
-            row.appendChild(label);
-            container.appendChild(row);
-            // If expanded, render children
+            group.appendChild(card);
             if (item.expanded && item.children?.length) {
                 const childContainer = document.createElement('div');
-                childContainer.className = 'ml-4 border-l border-blue-100 pl-2';
+                childContainer.className = 'category-children';
+                group.appendChild(childContainer);
                 createHierarchicalList(item.children, childContainer, level + 1);
-                container.appendChild(childContainer);
             }
+            container.appendChild(group);
         } else if (item.type === 'topic') { 
-            // Topic item
             const topicLink = document.createElement('a');
-            topicLink.className = 'topic-link-item flex-1';
+            topicLink.className = 'topic-link-item';
             topicLink.textContent = item.title;
             topicLink.href = `#${item.id}`;
             topicLink.dataset.topicId = item.id;
@@ -106,13 +104,11 @@ function createHierarchicalList(items, container, level = 0) {
                 e.preventDefault();
                 renderDetailPage(item.id); 
             });
-            // Add a placeholder span for alignment (for arrow spacing)
-            row.appendChild(document.createElement('span'));
-            row.appendChild(topicLink);
-            container.appendChild(row);
+            group.appendChild(topicLink);
+            container.appendChild(group);
         }
     });
-};
+}
 
 // Temporary global exposure
 if (typeof window !== 'undefined') {

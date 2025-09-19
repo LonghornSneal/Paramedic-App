@@ -75,7 +75,7 @@ async function run() {
   await page.waitForSelector('#content-area');
 
   // Expand first category to reveal topics
-  await page.click('#content-area .arrow');
+  await page.click('#content-area .category-card');
 
   // Click first topic
   await page.waitForSelector('#content-area .topic-link-item', { timeout: 5000 });

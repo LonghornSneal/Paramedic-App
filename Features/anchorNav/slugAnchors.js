@@ -35,10 +35,12 @@ export function setupSlugAnchors(tocData) {
             if (!targetEl) return;
             targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
             const contentEl = targetEl.nextElementSibling;
-            const arrowEl = targetEl.querySelector('.arrow');
+            const indicator = targetEl.querySelector('.section-indicator');
             if (contentEl?.classList.contains('hidden')) {
                 contentEl.classList.remove('hidden');
-                arrowEl?.classList.add('rotate');
+                if (indicator) indicator.textContent = 'Hide';
+                targetEl.setAttribute('aria-expanded', 'true');
+                targetEl.classList.add('is-expanded');
             }
         });
     });

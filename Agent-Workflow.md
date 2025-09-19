@@ -8,14 +8,19 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
 
 ## Quick Start
 
+0) Health check
+- Run `npm run mcp:health` from the repo root. Fix any failures (missing packages, `.bin` shims, or env vars) before you launch Codex.
+- Restart Codex after installing dependencies or changing environment variables so the new MCP binaries are picked up.
+
 1) Start Inspector (UI)
 - Double-click `dev-tools/start-inspector.cmd` (Filesystem)
 - Or use `start-inspector-git.cmd`, `-webpick.cmd`, etc.
 - New: `start-inspector-playwright.cmd` (browser tools), `start-inspector-shell.cmd` (run commands), or `start-inspector-all.cmd` (UI only, pick any server)
 
 2) In Codex CLI
-- Just run `codex` from this repo folder to start a session
-- Codex is configured to use all MCP servers in `~/.codex/config.toml`
+- Run `codex` from this repo folder to start a session.
+- When the session banner shows each server as connected, call `filesystem.read_text_file` (or `list_directory`) and `git_status` via the MCP git server to confirm routing.
+- If a server refuses to connect, rerun the health check, address the issue, and restart Codex before proceeding.
 
 ## Git tools (via MCP git server)
 - First set working directory (per session):
@@ -47,6 +52,9 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
   - Note: current setup is in-memory for the server lifetime; re-run loses graph
 
 ## Best Practices
+
+- Run `npm run mcp:health` again if any MCP server fails to connect; fix the root cause and restart Codex before continuing work.
+- Keep diffs, commits, edits, and searches inside MCP (`filesystem`, `git`, `shell.execute.command`) and fall back to direct shell only while restoring service.
 - At session start: call `git_set_working_dir`
 - Use `search_files` (filesystem server) to locate code quickly
 - Use `edit_file` to make scoped changes; then `git_diff` to verify

@@ -13,7 +13,8 @@
     "scan:dead": "knip --json",
     "scan:deps": "depcheck --json",
     "test:vent": "playwright test dev-tools/tests/ventilation.spec.js",
-    "test": "npm run test:vent"
+    "test": "npm run test:vent",
+    "mcp:health": "node dev-tools/mcp-health-check.js"
   },
   "devDependencies": {
     "@cyanheads/git-mcp-server": "^2.3.2",
