@@ -36,6 +36,19 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 ## MCP Tooling Discipline
 - Invoke the seq MCP server at the start of every task to structure the plan before making changes.
 - Record task decisions and follow-up items through the memory MCP server before finishing the work.
+### MCP Server Auto-Invocation Guide
+- **filesystem** — Auto-run for local file reads and edits because the reference implementation is built for secure, access-controlled filesystem work; skip it for actions that touch locations outside the repo and confirm with the user instead ([modelcontextprotocol/servers README](https://github.com/modelcontextprotocol/servers?tab=readme-ov-file#model-context-protocol-servers)).
+- **git** — Invoke whenever you need status, diffs, or to stage/commit so the agent uses the git-aware tooling instead of raw shell commands; avoid it when you only need to skim a single file ([cyanheads/git-mcp-server](https://github.com/cyanheads/git-mcp-server)).
+- **shell** — Use only when a task truly requires running CLI programs or custom scripts, leveraging the server's allowlists and audit logging; skip it for filesystem or git tasks the dedicated servers already cover ([sonirico/mcp-shell](https://github.com/sonirico/mcp-shell)).
+- **webpick** — Auto-run for scoped content grabs where CSS selectors are enough; skip it for heavy navigation or JS-heavy pages that need a headless browser ([mcp-web-content-pick README](https://github.com/kilicmu/mcp-web-content-pick)).
+- **fetch** — Use when you just need a readable copy of an article, title extraction, or optional image saves; avoid it if you require Playwright-grade rendering or multi-hop crawling ([kazuph/mcp-fetch](https://github.com/kazuph/mcp-fetch)).
+- **fetcher** — Reach for the Playwright-backed fetcher when pages need JavaScript execution or readability cleanup beyond simple HTTP fetches; skip it for static pages where fetch already works ([fetcher-mcp on npm](https://www.npmjs.com/package/fetcher-mcp)).
+- **smart-crawler** — Auto-run only for deep or repetitive crawling jobs where Playwright automation is justified; otherwise prefer lighter fetch tools to reduce load ([mcp-smart-crawler](https://github.com/loo-y/mcp-smart-crawler)).
+- **playwright** — Use for browser automation, accessibility tree snapshots, or verifying UI flows; skip it when a static fetch suffices so we do not launch full browsers unnecessarily ([microsoft/playwright-mcp](https://github.com/microsoft/playwright-mcp)).
+- **lighthouse** — Trigger before shipping major UI changes when you need quantified performance metrics; skip for quick content tweaks that do not affect page load ([lighthouse-mcp on npm](https://www.npmjs.com/package/lighthouse-mcp)).
+- **a11y** — Run axe-based scans when layouts or interactions change, holding it back for purely backend or data edits ([a11y-mcp on npm](https://www.npmjs.com/package/a11y-mcp)).
+- **Domain-specific servers** — Only start niche servers (for example n8n workflow tooling) when working directly in that ecosystem, following community guidance that these integrations shine when the agent needs embedded docs and validation ([n8n-mcp launch post](https://www.reddit.com/r/n8n/comments/1lvcwri/i_built_an_mcp_server_that_finally_enables/)).
+
 
 ## Clinical Safeguards & Escalation
 - **Scope adherence**: If a protocol references restrictions (e.g., EMT-B vs EMT-P actions, physician consult triggers), ensure UI labels and decision aids reflect those limits.
