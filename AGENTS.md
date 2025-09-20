@@ -33,6 +33,10 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 4. **Document**: Annotate `README.md` per repository rules (double-asterisk bracket convention) with summary, rationale, and source location.
 5. **Review**: Run lint/tests, then perform manual QA focusing on the affected protocol workflows.
 
+## MCP Tooling Discipline
+- Invoke the seq MCP server at the start of every task to structure the plan before making changes.
+- Record task decisions and follow-up items through the memory MCP server before finishing the work.
+
 ## Clinical Safeguards & Escalation
 - **Scope adherence**: If a protocol references restrictions (e.g., EMT-B vs EMT-P actions, physician consult triggers), ensure UI labels and decision aids reflect those limits.
 - **Mandatory reporting**: Keep hotline numbers and reporting steps accurate. When numbers change, update contact cards across all surfaces and add regression tests if possible.
