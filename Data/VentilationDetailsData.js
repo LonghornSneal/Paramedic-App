@@ -16,21 +16,7 @@
 
 
 
-export const VentilationDetailsData = [
-
-  {
-
-    id: 'zoll-emv731-original-documentation',
-
-    title: 'Zoll EMV731 - Original Documentation',
-
-    equipment: true,
-
-    originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf'
-
-  },
-
-  // ---- Quick Vent Guide ----
+export const VentilationDetailsData = [  // ---- Quick Vent Guide ----
 
   { id: 'zoll-quick-vent-zoll-setup', title: 'Zoll Set Up', quickVent: 'setup', equipment: true },
 
@@ -51,18 +37,6 @@ export const VentilationDetailsData = [
   { id: 'zoll-quick-vent-tidal-volume-calculator', title: 'Tidal Volume Calculator', quickVent: 'calculator', equipment: true },
 
   // ---- General Information children ----
-
-  { id: 'zoll-emv731-general-information-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 7, mdPath: 'Content/Skills & Equipment/Zoll EMV731/general-information.md', cheat: [
-
-    "Portable ventilator for patients 5 kg+ with Smart Help, sealed gas path, dual-power capability.",
-
-    "Lightweight (<4.4 kg) chassis with >10 hr runtime and wide temperature/altitude range.",
-
-    "Supports high- or low-pressure O2 and ambient-air operation with filter-ready circuit.",
-
-    "Check manual issue date; request updates if the binder is older than three years."
-
-  ] },
 
   { id: 'zoll-emv731-general-information-purpose-manual', title: 'Purpose & Manual Use', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 7, mdPath: 'Content/Skills & Equipment/Zoll EMV731/general-information.md', cheat: [
 
@@ -127,16 +101,6 @@ export const VentilationDetailsData = [
 
 
   // ---- Product Overview children ----
-
-  { id: 'zoll-emv731-product-overview-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 27, mdPath: 'Content/Skills & Equipment/Zoll EMV731/product-overview.md', cheat: [
-
-    "Three-model family (AEV, EMV+, Eagle II) shares rugged design and Smart Help.",
-
-    "Daylight-visible LCD, status LEDs, sealed pneumatic path, Masimo SpO2 integration.",
-
-    "Supports high/low-pressure O2 and ambient air across hospital, air, and ground missions."
-
-  ] },
 
   { id: 'zoll-emv731-product-overview-models', title: 'Models & Intended Use', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 27, mdPath: 'Content/Skills & Equipment/Zoll EMV731/product-overview.md', cheat: [
 
@@ -232,16 +196,6 @@ export const VentilationDetailsData = [
 
   // ---- Setting Up children ----
 
-  { id: 'zoll-emv731-setting-up-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 43, mdPath: 'Content/Skills & Equipment/Zoll EMV731/setting-up-ventilator.md', cheat: [
-
-    "Follow Chapter 3 sequence from circuit setup through patient hookup.",
-
-    "Keep bag-valve mask ready; never start with a patient attached.",
-
-    "Complete power, mode, and alarm checks before connecting the patient."
-
-  ] },
-
   { id: 'zoll-emv731-setting-up-circuit', title: 'Circuit Attachment', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 43, mdPath: 'Content/Skills & Equipment/Zoll EMV731/setting-up-ventilator.md', cheat: [
 
     "Attach corrugated hose, pressure line, and exhalation line; save the red gas-output cap.",
@@ -333,26 +287,6 @@ export const VentilationDetailsData = [
   ] },
 
   // ---- Using children ----
-
-
-
-  { id: 'zoll-emv731-using-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 57, mdPath: 'Content/Skills & Equipment/Zoll EMV731/using-ventilator.md', cheat: [
-
-
-
-    "Follow Chapter 4 to drive the interface, adjust parameters, pick modes, and monitor alarms.",
-
-
-
-    "Use parameter buttons, context menus, and breath targets to tailor ventilation.",
-
-
-
-    "Watch popups and the alarm center to keep patients safe during operation."
-
-
-
-  ] },
 
 
 
@@ -1400,6 +1334,20 @@ longer circuits can trap PEEP in patients with short expiratory times.
     ],
 
   },
+
+
+  {
+
+    id: 'zoll-emv731-original-documentation',
+
+    title: 'Zoll EMV731 - Original Documentation',
+
+    equipment: true,
+
+    originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf'
+
+  },
+
 
 ];
 

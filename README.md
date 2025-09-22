@@ -604,6 +604,7 @@ Warnings/Alerts: Visually shown under Search Bar.
       Drug Interaction Warning: "Patient is on [Drug], which contraindicates [This Treatment]”).   
   VS Warning: "BP too low for this treatment!”.
    "
+**[2025-09-20 EMV731 navigation cleanup: moved Original Documentation to the final slot and removed redundant 'All Content' topics so General Information, Product Overview, Setting Up, and Using open straight to their chapter subsections (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapters 1-4).]**
 **[2025-09-17 EMV731 general information, product overview, setup, and operations condensed into section summaries with citations for in-app navigation (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapters 1-4).]**
 
 **[2025-03-09 UI polish: Show/Hide badge toggles now replace chevrons across lists and detail sections, aligning styles.css with dev-tools/als-medication-detail.png and preserving cross-browser number-input behavior.]**

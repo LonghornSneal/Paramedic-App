@@ -317,7 +317,6 @@ export const ParamedicCategoriesData = [
         id: slugify("Zoll EMV731"), title: "Zoll EMV731",
         type: "category",
         children: [
-          { id: slugify("zoll-emv731-original-documentation"), title: "Original Documentation", type: "topic" },
           { id: slugify("zoll-emv731-quick-vent-guide"), title: "Quick Vent Guide", type: "category", children: [
             { id: 'zoll-quick-vent-zoll-setup', title: 'Zoll Set Up', type: 'topic' },
             { id: 'zoll-quick-vent-operational-notes', title: 'General Operational Notes', type: 'topic' },
@@ -330,7 +329,6 @@ export const ParamedicCategoriesData = [
             { id: 'zoll-quick-vent-tidal-volume-calculator', title: 'Tidal Volume Calculator', type: 'topic' }
           ] },
           { id: ("zoll-emv731-general-information"), title: "Zoll EMV731 - General Information", type: "category", children: [
-            { id: 'zoll-emv731-general-information-all', title: 'All Content', type: 'topic' },
             { id: 'zoll-emv731-general-information-purpose-manual', title: 'Purpose & Manual Use', type: 'topic' },
             { id: 'zoll-emv731-general-information-symbols', title: 'Symbols', type: 'topic' },
             { id: 'zoll-emv731-general-information-indications', title: 'Indications for Use', type: 'topic' },
@@ -339,7 +337,6 @@ export const ParamedicCategoriesData = [
             { id: 'zoll-emv731-general-information-contact', title: 'Contact Information', type: 'topic' }
           ] },
           { id: slugify("zoll-emv731-product-overview"), title: "Product Overview", type: "category", children: [
-            { id: 'zoll-emv731-product-overview-all', title: 'All Content', type: 'topic' },
             { id: 'zoll-emv731-product-overview-models', title: 'Models & Intended Use', type: 'topic' },
             { id: 'zoll-emv731-product-overview-controls', title: 'Controls & Indicators', type: 'topic' },
             { id: 'zoll-emv731-product-overview-gui', title: 'GUI Overview', type: 'topic' },
@@ -351,7 +348,6 @@ export const ParamedicCategoriesData = [
             { id: 'zoll-emv731-product-overview-power', title: 'Power Sources', type: 'topic' }
           ] },
           { id: slugify("zoll-emv731-setting-up-the-ventilator"), title: "Setting Up the Ventilator", type: "category", children: [
-            { id: 'zoll-emv731-setting-up-all', title: 'All Content', type: 'topic' },
             { id: 'zoll-emv731-setting-up-circuit', title: 'Circuit Attachment', type: 'topic' },
             { id: 'zoll-emv731-setting-up-hp-o2', title: 'High-Pressure O₂ Connection', type: 'topic' },
             { id: 'zoll-emv731-setting-up-filters', title: 'Filters & Accessories', type: 'topic' },
@@ -363,7 +359,6 @@ export const ParamedicCategoriesData = [
             { id: 'zoll-emv731-setting-up-connect', title: 'Connect Patient', type: 'topic' }
           ] },
           { id: slugify("zoll-emv731-using-the-ventilator"), title: "Using the Ventilator", type: "category", children: [
-            { id: 'zoll-emv731-using-all', title: 'All Content', type: 'topic' },
             { id: 'zoll-emv731-using-interface', title: 'Interface & Parameter Windows', type: 'topic' },
             { id: 'zoll-emv731-using-change-values', title: 'Changing Parameter Values', type: 'topic' },
             { id: 'zoll-emv731-using-mode-ac', title: 'Ventilation Modes (AC)', type: 'topic' },
@@ -431,7 +426,8 @@ export const ParamedicCategoriesData = [
             { id: 'zoll-emv731-circuits-directions', title: 'Directions for Use', type: 'topic' },
             { id: 'zoll-emv731-circuits-troubleshooting', title: 'Troubleshooting', type: 'topic' },
             { id: 'zoll-emv731-circuits-warnings', title: 'Warnings & Notes', type: 'topic' }
-          ] }
+          ] },
+          { id: slugify("zoll-emv731-original-documentation"), title: "Original Documentation", type: "topic" }
         ]
   
       },{ 

@@ -296,12 +296,57 @@ function escapeHtml(s){
     .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 
-async function renderEquipmentFromMarkdown(details, contentArea, topic){
+async function renderEquipmentFromMarkdown(details, contentArea, topic) {
   try {
     const res = await fetch(details.mdPath);
     if (!res.ok) throw new Error(`Failed to load ${details.mdPath}`);
     const md = await res.text();
     const { cheat, sections } = parseMdSections(md, topic.id);
+
+    const subscriptDigits = '₀₁₂₃₄₅₆₇₈₉';
+    const normalizeHeading = (value = '') => {
+      const raw = value.toString().trim();
+      const withDigits = raw.replace(/[₀₁₂₃₄₅₆₇₈₉]/g, char => {
+        const idx = subscriptDigits.indexOf(char);
+        return idx === -1 ? char : String(idx);
+      });
+      const collapsed = withDigits.replace(/\s+/g, ' ');
+      const normalized = typeof collapsed.normalize === 'function' ? collapsed.normalize('NFKD') : collapsed;
+      return normalized.toLowerCase();
+    };
+
+    const desiredTitles = Array.isArray(details.sectionTitles)
+      ? details.sectionTitles
+      : details.sectionTitle
+      ? [details.sectionTitle]
+      : topic?.title
+      ? [topic.title]
+      : [];
+
+    const normalizedTargets = desiredTitles
+      .map(normalizeHeading)
+      .filter(Boolean);
+
+    let selectedSections = sections;
+    let matchedSpecific = false;
+    if (normalizedTargets.length) {
+      const matches = [];
+      normalizedTargets.forEach(target => {
+        const matchSection = sections.find(sec => normalizeHeading(sec.title) === target);
+        if (matchSection) matches.push(matchSection);
+      });
+      if (matches.length) {
+        selectedSections = matches;
+        matchedSpecific = true;
+      }
+    }
+
+    const hasSpecificSection = matchedSpecific;
+    const collapsible = details.collapsible ?? !hasSpecificSection;
+    const expandSections = details.expandSections ?? hasSpecificSection;
+    const showCheat = details.includeCheat ?? !hasSpecificSection;
+    const enableToc = details.includeToc ?? (!hasSpecificSection && selectedSections.length >= 6);
+
     if (details.originalPdf) {
       const pdfUrl = details.pdfPage ? `${details.originalPdf}#page=${details.pdfPage}` : details.originalPdf;
       const embedId = `pdf-embed-${slugify(topic.id)}`;
@@ -321,7 +366,43 @@ async function renderEquipmentFromMarkdown(details, contentArea, topic){
           embed.classList.toggle('hidden');
           btn.textContent = embed.classList.contains('hidden') ? 'View Inline' : 'Hide PDF';
         });
+      }
     }
+
+    const cheatHtml = details.cheat && Array.isArray(details.cheat) && details.cheat.length
+      ? renderMdBlock(details.cheat)
+      : cheat;
+
+    if (showCheat && cheatHtml && cheatHtml.trim()) {
+      insertEquipmentSection(contentArea, 'Cheat Sheet', cheatHtml, {
+        collapsible,
+        expanded: expandSections
+      });
+    }
+
+    selectedSections.forEach(sec => {
+      insertEquipmentSection(contentArea, sec.title, sec.html, {
+        collapsible,
+        expanded: expandSections
+      });
+    });
+
+    attachToggleCategoryHandlers(contentArea);
+
+    const tocSections = [];
+    if (showCheat && cheatHtml && cheatHtml.trim()) {
+      tocSections.push({ id: slugify('Cheat Sheet'), label: 'Cheat Sheet' });
+    }
+    selectedSections.forEach(sec => {
+      tocSections.push({ id: slugify(sec.title), label: sec.title });
+    });
+
+    if (enableToc && typeof window !== 'undefined' && window.ENABLE_DETAIL_TOC && tocSections.length >= 6) {
+      setupSlugAnchors(tocSections);
+    }
+  } catch (err) {
+    contentArea.insertAdjacentHTML('beforeend', `<div class="text-red-700">Unable to load content: ${escapeHtml(err.message)}</div>`);
+  }
 }
 
 function renderOriginalPdfSection(details, contentArea, topic){
@@ -367,26 +448,54 @@ function renderOriginalPdfSection(details, contentArea, topic){
   }
 }
 
-function insertEquipmentSection(container, title, html){
+function insertEquipmentSection(container, title, html, options = {}) {
+  const { collapsible = true, expanded = false, headingTag = 'h3' } = options;
   const wrapper = document.createElement('div');
   wrapper.className = 'detail-section mb-3';
+
+  if (!collapsible) {
+    const headingEl = document.createElement(headingTag);
+    headingEl.className = 'detail-section-title';
+    headingEl.id = slugify(title);
+    headingEl.textContent = title;
+    wrapper.appendChild(headingEl);
+
+    const body = document.createElement('div');
+    body.className = 'detail-text';
+    body.innerHTML = html;
+    wrapper.appendChild(body);
+
+    container.appendChild(wrapper);
+    return;
+  }
+
   const titleEl = document.createElement('div');
   titleEl.className = 'detail-section-title toggle-category';
   titleEl.setAttribute('role', 'button');
   titleEl.setAttribute('tabindex', '0');
-  titleEl.setAttribute('aria-expanded', 'false');
+  titleEl.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+
   const titleLabel = document.createElement('span');
   titleLabel.className = 'detail-section-label';
   titleLabel.textContent = title;
+
   const indicatorEl = document.createElement('span');
   indicatorEl.className = 'section-indicator';
-  indicatorEl.textContent = 'Show';
+  indicatorEl.textContent = expanded ? 'Hide' : 'Show';
+
   titleEl.id = slugify(title);
   titleEl.append(titleLabel, indicatorEl);
   wrapper.appendChild(titleEl);
+
   const body = document.createElement('div');
-  body.className = 'detail-text hidden';
+  body.className = 'detail-text';
   body.innerHTML = html;
+  if (!expanded) {
+    body.classList.add('hidden');
+  } else {
+    titleEl.classList.add('is-expanded');
+  }
+
   wrapper.appendChild(body);
   container.appendChild(wrapper);
 }
