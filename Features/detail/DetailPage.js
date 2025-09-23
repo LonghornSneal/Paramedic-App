@@ -303,10 +303,10 @@ async function renderEquipmentFromMarkdown(details, contentArea, topic) {
     const md = await res.text();
     const { cheat, sections } = parseMdSections(md, topic.id);
 
-    const subscriptDigits = '₀₁₂₃₄₅₆₇₈₉';
+    const subscriptDigits = '\\u2080\\u2081\\u2082\\u2083\\u2084\\u2085\\u2086\\u2087\\u2088\\u2089';
     const normalizeHeading = (value = '') => {
       const raw = value.toString().trim();
-      const withDigits = raw.replace(/[₀₁₂₃₄₅₆₇₈₉]/g, char => {
+      const withDigits = raw.replace(/\\\u2080\\\u2081\\\u2082\\\u2083\\\u2084\\\u2085\\\u2086\\\u2087\\\u2088\\\u2089/g, char => {
         const idx = subscriptDigits.indexOf(char);
         return idx === -1 ? char : String(idx);
       });
@@ -424,27 +424,6 @@ function renderOriginalPdfSection(details, contentArea, topic){
       embed.classList.toggle('hidden');
       btn.textContent = embed.classList.contains('hidden') ? 'View Inline' : 'Hide PDF';
     });
-  }
-}
-    // Insert Cheat Sheet first (prefer curated if present on details)
-    const cheatHtml = details.cheat && Array.isArray(details.cheat) && details.cheat.length
-      ? renderMdBlock(details.cheat)
-      : cheat;
-    insertEquipmentSection(contentArea, 'Cheat Sheet', cheatHtml);
-    // Then other sections
-    sections.forEach(sec => insertEquipmentSection(contentArea, sec.title, sec.html));
-    // Bind expand/collapse after insertion
-    attachToggleCategoryHandlers(contentArea);
-    // Build TOC for long pages
-    const tocSections = [
-      { id: slugify('Cheat Sheet'), label: 'Cheat Sheet' },
-      ...sections.map(s => ({ id: slugify(s.title), label: s.title }))
-    ];
-    if (tocSections.length >= 6) {
-      setupSlugAnchors(tocSections);
-    }
-  } catch(err){
-    contentArea.insertAdjacentHTML('beforeend', `<div class="text-red-700">Unable to load content: ${escapeHtml(err.message)}</div>`);
   }
 }
 
@@ -1058,3 +1037,4 @@ function renderCheatSheet(md, topicId){
   - E2E coverage: dev-tools/tests/ventilation.spec.js verifies Not Sure stacked answers,
     explicit min/max formulas in the Calculation Details popup, and sex indicator visibility.
 */
+
