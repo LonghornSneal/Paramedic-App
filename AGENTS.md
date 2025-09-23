@@ -34,7 +34,7 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 5. **Review**: Run lint/tests, then perform manual QA focusing on the affected protocol workflows.
 
 ## MCP Tooling Discipline
-- Invoke the seq MCP server at the start of every task to structure the plan before making changes.
+- Invoke the seq MCP server at the start of every task to structure the plan before making changes. If unable for any reason to invoke the seq MCP server, then the very first thing you must do is solve this issue until it is invoked. Do not move onto a task until this step is complete.
 - Record task decisions and follow-up items through the memory MCP server before finishing the work.
 ### MCP Server Auto-Invocation Guide
 - **filesystem** — Auto-run for local file reads and edits because the reference implementation is built for secure, access-controlled filesystem work; skip it for actions that touch locations outside the repo and confirm with the user instead ([modelcontextprotocol/servers README](https://github.com/modelcontextprotocol/servers?tab=readme-ov-file#model-context-protocol-servers)).

@@ -1,6 +1,7 @@
-// Features/navigation/Home.js – Home button handler
+// Features/navigation/Home.js - Home button handler
 // This script manages the Home button which returns the user to the main contents (home) view.
 // It resets any expanded categories and navigates to the top-level list when the Home button is clicked.
+import { addTapListener } from '../../Utils/addTapListener.js';
 import { renderInitialView } from '../list/ListView.js';
 
 function collapseAllCategories() {
@@ -31,9 +32,6 @@ export function attachHomeHandler() {
     if (!window.navHomeButton) return;  // Ensure the Home button exists
     addTapListener(window.navHomeButton, () => handleHomeClick());
 }
-
-// Import needed utility
-import { addTapListener } from '../../Utils/addTapListener.js';
 
 if (typeof window !== 'undefined') {
     window.attachHomeHandler = attachHomeHandler;

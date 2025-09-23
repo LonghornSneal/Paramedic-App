@@ -617,11 +617,23 @@ export const VentilationDetailsData = [  // ---- Quick Vent Guide ----
 
   { id: 'zoll-emv731-specifications-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 131, mdPath: 'Content/Skills & Equipment/Zoll EMV731/specifications.md' },
 
-  { id: 'zoll-emv731-specifications-ranges', title: 'Operating Ranges', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 131 },
+  { id: 'zoll-emv731-specifications-ranges', title: 'Operating Ranges', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 131, mdPath: 'Content/Skills & Equipment/Zoll EMV731/specifications.md', sectionTitle: 'Operating Ranges', cheat: [
+    'Ventilator supports 1-80 BPM mandatory rates (reports up to 90 BPM) and flows up to 100 LPM at 40 cm H2O. (Rev. P, Appendix A-1)',
+    'Tidal volume programs from 50 to 2000 mL in 10 mL steps-check lung mechanics before approaching the extremes. (Rev. P, Appendix A-1)',
+    'Pressure window spans PIP 10-80 cm H2O and PEEP/EPAP 0-30 cm H2O, with FiO2 control from 21% to 100%. (Rev. P, Appendix A-2)'
+  ] },
 
-  { id: 'zoll-emv731-specifications-resolution', title: 'Measurement Resolution & Tolerances', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 131 },
+  { id: 'zoll-emv731-specifications-resolution', title: 'Measurement Resolution & Tolerances', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 131, mdPath: 'Content/Skills & Equipment/Zoll EMV731/specifications.md', sectionTitle: 'Measurement Resolution & Tolerances', cheat: [
+    'Rate commands resolve to whole breaths with +/-1 BPM accuracy; inspiratory time adjusts in 0.05 s steps. (Rev. P, Appendix A-1)',
+    'Tidal volume accuracy is +/-(5 mL + 10% of the set value)-verify with a test lung after circuit or altitude changes. (Rev. P, Appendix A-1)',
+    'Pressure readings (PIP, PEEP/EPAP, MAP) stay within +/-(2 cm H2O + 8%); larger drift signals maintenance. (Rev. P, Appendix A-2)'
+  ] },
 
-  { id: 'zoll-emv731-specifications-o2', title: 'Oxygen Input Pressure', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 131 },
+  { id: 'zoll-emv731-specifications-o2', title: 'Oxygen Input Pressure', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 131, mdPath: 'Content/Skills & Equipment/Zoll EMV731/specifications.md', sectionTitle: 'Oxygen Input Pressure', cheat: [
+    'Designed for regulated 55 psig medical oxygen through the DISS inlet-match hoses and regulators to that spec. (Rev. P, Appendix A-2)',
+    'Low or high supply alarms fire when pressure drifts outside roughly 40-87 psig; be ready to revert to compressor-only ventilation. (Rev. P, Chapter 3-3)',
+    'Cap or filter the inlet during transport to keep debris out of the closed pneumatic path. (Rev. P, Chapter 6-1)'
+  ] },
 
 
 
@@ -629,17 +641,37 @@ export const VentilationDetailsData = [  // ---- Quick Vent Guide ----
 
   { id: 'zoll-emv731-accessories-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139, mdPath: 'Content/Skills & Equipment/Zoll EMV731/accessories.md' },
 
-  { id: 'zoll-emv731-accessories-power', title: 'Power Supplies & Cables', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139 },
+  { id: 'zoll-emv731-accessories-power', title: 'Power Supplies & Cables', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139, mdPath: 'Content/Skills & Equipment/Zoll EMV731/accessories.md', sectionTitle: 'Power Supplies & Cables', cheat: [
+    'Carry an AC/DC brick (024-0012-00) plus the correct regional cord so the ventilator can charge on any mains circuit. (Rev. P, Appendix B-1)',
+    'Keep both vehicle cables on hand: 704-0EMV-05 for 28 VDC military power and 704-0EMV-06 for 12 VDC ambulance sockets. (Rev. P, Appendix B-2)',
+    'Use hospital-grade extensions (704-0EMV-XX) or the NEMA-equipped 710-0731-01 when generator or distance demands it. (Rev. P, Appendix B-1)'
+  ] },
 
-  { id: 'zoll-emv731-accessories-battery', title: 'Battery Packs', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139 },
+  { id: 'zoll-emv731-accessories-battery', title: 'Battery Packs', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139, mdPath: 'Content/Skills & Equipment/Zoll EMV731/accessories.md', sectionTitle: 'Battery Packs', cheat: [
+    '6800 mAh replacement pack (703-0731-01) matches the ventilator runtime; rotate through charge cycles to keep spares warm. (Rev. P, Appendix B-1)',
+    'Only ZOLL service centers swap internal batteries-flag packs that hit drop limits so they can be shipped under lithium rules. (Rev. P, Appendix B-2)'
+  ] },
 
-  { id: 'zoll-emv731-accessories-cases', title: 'Carrying Cases', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139 },
+  { id: 'zoll-emv731-accessories-cases', title: 'Carrying Cases', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139, mdPath: 'Content/Skills & Equipment/Zoll EMV731/accessories.md', sectionTitle: 'Carrying Cases', cheat: [
+    'Keep the padded carry case (402-0032-00) with rain flap ready for routine transports. (Rev. P, Appendix B-1)',
+    'Match transit cases (703-0731-03 through 703-0731-15) to mission needs-bulkhead power, USB pass-through, wheels, or pull handles. (Rev. P, Appendix B-3)'
+  ] },
 
-  { id: 'zoll-emv731-accessories-filters', title: 'Filters & HMEs', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139 },
+  { id: 'zoll-emv731-accessories-filters', title: 'Filters & HMEs', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139, mdPath: 'Content/Skills & Equipment/Zoll EMV731/accessories.md', sectionTitle: 'Filters & HMEs', cheat: [
+    'Stock B/V intake filters (465-0024-00) and the foam/disk replacements to protect the compressor. (Rev. P, Appendix B-1)',
+    'Choose HME/HMEF cartridges sized for patient dead space (820-0108-00 through 820-0110-25). (Rev. P, Appendix B-1 through B-2)',
+    'Carry MDI adapters (820-0111-00 adult, 820-0112-00 pediatric) when noninvasive inhaler support is expected. (Rev. P, Appendix B-2)'
+  ] },
 
-  { id: 'zoll-emv731-accessories-reservoir', title: 'Reservoir Kits', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139 },
+  { id: 'zoll-emv731-accessories-reservoir', title: 'Reservoir Kits', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139, mdPath: 'Content/Skills & Equipment/Zoll EMV731/accessories.md', sectionTitle: 'Reservoir Kits', cheat: [
+    'Use the 3 L oxygen reservoir (704-0004-00) when supplementing low-flow concentrators or portable cylinders. (Rev. P, Appendix B-2)',
+    'Pair the reservoir with the check valve kit (704-0700-01) to prevent backflow during source changes. (Rev. P, Appendix B-3)'
+  ] },
 
-  { id: 'zoll-emv731-accessories-country', title: 'Country Variations', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139 },
+  { id: 'zoll-emv731-accessories-country', title: 'Country Variations', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 139, mdPath: 'Content/Skills & Equipment/Zoll EMV731/accessories.md', sectionTitle: 'Country Variations', cheat: [
+    'IEC-to-country cordsets (708-0041-XX) match the ventilator power brick to local outlets-select the correct suffix before deployment. (Rev. P, Appendix B-1)',
+    'Hospital-grade extensions (704-0EMV-XX) and specialty cords (708-0063-00, 708-0064-00) satisfy regional electrical codes. (Rev. P, Appendix B-2)'
+  ] },
 
 
 
@@ -647,13 +679,29 @@ export const VentilationDetailsData = [  // ---- Quick Vent Guide ----
 
   { id: 'zoll-emv731-oximeter-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 143, mdPath: 'Content/Skills & Equipment/Zoll EMV731/pulse-oximeter-principles.md' },
 
-  { id: 'zoll-emv731-oximeter-principles', title: 'Principles of Pulse Oximetry', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 143 },
+  { id: 'zoll-emv731-oximeter-principles', title: 'Principles of Pulse Oximetry', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 143, mdPath: 'Content/Skills & Equipment/Zoll EMV731/pulse-oximeter-principles.md', sectionTitle: 'Principles of Pulse Oximetry', cheat: [
+    'Sensors use red and infrared LEDs plus a photodiode to track arterial absorbance changes. (Rev. P, Appendix C-1)',
+    'Plethysmography and spectrophotometry assumptions break down when venous pulsation dominates—watch placement. (Rev. P, Appendix C-1)',
+    'Noise rejection is vital in transport; know how the algorithm distinguishes arterial from venous components. (Rev. P, Appendix C-1)'
+  ] },
 
-  { id: 'zoll-emv731-oximeter-traditional', title: 'Traditional Ratio Method', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 143 },
+  { id: 'zoll-emv731-oximeter-traditional', title: 'Traditional Ratio Method', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 143, mdPath: 'Content/Skills & Equipment/Zoll EMV731/pulse-oximeter-principles.md', sectionTitle: 'Traditional Ratio Method', cheat: [
+    'Calculates AC/DC ratios at 660 and 905 nm and forms R to lookup SpO2. (Rev. P, Appendix C-1)',
+    'Relies on tables derived from healthy volunteer blood samples; motion error skews R. (Rev. P, Appendix C-1)',
+    'Assumes all pulsatile signal is arterial—keep probes still and perfused to stay accurate. (Rev. P, Appendix C-1)'
+  ] },
 
-  { id: 'zoll-emv731-oximeter-masimo', title: 'Masimo SET Algorithm', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 143 },
+  { id: 'zoll-emv731-oximeter-masimo', title: 'Masimo SET Algorithm', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 143, mdPath: 'Content/Skills & Equipment/Zoll EMV731/pulse-oximeter-principles.md', sectionTitle: 'Masimo SET Algorithm', cheat: [
+    'Treats measured signals as arterial plus noise, isolates the arterial component before computing R. (Rev. P, Appendix C-2)',
+    'Sweeps possible saturations and picks the peak of the Discrete Saturation Transform curve. (Rev. P, Appendix C-2)',
+    'Adaptive correlation cancelling suppresses venous and motion artifacts so SpO2 stays reliable in transport. (Rev. P, Appendix C-2)'
+  ] },
 
-  { id: 'zoll-emv731-oximeter-rate-noise', title: 'Update Rate & Noise Handling', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 143 },
+  { id: 'zoll-emv731-oximeter-rate-noise', title: 'Update Rate & Noise Handling', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 143, mdPath: 'Content/Skills & Equipment/Zoll EMV731/pulse-oximeter-principles.md', sectionTitle: 'Update Rate & Noise Handling', cheat: [
+    'Processes four seconds of data and refreshes SpO2 every two seconds; trends update quickly. (Rev. P, Appendix C-2)',
+    'Noise reference N' is recalculated for each possible saturation to maximise signal-to-noise. (Rev. P, Appendix C-2)',
+    'Motion tolerance comes from stripping venous noise before the final saturation output. (Rev. P, Appendix C-2)'
+  ] },
 
 
 
@@ -661,15 +709,35 @@ export const VentilationDetailsData = [  // ---- Quick Vent Guide ----
 
   { id: 'zoll-emv731-circuits-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 145, mdPath: 'Content/Skills & Equipment/Zoll EMV731/patient-circuits.md' },
 
-  { id: 'zoll-emv731-circuits-types', title: 'Circuit Types & Lengths', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 145 },
+  { id: 'zoll-emv731-circuits-types', title: 'Circuit Types & Lengths', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 145, mdPath: 'Content/Skills & Equipment/Zoll EMV731/patient-circuits.md', sectionTitle: 'Circuit Types & Lengths', cheat: [
+    '6 ft (820-0106-XX) and 12 ft (820-0130-XX) single-limb circuits are single-use and interface with the external exhalation valve. (Rev. P, Appendix D-1 through D-2)',
+    'Supports tidal volumes from about 200 mL to full adult range; longer circuits add compressible volume. (Rev. P, Appendix D-1 through D-3)',
+    'Monitor PEEP performance closely when using the 12 ft circuit with short expiratory times. (Rev. P, Appendix D-3)'
+  ] },
 
-  { id: 'zoll-emv731-circuits-specs', title: 'Technical Specifications', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 145 },
+  { id: 'zoll-emv731-circuits-specs', title: 'Technical Specifications', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 145, mdPath: 'Content/Skills & Equipment/Zoll EMV731/patient-circuits.md', sectionTitle: 'Technical Specifications', cheat: [
+    '22 mm ID tubing with inspiratory resistance ~0.02 hPa/L/min and expiratory ~0.10 hPa/L/min at 30 LPM. (Rev. P, Appendix D-2)',
+    'Compliance ~2.8 mL/hPa at 60 hPa and deadspace ~22 mL; max working pressure 100 hPa. (Rev. P, Appendix D-2)',
+    'Operating temperature -40 C to 70 C, ISO 5367 compliant, not for heated humidification. (Rev. P, Appendix D-2)'
+  ] },
 
-  { id: 'zoll-emv731-circuits-directions', title: 'Directions for Use', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 145 },
+  { id: 'zoll-emv731-circuits-directions', title: 'Directions for Use', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 145, mdPath: 'Content/Skills & Equipment/Zoll EMV731/patient-circuits.md', sectionTitle: 'Directions for Use', cheat: [
+    'Attach inspiratory limb, pressure line, and exhalation drive line securely before connecting to the patient. (Rev. P, Appendix D-8 through D-10)',
+    'Remove the pressure-line cuff if needed and seat it firmly on the transducer port. (Rev. P, Appendix D-9)',
+    'Run the ventilator on a test lung to check for leaks or occlusions prior to patient use. (Rev. P, Appendix D-10)'
+  ] },
 
-  { id: 'zoll-emv731-circuits-troubleshooting', title: 'Troubleshooting', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 145 },
+  { id: 'zoll-emv731-circuits-troubleshooting', title: 'Troubleshooting', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 145, mdPath: 'Content/Skills & Equipment/Zoll EMV731/patient-circuits.md', sectionTitle: 'Troubleshooting', cheat: [
+    'Disconnect, PEEP leak, or low pressure alarms usually trace to loose fittings or the exhalation valve. (Rev. P, Appendix D-11)',
+    'Inspect and relax the silicone diaphragm, then reseat it and ensure the FLOW barb is oriented correctly. (Rev. P, Appendix D-11 through D-12)',
+    'If the diaphragm is torn or leaks persist after reseating, replace the circuit and retest on a lung. (Rev. P, Appendix D-11)'
+  ] },
 
-  { id: 'zoll-emv731-circuits-warnings', title: 'Warnings & Notes', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 145 },
+  { id: 'zoll-emv731-circuits-warnings', title: 'Warnings & Notes', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 145, mdPath: 'Content/Skills & Equipment/Zoll EMV731/patient-circuits.md', sectionTitle: 'Warnings & Notes', cheat: [
+    'Correct for circuit compressible volume in small adults/pediatrics to avoid under-ventilation. (Rev. P, Appendix D-3)',
+    'Do not run PEEP below 5 cm H2O; the single-limb valve may not seal fast enough. (Rev. P, Appendix D-3)',
+    'Dispose of circuits after single-patient use and handle as biohazard if contaminated. (Rev. P, Appendix D-2)'
+  ] },
 
   {
 
