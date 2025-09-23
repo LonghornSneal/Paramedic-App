@@ -551,13 +551,29 @@ export const VentilationDetailsData = [  // ---- Quick Vent Guide ----
 
   { id: 'zoll-emv731-operating-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 113, mdPath: 'Content/Skills & Equipment/Zoll EMV731/operating-environments.md' },
 
-  { id: 'zoll-emv731-operating-conditions', title: 'Environmental Conditions', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 113 },
+  { id: 'zoll-emv731-operating-conditions', title: 'Environmental Conditions', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 113, mdPath: 'Content/Skills & Equipment/Zoll EMV731/operating-environments.md', sectionTitle: 'Environmental Conditions', cheat: [
+    'Low-priority environment advisories flag hot, cold, or altitude extremes; confirm patient status and adjust compliance as needed. (Rev. P, Chapter 6-1 through 6-3)',
+    'Shield the Fresh Gas intake with the soft case and a disposable B/V filter in dust, rain, or snow; swap the filter before it clogs. (Rev. P, Chapter 6-1 through 6-2)',
+    'Above 25,000 ft the controller stops compensating; trim delivered volume/pressure and restore baseline once the cabin returns to range. (Rev. P, Chapter 6-3)'
+  ] },
 
-  { id: 'zoll-emv731-operating-transport', title: 'Transport Use', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 113 },
+  { id: 'zoll-emv731-operating-transport', title: 'Transport Use', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 113, mdPath: 'Content/Skills & Equipment/Zoll EMV731/operating-environments.md', sectionTitle: 'Transport Use', cheat: [
+    'Secure the ventilator with ZOLL-approved mounts (carry case, CCLAW litter bracket, roll stand) before moving the patient. (Rev. P, Chapters 2-2 and 6-7; Appendix B)',
+    'Plan each power handoff; confirm vehicle or facility power quality and use the internal battery or a UPS to bridge unstable mains. (Rev. P, Appendix A)',
+    'Watch altitude advisories in flight and adjust tidal volume or switch to pressure targets if the cabin exceeds 25,000 ft. (Rev. P, Chapter 6-3)'
+  ] },
 
-  { id: 'zoll-emv731-operating-noise', title: 'High Noise Environments', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 113 },
+  { id: 'zoll-emv731-operating-noise', title: 'High Noise Environments', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 85, mdPath: 'Content/Skills & Equipment/Zoll EMV731/operating-environments.md', sectionTitle: 'High Noise Environments', cheat: [
+    'Use the 30-second pre-emptive mute before suctioning or disconnects so Smart Help guidance stays readable. (Rev. P, Chapter 5-5)',
+    'Startup mute buys two minutes to configure, but high-priority alarms still break through and must be addressed immediately. (Rev. P, Chapter 5-5)',
+    'In loud cabins press Mute while troubleshooting; otherwise the alarm retriggers each breath and cancels parameter edits. (Rev. P, Chapter 5-5)'
+  ] },
 
-  { id: 'zoll-emv731-operating-emc', title: 'EMC & Safety', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 113 },
+  { id: 'zoll-emv731-operating-emc', title: 'EMC & Safety', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 134, mdPath: 'Content/Skills & Equipment/Zoll EMV731/operating-environments.md', sectionTitle: 'EMC & Safety', cheat: [
+    'Run the ventilator on Class A power only and use the internal battery or a UPS to bridge voltage dips. (Rev. P, Appendix A-2 through A-4)',
+    'Maintain RF separation-about 0.6 m for 1 W portables and 3.6 m for 10 W sets-and reposition radios if Smart Help flags interference. (Rev. P, Appendix A-5)',
+    'Keep humidity above 30% on synthetic floors and watch status indicators whenever RF emitters operate nearby. (Rev. P, Appendix A-5 through A-6)'
+  ] },
 
 
 
@@ -565,15 +581,35 @@ export const VentilationDetailsData = [  // ---- Quick Vent Guide ----
 
   { id: 'zoll-emv731-maintenance-all', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 121, mdPath: 'Content/Skills & Equipment/Zoll EMV731/maintenance.md' },
 
-  { id: 'zoll-emv731-maintenance-pm', title: 'Preventive Maintenance', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 121 },
+  { id: 'zoll-emv731-maintenance-pm', title: 'Preventive Maintenance', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 121, mdPath: 'Content/Skills & Equipment/Zoll EMV731/maintenance.md', sectionTitle: 'Preventive Maintenance', cheat: [
+    'Log visual inspections each shift and treat the PM Due Smart Help reminder as an immediate cue to schedule calibration. (Rev. P, Chapter 7-1 through 7-3)',
+    'Only ZOLL technicians recalibrate via the RCS system; shorten the interval after heavy deployments and record results locally. (Rev. P, Chapter 7-3)',
+    'After long storage, warm the unit to the operating range, run the Operational Test, and recharge before patient use. (Rev. P, Chapter 7-1)'
+  ] },
 
-  { id: 'zoll-emv731-maintenance-filters', title: 'Filter Maintenance', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 121 },
+  { id: 'zoll-emv731-maintenance-filters', title: 'Filter Maintenance', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 121, mdPath: 'Content/Skills & Equipment/Zoll EMV731/maintenance.md', sectionTitle: 'Filter Maintenance', cheat: [
+    'Power down, remove the foam prefilter with hemostats, and discard it; never rinse or reuse. (Rev. P, Chapter 7-3)',
+    'If debris persists, open the compressor inlet fitting, swap the disk filter, and reinstall the gasket before tightening the screws. (Rev. P, Chapter 7-3 through 7-4)',
+    'Never run the compressor without filters in place; contamination forces depot-level cleaning. (Rev. P, Chapter 7-3)'
+  ] },
 
-  { id: 'zoll-emv731-maintenance-exhalation', title: 'Exhalation Valve Diaphragm', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 121 },
+  { id: 'zoll-emv731-maintenance-exhalation', title: 'Exhalation Valve Diaphragm', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 156, mdPath: 'Content/Skills & Equipment/Zoll EMV731/maintenance.md', sectionTitle: 'Exhalation Valve Diaphragm', cheat: [
+    'Inspect the silicone diaphragm for kinks when valve alarms persist and relax folds with gentle opposing pressure. (Rev. P, Appendix D-11)',
+    'Re-seat the diaphragm, orient the tubing barb with the FLOW arrow, and snap the cover fully closed. (Rev. P, Appendix D-11 through D-12)',
+    'Test the circuit on a test lung after reassembly before reconnecting to the patient. (Rev. P, Appendix D-12)'
+  ] },
 
-  { id: 'zoll-emv731-maintenance-selftest', title: 'Self Test & Service', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 121 },
+  { id: 'zoll-emv731-maintenance-selftest', title: 'Self Test & Service', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 121, mdPath: 'Content/Skills & Equipment/Zoll EMV731/maintenance.md', sectionTitle: 'Self Test & Service', cheat: [
+    'Let the ventilator finish its startup self check every cycle and honour Power Cycle Needed prompts to refresh flow calibration. (Rev. P, Chapter 7-1 through 7-8)',
+    'If a self-check fault persists, remove the unit from service, capture the alarm code, and coordinate with ZOLL. (Rev. P, Chapter 7-8)',
+    'Only ZOLL-certified technicians perform RCS calibration or internal repairs; field crews should not open the chassis. (Rev. P, Chapter 7-3 through 7-8)'
+  ] },
 
-  { id: 'zoll-emv731-maintenance-cleaning', title: 'Cleaning & Storage', equipment: true, placeholder: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 121 },
+  { id: 'zoll-emv731-maintenance-cleaning', title: 'Cleaning & Storage', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 121, mdPath: 'Content/Skills & Equipment/Zoll EMV731/maintenance.md', sectionTitle: 'Cleaning & Storage', cheat: [
+    'Clean the housing with soapy water, then a 10% bleach wipe-down, and dry with lint-free cloths; never submerge the unit. (Rev. P, Chapter 7-2)',
+    'After contaminated incidents follow the Incident Commander\'s PPE and decon guidance immediately. (Rev. P, Chapter 7-2 through 7-3)',
+    'Store fully charged in a cool space and top off every 3 to 12 months depending on temperature; recharge before redeployment. (Rev. P, Chapter 7-5 through 7-7)'
+  ] },
 
 
 
@@ -1376,4 +1412,3 @@ export default VentilationDetailsData;
     verify computed values and layout.
 
 */
-

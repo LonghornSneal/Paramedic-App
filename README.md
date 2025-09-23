@@ -604,6 +604,8 @@ Warnings/Alerts: Visually shown under Search Bar.
       Drug Interaction Warning: "Patient is on [Drug], which contraindicates [This Treatment]”).   
   VS Warning: "BP too low for this treatment!”.
    "
+**[2025-09-22 EMV731 operating environment briefings: Environmental Conditions, Transport Use, High Noise, and EMC & Safety pages condensed for field-ready guidance (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapter 5-5; Chapter 6-1 through 6-4; Appendix A).]**
+**[2025-09-22 EMV731 maintenance quick guides: Preventive Maintenance, Filter Maintenance, Exhalation Valve Diaphragm, Self Test & Service, and Cleaning & Storage summarised for field crews (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapter 7-1 through 7-7; Appendix D-11 through D-12).]**
 **[2025-09-22 EMV731 detail routing: Zoll EMV731 subtopics now open directly to their chapter sections without extra TOC layers, matching the operator workflow for General Information, Product Overview, Setup, Use, Alarms, and Accessories (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapters 1-5).]**
 **[2025-09-20 EMV731 navigation cleanup: moved Original Documentation to the final slot and removed redundant 'All Content' topics so General Information, Product Overview, Setting Up, and Using open straight to their chapter subsections (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapters 1-4).]**
 **[2025-09-17 EMV731 general information, product overview, setup, and operations condensed into section summaries with citations for in-app navigation (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapters 1-4).]**

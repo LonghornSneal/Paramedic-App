@@ -1,234 +1,34 @@
-Chapter 6
-Operating Environments
-This chapter describes how to operate the ZOLL Ventilator outside of a typical hospital
-environment. The types of environments that we describe are:
-• Harsh environments -- prehospital and transport
-• Hazardous environments -- in the presence of chemical and/or biological toxins
-• MRI environments -- during MRI (magnetic resonance imaging) treatment
+## All Content
+Chapter 6 outlines how the EMV731 keeps delivering prescribed ventilation in harsh field deployments while relying on crews to manage dust, weather, temperature, and altitude extremes. It also explains how to configure the ventilator for ground, aeromedical, hazardous, and MRI operations without compromising patient safety. (*Source: Rev. P, Chapter 6-1 through 6-8*)
 
-Using the ZOLL Ventilator in Harsh Environments
-The ZOLL Ventilator operates in harsh prehospital environments and during air and ground
-transport. In order to safely manage the patient, you must understand the operating
-characteristics of the ventilator and diligently monitor the patient and device in these
-environments. The unit continuously monitors environmental conditions (temperature and
-ambient pressure) and when it detects extreme environments, the unit alerts you with a Low
-Priority alarm which defines the operating condition and prompts your actions. Low Priority
-alarms are advisory and you should remember that the device is operating as designed.
+- Environmental alarms are advisory cues that the patient or circuit needs attention, not proof that the device is failing.
+- Keep the intake protected and the chassis secured during transport so altitude compensation, pneumatic sensors, and Smart Help messaging stay reliable.
+- When environments add noise or RF clutter, lean on workflow tools (Mute, Alarm Message Center, separation distances) to keep alerts actionable.
 
-Airborne Particulates
-Under normal operating conditions, the internal 2-stage filtration system protects the gas flow
-path from particulates entrained through the Fresh Gas/Emergency Air Intake. However, when
-operating in areas where fine dust or dirt is airborne due to wind or vehicle movement, you
-should use a disposable bacterial/viral filter to preserve the internal filter. Using disposable
-filters prevents you from having to change the ventilators internal filters. Visually inspect the
-filter for dust/dirt build up for extended operation in harsh environments, you should change the
-filter as it becomes dirty.
+## Environmental Conditions
+The EMV731 continuously samples ambient temperature and pressure. Low-priority alerts warn that hot, cold, or high-altitude conditions could change compliance or battery behavior. Crews should treat those prompts as marching orders: protect the Fresh Gas/Emergency Air Intake with the soft case and a disposable bacterial/viral filter in dust, rain, or snow; remove the case in heat to shed compressor warmth; keep it on in deep cold to trap heat; adjust compliance settings as temperatures swing; and watch tidal volume and SpO2 for any sign the valves are sluggish. Altitude compensation holds true from -2,000 to 25,000 ft-above that the controller freezes at the 25k curve, so reduce delivered volume or switch to pressure targeting, verify chest rise, and restore the original settings once the cabin is back in range. The ventilator is not certified for hyperbaric chambers. (*Source: Rev. P, Chapter 6-1 through 6-3*)
 
+- Fit the Fresh Gas/Emergency Air Intake with a disposable bacterial/viral filter whenever dust, smoke, or precipitation threaten the compressor; inspect and replace the filter before debris forces a service visit.
+- At temperature extremes, manage the padded case, adjust circuit compliance values, and expect battery charge/discharge alarms when Li-ion limits (45 C charge, -25 C discharge) are crossed.
+- When the Excessive Altitude advisory appears (>25,000 ft), trim tidal volume or pressure targets, verify chest excursion, and return to the baseline program once the cabin is re-pressurised.
 
-ZOLL Ventilator Operator’s Guide
+## Transport Use
+The ventilator ships with mounting hardware for ambulances, aircraft, and hospital transports, and there are dedicated accessories-Carry cases, CCLAW litter brackets, roll stands (including MRI-rated carts)-to lock the unit to a stretcher, wall, or stand. Secure the chassis, lock wheels, and tether the stand before moving the patient so circuits and connectors stay seated. Plan power changes at every handoff: connect to vehicle DC or hospital AC whenever it is stable, fall back on the 10+ hour internal battery when needed, and use a UPS or the internal battery to ride through generator transfers. During aeromedical climbs, keep an eye on the low-priority altitude advisory and manage tidal volume if the cabin passes the compensation ceiling. (*Source: Rev. P, Chapters 2-2 and 6-7; Appendix B*)
 
-6-1
+- Use only ZOLL-approved mounts and carry systems; they align the gas path, cable strain relief, and shock padding for transport vibrations.
+- Before departure, confirm which power source will be used at each leg and that chargers or vehicle inverters meet the ventilator's Class A requirements.
+- In aircraft, confirm cabin pressurisation plans and be prepared to adjust volume or pressure targets if the altitude advisory triggers.
 
-OPERATING ENVIRONMENTS
-The primary effect of entrained particles is on the operation of the flow pneumotach used to
-control the gas delivered to the patient. Dirt on the pneumotach screens affects the unit’s
-calibration. Cleaning the screens requires a biomedical technician to disassemble the device
-and ultrasonically clean the screens. Using a filter in dusty environments prevents having to
-remove the unit from service for cleaning. In addition to using the filter, you can also keep the
-unit in the soft case, which will protect the unit case and the LCD from being scratched or
-damaged. It is also easier to clean the padded case following use in a dusty/dirty environment
-than the device.
+## High Noise Environments
+Chapter 5 warns that loud cabins can hide alarms, so crews should mute intentionally rather than ignore the tones. A pre-emptive mute buys 30 seconds before suctioning or disconnecting. A two-minute startup mute suppresses nuisance alarms while you finish setup, but high-priority faults still break through. In noisy spaces you should still press Mute while you resolve the problem-otherwise the alarm re-triggers every breath, cancels parameter changes, and slows the fix. Rely on the Alarm Message Center, the LED column, and Smart Help scripts while the tone is suppressed, and restore the audible alert once the hazard is cleared. (*Source: Rev. P, Chapter 5-5*)
 
-Extreme Temperature Environments
-Traditional transport ventilators typically operate from 0 to 40C (32 to 104F). The ZOLL
-Ventilator can operate over the range of -25 to 49C (-13 to 120F) during emergency
-situations.
+- Queue a pre-emptive mute before planned disconnects so the alarm banner stays readable and settings are not interrupted.
+- During configuration, use the startup mute to finish programming, but treat any break-through alarm as a priority fault.
+- In persistent high-noise cabins, silence the tone while troubleshooting and monitor the Alarm Message Center until the condition resolves.
 
-Operating at High Temperatures
-When operating the ventilator at high temperatures, you may observe alarm conditions
-associated with Li-ION battery performance:
-Charging -- If operating using external power, the unit may issue an alarm when the battery
-reaches its high charge temperature limit of 45 C.
-Discharging -- If operating using external power, the unit may issue an alarm when the battery
-reaches its high discharge temperature limit of 49 C.
-Compliance is a physical characteristic of the ventilator that varies with temperature. The
-circuit becomes more compliant as the temperature rises. The ZOLL ventilator allows you to
-increase the compliance value when operating in hot environments.
-When operating at high temperatures, you should remove the unit from its padded case, which
-allows the unit to pass heat into the surrounding environment.
+## EMC & Safety
+Appendix A lists the EMV731's electromagnetic emission and immunity ratings (CISPR 11 Class A, IEC 60601-1-2). In practice that means crews should power the ventilator from professional-grade mains or vehicle DC with the supplied double-insulated supply, back it with the internal battery or a UPS when voltage dips are expected, and maintain RF separation from radios. Keep 1 W hand-held transmitters roughly 0.6 m away and 10 W portables around 3.6 m; increase the gap for higher-power sets and reposition equipment if Smart Help flags interference. Maintain relative humidity above 30% on synthetic floors to reduce ESD, and remember that although the chassis is splash-rated IPX4, it is not certified for flammable-anaesthetic atmospheres or domestic power circuits. (*Source: Rev. P, Appendix A-2 through A-6*)
 
-Operating at Low Temperatures
-When operating the ventilator at low temperatures, you may observe alarm conditions
-associated with Li-ION battery performance:
-Charging -- If operating using external power, the unit may issue an alarm when the battery
-reaches its low charge temperature limit of 0 C.
-Discharging -- If operating using external power, the unit may issue an alarm when the battery
-reaches its low discharge temperature limit of -25 C.
-Compliance is a physical characteristic of the ventilator that varies with temperature. The
-circuit becomes less compliant as the temperature drops. The ZOLL ventilator allows you to
-decrease the compliance value when operating in cold environments.
-Valve operating performance can be affected by extremely low temperatures. Consequently, at
-low temperatures, you should monitor the patient to ensure that the patient is receiving
-adequate tidal volume and monitor the patient’s SpO2 readings.
-When operating at low temperatures, you can improve performance by operating the unit in the
-padded case, which insulates the unit and allows it to retain heat generated by the compressor,
-circuit boards, and AC/DC Power Supply.
-
-6-2
-
-
-
-Altitude
-The ZOLL 731 Series Ventilator is designed to operate from -610 to 7620 meters (-2,000 to
-25,000 feet). An absolute barometric pressure sensor monitors ambient pressure and the unit
-uses this information to continuously correct the output of the device to maintain the ventilation
-parameters. When the altitude is > 25,000 feet, the unit activates a Low Priority alarm. When
-this occurs, you should monitor the peak inspiratory pressure (PIP) and adjust the tidal volume
-to maintain the PIP and monitor breath sounds and chest excursion to assure the unit maintains
-adequate ventilation. The tidal volume increases as altitude increases, so you should look to
-prevent over-pressurization of the lung when the altitude increases beyond 25,000 feet. If
-changes are made above 25,000 feet, you should revert to the initial settings once operation
-resumes in the compensated range (the LED will turn from yellow to green).
-
-Warning!
-
-The unit is not intended for hyperbaric operation. Use in a hyperbaric chamber can
-result in harm to the patient and/or damage to the device.
-
-
-ZOLL Ventilator Operator’s Guide
-
-
-6-3
-
-OPERATING ENVIRONMENTS
-
-Rain and Snow
-You should prevent exposing the unit to rain or snow. Use the optional padded case that can be
-purchased with the ZOLL Ventilator to protect the 731 Series Ventilator from rain and snow.
-The unit is capable of operating in these conditions if you keep the device in the padded case
-and use the rain flap that is provided with the padded case. The padded case and rain flap
-prevent rain and snow from puddling on any of the device’s surfaces. In cases of driving rain,
-where water could possibly enter the unit’s compressor, you can use a bacterial/viral filter to
-protect the compressor inlet.
-
-Using the ZOLL Ventilator in Hazardous Environments
-You can use the ZOLL Ventilator in environments where chemical and/or biological toxins are
-present. To do this safely, all gas delivered to the patient comes from either a pressurized
-medical-grade oxygen source and/or filtered ambient air entrained through the
-Fresh Gas/Emergency Air Intake. You can chose between a bacterial/viral filter and a
-chemical/biological filter based on the direction of the Medical Control Officer.
-To prevent the patient from breathing contaminated ambient air in the event of a ventilator
-failure, the unit contains an internal anti-asphyxia valve that allows the patient to inspire gas
-through the external filter. While this design assures that no contaminated gas reaches the
-patient, you are required to ensure that nothing blocks the input of the external filter.
-
-Warning!
-
-The Medical Control Officer and/or Incident Commander should determine which, if
-any, external filter is used based on the potential hazard.
-
-Warning!
-
-You must ensure that nothing blocks the inlet of the external filter; failure to do so could
-prevent the patient from breathing and cause an ventilator failure.
-
-Fresh Gas/Emergency Air Intake
-
-Bacterial/Viral Filter
-
-Chemical/Biological Filter
-
-Hazardous Environment Filters
-
-6-4
-
-
-
-Bacterial/Viral Filter Use
-You can use Bacterial/Viral (B/V) filters in environments where the patient is at risk from cross
-contamination or airborne pathogens. When used in accordance with the manufacturer’s
-instructions, these filters can help prevent inhalation of infectious matter. In dusty
-environments, you can also use the B/V filters to prevent entrainment of particulate matter that
-could affect the ventilators pneumatic components. To use a bacterial/viral filter, insert the
-filter's male 22 mm conical fitting into the Fresh Gas/Emergency Air Intake.
-Caution
-
-If filters have been exposed to biological matter, dispose of them following the Universal
-Precaution procedures for your facility.
-
-Chemical/Biological Filter Use
-The ZOLL 731 Series Ventilator is designed to allow attachment of chemical/biological filter/
-canister (type C2A11) for use in contaminated environments. The Fresh Gas/Emergency Air
-Intake fitting allows for attachment of standard Rd 40 x 1/7 threads. A complete description of
-this standard can be found in BS EN 148-1:1999 Respiratory protective devices - Threads for
-face pieces.
-
-Check Valve on Breathing Circuit when in Hazardous Environments
-When operating in a Hazardous Situation where a chemical/biological filter is in use, you
-should use a Check Valve (REF 704-0700-01) to prevent hazardous gas from entering the
-patient’s breathing circuit. The exhalation valve on the breathing circuit is not adequate to
-protect patients if they rapidly inhale/exhale as the valve may not fully close in time to prevent
-hazardous gas entrainment. Also, if the PEEP is set low, patients may inhale faster than the flow
-is delivered which could cause hazardous gas entrainment. Consequently, a Check Valve is
-required to protect patients.
-
-1. A 3M C2A1 canister (3M St. Paul, MN) was used in our validation testing to represent the class of filters
-generically known as C2A1 under the NSN number 4240-01-361-1319. These tests confirmed the
-performance of the ventilator when operating with these devices as a class. Use of the 3M canister does not
-constitute endorsement or recommendation of the 3M device. Use and selection of the appropriate filter
-should always be under the direction of the Incident Commander.
-
-
-ZOLL Ventilator Operator’s Guide
-
-6-5
-
-OPERATING ENVIRONMENTS
-
-Warning!
-
-The unit is shipped with both the pediatric/adult and infant/pediatric single limb
-circuits. A Check Valve (704-0700-01) is required with these breathing circuits when
-operating in a hazardous environment. The correct mating of the Check Valve with the
-breathing circuit is shown below. Operators who anticipate use in these environments
-should also stock the Check Valve.
-
-Check Valve Connection To Breathing Circuit
-
-6-6
-
-
-
-
-Using the ZOLL Ventilator in an MRI Environment
-You can use ZOLL’s MRI-compliant EMV+® and Eagle II™ ventilators in an
-MRI environment while securely mounted to the ZOLL MRI Roll Stand (REF 816-0731-01)
-with the Aluminum IV Support Arm (REF 820-0124-00).
-To securely mount the ventilator, tighten the knob on the back plate of the roll stand to hold the
-ventilator in position, then lock the roll stand wheels (we also recommend that you tether the
-rolling stand in place):
-
-731 Series Ventilator Mounted On MRI Rolling Stand With IV Support Arm
-
-Before using the ventilator in an MRI environment, it is important that you read and understand
-all warnings in the “Ferromagnetic Equipment” Section of Chapter 1.
-
-
-ZOLL Ventilator Operator’s Guide
-
-6-7
-
-OPERATING ENVIRONMENTS
-
-Warning!
-
-Use only ZOLL’s EMV+ and Eagle II Ventilators marked with the MR symbol in the
-MRI environment.
-
-Caution
-
-The use of longer breathing circuits may increase the risk of self-triggering ventilator breaths.
-Reducing the pressure trigger sensitivity may solve this problem.
-
-6-8
+- Use Class A power only (hospital AC, ambulance DC, or the supplied supply) and let the internal battery bridge voltage dips or outages.
+- Maintain EMC separation distances for radios and reorient or relocate transmitters if alarms persist.
+- Control ESD by managing humidity and cable routing, and verify indicator lights whenever RF devices operate nearby.
