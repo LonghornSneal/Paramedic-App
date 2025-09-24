@@ -848,9 +848,9 @@ Launchers:
 Good practice
 - Connect only servers needed for the current task.
 - **[Default to MCP tools for edits, diffs, searches, and command execution; drop to direct shell only when MCP servers are being restored.]**
-- Filesystem edits: `fs_edit_file` for surgical line edits; confirm with `git_status` + `git_diff`.
+- Filesystem edits: `filesystem_edit_file` for surgical line edits; confirm with `git_status` + `git_diff`.
 - Preview locally with `shell_execute_command` -> `npm run preview`.
-- Validate flows with Playwright tools (or run `npm run test:vent`). On Windows, run `browser_install` once; Administrator may be required for Chrome.
+- Validate flows with Playwright tools (or run `npm run test:vent`). On Windows, run `playwright_browser_install` once; Administrator may be required for Chrome.
 - Persist decisions in `memory` during large refactors.
 
 ## Tests

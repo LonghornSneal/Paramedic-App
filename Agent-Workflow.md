@@ -65,30 +65,26 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
 ## New MCP Tools (what to use when)
 
 - CSS visualize: `playwright`
-  - `browser_navigate` to `file:///C:/Users/HhsJa/OneDrive/Documents/GitHub/Paramedic-App/index.html` or `http://localhost:5173/`
-  - `browser_resize` (e.g., 390x844 for mobile preview)
-  - `browser_take_screenshot` (full page or after `browser_snapshot` select elements)
-  - `browser_evaluate` to read `getComputedStyle(...)` for selectors
+  - `playwright_browser_navigate` to `file:///C:/Users/HhsJa/OneDrive/Documents/GitHub/Paramedic-App/index.html` or `http://localhost:5173/`
+  - `playwright_browser_resize` (e.g., 390x844 for mobile preview)
+  - `playwright_browser_take_screenshot` (full page or after `playwright_browser_snapshot` select elements)
+  - `playwright_browser_evaluate` to read `getComputedStyle(...)` for selectors
 
 - CSS generation/resizing: `filesystem` + `shell`
   - Add rules: use `filesystem_edit_file` or `filesystem_write_file` to append to `styles.css`
   - Verify: `playwright_browser_evaluate` to compare computed styles to expected values
 
 - “Did it actually get done?” checks: `playwright`
-- “Did it actually get done?” checks: `playwright`
   - Use `playwright_browser_navigate` + `playwright_browser_wait_for { text }` + `playwright_browser_take_screenshot`
   - For strict checks, `playwright_browser_evaluate` assertions (e.g., find element and compare text/location)
 
 - Outdated/dead code scan: `shell`
-- Outdated/dead code scan: `shell`
   - `shell_execute_command` with `npm run scan:dead` (Knip) and `npm run scan:deps` (depcheck)
 
-- Explore other apps for ideas: `playwright` + `webpick`
 - Explore other apps for ideas: `playwright` + `webpick`
   - `playwright_browser_navigate` to the target URL, take screenshots, inspect DOM
   - `webpick_web-content-pick` to extract headings/links/images/tables as structured data
 
-- Local preview you can test: `shell`
 - Local preview you can test: `shell`
   - `shell_execute_command` → `npm run preview` (serves at `http://localhost:5173`)
   - Then drive it with `playwright` tools.
