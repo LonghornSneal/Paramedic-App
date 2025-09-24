@@ -72,18 +72,18 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
 
 - CSS generation/resizing: `filesystem` + `shell`
   - Add rules: use `filesystem_edit_file` or `filesystem_write_file` to append to `styles.css`
-  - Verify: `playwright.browser_evaluate` to compare computed styles to expected values
+  - Verify: `playwright_browser_evaluate` to compare computed styles to expected values
 
 - “Did it actually get done?” checks: `playwright`
-  - Use `browser_navigate` + `browser_wait_for { text }` + `browser_take_screenshot`
-  - For strict checks, `browser_evaluate` assertions (e.g., find element and compare text/location)
+  - Use `playwright_browser_navigate` + `playwright_browser_wait_for { text }` + `playwright_browser_take_screenshot`
+  - For strict checks, `playwright_browser_evaluate` assertions (e.g., find element and compare text/location)
 
 - Outdated/dead code scan: `shell`
   - `shell_execute_command` with `npm run scan:dead` (Knip) and `npm run scan:deps` (depcheck)
 
 - Explore other apps for ideas: `playwright` + `webpick`
-  - `playwright.browser_navigate` to the target URL, take screenshots, inspect DOM
-  - `webpick.web-content-pick` to extract headings/links/images/tables as structured data
+  - `playwright_browser_navigate` to the target URL, take screenshots, inspect DOM
+  - `webpick_web-content-pick` to extract headings/links/images/tables as structured data
 
 - Local preview you can test: `shell`
   - `shell_execute_command` → `npm run preview` (serves at `http://localhost:5173`)
@@ -94,5 +94,5 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
 
 - Math “show your work” popup verification: `playwright`
   - Navigate to page; trigger the calculator flow (click/fill)
-  - `browser_wait_for` to see the popup text
-  - `browser_evaluate` to assert that the popup contains all steps and that the final answer appears in the target selector
+  - `playwright_browser_wait_for` to see the popup text
+  - `playwright_browser_evaluate` to assert that the popup contains all steps and that the final answer appears in the target selector
