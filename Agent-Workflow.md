@@ -71,7 +71,7 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
   - `browser_evaluate` to read `getComputedStyle(...)` for selectors
 
 - CSS generation/resizing: `filesystem` + `shell`
-  - Add rules: use `filesystem.edit_file` or `filesystem.write_file` to append to `styles.css`
+  - Add rules: use `filesystem_edit_file` or `filesystem_write_file` to append to `styles.css`
   - Verify: `playwright.browser_evaluate` to compare computed styles to expected values
 
 - “Did it actually get done?” checks: `playwright`
@@ -79,14 +79,14 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
   - For strict checks, `browser_evaluate` assertions (e.g., find element and compare text/location)
 
 - Outdated/dead code scan: `shell`
-  - `execute.command` with `npm run scan:dead` (Knip) and `npm run scan:deps` (depcheck)
+  - `shell_execute_command` with `npm run scan:dead` (Knip) and `npm run scan:deps` (depcheck)
 
 - Explore other apps for ideas: `playwright` + `webpick`
   - `playwright.browser_navigate` to the target URL, take screenshots, inspect DOM
   - `webpick.web-content-pick` to extract headings/links/images/tables as structured data
 
 - Local preview you can test: `shell`
-  - `execute.command` → `npm run preview` (serves at `http://localhost:5173`)
+  - `shell_execute_command` → `npm run preview` (serves at `http://localhost:5173`)
   - Then drive it with `playwright` tools.
 
 - Search for issues: `shell` (aggregated linters)
@@ -96,4 +96,3 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
   - Navigate to page; trigger the calculator flow (click/fill)
   - `browser_wait_for` to see the popup text
   - `browser_evaluate` to assert that the popup contains all steps and that the final answer appears in the target selector
-

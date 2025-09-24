@@ -1,6 +1,5 @@
 # Paramedic App Agent Handbook
 _Last updated: 2025-03-09_
-
 ## Mission & Source of Truth
 - Deliver the full Abbott EMS protocol playbook as a rapid, offline-ready reference for field clinicians.
 - Treat `C:/Users/HhsJa/OneDrive/Documents/Edited entire Protocols organized.docx` (and the extracted text at `research/paramedic_protocols.txt`) as the non-negotiable source for medical content. No guidance ships without tracing back to a paragraph in that document.
