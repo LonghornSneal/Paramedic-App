@@ -842,14 +842,14 @@ Launchers:
 **[`firecrawl` stays commented until a `FIRECRAWL_API_KEY` is available; uncomment the stub in `~/.codex/config.toml` when you have credentials.]**
 **[Install dependencies with `npm install` so the bundled MCP binaries are available on the local PATH before launching Codex.]**
 **[Startup health check: run `npm run mcp:health` before coding. The script verifies local packages, `.bin` shims, and warns about missing env vars; fix issues, restart Codex, then reconnect servers.]**
-**[Connectivity sanity check: after the Codex session opens, call `filesystem.read_text_file` and `git_status` via MCP tools to confirm the repo is wired correctly.]**
+**[Connectivity sanity check: after the Codex session opens, call `filesystem_read_text_file` and `git_status` via MCP tools to confirm the repo is wired correctly.]**
 **[If a server fails mid-session, repair it (reinstall, set env vars, or disable optional entries) and restart Codex. Use direct shell commands only as a temporary bridge while restoring MCP coverage.]**
 
 Good practice
 - Connect only servers needed for the current task.
 - **[Default to MCP tools for edits, diffs, searches, and command execution; drop to direct shell only when MCP servers are being restored.]**
-- Filesystem edits: `fs.edit_file` for surgical line edits; confirm with `git_status` + `git_diff`.
-- Preview locally with `shell.execute.command` -> `npm run preview`.
+- Filesystem edits: `fs_edit_file` for surgical line edits; confirm with `git_status` + `git_diff`.
+- Preview locally with `shell_execute_command` -> `npm run preview`.
 - Validate flows with Playwright tools (or run `npm run test:vent`). On Windows, run `browser_install` once; Administrator may be required for Chrome.
 - Persist decisions in `memory` during large refactors.
 
@@ -883,5 +883,3 @@ This repo is wired to auto‑deploy to GitHub Pages from `main` via `.github/wor
 - If it shows 404 initially, wait for the Pages workflow to finish (Actions tab), or check Settings → Pages to confirm the deployment.
 - Not Sure shows two stacked answers (no ARDS first, ARDS second); pop‑up shows explicit formulas and correct ranges — verified by E2E.
 - Sex icon remains visible when selected (selected state background/border) — verified by E2E.
-
-
