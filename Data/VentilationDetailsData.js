@@ -699,7 +699,7 @@ export const VentilationDetailsData = [  // ---- Quick Vent Guide ----
 
   { id: 'zoll-emv731-oximeter-rate-noise', title: 'Update Rate & Noise Handling', equipment: true, originalPdf: 'Content/Skills & Equipment/Zoll EMV731/Zoll_EMV731_Operators_Manual-1.pdf', pdfPage: 143, mdPath: 'Content/Skills & Equipment/Zoll EMV731/pulse-oximeter-principles.md', sectionTitle: 'Update Rate & Noise Handling', cheat: [
     'Processes four seconds of data and refreshes SpO2 every two seconds; trends update quickly. (Rev. P, Appendix C-2)',
-    'Noise reference N' is recalculated for each possible saturation to maximise signal-to-noise. (Rev. P, Appendix C-2)',
+    'Noise reference N-prime is recalculated for each possible saturation to maximise signal-to-noise. (Rev. P, Appendix C-2)',
     'Motion tolerance comes from stripping venous noise before the final saturation output. (Rev. P, Appendix C-2)'
   ] },
 
