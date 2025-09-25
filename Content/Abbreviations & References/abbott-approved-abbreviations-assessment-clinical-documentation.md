@@ -1,0 +1,224 @@
+# Assessment & Clinical Documentation
+
+- #
+  - Number
+- <
+  - less than
+- =
+  - Equal
+- >
+  - greater than
+- @
+  - At
+- a
+  - a
+- A&Ox3
+  - Alert & oriented to name, date, and place
+- a.c.
+  - A meals
+- a.d.
+  - Right ear (auris dexter)
+- A/C
+  - Aircraft
+- b.i.d.
+  - Twice a day
+- BGL
+  - Blood glucose level
+- BM
+  - Bowel movement
+- BSA
+  - Body surface area
+- c
+  - c
+- c
+  - c
+- c/o
+  - Complains / complaining of
+- Ca++
+  - Calcium
+- CI
+  - Chlorine
+- CK
+  - Creatine kinase
+- co
+  - Cout, wide open
+- CSM
+  - Carotid sinus massage
+- Cx
+  - Chest
+- DAE
+  - Dysbaric air embolism
+- Diff
+  - Difficulty
+- Disch
+  - Discharge
+- DKA
+  - Diabetic ketoacidosis
+- DM
+  - Diabetes mellitus
+- DNR
+  - Do-not-resuscitate
+- DOB
+  - Date of birth
+- DPT
+  - Diphtheria, pertussis, tetanus
+- e.g.
+  - For example
+- EDC
+  - Estimated date of confinement
+- Est.
+  - Estimated
+- ETOH
+  - Ethyl alcohol, alcoholic beverage
+- Fr
+  - French
+- FUO
+  - Fever of unknown origin
+- GU
+  - Genitourinary
+- GYN
+  - Gynecology
+- H&H
+  - Hemoglobin and hematocrit
+- H/A
+  - Headache
+- HAV
+  - Hepatitis A virus
+- HBV
+  - Hepatitis B virus
+- HCV
+  - Hepatitis C virus
+- HEENT
+  - Head, eyes, ears, nose, throat
+- Hg
+  - Mercury
+- Hr
+  - Hour
+- Hx
+  - History
+- IM
+  - Intramuscular
+- J
+  - Joules
+- K+
+  - Potassium
+- Lbs
+  - Pounds
+- Liq
+  - Liquid
+- mA
+  - Milliamperes
+- MAE
+  - Moves all extremities
+- MMR
+  - Measles, mumps, rubella
+- MVC
+  - Motor vehicle crash
+- MVP
+  - Mitral valve prolapse
+- N/C
+  - Nasal canula
+- N/V/D
+  - Nausea, vomiting, diarrhea
+- Na+
+  - Sodium
+- NAD
+  - No apparent / acute distress
+- NES
+  - Non-English Speaking
+- NKA
+  - No known allergies
+- NPO
+  - Nothing by mouth
+- o
+  - VF or pVT:
+- OOH
+  - Out of hospital
+- OPP
+  - Organophosphate poisoning
+- OR
+  - Operating room
+- oz.
+  - Ounce
+- p
+  - p
+- P (+ #)
+  - Parity (P3, P4 etc)
+- P/CD
+  - Pink warm and dry
+- PCP
+  - Phencyclidine, Primary Care Physician
+- PO
+  - By mouth
+- PRBCs
+  - Packed red blood cells
+- PRN
+  - As needed
+- Pt.
+  - Patient
+- Q
+  - Q
+- q
+  - each
+- Qh
+  - Q hour
+- R
+  - Right
+- Rbc
+  - Red blood cell, red blood (cell) count
+- RLQ
+  - Right lower quadrant
+- RN
+  - Registered nurse
+- RUQ
+  - Right upper quadrant
+- s
+  - Cout
+- s
+  - cout
+- s/s
+  - Signs / symptoms
+- SC, SQ
+  - Subcutaneous
+- SROM
+  - Spontaneous Rupture of Membranes
+- SUV
+  - Sport utility vehicle
+- Sx
+  - Symptoms
+- tab
+  - Tablet
+- Tbsp
+  - Tablespoon
+- TCA
+  - Tricyclic antidepressant
+- Temp
+  - Temperature
+- TKO
+  - To keep open
+- Tsp
+  - Teaspoon
+- Tx
+  - Treatment
+- UTL
+  - Unable to locate
+- UTO
+  - Unable to obtain
+- VO
+  - Verbal order
+- Vol
+  - Volume
+- VS
+  - Vital signs
+- Vt
+  - Tidal volume
+- WDWN
+  - Well developed, well nourished
+- WPW
+  - Wolf-Parkinson-White
+- Xfer
+  - Transfer
+- y/o
+  - Years old
+
+Source: "Abbreviations for PCR - Approved list" (Section 1: EMS Operations).

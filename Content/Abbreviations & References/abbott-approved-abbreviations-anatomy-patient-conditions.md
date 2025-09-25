@@ -1,0 +1,104 @@
+# Anatomy & Patient Conditions
+
+- AAA
+  - Abdominal aortic aneurysm
+- Abd
+  - Abdomen
+- ACS
+  - Acute Coronary Syndrome
+- AIDS
+  - Acquired immunodeficiency syndrome
+- Ant
+  - Anterior
+- ARDS
+  - Adult respiratory distress syndrome
+- BBS
+  - Bilateral breath sounds
+- C-spine
+  - Cervical spine
+- CA
+  - Carcinoma, cancer
+- CABG
+  - Coronary artery bypass graft
+- CAD
+  - Coronary artery disease
+- CHI
+  - Closed head injury
+- CID
+  - Cervical Immobilization Device
+- COPD
+  - Chronic obstructive pulmonary disease
+- DIC
+  - Disseminating intravascular coagulation
+- DVT
+  - Deep vein thrombosis
+- Dx
+  - Diagnosis
+- ESRD
+  - End stage renal disease
+- ExDS
+  - Excited Delirium Syndrome
+- EXT
+  - Extremity(s)
+- Fx
+  - Fracture
+- GERD
+  - Gastroesophageal reflux disease
+- ICP
+  - Intracranial pressure
+- KVO
+  - Keep vein open
+- L spine
+  - Lumbar spine
+- L&D
+  - Labor and delivery
+- L/S
+  - Lung sounds
+- LAD
+  - Left axis deviation / left anterior descending
+- LMP
+  - Last menstrual period
+- LSB
+  - Long spine board
+- MOI
+  - Mechanism of injury
+- NOI
+  - No obvious injury
+- OBS
+  - Organic brain syndrome
+- PA
+  - Physician assistant, pulmonary artery
+- PE
+  - Physical exam, pulmonary emboli, pulmonary edema
+- PID
+  - Pelvic inflammatory disease
+- post.
+  - Posterior
+- PSO
+  - Paramedic Standing Orders / Patient Safety Organization
+- RAD
+  - Right axis deviation, reactive airway disease
+- RCA
+  - Right coronary artery
+- RHD
+  - Rheumatic heart disease
+- SARS
+  - Severe acute respiratory syndrome
+- SCI
+  - Spinal cord injury
+- SCUBA
+  - Self-contained underwater breathing apparatus
+- SIDS
+  - Sudden infant death syndrome
+- STD
+  - Sexually transmitted disease
+- T spine
+  - Thoracic spine
+- TBI
+  - Traumatic brain injury
+- URI
+  - Upper respiratory infection
+- UTI
+  - Urinary tract infection
+
+Source: "Abbreviations for PCR - Approved list" (Section 1: EMS Operations).

@@ -1,0 +1,66 @@
+# Diagnostics, Labs & Imaging
+
+- +CMS
+  - Positive circulatory, motor & sensory function
+- ADD
+  - Attention deficit disorder
+- AED
+  - Automated external defibrillator
+- APGAR
+  - Appearance, Pulse, Grimace, Activity, Respiratory effort
+- APS
+  - Adult Protective Services
+- AS
+  - Left ear (auris sinistra)
+- C/C
+  - Chief complaint
+- CAT/CT
+  - Computerized axial tomography scanner
+- CBC
+  - Complete blood count
+- CMO
+  - Chief Medical Officer
+- CPS
+  - Child Protective Services
+- CRT
+  - Capillary refill time
+- CTA
+  - Clear to auscultation
+- CXR
+  - Chest x-ray
+- DO
+  - Doctor of Osteopathy
+- EF
+  - Ejection fraction
+- EPS
+  - Electrophysiological study
+- FHR
+  - Fetal heart rate
+- GI
+  - Gastrointestinal
+- HIV
+  - Human immunodeficiency virus
+- KTD
+  - Kendrick traction device
+- LLQ
+  - Lower left quadrant
+- LUQ
+  - Left upper quadrant
+- NP
+  - Nurse Practitioner
+- OMD
+  - Office of the Medical Director
+- OS
+  - Left eye (oculus sinister)
+- p.r.
+  - Per rectum
+- PMD
+  - Primary/Private medical doctor
+- SOAPE
+  - Subjective, Objective, Assessment, Plan, Enroute
+- TASER
+  - Thomas A. Swift Electric Rifle
+- U/A
+  - Upon arrival, urine analysis
+
+Source: "Abbreviations for PCR - Approved list" (Section 1: EMS Operations).

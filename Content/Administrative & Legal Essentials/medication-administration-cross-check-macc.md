@@ -59,3 +59,5 @@
   - Absolute/Relative Contraindications Allergies/Interactions/Expired (Rule Based Error)
 
 </details>
+
+Source: "Medication Administration Cross Check" and "BLS MACC" (Section 1: EMS Operations).

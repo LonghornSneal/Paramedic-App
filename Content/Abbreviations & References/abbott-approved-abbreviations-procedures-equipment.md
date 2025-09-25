@@ -1,0 +1,86 @@
+# Procedures & Equipment
+
+- +
+  - Positive
+- +ROM
+  - Positive range of motion
+- 1.
+  - Known hypersensitivity
+- ?
+  - Questionable, possible
+- A.E.
+  - Above elbow (amputation)
+- A.K.
+  - Above knee (amputation)
+- AB
+  - Abortion
+- ACE
+  - Angiotensin-converting enzyme
+- AOS TF
+  - Arrived On Scene To Find
+- ATF
+  - Arrived to find
+- AVM
+  - Arteriovenous malformation
+- B.E.
+  - Below elbow (amputation)
+- B.K.
+  - Below knee (amputation)
+- CO2
+  - Carbon dioxide
+- D&C
+  - Dilatation & curettage
+- DNAR
+  - Did not attempt resuscitation
+- EGA
+  - Estimated Gestational Age
+- ETA
+  - Estimated time of arrival
+- ETC02
+  - End-tidal carbon dioxide
+- EXP
+  - Expansion
+- HTN
+  - Hypertension
+- Inf
+  - Inferior
+- IO
+  - Intraosseous
+- IV
+  - Intravenous
+- KED
+  - Kendrick extrication device
+- LOC
+  - Level/loss of consciousness
+- MCL
+  - Midclavicular line, modified chest lead
+- mEq
+  - Milliequivalent
+- NGT
+  - Nasogastric tube
+- NH
+  - Nursing home
+- o
+  - Post-ROSC Stabilization
+- OBV
+  - Obvious
+- OLMC
+  - On-line medical consultation/control
+- pC02
+  - Carbon dioxide pressure
+- PEEP
+  - Positive end expiratory pressure
+- POC
+  - Position of comfort
+- POV
+  - Privately operated/owned vehicle
+- PTA/PTOA
+  - Prior to (our) arrival
+- ROSC
+  - Return of spontaneous circulation
+- TB
+  - Tuberculosis
+- TCP
+  - Transcutaneous pacing
+
+Source: "Abbreviations for PCR - Approved list" (Section 1: EMS Operations).

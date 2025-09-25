@@ -1,0 +1,78 @@
+# Measurements & Units
+
+- 1
+  - First degree or Primary
+- 2
+  - Second degree or Secondary
+- 3
+  - Third degree or Tertiary
+- AIVR
+  - Accelerated Idioventricular rhythm
+- AVA
+  - Alternate vascular access
+- Cc
+  - Cubic centimeter
+- CCB
+  - Calcium channel blocker
+- CCR
+  - Cardiocerebral Resuscitation
+- CCU
+  - Coronary / critical care unit
+- Cm
+  - Centimeter
+- Co
+  - Centigrade
+- CVA
+  - Cerebrovascular accident
+- DCAPBTLS
+  - Deformities, Contusions, Abrasions, Penetrations,Paradoxical movements, Burns, Tenderness, Lacerations,
+- dL
+  - Deciliter (1/10 liter: 100 ml)
+- ECG/EKG
+  - Electrocardiogram
+- EEG
+  - Electroencephalogram
+- Fo
+  - Fahrenheit
+- Gm, g
+  - Gram
+- Gtts
+  - Drops
+- ICU
+  - Intensive care unit
+- IU
+  - International units
+- Kg
+  - Kilogram
+- L
+  - Left or Liter
+- Lac
+  - Laceration
+- Lpm
+  - Liter per minute
+- MAP
+  - Mean arterial pressure
+- Mcg
+  - Microgram
+- mg
+  - Milligram
+- mL
+  - Milliliter
+- mm
+  - Millimeter
+- Mph
+  - Miles per hour
+- NICU
+  - Neurological, neonatal intensive care unit
+- PICU
+  - Pediatric intensive care unit
+- PTS
+  - Pediatric trauma score
+- RTS
+  - Revised trauma score
+- SA02
+  - Oxygen saturation of arterial oxyhemoglobin
+- U
+  - Unit
+
+Source: "Abbreviations for PCR - Approved list" (Section 1: EMS Operations).

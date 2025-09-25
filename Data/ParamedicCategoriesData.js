@@ -1,6 +1,5 @@
 // Data/ParamedicCategoriesData.js
 import { slugify } from '../Utils/slugify.js';
-
 export const ParamedicCategoriesData = [
   {id: slugify("Adult Protocols"), title: "Adult Protocols", 
       type: "category", children: [{
@@ -205,84 +204,84 @@ export const ParamedicCategoriesData = [
     },
   {id: slugify("ALS Medications"), title: "ALS Medications", 
       type: "category", children: [
-        { id: '10-calcium-chloride', title: "10% Calcium Chloride", 
+        { id: '10-calcium-chloride', title: "Calcium Chloride (1,000mg/10ml)", 
           type: "topic" 
         }, { 
-          id: '2-lidocaine-xylocaine', title: "2% Lidocaine (Xylocaine)", 
+          id: '2-lidocaine-xylocaine', title: "2% Lidocaine (Xylocaine) (100mg/5ml)", 
           type: "topic" 
         },
-        { id: '8-4-sodium-bicarbonate-nahco3', title: "8.4% Sodium Bicarbonate (NaHCO₃)", 
+        { id: '8-4-sodium-bicarbonate-nahco3', title: "8.4% Bicarb (NaHCO3) (50mEq/50ml)", 
           type: "topic" 
         }, { 
-          id: 'adenosine-adenocard', title: "Adenosine (Adenocard)", 
+          id: 'adenosine-adenocard', title: "Adenosine (Adenocard) (6mg/2ml)", 
           type: "topic" 
         },
-        { id: 'albuterol', title: "Albuterol", 
+        { id: 'albuterol', title: "Albuterol (2.5mg/3cc)", 
           type: "topic" 
         }, { 
-          id: 'asa', title: "ASA", 
+          id: 'asa', title: "ASA (81mg/tab)", 
           type: "topic" 
         }, { 
-          id: 'atropine-sulfate', title: "Atropine Sulfate", 
+          id: 'atropine-sulfate', title: "Atropine Sulfate (1mg/10ml)", 
           type: "topic" 
         },
-        { id: 'd10', title: "D10", 
+        { id: 'd10', title: "D10 (25g/250ml bag)", 
           type: "topic" 
         }, { 
-          id: 'd5', title: "D5", 
+          id: 'd5', title: "D5 (5g/100ml bag)", 
           type: "topic" 
         }, { 
-          id: 'dexamethasone-decadron', title: "Dexamethasone (Decadron)", 
+          id: 'dexamethasone-decadron', title: "Dexamethasone (Decadron) (10mg/ml)", 
           type: "topic" 
         },
-        { id: 'diphenhydramine-benadryl', title: "Diphenhydramine (Benadryl)", 
+        { id: 'diphenhydramine-benadryl', title: "Diphenhydramine (Benadryl) (50mg/ml)", 
           type: "topic" 
         }, { 
-          id: 'droperidol-inapsine', title: "Droperidol (Inapsine)", 
+          id: 'droperidol-inapsine', title: "Droperidol (Inapsine) (5mg/2ml)", 
           type: "topic" 
         },
-        { id: 'epi-1-1000-adrenaline', title: "Epi 1:1,000 (Adrenaline)", 
+        { id: 'epi-1-1000-adrenaline', title: "Epi 1:1,000 (Adrenaline) (10mg/10ml)", 
           type: "topic" 
         }, { 
-          id: 'epi-1-10000', title: "Epi 1:10,000", 
+          id: 'epi-1-10000', title: "Epi 1:10,000 (1mg/10ml)", 
           type: "topic" 
         },
-        { id: 'epi-1-100000-push-dose-epi', title: "Epi 1:100,000 \"Push-Dose Epi\"", 
+        { id: 'epi-1-100000-push-dose-epi', title: "Epi 1:100,000 \"Push-Dose Epi\" (100mcg/10ml)",
           type: "topic" 
         }, { 
-          id: 'etomidate-amidate', title: "Etomidate (Amidate)", 
+          id: 'etomidate-amidate', title: "Etomidate (Amidate) (20mg/10ml)", 
           type: "topic" 
         },
-        { id: 'fentanyl-sublimaze', title: "Fentanyl (Sublimaze)", 
+        { id: 'fentanyl-sublimaze', title: "Fentanyl (Sublimaze) (100mcg/2ml)", 
           type: "topic" 
         }, { 
-          id: 'ipratropium', title: "Ipratropium", 
+          id: 'ipratropium', title: "Ipratropium (0.5mg/3cc)", 
           type: "topic" 
         },
-        { id: 'ketamine-ketalar', title: "Ketamine (Ketalar)", 
+        { id: 'ketamine-ketalar', title: "Ketamine (Ketalar) (500mg/5ml)", 
           type: "topic" 
         }, { 
-          id: 'ketorolac-tromethamine-toradol', title: "Ketorolac Tromethamine (Toradol)", 
+          id: 'ketorolac-tromethamine-toradol', title: "Ketorolac Tromethamine (Toradol) (30mg/ml)", 
           type: "topic" 
         },
-        { id: 'magnesium-sulfate-mgso4', title: "Magnesium sulfate (MgSO₄)", 
+        { id: 'magnesium-sulfate-mgso4', title: "Magnesium Sulfate (MgSO4) (1g/2ml)", 
           type: "topic" 
         }, { 
-          id: 'metoprolol-tartrate-lopressor', title: "Metoprolol tartrate (Lopressor)", 
+          id: 'metoprolol-tartrate-lopressor', title: "Metoprolol Tartrate (Lopressor) (5mg/5ml)", 
           type: "topic" 
         },
-        { id: 'midazolam-versed', title: "Midazolam (Versed)", 
+        { id: 'midazolam-versed', title: "Midazolam (Versed) (10mg/2ml)", 
           type: "topic" 
-        }, { id: 'morphine', title: "Morphine", 
+        }, { id: 'morphine', title: "Morphine (4mg/2ml)", 
           type: "topic" 
         },
-        { id: 'naloxone-narcan', title: "Naloxone (Narcan)", 
+        { id: 'naloxone-narcan', title: "Naloxone (Narcan) (2mg/2ml)", 
           type: "topic" 
         }, { 
-          id: 'ntg', title: "NTG", 
+          id: 'ntg', title: "NTG (0.4mg/spray)", 
           type: "topic" 
         }, { 
-          id: 'ondansetron-zofran', title: "Ondansetron (Zofran)", 
+          id: 'ondansetron-zofran', title: "Ondansetron (Zofran) (4mg/2ml)", 
           type: "topic" 
         }
       ]
@@ -311,7 +310,8 @@ export const ParamedicCategoriesData = [
           type: "topic" 
         },{ 
           id: slugify("Medication Administration Cross Check (MACC)"), title: "Medication Administration Cross Check (MACC)", 
-          type: "topic" 
+          type: "topic",
+          details: { mdPath: "Content/Administrative & Legal Essentials/medication-administration-cross-check-macc.md" } 
         },{ 
           id: slugify("CDC Field Triage Guidelines (Trauma)"), title: "CDC Field Triage Guidelines (Trauma)", 
           type: "topic" 
@@ -325,7 +325,7 @@ export const ParamedicCategoriesData = [
       id: slugify("Skills & Equipment"), title: "Skills & Equipment", 
       type: "category", children: [{ 
   //      @@ 'Skills & Equipment' children array
-        
+
          id: slugify("Ventilator Set-Up (ParaPAC Plus)"), title: "Ventilator Set-Up (ParaPAC Plus)",
          type: "topic" 
        },{ 
@@ -444,7 +444,7 @@ export const ParamedicCategoriesData = [
           ] },
           { id: slugify("zoll-emv731-original-documentation"), title: "Original Documentation", type: "topic" }
         ]
-  
+
       },{ 
         id: slugify("I-gel Supraglottic Airway (SGA)"), title: "I-gel Supraglottic Airway (SGA)", 
         type: "topic" 
@@ -474,20 +474,120 @@ export const ParamedicCategoriesData = [
         type: "topic" 
       }]
     },
-  {
+   {
+
       id: slugify("Abbreviations & References"), title: "Abbreviations & References", 
+
       type: "category", 
+
       children: [
-        { 
+
+        {
+
           id: slugify("Abbott Approved Abbreviations"), title: "Abbott Approved Abbreviations", 
-          type: "topic" 
+
+          type: "category", 
+
+          children: [
+
+            {
+
+              id: slugify("Abbott Approved Abbreviations Assessment & Clinical Documentation"), title: "Assessment & Clinical Documentation", 
+
+              type: "topic", 
+
+              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-assessment-clinical-documentation.md" } 
+
+            },{
+
+              id: slugify("Abbott Approved Abbreviations Procedures & Equipment"), title: "Procedures & Equipment", 
+
+              type: "topic", 
+
+              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-procedures-equipment.md" } 
+
+            },{
+
+              id: slugify("Abbott Approved Abbreviations Medications & Pharmacology (Rx)"), title: "Medications & Pharmacology (Rx)", 
+
+              type: "topic", 
+
+              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-medications-pharmacology-rx.md" } 
+
+            },{
+
+              id: slugify("Abbott Approved Abbreviations Measurements & Units"), title: "Measurements & Units", 
+
+              type: "topic", 
+
+              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-measurements-units.md" } 
+
+            },{
+
+              id: slugify("Abbott Approved Abbreviations Cardiovascular & Hemodynamics"), title: "Cardiovascular & Hemodynamics", 
+
+              type: "topic", 
+
+              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-cardiovascular-hemodynamics.md" } 
+
+            },{
+
+              id: slugify("Abbott Approved Abbreviations Respiratory & Airway"), title: "Respiratory & Airway", 
+
+              type: "topic", 
+
+              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-respiratory-airway.md" } 
+
+            },{
+
+              id: slugify("Abbott Approved Abbreviations Anatomy & Patient Conditions"), title: "Anatomy & Patient Conditions", 
+
+              type: "topic", 
+
+              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-anatomy-patient-conditions.md" } 
+
+            },{
+
+              id: slugify("Abbott Approved Abbreviations Diagnostics, Labs & Imaging"), title: "Diagnostics, Labs & Imaging", 
+
+              type: "topic", 
+
+              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-diagnostics-labs-imaging.md" } 
+
+            },{
+
+              id: slugify("Abbott Approved Abbreviations Neurologic & Trauma"), title: "Neurologic & Trauma", 
+
+              type: "topic", 
+
+              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-neurologic-trauma.md" } 
+
+            },{
+
+              id: slugify("Abbott Approved Abbreviations Operations & Agencies"), title: "Operations & Agencies", 
+
+              type: "topic", 
+
+              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-operations-agencies.md" } 
+
+            }
+
+          ]
+
         },{ 
+
           id: slugify("Other Abbreviations"), title: "Other Abbreviations", 
-          type: "topic" 
+
+          type: "topic", 
+
+          details: { mdPath: "Content/Abbreviations & References/other-abbreviations.md" } 
+
         }
+
       ]
+
     },
-  {
+
       id: slugify("Introduction & Core Principles"), title: "Introduction & Core Principles", 
       type: "category", 
       children: [
@@ -542,7 +642,8 @@ export const ParamedicCategoriesData = [
           type: "topic" 
         },{ 
           id: slugify("Applicability of the COG"), title: "Applicability of the COG", 
-          type: "topic" 
+          type: "topic",
+          details: { mdPath: "Content/Administrative & Legal Essentials/applicability-of-the-cog.md" } 
         },{ 
           id: slugify("Mandatory Reporting"), title: "Mandatory Reporting", 
           type: "topic" 
@@ -556,3 +657,4 @@ export const ParamedicCategoriesData = [
       ]
     }
 ];
+

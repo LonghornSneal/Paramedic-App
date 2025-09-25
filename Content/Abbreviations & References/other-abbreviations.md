@@ -1,12 +1,25 @@
 # Abbreviations Used in Document
 
-- a = before
-- c = with
-- s = without
-- p = after
-- q = every
-- x = except
-- MD = Medical Director
+- a
+  - before
+
+- c
+  - with
+
+- s
+  - without
+
+- p
+  - after
+
+- q
+  - every
+
+- x
+  - except
+
+- MD
+  - Medical Director
 - COG
 - OLMC
 - MAC
@@ -15,6 +28,12 @@
 - SMR
 - SGA
 - MPDS
-- CIR = Certificate of Informed Refusal
-- (RRWCT) = Regular Regular Wide Complex Tachycardia
+
+- CIR
+  - Certificate of Informed Refusal
+
+- (RRWCT)
+  - Regular Regular Wide Complex Tachycardia
 - Differences between SQ and IM
+
+Source: "Abbreviations Used in Document" (Section 1: EMS Operations).

@@ -8,3 +8,5 @@
 - C Pt  Evaluate/PCR/Tx Prn  Unless Not a Pt
 - Pt definition Involves both the Individuals Input & the Clinicians Assessment (Including why 911 was called)
 - Missouri does not define Emancipated, but common case law references exist
+
+Source: "Applicability of the COG" (Section 1: EMS Operations).

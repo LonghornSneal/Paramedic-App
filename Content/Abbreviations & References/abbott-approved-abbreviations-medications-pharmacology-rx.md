@@ -1,0 +1,48 @@
+# Medications & Pharmacology (Rx)
+
+- APAP
+  - Acetaminophen (APAP)
+- ASA
+  - Acetyl salicylic acid (Aspirin)
+- Consultation: Cardiogenic Shock or Post-ROSC Stabilization
+  - = 1mcg/kg IVP/IO    From Push-Dose Epi
+- D10W
+  - Dextrose 10% in water
+- D25W
+  - Dextrose 25% in water
+- D50
+  - 50% Dextrose
+- D5W
+  - Dextrose 5% in water
+- Epi
+  - Epinephrine
+- HCTZ
+  - Hydrochlorothiazide
+- HRT
+  - Hormone replacement therapy
+- IDDM/DM I
+  - Insulin dependent diabetes mellitus (Type I)
+- LR
+  - Lactated Ringers
+- MDI
+  - Metered dose inhaler
+- MS
+  - Morphine Sulfate, Multiple Sclerosis
+- NIDDM/DM II
+  - Non-insulin dependent diabetes mellitus (Type II)
+- NKDA
+  - No known drug allergies
+- NS
+  - Normal saline
+- NSAID
+  - Non-steroidal anti-inflammatory drug
+- NTG
+  - Nitroglycerin
+- OD
+  - Overdose, right eye (oculus dexter)
+- Rx
+  - Prescription
+- SL
+  - Sublingual, Saline Lock
+
+Source: "Abbreviations for PCR - Approved list" (Section 1: EMS Operations).

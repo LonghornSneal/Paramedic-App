@@ -1,0 +1,72 @@
+# Cardiovascular & Hemodynamics
+
+- 2.
+  - Hypotension (SBP <100 mmHg) probabky relative??
+- A Fib
+  - Atrial fibrillation
+- ABG
+  - Arterial blood gas
+- Af
+  - Atrial flutter
+- AICD
+  - Automatic Implanted Cardioverter Defibrillator
+- AMI
+  - Acute myocardial infarction
+- AV
+  - Atrioventricular
+- BBBB
+  - Bundle branch block
+- BP
+  - Blood Pressure
+- CHF
+  - Congestive heart failure
+- CK-MB
+  - Creatine kinase myocardial band
+- CO
+  - Cardiac output / carbon monoxide
+- CPR
+  - Cardiopulmonary resuscitation
+- CVP
+  - Central venous pressure
+- FHx
+  - Family history
+- HR
+  - Heart rate
+- IVP
+  - IV push IVR Idioventricular rhythm
+- JVD
+  - Jugular venous distention
+- LBBB
+  - Left bundle branch block
+- LSD
+  - Lysergic acid diethylamide
+- LVAD
+  - Left Ventricular Assist Device
+- LVH
+  - Left ventricular hypertrophy
+- o
+  - Symptomatic BRADYCARDIA
+- o
+  - Cardiogenic Shock
+- PCI
+  - Percutaneous coronary intervention
+- PEA
+  - Pulseless electrical activity
+- PSVT
+  - Paroxysmal supraventricular tachycardia
+- PVC
+  - Premature ventricular contraction
+- PVT
+  - Polymorphic ventricular tachycardia
+- RBBB
+  - Right bundle branch block
+- SBP
+  - Systolic blood pressure
+- SVT
+  - Supraventricular tachycardia
+- VF
+  - Ventricular fibrillation
+- VT
+  - Ventricular tachycardia
+
+Source: "Abbreviations for PCR - Approved list" (Section 1: EMS Operations).

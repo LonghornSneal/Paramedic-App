@@ -11,11 +11,15 @@ let allSearchableTopics = [];
 export function processItem(item, parentPath = '', parentIds = []) {
     let currentPath = parentPath ? parentPath + ' > ' + item.title : item.title;
     let currentIds = (item.type === 'category') ? parentIds.concat(item.id) : parentIds;
-    const detailsObj = window.medicationDataMap?.[item.id];
+    const medDetails = window.medicationDataMap?.[item.id] || null;
+    const itemDetails = item.details ? { ...(item.details || {}) } : null;
+    const combinedDetails = medDetails
+        ? { ...(itemDetails || {}), ...medDetails }
+        : itemDetails;
     const fullItem = {
         ...item,
         path: currentPath,
-        details: detailsObj || null,
+        details: combinedDetails,
         categoryPath: parentIds
     };
     window.allDisplayableTopicsMap[item.id] = fullItem;

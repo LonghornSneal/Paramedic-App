@@ -1,0 +1,58 @@
+# Respiratory & Airway
+
+- 02
+  - Oxygen
+- 2.
+  - 50yo (asthma) usually for the 1:1,000 for bronchospam
+- ABC
+  - Airway, breathing, circulation
+- BiPAP
+  - Bi-level Positive Airway Pressure
+- BS
+  - Breath, bowel sounds
+- BVM
+  - Bag valve mask
+- CAO x 3 or 4
+  - Conscious, Alert, & Oriented to Person, Place, Time & Events
+- CPAP
+  - Continuous positive airway pressure
+- DOE
+  - Dyspnea on exertion
+- ET
+  - Endotracheal
+- ETT
+  - Endotracheal tube
+- FBAO
+  - Foreign body airway obstruction
+- IMV
+  - Intermittent mechanical ventilation
+- IPPB
+  - Intermittent positive pressure breathing
+- LMA
+  - Laryngeal Mask Airway
+- NPA
+  - Nasopharyngeal airway
+- NRB
+  - Non-rebreather mask
+- NT
+  - Nasotracheal
+- OPA
+  - Oropharyngeal airway
+- P02
+  - Partial pressure of oxygen
+- PAI
+  - Pharmacologically assisted intubation, Pre-Arrival Instructions
+- PND
+  - Paroxysmal nocturnal dyspnea
+- PPV
+  - Positive Pressure Ventilation
+- RR
+  - Respiratory rate
+- RRT
+  - Registered Respiratory Therapist
+- RSV
+  - Respiratory syncytial virus
+- SOB
+  - Shortness of breath
+
+Source: "Abbreviations for PCR - Approved list" (Section 1: EMS Operations).
