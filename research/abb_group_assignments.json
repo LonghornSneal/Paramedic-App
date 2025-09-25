@@ -1,0 +1,1534 @@
+{
+  "Medications & Pharmacology (Rx)": [
+    [
+      "APAP",
+      "Acetaminophen (APAP)"
+    ],
+    [
+      "ASA",
+      "Acetyl salicylic acid (Aspirin)"
+    ],
+    [
+      "D5W",
+      "Dextrose 5% in water"
+    ],
+    [
+      "D10W",
+      "Dextrose 10% in water"
+    ],
+    [
+      "D25W",
+      "Dextrose 25% in water"
+    ],
+    [
+      "D50",
+      "50% Dextrose"
+    ],
+    [
+      "Epi",
+      "Epinephrine"
+    ],
+    [
+      "HCTZ",
+      "Hydrochlorothiazide"
+    ],
+    [
+      "HRT",
+      "Hormone replacement therapy"
+    ],
+    [
+      "IDDM/DM I",
+      "Insulin dependent diabetes mellitus (Type I)"
+    ],
+    [
+      "LR",
+      "Lactated Ringers"
+    ],
+    [
+      "MDI",
+      "Metered dose inhaler"
+    ],
+    [
+      "MS",
+      "Morphine Sulfate, Multiple Sclerosis"
+    ],
+    [
+      "NIDDM/DM II",
+      "Non-insulin dependent diabetes mellitus (Type II)"
+    ],
+    [
+      "NKDA",
+      "No known drug allergies"
+    ],
+    [
+      "NS",
+      "Normal saline"
+    ],
+    [
+      "NSAID",
+      "Non-steroidal anti-inflammatory drug"
+    ],
+    [
+      "NTG",
+      "Nitroglycerin"
+    ],
+    [
+      "OD",
+      "Overdose, right eye (oculus dexter)"
+    ],
+    [
+      "Rx",
+      "Prescription"
+    ],
+    [
+      "SL",
+      "Sublingual, Saline Lock"
+    ],
+    [
+      "Consultation: Cardiogenic Shock or Post-ROSC Stabilization",
+      "= 1mcg/kg IVP/IO    From Push-Dose Epi"
+    ]
+  ],
+  "Measurements & Units": [
+    [
+      "AIVR",
+      "Accelerated Idioventricular rhythm"
+    ],
+    [
+      "AVA",
+      "Alternate vascular access"
+    ],
+    [
+      "Co",
+      "Centigrade"
+    ],
+    [
+      "Cc",
+      "Cubic centimeter"
+    ],
+    [
+      "CCR",
+      "Cardiocerebral Resuscitation"
+    ],
+    [
+      "Cm",
+      "Centimeter"
+    ],
+    [
+      "CCB",
+      "Calcium channel blocker"
+    ],
+    [
+      "CCU",
+      "Coronary / critical care unit"
+    ],
+    [
+      "CVA",
+      "Cerebrovascular accident"
+    ],
+    [
+      "DCAPBTLS",
+      "Deformities, Contusions, Abrasions, Penetrations,Paradoxical movements, Burns, Tenderness, Lacerations,"
+    ],
+    [
+      "dL",
+      "Deciliter (1/10 liter: 100 ml)"
+    ],
+    [
+      "ECG/EKG",
+      "Electrocardiogram"
+    ],
+    [
+      "EEG",
+      "Electroencephalogram"
+    ],
+    [
+      "Fo",
+      "Fahrenheit"
+    ],
+    [
+      "Gm, g",
+      "Gram"
+    ],
+    [
+      "Gtts",
+      "Drops"
+    ],
+    [
+      "ICU",
+      "Intensive care unit"
+    ],
+    [
+      "IU",
+      "International units"
+    ],
+    [
+      "Kg",
+      "Kilogram"
+    ],
+    [
+      "L",
+      "Left or Liter"
+    ],
+    [
+      "Lac",
+      "Laceration"
+    ],
+    [
+      "Lpm",
+      "Liter per minute"
+    ],
+    [
+      "mg",
+      "Milligram"
+    ],
+    [
+      "MAP",
+      "Mean arterial pressure"
+    ],
+    [
+      "Mcg",
+      "Microgram"
+    ],
+    [
+      "mL",
+      "Milliliter"
+    ],
+    [
+      "mm",
+      "Millimeter"
+    ],
+    [
+      "Mph",
+      "Miles per hour"
+    ],
+    [
+      "NICU",
+      "Neurological, neonatal intensive care unit"
+    ],
+    [
+      "PICU",
+      "Pediatric intensive care unit"
+    ],
+    [
+      "PTS",
+      "Pediatric trauma score"
+    ],
+    [
+      "RTS",
+      "Revised trauma score"
+    ],
+    [
+      "SA02",
+      "Oxygen saturation of arterial oxyhemoglobin"
+    ],
+    [
+      "U",
+      "Unit"
+    ],
+    [
+      "1",
+      "First degree or Primary"
+    ],
+    [
+      "2",
+      "Second degree or Secondary"
+    ],
+    [
+      "3",
+      "Third degree or Tertiary"
+    ]
+  ],
+  "Anatomy & Patient Conditions": [
+    [
+      "AAA",
+      "Abdominal aortic aneurysm"
+    ],
+    [
+      "Abd",
+      "Abdomen"
+    ],
+    [
+      "ACS",
+      "Acute Coronary Syndrome"
+    ],
+    [
+      "AIDS",
+      "Acquired immunodeficiency syndrome"
+    ],
+    [
+      "Ant",
+      "Anterior"
+    ],
+    [
+      "ARDS",
+      "Adult respiratory distress syndrome"
+    ],
+    [
+      "BBS",
+      "Bilateral breath sounds"
+    ],
+    [
+      "CA",
+      "Carcinoma, cancer"
+    ],
+    [
+      "CABG",
+      "Coronary artery bypass graft"
+    ],
+    [
+      "CAD",
+      "Coronary artery disease"
+    ],
+    [
+      "CHI",
+      "Closed head injury"
+    ],
+    [
+      "CID",
+      "Cervical Immobilization Device"
+    ],
+    [
+      "COPD",
+      "Chronic obstructive pulmonary disease"
+    ],
+    [
+      "C-spine",
+      "Cervical spine"
+    ],
+    [
+      "DIC",
+      "Disseminating intravascular coagulation"
+    ],
+    [
+      "DVT",
+      "Deep vein thrombosis"
+    ],
+    [
+      "Dx",
+      "Diagnosis"
+    ],
+    [
+      "ESRD",
+      "End stage renal disease"
+    ],
+    [
+      "ExDS",
+      "Excited Delirium Syndrome"
+    ],
+    [
+      "EXT",
+      "Extremity(s)"
+    ],
+    [
+      "Fx",
+      "Fracture"
+    ],
+    [
+      "GERD",
+      "Gastroesophageal reflux disease"
+    ],
+    [
+      "ICP",
+      "Intracranial pressure"
+    ],
+    [
+      "KVO",
+      "Keep vein open"
+    ],
+    [
+      "L spine",
+      "Lumbar spine"
+    ],
+    [
+      "L&D",
+      "Labor and delivery"
+    ],
+    [
+      "L/S",
+      "Lung sounds"
+    ],
+    [
+      "LAD",
+      "Left axis deviation / left anterior descending"
+    ],
+    [
+      "LMP",
+      "Last menstrual period"
+    ],
+    [
+      "LSB",
+      "Long spine board"
+    ],
+    [
+      "MOI",
+      "Mechanism of injury"
+    ],
+    [
+      "NOI",
+      "No obvious injury"
+    ],
+    [
+      "OBS",
+      "Organic brain syndrome"
+    ],
+    [
+      "PA",
+      "Physician assistant, pulmonary artery"
+    ],
+    [
+      "PE",
+      "Physical exam, pulmonary emboli, pulmonary edema"
+    ],
+    [
+      "PID",
+      "Pelvic inflammatory disease"
+    ],
+    [
+      "post.",
+      "Posterior"
+    ],
+    [
+      "PSO",
+      "Paramedic Standing Orders / Patient Safety Organization"
+    ],
+    [
+      "RAD",
+      "Right axis deviation, reactive airway disease"
+    ],
+    [
+      "RCA",
+      "Right coronary artery"
+    ],
+    [
+      "RHD",
+      "Rheumatic heart disease"
+    ],
+    [
+      "SARS",
+      "Severe acute respiratory syndrome"
+    ],
+    [
+      "SCI",
+      "Spinal cord injury"
+    ],
+    [
+      "SCUBA",
+      "Self-contained underwater breathing apparatus"
+    ],
+    [
+      "SIDS",
+      "Sudden infant death syndrome"
+    ],
+    [
+      "STD",
+      "Sexually transmitted disease"
+    ],
+    [
+      "T spine",
+      "Thoracic spine"
+    ],
+    [
+      "TBI",
+      "Traumatic brain injury"
+    ],
+    [
+      "URI",
+      "Upper respiratory infection"
+    ],
+    [
+      "UTI",
+      "Urinary tract infection"
+    ]
+  ],
+  "Cardiovascular & Hemodynamics": [
+    [
+      "ABG",
+      "Arterial blood gas"
+    ],
+    [
+      "A Fib",
+      "Atrial fibrillation"
+    ],
+    [
+      "Af",
+      "Atrial flutter"
+    ],
+    [
+      "AMI",
+      "Acute myocardial infarction"
+    ],
+    [
+      "AV",
+      "Atrioventricular"
+    ],
+    [
+      "BBBB",
+      "Bundle branch block"
+    ],
+    [
+      "BP",
+      "Blood Pressure"
+    ],
+    [
+      "CHF",
+      "Congestive heart failure"
+    ],
+    [
+      "CK-MB",
+      "Creatine kinase myocardial band"
+    ],
+    [
+      "CO",
+      "Cardiac output / carbon monoxide"
+    ],
+    [
+      "CPR",
+      "Cardiopulmonary resuscitation"
+    ],
+    [
+      "CVP",
+      "Central venous pressure"
+    ],
+    [
+      "FHx",
+      "Family history"
+    ],
+    [
+      "HR",
+      "Heart rate"
+    ],
+    [
+      "AICD",
+      "Automatic Implanted Cardioverter Defibrillator"
+    ],
+    [
+      "IVP",
+      "IV push IVR Idioventricular rhythm"
+    ],
+    [
+      "JVD",
+      "Jugular venous distention"
+    ],
+    [
+      "LBBB",
+      "Left bundle branch block"
+    ],
+    [
+      "LSD",
+      "Lysergic acid diethylamide"
+    ],
+    [
+      "LVAD",
+      "Left Ventricular Assist Device"
+    ],
+    [
+      "LVH",
+      "Left ventricular hypertrophy"
+    ],
+    [
+      "PCI",
+      "Percutaneous coronary intervention"
+    ],
+    [
+      "PEA",
+      "Pulseless electrical activity"
+    ],
+    [
+      "PSVT",
+      "Paroxysmal supraventricular tachycardia"
+    ],
+    [
+      "PVC",
+      "Premature ventricular contraction"
+    ],
+    [
+      "PVT",
+      "Polymorphic ventricular tachycardia"
+    ],
+    [
+      "RBBB",
+      "Right bundle branch block"
+    ],
+    [
+      "SBP",
+      "Systolic blood pressure"
+    ],
+    [
+      "SVT",
+      "Supraventricular tachycardia"
+    ],
+    [
+      "VF",
+      "Ventricular fibrillation"
+    ],
+    [
+      "VT",
+      "Ventricular tachycardia"
+    ],
+    [
+      "o",
+      "Symptomatic BRADYCARDIA"
+    ],
+    [
+      "o",
+      "Cardiogenic Shock"
+    ],
+    [
+      "2.",
+      "Hypotension (SBP <100 mmHg) probabky relative??"
+    ]
+  ],
+  "Respiratory & Airway": [
+    [
+      "ABC",
+      "Airway, breathing, circulation"
+    ],
+    [
+      "BiPAP",
+      "Bi-level Positive Airway Pressure"
+    ],
+    [
+      "BS",
+      "Breath, bowel sounds"
+    ],
+    [
+      "BVM",
+      "Bag valve mask"
+    ],
+    [
+      "CAO x 3 or 4",
+      "Conscious, Alert, & Oriented to Person, Place, Time & Events"
+    ],
+    [
+      "CPAP",
+      "Continuous positive airway pressure"
+    ],
+    [
+      "DOE",
+      "Dyspnea on exertion"
+    ],
+    [
+      "ET",
+      "Endotracheal"
+    ],
+    [
+      "ETT",
+      "Endotracheal tube"
+    ],
+    [
+      "FBAO",
+      "Foreign body airway obstruction"
+    ],
+    [
+      "IMV",
+      "Intermittent mechanical ventilation"
+    ],
+    [
+      "IPPB",
+      "Intermittent positive pressure breathing"
+    ],
+    [
+      "LMA",
+      "Laryngeal Mask Airway"
+    ],
+    [
+      "NPA",
+      "Nasopharyngeal airway"
+    ],
+    [
+      "NRB",
+      "Non-rebreather mask"
+    ],
+    [
+      "NT",
+      "Nasotracheal"
+    ],
+    [
+      "02",
+      "Oxygen"
+    ],
+    [
+      "OPA",
+      "Oropharyngeal airway"
+    ],
+    [
+      "PAI",
+      "Pharmacologically assisted intubation, Pre-Arrival Instructions"
+    ],
+    [
+      "PND",
+      "Paroxysmal nocturnal dyspnea"
+    ],
+    [
+      "P02",
+      "Partial pressure of oxygen"
+    ],
+    [
+      "PPV",
+      "Positive Pressure Ventilation"
+    ],
+    [
+      "RR",
+      "Respiratory rate"
+    ],
+    [
+      "RRT",
+      "Registered Respiratory Therapist"
+    ],
+    [
+      "RSV",
+      "Respiratory syncytial virus"
+    ],
+    [
+      "SOB",
+      "Shortness of breath"
+    ],
+    [
+      "2.",
+      "50yo (asthma) usually for the 1:1,000 for bronchospam"
+    ]
+  ],
+  "Neurologic & Trauma": [
+    [
+      "CNS",
+      "Central nervous system"
+    ],
+    [
+      "CNS",
+      "Central nervous system"
+    ],
+    [
+      "CP",
+      "Chest pain"
+    ],
+    [
+      "CSF",
+      "Cerebrospinal fluid"
+    ],
+    [
+      "DTs",
+      "Delirium tremens"
+    ],
+    [
+      "FSP",
+      "Full spinal precaution"
+    ],
+    [
+      "GCS",
+      "Glasgow coma scale/score"
+    ],
+    [
+      "NMB",
+      "Neuromuscular blockade"
+    ],
+    [
+      "PERRL",
+      "Pupils equal round reactive to light"
+    ],
+    [
+      "Pn",
+      "Pain"
+    ],
+    [
+      "TIA",
+      "Transient ischemic attack"
+    ]
+  ],
+  "Diagnostics, Labs & Imaging": [
+    [
+      "ADD",
+      "Attention deficit disorder"
+    ],
+    [
+      "AED",
+      "Automated external defibrillator"
+    ],
+    [
+      "APS",
+      "Adult Protective Services"
+    ],
+    [
+      "APGAR",
+      "Appearance, Pulse, Grimace, Activity, Respiratory effort"
+    ],
+    [
+      "AS",
+      "Left ear (auris sinistra)"
+    ],
+    [
+      "C/C",
+      "Chief complaint"
+    ],
+    [
+      "CAT/CT",
+      "Computerized axial tomography scanner"
+    ],
+    [
+      "CBC",
+      "Complete blood count"
+    ],
+    [
+      "CMO",
+      "Chief Medical Officer"
+    ],
+    [
+      "+CMS",
+      "Positive circulatory, motor & sensory function"
+    ],
+    [
+      "CPS",
+      "Child Protective Services"
+    ],
+    [
+      "CRT",
+      "Capillary refill time"
+    ],
+    [
+      "CTA",
+      "Clear to auscultation"
+    ],
+    [
+      "CXR",
+      "Chest x-ray"
+    ],
+    [
+      "DO",
+      "Doctor of Osteopathy"
+    ],
+    [
+      "EF",
+      "Ejection fraction"
+    ],
+    [
+      "EPS",
+      "Electrophysiological study"
+    ],
+    [
+      "FHR",
+      "Fetal heart rate"
+    ],
+    [
+      "GI",
+      "Gastrointestinal"
+    ],
+    [
+      "HIV",
+      "Human immunodeficiency virus"
+    ],
+    [
+      "KTD",
+      "Kendrick traction device"
+    ],
+    [
+      "LLQ",
+      "Lower left quadrant"
+    ],
+    [
+      "LUQ",
+      "Left upper quadrant"
+    ],
+    [
+      "NP",
+      "Nurse Practitioner"
+    ],
+    [
+      "OMD",
+      "Office of the Medical Director"
+    ],
+    [
+      "OS",
+      "Left eye (oculus sinister)"
+    ],
+    [
+      "PMD",
+      "Primary/Private medical doctor"
+    ],
+    [
+      "p.r.",
+      "Per rectum"
+    ],
+    [
+      "SOAPE",
+      "Subjective, Objective, Assessment, Plan, Enroute"
+    ],
+    [
+      "TASER",
+      "Thomas A. Swift Electric Rifle"
+    ],
+    [
+      "U/A",
+      "Upon arrival, urine analysis"
+    ]
+  ],
+  "Procedures & Equipment": [
+    [
+      "AB",
+      "Abortion"
+    ],
+    [
+      "ACE",
+      "Angiotensin-converting enzyme"
+    ],
+    [
+      "A.E.",
+      "Above elbow (amputation)"
+    ],
+    [
+      "A.K.",
+      "Above knee (amputation)"
+    ],
+    [
+      "AOS TF",
+      "Arrived On Scene To Find"
+    ],
+    [
+      "ATF",
+      "Arrived to find"
+    ],
+    [
+      "AVM",
+      "Arteriovenous malformation"
+    ],
+    [
+      "B.E.",
+      "Below elbow (amputation)"
+    ],
+    [
+      "B.K.",
+      "Below knee (amputation)"
+    ],
+    [
+      "CO2",
+      "Carbon dioxide"
+    ],
+    [
+      "D&C",
+      "Dilatation & curettage"
+    ],
+    [
+      "DNAR",
+      "Did not attempt resuscitation"
+    ],
+    [
+      "EGA",
+      "Estimated Gestational Age"
+    ],
+    [
+      "ETA",
+      "Estimated time of arrival"
+    ],
+    [
+      "ETC02",
+      "End-tidal carbon dioxide"
+    ],
+    [
+      "EXP",
+      "Expansion"
+    ],
+    [
+      "HTN",
+      "Hypertension"
+    ],
+    [
+      "Inf",
+      "Inferior"
+    ],
+    [
+      "IO",
+      "Intraosseous"
+    ],
+    [
+      "IV",
+      "Intravenous"
+    ],
+    [
+      "KED",
+      "Kendrick extrication device"
+    ],
+    [
+      "LOC",
+      "Level/loss of consciousness"
+    ],
+    [
+      "MCL",
+      "Midclavicular line, modified chest lead"
+    ],
+    [
+      "mEq",
+      "Milliequivalent"
+    ],
+    [
+      "NGT",
+      "Nasogastric tube"
+    ],
+    [
+      "NH",
+      "Nursing home"
+    ],
+    [
+      "OBV",
+      "Obvious"
+    ],
+    [
+      "OLMC",
+      "On-line medical consultation/control"
+    ],
+    [
+      "pC02",
+      "Carbon dioxide pressure"
+    ],
+    [
+      "PEEP",
+      "Positive end expiratory pressure"
+    ],
+    [
+      "POC",
+      "Position of comfort"
+    ],
+    [
+      "POV",
+      "Privately operated/owned vehicle"
+    ],
+    [
+      "PTA/PTOA",
+      "Prior to (our) arrival"
+    ],
+    [
+      "ROSC",
+      "Return of spontaneous circulation"
+    ],
+    [
+      "+ROM",
+      "Positive range of motion"
+    ],
+    [
+      "TB",
+      "Tuberculosis"
+    ],
+    [
+      "TCP",
+      "Transcutaneous pacing"
+    ],
+    [
+      "?",
+      "Questionable, possible"
+    ],
+    [
+      "+",
+      "Positive"
+    ],
+    [
+      "o",
+      "Post-ROSC Stabilization"
+    ],
+    [
+      "1.",
+      "Known hypersensitivity"
+    ]
+  ],
+  "Operations & Agencies": [
+    [
+      "ALS",
+      "Advanced Life Support"
+    ],
+    [
+      "BLS",
+      "Basic life support"
+    ],
+    [
+      "DOS",
+      "Dead on scene"
+    ],
+    [
+      "EMS",
+      "Emergency Medical Services"
+    ],
+    [
+      "EOR",
+      "End of Report"
+    ],
+    [
+      "ER/ED",
+      "Emergency room/department"
+    ],
+    [
+      "hs",
+      "hora somni; hour of sleep; at bedtime"
+    ],
+    [
+      "ILS",
+      "Intermediate life support"
+    ],
+    [
+      "LSV",
+      "Life Support Vehicle (ambulance)"
+    ],
+    [
+      "MD",
+      "Medical Doctor"
+    ],
+    [
+      "OB",
+      "Obstetrics"
+    ],
+    [
+      "q.i.d.",
+      "Four times a day"
+    ],
+    [
+      "t.i.d.",
+      "Three times a day"
+    ],
+    [
+      "X-prt",
+      "Transport"
+    ],
+    [
+      "x",
+      "Times"
+    ]
+  ],
+  "Assessment & Clinical Documentation": [
+    [
+      "A&Ox3",
+      "Alert & oriented to name, date, and place"
+    ],
+    [
+      "a.c.",
+      "A meals"
+    ],
+    [
+      "A/C",
+      "Aircraft"
+    ],
+    [
+      "a.d.",
+      "Right ear (auris dexter)"
+    ],
+    [
+      "BGL",
+      "Blood glucose level"
+    ],
+    [
+      "b.i.d.",
+      "Twice a day"
+    ],
+    [
+      "BM",
+      "Bowel movement"
+    ],
+    [
+      "BSA",
+      "Body surface area"
+    ],
+    [
+      "c",
+      "c"
+    ],
+    [
+      "c/o",
+      "Complains / complaining of"
+    ],
+    [
+      "Ca++",
+      "Calcium"
+    ],
+    [
+      "CK",
+      "Creatine kinase"
+    ],
+    [
+      "CI",
+      "Chlorine"
+    ],
+    [
+      "CSM",
+      "Carotid sinus massage"
+    ],
+    [
+      "Cx",
+      "Chest"
+    ],
+    [
+      "Diff",
+      "Difficulty"
+    ],
+    [
+      "Disch",
+      "Discharge"
+    ],
+    [
+      "DAE",
+      "Dysbaric air embolism"
+    ],
+    [
+      "DKA",
+      "Diabetic ketoacidosis"
+    ],
+    [
+      "DM",
+      "Diabetes mellitus"
+    ],
+    [
+      "DNR",
+      "Do-not-resuscitate"
+    ],
+    [
+      "DOB",
+      "Date of birth"
+    ],
+    [
+      "DPT",
+      "Diphtheria, pertussis, tetanus"
+    ],
+    [
+      "EDC",
+      "Estimated date of confinement"
+    ],
+    [
+      "e.g.",
+      "For example"
+    ],
+    [
+      "Est.",
+      "Estimated"
+    ],
+    [
+      "ETOH",
+      "Ethyl alcohol, alcoholic beverage"
+    ],
+    [
+      "Fr",
+      "French"
+    ],
+    [
+      "FUO",
+      "Fever of unknown origin"
+    ],
+    [
+      "GU",
+      "Genitourinary"
+    ],
+    [
+      "GYN",
+      "Gynecology"
+    ],
+    [
+      "Hr",
+      "Hour"
+    ],
+    [
+      "H/A",
+      "Headache"
+    ],
+    [
+      "HAV",
+      "Hepatitis A virus"
+    ],
+    [
+      "HBV",
+      "Hepatitis B virus"
+    ],
+    [
+      "HCV",
+      "Hepatitis C virus"
+    ],
+    [
+      "HEENT",
+      "Head, eyes, ears, nose, throat"
+    ],
+    [
+      "H&H",
+      "Hemoglobin and hematocrit"
+    ],
+    [
+      "Hg",
+      "Mercury"
+    ],
+    [
+      "Hx",
+      "History"
+    ],
+    [
+      "IM",
+      "Intramuscular"
+    ],
+    [
+      "J",
+      "Joules"
+    ],
+    [
+      "K+",
+      "Potassium"
+    ],
+    [
+      "Lbs",
+      "Pounds"
+    ],
+    [
+      "Liq",
+      "Liquid"
+    ],
+    [
+      "mA",
+      "Milliamperes"
+    ],
+    [
+      "MAE",
+      "Moves all extremities"
+    ],
+    [
+      "MMR",
+      "Measles, mumps, rubella"
+    ],
+    [
+      "MVC",
+      "Motor vehicle crash"
+    ],
+    [
+      "MVP",
+      "Mitral valve prolapse"
+    ],
+    [
+      "Na+",
+      "Sodium"
+    ],
+    [
+      "NAD",
+      "No apparent / acute distress"
+    ],
+    [
+      "N/C",
+      "Nasal canula"
+    ],
+    [
+      "NES",
+      "Non-English Speaking"
+    ],
+    [
+      "NKA",
+      "No known allergies"
+    ],
+    [
+      "NPO",
+      "Nothing by mouth"
+    ],
+    [
+      "N/V/D",
+      "Nausea, vomiting, diarrhea"
+    ],
+    [
+      "OOH",
+      "Out of hospital"
+    ],
+    [
+      "OPP",
+      "Organophosphate poisoning"
+    ],
+    [
+      "OR",
+      "Operating room"
+    ],
+    [
+      "oz.",
+      "Ounce"
+    ],
+    [
+      "P (+ #)",
+      "Parity (P3, P4 etc)"
+    ],
+    [
+      "PCP",
+      "Phencyclidine, Primary Care Physician"
+    ],
+    [
+      "PO",
+      "By mouth"
+    ],
+    [
+      "PRBCs",
+      "Packed red blood cells"
+    ],
+    [
+      "PRN",
+      "As needed"
+    ],
+    [
+      "Pt.",
+      "Patient"
+    ],
+    [
+      "P/CD",
+      "Pink warm and dry"
+    ],
+    [
+      "Q",
+      "Q"
+    ],
+    [
+      "Qh",
+      "Q hour"
+    ],
+    [
+      "R",
+      "Right"
+    ],
+    [
+      "Rbc",
+      "Red blood cell, red blood (cell) count"
+    ],
+    [
+      "RLQ",
+      "Right lower quadrant"
+    ],
+    [
+      "RN",
+      "Registered nurse"
+    ],
+    [
+      "RUQ",
+      "Right upper quadrant"
+    ],
+    [
+      "s",
+      "Cout"
+    ],
+    [
+      "s/s",
+      "Signs / symptoms"
+    ],
+    [
+      "SC, SQ",
+      "Subcutaneous"
+    ],
+    [
+      "SROM",
+      "Spontaneous Rupture of Membranes"
+    ],
+    [
+      "SUV",
+      "Sport utility vehicle"
+    ],
+    [
+      "Sx",
+      "Symptoms"
+    ],
+    [
+      "Temp",
+      "Temperature"
+    ],
+    [
+      "tab",
+      "Tablet"
+    ],
+    [
+      "Tbsp",
+      "Tablespoon"
+    ],
+    [
+      "TCA",
+      "Tricyclic antidepressant"
+    ],
+    [
+      "TKO",
+      "To keep open"
+    ],
+    [
+      "Tsp",
+      "Teaspoon"
+    ],
+    [
+      "Tx",
+      "Treatment"
+    ],
+    [
+      "UTL",
+      "Unable to locate"
+    ],
+    [
+      "UTO",
+      "Unable to obtain"
+    ],
+    [
+      "Vol",
+      "Volume"
+    ],
+    [
+      "VO",
+      "Verbal order"
+    ],
+    [
+      "VS",
+      "Vital signs"
+    ],
+    [
+      "Vt",
+      "Tidal volume"
+    ],
+    [
+      "co",
+      "Cout, wide open"
+    ],
+    [
+      "WDWN",
+      "Well developed, well nourished"
+    ],
+    [
+      "WPW",
+      "Wolf-Parkinson-White"
+    ],
+    [
+      "Xfer",
+      "Transfer"
+    ],
+    [
+      "y/o",
+      "Years old"
+    ],
+    [
+      "@",
+      "At"
+    ],
+    [
+      "=",
+      "Equal"
+    ],
+    [
+      "#",
+      "Number"
+    ],
+    [
+      "c",
+      "c"
+    ],
+    [
+      "s",
+      "cout"
+    ],
+    [
+      "a",
+      "a"
+    ],
+    [
+      "p",
+      "p"
+    ],
+    [
+      "q",
+      "each"
+    ],
+    [
+      ">",
+      "greater than"
+    ],
+    [
+      "<",
+      "less than"
+    ],
+    [
+      "o",
+      "VF or pVT:"
+    ]
+  ]
+}

@@ -1,7 +1,7 @@
 // Attach medication details to the global scope so main.js can access them
 export const MedicationDetailsData = [
     {
-        id: '10-calcium-chloride', title: '10% Calcium Chloride',
+        id: '10-calcium-chloride', title: 'Calcium Chloride (1,000mg/10ml)',
         concentration: '(1,000mg/10ml)',
         "class": 'Electrolyte',
         indications: ['Hyperkalemia', 'Symptomatic ↓HR', 'Toxic Ingestion'], // Changed 'Symptomatic [INC]HR' to 'Symptomatic ↓HR' (corrected indication)  // confirm change with protocols
@@ -12,7 +12,7 @@ export const MedicationDetailsData = [
         pediatricRx: ['{{red:Don’t give Calcium Chloride to Pediatric pts}}']
     },
     {
-        id: '2-lidocaine-xylocaine', title: "2% Lidocaine (Xylocaine)",
+        id: '2-lidocaine-xylocaine', title: "2% Lidocaine (Xylocaine) (100mg/5ml)",
         concentration: "(100mg/5ml)",
         "class": "Antiarrhythmic",
         indications: ["Symptomatic [INC]HR & VF/pVT"],
@@ -22,7 +22,7 @@ export const MedicationDetailsData = [
         adultRx: ["VT Rx: 1-1.5mg/kg slow IVP over 2-3min,↑      If n/c p̄ 5min, [[then give 0.5-0.75mg/kg|Max = 3mg/kg]]", "P̄-ROSC Stabilization Rx: Consult to give 2mg/min IV maintenance infusion", "EZ-IO Rx: 2ml over 60-90sec↑      → Flush c̅ 5-10ml NS rapidly over 5sec↑            → Then give 1ml over 30sec"]
     },
     {
-        id: '8-4-sodium-bicarbonate-nahco3', title: "8.4% Sodium Bicarbonate (NaHCO₃)",
+        id: '8-4-sodium-bicarbonate-nahco3', title: "8.4% Bicarb (NaHCO3) (50mEq/50ml)",
         concentration: "(50mEq/50ml)",
         notes: ["***Given separately from other drugs***"],
         class: "[[Alkalizing|buffering]] agent",
@@ -34,7 +34,7 @@ export const MedicationDetailsData = [
         pediatricRx: ["{{redul:Neonates & Children <2yo = use 4.2% Bicarb given slowly}}", "Propranolol OD c̅ widened QRS Rx: Consult to give 1-2mEq/kg IV/IO bolus", "Tricyclic OD c̅ ↓BP or pulseless or wide QRS Rx: Consult to give 1-2mEq/kg IV/IO"]
     },
     {
-        id: 'adenosine-adenocard', title: "Adenosine (Adenocard)",
+        id: 'adenosine-adenocard', title: "Adenosine (Adenocard) (6mg/2ml)",
         concentration: "(6mg/2ml)",
         class: "Antiarrhythmic",
         indications: ["SVT"],
@@ -44,7 +44,7 @@ export const MedicationDetailsData = [
         adultRx: ["SVT Rx: 6mg Fast IVP c̅ 10ml Flush↑      If n/c → 12mg Fast IVP c̅ 10ml Flush↑            If n/c → 12mg Fast IVP c̅ 10ml Flush↑                If n/c → Consult to give 12mg Fast IVP during transport↑                [[Note:|n/c =Stable Pt & Rhythm is unchanged]]"]
     },
     {
-        id: 'albuterol', title: "Albuterol",
+        id: 'albuterol', title: "Albuterol (2.5mg/3cc)",
         concentration: "(2.5mg/3cc)",
         class: "[[Beta adrenergic agonist|β₂-selective]] bronchodilator",
         indications: ["Bronchospasm"],
@@ -55,7 +55,7 @@ export const MedicationDetailsData = [
         pediatricRx: ["Bronchospasm Rx: 2.5mg neb c̅ O₂ ≥6 LPM↑      Consult to repeat dose"]
     },
     {
-        id: 'asa', title: "ASA",
+        id: 'asa', title: "ASA (81mg/tab)",
         concentration: "(81mg/tab)",
         class: "NSAID (analgesic/antipyretic, antiplatelet)",
         indications: ["MI or ACS"],
@@ -65,7 +65,7 @@ export const MedicationDetailsData = [
         adultRx: ["MI/ACS Rx: 324mg PO (chewed)"]
     },
     {
-        id: 'atropine-sulfate', title: "Atropine Sulfate",
+        id: 'atropine-sulfate', title: "Atropine Sulfate (1mg/10ml)",
         concentration: "(1mg/10ml)",
         class: "[[Anticholinergic|specifically, antimuscarinic]]",
         indications: ["Symptomatic ↓HR", "Organophosphate poisoning"],
@@ -76,7 +76,7 @@ export const MedicationDetailsData = [
         pediatricRx: ["[[SLUDGEM Pt S/S|Organophosphate poisoning]] Rx: 0.05mg/kg IV or IM prn↑   → Repeat dose prn", "Plant ingestion c̅ ↓HR Rx: Consult with Med Control for dosing:↑   <12yo = 0.02–0.05mg/kg IV/IO q̄ 20–30min until patient “dries up”↑   ≥12yo = 0.05mg/kg IV/IO q̄ 20–30min until patient “dries up”"]
     },
     {
-        id: 'd5', title: "D5",
+        id: 'd5', title: "D5 (5g/100ml bag)",
         concentration: "(5g/100ml bag)",
         class: "Carbohydrate",
         indications: ["↓BGL/Insulin Shock"],
@@ -86,7 +86,7 @@ export const MedicationDetailsData = [
         adultRx: ["[[D5 is primarily for IVFs|D10 is given for ↓BGL]]"]
     },
     {
-        id: 'd10', title: "D10",
+        id: 'd10', title: "D10 (25g/250ml bag)",
         concentration: "(25g/250ml bag)",
         class: "Carbohydrate",
         indications: ["↓BGL/Insulin Shock"],
@@ -96,7 +96,7 @@ export const MedicationDetailsData = [
         adultRx: ["Give D10 in 10g increments until BGL >100 mg/dL"]
     },
     {
-        id: 'dexamethasone-decadron', title: "Dexamethasone (Decadron)",
+        id: 'dexamethasone-decadron', title: "Dexamethasone (Decadron) (10mg/ml)",
         concentration: "(10mg/ml)",
         class: "Corticosteroid (anti-inflammatory)",
         indications: ["Anaphylaxis", "Bronchospasm"],
@@ -107,7 +107,7 @@ export const MedicationDetailsData = [
         pediatricRx: ["Anaphylaxis: 0.6mg/kg IV/IM", "Bronchospasm: 0.6mg/kg IV/IM/PO"]
     },
     {
-        id: 'diphenhydramine-benadryl', title: "Diphenhydramine (Benadryl)",
+        id: 'diphenhydramine-benadryl', title: "Diphenhydramine (Benadryl) (50mg/ml)",
         concentration: "(50mg/ml)",
         class: "Antihistamine (H1)",
         indications: ["Allergic Reaction", "Anaphylaxis", "Toxic Ingestion (dystonic reactions)"], // Simplified phrasing for dystonic reactions indication
@@ -118,7 +118,7 @@ export const MedicationDetailsData = [
         pediatricRx: ["Intervention: Allergic RXN or c̅ Anaphylaxis p̄ Epi = 1mg/kg IVP", "Continuity: Extrapyramidal RXN from Haldol = 1mg/kg IV/IM/IO"] // Added missing space after 'Haldol' for consistency
     },
     {
-        id: 'droperidol-inapsine', title: "Droperidol (Inapsine)",
+        id: 'droperidol-inapsine', title: "Droperidol (Inapsine) (5mg/2ml)",
         concentration: "(5mg/2ml)",
         class: "Sedative/Hypnotic/Antiemetic",
         indications: ["N/V", "Pain Management", "Violent/Agitated/ &/or Anxious pt"],
@@ -129,7 +129,7 @@ export const MedicationDetailsData = [
         pediatricRx: ["Not approved for Pediatric Pts"]
     },
     {
-        id: 'epi-1-1000-adrenaline', title: "Epi 1:1,000 (Adrenaline)", 
+        id: 'epi-1-1000-adrenaline', title: "Epi 1:1,000 (Adrenaline) (10mg/10ml)", 
         concentration: "(10mg/10ml)",
         class: "Endogenous Catecholamine",
         indications: ["Anaphylaxis", "Bronchospasm"],
@@ -139,7 +139,7 @@ export const MedicationDetailsData = [
         pediatricRx: ["Intervention: Anaphylaxis <10kg = 0.01mg/kg IM  (0.01ml/kg IM)↑   10-25kg = 0.15mg IM   (0.15ml IM)↑   25-60kg = 0.3mg IM   (0.3ml IM)↑   >60kg = 0.5mg IM   (0.5ml IM)", "*All weight classes: give prn every 5-15min   (max = 3 doses)", "Consultation → Epi IV Infusion p̄ 3rd dose of Epi", "Consultation: Bronchospasm = 0.3mg IM (0.3ml IM)"] // Fixed typo 'does' to 'dose'
     },
     {
-        id: 'epi-1-10000', title: "Epi 1:10,000", 
+        id: 'epi-1-10000', title: "Epi 1:10,000 (1mg/10ml)", 
         concentration: "(1mg/10ml)",
         class: "Endogenous Catecholamine",
         indications: ["VF or pVT", "Symptomatic ↓HR", "Cardiogenic Shock", "Post-ROSC Stabilization"],
@@ -149,7 +149,7 @@ export const MedicationDetailsData = [
         pediatricRx: ["Cardiogenic Shock/Post Arrest Stabilization PEDIATRIC p157 - epinephrine 1mcg/kg IO or IVP"] // where did this p157 come from?????
     },
     {
-        id: 'epi-1-100000-push-dose-epi',  title: "Epi 1:100,000 \"Push-Dose Epi\"", 
+        id: 'epi-1-100000-push-dose-epi',  title: 'Epi 1:100,000 "Push-Dose Epi" (100mcg/10ml)', 
         concentration: "(100mcg/10ml)",
         class: "Endogenous Catecholamine",
         indications: ["Symptomatic ↓HR", "Cardiogenic Shock", "Post-ROSC Stabilization"],
@@ -159,8 +159,8 @@ export const MedicationDetailsData = [
         pediatricRx: ["Consultation: Cardiogenic Shock or Post-ROSC Stabilization↑   = 1mcg/kg IVP/IO  → From Push-Dose Epi", "10kg child = 1ml    → From Push-Dose Epi", "15kg child = 1.5ml   → From Push-Dose Epi"] // Added missing space in 'Shock or'
     },
     {
-        id: 'etomidate-amidate', title: "Etomidate (Amidate)",
-        concentration: "(40mg/20ml)",
+        id: 'etomidate-amidate', title: "Etomidate (Amidate) (20mg/10ml)",
+        concentration: "(20mg/10ml vials)",
         class: "Sedative-hypnotic",
         indications: ["SAI"],
         contraindications: ["Known allergy or hypersensitivity"],
@@ -168,7 +168,7 @@ export const MedicationDetailsData = [
         adultRx: ["Intervention: SAI for >10yo = 0.3mg/kg IVP      Max = 40mg"]
     },
     {
-        id: 'fentanyl-sublimaze', title: "Fentanyl (Sublimaze)",
+        id: 'fentanyl-sublimaze', title: "Fentanyl (Sublimaze) (100mcg/2ml)",
         concentration: "(100mcg/2ml)",
         class: "Synthetic opioid",
         indications: ["MI", "Pain Management", "Sickle Cell Crisis"],
@@ -179,7 +179,7 @@ export const MedicationDetailsData = [
         pediatricRx: ["Intervention: Pain 0.5-1mcg/kg IV/IN     Max = 50mcg↑   → Consultation needed for repeated doses", "Consultation: Sickle Cell Crisis 1mcg/kg slow IVP/SQ ↑   Max = 50mcg"]
     },
     {
-        id: 'ipratropium', title: "Ipratropium",
+        id: 'ipratropium', title: "Ipratropium (0.5mg/3cc)",
         concentration: "(0.5mg/3cc)",
         class: "Anticholinergic↑Parasympatholytic used in the Tx of respiratory emergencies.↑Causes bronchodilation & dries Respiratory tract secretions.↑Blocks Acetylcholine. 15% of dose reaches lower airway.",
         indications: ["Bronchospasm"],
@@ -188,7 +188,7 @@ export const MedicationDetailsData = [
         adultRx: ["Continuity: Bronchospasm = 0.5mg or Duo-Neb"]
     },
     {
-        id: 'ketamine-ketalar', title: "Ketamine (Ketalar)",
+        id: 'ketamine-ketalar', title: "Ketamine (Ketalar) (500mg/5ml)",
         concentration: "(500mg/5ml)",
         class: "Dissociative general anesthetic",
         indications: ["SAI", "Bronchospasm", "Pain Management", "Violent/Combative Pt"],
@@ -199,7 +199,7 @@ export const MedicationDetailsData = [
         pediatricRx: ["Intervention: Combative = 4mg/kg IM ↑   Don’t exceed Entire Vial/Site", "Intervention: SAI/Bronchospasm = 2mg/kg IV/IO", "Intervention: SAI c̅ ↓BP s̄ Cardiogenic Shock = 1mg/kg IV", "Intervention: SAI c̅ suspected Cardiogenic Shock = 0.5mg/kg IV"]
     },
     {
-        id: 'ketorolac-tromethamine-toradol', title: "Ketorolac Tromethamine (Toradol)",
+        id: 'ketorolac-tromethamine-toradol', title: "Ketorolac Tromethamine (Toradol) (30mg/ml)",
         concentration: "(30mg/ml)",
         class: "NSAID",
         indications: ["Pain Control for pts >17yo"],
@@ -209,7 +209,7 @@ export const MedicationDetailsData = [
         adultRx: ["Intervention: For Pain = 15mg IV/IM       If >65yo = 7.5mg IV/IM ↑   (Not for abdominal/chest pain)↑   May be given off-label with med control approval for <17yo"] // Replaced 'Chest' with 'chest' for consistency
     },
     {
-        id: 'magnesium-sulfate-mgso4', title: "Magnesium sulfate (MgSO₄)",
+        id: 'magnesium-sulfate-mgso4', title: "Magnesium Sulfate (MgSO4) (1g/2ml)",
         concentration: "(1g/2ml)",
         class: "Electrolyte",
         indications: ["Bronchospasm", "Childbirth", "Symptomatic [INC]HR"],
@@ -220,7 +220,7 @@ export const MedicationDetailsData = [
         pediatricRx: ["Consultation: Bronchospasm → For >2yo c̅ Severe Asthmatics ↑   or c̅ PMH of Intubation for asthma ↑   = 40mg/kg diluted c̅ NS to a concentration of 100mg/ml ↑   → Infuse over 20min c̅ rate <150mg/min       Max = 2g", "“Prepared Syringe” c̅ a concentration of 100mg/ml: ↑   = Draw 10ml out of 250ml NS bag c̅ 10cc syringe ↑   → Waste 2ml from syringe ↑   → Draw up into the syringe 1g (2ml) of MgSO₄", "(Pediatric Weight (in kg))/2.5 = # of ml’s added ↑   to our 250ml NS bag from our “prepared syringe”", "Run MgSO₄ Infused NS bag over 20min c̅  10-Drip Set at 2gtts/sec", "Note: 50kg Child = 2g MgSO₄ (our max dose) = 2 Vials of MgSO₄↑   25kg child = 1g MgSO₄ = 1 Vial of MgSO₄↑   Never exceed 3gtts/sec↑   Never exceed 2 Vials of our 1g/2ml MgSO₄"]
     },
     {
-        id: 'metoprolol-tartrate-lopressor', title: "Metoprolol tartrate (Lopressor)",
+        id: 'metoprolol-tartrate-lopressor', title: "Metoprolol Tartrate (Lopressor) (5mg/5ml)",
         concentration: "(5mg/5ml)",
         class: "Beta antagonist (β1 selective)",
         indications: ["Symptomatic [INC]HR"],
@@ -229,7 +229,7 @@ export const MedicationDetailsData = [
         adultRx: ["Intervention: A-Fib c̅ RVR or A-Flutter ↑   = 0.15mg/kg  slow IVP  over 2min       Max = 10mg", "Consultation: Stable SVT ↑   → Discuss for use as an additionally used dose for SVT"]
     },
     {
-        id: 'midazolam-versed', title: "Midazolam (Versed)",
+        id: 'midazolam-versed', title: "Midazolam (Versed) (10mg/2ml)",
         concentration: "(10mg/2ml)",
         class: "Benzo",
         indications: ["SAI", "Symptomatic ↓HR", "Seizure", "Symptomatic [INC]HR", "Vent Pt", "Violent/Combative Pt"],
@@ -240,7 +240,7 @@ export const MedicationDetailsData = [
         pediatricRx: ["Intervention: SAI = 0.1mg/kg IV       Max = 5mg", "Intervention: Seizure = 0.5mg/kg  IN ↑   Initial Max = 10mg & Total Dose Max = 20mg↑   or 0.2mg/kg  IV/IO  c̅  Max = 5mg & prn until Total Max = 10mg IV", "Intervention: Seizure from Organophosphate OD ↑   = 0.2mg/kg  IV/IO      Max = 5mg↑   or 0.5mg/kg  IN", "Intervention: RASS+3 “safety or [INC] physical restraint” ↑   =   0.1-0.2mg/kg  IM        Max = 5mg  IM↑   or 0.05-0.1mg/kg  IV      Max = 10mg  IV↑   or    0.02mg/kg  IN        Max = 20mg  IN↑   prn until Max Dose is Reached"]
     },
     {
-        id: 'morphine', title: "Morphine",
+        id: 'morphine', title: "Morphine (4mg/2ml)",
         concentration: "(4mg/2ml)",
         class: "",
         indications: [],
@@ -251,7 +251,7 @@ export const MedicationDetailsData = [
         pediatricRx: ["Intervention: Pain = 0.1mg/kg  IV/SQ     Max = 4mg ↑   → Consult for further doses", "Consultation: Sickle Cell Crisis = 0.1mg/kg  IV/SQ    Max = 4mg"]
     },
     {
-        id: 'naloxone-narcan', title: "Naloxone (Narcan)",
+        id: 'naloxone-narcan', title: "Naloxone (Narcan) (2mg/2ml)",
         concentration: "(2mg/2ml)",
         class: "",
         indications: [],
@@ -262,7 +262,7 @@ export const MedicationDetailsData = [
         pediatricRx: ["Intervention: AMS/Opioid OD = 0.1mg/kg  IV/IO/ETT/IM ↑   Max = 2.0mg", "Continuity: Methadone OD = 0.2mg/kg       Max = 2.0mg"]
     },
     {
-        id: 'ntg', title: "NTG",
+        id: 'ntg', title: "NTG (0.4mg/spray)",
         concentration: "(0.4mg/spray)",
         class: "Organic nitrate",
         indications: ["MI or ACS", "Pulmonary Edema"],
@@ -272,7 +272,7 @@ export const MedicationDetailsData = [
         adultRx: ["Don’t give if pt had Viagra/Cialis within the past 48hrs", "NTG is NOT contraindicated c̅ Inferior STEMI ↑   → Should the pt become profoundly Hypotensive↑   → Infuse NS until BP >90", "Be cautious c̅ Aortic Stenosis or Murmurs", "Intervention: MI/ACS = 0.4mg SL q̄ 5min prn only if BP >100 ↑   or  >110 if pt Never had NTG ā↑   Max = 3 doses", "Continuity: Repeat  q̄  5min  if → SBP >100 & pain still present", "Intervention: Pulmonary Edema = 0.4mg  SL  if BP  >100↑   or  >120  if pt Never had NTG ā", "Intervention: Flash Pulm-Edema from Hypertensive Crisis  s̄  IV ↑   = 0.4mg  SL", "Consultation: 0.8-1.2mg  SL & Inform Med-Control if no IV yet"]
     },
     {
-        id: 'ondansetron-zofran', title: "Ondansetron (Zofran)",
+        id: 'ondansetron-zofran', title: "Ondansetron (Zofran) (4mg/2ml)",
         concentration: "(4mg/2ml)",
         class: "Antiemetic",
         indications: ["N/V"],

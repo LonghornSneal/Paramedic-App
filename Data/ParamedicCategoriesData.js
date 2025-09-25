@@ -3,25 +3,40 @@ import { slugify } from '../Utils/slugify.js';
 
 export const ParamedicCategoriesData = [
   {id: slugify("Adult Protocols"), title: "Adult Protocols", 
-      type: "category", children: [{ 
-        id: slugify("Adult Airway & Breathing"), title: "Airway & Breathing", 
-        type: "category", children: [{ 
-          id: slugify("Adult Bronchospasm"), title: "Bronchospasm", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult CPAP-BiPAP"), title: "CPAP/BiPAP", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult SAI"), title: "SAI", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult Nasal Intubation"), title: "Nasal Intubation", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult Ventilator pt Intubated & Sedated"), title: "Ventilator pt: Intubated & Sedated", 
-          type: "topic" 
-        },]
-      },{ 
+      type: "category", children: [{
+        id: slugify("Adult Airway & Breathing"), title: "Airway & Breathing",
+        type: "category", children: [{
+          id: slugify("Adult COMA/OD"), title: "COMA/OD",
+          type: "topic"
+        },{
+          id: slugify("Adult CPAP or BiPAP"), title: "CPAP or BiPAP",
+          type: "topic"
+        },{
+          id: slugify("Adult SAI"), title: "SAI",
+          type: "topic"
+        },{
+          id: slugify("Adult Nasal Intubation"), title: "Nasal Intubation",
+          type: "topic"
+        },{
+          id: slugify("Adult ET Intubation"), title: "ET Intubation",
+          type: "topic"
+        },{
+          id: slugify("Adult VENTILATOR Pt; Intubated & Sedated"), title: "VENTILATOR Pt; Intubated & Sedated",
+          type: "topic"
+        },{
+          id: slugify("Adult TRACHEOSTOMY CARE"), title: "TRACHEOSTOMY CARE",
+          type: "topic"
+        },{
+          id: slugify("Adult Cricothyrotomy"), title: "Cricothyrotomy",
+          type: "topic"
+        },{
+          id: slugify("Adult Tension Pneumo"), title: "Tension Pneumo",
+          type: "topic"
+        },{
+          id: slugify("Adult SGA -> Cardiac Arrest = Use 1st"), title: "SGA -> Cardiac Arrest = Use 1st",
+          type: "topic"
+        }]
+      },{
         id: slugify("Adult Circulation-Cardiology"), title: "Circulation/Cardiology", 
         type: "category", children: [{ 
           id: slugify("Adult Bradycardia"), title: "Bradycardia", 

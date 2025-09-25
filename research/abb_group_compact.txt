@@ -1,0 +1,30 @@
+Medications & Pharmacology (Rx) (22):
+APAP, ASA, Consultation: Cardiogenic Shock or Post-ROSC Stabilization, D10W, D25W, D50, D5W, Epi, HCTZ, HRT, IDDM/DM I, LR, MDI, MS, NIDDM/DM II, NKDA, NS, NSAID, NTG, OD, Rx, SL
+
+Measurements & Units (37):
+1, 2, 3, AIVR, AVA, Cc, CCB, CCR, CCU, Cm, Co, CVA, DCAPBTLS, dL, ECG/EKG, EEG, Fo, Gm, g, Gtts, ICU, IU, Kg, L, Lac, Lpm, MAP, Mcg, mg, mL, mm, Mph, NICU, PICU, PTS, RTS, SA02, U
+
+Anatomy & Patient Conditions (50):
+AAA, Abd, ACS, AIDS, Ant, ARDS, BBS, C-spine, CA, CABG, CAD, CHI, CID, COPD, DIC, DVT, Dx, ESRD, ExDS, EXT, Fx, GERD, ICP, KVO, L spine, L/S, LAD, L&D, LMP, LSB, MOI, NOI, OBS, PA, PE, PID, post., PSO, RAD, RCA, RHD, SARS, SCI, SCUBA, SIDS, STD, T spine, TBI, URI, UTI
+
+Cardiovascular & Hemodynamics (34):
+2., A Fib, ABG, Af, AICD, AMI, AV, BBBB, BP, CHF, CK-MB, CO, CPR, CVP, FHx, HR, IVP, JVD, LBBB, LSD, LVAD, LVH, o, o, PCI, PEA, PSVT, PVC, PVT, RBBB, SBP, SVT, VF, VT
+
+Respiratory & Airway (27):
+02, 2., ABC, BiPAP, BS, BVM, CAO x 3 or 4, CPAP, DOE, ET, ETT, FBAO, IMV, IPPB, LMA, NPA, NRB, NT, OPA, P02, PAI, PND, PPV, RR, RRT, RSV, SOB
+
+Neurologic & Trauma (11):
+CNS, CNS, CP, CSF, DTs, FSP, GCS, NMB, PERRL, Pn, TIA
+
+Diagnostics, Labs & Imaging (31):
++CMS, ADD, AED, APGAR, APS, AS, C/C, CAT/CT, CBC, CMO, CPS, CRT, CTA, CXR, DO, EF, EPS, FHR, GI, HIV, KTD, LLQ, LUQ, NP, OMD, OS, p.r., PMD, SOAPE, TASER, U/A
+
+Procedures & Equipment (41):
++, +ROM, 1., ?, A.E., A.K., AB, ACE, AOS TF, ATF, AVM, B.E., B.K., CO2, D&C, DNAR, EGA, ETA, ETC02, EXP, HTN, Inf, IO, IV, KED, LOC, MCL, mEq, NGT, NH, o, OBV, OLMC, pC02, PEEP, POC, POV, PTA/PTOA, ROSC, TB, TCP
+
+Operations & Agencies (15):
+ALS, BLS, DOS, EMS, EOR, ER/ED, hs, ILS, LSV, MD, OB, q.i.d., t.i.d., x, X-prt
+
+Assessment & Clinical Documentation (110):
+#, <, =, >, @, a, a.c., a.d., A/C, A&Ox3, b.i.d., BGL, BM, BSA, c, c, c/o, Ca++, CI, CK, co, CSM, Cx, DAE, Diff, Disch, DKA, DM, DNR, DOB, DPT, e.g., EDC, Est., ETOH, Fr, FUO, GU, GYN, H/A, HAV, HBV, HCV, HEENT, Hg, H&H, Hr, Hx, IM, J, K+, Lbs, Liq, mA, MAE, MMR, MVC, MVP, N/C, N/V/D, Na+, NAD, NES, NKA, NPO, o, OOH, OPP, OR, oz., p, P (+ #), P/CD, PCP, PO, PRBCs, PRN, Pt., Q, q, Qh, R, Rbc, RLQ, RN, RUQ, s, s, s/s, SC, SQ, SROM, SUV, Sx, tab, Tbsp, TCA, Temp, TKO, Tsp, Tx, UTL, UTO, VO, Vol, VS, Vt, WDWN, WPW, Xfer, y/o
+
