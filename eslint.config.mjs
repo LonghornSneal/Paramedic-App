@@ -3,6 +3,9 @@ import globals from "globals";
 
 export default [
   {
+    ignores: ["dev-tools/coverage/**"],
+  },
+  {
     files: ["**/*.js"],
     languageOptions: {
       parserOptions: {
@@ -19,6 +22,13 @@ export default [
     },
     rules: {
       "compat/compat": "warn",
+      "no-console": ["warn", { allow: ["warn", "error"] }],
+    },
+  },
+  {
+    files: ["dev-tools/**/*.js"],
+    rules: {
+      "no-console": "off",
     },
   },
 ];

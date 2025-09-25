@@ -35,6 +35,30 @@ const serverConfigs = {
     ],
     stderr: "pipe",
     cwd: basePath
+  },
+  fetch: {
+    command: "node",
+    args: [
+      `${basePath}/node_modules/@kazuph/mcp-fetch/dist/index.js`
+    ],
+    stderr: "pipe",
+    cwd: basePath
+  },
+  fetcher: {
+    command: "node",
+    args: [
+      `${basePath}/node_modules/fetcher-mcp/build/index.js`
+    ],
+    stderr: "pipe",
+    cwd: basePath
+  },
+  webpick: {
+    command: "node",
+    args: [
+      `${basePath}/node_modules/mcp-web-content-pick/dist/index.js`
+    ],
+    stderr: "pipe",
+    cwd: basePath
   }
 };
 

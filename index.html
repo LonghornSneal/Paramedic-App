@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     <title>Paramedic Quick Reference</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Baloo+2:wght@600&display=swap" rel="stylesheet">
     <!-- Local Stylesheet -->
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css" >
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Viewport height fix for mobile browsers -->
@@ -19,13 +19,13 @@
 <!-- Sidebar Overlay -->
 <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
 <!-- Patient Info Sidebar -->
-<div id="patient-sidebar" class="hidden"> 
+<div id="patient-sidebar" class="hidden">
   <!-- Close Button at top of sidebar -->
   <div class="flex justify-end mb-2">
-    <button type="button" id="close-sidebar-button" aria-label="Close Patient Info Sidebar" title="Close Sidebar" 
+    <button type="button" id="close-sidebar-button" aria-label="Close Patient Info Sidebar" title="Close Sidebar"
             class="p-2 rounded-full text-gray-500 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
       <!-- Close (X) icon -->
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
       </svg>
@@ -41,20 +41,20 @@
       <option value="male">Male</option>
     </select>
     <label for="pt-age" class="sidebar-label">Age:</label>
-    <input type="number" id="pt-age" class="sidebar-input w-full mb-3" placeholder="Age in years" />
+    <input type="number" id="pt-age" class="sidebar-input w-full mb-3" placeholder="Age in years" >
     <label for="pt-weight-kg" class="sidebar-label">Weight:</label>
     <!-- Dual weight inputs: kilograms and pounds. When the user enters a value in one field,
          the other field automatically updates via JavaScript (see Features/patient/PatientInfo.js). -->
     <div class="flex items-center space-x-2 mb-3">
-      <input type="number" id="pt-weight-kg" class="sidebar-input w-full" placeholder="kg" />
-      <input type="number" id="pt-weight-lb" class="sidebar-input w-full" placeholder="lbs" />
+      <input type="number" id="pt-weight-kg" class="sidebar-input w-full" placeholder="kg" >
+      <input type="number" id="pt-weight-lb" class="sidebar-input w-full" placeholder="lbs" >
     </div>
     <label for="pt-height-ft" class="sidebar-label mt-2">Height:</label>
     <div class="flex items-center space-x-2 mb-1">
-      <input type="number" id="pt-height-ft" class="sidebar-input w-20" placeholder="ft" />
-      <input type="number" id="pt-height-in" class="sidebar-input w-20" placeholder="in" />
+      <input type="number" id="pt-height-ft" class="sidebar-input w-20" placeholder="ft" >
+      <input type="number" id="pt-height-in" class="sidebar-input w-20" placeholder="in" >
       <span class="text-xs text-gray-500">or</span>
-      <input type="number" id="pt-height-inches" class="sidebar-input w-24" placeholder="inches" />
+      <input type="number" id="pt-height-inches" class="sidebar-input w-24" placeholder="inches" >
     </div>
   </div>
   <!-- Section: Medical History -->
@@ -94,30 +94,30 @@
   <div class="sidebar-section">
     <h2 class="sidebar-section-title">Vital Signs</h2>
     <label for="vs-bp" class="sidebar-label">Blood Pressure (BP):</label>
-    <input type="text" id="vs-bp" class="sidebar-input w-full mb-2" placeholder="e.g. 120/80" />
+    <input type="text" id="vs-bp" class="sidebar-input w-full mb-2" placeholder="e.g. 120/80" >
     <label for="vs-hr" class="sidebar-label">Heart Rate (HR):</label>
-    <input type="number" id="vs-hr" class="sidebar-input w-full mb-2" />
+    <input type="number" id="vs-hr" class="sidebar-input w-full mb-2" >
     <label for="vs-spo2" class="sidebar-label">SpO₂ (%):</label>
-    <input type="number" id="vs-spo2" class="sidebar-input w-full mb-2" />
+    <input type="number" id="vs-spo2" class="sidebar-input w-full mb-2" >
     <label for="vs-etco2" class="sidebar-label">EtCO₂:</label>
-    <input type="number" id="vs-etco2" class="sidebar-input w-full mb-2" />
+    <input type="number" id="vs-etco2" class="sidebar-input w-full mb-2" >
     <label for="vs-rr" class="sidebar-label">Respiratory Rate (RR):</label>
-    <input type="number" id="vs-rr" class="sidebar-input w-full mb-2" />
+    <input type="number" id="vs-rr" class="sidebar-input w-full mb-2" >
     <label for="vs-bgl" class="sidebar-label">Blood Glucose (BGL):</label>
-    <input type="text" id="vs-bgl" class="sidebar-input w-full mb-2" />
+    <input type="text" id="vs-bgl" class="sidebar-input w-full mb-2" >
     <label for="vs-eyes" class="sidebar-label">Pupils:</label>
-    <input type="text" id="vs-eyes" class="sidebar-input w-full mb-2" placeholder="e.g. 4mm, PERRL" />
+    <input type="text" id="vs-eyes" class="sidebar-input w-full mb-2" placeholder="e.g. 4mm, PERRL" >
     <label for="vs-gcs" class="sidebar-label">GCS:</label>
-    <input type="number" id="vs-gcs" class="sidebar-input w-full mb-2" />
+    <input type="number" id="vs-gcs" class="sidebar-input w-full mb-2" >
     <label for="vs-ao-status" class="sidebar-label">AO Status:</label>
-    <input type="text" id="vs-ao-status" class="sidebar-input w-full mb-2" placeholder="e.g. x4" />
+    <input type="text" id="vs-ao-status" class="sidebar-input w-full mb-2" placeholder="e.g. x4" >
     <label for="vs-lung-sounds" class="sidebar-label">Lung Sounds:</label>
-    <input type="text" id="vs-lung-sounds" class="sidebar-input w-full mb-2" placeholder="e.g. Clear" /></div>
+    <input type="text" id="vs-lung-sounds" class="sidebar-input w-full mb-2" placeholder="e.g. Clear" ></div>
   <!-- Section: EKG -->
   <div class="sidebar-section">
     <h2 class="sidebar-section-title">EKG Interpretation</h2>
     <label for="pt-ekg" class="sidebar-label">EKG:</label>
-    <input type="text" id="pt-ekg" class="sidebar-input w-full" placeholder="e.g. Sinus Tachycardia" /></div>
+    <input type="text" id="pt-ekg" class="sidebar-input w-full" placeholder="e.g. Sinus Tachycardia" ></div>
 </div>
 
 <div id="settings-panel" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-lg shadow-lg">
@@ -131,7 +131,7 @@
     <h2 class="text-xl font-semibold text-center mb-4">Settings</h2>
     <div class="flex items-center justify-between">
         <label for="dark-mode-toggle" class="mr-2 text-gray-800">Dark Mode</label>
-        <input type="checkbox" id="dark-mode-toggle" class="w-5 h-5" />
+        <input type="checkbox" id="dark-mode-toggle" class="w-5 h-5" >
     </div>
 </div>
 
@@ -148,7 +148,7 @@
             <div class="flex-grow text-center">
                 <h1 class="text-lg sm:text-xl md:text-2xl font-semibold">Paramedic Quick Reference</h1>
                 <div class="mt-2">
-                    <input type="search" id="searchInput" placeholder="Search topics or medications..." class="w-full p-3 rounded-lg border-2 border-blue-400 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300" aria-label="Search Treatment Information" />
+                    <input type="search" id="searchInput" placeholder="Search topics or medications..." class="w-full p-3 rounded-lg border-2 border-blue-400 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300" aria-label="Search Treatment Information" >
                 </div>
                 <!-- Compact Patient Snapshot Bar below search -->
                 <div id="patient-snapshot-bar" class="mt-2 text-sm text-gray-700"></div>
@@ -203,4 +203,6 @@
 <script type="module" src="main.js"></script>
 </body>
 </html>
- 
+
+
+

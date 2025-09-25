@@ -6,12 +6,12 @@ import { attachNavHandlers } from './Features/navigation/Navigation.js';
 import { attachHomeHandler } from './Features/navigation/Home.js';
 import { renderInitialView } from './Features/list/ListView.js';
 import { renderDetailPage } from './Features/detail/DetailPage.js';
-import { pmhSuggestions, 
-         allergySuggestions, 
-         medicationNameSuggestions, 
-         indicationSuggestions, 
-         symptomSuggestions, 
-         PDE5_INHIBITORS 
+import { pmhSuggestions,
+         allergySuggestions,
+         medicationNameSuggestions,
+         indicationSuggestions,
+         symptomSuggestions,
+         PDE5_INHIBITORS
         } from './Features/patient/PatientInfo.js';
 import { setupAutocomplete } from './Features/patient/Autocomplete.js';
 import { attachSearchHandlers, processItem } from './Features/search/Search.js';
@@ -21,16 +21,16 @@ import { escapeHTML } from './Utils/escapeHTML.js';
 import { setupSlugAnchors } from './Features/anchorNav/slugAnchors.js';
 
 // --- Global Variables ---
-let searchInput, 
-    patientSidebar, 
-    contentArea, 
-    openSidebarButton, 
-    closeSidebarButton, 
-    sidebarOverlay, 
-    navBackButton, 
-    navForwardButton, 
-    navHomeButton, 
-    settingsButton, 
+let searchInput,
+    patientSidebar,
+    contentArea,
+    openSidebarButton,
+    closeSidebarButton,
+    sidebarOverlay,
+    navBackButton,
+    navForwardButton,
+    navHomeButton,
+    settingsButton,
     settingsPanel;
 let medicationDataMap = {};
 let allDisplayableTopicsMap = {};
@@ -51,10 +51,10 @@ let paramedicCategories = [];
     settingsPanel = document.getElementById('settings-panel');
 }
 // Kick off the application once DOM is ready
-if (document.readyState === 'loading') { 
+if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
 } else {
-    initApp(); 
+    initApp();
 }
 
 // Initializes the application, setting up UI event handlers and loading data.
@@ -139,7 +139,7 @@ function initApp() {
                     A runtime error occurred: ${escapeHTML(e.message || 'Unknown error')}
                 </div>`;
             }
-            // eslint-disable-next-line no-console
+
             console.error('Runtime error:', e.error || e.message, e);
         } catch { /* ignore */ }
     }, { once: true });
@@ -151,7 +151,7 @@ function initApp() {
         initializeData(ParamedicCategoriesData, MedicationDetailsData);
     } else {
         console.error('Category or medication data not loaded!');
-    } 
+    }
         // After data initialization, expose data maps globally for now
     window.paramedicCategories = paramedicCategories;
     window.medicationDataMap = medicationDataMap;
@@ -169,11 +169,10 @@ function initApp() {
         window.renderPatientSnapshot();
     }
 
-
     // Add focus highlight to all textareas and inputs
     document.querySelectorAll('textarea, input').forEach(el => {
         el.addEventListener('focus', () => el.classList.add('ring', 'ring-blue-300'));
-        el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300')); 
+        el.addEventListener('blur', () => el.classList.remove('ring', 'ring-blue-300'));
     });
     // Finally, render the initial category list view
     if (Array.isArray(paramedicCategories) && paramedicCategories.length > 0) {
@@ -277,11 +276,9 @@ function initializeData(categoriesData, medDetailsData) { // /Assign the global 
         medicationDataMap[item.id] = item;
     });
     // ✅ Ensure the global map is set *before* processing items
-    window.medicationDataMap = medicationDataMap; 
+    window.medicationDataMap = medicationDataMap;
     // Build the searchable index and allDisplayableTopicsMap using the provided categories
 //    categoriesData.forEach(cat => processItem(cat));
-
-
 
         // Details merged above; no separate map required.
 
@@ -289,15 +286,11 @@ function initializeData(categoriesData, medDetailsData) { // /Assign the global 
     categoriesData.forEach(cat => processItem(cat));
     // Removed: Medication Class dropdown (no longer part of Patient Info sidebar)
 
-
-
 /**
  * Insert the Medication Class dropdown into the patient sidebar.  Gathers all
  * unique classes from `window.medicationDataMap` and dispatches a custom
  * event once inserted so that PatientInfo can attach listeners.
  */
-
-
 
     // Load common suggestion terms into suggestion sets
     const commonPmh = ['hypertension','htn',
@@ -341,25 +334,25 @@ function initializeData(categoriesData, medDetailsData) { // /Assign the global 
     // Extract additional allergy keywords from medication contraindications
     Object.values(medicationDataMap).forEach(med => {
         if (med.contraindications && Array.isArray(med.contraindications)) {
-            med.contraindications.forEach(ci => { 
+            med.contraindications.forEach(ci => {
                 const ciLower = ci.toLowerCase();
                 if (ciLower.includes('hypersensitivity') || ciLower.includes('allergy to')) {    // Derive a generalized allergen term from text
                     let allergen = ciLower.replace('known hypersensitivity to', '')
                                           .replace('allergy to any nsaid (including asa)', 'nsaid allergy')
                                           .replace('allergy to', '')
                                           .trim();
-                    if (allergen.includes('local anesthetic allergy in the amide class')) { 
+                    if (allergen.includes('local anesthetic allergy in the amide class')) {
                         allergen = 'amide anesthetic allergy';
                     } else if (allergen.includes('nsaid (including asa)')) {
                         allergen = 'nsaid allergy';
-                    } else { 
-                        allergen = allergen.split('(')[0].trim(); 
+                    } else {
+                        allergen = allergen.split('(')[0].trim();
                     }
-                    if (allergen && allergen.length > 2 && allergen.length < 30) { 
-                        allergySuggestions.add(allergen); 
-                    } 
+                    if (allergen && allergen.length > 2 && allergen.length < 30) {
+                        allergySuggestions.add(allergen);
+                    }
                 }
-            }); 
+            });
         }
     });
 }
