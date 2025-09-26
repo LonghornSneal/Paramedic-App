@@ -1,0 +1,4468 @@
+{
+  "generatedAt": "2025-09-26T08:46:40.776Z",
+  "created": [],
+  "skippedExisting": [
+    {
+      "id": "introduction-to-abbott",
+      "title": "Introduction to Abbott",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Introduction & Core Principles\\introduction-to-abbott.md"
+    },
+    {
+      "id": "core-principles-safety-well-being",
+      "title": "Core Principles – Safety & Well-Being",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Introduction & Core Principles\\core-principles-safety-well-being.md"
+    },
+    {
+      "id": "als-ground-rules",
+      "title": "ALS Ground Rules",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Administrative & Legal Essentials\\als-ground-rules.md"
+    },
+    {
+      "id": "scope-violations-possible-consequences",
+      "title": "Scope Violations & Possible Consequences",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Administrative & Legal Essentials\\scope-violations-possible-consequences.md"
+    },
+    {
+      "id": "suspension-revocation",
+      "title": "Suspension/Revocation",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Administrative & Legal Essentials\\suspension-revocation.md"
+    },
+    {
+      "id": "on-scene-authority",
+      "title": "On-Scene Authority",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Administrative & Legal Essentials\\on-scene-authority.md"
+    },
+    {
+      "id": "response-mode",
+      "title": "Response Mode",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Administrative & Legal Essentials\\response-mode.md"
+    },
+    {
+      "id": "transfer-to-lesser-credential",
+      "title": "Transfer to Lesser Credential",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Administrative & Legal Essentials\\transfer-to-lesser-credential.md"
+    },
+    {
+      "id": "emr-accompanying-critically-ill",
+      "title": "EMR Accompanying Critically Ill",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Administrative & Legal Essentials\\emr-accompanying-critically-ill.md"
+    },
+    {
+      "id": "consulting-olmc",
+      "title": "Consulting OLMC",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Administrative & Legal Essentials\\consulting-olmc.md"
+    },
+    {
+      "id": "on-scene-healthcare-professionals",
+      "title": "On-Scene Healthcare Professionals",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Administrative & Legal Essentials\\on-scene-healthcare-professionals.md"
+    },
+    {
+      "id": "dispatching-md-200",
+      "title": "Dispatching MD [200]",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Administrative & Legal Essentials\\dispatching-md-200.md"
+    },
+    {
+      "id": "air-ambulance-utilization",
+      "title": "AIR AMBULANCE UTILIZATION",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Administrative & Legal Essentials\\air-ambulance-utilization.md"
+    },
+    {
+      "id": "restraint-of-agitated-combative-patients",
+      "title": "Restraint of Agitated/Combative Patients",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Operational Protocols\\restraint-of-agitated-combative-patients.md"
+    },
+    {
+      "id": "richmond-agitation-sedation-scale-rass",
+      "title": "Richmond Agitation Sedation Scale (RASS)",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Operational Protocols\\richmond-agitation-sedation-scale-rass.md"
+    },
+    {
+      "id": "crime-scene",
+      "title": "Crime Scene",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Administrative & Legal Essentials\\crime-scene.md"
+    },
+    {
+      "id": "pcr-requirements",
+      "title": "PCR Requirements",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Operational Protocols\\pcr-requirements.md"
+    },
+    {
+      "id": "clinical-errors-reporting",
+      "title": "Clinical Errors & Reporting",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Operational Protocols\\clinical-errors-reporting.md"
+    },
+    {
+      "id": "mandatory-reporting",
+      "title": "Mandatory Reporting",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Administrative & Legal Essentials\\mandatory-reporting.md"
+    },
+    {
+      "id": "medication-administration-cross-check-macc",
+      "title": "Medication Administration Cross Check (MACC)",
+      "reason": "existing details"
+    },
+    {
+      "id": "rehabilitation-emergency-incidents-municipal-partners",
+      "title": "Rehabilitation: Emergency Incidents & Municipal Partners",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Operational Protocols\\rehabilitation-emergency-incidents-municipal-partners.md"
+    },
+    {
+      "id": "ventilator-set-up-parapac-plus",
+      "title": "Ventilator Set-Up (ParaPAC Plus)",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Skills & Equipment\\ventilator-set-up-parapac-plus.md"
+    },
+    {
+      "id": "i-gel-supraglottic-airway-sga",
+      "title": "I-gel Supraglottic Airway (SGA)",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Skills & Equipment\\i-gel-supraglottic-airway-sga.md"
+    },
+    {
+      "id": "thermometer-braun-thermoscan",
+      "title": "Thermometer (Braun ThermoScan)",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Skills & Equipment\\thermometer-braun-thermoscan.md"
+    },
+    {
+      "id": "glucometer-mckesson-true-metrix-pro",
+      "title": "Glucometer (McKesson True Metrix Pro)",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Skills & Equipment\\glucometer-mckesson-true-metrix-pro.md"
+    },
+    {
+      "id": "diltiazem-add-vantage-directions",
+      "title": "Diltiazem Add-Vantage Directions",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Skills & Equipment\\diltiazem-add-vantage-directions.md"
+    },
+    {
+      "id": "ez-io-insertion",
+      "title": "EZ-IO Insertion",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Skills & Equipment\\ez-io-insertion.md"
+    },
+    {
+      "id": "push-dose-epi",
+      "title": "PUSH-DOSE EPI",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Skills & Equipment\\push-dose-epi.md"
+    },
+    {
+      "id": "mucosal-atomization-device-mad",
+      "title": "Mucosal Atomization Device (M.A.D.)",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Skills & Equipment\\mucosal-atomization-device-mad.md"
+    },
+    {
+      "id": "minutes-of-oxygen-by-cylinder-size",
+      "title": "Minutes of Oxygen by Cylinder Size",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Skills & Equipment\\minutes-of-oxygen-by-cylinder-size.md"
+    },
+    {
+      "id": "understanding-ratios-percentages-solution-mixtures",
+      "title": "Understanding Ratios, Percentages & Solution Mixtures",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Skills & Equipment\\understanding-ratios-percentages-solution-mixtures.md"
+    },
+    {
+      "id": "abbott-approved-abbreviations-respiratory-airway",
+      "title": "Respiratory & Airway",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Abbreviations & References\\abbott-approved-abbreviations-respiratory-airway.md"
+    },
+    {
+      "id": "adult-coma-od",
+      "title": "COMA/OD",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-coma-od.md"
+    },
+    {
+      "id": "adult-cpap-or-bipap",
+      "title": "CPAP or BiPAP",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-cpap-or-bipap.md"
+    },
+    {
+      "id": "adult-sai",
+      "title": "SAI",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-sai.md"
+    },
+    {
+      "id": "adult-nasal-intubation",
+      "title": "Nasal Intubation",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-nasal-intubation.md"
+    },
+    {
+      "id": "adult-et-intubation",
+      "title": "ET Intubation",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-et-intubation.md"
+    },
+    {
+      "id": "adult-ventilator-pt-intubated-sedated",
+      "title": "VENTILATOR Pt; Intubated & Sedated",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-ventilator-pt-intubated-sedated.md"
+    },
+    {
+      "id": "adult-tracheostomy-care",
+      "title": "TRACHEOSTOMY CARE",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-tracheostomy-care.md"
+    },
+    {
+      "id": "adult-cricothyrotomy",
+      "title": "Cricothyrotomy",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-cricothyrotomy.md"
+    },
+    {
+      "id": "adult-tension-pneumo",
+      "title": "Tension Pneumo",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-tension-pneumo.md"
+    },
+    {
+      "id": "adult-sga-cardiac-arrest-use-1st",
+      "title": "SGA -> Cardiac Arrest = Use 1st",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-sga-cardiac-arrest-use-1st.md"
+    },
+    {
+      "id": "zoll-emv731-product-overview-circuits",
+      "title": "Ventilator Circuits",
+      "reason": "handled by Zoll manual"
+    },
+    {
+      "id": "adult-bradycardia",
+      "title": "Bradycardia",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-bradycardia.md"
+    },
+    {
+      "id": "adult-cardiogenic-shock-not-post-arrest",
+      "title": "Cardiogenic Shock (not post arrest)",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-cardiogenic-shock-not-post-arrest.md"
+    },
+    {
+      "id": "adult-lvad-pt",
+      "title": "LVAD pt",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-lvad-pt.md"
+    },
+    {
+      "id": "adult-pea-asystole",
+      "title": "PEA/Asystole",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-pea-asystole.md"
+    },
+    {
+      "id": "adult-pulmonary-edema",
+      "title": "Pulmonary Edema",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-pulmonary-edema.md"
+    },
+    {
+      "id": "adult-rosc-stabilization",
+      "title": "ROSC Stabilization",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-rosc-stabilization.md"
+    },
+    {
+      "id": "adult-allergic-reaction",
+      "title": "Allergic Reaction",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-allergic-reaction.md"
+    },
+    {
+      "id": "adult-anaphylaxis",
+      "title": "Anaphylaxis",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-anaphylaxis.md"
+    },
+    {
+      "id": "adult-fall-or-weakness",
+      "title": "Fall or Weakness",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-fall-or-weakness.md"
+    },
+    {
+      "id": "adult-hyperkalemia",
+      "title": "Hyperkalemia",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-hyperkalemia.md"
+    },
+    {
+      "id": "adult-hyperglycemia",
+      "title": "Hyperglycemia",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-hyperglycemia.md"
+    },
+    {
+      "id": "adult-n-v",
+      "title": "N/V",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-n-v.md"
+    },
+    {
+      "id": "adult-pain",
+      "title": "Pain",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-pain.md"
+    },
+    {
+      "id": "adult-seizure",
+      "title": "Seizure",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-seizure.md"
+    },
+    {
+      "id": "adult-sepsis",
+      "title": "Sepsis",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-sepsis.md"
+    },
+    {
+      "id": "adult-sickle-cell-crisis",
+      "title": "Sickle Cell Crisis",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-sickle-cell-crisis.md"
+    },
+    {
+      "id": "pediatric-trauma",
+      "title": "Trauma",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Pediatric Protocols\\pediatric-trauma.md"
+    },
+    {
+      "id": "adult-major-level-1-trauma",
+      "title": "Major Level 1 Trauma",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-major-level-1-trauma.md"
+    },
+    {
+      "id": "adult-refusals",
+      "title": "Refusals",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-refusals.md"
+    },
+    {
+      "id": "pediatric-assessment-vs",
+      "title": "Pediatric Assessment & VS",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Pediatric Protocols\\pediatric-assessment-vs.md"
+    },
+    {
+      "id": "zoll-emv731-circuits-directions",
+      "title": "Directions for Use",
+      "reason": "handled by Zoll manual"
+    },
+    {
+      "id": "zoll-emv731-setting-up-circuit",
+      "title": "Circuit Attachment",
+      "reason": "handled by Zoll manual"
+    },
+    {
+      "id": "zoll-emv731-using-manage-alarms",
+      "title": "Managing Alarms",
+      "reason": "handled by Zoll manual"
+    },
+    {
+      "id": "adult-sludgem-pt",
+      "title": "SLUDGEM pt",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Adult Protocols\\adult-sludgem-pt.md"
+    },
+    {
+      "id": "pediatric-refusals",
+      "title": "Refusals",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Pediatric Protocols\\pediatric-refusals.md"
+    },
+    {
+      "id": "pediatric-special-needs-children",
+      "title": "Special Needs Children",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Pediatric Protocols\\pediatric-special-needs-children.md"
+    },
+    {
+      "id": "workers-compensation-process",
+      "title": "Worker’s Compensation Process",
+      "reason": "file already exists",
+      "path": "C:\\Users\\HhsJa\\OneDrive\\Documents\\GitHub\\Paramedic-App\\Content\\Administrative & Legal Essentials\\workers-compensation-process.md"
+    },
+    {
+      "id": "2-lidocaine-xylocaine",
+      "title": "2% Lidocaine (Xylocaine) (100mg/5ml)",
+      "reason": "ALS medication handled by data"
+    },
+    {
+      "id": "adenosine-adenocard",
+      "title": "Adenosine (Adenocard) (6mg/2ml)",
+      "reason": "ALS medication handled by data"
+    },
+    {
+      "id": "dexamethasone-decadron",
+      "title": "Dexamethasone (Decadron) (10mg/ml)",
+      "reason": "ALS medication handled by data"
+    },
+    {
+      "id": "ondansetron-zofran",
+      "title": "Ondansetron (Zofran) (4mg/2ml)",
+      "reason": "ALS medication handled by data"
+    },
+    {
+      "id": "8-4-sodium-bicarbonate-nahco3",
+      "title": "8.4% Bicarb (NaHCO3) (50mEq/50ml)",
+      "reason": "ALS medication handled by data"
+    },
+    {
+      "id": "albuterol",
+      "title": "Albuterol (2.5mg/3cc)",
+      "reason": "ALS medication handled by data"
+    },
+    {
+      "id": "asa",
+      "title": "ASA (81mg/tab)",
+      "reason": "ALS medication handled by data"
+    },
+    {
+      "id": "atropine-sulfate",
+      "title": "Atropine Sulfate (1mg/10ml)",
+      "reason": "ALS medication handled by data"
+    },
+    {
+      "id": "d10",
+      "title": "D10 (25g/250ml bag)",
+      "reason": "ALS medication handled by data"
+    },
+    {
+      "id": "diphenhydramine-benadryl",
+      "title": "Diphenhydramine (Benadryl) (50mg/ml)",
+      "reason": "ALS medication handled by data"
+    },
+    {
+      "id": "droperidol-inapsine",
+      "title": "Droperidol (Inapsine) (5mg/2ml)",
+      "reason": "ALS medication handled by data"
+    },
+    {
+      "id": "epi-1-1000-adrenaline",
+      "title": "Epi 1:1,000 (Adrenaline) (10mg/10ml)",
+      "reason": "ALS medication handled by data"
+    },
+    {
+      "id": "epi-1-10000",
+      "title": "Epi 1:10,000 (1mg/10ml)",
+      "reason": "ALS medication handled by data"
+    },
+    {
+      "id": "epi-1-100000-push-dose-epi",
+      "title": "Epi 1:100,000 \"Push-Dose Epi\" (100mcg/10ml)",
+      "reason": "ALS medication handled by data"
+    },
+    {
+      "id": "fentanyl-sublimaze",
+      "title": "Fentanyl (Sublimaze) (100mcg/2ml)",
+      "reason": "ALS medication handled by data"
+    },
+    {
+      "id": "ipratropium",
+      "title": "Ipratropium (0.5mg/3cc)",
+      "reason": "ALS medication handled by data"
+    },
+    {
+      "id": "ketamine-ketalar",
+      "title": "Ketamine (Ketalar) (500mg/5ml)",
+      "reason": "ALS medication handled by data"
+    },
+    {
+      "id": "ketorolac-tromethamine-toradol",
+      "title": "Ketorolac Tromethamine (Toradol) (30mg/ml)",
+      "reason": "ALS medication handled by data"
+    }
+  ],
+  "missingDirectory": [],
+  "unmatchedDocHeadings": [
+    {
+      "title": "Abbreviations Used in Document",
+      "tokens": [
+        "ABBRE",
+        "US",
+        "IN",
+        "DOCUM"
+      ],
+      "tokenSet": {},
+      "index": 1,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Section 1: EMS",
+      "tokens": [
+        "SEC",
+        "1",
+        "EMS"
+      ],
+      "tokenSet": {},
+      "index": 2,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Applies to both Adults & Pediatrics",
+      "tokens": [
+        "APPLI",
+        "TO",
+        "BOTH",
+        "ADULT",
+        "PEDIA"
+      ],
+      "tokenSet": {},
+      "index": 17,
+      "assignedTopicId": null
+    },
+    {
+      "title": "BLS MACC",
+      "tokens": [
+        "BLS",
+        "MACC"
+      ],
+      "tokenSet": {},
+      "index": 27,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Skills",
+      "tokens": [
+        "SKILL"
+      ],
+      "tokenSet": {},
+      "index": 30,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Protocols",
+      "tokens": [
+        "ADULT",
+        "PROTO"
+      ],
+      "tokenSet": {},
+      "index": 41,
+      "assignedTopicId": null
+    },
+    {
+      "title": "BREATHING",
+      "tokens": [
+        "BREAT"
+      ],
+      "tokenSet": {},
+      "index": 44,
+      "assignedTopicId": null
+    },
+    {
+      "title": "BRONCHOSPASM",
+      "tokens": [
+        "BRONC"
+      ],
+      "tokenSet": {},
+      "index": 45,
+      "assignedTopicId": null
+    },
+    {
+      "title": "PUSH-DOSE EPI",
+      "tokens": [
+        "PUSH",
+        "DOSE",
+        "EPI"
+      ],
+      "tokenSet": {},
+      "index": 59,
+      "assignedTopicId": null
+    },
+    {
+      "title": "MI or Acute Coronary Syndrome (ACS)",
+      "tokens": [
+        "MI",
+        "OR",
+        "ACUTE",
+        "CORON",
+        "SYNDR",
+        "ACS"
+      ],
+      "tokenSet": {},
+      "index": 62,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Symptomatic Tachycardia",
+      "tokens": [
+        "SYMPT",
+        "TACHY"
+      ],
+      "tokenSet": {},
+      "index": 66,
+      "assignedTopicId": null
+    },
+    {
+      "title": "V-FIB or PULSELESS V-TACH",
+      "tokens": [
+        "V",
+        "FIB",
+        "OR",
+        "PULSE",
+        "V",
+        "TACH"
+      ],
+      "tokenSet": {},
+      "index": 67,
+      "assignedTopicId": null
+    },
+    {
+      "title": "CPR Initiation & Termination",
+      "tokens": [
+        "CPR",
+        "INITI",
+        "TERMI"
+      ],
+      "tokenSet": {},
+      "index": 71,
+      "assignedTopicId": null
+    },
+    {
+      "title": "DEATH Documentation; body Temp.",
+      "tokens": [
+        "DEATH",
+        "DOCUM",
+        "BODY",
+        "TEMP"
+      ],
+      "tokenSet": {},
+      "index": 72,
+      "assignedTopicId": null
+    },
+    {
+      "title": "HYPOGLYCEMIA / INSULIN SHOCK",
+      "tokens": [
+        "HYPOG",
+        "INSUL",
+        "SHOCK"
+      ],
+      "tokenSet": {},
+      "index": 75,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Organophosphate or Carbamate Poisoning",
+      "tokens": [
+        "ORGAN",
+        "OR",
+        "CARBA",
+        "POISO"
+      ],
+      "tokenSet": {},
+      "index": 78,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Stroke Centers; Missouri Certified (Greater St. Louis Region)",
+      "tokens": [
+        "STROK",
+        "CENT",
+        "MISSO",
+        "CERTI",
+        "GREAT",
+        "ST",
+        "LOUI",
+        "REGIO"
+      ],
+      "tokenSet": {},
+      "index": 83,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Suspected Acute STROKE",
+      "tokens": [
+        "SUSPE",
+        "ACUTE",
+        "STROK"
+      ],
+      "tokenSet": {},
+      "index": 84,
+      "assignedTopicId": null
+    },
+    {
+      "title": "RASS +1, +2, or +3    Agitated/Anxious Pt",
+      "tokens": [
+        "RASS",
+        "1",
+        "2",
+        "OR",
+        "3",
+        "AGITA",
+        "ANXIO",
+        "PT"
+      ],
+      "tokenSet": {},
+      "index": 87,
+      "assignedTopicId": null
+    },
+    {
+      "title": "OB/GYN",
+      "tokens": [
+        "OB",
+        "GYN"
+      ],
+      "tokenSet": {},
+      "index": 88,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Delivery OOH/Pre-eclampsia/Eclampsia",
+      "tokens": [
+        "DELIV",
+        "OOH",
+        "PRE",
+        "ECLAM",
+        "ECLAM"
+      ],
+      "tokenSet": {},
+      "index": 89,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Riot Control (Incapacitating Agent)",
+      "tokens": [
+        "RIOT",
+        "CONTR",
+        "INCAP",
+        "AGENT"
+      ],
+      "tokenSet": {},
+      "index": 91,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Spinal Motion Restriction (SMR)",
+      "tokens": [
+        "SPINA",
+        "MO",
+        "RESTR",
+        "SMR"
+      ],
+      "tokenSet": {},
+      "index": 92,
+      "assignedTopicId": null
+    },
+    {
+      "title": "TASER  p-deployment",
+      "tokens": [
+        "TAS",
+        "P",
+        "DEPLO"
+      ],
+      "tokenSet": {},
+      "index": 93,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Refusals & Suicidal Pts",
+      "tokens": [
+        "REFUS",
+        "SUICI",
+        "PTS"
+      ],
+      "tokenSet": {},
+      "index": 98,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Pediatric Protocols",
+      "tokens": [
+        "PEDIA",
+        "PROTO"
+      ],
+      "tokenSet": {},
+      "index": 99,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Low SBP Pediatric",
+      "tokens": [
+        "LOW",
+        "SBP",
+        "PEDIA"
+      ],
+      "tokenSet": {},
+      "index": 101,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Pediatric Initial pt Assessment",
+      "tokens": [
+        "PEDIA",
+        "INITI",
+        "PT",
+        "ASSES"
+      ],
+      "tokenSet": {},
+      "index": 102,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Airway & Breathing",
+      "tokens": [
+        "AIRWA",
+        "BREAT"
+      ],
+      "tokenSet": {},
+      "index": 103,
+      "assignedTopicId": null
+    },
+    {
+      "title": "AIRWAY",
+      "tokens": [
+        "AIRWA"
+      ],
+      "tokenSet": {},
+      "index": 104,
+      "assignedTopicId": null
+    },
+    {
+      "title": "BREATHING / Respiratory Failure",
+      "tokens": [
+        "BREAT",
+        "RESPI",
+        "FAILU"
+      ],
+      "tokenSet": {},
+      "index": 105,
+      "assignedTopicId": null
+    },
+    {
+      "title": "BRONCHOSPASM",
+      "tokens": [
+        "BRONC"
+      ],
+      "tokenSet": {},
+      "index": 106,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Brief Resolved Unexplained Event (BRUE)",
+      "tokens": [
+        "BRIEF",
+        "RESOL",
+        "UNEXP",
+        "EVENT",
+        "BRUE"
+      ],
+      "tokenSet": {},
+      "index": 107,
+      "assignedTopicId": null
+    },
+    {
+      "title": "CONTINUOUS POSITIVE AIRWAY PRESSURE (CPAP)",
+      "tokens": [
+        "CONTI",
+        "POSIT",
+        "AIRWA",
+        "PRESS",
+        "CPAP"
+      ],
+      "tokenSet": {},
+      "index": 108,
+      "assignedTopicId": null
+    },
+    {
+      "title": "CPAP Set-up: FlowSafe II System",
+      "tokens": [
+        "CPAP",
+        "SET",
+        "UP",
+        "FLOWS",
+        "II",
+        "SYSTE"
+      ],
+      "tokenSet": {},
+      "index": 109,
+      "assignedTopicId": null
+    },
+    {
+      "title": "BiPAP Set-up: FlowSafe II System",
+      "tokens": [
+        "BIPAP",
+        "SET",
+        "UP",
+        "FLOWS",
+        "II",
+        "SYSTE"
+      ],
+      "tokenSet": {},
+      "index": 110,
+      "assignedTopicId": null
+    },
+    {
+      "title": "CIRCULATION / Shock",
+      "tokens": [
+        "CIRCU",
+        "SHOCK"
+      ],
+      "tokenSet": {},
+      "index": 113,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Newborn Resuscitation  Inverted Pyramid Model",
+      "tokens": [
+        "NEWBO",
+        "RESUS",
+        "INVER",
+        "PYRAM",
+        "MODEL"
+      ],
+      "tokenSet": {},
+      "index": 114,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Inverted Pyramid Model for Newborn Resuscitation",
+      "tokens": [
+        "INVER",
+        "PYRAM",
+        "MODEL",
+        "FOR",
+        "NEWBO",
+        "RESUS"
+      ],
+      "tokenSet": {},
+      "index": 115,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Cardiogenic Shock or p Arrest Stabilization",
+      "tokens": [
+        "CARDI",
+        "SHOCK",
+        "OR",
+        "P",
+        "ARRES",
+        "STABI"
+      ],
+      "tokenSet": {},
+      "index": 116,
+      "assignedTopicId": null
+    },
+    {
+      "title": "PEDIATRIC ADVANCED LIFE SUPPORT",
+      "tokens": [
+        "PEDIA",
+        "ADVAN",
+        "LIFE",
+        "SUPPO"
+      ],
+      "tokenSet": {},
+      "index": 117,
+      "assignedTopicId": null
+    },
+    {
+      "title": "NEONATAL RESUSCITATION",
+      "tokens": [
+        "NEONA",
+        "RESUS"
+      ],
+      "tokenSet": {},
+      "index": 118,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Medical",
+      "tokens": [
+        "MEDIC"
+      ],
+      "tokenSet": {},
+      "index": 119,
+      "assignedTopicId": null
+    },
+    {
+      "title": "AMS/Suspected Opioid OD",
+      "tokens": [
+        "AMS",
+        "SUSPE",
+        "OPIOI",
+        "OD"
+      ],
+      "tokenSet": {},
+      "index": 120,
+      "assignedTopicId": null
+    },
+    {
+      "title": "ALLERGIC REACTION",
+      "tokens": [
+        "ALLER",
+        "REAC"
+      ],
+      "tokenSet": {},
+      "index": 121,
+      "assignedTopicId": null
+    },
+    {
+      "title": "ANAPHYLAXIS",
+      "tokens": [
+        "ANAPH"
+      ],
+      "tokenSet": {},
+      "index": 122,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Hyperglycemia/DKA or Nonketotic Hyperosmolar Coma",
+      "tokens": [
+        "HYPER",
+        "DKA",
+        "OR",
+        "NONKE",
+        "HYPER",
+        "COMA"
+      ],
+      "tokenSet": {},
+      "index": 123,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Hypoglycemia / Insulin OD",
+      "tokens": [
+        "HYPOG",
+        "INSUL",
+        "OD"
+      ],
+      "tokenSet": {},
+      "index": 124,
+      "assignedTopicId": null
+    },
+    {
+      "title": "N/V",
+      "tokens": [
+        "N",
+        "V"
+      ],
+      "tokenSet": {},
+      "index": 125,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Organophosphate or Carbamate Poisoning",
+      "tokens": [
+        "ORGAN",
+        "OR",
+        "CARBA",
+        "POISO"
+      ],
+      "tokenSet": {},
+      "index": 126,
+      "assignedTopicId": null
+    },
+    {
+      "title": "SEIZURE",
+      "tokens": [
+        "SEIZU"
+      ],
+      "tokenSet": {},
+      "index": 128,
+      "assignedTopicId": null
+    },
+    {
+      "title": "SICKLE CELL CRISIS",
+      "tokens": [
+        "SICKL",
+        "CELL",
+        "CRISI"
+      ],
+      "tokenSet": {},
+      "index": 129,
+      "assignedTopicId": null
+    },
+    {
+      "title": "TOXIC INGESTION",
+      "tokens": [
+        "TOXIC",
+        "INGES"
+      ],
+      "tokenSet": {},
+      "index": 130,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Refusals",
+      "tokens": [
+        "REFUS"
+      ],
+      "tokenSet": {},
+      "index": 132,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Minor Consent/Refusal Details",
+      "tokens": [
+        "MINOR",
+        "CONSE",
+        "REFUS",
+        "DETAI"
+      ],
+      "tokenSet": {},
+      "index": 133,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Trauma",
+      "tokens": [
+        "TRAUM"
+      ],
+      "tokenSet": {},
+      "index": 134,
+      "assignedTopicId": null
+    },
+    {
+      "title": "TRAUMA, major",
+      "tokens": [
+        "TRAUM",
+        "MAJOR"
+      ],
+      "tokenSet": {},
+      "index": 135,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Traumatic Arrest????????????????",
+      "tokens": [
+        "TRAUM",
+        "ARRES"
+      ],
+      "tokenSet": {},
+      "index": 136,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Central IV Catheters  Indwelling IV access:",
+      "tokens": [
+        "CENTR",
+        "IV",
+        "CATHE",
+        "INDWE",
+        "IV",
+        "ACC"
+      ],
+      "tokenSet": {},
+      "index": 138,
+      "assignedTopicId": null
+    },
+    {
+      "title": "CSF Shunt (Ventriculoperitoneal or V-P Shunt):",
+      "tokens": [
+        "CSF",
+        "SHUNT",
+        "VENTR",
+        "OR",
+        "V",
+        "P",
+        "SHUNT"
+      ],
+      "tokenSet": {},
+      "index": 139,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Gastrostomy",
+      "tokens": [
+        "GASTR"
+      ],
+      "tokenSet": {},
+      "index": 140,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Colostomy of Ileostomy  Fecal Drainage:",
+      "tokens": [
+        "COLOS",
+        "OF",
+        "ILEOS",
+        "FECAL",
+        "DRAIN"
+      ],
+      "tokenSet": {},
+      "index": 141,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Ureterostomy or Nephrostomy Tube or Foley:",
+      "tokens": [
+        "URETE",
+        "OR",
+        "NEPHR",
+        "TUBE",
+        "OR",
+        "FOLEY"
+      ],
+      "tokenSet": {},
+      "index": 142,
+      "assignedTopicId": null
+    },
+    {
+      "title": "SPECIAL HEALTH CARE NEEDS",
+      "tokens": [
+        "SPECI",
+        "HEALT",
+        "CARE",
+        "NE"
+      ],
+      "tokenSet": {},
+      "index": 143,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Special needs Tracking & Awareness Response System (STARS)",
+      "tokens": [
+        "SPECI",
+        "NE",
+        "TRACK",
+        "AWARE",
+        "RESPO",
+        "SYSTE",
+        "STAR"
+      ],
+      "tokenSet": {},
+      "index": 144,
+      "assignedTopicId": null
+    },
+    {
+      "title": "TracheostomyTube",
+      "tokens": [
+        "TRACH"
+      ],
+      "tokenSet": {},
+      "index": 145,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Needle Decompression",
+      "tokens": [
+        "NEEDL",
+        "DECOM"
+      ],
+      "tokenSet": {},
+      "index": 146,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Pediatric References",
+      "tokens": [
+        "PEDIA",
+        "REFER"
+      ],
+      "tokenSet": {},
+      "index": 148,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Abbreviations for PCR  Approved list",
+      "tokens": [
+        "ABBRE",
+        "FOR",
+        "PCR",
+        "APPRO",
+        "LIST"
+      ],
+      "tokenSet": {},
+      "index": 149,
+      "assignedTopicId": null
+    },
+    {
+      "title": "ALS Medications",
+      "tokens": [
+        "ALS",
+        "MEDIC"
+      ],
+      "tokenSet": {},
+      "index": 150,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Drug Info:",
+      "tokens": [
+        "DRUG",
+        "INFO"
+      ],
+      "tokenSet": {},
+      "index": 152,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 153,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Drug Info:",
+      "tokens": [
+        "DRUG",
+        "INFO"
+      ],
+      "tokenSet": {},
+      "index": 155,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 156,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Pediatric Rx:",
+      "tokens": [
+        "PEDIA",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 157,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Drug Info:",
+      "tokens": [
+        "DRUG",
+        "INFO"
+      ],
+      "tokenSet": {},
+      "index": 159,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 160,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Drug Info:",
+      "tokens": [
+        "DRUG",
+        "INFO"
+      ],
+      "tokenSet": {},
+      "index": 162,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 163,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Pediatric Rx:",
+      "tokens": [
+        "PEDIA",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 164,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Drug Info:",
+      "tokens": [
+        "DRUG",
+        "INFO"
+      ],
+      "tokenSet": {},
+      "index": 166,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 167,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 169,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Pediatric Rx:",
+      "tokens": [
+        "PEDIA",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 170,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Rx:",
+      "tokens": [
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 172,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 174,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Pediatric Rx:",
+      "tokens": [
+        "PEDIA",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 175,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 177,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 179,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Pediatric Rx:",
+      "tokens": [
+        "PEDIA",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 180,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 182,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Push-Dose Epi Preparation:",
+      "tokens": [
+        "PUSH",
+        "DOSE",
+        "EPI",
+        "PREPA"
+      ],
+      "tokenSet": {},
+      "index": 184,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Epi Continuous Infusion:",
+      "tokens": [
+        "EPI",
+        "CONTI",
+        "INFUS"
+      ],
+      "tokenSet": {},
+      "index": 185,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Epi Continuous Infusion Drip Rates c 60-Drip (Micro-Drip):",
+      "tokens": [
+        "EPI",
+        "CONTI",
+        "INFUS",
+        "DRIP",
+        "RATE",
+        "C",
+        "60",
+        "DRIP",
+        "MICRO",
+        "DRIP"
+      ],
+      "tokenSet": {},
+      "index": 186,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 187,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Pediatric Rx:",
+      "tokens": [
+        "PEDIA",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 188,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Etomidate  (40mg/20ml)",
+      "tokens": [
+        "ETOMI",
+        "40MG",
+        "20ML"
+      ],
+      "tokenSet": {},
+      "index": 189,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 190,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 192,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Pediatric Rx:",
+      "tokens": [
+        "PEDIA",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 193,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 195,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 197,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Pediatric Rx:",
+      "tokens": [
+        "PEDIA",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 198,
+      "assignedTopicId": null
+    },
+    {
+      "title": "17yo Rx:",
+      "tokens": [
+        "17YO",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 200,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 202,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 204,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Pediatric Rx:",
+      "tokens": [
+        "PEDIA",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 205,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 207,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 209,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Pediatric Rx:",
+      "tokens": [
+        "PEDIA",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 210,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Drug Info:",
+      "tokens": [
+        "DRUG",
+        "INFO"
+      ],
+      "tokenSet": {},
+      "index": 212,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 213,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Pediatric Rx:",
+      "tokens": [
+        "PEDIA",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 214,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Drug Info:",
+      "tokens": [
+        "DRUG",
+        "INFO"
+      ],
+      "tokenSet": {},
+      "index": 216,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 217,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Pediatric Rx:",
+      "tokens": [
+        "PEDIA",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 218,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Drug Info:",
+      "tokens": [
+        "DRUG",
+        "INFO"
+      ],
+      "tokenSet": {},
+      "index": 220,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 221,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Drug Info:",
+      "tokens": [
+        "DRUG",
+        "INFO"
+      ],
+      "tokenSet": {},
+      "index": 223,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 224,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Pediatric Rx:",
+      "tokens": [
+        "PEDIA",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 225,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Drug Info:",
+      "tokens": [
+        "DRUG",
+        "INFO"
+      ],
+      "tokenSet": {},
+      "index": 227,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Adult Rx:",
+      "tokens": [
+        "ADULT",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 228,
+      "assignedTopicId": null
+    },
+    {
+      "title": "Pediatric Rx:",
+      "tokens": [
+        "PEDIA",
+        "RX"
+      ],
+      "tokenSet": {},
+      "index": 229,
+      "assignedTopicId": null
+    }
+  ],
+  "unassignedAppTopics": [
+    {
+      "id": "adult-mi-acs",
+      "title": "MI/ACS",
+      "tokens": [
+        "MI",
+        "ACS"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "Circulation/Cardiology",
+        "MI/ACS"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-vf-pvt",
+      "title": "VF/pVT",
+      "tokens": [
+        "VF",
+        "PVT"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "Circulation/Cardiology",
+        "VF/pVT"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-svt-mono-vt-unstable",
+      "title": "SVT/Mono-VT (unstable)",
+      "tokens": [
+        "SVT",
+        "MONO",
+        "VT",
+        "UNSTA"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "Circulation/Cardiology",
+        "SVT/Mono-VT (unstable)"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-svt-stable",
+      "title": "SVT (stable)",
+      "tokens": [
+        "SVT",
+        "STABL"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "Circulation/Cardiology",
+        "SVT (stable)"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-a-fib-rvr-or-a-flutter-stable-symptomatic",
+      "title": "A-Fib RVR or A-Flutter (stable symptomatic)",
+      "tokens": [
+        "A",
+        "FIB",
+        "RVR",
+        "OR",
+        "A",
+        "FLUTT",
+        "STABL",
+        "SYMPT"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "Circulation/Cardiology",
+        "A-Fib RVR or A-Flutter (stable symptomatic)"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-mat-stable",
+      "title": "MAT (stable)",
+      "tokens": [
+        "MAT",
+        "STABL"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "Circulation/Cardiology",
+        "MAT (stable)"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-mono-vt-stable",
+      "title": "Mono-VT (stable)",
+      "tokens": [
+        "MONO",
+        "VT",
+        "STABL"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "Circulation/Cardiology",
+        "Mono-VT (stable)"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-poly-vt-torsades-stable",
+      "title": "Poly-VT/Torsades (stable)",
+      "tokens": [
+        "PO",
+        "VT",
+        "TORSA",
+        "STABL"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "Circulation/Cardiology",
+        "Poly-VT/Torsades (stable)"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-poly-vt-torsades-unstable",
+      "title": "Poly-VT/Torsades (unstable)",
+      "tokens": [
+        "PO",
+        "VT",
+        "TORSA",
+        "UNSTA"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "Circulation/Cardiology",
+        "Poly-VT/Torsades (unstable)"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-hypoglycemia",
+      "title": "Hypoglycemia",
+      "tokens": [
+        "HYPOG"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "Medical Emergencies",
+        "Hypoglycemia"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-h-a-or-abdominal-pain",
+      "title": "H/A or Abdominal pain",
+      "tokens": [
+        "H",
+        "A",
+        "OR",
+        "ABDOM",
+        "PAIN"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "Medical Emergencies",
+        "H/A or Abdominal pain"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-stroke",
+      "title": "Stroke",
+      "tokens": [
+        "STROK"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "Medical Emergencies",
+        "Stroke"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-normal-delivery",
+      "title": "Normal Delivery",
+      "tokens": [
+        "NORMA",
+        "DELIV"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "OB/GYN",
+        "Normal Delivery"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-shoulder-dystocia",
+      "title": "Shoulder Dystocia",
+      "tokens": [
+        "SHOUL",
+        "DYSTO"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "OB/GYN",
+        "Shoulder Dystocia"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-breech",
+      "title": "Breech",
+      "tokens": [
+        "BREEC"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "OB/GYN",
+        "Breech"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-frank-complete-breech-presentation",
+      "title": "Frank/Complete Breech Presentation",
+      "tokens": [
+        "FRANK",
+        "COMPL",
+        "BREEC",
+        "PRESE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "OB/GYN",
+        "Frank/Complete Breech Presentation"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-prolapsed-cord",
+      "title": "Prolapsed Cord",
+      "tokens": [
+        "PROLA",
+        "CORD"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "OB/GYN",
+        "Prolapsed Cord"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-eclampsia",
+      "title": "Eclampsia",
+      "tokens": [
+        "ECLAM"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "OB/GYN",
+        "Eclampsia"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-cardiac-arrest-pressure-sores-from-immobility",
+      "title": "Cardiac Arrest + Pressure Sores from Immobility",
+      "tokens": [
+        "CARDI",
+        "ARRES",
+        "PRESS",
+        "SORE",
+        "FROM",
+        "IMMOB"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "Trauma",
+        "Cardiac Arrest + Pressure Sores from Immobility"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-mace-pepper-spray",
+      "title": "Mace/Pepper-Spray",
+      "tokens": [
+        "MACE",
+        "PEPP",
+        "SPRAY"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "Trauma",
+        "Mace/Pepper-Spray"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-smr",
+      "title": "SMR",
+      "tokens": [
+        "SMR"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "Trauma",
+        "SMR"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "adult-taser",
+      "title": "Taser",
+      "tokens": [
+        "TAS"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Adult Protocols",
+        "Trauma",
+        "Taser"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "d5",
+      "title": "D5 (5g/100ml bag)",
+      "tokens": [
+        "D5",
+        "5G",
+        "100ML",
+        "BAG"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "ALS Medications",
+        "D5 (5g/100ml bag)"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "etomidate-amidate",
+      "title": "Etomidate (Amidate) (20mg/10ml)",
+      "tokens": [
+        "ETOMI",
+        "AMIDA",
+        "20MG",
+        "10ML"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "ALS Medications",
+        "Etomidate (Amidate) (20mg/10ml)"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-quick-vent-zoll-setup",
+      "title": "Zoll Set Up",
+      "tokens": [
+        "ZOLL",
+        "SET",
+        "UP"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Quick Vent Guide",
+        "Zoll Set Up"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-quick-vent-operational-notes",
+      "title": "General Operational Notes",
+      "tokens": [
+        "GENER",
+        "OPERA",
+        "NOTE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Quick Vent Guide",
+        "General Operational Notes"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-quick-vent-volume-mode",
+      "title": "Volume Mode",
+      "tokens": [
+        "VOLUM",
+        "MODE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Quick Vent Guide",
+        "Volume Mode"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-quick-vent-pressure-mode",
+      "title": "Pressure Mode",
+      "tokens": [
+        "PRESS",
+        "MODE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Quick Vent Guide",
+        "Pressure Mode"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-quick-vent-other-vent-alarms",
+      "title": "Other Vent Alarms",
+      "tokens": [
+        "OTH",
+        "VENT",
+        "ALARM"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Quick Vent Guide",
+        "Other Vent Alarms"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-quick-vent-cpap",
+      "title": "CPAP",
+      "tokens": [
+        "CPAP"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Quick Vent Guide",
+        "CPAP"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-quick-vent-bi-level",
+      "title": "Bi-Level",
+      "tokens": [
+        "BI",
+        "LEVEL"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Quick Vent Guide",
+        "Bi-Level"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-quick-vent-terms-settings",
+      "title": "Terms & Settings",
+      "tokens": [
+        "TERM",
+        "SETT"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Quick Vent Guide",
+        "Terms & Settings"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-quick-vent-tidal-volume-calculator",
+      "title": "Tidal Volume Calculator",
+      "tokens": [
+        "TIDAL",
+        "VOLUM",
+        "CALCU"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Quick Vent Guide",
+        "Tidal Volume Calculator"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-general-information-purpose-manual",
+      "title": "Purpose & Manual Use",
+      "tokens": [
+        "PURPO",
+        "MANUA",
+        "USE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Zoll EMV731 - General Information",
+        "Purpose & Manual Use"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-general-information-symbols",
+      "title": "Symbols",
+      "tokens": [
+        "SYMBO"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Zoll EMV731 - General Information",
+        "Symbols"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-general-information-indications",
+      "title": "Indications for Use",
+      "tokens": [
+        "INDIC",
+        "FOR",
+        "USE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Zoll EMV731 - General Information",
+        "Indications for Use"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-general-information-warnings",
+      "title": "Warnings & Cautions",
+      "tokens": [
+        "WARN",
+        "CAU"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Zoll EMV731 - General Information",
+        "Warnings & Cautions"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-general-information-warranty",
+      "title": "Warranty & Tracking",
+      "tokens": [
+        "WARRA",
+        "TRACK"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Zoll EMV731 - General Information",
+        "Warranty & Tracking"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-general-information-contact",
+      "title": "Contact Information",
+      "tokens": [
+        "CONTA",
+        "INFOR"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Zoll EMV731 - General Information",
+        "Contact Information"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-product-overview-models",
+      "title": "Models & Intended Use",
+      "tokens": [
+        "MODEL",
+        "INTEN",
+        "USE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Product Overview",
+        "Models & Intended Use"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-product-overview-controls",
+      "title": "Controls & Indicators",
+      "tokens": [
+        "CONTR",
+        "INDIC"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Product Overview",
+        "Controls & Indicators"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-product-overview-gui",
+      "title": "GUI Overview",
+      "tokens": [
+        "GUI",
+        "OVERV"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Product Overview",
+        "GUI Overview"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-product-overview-pneumatic",
+      "title": "Pneumatic Design",
+      "tokens": [
+        "PNEUM",
+        "DESIG"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Product Overview",
+        "Pneumatic Design"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-product-overview-fresh-gas",
+      "title": "Fresh Gas Intake",
+      "tokens": [
+        "FRESH",
+        "GAS",
+        "INTAK"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Product Overview",
+        "Fresh Gas Intake"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-product-overview-connector",
+      "title": "Connector Panel",
+      "tokens": [
+        "CONNE",
+        "PANEL"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Product Overview",
+        "Connector Panel"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-product-overview-oximeter",
+      "title": "Pulse Oximeter Module",
+      "tokens": [
+        "PULSE",
+        "OXIME",
+        "MODUL"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Product Overview",
+        "Pulse Oximeter Module"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-product-overview-power",
+      "title": "Power Sources",
+      "tokens": [
+        "POW",
+        "SOURC"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Product Overview",
+        "Power Sources"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-setting-up-hp-o2",
+      "title": "High-Pressure O₂ Connection",
+      "tokens": [
+        "HIGH",
+        "PRESS",
+        "O2",
+        "CONNE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Setting Up the Ventilator",
+        "High-Pressure O₂ Connection"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-setting-up-filters",
+      "title": "Filters & Accessories",
+      "tokens": [
+        "FILT",
+        "ACCES"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Setting Up the Ventilator",
+        "Filters & Accessories"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-setting-up-power",
+      "title": "Power Source Selection",
+      "tokens": [
+        "POW",
+        "SOURC",
+        "SELEC"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Setting Up the Ventilator",
+        "Power Source Selection"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-setting-up-power-on",
+      "title": "Power On & Defaults",
+      "tokens": [
+        "POW",
+        "ON",
+        "DEFAU"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Setting Up the Ventilator",
+        "Power On & Defaults"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-setting-up-mode",
+      "title": "Mode Selection",
+      "tokens": [
+        "MODE",
+        "SELEC"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Setting Up the Ventilator",
+        "Mode Selection"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-setting-up-op-test",
+      "title": "Operational Test",
+      "tokens": [
+        "OPERA",
+        "TEST"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Setting Up the Ventilator",
+        "Operational Test"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-setting-up-oximeter",
+      "title": "Attach Pulse Oximeter",
+      "tokens": [
+        "ATTAC",
+        "PULSE",
+        "OXIME"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Setting Up the Ventilator",
+        "Attach Pulse Oximeter"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-setting-up-connect",
+      "title": "Connect Patient",
+      "tokens": [
+        "CONNE",
+        "PATIE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Setting Up the Ventilator",
+        "Connect Patient"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-using-interface",
+      "title": "Interface & Parameter Windows",
+      "tokens": [
+        "INTER",
+        "PARAM",
+        "WINDO"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Using the Ventilator",
+        "Interface & Parameter Windows"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-using-change-values",
+      "title": "Changing Parameter Values",
+      "tokens": [
+        "CHANG",
+        "PARAM",
+        "VALUE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Using the Ventilator",
+        "Changing Parameter Values"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-using-mode-ac",
+      "title": "Ventilation Modes (AC)",
+      "tokens": [
+        "VENTI",
+        "MODE",
+        "AC"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Using the Ventilator",
+        "Ventilation Modes (AC)"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-using-mode-simv",
+      "title": "Ventilation Modes (SIMV)",
+      "tokens": [
+        "VENTI",
+        "MODE",
+        "SIMV"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Using the Ventilator",
+        "Ventilation Modes (SIMV)"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-using-mode-cpap",
+      "title": "Ventilation Modes (CPAP)",
+      "tokens": [
+        "VENTI",
+        "MODE",
+        "CPAP"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Using the Ventilator",
+        "Ventilation Modes (CPAP)"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-using-mode-bilevel",
+      "title": "Ventilation Modes (Bi-Level)",
+      "tokens": [
+        "VENTI",
+        "MODE",
+        "BI",
+        "LEVEL"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Using the Ventilator",
+        "Ventilation Modes (Bi-Level)"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-using-breath-target",
+      "title": "Breath Target (V/P)",
+      "tokens": [
+        "BREAT",
+        "TARGE",
+        "V",
+        "P"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Using the Ventilator",
+        "Breath Target (V/P)"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-using-oximeter",
+      "title": "Pulse Oximeter Use",
+      "tokens": [
+        "PULSE",
+        "OXIME",
+        "USE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Using the Ventilator",
+        "Pulse Oximeter Use"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-using-popups",
+      "title": "Pop Up Messages",
+      "tokens": [
+        "POP",
+        "UP",
+        "MESSA"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Using the Ventilator",
+        "Pop Up Messages"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-alarms-overview",
+      "title": "Alarm Overview",
+      "tokens": [
+        "ALARM",
+        "OVERV"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Alarms",
+        "Alarm Overview"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-alarms-amc",
+      "title": "Alarm Message Center (AMC)",
+      "tokens": [
+        "ALARM",
+        "MESSA",
+        "CENT",
+        "AMC"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Alarms",
+        "Alarm Message Center (AMC)"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-alarms-priorities",
+      "title": "Alarm Priorities",
+      "tokens": [
+        "ALARM",
+        "PRIOR"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Alarms",
+        "Alarm Priorities"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-alarms-icons",
+      "title": "Alarm Icons & Service Codes",
+      "tokens": [
+        "ALARM",
+        "ICON",
+        "SERVI",
+        "CODE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Alarms",
+        "Alarm Icons & Service Codes"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-alarms-muting",
+      "title": "Muting Alarms",
+      "tokens": [
+        "MUT",
+        "ALARM"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Alarms",
+        "Muting Alarms"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-alarms-types-patient",
+      "title": "Alarm Types: Patient Safety",
+      "tokens": [
+        "ALARM",
+        "TYPE",
+        "PATIE",
+        "SAFET"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Alarms",
+        "Alarm Types: Patient Safety"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-alarms-types-environment",
+      "title": "Alarm Types: Environment",
+      "tokens": [
+        "ALARM",
+        "TYPE",
+        "ENVIR"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Alarms",
+        "Alarm Types: Environment"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-alarms-types-selfcheck",
+      "title": "Alarm Types: Self Check",
+      "tokens": [
+        "ALARM",
+        "TYPE",
+        "SELF",
+        "CHECK"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Alarms",
+        "Alarm Types: Self Check"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-alarms-groups",
+      "title": "Alarm Groups",
+      "tokens": [
+        "ALARM",
+        "GROUP"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Alarms",
+        "Alarm Groups"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-alarms-popups",
+      "title": "Pop Up Messages",
+      "tokens": [
+        "POP",
+        "UP",
+        "MESSA"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Alarms",
+        "Pop Up Messages"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-operating-all",
+      "title": "All Content",
+      "tokens": [
+        "ALL",
+        "CONTE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Operating Environments",
+        "All Content"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-operating-conditions",
+      "title": "Environmental Conditions",
+      "tokens": [
+        "ENVIR",
+        "CONDI"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Operating Environments",
+        "Environmental Conditions"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-operating-transport",
+      "title": "Transport Use",
+      "tokens": [
+        "TRANS",
+        "USE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Operating Environments",
+        "Transport Use"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-operating-noise",
+      "title": "High Noise Environments",
+      "tokens": [
+        "HIGH",
+        "NOISE",
+        "ENVIR"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Operating Environments",
+        "High Noise Environments"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-operating-emc",
+      "title": "EMC & Safety",
+      "tokens": [
+        "EMC",
+        "SAFET"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Operating Environments",
+        "EMC & Safety"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-maintenance-all",
+      "title": "All Content",
+      "tokens": [
+        "ALL",
+        "CONTE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Maintenance",
+        "All Content"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-maintenance-pm",
+      "title": "Preventive Maintenance",
+      "tokens": [
+        "PREVE",
+        "MAINT"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Maintenance",
+        "Preventive Maintenance"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-maintenance-filters",
+      "title": "Filter Maintenance",
+      "tokens": [
+        "FILT",
+        "MAINT"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Maintenance",
+        "Filter Maintenance"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-maintenance-exhalation",
+      "title": "Exhalation Valve Diaphragm",
+      "tokens": [
+        "EXHAL",
+        "VALVE",
+        "DIAPH"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Maintenance",
+        "Exhalation Valve Diaphragm"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-maintenance-selftest",
+      "title": "Self Test & Service",
+      "tokens": [
+        "SELF",
+        "TEST",
+        "SERVI"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Maintenance",
+        "Self Test & Service"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-maintenance-cleaning",
+      "title": "Cleaning & Storage",
+      "tokens": [
+        "CLEAN",
+        "STORA"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Maintenance",
+        "Cleaning & Storage"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-specifications-all",
+      "title": "All Content",
+      "tokens": [
+        "ALL",
+        "CONTE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Specifications",
+        "All Content"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-specifications-ranges",
+      "title": "Operating Ranges",
+      "tokens": [
+        "OPERA",
+        "RANGE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Specifications",
+        "Operating Ranges"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-specifications-resolution",
+      "title": "Measurement Resolution & Tolerances",
+      "tokens": [
+        "MEASU",
+        "RESOL",
+        "TOLER"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Specifications",
+        "Measurement Resolution & Tolerances"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-specifications-o2",
+      "title": "Oxygen Input Pressure",
+      "tokens": [
+        "OXYGE",
+        "INPUT",
+        "PRESS"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Specifications",
+        "Oxygen Input Pressure"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-accessories-all",
+      "title": "All Content",
+      "tokens": [
+        "ALL",
+        "CONTE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Accessories",
+        "All Content"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-accessories-power",
+      "title": "Power Supplies & Cables",
+      "tokens": [
+        "POW",
+        "SUPPL",
+        "CABLE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Accessories",
+        "Power Supplies & Cables"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-accessories-battery",
+      "title": "Battery Packs",
+      "tokens": [
+        "BATTE",
+        "PACK"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Accessories",
+        "Battery Packs"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-accessories-cases",
+      "title": "Carrying Cases",
+      "tokens": [
+        "CARRY",
+        "CASE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Accessories",
+        "Carrying Cases"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-accessories-filters",
+      "title": "Filters & HMEs",
+      "tokens": [
+        "FILT",
+        "HM"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Accessories",
+        "Filters & HMEs"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-accessories-reservoir",
+      "title": "Reservoir Kits",
+      "tokens": [
+        "RESER",
+        "KITS"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Accessories",
+        "Reservoir Kits"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-accessories-country",
+      "title": "Country Variations",
+      "tokens": [
+        "COUNT",
+        "VARIA"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Accessories",
+        "Country Variations"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-oximeter-all",
+      "title": "All Content",
+      "tokens": [
+        "ALL",
+        "CONTE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Pulse Oximeter Principles",
+        "All Content"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-oximeter-principles",
+      "title": "Principles of Pulse Oximetry",
+      "tokens": [
+        "PRINC",
+        "OF",
+        "PULSE",
+        "OXIME"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Pulse Oximeter Principles",
+        "Principles of Pulse Oximetry"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-oximeter-traditional",
+      "title": "Traditional Ratio Method",
+      "tokens": [
+        "TRADI",
+        "RATIO",
+        "METHO"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Pulse Oximeter Principles",
+        "Traditional Ratio Method"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-oximeter-masimo",
+      "title": "Masimo SET Algorithm",
+      "tokens": [
+        "MASIM",
+        "SET",
+        "ALGOR"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Pulse Oximeter Principles",
+        "Masimo SET Algorithm"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-oximeter-rate-noise",
+      "title": "Update Rate & Noise Handling",
+      "tokens": [
+        "UPDAT",
+        "RATE",
+        "NOISE",
+        "HANDL"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Pulse Oximeter Principles",
+        "Update Rate & Noise Handling"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-circuits-all",
+      "title": "All Content",
+      "tokens": [
+        "ALL",
+        "CONTE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Patient Circuits",
+        "All Content"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-circuits-types",
+      "title": "Circuit Types & Lengths",
+      "tokens": [
+        "CIRCU",
+        "TYPE",
+        "LENGT"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Patient Circuits",
+        "Circuit Types & Lengths"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-circuits-specs",
+      "title": "Technical Specifications",
+      "tokens": [
+        "TECHN",
+        "SPECI"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Patient Circuits",
+        "Technical Specifications"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-circuits-troubleshooting",
+      "title": "Troubleshooting",
+      "tokens": [
+        "TROUB"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Patient Circuits",
+        "Troubleshooting"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-circuits-warnings",
+      "title": "Warnings & Notes",
+      "tokens": [
+        "WARN",
+        "NOTE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Patient Circuits",
+        "Warnings & Notes"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "zoll-emv731-original-documentation",
+      "title": "Original Documentation",
+      "tokens": [
+        "ORIGI",
+        "DOCUM"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Skills & Equipment",
+        "Zoll EMV731",
+        "Original Documentation"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "abbott-approved-abbreviations-assessment-clinical-documentation",
+      "title": "Assessment & Clinical Documentation",
+      "tokens": [
+        "ASSES",
+        "CLINI",
+        "DOCUM"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Abbreviations & References",
+        "Abbott Approved Abbreviations",
+        "Assessment & Clinical Documentation"
+      ],
+      "details": {
+        "abbreviationGroup": "assessment-and-clinical-documentation"
+      },
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "abbott-approved-abbreviations-procedures-equipment",
+      "title": "Procedures & Equipment",
+      "tokens": [
+        "PROCE",
+        "EQUIP"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Abbreviations & References",
+        "Abbott Approved Abbreviations",
+        "Procedures & Equipment"
+      ],
+      "details": {
+        "abbreviationGroup": "procedures-and-equipment"
+      },
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "abbott-approved-abbreviations-medications-pharmacology-rx",
+      "title": "Medications & Pharmacology (Rx)",
+      "tokens": [
+        "MEDIC",
+        "PHARM",
+        "RX"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Abbreviations & References",
+        "Abbott Approved Abbreviations",
+        "Medications & Pharmacology (Rx)"
+      ],
+      "details": {
+        "abbreviationGroup": "medications-and-pharmacology-rx"
+      },
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "abbott-approved-abbreviations-measurements-units",
+      "title": "Measurements & Units",
+      "tokens": [
+        "MEASU",
+        "UNIT"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Abbreviations & References",
+        "Abbott Approved Abbreviations",
+        "Measurements & Units"
+      ],
+      "details": {
+        "abbreviationGroup": "measurements-and-units"
+      },
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "abbott-approved-abbreviations-cardiovascular-hemodynamics",
+      "title": "Cardiovascular & Hemodynamics",
+      "tokens": [
+        "CARDI",
+        "HEMOD"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Abbreviations & References",
+        "Abbott Approved Abbreviations",
+        "Cardiovascular & Hemodynamics"
+      ],
+      "details": {
+        "abbreviationGroup": "cardiovascular-and-hemodynamics"
+      },
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "abbott-approved-abbreviations-anatomy-patient-conditions",
+      "title": "Anatomy & Patient Conditions",
+      "tokens": [
+        "ANATO",
+        "PATIE",
+        "CONDI"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Abbreviations & References",
+        "Abbott Approved Abbreviations",
+        "Anatomy & Patient Conditions"
+      ],
+      "details": {
+        "abbreviationGroup": "anatomy-and-patient-conditions"
+      },
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "abbott-approved-abbreviations-diagnostics-labs-imaging",
+      "title": "Diagnostics, Labs & Imaging",
+      "tokens": [
+        "DIAGN",
+        "LABS",
+        "IMAG"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Abbreviations & References",
+        "Abbott Approved Abbreviations",
+        "Diagnostics, Labs & Imaging"
+      ],
+      "details": {
+        "abbreviationGroup": "diagnostics-labs-and-imaging"
+      },
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "abbott-approved-abbreviations-operations-agencies",
+      "title": "Operations & Agencies",
+      "tokens": [
+        "OPERA",
+        "AGENC"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Abbreviations & References",
+        "Abbott Approved Abbreviations",
+        "Operations & Agencies"
+      ],
+      "details": {
+        "abbreviationGroup": "operations-and-agencies"
+      },
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "other-abbreviations",
+      "title": "Other Abbreviations",
+      "tokens": [
+        "OTH",
+        "ABBRE"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Abbreviations & References",
+        "Other Abbreviations"
+      ],
+      "details": {
+        "abbreviationGroup": "other-abbreviations"
+      },
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "applicability-of-the-cog",
+      "title": "Applicability of the COG",
+      "tokens": [
+        "APPLI",
+        "OF",
+        "THE",
+        "COG"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Administrative & Legal Essentials",
+        "Applicability of the COG"
+      ],
+      "details": {
+        "mdPath": "Content/Administrative & Legal Essentials/applicability-of-the-cog.md"
+      },
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "clinical-errors-reporting",
+      "title": "Clinical Errors & Reporting",
+      "tokens": [
+        "CLINI",
+        "ERROR",
+        "REPOR"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Administrative & Legal Essentials",
+        "Clinical Errors & Reporting"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "medication-administration-cross-check-macc",
+      "title": "Medication Administration Cross Check (MACC)",
+      "tokens": [
+        "MEDIC",
+        "ADMIN",
+        "CROS",
+        "CHECK",
+        "MACC"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Administrative & Legal Essentials",
+        "Medication Administration Cross Check (MACC)"
+      ],
+      "details": {
+        "mdPath": "Content/Administrative & Legal Essentials/medication-administration-cross-check-macc.md",
+        "collapsibleHeadings": [
+          "BLS MACC"
+        ]
+      },
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "cdc-field-triage-guidelines-trauma",
+      "title": "CDC Field Triage Guidelines (Trauma)",
+      "tokens": [
+        "CDC",
+        "FIELD",
+        "TRIAG",
+        "GUIDE",
+        "TRAUM"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Administrative & Legal Essentials",
+        "CDC Field Triage Guidelines (Trauma)"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    },
+    {
+      "id": "rehabilitation-emergency-incidents-municipal-partners",
+      "title": "Rehabilitation: Emergency Incidents & Municipal Partners",
+      "tokens": [
+        "REHAB",
+        "EMERG",
+        "INCID",
+        "MUNIC",
+        "PARTN"
+      ],
+      "tokenSet": {},
+      "type": "topic",
+      "path": [
+        "Administrative & Legal Essentials",
+        "Rehabilitation: Emergency Incidents & Municipal Partners"
+      ],
+      "details": null,
+      "assigned": false,
+      "matchTitle": null,
+      "tocIndex": null,
+      "content": ""
+    }
+  ]
+}

@@ -1,6 +1,7 @@
-import { ParamedicCategoriesData } from './Data/ParamedicCategoriesData.js';
+﻿import { ParamedicCategoriesData } from './Data/ParamedicCategoriesData.js';
 import { MedicationDetailsData } from './Data/MedicationDetailsData.js';
 import { VentilationDetailsData } from './Data/VentilationDetailsData.js';
+import { ProtocolMarkdownMap } from './Data/ProtocolMarkdownMap.js';
 import { addTapListener } from './Utils/addTapListener.js';
 import { attachNavHandlers } from './Features/navigation/Navigation.js';
 import { attachHomeHandler } from './Features/navigation/Home.js';
@@ -256,13 +257,28 @@ function cleanClassName(str) {
     // Remove parenthetical notes
     const noParens = noMarkup.replace(/\s*\([^)]*\)\s*/g, ' ').trim();
     // Cut at common separators that indicate extra description
-    const cutAtDash = noParens.split(/\s[-–—]\s/)[0].trim();
+    const cutAtDash = noParens.split(/\s[-â€“â€”]\s/)[0].trim();
     return cutAtDash;
 }
 
 // Initializes global data structures for categories and medications.
+function applyMarkdownDetails(nodes) {
+    if (!Array.isArray(nodes)) return;
+    nodes.forEach(node => {
+        if (node.type === 'topic') {
+            const mdPath = ProtocolMarkdownMap[node.id];
+            if (mdPath && !node.details) {
+                node.details = { mdPath };
+            }
+        }
+        if (Array.isArray(node.children) && node.children.length) {
+            applyMarkdownDetails(node.children);
+        }
+    });
+}
 function initializeData(categoriesData, medDetailsData) { // /Assign the global category array
     paramedicCategories = categoriesData;
+    applyMarkdownDetails(paramedicCategories);
     // Reset maps
     allDisplayableTopicsMap = {};
     // Make sure the global map exists BEFORE processItem uses it
@@ -275,7 +291,7 @@ function initializeData(categoriesData, medDetailsData) { // /Assign the global 
     [...MedicationDetailsData, ...VentilationDetailsData].forEach(item => {
         medicationDataMap[item.id] = item;
     });
-    // ✅ Ensure the global map is set *before* processing items
+    // âœ… Ensure the global map is set *before* processing items
     window.medicationDataMap = medicationDataMap;
     // Build the searchable index and allDisplayableTopicsMap using the provided categories
 //    categoriesData.forEach(cat => processItem(cat));

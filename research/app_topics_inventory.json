@@ -1,0 +1,3762 @@
+{
+  "generatedAt": "2025-09-26T07:55:39.375Z",
+  "totalItems": 253,
+  "byType": {
+    "category": 27,
+    "topic": 226
+  },
+  "withoutDetails": [
+    {
+      "id": "adult-coma-od",
+      "title": "COMA/OD",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > COMA/OD",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-cpap-or-bipap",
+      "title": "CPAP or BiPAP",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > CPAP or BiPAP",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-sai",
+      "title": "SAI",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > SAI",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-nasal-intubation",
+      "title": "Nasal Intubation",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > Nasal Intubation",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-et-intubation",
+      "title": "ET Intubation",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > ET Intubation",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-ventilator-pt-intubated-sedated",
+      "title": "VENTILATOR Pt; Intubated & Sedated",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > VENTILATOR Pt; Intubated & Sedated",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-tracheostomy-care",
+      "title": "TRACHEOSTOMY CARE",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > TRACHEOSTOMY CARE",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-cricothyrotomy",
+      "title": "Cricothyrotomy",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > Cricothyrotomy",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-tension-pneumo",
+      "title": "Tension Pneumo",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > Tension Pneumo",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-sga-cardiac-arrest-use-1st",
+      "title": "SGA -> Cardiac Arrest = Use 1st",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > SGA -> Cardiac Arrest = Use 1st",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-bradycardia",
+      "title": "Bradycardia",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > Bradycardia",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-cardiogenic-shock-not-post-arrest",
+      "title": "Cardiogenic Shock (not post arrest)",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > Cardiogenic Shock (not post arrest)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-lvad-pt",
+      "title": "LVAD pt",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > LVAD pt",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-pulmonary-edema",
+      "title": "Pulmonary Edema",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > Pulmonary Edema",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-mi-acs",
+      "title": "MI/ACS",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > MI/ACS",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-pea-asystole",
+      "title": "PEA/Asystole",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > PEA/Asystole",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-rosc-stabilization",
+      "title": "ROSC Stabilization",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > ROSC Stabilization",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-vf-pvt",
+      "title": "VF/pVT",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > VF/pVT",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-hyperkalemia",
+      "title": "Hyperkalemia",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > Hyperkalemia",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-svt-mono-vt-unstable",
+      "title": "SVT/Mono-VT (unstable)",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > SVT/Mono-VT (unstable)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-svt-stable",
+      "title": "SVT (stable)",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > SVT (stable)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-a-fib-rvr-or-a-flutter-stable-symptomatic",
+      "title": "A-Fib RVR or A-Flutter (stable symptomatic)",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > A-Fib RVR or A-Flutter (stable symptomatic)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-mat-stable",
+      "title": "MAT (stable)",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > MAT (stable)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-mono-vt-stable",
+      "title": "Mono-VT (stable)",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > Mono-VT (stable)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-poly-vt-torsades-stable",
+      "title": "Poly-VT/Torsades (stable)",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > Poly-VT/Torsades (stable)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-poly-vt-torsades-unstable",
+      "title": "Poly-VT/Torsades (unstable)",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > Poly-VT/Torsades (unstable)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-allergic-reaction",
+      "title": "Allergic Reaction",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Allergic Reaction",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-anaphylaxis",
+      "title": "Anaphylaxis",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Anaphylaxis",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-fall-or-weakness",
+      "title": "Fall or Weakness",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Fall or Weakness",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-hyperglycemia",
+      "title": "Hyperglycemia",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Hyperglycemia",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-hypoglycemia",
+      "title": "Hypoglycemia",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Hypoglycemia",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-n-v",
+      "title": "N/V",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > N/V",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-sludgem-pt",
+      "title": "SLUDGEM pt",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > SLUDGEM pt",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-pain",
+      "title": "Pain",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Pain",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-h-a-or-abdominal-pain",
+      "title": "H/A or Abdominal pain",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > H/A or Abdominal pain",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-sickle-cell-crisis",
+      "title": "Sickle Cell Crisis",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Sickle Cell Crisis",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-seizure",
+      "title": "Seizure",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Seizure",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-sepsis",
+      "title": "Sepsis",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Sepsis",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-stroke",
+      "title": "Stroke",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Stroke",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-toxic-ingestion-with-serious-s-s",
+      "title": "Toxic Ingestion with serious S/S",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Toxic Ingestion with serious S/S",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-rass-1-through-4",
+      "title": "RASS +1 through +4",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > RASS +1 through +4",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-normal-delivery",
+      "title": "Normal Delivery",
+      "type": "topic",
+      "path": "Adult Protocols > OB/GYN > Normal Delivery",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-shoulder-dystocia",
+      "title": "Shoulder Dystocia",
+      "type": "topic",
+      "path": "Adult Protocols > OB/GYN > Shoulder Dystocia",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-breech",
+      "title": "Breech",
+      "type": "topic",
+      "path": "Adult Protocols > OB/GYN > Breech",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-frank-complete-breech-presentation",
+      "title": "Frank/Complete Breech Presentation",
+      "type": "topic",
+      "path": "Adult Protocols > OB/GYN > Frank/Complete Breech Presentation",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-prolapsed-cord",
+      "title": "Prolapsed Cord",
+      "type": "topic",
+      "path": "Adult Protocols > OB/GYN > Prolapsed Cord",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-eclampsia",
+      "title": "Eclampsia",
+      "type": "topic",
+      "path": "Adult Protocols > OB/GYN > Eclampsia",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-cardiac-arrest-pressure-sores-from-immobility",
+      "title": "Cardiac Arrest + Pressure Sores from Immobility",
+      "type": "topic",
+      "path": "Adult Protocols > Trauma > Cardiac Arrest + Pressure Sores from Immobility",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-mace-pepper-spray",
+      "title": "Mace/Pepper-Spray",
+      "type": "topic",
+      "path": "Adult Protocols > Trauma > Mace/Pepper-Spray",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-smr",
+      "title": "SMR",
+      "type": "topic",
+      "path": "Adult Protocols > Trauma > SMR",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-taser",
+      "title": "Taser",
+      "type": "topic",
+      "path": "Adult Protocols > Trauma > Taser",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-major-level-1-trauma",
+      "title": "Major Level 1 Trauma",
+      "type": "topic",
+      "path": "Adult Protocols > Trauma > Major Level 1 Trauma",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-refusals",
+      "title": "Refusals",
+      "type": "topic",
+      "path": "Adult Protocols > Refusals",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "pediatric-assessment-vs",
+      "title": "Pediatric Assessment & VS",
+      "type": "topic",
+      "path": "Pediatric Protocols > Pediatric Assessment & VS",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "pediatric-airway-breathing",
+      "title": "Airway & Breathing",
+      "type": "topic",
+      "path": "Pediatric Protocols > Airway & Breathing",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "pediatric-circulation-cardiac",
+      "title": "Circulation/Cardiac",
+      "type": "topic",
+      "path": "Pediatric Protocols > Circulation/Cardiac",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "pediatric-medical",
+      "title": "Medical",
+      "type": "topic",
+      "path": "Pediatric Protocols > Medical",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "pediatric-trauma",
+      "title": "Trauma",
+      "type": "topic",
+      "path": "Pediatric Protocols > Trauma",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "pediatric-special-needs-children",
+      "title": "Special Needs Children",
+      "type": "topic",
+      "path": "Pediatric Protocols > Special Needs Children",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "pediatric-refusals",
+      "title": "Refusals",
+      "type": "topic",
+      "path": "Pediatric Protocols > Refusals",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "10-calcium-chloride",
+      "title": "Calcium Chloride (1,000mg/10ml)",
+      "type": "topic",
+      "path": "ALS Medications > Calcium Chloride (1,000mg/10ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "2-lidocaine-xylocaine",
+      "title": "2% Lidocaine (Xylocaine) (100mg/5ml)",
+      "type": "topic",
+      "path": "ALS Medications > 2% Lidocaine (Xylocaine) (100mg/5ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "8-4-sodium-bicarbonate-nahco3",
+      "title": "8.4% Bicarb (NaHCO3) (50mEq/50ml)",
+      "type": "topic",
+      "path": "ALS Medications > 8.4% Bicarb (NaHCO3) (50mEq/50ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adenosine-adenocard",
+      "title": "Adenosine (Adenocard) (6mg/2ml)",
+      "type": "topic",
+      "path": "ALS Medications > Adenosine (Adenocard) (6mg/2ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "albuterol",
+      "title": "Albuterol (2.5mg/3cc)",
+      "type": "topic",
+      "path": "ALS Medications > Albuterol (2.5mg/3cc)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "asa",
+      "title": "ASA (81mg/tab)",
+      "type": "topic",
+      "path": "ALS Medications > ASA (81mg/tab)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "atropine-sulfate",
+      "title": "Atropine Sulfate (1mg/10ml)",
+      "type": "topic",
+      "path": "ALS Medications > Atropine Sulfate (1mg/10ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "d10",
+      "title": "D10 (25g/250ml bag)",
+      "type": "topic",
+      "path": "ALS Medications > D10 (25g/250ml bag)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "d5",
+      "title": "D5 (5g/100ml bag)",
+      "type": "topic",
+      "path": "ALS Medications > D5 (5g/100ml bag)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "dexamethasone-decadron",
+      "title": "Dexamethasone (Decadron) (10mg/ml)",
+      "type": "topic",
+      "path": "ALS Medications > Dexamethasone (Decadron) (10mg/ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "diphenhydramine-benadryl",
+      "title": "Diphenhydramine (Benadryl) (50mg/ml)",
+      "type": "topic",
+      "path": "ALS Medications > Diphenhydramine (Benadryl) (50mg/ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "droperidol-inapsine",
+      "title": "Droperidol (Inapsine) (5mg/2ml)",
+      "type": "topic",
+      "path": "ALS Medications > Droperidol (Inapsine) (5mg/2ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "epi-1-1000-adrenaline",
+      "title": "Epi 1:1,000 (Adrenaline) (10mg/10ml)",
+      "type": "topic",
+      "path": "ALS Medications > Epi 1:1,000 (Adrenaline) (10mg/10ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "epi-1-10000",
+      "title": "Epi 1:10,000 (1mg/10ml)",
+      "type": "topic",
+      "path": "ALS Medications > Epi 1:10,000 (1mg/10ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "epi-1-100000-push-dose-epi",
+      "title": "Epi 1:100,000 \"Push-Dose Epi\" (100mcg/10ml)",
+      "type": "topic",
+      "path": "ALS Medications > Epi 1:100,000 \"Push-Dose Epi\" (100mcg/10ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "etomidate-amidate",
+      "title": "Etomidate (Amidate) (20mg/10ml)",
+      "type": "topic",
+      "path": "ALS Medications > Etomidate (Amidate) (20mg/10ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "fentanyl-sublimaze",
+      "title": "Fentanyl (Sublimaze) (100mcg/2ml)",
+      "type": "topic",
+      "path": "ALS Medications > Fentanyl (Sublimaze) (100mcg/2ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "ipratropium",
+      "title": "Ipratropium (0.5mg/3cc)",
+      "type": "topic",
+      "path": "ALS Medications > Ipratropium (0.5mg/3cc)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "ketamine-ketalar",
+      "title": "Ketamine (Ketalar) (500mg/5ml)",
+      "type": "topic",
+      "path": "ALS Medications > Ketamine (Ketalar) (500mg/5ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "ketorolac-tromethamine-toradol",
+      "title": "Ketorolac Tromethamine (Toradol) (30mg/ml)",
+      "type": "topic",
+      "path": "ALS Medications > Ketorolac Tromethamine (Toradol) (30mg/ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "magnesium-sulfate-mgso4",
+      "title": "Magnesium Sulfate (MgSO4) (1g/2ml)",
+      "type": "topic",
+      "path": "ALS Medications > Magnesium Sulfate (MgSO4) (1g/2ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "metoprolol-tartrate-lopressor",
+      "title": "Metoprolol Tartrate (Lopressor) (5mg/5ml)",
+      "type": "topic",
+      "path": "ALS Medications > Metoprolol Tartrate (Lopressor) (5mg/5ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "midazolam-versed",
+      "title": "Midazolam (Versed) (10mg/2ml)",
+      "type": "topic",
+      "path": "ALS Medications > Midazolam (Versed) (10mg/2ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "morphine",
+      "title": "Morphine (4mg/2ml)",
+      "type": "topic",
+      "path": "ALS Medications > Morphine (4mg/2ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "naloxone-narcan",
+      "title": "Naloxone (Narcan) (2mg/2ml)",
+      "type": "topic",
+      "path": "ALS Medications > Naloxone (Narcan) (2mg/2ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "ntg",
+      "title": "NTG (0.4mg/spray)",
+      "type": "topic",
+      "path": "ALS Medications > NTG (0.4mg/spray)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "ondansetron-zofran",
+      "title": "Ondansetron (Zofran) (4mg/2ml)",
+      "type": "topic",
+      "path": "ALS Medications > Ondansetron (Zofran) (4mg/2ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "restraint-of-agitated-combative-patients",
+      "title": "Restraint of Agitated/Combative Patients",
+      "type": "topic",
+      "path": "Operational Protocols > Restraint of Agitated/Combative Patients",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "richmond-agitation-sedation-scale-rass",
+      "title": "Richmond Agitation Sedation Scale (RASS)",
+      "type": "topic",
+      "path": "Operational Protocols > Richmond Agitation Sedation Scale (RASS)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "rule-of-9s-rule-of-palms-bsa-burn-estimation",
+      "title": "Rule of 9’s & Rule of Palms (BSA Burn Estimation)",
+      "type": "topic",
+      "path": "Operational Protocols > Rule of 9’s & Rule of Palms (BSA Burn Estimation)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "smith-modified-sgarbossa-criteria",
+      "title": "Smith-Modified Sgarbossa Criteria",
+      "type": "topic",
+      "path": "Operational Protocols > Smith-Modified Sgarbossa Criteria",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "pcr-requirements",
+      "title": "PCR Requirements",
+      "type": "topic",
+      "path": "Operational Protocols > PCR Requirements",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "clinical-errors-reporting",
+      "title": "Clinical Errors & Reporting",
+      "type": "topic",
+      "path": "Operational Protocols > Clinical Errors & Reporting",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "cdc-field-triage-guidelines-trauma",
+      "title": "CDC Field Triage Guidelines (Trauma)",
+      "type": "topic",
+      "path": "Operational Protocols > CDC Field Triage Guidelines (Trauma)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "rehabilitation-emergency-incidents-municipal-partners",
+      "title": "Rehabilitation: Emergency Incidents & Municipal Partners",
+      "type": "topic",
+      "path": "Operational Protocols > Rehabilitation: Emergency Incidents & Municipal Partners",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "ventilator-set-up-parapac-plus",
+      "title": "Ventilator Set-Up (ParaPAC Plus)",
+      "type": "topic",
+      "path": "Skills & Equipment > Ventilator Set-Up (ParaPAC Plus)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-zoll-setup",
+      "title": "Zoll Set Up",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > Zoll Set Up",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-operational-notes",
+      "title": "General Operational Notes",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > General Operational Notes",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-volume-mode",
+      "title": "Volume Mode",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > Volume Mode",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-pressure-mode",
+      "title": "Pressure Mode",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > Pressure Mode",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-other-vent-alarms",
+      "title": "Other Vent Alarms",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > Other Vent Alarms",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-cpap",
+      "title": "CPAP",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > CPAP",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-bi-level",
+      "title": "Bi-Level",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > Bi-Level",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-terms-settings",
+      "title": "Terms & Settings",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > Terms & Settings",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-tidal-volume-calculator",
+      "title": "Tidal Volume Calculator",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > Tidal Volume Calculator",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-general-information-purpose-manual",
+      "title": "Purpose & Manual Use",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Zoll EMV731 - General Information > Purpose & Manual Use",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-general-information-symbols",
+      "title": "Symbols",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Zoll EMV731 - General Information > Symbols",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-general-information-indications",
+      "title": "Indications for Use",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Zoll EMV731 - General Information > Indications for Use",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-general-information-warnings",
+      "title": "Warnings & Cautions",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Zoll EMV731 - General Information > Warnings & Cautions",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-general-information-warranty",
+      "title": "Warranty & Tracking",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Zoll EMV731 - General Information > Warranty & Tracking",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-general-information-contact",
+      "title": "Contact Information",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Zoll EMV731 - General Information > Contact Information",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-models",
+      "title": "Models & Intended Use",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > Models & Intended Use",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-controls",
+      "title": "Controls & Indicators",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > Controls & Indicators",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-gui",
+      "title": "GUI Overview",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > GUI Overview",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-pneumatic",
+      "title": "Pneumatic Design",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > Pneumatic Design",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-fresh-gas",
+      "title": "Fresh Gas Intake",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > Fresh Gas Intake",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-connector",
+      "title": "Connector Panel",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > Connector Panel",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-circuits",
+      "title": "Ventilator Circuits",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > Ventilator Circuits",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-oximeter",
+      "title": "Pulse Oximeter Module",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > Pulse Oximeter Module",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-power",
+      "title": "Power Sources",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > Power Sources",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-circuit",
+      "title": "Circuit Attachment",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > Circuit Attachment",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-hp-o2",
+      "title": "High-Pressure O₂ Connection",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > High-Pressure O₂ Connection",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-filters",
+      "title": "Filters & Accessories",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > Filters & Accessories",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-power",
+      "title": "Power Source Selection",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > Power Source Selection",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-power-on",
+      "title": "Power On & Defaults",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > Power On & Defaults",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-mode",
+      "title": "Mode Selection",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > Mode Selection",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-op-test",
+      "title": "Operational Test",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > Operational Test",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-oximeter",
+      "title": "Attach Pulse Oximeter",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > Attach Pulse Oximeter",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-connect",
+      "title": "Connect Patient",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > Connect Patient",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-interface",
+      "title": "Interface & Parameter Windows",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Interface & Parameter Windows",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-change-values",
+      "title": "Changing Parameter Values",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Changing Parameter Values",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-mode-ac",
+      "title": "Ventilation Modes (AC)",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Ventilation Modes (AC)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-mode-simv",
+      "title": "Ventilation Modes (SIMV)",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Ventilation Modes (SIMV)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-mode-cpap",
+      "title": "Ventilation Modes (CPAP)",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Ventilation Modes (CPAP)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-mode-bilevel",
+      "title": "Ventilation Modes (Bi-Level)",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Ventilation Modes (Bi-Level)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-breath-target",
+      "title": "Breath Target (V/P)",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Breath Target (V/P)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-oximeter",
+      "title": "Pulse Oximeter Use",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Pulse Oximeter Use",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-popups",
+      "title": "Pop Up Messages",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Pop Up Messages",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-manage-alarms",
+      "title": "Managing Alarms",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Managing Alarms",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-overview",
+      "title": "Alarm Overview",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Alarm Overview",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-amc",
+      "title": "Alarm Message Center (AMC)",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Alarm Message Center (AMC)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-priorities",
+      "title": "Alarm Priorities",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Alarm Priorities",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-icons",
+      "title": "Alarm Icons & Service Codes",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Alarm Icons & Service Codes",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-muting",
+      "title": "Muting Alarms",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Muting Alarms",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-types-patient",
+      "title": "Alarm Types: Patient Safety",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Alarm Types: Patient Safety",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-types-environment",
+      "title": "Alarm Types: Environment",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Alarm Types: Environment",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-types-selfcheck",
+      "title": "Alarm Types: Self Check",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Alarm Types: Self Check",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-groups",
+      "title": "Alarm Groups",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Alarm Groups",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-popups",
+      "title": "Pop Up Messages",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Pop Up Messages",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-operating-all",
+      "title": "All Content",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Operating Environments > All Content",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-operating-conditions",
+      "title": "Environmental Conditions",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Operating Environments > Environmental Conditions",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-operating-transport",
+      "title": "Transport Use",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Operating Environments > Transport Use",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-operating-noise",
+      "title": "High Noise Environments",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Operating Environments > High Noise Environments",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-operating-emc",
+      "title": "EMC & Safety",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Operating Environments > EMC & Safety",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-maintenance-all",
+      "title": "All Content",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Maintenance > All Content",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-maintenance-pm",
+      "title": "Preventive Maintenance",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Maintenance > Preventive Maintenance",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-maintenance-filters",
+      "title": "Filter Maintenance",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Maintenance > Filter Maintenance",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-maintenance-exhalation",
+      "title": "Exhalation Valve Diaphragm",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Maintenance > Exhalation Valve Diaphragm",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-maintenance-selftest",
+      "title": "Self Test & Service",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Maintenance > Self Test & Service",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-maintenance-cleaning",
+      "title": "Cleaning & Storage",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Maintenance > Cleaning & Storage",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-specifications-all",
+      "title": "All Content",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Specifications > All Content",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-specifications-ranges",
+      "title": "Operating Ranges",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Specifications > Operating Ranges",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-specifications-resolution",
+      "title": "Measurement Resolution & Tolerances",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Specifications > Measurement Resolution & Tolerances",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-specifications-o2",
+      "title": "Oxygen Input Pressure",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Specifications > Oxygen Input Pressure",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-accessories-all",
+      "title": "All Content",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Accessories > All Content",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-accessories-power",
+      "title": "Power Supplies & Cables",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Accessories > Power Supplies & Cables",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-accessories-battery",
+      "title": "Battery Packs",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Accessories > Battery Packs",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-accessories-cases",
+      "title": "Carrying Cases",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Accessories > Carrying Cases",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-accessories-filters",
+      "title": "Filters & HMEs",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Accessories > Filters & HMEs",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-accessories-reservoir",
+      "title": "Reservoir Kits",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Accessories > Reservoir Kits",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-accessories-country",
+      "title": "Country Variations",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Accessories > Country Variations",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-oximeter-all",
+      "title": "All Content",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Pulse Oximeter Principles > All Content",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-oximeter-principles",
+      "title": "Principles of Pulse Oximetry",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Pulse Oximeter Principles > Principles of Pulse Oximetry",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-oximeter-traditional",
+      "title": "Traditional Ratio Method",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Pulse Oximeter Principles > Traditional Ratio Method",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-oximeter-masimo",
+      "title": "Masimo SET Algorithm",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Pulse Oximeter Principles > Masimo SET Algorithm",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-oximeter-rate-noise",
+      "title": "Update Rate & Noise Handling",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Pulse Oximeter Principles > Update Rate & Noise Handling",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-circuits-all",
+      "title": "All Content",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Patient Circuits > All Content",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-circuits-types",
+      "title": "Circuit Types & Lengths",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Patient Circuits > Circuit Types & Lengths",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-circuits-specs",
+      "title": "Technical Specifications",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Patient Circuits > Technical Specifications",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-circuits-directions",
+      "title": "Directions for Use",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Patient Circuits > Directions for Use",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-circuits-troubleshooting",
+      "title": "Troubleshooting",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Patient Circuits > Troubleshooting",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-circuits-warnings",
+      "title": "Warnings & Notes",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Patient Circuits > Warnings & Notes",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-original-documentation",
+      "title": "Original Documentation",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Original Documentation",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "i-gel-supraglottic-airway-sga",
+      "title": "I-gel Supraglottic Airway (SGA)",
+      "type": "topic",
+      "path": "Skills & Equipment > I-gel Supraglottic Airway (SGA)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "thermometer-braun-thermoscan",
+      "title": "Thermometer (Braun ThermoScan)",
+      "type": "topic",
+      "path": "Skills & Equipment > Thermometer (Braun ThermoScan)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "glucometer-mckesson-true-metrix-pro",
+      "title": "Glucometer (McKesson True Metrix Pro)",
+      "type": "topic",
+      "path": "Skills & Equipment > Glucometer (McKesson True Metrix Pro)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "diltiazem-add-vantage-directions",
+      "title": "Diltiazem Add-Vantage Directions",
+      "type": "topic",
+      "path": "Skills & Equipment > Diltiazem Add-Vantage Directions",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "ez-io-insertion",
+      "title": "EZ-IO Insertion",
+      "type": "topic",
+      "path": "Skills & Equipment > EZ-IO Insertion",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "push-dose-epi",
+      "title": "PUSH-DOSE EPI",
+      "type": "topic",
+      "path": "Skills & Equipment > PUSH-DOSE EPI",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "mucosal-atomization-device-mad",
+      "title": "Mucosal Atomization Device (M.A.D.)",
+      "type": "topic",
+      "path": "Skills & Equipment > Mucosal Atomization Device (M.A.D.)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "minutes-of-oxygen-by-cylinder-size",
+      "title": "Minutes of Oxygen by Cylinder Size",
+      "type": "topic",
+      "path": "Skills & Equipment > Minutes of Oxygen by Cylinder Size",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "understanding-ratios-percentages-solution-mixtures",
+      "title": "Understanding Ratios, Percentages & Solution Mixtures",
+      "type": "topic",
+      "path": "Skills & Equipment > Understanding Ratios, Percentages & Solution Mixtures",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "introduction-to-abbott",
+      "title": "Introduction to Abbott",
+      "type": "topic",
+      "path": "Introduction & Core Principles > Introduction to Abbott",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "core-principles-safety-well-being",
+      "title": "Core Principles – Safety & Well-Being",
+      "type": "topic",
+      "path": "Introduction & Core Principles > Core Principles – Safety & Well-Being",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "general-important-information",
+      "title": "General Important Information",
+      "type": "topic",
+      "path": "Introduction & Core Principles > General Important Information",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "als-ground-rules",
+      "title": "ALS Ground Rules",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > ALS Ground Rules",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "scope-violations-possible-consequences",
+      "title": "Scope Violations & Possible Consequences",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Scope Violations & Possible Consequences",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "suspension-revocation",
+      "title": "Suspension/Revocation",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Suspension/Revocation",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "on-scene-authority",
+      "title": "On-Scene Authority",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > On-Scene Authority",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "on-scene-healthcare-professionals",
+      "title": "On-Scene Healthcare Professionals",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > On-Scene Healthcare Professionals",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "dispatching-md-200",
+      "title": "Dispatching MD [200]",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Dispatching MD [200]",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "consulting-olmc",
+      "title": "Consulting OLMC",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Consulting OLMC",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "transfer-to-lesser-credential",
+      "title": "Transfer to Lesser Credential",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Transfer to Lesser Credential",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "emr-accompanying-critically-ill",
+      "title": "EMR Accompanying Critically Ill",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > EMR Accompanying Critically Ill",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "response-mode",
+      "title": "Response Mode",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Response Mode",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "air-ambulance-utilization",
+      "title": "AIR AMBULANCE UTILIZATION",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > AIR AMBULANCE UTILIZATION",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "mandatory-reporting",
+      "title": "Mandatory Reporting",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Mandatory Reporting",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "crime-scene",
+      "title": "Crime Scene",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Crime Scene",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "workers-compensation-process",
+      "title": "Worker’s Compensation Process",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Worker’s Compensation Process",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "clinical-errors-reporting",
+      "title": "Clinical Errors & Reporting",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Clinical Errors & Reporting",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "cdc-field-triage-guidelines-trauma",
+      "title": "CDC Field Triage Guidelines (Trauma)",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > CDC Field Triage Guidelines (Trauma)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "rehabilitation-emergency-incidents-municipal-partners",
+      "title": "Rehabilitation: Emergency Incidents & Municipal Partners",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Rehabilitation: Emergency Incidents & Municipal Partners",
+      "hasDetails": false,
+      "detailsKeys": []
+    }
+  ],
+  "raw": [
+    {
+      "id": "adult-protocols",
+      "title": "Adult Protocols",
+      "type": "category",
+      "path": "Adult Protocols",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-airway-breathing",
+      "title": "Airway & Breathing",
+      "type": "category",
+      "path": "Adult Protocols > Airway & Breathing",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-coma-od",
+      "title": "COMA/OD",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > COMA/OD",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-cpap-or-bipap",
+      "title": "CPAP or BiPAP",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > CPAP or BiPAP",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-sai",
+      "title": "SAI",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > SAI",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-nasal-intubation",
+      "title": "Nasal Intubation",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > Nasal Intubation",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-et-intubation",
+      "title": "ET Intubation",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > ET Intubation",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-ventilator-pt-intubated-sedated",
+      "title": "VENTILATOR Pt; Intubated & Sedated",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > VENTILATOR Pt; Intubated & Sedated",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-tracheostomy-care",
+      "title": "TRACHEOSTOMY CARE",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > TRACHEOSTOMY CARE",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-cricothyrotomy",
+      "title": "Cricothyrotomy",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > Cricothyrotomy",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-tension-pneumo",
+      "title": "Tension Pneumo",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > Tension Pneumo",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-sga-cardiac-arrest-use-1st",
+      "title": "SGA -> Cardiac Arrest = Use 1st",
+      "type": "topic",
+      "path": "Adult Protocols > Airway & Breathing > SGA -> Cardiac Arrest = Use 1st",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-circulation-cardiology",
+      "title": "Circulation/Cardiology",
+      "type": "category",
+      "path": "Adult Protocols > Circulation/Cardiology",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-bradycardia",
+      "title": "Bradycardia",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > Bradycardia",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-cardiogenic-shock-not-post-arrest",
+      "title": "Cardiogenic Shock (not post arrest)",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > Cardiogenic Shock (not post arrest)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-lvad-pt",
+      "title": "LVAD pt",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > LVAD pt",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-pulmonary-edema",
+      "title": "Pulmonary Edema",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > Pulmonary Edema",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-mi-acs",
+      "title": "MI/ACS",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > MI/ACS",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-pea-asystole",
+      "title": "PEA/Asystole",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > PEA/Asystole",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-rosc-stabilization",
+      "title": "ROSC Stabilization",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > ROSC Stabilization",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-vf-pvt",
+      "title": "VF/pVT",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > VF/pVT",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-hyperkalemia",
+      "title": "Hyperkalemia",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > Hyperkalemia",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-svt-mono-vt-unstable",
+      "title": "SVT/Mono-VT (unstable)",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > SVT/Mono-VT (unstable)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-svt-stable",
+      "title": "SVT (stable)",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > SVT (stable)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-a-fib-rvr-or-a-flutter-stable-symptomatic",
+      "title": "A-Fib RVR or A-Flutter (stable symptomatic)",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > A-Fib RVR or A-Flutter (stable symptomatic)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-mat-stable",
+      "title": "MAT (stable)",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > MAT (stable)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-mono-vt-stable",
+      "title": "Mono-VT (stable)",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > Mono-VT (stable)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-poly-vt-torsades-stable",
+      "title": "Poly-VT/Torsades (stable)",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > Poly-VT/Torsades (stable)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-poly-vt-torsades-unstable",
+      "title": "Poly-VT/Torsades (unstable)",
+      "type": "topic",
+      "path": "Adult Protocols > Circulation/Cardiology > Poly-VT/Torsades (unstable)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-medical-emergencies",
+      "title": "Medical Emergencies",
+      "type": "category",
+      "path": "Adult Protocols > Medical Emergencies",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-allergic-reaction",
+      "title": "Allergic Reaction",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Allergic Reaction",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-anaphylaxis",
+      "title": "Anaphylaxis",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Anaphylaxis",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-fall-or-weakness",
+      "title": "Fall or Weakness",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Fall or Weakness",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-hyperglycemia",
+      "title": "Hyperglycemia",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Hyperglycemia",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-hypoglycemia",
+      "title": "Hypoglycemia",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Hypoglycemia",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-n-v",
+      "title": "N/V",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > N/V",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-sludgem-pt",
+      "title": "SLUDGEM pt",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > SLUDGEM pt",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-pain",
+      "title": "Pain",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Pain",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-h-a-or-abdominal-pain",
+      "title": "H/A or Abdominal pain",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > H/A or Abdominal pain",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-sickle-cell-crisis",
+      "title": "Sickle Cell Crisis",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Sickle Cell Crisis",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-seizure",
+      "title": "Seizure",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Seizure",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-sepsis",
+      "title": "Sepsis",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Sepsis",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-stroke",
+      "title": "Stroke",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Stroke",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-toxic-ingestion-with-serious-s-s",
+      "title": "Toxic Ingestion with serious S/S",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > Toxic Ingestion with serious S/S",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-rass-1-through-4",
+      "title": "RASS +1 through +4",
+      "type": "topic",
+      "path": "Adult Protocols > Medical Emergencies > RASS +1 through +4",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-obgyn",
+      "title": "OB/GYN",
+      "type": "category",
+      "path": "Adult Protocols > OB/GYN",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-normal-delivery",
+      "title": "Normal Delivery",
+      "type": "topic",
+      "path": "Adult Protocols > OB/GYN > Normal Delivery",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-shoulder-dystocia",
+      "title": "Shoulder Dystocia",
+      "type": "topic",
+      "path": "Adult Protocols > OB/GYN > Shoulder Dystocia",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-breech",
+      "title": "Breech",
+      "type": "topic",
+      "path": "Adult Protocols > OB/GYN > Breech",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-frank-complete-breech-presentation",
+      "title": "Frank/Complete Breech Presentation",
+      "type": "topic",
+      "path": "Adult Protocols > OB/GYN > Frank/Complete Breech Presentation",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-prolapsed-cord",
+      "title": "Prolapsed Cord",
+      "type": "topic",
+      "path": "Adult Protocols > OB/GYN > Prolapsed Cord",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-eclampsia",
+      "title": "Eclampsia",
+      "type": "topic",
+      "path": "Adult Protocols > OB/GYN > Eclampsia",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-trauma",
+      "title": "Trauma",
+      "type": "category",
+      "path": "Adult Protocols > Trauma",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-cardiac-arrest-pressure-sores-from-immobility",
+      "title": "Cardiac Arrest + Pressure Sores from Immobility",
+      "type": "topic",
+      "path": "Adult Protocols > Trauma > Cardiac Arrest + Pressure Sores from Immobility",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-mace-pepper-spray",
+      "title": "Mace/Pepper-Spray",
+      "type": "topic",
+      "path": "Adult Protocols > Trauma > Mace/Pepper-Spray",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-smr",
+      "title": "SMR",
+      "type": "topic",
+      "path": "Adult Protocols > Trauma > SMR",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-taser",
+      "title": "Taser",
+      "type": "topic",
+      "path": "Adult Protocols > Trauma > Taser",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-major-level-1-trauma",
+      "title": "Major Level 1 Trauma",
+      "type": "topic",
+      "path": "Adult Protocols > Trauma > Major Level 1 Trauma",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adult-refusals",
+      "title": "Refusals",
+      "type": "topic",
+      "path": "Adult Protocols > Refusals",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "pediatric-protocols",
+      "title": "Pediatric Protocols",
+      "type": "category",
+      "path": "Pediatric Protocols",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "pediatric-assessment-vs",
+      "title": "Pediatric Assessment & VS",
+      "type": "topic",
+      "path": "Pediatric Protocols > Pediatric Assessment & VS",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "pediatric-airway-breathing",
+      "title": "Airway & Breathing",
+      "type": "topic",
+      "path": "Pediatric Protocols > Airway & Breathing",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "pediatric-circulation-cardiac",
+      "title": "Circulation/Cardiac",
+      "type": "topic",
+      "path": "Pediatric Protocols > Circulation/Cardiac",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "pediatric-medical",
+      "title": "Medical",
+      "type": "topic",
+      "path": "Pediatric Protocols > Medical",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "pediatric-trauma",
+      "title": "Trauma",
+      "type": "topic",
+      "path": "Pediatric Protocols > Trauma",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "pediatric-special-needs-children",
+      "title": "Special Needs Children",
+      "type": "topic",
+      "path": "Pediatric Protocols > Special Needs Children",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "pediatric-refusals",
+      "title": "Refusals",
+      "type": "topic",
+      "path": "Pediatric Protocols > Refusals",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "als-medications",
+      "title": "ALS Medications",
+      "type": "category",
+      "path": "ALS Medications",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "10-calcium-chloride",
+      "title": "Calcium Chloride (1,000mg/10ml)",
+      "type": "topic",
+      "path": "ALS Medications > Calcium Chloride (1,000mg/10ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "2-lidocaine-xylocaine",
+      "title": "2% Lidocaine (Xylocaine) (100mg/5ml)",
+      "type": "topic",
+      "path": "ALS Medications > 2% Lidocaine (Xylocaine) (100mg/5ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "8-4-sodium-bicarbonate-nahco3",
+      "title": "8.4% Bicarb (NaHCO3) (50mEq/50ml)",
+      "type": "topic",
+      "path": "ALS Medications > 8.4% Bicarb (NaHCO3) (50mEq/50ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "adenosine-adenocard",
+      "title": "Adenosine (Adenocard) (6mg/2ml)",
+      "type": "topic",
+      "path": "ALS Medications > Adenosine (Adenocard) (6mg/2ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "albuterol",
+      "title": "Albuterol (2.5mg/3cc)",
+      "type": "topic",
+      "path": "ALS Medications > Albuterol (2.5mg/3cc)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "asa",
+      "title": "ASA (81mg/tab)",
+      "type": "topic",
+      "path": "ALS Medications > ASA (81mg/tab)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "atropine-sulfate",
+      "title": "Atropine Sulfate (1mg/10ml)",
+      "type": "topic",
+      "path": "ALS Medications > Atropine Sulfate (1mg/10ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "d10",
+      "title": "D10 (25g/250ml bag)",
+      "type": "topic",
+      "path": "ALS Medications > D10 (25g/250ml bag)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "d5",
+      "title": "D5 (5g/100ml bag)",
+      "type": "topic",
+      "path": "ALS Medications > D5 (5g/100ml bag)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "dexamethasone-decadron",
+      "title": "Dexamethasone (Decadron) (10mg/ml)",
+      "type": "topic",
+      "path": "ALS Medications > Dexamethasone (Decadron) (10mg/ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "diphenhydramine-benadryl",
+      "title": "Diphenhydramine (Benadryl) (50mg/ml)",
+      "type": "topic",
+      "path": "ALS Medications > Diphenhydramine (Benadryl) (50mg/ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "droperidol-inapsine",
+      "title": "Droperidol (Inapsine) (5mg/2ml)",
+      "type": "topic",
+      "path": "ALS Medications > Droperidol (Inapsine) (5mg/2ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "epi-1-1000-adrenaline",
+      "title": "Epi 1:1,000 (Adrenaline) (10mg/10ml)",
+      "type": "topic",
+      "path": "ALS Medications > Epi 1:1,000 (Adrenaline) (10mg/10ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "epi-1-10000",
+      "title": "Epi 1:10,000 (1mg/10ml)",
+      "type": "topic",
+      "path": "ALS Medications > Epi 1:10,000 (1mg/10ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "epi-1-100000-push-dose-epi",
+      "title": "Epi 1:100,000 \"Push-Dose Epi\" (100mcg/10ml)",
+      "type": "topic",
+      "path": "ALS Medications > Epi 1:100,000 \"Push-Dose Epi\" (100mcg/10ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "etomidate-amidate",
+      "title": "Etomidate (Amidate) (20mg/10ml)",
+      "type": "topic",
+      "path": "ALS Medications > Etomidate (Amidate) (20mg/10ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "fentanyl-sublimaze",
+      "title": "Fentanyl (Sublimaze) (100mcg/2ml)",
+      "type": "topic",
+      "path": "ALS Medications > Fentanyl (Sublimaze) (100mcg/2ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "ipratropium",
+      "title": "Ipratropium (0.5mg/3cc)",
+      "type": "topic",
+      "path": "ALS Medications > Ipratropium (0.5mg/3cc)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "ketamine-ketalar",
+      "title": "Ketamine (Ketalar) (500mg/5ml)",
+      "type": "topic",
+      "path": "ALS Medications > Ketamine (Ketalar) (500mg/5ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "ketorolac-tromethamine-toradol",
+      "title": "Ketorolac Tromethamine (Toradol) (30mg/ml)",
+      "type": "topic",
+      "path": "ALS Medications > Ketorolac Tromethamine (Toradol) (30mg/ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "magnesium-sulfate-mgso4",
+      "title": "Magnesium Sulfate (MgSO4) (1g/2ml)",
+      "type": "topic",
+      "path": "ALS Medications > Magnesium Sulfate (MgSO4) (1g/2ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "metoprolol-tartrate-lopressor",
+      "title": "Metoprolol Tartrate (Lopressor) (5mg/5ml)",
+      "type": "topic",
+      "path": "ALS Medications > Metoprolol Tartrate (Lopressor) (5mg/5ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "midazolam-versed",
+      "title": "Midazolam (Versed) (10mg/2ml)",
+      "type": "topic",
+      "path": "ALS Medications > Midazolam (Versed) (10mg/2ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "morphine",
+      "title": "Morphine (4mg/2ml)",
+      "type": "topic",
+      "path": "ALS Medications > Morphine (4mg/2ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "naloxone-narcan",
+      "title": "Naloxone (Narcan) (2mg/2ml)",
+      "type": "topic",
+      "path": "ALS Medications > Naloxone (Narcan) (2mg/2ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "ntg",
+      "title": "NTG (0.4mg/spray)",
+      "type": "topic",
+      "path": "ALS Medications > NTG (0.4mg/spray)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "ondansetron-zofran",
+      "title": "Ondansetron (Zofran) (4mg/2ml)",
+      "type": "topic",
+      "path": "ALS Medications > Ondansetron (Zofran) (4mg/2ml)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "operational-protocols",
+      "title": "Operational Protocols",
+      "type": "category",
+      "path": "Operational Protocols",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "restraint-of-agitated-combative-patients",
+      "title": "Restraint of Agitated/Combative Patients",
+      "type": "topic",
+      "path": "Operational Protocols > Restraint of Agitated/Combative Patients",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "richmond-agitation-sedation-scale-rass",
+      "title": "Richmond Agitation Sedation Scale (RASS)",
+      "type": "topic",
+      "path": "Operational Protocols > Richmond Agitation Sedation Scale (RASS)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "rule-of-9s-rule-of-palms-bsa-burn-estimation",
+      "title": "Rule of 9’s & Rule of Palms (BSA Burn Estimation)",
+      "type": "topic",
+      "path": "Operational Protocols > Rule of 9’s & Rule of Palms (BSA Burn Estimation)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "smith-modified-sgarbossa-criteria",
+      "title": "Smith-Modified Sgarbossa Criteria",
+      "type": "topic",
+      "path": "Operational Protocols > Smith-Modified Sgarbossa Criteria",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "pcr-requirements",
+      "title": "PCR Requirements",
+      "type": "topic",
+      "path": "Operational Protocols > PCR Requirements",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "clinical-errors-reporting",
+      "title": "Clinical Errors & Reporting",
+      "type": "topic",
+      "path": "Operational Protocols > Clinical Errors & Reporting",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "medication-administration-cross-check-macc",
+      "title": "Medication Administration Cross Check (MACC)",
+      "type": "topic",
+      "path": "Operational Protocols > Medication Administration Cross Check (MACC)",
+      "hasDetails": true,
+      "detailsKeys": [
+        "mdPath",
+        "collapsibleHeadings"
+      ]
+    },
+    {
+      "id": "cdc-field-triage-guidelines-trauma",
+      "title": "CDC Field Triage Guidelines (Trauma)",
+      "type": "topic",
+      "path": "Operational Protocols > CDC Field Triage Guidelines (Trauma)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "rehabilitation-emergency-incidents-municipal-partners",
+      "title": "Rehabilitation: Emergency Incidents & Municipal Partners",
+      "type": "topic",
+      "path": "Operational Protocols > Rehabilitation: Emergency Incidents & Municipal Partners",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "skills-equipment",
+      "title": "Skills & Equipment",
+      "type": "category",
+      "path": "Skills & Equipment",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "ventilator-set-up-parapac-plus",
+      "title": "Ventilator Set-Up (ParaPAC Plus)",
+      "type": "topic",
+      "path": "Skills & Equipment > Ventilator Set-Up (ParaPAC Plus)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731",
+      "title": "Zoll EMV731",
+      "type": "category",
+      "path": "Skills & Equipment > Zoll EMV731",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-quick-vent-guide",
+      "title": "Quick Vent Guide",
+      "type": "category",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-zoll-setup",
+      "title": "Zoll Set Up",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > Zoll Set Up",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-operational-notes",
+      "title": "General Operational Notes",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > General Operational Notes",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-volume-mode",
+      "title": "Volume Mode",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > Volume Mode",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-pressure-mode",
+      "title": "Pressure Mode",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > Pressure Mode",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-other-vent-alarms",
+      "title": "Other Vent Alarms",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > Other Vent Alarms",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-cpap",
+      "title": "CPAP",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > CPAP",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-bi-level",
+      "title": "Bi-Level",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > Bi-Level",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-terms-settings",
+      "title": "Terms & Settings",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > Terms & Settings",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-quick-vent-tidal-volume-calculator",
+      "title": "Tidal Volume Calculator",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Quick Vent Guide > Tidal Volume Calculator",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-general-information",
+      "title": "Zoll EMV731 - General Information",
+      "type": "category",
+      "path": "Skills & Equipment > Zoll EMV731 > Zoll EMV731 - General Information",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-general-information-purpose-manual",
+      "title": "Purpose & Manual Use",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Zoll EMV731 - General Information > Purpose & Manual Use",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-general-information-symbols",
+      "title": "Symbols",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Zoll EMV731 - General Information > Symbols",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-general-information-indications",
+      "title": "Indications for Use",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Zoll EMV731 - General Information > Indications for Use",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-general-information-warnings",
+      "title": "Warnings & Cautions",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Zoll EMV731 - General Information > Warnings & Cautions",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-general-information-warranty",
+      "title": "Warranty & Tracking",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Zoll EMV731 - General Information > Warranty & Tracking",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-general-information-contact",
+      "title": "Contact Information",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Zoll EMV731 - General Information > Contact Information",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview",
+      "title": "Product Overview",
+      "type": "category",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-models",
+      "title": "Models & Intended Use",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > Models & Intended Use",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-controls",
+      "title": "Controls & Indicators",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > Controls & Indicators",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-gui",
+      "title": "GUI Overview",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > GUI Overview",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-pneumatic",
+      "title": "Pneumatic Design",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > Pneumatic Design",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-fresh-gas",
+      "title": "Fresh Gas Intake",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > Fresh Gas Intake",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-connector",
+      "title": "Connector Panel",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > Connector Panel",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-circuits",
+      "title": "Ventilator Circuits",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > Ventilator Circuits",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-oximeter",
+      "title": "Pulse Oximeter Module",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > Pulse Oximeter Module",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-product-overview-power",
+      "title": "Power Sources",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Product Overview > Power Sources",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-the-ventilator",
+      "title": "Setting Up the Ventilator",
+      "type": "category",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-circuit",
+      "title": "Circuit Attachment",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > Circuit Attachment",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-hp-o2",
+      "title": "High-Pressure O₂ Connection",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > High-Pressure O₂ Connection",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-filters",
+      "title": "Filters & Accessories",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > Filters & Accessories",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-power",
+      "title": "Power Source Selection",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > Power Source Selection",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-power-on",
+      "title": "Power On & Defaults",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > Power On & Defaults",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-mode",
+      "title": "Mode Selection",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > Mode Selection",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-op-test",
+      "title": "Operational Test",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > Operational Test",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-oximeter",
+      "title": "Attach Pulse Oximeter",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > Attach Pulse Oximeter",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-setting-up-connect",
+      "title": "Connect Patient",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Setting Up the Ventilator > Connect Patient",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-the-ventilator",
+      "title": "Using the Ventilator",
+      "type": "category",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-interface",
+      "title": "Interface & Parameter Windows",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Interface & Parameter Windows",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-change-values",
+      "title": "Changing Parameter Values",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Changing Parameter Values",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-mode-ac",
+      "title": "Ventilation Modes (AC)",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Ventilation Modes (AC)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-mode-simv",
+      "title": "Ventilation Modes (SIMV)",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Ventilation Modes (SIMV)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-mode-cpap",
+      "title": "Ventilation Modes (CPAP)",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Ventilation Modes (CPAP)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-mode-bilevel",
+      "title": "Ventilation Modes (Bi-Level)",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Ventilation Modes (Bi-Level)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-breath-target",
+      "title": "Breath Target (V/P)",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Breath Target (V/P)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-oximeter",
+      "title": "Pulse Oximeter Use",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Pulse Oximeter Use",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-popups",
+      "title": "Pop Up Messages",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Pop Up Messages",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-using-manage-alarms",
+      "title": "Managing Alarms",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Using the Ventilator > Managing Alarms",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms",
+      "title": "Alarms",
+      "type": "category",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-overview",
+      "title": "Alarm Overview",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Alarm Overview",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-amc",
+      "title": "Alarm Message Center (AMC)",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Alarm Message Center (AMC)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-priorities",
+      "title": "Alarm Priorities",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Alarm Priorities",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-icons",
+      "title": "Alarm Icons & Service Codes",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Alarm Icons & Service Codes",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-muting",
+      "title": "Muting Alarms",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Muting Alarms",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-types-patient",
+      "title": "Alarm Types: Patient Safety",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Alarm Types: Patient Safety",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-types-environment",
+      "title": "Alarm Types: Environment",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Alarm Types: Environment",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-types-selfcheck",
+      "title": "Alarm Types: Self Check",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Alarm Types: Self Check",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-groups",
+      "title": "Alarm Groups",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Alarm Groups",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-alarms-popups",
+      "title": "Pop Up Messages",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Alarms > Pop Up Messages",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-operating-environments",
+      "title": "Operating Environments",
+      "type": "category",
+      "path": "Skills & Equipment > Zoll EMV731 > Operating Environments",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-operating-all",
+      "title": "All Content",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Operating Environments > All Content",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-operating-conditions",
+      "title": "Environmental Conditions",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Operating Environments > Environmental Conditions",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-operating-transport",
+      "title": "Transport Use",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Operating Environments > Transport Use",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-operating-noise",
+      "title": "High Noise Environments",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Operating Environments > High Noise Environments",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-operating-emc",
+      "title": "EMC & Safety",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Operating Environments > EMC & Safety",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-maintenance",
+      "title": "Maintenance",
+      "type": "category",
+      "path": "Skills & Equipment > Zoll EMV731 > Maintenance",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-maintenance-all",
+      "title": "All Content",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Maintenance > All Content",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-maintenance-pm",
+      "title": "Preventive Maintenance",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Maintenance > Preventive Maintenance",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-maintenance-filters",
+      "title": "Filter Maintenance",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Maintenance > Filter Maintenance",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-maintenance-exhalation",
+      "title": "Exhalation Valve Diaphragm",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Maintenance > Exhalation Valve Diaphragm",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-maintenance-selftest",
+      "title": "Self Test & Service",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Maintenance > Self Test & Service",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-maintenance-cleaning",
+      "title": "Cleaning & Storage",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Maintenance > Cleaning & Storage",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-specifications",
+      "title": "Specifications",
+      "type": "category",
+      "path": "Skills & Equipment > Zoll EMV731 > Specifications",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-specifications-all",
+      "title": "All Content",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Specifications > All Content",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-specifications-ranges",
+      "title": "Operating Ranges",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Specifications > Operating Ranges",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-specifications-resolution",
+      "title": "Measurement Resolution & Tolerances",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Specifications > Measurement Resolution & Tolerances",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-specifications-o2",
+      "title": "Oxygen Input Pressure",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Specifications > Oxygen Input Pressure",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-accessories",
+      "title": "Accessories",
+      "type": "category",
+      "path": "Skills & Equipment > Zoll EMV731 > Accessories",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-accessories-all",
+      "title": "All Content",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Accessories > All Content",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-accessories-power",
+      "title": "Power Supplies & Cables",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Accessories > Power Supplies & Cables",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-accessories-battery",
+      "title": "Battery Packs",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Accessories > Battery Packs",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-accessories-cases",
+      "title": "Carrying Cases",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Accessories > Carrying Cases",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-accessories-filters",
+      "title": "Filters & HMEs",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Accessories > Filters & HMEs",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-accessories-reservoir",
+      "title": "Reservoir Kits",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Accessories > Reservoir Kits",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-accessories-country",
+      "title": "Country Variations",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Accessories > Country Variations",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-pulse-oximeter-principles",
+      "title": "Pulse Oximeter Principles",
+      "type": "category",
+      "path": "Skills & Equipment > Zoll EMV731 > Pulse Oximeter Principles",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-oximeter-all",
+      "title": "All Content",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Pulse Oximeter Principles > All Content",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-oximeter-principles",
+      "title": "Principles of Pulse Oximetry",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Pulse Oximeter Principles > Principles of Pulse Oximetry",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-oximeter-traditional",
+      "title": "Traditional Ratio Method",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Pulse Oximeter Principles > Traditional Ratio Method",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-oximeter-masimo",
+      "title": "Masimo SET Algorithm",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Pulse Oximeter Principles > Masimo SET Algorithm",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-oximeter-rate-noise",
+      "title": "Update Rate & Noise Handling",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Pulse Oximeter Principles > Update Rate & Noise Handling",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-patient-circuits",
+      "title": "Patient Circuits",
+      "type": "category",
+      "path": "Skills & Equipment > Zoll EMV731 > Patient Circuits",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-circuits-all",
+      "title": "All Content",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Patient Circuits > All Content",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-circuits-types",
+      "title": "Circuit Types & Lengths",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Patient Circuits > Circuit Types & Lengths",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-circuits-specs",
+      "title": "Technical Specifications",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Patient Circuits > Technical Specifications",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-circuits-directions",
+      "title": "Directions for Use",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Patient Circuits > Directions for Use",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-circuits-troubleshooting",
+      "title": "Troubleshooting",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Patient Circuits > Troubleshooting",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-circuits-warnings",
+      "title": "Warnings & Notes",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Patient Circuits > Warnings & Notes",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "zoll-emv731-original-documentation",
+      "title": "Original Documentation",
+      "type": "topic",
+      "path": "Skills & Equipment > Zoll EMV731 > Original Documentation",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "i-gel-supraglottic-airway-sga",
+      "title": "I-gel Supraglottic Airway (SGA)",
+      "type": "topic",
+      "path": "Skills & Equipment > I-gel Supraglottic Airway (SGA)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "thermometer-braun-thermoscan",
+      "title": "Thermometer (Braun ThermoScan)",
+      "type": "topic",
+      "path": "Skills & Equipment > Thermometer (Braun ThermoScan)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "glucometer-mckesson-true-metrix-pro",
+      "title": "Glucometer (McKesson True Metrix Pro)",
+      "type": "topic",
+      "path": "Skills & Equipment > Glucometer (McKesson True Metrix Pro)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "diltiazem-add-vantage-directions",
+      "title": "Diltiazem Add-Vantage Directions",
+      "type": "topic",
+      "path": "Skills & Equipment > Diltiazem Add-Vantage Directions",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "ez-io-insertion",
+      "title": "EZ-IO Insertion",
+      "type": "topic",
+      "path": "Skills & Equipment > EZ-IO Insertion",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "push-dose-epi",
+      "title": "PUSH-DOSE EPI",
+      "type": "topic",
+      "path": "Skills & Equipment > PUSH-DOSE EPI",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "mucosal-atomization-device-mad",
+      "title": "Mucosal Atomization Device (M.A.D.)",
+      "type": "topic",
+      "path": "Skills & Equipment > Mucosal Atomization Device (M.A.D.)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "minutes-of-oxygen-by-cylinder-size",
+      "title": "Minutes of Oxygen by Cylinder Size",
+      "type": "topic",
+      "path": "Skills & Equipment > Minutes of Oxygen by Cylinder Size",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "understanding-ratios-percentages-solution-mixtures",
+      "title": "Understanding Ratios, Percentages & Solution Mixtures",
+      "type": "topic",
+      "path": "Skills & Equipment > Understanding Ratios, Percentages & Solution Mixtures",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "abbreviations-references",
+      "title": "Abbreviations & References",
+      "type": "category",
+      "path": "Abbreviations & References",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "abbott-approved-abbreviations",
+      "title": "Abbott Approved Abbreviations",
+      "type": "category",
+      "path": "Abbreviations & References > Abbott Approved Abbreviations",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "abbott-approved-abbreviations-assessment-clinical-documentation",
+      "title": "Assessment & Clinical Documentation",
+      "type": "topic",
+      "path": "Abbreviations & References > Abbott Approved Abbreviations > Assessment & Clinical Documentation",
+      "hasDetails": true,
+      "detailsKeys": [
+        "abbreviationGroup"
+      ]
+    },
+    {
+      "id": "abbott-approved-abbreviations-procedures-equipment",
+      "title": "Procedures & Equipment",
+      "type": "topic",
+      "path": "Abbreviations & References > Abbott Approved Abbreviations > Procedures & Equipment",
+      "hasDetails": true,
+      "detailsKeys": [
+        "abbreviationGroup"
+      ]
+    },
+    {
+      "id": "abbott-approved-abbreviations-medications-pharmacology-rx",
+      "title": "Medications & Pharmacology (Rx)",
+      "type": "topic",
+      "path": "Abbreviations & References > Abbott Approved Abbreviations > Medications & Pharmacology (Rx)",
+      "hasDetails": true,
+      "detailsKeys": [
+        "abbreviationGroup"
+      ]
+    },
+    {
+      "id": "abbott-approved-abbreviations-measurements-units",
+      "title": "Measurements & Units",
+      "type": "topic",
+      "path": "Abbreviations & References > Abbott Approved Abbreviations > Measurements & Units",
+      "hasDetails": true,
+      "detailsKeys": [
+        "abbreviationGroup"
+      ]
+    },
+    {
+      "id": "abbott-approved-abbreviations-cardiovascular-hemodynamics",
+      "title": "Cardiovascular & Hemodynamics",
+      "type": "topic",
+      "path": "Abbreviations & References > Abbott Approved Abbreviations > Cardiovascular & Hemodynamics",
+      "hasDetails": true,
+      "detailsKeys": [
+        "abbreviationGroup"
+      ]
+    },
+    {
+      "id": "abbott-approved-abbreviations-respiratory-airway",
+      "title": "Respiratory & Airway",
+      "type": "topic",
+      "path": "Abbreviations & References > Abbott Approved Abbreviations > Respiratory & Airway",
+      "hasDetails": true,
+      "detailsKeys": [
+        "abbreviationGroup"
+      ]
+    },
+    {
+      "id": "abbott-approved-abbreviations-anatomy-patient-conditions",
+      "title": "Anatomy & Patient Conditions",
+      "type": "topic",
+      "path": "Abbreviations & References > Abbott Approved Abbreviations > Anatomy & Patient Conditions",
+      "hasDetails": true,
+      "detailsKeys": [
+        "abbreviationGroup"
+      ]
+    },
+    {
+      "id": "abbott-approved-abbreviations-diagnostics-labs-imaging",
+      "title": "Diagnostics, Labs & Imaging",
+      "type": "topic",
+      "path": "Abbreviations & References > Abbott Approved Abbreviations > Diagnostics, Labs & Imaging",
+      "hasDetails": true,
+      "detailsKeys": [
+        "abbreviationGroup"
+      ]
+    },
+    {
+      "id": "abbott-approved-abbreviations-neurologic-trauma",
+      "title": "Neurologic & Trauma",
+      "type": "topic",
+      "path": "Abbreviations & References > Abbott Approved Abbreviations > Neurologic & Trauma",
+      "hasDetails": true,
+      "detailsKeys": [
+        "abbreviationGroup"
+      ]
+    },
+    {
+      "id": "abbott-approved-abbreviations-operations-agencies",
+      "title": "Operations & Agencies",
+      "type": "topic",
+      "path": "Abbreviations & References > Abbott Approved Abbreviations > Operations & Agencies",
+      "hasDetails": true,
+      "detailsKeys": [
+        "abbreviationGroup"
+      ]
+    },
+    {
+      "id": "other-abbreviations",
+      "title": "Other Abbreviations",
+      "type": "topic",
+      "path": "Abbreviations & References > Other Abbreviations",
+      "hasDetails": true,
+      "detailsKeys": [
+        "abbreviationGroup"
+      ]
+    },
+    {
+      "id": "introduction-core-principles",
+      "title": "Introduction & Core Principles",
+      "type": "category",
+      "path": "Introduction & Core Principles",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "introduction-to-abbott",
+      "title": "Introduction to Abbott",
+      "type": "topic",
+      "path": "Introduction & Core Principles > Introduction to Abbott",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "core-principles-safety-well-being",
+      "title": "Core Principles – Safety & Well-Being",
+      "type": "topic",
+      "path": "Introduction & Core Principles > Core Principles – Safety & Well-Being",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "general-important-information",
+      "title": "General Important Information",
+      "type": "topic",
+      "path": "Introduction & Core Principles > General Important Information",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "administrative-legal-essentials",
+      "title": "Administrative & Legal Essentials",
+      "type": "category",
+      "path": "Administrative & Legal Essentials",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "als-ground-rules",
+      "title": "ALS Ground Rules",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > ALS Ground Rules",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "scope-violations-possible-consequences",
+      "title": "Scope Violations & Possible Consequences",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Scope Violations & Possible Consequences",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "suspension-revocation",
+      "title": "Suspension/Revocation",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Suspension/Revocation",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "on-scene-authority",
+      "title": "On-Scene Authority",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > On-Scene Authority",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "on-scene-healthcare-professionals",
+      "title": "On-Scene Healthcare Professionals",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > On-Scene Healthcare Professionals",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "dispatching-md-200",
+      "title": "Dispatching MD [200]",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Dispatching MD [200]",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "consulting-olmc",
+      "title": "Consulting OLMC",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Consulting OLMC",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "transfer-to-lesser-credential",
+      "title": "Transfer to Lesser Credential",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Transfer to Lesser Credential",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "emr-accompanying-critically-ill",
+      "title": "EMR Accompanying Critically Ill",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > EMR Accompanying Critically Ill",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "response-mode",
+      "title": "Response Mode",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Response Mode",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "air-ambulance-utilization",
+      "title": "AIR AMBULANCE UTILIZATION",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > AIR AMBULANCE UTILIZATION",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "applicability-of-the-cog",
+      "title": "Applicability of the COG",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Applicability of the COG",
+      "hasDetails": true,
+      "detailsKeys": [
+        "mdPath"
+      ]
+    },
+    {
+      "id": "mandatory-reporting",
+      "title": "Mandatory Reporting",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Mandatory Reporting",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "crime-scene",
+      "title": "Crime Scene",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Crime Scene",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "workers-compensation-process",
+      "title": "Worker’s Compensation Process",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Worker’s Compensation Process",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "clinical-errors-reporting",
+      "title": "Clinical Errors & Reporting",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Clinical Errors & Reporting",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "medication-administration-cross-check-macc",
+      "title": "Medication Administration Cross Check (MACC)",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Medication Administration Cross Check (MACC)",
+      "hasDetails": true,
+      "detailsKeys": [
+        "mdPath",
+        "collapsibleHeadings"
+      ]
+    },
+    {
+      "id": "cdc-field-triage-guidelines-trauma",
+      "title": "CDC Field Triage Guidelines (Trauma)",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > CDC Field Triage Guidelines (Trauma)",
+      "hasDetails": false,
+      "detailsKeys": []
+    },
+    {
+      "id": "rehabilitation-emergency-incidents-municipal-partners",
+      "title": "Rehabilitation: Emergency Incidents & Municipal Partners",
+      "type": "topic",
+      "path": "Administrative & Legal Essentials > Rehabilitation: Emergency Incidents & Municipal Partners",
+      "hasDetails": false,
+      "detailsKeys": []
+    }
+  ]
+}
