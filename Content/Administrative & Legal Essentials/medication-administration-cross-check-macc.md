@@ -28,8 +28,7 @@
 - CRM  Avoid Ambiguity & use closed loop/Effective communication between partners.
 - The MACC was presented to EMRs in conjunction c an introduction to Crew Resource Management (CRM)
 
-<details>
-<summary>BLS MACC</summary>
+## BLS MACC
 
 - BLS EMRs
 - Positive Visual Verification of Info on drug label
@@ -58,6 +57,7 @@
   - Wrong Situation or reason          (Rule Based Error)
   - Absolute/Relative Contraindications Allergies/Interactions/Expired (Rule Based Error)
 
-</details>
 
 Source: "Medication Administration Cross Check" and "BLS MACC" (Section 1: EMS Operations).
+
+

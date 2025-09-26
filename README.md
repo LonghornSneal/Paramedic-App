@@ -857,8 +857,10 @@ Good practice
 Playwright E2E tests live in `dev-tools/tests/ventilation.spec.js`.
 - `npm run test:vent` checks:
   - Not Sure shows two distinct ranges (no ARDS, ARDS) in the purple answer area
-  - Calculation Details pop‑up shows explicit TV min/max formulas and ranges for both pt types
+  - Calculation Details pop-up shows explicit TV min/max formulas and ranges for both pt types
   - Sex icon is visible when selected
+
+- `ABBREV_TEST_URL=http://localhost:8124 node dev-tools/run-abbrev-playwright.js` captures grouped abbreviation layouts and dropdown interactions; ensure the preview server is running on the specified port before executing.
 
 Ad‑hoc check: `node dev-tools/check-tv.js` prints the live answer and modal content for a 70 kg example.
 
@@ -869,6 +871,9 @@ Ad‑hoc check: `node dev-tools/check-tv.js` prints the live answer and modal co
 
 ## Recent fixes (verified)
 
+- **[2025-09-26 Abbott abbreviations experience rebuilt: 'Abbott Approved Abbreviations' now offers grouping selectors with term/abbrev grid modes, removal/addition/reorganize flows, and an Other Abbreviations companion page, all sourced from 'Abbreviations for PCR - Approved list' and 'Abbreviations Used in Document' (Abbott EMS Protocols).]**
+- **[2025-09-26 MACC guidance imported verbatim: Medication Administration Cross Check detail renders the full double-check sequence with a collapsible BLS MACC appendix (source: 'Medication Administration Cross Check' and 'BLS MACC').]**
+- **[2025-09-26 ALS medication cards expose concentration metadata via the new Concentration section on each detail page, keeping dosing data aligned with the ALS Medications tables (source: ALS Medications chapter).]**
 - **[2025-09-18 MCP stack hardened: updated ~/.codex/config.toml, added dev-tools/mcp-health-check.js, and wired npm run mcp:health so MCP clients fail fast when binaries or env vars are missing (source: user request).]**
 - **[2025-09-19 mcp:health now marks optional MCP servers as [OK]/[SKIP], ignores commented config entries, and confirms firecrawl remains disabled until credentials exist (dev-tools/mcp-health-check.js; verified with npm run mcp:health).]**
 
@@ -883,3 +888,4 @@ This repo is wired to auto‑deploy to GitHub Pages from `main` via `.github/wor
 - If it shows 404 initially, wait for the Pages workflow to finish (Actions tab), or check Settings → Pages to confirm the deployment.
 - Not Sure shows two stacked answers (no ARDS first, ARDS second); pop‑up shows explicit formulas and correct ranges — verified by E2E.
 - Sex icon remains visible when selected (selected state background/border) — verified by E2E.
+

@@ -6,6 +6,24 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
 - Memory: persist key decisions when useful
 - Web: fetch docs/snippets structurally when needed
 
+
+## Session Startup Protocol
+
+1. **Launch Inspector with seq enabled**  
+   - Run `dev-tools\\start-inspector-seq.cmd` from the repo root. This opens the Inspector UI and starts the seq MCP server alongside the other default servers.
+2. **Confirm Inspector connection**  
+   - As soon as the browser window opens, click the **Connect** button. Keep the browser tab and the shell window open; closing either stops the servers.
+3. **Codex session handshake**  
+   - In every new chat, the agent must immediately run `dev-tools\\start-inspector-seq.cmd`, wait for the Inspector to finish launching, and then say:  
+     let me know when you have pressed "Connect" and I will begin working on the current task or tasks.  
+   - Begin work only after the user confirms they clicked **Connect**.
+4. **Sequential thinking discipline**  
+   - Invoke the sequentialthinking tool with at least five thoughts for every task, prompt, and response. Increase the total if the work is complex or if any prior attempt needs correction (add one or more extra thoughts for each rework cycle). Use the `needsMoreThoughts` flag when extending a plan beyond the original estimate. The seq MCP server must be invoked for every task, prompt, and response without exception.
+5. **MCP-driven validation**  
+   - Before delivering a final response, run the relevant lint/tests through MCP (shell_execute_command, hooks, playwright, etc.) so that feature changes are proven to work in the app.
+
+Document any workflow adjustments here so future sessions inherit the same startup behaviour.
+
 ## Quick Start
 
 0) Health check
@@ -96,3 +114,5 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
   - Navigate to page; trigger the calculator flow (click/fill)
   - `playwright_browser_wait_for` to see the popup text
   - `playwright_browser_evaluate` to assert that the popup contains all steps and that the final answer appears in the target selector
+
+

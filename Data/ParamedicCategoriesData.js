@@ -311,7 +311,7 @@ export const ParamedicCategoriesData = [
         },{ 
           id: slugify("Medication Administration Cross Check (MACC)"), title: "Medication Administration Cross Check (MACC)", 
           type: "topic",
-          details: { mdPath: "Content/Administrative & Legal Essentials/medication-administration-cross-check-macc.md" } 
+          details: { mdPath: "Content/Administrative & Legal Essentials/medication-administration-cross-check-macc.md", collapsibleHeadings: ["BLS MACC"] } 
         },{ 
           id: slugify("CDC Field Triage Guidelines (Trauma)"), title: "CDC Field Triage Guidelines (Trauma)", 
           type: "topic" 
@@ -496,7 +496,7 @@ export const ParamedicCategoriesData = [
 
               type: "topic", 
 
-              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-assessment-clinical-documentation.md" } 
+              details: { abbreviationGroup: "assessment-and-clinical-documentation" } 
 
             },{
 
@@ -504,7 +504,7 @@ export const ParamedicCategoriesData = [
 
               type: "topic", 
 
-              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-procedures-equipment.md" } 
+              details: { abbreviationGroup: "procedures-and-equipment" } 
 
             },{
 
@@ -512,7 +512,7 @@ export const ParamedicCategoriesData = [
 
               type: "topic", 
 
-              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-medications-pharmacology-rx.md" } 
+              details: { abbreviationGroup: "medications-and-pharmacology-rx" } 
 
             },{
 
@@ -520,7 +520,7 @@ export const ParamedicCategoriesData = [
 
               type: "topic", 
 
-              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-measurements-units.md" } 
+              details: { abbreviationGroup: "measurements-and-units" } 
 
             },{
 
@@ -528,7 +528,7 @@ export const ParamedicCategoriesData = [
 
               type: "topic", 
 
-              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-cardiovascular-hemodynamics.md" } 
+              details: { abbreviationGroup: "cardiovascular-and-hemodynamics" } 
 
             },{
 
@@ -536,7 +536,7 @@ export const ParamedicCategoriesData = [
 
               type: "topic", 
 
-              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-respiratory-airway.md" } 
+              details: { abbreviationGroup: "respiratory-and-airway" } 
 
             },{
 
@@ -544,7 +544,7 @@ export const ParamedicCategoriesData = [
 
               type: "topic", 
 
-              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-anatomy-patient-conditions.md" } 
+              details: { abbreviationGroup: "anatomy-and-patient-conditions" } 
 
             },{
 
@@ -552,7 +552,7 @@ export const ParamedicCategoriesData = [
 
               type: "topic", 
 
-              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-diagnostics-labs-imaging.md" } 
+              details: { abbreviationGroup: "diagnostics-labs-and-imaging" } 
 
             },{
 
@@ -560,7 +560,7 @@ export const ParamedicCategoriesData = [
 
               type: "topic", 
 
-              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-neurologic-trauma.md" } 
+              details: { abbreviationGroup: "neurologic-and-trauma" } 
 
             },{
 
@@ -568,7 +568,7 @@ export const ParamedicCategoriesData = [
 
               type: "topic", 
 
-              details: { mdPath: "Content/Abbreviations & References/abbott-approved-abbreviations-operations-agencies.md" } 
+              details: { abbreviationGroup: "operations-and-agencies" } 
 
             }
 
@@ -580,7 +580,7 @@ export const ParamedicCategoriesData = [
 
           type: "topic", 
 
-          details: { mdPath: "Content/Abbreviations & References/other-abbreviations.md" } 
+          details: { abbreviationGroup: "other-abbreviations" } 
 
         }
 
@@ -616,7 +616,7 @@ export const ParamedicCategoriesData = [
           type: "topic" 
         },{ 
           id: slugify("Suspension/Revocation"), title: "Suspension/Revocation", 
-           type: "topic" 
+          type: "topic" 
         },{ 
           id: slugify("On-Scene Authority"), title: "On-Scene Authority", 
           type: "topic" 
@@ -654,8 +654,21 @@ export const ParamedicCategoriesData = [
         },{ 
           id: slugify("Worker’s Compensation Process"), title: "Worker’s Compensation Process", 
           type: "topic" 
+        },{ 
+          id: slugify("Clinical Errors & Reporting"), title: "Clinical Errors & Reporting", 
+          type: "topic" 
+        },{ 
+          id: slugify("Medication Administration Cross Check (MACC)"), title: "Medication Administration Cross Check (MACC)", 
+          type: "topic",
+          details: { mdPath: "Content/Administrative & Legal Essentials/medication-administration-cross-check-macc.md", collapsibleHeadings: ["BLS MACC"] } 
+        },{ 
+          id: slugify("CDC Field Triage Guidelines (Trauma)"), title: "CDC Field Triage Guidelines (Trauma)", 
+          type: "topic" 
+        },{ 
+          id: slugify("Rehabilitation: Emergency Incidents & Municipal Partners"), title: "Rehabilitation: Emergency Incidents & Municipal Partners", 
+          type: "topic" 
         }
       ]
-    }
+    },
 ];
 
