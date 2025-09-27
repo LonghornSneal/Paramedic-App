@@ -102,12 +102,12 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 ## Change Log & Collaboration
 - Record all protocol updates in README Chapter 6 (current tasks) with date, source section, and files touched. Planned future imports belong in Chapter 10.
 - Use the planning tool for anything beyond typo fixes; include notes about which DOCX sections were consulted.
-- Open questions or policy clarifications should be escalated to maintainers or the medical oversight contact before implementation.
+- Open questions or policy clarifications should be escalated to user before implementation.
 
 ## Reference Assets
-- `research/paramedic_protocols.txt` - extracted ASCII copy of the DOCX for quick grep access. Refresh it when the DOCX changes.
+- `research/paramedic_protocols.txt` - extracted ASCII copy of the DOCX for quick grep access.
 - `research/agents_samples.json` - external AGENTS.md references (keep for inspiration; do not treat as clinical sources).
 - `research/agents_outline.md` - evolving outline for handbook improvements.
 - `dev-tools/tests/ventilation.spec.js` - baseline automated validation; expand with additional protocol-critical tests as coverage grows.
 
-Stay disciplined: every update must tie back to the authoritative protocol while preserving the app's reliability for crews who rely on it in the field.
+Stay disciplined: every update must preserve the app's reliability for crews who rely on it in the field.
