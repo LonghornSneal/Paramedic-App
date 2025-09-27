@@ -27,7 +27,7 @@ export const ParamedicCategoriesData = [
           type: "topic"
         },{
           id: slugify("Adult Cricothyrotomy"), title: "Cricothyrotomy",
-          type: "topic"
+          type: "topic", details: { render: "cricothyrotomy", variant: "adult" }
         },{
           id: slugify("Adult Tension Pneumo"), title: "Tension Pneumo",
           type: "topic"
@@ -196,7 +196,7 @@ export const ParamedicCategoriesData = [
         type: "topic"
       },{
         id: slugify("Pediatric Cricothyrotomy"), title: "Cricothyrotomy",
-        type: "topic"
+        type: "topic", details: { render: "cricothyrotomy", variant: "pediatric" }
       },{ 
         id: slugify("Pediatric Circulation-Cardiac"), title: "Circulation/Cardiac", 
         type: "topic" 
