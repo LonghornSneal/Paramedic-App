@@ -1,0 +1,170 @@
+Title: Surgical cricothyrotomy - WikEM
+
+URL Source: https://wikem.org/wiki/Surgical_cricothyrotomy
+
+Markdown Content:
+We need you! See something you could improve? [Make an edit](https://wikem.org/wiki/Getting_started "Getting started") and help make WikEM better for everyone.
+
+Indications
+-----------
+
+[![Image 1](https://s3.ap-southeast-2.amazonaws.com/wikem.cf.bucket/images/thumb/F8.png/300px-F8.png)](https://wikem.org/wiki/File:F8.png)
+
+External views of the larynx: (a) anterior aspect; (b) anterolateral aspect with the thyroid gland and cricothyroid ligament removed.
+
+[![Image 2](https://s3.ap-southeast-2.amazonaws.com/wikem.cf.bucket/images/thumb/Cartilages_and_ligaments_of_the_larynx.png/300px-Cartilages_and_ligaments_of_the_larynx.png)](https://wikem.org/wiki/File:Cartilages_and_ligaments_of_the_larynx.png)
+
+The cartilages and ligaments of the larynx seen posteriorly.
+
+*   'Can't intubate, can't ventilate' 
+    *   Need to secure an airway and cannot do so by non-surgical means
+
+*   Relevant clinical scenarios: 
+    *   Choking event with food bolus located above cricothyroid membrane
+    *   Anaphylaxis requiring airway intervention but unable to pass tube from above
+    *   Severe facial trauma or burns with distorted anatomy
+    *   Failed airway
+
+Contraindications
+-----------------
+
+*   No absolute contraindications in adults[[1]](https://wikem.org/wiki/Surgical_cricothyrotomy#cite_note-1)
+*   In infants and young children, [Needle Cricothyrotomy](https://wikem.org/wiki/Needle_Cricothyrotomy "Needle Cricothyrotomy") may be preferred 
+    *   Cutoff age is debated 
+        *   Young as 5 in some sources[[2]](https://wikem.org/wiki/Surgical_cricothyrotomy#cite_note-2)
+        *   10 or 12 years of age in other
+
+### Relative Contraindications
+
+*   Inability to identify the landmarks.
+*   Underlying anatomical abnormality.
+*   Tracheal transection or severe trauma.
+
+### Predictors of Difficult [Cricothyrotomy](https://wikem.org/wiki/Cricothyrotomy "Cricothyrotomy") (SHORT)
+
+*   **S**urgery
+*   **H**ematoma
+*   **O**besity
+*   **R**adiation (Burn or other distortion)
+*   **T**umor
+
+Materials
+---------
+
+*   No. 11 blade scalpel
+*   Trousseau dilator
+*   Tracheal hook
+*   [Bougie](https://wikem.org/wiki/Bougie "Bougie")
+*   Cuffed No. 4 Tracheostomy Tube or size 6 ETT
+*   4 x 4 gauze
+*   Surgical drape
+*   Antiseptic solution
+
+Procedure
+---------
+
+[![Image 3](https://s3.ap-southeast-2.amazonaws.com/wikem.cf.bucket/images/thumb/Ant_Neck_Cric.png/300px-Ant_Neck_Cric.png)](https://wikem.org/wiki/File:Ant_Neck_Cric.png)
+
+Anterior neck anatomy with site of initial surgical cricothyrotomy incision (red line).
+
+[![Image 4](https://s3.ap-southeast-2.amazonaws.com/wikem.cf.bucket/images/thumb/Larynx_external_Cricothyrotomy.gif/300px-Larynx_external_Cricothyrotomy.gif)](https://wikem.org/wiki/File:Larynx_external_Cricothyrotomy.gif)
+
+Landmarks for Cricothyrotomy
+
+[![Image 5: Surgical cricothyrotomy.JPG](https://s3.ap-southeast-2.amazonaws.com/wikem.cf.bucket/images/thumb/Surgical_cricothyrotomy.JPG/300px-Surgical_cricothyrotomy.JPG)](https://wikem.org/wiki/File:Surgical_cricothyrotomy.JPG)
+
+### Scalpel-[Bougie](https://wikem.org/wiki/Bougie "Bougie") Technique:
+
+Note that this technique is preferred as it requires no specialized equipment and can be performed quickly relative to other techniques
+
+*   Identify landmarks as in other techniques
+*   Prep the neck as in other techniques
+*   Stabilize larynx with left hand
+*   Make a 4 cm vertical incision at neck midline over cricothyroid membrane
+*   Palpate cricothyroid membrane with left index finger
+*   Make a horizontal incision into the cricothyroid membrane and dilate using finger or scalpel
+*   Insert left index finger into trachea
+*   Pass [bougie](https://wikem.org/wiki/Bougie "Bougie") over left index finger into trachea
+*   Pass endotracheal tube over bougie just until balloon is no longer visible
+*   Inflate balloon
+*   Secure tube and confirm placement as with other techniques
+
+### Standard Technique:
+
+*   **Identify the Landmarks**
+    *   Starting at the Sternal Notch, palpate superiorly until the Laryngeal Prominence is felt. The Cricothyroid Membrane will be approximately one fingerbreadth below this.
+    *   If not palpable with the prior method, place four fingers longitudinally across the neck with the 5th finger on the Sternal Notch. The Cricothyroid Membrane will be below your Index finger.
+
+*   **Prepare the Neck**
+    *   Clean the neck with antiseptic. If time allows, infiltrate the skin and soft tissue with Lidocaine.
+
+*   **Stabilize the Larynx**
+    *   Note: This is ESSENTIAL to success.
+    *   With the thumb and middle finger of the non-dominant hand, grip the posterolateral aspects of the Larynx, while leaving your index finger free to re-palpate the Cricothyroid membrane at any time.
+
+*   **Incise the Skin**
+    *   With your dominant hand, make a 3.5 cm midline VERTICAL incision over the membrane.
+
+*   **Re-identify the Membrane**
+    *   Use the non-dominant index finger to again relocate the membrane.
+
+*   **Incise the Membrane**
+    *   Make a 1 cm HORIZONTAL incision on the lower edge of the membrane.
+    *   Note: The Cricothyroid vessels lie on the superior edge of the membrane. Making a lower incision helps avoid these vessels.
+    *   Aim the scalpel caudally to avoid injuring the vocal cords.
+
+*   **Once you have made the incision, slide the index finger of your non-dominant hand into the incision so as to not lose the opening.**
+*   **Insert the Tracheal Hook**
+    *   With your dominant hand, insert the hook TRANSVERSLY. Then, rotate it 90 degrees, so that the hook is oriented cephalad and lift the Larynx upward and cephalad. The hook may now be switched to your non-dominant hand or held by an assistant (preferable).
+
+*   **Insert the Trousseau Dilator**
+    *   With your dominant hand, insert the dilator into the incision and GENTLY enlarge the incision in a vertical direction.
+
+*   **Remove the dilator place the tracheostomy (or endotracheal) tube over your finger and into the opening.**
+    *   Note: A gum elastic bougie may be used in place of the above tubes.
+
+*   **Inflate the cuff and confirm placement.**
+
+### Four-Step Technique:
+
+1.   Identify the landmarks (as in the Standard Technique)
+2.   Make a 1-2 cm HORIZONTAL stab incision through both the skin and cricothyroid membrane.
+3.   BEFORE removing the scalpel, insert a tracheal hook and direct it caudally.
+4.   Insert the tracheostomy tube through the incision into the trachea.
+
+Complications
+-------------
+
+*   Incorrect placement
+*   Bleeding
+*   Esophageal or mediastinal perforation
+*   Aspiration
+*   Vocal cord or laryngeal injury
+*   Thyroid injury
+*   Subcutaneous emphysema
+
+See Also
+--------
+
+*   [Intubation](https://wikem.org/wiki/Intubation "Intubation")
+*   [Difficult airway algorithm](https://wikem.org/wiki/Difficult_airway_algorithm "Difficult airway algorithm")
+*   [Surgical airways](https://wikem.org/wiki/Surgical_airways "Surgical airways")
+
+External Links
+--------------
+
+*   [Merk Manual - Surgical Airway](https://www.merckmanuals.com/professional/critical-care-medicine/respiratory-arrest/surgical-airway#v28605119)
+*   [emDocs - Bougie Nights: The Surgical Airway Revisited](http://www.emdocs.net/unlocking-common-ed-procedures-bougie-nights-the-surgical-airway-revisited/)
+
+### Videos
+
+*   EMCrit (0:50) [https://www.youtube.com/watch?v=Q0RVlgwC9rs&feature=emb_logo](https://www.youtube.com/watch?v=Q0RVlgwC9rs&feature=emb_logo)
+*   EMCrit (0:58) [https://www.youtube.com/watch?v=WnTBm5f_ihQ&feature=emb_logo](https://www.youtube.com/watch?v=WnTBm5f_ihQ&feature=emb_logo)
+*   Henneman (6:59) [https://www.youtube.com/watch?v=bIbl6zgWBjg&feature=emb_logo](https://www.youtube.com/watch?v=bIbl6zgWBjg&feature=emb_logo)
+
+References
+----------
+
+1.   [↑](https://wikem.org/wiki/Surgical_cricothyrotomy#cite_ref-1 "Jump up")In Roberts, J. R., In Custalow, C. B., In Thomsen, T. W., & In Hedges, J. R. (2014). Roberts and Hedges' clinical procedures in emergency medicine.
+2.   [↑](https://wikem.org/wiki/Surgical_cricothyrotomy#cite_ref-2 "Jump up")King, C., Henretig, F.M. (2008). Textbook of Pediatric Emergency Procedures.
+

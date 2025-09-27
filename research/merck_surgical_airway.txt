@@ -1,0 +1,49 @@
+Title: Surgical Airway - Critical Care Medicine - Merck Manual Professional Edition
+
+URL Source: https://www.merckmanuals.com/professional/critical-care-medicine/respiratory-arrest/surgical-airway
+
+Markdown Content:
+If the upper airway is obstructed because of a foreign body or massive facial trauma or if ventilation cannot be accomplished by other means, surgical entry into the trachea is required. A surgical airway can also be used after a failed intubation. However, surgical airways take longer than [laryngeal mask airways](https://www.merckmanuals.com/professional/critical-care-medicine/respiratory-arrest/airway-and-respiratory-devices#v28604914) (LMAs) and other supraglottic airways and are therefore a faster means of rescue ventilation. Foreign body obstruction and (for an LMA) massive facial trauma are only rare contraindications to their use.
+
+(See also [Overview of Respiratory Arrest](https://www.merckmanuals.com/professional/critical-care-medicine/respiratory-arrest/overview-of-respiratory-arrest), [Airway Establishment and Control](https://www.merckmanuals.com/professional/critical-care-medicine/respiratory-arrest/airway-establishment-and-control), and [Tracheal Intubation](https://www.merckmanuals.com/professional/critical-care-medicine/respiratory-arrest/tracheal-intubation).)
+
+Cricothyrotomy
+--------------
+
+Scalpel cricothyrotomy/FONA (front of neck airway) is typically used for emergency surgical access because it is faster and simpler than tracheostomy (see also [How To Do Percutaneous Cricothyrotomy](https://www.merckmanuals.com/professional/critical-care-medicine/how-to-do-other-airway-procedures/how-to-do-a-percutaneous-cricothyrotomy)). Cricothyrotomy should be performed if a patient cannot be orotracheally or nasotracheally intubated and cannot be ventilated by alternate methods.
+
+The patient is positioned supine with the neck extended. After sterile preparation, the larynx is grasped with one hand while a blade is used to incise the skin and subcutaneous tissue vertically in the midline, and cricothyroid membrane horizontally. An endotracheal tube or tracheostomy tube can be placed through the incision into the trachea.
+
+![Image 1: Emergency Cricothyrotomy](https://edge.sitecorecloud.io/mmanual-ssq1ci05/media/professional/images/c/r/c/crc-cricothyrotomy-v4.gif?thn=0&sc_lang=en&mw=1920)
+
+Unlike positioning for laryngoscopy or ventilation, the correct position for cricothyrotomy involves extending the neck and arching the shoulders backward. After sterile preparation, the clinician grasps the larynx with the nondominant hand while a blade held in the dominant hand is used to vertically incise the skin, subcutaneous tissue, and horizontally incise the cricothyroid membrane using 1 attempt cut that fit the diameter of a small endotracheal tube (6.0 mm internal diameter [ID]) or small tracheotomy tube (cuffed 4.0 Shiley preferred) used to keep the airway open over a bougie guide aimed downward into the trachea.
+
+Complications include hemorrhage, subcutaneous emphysema, [pneumomediastinum](https://www.merckmanuals.com/professional/pulmonary-disorders/mediastinal-and-pleural-disorders/pneumomediastinum), and [pneumothorax](https://www.merckmanuals.com/professional/pulmonary-disorders/mediastinal-and-pleural-disorders/pneumothorax).
+
+Various commercial products allow rapid surgical access to the cricothyroid space and provide a tube that allows adequate oxygenation and ventilation.
+
+Needle cricothyrotomy with large-bore IV catheters cannot provide adequate ventilation unless a 50-psi driving source (jet insufflator or jet ventilator) is readily available.
+
+Tracheostomy
+------------
+
+Tracheostomy is a more complex procedure than cricothyrotomy because the trachea rings are very close together and part of at least one ring usually must be removed to allow tube placement. Tracheostomy is preferably done in an operating room by a surgeon. In emergencies, the procedure has a higher rate of complications than cricothyrotomy and offers no advantage. However, it is the preferred procedure for patients requiring long-term ventilation.
+
+Percutaneous tracheostomy is an attractive alternative for patients who are critically ill and receiving mechanical ventilation. This bedside technique uses skin puncture and dilators to insert a tracheostomy tube. Fiberoptic assistance (within the trachea) is usually used to prevent puncture of the membranous (posterior) trachea and esophagus.
+
+Rarely, tracheostomy insertion causes hemorrhage, thyroid damage, pneumothorax, recurrent [laryngeal nerve paralysis](https://www.merckmanuals.com/professional/ear-nose-and-throat-disorders/laryngeal-disorders/vocal-fold-paralysis), injury to major vessels, or late tracheal stenosis at the insertion site.
+
+Erosion of the trachea is uncommon. It results more commonly from excessively high cuff pressure (> 30 cm of water). Rarely, hemorrhage from major vessels (eg, innominate artery), fistulas (especially tracheoesophageal), and tracheal stenosis occur. Using high-volume, low-pressure cuffs with tubes of appropriate size and measuring cuff pressure frequently (every 8 hours) to maintain it at < 30 cm water decrease the risk of ischemic pressure necrosis, but patients in shock, with low cardiac output, or with sepsis remain especially vulnerable.
+
+![Image 2: quizzes_lightbulb_red](https://www.merckmanuals.com/_next/image?url=https%3A%2F%2Fedge.sitecorecloud.io%2Fmmanual-ssq1ci05%2Fmedia%2Fmanual%2Fmarketing%2Fquizzes_lightbulb_red.png&w=128&q=75)
+
+Test your Knowledge
+
+Take a quiz on this topic
+
+![Image 3: This icon serves as a link to download the eSSENTIAL Accessibility assistive technology app for individuals with physical disabilities. It is featured as part of our commitment to diversity and inclusion. M](blob:http://localhost/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 4: This icon serves as a link to download the eSSENTIAL Accessibility assistive technology app for individuals with physical disabilities. It is featured as part of our commitment to diversity and inclusion. M](blob:http://localhost/b9a31d3949b1882a09ed2f8508d538f3)
+
+![Image 5: This icon serves as a link to download the eSSENTIAL Accessibility assistive technology app for individuals with physical disabilities. It is featured as part of our commitment to diversity and inclusion. M](blob:http://localhost/b9a31d3949b1882a09ed2f8508d538f3)
+

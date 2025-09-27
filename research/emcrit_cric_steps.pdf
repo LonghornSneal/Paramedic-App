@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head >
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name='robots' content='noindex, follow' />
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+	<!-- This site is optimized with the Yoast SEO Premium plugin v26.0 (Yoast SEO v26.0) - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Page not found - EMCrit Project</title>
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:title" content="Page not found - EMCrit Project" />
+	<meta property="og:site_name" content="EMCrit Project" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://emcrit.org/#website","url":"https://emcrit.org/","name":"EMCrit Project","description":"Online Medical Education on Emergency Department (ED) Critical Care, Trauma, and Resuscitation","publisher":{"@id":"https://emcrit.org/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://emcrit.org/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"},{"@type":"Organization","@id":"https://emcrit.org/#organization","name":"EMCrit Project","url":"https://emcrit.org/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://emcrit.org/#/schema/logo/image/","url":"https://i0.wp.com/emcrit.org/wp-content/uploads/2015/04/podcast-art-for-itunes-600-600-2011-version.jpg?fit=600%2C600&ssl=1","contentUrl":"https://i0.wp.com/emcrit.org/wp-content/uploads/2015/04/podcast-art-for-itunes-600-600-2011-version.jpg?fit=600%2C600&ssl=1","width":600,"height":600,"caption":"EMCrit Project"},"image":{"@id":"https://emcrit.org/#/schema/logo/image/"},"sameAs":["https://www.facebook.com/emcrit","https://x.com/emcrit","https://www.instagram.com/emcrit/","http://youtube.com/emcrit"]}]}</script>
+	<!-- / Yoast SEO Premium plugin. -->
+
+
+<link rel='dns-prefetch' href='//www.googletagmanager.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//v0.wordpress.com' />
+<link rel='preconnect' href='//i0.wp.com' />
+<link rel='preconnect' href='//c0.wp.com' />
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/emcrit.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.8.2"}};
+/*! This file is auto-generated */
+!function(s,n){var o,i,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),a=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===a[t]})}function u(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);for(var n=e.getImageData(16,16,1,1),a=0;a<n.data.length;a++)if(0!==n.data[a])return!1;return!0}function f(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\udedf")}return!1}function g(e,t,n,a){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):s.createElement("canvas"),o=r.getContext("2d",{willReadFrequently:!0}),i=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(function(e){i[e]=t(o,e,n,a)}),i}function t(e){var t=s.createElement("script");t.src=e,t.defer=!0,s.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",i=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){s.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+g.toString()+"("+[JSON.stringify(i),f.toString(),p.toString(),u.toString()].join(",")+"));",a=new Blob([e],{type:"text/javascript"}),r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=function(e){c(n=e.data),r.terminate(),t(n)})}catch(e){}c(n=g(i,f,p,u))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<link rel='stylesheet' id='mp-theme-css' href='https://emcrit.org/wp-content/plugins/memberpress/css/ui/theme.css?ver=1.12.7' type='text/css' media='all' />
+<link rel='stylesheet' id='magazine-pro-theme-css' href='https://emcrit.org/wp-content/themes/magazine-pro/style.css?ver=3.1' type='text/css' media='all' />
+<style id='wp-emoji-styles-inline-css' type='text/css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel='stylesheet' id='wp-block-library-css' href='https://c0.wp.com/c/6.8.2/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='safe-svg-svg-icon-style-inline-css' type='text/css'>
+.safe-svg-cover{text-align:center}.safe-svg-cover .safe-svg-inside{display:inline-block;max-width:100%}.safe-svg-cover svg{fill:currentColor;height:100%;max-height:100%;max-width:100%;width:100%}
+
+</style>
+<link rel='stylesheet' id='mediaelement-css' href='https://c0.wp.com/c/6.8.2/wp-includes/js/mediaelement/mediaelementplayer-legacy.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-mediaelement-css' href='https://c0.wp.com/c/6.8.2/wp-includes/js/mediaelement/wp-mediaelement.min.css' type='text/css' media='all' />
+<style id='jetpack-sharing-buttons-style-inline-css' type='text/css'>
+.jetpack-sharing-buttons__services-list{display:flex;flex-direction:row;flex-wrap:wrap;gap:0;list-style-type:none;margin:5px;padding:0}.jetpack-sharing-buttons__services-list.has-small-icon-size{font-size:12px}.jetpack-sharing-buttons__services-list.has-normal-icon-size{font-size:16px}.jetpack-sharing-buttons__services-list.has-large-icon-size{font-size:24px}.jetpack-sharing-buttons__services-list.has-huge-icon-size{font-size:36px}@media print{.jetpack-sharing-buttons__services-list{display:none!important}}.editor-styles-wrapper .wp-block-jetpack-sharing-buttons{gap:0;padding-inline-start:0}ul.jetpack-sharing-buttons__services-list.has-background{padding:1.25em 2.375em}
+</style>
+<style id='elasticpress-related-posts-style-inline-css' type='text/css'>
+.editor-styles-wrapper .wp-block-elasticpress-related-posts ul,.wp-block-elasticpress-related-posts ul{list-style-type:none;padding:0}.editor-styles-wrapper .wp-block-elasticpress-related-posts ul li a>div{display:inline}
+
+</style>
+<style id='powerpress-player-block-style-inline-css' type='text/css'>
+
+
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='abt-frontend-css' href='https://emcrit.org/wp-content/plugins/academic-bloggers-toolkit/bundle/frontend.css?ver=1729473685' type='text/css' media='all' />
+<link rel='stylesheet' id='wpsm_ac_pro-font-awesome-front-css' href='https://emcrit.org/wp-content/plugins/accordion-pro/assets/css/font-awesome/css/font-awesome.min.css?ver=6.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wpsm_ac_pro_bootstrap-front-css' href='https://emcrit.org/wp-content/plugins/accordion-pro/assets/css/bootstrap-front.css?ver=6.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wpsm_ac_pro_animate-css' href='https://emcrit.org/wp-content/plugins/accordion-pro/assets/css/animate.css?ver=6.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wpsm_ac_front_font-icon-picker_all-css' href='https://emcrit.org/wp-content/plugins/accordion-pro/assets/mul-type-icon-picker/icon-picker.css?ver=6.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wpsm_ac_front_font-icon-picker-glyphicon_style-css' href='https://emcrit.org/wp-content/plugins/accordion-pro/assets/mul-type-icon-picker/picker/glyphicon.css?ver=6.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wpsm_ac_front_font-icon-picker-dashicons_style-css' href='https://emcrit.org/wp-content/plugins/accordion-pro/assets/mul-type-icon-picker/picker/dashicons.css?ver=6.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wpsm_ac_pro_scrollbar_style-css' href='https://emcrit.org/wp-content/plugins/accordion-pro/assets/scrollbar/jquery.mCustomScrollbar.css?ver=6.8.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wpcw-frontend-css' href='https://emcrit.org/wp-content/plugins/wp-courseware/assets/css/frontend.css?id=bd62a8f26ba034a1bafb&#038;ver=4.17.0' type='text/css' media='all' />
+<link rel='stylesheet' id='wpcw-course-note-css' href='https://emcrit.org/wp-content/plugins/wp-courseware/assets/css/coursenote.css?id=b2b610afda7c56ebf10c&#038;ver=4.17.0' type='text/css' media='all' />
+<link rel='stylesheet' id='sidebar-login-css' href='https://emcrit.org/wp-content/plugins/sidebar-login/build/sidebar-login.css?ver=1729473461' type='text/css' media='all' />
+<link rel='stylesheet' id='dashicons-css' href='https://c0.wp.com/c/6.8.2/wp-includes/css/dashicons.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='google-fonts-css' href='//fonts.googleapis.com/css?family=Roboto%3A300%2C400%7CRaleway%3A400%2C500%2C900&#038;ver=3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='elasticpress-facets-css' href='https://emcrit.org/wp-content/plugins/elasticpress/dist/css/facets-styles.css?ver=5797fb4036fc4007a87a' type='text/css' media='all' />
+<link rel='stylesheet' id='simple-social-icons-font-css' href='https://emcrit.org/wp-content/plugins/simple-social-icons/css/style.css?ver=3.0.2' type='text/css' media='all' />
+<link rel='stylesheet' id='genesis-printstyle-plus-custom-css' href='https://emcrit.org/wp-content/themes/magazine-pro/gpsp-print.css?ver=3.1' type='text/css' media='print' />
+<link rel='stylesheet' id='aawp-css' href='https://emcrit.org/wp-content/plugins/aawp/assets/dist/css/main.css?ver=3.19.0' type='text/css' media='all' />
+<script type="text/javascript" src="https://c0.wp.com/c/6.8.2/wp-includes/js/jquery/jquery.min.js" id="jquery-core-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.8.2/wp-includes/js/jquery/jquery-migrate.min.js" id="jquery-migrate-js"></script>
+<script type="text/javascript" id="file_uploads_nfpluginsettings-js-extra">
+/* <![CDATA[ */
+var params = {"clearLogRestUrl":"https:\/\/emcrit.org\/wp-json\/nf-file-uploads\/debug-log\/delete-all","clearLogButtonId":"file_uploads_clear_debug_logger","downloadLogRestUrl":"https:\/\/emcrit.org\/wp-json\/nf-file-uploads\/debug-log\/get-all","downloadLogButtonId":"file_uploads_download_debug_logger"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://emcrit.org/wp-content/plugins/ninja-forms-uploads/assets/js/nfpluginsettings.js?ver=3.3.23" id="file_uploads_nfpluginsettings-js"></script>
+<script type="text/javascript" src="https://emcrit.org/wp-content/plugins/accordion-pro/assets/scrollbar/jquery.mCustomScrollbar.concat.min.js?ver=6.8.2" id="wpsm_ac_pro_scrollbar_script-js"></script>
+<script type="text/javascript" src="https://emcrit.org/wp-content/themes/magazine-pro/js/entry-date.js?ver=1.0.0" id="magazine-entry-date-js"></script>
+<script type="text/javascript" src="https://emcrit.org/wp-content/themes/magazine-pro/js/responsive-menu.js?ver=1.0.0" id="magazine-responsive-menu-js"></script>
+
+<!-- Google tag (gtag.js) snippet added by Site Kit -->
+<!-- Google Analytics snippet added by Site Kit -->
+<script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=G-VD7SGNM828" id="google_gtagjs-js" async></script>
+<script type="text/javascript" id="google_gtagjs-js-after">
+/* <![CDATA[ */
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}
+gtag("set","linker",{"domains":["emcrit.org"]});
+gtag("js", new Date());
+gtag("set", "developer_id.dZTNiMT", true);
+gtag("config", "G-VD7SGNM828");
+/* ]]> */
+</script>
+<link rel="https://api.w.org/" href="https://emcrit.org/wp-json/" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://emcrit.org/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.8.2" />
+<style type="text/css">.aawp .aawp-tb__row--highlight{background-color:#256aaf;}.aawp .aawp-tb__row--highlight{color:#256aaf;}.aawp .aawp-tb__row--highlight a{color:#256aaf;}</style><meta name="generator" content="Site Kit by Google 1.162.1" />            <script type="text/javascript"><!--
+                                function powerpress_pinw(pinw_url){window.open(pinw_url, 'PowerPressPlayer','toolbar=0,status=0,resizable=1,width=460,height=320');	return false;}
+                //-->
+
+                // tabnab protection
+                window.addEventListener('load', function () {
+                    // make all links have rel="noopener noreferrer"
+                    document.querySelectorAll('a[target="_blank"]').forEach(link => {
+                        link.setAttribute('rel', 'noopener noreferrer');
+                    });
+                });
+            </script>
+            <link rel="icon" href="https://emcrit.org/wp-content/themes/magazine-pro/images/favicon.ico" />
+<meta name="google-site-verification" content="7iOWJeq2dhOHCTmSQbZS4AXRFqt7PWtZeZswa8L3830" />
+<script src="//use.typekit.net/otu6fju.js"></script>
+<script>try{Typekit.load();}catch(e){}</script>
+<meta name="apple-itunes-app" content="app-id=314020330" />
+<meta charset="utf-8">
+
+
+<!-- Google Tag Manager snippet added by Site Kit -->
+<script type="text/javascript">
+/* <![CDATA[ */
+
+			( function( w, d, s, l, i ) {
+				w[l] = w[l] || [];
+				w[l].push( {'gtm.start': new Date().getTime(), event: 'gtm.js'} );
+				var f = d.getElementsByTagName( s )[0],
+					j = d.createElement( s ), dl = l != 'dataLayer' ? '&l=' + l : '';
+				j.async = true;
+				j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+				f.parentNode.insertBefore( j, f );
+			} )( window, document, 'script', 'dataLayer', 'GTM-PKRQGWD' );
+			
+/* ]]> */
+</script>
+
+<!-- End Google Tag Manager snippet added by Site Kit -->
+		<style type="text/css" id="wp-custom-css">
+			body {
+	font-size: 18px;
+}
+
+.widget-title {
+	clear: both;
+	font-size: 16px;
+	margin-bottom: 24px;
+	text-transform: uppercase;
+	background-color: #222;
+	color: #fff;
+	padding: 10px;
+}
+
+.featured-content a.alignnone, 
+.js .home-middle a.alignleft, .js .home-top a.alignleft {
+	margin-bottom: 0;
+}
+
+/*body {
+	font-family: "freight-text-pro", sans-serif;
+}*/
+
+.widget-title {
+	margin-bottom: 0;
+}
+
+.sidebar .widget {
+	margin-bottom: 20px;
+}
+
+/*Email Opt-In Form*/
+ul#emaillist li {
+	border-bottom-style: 0;
+	border-bottom-width: 0;
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+ul#emaillist li {
+	list-style-type: circle;
+}
+
+h3#emaillist {
+	color: #aaa;
+}
+
+p#emaillist {
+	margin-bottom: 0;
+}
+
+.enews-widget {
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+
+/* Ambiance Pro-like design for single entry
+--------------------------------------------- */
+.entry-background {
+	display: block;
+	height: 560px;
+	width: 100%;
+}
+
+.has-featured-image .site-header,
+.has-featured-image .nav-secondary {
+	padding-top: 0;
+	background: rgba(0,0,0,0.5);
+}
+
+.has-featured-image .site-header {
+	text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.entry-avatar {
+	text-align: center;
+	position: relative;
+}
+
+.entry-avatar .avatar {
+	background-color: #fff;
+	float: none;
+	margin-bottom: 40px;
+	margin-top: -105px;
+	padding: 5px;
+	height: 120px;
+	width: 120px;
+	border-radius: 50%;
+}
+
+.has-featured-image .site-title a, .has-featured-image .site-title a:hover,
+.has-featured-image .genesis-nav-menu > li > a,
+.has-featured-image .responsive-menu-icon:before,
+.has-featured-image .genesis-nav-menu.responsive-menu > .menu-item-has-children:before {
+	color: #fff;
+}
+
+@media only screen and (min-width: 1024px) {
+	.entry-background {
+		padding-top: 64px;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.has-featured-image .genesis-nav-menu.responsive-menu .sub-menu li a {
+		color: #fff;
+	}
+}
+
+/*+++++++++++++++++++++++++++++++++Brought from Balance+++++++++++++++++++++++++*/
+/* Bevel Buttons */
+a.bevel {
+	border-color: rgba(255,255,255,.2) rgba(0,0,0,0.1) rgba(0,0,0,.1) rgba(255,255,255,0.2);
+	border-style: solid;
+	border-width: 3px;
+	color: #fff;
+	display: inline-block;
+	padding: .5em .8em;
+	text-decoration: none;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+}
+
+a.bevel.blue {
+	background: #031B62;
+	color: #fff;
+}
+
+.format_text .bevel:hover {
+	color: #fff;
+	opacity: .5;
+}
+
+/*Image Shadows*/
+.img-shadow {
+	position: relative;
+	max-width: 100%;
+	float: left;
+}
+
+.img-shadow::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	-moz-box-shadow: 0 0 10px 4px #777777;
+	-webkit-box-shadow: 0 0 10px 4px #777777;
+	box-shadow: 0 0 10px 4px #777777;
+}
+
+.img-shadow img {
+	float: left;
+}
+
+/*Other Stuff*/
+p#myfooter {
+	text-align: center;
+	color: #888888;
+	font-size: 8px;
+}
+
+/*body.home .entry-content p {
+	width: 55%;
+	float: right;
+	margin-top: -5px;
+}
+
+a.more-link {
+	float: right;
+	clear: both;
+	font-size: 9px;
+}
+
+input#goog-input {
+	height: 24px;
+	margin: 0;
+}
+*/
+/*My Post Footer (Subscribe Box)*/
+/* BOXES */
+#rightcolp {
+	clear: both;
+	width: 100%;
+}
+
+#rightcolp p {
+	font-size: 14px;
+	line-height: 1.5em;
+	padding: 10px 2.5em 10px 0;
+}
+
+a#cmecredit {
+	color: #031B62;
+}
+
+#subscribep h3 {
+	padding: 0;
+	font-size: 2.4em;
+	text-align: center;
+}
+
+#rightcolp ul {
+	list-style-position: inside;
+	list-style-type: square;
+	margin-left: 1em;
+}
+
+#rightcolp ul a {
+	text-decoration: underline;
+	font-size: 14px;
+}
+
+#rightcolp ul a:hover {
+	border: 0;
+}
+
+/*#rightcolp li { margin-bottom: 10px; }*/
+#subscribep {
+	margin: 15px 0 0;
+	padding: 0 10px 19px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	text-align: center;
+}
+
+#mc_embed_signup form {
+	text-align: center;
+}
+
+#customp {
+	background: #FCF16A;
+	border: 1px solid #C6D9E9;
+	margin: 15px 0 0;
+	padding: 0 10px 10px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#customp h3 {
+	text-align: center;
+}
+
+#customp ul {
+	margin-left: 100px;
+}
+
+.clearspace p {
+	color: #FFF;
+}
+
+h3.getcme {
+	font-size: 48px;
+	line-height: 58px;
+	text-align: center;
+}
+
+/*guest-post box*/
+div.guest {
+	background-color: lightgrey;
+	float: left;
+	width: 750px;
+	padding: 0 10px 0 0;
+	border: 4px solid navy;
+	margin-bottom: 25px;
+}
+
+img#guest {
+	margin-bottom: 0;
+}
+
+div.csl-entry {
+	line-height: 1;
+	margin-bottom: 15px;
+}
+
+iframe.bookframe {
+	border-width: 0;
+}
+
+iframe.youtube-player, div.embed-vimeo iframe {
+	margin-bottom: 40px;
+}
+
+h3.getcme {
+	margin-top: 10px;
+}
+
+section#facebook-likebox-2 div.widget-wrap iframe {
+	height: 300px !important;
+	width: 400px !important;
+}
+
+div.comment-content p a {
+	color: #000080;
+	text-decoration: underline;
+}
+
+/*expand title area*/
+div.title-area {
+	width: 800px;
+}
+.site-header .widget-area {
+	width: 320px;
+}
+
+span.tinyemcrit {
+	color: #BCBEBF;
+}
+
+/*rec reading page*/
+div.betweenbooks {
+	clear: both;
+	padding-top: 50px;
+}
+
+/*styling of insightly forms*/
+.form-style-1 {
+	margin: 10px auto;
+	max-width: 400px;
+	padding: 20px 12px 10px 20px;
+	font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.form-style-1 li {
+	padding: 0;
+	display: block;
+	list-style: none;
+	margin: 10px 0 0;
+}
+
+.form-style-1 label {
+	margin: 0 0 3px;
+	padding: 0;
+	display: block;
+	font-weight: bold;
+}
+
+.form-style-1 input[type=text],
+.form-style-1 input[type=date],
+.form-style-1 input[type=datetime],
+.form-style-1 input[type=number],
+.form-style-1 input[type=search],
+.form-style-1 input[type=time],
+.form-style-1 input[type=url],
+.form-style-1 input[type=email],
+textarea,
+select {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	border: 1px solid #BEBEBE;
+	padding: 7px;
+	margin: 0;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-ms-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	outline: none;
+}
+
+.form-style-1 input[type=text]:focus,
+.form-style-1 input[type=date]:focus,
+.form-style-1 input[type=datetime]:focus,
+.form-style-1 input[type=number]:focus,
+.form-style-1 input[type=search]:focus,
+.form-style-1 input[type=time]:focus,
+.form-style-1 input[type=url]:focus,
+.form-style-1 input[type=email]:focus,
+.form-style-1 textarea:focus,
+.form-style-1 select:focus {
+	-moz-box-shadow: 0 0 8px #88D5E9;
+	-webkit-box-shadow: 0 0 8px #88D5E9;
+	box-shadow: 0 0 8px #88D5E9;
+	border: 1px solid #88D5E9;
+}
+
+.form-style-1 .field-divided {
+	width: 49%;
+}
+
+.form-style-1 .field-long {
+	width: 100%;
+}
+
+.form-style-1 .field-select {
+	width: 100%;
+}
+
+.form-style-1 .field-textarea {
+	height: 100px;
+}
+
+.form-style-1 input[type=submit], .form-style-1 input[type=button] {
+	background: #4B99AD;
+	padding: 8px 15px;
+	border: none;
+	color: #fff;
+}
+
+.form-style-1 input[type=submit]:hover, .form-style-1 input[type=button]:hover {
+	background: #4691A4;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+.form-style-1 .required {
+	color: red;
+}
+/*End Insightly Styling*/
+
+.entry-author-name {font-size: 1.2em;font-weight: bold;}
+
+
+.entry-title {
+	font-size: 24px;
+}
+
+.abt-bibliography, .abt-static-bib {
+    background: #f5f5f5;
+    padding: 10px;
+}
+
+div.podcastbox {
+background: #F5F5F5;
+padding-top: 25px;
+padding-right: 0;
+padding-bottom: 25px;
+padding-left: 25px;
+margin-bottom: 10px;
+border-radius: 25px;
+}
+
+/*ibcc-menu-stuff
+.menuicon, .menuicon:hover {
+	top: 20px;
+	left: 10px;
+	position: relative;
+}
+
+li#menu-item-453038 {
+	width: 50px;
+}
+
+li#menu-item-453038:hover {
+	position: relative;
+	width: 50px;
+}
+*/
+
+.ibanchor:target::before {
+  content: "";
+  display: block;
+  height: 100px; /* fixed header height*/
+  margin: -100px 0 0; /* negative fixed header height */
+}
+
+@media only screen and (max-device-width: 600px) {
+   div.title-area {
+	width: 320px;
+}
+		h1.sitetitle {
+	width: 320px;
+	}
+	.ibanchor:target::before {
+  content: "";
+  display: block;
+  height: 0px; /* fixed header height*/
+  margin: 0px 0 0; /* negative fixed header height */
+}
+	
+    }
+
+/*Team Page*/
+/* Three columns side by side */
+.page-id-459746 .column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+/* Display the columns below each other instead of side by side on small screens */
+ @media screen and (max-width: 650px) {
+ .page-id-459746 .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+/* Add some shadows to create a card effect */
+.page-id-459746 .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Some left and right padding inside the container */
+.page-id-459746 .container {
+  padding: 0 16px;
+}
+
+/* Clear floats */
+.page-id-459746 .container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.page-id-459746 .title {
+  color: grey;
+}
+
+.page-id-459746 .button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.page-id-459746 .button:hover {
+  background-color: #555;
+} 
+
+/*membership buttons
+.group-button {
+	border-radius: 4px;
+	font-size: 16px;
+	background-color: #008CBA;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}*/
+
+
+/* Content Boxes*/
+.content-box-blue,
+.content-box-gray,
+.content-box-yellow {
+margin: 0 0 25px;
+overflow: hidden;
+padding: 20px;
+}
+.content-box-blue {
+background-color: #d8ecf7;
+border: 1px solid #afcde3;
+}
+.content-box-gray {
+background-color: #e2e2e2;
+border: 1px solid #bdbdbd;
+}
+.content-box-yellow {
+background-color: #fef5c4;
+border: 1px solid #fadf98;
+}
+
+/*Buttons*/
+.button {
+  align-items: center;
+  background-color: initial;
+  background-image: linear-gradient(#464d55, #25292e);
+  border-radius: 8px;
+  border-width: 0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .1),0 3px 6px rgba(0, 0, 0, .05);
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  font-family: expo-brand-demi,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 18px;
+  height: 52px;
+  justify-content: center;
+  line-height: 1;
+  margin: 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 32px;
+  text-align: center;
+  text-decoration: none;
+  transform: translate3d(0, 0, 0);
+  transition: all 150ms;
+  vertical-align: baseline;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+
+.button:hover {
+  box-shadow: rgba(0, 1, 0, .2) 0 2px 8px;
+  opacity: .85;
+}
+
+.button:active {
+  outline: 0;
+}
+
+.button:focus {
+  box-shadow: rgba(0, 0, 0, .5) 0 0 0 3px;
+}
+
+@media (max-width: 420px) {
+  .button-84 {
+    height: 48px;
+  }
+}
+
+h6 {
+	background-color: blue;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+h5 {
+	background-color: #999999;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+}		</style>
+		</head>
+<body data-rsssl=1 class="error404 wp-theme-genesis wp-child-theme-magazine-pro aawp-custom content-sidebar genesis-breadcrumbs-visible genesis-footer-widgets-visible magazine-pro-blue primary-nav">		<!-- Google Tag Manager (noscript) snippet added by Site Kit -->
+		<noscript>
+			<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PKRQGWD" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+		</noscript>
+		<!-- End Google Tag Manager (noscript) snippet added by Site Kit -->
+		<div class="site-container"><nav class="nav-primary" aria-label="Main"><div class="wrap"><ul id="menu-main-menu" class="menu genesis-nav-menu menu-primary"><li id="menu-item-1010" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1010"><a href="https://emcrit.org/"><span >Home</span></a></li>
+<li id="menu-item-443628" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-443628"><a href="https://emcrit.org/category/emcrit/"><span >EMCrit</span></a></li>
+<li id="menu-item-19146" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-19146"><a href="http://pulmcrit.org"><span >PulmCrit</span></a></li>
+<li id="menu-item-453570" class="menu-item menu-item-type-post_type menu-item-object-ibcc menu-item-453570"><a href="https://emcrit.org/ibcc/toc/"><span >IBCC</span></a></li>
+<li id="menu-item-505061" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-505061"><a href="https://emcrit.org/category/emcrit/1to1/"><span >1:1</span></a></li>
+<li id="menu-item-486977" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-486977"><a href="https://emcrit.org/odr"><span >ODR</span></a></li>
+<li id="menu-item-1031" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1031"><a href="https://emcrit.org/about-me"><span >About</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-1013" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1013"><a rel="author" href="https://emcrit.org/about/"><span >About EMCrit</span></a></li>
+	<li id="menu-item-17215" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17215"><a href="https://emcrit.org/about-pulmcrit/"><span >PulmCrit – The Full Story</span></a></li>
+	<li id="menu-item-999" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-999"><a href="https://emcrit.org/faq/"><span >EMCrit FAQ</span></a></li>
+	<li id="menu-item-1028" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1028"><a href="https://emcrit.org/subscribe/"><span >Subscribe to the Newsletter</span></a></li>
+</ul>
+</li>
+<li id="menu-item-1032" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1032"><a href="https://emcrit.org/contact/"><span >Contact</span></a></li>
+<li id="menu-item-484164" class="highlight menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-484164"><a href="https://emcrit.org/join"><span >Join</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-484165" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-484165"><a href="https://emcrit.org/why-join/"><span >Why Should I Become a Member?</span></a></li>
+	<li id="menu-item-484166" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-484166"><a href="https://emcrit.org/why-join/faq/"><span >Questions Before Joining (FAQ)</span></a></li>
+	<li id="menu-item-484167" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-484167"><a href="https://emcrit.org/join"><span >Join Now!</span></a></li>
+</ul>
+</li>
+</ul></div></nav><header class="site-header"><div class="wrap"><div class="title-area">
+<h1 class="site-title" itemprop="headline"><a href="https://emcrit.org">EMCrit Project</a></h1>
+<p class="site-description">Online Medical Education on Emergency Department (ED) Critical Care, Trauma, and Resuscitation</p></div><div class="widget-area header-widget-area"><section id="search-5" class="widget widget_search"><div class="widget-wrap"><form class="search-form" method="get" action="https://emcrit.org/" role="search"><input class="search-form-input" type="search" name="s" id="searchform-1" placeholder="Search the site ..."><input class="search-form-submit" type="submit" value="Search"><meta content="https://emcrit.org/?s={s}"></form></div></section>
+</div></div></header><nav class="nav-secondary" aria-label="Secondary"><div class="wrap"><ul id="menu-racc-secondary-nav" class="menu genesis-nav-menu menu-secondary"><li id="menu-item-446537" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-446537"><a href="https://emcrit.org/emcrit-archives/"><span >EMCrit Archives</span></a></li>
+<li id="menu-item-482482" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-482482"><a href="https://emcrit.org/squirt/edicu/"><span >EDICUs</span></a></li>
+<li id="menu-item-499807" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-499807"><a href="#"><span >Show Types ▿</span></a>
+<ul class="sub-menu">
+	<li id="menu-item-505060" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-505060"><a href="https://emcrit.org/category/emcrit/1to1/"><span >1:1 Nursing Podcast</span></a></li>
+	<li id="menu-item-499808" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-499808"><a href="https://emcrit.org/foundstab/"><span >Foundational Stabilization (FoundStab) Project</span></a></li>
+	<li id="menu-item-496104" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-496104"><a href="https://emcrit.org/tag/racc-lit"><span >RACC-Lit</span></a></li>
+	<li id="menu-item-502370" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-502370"><a href="https://emcrit.org/tag/cv-emcrit/"><span >CV-EMCrit</span></a></li>
+	<li id="menu-item-497108" class="menu-item menu-item-type-taxonomy menu-item-object-subject menu-item-497108"><a href="https://emcrit.org/subject/mind-of-the-resuscitationist/"><span >Mind of the Resuscitationist</span></a></li>
+	<li id="menu-item-497107" class="menu-item menu-item-type-taxonomy menu-item-object-subject menu-item-497107"><a href="https://emcrit.org/subject/procedures/"><span >Procedures</span></a></li>
+</ul>
+</li>
+<li id="menu-item-503801" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-503801"><a href="https://emcrit.org/outside-shows/"><span >Outside Shows</span></a></li>
+</ul></div></nav><div class="site-inner"><div class="content-sidebar-wrap"><main class="content"><div class="breadcrumb">You are here: <span class="breadcrumb-link-wrap"><a class="breadcrumb-link" href="https://emcrit.org/"><span class="breadcrumb-link-text-wrap">Home</span></a><meta ></span> <span aria-label="breadcrumb separator">/</span> Not found: </div>
+	<div class="post hentry">
+
+		<h1 class="entry-title">Not Found, Error 404</h1>
+		<div class="entry-content">
+			<p>The page you are looking for no longer exists. Perhaps you can return back to the site's <a href="https://emcrit.org">homepage</a> and see if you can find what you are looking for. Or, you can try finding it with the information below:</p>
+		<div>
+			<p>
+						<a href="https://emcrit.org/login/?redirect_to=https%3A%2F%2Femcrit.org%2Fwp-content%2Fuploads%2F2018%2F02%2FCricSteps.pdf">Do you need to Log in?</a></p>
+		</div>
+
+			<div class="archive-page">
+
+				<h4>Pages:</h4>
+				<ul>
+					<li class="page_item page-item-484199"><a href="https://emcrit.org/casey-albin/">About Casey Albin MD</a></li>
+<li class="page_item page-item-56797"><a href="https://emcrit.org/humanfact0rz/">About Christopher Hicks, MD</a></li>
+<li class="page_item page-item-20391"><a href="https://emcrit.org/about-emnerd/">About EMNerd</a></li>
+<li class="page_item page-item-17601"><a href="https://emcrit.org/mike-lauria/">About Mike Lauria</a></li>
+<li class="page_item page-item-484200"><a href="https://emcrit.org/neha-dangayach-md/">About Neha Dangayach, MD</a></li>
+<li class="page_item page-item-483089"><a href="https://emcrit.org/account/">Account</a></li>
+<li class="page_item page-item-505926"><a href="https://emcrit.org/acep/">ACEP Lecture Notes</a></li>
+<li class="page_item page-item-484062 page_item_has_children"><a href="https://emcrit.org/books/">Books</a>
+<ul class='children'>
+	<li class="page_item page-item-2280"><a href="https://emcrit.org/books/clinical-recommended-reading/">Clinical Recommended Reading</a></li>
+	<li class="page_item page-item-13552"><a href="https://emcrit.org/books/fiction/">Fiction Books I&#8217;ve Loved</a></li>
+	<li class="page_item page-item-2869"><a href="https://emcrit.org/books/journals/">Journals I Read Each Month</a></li>
+	<li class="page_item page-item-484039"><a href="https://emcrit.org/books/nonfiction/">Non-Fiction Books I Recommend Divided by Topic</a></li>
+</ul>
+</li>
+<li class="page_item page-item-483849"><a href="https://emcrit.org/course/">CME Episodes</a></li>
+<li class="page_item page-item-505985 page_item_has_children"><a href="https://emcrit.org/cme/">CME Stuff</a>
+<ul class='children'>
+	<li class="page_item page-item-503550"><a href="https://emcrit.org/cme/seasons/">EMCrit CME Seasons</a></li>
+</ul>
+</li>
+<li class="page_item page-item-462603"><a href="https://emcrit.org/commenting/">Commenting Policy</a></li>
+<li class="page_item page-item-1725"><a href="https://emcrit.org/credits/">Credits and Attributions</a></li>
+<li class="page_item page-item-484792"><a href="https://emcrit.org/deeper-stimulus-projects/">Deeper Stimulus Projects</a></li>
+<li class="page_item page-item-10245"><a href="https://emcrit.org/dsi/">Delayed Sequence Intubation (DSI)</a></li>
+<li class="page_item page-item-486187"><a href="https://emcrit.org/donate/">Donate to the EMCrit Project</a></li>
+<li class="page_item page-item-486689"><a href="https://emcrit.org/help/">EMCrit Help Page</a></li>
+<li class="page_item page-item-2428"><a href="https://emcrit.org/live/">EMCrit Live</a></li>
+<li class="page_item page-item-3265"><a href="https://emcrit.org/mix/">EMCrit Live Audio Stream</a></li>
+<li class="page_item page-item-503798"><a href="https://emcrit.org/outside-shows/">EMCrit Outside Shows</a></li>
+<li class="page_item page-item-498470"><a href="https://emcrit.org/plusone/">EMCrit Plus Ones</a></li>
+<li class="page_item page-item-483820 page_item_has_children"><a href="https://emcrit.org/policy/">EMCrit Policies</a>
+<ul class='children'>
+	<li class="page_item page-item-12077"><a href="https://emcrit.org/policy/book-review-guidelines/">Book Reviewer Guidelines for the EMCrit Site</a></li>
+	<li class="page_item page-item-483825"><a href="https://emcrit.org/policy/cme/">CME Information and Accreditation</a></li>
+	<li class="page_item page-item-497178"><a href="https://emcrit.org/policy/corrections/">Corrections</a></li>
+	<li class="page_item page-item-2561"><a href="https://emcrit.org/policy/disclaimer/">Disclaimer</a></li>
+	<li class="page_item page-item-17704"><a href="https://emcrit.org/policy/editorial/">Editorial Policies</a></li>
+	<li class="page_item page-item-492056"><a href="https://emcrit.org/policy/cancellation/">Membership Cancellation Policy</a></li>
+	<li class="page_item page-item-451249"><a href="https://emcrit.org/policy/privacy/">Privacy Policy</a></li>
+	<li class="page_item page-item-446049"><a href="https://emcrit.org/policy/style-guide/">Style Guide</a></li>
+	<li class="page_item page-item-504168"><a href="https://emcrit.org/policy/tos/">Terms of Service</a></li>
+</ul>
+</li>
+<li class="page_item page-item-498521"><a href="https://emcrit.org/foundstab/">Foundational Stabilization (FoundStab) Project</a></li>
+<li class="page_item page-item-497893"><a href="https://emcrit.org/free-coaching-form/">Free Coaching Form</a></li>
+<li class="page_item page-item-475173"><a href="https://emcrit.org/guests/">Information for Guests</a></li>
+<li class="page_item page-item-441058 page_item_has_children"><a href="https://emcrit.org/salad/">Introduction to the SALAD Technique</a>
+<ul class='children'>
+	<li class="page_item page-item-441200"><a href="https://emcrit.org/salad/about/">About the SALAD Technique</a></li>
+	<li class="page_item page-item-482134"><a href="https://emcrit.org/salad/saga-read/">SAGA &#038; READ</a></li>
+	<li class="page_item page-item-482119"><a href="https://emcrit.org/salad/devices/">SALAD Devices</a></li>
+	<li class="page_item page-item-482126"><a href="https://emcrit.org/salad/faq/">SALAD FAQ</a></li>
+	<li class="page_item page-item-482045"><a href="https://emcrit.org/salad/literature/">SALAD Literature and Links</a></li>
+	<li class="page_item page-item-482044 page_item_has_children"><a href="https://emcrit.org/salad/techniques/">The SALAD Techniques</a>
+	<ul class='children'>
+		<li class="page_item page-item-482114"><a href="https://emcrit.org/salad/techniques/beef-salad/">BEEF SALAD</a></li>
+		<li class="page_item page-item-482410"><a href="https://emcrit.org/salad/techniques/eso-ett-gop/">Eso-ETT / GOP</a></li>
+		<li class="page_item page-item-482405"><a href="https://emcrit.org/salad/techniques/saaci/">SAACI</a></li>
+		<li class="page_item page-item-482400"><a href="https://emcrit.org/salad/techniques/salad-poke/">SALAD Poke</a></li>
+		<li class="page_item page-item-482077"><a href="https://emcrit.org/salad/techniques/standard-salad-approach/">Standard SALAD Approach</a></li>
+	</ul>
+</li>
+</ul>
+</li>
+<li class="page_item page-item-16704 page_item_has_children"><a href="https://emcrit.org/janus-general/">Janus General Hospital</a>
+<ul class='children'>
+	<li class="page_item page-item-16714"><a href="https://emcrit.org/janus-general/janus-general-faq/">Janus General FAQ</a></li>
+	<li class="page_item page-item-16710"><a href="https://emcrit.org/janus-general/janus-general-staff/">Janus General Staff</a></li>
+	<li class="page_item page-item-16706"><a href="https://emcrit.org/janus-general/request-privileges/">Request Privileges at Janus General</a></li>
+</ul>
+</li>
+<li class="page_item page-item-483091"><a href="https://emcrit.org/login/">Login</a></li>
+<li class="page_item page-item-483274 page_item_has_children"><a href="https://emcrit.org/members-faq/">Members FAQ</a>
+<ul class='children'>
+	<li class="page_item page-item-483276"><a href="https://emcrit.org/members-faq/private-podcast/">Get the Private Podcast on Your Phone/Device</a></li>
+	<li class="page_item page-item-497336"><a href="https://emcrit.org/members-faq/lost-your-captivate-link/">Lost your Captivate Link?</a></li>
+</ul>
+</li>
+<li class="page_item page-item-483366"><a href="https://emcrit.org/my-courses/">My Courses</a></li>
+<li class="page_item page-item-2669"><a href="https://emcrit.org/preoxygenation/">Preoxygenation, Reoxygenation and Deoxygenation</a></li>
+<li class="page_item page-item-17211"><a href="https://emcrit.org/about-pulmcrit/">PulmCrit &#8211; The Full Story</a></li>
+<li class="page_item page-item-467526"><a href="https://emcrit.org/pulmcrit-instagram/">PulmCrit Instagram Links</a></li>
+<li class="page_item page-item-17269"><a href="https://emcrit.org/pulmcrit-table-of-contents-toc/">PulmCrit Table of Contents (TOC)</a></li>
+<li class="page_item page-item-1651 page_item_has_children"><a href="https://emcrit.org/rush-exam/">Rapid Ultrasound for Shock and Hypotension &#8211; the RUSH Exam</a>
+<ul class='children'>
+	<li class="page_item page-item-4636"><a href="https://emcrit.org/rush-exam/original-rush-article/">Original RUSH Article</a></li>
+</ul>
+</li>
+<li class="page_item page-item-490436"><a href="https://emcrit.org/verification/">Resident/Student Verification</a></li>
+<li class="page_item page-item-484939"><a href="https://emcrit.org/scram/">Resus SCRAM Airway Bag and the Crash Rx Scram</a></li>
+<li class="page_item page-item-497749"><a href="https://emcrit.org/resuscitationist-research-group/">Resuscitationist Research Group</a></li>
+<li class="page_item page-item-3799"><a href="https://emcrit.org/sign-up-for-the-emcrit-mailing-list/">Sign Up for the EMCrit Mailing List</a></li>
+<li class="page_item page-item-490548"><a href="https://emcrit.org/residency-wide/">Sign-Up for Residency-Wide Subscription to EMCrit</a></li>
+<li class="page_item page-item-489396"><a href="https://emcrit.org/special-cases-page/">Special Cases Page</a></li>
+<li class="page_item page-item-483087"><a href="https://emcrit.org/thank-you/">Thank You</a></li>
+<li class="page_item page-item-14290"><a href="https://emcrit.org/trauma-cme/">Trauma CME (Continuing Medical Education)</a></li>
+<li class="page_item page-item-3900"><a href="https://emcrit.org/trauma/">Trauma Resources</a></li>
+<li class="page_item page-item-4615"><a href="https://emcrit.org/unanswered-crucial-critical-care-questions/">Unanswered Crucial Critical Care and Resuscitation Questions</a></li>
+<li class="page_item page-item-484143 page_item_has_children"><a href="https://emcrit.org/why-join/">Why Should I Become a Member?</a>
+<ul class='children'>
+	<li class="page_item page-item-484147"><a href="https://emcrit.org/why-join/faq/">Questions Before Joining (FAQ)</a></li>
+</ul>
+</li>
+<li class="page_item page-item-219"><a href="https://emcrit.org/subscribe/">Subscribe to the Newsletter</a></li>
+<li class="page_item page-item-333"><a href="https://emcrit.org/emcrit-archives/">EMCrit Archives</a></li>
+<li class="page_item page-item-359"><a href="https://emcrit.org/about/">About the EMCrit Site</a></li>
+<li class="page_item page-item-387"><a href="https://emcrit.org/favorites/">Favorites</a></li>
+<li class="page_item page-item-489"><a href="https://emcrit.org/faq/">EMCrit FAQ</a></li>
+<li class="page_item page-item-1228"><a href="https://emcrit.org/first-comment/">Thanks for Commenting!</a></li>
+<li class="page_item page-item-297"><a href="https://emcrit.org/contact/">Contact Us</a></li>
+				</ul>
+
+				<h4>Categories:</h4>
+				<ul>
+						<li class="cat-item cat-item-7"><a href="https://emcrit.org/category/emcrit/">EMCrit</a>
+<ul class='children'>
+	<li class="cat-item cat-item-33098"><a href="https://emcrit.org/category/emcrit/1to1/">1:1 Nursing Podcast</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-32997"><a href="https://emcrit.org/category/defunct/">EMCrit Defunct</a>
+</li>
+	<li class="cat-item cat-item-1176"><a href="https://emcrit.org/category/emnerd/">EMNerd</a>
+</li>
+	<li class="cat-item cat-item-33048"><a href="https://emcrit.org/category/odr/">On Deeper Reflection</a>
+</li>
+	<li class="cat-item cat-item-486"><a href="https://emcrit.org/category/pulmcrit/">PULMCrit</a>
+</li>
+				</ul>
+
+			</div><!-- end .archive-page-->
+
+			<div class="archive-page">
+
+				<h4>Authors:</h4>
+				<ul>
+					<li><a href="https://emcrit.org/author/caseyalbin/" title="Posts by Casey Albin">Casey Albin</a> (4)</li><li><a href="https://emcrit.org/author/humanfact0rz/" title="Posts by Chris Hicks">Chris Hicks</a> (5)</li><li><a href="https://emcrit.org/author/resusme/" title="Posts by Cliff Reid">Cliff Reid</a> (2)</li><li><a href="https://emcrit.org/author/georgekovacs/" title="Posts by George Kovacs">George Kovacs</a> (1)</li><li><a href="https://emcrit.org/author/guest/" title="Posts by Guest Author">Guest Author</a> (16)</li><li><a href="https://emcrit.org/author/pulmcrit/" title="Posts by Josh Farkas">Josh Farkas</a> (512)</li><li><a href="https://emcrit.org/author/augustinkj/" title="Posts by Katrina Augustin">Katrina Augustin</a> (7)</li><li><a href="https://emcrit.org/author/lduggan/" title="Posts by Laura Duggan">Laura Duggan</a> (2)</li><li><a href="https://emcrit.org/author/mikelauria/" title="Posts by Mike Lauria">Mike Lauria</a> (19)</li><li><a href="https://emcrit.org/author/drdangayach/" title="Posts by Neha Dangayach">Neha Dangayach</a> (2)</li><li><a href="https://emcrit.org/author/neuroemcritteam/" title="Posts by NeuroEMCrit Team (Casey &amp; Neha)">NeuroEMCrit Team (Casey &amp; Neha)</a> (8)</li><li><a href="https://emcrit.org/author/ecgdroid/" title="Posts by Pendell Meyers">Pendell Meyers</a> (4)</li><li><a href="https://emcrit.org/author/emnerd/" title="Posts by Rory Spiegel">Rory Spiegel</a> (139)</li><li><a href="https://emcrit.org/author/emcrit-2/" title="Posts by Scott Weingart, MD FCCM">Scott Weingart, MD FCCM</a> (745)</li>				</ul>
+
+				<h4>Monthly:</h4>
+				<ul>
+						<li><a href='https://emcrit.org/2025/09/'>September 2025</a></li>
+	<li><a href='https://emcrit.org/2025/08/'>August 2025</a></li>
+	<li><a href='https://emcrit.org/2025/07/'>July 2025</a></li>
+	<li><a href='https://emcrit.org/2025/06/'>June 2025</a></li>
+	<li><a href='https://emcrit.org/2025/05/'>May 2025</a></li>
+	<li><a href='https://emcrit.org/2025/04/'>April 2025</a></li>
+	<li><a href='https://emcrit.org/2025/03/'>March 2025</a></li>
+	<li><a href='https://emcrit.org/2025/02/'>February 2025</a></li>
+	<li><a href='https://emcrit.org/2025/01/'>January 2025</a></li>
+	<li><a href='https://emcrit.org/2024/12/'>December 2024</a></li>
+	<li><a href='https://emcrit.org/2024/11/'>November 2024</a></li>
+	<li><a href='https://emcrit.org/2024/10/'>October 2024</a></li>
+	<li><a href='https://emcrit.org/2024/09/'>September 2024</a></li>
+	<li><a href='https://emcrit.org/2024/08/'>August 2024</a></li>
+	<li><a href='https://emcrit.org/2024/07/'>July 2024</a></li>
+	<li><a href='https://emcrit.org/2024/06/'>June 2024</a></li>
+	<li><a href='https://emcrit.org/2024/05/'>May 2024</a></li>
+	<li><a href='https://emcrit.org/2024/04/'>April 2024</a></li>
+	<li><a href='https://emcrit.org/2024/03/'>March 2024</a></li>
+	<li><a href='https://emcrit.org/2024/02/'>February 2024</a></li>
+	<li><a href='https://emcrit.org/2024/01/'>January 2024</a></li>
+	<li><a href='https://emcrit.org/2023/12/'>December 2023</a></li>
+	<li><a href='https://emcrit.org/2023/11/'>November 2023</a></li>
+	<li><a href='https://emcrit.org/2023/10/'>October 2023</a></li>
+	<li><a href='https://emcrit.org/2023/09/'>September 2023</a></li>
+	<li><a href='https://emcrit.org/2023/08/'>August 2023</a></li>
+	<li><a href='https://emcrit.org/2023/07/'>July 2023</a></li>
+	<li><a href='https://emcrit.org/2023/06/'>June 2023</a></li>
+	<li><a href='https://emcrit.org/2023/05/'>May 2023</a></li>
+	<li><a href='https://emcrit.org/2023/04/'>April 2023</a></li>
+	<li><a href='https://emcrit.org/2023/03/'>March 2023</a></li>
+	<li><a href='https://emcrit.org/2023/02/'>February 2023</a></li>
+	<li><a href='https://emcrit.org/2023/01/'>January 2023</a></li>
+	<li><a href='https://emcrit.org/2022/12/'>December 2022</a></li>
+	<li><a href='https://emcrit.org/2022/11/'>November 2022</a></li>
+	<li><a href='https://emcrit.org/2022/10/'>October 2022</a></li>
+	<li><a href='https://emcrit.org/2022/09/'>September 2022</a></li>
+	<li><a href='https://emcrit.org/2022/08/'>August 2022</a></li>
+	<li><a href='https://emcrit.org/2022/07/'>July 2022</a></li>
+	<li><a href='https://emcrit.org/2022/06/'>June 2022</a></li>
+	<li><a href='https://emcrit.org/2022/05/'>May 2022</a></li>
+	<li><a href='https://emcrit.org/2022/04/'>April 2022</a></li>
+	<li><a href='https://emcrit.org/2022/03/'>March 2022</a></li>
+	<li><a href='https://emcrit.org/2022/02/'>February 2022</a></li>
+	<li><a href='https://emcrit.org/2022/01/'>January 2022</a></li>
+	<li><a href='https://emcrit.org/2021/12/'>December 2021</a></li>
+	<li><a href='https://emcrit.org/2021/11/'>November 2021</a></li>
+	<li><a href='https://emcrit.org/2021/10/'>October 2021</a></li>
+	<li><a href='https://emcrit.org/2021/09/'>September 2021</a></li>
+	<li><a href='https://emcrit.org/2021/08/'>August 2021</a></li>
+	<li><a href='https://emcrit.org/2021/07/'>July 2021</a></li>
+	<li><a href='https://emcrit.org/2021/06/'>June 2021</a></li>
+	<li><a href='https://emcrit.org/2021/05/'>May 2021</a></li>
+	<li><a href='https://emcrit.org/2021/04/'>April 2021</a></li>
+	<li><a href='https://emcrit.org/2021/03/'>March 2021</a></li>
+	<li><a href='https://emcrit.org/2021/02/'>February 2021</a></li>
+	<li><a href='https://emcrit.org/2021/01/'>January 2021</a></li>
+	<li><a href='https://emcrit.org/2020/12/'>December 2020</a></li>
+	<li><a href='https://emcrit.org/2020/11/'>November 2020</a></li>
+	<li><a href='https://emcrit.org/2020/10/'>October 2020</a></li>
+	<li><a href='https://emcrit.org/2020/09/'>September 2020</a></li>
+	<li><a href='https://emcrit.org/2020/08/'>August 2020</a></li>
+	<li><a href='https://emcrit.org/2020/07/'>July 2020</a></li>
+	<li><a href='https://emcrit.org/2020/06/'>June 2020</a></li>
+	<li><a href='https://emcrit.org/2020/05/'>May 2020</a></li>
+	<li><a href='https://emcrit.org/2020/04/'>April 2020</a></li>
+	<li><a href='https://emcrit.org/2020/03/'>March 2020</a></li>
+	<li><a href='https://emcrit.org/2020/02/'>February 2020</a></li>
+	<li><a href='https://emcrit.org/2020/01/'>January 2020</a></li>
+	<li><a href='https://emcrit.org/2019/12/'>December 2019</a></li>
+	<li><a href='https://emcrit.org/2019/11/'>November 2019</a></li>
+	<li><a href='https://emcrit.org/2019/10/'>October 2019</a></li>
+	<li><a href='https://emcrit.org/2019/09/'>September 2019</a></li>
+	<li><a href='https://emcrit.org/2019/08/'>August 2019</a></li>
+	<li><a href='https://emcrit.org/2019/07/'>July 2019</a></li>
+	<li><a href='https://emcrit.org/2019/06/'>June 2019</a></li>
+	<li><a href='https://emcrit.org/2019/05/'>May 2019</a></li>
+	<li><a href='https://emcrit.org/2019/04/'>April 2019</a></li>
+	<li><a href='https://emcrit.org/2019/03/'>March 2019</a></li>
+	<li><a href='https://emcrit.org/2019/02/'>February 2019</a></li>
+	<li><a href='https://emcrit.org/2019/01/'>January 2019</a></li>
+	<li><a href='https://emcrit.org/2018/12/'>December 2018</a></li>
+	<li><a href='https://emcrit.org/2018/11/'>November 2018</a></li>
+	<li><a href='https://emcrit.org/2018/10/'>October 2018</a></li>
+	<li><a href='https://emcrit.org/2018/09/'>September 2018</a></li>
+	<li><a href='https://emcrit.org/2018/08/'>August 2018</a></li>
+	<li><a href='https://emcrit.org/2018/07/'>July 2018</a></li>
+	<li><a href='https://emcrit.org/2018/06/'>June 2018</a></li>
+	<li><a href='https://emcrit.org/2018/05/'>May 2018</a></li>
+	<li><a href='https://emcrit.org/2018/04/'>April 2018</a></li>
+	<li><a href='https://emcrit.org/2018/03/'>March 2018</a></li>
+	<li><a href='https://emcrit.org/2018/02/'>February 2018</a></li>
+	<li><a href='https://emcrit.org/2018/01/'>January 2018</a></li>
+	<li><a href='https://emcrit.org/2017/12/'>December 2017</a></li>
+	<li><a href='https://emcrit.org/2017/11/'>November 2017</a></li>
+	<li><a href='https://emcrit.org/2017/10/'>October 2017</a></li>
+	<li><a href='https://emcrit.org/2017/09/'>September 2017</a></li>
+	<li><a href='https://emcrit.org/2017/08/'>August 2017</a></li>
+	<li><a href='https://emcrit.org/2017/07/'>July 2017</a></li>
+	<li><a href='https://emcrit.org/2017/06/'>June 2017</a></li>
+	<li><a href='https://emcrit.org/2017/05/'>May 2017</a></li>
+	<li><a href='https://emcrit.org/2017/04/'>April 2017</a></li>
+	<li><a href='https://emcrit.org/2017/03/'>March 2017</a></li>
+	<li><a href='https://emcrit.org/2017/02/'>February 2017</a></li>
+	<li><a href='https://emcrit.org/2017/01/'>January 2017</a></li>
+	<li><a href='https://emcrit.org/2016/12/'>December 2016</a></li>
+	<li><a href='https://emcrit.org/2016/11/'>November 2016</a></li>
+	<li><a href='https://emcrit.org/2016/10/'>October 2016</a></li>
+	<li><a href='https://emcrit.org/2016/09/'>September 2016</a></li>
+	<li><a href='https://emcrit.org/2016/08/'>August 2016</a></li>
+	<li><a href='https://emcrit.org/2016/07/'>July 2016</a></li>
+	<li><a href='https://emcrit.org/2016/06/'>June 2016</a></li>
+	<li><a href='https://emcrit.org/2016/05/'>May 2016</a></li>
+	<li><a href='https://emcrit.org/2016/04/'>April 2016</a></li>
+	<li><a href='https://emcrit.org/2016/03/'>March 2016</a></li>
+	<li><a href='https://emcrit.org/2016/02/'>February 2016</a></li>
+	<li><a href='https://emcrit.org/2016/01/'>January 2016</a></li>
+	<li><a href='https://emcrit.org/2015/12/'>December 2015</a></li>
+	<li><a href='https://emcrit.org/2015/11/'>November 2015</a></li>
+	<li><a href='https://emcrit.org/2015/10/'>October 2015</a></li>
+	<li><a href='https://emcrit.org/2015/09/'>September 2015</a></li>
+	<li><a href='https://emcrit.org/2015/08/'>August 2015</a></li>
+	<li><a href='https://emcrit.org/2015/07/'>July 2015</a></li>
+	<li><a href='https://emcrit.org/2015/06/'>June 2015</a></li>
+	<li><a href='https://emcrit.org/2015/05/'>May 2015</a></li>
+	<li><a href='https://emcrit.org/2015/04/'>April 2015</a></li>
+	<li><a href='https://emcrit.org/2015/03/'>March 2015</a></li>
+	<li><a href='https://emcrit.org/2015/02/'>February 2015</a></li>
+	<li><a href='https://emcrit.org/2015/01/'>January 2015</a></li>
+	<li><a href='https://emcrit.org/2014/12/'>December 2014</a></li>
+	<li><a href='https://emcrit.org/2014/11/'>November 2014</a></li>
+	<li><a href='https://emcrit.org/2014/10/'>October 2014</a></li>
+	<li><a href='https://emcrit.org/2014/09/'>September 2014</a></li>
+	<li><a href='https://emcrit.org/2014/08/'>August 2014</a></li>
+	<li><a href='https://emcrit.org/2014/07/'>July 2014</a></li>
+	<li><a href='https://emcrit.org/2014/06/'>June 2014</a></li>
+	<li><a href='https://emcrit.org/2014/05/'>May 2014</a></li>
+	<li><a href='https://emcrit.org/2014/04/'>April 2014</a></li>
+	<li><a href='https://emcrit.org/2014/03/'>March 2014</a></li>
+	<li><a href='https://emcrit.org/2014/02/'>February 2014</a></li>
+	<li><a href='https://emcrit.org/2014/01/'>January 2014</a></li>
+	<li><a href='https://emcrit.org/2013/12/'>December 2013</a></li>
+	<li><a href='https://emcrit.org/2013/11/'>November 2013</a></li>
+	<li><a href='https://emcrit.org/2013/10/'>October 2013</a></li>
+	<li><a href='https://emcrit.org/2013/09/'>September 2013</a></li>
+	<li><a href='https://emcrit.org/2013/08/'>August 2013</a></li>
+	<li><a href='https://emcrit.org/2013/07/'>July 2013</a></li>
+	<li><a href='https://emcrit.org/2013/06/'>June 2013</a></li>
+	<li><a href='https://emcrit.org/2013/05/'>May 2013</a></li>
+	<li><a href='https://emcrit.org/2013/04/'>April 2013</a></li>
+	<li><a href='https://emcrit.org/2013/03/'>March 2013</a></li>
+	<li><a href='https://emcrit.org/2013/02/'>February 2013</a></li>
+	<li><a href='https://emcrit.org/2013/01/'>January 2013</a></li>
+	<li><a href='https://emcrit.org/2012/12/'>December 2012</a></li>
+	<li><a href='https://emcrit.org/2012/11/'>November 2012</a></li>
+	<li><a href='https://emcrit.org/2012/10/'>October 2012</a></li>
+	<li><a href='https://emcrit.org/2012/09/'>September 2012</a></li>
+	<li><a href='https://emcrit.org/2012/08/'>August 2012</a></li>
+	<li><a href='https://emcrit.org/2012/07/'>July 2012</a></li>
+	<li><a href='https://emcrit.org/2012/06/'>June 2012</a></li>
+	<li><a href='https://emcrit.org/2012/05/'>May 2012</a></li>
+	<li><a href='https://emcrit.org/2012/04/'>April 2012</a></li>
+	<li><a href='https://emcrit.org/2012/03/'>March 2012</a></li>
+	<li><a href='https://emcrit.org/2012/02/'>February 2012</a></li>
+	<li><a href='https://emcrit.org/2012/01/'>January 2012</a></li>
+	<li><a href='https://emcrit.org/2011/12/'>December 2011</a></li>
+	<li><a href='https://emcrit.org/2011/11/'>November 2011</a></li>
+	<li><a href='https://emcrit.org/2011/10/'>October 2011</a></li>
+	<li><a href='https://emcrit.org/2011/09/'>September 2011</a></li>
+	<li><a href='https://emcrit.org/2011/08/'>August 2011</a></li>
+	<li><a href='https://emcrit.org/2011/07/'>July 2011</a></li>
+	<li><a href='https://emcrit.org/2011/06/'>June 2011</a></li>
+	<li><a href='https://emcrit.org/2011/05/'>May 2011</a></li>
+	<li><a href='https://emcrit.org/2011/04/'>April 2011</a></li>
+	<li><a href='https://emcrit.org/2011/03/'>March 2011</a></li>
+	<li><a href='https://emcrit.org/2011/02/'>February 2011</a></li>
+	<li><a href='https://emcrit.org/2011/01/'>January 2011</a></li>
+	<li><a href='https://emcrit.org/2010/12/'>December 2010</a></li>
+	<li><a href='https://emcrit.org/2010/11/'>November 2010</a></li>
+	<li><a href='https://emcrit.org/2010/10/'>October 2010</a></li>
+	<li><a href='https://emcrit.org/2010/09/'>September 2010</a></li>
+	<li><a href='https://emcrit.org/2010/08/'>August 2010</a></li>
+	<li><a href='https://emcrit.org/2010/07/'>July 2010</a></li>
+	<li><a href='https://emcrit.org/2010/06/'>June 2010</a></li>
+	<li><a href='https://emcrit.org/2010/05/'>May 2010</a></li>
+	<li><a href='https://emcrit.org/2010/04/'>April 2010</a></li>
+	<li><a href='https://emcrit.org/2010/03/'>March 2010</a></li>
+	<li><a href='https://emcrit.org/2010/02/'>February 2010</a></li>
+	<li><a href='https://emcrit.org/2010/01/'>January 2010</a></li>
+	<li><a href='https://emcrit.org/2009/12/'>December 2009</a></li>
+	<li><a href='https://emcrit.org/2009/11/'>November 2009</a></li>
+	<li><a href='https://emcrit.org/2009/10/'>October 2009</a></li>
+	<li><a href='https://emcrit.org/2009/09/'>September 2009</a></li>
+	<li><a href='https://emcrit.org/2009/08/'>August 2009</a></li>
+	<li><a href='https://emcrit.org/2009/07/'>July 2009</a></li>
+	<li><a href='https://emcrit.org/2009/06/'>June 2009</a></li>
+	<li><a href='https://emcrit.org/2009/05/'>May 2009</a></li>
+	<li><a href='https://emcrit.org/2009/04/'>April 2009</a></li>
+	<li><a href='https://emcrit.org/2009/03/'>March 2009</a></li>
+				</ul>
+
+				<h4>Recent Posts:</h4>
+				<ul>
+						<li><a href='https://emcrit.org/emcrit/electrical-storm-1/'>CV-EMCrit Wee &#8211; Electrical Storm:  Surviving the Storm Part I</a></li>
+	<li><a href='https://emcrit.org/emcrit/1to1/medical-cardiac-arrest/'>EMCrit 1:1 Nursing 005 &#8211; Medical Cardiac Arrest</a></li>
+	<li><a href='https://emcrit.org/emcrit/behind-medmal-pe/'>EMCrit 408 &#8211; Behind the Scenes of an Infuriating Medical Malpractice Trial</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/nalbuphine/'>PulmCrit Blog: Nalbuphine, the Diet Coke of opioids</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/triple-threat-llms/'>PulmCrit Wee: Triple-Threat strategy for using LLMs to answer a medical question</a></li>
+	<li><a href='https://emcrit.org/emcrit/massive-hemorrhage-protocol-2/'>EMCrit 407 &#8211; Massive Hemorrhage Protocol 2.0 with Petro</a></li>
+	<li><a href='https://emcrit.org/emcrit/1to1/qa-i/'>EMCrit 1:1 Nursing 004 &#8211; Listener Q&#038;A and Follow-Up 1</a></li>
+	<li><a href='https://emcrit.org/emcrit/awake-nasotracheal-intubation/'>EMCrit 406 &#8211; Awake NasoTracheal Intubation (AFOI) &#8211; When to Pick Your Patient&#8217;s Nose!</a></li>
+	<li><a href='https://emcrit.org/emcrit/racc-lit-august-2025/'>EMCrit RACC-Lit Review &#8211; August 2025</a></li>
+	<li><a href='https://emcrit.org/emcrit/paracentesis/'>EMCrit 405 &#8211; Paracentesis &#8211; the EMCrit (Easy) Way</a></li>
+	<li><a href='https://emcrit.org/emcrit/neurocritical-care-year-in-review-2023-2024-acute-ischemic-stroke/'>NeuroEMCrit &#8211; Neurocritical Care Year in Review 2023-2024 Part 1 &#8211; Acute Ischemic Stroke</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/2025scap/'>PulmCrit Wee: Severe community-acquired pneumonia (sCAP) 2025 update</a></li>
+	<li><a href='https://emcrit.org/emcrit/facial-trauma/'>EMCrit 404 &#8211; Facial Trauma</a></li>
+	<li><a href='https://emcrit.org/emcrit/1to1/intubation/'>EMCrit 1:1 Nursing Podcast 003 &#8211; Intubation</a></li>
+	<li><a href='https://emcrit.org/emcrit/mastering-persistent-air-leaks/'>CV-EMCrit Wee &#8211; Mastering Persistent Air Leaks: Navigating the Management of Pleural Fistulae from Conservative Care to VV ECMO-facilitated Ultra-Ultra Lung Protective Ventilation</a></li>
+	<li><a href='https://emcrit.org/emcrit/status-epilepticus-2025/'>EMCrit 403 &#8211; What&#8217;s the Status of Status &#8211; Status Epilepticus 2025 with PulmCrit</a></li>
+	<li><a href='https://emcrit.org/odr/inner-voice/'>ODR 014 &#8211; UnBurnable Series &#8211; Inner Voice</a></li>
+	<li><a href='https://emcrit.org/emcrit/emcrit-racc-lit-review-june-2025/'>EMCrit RACC-Lit Review &#8211; June 2025</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/humanism-first/'>PulmCrit Wee: Humanism-first structure for family meetings</a></li>
+	<li><a href='https://emcrit.org/emcrit/emcrit-guest-post-in-defense-of-dignity-by-chris-hicks-md/'>EMCrit Guest Post &#8211; In Defense of Dignity by Chris Hicks, MD</a></li>
+	<li><a href='https://emcrit.org/emcrit/more-rapid-sodium-normalization-hyponatremia/'>EMCrit 402 &#8211; Sea Change on Salt Water (More Rapid Sodium Normalization in Hyponatremia)? with KidneyBoy</a></li>
+	<li><a href='https://emcrit.org/emcrit/1to1/pad/'>EMCrit 1:1 Nursing Podcast 002 &#8211; Post-Intubation Sedation (Pain, Agitation, &#038; Delirium)</a></li>
+	<li><a href='https://emcrit.org/emcrit/ketamine-status-epilepticus/'>EMCrit Wee &#8211; Ketamine for Early Status Epilepticus Debate with First10EM</a></li>
+	<li><a href='https://emcrit.org/emcrit/pediatric-tracheotomy/'>EMCrit 401 &#8211; Pediatric Tracheotomy / FONA  with Cliff Reid [Primer Ep]</a></li>
+	<li><a href='https://emcrit.org/emcrit/emcrit-racc-lit-review-may-2025/'>EMCrit RACC Lit Review &#8211; May 2025</a></li>
+	<li><a href='https://emcrit.org/emcrit/motr-2025/'>EMCrit 400 &#8211; Mind of the Resuscitationist</a></li>
+	<li><a href='https://emcrit.org/emcrit/defibrillation-follow-up/'>EMCrit Wee &#8211; All Things Defibrillation Follow-Up Ep</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/twdfnr-ondansetron/'>PulmCrit Letter to the Editor: Things we do for no reason: Checking QTc on hospitalized adult patients before IV ondansetron administration</a></li>
+	<li><a href='https://emcrit.org/emcrit/1to1/easy-case-of-sepsis/'>EMCrit 1:1 Nursing 001 &#8211; An Easy Case of Sepsis</a></li>
+	<li><a href='https://emcrit.org/emcrit/further-disambiguating-pea/'>EMCrit Ghali Grills 003 &#8211; Further Disambiguating &#8220;PEA&#8221;</a></li>
+	<li><a href='https://emcrit.org/emcrit/neuroleptic-malignant-syndrome-explosion/'>EMCrit Wee &#8211; Neuroleptic Malignant Syndrome (NMS) Explosion</a></li>
+	<li><a href='https://emcrit.org/emcrit/shadow-spinal-cord-injury/'>EMCrit Shadowboxing Case 9 &#8211; Spinal Cord Injury?</a></li>
+	<li><a href='https://emcrit.org/emcrit/serotonin-syndrome-neuroleptic-malignant-syndrome/'>EMCrit 399 &#8211; Serotonin Syndrome (SS) and Neuroleptic Malignant Syndrome (NMS) &#8211; Primer Episode</a></li>
+	<li><a href='https://emcrit.org/emcrit/1to1/intro/'>1:1 Nursing Podcast &#8211; Episode 0 &#8211; The Introduction</a></li>
+	<li><a href='https://emcrit.org/emcrit/neuromuscular-emergencies/'>EMCrit 398 &#8211; NeuroEMCrit &#8211; NeuroMuscular Emergencies</a></li>
+	<li><a href='https://emcrit.org/emcrit/lit-review-march-2025/'>EMCrit RACC-Lit Review &#8211; March 2025</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/loading-infusion-auto-titration/'>PulmCrit Wee &#8211; Loading infusion auto-titration (LIAT) for infused medications with intermediate half-lives</a></li>
+	<li><a href='https://emcrit.org/emcrit/arterial-lines-debate/'>EMCrit 397 &#8211; Philosophy of Arterial Lines in the ED &#8211; A Debate in Absentia</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/michelin-chest-syndrome/'>PulmCrit Wee: Michelin Chest Syndrome</a></li>
+	<li><a href='https://emcrit.org/emcrit/emcrit-qa-episode-001/'>EMCrit 396 &#8211; Q&#038;A Episode 001</a></li>
+	<li><a href='https://emcrit.org/emcrit/philosophy-crics-central-airway-obstruction/'>EMCrit Wee &#8211; Some Philosophy of Surgical Airways (Crics) and What to Do When the Doom is Lower Down (Central Airway Obstruction)</a></li>
+	<li><a href='https://emcrit.org/emcrit/stellate-ganglion-block/'>EMCrit 395 &#8211; Stellate Ganglion Block &#8211; Not Whether, but When?</a></li>
+	<li><a href='https://emcrit.org/emcrit/inotropes-2/'>EMCrit 394 – CV-EMCrit – Inotrope Basics Part 2 &#8211; Specific Scenarios</a></li>
+	<li><a href='https://emcrit.org/emcrit/emcrit-racc-lit-january-2025/'>EMCrit RACC-Lit &#8211; January 2025</a></li>
+	<li><a href='https://emcrit.org/emcrit/inotropes-1/'>EMCrit 393 &#8211; CV-EMCrit &#8211; Inotrope Basics Part 1</a></li>
+	<li><a href='https://emcrit.org/emcrit/bad-behavior/'>EMCrit Wee (392.5) &#8211; Naughty or Nice? Bad Behavior in Healthcare with Liz Crowe, PhD</a></li>
+	<li><a href='https://emcrit.org/emcrit/all-things-defibrillation/'>EMCrit 392 &#8211; All Things Defibrillation with Sheldon Cheskes</a></li>
+	<li><a href='https://emcrit.org/emcrit/pericardiocentesis/'>EMCrit 391 &#8211; Pericardiocentesis and Tamponade Temporization</a></li>
+	<li><a href='https://emcrit.org/emcrit/racc-lit-december-2024/'>EMCrit RACC-Lit Review for December 2024</a></li>
+	<li><a href='https://emcrit.org/emcrit/hyperangulated-blade-tips/'>EMCrit 390 &#8211; Hyperangulated Video Laryngoscopy (HAVL)</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/adapt-trial/'>PulmCrit: ADAPT and SCREEN trials are full of sound and fury, signifying little</a></li>
+	<li><a href='https://emcrit.org/emcrit/emcrit-389-massive-transfusion-update-and-hemostatic-resuscitation/'>EMCrit 389 &#8211; Massive Transfusion Update and Hemostatic Resuscitation</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/bluesky-migration/'>PulmCrit: How to quickly create a useful professional account in BlueSky</a></li>
+	<li><a href='https://emcrit.org/emcrit/experts-guide-bougie/'>EMCrit 388 &#8211; Experts&#8217; Guide to the Bougie with Barnicle and Driver</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/bluesky/'>PulmCrit Wee: Why MedTwitter should move to Bluesky</a></li>
+	<li><a href='https://emcrit.org/emcrit/racc-lit-november-2024/'>EMCrit RACC Lit Review &#8211; October/November 2024</a></li>
+	<li><a href='https://emcrit.org/emcrit/avoid-malpractice/'>EMCrit 387 &#8211; Emergency Department Charting for Legal Protection and Patient Safety</a></li>
+	<li><a href='https://emcrit.org/emcrit/acute-liver-failure/'>EMCrit 386 &#8211; Liver I &#8211; Fulminant Acute Liver Failure (ALF) with Tasneem Pirani</a></li>
+	<li><a href='https://emcrit.org/emcrit/dirty-epi/'>EMCrit Wee &#8211; Dirty Epi is Dumb, Mildly Messy Epi is OK!</a></li>
+	<li><a href='https://emcrit.org/emcrit/orbital-compartment-syndrome/'>EMCrit 385 &#8211; Eye Trauma I &#8211; Retrobulbar Hematoma, Orbital Compartment Syndrome, and Paracanthal Decompressions</a></li>
+	<li><a href='https://emcrit.org/emcrit/happen-trial/'>EMCrit 384 &#8211; Did this Really Just HAPPEN? &#8211; The HAPPEN Trial Hot Take &#8211; NIPPV for COPD</a></li>
+	<li><a href='https://emcrit.org/emcrit/vascular-access/'>EMCrit Wee &#8211; The Vascular Guy on Vascular Access</a></li>
+	<li><a href='https://emcrit.org/emcrit/differential-gas-exchange-va-ecmo/'>CV-EMCrit &#8211; MCS Minute Series: Differential Gas Exchange on Peripheral Femoral VA ECMO with Trina</a></li>
+	<li><a href='https://emcrit.org/emcrit/ultrasound-cardiac-arrest/'>EMCrit 383 &#8211; The Ultrasound Hierarchy of Needs in Cardiac Arrest with Mike Prats</a></li>
+	<li><a href='https://emcrit.org/emcrit/racc-lit-september-2024/'>EMCrit RACC Lit Review &#8211; September 2024</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/hfxef-rvxef/'>PulmCrit Wee &#8211; A better classification of heart failure (HFxEF-RVxEF)</a></li>
+	<li><a href='https://emcrit.org/emcrit/vasopressin-deep-dive/'>EMCrit 382 &#8211; A Deep Dive on Vasopressin: Timing, Push Dose Vaso and the Vasopressin Load Test</a></li>
+	<li><a href='https://emcrit.org/emcrit/doctors-and-litigation/'>EMCrit Expert Rounds 1 &#8211; Gita Pensa on Doctors and Litigation</a></li>
+	<li><a href='https://emcrit.org/emcrit/penetrating-neck-trauma/'>EMCrit 381 &#8211; Penetrating Neck Trauma &#8211; Get Out of the Zones!</a></li>
+	<li><a href='https://emcrit.org/emcrit/racc-lit-august-2024/'>EMCrit RACC Lit Review &#8211; August 2024</a></li>
+	<li><a href='https://emcrit.org/emcrit/tham/'>EMCrit 380 &#8211; Acid Base Part VIII &#8211; Tris-Hydroxymethyl Aminomethane (THAM) for Acidosis</a></li>
+	<li><a href='https://emcrit.org/emcrit/crit-care-cards-case/'>EMCrit ShadowBoxing &#8211; Casey Parker Rural Medicine Critical Care Case</a></li>
+	<li><a href='https://emcrit.org/emcrit/qa-july-2024/'>EMCrit Follow-Up and Q&#038;A &#8211; July 2024</a></li>
+	<li><a href='https://emcrit.org/emcrit/procedural-sedation-critically-ill/'>EMCrit 379 &#8211; Procedural Sedation Part IV &#8211; the Critically Ill Patient and MidaKet</a></li>
+	<li><a href='https://emcrit.org/emcrit/blowing-off-afib/'>EMCrit Wee &#8211; Don&#8217;t be so Quick to Blow-Off New-Onset Atrial Fibrillation (A-Fib)</a></li>
+	<li><a href='https://emcrit.org/emcrit/nec-fasc/'>EMCrit 378 &#8211; So NSTI &#8211; Necrotizing Fasciitis &#038; Life Threatening Soft Tissue Infections</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/infusion-rate/'>PulmCrit Wee: Rational selection of infusion rate based on loading dose</a></li>
+	<li><a href='https://emcrit.org/emcrit/adaptive-support-ventilation/'>EMCrit Wee &#8211; Adaptive Support Ventilation (ASV)</a></li>
+	<li><a href='https://emcrit.org/emcrit/racc-lit-june-2024/'>EMCrit RACC-Lit Review for June 2024</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/revise/'>PulmCrit: PPIs are safe and effective for GI prophylaxis&#8230; the end.</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/bsi/'>PulmCrit: Bilevel Sequence Intubation (BSI) &#8211; The new standard</a></li>
+	<li><a href='https://emcrit.org/emcrit/additional-preoxi/'>EMCrit Wee &#8211; Additional Thoughts on the PREOXI Trial</a></li>
+	<li><a href='https://emcrit.org/emcrit/preoxi/'>EMCrit 377 &#8211; Breaking News &#8211; The PREOXI Trial changes everything about Preoxygenation for Intubations in the Critically Ill</a></li>
+	<li><a href='https://emcrit.org/emcrit/emcrit-wee-controlled-automated-reperfusion-of-the-whole-body-carl-ecpr-ecls-yields-amazing-results/'>EMCrit Wee &#8211; Controlled Automated Reperfusion of the Whole Body (CARL) ECPR / ECLS Yields Amazing Results</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/midaket/'>PulmCrit: MidaKet for procedural sedation in critical illness</a></li>
+	<li><a href='https://emcrit.org/emcrit/etco2-sedation-ed/'>EMCrit 376 &#8211; Do We Need ETCO2 (Capnography) for Procedural Sedation in the ED? with Sam Campbell (Procedural Sedation 4)</a></li>
+	<li><a href='https://emcrit.org/emcrit/cabg/'>CV-EMCrit &#8211; Cardiovascular Intensivist Series:  Post Cardiopulmonary Bypass Care (CABG) with Trina Augustin</a></li>
+	<li><a href='https://emcrit.org/emcrit/vasopressors-for-hemorrhage/'>EMCrit 375 &#8211; Vasopressors for Early Hemorrhage?</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/piptazo-mortality/'>PulmCrit: Why the new study associating piptazo with increased mortality is wrong</a></li>
+	<li><a href='https://emcrit.org/emcrit/burr-holes-craniotomy/'>EMCrit Wee &#8211; Intraosseous Device Burr Holes (Craniotomy) with Marc Grossman</a></li>
+	<li><a href='https://emcrit.org/emcrit/emcrit-374-shadowboxing-an-amaximally-sick-patient/'>EMCrit 374 &#8211; ShadowBoxing &#8211; An AMAXimally Sick Patient</a></li>
+	<li><a href='https://emcrit.org/emcrit/bounceback-asymptomatic-hypertension/'>EMCrit 373 &#8211; Mike Weinstock with another Critical Care Bounceback: &#8220;Asymptomatic Hypertension&#8221;</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/cutoff-razor/'>Pulmcrit wee: The cutoff razor</a></li>
+	<li><a href='https://emcrit.org/emcrit/heuristics-for-the-new-icu-attending/'>EMCrit Wee &#8211; Ross Prager on 10 Heuristics for the New ICU Attending</a></li>
+	<li><a href='https://emcrit.org/emcrit/foundstab-intubation-sop/'>EMCrit 372 &#8211; FoundStab Intubation SOP</a></li>
+	<li><a href='https://emcrit.org/emcrit/racc-lit-march-2024/'>EMCrit RACC-Lit Review &#8211; March 2024</a></li>
+	<li><a href='https://emcrit.org/emcrit/contrast-reactions/'>EMCrit 371 &#8211; Iodinated Contrast Issues: Part 2 &#8211; Contrast Reactions</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/ecg-pe/'>PulmCrit Blogitorial &#8211; Use of ECGs for management of (sub)massive PE</a></li>
+	<li><a href='https://emcrit.org/pulmcrit/propofol-eye-opening/'>PulmCrit Wee: Propofol induced eyelid opening apraxia &#8211; the struggle is real</a></li>
+	<li><a href='https://emcrit.org/emcrit/emcrit-wee-zentensivism-with-matt-siuba/'>EMCrit Wee &#8211; Zentensivism with Matt Siuba</a></li>
+				</ul>
+
+			</div><!-- end .archive-page-->
+
+		</div><!-- end .entry-content -->
+
+	</div><!-- end .postclass -->
+
+</main><aside class="sidebar sidebar-primary widget-area" role="complementary" aria-label="Primary Sidebar"><section id="custom_html-9" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><div class="textwidget custom-html-widget"><a href="https://emcrit.org/join"><img data-recalc-dims="1" src="https://i0.wp.com/emcrit.org/wp-content/uploads/2021/08/join-emcrit-bigger.jpg?resize=360%2C80&#038;ssl=1" width="360" height="80" alt="EMCrit Join" /></a></div></div></section>
+<section id="wp_sidebarlogin-2" class="widget widget_wp_sidebarlogin"><div class="widget-wrap"><h4 class="widget-title widgettitle">Login</h4>
+<div class="sidebar-login-form"><form name="loginform" id="loginform" action="https://emcrit.org/wp-login.php" method="post"><p class="login-username">
+				<label for="user_login">Username</label>
+				<input type="text" name="log" id="user_login" autocomplete="username" class="input" value="" size="20" />
+			</p><p class="login-password">
+				<label for="user_pass">Password</label>
+				<input type="password" name="pwd" id="user_pass" autocomplete="current-password" spellcheck="false" class="input" value="" size="20" />
+			</p><p class="login-remember"><label><input name="rememberme" type="checkbox" id="rememberme" value="forever" checked="checked" /> Remember Me</label></p><p class="login-submit">
+				<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary" value="Log In" />
+				<input type="hidden" name="redirect_to" value="https://emcrit.org/wp-content/uploads/2018/02/CricSteps.pdf?_login=c5eaf601b8" />
+			</p></form><ul class="sidebar-login-links pagenav sidebar_login_links"><li class="lost_password-link"><a href="https://emcrit.org/wp-login.php?action=lostpassword">Lost Password</a></li></ul></div></div></section>
+<section id="simple-social-icons-2" class="widget simple-social-icons"><div class="widget-wrap"><h4 class="widget-title widgettitle">Feel Social?</h4>
+<ul class="alignleft"><li class="ssi-facebook"><a href="https://facebook.com/emcrit" ><svg role="img" class="social-facebook" aria-labelledby="social-facebook-2"><title id="social-facebook-2">Facebook</title><use xlink:href="https://emcrit.org/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-facebook"></use></svg></a></li><li class="ssi-rss"><a href="https://emcrit.org/feed" ><svg role="img" class="social-rss" aria-labelledby="social-rss-2"><title id="social-rss-2">RSS</title><use xlink:href="https://emcrit.org/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-rss"></use></svg></a></li><li class="ssi-twitter"><a href="https://twitter.com/emcrit" ><svg role="img" class="social-twitter" aria-labelledby="social-twitter-2"><title id="social-twitter-2">Twitter</title><use xlink:href="https://emcrit.org/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-twitter"></use></svg></a></li><li class="ssi-youtube"><a href="https://youtube.com/emcrit" ><svg role="img" class="social-youtube" aria-labelledby="social-youtube-2"><title id="social-youtube-2">YouTube</title><use xlink:href="https://emcrit.org/wp-content/plugins/simple-social-icons/symbol-defs.svg#social-youtube"></use></svg></a></li></ul></div></section>
+<section id="custom_html-12" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><div class="textwidget custom-html-widget"><a href="https://emcrit.org/coaching"><img data-recalc-dims="1" src="https://i0.wp.com/emcrit.org/wp-content/uploads/2022/07/Coach-Banner-Ad.jpg?ssl=1" h=270 w=360 alt="Metasin Coaching" /></a></div></div></section>
+<section id="custom_html-7" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><div class="textwidget custom-html-widget"><a href="https://resuscrisismanual.com"><img data-recalc-dims="1" src="https://i0.wp.com/emcrit.org/wp-content/uploads/2019/11/RCM-Banner-Ad-1.jpg?resize=360%2C270&#038;ssl=1" height="270" width="360" alt="RCM"/></a></div></div></section>
+<section id="custom_html-11" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><div class="textwidget custom-html-widget"><a href="https://paulswinton.com/resus/"><img data-recalc-dims="1" src="https://i0.wp.com/emcrit.org/wp-content/uploads/2021/12/SCRAM-AD-EMCrit.jpg?resize=360%2C270&#038;ssl=1" height="270" width="360" alt="SCRAM Bag"/></a></div></div></section>
+<section id="text-417131207" class="widget widget_text"><div class="widget-wrap">			<div class="textwidget"><a href="https://emcrit.org/books/" class="recommended-reading-banner"><img data-recalc-dims="1" src="https://i0.wp.com/emcrit.org/wp-content/uploads/2014/12/rec-reading.jpg?resize=360%2C180" height="180" width="360" /></a></div>
+		</div></section>
+<section id="custom_html-13" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><h4 class="widget-title widgettitle">CME Information</h4>
+<div class="textwidget custom-html-widget">See our <a href="https://emcrit.org/policy/cme-info/">CME Information</a></div></div></section>
+<section id="text-417131195" class="widget widget_text"><div class="widget-wrap"><h4 class="widget-title widgettitle">Other Stuff</h4>
+			<div class="textwidget"><ul>
+<li>Have a great idea for the next podcast? <a href="https://emcrit.org/contact"><strong>Share it here!</strong></a></li>
+<li>Tough Questions. <a href="https://emcrit.org/unanswered-crucial-critical-care-questions/"><strong>Maybe you have an answer!</strong></a></li>
+<li>When you're done listening to the podcast, <br />check out these <a href="https://emcrit.org/favorites"><strong>great sites</strong></a>.</li>
+</ul>
+</div>
+		</div></section>
+</aside></div></div><div class="footer-widgets"><div class="wrap"><div class="widget-area footer-widgets-1 footer-widget-area"><section id="custom_html-3" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><h4 class="widget-title widgettitle">Who We Are</h4>
+<div class="textwidget custom-html-widget"><p>
+We are the <strong>EMCrit Project</strong>, a <a href="https://emcrit.org/about">team</a> of independent medical bloggers and podcasters joined together by our common love of cutting-edge care, iconoclastic ramblings, and FOAM. 
+</p>
+</div></div></section>
+</div><div class="widget-area footer-widgets-2 footer-widget-area"><section id="text-417131218" class="widget widget_text"><div class="widget-wrap"><h4 class="widget-title widgettitle">Resus Leadership Academy</h4>
+			<div class="textwidget"><div>
+<a href="https://resusleadershipacademy.com"><img data-recalc-dims="1" src="https://i0.wp.com/emcrit.org/wp-content/uploads/2015/03/rla-tiny.png?resize=90%2C90" width="90" height="90" /></a></div></div>
+		</div></section>
+</div><div class="widget-area footer-widgets-3 footer-widget-area"><section id="custom_html-2" class="widget_text widget widget_custom_html"><div class="widget_text widget-wrap"><h4 class="widget-title widgettitle">Subscribe by Email</h4>
+<div class="textwidget custom-html-widget"><!-- Begin MailChimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{clear:left; font:14px; }
+	/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="https://crashingpatient.us5.list-manage.com/subscribe/post?u=bf2bef2cdf808cac01040fd43&amp;id=aced32bd68" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<div id="mc_embed_signup_scroll">
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_bf2bef2cdf808cac01040fd43_aced32bd68" tabindex="-1" value=""></div>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</div>
+</form>
+</div>
+
+<!--End mc_embed_signup--></div></div></section>
+</div></div></div><footer class="site-footer"><div class="wrap"><p><div>EMCrit®️ is the registered trademark of Metasin LLC. All EMCrit Content is a product of EMCrit LLC; Copyright 2009-. All PulmCrit and IBCC Content are a product of Farkas Medical LLC; Copyright 2009-. This site represents our opinions only. See <a href="https://emcrit.org/disclaimer/">our full disclaimer</a>, <a href="https://emcrit.org/privacy">privacy policy</a>, <a href="https://emcrit.org/commenting/">commenting policy, </a><a href="https://emcrit.org/policy/tos/">terms of service,</a> and <a href="https://emcrit.org/credits/">credits and attribution.</a>AI Use Prohibited: Content on this website may not be used in the training or development of AI systems without our express permission.</div></p></div></footer></div><script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/magazine-pro\/*","\/wp-content\/themes\/genesis\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+			<script>
+				// Used by Gallery Custom Links to handle tenacious Lightboxes
+				//jQuery(document).ready(function () {
+
+					function mgclInit() {
+						
+						// In jQuery:
+						// if (jQuery.fn.off) {
+						// 	jQuery('.no-lightbox, .no-lightbox img').off('click'); // jQuery 1.7+
+						// }
+						// else {
+						// 	jQuery('.no-lightbox, .no-lightbox img').unbind('click'); // < jQuery 1.7
+						// }
+
+						// 2022/10/24: In Vanilla JS
+						var elements = document.querySelectorAll('.no-lightbox, .no-lightbox img');
+						for (var i = 0; i < elements.length; i++) {
+						 	elements[i].onclick = null;
+						}
+
+
+						// In jQuery:
+						//jQuery('a.no-lightbox').click(mgclOnClick);
+
+						// 2022/10/24: In Vanilla JS:
+						var elements = document.querySelectorAll('a.no-lightbox');
+						for (var i = 0; i < elements.length; i++) {
+						 	elements[i].onclick = mgclOnClick;
+						}
+
+						// in jQuery:
+						// if (jQuery.fn.off) {
+						// 	jQuery('a.set-target').off('click'); // jQuery 1.7+
+						// }
+						// else {
+						// 	jQuery('a.set-target').unbind('click'); // < jQuery 1.7
+						// }
+						// jQuery('a.set-target').click(mgclOnClick);
+
+						// 2022/10/24: In Vanilla JS:
+						var elements = document.querySelectorAll('a.set-target');
+						for (var i = 0; i < elements.length; i++) {
+						 	elements[i].onclick = mgclOnClick;
+						}
+					}
+
+					function mgclOnClick() {
+						if (!this.target || this.target == '' || this.target == '_self')
+							window.location = this.href;
+						else
+							window.open(this.href,this.target);
+						return false;
+					}
+
+					// From WP Gallery Custom Links
+					// Reduce the number of  conflicting lightboxes
+					function mgclAddLoadEvent(func) {
+						var oldOnload = window.onload;
+						if (typeof window.onload != 'function') {
+							window.onload = func;
+						} else {
+							window.onload = function() {
+								oldOnload();
+								func();
+							}
+						}
+					}
+
+					mgclAddLoadEvent(mgclInit);
+					mgclInit();
+
+				//});
+			</script>
+		<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=115946458480767&version=v2.3";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script><style type="text/css" media="screen">#simple-social-icons-2 ul li a, #simple-social-icons-2 ul li a:hover, #simple-social-icons-2 ul li a:focus { background-color: #eeeeee !important; border-radius: 0px; color: #1e73be !important; border: 0px #ffffff solid !important; font-size: 28px; padding: 14px; }  #simple-social-icons-2 ul li a:hover, #simple-social-icons-2 ul li a:focus { background-color: #222222 !important; border-color: #ffffff !important; color: #ffffff !important; }  #simple-social-icons-2 ul li a:focus { outline: 1px dotted #222222 !important; }</style><link rel='stylesheet' id='wpachievements-notify-style-css' href='https://emcrit.org/wp-content/plugins/wp-courseware/includes/popup/css/MetroNotificationStyle.min.css?ver=6.8.2' type='text/css' media='all' />
+<script type="text/javascript" src="https://emcrit.org/wp-content/plugins/accordion-pro/assets/js/bootstrap.js?ver=6.8.2" id="wpsm_ac_pro_bootstrap-js-front-js"></script>
+<script type="text/javascript" src="https://emcrit.org/wp-content/plugins/wp-courseware/assets/js/countdown.js?id=81fd492a20dad3190342&amp;ver=4.17.0" id="wpcw-countdown-js"></script>
+<script type="text/javascript" src="https://emcrit.org/wp-content/plugins/wp-courseware/assets/js/form.js?id=c970b90b570ce4ea4d55&amp;ver=4.17.0" id="wpcw-jquery-form-js"></script>
+<script type="text/javascript" id="wpcw-frontend-js-extra">
+/* <![CDATA[ */
+var wpcw_frontend_params = {"api_url":"https:\/\/emcrit.org\/wp-json\/wpcw\/v1\/api\/","api_nonce":"aa3be27b51","ajax_api_url":"\/?wpcw-ajax=%%endpoint%%","ajax_api_nonce":"668b929ef5","ajaxurl":"https:\/\/emcrit.org\/wp-admin\/admin-ajax.php","enrollment_nonce":"57ae36ca9d","progress_nonce":"d311f480f1","str_uploading":"Uploading:","str_quiz_all_fields":"Please provide an answer for all of the questions on this page.","timer_units_hrs":"hrs","timer_units_mins":"mins","timer_units_secs":"secs","min_password_strength":"3","i18n_password_error":"Please enter a stronger password.","i18n_password_hint":"Hint: The password should be at least twelve characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! \" ? $ % ^ & ).","course_progress":{"i18n_confirm_reset_unit":"Are you sure you wish to reset your progress of this Unit? This CANNOT be undone.","i18n_confirm_reset_units":"Are you sure you wish to reset your progress up to this Unit? This CANNOT be undone."}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://emcrit.org/wp-content/plugins/wp-courseware/assets/js/frontend.js?id=860ac92ddd9f1dcceebb&amp;ver=4.17.0" id="wpcw-frontend-js"></script>
+<script type="text/javascript" id="wpcw-course-note-js-extra">
+/* <![CDATA[ */
+var wpcw_course_note_params = {"api_url":"https:\/\/emcrit.org\/wp-json\/wpcw\/v1\/api\/","api_nonce":"aa3be27b51","ajax_api_url":"\/?wpcw-ajax=%%endpoint%%","ajax_api_nonce":"668b929ef5","delete_note_confirm":"Are you sure you wish to delete your note?"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://emcrit.org/wp-content/plugins/wp-courseware/assets/js/coursenote.js?id=abbb01232b5c3e247b37&amp;ver=4.17.0" id="wpcw-course-note-js"></script>
+<script type="text/javascript" src="https://emcrit.org/wp-content/plugins/breeze/assets/js/js-front-end/breeze-lazy-load.min.js?ver=2.2.20" id="breeze-lazy-js"></script>
+<script type="text/javascript" id="breeze-lazy-js-after">
+/* <![CDATA[ */
+document.addEventListener("DOMContentLoaded", function () {
+							window.lazyLoadInstance = new LazyLoad({
+						    elements_selector: ".br-lazy",
+						    data_src: "breeze",
+						    data_srcset: "brsrcset",
+						    data_sizes: "brsizes",
+						    class_loaded: "br-loaded",
+						    threshold: 300,
+								    });
+						});
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://emcrit.org/wp-content/plugins/aawp/assets/dist/js/main.js?ver=3.19.0" id="aawp-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.8.2/wp-includes/js/jquery/ui/core.min.js" id="jquery-ui-core-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.8.2/wp-includes/js/jquery/ui/mouse.min.js" id="jquery-ui-mouse-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.8.2/wp-includes/js/jquery/ui/sortable.min.js" id="jquery-ui-sortable-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.8.2/wp-includes/js/jquery/jquery.ui.touch-punch.js" id="jquery-touch-punch-js"></script>
+<script type="text/javascript" src="https://emcrit.org/wp-content/plugins/wp-courseware/includes/popup/js/MetroNotification.js?ver=6.8.2" id="wpachievements-notify-script-js"></script>
+<script type="text/javascript" src="https://c0.wp.com/c/6.8.2/wp-includes/js/dist/vendor/wp-polyfill.min.js" id="wp-polyfill-js"></script>
+<script type="text/javascript" id="sidebar-login-js-extra">
+/* <![CDATA[ */
+var sidebar_login_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","force_ssl_admin":"1","is_ssl":"1","i18n_username_required":"Please enter your username","i18n_password_required":"Please enter your password","error_class":"sidebar-login-error"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://emcrit.org/wp-content/plugins/sidebar-login/build/frontend.js?ver=39f7653913319f945fb39a83c9a25003" id="sidebar-login-js"></script>
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        var aawp_geotargeting_api = "";
+        var aawp_geotargeting_settings = {"store":"com","mode":"title"};
+        var aawp_geotargeting_localized_stores = {"au":"com.au","nz":"com.au","ca":"ca","de":"de","at":"de","ch":"de","es":"es","fr":"fr","it":"it","gb":"co.uk","ie":"co.uk"};
+        var aawp_geotargeting_tracking_ids = {"ca":"emcritca-20","com.au":"emcrit09-22","de":"emcrituk0e-21","fr":"emcrituk0d-21","it":"emcrituk01d-21","es":"emcrituk0c-21","co.uk":"emcrituk-21"};
+        /* ]]> */
+    </script>
+    </body></html>

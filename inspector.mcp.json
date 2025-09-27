@@ -98,6 +98,13 @@
         "./node_modules/a11y-mcp/src/index.js"
       ],
       "env": {}
+    },
+    "healthcare": {
+      "command": "node",
+      "args": [
+        "./node_modules/healthcare-mcp/server/index.js"
+      ],
+      "env": {}
     }
   }
 }

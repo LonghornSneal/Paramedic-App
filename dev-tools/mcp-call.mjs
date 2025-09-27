@@ -36,6 +36,14 @@ const serverConfigs = {
     stderr: "pipe",
     cwd: basePath
   },
+  healthcare: {
+    command: "node",
+    args: [
+      `${basePath}/node_modules/healthcare-mcp/server/index.js`
+    ],
+    stderr: "pipe",
+    cwd: basePath
+  },
   fetch: {
     command: "node",
     args: [

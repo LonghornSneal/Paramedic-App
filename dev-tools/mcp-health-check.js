@@ -126,6 +126,14 @@ const servers = [
 
 const optionalServers = [
   {
+    name: 'healthcare',
+    package: 'healthcare-mcp',
+    binary: 'healthcare-mcp',
+    required: false,
+    configKey: 'healthcare',
+    notes: 'Authoritative healthcare research tools (FDA, PubMed, ICD-10, etc.).'
+  },
+  {
     name: 'firecrawl',
     package: 'firecrawl-mcp',
     binary: 'firecrawl-mcp',
