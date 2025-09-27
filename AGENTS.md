@@ -2,8 +2,8 @@
 _Last updated: 2025-03-09_
 ## Mission & Source of Truth
 - Deliver the full Abbott EMS protocol playbook as a rapid, offline-ready reference for field clinicians.
-- Treat `C:/Users/HhsJa/OneDrive/Documents/Edited entire Protocols organized.docx` (and the extracted text at `research/paramedic_protocols.txt`) as the non-negotiable source for medical content. No guidance ships without tracing back to a paragraph in that document.
-- Preserve clinical accuracy, scope-of-practice boundaries, and mandated reporting obligations exactly as written. Escalate to maintainers before interpreting ambiguous language.
+- Treat `C:/Users/HhsJa/OneDrive/Documents/Edited entire Protocols organized.docx` (and the extracted text at `research/paramedic_protocols.txt`) as the primary source of app information. Any information from outside sources that is used within the app must not contraindict the primary source of app information and must also have an appropriate citation with a hyperlink to take the user directly to where the information was pulled from.
+- Escalate to user before interpreting ambiguous language.
 - Respect privacy: never record actual patient identifiers or PHI when adding examples or workflows.
 
 ## Protocol Topology & Repository Map
@@ -18,7 +18,7 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 | ALS Medications | Full drug monographs, dosing, contraindications | `Data/MedicationDetailsData.js`, `Data/additionalMedications.js`, UI cards in `Content/` and patient safety warnings |
 
 ### Category Tree Alignment
-- `Data/ParamedicCategoriesData.js` must mirror the structure of the DOCX table of contents. Keep section ordering, nested topics, and titles synchronized.
+- `Data/ParamedicCategoriesData.js` will be similar in structure of the DOCX table of contents (section ordering, nested topics, and titles).
 - Each content directory should contain one markdown/HTML asset per protocol topic. When adding a new file, ensure the slug matches the entry ID (`slugify(title)`).
 - Update `slugAnchors.js` and `slugList.js` whenever a new section or anchor is introduced so navigation and deep links stay correct.
 
@@ -26,14 +26,13 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 1. **Read the source**: Before modifying content, locate the relevant paragraphs in the DOCX or `research/paramedic_protocols.txt`. Capture copy block references (e.g., "Section 1: EMS > ALS Ground Rules").
 2. **Plan the change**: Outline affected files (`Data/*.js`, `Content/*`, UI features) and note clinical dependencies (e.g., RASS scale, MACC workflow, mandatory reporting numbers).
 3. **Implement**:
-   - Textual updates: reflect the protocol verbatim, only adjusting for readability (headings, tables). Preserve dosage numbers, callouts, and caution language.
    - Data modules: verify IDs are unique, sorted, and cross-referenced. Include metadata such as indications, contraindications, dosing ranges, and links back to content files.
    - Feature logic: keep behaviour declarative. Calculators (ventilation ratios, dosing, rule of 9s) must show formulae that match the protocol text.
 4. **Document**: Annotate `README.md` per repository rules (double-asterisk bracket convention) with summary, rationale, and source location.
 5. **Review**: Run lint/tests, then perform manual QA focusing on the affected protocol workflows.
 
 ## MCP Tooling Discipline
-- Invoke the seq MCP server at the start of every task to structure the plan before making changes. If unable for any reason to invoke the seq MCP server, then the very first thing you must do is solve this issue until it is invoked. Do not move onto a task until this step is complete.
+- Invoke the seq MCP server at the start of every task to structure the plan before making changes. Assume that the user has already connected to the server, if having issues with using the MCP server, then assume that the user has not connected to it yet, in which case you will set up everything for the server up until the point of that the user must click "Connect", you will then ask the user if the clicked on "Conect" already, then when the user confirms that they are connected to the MCP, you will continue your original task(s) and initiate the seq MCP server. If unable to invoke the seq MCP server, then you must solve this issue until it is invoked. Do not move onto a task until this step is complete.
 - Record task decisions and follow-up items through the memory MCP server before finishing the work.
 ### MCP Server Auto-Invocation Guide
 - **filesystem** — Auto-run for local file reads and edits because the reference implementation is built for secure, access-controlled filesystem work; skip it for actions that touch locations outside the repo and confirm with the user instead ([servers README](https://github.com/modelcontextprotocol/servers?tab=readme-ov-file#model-context-protocol-servers)).
@@ -54,7 +53,7 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 - **Domain-specific servers** — Only start niche servers (for example n8n workflow tooling) when working directly in that ecosystem, following community guidance that these integrations shine when the agent needs embedded docs and validation ([n8n-mcp launch post](https://www.reddit.com/r/n8n/comments/1lvcwri/i_built_an_mcp_server_that_finally_enables/)).
 - **agent-care** - Connect to SMART-on-FHIR sandboxes when you must audit real patient charts, vitals, or medication lists against EMR data; keep PHI local and only run it once credentials and sandbox endpoints are confirmed ([agentcare-mcp](https://github.com/Kartha-AI/agentcare-mcp)).
 - **emergency-medicare-planner** - Launch when a workflow requires evaluating nearby hospitals or transport destinations (uses Google Maps Places/Directions); skip if facility selection is already decided in the protocol ([emergency-medicare-planner-mcp-server](https://github.com/manolaz/emergency-medicare-planner-mcp-server)).
-- **healthcare-mcp** - Use for authoritative drug monographs, ICD-10 lookups, and clinical trial references to cross-check protocol content; avoid it for internal Abbott-only guidance where the DOCX already rules ([healthcare-mcp-public](https://github.com/Cicatriiz/healthcare-mcp-public)).
+- **healthcare-mcp** - Must use first when researching for additional content to be place within the app. Use for authoritative drug monographs, ICD-10 lookups, researching AHA treatments, and clinical trial references to cross-check protocol content; avoid it for internal Abbott-only guidance where the DOCX already rules ([healthcare-mcp-public](https://github.com/Cicatriiz/healthcare-mcp-public)).
 #### Task Routines & Loop Discipline
 - **Updating README.md**: Start with `checklist-mcp-server` to generate a seq plan node for the doc change, launch `vscode_mcp` for live diagnostics on Markdown anchors, run `hooks-mcp` action `docs_lint` (or equivalent) in a loop until it passes, then capture rationale via `memory` before committing.
 - **Updating AGENTS.md**: Mirror README workflow but add `memory` entries that summarize new agent policies; rerun `checklist` nodes after each edit to ensure every instruction bullet is satisfied.
@@ -70,16 +69,15 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 - **Other Discovered Tasks**: When research uncovers a new workflow (e.g., spec-first dev from `spec-workflow-mcp` or process automation via ActivePieces), register it under the Domain-specific section and extend the checklist sequence accordingly.
 
 
-## Clinical Safeguards & Escalation
-- **Scope adherence**: If a protocol references restrictions (e.g., EMT-B vs EMT-P actions, physician consult triggers), ensure UI labels and decision aids reflect those limits.
-- **Mandatory reporting**: Keep hotline numbers and reporting steps accurate. When numbers change, update contact cards across all surfaces and add regression tests if possible.
-- **Medication Administration Cross Check (MACC)**: Reinforce double-check steps in UI flows. Any automation around dosing must still surface MACC prompts.
+## Clinical Safeguards & Escalation (this section will require updating eventually)
+- **Scope adherence**: If a protocol in the app references restrictions, ensure UI labels and decision aids reflect those limits.
+- **Mandatory reporting**: Keep hotline numbers and reporting steps accurate. When numbers change, update contact cards across all surfaces and add regression tests if possible. Research for updates in this field once a month. Record that the monthly search was perfomed so that this is only researched once a month.
 - **Restraint & sedation content**: Highlight safety notes (no prone restraints, ketamine monitoring, RASS scale) prominently. Validate that warnings propagate to patient snapshot summaries where relevant.
 - **Air medical criteria**: If calculators or decision trees reference air transport, match the conditions listed in the protocol (time thresholds, no-go criteria).
-- **Legal/administrative content**: Keep HIPAA, PCR requirements, and incident reporting workflows intact. When altering guidance, notify maintainers for legal review.
+- **Legal/administrative content**: Keep HIPAA, PCR requirements, and incident reporting workflows intact. When altering guidance, notify user for legal review.
 
 ## Data Modeling Guidelines
-- Each medication entry (`MedicationDetailsData.js`, `additionalMedications.js`) must include: common name, concentration, adult dosing, pediatric dosing, contraindications, adverse effects, MACC cues, and crosslinks to protocol sections.
+- Each medication entry (`MedicationDetailsData.js`, `additionalMedications.js`) must include: common name, concentration, adult dosing, pediatric dosing, contraindications, & adverse effects.
 - Ventilation and airway tools should expose parameters from the skills section (e.g., ParaPAC settings, CPAP/BiPAP tables). Store reference ranges in `Data/VentilationDetailsData.js` with units and notes.
 - Patient tools (`Features/patient/`) should encapsulate quick-reference values (BGL thresholds, shock index formulas, stroke scale criteria). Track the exact paragraph source in code comments when logic is derived.
 - Maintain ASCII encoding; replace special punctuation with ASCII equivalents when importing protocol text.
@@ -99,7 +97,7 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 - Pediatric protocols: Check dosing adjustments, neonatal resuscitation steps, and STARS guidance. Verify pediatric vitals tables load and search exposes new terms.
 - Skills: Walk through ventilator setup, EZ-IO, i-gel, and push-dose epi prep instructions. Ensure any calculators reflect the math in the source document.
 - Medications: Compare each drug card against the ALS medication monographs, including concentration units and infusion rates.
-- Safety content: Confirm mandatory reporting numbers, MACC procedure, RASS scale, and crime-scene precautions are visible and correctly formatted.
+- Safety content: Confirm mandatory reporting numbers, RASS scale, and crime-scene precautions are visible and correctly formatted.
 
 ## Change Log & Collaboration
 - Record all protocol updates in README Chapter 6 (current tasks) with date, source section, and files touched. Planned future imports belong in Chapter 10.

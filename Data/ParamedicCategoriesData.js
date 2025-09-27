@@ -131,8 +131,17 @@ export const ParamedicCategoriesData = [
           id: slugify("Adult Toxic Ingestion with serious S-S"), title: "Toxic Ingestion with serious S/S", 
           type: "topic" 
         },{ 
-          id: slugify("Adult RASS 1 through 4"), title: "RASS +1 through +4", 
-          type: "topic" 
+          id: slugify("Adult RASS pt, +1, +2, +3, +4"), title: "RASS pt, +1, +2, +3, +4",
+          type: "category", children: [{
+            id: slugify("Adult RASS +1"), title: "RASS +1", 
+            type: "topic" 
+          },{
+            id: slugify("Adult RASS +2, +3"), title: "RASS +2, +3", 
+            type: "topic" 
+          },{
+            id: slugify("Adult RASS +4"), title: "RASS +4", 
+            type: "topic" 
+          }]
         },]
       },{ 
         id: slugify("Adult OBGYN"), title: "OB/GYN", 
@@ -671,4 +680,5 @@ export const ParamedicCategoriesData = [
       ]
     },
 ];
+
 
