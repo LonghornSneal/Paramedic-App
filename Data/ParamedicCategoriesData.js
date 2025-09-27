@@ -192,8 +192,11 @@ export const ParamedicCategoriesData = [
         id: slugify("Pediatric Assessment & VS"), title: "Pediatric Assessment & VS", 
         type: "topic" 
       },{ 
-        id: slugify("Pediatric Airway & Breathing"), title: "Airway & Breathing", 
-        type: "topic" 
+        id: slugify("Pediatric Airway & Breathing"), title: "Airway & Breathing",
+        type: "topic"
+      },{
+        id: slugify("Pediatric Cricothyrotomy"), title: "Cricothyrotomy",
+        type: "topic"
       },{ 
         id: slugify("Pediatric Circulation-Cardiac"), title: "Circulation/Cardiac", 
         type: "topic" 
@@ -680,5 +683,6 @@ export const ParamedicCategoriesData = [
       ]
     },
 ];
+
 
 

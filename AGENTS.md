@@ -38,6 +38,14 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 - **filesystem** — Auto-run for local file reads and edits because the reference implementation is built for secure, access-controlled filesystem work; skip it for actions that touch locations outside the repo and confirm with the user instead ([servers README](https://github.com/modelcontextprotocol/servers?tab=readme-ov-file#model-context-protocol-servers)).
 - **git** — Invoke whenever you need status, diffs, or to stage/commit so the agent uses the git-aware tooling instead of raw shell commands; avoid it when you only need to skim a single file ([git-mcp-server](https://github.com/cyanheads/git-mcp-server)).
 - **shell** — Use only when a task truly requires running CLI programs or custom scripts, leveraging the server's allowlists and audit logging; skip it for filesystem or git tasks the dedicated servers already cover ([mcp-shell](https://github.com/sonirico/mcp-shell)).
+  - When calling `node dev-tools/mcp-call.mjs` from PowerShell, pipe JSON via a double-quoted here-string into stdin to avoid quote escaping errors, for example:
+
+    ```powershell
+    @"{
+      "name": "sequentialthinking",
+      "arguments": {...}
+    }"@ | node dev-tools/mcp-call.mjs seq call -
+    ```
 - **webpick** — Auto-run for scoped content grabs where CSS selectors are enough; skip it for heavy navigation or JS-heavy pages that need a headless browser ([mcp-web-content-pick README](https://github.com/kilicmu/mcp-web-content-pick)).
 - **fetch** — Use when you just need a readable copy of an article, title extraction, or optional image saves; avoid it if you require Playwright-grade rendering or multi-hop crawling ([mcp-fetch](https://github.com/kazuph/mcp-fetch)).
 - **fetcher** — Reach for the Playwright-backed fetcher when pages need JavaScript execution or readability cleanup beyond simple HTTP fetches; skip it for static pages where fetch already works ([fetcher-mcp on npm](https://www.npmjs.com/package/fetcher-mcp)).

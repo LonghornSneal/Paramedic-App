@@ -975,3 +975,109 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
   margin-bottom: 0.5rem;
   font-size: 1.05rem;
 }
+
+.equipment-popover-trigger {
+  position: relative;
+  cursor: pointer;
+  border-bottom: 1px dotted currentcolor;
+}
+
+.equipment-popover-trigger-ready {
+  transition: color 0.12s ease-in-out;
+}
+
+.equipment-popover-trigger.equipment-popover-active {
+  color: #0f172a;
+}
+
+.equipment-popover-trigger.equipment-popover-pinned {
+  font-weight: 600;
+}
+
+.equipment-popover-trigger:hover,
+.equipment-popover-trigger:focus {
+  border-bottom-style: solid;
+}
+
+.equipment-popover {
+  position: absolute;
+  z-index: 70;
+  max-width: 280px;
+  background-color: #f8fafc;
+  border: 1px solid #cbd5f5;
+  border-radius: 0.75rem;
+  box-shadow: 0 18px 36px rgb(15 23 42 / 28%);
+  padding: 0.75rem;
+}
+
+.equipment-popover.hidden {
+  display: none;
+}
+
+.equipment-popover-content {
+  position: relative;
+}
+
+.equipment-popover-close {
+  position: absolute;
+  top: -0.6rem;
+  right: -0.6rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 9999px;
+  border: none;
+  background-color: #0f172a;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  line-height: 1.6rem;
+  text-align: center;
+}
+
+.equipment-popover-close:hover,
+.equipment-popover-close:focus {
+  background-color: #1d4ed8;
+  outline: none;
+}
+
+.equipment-popover-image {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.equipment-popover-caption {
+  font-size: 0.85rem;
+  color: #0f172a;
+  margin-bottom: 0.35rem;
+}
+
+.equipment-popover-caption.hidden {
+  display: none;
+}
+
+.equipment-popover-source {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.equipment-popover-source.hidden {
+  display: none;
+}
+
+.equipment-popover-source:hover,
+.equipment-popover-source:focus {
+  color: #1e40af;
+}
+
+/* stylelint-disable-next-line media-feature-range-notation */
+@media (max-width: 640px) {
+  .equipment-popover {
+    width: 90vw;
+    max-width: 320px;
+  }
+}

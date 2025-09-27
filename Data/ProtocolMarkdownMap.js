@@ -55,6 +55,7 @@ export const ProtocolMarkdownMap = {
   "on-scene-healthcare-professionals": "Content/Administrative & Legal Essentials/on-scene-healthcare-professionals.md",
   "pcr-requirements": "Content/Operational Protocols/pcr-requirements.md",
   "pediatric-assessment-vs": "Content/Pediatric Protocols/pediatric-assessment-vs.md",
+  "pediatric-cricothyrotomy": "Content/Pediatric Protocols/pediatric-cricothyrotomy.md",
   "pediatric-refusals": "Content/Pediatric Protocols/pediatric-refusals.md",
   "pediatric-special-needs-children": "Content/Pediatric Protocols/pediatric-special-needs-children.md",
   "pediatric-trauma": "Content/Pediatric Protocols/pediatric-trauma.md",
