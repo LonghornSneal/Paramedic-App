@@ -10,6 +10,7 @@ import { setupSlugAnchors } from '../anchorNav/slugAnchors.js';
 // Import slugify for use in setting section IDs
 import { slugify } from '../../Utils/slugify.js';
 import { AbbreviationGroups } from '../../Data/AbbreviationGroups.js';
+import { CricothyrotomyContent } from '../../Data/CricothyrotomyContent.js';
 
 let equipmentPopover;
 let equipmentPopoverImage;
@@ -20,6 +21,27 @@ let equipmentPopoverPinnedTrigger = null;
 let equipmentPopoverActiveTrigger = null;
 let equipmentPopoverHideTimer;
 let equipmentPopoverEventsBound = false;
+let equipmentPopoverCredit;
+let equipmentPopoverOpenViewerButton;
+
+let equipmentViewer;
+let equipmentViewerPanel;
+let equipmentViewerImage;
+let equipmentViewerMedia;
+let equipmentViewerCaption;
+let equipmentViewerSourceLink;
+let equipmentViewerCloseButton;
+let equipmentViewerZoomDisplay;
+let equipmentViewerSizeDisplay;
+let equipmentViewerZoom = 1;
+let equipmentViewerTranslateX = 0;
+let equipmentViewerTranslateY = 0;
+let equipmentViewerWidthRatio = 0.6;
+let equipmentViewerIsPanning = false;
+let equipmentViewerPanStartX = 0;
+let equipmentViewerPanStartY = 0;
+
+const equipmentMetadata = new Map();
 
 
 function ensureEquipmentPopover() {

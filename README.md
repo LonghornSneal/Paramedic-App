@@ -604,6 +604,7 @@ Warnings/Alerts: Visually shown under Search Bar.
       Drug Interaction Warning: "Patient is on [Drug], which contraindicates [This Treatment]”).   
   VS Warning: "BP too low for this treatment!”.
    "
+**[2025-09-29 MCP webpick tooling hardening: Replaced the upstream web-content-pick server with a sanitized local wrapper so MCP tool registration stays OpenAI-compatible and eliminates the stream disconnects triggered during tool conversion.]**
 **[2025-09-27 Adult & Pediatric Cricothyrotomy updates: Replaced the Abbott indication banner text, embedded photo popovers inside the scalpel-finger-bougie steps, mirrored pediatric emergency tracheotomy guidance, and refreshed citations/assets (sources: StatPearls Cricothyroidotomy 2025; Berger-Estilita et al. 2021 Pediatric FONA primer).]**
 **[2025-09-22 EMV731 operating environment briefings: Environmental Conditions, Transport Use, High Noise, and EMC & Safety pages condensed for field-ready guidance (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapter 5-5; Chapter 6-1 through 6-4; Appendix A).]**
 **[2025-09-22 EMV731 maintenance quick guides: Preventive Maintenance, Filter Maintenance, Exhalation Valve Diaphragm, Self Test & Service, and Cleaning & Storage summarised for field crews (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapter 7-1 through 7-7; Appendix D-11 through D-12).]**
@@ -872,9 +873,7 @@ Ad‑hoc check: `node dev-tools/check-tv.js` prints the live answer and modal co
 - Ventilation data is in `Data/VentilationDetailsData.js` only.
 - If TV logic expands, consider extracting to `Features/ventilation/tv.js` with unit tests.
 
-## Recent fixes (verified)
-
-- **[2025-09-26 Abbott abbreviations experience rebuilt: 'Abbott Approved Abbreviations' now offers grouping selectors with term/abbrev grid modes, removal/addition/reorganize flows, and an Other Abbreviations companion page, all sourced from 'Abbreviations for PCR - Approved list' and 'Abbreviations Used in Document' (Abbott EMS Protocols).]**
+## Recent fixes (verified)\r\n\r\n- **[2025-09-29 Cricothyrotomy detail content structured: Data/CricothyrotomyContent.js now delivers adult & pediatric banners, 13-step workflows, sedation toggles, and an offline surgical airway video sourced from Abbott EMS Airway & Breathing: Cricothyrotomy, StatPearls Cricothyroidotomy (2025), and Deployed Medicine video 143.]**\r\n- **[2025-09-26 Abbott abbreviations experience rebuilt: 'Abbott Approved Abbreviations' now offers grouping selectors with term/abbrev grid modes, removal/addition/reorganize flows, and an Other Abbreviations companion page, all sourced from 'Abbreviations for PCR - Approved list' and 'Abbreviations Used in Document' (Abbott EMS Protocols).]**
 - **[2025-09-26 MACC guidance imported verbatim: Medication Administration Cross Check detail renders the full double-check sequence with a collapsible BLS MACC appendix (source: 'Medication Administration Cross Check' and 'BLS MACC').]**
 - **[2025-09-26 ALS medication cards expose concentration metadata via the new Concentration section on each detail page, keeping dosing data aligned with the ALS Medications tables (source: ALS Medications chapter).]**
 - **[2025-09-18 MCP stack hardened: updated ~/.codex/config.toml, added dev-tools/mcp-health-check.js, and wired npm run mcp:health so MCP clients fail fast when binaries or env vars are missing (source: user request).]**
@@ -891,4 +890,6 @@ This repo is wired to auto‑deploy to GitHub Pages from `main` via `.github/wor
 - If it shows 404 initially, wait for the Pages workflow to finish (Actions tab), or check Settings → Pages to confirm the deployment.
 - Not Sure shows two stacked answers (no ARDS first, ARDS second); pop‑up shows explicit formulas and correct ranges — verified by E2E.
 - Sex icon remains visible when selected (selected state background/border) — verified by E2E.
+
+
 

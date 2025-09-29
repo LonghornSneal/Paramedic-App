@@ -63,7 +63,7 @@ const serverConfigs = {
   webpick: {
     command: "node",
     args: [
-      `${basePath}/node_modules/mcp-web-content-pick/dist/index.js`
+      `${basePath}/dev-tools/mcp/webpick-server.mjs`
     ],
     stderr: "pipe",
     cwd: basePath
