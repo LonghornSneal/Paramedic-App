@@ -50,7 +50,7 @@ export const ParamedicCategoriesData = [
           id: slugify("Adult Pulmonary Edema"), title: "Pulmonary Edema", 
           type: "topic" 
         },{ 
-          id: slugify("Adult MI-ACS"), title: "MI/ACS", 
+          id: slugify("Adult MI or Acute Coronary Syndrome (ACS)"), title: "MI or Acute Coronary Syndrome (ACS)", 
           type: "topic" 
         },{ 
           id: slugify("Adult PEA-Asystole"), title: "PEA/Asystole", 
@@ -74,7 +74,7 @@ export const ParamedicCategoriesData = [
           id: slugify("Adult A-Fib RVR or A-Flutter (stable symptomatic)"), title: "A-Fib RVR or A-Flutter (stable symptomatic)", 
           type: "topic" 
         },{ 
-          id: slugify("Adult MAT (stable)"), title: "MAT (stable)", 
+          id: slugify("Adult Multifocal Atrial Tachycardia (MAT) (Stable Symptomatic)"), title: "Multifocal Atrial Tachycardia (MAT) (Stable Symptomatic)", 
           type: "topic" 
         },{ 
           id: slugify("Adult Mono-VT (stable)"), title: "Mono-VT (stable)", 
@@ -689,6 +689,7 @@ export const ParamedicCategoriesData = [
       ]
     },
 ];
+
 
 
 
