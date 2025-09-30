@@ -194,9 +194,15 @@ export const ParamedicCategoriesData = [
       },{ 
         id: slugify("Pediatric Airway & Breathing"), title: "Airway & Breathing",
         type: "topic"
-      },{
-        id: slugify("Pediatric Cricothyrotomy"), title: "Cricothyrotomy",
-        type: "topic", details: { render: "cricothyrotomy", variant: "pediatric" }
+      },{ 
+        id: slugify("Pediatric Cricothyrotomy"), title: "Cricothyrotomy", 
+        type: "category", children: [{ 
+          id: slugify("Pediatric Surgical Cric >12"), title: "Surgical Cric. for >12yrs old", 
+          type: "topic", details: { render: "cricothyrotomy", variant: "pediatric", section: "pediatric-surgical" } 
+        },{ 
+          id: slugify("Pediatric Needle Cric <12"), title: "Needle Cric for <12yrs old", 
+          type: "topic", details: { render: "cricothyrotomy", variant: "pediatric", section: "pediatric-needle" } 
+        }]
       },{ 
         id: slugify("Pediatric Circulation-Cardiac"), title: "Circulation/Cardiac", 
         type: "topic" 
