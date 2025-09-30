@@ -12,7 +12,7 @@
     "preview": "http-server -p 5173 -c-1",
     "scan:dead": "knip --json",
     "scan:deps": "depcheck --json",
-    "test:vent": "playwright test dev-tools/tests/ventilation.spec.js",
+    "test:vent": "playwright test dev-tools/tests/ventilation.spec.js dev-tools/tests/cricothyrotomy.spec.js",
     "test": "npm run test:vent",
     "mcp:health": "node dev-tools/mcp-health-check.js"
   },
@@ -57,3 +57,8 @@
     "stylelint-no-unsupported-browser-features": "^8.0.4"
   }
 }
+
+
+
+
+

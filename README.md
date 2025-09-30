@@ -873,7 +873,7 @@ Ad‑hoc check: `node dev-tools/check-tv.js` prints the live answer and modal co
 - Ventilation data is in `Data/VentilationDetailsData.js` only.
 - If TV logic expands, consider extracting to `Features/ventilation/tv.js` with unit tests.
 
-## Recent fixes (verified)\r\n\r\n- **[2025-09-29 Cricothyrotomy detail content structured: Data/CricothyrotomyContent.js now delivers adult & pediatric banners, 13-step workflows, sedation toggles, and an offline surgical airway video sourced from Abbott EMS Airway & Breathing: Cricothyrotomy, StatPearls Cricothyroidotomy (2025), and Deployed Medicine video 143.]**\r\n- **[2025-09-26 Abbott abbreviations experience rebuilt: 'Abbott Approved Abbreviations' now offers grouping selectors with term/abbrev grid modes, removal/addition/reorganize flows, and an Other Abbreviations companion page, all sourced from 'Abbreviations for PCR - Approved list' and 'Abbreviations Used in Document' (Abbott EMS Protocols).]**
+## Recent fixes (verified)\r\n\r\n- **[2025-09-29 Cricothyrotomy detail experience rebuilt: Data/CricothyrotomyContent.js and Features/detail/DetailPage.js render custom banners, sedation toggles, 13-step workflows, and an offline surgical airway video sourced from Abbott EMS Airway & Breathing: Cricothyrotomy, StatPearls Cricothyroidotomy (2025), and Deployed Medicine video 143.]**\r\n- **[2025-09-26 Abbott abbreviations experience rebuilt: 'Abbott Approved Abbreviations' now offers grouping selectors with term/abbrev grid modes, removal/addition/reorganize flows, and an Other Abbreviations companion page, all sourced from 'Abbreviations for PCR - Approved list' and 'Abbreviations Used in Document' (Abbott EMS Protocols).]**
 - **[2025-09-26 MACC guidance imported verbatim: Medication Administration Cross Check detail renders the full double-check sequence with a collapsible BLS MACC appendix (source: 'Medication Administration Cross Check' and 'BLS MACC').]**
 - **[2025-09-26 ALS medication cards expose concentration metadata via the new Concentration section on each detail page, keeping dosing data aligned with the ALS Medications tables (source: ALS Medications chapter).]**
 - **[2025-09-18 MCP stack hardened: updated ~/.codex/config.toml, added dev-tools/mcp-health-check.js, and wired npm run mcp:health so MCP clients fail fast when binaries or env vars are missing (source: user request).]**
@@ -890,6 +890,7 @@ This repo is wired to auto‑deploy to GitHub Pages from `main` via `.github/wor
 - If it shows 404 initially, wait for the Pages workflow to finish (Actions tab), or check Settings → Pages to confirm the deployment.
 - Not Sure shows two stacked answers (no ARDS first, ARDS second); pop‑up shows explicit formulas and correct ranges — verified by E2E.
 - Sex icon remains visible when selected (selected state background/border) — verified by E2E.
+
 
 
 
