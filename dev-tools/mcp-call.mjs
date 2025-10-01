@@ -28,6 +28,14 @@ const serverConfigs = {
     stderr: "pipe",
     cwd: basePath
   },
+  tasktimer: {
+    command: "node",
+    args: [
+      `${basePath}/dev-tools/mcp/task-timer-server.mjs`
+    ],
+    stderr: "pipe",
+    cwd: basePath
+  },
   memory: {
     command: "node",
     args: [
@@ -138,3 +146,9 @@ if (!server) {
   console.error(error);
   process.exit(1);
 });
+
+
+
+
+
+

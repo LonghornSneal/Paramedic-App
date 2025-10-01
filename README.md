@@ -829,6 +829,9 @@ Launchers:
 **[Connectivity sanity check: after the Codex session opens, call `filesystem_read_text_file` and `git_status` via MCP tools to confirm the repo is wired correctly.]**
 **[If a server fails mid-session, repair it (reinstall, set env vars, or disable optional entries) and restart Codex. Use direct shell commands only as a temporary bridge while restoring MCP coverage.]**
 
+**[Prompts beginning with `TIMER.` must trigger a new `task_timer` step before planning so the entire workflow is captured front to back.]**
+**[Task timing: Call `task_timer` at the start and end of every major step (`action: "start"` / `action: "stop"`) and supply `taskName`, `taskId` (when available), `stepName`, `stepType`, tags (e.g., experiments), and a short note so `dev-tools/task-timer/history.json` captures analysable durations. Run `task_timer report` when the task wraps to review flagged items, comparisons, and error rates. Flags fire when a step exceeds 2 minutes, repeats 5+ times within one task, or recurs across 3+ tasks with runs >=3 minutes.]**
+
 Good practice
 - Connect only servers needed for the current task.
 - **[Default to MCP tools for edits, diffs, searches, and command execution; drop to direct shell only when MCP servers are being restored.]**
@@ -853,10 +856,16 @@ Ad‑hoc check: `node dev-tools/check-tv.js` prints the live answer and modal co
 - Ventilation data is in `Data/VentilationDetailsData.js` only.
 - If TV logic expands, consider extracting to `Features/ventilation/tv.js` with unit tests.
 
-## Recent fixes (verified)\r\n\r\n- **[2025-09-30 Pediatric protocols hierarchy rebuilt: Data/ParamedicCategoriesData.js now nests the requested pediatric categories/subtopics, slug infrastructure updated, new Content/Pediatric Protocols/*.md files populated from research/paramedic_protocols.txt sections "Pediatric Initial pt Assessment" through "Violent Pt" and "Special Needs Children", and pediatric cricothyrotomy content now omits needle access (<12 yrs) in favor of surgical guidance only.]**
+## Recent fixes (verified)
+
+- **[2025-10-01 Task timer MCP tooling: Added dev-tools/mcp/task-timer-server.mjs with per-step metadata, automatic flagging thresholds, comparison reporting, and registrations in dev-tools/mcp-call.mjs, inspector.mcp.json, and ~/.codex/config.toml.]**
+
+
+- **[2025-09-30 Pediatric protocols hierarchy rebuilt: Data/ParamedicCategoriesData.js now nests the requested pediatric categories/subtopics, slug infrastructure updated, new Content/Pediatric Protocols/*.md files populated from research/paramedic_protocols.txt sections "Pediatric Initial pt Assessment" through "Violent Pt" and "Special Needs Children", and pediatric cricothyrotomy content now omits needle access (<12 yrs) in favor of surgical guidance only.]**
 - **[2025-09-30 Refusals protocol split: Data/ParamedicCategoriesData.js now nests Consent & Refusal plus Refusals & Suicidal Pt's, slug list & ProtocolMarkdownMap updated, and new Content/Adult Protocols/adult-consent-refusal.md / adult-refusals-suicidal-pts.md seeded from research/paramedic_protocols.txt sections "Consent & Refusal" and "Refusals & Suicidal Pts".]**
 - **[2025-09-30 Adult protocol detail expansion: added markdown coverage for MI or Acute Coronary Syndrome (ACS), VF/pVT, SVT modalities, arrhythmia management, metabolic emergencies, obstetric complications, SMR/TASER guidance, and trauma triage; updated navigation slug/data for MI and MAT (source: research/paramedic_protocols.txt sections "MI or Acute Coronary Syndrome (ACS)", "Adult Non-Trauma Cardiocerebral Resuscitation (CCR)", "Hypoglycemia / Insulin Shock", "Delivery OOH/Pre-eclampsia/Eclampsia", "TASER p-deployment", "Trauma Major (Level 1)").]**
-**[2025-09-29 Cricothyrotomy detail experience rebuilt: Data/CricothyrotomyContent.js and Features/detail/DetailPage.js render custom banners, sedation toggles, 13-step workflows, and an offline surgical airway video sourced from Abbott EMS Airway & Breathing: Cricothyrotomy, StatPearls Cricothyroidotomy (2025), and Deployed Medicine video 143.]**\r\n- **[2025-09-26 Abbott abbreviations experience rebuilt: 'Abbott Approved Abbreviations' now offers grouping selectors with term/abbrev grid modes, removal/addition/reorganize flows, and an Other Abbreviations companion page, all sourced from 'Abbreviations for PCR - Approved list' and 'Abbreviations Used in Document' (Abbott EMS Protocols).]**
+**[2025-09-29 Cricothyrotomy detail experience rebuilt: Data/CricothyrotomyContent.js and Features/detail/DetailPage.js render custom banners, sedation toggles, 13-step workflows, and an offline surgical airway video sourced from Abbott EMS Airway & Breathing: Cricothyrotomy, StatPearls Cricothyroidotomy (2025), and Deployed Medicine video 143.]**
+- **[2025-09-26 Abbott abbreviations experience rebuilt: 'Abbott Approved Abbreviations' now offers grouping selectors with term/abbrev grid modes, removal/addition/reorganize flows, and an Other Abbreviations companion page, all sourced from 'Abbreviations for PCR - Approved list' and 'Abbreviations Used in Document' (Abbott EMS Protocols).]**
 - **[2025-09-26 MACC guidance imported verbatim: Medication Administration Cross Check detail renders the full double-check sequence with a collapsible BLS MACC appendix (source: 'Medication Administration Cross Check' and 'BLS MACC').]**
 - **[2025-09-26 ALS medication cards expose concentration metadata via the new Concentration section on each detail page, keeping dosing data aligned with the ALS Medications tables (source: ALS Medications chapter).]**
 - **[2025-09-18 MCP stack hardened: updated ~/.codex/config.toml, added dev-tools/mcp-health-check.js, and wired npm run mcp:health so MCP clients fail fast when binaries or env vars are missing (source: user request).]**
@@ -873,3 +882,9 @@ This repo is wired to auto‑deploy to GitHub Pages from `main` via `.github/wor
 - If it shows 404 initially, wait for the Pages workflow to finish (Actions tab), or check Settings → Pages to confirm the deployment.
 - Not Sure shows two stacked answers (no ARDS first, ARDS second); pop‑up shows explicit formulas and correct ranges — verified by E2E.
 - Sex icon remains visible when selected (selected state background/border) — verified by E2E.
+
+
+- **[2025-10-01 Task timer MCP tooling: Added dev-tools/mcp/task-timer-server.mjs with per-step metadata, automatic flagging thresholds, comparison reporting, and registrations in dev-tools/mcp-call.mjs, inspector.mcp.json, and ~/.codex/config.toml.]**
+
+
+

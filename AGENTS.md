@@ -34,10 +34,14 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 ## MCP Tooling Discipline
 - Invoke the seq MCP server at the start of every task to structure the plan before making changes. Assume that the user has already connected to the server, if having issues with using the MCP server, then assume that the user has not connected to it yet, in which case you will set up everything for the server up until the point of that the user must click "Connect", you will then ask the user if the clicked on "Conect" already, then when the user confirms that they are connected to the MCP, you will continue your original task(s) and initiate the seq MCP server. If unable to invoke the seq MCP server, then you must solve this issue until it is invoked. Do not move onto a task until this step is complete.
 - Record task decisions and follow-up items through the memory MCP server before finishing the work.
+- When a user prompt begins with TIMER. start a new timer step before planning so the entire session is captured.
+- Use the task_timer MCP server to start and stop every major step (`action: "start"` / `action: "stop"`) so `dev-tools/task-timer/history.json` captures durations with clear `taskName`, `taskId`, `stepName`, and `stepType` labels. Include a short note for context. Flags trigger when a step lasts longer than 2 minutes, occurs 5+ times in a single task, or recurs across 3+ tasks with each run >=3 minutes.
+- Capture `errors` (count) and an outcome note when stopping so the error calculator can measure improvements safely.
 ### MCP Server Auto-Invocation Guide
-- **filesystem** — Auto-run for local file reads and edits because the reference implementation is built for secure, access-controlled filesystem work; skip it for actions that touch locations outside the repo and confirm with the user instead ([servers README](https://github.com/modelcontextprotocol/servers?tab=readme-ov-file#model-context-protocol-servers)).
-- **git** — Invoke whenever you need status, diffs, or to stage/commit so the agent uses the git-aware tooling instead of raw shell commands; avoid it when you only need to skim a single file ([git-mcp-server](https://github.com/cyanheads/git-mcp-server)).
-- **shell** — Use only when a task truly requires running CLI programs or custom scripts, leveraging the server's allowlists and audit logging; skip it for filesystem or git tasks the dedicated servers already cover ([mcp-shell](https://github.com/sonirico/mcp-shell)).
+- **filesystem** - Auto-run for local file reads and edits because the reference implementation is built for secure, access-controlled filesystem work; skip it for actions that touch locations outside the repo and confirm with the user instead ([servers README](https://github.com/modelcontextprotocol/servers?tab=readme-ov-file#model-context-protocol-servers)).
+- **git** - Invoke whenever you need status, diffs, or to stage/commit so the agent uses the git-aware tooling instead of raw shell commands; avoid it when you only need to skim a single file ([git-mcp-server](https://github.com/cyanheads/git-mcp-server)).
+- **shell** - Use only when a task truly requires running CLI programs or custom scripts, leveraging the server's allowlists and audit logging; skip it for filesystem or git tasks the dedicated servers already cover ([mcp-shell](https://github.com/sonirico/mcp-shell)).
+- **tasktimer** - Start with `action: "start"` whenever you begin a major step and stop with `action: "stop"` immediately after completing it. Populate `taskName`, `taskId`, `stepName`, `stepType`, `tags` (experiments), and a concise note. Flags surface at >2 minutes, 5+ repeats within a task, or >=3 tasks with individual runs >=3 minutes. End each task with `task_timer report` to review flagged steps, comparisons, and error rates.
   - When calling `node dev-tools/mcp-call.mjs` from PowerShell, pipe JSON via a double-quoted here-string into stdin to avoid quote escaping errors, for example:
 
     ```powershell
@@ -119,3 +123,10 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 - `dev-tools/tests/ventilation.spec.js` - baseline automated validation; expand with additional protocol-critical tests as coverage grows.
 
 Stay disciplined: every update must preserve the app's reliability for crews who rely on it in the field.
+
+
+
+
+
+
+

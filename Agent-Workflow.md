@@ -19,7 +19,15 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
    - Begin work only after the user confirms they clicked **Connect**.
 4. **Sequential thinking discipline**  
    - Invoke the sequentialthinking tool with at least five thoughts for every task, prompt, and response. Increase the total if the work is complex or if any prior attempt needs correction (add one or more extra thoughts for each rework cycle). Use the `needsMoreThoughts` flag when extending a plan beyond the original estimate. The seq MCP server must be invoked for every task, prompt, and response without exception.
-5. **MCP-driven validation**  
+5. **Task timing discipline**  
+   - Use the `task_timer` MCP server to start every major step with a clear `taskName` and `stepName`, then stop it as soon as the step finishes so durations are captured in `dev-tools/task-timer/history.json` for future optimisation.
+   - Include `stepType` (e.g., `thought`, `action`, `research`) and a concise note so repeated work is easy to classify.
+   - Flags trigger when a step runs longer than 2 minutes, the same labelled step appears at least 5 times within one task, or it appears in 3+ different tasks with each run lasting 3 minutes or longer.
+   - Capture  `errors` (count) and an outcome note when stopping so the error calculator can evaluate speed vs accuracy. 
+   - If a step must restart, pass `autoStop: true` when starting the new segment so the previous run is closed cleanly.
+   - When the user prompt begins with `TIMER.` start a new timer step before planning so the session is captured from the outset.
+   - At the end of the task, call `task_timer report` with the relevant `taskName`/`taskId` to review flagged entries, comparisons, and error rates.
+6. **MCP-driven validation**  
    - Before delivering a final response, run the relevant lint/tests through MCP (shell_execute_command, hooks, playwright, etc.) so that feature changes are proven to work in the app.
 
 Document any workflow adjustments here so future sessions inherit the same startup behaviour.
@@ -114,5 +122,6 @@ Document any workflow adjustments here so future sessions inherit the same start
   - Navigate to page; trigger the calculator flow (click/fill)
   - `playwright_browser_wait_for` to see the popup text
   - `playwright_browser_evaluate` to assert that the popup contains all steps and that the final answer appears in the target selector
+
 
 
