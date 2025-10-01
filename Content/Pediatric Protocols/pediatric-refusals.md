@@ -32,25 +32,3 @@ A Parent/Guardian might deny EMS access to minor children if theres no obvious l
 Emancipation does not always = Medical Emancipation (some conditions allow minors to consent specifically for STDs, Addiction, Pregnancy, or Gynecologic issues, or Infectious/Contagious/Communicable disease that is required by law to be tested & Txed) or is on active duty
 A Pregnant minor must have adult consent unless she falls under one of those x-ions
 If Treating Minors, Involve their input (age-appropriate)
-Trauma
-TRAUMA, major
-Defined as Trauma c  Airway compromise, breathing difficulty, shock, mental status change, >9% BSA burns, or cardiac arrest
-Intervention
-Tx ABCs & Transport as early as possible
-IV en route
-Txs to do on scene include those done a moving pt (SMR) or is expected to quickly cause Dramatic Improvement (Needle-D)
-Herniation Risk = Potential Head Injury & needs Intubated
-Hyperventilate, ETCO2  30-35
-Only if pt has signs of active herniation such as
- Newly fixed & Dilated Pupil, Cushings reflex, or posturing
-Hyperventilation is defined as
-Adult = 20/min
-Child = 25/min
-Infant <1yo = 30/min
-Consultation
-Contact Med-Control early during transport
-Discuss therapies that may be indicated by pts condition
-Continuity
-Pt has AMS p initial contact, contact Med-Control
-[is this part correct??????????]
-Traumatic Arrest????????????????

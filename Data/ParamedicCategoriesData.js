@@ -184,40 +184,160 @@ export const ParamedicCategoriesData = [
         },]
       },{ 
         id: slugify("Adult Refusals"), title: "Refusals", 
-        type: "topic" 
+        type: "category", children: [{
+          id: slugify("Adult Consent & Refusal"), title: "Consent & Refusal",
+          type: "topic"
+        },{
+          id: slugify("Adult Refusals & Suicidal Pt's"), title: "Refusals & Suicidal Pt's",
+          type: "topic"
+        }]
       }]
     },
   {id: slugify("Pediatric Protocols"), title: "Pediatric Protocols", 
       type: "category", children: [{ 
-        id: slugify("Pediatric Assessment & VS"), title: "Pediatric Assessment & VS", 
-        type: "topic" 
-      },{ 
-        id: slugify("Pediatric Airway & Breathing"), title: "Airway & Breathing",
-        type: "topic"
-      },{ 
-        id: slugify("Pediatric Cricothyrotomy"), title: "Cricothyrotomy", 
-        type: "category", children: [{ 
-          id: slugify("Pediatric Surgical Cric >12"), title: "Surgical Cric. for >12yrs old", 
-          type: "topic", details: { render: "cricothyrotomy", variant: "pediatric", section: "pediatric-surgical" } 
-        },{ 
-          id: slugify("Pediatric Needle Cric <12"), title: "Needle Cric for <12yrs old", 
-          type: "topic", details: { render: "cricothyrotomy", variant: "pediatric", section: "pediatric-needle" } 
+        id: slugify("Pediatric Initial Assessment & VS"), title: "Pediatric Initial Assessment & VS",
+        type: "category", children: [{
+          id: slugify("Pediatric Initial Assessment"), title: "Pediatric Initial Assessment",
+          type: "topic"
+        },{
+          id: slugify("Pediatric VS"), title: "Pediatric VS",
+          type: "topic"
         }]
       },{ 
-        id: slugify("Pediatric Circulation-Cardiac"), title: "Circulation/Cardiac", 
-        type: "topic" 
+        id: slugify("Pediatric Airway & Breathing"), title: "Airway & Breathing",
+        type: "category", children: [{
+          id: slugify("Pediatric Airway"), title: "Airway",
+          type: "category", children: [{
+            id: slugify("Pediatric Airway Basics"), title: "Pediatric Airway Basics",
+            type: "topic"
+          },{
+            id: slugify("Pediatric SGA"), title: "SGA",
+            type: "topic"
+          },{
+            id: slugify("Pediatric SAI"), title: "SAI",
+            type: "topic"
+          },{
+            id: slugify("Pediatric Intubation"), title: "Intubation",
+            type: "topic"
+          },{
+            id: slugify("Pediatric Tracheostoma"), title: "Tracheostoma",
+            type: "topic"
+          },{
+            id: slugify("Pediatric Tracheostoma with No or Uncuffed Appliance"), title: "Tracheostoma with No or Uncuffed Appliance",
+            type: "topic"
+          },{
+            id: slugify("Pediatric Tension Pneumo"), title: "Tension Pneumo",
+            type: "topic"
+          },{
+            id: slugify("Pediatric Cricothyrotomy"), title: "Cricothyrotomy",
+            type: "topic", details: { render: "cricothyrotomy", variant: "pediatric", section: "pediatric-surgical" }
+          }]
+        },{
+          id: slugify("Pediatric Breathing Basics"), title: "Breathing Basics",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Bronchospasm"), title: "Bronchospasm",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Brief Resolved Unexplained Event (BRUE)"), title: "Brief Resolved Unexplained Event (BRUE)",
+          type: "topic"
+        },{
+          id: slugify("Pediatric CPAP"), title: "CPAP",
+          type: "topic"
+        },{
+          id: slugify("Pediatric BiPAP"), title: "BiPAP",
+          type: "topic"
+        }]
       },{ 
-        id: slugify("Pediatric Medical"), title: "Medical", 
-        type: "topic" 
+        id: slugify("Pediatric Circulation/Cardiac"), title: "Circulation/Cardiac",
+        type: "category", children: [{
+          id: slugify("Pediatric Circulation Basics & Shock"), title: "Circulation Basics & Shock",
+          type: "topic"
+        },{
+          id: slugify("Pediatric ALS"), title: "Pediatric ALS",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Neonatal Resuscitation"), title: "Neonatal Resuscitation",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Newborn Resuscitation"), title: "Newborn Resuscitation",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Cardiogenic Shock/Post-Arrest Stabilization"), title: "Cardiogenic Shock/Post-Arrest Stabilization",
+          type: "topic"
+        }]
       },{ 
-        id: slugify("Pediatric Trauma"), title: "Trauma", 
-        type: "topic" 
+        id: slugify("Pediatric Medical"), title: "Medical",
+        type: "category", children: [{
+          id: slugify("Pediatric AMS/Suspected Opioid OD"), title: "AMS/Suspected Opioid OD",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Allergic Reaction"), title: "Allergic Reaction",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Anaphylaxis"), title: "Anaphylaxis",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Hyperglycemia/DKA/HHS"), title: "Hyperglycemia/DKA/HHS",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Hypoglycemia/Insulin OD"), title: "Hypoglycemia/Insulin OD",
+          type: "topic"
+        },{
+          id: slugify("Pediatric N/V"), title: "N/V",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Organophosphate or Carbamate Poisoning"), title: "Organophosphate or Carbamate Poisoning",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Pain Management"), title: "Pain Management",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Sickle Cell Crisis"), title: "Sickle Cell Crisis",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Seizure"), title: "Seizure",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Toxic Ingestion"), title: "Toxic Ingestion",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Violent Pt"), title: "Violent Pt",
+          type: "topic"
+        }]
       },{ 
-        id: slugify("Pediatric Special Needs Children"), title: "Special Needs Children", 
-        type: "topic" 
+        id: slugify("Pediatric Trauma"), title: "Trauma",
+        type: "topic"
       },{ 
-        id: slugify("Pediatric Refusals"), title: "Refusals", 
-        type: "topic" 
+        id: slugify("Pediatric Special Needs Children"), title: "Special Needs Children",
+        type: "category", children: [{
+          id: slugify("Pediatric Central IV Catheters"), title: "Central IV Catheters",
+          type: "topic"
+        },{
+          id: slugify("Pediatric CSF Shunt (or V-P Shunt)"), title: "CSF Shunt (or V-P Shunt)",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Gastrostomy"), title: "Gastrostomy",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Colostomy or Ileostomy (Fecal Drainage)"), title: "Colostomy or Ileostomy (Fecal Drainage)",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Ureterostomy or Nephrostomy Tube or Foley"), title: "Ureterostomy or Nephrostomy Tube or Foley",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Special Health Care Needs"), title: "Special Health Care Needs",
+          type: "topic"
+        },{
+          id: slugify("Pediatric STARS pt"), title: "STARS pt",
+          type: "topic"
+        },{
+          id: slugify("Pediatric Tracheostomy Tube"), title: "Tracheostomy Tube",
+          type: "topic"
+        }]
+      },{ 
+        id: slugify("Pediatric Refusals"), title: "Refusals",
+        type: "topic"
       }]
     },
   {id: slugify("ALS Medications"), title: "ALS Medications", 

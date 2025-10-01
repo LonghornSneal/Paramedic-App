@@ -256,7 +256,6 @@ styles.css: Custom CSS stylesheet. Loaded in the head of index.html to complemen
   Settings button: #settings-button animated color transition (CSS keyframes).
 
 
-
 Data/ (Data files directory): Holds static ES modules that define application content. Files export constants that are imported by main.js, which constructs global registries for runtime use.
   Data/ParamedicCategoriesData.js: exports the hierarchical Contents tree (export const ParamedicCategoriesData = [...]). Uses slugify() to generate stable IDs for categories/topics, & optional children for nesting.
     Usage: main.js will iterate over window.ParamedicCategoriesData to build the menu. Each topic or subtopic’s id is crucial as it links to details in the next file. main.js imports this module and calls processItem() for each root category to populate window.allDisplayableTopicsMap and build the search index. These ids must match corresponding entries in MedicationDetailsData or VentilationDetailsData for detail pages to load.
@@ -337,9 +336,6 @@ These files currently contain descriptive comments only & no runtime behavior.
   /Symptoms.js
   /VS.js
 
-
-
-
  
 updatePatientData(): This script works closely with main.js, reads the current values from all patient info fields (e.g., age field number, list of allergies entered, etc.) & updates the patientData object. After updating data, it relies on main.js functions like re-rendering pages or lists. It also relies on global structures (like allDisplayableTopicsMap and allSearchableTopics) which are set up in main.js. Thus, it’s included after those structures exist. The event listeners in PatientInfo.js ensure that as soon as the user types or selects something in the sidebar, the rest of the app responds.
   Triggers various UI updates: (for example) May call applyPatientFilters() which goes through the topic list in the DOM & adds or removes a CSS class (like .strikethrough) on each topic depending on patient criteria. It will also invoke a refresh of the current detail page view (if one is open) by calling renderDetailPage for the current topic ID with the new context, so that any dosage calculations or warnings can update immediately.
@@ -368,16 +364,9 @@ Utils/ : Utility scripts. These are helpers that are used across the app for sma
     Used to generate ids for .detail-section-title headings in detail pages so anchor links & the optional in‑page TOC work reliably. Always use this function for any new section titles or topic ids to avoid mismatches.
 
 
-
-
 *Main Scripts (project root): These are the core JavaScript files (often loaded directly in index.html) that drive the app’s functionality.*
 
   **viewportFix.js** – A small script that fixes the behavior of CSS 100vh on mobile browsers. On some mobile devices, 100vh can be problematic (because of browser UI chrome). This script calculates the actual viewport height and sets a CSS variable or updates elements like the sidebar to ensure full-height coverage. In effect, it ensures elements intended to span the full screen actually do so without causing scroll issues. This is mostly a UX polish for mobile compatibility. (It might add an event listener to window resize and adjust some CSS custom property like --vh which is then used in CSS in place of 100vh).
-
-
-
-
-
 
 
   **main.js** – The central application script that brings everything together. It handles initialization, rendering of views (list or detail), search functionality, and integrates the patient info into the content. Some key responsibilities and functions in main.js:
@@ -386,33 +375,27 @@ Utils/ : Utility scripts. These are helpers that are used across the app for sma
 
       It also initializes autocomplete for patient info fields by calling a helper setupAutocomplete on various patient info textareas (for example, past medical history, allergies, medications, etc. have suggestion dropdowns). This makes user input faster and more uniform.
 
-Proposed rewrite (final)
-Initialization (initApp)
+    Proposed rewrite (final)
+    Initialization (initApp)
 
-On DOM ready, initApp() runs. It caches key DOM elements via assignDomElements() and exposes them globally (for cross‑module use), ensures the overlay and Patient Info sidebar start hidden, and wires open/close handlers: clicking the Patient Info button opens the sidebar and activates the overlay; clicking the close (X) or overlay hides it (with a short transition). Navigation (Back/Forward), Home, and search listeners are attached here. It also initializes autocomplete for PMH, Allergies, Medications, Indications, and Symptoms, making free‑text entry faster and more consistent.
-
-
-
+    On DOM ready, initApp() runs. It caches key DOM elements via assignDomElements() and exposes them globally (for cross‑module use), ensures the overlay and Patient Info sidebar start hidden, and wires open/close handlers: clicking the Patient Info button opens the sidebar and activates the overlay; clicking the close (X) or overlay hides it (with a short transition). Navigation (Back/Forward), Home, and search listeners are attached here. It also initializes autocomplete for PMH, Allergies, Medications, Indications, and Symptoms, making free‑text entry faster and more consistent.
 
 
       Critically, initApp() calls initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData). This merges the static data (loaded from the Data files) into internal structures. For instance, it might copy the array from ParamedicCategoriesData into a global paramedicCategories variable, and then traverse it to build allDisplayableTopicsMap (mapping every topic ID to its object with references to parent categories). It also builds allSearchableTopics, an array of objects each containing a topic’s title and full path, which is used to perform text search quickly.
 
       Once data initialization is done, it calls renderInitialView() to display the main content list. It also ensures the navigation history is set up (an empty array with index -1 initially) and that the Back/Forward buttons are correctly disabled at start.
 
-Proposed rewrite (final)
-main.js — application bootstrap
+  Proposed rewrite (final)
+  main.js — application bootstrap
 
-ES module entry point. On DOM ready, initApp():
-Caches key DOM elements (assignDomElements) and exposes them on window for cross‑module use; renders an HTTP warning if served via file://.
-Wires navigation (Back/Forward), search (live filter + Enter commit), Home, Settings/overlay, and Patient Info sidebar open/close behavior.
-Builds window.medicationDataMap by merging MedicationDetailsData and VentilationDetailsData, then indexes ParamedicCategoriesData via processItem() to populate window.allDisplayableTopicsMap and the search index.
-Initializes autocomplete for PMH/Allergies/Medications/Indications/Symptoms and renders the initial patient snapshot if available.
-Adds small UX touches (focus rings on inputs).
-Renders the initial Contents list via renderInitialView(true) (or shows “No categories available”).
-All Data/Features/Utils are imported as ES modules; index.html includes only <script type="module" src="main.js">.
-
-
-
+  ES module entry point. On DOM ready, initApp():
+  Caches key DOM elements (assignDomElements) and exposes them on window for cross‑module use; renders an HTTP warning if served via file://.
+  Wires navigation (Back/Forward), search (live filter + Enter commit), Home, Settings/overlay, and Patient Info sidebar open/close behavior.
+  Builds window.medicationDataMap by merging MedicationDetailsData and VentilationDetailsData, then indexes ParamedicCategoriesData via processItem() to populate window.allDisplayableTopicsMap and the search index.
+  Initializes autocomplete for PMH/Allergies/Medications/Indications/Symptoms and renders the initial patient snapshot if available.
+  Adds small UX touches (focus rings on inputs).
+  Renders the initial Contents list via renderInitialView(true) (or shows “No categories available”).
+  All Data/Features/Utils are imported as ES modules; index.html includes only <script type="module" src="main.js">.
 
 
     Rendering the Category List (renderInitialView): This function populates the main content area with the list of categories and topics (the table of contents of the app). It likely uses a helper (maybe internally defined) that recursively creates HTML for a given category and its children. Each category is output as a clickable card that displays its title alongside a Show/Hide badge. Each topic (child without further children) is output as a <div class="topic-item"> or button element with an attached data-topic-id. The structure in HTML might be nested <div class="category-group"> containing a parent and its child list, etc.
@@ -531,10 +514,6 @@ Dynamic Updates on Detail Page: Patient Info changes trigger updatePatientData()
 - **Quick Vent interplay:** When the active topic is part of the Quick Vent workflow, the rerender repopulates sex/weight/height controls and recalculates tidal-volume outputs, keeping the bedside calculator synchronized with sidebar context (`Features/detail/DetailPage.js:375-740`).
 
 
-
-
-
-
 Back/Forward Navigation: Back/Forward use a view‑state stack. Clicking Back decrements the index and restores either:
   a list state by re‑rendering the Contents & expanding the relevant category path, highlighting & scrolling the previously viewed topic into view, or
   a detail state by re‑rendering the corresponding detail page (without adding a new history entry).
@@ -604,18 +583,18 @@ Warnings/Alerts: Visually shown under Search Bar.
       Drug Interaction Warning: "Patient is on [Drug], which contraindicates [This Treatment]”).   
   VS Warning: "BP too low for this treatment!”.
    "
-**[2025-09-30 Adult protocol detail expansion: added markdown coverage for MI or Acute Coronary Syndrome (ACS), VF/pVT, SVT modalities, arrhythmia management, metabolic emergencies, obstetric complications, SMR/TASER guidance, and trauma triage; updated navigation slug/data for MI and MAT (source: research/paramedic_protocols.txt sections "MI or Acute Coronary Syndrome (ACS)", "Adult Non-Trauma Cardiocerebral Resuscitation (CCR)", "Hypoglycemia / Insulin Shock", "Delivery OOH/Pre-eclampsia/Eclampsia", "TASER p-deployment", "Trauma Major (Level 1)").]**
-**[2025-09-29 MCP webpick tooling hardening: Replaced the upstream web-content-pick server with a sanitized local wrapper so MCP tool registration stays OpenAI-compatible and eliminates the stream disconnects triggered during tool conversion.]**
-**[2025-09-27 Adult & Pediatric Cricothyrotomy updates: Replaced the Abbott indication banner text, embedded photo popovers inside the scalpel-finger-bougie steps, mirrored pediatric emergency tracheotomy guidance, and refreshed citations/assets (sources: StatPearls Cricothyroidotomy 2025; Berger-Estilita et al. 2021 Pediatric FONA primer).]**
-**[2025-09-22 EMV731 operating environment briefings: Environmental Conditions, Transport Use, High Noise, and EMC & Safety pages condensed for field-ready guidance (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapter 5-5; Chapter 6-1 through 6-4; Appendix A).]**
-**[2025-09-22 EMV731 maintenance quick guides: Preventive Maintenance, Filter Maintenance, Exhalation Valve Diaphragm, Self Test & Service, and Cleaning & Storage summarised for field crews (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapter 7-1 through 7-7; Appendix D-11 through D-12).]**
-**[2025-09-22 EMV731 detail routing: Zoll EMV731 subtopics now open directly to their chapter sections without extra TOC layers, matching the operator workflow for General Information, Product Overview, Setup, Use, Alarms, and Accessories (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapters 1-5).]**
-**[2025-09-20 EMV731 navigation cleanup: moved Original Documentation to the final slot and removed redundant 'All Content' topics so General Information, Product Overview, Setting Up, and Using open straight to their chapter subsections (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapters 1-4).]**
-**[2025-09-17 EMV731 general information, product overview, setup, and operations condensed into section summaries with citations for in-app navigation (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapters 1-4).]**
+**[2025-09-30 Adult protocol detail expansion: added markdown coverage for MI or Acute Coronary Syndrome (ACS), VF/pVT, SVT modalities, arrhythmia management, metabolic emergencies, obstetric complications, SMR/TASER guidance, and trauma triage; updated navigation slug/data for MI and MAT (source: research/paramedic_protocols.txt sections "MI or Acute Coronary Syndrome (ACS)".]**
+**[2025-09-29 MCP webpick tooling hardening: Replaced the upstream web-content-pick server with a sanitized local wrapper so MCP tool registration stays OpenAI-compatible & eliminates the stream disconnects triggered during tool conversion.]**
+**[2025-09-27 Adult & Pediatric Cricothyrotomy updates: Replaced the Abbott indication banner text, embedded photo popovers inside the scalpel-finger-bougie steps, mirrored pediatric emergency tracheotomy guidance, & refreshed citations/assets (sources: StatPearls Cricothyroidotomy 2025; Berger-Estilita et al. 2021 Pediatric FONA prime).]**
+**[2025-09-22 EMV731 operating environment briefings: Environmental Conditions, Transport Use, High Noise, & EMC & Safety pages condensed for field-ready guidance (source: Zoll EMV+ Ventilator Operator's Guide.]**
+**[2025-09-22 EMV731 maintenance quick guides: Preventive Maintenance, Filter Maintenance, Exhalation Valve Diaphragm, Self Test & Service, & Cleaning & Storage summarised for field crews (source: Zoll EMV+ Ventilator Operator's Guide Rev.]**
+**[2025-09-22 EMV731 detail routing: Zoll EMV731 subtopics now open directly to their chapter sections without extra TOC layers, matching the operator workflow for General Information, Product Overview, Setup, Use, Alarms, & Accessories (source: Zoll EMV+ Ventilator Operator's Guide Rev.]**
+**[2025-09-20 EMV731 navigation cleanup: moved Original Documentation to the final slot & removed redundant 'All Content' topics so General Information, Product Overview, Setting Up, & Using open straight to their chapter subsections (source: Zoll EMV+ Ventilator Operator's Guide.]**
+**[2025-09-17 EMV731 general information, product overview, setup, & operations condensed into section summaries with citations for in-app navigation (source: Zoll EMV+ Ventilator Operator's Guide.]**
 
-**[2025-03-09 UI polish: Show/Hide badge toggles now replace chevrons across lists and detail sections, aligning styles.css with dev-tools/als-medication-detail.png and preserving cross-browser number-input behavior.]**
-**[2025-03-09 EMV731 alarms chapter summarized: alarm overview, alarm message center, priorities, icon/service code cues, muting behaviors, patient/environment/self-check groupings, and pop ups distilled for field crews (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapter 5-1 through 5-31).]**
-**[2025-03-09 EMV731 alarms navigation: removed the All Content topic and linked each subsection to chapter-specific summaries with navigation/slug updates (source: Zoll EMV+ Ventilator Operator's Guide Rev. P, Chapter 5-1 through 5-31).]**
+**[2025-03-09 UI polish: Show/Hide badge toggles now replace chevrons across lists & detail sections, aligning styles.css with dev-tools/als-medication-detail.png & preserving cross-browser number-input behavior.]**
+**[2025-03-09 EMV731 alarms chapter summarized: alarm overview, alarm message center, priorities, icon/service code cues, muting behaviors, patient/environment/self-check groupings, & pop ups distilled for field crews (source: Zoll EMV+ Ventilator Operator's Guide.]**
+**[2025-03-09 EMV731 alarms navigation: removed the All Content topic & linked each subsection to chapter-specific summaries with navigation/slug updates.**
 
 
 
@@ -874,7 +853,9 @@ Ad‑hoc check: `node dev-tools/check-tv.js` prints the live answer and modal co
 - Ventilation data is in `Data/VentilationDetailsData.js` only.
 - If TV logic expands, consider extracting to `Features/ventilation/tv.js` with unit tests.
 
-## Recent fixes (verified)\r\n\r\n- **[2025-09-30 Adult protocol detail expansion: added markdown coverage for MI or Acute Coronary Syndrome (ACS), VF/pVT, SVT modalities, arrhythmia management, metabolic emergencies, obstetric complications, SMR/TASER guidance, and trauma triage; updated navigation slug/data for MI and MAT (source: research/paramedic_protocols.txt sections "MI or Acute Coronary Syndrome (ACS)", "Adult Non-Trauma Cardiocerebral Resuscitation (CCR)", "Hypoglycemia / Insulin Shock", "Delivery OOH/Pre-eclampsia/Eclampsia", "TASER p-deployment", "Trauma Major (Level 1)").]**
+## Recent fixes (verified)\r\n\r\n- **[2025-09-30 Pediatric protocols hierarchy rebuilt: Data/ParamedicCategoriesData.js now nests the requested pediatric categories/subtopics, slug infrastructure updated, new Content/Pediatric Protocols/*.md files populated from research/paramedic_protocols.txt sections "Pediatric Initial pt Assessment" through "Violent Pt" and "Special Needs Children", and pediatric cricothyrotomy content now omits needle access (<12 yrs) in favor of surgical guidance only.]**
+- **[2025-09-30 Refusals protocol split: Data/ParamedicCategoriesData.js now nests Consent & Refusal plus Refusals & Suicidal Pt's, slug list & ProtocolMarkdownMap updated, and new Content/Adult Protocols/adult-consent-refusal.md / adult-refusals-suicidal-pts.md seeded from research/paramedic_protocols.txt sections "Consent & Refusal" and "Refusals & Suicidal Pts".]**
+- **[2025-09-30 Adult protocol detail expansion: added markdown coverage for MI or Acute Coronary Syndrome (ACS), VF/pVT, SVT modalities, arrhythmia management, metabolic emergencies, obstetric complications, SMR/TASER guidance, and trauma triage; updated navigation slug/data for MI and MAT (source: research/paramedic_protocols.txt sections "MI or Acute Coronary Syndrome (ACS)", "Adult Non-Trauma Cardiocerebral Resuscitation (CCR)", "Hypoglycemia / Insulin Shock", "Delivery OOH/Pre-eclampsia/Eclampsia", "TASER p-deployment", "Trauma Major (Level 1)").]**
 **[2025-09-29 Cricothyrotomy detail experience rebuilt: Data/CricothyrotomyContent.js and Features/detail/DetailPage.js render custom banners, sedation toggles, 13-step workflows, and an offline surgical airway video sourced from Abbott EMS Airway & Breathing: Cricothyrotomy, StatPearls Cricothyroidotomy (2025), and Deployed Medicine video 143.]**\r\n- **[2025-09-26 Abbott abbreviations experience rebuilt: 'Abbott Approved Abbreviations' now offers grouping selectors with term/abbrev grid modes, removal/addition/reorganize flows, and an Other Abbreviations companion page, all sourced from 'Abbreviations for PCR - Approved list' and 'Abbreviations Used in Document' (Abbott EMS Protocols).]**
 - **[2025-09-26 MACC guidance imported verbatim: Medication Administration Cross Check detail renders the full double-check sequence with a collapsible BLS MACC appendix (source: 'Medication Administration Cross Check' and 'BLS MACC').]**
 - **[2025-09-26 ALS medication cards expose concentration metadata via the new Concentration section on each detail page, keeping dosing data aligned with the ALS Medications tables (source: ALS Medications chapter).]**
@@ -892,8 +873,3 @@ This repo is wired to auto‑deploy to GitHub Pages from `main` via `.github/wor
 - If it shows 404 initially, wait for the Pages workflow to finish (Actions tab), or check Settings → Pages to confirm the deployment.
 - Not Sure shows two stacked answers (no ARDS first, ARDS second); pop‑up shows explicit formulas and correct ranges — verified by E2E.
 - Sex icon remains visible when selected (selected state background/border) — verified by E2E.
-
-
-
-
-
