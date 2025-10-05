@@ -1,0 +1,155 @@
+NAME: Context7 COUNT: 14
+  - PennyStockade: context7 and serena. Serena has been an absolute godsend. Anything else just gets turned on for the session its needed in.
+  - chuckycastle: Ref and Exa are pretty different. I’d say Ref > Context7 and Exa > WebSearch
+  - EarlyWorry8502: I can’t survive without sequential thinking + context7. Only MCPs I have.  I wish I could find better but these are the only reliable ones for me. Still looking for a reliable way to store Claude chat, memory MCP is terrible.
+  - LonghornSneal: Did you set up instructions for how sequential thinking should be used? I've started out with forcing it to do 5 thoughts, but I'm thinking this might have been a mistake, because every task takes forever now.  I'm not sure what context7 is about, but i might give that a try today.
+  - Dan_Wood_: Context7 is the only MCP we both can agree on. Having a Postgres MCP that has two tools is hardly context eating and it’s very specific to my usage…
+  - Due_Mouse8946: Context 7 has always been horrible for me. Always out of date. Practically useless. I prefer to use a tool that pulls documentation in real time right then and there. That way, I know I'm getting real up to date documentation, not something someone uploaded to context 7 a year ago and hasn't been updated since.
+  - Character-Interest27: No, the only mcp you actually need is perplexity mcp, because it can do basically everything context7 does but better and so much more
+  - Round_Mixture_7541: Lol wtf is this. I can say the same - delete Context7 after the first call! Why keeping it? It will just pollute your context window. It's A WASTE!
+  - Inner-Sundae-8669: Supabase mcp and context 7 are both pretty nice,  which means 100% of the mcp's I've used work well.
+  - juggerjaxen: don’t why everyone loves context7 when deepwiki exists
+  - Electronic_Cream8552: I use playwright to search for context instead of context7. Run once then save it to memory. Works most of the time
+  - sandman_br: Context7 and that’s it
+  - Correct_Catch9628: Feel either context7 is very good or they have a good marketing budget
+  - thehashimwarren: I have no relationship to Context7. And just now I went to the site to see how they make money, and for the first time realize it's an Upstash supported project.  I don't have any relationship with Upstash either.  Context7 is just really good.
+---
+NAME: Supabase COUNT: 6
+  - Much-Signal1718: I don't think you have tried supabase bruh
+  - santiagolarrain: Came in to say this. Is absolutely awesome. Making queries, figuring out things by itself. Making it part of my slash commands. I love the MCP Supabase. That said, Im thinking of disabling it most of the time, because I know exactly when I want Clause Code to use it. I think that should be the default. Have them all disabled and enabled on per need basis.
+  - knightofren_: Supabase mcp is pretty good
+  - Inner-Sundae-8669: Supabase mcp and context 7 are both pretty nice,  which means 100% of the mcp's I've used work well.
+  - martis941: What about Stripe, supabase, browsermcp lol
+  - thehashimwarren: I would be afraid to use a Stripe MCP. I haven't used Supabase, but I have used Neon's MCP
+---
+NAME: Playwright COUNT: 5
+  - attalbotmoonsays: If you're using a CLI tool you'll want to ensure your LLM has access to docs so it knows how to use it. I often create a {toolname}-llm.txt file with docs in it. Even playwright as a CLI your LLM client needs to know how to use it and depending on how much documentation comes with the package it may not use it effectively. MCP is great because depending on the MCP server set up they can be prescriptive in the tools your LLM uses. And MCP tools calls can be chained together too. The other thing to consider too is that if you're using a CLI and n not MCP your llm client will have to write a script to perform the work. And it doesn't have real-time access to what that script is doing. It will only know what happens after the fact. Using MCP your client has capability to know exactly what's happening when it's happening and can respond right away. 
+  - serranomorante: In what way is playwright-mcp not working for users? I don't understand.
+  - iChrist: I love SearXNG MCP, Reddit MCP, Playwright MCP, Youtube summarize MCP. They are all viable
+  - Endlesssky27: Playwright mcp is top tier
+  - Electronic_Cream8552: I use playwright to search for context instead of context7. Run once then save it to memory. Works most of the time
+---
+NAME: Serena COUNT: 4
+  - PennyStockade: context7 and serena. Serena has been an absolute godsend. Anything else just gets turned on for the session its needed in.
+  - gopietz: I’m not convinced about Serena. Codex was trained to use the tools it has and it highly token efficient the way it works anyway.
+  - daf00q: Whats serena good for?
+  - zinozAreNazis: I meant to reply to the “Serena” comment below you. My bad. These are useful and I agree with you.
+---
+NAME: SequentialThinking COUNT: 3
+  - callStackNerd: Can’t forget about sequentialthinking!
+  - EarlyWorry8502: I can’t survive without sequential thinking + context7. Only MCPs I have.  I wish I could find better but these are the only reliable ones for me. Still looking for a reliable way to store Claude chat, memory MCP is terrible.
+  - LonghornSneal: Did you set up instructions for how sequential thinking should be used? I've started out with forcing it to do 5 thoughts, but I'm thinking this might have been a mistake, because every task takes forever now.  I'm not sure what context7 is about, but i might give that a try today.
+---
+NAME: Postgres COUNT: 3
+  - Dan_Wood_: Agreed. I also made a Postgres MCP with ssh tunnel functionality which is also super handy for Postgres read only functions, list tables, rows columns etc
+  - dot-slash-me: There are cases where Postgres MCP makes sense though. For trivial and most often use cases, MCP isn't likely required. But if you're working on a pretty complicated DB with a ton of tables, functions and triggers, postgres MCP really shines.   But yeah, most often MCP in itself is pretty much useless and can be done with a single cli command instead.
+  - Dan_Wood_: Context7 is the only MCP we both can agree on. Having a Postgres MCP that has two tools is hardly context eating and it’s very specific to my usage…
+---
+NAME: REF COUNT: 2
+  - serge_shima: Context-7 outputs an absurd amount of tokens, completely flooding the context window. It fills it up almost instantly.     You can replace it with either REF or EXA-CODE. I usually go with EXA-CODE - it provides clear, structured examples that actually make sense.
+  - chuckycastle: Ref and Exa are pretty different. I’d say Ref > Context7 and Exa > WebSearch
+---
+NAME: EXA-Code COUNT: 2
+  - serge_shima: Context-7 outputs an absurd amount of tokens, completely flooding the context window. It fills it up almost instantly.     You can replace it with either REF or EXA-CODE. I usually go with EXA-CODE - it provides clear, structured examples that actually make sense.
+  - chuckycastle: Ref and Exa are pretty different. I’d say Ref > Context7 and Exa > WebSearch
+---
+NAME: Supabase MCP COUNT: 2
+  - knightofren_: Supabase mcp is pretty good
+  - Inner-Sundae-8669: Supabase mcp and context 7 are both pretty nice,  which means 100% of the mcp's I've used work well.
+---
+NAME: MCPHub COUNT: 2
+  - boricuajj:  I agree, but that's why I use something like [MCPHub](https://github.com/samanhappy/mcphub) with the smart routing that saves my context and still keeps my mcps accessible.
+  - boricuajj: I gave Claude Code the github link and asked it to explain it to me + give me instructions on how to set it up. Then I asked it to assist me in setting it up.     Instead of connecting all of the MCP servers, you will set up MCPHub as the only MCP server in RooCode. All of the MCP servers should be connected + set up within MCPHub.
+---
+NAME: Deepwiki COUNT: 2
+  - Interesting-Aioli506: Try deepwiki
+  - juggerjaxen: don’t why everyone loves context7 when deepwiki exists
+---
+NAME: Deepwiki MCP COUNT: 2
+  - Interesting-Aioli506: Try deepwiki
+  - juggerjaxen: don’t why everyone loves context7 when deepwiki exists
+---
+NAME: Filesystem COUNT: 1
+  - EarlyWorry8502: Nope I didnt touch it just vanilla. I forgot I also use the Filesystem MCP, which is a pain to config when you have multiple projects in the same workspace, but otherwise seems useful and harmless to memory.
+---
+NAME: Filesystem MCP COUNT: 1
+  - EarlyWorry8502: Nope I didnt touch it just vanilla. I forgot I also use the Filesystem MCP, which is a pain to config when you have multiple projects in the same workspace, but otherwise seems useful and harmless to memory.
+---
+NAME: Perplexity MCP COUNT: 1
+  - Character-Interest27: No, the only mcp you actually need is perplexity mcp, because it can do basically everything context7 does but better and so much more
+---
+NAME: Perplexity MCP mention COUNT: 1
+  - Character-Interest27: No, the only mcp you actually need is perplexity mcp, because it can do basically everything context7 does but better and so much more
+---
+NAME: GUID Generator COUNT: 1
+  - cs_legend_93: I like GUID-Generator to generate correct GUID's
+---
+NAME: Atlassian COUNT: 1
+  - livecodelife: I use MCP servers purely for workflow management. So Atlassian MCP for creating and pulling tickets to work on, Gitlab MCP to create and review pull requests (my employer chose Gitlab over GitHub for some reason), and sometimes Slack MCP to consolidate or summarize conversations for more context about work I’m doing. I’ve tried a lot of the others and have seen no benefit. For personal projects, I don’t use any at all unless it’s big enough that I start creating tickets to track work and then I just do it all through GitHub with the GitHub MCP
+---
+NAME: GitLab COUNT: 1
+  - livecodelife: I use MCP servers purely for workflow management. So Atlassian MCP for creating and pulling tickets to work on, Gitlab MCP to create and review pull requests (my employer chose Gitlab over GitHub for some reason), and sometimes Slack MCP to consolidate or summarize conversations for more context about work I’m doing. I’ve tried a lot of the others and have seen no benefit. For personal projects, I don’t use any at all unless it’s big enough that I start creating tickets to track work and then I just do it all through GitHub with the GitHub MCP
+---
+NAME: Slack COUNT: 1
+  - livecodelife: I use MCP servers purely for workflow management. So Atlassian MCP for creating and pulling tickets to work on, Gitlab MCP to create and review pull requests (my employer chose Gitlab over GitHub for some reason), and sometimes Slack MCP to consolidate or summarize conversations for more context about work I’m doing. I’ve tried a lot of the others and have seen no benefit. For personal projects, I don’t use any at all unless it’s big enough that I start creating tickets to track work and then I just do it all through GitHub with the GitHub MCP
+---
+NAME: dbt COUNT: 1
+  - kum0nryu: dbt-mcp is VERY good for dbt development, maintenance, and analytics (via semantic layer).
+---
+NAME: DBT MCP COUNT: 1
+  - kum0nryu: dbt-mcp is VERY good for dbt development, maintenance, and analytics (via semantic layer).
+---
+NAME: Sourcegraph Sourcebot COUNT: 1
+  - goroskob: Sourcebot and their MCP is great if your org has a shit ton of repositories. Lets the LLM explore them and answer questions about the domain
+---
+NAME: Sourcebot MCP COUNT: 1
+  - goroskob: Sourcebot and their MCP is great if your org has a shit ton of repositories. Lets the LLM explore them and answer questions about the domain
+---
+NAME: Tavily COUNT: 1
+  - dekozo: I like tavily mcp (better than cursor looking up)
+---
+NAME: Tavily MCP COUNT: 1
+  - dekozo: I like tavily mcp (better than cursor looking up)
+---
+NAME: SearXNG COUNT: 1
+  - iChrist: I love SearXNG MCP, Reddit MCP, Playwright MCP, Youtube summarize MCP. They are all viable
+---
+NAME: Reddit MCP COUNT: 1
+  - iChrist: I love SearXNG MCP, Reddit MCP, Playwright MCP, Youtube summarize MCP. They are all viable
+---
+NAME: YouTube Summarize COUNT: 1
+  - iChrist: I love SearXNG MCP, Reddit MCP, Playwright MCP, Youtube summarize MCP. They are all viable
+---
+NAME: SearXNG MCP COUNT: 1
+  - iChrist: I love SearXNG MCP, Reddit MCP, Playwright MCP, Youtube summarize MCP. They are all viable
+---
+NAME: Reddit MCP mention COUNT: 1
+  - iChrist: I love SearXNG MCP, Reddit MCP, Playwright MCP, Youtube summarize MCP. They are all viable
+---
+NAME: YouTube MCP COUNT: 1
+  - iChrist: I love SearXNG MCP, Reddit MCP, Playwright MCP, Youtube summarize MCP. They are all viable
+---
+NAME: Chrome DevTools COUNT: 1
+  - minato-sama: Chrome dev tools MCP 🙌
+---
+NAME: Neon MCP COUNT: 1
+  - thehashimwarren: I would be afraid to use a Stripe MCP. I haven't used Supabase, but I have used Neon's MCP
+---
+NAME: Linear COUNT: 1
+  - eyalbe: I’m using the linear mcp regularly in my dev workflow
+---
+NAME: AWS MCP COUNT: 1
+  - Low-Wish6429: File system , cli mcp and aws mcp
+---
+NAME: CLI MCP COUNT: 1
+  - Low-Wish6429: File system , cli mcp and aws mcp
+---
+NAME: MCP Router COUNT: 1
+  - wka007: Anyone try MCP Router?  I just started using it and so far I’ve got no complaints.
+---
+NAME: MARM Systems COUNT: 1
+  - Alone-Biscotti6145: Try my MCP if you want to control your memory. I have Docker and pip for ways to install it.  It comes with 18 tools, a SQL database with a 5-table schema, smart retrieval and has my protocol baked into it.  Also, it can be used locally across multiple AIs; Gemini can pull up entries that Claude saves, and vice versa.   I haven't had a lot of time to promote it, finally getting over a sickness that has locked me down for a week.  https://github.com/Lyellr88/MARM-Systems
+---
+NAME: Rube COUNT: 1
+  - Prize-Security6194: https://rube.app is pretty useful
+---

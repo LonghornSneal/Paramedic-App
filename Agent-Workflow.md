@@ -2,7 +2,7 @@
 
 This guide shows how to use Codex + MCP servers to code in this repo efficiently.
 
-- Search → Plan → Edit → Diff → Test → Commit → Push
+- Search -> Plan -> Edit -> Diff -> Test -> Commit -> Push
 - Memory: persist key decisions when useful
 - Web: fetch docs/snippets structurally when needed
 
@@ -19,6 +19,9 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
    - Begin work only after the user confirms they clicked **Connect**.
 4. **Sequential thinking discipline**  
    - Invoke the sequentialthinking tool with at least five thoughts for every task, prompt, and response. Increase the total if the work is complex or if any prior attempt needs correction (add one or more extra thoughts for each rework cycle). Use the `needsMoreThoughts` flag when extending a plan beyond the original estimate. The seq MCP server must be invoked for every task, prompt, and response without exception.
+   - Import the helper module once per session: `Import-Module (Resolve-Path 'dev-tools/modules/Invoke-SeqThought/Invoke-SeqThought.psd1')`.
+   - Run `dev-tools/scripts/Enable-SeqThoughtAutoLoad.ps1` once to append the modules directory to `$PROFILE` and keep `Invoke-SeqThought` available in future PowerShell sessions.
+   - Call `Invoke-SeqThought -Thought "..." -ThoughtNumber 1 -TotalThoughts 6 -NextThoughtNeeded $true` and add optional flags (`IsRevision`, `RevisesThought`, `BranchFromThought`, `BranchId`, `NeedsMoreThoughts`) as needed.
 5. **Task timing discipline**  
    - Use the `task_timer` MCP server to start every major step with a clear `taskName` and `stepName`, then stop it as soon as the step finishes so durations are captured in `dev-tools/task-timer/history.json` for future optimisation.
    - Include `stepType` (e.g., `thought`, `action`, `research`) and a concise note so repeated work is easy to classify.
@@ -53,8 +56,8 @@ Document any workflow adjustments here so future sessions inherit the same start
   - Tool: `git_set_working_dir`
   - Arg `path`: `C:\Users\HhsJa\OneDrive\Documents\GitHub\Paramedic-App`
 - Then status/diff:
-  - `git_status` → see staged/unstaged changes
-  - `git_diff` → view diffs
+  - `git_status` -> see staged/unstaged changes
+  - `git_diff` -> view diffs
 - Commit & push:
   - `git_add` with `files: "."`
   - `git_commit` with `message: "feat: ..."`
@@ -100,7 +103,7 @@ Document any workflow adjustments here so future sessions inherit the same start
   - Add rules: use `filesystem_edit_file` or `filesystem_write_file` to append to `styles.css`
   - Verify: `playwright_browser_evaluate` to compare computed styles to expected values
 
-- “Did it actually get done?” checks: `playwright`
+- "Did it actually get done?" checks: `playwright`
   - Use `playwright_browser_navigate` + `playwright_browser_wait_for { text }` + `playwright_browser_take_screenshot`
   - For strict checks, `playwright_browser_evaluate` assertions (e.g., find element and compare text/location)
 
@@ -112,16 +115,19 @@ Document any workflow adjustments here so future sessions inherit the same start
   - `webpick_web-content-pick` to extract headings/links/images/tables as structured data
 
 - Local preview you can test: `shell`
-  - `shell_execute_command` → `npm run preview` (serves at `http://localhost:5173`)
+  - `shell_execute_command` -> `npm run preview` (serves at `http://localhost:5173`)
   - Then drive it with `playwright` tools.
 
 - Search for issues: `shell` (aggregated linters)
   - Run `npm run lint` to check CSS, HTML, JS, and web best practices
 
-- Math “show your work” popup verification: `playwright`
+- Math "show your work" popup verification: `playwright`
   - Navigate to page; trigger the calculator flow (click/fill)
   - `playwright_browser_wait_for` to see the popup text
   - `playwright_browser_evaluate` to assert that the popup contains all steps and that the final answer appears in the target selector
+
+
+
 
 
 

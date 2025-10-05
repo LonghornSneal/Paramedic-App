@@ -1,5 +1,5 @@
 # Paramedic App Agent Handbook
-_Last updated: 2025-03-09_
+_Last updated: 2025-10-05_
 ## Mission & Source of Truth
 - Deliver the full Abbott EMS protocol playbook as a rapid, offline-ready reference for field clinicians.
 - Treat `C:/Users/HhsJa/OneDrive/Documents/Edited entire Protocols organized.docx` (and the extracted text at `research/paramedic_protocols.txt`) as the primary source of app information. Any information from outside sources that is used within the app must not contraindict the primary source of app information and must also have an appropriate citation with a hyperlink to take the user directly to where the information was pulled from.
@@ -31,6 +31,40 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 4. **Document**: Annotate `README.md` per repository rules (double-asterisk bracket convention) with summary, rationale, and source location.
 5. **Review**: Run lint/tests, then perform manual QA focusing on the affected protocol workflows.
 
+## Code Review & Maintenance Discipline
+- **General checks**
+  - Reference code by file path with 1-based line numbers (for example `Features/detail/DetailPage.js:42`).
+  - Track questionable assets (duplicate snippets, unused modules, large images) in the task summary before removal so the user can confirm.
+  - Verify the target file is the canonical home for the logic; note any relocation proposals and the dependent modules they affect.
+- **JavaScript / JSX**
+  - Use `rg`/`git grep` to locate identical blocks before deleting; only remove duplicates that match byte-for-byte and are unused in routing, exports, or tests.
+  - When finding unused exports, confirm whether README.md or roadmap sections promise future use; if yes, annotate the reference instead of deleting.
+  - Highlight mismatched module intent (e.g., UI helpers living in data folders) and suggest the correct directory in the response.
+- **HTML / Markup**
+  - Cull screenshots or images that do not appear in rendered pages or documentation; cross-check for alt text references before removal.
+  - Ensure anchor IDs sync with `Features/anchorNav/*`; record any missing slug updates that need follow-up.
+  - Validate semantic structure (landmarks, heading hierarchy) and note any regressions introduced by edits.
+- **CSS**
+  - Remove duplicate rule sets only when selectors and declarations match exactly and no media queries diverge.
+  - Flag orphaned utility classes and confirm they are not toggled dynamically in JS before deprecating.
+  - Check that variables and mixins reside in the designated theme files; list migrations needed if they do not.
+- **Markdown / README**
+  - Follow the double-asterisk bracket convention already defined in README.md; log every change in Chapter 6.
+  - When spotting outdated guidance, confirm whether a newer instruction exists elsewhere before editing; otherwise, create a TODO entry for user review.
+  - Surface any tooling discrepancies (scripts, commands) so the user can reconcile docs and package scripts.
+## Sequential Thinking Playbook
+1. **Scoping Thought** – List every user question/task, call out the files/features involved, timer/checklist updates, and any ambiguities to escalate. Set an initial `totalThoughts` that covers the required structure (scoping + per question + research + QA + TIME) and adjust during execution.
+2. **Per-Question Thoughts** – Dedicate one thought to each user question or subtask. Capture acceptance criteria, dependencies, and checklist items. Branch with `branchFromThought`/`branchId` if the work diverges, and mark revisions with `isRevision`.
+3. **Execution Planning Thoughts** – Before editing or running tools, outline the steps, matching files, and MCP actions (filesystem/git/hooks/playwright). Flag rollback plans, timer step names, and memory updates.
+4. **Research Thoughts (coding-focused)** – When research is necessary, name the coding sources to pull (repo docs, design specs, GitHub threads, vetted forums) and confirm freshness. Only cite external sources when they materially improve implementation accuracy and never contradict the protocol DOCX.
+5. **Dynamic Adjustment Thoughts** – Emit a new thought when scope changes. Update `totalThoughts` and use `needsMoreThoughts` if you overrun the original estimate so the history stays auditable.
+6. **QA/Test Thought** – Second to last. Review existing automated/manual coverage, decide whether new tests or lint checks are needed, schedule exact commands, and record follow-ups for any failures (CSS, JS, data, or doc regressions).
+7. **TIME Thought** – Final thought. Summarise elapsed steps, surface bottlenecks, propose time-saving automations (scripts, templates, checklist tweaks), and ask the user whether to adopt them. Log notable decisions to the memory MCP before finishing.
+
+## Research Utilities & Fallbacks
+- Run `dev-tools/scripts/Get-McpResearchContent.ps1 <url>` to fetch web content with a Codex-friendly user agent and automatic fallbacks (Reddit share URLs resolve to JSON; other 403/404 responses fall back to `r.jina.ai`). Use `-OutFile` to store the response for later parsing.
+- The curated source catalog at `research/mcp_source_catalog.md` tracks reliable MCP-friendly endpoints (GitHub API, raw GitHub, proxy mirrors) and recording cadence. Update it when new dependable sources or failure modes are discovered.
+- Prefer GitHub API + raw content for code/documentation research before falling back to community mirrors; always reconcile findings with the Abbott protocol DOCX before shipping changes.
 ## MCP Tooling Discipline
 - Invoke the seq MCP server at the start of every task to structure the plan before making changes. Assume that the user has already connected to the server, if having issues with using the MCP server, then assume that the user has not connected to it yet, in which case you will set up everything for the server up until the point of that the user must click "Connect", you will then ask the user if the clicked on "Conect" already, then when the user confirms that they are connected to the MCP, you will continue your original task(s) and initiate the seq MCP server. If unable to invoke the seq MCP server, then you must solve this issue until it is invoked. Do not move onto a task until this step is complete.
 - Record task decisions and follow-up items through the memory MCP server before finishing the work.
@@ -123,6 +157,8 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 - `dev-tools/tests/ventilation.spec.js` - baseline automated validation; expand with additional protocol-critical tests as coverage grows.
 
 Stay disciplined: every update must preserve the app's reliability for crews who rely on it in the field.
+
+
 
 
 
