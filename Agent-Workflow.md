@@ -5,6 +5,7 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
 - Search -> Plan -> Edit -> Diff -> Test -> Commit -> Push
 - Memory: persist key decisions when useful
 - Web: fetch docs/snippets structurally when needed
+- Default focus: execute the active user task exactly as requested. Do not volunteer protocol content changes unless the user explicitly assigns them; treat the user as the final authority on wording.
 
 
 ## Session Startup Protocol
@@ -19,6 +20,7 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
    - Begin work only after the user confirms they clicked **Connect**.
 4. **Sequential thinking discipline**  
    - Invoke the sequentialthinking tool with at least five thoughts for every task, prompt, and response. Increase the total if the work is complex or if any prior attempt needs correction (add one or more extra thoughts for each rework cycle). Use the `needsMoreThoughts` flag when extending a plan beyond the original estimate. The seq MCP server must be invoked for every task, prompt, and response without exception.
+   - Make sure the thought plan mirrors the user's explicit request; ask before altering protocol content if it was not part of the assignment.
    - Import the helper module once per session: `Import-Module (Resolve-Path 'dev-tools/modules/Invoke-SeqThought/Invoke-SeqThought.psd1')`.
    - Run `dev-tools/scripts/Enable-SeqThoughtAutoLoad.ps1` once to append the modules directory to `$PROFILE` and keep `Invoke-SeqThought` available in future PowerShell sessions.
    - Call `Invoke-SeqThought -Thought "..." -ThoughtNumber 1 -TotalThoughts 6 -NextThoughtNeeded $true` and add optional flags (`IsRevision`, `RevisesThought`, `BranchFromThought`, `BranchId`, `NeedsMoreThoughts`) as needed.

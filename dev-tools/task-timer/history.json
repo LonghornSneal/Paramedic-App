@@ -668,6 +668,193 @@
         "repeatsInTask": 1,
         "crossTaskLongRuns": 1
       }
+    },
+    {
+      "id": "step-1759647059295",
+      "taskId": "focus-instruction-update",
+      "taskName": "Adjust Focus Instructions",
+      "stepName": "Session setup",
+      "stepType": "plan",
+      "startedAt": "2025-10-05T06:49:25.401Z",
+      "endedAt": "2025-10-05T06:50:59.295Z",
+      "startNote": "Plan updates to instructions clarifying agent focus",
+      "stopNote": "Planning complete",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 93894,
+      "durationSeconds": 93.894,
+      "durationReadable": "1m 33.9s",
+      "errors": 0,
+      "result": "success",
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1759647098542",
+      "taskId": "focus-instruction-update",
+      "taskName": "Adjust Focus Instructions",
+      "stepName": "Locate instructions",
+      "stepType": "analysis",
+      "startedAt": "2025-10-05T06:51:09.199Z",
+      "endedAt": "2025-10-05T06:51:38.542Z",
+      "startNote": "Search repository instructions for protocol content focus phrasing",
+      "stopNote": "Gathered target locations for instruction updates",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 29343,
+      "durationSeconds": 29.343,
+      "durationReadable": "29.3s",
+      "errors": 0,
+      "result": "success",
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1759661357230",
+      "taskId": "focus-instruction-update",
+      "taskName": "Adjust Focus Instructions",
+      "stepName": "Edit instructions",
+      "stepType": "writing",
+      "startedAt": "2025-10-05T06:51:51.499Z",
+      "endedAt": "2025-10-05T10:49:17.230Z",
+      "startNote": "Update docs to clarify agent focus on user-specified tasks",
+      "stopNote": "Stopping inherited active step before starting new TIMER-scoped session",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 14245731,
+      "durationSeconds": 14245.731,
+      "durationReadable": "3h 57m 25.7s",
+      "errors": 0,
+      "result": "aborted",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 3h 57m 25.7s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1759661438013",
+      "taskId": "focus-messaging-20250214",
+      "taskName": "Focus Messaging Corrections",
+      "stepName": "Initial Scoping",
+      "stepType": "planning",
+      "startedAt": "2025-10-05T10:49:19.887Z",
+      "endedAt": "2025-10-05T10:50:38.013Z",
+      "startNote": "Begin TIMER-scoped task to correct repo focus instructions",
+      "stopNote": "Scoping complete, ready to research instructions",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 78126,
+      "durationSeconds": 78.126,
+      "durationReadable": "1m 18.1s",
+      "errors": 0,
+      "result": "success",
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1759661601922",
+      "taskId": "focus-messaging-20250214",
+      "taskName": "Focus Messaging Corrections",
+      "stepName": "Instruction Audit",
+      "stepType": "research",
+      "startedAt": "2025-10-05T10:50:40.051Z",
+      "endedAt": "2025-10-05T10:53:21.922Z",
+      "startNote": "Search repository docs for incorrect focus messaging",
+      "stopNote": "Identified AGENTS/Agents mission text and Agent-Workflow bullet requiring updates",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 161871,
+      "durationSeconds": 161.871,
+      "durationReadable": "2m 41.9s",
+      "errors": 0,
+      "result": "success",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 2m 41.9s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1759682297939",
+      "taskId": "focus-messaging-20250214",
+      "taskName": "Focus Messaging Corrections",
+      "stepName": "Update instructions",
+      "stepType": "writing",
+      "startedAt": "2025-10-05T10:53:25.203Z",
+      "endedAt": "2025-10-05T16:38:17.939Z",
+      "startNote": "Edit agent handbooks and workflow doc to clarify focus on current tasks",
+      "stopNote": "Updated handbook mission/scope and workflow focus language",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 20692736,
+      "durationSeconds": 20692.736,
+      "durationReadable": "5h 44m 52.7s",
+      "errors": 0,
+      "result": "success",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 5h 44m 52.7s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1759682318522",
+      "taskId": "focus-messaging-20250214",
+      "taskName": "Focus Messaging Corrections",
+      "stepName": "Review updates",
+      "stepType": "analysis",
+      "startedAt": "2025-10-05T16:38:25.790Z",
+      "endedAt": "2025-10-05T16:38:38.522Z",
+      "startNote": "Verify wording changes and capture remaining diffs",
+      "stopNote": "Diffs verified; no additional validation needed beyond doc review",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 12732,
+      "durationSeconds": 12.732,
+      "durationReadable": "12.7s",
+      "errors": 0,
+      "result": "success",
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
     }
   ],
   "metrics": {
@@ -782,8 +969,8 @@
       },
       "session setup": {
         "stepName": "Session setup",
-        "totalRuns": 3,
-        "totalDurationMs": 509882,
+        "totalRuns": 4,
+        "totalDurationMs": 603776,
         "totalErrors": 0,
         "flaggedCounts": {
           "duration_over_2m": 1,
@@ -793,7 +980,8 @@
         "tasks": {
           "seq-instruction-update": 1,
           "seq-instruction-update-3": 1,
-          "mcp-instruction-update": 1
+          "mcp-instruction-update": 1,
+          "focus-instruction-update": 1
         },
         "experiments": {}
       },
@@ -1006,6 +1194,96 @@
           "mcp-instruction-update": 1
         },
         "experiments": {}
+      },
+      "locate instructions": {
+        "stepName": "Locate instructions",
+        "totalRuns": 1,
+        "totalDurationMs": 29343,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "focus-instruction-update": 1
+        },
+        "experiments": {}
+      },
+      "edit instructions": {
+        "stepName": "Edit instructions",
+        "totalRuns": 1,
+        "totalDurationMs": 14245731,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "focus-instruction-update": 1
+        },
+        "experiments": {}
+      },
+      "initial scoping": {
+        "stepName": "Initial Scoping",
+        "totalRuns": 1,
+        "totalDurationMs": 78126,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "focus-messaging-20250214": 1
+        },
+        "experiments": {}
+      },
+      "instruction audit": {
+        "stepName": "Instruction Audit",
+        "totalRuns": 1,
+        "totalDurationMs": 161871,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "focus-messaging-20250214": 1
+        },
+        "experiments": {}
+      },
+      "update instructions": {
+        "stepName": "Update instructions",
+        "totalRuns": 1,
+        "totalDurationMs": 20692736,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "focus-messaging-20250214": 1
+        },
+        "experiments": {}
+      },
+      "review updates": {
+        "stepName": "Review updates",
+        "totalRuns": 1,
+        "totalDurationMs": 12732,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "focus-messaging-20250214": 1
+        },
+        "experiments": {}
       }
     },
     "experiments": {
@@ -1023,7 +1301,7 @@
         }
       }
     },
-    "updatedAt": "2025-10-05T06:12:36.253Z"
+    "updatedAt": "2025-10-05T16:38:38.522Z"
   },
-  "lastUpdated": "2025-10-05T06:12:36.253Z"
+  "lastUpdated": "2025-10-05T16:38:38.522Z"
 }

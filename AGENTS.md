@@ -1,10 +1,14 @@
 # Paramedic App Agent Handbook
 _Last updated: 2025-10-05_
 ## Mission & Source of Truth
-- Deliver the full Abbott EMS protocol playbook as a rapid, offline-ready reference for field clinicians.
-- Treat `C:/Users/HhsJa/OneDrive/Documents/Edited entire Protocols organized.docx` (and the extracted text at `research/paramedic_protocols.txt`) as the primary source of app information. Any information from outside sources that is used within the app must not contraindict the primary source of app information and must also have an appropriate citation with a hyperlink to take the user directly to where the information was pulled from.
+- Build and refine the Paramedic App exactly as the user specifies. The active user request is always your current focus.
+- Only touch protocol text or content assets when the user explicitly assigns that work. When assigned, use `C:/Users/HhsJa/OneDrive/Documents/Edited entire Protocols organized.docx` and `research/paramedic_protocols.txt` as the primary sources, and cite any external references with direct hyperlinks that align with the user's material.
 - Escalate to user before interpreting ambiguous language.
 - Respect privacy: never record actual patient identifiers or PHI when adding examples or workflows.
+## Task Scope & Priorities
+- Follow the user's current instructions as the authoritative task list. Never self-assign protocol content edits or redirect towards content unless the user explicitly requests it.
+- Use the protocol documents to validate behaviour or content only when the user tasks you with that area, keeping their wording, structure, and future plans intact unless they direct otherwise.
+- Escalate when a requirement might change clinical guidance so the user can approve or redirect before any edits land.
 
 ## Protocol Topology & Repository Map
 The DOCX is organized into five major bodies. Maintain 1:1 coverage across code, data, and content directories.
@@ -22,8 +26,7 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 - Each content directory should contain one markdown/HTML asset per protocol topic. When adding a new file, ensure the slug matches the entry ID (`slugify(title)`).
 - Update `slugAnchors.js` and `slugList.js` whenever a new section or anchor is introduced so navigation and deep links stay correct.
 
-## Authoring & Update Workflow
-1. **Read the source**: Before modifying content, locate the relevant paragraphs in the DOCX or `research/paramedic_protocols.txt`. Capture copy block references (e.g., "Section 1: EMS > ALS Ground Rules").
+## Authoring & Update Workflow\r\n_Use this workflow only when the user assigns protocol or content edits._\r\n1. **Read the source**: Before modifying content, locate the relevant paragraphs in the DOCX or `research/paramedic_protocols.txt`. Capture copy block references (e.g., "Section 1: EMS > ALS Ground Rules").
 2. **Plan the change**: Outline affected files (`Data/*.js`, `Content/*`, UI features) and note clinical dependencies (e.g., RASS scale, MACC workflow, mandatory reporting numbers).
 3. **Implement**:
    - Data modules: verify IDs are unique, sorted, and cross-referenced. Include metadata such as indications, contraindications, dosing ranges, and links back to content files.
@@ -157,6 +160,8 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 - `dev-tools/tests/ventilation.spec.js` - baseline automated validation; expand with additional protocol-critical tests as coverage grows.
 
 Stay disciplined: every update must preserve the app's reliability for crews who rely on it in the field.
+
+
 
 
 
