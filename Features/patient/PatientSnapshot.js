@@ -229,10 +229,14 @@ export function renderPatientSnapshot(){
   if (v.hr != null) parts.push(`<span class="${sevHR(v.hr)}">HR ${v.hr}</span>`);
   if (v.rr != null) parts.push(`<span class="${sevRR(v.rr)}">RR ${v.rr}</span>`);
   if (v.bgl) parts.push(`<span class="${sevBGL(v.bgl)}">BGL ${v.bgl}</span>`);
+  const ekgSecondaryNote = typeof d.ekgSecondary === 'string' ? d.ekgSecondary.trim() : '';
   if (hasEkg) {
     const ekgText = typeof ekgLabelSource === 'string' ? ekgLabelSource : '';
     const ekgTitle = d.ekg || ekgText;
     parts.push(`<span class="${sevRhythm(d.ekg)}" title="${ekgTitle}">${abbr(ekgText)}</span>`);
+  }
+  if (ekgSecondaryNote) {
+    parts.push(ekgSecondaryNote);
   }
 
   const summaryHtml = parts.join(' &bull; ');

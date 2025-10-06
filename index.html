@@ -105,7 +105,7 @@
           <span class="sr-only">Years</span>
         </button>
       </div>
-      <input type="number" id="pt-age" class="sidebar-input age-input" inputmode="decimal" step="any">
+      <input type="number" id="pt-age" class="sidebar-input age-input age-input--compact" inputmode="decimal" step="any">
     </div>
     <div class="sidebar-field sidebar-field-weight mb-2">
       <label for="pt-weight-value" class="sidebar-label">Weight:</label>
@@ -161,75 +161,112 @@
   <!-- Section: Vital Signs -->
   <div class="sidebar-section">
     <h2 class="sidebar-section-title">Vital Signs</h2>
-    <div class="sidebar-field sidebar-field-vital mb-2">
-      <label for="vs-bp" class="sidebar-label">BP:</label>
-      <input type="text" id="vs-bp" class="sidebar-input w-full" placeholder="e.g. 120/80" list="vs-bp-presets" inputmode="numeric">
+    <div class="sidebar-field sidebar-field-vital mb-3">
+      <label for="vs-bp-systolic" class="sidebar-label">BP:</label>
+      <div class="dual-input-wrapper">
+        <div class="bp-input-group" role="group" aria-label="Blood pressure entry">
+          <input type="number" id="vs-bp-systolic" class="sidebar-input vital-input vital-input--narrow" inputmode="numeric" min="0" max="400" aria-label="Systolic blood pressure" placeholder="SYS">
+          <span class="bp-divider">/</span>
+          <input type="number" id="vs-bp-diastolic" class="sidebar-input vital-input vital-input--narrow" inputmode="numeric" min="0" max="300" aria-label="Diastolic blood pressure" placeholder="DIA">
+        </div>
+        <select id="vs-bp-select" class="sidebar-input vital-select" aria-label="Blood pressure preset">
+          <option value="">Preset</option>
+          <option value="200+">200+</option>
+          <option value="160+">160+</option>
+          <option value="Normal (90-160 SBP)">Normal (90-160 SBP)</option>
+          <option value="70-90">70-90</option>
+          <option value="70-">70-</option>
+        </select>
+      </div>
     </div>
-    <datalist id="vs-bp-presets">
-      <option value="200+"></option>
-      <option value="160+"></option>
-      <option value="Normal (90-160 SBP)"></option>
-      <option value="70-90"></option>
-      <option value="70-"></option>
-    </datalist>
-    <div class="sidebar-field sidebar-field-vital mb-2">
-      <label for="vs-hr" class="sidebar-label">HR:</label>
-      <input type="text" id="vs-hr" class="sidebar-input w-full" list="vs-hr-presets" inputmode="numeric">
+    <div class="sidebar-field sidebar-field-vital mb-3">
+      <label for="vs-hr-value" class="sidebar-label">HR:</label>
+      <div class="dual-input-wrapper">
+        <input type="number" id="vs-hr-value" class="sidebar-input vital-input" inputmode="numeric" min="0" max="300" aria-label="Heart rate numeric entry" placeholder="bpm">
+        <select id="vs-hr-select" class="sidebar-input vital-select" aria-label="Heart rate preset">
+          <option value="">Preset</option>
+          <option value="150+">150+</option>
+          <option value="100+">100+</option>
+          <option value="60-100">60-100</option>
+          <option value=">60">&gt;60</option>
+          <option value=">40">&gt;40</option>
+        </select>
+      </div>
     </div>
-    <datalist id="vs-hr-presets">
-      <option value="150+"></option>
-      <option value="100+"></option>
-      <option value="60-100"></option>
-      <option value=">60"></option>
-      <option value=">40"></option>
-    </datalist>
-    <div class="sidebar-field sidebar-field-vital mb-2">
-      <label for="vs-spo2" class="sidebar-label">% SpO₂:</label>
-      <input type="text" id="vs-spo2" class="sidebar-input w-full" list="vs-spo2-presets" inputmode="numeric">
+    <div class="sidebar-field sidebar-field-vital mb-3">
+      <label for="vs-spo2-value" class="sidebar-label">% SpO2:</label>
+      <div class="dual-input-wrapper">
+        <input type="number" id="vs-spo2-value" class="sidebar-input vital-input" inputmode="numeric" min="50" max="100" aria-label="Pulse oximetry numeric entry" placeholder="%">
+        <select id="vs-spo2-select" class="sidebar-input vital-select" aria-label="Pulse oximetry preset">
+          <option value="">Preset</option>
+          <option value="Normal">Normal</option>
+          <option value="Low">Low</option>
+          <option value="Severely Low">Severely Low</option>
+        </select>
+      </div>
     </div>
-    <datalist id="vs-spo2-presets">
-      <option value="Normal"></option>
-      <option value="Low"></option>
-      <option value="Severely Low"></option>
-    </datalist>
-    <div class="sidebar-field sidebar-field-vital mb-2">
-      <label for="vs-etco2" class="sidebar-label">EtCO₂:</label>
-      <input type="text" id="vs-etco2" class="sidebar-input w-full" inputmode="numeric">
+    <div class="sidebar-field sidebar-field-vital mb-3">
+      <label for="vs-etco2" class="sidebar-label">EtCO2:</label>
+      <input type="number" id="vs-etco2" class="sidebar-input vital-input" inputmode="numeric" min="0" max="50" aria-label="End tidal CO2" placeholder="mmHg">
     </div>
-    <div class="sidebar-field sidebar-field-vital mb-2">
+    <div class="sidebar-field sidebar-field-vital mb-3">
       <label for="vs-rr" class="sidebar-label">RR:</label>
-      <input type="text" id="vs-rr" class="sidebar-input w-full" inputmode="numeric">
+      <input type="number" id="vs-rr" class="sidebar-input vital-input" inputmode="numeric" min="0" max="80" aria-label="Respiratory rate" placeholder="rpm">
     </div>
-    <div class="sidebar-field sidebar-field-vital mb-2">
-      <label for="vs-bgl" class="sidebar-label">BGL:</label>
-      <input type="text" id="vs-bgl" class="sidebar-input w-full" list="vs-bgl-presets" inputmode="numeric">
+    <div class="sidebar-field sidebar-field-vital mb-3">
+      <label for="vs-bgl-value" class="sidebar-label">BGL:</label>
+      <div class="dual-input-wrapper">
+        <input type="number" id="vs-bgl-value" class="sidebar-input vital-input" inputmode="numeric" min="0" max="900" aria-label="Blood glucose numeric entry" placeholder="mg/dL">
+        <select id="vs-bgl-select" class="sidebar-input vital-select" aria-label="Blood glucose preset">
+          <option value="">Preset</option>
+          <option value="Normal">Normal</option>
+          <option value="High">High</option>
+          <option value="Low">Low</option>
+          <option value="Critical">Critical</option>
+        </select>
+      </div>
     </div>
-    <datalist id="vs-bgl-presets">
-      <option value="Normal"></option>
-      <option value="High"></option>
-      <option value="Low"></option>
-      <option value="Critical"></option>
-    </datalist>
-    <div class="sidebar-field sidebar-field-vital mb-2">
-      <label for="vs-eyes" class="sidebar-label">Pupils (mm):</label>
-      <input type="text" id="vs-eyes" class="sidebar-input w-full" list="vs-eyes-presets" placeholder="e.g. 4mm, PERRL">
+    <div class="sidebar-field sidebar-field-vital mb-3">
+      <label for="vs-pupils-value" class="sidebar-label">Pupils (mm):</label>
+      <div class="dual-input-wrapper">
+        <input type="number" id="vs-pupils-value" class="sidebar-input vital-input" inputmode="numeric" min="0" max="8" step="0.5" aria-label="Pupil size in millimeters" placeholder="mm">
+        <select id="vs-pupils-select" class="sidebar-input vital-select" aria-label="Pupil descriptor">
+          <option value="">Descriptor</option>
+          <option value="PERRL">PERRL</option>
+          <option value="Pinpoint">Pinpoint</option>
+          <option value="Dilated">Dilated</option>
+          <option value="Unequal">Unequal</option>
+          <option value="Fixed">Fixed</option>
+          <option value="Sluggish">Sluggish</option>
+          <option value="Non-reactive">Non-reactive</option>
+        </select>
+      </div>
     </div>
-    <datalist id="vs-eyes-presets">
-      <option value="PERRL"></option>
-      <option value="Pinpoint"></option>
-      <option value="Dilated"></option>
-      <option value="Unequal"></option>
-      <option value="Fixed"></option>
-      <option value="Sluggish"></option>
-      <option value="Non-reactive"></option>
-    </datalist>
-    <div class="sidebar-field sidebar-field-vital mb-2">
-      <label for="vs-gcs" class="sidebar-label">GCS:</label>
-      <input type="text" id="vs-gcs" class="sidebar-input w-full" inputmode="numeric">
+    <div class="sidebar-field sidebar-field-vital mb-3">
+      <label for="vs-gcs-value" class="sidebar-label">GCS:</label>
+      <div class="dual-input-wrapper">
+        <input type="number" id="vs-gcs-value" class="sidebar-input vital-input" inputmode="numeric" min="3" max="15" aria-label="Glasgow Coma Scale numeric entry" placeholder="score">
+        <select id="vs-gcs-select" class="sidebar-input vital-select" aria-label="Glasgow Coma Scale preset">
+          <option value="">Preset</option>
+          <option value="15">15</option>
+          <option value="14">14</option>
+          <option value="13">13</option>
+          <option value="12">12</option>
+          <option value="11">11</option>
+          <option value="10">10</option>
+          <option value="9">9</option>
+          <option value="8">8</option>
+          <option value="7">7</option>
+          <option value="6">6</option>
+          <option value="5">5</option>
+          <option value="4">4</option>
+          <option value="3">3</option>
+        </select>
+      </div>
     </div>
-    <div class="sidebar-field sidebar-field-vital mb-2">
-      <label for="vs-ao-status" class="sidebar-label">A&amp;O Status:</label>
-      <select id="vs-ao-status" class="sidebar-input w-full">
+    <div class="sidebar-field sidebar-field-vital mb-3">
+      <label for="vs-ao-status" class="sidebar-label">A&O Status:</label>
+      <select id="vs-ao-status" class="sidebar-input vital-select">
         <option value=""></option>
         <option value="0">0</option>
         <option value="1">1</option>
@@ -238,9 +275,9 @@
         <option value="4">4</option>
       </select>
     </div>
-    <div class="sidebar-field sidebar-field-vital mb-2">
+    <div class="sidebar-field sidebar-field-vital mb-3">
       <label for="vs-lung-sounds" class="sidebar-label">Lung Sounds:</label>
-      <input type="text" id="vs-lung-sounds" class="sidebar-input w-full" list="vs-lung-sounds-presets" placeholder="e.g. Clear">
+      <input type="text" id="vs-lung-sounds" class="sidebar-input vital-input" list="vs-lung-sounds-presets" placeholder="e.g. Clear">
     </div>
     <datalist id="vs-lung-sounds-presets">
       <option value="Clear"></option>
@@ -257,16 +294,46 @@
   </div>
   <!-- Section: EKG -->
   <div class="sidebar-section">
-    <h2 class="sidebar-section-title">EKG Interpretation</h2>
-    <div class="flex items-center justify-between">
-      <label for="pt-ekg" class="sidebar-label mb-0">EKG:</label>
-      <button type="button" id="ekg-help-button" class="text-sm text-blue-600 hover:underline" aria-haspopup="dialog" aria-controls="ekg-help-modal">Help</button>
+    <div class="sidebar-section-header">
+      <h2 class="sidebar-section-title">EKG Interpretation</h2>
+      <button type="button" id="ekg-help-button" class="sidebar-help-button" aria-haspopup="dialog" aria-controls="ekg-help-modal">Help</button>
     </div>
-    <div class="autocomplete-container">
-      <input type="text" id="pt-ekg" class="sidebar-input w-full" placeholder="e.g. Sinus Tachycardia" >
-      <div id="pt-ekg-suggestions" class="autocomplete-suggestions hidden"></div>
+    <div class="sidebar-field sidebar-field-ekg mb-3">
+      <label for="pt-ekg-select" class="sidebar-label">Rhythm:</label>
+      <div class="dual-input-wrapper">
+        <select id="pt-ekg-select" class="sidebar-input vital-select" aria-label="EKG rhythm preset">
+          <option value="">Select rhythm</option>
+          <option value="Normal Sinus Rhythm">Normal Sinus Rhythm</option>
+          <option value="Sinus Tachycardia">Sinus Tachycardia</option>
+          <option value="Sinus Bradycardia">Sinus Bradycardia</option>
+          <option value="Atrial Fibrillation">Atrial Fibrillation</option>
+          <option value="Atrial Flutter">Atrial Flutter</option>
+          <option value="SVT">SVT</option>
+          <option value="Junctional Rhythm">Junctional Rhythm</option>
+          <option value="First Degree AV Block">First Degree AV Block</option>
+          <option value="Second Degree AV Block Type I">Second Degree AV Block Type I</option>
+          <option value="Second Degree AV Block Type II">Second Degree AV Block Type II</option>
+          <option value="Third Degree AV Block">Third Degree AV Block</option>
+          <option value="Ventricular Tachycardia">Ventricular Tachycardia</option>
+          <option value="Ventricular Fibrillation">Ventricular Fibrillation</option>
+          <option value="Asystole">Asystole</option>
+          <option value="PEA">PEA</option>
+          <option value="Wolff-Parkinson-White">Wolff-Parkinson-White</option>
+          <option value="Torsades de Pointes">Torsades de Pointes</option>
+          <option value="Paced Rhythm">Paced Rhythm</option>
+        </select>
+        <div class="autocomplete-container flex-1">
+          <input type="text" id="pt-ekg" class="sidebar-input vital-input" placeholder="e.g. Sinus Tachycardia">
+          <div id="pt-ekg-suggestions" class="autocomplete-suggestions hidden"></div>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-field sidebar-field-ekg mb-3">
+      <label for="pt-ekg-secondary" class="sidebar-label">MI/BBB/Sgarbossa:</label>
+      <input type="text" id="pt-ekg-secondary" class="sidebar-input vital-input" placeholder="e.g. Inferior MI, RBBB, Sgarbossa positive">
     </div>
   </div>
+
 </div>
 
 <div id="settings-panel" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-lg shadow-lg">

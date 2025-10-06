@@ -25,30 +25,39 @@ export const patientData = {
     vitalSigns: {
         bp: '', bpSystolic: null, bpDiastolic: null, map: null, hr: null, spo2: null, etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: ''
     },
-    ekg: '', ekgDisplay: ''
+    ekg: '', ekgDisplay: '', ekgSecondary: ''
 };
 // IDs of inputs we want to monitor for changes. Weight toggles manipulate the same input, so we only
 // track the shared weight field alongside the rest of the sidebar inputs. When any of these inputs fires an input event, we call
 // updatePatientData() to refresh patientData and update the UI.
-const ptInputIds = [ 'pt-age', 
+const ptInputIds = [ 'pt-age',
     'pt-weight-value',
     'pt-height-ft','pt-height-in',
-    'pt-pmh', 
-    'pt-allergies', 
-    'pt-medications', 
-    'pt-indications', 
+    'pt-pmh',
+    'pt-allergies',
+    'pt-medications',
+    'pt-indications',
     'pt-symptoms',
-        'vs-bp', 
-        'vs-hr', 
-        'vs-spo2', 
-        'vs-etco2', 
-        'vs-rr', 
-        'vs-bgl', 
-        'vs-eyes', 
-        'vs-gcs', 
-        'vs-ao-status', 
-        'vs-lung-sounds', 
-        'pt-ekg' 
+    'vs-bp-systolic',
+    'vs-bp-diastolic',
+    'vs-bp-select',
+    'vs-hr-value',
+    'vs-hr-select',
+    'vs-spo2-value',
+    'vs-spo2-select',
+    'vs-etco2',
+    'vs-rr',
+    'vs-bgl-value',
+    'vs-bgl-select',
+    'vs-pupils-value',
+    'vs-pupils-select',
+    'vs-gcs-value',
+    'vs-gcs-select',
+    'vs-ao-status',
+    'vs-lung-sounds',
+    'pt-ekg',
+    'pt-ekg-select',
+    'pt-ekg-secondary'
 ];
 const ptInputs = ptInputIds.map(id => document.getElementById(id));
 const ageInputEl = document.getElementById('pt-age');
@@ -103,7 +112,26 @@ export const symptomSuggestions = new Set([
 ]);
 
 export const ekgSuggestions = new Set([
-    'sinus tachycardia','sinus bradycardia','atrial fibrillation','atrial flutter','supraventricular tachycardia','ventricular tachycardia','junctional rhythm','asystole'
+    'normal sinus rhythm',
+    'sinus tachycardia',
+    'sinus bradycardia',
+    'atrial fibrillation',
+    'atrial flutter',
+    'supraventricular tachycardia',
+    'svt',
+    'junctional rhythm',
+    'first degree av block',
+    'second degree av block type i',
+    'second degree av block type ii',
+    'third degree av block',
+    'ventricular tachycardia',
+    'torsades de pointes',
+    'ventricular fibrillation',
+    'paced rhythm',
+    'wolff-parkinson-white',
+    'asystole',
+    'pea',
+    'pulseless electrical activity'
 ]);
 
 /**
@@ -137,88 +165,261 @@ function getParsedInt(id, min, max) {
     return clamped;
 }
 function clampNumber(value, min, max) {
+
   if (typeof value !== 'number' || Number.isNaN(value)) return null;
+
   let clamped = value;
+
   if (typeof min === 'number' && clamped < min) clamped = min;
+
   if (typeof max === 'number' && clamped > max) clamped = max;
+
   return clamped;
+
 }
 
-function getNormalizedBloodPressure(id) {
-  const el = document.getElementById(id);
-  const raw = el?.value?.trim() ?? '';
-  if (!raw) {
-    return { value: '', systolic: null, diastolic: null, map: null };
-  }
-  const bpPattern = /^(\d{1,3})(?:\s*\/\s*(\d{1,3}))?$/;
-  const match = raw.match(bpPattern);
-  if (!match) {
-    return { value: raw, systolic: null, diastolic: null, map: null };
-  }
-  const systolicParsed = parseInt(match[1], 10);
-  const diastolicParsed = match[2] ? parseInt(match[2], 10) : null;
-  const systolic = clampNumber(systolicParsed, 0, 400);
-  const diastolic = diastolicParsed != null ? clampNumber(diastolicParsed, 0, 300) : null;
-  if (systolic == null) {
-    return { value: raw, systolic: null, diastolic, map: null };
-  }
-  const formatted = diastolic != null ? `${systolic}/${diastolic}` : `${systolic}`;
-  if (el && formatted !== raw) el.value = formatted;
-  const map = diastolic != null ? Math.round((systolic + 2 * diastolic) / 3) : null;
-  return { value: formatted, systolic, diastolic, map };
+
+
+function getIntegerFromInput(el, min, max) {
+
+  if (!el) return null;
+
+  const raw = typeof el.value === 'string' ? el.value.trim() : '';
+
+  if (!raw) return null;
+
+  const parsed = parseInt(raw, 10);
+
+  if (Number.isNaN(parsed)) return null;
+
+  const clamped = clampNumber(parsed, min, max);
+
+  if (clamped == null) return null;
+
+  if (clamped !== parsed) el.value = clamped.toString();
+
+  return clamped;
+
 }
 
-function getNormalizedPupilDescription(id) {
-  const el = document.getElementById(id);
-  const raw = el?.value?.trim() ?? '';
-  if (!raw) return '';
-  const match = raw.match(/^(\d{1,2})(?:\s*mm)?(.*)$/i);
-  if (!match) return raw;
-  const sizeParsed = parseInt(match[1], 10);
-  const size = clampNumber(sizeParsed, 0, 8);
-  if (size == null) return raw;
-  const remainder = match[2] ?? '';
-  const trimmed = remainder.trim();
-  let suffix = '';
-  if (trimmed) {
-    const firstChar = trimmed[0];
-    if (firstChar === ',') {
-      suffix = trimmed;
-    } else if (firstChar === '/' || firstChar === '-') {
-      suffix = ' ' + trimmed;
-    } else {
-      suffix = ', ' + trimmed;
+
+
+function getBloodPressureDetails() {
+
+  const systolicEl = document.getElementById('vs-bp-systolic');
+
+  const diastolicEl = document.getElementById('vs-bp-diastolic');
+
+  const presetEl = document.getElementById('vs-bp-select');
+
+
+
+  const systolic = getIntegerFromInput(systolicEl, 0, 400);
+
+  const diastolic = getIntegerFromInput(diastolicEl, 0, 300);
+
+  const preset = presetEl?.value?.trim() ?? '';
+
+
+
+  let formatted = '';
+
+  if (systolic != null && diastolic != null) {
+
+    formatted = systolic + '/' + diastolic;
+
+  } else if (systolic != null) {
+
+    formatted = systolic.toString();
+
+  }
+
+
+
+  if (formatted && presetEl && preset) {
+
+    presetEl.value = '';
+
+  } else if (!formatted && preset) {
+
+    formatted = preset;
+
+  }
+
+
+
+  let map = null;
+
+  if (systolic != null && diastolic != null) {
+
+    map = Math.round((systolic + (2 * diastolic)) / 3);
+
+    if (systolicEl) systolicEl.dataset.mapValue = map.toString();
+
+    if (diastolicEl) diastolicEl.dataset.mapValue = map.toString();
+
+  } else {
+
+    if (systolicEl) delete systolicEl.dataset.mapValue;
+
+    if (diastolicEl) delete diastolicEl.dataset.mapValue;
+
+  }
+
+
+
+  return { value: formatted, systolic, diastolic, preset, map };
+
+}
+
+
+
+function getPupilDetails(sizeId, descriptorId) {
+
+  const sizeEl = document.getElementById(sizeId);
+
+  const descriptorEl = document.getElementById(descriptorId);
+
+  const sizeRaw = sizeEl?.value?.trim() ?? '';
+
+  let size = null;
+
+  if (sizeRaw) {
+
+    const parsed = parseFloat(sizeRaw);
+
+    if (!Number.isNaN(parsed)) {
+
+      const clamped = clampNumber(parsed, 0, 8);
+
+      if (clamped != null) {
+
+        const normalized = Math.round(clamped * 2) / 2;
+
+        size = normalized;
+
+        if (sizeEl) sizeEl.value = Number.isInteger(normalized) ? normalized.toString() : normalized.toFixed(1);
+
+      }
+
     }
+
   }
-  const formatted = `${size}mm${suffix}`;
-  if (el && formatted !== raw) el.value = formatted;
-  return formatted;
+
+  const descriptor = descriptorEl?.value?.trim() ?? '';
+
+  let combined = '';
+
+  if (size != null) {
+
+    combined = Number.isInteger(size) ? size.toString() + 'mm' : size.toFixed(1) + 'mm';
+
+  }
+
+  if (descriptor) {
+
+    combined = combined ? combined + ', ' + descriptor : descriptor;
+
+  }
+
+  return { combined, size, descriptor };
+
 }
+
+
+
+function readNumberOrPreset(numberId, selectId, min, max, options = {}) {
+
+  const numberEl = document.getElementById(numberId);
+
+  const selectEl = document.getElementById(selectId);
+
+  const numberValue = getIntegerFromInput(numberEl, min, max);
+
+  if (numberValue != null) {
+
+    if (selectEl) selectEl.value = '';
+
+    return numberValue;
+
+  }
+
+  const preset = selectEl?.value?.trim() ?? '';
+
+  if (!preset) return '';
+
+  if (options.parsePresetAsNumber && /^\d+$/.test(preset)) {
+
+    const parsed = parseInt(preset, 10);
+
+    return clampNumber(parsed, min, max);
+
+  }
+
+  return preset;
+
+}
+function linkNumberAndSelect(numberIds, selectId, options = {}) {
+  const ids = Array.isArray(numberIds) ? numberIds : [numberIds];
+  const numberElements = ids.map(id => document.getElementById(id)).filter(Boolean);
+  const selectEl = document.getElementById(selectId);
+  if (!numberElements.length || !selectEl) return;
+  if (options.allowCombined) return;
+  numberElements.forEach(el => {
+    el.addEventListener('input', () => {
+      if (el.value && selectEl.value) {
+        selectEl.value = '';
+      }
+    });
+  });
+  selectEl.addEventListener('change', () => {
+    if (selectEl.value) {
+      numberElements.forEach(el => {
+        el.value = '';
+      });
+    }
+  });
+}
+
+
 
 
 /**
+
  * Parses a floating point value from the input with the given id. Returns null if parsing fails
+
  * or the value is empty. This helper is used for weight inputs where decimals are allowed.
+
  *
+
  * @param {string} id The id of the input element to parse.
+
  * @returns {number|null} The parsed float or null.
+
  */
+
 function getParsedFloat(id) {
+
     const val = getInputValue(id);
+
     return val && !isNaN(parseFloat(val)) ? parseFloat(val) : null;
+
 }
+
 function getNormalizedNumberOrText(id, min, max) {
+
   const el = document.getElementById(id);
-  const raw = el?.value?.trim() ?? '';
-  if (!raw) return '';
-  const parsed = parseInt(raw, 10);
-  if (Number.isNaN(parsed)) return raw;
-  let clamped = parsed;
-  if (typeof min === 'number' && clamped < min) clamped = min;
-  if (typeof max === 'number' && clamped > max) clamped = max;
-  if (el && clamped !== parsed) el.value = clamped.toString();
-  return clamped;
+
+  const numeric = getIntegerFromInput(el, min, max);
+
+  if (numeric != null) return numeric;
+
+  return el?.value?.trim() ?? '';
+
 }
+
+
+
 
 /**
  * Splits a comma‑separated textarea into an array of lower‑cased values. Returns an empty
@@ -662,32 +863,43 @@ function updatePatientData() {
     patientData.symptoms = symptomUnique.canonical;
     patientData.symptomsDisplay = symptomUnique.display;
 
+    const ekgSelectValue = document.getElementById('pt-ekg-select')?.value?.trim() ?? '';
     const ekgValues = getFieldValues('ekg', 'pt-ekg');
-    const ekgUnique = dedupeByCanonical(ekgValues.canonical, ekgValues.display);
-    patientData.ekg = ekgUnique.canonical[0] || '';
-    patientData.ekgDisplay = ekgUnique.display[0] || '';
-
-    const bpDetails = getNormalizedBloodPressure('vs-bp');
-    const bpInputNode = document.getElementById('vs-bp');
-    if (bpInputNode) {
-        if (typeof bpDetails.map === 'number' && !Number.isNaN(bpDetails.map)) {
-            bpInputNode.dataset.mapValue = bpDetails.map.toString();
-        } else {
-            delete bpInputNode.dataset.mapValue;
+    const ekgCanonical = Array.isArray(ekgValues.canonical) ? [...ekgValues.canonical] : [];
+    const ekgDisplay = Array.isArray(ekgValues.display) ? [...ekgValues.display] : [];
+    if (ekgSelectValue) {
+        const normalizedSelect = normalizeCommittedValues('ekg', [ekgSelectValue]);
+        if (normalizedSelect && Array.isArray(normalizedSelect.canonical) && Array.isArray(normalizedSelect.display)) {
+            ekgCanonical.unshift(...normalizedSelect.canonical);
+            ekgDisplay.unshift(...normalizedSelect.display);
         }
     }
+    const ekgUnique = dedupeByCanonical(ekgCanonical, ekgDisplay);
+    patientData.ekg = ekgUnique.canonical[0] || '';
+    patientData.ekgDisplay = ekgUnique.display[0] || '';
+    patientData.ekgSecondary = getInputValue('pt-ekg-secondary');
+
+    const bpDetails = getBloodPressureDetails();
+    const hrValue = readNumberOrPreset('vs-hr-value', 'vs-hr-select', 0, 300);
+    const spo2Value = readNumberOrPreset('vs-spo2-value', 'vs-spo2-select', 50, 100);
+    const etco2Value = getNormalizedNumberOrText('vs-etco2', 0, 50);
+    const rrValue = getNormalizedNumberOrText('vs-rr', 0, 80);
+    const bglValue = readNumberOrPreset('vs-bgl-value', 'vs-bgl-select', 0, 900);
+    const pupilDetails = getPupilDetails('vs-pupils-value', 'vs-pupils-select');
+    const gcsValue = readNumberOrPreset('vs-gcs-value', 'vs-gcs-select', 3, 15, { parsePresetAsNumber: true });
+
     patientData.vitalSigns = {
         bp: bpDetails.value,
         bpSystolic: bpDetails.systolic,
         bpDiastolic: bpDetails.diastolic,
         map: bpDetails.map,
-        hr: getNormalizedNumberOrText('vs-hr', 0, 300),
-        spo2: getNormalizedNumberOrText('vs-spo2', 50, 100),
-        etco2: getNormalizedNumberOrText('vs-etco2', 0, 50),
-        rr: getNormalizedNumberOrText('vs-rr', 0, 80),
-        bgl: getNormalizedNumberOrText('vs-bgl', 0, 900),
-        eyes: getNormalizedPupilDescription('vs-eyes'),
-        gcs: getNormalizedNumberOrText('vs-gcs', 3, 15),
+        hr: hrValue,
+        spo2: spo2Value,
+        etco2: etco2Value,
+        rr: rrValue,
+        bgl: bglValue,
+        eyes: pupilDetails.combined,
+        gcs: gcsValue,
         aoStatus: getInputValue('vs-ao-status'),
         lungSounds: getInputValue('vs-lung-sounds')
     };
@@ -771,6 +983,29 @@ if (weightInputEl) {
     updatePatientData();
   });
 }
+
+linkNumberAndSelect(['vs-bp-systolic', 'vs-bp-diastolic'], 'vs-bp-select');
+linkNumberAndSelect('vs-hr-value', 'vs-hr-select');
+linkNumberAndSelect('vs-spo2-value', 'vs-spo2-select');
+linkNumberAndSelect('vs-bgl-value', 'vs-bgl-select');
+linkNumberAndSelect('vs-gcs-value', 'vs-gcs-select');
+
+const ekgSelectEl = document.getElementById('pt-ekg-select');
+const ekgInputEl = document.getElementById('pt-ekg');
+if (ekgSelectEl && ekgInputEl) {
+  ekgSelectEl.addEventListener('change', () => {
+    if (ekgSelectEl.value) {
+      ekgInputEl.value = ekgSelectEl.value;
+      updatePatientData();
+    }
+  });
+  ekgInputEl.addEventListener('input', () => {
+    if (ekgInputEl.value.trim()) {
+      ekgSelectEl.value = '';
+    }
+  });
+}
+
 
 sexButtons.forEach(btn => {
   btn.setAttribute('aria-pressed', 'false');
