@@ -114,8 +114,10 @@
   <!-- Section: Vital Signs -->
   <div class="sidebar-section">
     <h2 class="sidebar-section-title">Vital Signs</h2>
-    <label for="vs-bp" class="sidebar-label">Blood Pressure (BP):</label>
-    <input type="text" id="vs-bp" class="sidebar-input w-full mb-2" placeholder="e.g. 120/80" list="vs-bp-presets" inputmode="numeric" >
+    <div class="sidebar-field sidebar-field-vital mb-2">
+      <label for="vs-bp" class="sidebar-label">BP:</label>
+      <input type="text" id="vs-bp" class="sidebar-input w-full" placeholder="e.g. 120/80" list="vs-bp-presets" inputmode="numeric">
+    </div>
     <datalist id="vs-bp-presets">
       <option value="200+"></option>
       <option value="160+"></option>
@@ -123,8 +125,10 @@
       <option value="70-90"></option>
       <option value="70-"></option>
     </datalist>
-    <label for="vs-hr" class="sidebar-label">Heart Rate (HR):</label>
-    <input type="text" id="vs-hr" class="sidebar-input w-full mb-2" list="vs-hr-presets" inputmode="numeric" >
+    <div class="sidebar-field sidebar-field-vital mb-2">
+      <label for="vs-hr" class="sidebar-label">HR:</label>
+      <input type="text" id="vs-hr" class="sidebar-input w-full" list="vs-hr-presets" inputmode="numeric">
+    </div>
     <datalist id="vs-hr-presets">
       <option value="150+"></option>
       <option value="100+"></option>
@@ -132,27 +136,78 @@
       <option value=">60"></option>
       <option value=">40"></option>
     </datalist>
-    <label for="vs-spo2" class="sidebar-label">SpO₂ (%):</label>
-    <input type="text" id="vs-spo2" class="sidebar-input w-full mb-2" list="vs-spo2-presets" inputmode="numeric" >
+    <div class="sidebar-field sidebar-field-vital mb-2">
+      <label for="vs-spo2" class="sidebar-label">% SpO₂:</label>
+      <input type="text" id="vs-spo2" class="sidebar-input w-full" list="vs-spo2-presets" inputmode="numeric">
+    </div>
     <datalist id="vs-spo2-presets">
       <option value="Normal"></option>
       <option value="Low"></option>
       <option value="Severely Low"></option>
     </datalist>
-    <label for="vs-etco2" class="sidebar-label">EtCO₂:</label>
-    <input type="text" id="vs-etco2" class="sidebar-input w-full mb-2" inputmode="numeric" >
-    <label for="vs-rr" class="sidebar-label">Respiratory Rate (RR):</label>
-    <input type="text" id="vs-rr" class="sidebar-input w-full mb-2" inputmode="numeric" >
-    <label for="vs-bgl" class="sidebar-label">Blood Glucose (BGL):</label>
-    <input type="text" id="vs-bgl" class="sidebar-input w-full mb-2" inputmode="numeric" >
-    <label for="vs-eyes" class="sidebar-label">Pupils:</label>
-    <input type="text" id="vs-eyes" class="sidebar-input w-full mb-2" placeholder="e.g. 4mm, PERRL" >
-    <label for="vs-gcs" class="sidebar-label">GCS:</label>
-    <input type="text" id="vs-gcs" class="sidebar-input w-full mb-2" inputmode="numeric" >
-    <label for="vs-ao-status" class="sidebar-label">AO Status:</label>
-    <input type="text" id="vs-ao-status" class="sidebar-input w-full mb-2" placeholder="e.g. x4" >
-    <label for="vs-lung-sounds" class="sidebar-label">Lung Sounds:</label>
-    <input type="text" id="vs-lung-sounds" class="sidebar-input w-full mb-2" placeholder="e.g. Clear" ></div>
+    <div class="sidebar-field sidebar-field-vital mb-2">
+      <label for="vs-etco2" class="sidebar-label">EtCO₂:</label>
+      <input type="text" id="vs-etco2" class="sidebar-input w-full" inputmode="numeric">
+    </div>
+    <div class="sidebar-field sidebar-field-vital mb-2">
+      <label for="vs-rr" class="sidebar-label">RR:</label>
+      <input type="text" id="vs-rr" class="sidebar-input w-full" inputmode="numeric">
+    </div>
+    <div class="sidebar-field sidebar-field-vital mb-2">
+      <label for="vs-bgl" class="sidebar-label">BGL:</label>
+      <input type="text" id="vs-bgl" class="sidebar-input w-full" list="vs-bgl-presets" inputmode="numeric">
+    </div>
+    <datalist id="vs-bgl-presets">
+      <option value="Normal"></option>
+      <option value="High"></option>
+      <option value="Low"></option>
+      <option value="Critical"></option>
+    </datalist>
+    <div class="sidebar-field sidebar-field-vital mb-2">
+      <label for="vs-eyes" class="sidebar-label">Pupils (mm):</label>
+      <input type="text" id="vs-eyes" class="sidebar-input w-full" list="vs-eyes-presets" placeholder="e.g. 4mm, PERRL">
+    </div>
+    <datalist id="vs-eyes-presets">
+      <option value="PERRL"></option>
+      <option value="Pinpoint"></option>
+      <option value="Dilated"></option>
+      <option value="Unequal"></option>
+      <option value="Fixed"></option>
+      <option value="Sluggish"></option>
+      <option value="Non-reactive"></option>
+    </datalist>
+    <div class="sidebar-field sidebar-field-vital mb-2">
+      <label for="vs-gcs" class="sidebar-label">GCS:</label>
+      <input type="text" id="vs-gcs" class="sidebar-input w-full" inputmode="numeric">
+    </div>
+    <div class="sidebar-field sidebar-field-vital mb-2">
+      <label for="vs-ao-status" class="sidebar-label">A&amp;O Status:</label>
+      <select id="vs-ao-status" class="sidebar-input w-full">
+        <option value=""></option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+    </div>
+    <div class="sidebar-field sidebar-field-vital mb-2">
+      <label for="vs-lung-sounds" class="sidebar-label">Lung Sounds:</label>
+      <input type="text" id="vs-lung-sounds" class="sidebar-input w-full" list="vs-lung-sounds-presets" placeholder="e.g. Clear">
+    </div>
+    <datalist id="vs-lung-sounds-presets">
+      <option value="Clear"></option>
+      <option value="Clear Bilaterally"></option>
+      <option value="Diminished"></option>
+      <option value="Coarse"></option>
+      <option value="Crackles"></option>
+      <option value="Rales"></option>
+      <option value="Rhonchi"></option>
+      <option value="Wheezes"></option>
+      <option value="Stridor"></option>
+      <option value="Absent"></option>
+    </datalist>
+  </div>
   <!-- Section: EKG -->
   <div class="sidebar-section">
     <h2 class="sidebar-section-title">EKG Interpretation</h2>

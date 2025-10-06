@@ -109,67 +109,29 @@ Design & Feature Overview: The app’s UI elements & features.
   Patient Info Sidebar/Section: The sidebar is an interactive form that updates patientData as you type. All Categories will Auto-Update if the information is filled out elsewhere from within the app.
     Includes: Sex, Age, Weight (kg/lb), Height, PMH, Allergies, Medications, Indications, S/S, & VS.
       Note: pain scale still needs to be coded into app.
-    VS Categories: BP (MAP is automatically calculated)HR, %SpO2, EtCO2, RR, BGL, Pupils, GCS, A&O Status, LS, & EKG Interpretation.
-    Sex: Select 'Male' or 'Female' selection currently (task update available). Currently used for the Zoll Ventilator Calculation.
-    Age: Affects surfaced treatments (e.g., dose differences, which sections to StrikeThrough). 18 & up equals “adult.”
-        Inputs: whole numbers only, years 0–120, months 0–40, days 0–500.
-    Weight (kg/lb): Used for Auto-Calculation with weight-based dosages.  Whole numbers only. Ranges: lb 0–1500; kg 0–700.
-    Height: either ft+in or total inches; values sync both ways.
-
-    Past Medical History (PMH): Free‑text, comma‑separated (#pt‑pmh) with autocomplete (e.g., diabetes, CHF, asthma). Parsed to an array on input. 
-        Snapshot: Shows only most relevant (abbrev.). Informational only.
-        Smart Suggestions: (Currently needs to be coded for)
-          Roadmap: will filter Smart Suggestions’ Topic List (lower priority than Indications).
-        Strike-Through: (Currently needs to be coded for) Adds a Strike-Through on innappropriate treatment options based upon PMH.
-
-    Allergies: Type‑to‑filter or choose from dropdown.
-        Allergy Alert: listed medication matches an allergy, then it's detail page shows an Allergy Alert & innappropriate treatments are struck‑through.
-          Struck‑Through Items: Remain selectable.
-        Autocomplete: Suggests available Paramedic medications first.
-
-    Medications: Current pt medications. Type‑to‑filter or choose from dropdown.
-        Autocomplete: Suggests common medications that may be relevant to pt care first and foremost.
-        Interaction Checks: Identifies Rx interactions and applies Alerts/Warnings (e.g., PDE‑5 inhibitor → warn against nitroglycerin).
-
-    Indications: Type‑to‑filter or choose from dropdown. Chief Complaint (e.g., chest pain, SOB).
-        Highlights: Topics related to the Indications are highlighted.
-
-    Signs & Symptoms (S/S): Same mechanics as Indications; adds nuance for smart filtering/highlighting.
-
+    VS Categories: BP (auto-calculates MAP), HR, %SpO2, EtCO2, RR, BGL, Pupils (mm), GCS, A&O Status, LS, & EKG Interpretation.
     Vital Signs (VS): Manual entry or dropdowns. Abnormal values trigger warnings or Strike-Through contraindicated actions.
-      Selectable Options: Hover/press‑and‑hold on dropdown option opens a right‑of‑sidebar pop‑up with definitions; close via “×”.
+      Selectable Options: Each field exposes datalist suggestions today; hover/press-and-hold pop-ups for definitions remain on the roadmap.
     VS include:
-      Blood Pressure (BP): Number entry or dropdown.
-          Drop-Down Menu Options: 200+, 160+, Normal (90-160 SBP), 70-90, & 70-.
-          Inpute Range: SBP 0–400; diastolic 0–300. Integers.
-        MAP: Auto‑calculated from SBP/DBP; has its own pop‑up.
-      Heart Rate (HR): Number entry or dropdown.
-          Drop-Down Menu Options: 150+, 100+, 60–100, >60, >40.
-          Inpute Range: Integers. SBP 0–300 bpm. Diastolic BP 0-200
-      SpO₂ (%): Number or dropdown.
-          Drop-Down Menu Options: (Normal, Low, Severely Low).
-          Inpute Range: Integers 50–100.
-      EtCO₂: Number or dropdown.
-          Drop-Down Menu Options:
-          Inpute Range: Integers 0–50.
-      RR: Number or dropdown.
-          Drop-Down Menu Options: 
-          Inpute Range: Integers 0–80.
-      BGL: Number or dropdown.
-          Drop-Down Menu Options:
-          Inpute Range: Integers 0–900.
-      Pupils (mm): Number or dropdown.
-          Drop-Down Menu Options:
-          Inpute Range: Integers 0–8.
-        Note: future updates needed to access other eye issues.
-      GCS: Number or dropdown.
-          Drop-Down Menu Options:
-          Inpute Range: list runs 3–15.
-      A&O: Dropdown only.
-          Drop-Down Menu Options: 0, 1, 2, 3, & 4.
-      Lung Sounds (LS): Type‑to‑filter or dropdown.
-          Drop-Down Menu Options:
-
+      BP: Number entry or dropdown.
+          Dropdown Options: 200+, 160+, Normal (90-160 SBP), 70-90, 70-.
+          Input Range: systolic 0-400; diastolic 0-300 (integers). MAP auto-calculated and stored on the input for future pop-up support.
+      HR: Number entry or dropdown.
+          Dropdown Options: 150+, 100+, 60-100, >60, >40.
+          Input Range: 0-300 bpm (integers).
+      % SpO2: Number entry or dropdown.
+          Dropdown Options: Normal, Low, Severely Low.
+          Input Range: 50-100 (integers).
+      EtCO2: Number entry.
+          Input Range: 0-50 (integers).
+      RR: Number entry.
+          Input Range: 0-80 (integers).
+      BGL: Number entry or dropdown (Normal, High, Low, Critical). Numeric entries clamp to 0-900; textual descriptors remain accepted.
+      Pupils (mm): Number entry or dropdown (PERRL, Pinpoint, Dilated, Unequal, Fixed, Sluggish, Non-reactive). Numeric values normalize to 0-8 mm before appending descriptors.
+      GCS: Number entry or dropdown.
+          Input Range: 3-15.
+      A&O Status: Dropdown only (0, 1, 2, 3, 4).
+      Lung Sounds (LS): Type-to-filter dropdown (Clear, Clear Bilaterally, Diminished, Coarse, Crackles, Rales, Rhonchi, Wheezes, Stridor, Absent).
     EKG: Free text in sidebar (#pt‑ekg).
       Future Tasks: dropdowns, pop‑ups, or “help.” Snapshot can tint entries containing “tachy”/“brady” if patientData.ekg is set. Current code doesn’t set it in updatePatientData(); add that assignment to enable snapshot and future EKG logic.
 
@@ -583,6 +545,7 @@ Warnings/Alerts: Visually shown under Search Bar.
       Drug Interaction Warning: "Patient is on [Drug], which contraindicates [This Treatment]”).   
   VS Warning: "BP too low for this treatment!”.
    "
+**[2025-10-06 Vital Signs sidebar single-line alignment: Vitals now render as single-row flex fields with abbreviated labels (BP, HR, % SpO2, RR, BGL, A&O), datalist suggestions for BGL/Pupils/Lung Sounds, BP normalization with MAP dataset exposure, BGL/Pupil parsing safeguards, and README vital-sign docs updated (files: index.html; styles.css; Features/patient/PatientInfo.js; Features/Warnings.js; README.md). Tests: npm run lint (fails on long-standing stylelint violations).]**
 **[2025-10-06 Patient Info sidebar inline layout: Sex symbols now sit beside the label with hover/press tooltips, Age toggles render between the title and input, Weight relies on one field with stacked kg/lb toggles plus tooltip summary, and Height accepts total inches while the snapshot shows weight in the selected unit and only surfaces height for patients under 18 (files: index.html; styles.css; Features/patient/PatientInfo.js; Features/patient/PatientSnapshot.js). Tests: npm run lint (fails: stylelint inherits pre-existing repository violations in styles.css).]**
 **[2025-09-30 Adult protocol detail expansion: added markdown coverage for MI or Acute Coronary Syndrome (ACS), VF/pVT, SVT modalities, arrhythmia management, metabolic emergencies, obstetric complications, SMR/TASER guidance, and trauma triage; updated navigation slug/data for MI and MAT (source: research/paramedic_protocols.txt sections "MI or Acute Coronary Syndrome (ACS)".]**
 **[2025-09-29 MCP webpick tooling hardening: Replaced the upstream web-content-pick server with a sanitized local wrapper so MCP tool registration stays OpenAI-compatible & eliminates the stream disconnects triggered during tool conversion.]**

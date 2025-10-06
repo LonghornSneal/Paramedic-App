@@ -23,7 +23,7 @@ export const patientData = {
     indications: [], indicationsDisplay: [],
     symptoms: [], symptomsDisplay: [],
     vitalSigns: {
-        bp: '', hr: null, spo2: null, etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: ''
+        bp: '', bpSystolic: null, bpDiastolic: null, map: null, hr: null, spo2: null, etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: ''
     },
     ekg: '', ekgDisplay: ''
 };
@@ -136,6 +136,66 @@ function getParsedInt(id, min, max) {
     if (el && clamped !== parsed) el.value = clamped.toString();
     return clamped;
 }
+function clampNumber(value, min, max) {
+  if (typeof value !== 'number' || Number.isNaN(value)) return null;
+  let clamped = value;
+  if (typeof min === 'number' && clamped < min) clamped = min;
+  if (typeof max === 'number' && clamped > max) clamped = max;
+  return clamped;
+}
+
+function getNormalizedBloodPressure(id) {
+  const el = document.getElementById(id);
+  const raw = el?.value?.trim() ?? '';
+  if (!raw) {
+    return { value: '', systolic: null, diastolic: null, map: null };
+  }
+  const bpPattern = /^(\d{1,3})(?:\s*\/\s*(\d{1,3}))?$/;
+  const match = raw.match(bpPattern);
+  if (!match) {
+    return { value: raw, systolic: null, diastolic: null, map: null };
+  }
+  const systolicParsed = parseInt(match[1], 10);
+  const diastolicParsed = match[2] ? parseInt(match[2], 10) : null;
+  const systolic = clampNumber(systolicParsed, 0, 400);
+  const diastolic = diastolicParsed != null ? clampNumber(diastolicParsed, 0, 300) : null;
+  if (systolic == null) {
+    return { value: raw, systolic: null, diastolic, map: null };
+  }
+  const formatted = diastolic != null ? `${systolic}/${diastolic}` : `${systolic}`;
+  if (el && formatted !== raw) el.value = formatted;
+  const map = diastolic != null ? Math.round((systolic + 2 * diastolic) / 3) : null;
+  return { value: formatted, systolic, diastolic, map };
+}
+
+function getNormalizedPupilDescription(id) {
+  const el = document.getElementById(id);
+  const raw = el?.value?.trim() ?? '';
+  if (!raw) return '';
+  const match = raw.match(/^(\d{1,2})(?:\s*mm)?(.*)$/i);
+  if (!match) return raw;
+  const sizeParsed = parseInt(match[1], 10);
+  const size = clampNumber(sizeParsed, 0, 8);
+  if (size == null) return raw;
+  const remainder = match[2] ?? '';
+  const trimmed = remainder.trim();
+  let suffix = '';
+  if (trimmed) {
+    const firstChar = trimmed[0];
+    if (firstChar === ',') {
+      suffix = trimmed;
+    } else if (firstChar === '/' || firstChar === '-') {
+      suffix = ' ' + trimmed;
+    } else {
+      suffix = ', ' + trimmed;
+    }
+  }
+  const formatted = `${size}mm${suffix}`;
+  if (el && formatted !== raw) el.value = formatted;
+  return formatted;
+}
+
+
 /**
  * Parses a floating point value from the input with the given id. Returns null if parsing fails
  * or the value is empty. This helper is used for weight inputs where decimals are allowed.
@@ -607,14 +667,26 @@ function updatePatientData() {
     patientData.ekg = ekgUnique.canonical[0] || '';
     patientData.ekgDisplay = ekgUnique.display[0] || '';
 
+    const bpDetails = getNormalizedBloodPressure('vs-bp');
+    const bpInputNode = document.getElementById('vs-bp');
+    if (bpInputNode) {
+        if (typeof bpDetails.map === 'number' && !Number.isNaN(bpDetails.map)) {
+            bpInputNode.dataset.mapValue = bpDetails.map.toString();
+        } else {
+            delete bpInputNode.dataset.mapValue;
+        }
+    }
     patientData.vitalSigns = {
-        bp: getInputValue('vs-bp'),
+        bp: bpDetails.value,
+        bpSystolic: bpDetails.systolic,
+        bpDiastolic: bpDetails.diastolic,
+        map: bpDetails.map,
         hr: getNormalizedNumberOrText('vs-hr', 0, 300),
         spo2: getNormalizedNumberOrText('vs-spo2', 50, 100),
         etco2: getNormalizedNumberOrText('vs-etco2', 0, 50),
         rr: getNormalizedNumberOrText('vs-rr', 0, 80),
-        bgl: getInputValue('vs-bgl'),  // note: BGL might not be numeric (could be "High/Normal/Low")
-        eyes: getInputValue('vs-eyes'),
+        bgl: getNormalizedNumberOrText('vs-bgl', 0, 900),
+        eyes: getNormalizedPupilDescription('vs-eyes'),
         gcs: getNormalizedNumberOrText('vs-gcs', 3, 15),
         aoStatus: getInputValue('vs-ao-status'),
         lungSounds: getInputValue('vs-lung-sounds')
@@ -656,7 +728,11 @@ function updatePatientData() {
 
 // Attach input event listeners for live updates. Each monitored input triggers updatePatientData().
 ptInputs.forEach(input => {
-  input?.addEventListener('input', updatePatientData);
+  if (!input) return;
+  input.addEventListener('input', updatePatientData);
+  if (input.tagName === 'SELECT') {
+    input.addEventListener('change', updatePatientData);
+  }
 });
 
 ageUnitButtons.forEach(btn => {

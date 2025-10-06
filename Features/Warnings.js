@@ -47,10 +47,15 @@ function getPDE5Warning(topic, patientData) {
 // Low blood-pressure warnings (for nitroglycerin)
 function getLowBPWarning(topic, patientData) {
     if (!topic || topic.id !== 'ntg') return '';
-    const bpStr = patientData?.vitalSigns?.bp;
-    if (!bpStr) return '';
-    const systolic = parseInt(bpStr.split('/')[0], 10);
-    if (isNaN(systolic)) return '';
+    const vitalSigns = patientData?.vitalSigns || {};
+    let systolic = typeof vitalSigns.bpSystolic === 'number' ? vitalSigns.bpSystolic : null;
+    if (systolic == null) {
+        const bpStr = vitalSigns.bp;
+        if (!bpStr) return '';
+        const parsed = parseInt(bpStr.split('/')[0], 10);
+        if (Number.isNaN(parsed)) return '';
+        systolic = parsed;
+    }
     if (systolic < 100) {
         return `
           <div class="warning-box warning-box-red mb-2">
