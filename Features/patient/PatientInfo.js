@@ -13,14 +13,19 @@
 // weightUnit property remains for potential future use but the code currently always stores weight
 // in kilograms.
 import { renderPatientSnapshot } from './PatientSnapshot.js';
+import { splitSegments, normalizeCommittedValues } from './patientTerminology.js';
 
 export const patientData = {
     age: null, weight: null, weightUnit: 'kg', gender: '', heightIn: null,
-    pmh: [], allergies: [], currentMedications: [], indications: [], symptoms: [],
+    pmh: [], pmhDisplay: [],
+    allergies: [], allergyDisplay: [],
+    currentMedications: [], medicationsDisplay: [], medicationClasses: [],
+    indications: [], indicationsDisplay: [],
+    symptoms: [], symptomsDisplay: [],
     vitalSigns: {
         bp: '', hr: null, spo2: null, etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: ''
     },
-    ekg: ''
+    ekg: '', ekgDisplay: ''
 };
 // IDs of inputs we want to monitor for changes. Exclude the weight unit select (no longer used) and
 // include the new kilogram and pound inputs. When any of these inputs fires an input event, we call
@@ -46,6 +51,27 @@ const ptInputIds = [ 'pt-age',
         'pt-ekg' 
 ];
 const ptInputs = ptInputIds.map(id => document.getElementById(id));
+const genderInputEl = document.getElementById('pt-gender');
+const sexButtons = Array.from(document.querySelectorAll('.sex-option'));
+const weightSummaryEl = document.getElementById('weight-summary');
+const ekgHelpButton = document.getElementById('ekg-help-button');
+const ekgHelpModal = document.getElementById('ekg-help-modal');
+const ekgHelpBackdrop = document.getElementById('ekg-help-backdrop');
+const ekgHelpClose = document.getElementById('ekg-help-close');
+
+function openEkgHelp() {
+  if (!ekgHelpModal || !ekgHelpBackdrop) return;
+  ekgHelpModal.classList.remove('hidden');
+  ekgHelpBackdrop.classList.remove('hidden');
+}
+
+function closeEkgHelp() {
+  if (!ekgHelpModal || !ekgHelpBackdrop) return;
+  ekgHelpModal.classList.add('hidden');
+  ekgHelpBackdrop.classList.add('hidden');
+}
+
+
 // Constants related to warnings and suggestions. PEDIATRIC_AGE_THRESHOLD defines the minimum age
 // considered adult for protocol purposes. PDE5_INHIBITORS lists medications that may interact
 // dangerously with nitroglycerin and similar treatments.
@@ -69,6 +95,11 @@ export const symptomSuggestions = new Set([
     "dizziness","syncope","altered mental status","ams","weakness","fatigue","fever","chills","rash","seizure",
     "palpitations","edema","cough","anxiety","depression","back pain","trauma"
 ]);
+
+export const ekgSuggestions = new Set([
+    'sinus tachycardia','sinus bradycardia','atrial fibrillation','atrial flutter','supraventricular tachycardia','ventricular tachycardia','junctional rhythm','asystole'
+]);
+
 /**
  * Retrieves the trimmed string value of an input by its DOM id. Returns an empty string if the
  * element does not exist. This helper ensures updatePatientData() can safely read values even if
@@ -87,9 +118,17 @@ function getInputValue(id) {
  * @param {string} id The id of the input element to parse.
  * @returns {number|null} The parsed integer or null.
  */
-function getParsedInt(id) {
-    const val = getInputValue(id);
-    return val ? parseInt(val, 10) : null;
+function getParsedInt(id, min, max) {
+    const el = document.getElementById(id);
+    const val = el?.value?.trim();
+    if (!val) return null;
+    const parsed = parseInt(val, 10);
+    if (Number.isNaN(parsed)) return null;
+    let clamped = parsed;
+    if (typeof min === 'number' && clamped < min) clamped = min;
+    if (typeof max === 'number' && clamped > max) clamped = max;
+    if (el && clamped !== parsed) el.value = clamped.toString();
+    return clamped;
 }
 /**
  * Parses a floating point value from the input with the given id. Returns null if parsing fails
@@ -102,6 +141,19 @@ function getParsedFloat(id) {
     const val = getInputValue(id);
     return val && !isNaN(parseFloat(val)) ? parseFloat(val) : null;
 }
+function getNormalizedNumberOrText(id, min, max) {
+  const el = document.getElementById(id);
+  const raw = el?.value?.trim() ?? '';
+  if (!raw) return '';
+  const parsed = parseInt(raw, 10);
+  if (Number.isNaN(parsed)) return raw;
+  let clamped = parsed;
+  if (typeof min === 'number' && clamped < min) clamped = min;
+  if (typeof max === 'number' && clamped > max) clamped = max;
+  if (el && clamped !== parsed) el.value = clamped.toString();
+  return clamped;
+}
+
 /**
  * Splits a comma‑separated textarea into an array of lower‑cased values. Returns an empty
  * array if the textarea is empty. This normalization step ensures that matching against
@@ -110,13 +162,146 @@ function getParsedFloat(id) {
  * @param {string} id The id of the textarea to process.
  * @returns {string[]} An array of trimmed, lower‑cased strings.
  */
-function getArrayFromTextarea(id) {
-    const value = getInputValue(id);
-    return value ? value.split(',').map(v => v.trim().toLowerCase()).filter(Boolean) : [];
+function getFieldValues(field, id) {
+  const node = document.getElementById(id);
+  const rawValue = node?.value ?? '';
+  const segments = splitSegments(rawValue);
+  return normalizeCommittedValues(field, segments.committed);
 }
 // Weight conversion factor used when synchronizing kilogram and pound inputs. 1 kilogram equals
 // 2.20462 pounds. We round converted values to one decimal place for display purposes.
 const WEIGHT_CONVERSION_FACTOR = 2.20462;
+
+function setSelectedSex(selected) {
+  const target = selected ? selected.toLowerCase() : '';
+  sexButtons.forEach(btn => {
+    const isSelected = target && btn.dataset.value === target;
+    btn.classList.toggle('is-selected', isSelected);
+    btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+  });
+}
+
+function updateWeightSummaryDisplay(weightKg) {
+  if (!weightSummaryEl) return;
+  if (typeof weightKg === 'number' && !Number.isNaN(weightKg)) {
+    const pounds = weightKg * WEIGHT_CONVERSION_FACTOR;
+    const kgText = Number.isInteger(weightKg) ? weightKg.toString() : weightKg.toFixed(1);
+    const lbText = Math.round(pounds);
+    weightSummaryEl.textContent = `Weight context: ${kgText} kg (${lbText} lb).`;
+    weightSummaryEl.classList.remove('hidden');
+  } else {
+    weightSummaryEl.textContent = '';
+    weightSummaryEl.classList.add('hidden');
+  }
+}
+
+function dedupeByCanonical(canonicalValues, displayValues) {
+  const canonical = [];
+  const display = [];
+  const seen = new Set();
+  canonicalValues.forEach((value, index) => {
+    const key = value.toLowerCase();
+    if (seen.has(key)) return;
+    seen.add(key);
+    canonical.push(value);
+    display.push(displayValues[index]);
+  });
+  return { canonical, display };
+}
+
+let medicationClassLookup = null;
+
+function ensureMedicationClassLookup() {
+  const dataMap = (typeof window !== 'undefined' ? window.medicationDataMap : null);
+  if (!dataMap) {
+    medicationClassLookup = null;
+    return null;
+  }
+  if (!medicationClassLookup || medicationClassLookup.size === 0) {
+    medicationClassLookup = new Map();
+    Object.values(dataMap).forEach(entry => {
+      if (entry && entry.title && entry.class) {
+        medicationClassLookup.set(entry.title.toLowerCase(), entry.class);
+      }
+    });
+  }
+  return medicationClassLookup;
+}
+
+function resolveMedicationClasses(medicationTitles) {
+  const lookup = ensureMedicationClassLookup();
+  if (!lookup) return [];
+  const classes = [];
+  medicationTitles.forEach(title => {
+    if (!title) return;
+    const className = lookup.get(title.toLowerCase());
+    if (className && !classes.includes(className)) {
+      classes.push(className);
+    }
+  });
+  return classes;
+}
+
+function updateSuggestedTopics() {
+  if (typeof window === 'undefined') return;
+  const topicsMap = window.allDisplayableTopicsMap;
+  if (!topicsMap) return;
+  const indicationKeys = (patientData.indications || []).map(value => value.toLowerCase());
+  const symptomKeys = (patientData.symptoms || []).map(value => value.toLowerCase());
+  if (indicationKeys.length === 0 && symptomKeys.length === 0) {
+    window.patientSuggestedTopics = [];
+    return;
+  }
+  const suggestions = [];
+  Object.values(topicsMap).forEach(topic => {
+    if (!topic || topic.type !== 'topic') return;
+    const details = topic.details || {};
+    const topicIndications = (details.indications || []).map(val => val.toLowerCase());
+    const topicSymptoms = (details.symptoms || []).map(val => val.toLowerCase());
+    let score = 0;
+    const matchedIndications = [];
+    const matchedSymptoms = [];
+    indicationKeys.forEach(key => {
+      if (topicIndications.includes(key)) {
+        score += 3;
+        matchedIndications.push(key);
+      }
+    });
+    symptomKeys.forEach(key => {
+      if (topicSymptoms.includes(key)) {
+        score += 1;
+        matchedSymptoms.push(key);
+      }
+    });
+    if (score > 0) {
+      suggestions.push({ id: topic.id, score, matchedIndications, matchedSymptoms, title: topic.title });
+    }
+  });
+  suggestions.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return a.title.localeCompare(b.title);
+  });
+  window.patientSuggestedTopics = suggestions.slice(0, 8);
+}
+
+function applyTopicStrikethroughs() {
+  const topicLinks = document.querySelectorAll('a.topic-link-item');
+  topicLinks.forEach(link => {
+    const topicId = link.dataset.topicId;
+    const topicObj = window.allDisplayableTopicsMap?.[topicId];
+    if (patientData.indications.length > 0 && topicObj?.details?.indications) {
+      const medIndications = topicObj.details.indications.map(i => i.toLowerCase());
+      const hasMatch = patientData.indications.some(ind => medIndications.includes(ind.toLowerCase()));
+      if (!hasMatch) {
+        link.classList.add('strikethrough');
+      } else {
+        link.classList.remove('strikethrough');
+      }
+    } else {
+      link.classList.remove('strikethrough');
+    }
+  });
+}
 
 /**
  * Synchronizes the kg and lb weight inputs. When called with a source of 'kg', the function
@@ -157,7 +342,8 @@ function synchronizeWeights(source) {
  */
 function updatePatientData() {
     patientData.gender = getInputValue('pt-gender');
-    patientData.age = getParsedInt('pt-age');
+    setSelectedSex(patientData.gender);
+    patientData.age = getParsedInt('pt-age', 0, 120);
     // Height sync: if inches given, use that; else compute from ft/in
     const ft = getParsedInt('pt-height-ft');
     const inch = getParsedInt('pt-height-in');
@@ -186,22 +372,50 @@ function updatePatientData() {
         patientData.weight = null;
         patientData.weightUnit = 'kg';
     }
+    updateWeightSummaryDisplay(patientData.weight);
+
     // Other patient fields
     // Removed obsolete weight inputs; weight unit is now always 'kg'.
-    patientData.pmh = getArrayFromTextarea('pt-pmh');
-    patientData.allergies = getArrayFromTextarea('pt-allergies');
-    patientData.currentMedications = getArrayFromTextarea('pt-medications');
-    patientData.indications = getArrayFromTextarea('pt-indications');
-    patientData.symptoms = getArrayFromTextarea('pt-symptoms');
+    const pmhValues = getFieldValues('pmh', 'pt-pmh');
+    const pmhUnique = dedupeByCanonical(pmhValues.canonical, pmhValues.display);
+    patientData.pmh = pmhUnique.canonical;
+    patientData.pmhDisplay = pmhUnique.display;
+
+    const allergyValues = getFieldValues('allergies', 'pt-allergies');
+    const allergyUnique = dedupeByCanonical(allergyValues.canonical, allergyValues.display);
+    patientData.allergies = allergyUnique.canonical;
+    patientData.allergyDisplay = allergyUnique.display;
+
+    const medicationValues = getFieldValues('medications', 'pt-medications');
+    const medicationUnique = dedupeByCanonical(medicationValues.canonical, medicationValues.display);
+    patientData.currentMedications = medicationUnique.canonical;
+    patientData.medicationsDisplay = medicationUnique.display;
+    patientData.medicationClasses = resolveMedicationClasses(medicationUnique.canonical);
+
+    const indicationValues = getFieldValues('indications', 'pt-indications');
+    const indicationUnique = dedupeByCanonical(indicationValues.canonical, indicationValues.display);
+    patientData.indications = indicationUnique.canonical;
+    patientData.indicationsDisplay = indicationUnique.display;
+
+    const symptomValues = getFieldValues('symptoms', 'pt-symptoms');
+    const symptomUnique = dedupeByCanonical(symptomValues.canonical, symptomValues.display);
+    patientData.symptoms = symptomUnique.canonical;
+    patientData.symptomsDisplay = symptomUnique.display;
+
+    const ekgValues = getFieldValues('ekg', 'pt-ekg');
+    const ekgUnique = dedupeByCanonical(ekgValues.canonical, ekgValues.display);
+    patientData.ekg = ekgUnique.canonical[0] || '';
+    patientData.ekgDisplay = ekgUnique.display[0] || '';
+
     patientData.vitalSigns = {
         bp: getInputValue('vs-bp'),
-        hr: getParsedInt('vs-hr'),
-        spo2: getParsedInt('vs-spo2'),
-        etco2: getParsedInt('vs-etco2'),
-        rr: getParsedInt('vs-rr'),
+        hr: getNormalizedNumberOrText('vs-hr', 0, 300),
+        spo2: getNormalizedNumberOrText('vs-spo2', 50, 100),
+        etco2: getNormalizedNumberOrText('vs-etco2', 0, 50),
+        rr: getNormalizedNumberOrText('vs-rr', 0, 80),
         bgl: getInputValue('vs-bgl'),  // note: BGL might not be numeric (could be "High/Normal/Low")
         eyes: getInputValue('vs-eyes'),
-        gcs: getParsedInt('vs-gcs'),
+        gcs: getNormalizedNumberOrText('vs-gcs', 3, 15),
         aoStatus: getInputValue('vs-ao-status'),
         lungSounds: getInputValue('vs-lung-sounds')
     };
@@ -209,26 +423,13 @@ function updatePatientData() {
       // patient’s indications against each topic’s indications to determine relevance. This logic
       // originally lived in the ListView module but has been centralized here to respond to patient
       // input changes immediately.
-    const topicLinks = document.querySelectorAll('a.topic-link-item');
-    topicLinks.forEach(link => {
-        const topicId = link.dataset.topicId;
-        const topicObj = window.allDisplayableTopicsMap?.[topicId];
-        if (patientData.indications.length > 0 && topicObj?.details?.indications) {
-            const medIndications = topicObj.details.indications.map(i => i.toLowerCase());
-            const hasMatch = patientData.indications.some(ind => medIndications.includes(ind));
-            if (!hasMatch) {
-                link.classList.add('strikethrough');
-            } else {
-                link.classList.remove('strikethrough');
-            }
-        } else {
-            // No filtering, ensure nothing is struck out
-            link.classList.remove('strikethrough');
-        }
-    });
-    // If a detail page is open, re-render it to update warnings/dosages based on new patient info. We
-    // identify a detail page by checking for an element with class .topic-h2 which stores the topic id.
+    updateSuggestedTopics();
     const currentTopicTitleEl = window.contentArea?.querySelector('.topic-h2');
+    const isSearchResults = Boolean(document.getElementById('results-container'));
+    if (!currentTopicTitleEl && !isSearchResults && typeof window.renderInitialView === 'function') {
+        window.renderInitialView(false);
+    }
+    applyTopicStrikethroughs();
     if (currentTopicTitleEl) {
         const currentTopicId = currentTopicTitleEl.dataset.topicId;
         if (currentTopicId && window.allDisplayableTopicsMap?.[currentTopicId]) {
@@ -258,6 +459,27 @@ ptInputs.forEach(input => {
   input?.addEventListener('input', updatePatientData);
 });
 
+sexButtons.forEach(btn => {
+  btn.setAttribute('aria-pressed', 'false');
+  btn.addEventListener('click', () => {
+    if (!genderInputEl) return;
+    const selectedValue = btn.dataset.value || '';
+    genderInputEl.value = selectedValue;
+    setSelectedSex(selectedValue);
+    updatePatientData();
+  });
+});
+setSelectedSex(genderInputEl ? genderInputEl.value : '');
+
+if (ekgHelpButton && ekgHelpModal && ekgHelpBackdrop) {
+  ekgHelpButton.addEventListener('click', openEkgHelp);
+  ekgHelpBackdrop.addEventListener('click', closeEkgHelp);
+  ekgHelpClose?.addEventListener('click', closeEkgHelp);
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeEkgHelp();
+  });
+}
+
 // Additional listeners for weight inputs to synchronize kg and lb values. We attach these
 // separately because synchronizeWeights() must be called before updatePatientData() to ensure
 // patientData.weight is based on the latest conversion.
@@ -286,6 +508,8 @@ if (typeof window !== 'undefined') {
   window.patientData = patientData;
   window.PEDIATRIC_AGE_THRESHOLD = PEDIATRIC_AGE_THRESHOLD;
   window.PDE5_INHIBITORS = PDE5_INHIBITORS;
+  window.applyTopicStrikethroughs = applyTopicStrikethroughs;
+  window.updateSuggestedTopics = updateSuggestedTopics;
 }
 // Sync height inputs both ways
 function syncHeightsFromFtIn() {

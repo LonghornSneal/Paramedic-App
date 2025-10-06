@@ -1071,6 +1071,396 @@
         "repeatsInTask": 1,
         "crossTaskLongRuns": 0
       }
+    },
+    {
+      "id": "step-1759712300641",
+      "taskId": "patient-sidebar-overhaul",
+      "taskName": "Patient Sidebar overhaul",
+      "stepName": "Scoping & planning",
+      "stepType": "thought",
+      "startedAt": "2025-10-06T00:56:12.066Z",
+      "endedAt": "2025-10-06T00:58:20.641Z",
+      "startNote": "Assess full scope: snapshot input handling, patient details UI, synonyms pipeline, vitals presets, EKG help",
+      "stopNote": "Completed scoping and created execution plan",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 128575,
+      "durationSeconds": 128.575,
+      "durationReadable": "2m 8.6s",
+      "errors": 0,
+      "result": "success",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 2m 8.6s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1759712414713",
+      "taskId": "patient-sidebar-overhaul",
+      "taskName": "Patient Sidebar overhaul",
+      "stepName": "Synonyms infrastructure",
+      "stepType": "code",
+      "startedAt": "2025-10-06T00:58:28.628Z",
+      "endedAt": "2025-10-06T01:00:14.713Z",
+      "startNote": "Creating patientInfoSynonyms module and localStorage helper scaffolding",
+      "stopNote": "Created patientInfoSynonyms data and terminology helper module",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 106085,
+      "durationSeconds": 106.085,
+      "durationReadable": "1m 46.1s",
+      "errors": 0,
+      "result": "success",
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1759713062907",
+      "taskId": "patient-sidebar-overhaul",
+      "taskName": "Patient Sidebar overhaul",
+      "stepName": "Patient Details UI",
+      "stepType": "code",
+      "startedAt": "2025-10-06T01:00:26.180Z",
+      "endedAt": "2025-10-06T01:11:02.907Z",
+      "startNote": "Implement sex icon buttons and weight summary in index.html/styles, update PatientInfo accordingly",
+      "stopNote": "Refactored Patient Details UI with icon buttons and weight summary, updated logic/CSS",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 636727,
+      "durationSeconds": 636.727,
+      "durationReadable": "10m 36.7s",
+      "errors": 0,
+      "result": "success",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 10m 36.7s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1759714047068",
+      "taskId": "patient-sidebar-overhaul",
+      "taskName": "Patient Sidebar overhaul",
+      "stepName": "Autocomplete & canonical data",
+      "stepType": "code",
+      "startedAt": "2025-10-06T01:11:12.226Z",
+      "endedAt": "2025-10-06T01:27:27.068Z",
+      "startNote": "Overhauling autocomplete flows, canonical terms, medication class mapping, snapshot filtering",
+      "stopNote": "Overhauled autocomplete and patient data normalization with synonyms, medication classes, snapshot updates",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 974842,
+      "durationSeconds": 974.842,
+      "durationReadable": "16m 14.8s",
+      "errors": 0,
+      "result": "success",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 16m 14.8s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1759714312387",
+      "taskId": "patient-sidebar-overhaul",
+      "taskName": "Patient Sidebar overhaul",
+      "stepName": "Vitals presets",
+      "stepType": "code",
+      "startedAt": "2025-10-06T01:27:37.001Z",
+      "endedAt": "2025-10-06T01:31:52.387Z",
+      "startNote": "Add vital sign dropdown quick picks and input validation per README",
+      "stopNote": "Added vital sign presets via datalists and clamped numeric parsing per README ranges",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 255386,
+      "durationSeconds": 255.386,
+      "durationReadable": "4m 15.4s",
+      "errors": 0,
+      "result": "success",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 4m 15.4s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1759714955361",
+      "taskId": "patient-sidebar-overhaul",
+      "taskName": "Patient Sidebar overhaul",
+      "stepName": "Suggestions & filtering",
+      "stepType": "code",
+      "startedAt": "2025-10-06T01:42:25.119Z",
+      "endedAt": "2025-10-06T01:42:35.361Z",
+      "startNote": "Implementing suggested topics and enhanced filtering for indications/symptoms",
+      "stopNote": "Added suggested topics container with scoring and refreshed list filtering; work already applied",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 10242,
+      "durationSeconds": 10.242,
+      "durationReadable": "10.2s",
+      "errors": 0,
+      "result": "success",
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1759715575490",
+      "taskId": "patient-sidebar-overhaul",
+      "taskName": "Patient Sidebar overhaul",
+      "stepName": "EKG enhancements",
+      "stepType": "code",
+      "startedAt": "2025-10-06T01:44:40.820Z",
+      "endedAt": "2025-10-06T01:52:55.490Z",
+      "startNote": "Adding EKG autocomplete, help modal, and reference route",
+      "stopNote": "Added EKG autocomplete, help modal, and new reference content",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 494670,
+      "durationSeconds": 494.67,
+      "durationReadable": "8m 14.7s",
+      "errors": 0,
+      "result": "success",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 8m 14.7s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1759717972467",
+      "taskId": "patient-sidebar-overhaul",
+      "taskName": "Patient Sidebar overhaul",
+      "stepName": "Testing & QA",
+      "stepType": "analysis",
+      "startedAt": "2025-10-06T02:26:38.961Z",
+      "endedAt": "2025-10-06T02:32:52.467Z",
+      "startNote": "Reviewing changes, preparing QA notes and doc updates",
+      "stopNote": "Auto-stopped by start.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 373506,
+      "durationSeconds": 373.506,
+      "durationReadable": "6m 13.5s",
+      "errors": 0,
+      "result": null,
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 6m 13.5s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1759718145920",
+      "taskId": "patient-info-2025-01",
+      "taskName": "Patient Info Enhancements",
+      "stepName": "Initial scope review",
+      "stepType": "analysis",
+      "startedAt": "2025-10-06T02:32:52.467Z",
+      "endedAt": "2025-10-06T02:35:45.920Z",
+      "startNote": "Processing prior prompt requirements and outstanding tasks",
+      "stopNote": "Completed sequential thinking scoping thoughts; ready to draft plan.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 173453,
+      "durationSeconds": 173.453,
+      "durationReadable": "2m 53.5s",
+      "errors": 0,
+      "result": "success",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 2m 53.5s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1759718170712",
+      "taskId": "patient-info-2025-01",
+      "taskName": "Patient Info Enhancements",
+      "stepName": "Plan drafting",
+      "stepType": "planning",
+      "startedAt": "2025-10-06T02:35:50.891Z",
+      "endedAt": "2025-10-06T02:36:10.712Z",
+      "startNote": "Creating actionable plan for outstanding patient info sidebar tasks",
+      "stopNote": "Plan captured in planning tool; moving to audit phase.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 19821,
+      "durationSeconds": 19.821,
+      "durationReadable": "19.8s",
+      "errors": 0,
+      "result": "success",
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1759718626996",
+      "taskId": "patient-info-2025-01",
+      "taskName": "Patient Info Enhancements",
+      "stepName": "Code audit",
+      "stepType": "analysis",
+      "startedAt": "2025-10-06T02:36:17.309Z",
+      "endedAt": "2025-10-06T02:43:46.996Z",
+      "startNote": "Reviewing current patient info components to see completed vs pending work",
+      "stopNote": "Reviewed patient info components; identified remaining gaps like missing ekg-rhythm-reference category entry and scoped event handler placement.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 449687,
+      "durationSeconds": 449.687,
+      "durationReadable": "7m 29.7s",
+      "errors": 0,
+      "result": "success",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 7m 29.7s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1759719086253",
+      "taskId": "patient-info-2025-01",
+      "taskName": "Patient Info Enhancements",
+      "stepName": "Snapshot warning logic",
+      "stepType": "implementation",
+      "startedAt": "2025-10-06T02:45:56.833Z",
+      "endedAt": "2025-10-06T02:51:26.253Z",
+      "startNote": "Adding medication class warning surfacing tied to patient snapshot",
+      "stopNote": "Added class-based warning derivation in patient snapshot and supporting styles.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 329420,
+      "durationSeconds": 329.42,
+      "durationReadable": "5m 29.4s",
+      "errors": 0,
+      "result": "success",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 5m 29.4s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1759719445529",
+      "taskId": "patient-info-2025-01",
+      "taskName": "Patient Info Enhancements",
+      "stepName": "EKG help integration",
+      "stepType": "implementation",
+      "startedAt": "2025-10-06T02:51:38.355Z",
+      "endedAt": "2025-10-06T02:57:25.529Z",
+      "startNote": "Fixing EKG help button scope and adding ekg-rhythm-reference navigation entries",
+      "stopNote": "Moved EKG help controls to module scope and added ekg-rhythm-reference topic/slug.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 347174,
+      "durationSeconds": 347.174,
+      "durationReadable": "5m 47.2s",
+      "errors": 0,
+      "result": "success",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 5m 47.2s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1759719500090",
+      "taskId": "patient-info-2025-01",
+      "taskName": "Patient Info Enhancements",
+      "stepName": "Testing & QA",
+      "stepType": "testing",
+      "startedAt": "2025-10-06T02:57:41.849Z",
+      "endedAt": "2025-10-06T02:58:20.090Z",
+      "startNote": "Running lint/tests and reviewing impacts from patient info updates",
+      "stopNote": "npm run lint hits existing stylelint violations in styles.css; no new automated results.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 38241,
+      "durationSeconds": 38.241,
+      "durationReadable": "38.2s",
+      "errors": 1,
+      "result": "needs-followup",
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
     }
   ],
   "metrics": {
@@ -1503,17 +1893,18 @@
       },
       "scoping & planning": {
         "stepName": "Scoping & planning",
-        "totalRuns": 2,
-        "totalDurationMs": 334777,
+        "totalRuns": 3,
+        "totalDurationMs": 463352,
         "totalErrors": 0,
         "flaggedCounts": {
-          "duration_over_2m": 2,
+          "duration_over_2m": 3,
           "repeat_5_in_task": 0,
           "repeat_3_tasks_3m": 0
         },
         "tasks": {
           "patient-snapshot-readme": 1,
-          "patient-sidebar-update": 1
+          "patient-sidebar-update": 1,
+          "patient-sidebar-overhaul": 1
         },
         "experiments": {}
       },
@@ -1606,6 +1997,187 @@
           "patient-sidebar-update": 1
         },
         "experiments": {}
+      },
+      "synonyms infrastructure": {
+        "stepName": "Synonyms infrastructure",
+        "totalRuns": 1,
+        "totalDurationMs": 106085,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "patient-sidebar-overhaul": 1
+        },
+        "experiments": {}
+      },
+      "patient details ui": {
+        "stepName": "Patient Details UI",
+        "totalRuns": 1,
+        "totalDurationMs": 636727,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "patient-sidebar-overhaul": 1
+        },
+        "experiments": {}
+      },
+      "autocomplete & canonical data": {
+        "stepName": "Autocomplete & canonical data",
+        "totalRuns": 1,
+        "totalDurationMs": 974842,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "patient-sidebar-overhaul": 1
+        },
+        "experiments": {}
+      },
+      "vitals presets": {
+        "stepName": "Vitals presets",
+        "totalRuns": 1,
+        "totalDurationMs": 255386,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "patient-sidebar-overhaul": 1
+        },
+        "experiments": {}
+      },
+      "suggestions & filtering": {
+        "stepName": "Suggestions & filtering",
+        "totalRuns": 1,
+        "totalDurationMs": 10242,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "patient-sidebar-overhaul": 1
+        },
+        "experiments": {}
+      },
+      "ekg enhancements": {
+        "stepName": "EKG enhancements",
+        "totalRuns": 1,
+        "totalDurationMs": 494670,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "patient-sidebar-overhaul": 1
+        },
+        "experiments": {}
+      },
+      "testing & qa": {
+        "stepName": "Testing & QA",
+        "totalRuns": 2,
+        "totalDurationMs": 411747,
+        "totalErrors": 1,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "patient-sidebar-overhaul": 1,
+          "patient-info-2025-01": 1
+        },
+        "experiments": {}
+      },
+      "initial scope review": {
+        "stepName": "Initial scope review",
+        "totalRuns": 1,
+        "totalDurationMs": 173453,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "patient-info-2025-01": 1
+        },
+        "experiments": {}
+      },
+      "plan drafting": {
+        "stepName": "Plan drafting",
+        "totalRuns": 1,
+        "totalDurationMs": 19821,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "patient-info-2025-01": 1
+        },
+        "experiments": {}
+      },
+      "code audit": {
+        "stepName": "Code audit",
+        "totalRuns": 1,
+        "totalDurationMs": 449687,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "patient-info-2025-01": 1
+        },
+        "experiments": {}
+      },
+      "snapshot warning logic": {
+        "stepName": "Snapshot warning logic",
+        "totalRuns": 1,
+        "totalDurationMs": 329420,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "patient-info-2025-01": 1
+        },
+        "experiments": {}
+      },
+      "ekg help integration": {
+        "stepName": "EKG help integration",
+        "totalRuns": 1,
+        "totalDurationMs": 347174,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "patient-info-2025-01": 1
+        },
+        "experiments": {}
       }
     },
     "experiments": {
@@ -1623,7 +2195,7 @@
         }
       }
     },
-    "updatedAt": "2025-10-06T00:30:41.297Z"
+    "updatedAt": "2025-10-06T02:58:20.090Z"
   },
-  "lastUpdated": "2025-10-06T00:30:41.297Z"
+  "lastUpdated": "2025-10-06T02:58:20.090Z"
 }

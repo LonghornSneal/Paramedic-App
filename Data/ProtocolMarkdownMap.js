@@ -3,6 +3,7 @@
 
 export const ProtocolMarkdownMap = {
   "abbott-approved-abbreviations-respiratory-airway": "Content/Abbreviations & References/abbott-approved-abbreviations-respiratory-airway.md",
+  "ekg-rhythm-reference": "Content/Abbreviations & References/ekg-help.md",
   "adult-a-fib-rvr-or-a-flutter-stable-symptomatic": "Content/Adult Protocols/adult-a-fib-rvr-or-a-flutter-stable-symptomatic.md",
   "adult-allergic-reaction": "Content/Adult Protocols/adult-allergic-reaction.md",
   "adult-anaphylaxis": "Content/Adult Protocols/adult-anaphylaxis.md",

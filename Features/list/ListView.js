@@ -12,10 +12,59 @@ import { addTapListener } from '../../Utils/addTapListener.js'
 export function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     const contentArea = window.contentArea || document.getElementById('content-area');
     contentArea.innerHTML = '';  // Clear current content
+    const suggested = Array.isArray(window.patientSuggestedTopics) ? window.patientSuggestedTopics : [];
+    if (suggested.length) {
+        const suggestedWrapper = document.createElement('div');
+        suggestedWrapper.className = 'suggested-topics';
+        const heading = document.createElement('h3');
+        heading.className = 'suggested-heading';
+        heading.textContent = 'Suggested';
+        suggestedWrapper.appendChild(heading);
+        const suggestedList = document.createElement('div');
+        suggestedList.className = 'suggested-list';
+        suggested.forEach(entry => {
+            const topic = window.allDisplayableTopicsMap?.[entry.id];
+            if (!topic) return;
+            const link = document.createElement('a');
+            link.className = 'topic-link-item suggested-topic';
+            link.textContent = topic.title;
+            link.href = `#${topic.id}`;
+            link.dataset.topicId = topic.id;
+            link.setAttribute('role', 'button');
+            link.setAttribute('tabindex', '0');
+            addTapListener(link, e => {
+                e.preventDefault();
+                renderDetailPage(topic.id);
+            });
+            link.addEventListener('keydown', evt => {
+                if (evt.key === 'Enter' || evt.key === ' ') {
+                    evt.preventDefault();
+                    renderDetailPage(topic.id);
+                }
+            });
+            const meta = [];
+            if (entry.matchedIndications && entry.matchedIndications.length) meta.push('Indications');
+            if (entry.matchedSymptoms && entry.matchedSymptoms.length) meta.push('Symptoms');
+            if (meta.length) {
+                const reason = document.createElement('div');
+                reason.className = 'suggested-reason';
+                reason.textContent = `Matches: ${meta.join(', ')}`;
+                link.appendChild(reason);
+            }
+            suggestedList.appendChild(link);
+        });
+        if (suggestedList.children.length) {
+            suggestedWrapper.appendChild(suggestedList);
+            contentArea.appendChild(suggestedWrapper);
+        }
+    }
     // Render the hierarchical list of all categories
     const listContainer = document.createElement('div');
     createHierarchicalList(window.paramedicCategories, listContainer, 0);
     contentArea.appendChild(listContainer);
+    if (typeof window.applyTopicStrikethroughs === 'function') {
+        window.applyTopicStrikethroughs();
+    }
     // Expand categories along path and highlight topic if provided
     openCategoriesAndHighlight(categoryPath, highlightId);
     if (shouldAddHistory) {

@@ -374,6 +374,32 @@ body.dark-mode .snapshot-card {
 
     box-shadow: 0 0 0 2px #3b82f6; border-color: #3b82f6; }
 
+  .sex-picker { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
+
+  .sex-option { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.85rem; border-radius: 0.5rem; border: 1px solid #d1d5db; background: #fff; color: #1f2937; font-weight: 500; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease; }
+
+  .sex-option .sex-icon { display: inline-flex; width: 1.2rem; height: 1.2rem; align-items: center; justify-content: center; font-size: 1rem; }
+
+  .sex-option .sex-icon::before { font-size: 1.1rem; line-height: 1; }
+
+  .sex-option[data-value="female"] .sex-icon::before { content: "\2640"; color: #ec4899; }
+
+  .sex-option[data-value="male"] .sex-icon::before { content: "\2642"; color: #2563eb; }
+
+  .sex-option:hover { border-color: #2563eb; }
+
+  .sex-option.is-selected { color: #fff; }
+
+  .sex-option.is-selected[data-value="female"] { background: #ec4899; border-color: #ec4899; }
+
+  .sex-option.is-selected[data-value="female"] .sex-icon::before { color: #fff; }
+
+  .sex-option.is-selected[data-value="male"] { background: #2563eb; border-color: #2563eb; }
+
+  .sex-option.is-selected[data-value="male"] .sex-icon::before { color: #fff; }
+
+  .weight-summary { font-size: 0.75rem; color: #4b5563; margin-bottom: 0.5rem; }
+
   .sidebar-label { display: block; font-size: 0.875rem; line-height: 1.25rem;
 
     font-weight: 500; color: #374151; margin-bottom: 0.25rem; }
@@ -1147,6 +1173,20 @@ body.dark-mode { filter: brightness(var(--brightness)); }
 #patient-snapshot-bar { min-height: 1.5rem; }
 
 body.dark-mode #patient-snapshot-bar { color: #e5e7eb; }
+.snapshot-warning-list {
+  margin-top: 0.35rem;
+}
+
+.snapshot-warning-item {
+  color: #b91c1c;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+body.dark-mode .snapshot-warning-item {
+  color: #fca5a5;
+}
 
 
 
@@ -2924,3 +2964,31 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 
 
 
+.suggested-topics { background: #f8fafc; border: 1px solid #bfdbfe; border-radius: 0.75rem; padding: 1rem; margin-bottom: 1.5rem; }
+
+.suggested-heading { font-size: 1rem; font-weight: 600; color: #1d4ed8; margin-bottom: 0.75rem; }
+
+.suggested-list { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.suggested-topic { border-color: #bfdbfe; box-shadow: 0 10px 24px rgb(15 23 42 / 12%); }
+
+.suggested-topic:hover { background: #eff6ff; }
+
+.suggested-reason { display: block; font-size: 0.75rem; color: #1f2937; margin-top: 0.25rem; }
+.modal-backdrop { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.45); z-index: 90; }
+
+.modal { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 95; }
+
+.modal.hidden { display: none; }
+
+.modal-backdrop.hidden { display: none; }
+
+.modal-content { background: #ffffff; border-radius: 0.75rem; box-shadow: 0 24px 60px rgb(15 23 42 / 25%); padding: 1.5rem; width: min(520px, 90vw); max-height: 80vh; overflow-y: auto; }
+
+.modal-close { border: none; background: transparent; color: #1f2937; font-size: 1.5rem; float: right; cursor: pointer; }
+
+.modal-intro { margin-top: 0.5rem; margin-bottom: 1rem; color: #4b5563; font-size: 0.95rem; }
+
+.modal-list { list-style: disc; padding-left: 1.25rem; color: #1f2937; font-size: 0.9rem; }
+
+.modal-list li { margin-bottom: 0.5rem; }

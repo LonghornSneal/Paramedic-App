@@ -34,21 +34,28 @@
   <!-- Section: Basic Info -->
   <div class="sidebar-section">
     <h2 class="sidebar-section-title">Patient Details</h2>
-    <label for="pt-gender" class="sidebar-label">Sex:</label>
-    <select id="pt-gender" class="sidebar-input w-full mb-3">
-      <option value="">--</option>
-      <option value="female">Female</option>
-      <option value="male">Male</option>
-    </select>
+    <p class="sidebar-label">Sex:</p>
+    <input type="hidden" id="pt-gender" value="">
+    <div class="sex-picker mb-3" role="group" aria-label="Patient sex selection">
+      <button type="button" class="sex-option" data-value="female">
+        <span class="sex-icon" aria-hidden="true"></span>
+        <span class="sex-text">Female</span>
+      </button>
+      <button type="button" class="sex-option" data-value="male">
+        <span class="sex-icon" aria-hidden="true"></span>
+        <span class="sex-text">Male</span>
+      </button>
+    </div>
     <label for="pt-age" class="sidebar-label">Age:</label>
     <input type="number" id="pt-age" class="sidebar-input w-full mb-3" placeholder="Age in years" >
     <label for="pt-weight-kg" class="sidebar-label">Weight:</label>
     <!-- Dual weight inputs: kilograms and pounds. When the user enters a value in one field,
          the other field automatically updates via JavaScript (see Features/patient/PatientInfo.js). -->
-    <div class="flex items-center space-x-2 mb-3">
+    <div class="flex items-center space-x-2 mb-2">
       <input type="number" id="pt-weight-kg" class="sidebar-input w-full" placeholder="kg" >
       <input type="number" id="pt-weight-lb" class="sidebar-input w-full" placeholder="lbs" >
     </div>
+    <div id="weight-summary" class="weight-summary hidden" aria-live="polite"></div>
     <label for="pt-height-ft" class="sidebar-label mt-2">Height:</label>
     <div class="flex items-center space-x-2 mb-1">
       <input type="number" id="pt-height-ft" class="sidebar-input w-20" placeholder="ft" >
@@ -94,21 +101,40 @@
   <div class="sidebar-section">
     <h2 class="sidebar-section-title">Vital Signs</h2>
     <label for="vs-bp" class="sidebar-label">Blood Pressure (BP):</label>
-    <input type="text" id="vs-bp" class="sidebar-input w-full mb-2" placeholder="e.g. 120/80" >
+    <input type="text" id="vs-bp" class="sidebar-input w-full mb-2" placeholder="e.g. 120/80" list="vs-bp-presets" inputmode="numeric" >
+    <datalist id="vs-bp-presets">
+      <option value="200+"></option>
+      <option value="160+"></option>
+      <option value="Normal (90-160 SBP)"></option>
+      <option value="70-90"></option>
+      <option value="70-"></option>
+    </datalist>
     <label for="vs-hr" class="sidebar-label">Heart Rate (HR):</label>
-    <input type="number" id="vs-hr" class="sidebar-input w-full mb-2" >
+    <input type="text" id="vs-hr" class="sidebar-input w-full mb-2" list="vs-hr-presets" inputmode="numeric" >
+    <datalist id="vs-hr-presets">
+      <option value="150+"></option>
+      <option value="100+"></option>
+      <option value="60-100"></option>
+      <option value=">60"></option>
+      <option value=">40"></option>
+    </datalist>
     <label for="vs-spo2" class="sidebar-label">SpO₂ (%):</label>
-    <input type="number" id="vs-spo2" class="sidebar-input w-full mb-2" >
+    <input type="text" id="vs-spo2" class="sidebar-input w-full mb-2" list="vs-spo2-presets" inputmode="numeric" >
+    <datalist id="vs-spo2-presets">
+      <option value="Normal"></option>
+      <option value="Low"></option>
+      <option value="Severely Low"></option>
+    </datalist>
     <label for="vs-etco2" class="sidebar-label">EtCO₂:</label>
-    <input type="number" id="vs-etco2" class="sidebar-input w-full mb-2" >
+    <input type="text" id="vs-etco2" class="sidebar-input w-full mb-2" inputmode="numeric" >
     <label for="vs-rr" class="sidebar-label">Respiratory Rate (RR):</label>
-    <input type="number" id="vs-rr" class="sidebar-input w-full mb-2" >
+    <input type="text" id="vs-rr" class="sidebar-input w-full mb-2" inputmode="numeric" >
     <label for="vs-bgl" class="sidebar-label">Blood Glucose (BGL):</label>
-    <input type="text" id="vs-bgl" class="sidebar-input w-full mb-2" >
+    <input type="text" id="vs-bgl" class="sidebar-input w-full mb-2" inputmode="numeric" >
     <label for="vs-eyes" class="sidebar-label">Pupils:</label>
     <input type="text" id="vs-eyes" class="sidebar-input w-full mb-2" placeholder="e.g. 4mm, PERRL" >
     <label for="vs-gcs" class="sidebar-label">GCS:</label>
-    <input type="number" id="vs-gcs" class="sidebar-input w-full mb-2" >
+    <input type="text" id="vs-gcs" class="sidebar-input w-full mb-2" inputmode="numeric" >
     <label for="vs-ao-status" class="sidebar-label">AO Status:</label>
     <input type="text" id="vs-ao-status" class="sidebar-input w-full mb-2" placeholder="e.g. x4" >
     <label for="vs-lung-sounds" class="sidebar-label">Lung Sounds:</label>
@@ -116,8 +142,15 @@
   <!-- Section: EKG -->
   <div class="sidebar-section">
     <h2 class="sidebar-section-title">EKG Interpretation</h2>
-    <label for="pt-ekg" class="sidebar-label">EKG:</label>
-    <input type="text" id="pt-ekg" class="sidebar-input w-full" placeholder="e.g. Sinus Tachycardia" ></div>
+    <div class="flex items-center justify-between">
+      <label for="pt-ekg" class="sidebar-label mb-0">EKG:</label>
+      <button type="button" id="ekg-help-button" class="text-sm text-blue-600 hover:underline" aria-haspopup="dialog" aria-controls="ekg-help-modal">Help</button>
+    </div>
+    <div class="autocomplete-container">
+      <input type="text" id="pt-ekg" class="sidebar-input w-full" placeholder="e.g. Sinus Tachycardia" >
+      <div id="pt-ekg-suggestions" class="autocomplete-suggestions hidden"></div>
+    </div>
+  </div>
 </div>
 
 <div id="settings-panel" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-lg shadow-lg">
@@ -201,5 +234,22 @@
     </footer>
 </div>
 <script type="module" src="main.js"></script>
+
+<div id="ekg-help-backdrop" class="modal-backdrop hidden"></div>
+<div id="ekg-help-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="ekg-help-title">
+  <div class="modal-content">
+    <button type="button" id="ekg-help-close" class="modal-close" aria-label="Close EKG help">&times;</button>
+    <h3 id="ekg-help-title">EKG Rhythm Reference</h3>
+    <p class="modal-intro">Use these quick cues when selecting a rhythm. Full reference content is available in the EKG Rhythm Reference detail page.</p>
+    <ul class="modal-list">
+      <li><strong>Sinus Tachycardia:</strong> Regular rhythm, rate &gt; 100 bpm, upright P before each QRS.</li>
+      <li><strong>Sinus Bradycardia:</strong> Regular rhythm, rate &lt; 60 bpm, upright P before each QRS.</li>
+      <li><strong>Atrial Fibrillation:</strong> Irregularly irregular, absent P waves, fibrillatory baseline.</li>
+      <li><strong>SVT:</strong> Narrow complex tachycardia &gt; 150 bpm, P waves often hidden.</li>
+      <li><strong>Ventricular Tachycardia:</strong> Wide complex &gt; 100 bpm, monomorphic or polymorphic QRS.</li>
+    </ul>
+  </div>
+</div>
+
 </body>
 </html>

@@ -720,6 +720,12 @@ export const ParamedicCategoriesData = [
 
           details: { abbreviationGroup: "other-abbreviations" } 
 
+        },{ 
+
+          id: slugify("EKG Rhythm Reference"), title: "EKG Rhythm Reference", 
+
+          type: "topic" 
+
         }
 
       ]

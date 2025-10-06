@@ -12,6 +12,7 @@ import { pmhSuggestions,
          medicationNameSuggestions,
          indicationSuggestions,
          symptomSuggestions,
+         ekgSuggestions,
          PDE5_INHIBITORS
         } from './Features/patient/PatientInfo.js';
 import { setupAutocomplete } from './Features/patient/Autocomplete.js';
@@ -159,11 +160,12 @@ function initApp() {
     window.allDisplayableTopicsMap = allDisplayableTopicsMap;
 
     // Initialize autocomplete suggestions
-    setupAutocomplete('pt-pmh','pt-pmh-suggestions', pmhSuggestions);
-    setupAutocomplete('pt-allergies','pt-allergies-suggestions', allergySuggestions);
-    setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions);
-    setupAutocomplete('pt-indications','pt-indications-suggestions', indicationSuggestions);
-    setupAutocomplete('pt-symptoms','pt-symptoms-suggestions', symptomSuggestions);
+    setupAutocomplete('pt-pmh','pt-pmh-suggestions', pmhSuggestions, 'pmh');
+    setupAutocomplete('pt-allergies','pt-allergies-suggestions', allergySuggestions, 'allergies');
+    setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions, 'medications');
+    setupAutocomplete('pt-indications','pt-indications-suggestions', indicationSuggestions, 'indications');
+    setupAutocomplete('pt-symptoms','pt-symptoms-suggestions', symptomSuggestions, 'symptoms');
+    setupAutocomplete('pt-ekg','pt-ekg-suggestions', ekgSuggestions, 'ekg');
 
     // Render the initial patient snapshot once the dropdown is ready
     if (typeof window.renderPatientSnapshot === 'function') {
