@@ -39,11 +39,24 @@
       <input type="hidden" id="pt-gender" value="">
       <div class="sex-picker" role="group" aria-label="Patient sex selection">
         <button type="button" class="sex-option" data-value="female" data-tooltip="Female" aria-label="Female">
-          <span class="sex-icon" aria-hidden="true"></span>
+          <span class="sex-icon" aria-hidden="true">
+            <svg class="sex-icon-svg" viewBox="0 0 24 24" role="presentation" aria-hidden="true">
+              <circle class="sex-icon-ring" cx="12" cy="8" r="5"></circle>
+              <line class="sex-icon-stem" x1="12" y1="13" x2="12" y2="20"></line>
+              <line class="sex-icon-cross" x1="9" y1="17" x2="15" y2="17"></line>
+            </svg>
+          </span>
           <span class="sr-only">Female</span>
         </button>
         <button type="button" class="sex-option" data-value="male" data-tooltip="Male" aria-label="Male">
-          <span class="sex-icon" aria-hidden="true"></span>
+          <span class="sex-icon" aria-hidden="true">
+            <svg class="sex-icon-svg" viewBox="0 0 24 24" role="presentation" aria-hidden="true">
+              <circle class="sex-icon-ring" cx="10" cy="12" r="5"></circle>
+              <line class="sex-icon-stem" x1="13.5" y1="8.5" x2="19" y2="3"></line>
+              <line class="sex-icon-arrow" x1="17" y1="3" x2="19" y2="3"></line>
+              <line class="sex-icon-arrow" x1="19" y1="3" x2="19" y2="5"></line>
+            </svg>
+          </span>
           <span class="sr-only">Male</span>
         </button>
       </div>
@@ -51,14 +64,45 @@
     <div class="sidebar-field sidebar-field-age mb-3">
       <label for="pt-age" class="sidebar-label">Age:</label>
       <div class="age-unit-toggle-group" role="group" aria-label="Select age units">
-        <button type="button" class="age-unit-toggle" data-unit="days" data-tooltip="Days" aria-label="Days">
-          <span aria-hidden="true">D</span>
+        <button type="button" class="age-unit-toggle age-unit-toggle--day" data-unit="days" data-tooltip="Days" aria-label="Days">
+          <span class="age-icon" aria-hidden="true">
+            <svg class="age-icon-svg age-icon-svg--day" viewBox="0 0 24 24" role="presentation" aria-hidden="true">
+              <rect class="age-icon-body" x="4" y="5" width="16" height="14" rx="2"></rect>
+              <rect class="age-icon-header" x="4" y="5" width="16" height="4"></rect>
+              <rect class="age-icon-outline" x="4" y="5" width="16" height="14" rx="2" fill="none"></rect>
+              <rect class="age-icon-highlight" x="7" y="11" width="10" height="6" rx="1.2"></rect>
+            </svg>
+          </span>
+          <span class="sr-only">Days</span>
         </button>
-        <button type="button" class="age-unit-toggle" data-unit="months" data-tooltip="Months" aria-label="Months">
-          <span aria-hidden="true">M</span>
+        <button type="button" class="age-unit-toggle age-unit-toggle--month" data-unit="months" data-tooltip="Months" aria-label="Months">
+          <span class="age-icon" aria-hidden="true">
+            <svg class="age-icon-svg age-icon-svg--month" viewBox="0 0 24 24" role="presentation" aria-hidden="true">
+              <rect class="age-icon-body" x="4" y="5" width="16" height="14" rx="2"></rect>
+              <rect class="age-icon-header" x="4" y="5" width="16" height="4"></rect>
+              <rect class="age-icon-outline" x="4" y="5" width="16" height="14" rx="2" fill="none"></rect>
+              <g class="age-icon-grid">
+                <rect x="7" y="11" width="2.5" height="2.5" rx="0.5"></rect>
+                <rect x="11" y="11" width="2.5" height="2.5" rx="0.5"></rect>
+                <rect x="15" y="11" width="2.5" height="2.5" rx="0.5"></rect>
+                <rect x="7" y="15" width="2.5" height="2.5" rx="0.5"></rect>
+                <rect x="11" y="15" width="2.5" height="2.5" rx="0.5"></rect>
+                <rect x="15" y="15" width="2.5" height="2.5" rx="0.5"></rect>
+              </g>
+            </svg>
+          </span>
+          <span class="sr-only">Months</span>
         </button>
-        <button type="button" class="age-unit-toggle" data-unit="years" data-tooltip="Years" aria-label="Years">
-          <span aria-hidden="true">Y</span>
+        <button type="button" class="age-unit-toggle age-unit-toggle--year" data-unit="years" data-tooltip="Years" aria-label="Years">
+          <span class="age-icon" aria-hidden="true">
+            <svg class="age-icon-svg age-icon-svg--year" viewBox="0 0 24 24" role="presentation" aria-hidden="true">
+              <rect class="age-icon-body" x="4" y="5" width="16" height="14" rx="2"></rect>
+              <rect class="age-icon-header" x="4" y="5" width="16" height="4"></rect>
+              <rect class="age-icon-outline" x="4" y="5" width="16" height="14" rx="2" fill="none"></rect>
+              <path class="age-icon-cycle" d="M9.5 13a3.5 3.5 0 0 1 6.4-1.6l1.4-1.4v4.2h-4.2l1.4-1.4A2.2 2.2 0 1 0 11 14.2c0 .6.2 1.2.6 1.6a2.6 2.6 0 0 0 3.1.6" fill="none"></path>
+            </svg>
+          </span>
+          <span class="sr-only">Years</span>
         </button>
       </div>
       <input type="number" id="pt-age" class="sidebar-input age-input" inputmode="decimal" step="any">
@@ -74,8 +118,11 @@
     </div>
     <div class="sidebar-field sidebar-field-height mb-1">
       <label for="pt-height-ft" class="sidebar-label">Height:</label>
-      <input type="number" id="pt-height-ft" class="sidebar-input height-input" placeholder="ft" >
-      <input type="number" id="pt-height-in" class="sidebar-input height-input" placeholder="in or total" >
+      <div class="height-inline-inputs">
+        <input type="number" id="pt-height-ft" class="sidebar-input height-input height-input--compact" inputmode="numeric" aria-label="Feet" step="any">
+        <span class="height-unit-text">ft,</span>
+        <input type="number" id="pt-height-in" class="sidebar-input height-input height-input--compact" inputmode="numeric" aria-label="Inches" step="any">
+      </div>
     </div>
   </div>
   <!-- Section: Medical History -->
@@ -322,4 +369,5 @@
 
 </body>
 </html>
+
 
