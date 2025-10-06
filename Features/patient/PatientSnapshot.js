@@ -1,4 +1,7 @@
-import { patientData } from './PatientInfo.js';
+import { patientData, PEDIATRIC_AGE_THRESHOLD } from './PatientInfo.js';
+
+const WEIGHT_CONVERSION_FACTOR = 2.20462;
+
 
 // Abbreviations used for compact snapshot
 const ABBREV = new Map([
@@ -76,7 +79,54 @@ function abbr(text){
   return text.replace(/\b\w/g, c => c.toUpperCase());
 }
 function genderSymbol(g){ if (g === 'female') return 'F'; if (g === 'male') return 'M'; return ''; }
+function formatWeightDisplay(data) {
+  if (!data) return '';
+  const unit = data.weightUnit === 'lb' ? 'lb' : 'kg';
+  const raw = (typeof data.weightInputValue === 'number' && !Number.isNaN(data.weightInputValue)) ? data.weightInputValue : null;
+  if (raw != null) {
+    const rounded = Math.round(raw * 10) / 10;
+    const display = Math.abs(rounded - Math.round(rounded)) < 0.05 ? Math.round(rounded).toString() : rounded.toFixed(1);
+    return display + unit;
+  }
+  if (typeof data.weight === 'number' && !Number.isNaN(data.weight)) {
+    if (unit === 'lb') {
+      const pounds = data.weight * WEIGHT_CONVERSION_FACTOR;
+      const roundedLb = Math.round(pounds * 10) / 10;
+      const displayLb = Math.abs(roundedLb - Math.round(roundedLb)) < 0.05 ? Math.round(roundedLb).toString() : roundedLb.toFixed(1);
+      return displayLb + 'lb';
+    }
+    const kgRounded = Math.round(data.weight * 10) / 10;
+    const displayKg = Math.abs(kgRounded - Math.round(kgRounded)) < 0.05 ? Math.round(kgRounded).toString() : kgRounded.toFixed(1);
+    return displayKg + 'kg';
+  }
+  return '';
+}
+function formatHeightDisplay(totalIn) {
+  if (typeof totalIn !== 'number' || Number.isNaN(totalIn) || totalIn <= 0) return '';
+  const inches = Math.round(totalIn);
+  const feet = Math.floor(inches / 12);
+  const remainder = inches % 12;
+  if (feet > 0 && remainder > 0) return feet + 'ft ' + remainder + 'in';
+  if (feet > 0) return feet + 'ft';
+  return inches + 'in';
+}
 function sevHR(hr){ if (hr==null) return ''; if (hr>120||hr<50) return 'text-red-600'; if (hr>100||hr<60) return 'text-yellow-600'; return ''; }
+function formatSnapshotAge(data) {
+  if (!data) return '';
+  const raw = typeof data.ageInputValue === 'number' && !Number.isNaN(data.ageInputValue)
+    ? data.ageInputValue
+    : (typeof data.age === 'number' && !Number.isNaN(data.age) ? data.age : null);
+  if (raw == null) return '';
+  const unit = data.ageUnit || 'years';
+  const rounded = Math.round(raw * 10) / 10;
+  const displayValue = Math.abs(rounded - Math.round(rounded)) < 0.05
+    ? Math.round(rounded).toString()
+    : rounded.toFixed(1);
+  if (unit === 'days') return `${displayValue}d`;
+  if (unit === 'months') return `${displayValue}mo`;
+  return `${displayValue}yo`;
+}
+
 function sevRR(rr){ if (rr==null) return ''; if (rr>24||rr<10) return 'text-red-600'; if (rr>20||rr<12) return 'text-yellow-600'; return ''; }
 function sevBGL(bgl){ const n=parseFloat(bgl); if (isNaN(n)) return ''; if (n>200||n<60) return 'text-red-600'; if (n>140||n<70) return 'text-yellow-600'; return ''; }
 function sevRhythm(ekg){ const s=(ekg||'').toLowerCase(); if (s.includes('tachy')||s.includes('brady')) return 'text-yellow-600'; return ''; }
@@ -100,7 +150,12 @@ export function renderPatientSnapshot(){
   if (!bar) return;
   const d = patientData;
   const v = d.vitalSigns || {};
-  const hasDemographics = d.age != null || d.gender || d.weight != null;
+  const ageDisplay = formatSnapshotAge(d);
+  const genderDisplay = genderSymbol(d.gender);
+  const weightDisplay = formatWeightDisplay(d);
+  const isPediatric = typeof d.age === 'number' ? d.age < PEDIATRIC_AGE_THRESHOLD : false;
+  const heightDisplay = isPediatric ? formatHeightDisplay(d.heightIn) : '';
+  const hasDemographics = Boolean(ageDisplay || genderDisplay || weightDisplay || heightDisplay);
   const indicationsDisplay = Array.isArray(d.indicationsDisplay) ? d.indicationsDisplay : [];
   const allergiesDisplay = Array.isArray(d.allergyDisplay) ? d.allergyDisplay : [];
   const medicationsDisplay = Array.isArray(d.medicationsDisplay) ? d.medicationsDisplay : [];
@@ -139,10 +194,7 @@ export function renderPatientSnapshot(){
 
   const parts = [];
   if (hasDemographics){
-    const age = d.age != null ? `${d.age}yo` : '';
-    const g = genderSymbol(d.gender);
-    const wt = d.weight != null ? `${d.weight}kg` : '';
-    const seg = [age,g,wt].filter(Boolean).join(' ');
+    const seg = [ageDisplay, genderDisplay, weightDisplay, heightDisplay].filter(Boolean).join(' ');
     if (seg) parts.push(seg);
   }
   if (hasIndications){
@@ -198,4 +250,6 @@ if (typeof window !== 'undefined') { window.renderPatientSnapshot = renderPatien
 if (typeof window !== 'undefined') {
     window.renderPatientSnapshot = renderPatientSnapshot;
 }
+
+
 

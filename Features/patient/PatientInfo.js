@@ -4,19 +4,19 @@
  * This module manages the patientData object (age, weight, medical history, vitals, etc.) and updates
  * the app UI based on these inputs. It exposes the patientData object globally for backward
  * compatibility but also exports it for ES module consumers. A major improvement in this version
- * is support for dual weight inputs (kilograms and pounds). When the user enters a weight in one
- * unit, the other field automatically updates to the equivalent value. Internally we always store
- * weight in kilograms. See updatePatientData() and synchronizeWeights() for details.
+ * adds a single weight input with unit toggles. Users can enter kilograms or pounds, and the
+ * value automatically converts so the underlying data continues to store kilograms for calculations.
+ * Internally we always store weight in kilograms. See updatePatientData() and unit toggle helpers for details.
  */
 
 // The central patient data object. All fields are initialized to null or sensible defaults. The
-// weightUnit property remains for potential future use but the code currently always stores weight
-// in kilograms.
+// weightUnit tracks the user's selected unit for display while weightInputValue stores the raw entry.
+// Weight continues to be stored internally in kilograms for dosing calculations.
 import { renderPatientSnapshot } from './PatientSnapshot.js';
 import { splitSegments, normalizeCommittedValues } from './patientTerminology.js';
 
 export const patientData = {
-    age: null, weight: null, weightUnit: 'kg', gender: '', heightIn: null,
+    age: null, ageUnit: 'years', ageInputValue: null, weight: null, weightUnit: 'kg', weightInputValue: null, gender: '', heightIn: null,
     pmh: [], pmhDisplay: [],
     allergies: [], allergyDisplay: [],
     currentMedications: [], medicationsDisplay: [], medicationClasses: [],
@@ -27,12 +27,12 @@ export const patientData = {
     },
     ekg: '', ekgDisplay: ''
 };
-// IDs of inputs we want to monitor for changes. Exclude the weight unit select (no longer used) and
-// include the new kilogram and pound inputs. When any of these inputs fires an input event, we call
+// IDs of inputs we want to monitor for changes. Weight toggles manipulate the same input, so we only
+// track the shared weight field alongside the rest of the sidebar inputs. When any of these inputs fires an input event, we call
 // updatePatientData() to refresh patientData and update the UI.
 const ptInputIds = [ 'pt-age', 
-    'pt-weight-kg', 'pt-weight-lb', // dual weight inputs
-    'pt-height-ft','pt-height-in','pt-height-inches',
+    'pt-weight-value',
+    'pt-height-ft','pt-height-in',
     'pt-pmh', 
     'pt-allergies', 
     'pt-medications', 
@@ -51,9 +51,15 @@ const ptInputIds = [ 'pt-age',
         'pt-ekg' 
 ];
 const ptInputs = ptInputIds.map(id => document.getElementById(id));
+const ageInputEl = document.getElementById('pt-age');
+const ageUnitButtons = Array.from(document.querySelectorAll('.age-unit-toggle'));
+let selectedAgeUnit = 'years';
 const genderInputEl = document.getElementById('pt-gender');
 const sexButtons = Array.from(document.querySelectorAll('.sex-option'));
 const weightSummaryEl = document.getElementById('weight-summary');
+const weightInputEl = document.getElementById('pt-weight-value');
+const weightUnitButtons = Array.from(document.querySelectorAll('.weight-unit-toggle'));
+let selectedWeightUnit = 'kg';
 const ekgHelpButton = document.getElementById('ekg-help-button');
 const ekgHelpModal = document.getElementById('ekg-help-modal');
 const ekgHelpBackdrop = document.getElementById('ekg-help-backdrop');
@@ -168,12 +174,60 @@ function getFieldValues(field, id) {
   const segments = splitSegments(rawValue);
   return normalizeCommittedValues(field, segments.committed);
 }
-// Weight conversion factor used when synchronizing kilogram and pound inputs. 1 kilogram equals
+// Weight conversion factor used when converting between kilograms and pounds. 1 kilogram equals
 // 2.20462 pounds. We round converted values to one decimal place for display purposes.
 const WEIGHT_CONVERSION_FACTOR = 2.20462;
 
+function convertWeightValue(value, fromUnit, toUnit) {
+  if (typeof value !== 'number' || Number.isNaN(value)) return null;
+  const normalizedFrom = fromUnit === 'lb' ? 'lb' : 'kg';
+  const normalizedTo = toUnit === 'lb' ? 'lb' : 'kg';
+  if (normalizedFrom === normalizedTo) return value;
+  if (normalizedFrom === 'kg' && normalizedTo === 'lb') return value * WEIGHT_CONVERSION_FACTOR;
+  if (normalizedFrom === 'lb' && normalizedTo === 'kg') return value / WEIGHT_CONVERSION_FACTOR;
+  return value;
+}
+
+function formatWeightInputValue(value) {
+  if (typeof value !== 'number' || Number.isNaN(value)) return '';
+  const rounded = Math.round(value * 10) / 10;
+  if (Math.abs(rounded - Math.round(rounded)) < 0.05) return Math.round(rounded).toString();
+  return rounded.toFixed(1);
+}
+
+function setSelectedWeightUnit(unit, options = {}) {
+  const { convertInput = false, triggerUpdate = true, force = false } = options;
+  const normalized = unit === 'lb' ? 'lb' : 'kg';
+  const previous = selectedWeightUnit;
+  if (!force && normalized === previous) {
+    if (triggerUpdate) updatePatientData();
+    return;
+  }
+  selectedWeightUnit = normalized;
+  weightUnitButtons.forEach(btn => {
+    const isSelected = btn.dataset.unit === normalized;
+    btn.classList.toggle('is-selected', isSelected);
+    btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+  });
+  if (weightInputEl) {
+    if (convertInput && weightInputEl.value && previous && previous !== normalized) {
+      const parsed = parseFloat(weightInputEl.value);
+      if (!Number.isNaN(parsed)) {
+        const converted = convertWeightValue(parsed, previous, normalized);
+        if (typeof converted === 'number' && !Number.isNaN(converted)) {
+          weightInputEl.value = formatWeightInputValue(converted);
+        }
+      }
+    }
+    weightInputEl.dataset.weightUnit = normalized;
+    weightInputEl.placeholder = normalized === 'kg' ? 'kg' : 'lbs';
+  }
+  if (triggerUpdate) updatePatientData();
+}
+
 function setSelectedSex(selected) {
   const target = selected ? selected.toLowerCase() : '';
+
   sexButtons.forEach(btn => {
     const isSelected = target && btn.dataset.value === target;
     btn.classList.toggle('is-selected', isSelected);
@@ -181,17 +235,192 @@ function setSelectedSex(selected) {
   });
 }
 
+const AGE_UNIT_METADATA = {
+  days: { label: 'Days', suffix: 'd' },
+  months: { label: 'Months', suffix: 'mo' },
+  years: { label: 'Years', suffix: 'yo' }
+};
+const MAX_AGE_YEARS = 120;
+const AGE_TOOLTIP_ID = 'sidebar-age-tooltip';
+const SEX_TOOLTIP_ID = 'sidebar-sex-tooltip';
+let ageTooltipTimer = null;
+let sexTooltipTimer = null;
+
+function clampAgeYears(value) {
+  if (typeof value !== 'number' || Number.isNaN(value)) return null;
+  if (value < 0) return 0;
+  if (value > MAX_AGE_YEARS) return MAX_AGE_YEARS;
+  return Number(value.toFixed(2));
+}
+
+function convertAgeValue(value, fromUnit, toUnit) {
+  if (typeof value !== 'number' || Number.isNaN(value)) return null;
+  const normalizedFrom = (fromUnit === 'days' || fromUnit === 'months') ? fromUnit : 'years';
+  const normalizedTo = (toUnit === 'days' || toUnit === 'months') ? toUnit : 'years';
+  let years = value;
+  if (normalizedFrom === 'days') years = value / 365;
+  else if (normalizedFrom === 'months') years = value / 12;
+  if (normalizedTo === 'days') return years * 365;
+  if (normalizedTo === 'months') return years * 12;
+  return years;
+}
+
+function formatAgeValueForInput(value) {
+  if (typeof value !== 'number' || Number.isNaN(value)) return '';
+  const rounded = Math.round(value * 10) / 10;
+  if (Math.abs(rounded - Math.round(rounded)) < 0.05) return Math.round(rounded).toString();
+  return rounded.toFixed(1);
+}
+
+function readAgeInputValue() {
+  if (!ageInputEl) return { raw: null, years: null };
+  const rawText = ageInputEl.value?.trim() ?? '';
+  if (!rawText) return { raw: null, years: null };
+  const parsed = parseFloat(rawText);
+  if (Number.isNaN(parsed)) return { raw: null, years: null };
+  const normalizedRaw = parsed < 0 ? 0 : parsed;
+  if (ageInputEl && normalizedRaw !== parsed) {
+    ageInputEl.value = formatAgeValueForInput(normalizedRaw);
+  }
+  const years = convertAgeValue(normalizedRaw, selectedAgeUnit, 'years');
+  const clampedYears = clampAgeYears(years);
+  if (clampedYears != null && years != null && clampedYears !== years && ageInputEl) {
+    const adjusted = convertAgeValue(clampedYears, 'years', selectedAgeUnit);
+    if (typeof adjusted === 'number' && !Number.isNaN(adjusted)) {
+      ageInputEl.value = formatAgeValueForInput(adjusted);
+    }
+  }
+  return { raw: normalizedRaw, years: clampedYears };
+}
+
+function positionSidebarTooltip(button, tooltip) {
+  const rect = button.getBoundingClientRect();
+  const tipRect = tooltip.getBoundingClientRect();
+  const viewportWidth = document.documentElement.clientWidth || window.innerWidth;
+  const minLeft = window.scrollX + 8;
+  const maxLeft = window.scrollX + Math.max(8, viewportWidth - tipRect.width - 8);
+  const desiredLeft = rect.left + window.scrollX + rect.width + 8;
+  const left = Math.max(minLeft, Math.min(desiredLeft, maxLeft));
+  const desiredTop = rect.top + window.scrollY - tipRect.height - 10;
+  const top = Math.max(window.scrollY + 8, desiredTop);
+  tooltip.style.left = `${left}px`;
+  tooltip.style.top = `${top}px`;
+}
+
+function clearAgeTooltipTimer() {
+  if (ageTooltipTimer != null) {
+    window.clearTimeout(ageTooltipTimer);
+    ageTooltipTimer = null;
+  }
+}
+
+function hideAgeTooltip() {
+  const existing = document.getElementById(AGE_TOOLTIP_ID);
+  if (existing) existing.remove();
+  clearAgeTooltipTimer();
+}
+
+function showAgeTooltip(button) {
+  if (!button) return;
+  const label = button.dataset.tooltip || '';
+  if (!label) return;
+  hideAgeTooltip();
+  const tooltip = document.createElement('div');
+  tooltip.id = AGE_TOOLTIP_ID;
+  tooltip.className = 'qv-tooltip age-unit-tooltip';
+  tooltip.textContent = label;
+  document.body.appendChild(tooltip);
+  positionSidebarTooltip(button, tooltip);
+}
+
+function scheduleAgeTooltip(button) {
+  if (!button) return;
+  clearAgeTooltipTimer();
+  ageTooltipTimer = window.setTimeout(() => {
+    showAgeTooltip(button);
+  }, 400);
+}
+
+function clearSexTooltipTimer() {
+  if (sexTooltipTimer != null) {
+    window.clearTimeout(sexTooltipTimer);
+    sexTooltipTimer = null;
+  }
+}
+
+function hideSexTooltip() {
+  const existing = document.getElementById(SEX_TOOLTIP_ID);
+  if (existing) existing.remove();
+  clearSexTooltipTimer();
+}
+
+function showSexTooltip(button) {
+  if (!button) return;
+  const label = button.dataset.tooltip || '';
+  if (!label) return;
+  hideSexTooltip();
+  const tooltip = document.createElement("div");
+  tooltip.id = SEX_TOOLTIP_ID;
+  tooltip.className = "qv-tooltip age-unit-tooltip";
+  tooltip.textContent = label;
+  document.body.appendChild(tooltip);
+  positionSidebarTooltip(button, tooltip);
+}
+
+function scheduleSexTooltip(button) {
+  if (!button) return;
+  clearSexTooltipTimer();
+  sexTooltipTimer = window.setTimeout(() => {
+    showSexTooltip(button);
+  }, 400);
+}
+
+function setSelectedAgeUnit(unit, options = {}) {
+  const { convertInput = false, triggerUpdate = true, force = false } = options;
+  const normalized = AGE_UNIT_METADATA[unit] ? unit : 'years';
+  const previous = selectedAgeUnit;
+  if (!force && normalized === previous) {
+    if (triggerUpdate) updatePatientData();
+    return;
+  }
+  selectedAgeUnit = normalized;
+  ageUnitButtons.forEach(btn => {
+    const isSelected = btn.dataset.unit === normalized;
+    btn.classList.toggle('is-selected', isSelected);
+    btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+  });
+  if (ageInputEl) {
+    if (convertInput && ageInputEl.value && previous && previous !== normalized) {
+      const parsed = parseFloat(ageInputEl.value);
+      if (!Number.isNaN(parsed)) {
+        const converted = convertAgeValue(parsed, previous, normalized);
+        if (typeof converted === 'number' && !Number.isNaN(converted)) {
+          ageInputEl.value = formatAgeValueForInput(converted);
+        }
+      }
+    }
+    ageInputEl.dataset.ageUnit = normalized;
+  }
+  if (triggerUpdate) updatePatientData();
+}
+
 function updateWeightSummaryDisplay(weightKg) {
   if (!weightSummaryEl) return;
+  let summaryText = '';
   if (typeof weightKg === 'number' && !Number.isNaN(weightKg)) {
     const pounds = weightKg * WEIGHT_CONVERSION_FACTOR;
     const kgText = Number.isInteger(weightKg) ? weightKg.toString() : weightKg.toFixed(1);
     const lbText = Math.round(pounds);
-    weightSummaryEl.textContent = `Weight context: ${kgText} kg (${lbText} lb).`;
-    weightSummaryEl.classList.remove('hidden');
-  } else {
-    weightSummaryEl.textContent = '';
-    weightSummaryEl.classList.add('hidden');
+    summaryText = `Weight context: ${kgText} kg (${lbText} lb).`;
+  }
+  weightSummaryEl.textContent = summaryText;
+  weightSummaryEl.classList.toggle('hidden', summaryText === '');
+  if (weightInputEl) {
+    if (summaryText) {
+      weightInputEl.setAttribute('title', summaryText);
+    } else {
+      weightInputEl.removeAttribute('title');
+    }
   }
 }
 
@@ -303,79 +532,50 @@ function applyTopicStrikethroughs() {
   });
 }
 
-/**
- * Synchronizes the kg and lb weight inputs. When called with a source of 'kg', the function
- * converts the kilogram input into pounds and updates the pound input. When called with a
- * source of 'lb', the pound input is converted back to kilograms and the kilogram input is
- * updated. If the source input is empty or invalid, the target input is cleared as well.
- *
- * @param {string} source Either 'kg' or 'lb' indicating which input triggered the change.
- */
-function synchronizeWeights(source) {
-  const kgEl = document.getElementById('pt-weight-kg');
-  const lbEl = document.getElementById('pt-weight-lb');
-  if (!kgEl || !lbEl) return;
-  if (source === 'kg') {
-    const kg = parseFloat(kgEl.value);
-    if (!isNaN(kg)) {
-      const lb = kg * WEIGHT_CONVERSION_FACTOR;
-      lbEl.value = lb ? lb.toFixed(1) : '';
-    } else {
-      lbEl.value = '';
-    }
-  } else if (source === 'lb') {
-    const lb = parseFloat(lbEl.value);
-    if (!isNaN(lb)) {
-      const kg = lb / WEIGHT_CONVERSION_FACTOR;
-      kgEl.value = kg ? kg.toFixed(1) : '';
-    } else {
-      kgEl.value = '';
-    }
-  }
-}
 
 /**
  * Updates the global patientData object by reading all current inputs. This function is called on
  * every input event for monitored fields. It also handles striking through irrelevant topics in
  * the list, re‑rendering the detail page when necessary, and applying pediatric/adult section
- * strikeouts based on the patient’s age. Weight handling has been updated to support dual inputs
+ * strikeouts based on the patient’s age. Weight handling uses a single input with unit toggles
  */
 function updatePatientData() {
     patientData.gender = getInputValue('pt-gender');
     setSelectedSex(patientData.gender);
-    patientData.age = getParsedInt('pt-age', 0, 120);
+    const ageValues = readAgeInputValue();
+    patientData.age = ageValues.years;
+    patientData.ageUnit = selectedAgeUnit;
+    patientData.ageInputValue = ageValues.raw;
     // Height sync: if inches given, use that; else compute from ft/in
-    const ft = getParsedInt('pt-height-ft');
-    const inch = getParsedInt('pt-height-in');
-    const inches = getParsedInt('pt-height-inches');
+    const ft = getParsedInt('pt-height-ft', 0);
+    let inch = null;
+    if (ft != null && ft > 0) {
+        inch = getParsedInt('pt-height-in', 0, 11);
+    } else {
+        inch = getParsedInt('pt-height-in', 0);
+    }
     let totalIn = null;
-    if (inches != null) totalIn = inches;
-    else if (ft != null || inch != null) {
-        totalIn = (ft || 0) * 12 + (inch || 0);
+    if (ft != null && ft > 0) {
+        const remainder = inch != null ? inch : 0;
+        totalIn = ft * 12 + remainder;
+    } else if (inch != null) {
+        totalIn = inch;
     }
     patientData.heightIn = totalIn;
-    // Weight: determine which input has data. Prefer kilograms if both exist. We always store weight
-    // internally in kilograms for dosing calculations. If neither field has a valid value, weight is
-    // set to null.
-    const kgVal = getParsedFloat('pt-weight-kg');
-    const lbVal = getParsedFloat('pt-weight-lb');
-    // Medication class dropdown removed; no medicationClasses in patientData
-
-    if (kgVal !== null) {
-        patientData.weight = kgVal;
-        patientData.weightUnit = 'kg';
-    } else if (lbVal !== null) {
-        // Convert pounds to kilograms and round to two decimals
-        patientData.weight = parseFloat((lbVal / WEIGHT_CONVERSION_FACTOR).toFixed(2));
-        patientData.weightUnit = 'kg';
-    } else {
-        patientData.weight = null;
-        patientData.weightUnit = 'kg';
+    // Weight: reads the shared input and converts to kilograms regardless of the selected unit.
+    const weightRaw = getParsedFloat('pt-weight-value');
+    let weightKg = null;
+    if (weightRaw !== null) {
+        const converted = convertWeightValue(weightRaw, selectedWeightUnit, 'kg');
+        if (typeof converted === 'number' && !Number.isNaN(converted)) {
+            weightKg = parseFloat(converted.toFixed(2));
+        }
     }
+    patientData.weight = weightKg;
+    patientData.weightUnit = selectedWeightUnit;
+    patientData.weightInputValue = weightRaw;
     updateWeightSummaryDisplay(patientData.weight);
 
-    // Other patient fields
-    // Removed obsolete weight inputs; weight unit is now always 'kg'.
     const pmhValues = getFieldValues('pmh', 'pt-pmh');
     const pmhUnique = dedupeByCanonical(pmhValues.canonical, pmhValues.display);
     patientData.pmh = pmhUnique.canonical;
@@ -459,13 +659,60 @@ ptInputs.forEach(input => {
   input?.addEventListener('input', updatePatientData);
 });
 
+ageUnitButtons.forEach(btn => {
+  btn.setAttribute('aria-pressed', 'false');
+  const hideTooltipForButton = () => hideAgeTooltip();
+  btn.addEventListener('mouseenter', () => showAgeTooltip(btn));
+  btn.addEventListener('mouseleave', hideTooltipForButton);
+  btn.addEventListener('focus', () => showAgeTooltip(btn));
+  btn.addEventListener('blur', hideTooltipForButton);
+  btn.addEventListener('touchstart', () => { hideAgeTooltip(); scheduleAgeTooltip(btn); }, { passive: true });
+  btn.addEventListener('touchend', hideTooltipForButton, { passive: true });
+  btn.addEventListener('touchcancel', hideTooltipForButton, { passive: true });
+  btn.addEventListener('touchmove', hideTooltipForButton, { passive: true });
+  btn.addEventListener('click', () => {
+    setSelectedAgeUnit(btn.dataset.unit, { convertInput: true });
+    hideAgeTooltip();
+  });
+});
+if (ageUnitButtons.length) {
+  setSelectedAgeUnit(selectedAgeUnit, { force: true, triggerUpdate: false });
+  if (ageInputEl) ageInputEl.dataset.ageUnit = selectedAgeUnit;
+}
+
+weightUnitButtons.forEach(btn => {
+  btn.setAttribute('aria-pressed', 'false');
+  btn.addEventListener('click', () => {
+    const unit = btn.dataset.unit || 'kg';
+    setSelectedWeightUnit(unit, { convertInput: true });
+  });
+});
+if (weightUnitButtons.length) {
+  setSelectedWeightUnit(selectedWeightUnit, { force: true, triggerUpdate: false });
+}
+if (weightInputEl) {
+  weightInputEl.addEventListener('input', () => {
+    updatePatientData();
+  });
+}
+
 sexButtons.forEach(btn => {
   btn.setAttribute('aria-pressed', 'false');
+  const hideSexTooltipHandler = () => hideSexTooltip();
+  btn.addEventListener('mouseenter', () => showSexTooltip(btn));
+  btn.addEventListener('mouseleave', hideSexTooltipHandler);
+  btn.addEventListener('focus', () => showSexTooltip(btn));
+  btn.addEventListener('blur', hideSexTooltipHandler);
+  btn.addEventListener('touchstart', () => { hideSexTooltip(); scheduleSexTooltip(btn); }, { passive: true });
+  btn.addEventListener('touchend', hideSexTooltipHandler, { passive: true });
+  btn.addEventListener('touchcancel', hideSexTooltipHandler, { passive: true });
+  btn.addEventListener('touchmove', hideSexTooltipHandler, { passive: true });
   btn.addEventListener('click', () => {
     if (!genderInputEl) return;
     const selectedValue = btn.dataset.value || '';
     genderInputEl.value = selectedValue;
     setSelectedSex(selectedValue);
+    hideSexTooltip();
     updatePatientData();
   });
 });
@@ -477,24 +724,6 @@ if (ekgHelpButton && ekgHelpModal && ekgHelpBackdrop) {
   ekgHelpClose?.addEventListener('click', closeEkgHelp);
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape') closeEkgHelp();
-  });
-}
-
-// Additional listeners for weight inputs to synchronize kg and lb values. We attach these
-// separately because synchronizeWeights() must be called before updatePatientData() to ensure
-// patientData.weight is based on the latest conversion.
-const kgInputEl = document.getElementById('pt-weight-kg');
-const lbInputEl = document.getElementById('pt-weight-lb');
-if (kgInputEl) {
-  kgInputEl.addEventListener('input', () => {
-    synchronizeWeights('kg');
-    updatePatientData();
-  });
-}
-if (lbInputEl) {
-  lbInputEl.addEventListener('input', () => {
-    synchronizeWeights('lb');
-    updatePatientData();
   });
 }
 
@@ -511,32 +740,6 @@ if (typeof window !== 'undefined') {
   window.applyTopicStrikethroughs = applyTopicStrikethroughs;
   window.updateSuggestedTopics = updateSuggestedTopics;
 }
-// Sync height inputs both ways
-function syncHeightsFromFtIn() {
-  const ftEl = document.getElementById('pt-height-ft');
-  const inEl = document.getElementById('pt-height-in');
-  const totalEl = document.getElementById('pt-height-inches');
-  if (ftEl && inEl && totalEl) {
-    const ft = parseInt(ftEl.value || '0', 10);
-    const inc = parseInt(inEl.value || '0', 10);
-    if (!isNaN(ft) && !isNaN(inc)) totalEl.value = (ft*12 + inc) || '';
-  }
-}
-function syncHeightsFromTotal() {
-  const ftEl = document.getElementById('pt-height-ft');
-  const inEl = document.getElementById('pt-height-in');
-  const totalEl = document.getElementById('pt-height-inches');
-  if (ftEl && inEl && totalEl) {
-    const total = parseInt(totalEl.value || 'NaN', 10);
-    if (!isNaN(total)) {
-      ftEl.value = Math.floor(total/12);
-      inEl.value = total % 12;
-    }
-  }
-}
-document.getElementById('pt-height-ft')?.addEventListener('input', () => { syncHeightsFromFtIn(); updatePatientData(); });
-document.getElementById('pt-height-in')?.addEventListener('input', () => { syncHeightsFromFtIn(); updatePatientData(); });
-document.getElementById('pt-height-inches')?.addEventListener('input', () => { syncHeightsFromTotal(); updatePatientData(); });
 /*
   Features/patient/PatientInfo.js
   Purpose: Manages patient sidebar inputs (sex, age, weight, height, PMH, allergies, meds, indications, symptoms)
@@ -549,3 +752,16 @@ document.getElementById('pt-height-inches')?.addEventListener('input', () => { s
   - Sidebar synchronization is exercised by E2E tests that change sex/weight and then compute TV.
   - No unit test harness present; consider adding a small DOM test for weight lb↔kg sync.
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
