@@ -34,46 +34,66 @@ export function renderPatientSnapshot(){
   const bar = document.getElementById('patient-snapshot-bar');
   if (!bar) return;
   const d = patientData;
+  const v = d.vitalSigns || {};
+  const hasDemographics = d.age != null || d.gender || d.weight != null;
+  const hasIndications = Array.isArray(d.indications) && d.indications.length > 0;
+  const hasAllergies = Array.isArray(d.allergies) && d.allergies.length > 0;
+  const hasPmh = Array.isArray(d.pmh) && d.pmh.length > 0;
+  const hasVitals = Boolean(v.bp || v.hr != null || v.rr != null || v.bgl);
+  const hasEkg = typeof d.ekg === 'string' ? d.ekg.trim().length > 0 : Boolean(d.ekg);
+
+  if (!hasDemographics && !hasIndications && !hasAllergies && !hasPmh && !hasVitals && !hasEkg) {
+    bar.innerHTML = '';
+    return;
+  }
+
+  const allergiesInputValue = document.getElementById('pt-allergies')?.value ?? '';
+  const allergiesProvided = allergiesInputValue.trim().length > 0;
+
   const parts = [];
   // Age/Gender/Weight
-  if (d.age!=null || d.gender || d.weight!=null){
-    const age = d.age!=null ? `${d.age}yo` : '';
+  if (hasDemographics){
+    const age = d.age != null ? `${d.age}yo` : '';
     const g = genderSymbol(d.gender);
-    const wt = d.weight!=null ? `${d.weight}kg` : '';
+    const wt = d.weight != null ? `${d.weight}kg` : '';
     const seg = [age,g,wt].filter(Boolean).join(' ');
     if (seg) parts.push(seg);
   }
   // Indications underlined blue
-  if (Array.isArray(d.indications) && d.indications.length){
+  if (hasIndications){
     const inds = d.indications.map(ind => `<span class="underline decoration-blue-600 text-blue-600" title="${ind}">${abbr(ind)}</span>`);
     parts.push(inds.join(', '));
   }
-  // Allergies: NKA if none provided; else only show relevant ones
-  if (Array.isArray(d.allergies) && d.allergies.length){
+  // Allergies: only surface once the user has provided data
+  if (hasAllergies){
     const rel = relevantAllergies(d.indications, d.allergies);
-    if (rel.length) parts.push(`Allergy: ${rel.join(', ')}`);
-  } else {
-    parts.push('NKA');
+    if (rel.length) {
+      parts.push(`Allergy: ${rel.join(', ')}`);
+    } else {
+      const formatted = d.allergies.map(a => a.toUpperCase());
+      if (formatted.length) parts.push(`Allergies: ${formatted.join(', ')}`);
+    }
+  } else if (allergiesProvided) {
+    parts.push('Allergies: NKA');
   }
   // PMH concise (up to 2)
-  if (Array.isArray(d.pmh) && d.pmh.length){
+  if (hasPmh){
     const pmh = d.pmh.slice(0,2).map(p=>`<span title="${p}">${abbr(p)}</span>`).join(', ');
     if (pmh) parts.push(`PMH: ${pmh}`);
   }
   // Vitals
-  const v = d.vitalSigns || {};
   if (v.bp) parts.push(`BP ${v.bp}`);
-  if (v.hr!=null) parts.push(`<span class="${sevHR(v.hr)}">HR ${v.hr}</span>`);
-  if (v.rr!=null) parts.push(`<span class="${sevRR(v.rr)}">RR ${v.rr}</span>`);
+  if (v.hr != null) parts.push(`<span class="${sevHR(v.hr)}">HR ${v.hr}</span>`);
+  if (v.rr != null) parts.push(`<span class="${sevRR(v.rr)}">RR ${v.rr}</span>`);
   if (v.bgl) parts.push(`<span class="${sevBGL(v.bgl)}">BGL ${v.bgl}</span>`);
-  if (d.ekg) parts.push(`<span class="${sevRhythm(d.ekg)}" title="${d.ekg}">${abbr(d.ekg)}</span>`);
+  if (hasEkg) parts.push(`<span class="${sevRhythm(d.ekg)}" title="${d.ekg}">${abbr(d.ekg)}</span>`);
 
-  bar.innerHTML = parts.join(' · ');
+  bar.innerHTML = parts.join(' &bull; ');
 }
-
 if (typeof window !== 'undefined') { window.renderPatientSnapshot = renderPatientSnapshot; }
 
 // Optionally expose globally
 if (typeof window !== 'undefined') {
     window.renderPatientSnapshot = renderPatientSnapshot;
 }
+
