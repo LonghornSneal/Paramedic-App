@@ -66,41 +66,19 @@
       <div class="age-unit-toggle-group" role="group" aria-label="Select age units">
         <button type="button" class="age-unit-toggle age-unit-toggle--day" data-unit="days" data-tooltip="Days" aria-label="Days">
           <span class="age-icon" aria-hidden="true">
-            <svg class="age-icon-svg age-icon-svg--day" viewBox="0 0 24 24" role="presentation" aria-hidden="true">
-              <rect class="age-icon-body" x="4" y="5" width="16" height="14" rx="2"></rect>
-              <rect class="age-icon-header" x="4" y="5" width="16" height="4"></rect>
-              <rect class="age-icon-outline" x="4" y="5" width="16" height="14" rx="2" fill="none"></rect>
-              <rect class="age-icon-highlight" x="7" y="11" width="10" height="6" rx="1.2"></rect>
-            </svg>
+            <img src="Assets/age/age-days.jpg" alt="" class="age-icon-img">
           </span>
           <span class="sr-only">Days</span>
         </button>
         <button type="button" class="age-unit-toggle age-unit-toggle--month" data-unit="months" data-tooltip="Months" aria-label="Months">
           <span class="age-icon" aria-hidden="true">
-            <svg class="age-icon-svg age-icon-svg--month" viewBox="0 0 24 24" role="presentation" aria-hidden="true">
-              <rect class="age-icon-body" x="4" y="5" width="16" height="14" rx="2"></rect>
-              <rect class="age-icon-header" x="4" y="5" width="16" height="4"></rect>
-              <rect class="age-icon-outline" x="4" y="5" width="16" height="14" rx="2" fill="none"></rect>
-              <g class="age-icon-grid">
-                <rect x="7" y="11" width="2.5" height="2.5" rx="0.5"></rect>
-                <rect x="11" y="11" width="2.5" height="2.5" rx="0.5"></rect>
-                <rect x="15" y="11" width="2.5" height="2.5" rx="0.5"></rect>
-                <rect x="7" y="15" width="2.5" height="2.5" rx="0.5"></rect>
-                <rect x="11" y="15" width="2.5" height="2.5" rx="0.5"></rect>
-                <rect x="15" y="15" width="2.5" height="2.5" rx="0.5"></rect>
-              </g>
-            </svg>
+            <img src="Assets/age/age-months.jpg" alt="" class="age-icon-img">
           </span>
           <span class="sr-only">Months</span>
         </button>
         <button type="button" class="age-unit-toggle age-unit-toggle--year" data-unit="years" data-tooltip="Years" aria-label="Years">
           <span class="age-icon" aria-hidden="true">
-            <svg class="age-icon-svg age-icon-svg--year" viewBox="0 0 24 24" role="presentation" aria-hidden="true">
-              <rect class="age-icon-body" x="4" y="5" width="16" height="14" rx="2"></rect>
-              <rect class="age-icon-header" x="4" y="5" width="16" height="4"></rect>
-              <rect class="age-icon-outline" x="4" y="5" width="16" height="14" rx="2" fill="none"></rect>
-              <path class="age-icon-cycle" d="M9.5 13a3.5 3.5 0 0 1 6.4-1.6l1.4-1.4v4.2h-4.2l1.4-1.4A2.2 2.2 0 1 0 11 14.2c0 .6.2 1.2.6 1.6a2.6 2.6 0 0 0 3.1.6" fill="none"></path>
-            </svg>
+            <img src="Assets/age/age-years.jpg" alt="" class="age-icon-img">
           </span>
           <span class="sr-only">Years</span>
         </button>
@@ -120,8 +98,9 @@
       <label for="pt-height-ft" class="sidebar-label">Height:</label>
       <div class="height-inline-inputs">
         <input type="number" id="pt-height-ft" class="sidebar-input height-input height-input--compact" inputmode="numeric" aria-label="Feet" step="any">
-        <span class="height-unit-text">ft,</span>
+        <span class="height-unit-text">ft</span>
         <input type="number" id="pt-height-in" class="sidebar-input height-input height-input--compact" inputmode="numeric" aria-label="Inches" step="any">
+        <span class="height-unit-text">in</span>
       </div>
     </div>
   </div>
@@ -130,17 +109,17 @@
     <h2 class="sidebar-section-title">Medical History</h2>
     <label for="pt-pmh" class="sidebar-label">Past Medical History:</label>
     <div class="autocomplete-container">
-      <textarea id="pt-pmh" rows="2" class="sidebar-input w-full"></textarea>
+      <textarea id="pt-pmh" rows="1" class="sidebar-input w-full"></textarea>
       <div id="pt-pmh-suggestions" class="autocomplete-suggestions hidden"></div>
     </div>
     <label for="pt-allergies" class="sidebar-label mt-3">Allergies:</label>
     <div class="autocomplete-container">
-      <textarea id="pt-allergies" rows="2" class="sidebar-input w-full"></textarea>
+      <textarea id="pt-allergies" rows="1" class="sidebar-input w-full"></textarea>
       <div id="pt-allergies-suggestions" class="autocomplete-suggestions hidden"></div>
     </div>
     <label for="pt-medications" class="sidebar-label mt-3">Current Medications:</label>
     <div class="autocomplete-container">
-      <textarea id="pt-medications" rows="2" class="sidebar-input w-full"></textarea>
+      <textarea id="pt-medications" rows="1" class="sidebar-input w-full"></textarea>
       <div id="pt-medications-suggestions" class="autocomplete-suggestions hidden"></div>
     </div>
   </div>
@@ -149,12 +128,12 @@
     <h2 class="sidebar-section-title">Current Presentation</h2>
     <label for="pt-indications" class="sidebar-label">Indications:</label>
     <div class="autocomplete-container">
-      <textarea id="pt-indications" rows="2" class="sidebar-input w-full"></textarea>
+      <textarea id="pt-indications" rows="1" class="sidebar-input w-full"></textarea>
       <div id="pt-indications-suggestions" class="autocomplete-suggestions hidden"></div>
     </div>
     <label for="pt-symptoms" class="sidebar-label mt-3">Symptoms:</label>
     <div class="autocomplete-container">
-      <textarea id="pt-symptoms" rows="2" class="sidebar-input w-full"></textarea>
+      <textarea id="pt-symptoms" rows="1" class="sidebar-input w-full"></textarea>
       <div id="pt-symptoms-suggestions" class="autocomplete-suggestions hidden"></div>
     </div>
   </div>
@@ -166,11 +145,10 @@
       <div class="dual-input-wrapper">
         <div class="bp-input-group" role="group" aria-label="Blood pressure entry">
           <input type="number" id="vs-bp-systolic" class="sidebar-input vital-input vital-input--narrow" inputmode="numeric" min="0" max="400" aria-label="Systolic blood pressure" placeholder="SYS">
-          <span class="bp-divider">/</span>
           <input type="number" id="vs-bp-diastolic" class="sidebar-input vital-input vital-input--narrow" inputmode="numeric" min="0" max="300" aria-label="Diastolic blood pressure" placeholder="DIA">
         </div>
         <select id="vs-bp-select" class="sidebar-input vital-select" aria-label="Blood pressure preset">
-          <option value="">Preset</option>
+          <option value="" aria-label="No preset"></option>
           <option value="200+">200+</option>
           <option value="160+">160+</option>
           <option value="Normal (90-160 SBP)">Normal (90-160 SBP)</option>
@@ -182,9 +160,9 @@
     <div class="sidebar-field sidebar-field-vital mb-3">
       <label for="vs-hr-value" class="sidebar-label">HR:</label>
       <div class="dual-input-wrapper">
-        <input type="number" id="vs-hr-value" class="sidebar-input vital-input" inputmode="numeric" min="0" max="300" aria-label="Heart rate numeric entry" placeholder="bpm">
+        <input type="number" id="vs-hr-value" class="sidebar-input vital-input" inputmode="numeric" min="0" max="400" aria-label="Heart rate numeric entry" placeholder="bpm">
         <select id="vs-hr-select" class="sidebar-input vital-select" aria-label="Heart rate preset">
-          <option value="">Preset</option>
+          <option value="" aria-label="No preset"></option>
           <option value="150+">150+</option>
           <option value="100+">100+</option>
           <option value="60-100">60-100</option>
@@ -198,7 +176,7 @@
       <div class="dual-input-wrapper">
         <input type="number" id="vs-spo2-value" class="sidebar-input vital-input" inputmode="numeric" min="50" max="100" aria-label="Pulse oximetry numeric entry" placeholder="%">
         <select id="vs-spo2-select" class="sidebar-input vital-select" aria-label="Pulse oximetry preset">
-          <option value="">Preset</option>
+          <option value="" aria-label="No preset"></option>
           <option value="Normal">Normal</option>
           <option value="Low">Low</option>
           <option value="Severely Low">Severely Low</option>
@@ -218,7 +196,7 @@
       <div class="dual-input-wrapper">
         <input type="number" id="vs-bgl-value" class="sidebar-input vital-input" inputmode="numeric" min="0" max="900" aria-label="Blood glucose numeric entry" placeholder="mg/dL">
         <select id="vs-bgl-select" class="sidebar-input vital-select" aria-label="Blood glucose preset">
-          <option value="">Preset</option>
+          <option value="" aria-label="No preset"></option>
           <option value="Normal">Normal</option>
           <option value="High">High</option>
           <option value="Low">Low</option>
@@ -231,7 +209,7 @@
       <div class="dual-input-wrapper">
         <input type="number" id="vs-pupils-value" class="sidebar-input vital-input" inputmode="numeric" min="0" max="8" step="0.5" aria-label="Pupil size in millimeters" placeholder="mm">
         <select id="vs-pupils-select" class="sidebar-input vital-select" aria-label="Pupil descriptor">
-          <option value="">Descriptor</option>
+          <option value="" aria-label="No descriptor"></option>
           <option value="PERRL">PERRL</option>
           <option value="Pinpoint">Pinpoint</option>
           <option value="Dilated">Dilated</option>
@@ -247,7 +225,7 @@
       <div class="dual-input-wrapper">
         <input type="number" id="vs-gcs-value" class="sidebar-input vital-input" inputmode="numeric" min="3" max="15" aria-label="Glasgow Coma Scale numeric entry" placeholder="score">
         <select id="vs-gcs-select" class="sidebar-input vital-select" aria-label="Glasgow Coma Scale preset">
-          <option value="">Preset</option>
+          <option value="" aria-label="No preset"></option>
           <option value="15">15</option>
           <option value="14">14</option>
           <option value="13">13</option>
@@ -277,20 +255,11 @@
     </div>
     <div class="sidebar-field sidebar-field-vital mb-3">
       <label for="vs-lung-sounds" class="sidebar-label">Lung Sounds:</label>
-      <input type="text" id="vs-lung-sounds" class="sidebar-input vital-input" list="vs-lung-sounds-presets" placeholder="e.g. Clear">
+      <div class="autocomplete-container flex-1">
+        <input type="text" id="vs-lung-sounds" class="sidebar-input vital-input" placeholder="Search lung sounds">
+        <div id="vs-lung-sounds-suggestions" class="autocomplete-suggestions hidden"></div>
+      </div>
     </div>
-    <datalist id="vs-lung-sounds-presets">
-      <option value="Clear"></option>
-      <option value="Clear Bilaterally"></option>
-      <option value="Diminished"></option>
-      <option value="Coarse"></option>
-      <option value="Crackles"></option>
-      <option value="Rales"></option>
-      <option value="Rhonchi"></option>
-      <option value="Wheezes"></option>
-      <option value="Stridor"></option>
-      <option value="Absent"></option>
-    </datalist>
   </div>
   <!-- Section: EKG -->
   <div class="sidebar-section">
@@ -300,37 +269,33 @@
     </div>
     <div class="sidebar-field sidebar-field-ekg mb-3">
       <label for="pt-ekg-select" class="sidebar-label">Rhythm:</label>
-      <div class="dual-input-wrapper">
-        <select id="pt-ekg-select" class="sidebar-input vital-select" aria-label="EKG rhythm preset">
-          <option value="">Select rhythm</option>
-          <option value="Normal Sinus Rhythm">Normal Sinus Rhythm</option>
-          <option value="Sinus Tachycardia">Sinus Tachycardia</option>
-          <option value="Sinus Bradycardia">Sinus Bradycardia</option>
-          <option value="Atrial Fibrillation">Atrial Fibrillation</option>
-          <option value="Atrial Flutter">Atrial Flutter</option>
-          <option value="SVT">SVT</option>
-          <option value="Junctional Rhythm">Junctional Rhythm</option>
-          <option value="First Degree AV Block">First Degree AV Block</option>
-          <option value="Second Degree AV Block Type I">Second Degree AV Block Type I</option>
-          <option value="Second Degree AV Block Type II">Second Degree AV Block Type II</option>
-          <option value="Third Degree AV Block">Third Degree AV Block</option>
-          <option value="Ventricular Tachycardia">Ventricular Tachycardia</option>
-          <option value="Ventricular Fibrillation">Ventricular Fibrillation</option>
-          <option value="Asystole">Asystole</option>
-          <option value="PEA">PEA</option>
-          <option value="Wolff-Parkinson-White">Wolff-Parkinson-White</option>
-          <option value="Torsades de Pointes">Torsades de Pointes</option>
-          <option value="Paced Rhythm">Paced Rhythm</option>
-        </select>
-        <div class="autocomplete-container flex-1">
-          <input type="text" id="pt-ekg" class="sidebar-input vital-input" placeholder="e.g. Sinus Tachycardia">
-          <div id="pt-ekg-suggestions" class="autocomplete-suggestions hidden"></div>
+      <div class="ekg-field-row">
+        <div class="ekg-select-group">
+          <select id="pt-ekg-select" class="sidebar-input vital-select" aria-label="EKG rhythm preset">
+            <option value="" aria-label="No rhythm selected"></option>
+          </select>
+          <div class="autocomplete-container ekg-autocomplete">
+            <input type="text" id="pt-ekg" class="sidebar-input vital-input" placeholder="Type or select rhythm">
+            <div id="pt-ekg-suggestions" class="autocomplete-suggestions hidden"></div>
+          </div>
         </div>
+        <div class="ekg-preview-shell" aria-hidden="true">
+          <img id="ekg-rhythm-preview" alt="" class="ekg-preview-img">
+        </div>
+        <button type="button" id="ekg-rhythm-info" class="ekg-info-button" aria-label="View rhythm definition" disabled>i</button>
       </div>
     </div>
     <div class="sidebar-field sidebar-field-ekg mb-3">
       <label for="pt-ekg-secondary" class="sidebar-label">MI/BBB/Sgarbossa:</label>
-      <input type="text" id="pt-ekg-secondary" class="sidebar-input vital-input" placeholder="e.g. Inferior MI, RBBB, Sgarbossa positive">
+      <div class="ekg-field-row">
+        <select id="pt-ekg-secondary" class="sidebar-input vital-select" aria-label="EKG modifier preset">
+          <option value="" aria-label="No modifier selected"></option>
+        </select>
+        <div class="ekg-preview-shell" aria-hidden="true">
+          <img id="ekg-modifier-preview" alt="" class="ekg-preview-img">
+        </div>
+        <button type="button" id="ekg-modifier-info" class="ekg-info-button" aria-label="View modifier definition" disabled>i</button>
+      </div>
     </div>
   </div>
 
@@ -422,15 +387,25 @@
 <div id="ekg-help-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="ekg-help-title">
   <div class="modal-content">
     <button type="button" id="ekg-help-close" class="modal-close" aria-label="Close EKG help">&times;</button>
-    <h3 id="ekg-help-title">EKG Rhythm Reference</h3>
-    <p class="modal-intro">Use these quick cues when selecting a rhythm. Full reference content is available in the EKG Rhythm Reference detail page.</p>
-    <ul class="modal-list">
-      <li><strong>Sinus Tachycardia:</strong> Regular rhythm, rate &gt; 100 bpm, upright P before each QRS.</li>
-      <li><strong>Sinus Bradycardia:</strong> Regular rhythm, rate &lt; 60 bpm, upright P before each QRS.</li>
-      <li><strong>Atrial Fibrillation:</strong> Irregularly irregular, absent P waves, fibrillatory baseline.</li>
-      <li><strong>SVT:</strong> Narrow complex tachycardia &gt; 150 bpm, P waves often hidden.</li>
-      <li><strong>Ventricular Tachycardia:</strong> Wide complex &gt; 100 bpm, monomorphic or polymorphic QRS.</li>
-    </ul>
+    <h3 id="ekg-help-title">EKG Interpretation</h3>
+    <div id="ekg-modal-general">
+      <p class="modal-intro">
+        Use these quick cues when selecting a rhythm or modifier. The info buttons beside each selector open detailed previews with definitions.
+      </p>
+      <ul class="modal-list">
+        <li><strong>Sinus Tachycardia:</strong> Regular rhythm, rate &gt; 100 bpm, upright P before each QRS.</li>
+        <li><strong>Sinus Bradycardia:</strong> Regular rhythm, rate &lt; 60 bpm, upright P before each QRS.</li>
+        <li><strong>Atrial Fibrillation:</strong> Irregularly irregular rhythm with absent P waves and fibrillatory baseline.</li>
+        <li><strong>SVT:</strong> Narrow-complex tachycardia &gt; 150 bpm, P waves often hidden.</li>
+        <li><strong>Ventricular Tachycardia:</strong> Wide-complex rhythm &gt; 100 bpm, monomorphic or polymorphic morphology.</li>
+      </ul>
+    </div>
+    <div id="ekg-modal-detail" class="ekg-modal-detail hidden">
+      <h4 id="ekg-modal-detail-title"></h4>
+      <img id="ekg-modal-detail-image" alt="" class="ekg-modal-detail-image">
+      <p id="ekg-modal-detail-definition" class="ekg-modal-detail-definition"></p>
+      <button type="button" id="ekg-modal-back" class="modal-back-button">Back</button>
+    </div>
   </div>
 </div>
 

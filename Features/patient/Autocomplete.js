@@ -70,3 +70,49 @@ export function setupAutocomplete(textareaId, suggestionsContainerId, suggestion
 
   textarea.addEventListener('focus', renderSuggestions);
 }
+
+export function setupSingleValueAutocomplete(inputId, suggestionsContainerId, suggestionSourceSet) {
+  const input = document.getElementById(inputId);
+  const suggestionsContainer = document.getElementById(suggestionsContainerId);
+  if (!input || !suggestionsContainer) return;
+
+  const baseValues = suggestionSourceSet ? Array.from(suggestionSourceSet) : [];
+
+  const renderSuggestions = () => {
+    const current = (input.value || '').trim().toLowerCase();
+    if (!current) {
+      suggestionsContainer.classList.add('hidden');
+      suggestionsContainer.innerHTML = '';
+      return;
+    }
+    const rows = baseValues.filter(option => option.toLowerCase().includes(current));
+    if (!rows.length) {
+      suggestionsContainer.classList.add('hidden');
+      suggestionsContainer.innerHTML = '';
+      return;
+    }
+    suggestionsContainer.innerHTML = rows.map(option => (
+      `<div class="autocomplete-suggestion-item" data-value="${option}">${option}</div>`
+    )).join('');
+    suggestionsContainer.classList.remove('hidden');
+  };
+
+  input.addEventListener('input', renderSuggestions);
+
+  addTapListener(suggestionsContainer, e => {
+    const item = e.target.closest('.autocomplete-suggestion-item');
+    if (!item) return;
+    const value = item.dataset.value || '';
+    input.value = value;
+    suggestionsContainer.classList.add('hidden');
+    suggestionsContainer.innerHTML = '';
+    input.focus();
+    input.dispatchEvent(new Event('input'));
+  });
+
+  input.addEventListener('blur', () => {
+    setTimeout(() => { suggestionsContainer.classList.add('hidden'); }, 150);
+  });
+
+  input.addEventListener('focus', renderSuggestions);
+}

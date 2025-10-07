@@ -14,6 +14,7 @@
 // Weight continues to be stored internally in kilograms for dosing calculations.
 import { renderPatientSnapshot } from './PatientSnapshot.js';
 import { splitSegments, normalizeCommittedValues } from './patientTerminology.js';
+import { EkgRhythmAssets, EkgModifierAssets } from '../../Data/EkgAssetsData.js';
 
 export const patientData = {
     age: null, ageUnit: 'years', ageInputValue: null, weight: null, weightUnit: 'kg', weightInputValue: null, gender: '', heightIn: null,
@@ -69,19 +70,57 @@ const weightSummaryEl = document.getElementById('weight-summary');
 const weightInputEl = document.getElementById('pt-weight-value');
 const weightUnitButtons = Array.from(document.querySelectorAll('.weight-unit-toggle'));
 let selectedWeightUnit = 'kg';
+let currentRhythmAssetId = '';
+let currentModifierAssetId = '';
 const ekgHelpButton = document.getElementById('ekg-help-button');
 const ekgHelpModal = document.getElementById('ekg-help-modal');
 const ekgHelpBackdrop = document.getElementById('ekg-help-backdrop');
 const ekgHelpClose = document.getElementById('ekg-help-close');
+const ekgHelpTitle = document.getElementById('ekg-help-title');
+const ekgModalGeneral = document.getElementById('ekg-modal-general');
+const ekgModalDetail = document.getElementById('ekg-modal-detail');
+const ekgModalDetailTitle = document.getElementById('ekg-modal-detail-title');
+const ekgModalDetailImage = document.getElementById('ekg-modal-detail-image');
+const ekgModalDetailDefinition = document.getElementById('ekg-modal-detail-definition');
+const ekgModalBack = document.getElementById('ekg-modal-back');
+const ekgRhythmPreviewImg = document.getElementById('ekg-rhythm-preview');
+const ekgModifierPreviewImg = document.getElementById('ekg-modifier-preview');
+const ekgRhythmInfoButton = document.getElementById('ekg-rhythm-info');
+const ekgModifierInfoButton = document.getElementById('ekg-modifier-info');
 
-function openEkgHelp() {
+function showEkgGeneral() {
+  if (ekgModalGeneral) ekgModalGeneral.classList.remove('hidden');
+  if (ekgModalDetail) ekgModalDetail.classList.add('hidden');
+  if (ekgHelpTitle) ekgHelpTitle.textContent = 'EKG Interpretation';
+  if (ekgModalBack) ekgModalBack.classList.add('hidden');
+  if (ekgModalDetailTitle) ekgModalDetailTitle.textContent = '';
+  if (ekgModalDetailDefinition) ekgModalDetailDefinition.textContent = '';
+  ekgModalDetailImage?.removeAttribute('src');
+}
+
+function openEkgHelp(detail) {
   if (!ekgHelpModal || !ekgHelpBackdrop) return;
+  if (detail && detail.asset && ekgModalDetail && ekgModalDetailTitle && ekgModalDetailImage && ekgModalDetailDefinition) {
+    const asset = detail.asset;
+    if (ekgModalGeneral) ekgModalGeneral.classList.add('hidden');
+    ekgModalDetail.classList.remove('hidden');
+    if (ekgHelpTitle) ekgHelpTitle.textContent = detail.heading || 'EKG Detail';
+    ekgModalDetailTitle.textContent = asset.name;
+    ekgModalDetailImage.src = asset.dataUri;
+    ekgModalDetailImage.alt = `${asset.name} waveform`;
+    ekgModalDetailDefinition.textContent = asset.definition;
+    if (ekgModalBack) ekgModalBack.classList.remove('hidden');
+  } else {
+    showEkgGeneral();
+  }
   ekgHelpModal.classList.remove('hidden');
   ekgHelpBackdrop.classList.remove('hidden');
 }
 
 function closeEkgHelp() {
   if (!ekgHelpModal || !ekgHelpBackdrop) return;
+  showEkgGeneral();
+  ekgModalDetailImage?.removeAttribute('src');
   ekgHelpModal.classList.add('hidden');
   ekgHelpBackdrop.classList.add('hidden');
 }
@@ -111,6 +150,19 @@ export const symptomSuggestions = new Set([
     "palpitations","edema","cough","anxiety","depression","back pain","trauma"
 ]);
 
+export const lungSoundSuggestions = new Set([
+    "Clear",
+    "Clear Bilaterally",
+    "Diminished",
+    "Coarse",
+    "Crackles",
+    "Rales",
+    "Rhonchi",
+    "Wheezes",
+    "Stridor",
+    "Absent"
+]);
+
 export const ekgSuggestions = new Set([
     'normal sinus rhythm',
     'sinus tachycardia',
@@ -133,6 +185,11 @@ export const ekgSuggestions = new Set([
     'pea',
     'pulseless electrical activity'
 ]);
+
+const rhythmAssetsByName = new Map(EkgRhythmAssets.map(asset => [asset.name.toLowerCase(), asset]));
+const rhythmAssetsById = new Map(EkgRhythmAssets.map(asset => [asset.id, asset]));
+const modifierAssetsByName = new Map(EkgModifierAssets.map(asset => [asset.name.toLowerCase(), asset]));
+const modifierAssetsById = new Map(EkgModifierAssets.map(asset => [asset.id, asset]));
 
 /**
  * Retrieves the trimmed string value of an input by its DOM id. Returns an empty string if the
@@ -379,6 +436,92 @@ function linkNumberAndSelect(numberIds, selectId, options = {}) {
       });
     }
   });
+}
+
+function findRhythmAssetByName(name) {
+  if (!name) return null;
+  return rhythmAssetsByName.get(String(name).trim().toLowerCase()) || null;
+}
+
+function findRhythmAssetById(id) {
+  if (!id) return null;
+  return rhythmAssetsById.get(id) || null;
+}
+
+function findModifierAssetByName(name) {
+  if (!name) return null;
+  return modifierAssetsByName.get(String(name).trim().toLowerCase()) || null;
+}
+
+function findModifierAssetById(id) {
+  if (!id) return null;
+  return modifierAssetsById.get(id) || null;
+}
+
+function populateEkgSelect(selectEl, assets, findByName) {
+  if (!selectEl || !Array.isArray(assets)) return;
+  const currentValue = selectEl.value || '';
+  selectEl.innerHTML = '';
+  const blankOption = document.createElement('option');
+  blankOption.value = '';
+  blankOption.setAttribute('aria-label', 'No selection');
+  selectEl.appendChild(blankOption);
+  assets.forEach(asset => {
+    const option = document.createElement('option');
+    option.value = asset.name;
+    option.dataset.assetId = asset.id;
+    option.textContent = asset.name;
+    selectEl.appendChild(option);
+  });
+  if (currentValue && typeof findByName === 'function') {
+    const asset = findByName(currentValue);
+    if (asset) {
+      selectEl.value = asset.name;
+    }
+  }
+}
+
+function renderEkgPreview(previewImg, infoButton, asset, typeLabel) {
+  const label = typeLabel || 'item';
+  if (!previewImg) return;
+  if (asset) {
+    previewImg.src = asset.dataUri;
+    previewImg.dataset.assetId = asset.id;
+    previewImg.classList.remove('is-empty');
+    previewImg.alt = '';
+    previewImg.title = asset.name;
+    if (infoButton) {
+      infoButton.disabled = false;
+      infoButton.dataset.assetId = asset.id;
+      infoButton.setAttribute('aria-label', `View ${label.toLowerCase()} definition`);
+      infoButton.title = asset.definition;
+    }
+  } else {
+    previewImg.removeAttribute('src');
+    previewImg.removeAttribute('data-asset-id');
+    previewImg.removeAttribute('title');
+    previewImg.classList.add('is-empty');
+    if (infoButton) {
+      infoButton.disabled = true;
+      infoButton.removeAttribute('data-asset-id');
+      infoButton.setAttribute('aria-label', `No ${label.toLowerCase()} selected`);
+      infoButton.removeAttribute('title');
+    }
+  }
+}
+
+function updateRhythmPreview(sourceValue) {
+  const asset = findRhythmAssetByName(sourceValue);
+  currentRhythmAssetId = asset ? asset.id : '';
+  renderEkgPreview(ekgRhythmPreviewImg, ekgRhythmInfoButton, asset, 'Rhythm');
+  return asset;
+}
+
+function updateModifierPreview(sourceValue) {
+  const asset = findModifierAssetByName(sourceValue);
+  currentModifierAssetId = asset ? asset.id : '';
+  renderEkgPreview(ekgModifierPreviewImg, ekgModifierInfoButton, asset, 'Modifier');
+  return asset;
 }
 
 
@@ -880,7 +1023,7 @@ function updatePatientData() {
     patientData.ekgSecondary = getInputValue('pt-ekg-secondary');
 
     const bpDetails = getBloodPressureDetails();
-    const hrValue = readNumberOrPreset('vs-hr-value', 'vs-hr-select', 0, 300);
+    const hrValue = readNumberOrPreset('vs-hr-value', 'vs-hr-select', 0, 400);
     const spo2Value = readNumberOrPreset('vs-spo2-value', 'vs-spo2-select', 50, 100);
     const etco2Value = getNormalizedNumberOrText('vs-etco2', 0, 50);
     const rrValue = getNormalizedNumberOrText('vs-rr', 0, 80);
@@ -991,19 +1134,39 @@ linkNumberAndSelect('vs-bgl-value', 'vs-bgl-select');
 linkNumberAndSelect('vs-gcs-value', 'vs-gcs-select');
 
 const ekgSelectEl = document.getElementById('pt-ekg-select');
+const ekgModifierSelectEl = document.getElementById('pt-ekg-secondary');
 const ekgInputEl = document.getElementById('pt-ekg');
+
+if (ekgSelectEl) populateEkgSelect(ekgSelectEl, EkgRhythmAssets, findRhythmAssetByName);
+if (ekgModifierSelectEl) populateEkgSelect(ekgModifierSelectEl, EkgModifierAssets, findModifierAssetByName);
+
 if (ekgSelectEl && ekgInputEl) {
   ekgSelectEl.addEventListener('change', () => {
-    if (ekgSelectEl.value) {
-      ekgInputEl.value = ekgSelectEl.value;
-      updatePatientData();
+    const selectedValue = ekgSelectEl.value || '';
+    if (selectedValue) {
+      ekgInputEl.value = selectedValue;
     }
+    updateRhythmPreview(selectedValue || ekgInputEl.value);
+    updatePatientData();
   });
   ekgInputEl.addEventListener('input', () => {
-    if (ekgInputEl.value.trim()) {
-      ekgSelectEl.value = '';
+    const inputValue = ekgInputEl.value.trim();
+    const asset = updateRhythmPreview(inputValue);
+    if (ekgSelectEl) {
+      ekgSelectEl.value = asset ? asset.name : '';
     }
+    updatePatientData();
   });
+  updateRhythmPreview(ekgInputEl.value);
+}
+
+if (ekgModifierSelectEl) {
+  ekgModifierSelectEl.addEventListener('change', () => {
+    const value = ekgModifierSelectEl.value || '';
+    updateModifierPreview(value);
+    updatePatientData();
+  });
+  updateModifierPreview(ekgModifierSelectEl.value);
 }
 
 
@@ -1030,13 +1193,31 @@ sexButtons.forEach(btn => {
 setSelectedSex(genderInputEl ? genderInputEl.value : '');
 
 if (ekgHelpButton && ekgHelpModal && ekgHelpBackdrop) {
-  ekgHelpButton.addEventListener('click', openEkgHelp);
+  ekgHelpButton.addEventListener('click', () => {
+    showEkgGeneral();
+    openEkgHelp();
+  });
   ekgHelpBackdrop.addEventListener('click', closeEkgHelp);
   ekgHelpClose?.addEventListener('click', closeEkgHelp);
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape') closeEkgHelp();
   });
+  ekgModalBack?.addEventListener('click', showEkgGeneral);
 }
+
+ekgRhythmInfoButton?.addEventListener('click', () => {
+  const asset = findRhythmAssetById(currentRhythmAssetId);
+  if (asset) {
+    openEkgHelp({ asset, heading: 'Rhythm Detail' });
+  }
+});
+
+ekgModifierInfoButton?.addEventListener('click', () => {
+  const asset = findModifierAssetById(currentModifierAssetId);
+  if (asset) {
+    openEkgHelp({ asset, heading: 'Modifier Detail' });
+  }
+});
 
 // Removed Medication Class dropdown integration
 
