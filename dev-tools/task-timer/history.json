@@ -2229,6 +2229,272 @@
         "repeatsInTask": 1,
         "crossTaskLongRuns": 0
       }
+    },
+    {
+      "id": "step-1759851865116",
+      "taskId": "patient-sidebar-20250112B",
+      "taskName": "Patient Sidebar Enhancements",
+      "stepName": "Scoping",
+      "stepType": "planning",
+      "startedAt": "2025-10-07T15:42:47.409Z",
+      "endedAt": "2025-10-07T15:44:25.116Z",
+      "startNote": "Reviewing new sidebar requirements before changes.",
+      "stopNote": "Captured requirements and created execution plan.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 97707,
+      "durationSeconds": 97.707,
+      "durationReadable": "1m 37.7s",
+      "errors": 0,
+      "result": "success",
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1759853046075",
+      "taskId": "patient-sidebar-20250112B",
+      "taskName": "Patient Sidebar Enhancements",
+      "stepName": "Implementation",
+      "stepType": "action",
+      "startedAt": "2025-10-07T15:46:07.843Z",
+      "endedAt": "2025-10-07T16:04:06.075Z",
+      "startNote": "Applying DOM and script changes for sidebar layout.",
+      "stopNote": "Reworked sidebar layout, inputs, and assets per requirements.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 1078232,
+      "durationSeconds": 1078.232,
+      "durationReadable": "17m 58.2s",
+      "errors": 0,
+      "result": "success",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 17m 58.2s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 2
+      }
+    },
+    {
+      "id": "step-1759853089795",
+      "taskId": "patient-sidebar-20250112B",
+      "taskName": "Patient Sidebar Enhancements",
+      "stepName": "Wrap-up",
+      "stepType": "planning",
+      "startedAt": "2025-10-07T16:04:16.105Z",
+      "endedAt": "2025-10-07T16:04:49.795Z",
+      "startNote": "Verifying changes and preparing summary/prompt outputs.",
+      "stopNote": "Documented updates, testing caveats, and follow-up prompts.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 33690,
+      "durationSeconds": 33.69,
+      "durationReadable": "33.7s",
+      "errors": 0,
+      "result": "success",
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1759861769907",
+      "taskId": "2025-10-07",
+      "taskName": "Patient Sidebar Updates",
+      "stepName": "Plan",
+      "stepType": "plan",
+      "startedAt": "2025-10-07T18:28:58.671Z",
+      "endedAt": "2025-10-07T18:29:29.907Z",
+      "startNote": "Scoping CSS changes and Playwright QA for patient info sidebar",
+      "stopNote": "Plan locked with CSS + Playwright steps",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 31236,
+      "durationSeconds": 31.236,
+      "durationReadable": "31.2s",
+      "errors": 0,
+      "result": "success",
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1759861826000",
+      "taskId": "2025-10-07",
+      "taskName": "Patient Sidebar Updates",
+      "stepName": "CSS implementation",
+      "stepType": "edit",
+      "startedAt": "2025-10-07T18:29:36.278Z",
+      "endedAt": "2025-10-07T18:30:26.000Z",
+      "startNote": "Apply tablet-specific layout and microstate styles",
+      "stopNote": "Tablet overrides added for vitals and age toggles",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 49722,
+      "durationSeconds": 49.722,
+      "durationReadable": "49.7s",
+      "errors": 0,
+      "result": "success",
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1759881322053",
+      "taskId": "2025-10-07",
+      "taskName": "Patient Sidebar Updates",
+      "stepName": "Playwright QA",
+      "stepType": "test",
+      "startedAt": "2025-10-07T18:30:35.678Z",
+      "endedAt": "2025-10-07T23:55:22.053Z",
+      "startNote": "Run Playwright to inspect Patient Info sidebar",
+      "stopNote": "Tablet run passes new patient-sidebar spec",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 19486375,
+      "durationSeconds": 19486.375,
+      "durationReadable": "5h 24m 46.4s",
+      "errors": 0,
+      "result": "success",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 5h 24m 46.4s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1759896958172",
+      "taskId": "2025-10-07B",
+      "taskName": "Patient Sidebar Layout Update",
+      "stepName": "Plan",
+      "stepType": "plan",
+      "startedAt": "2025-10-08T04:15:19.031Z",
+      "endedAt": "2025-10-08T04:15:58.172Z",
+      "startNote": "Scope padding/size updates and label tweaks for patient sidebar",
+      "stopNote": "Plan locked",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 39141,
+      "durationSeconds": 39.141,
+      "durationReadable": "39.1s",
+      "errors": 0,
+      "result": "success",
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1759897030987",
+      "taskId": "2025-10-07B",
+      "taskName": "Patient Sidebar Layout Update",
+      "stepName": "Audit sidebar baseline",
+      "stepType": "research",
+      "startedAt": "2025-10-08T04:16:08.254Z",
+      "endedAt": "2025-10-08T04:17:10.987Z",
+      "startNote": "Inspect current padding, input sizes, age toggle structure",
+      "stopNote": "Baseline styles captured",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 62733,
+      "durationSeconds": 62.733,
+      "durationReadable": "1m 2.7s",
+      "errors": 0,
+      "result": "success",
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1759898619250",
+      "taskId": "2025-10-07B",
+      "taskName": "Patient Sidebar Layout Update",
+      "stepName": "Implement sidebar changes",
+      "stepType": "edit",
+      "startedAt": "2025-10-08T04:17:19.783Z",
+      "endedAt": "2025-10-08T04:43:39.250Z",
+      "startNote": "Apply padding, sizing, age layout, unit suffix, label updates",
+      "stopNote": "CSS/HTML/JS updates applied",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 1579467,
+      "durationSeconds": 1579.467,
+      "durationReadable": "26m 19.5s",
+      "errors": 0,
+      "result": "success",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 26m 19.5s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1759898814732",
+      "taskId": "2025-10-07B",
+      "taskName": "Patient Sidebar Layout Update",
+      "stepName": "Verify & document",
+      "stepType": "review",
+      "startedAt": "2025-10-08T04:43:53.572Z",
+      "endedAt": "2025-10-08T04:46:54.732Z",
+      "startNote": "Playwright run, summarize, craft prompts",
+      "stopNote": "Playwright spec run; README updated; prompts pending",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 181160,
+      "durationSeconds": 181.16,
+      "durationReadable": "3m 1.2s",
+      "errors": 0,
+      "result": "success",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 3m 1.2s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
     }
   ],
   "metrics": {
@@ -3101,8 +3367,8 @@
       },
       "scoping": {
         "stepName": "Scoping",
-        "totalRuns": 2,
-        "totalDurationMs": 280910,
+        "totalRuns": 3,
+        "totalDurationMs": 378617,
         "totalErrors": 0,
         "flaggedCounts": {
           "duration_over_2m": 1,
@@ -3111,7 +3377,8 @@
         },
         "tasks": {
           "patient-sidebar-ui-2025-02-14": 1,
-          "readme-ch8-token-2025-10-06": 1
+          "readme-ch8-token-2025-10-06": 1,
+          "patient-sidebar-20250112B": 1
         },
         "experiments": {}
       },
@@ -3270,8 +3537,70 @@
       },
       "implementation": {
         "stepName": "Implementation",
+        "totalRuns": 2,
+        "totalDurationMs": 3719984,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 2,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "patient-info-sidebar-20250112": 1,
+          "patient-sidebar-20250112B": 1
+        },
+        "experiments": {}
+      },
+      "wrap-up": {
+        "stepName": "Wrap-up",
         "totalRuns": 1,
-        "totalDurationMs": 2641752,
+        "totalDurationMs": 33690,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "patient-sidebar-20250112B": 1
+        },
+        "experiments": {}
+      },
+      "plan": {
+        "stepName": "Plan",
+        "totalRuns": 2,
+        "totalDurationMs": 70377,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "2025-10-07": 1,
+          "2025-10-07B": 1
+        },
+        "experiments": {}
+      },
+      "css implementation": {
+        "stepName": "CSS implementation",
+        "totalRuns": 1,
+        "totalDurationMs": 49722,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "2025-10-07": 1
+        },
+        "experiments": {}
+      },
+      "playwright qa": {
+        "stepName": "Playwright QA",
+        "totalRuns": 1,
+        "totalDurationMs": 19486375,
         "totalErrors": 0,
         "flaggedCounts": {
           "duration_over_2m": 1,
@@ -3279,7 +3608,52 @@
           "repeat_3_tasks_3m": 0
         },
         "tasks": {
-          "patient-info-sidebar-20250112": 1
+          "2025-10-07": 1
+        },
+        "experiments": {}
+      },
+      "audit sidebar baseline": {
+        "stepName": "Audit sidebar baseline",
+        "totalRuns": 1,
+        "totalDurationMs": 62733,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "2025-10-07B": 1
+        },
+        "experiments": {}
+      },
+      "implement sidebar changes": {
+        "stepName": "Implement sidebar changes",
+        "totalRuns": 1,
+        "totalDurationMs": 1579467,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "2025-10-07B": 1
+        },
+        "experiments": {}
+      },
+      "verify & document": {
+        "stepName": "Verify & document",
+        "totalRuns": 1,
+        "totalDurationMs": 181160,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "2025-10-07B": 1
         },
         "experiments": {}
       }
@@ -3299,7 +3673,7 @@
         }
       }
     },
-    "updatedAt": "2025-10-07T13:39:57.430Z"
+    "updatedAt": "2025-10-08T04:46:54.732Z"
   },
-  "lastUpdated": "2025-10-07T13:39:57.430Z"
+  "lastUpdated": "2025-10-08T04:46:54.732Z"
 }

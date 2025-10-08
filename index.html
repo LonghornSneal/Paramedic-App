@@ -78,12 +78,15 @@
         </button>
         <button type="button" class="age-unit-toggle age-unit-toggle--year" data-unit="years" data-tooltip="Years" aria-label="Years">
           <span class="age-icon" aria-hidden="true">
-            <img src="Assets/age/age-years.jpg" alt="" class="age-icon-img">
+            <img src="Assets/age/age-years.png" alt="" class="age-icon-img">
           </span>
           <span class="sr-only">Years</span>
         </button>
       </div>
-      <input type="number" id="pt-age" class="sidebar-input age-input age-input--compact" inputmode="decimal" step="any">
+      <div class="unit-input age-unit-input" data-unit="years">
+        <input type="number" id="pt-age" class="sidebar-input age-input age-input--compact" inputmode="decimal" step="any">
+        <span class="unit-suffix age-unit-suffix" aria-hidden="true"></span>
+      </div>
     </div>
     <div class="sidebar-field sidebar-field-weight mb-2">
       <label for="pt-weight-value" class="sidebar-label">Weight:</label>
@@ -91,7 +94,10 @@
         <button type="button" class="weight-unit-toggle" data-unit="kg" aria-label="Kilograms">kg</button>
         <button type="button" class="weight-unit-toggle" data-unit="lb" aria-label="Pounds">lbs</button>
       </div>
-      <input type="number" id="pt-weight-value" class="sidebar-input weight-input" placeholder="kg" inputmode="decimal" step="any">
+      <div class="unit-input weight-unit-input" data-unit="kg">
+        <input type="number" id="pt-weight-value" class="sidebar-input weight-input" placeholder="kg" inputmode="decimal" step="any">
+        <span class="unit-suffix weight-unit-suffix" aria-hidden="true"></span>
+      </div>
       <div id="weight-summary" class="weight-summary hidden" aria-live="polite"></div>
     </div>
     <div class="sidebar-field sidebar-field-height mb-1">
@@ -107,47 +113,58 @@
   <!-- Section: Medical History -->
   <div class="sidebar-section">
     <h2 class="sidebar-section-title">Medical History</h2>
-    <label for="pt-pmh" class="sidebar-label">Past Medical History:</label>
-    <div class="autocomplete-container">
-      <textarea id="pt-pmh" rows="1" class="sidebar-input w-full"></textarea>
-      <div id="pt-pmh-suggestions" class="autocomplete-suggestions hidden"></div>
+    <div class="sidebar-field sidebar-field-textarea">
+      <label for="pt-pmh" class="sidebar-label">PMH:</label>
+      <div class="autocomplete-container sidebar-input-flex">
+        <textarea id="pt-pmh" rows="1" class="sidebar-input"></textarea>
+        <div id="pt-pmh-suggestions" class="autocomplete-suggestions hidden"></div>
+      </div>
     </div>
-    <label for="pt-allergies" class="sidebar-label mt-3">Allergies:</label>
-    <div class="autocomplete-container">
-      <textarea id="pt-allergies" rows="1" class="sidebar-input w-full"></textarea>
-      <div id="pt-allergies-suggestions" class="autocomplete-suggestions hidden"></div>
+    <div class="sidebar-field sidebar-field-textarea mt-2">
+      <label for="pt-allergies" class="sidebar-label">Allergies:</label>
+      <div class="autocomplete-container sidebar-input-flex">
+        <textarea id="pt-allergies" rows="1" class="sidebar-input"></textarea>
+        <div id="pt-allergies-suggestions" class="autocomplete-suggestions hidden"></div>
+      </div>
     </div>
-    <label for="pt-medications" class="sidebar-label mt-3">Current Medications:</label>
-    <div class="autocomplete-container">
-      <textarea id="pt-medications" rows="1" class="sidebar-input w-full"></textarea>
-      <div id="pt-medications-suggestions" class="autocomplete-suggestions hidden"></div>
+    <div class="sidebar-field sidebar-field-textarea mt-2">
+      <label for="pt-medications" class="sidebar-label">Current Rx's:</label>
+      <div class="autocomplete-container sidebar-input-flex">
+        <textarea id="pt-medications" rows="1" class="sidebar-input"></textarea>
+        <div id="pt-medications-suggestions" class="autocomplete-suggestions hidden"></div>
+      </div>
     </div>
   </div>
   <!-- Section: Current Presentation -->
   <div class="sidebar-section">
     <h2 class="sidebar-section-title">Current Presentation</h2>
-    <label for="pt-indications" class="sidebar-label">Indications:</label>
-    <div class="autocomplete-container">
-      <textarea id="pt-indications" rows="1" class="sidebar-input w-full"></textarea>
-      <div id="pt-indications-suggestions" class="autocomplete-suggestions hidden"></div>
+    <div class="sidebar-field sidebar-field-textarea">
+      <label for="pt-indications" class="sidebar-label">Indications:</label>
+      <div class="autocomplete-container sidebar-input-flex">
+        <textarea id="pt-indications" rows="1" class="sidebar-input"></textarea>
+        <div id="pt-indications-suggestions" class="autocomplete-suggestions hidden"></div>
+      </div>
     </div>
-    <label for="pt-symptoms" class="sidebar-label mt-3">Symptoms:</label>
-    <div class="autocomplete-container">
-      <textarea id="pt-symptoms" rows="1" class="sidebar-input w-full"></textarea>
-      <div id="pt-symptoms-suggestions" class="autocomplete-suggestions hidden"></div>
+    <div class="sidebar-field sidebar-field-textarea mt-2">
+      <label for="pt-symptoms" class="sidebar-label">Sx:</label>
+      <div class="autocomplete-container sidebar-input-flex">
+        <textarea id="pt-symptoms" rows="1" class="sidebar-input"></textarea>
+        <div id="pt-symptoms-suggestions" class="autocomplete-suggestions hidden"></div>
+      </div>
     </div>
   </div>
   <!-- Section: Vital Signs -->
   <div class="sidebar-section">
-    <h2 class="sidebar-section-title">Vital Signs</h2>
-    <div class="sidebar-field sidebar-field-vital mb-3">
-      <label for="vs-bp-systolic" class="sidebar-label">BP:</label>
-      <div class="dual-input-wrapper">
-        <div class="bp-input-group" role="group" aria-label="Blood pressure entry">
-          <input type="number" id="vs-bp-systolic" class="sidebar-input vital-input vital-input--narrow" inputmode="numeric" min="0" max="400" aria-label="Systolic blood pressure" placeholder="SYS">
-          <input type="number" id="vs-bp-diastolic" class="sidebar-input vital-input vital-input--narrow" inputmode="numeric" min="0" max="300" aria-label="Diastolic blood pressure" placeholder="DIA">
+    <h2 class="sidebar-section-title">VS</h2>
+    <div class="vital-row vital-row-top">
+      <div class="vital-item vital-item-bp">
+        <span class="vital-label">BP:</span>
+        <div class="bp-stack" role="group" aria-label="Blood pressure entry">
+          <input type="text" id="vs-bp-systolic" class="bp-input bp-input--systolic" inputmode="numeric" maxlength="3" aria-label="Systolic blood pressure">
+          <span class="bp-divider-line" aria-hidden="true"></span>
+          <input type="text" id="vs-bp-diastolic" class="bp-input bp-input--diastolic" inputmode="numeric" maxlength="3" aria-label="Diastolic blood pressure">
         </div>
-        <select id="vs-bp-select" class="sidebar-input vital-select" aria-label="Blood pressure preset">
+        <select id="vs-bp-select" class="vital-mini-select" aria-label="Blood pressure preset">
           <option value="" aria-label="No preset"></option>
           <option value="200+">200+</option>
           <option value="160+">160+</option>
@@ -156,12 +173,13 @@
           <option value="70-">70-</option>
         </select>
       </div>
-    </div>
-    <div class="sidebar-field sidebar-field-vital mb-3">
-      <label for="vs-hr-value" class="sidebar-label">HR:</label>
-      <div class="dual-input-wrapper">
-        <input type="number" id="vs-hr-value" class="sidebar-input vital-input" inputmode="numeric" min="0" max="400" aria-label="Heart rate numeric entry" placeholder="bpm">
-        <select id="vs-hr-select" class="sidebar-input vital-select" aria-label="Heart rate preset">
+      <div class="vital-item vital-item-hr">
+        <span class="vital-label">HR:</span>
+        <div class="unit-input" data-unit="HR">
+          <input type="text" id="vs-hr-value" class="sidebar-input vital-input" inputmode="numeric" maxlength="3" aria-label="Heart rate numeric entry">
+          <span class="unit-suffix" aria-hidden="true">HR</span>
+        </div>
+        <select id="vs-hr-select" class="vital-mini-select" aria-label="Heart rate preset">
           <option value="" aria-label="No preset"></option>
           <option value="150+">150+</option>
           <option value="100+">100+</option>
@@ -170,32 +188,44 @@
           <option value=">40">&gt;40</option>
         </select>
       </div>
-    </div>
-    <div class="sidebar-field sidebar-field-vital mb-3">
-      <label for="vs-spo2-value" class="sidebar-label">% SpO2:</label>
-      <div class="dual-input-wrapper">
-        <input type="number" id="vs-spo2-value" class="sidebar-input vital-input" inputmode="numeric" min="50" max="100" aria-label="Pulse oximetry numeric entry" placeholder="%">
-        <select id="vs-spo2-select" class="sidebar-input vital-select" aria-label="Pulse oximetry preset">
-          <option value="" aria-label="No preset"></option>
-          <option value="Normal">Normal</option>
-          <option value="Low">Low</option>
-          <option value="Severely Low">Severely Low</option>
+      <div class="vital-item vital-item-spo2">
+        <span class="vital-label">% SpO<sub>2</sub>:</span>
+        <div class="unit-input" data-unit="%">
+          <input type="text" id="vs-spo2-value" class="sidebar-input vital-input" inputmode="numeric" maxlength="3" aria-label="Pulse oximetry numeric entry">
+          <span class="unit-suffix" aria-hidden="true">%</span>
+        </div>
+        <select id="vs-spo2-source" class="vital-mini-select" aria-label="Oxygen delivery source">
+          <option value=""></option>
+          <option value="RA">RA</option>
+          <option value="NC">NC</option>
+          <option value="Vent">Vent</option>
+          <option value="CPAP">CPAP</option>
+          <option value="BiPaP">BiPaP</option>
         </select>
       </div>
     </div>
-    <div class="sidebar-field sidebar-field-vital mb-3">
-      <label for="vs-etco2" class="sidebar-label">EtCO2:</label>
-      <input type="number" id="vs-etco2" class="sidebar-input vital-input" inputmode="numeric" min="0" max="50" aria-label="End tidal CO2" placeholder="mmHg">
-    </div>
-    <div class="sidebar-field sidebar-field-vital mb-3">
-      <label for="vs-rr" class="sidebar-label">RR:</label>
-      <input type="number" id="vs-rr" class="sidebar-input vital-input" inputmode="numeric" min="0" max="80" aria-label="Respiratory rate" placeholder="rpm">
-    </div>
-    <div class="sidebar-field sidebar-field-vital mb-3">
-      <label for="vs-bgl-value" class="sidebar-label">BGL:</label>
-      <div class="dual-input-wrapper">
-        <input type="number" id="vs-bgl-value" class="sidebar-input vital-input" inputmode="numeric" min="0" max="900" aria-label="Blood glucose numeric entry" placeholder="mg/dL">
-        <select id="vs-bgl-select" class="sidebar-input vital-select" aria-label="Blood glucose preset">
+    <div class="vital-row vital-row-mid">
+      <div class="vital-item">
+        <span class="vital-label">EtCO<sub>2</sub>:</span>
+        <div class="unit-input" data-unit="EtCO₂">
+          <input type="text" id="vs-etco2" class="sidebar-input vital-input" inputmode="numeric" maxlength="2" aria-label="End tidal CO2">
+          <span class="unit-suffix" aria-hidden="true">EtCO<sub>2</sub></span>
+        </div>
+      </div>
+      <div class="vital-item">
+        <span class="vital-label">RR:</span>
+        <div class="unit-input" data-unit="RR">
+          <input type="text" id="vs-rr" class="sidebar-input vital-input" inputmode="numeric" maxlength="2" aria-label="Respiratory rate">
+          <span class="unit-suffix" aria-hidden="true">RR</span>
+        </div>
+      </div>
+      <div class="vital-item">
+        <span class="vital-label">BGL:</span>
+        <div class="unit-input" data-unit="mg/dL">
+          <input type="text" id="vs-bgl-value" class="sidebar-input vital-input" inputmode="numeric" maxlength="3" aria-label="Blood glucose numeric entry">
+          <span class="unit-suffix" aria-hidden="true">mg/dL</span>
+        </div>
+        <select id="vs-bgl-select" class="vital-mini-select" aria-label="Blood glucose preset">
           <option value="" aria-label="No preset"></option>
           <option value="Normal">Normal</option>
           <option value="High">High</option>
@@ -204,11 +234,14 @@
         </select>
       </div>
     </div>
-    <div class="sidebar-field sidebar-field-vital mb-3">
-      <label for="vs-pupils-value" class="sidebar-label">Pupils (mm):</label>
-      <div class="dual-input-wrapper">
-        <input type="number" id="vs-pupils-value" class="sidebar-input vital-input" inputmode="numeric" min="0" max="8" step="0.5" aria-label="Pupil size in millimeters" placeholder="mm">
-        <select id="vs-pupils-select" class="sidebar-input vital-select" aria-label="Pupil descriptor">
+    <div class="vital-row vital-row-pupils">
+      <div class="vital-item vital-item-pupils">
+        <span class="vital-label">Pupils:</span>
+        <div class="unit-input" data-unit="mm">
+          <input type="text" id="vs-pupils-value" class="sidebar-input vital-input" inputmode="decimal" maxlength="4" aria-label="Pupil size in millimeters">
+          <span class="unit-suffix" aria-hidden="true">mm</span>
+        </div>
+        <select id="vs-pupils-select" class="vital-mini-select" aria-label="Pupil descriptor">
           <option value="" aria-label="No descriptor"></option>
           <option value="PERRL">PERRL</option>
           <option value="Pinpoint">Pinpoint</option>
@@ -219,12 +252,31 @@
           <option value="Non-reactive">Non-reactive</option>
         </select>
       </div>
+      <div class="vital-item vital-item-lungs">
+        <span class="vital-label">Lung Sounds:</span>
+        <select id="vs-lung-sounds" class="sidebar-input vital-select vital-mini-select" aria-label="Lung sounds">
+          <option value=""></option>
+          <option value="Clear">Clear</option>
+          <option value="Clear Bilaterally">Clear Bilaterally</option>
+          <option value="Diminished">Diminished</option>
+          <option value="Coarse">Coarse</option>
+          <option value="Crackles">Crackles</option>
+          <option value="Rales">Rales</option>
+          <option value="Rhonchi">Rhonchi</option>
+          <option value="Wheezes">Wheezes</option>
+          <option value="Stridor">Stridor</option>
+          <option value="Absent">Absent</option>
+        </select>
+      </div>
     </div>
-    <div class="sidebar-field sidebar-field-vital mb-3">
-      <label for="vs-gcs-value" class="sidebar-label">GCS:</label>
-      <div class="dual-input-wrapper">
-        <input type="number" id="vs-gcs-value" class="sidebar-input vital-input" inputmode="numeric" min="3" max="15" aria-label="Glasgow Coma Scale numeric entry" placeholder="score">
-        <select id="vs-gcs-select" class="sidebar-input vital-select" aria-label="Glasgow Coma Scale preset">
+    <div class="vital-row vital-row-awareness">
+      <div class="vital-item vital-item-gcs">
+        <span class="vital-label">GCS:</span>
+        <div class="unit-input" data-unit="GCS">
+          <input type="text" id="vs-gcs-value" class="sidebar-input vital-input" inputmode="numeric" maxlength="2" aria-label="Glasgow Coma Scale numeric entry">
+          <span class="unit-suffix" aria-hidden="true">GCS</span>
+        </div>
+        <select id="vs-gcs-select" class="vital-mini-select" aria-label="Glasgow Coma Scale preset">
           <option value="" aria-label="No preset"></option>
           <option value="15">15</option>
           <option value="14">14</option>
@@ -241,23 +293,16 @@
           <option value="3">3</option>
         </select>
       </div>
-    </div>
-    <div class="sidebar-field sidebar-field-vital mb-3">
-      <label for="vs-ao-status" class="sidebar-label">A&O Status:</label>
-      <select id="vs-ao-status" class="sidebar-input vital-select">
-        <option value=""></option>
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
-    </div>
-    <div class="sidebar-field sidebar-field-vital mb-3">
-      <label for="vs-lung-sounds" class="sidebar-label">Lung Sounds:</label>
-      <div class="autocomplete-container flex-1">
-        <input type="text" id="vs-lung-sounds" class="sidebar-input vital-input" placeholder="Search lung sounds">
-        <div id="vs-lung-sounds-suggestions" class="autocomplete-suggestions hidden"></div>
+      <div class="vital-item vital-item-ao">
+        <span class="vital-label">A&amp;O:</span>
+        <select id="vs-ao-status" class="sidebar-input vital-select vital-mini-select" aria-label="Alert and oriented status">
+          <option value=""></option>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
       </div>
     </div>
   </div>

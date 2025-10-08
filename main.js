@@ -13,10 +13,9 @@ import { pmhSuggestions,
          indicationSuggestions,
          symptomSuggestions,
          ekgSuggestions,
-         lungSoundSuggestions,
          PDE5_INHIBITORS
         } from './Features/patient/PatientInfo.js';
-import { setupAutocomplete, setupSingleValueAutocomplete } from './Features/patient/Autocomplete.js';
+import { setupAutocomplete } from './Features/patient/Autocomplete.js';
 import { attachSearchHandlers, processItem } from './Features/search/Search.js';
 import './Features/History.js';
 import './Features/settings.js';
@@ -167,7 +166,6 @@ function initApp() {
     setupAutocomplete('pt-indications','pt-indications-suggestions', indicationSuggestions, 'indications');
     setupAutocomplete('pt-symptoms','pt-symptoms-suggestions', symptomSuggestions, 'symptoms');
     setupAutocomplete('pt-ekg','pt-ekg-suggestions', ekgSuggestions, 'ekg');
-    setupSingleValueAutocomplete('vs-lung-sounds', 'vs-lung-sounds-suggestions', lungSoundSuggestions);
 
     // Render the initial patient snapshot once the dropdown is ready
     if (typeof window.renderPatientSnapshot === 'function') {

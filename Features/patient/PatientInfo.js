@@ -24,7 +24,7 @@ export const patientData = {
     indications: [], indicationsDisplay: [],
     symptoms: [], symptomsDisplay: [],
     vitalSigns: {
-        bp: '', bpSystolic: null, bpDiastolic: null, map: null, hr: null, spo2: null, etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: ''
+        bp: '', bpSystolic: null, bpDiastolic: null, map: null, hr: null, spo2: null, spo2Source: '', etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: ''
     },
     ekg: '', ekgDisplay: '', ekgSecondary: ''
 };
@@ -45,7 +45,7 @@ const ptInputIds = [ 'pt-age',
     'vs-hr-value',
     'vs-hr-select',
     'vs-spo2-value',
-    'vs-spo2-select',
+    'vs-spo2-source',
     'vs-etco2',
     'vs-rr',
     'vs-bgl-value',
@@ -63,13 +63,25 @@ const ptInputIds = [ 'pt-age',
 const ptInputs = ptInputIds.map(id => document.getElementById(id));
 const ageInputEl = document.getElementById('pt-age');
 const ageUnitButtons = Array.from(document.querySelectorAll('.age-unit-toggle'));
+const ageUnitWrapper = document.querySelector('.age-unit-input');
+const ageUnitSuffixEl = document.querySelector('.age-unit-suffix');
 let selectedAgeUnit = 'years';
 const genderInputEl = document.getElementById('pt-gender');
 const sexButtons = Array.from(document.querySelectorAll('.sex-option'));
 const weightSummaryEl = document.getElementById('weight-summary');
 const weightInputEl = document.getElementById('pt-weight-value');
 const weightUnitButtons = Array.from(document.querySelectorAll('.weight-unit-toggle'));
+const weightUnitWrapper = document.querySelector('.weight-unit-input');
+const weightUnitSuffixEl = document.querySelector('.weight-unit-suffix');
+const unitInputElements = Array.from(document.querySelectorAll('.unit-input .sidebar-input'));
 let selectedWeightUnit = 'kg';
+unitInputElements.forEach(input => {
+  if (!input) return;
+  const updateState = () => syncUnitSuffixState(input);
+  input.addEventListener('input', updateState);
+  input.addEventListener('change', updateState);
+  updateState();
+});
 let currentRhythmAssetId = '';
 let currentModifierAssetId = '';
 const ekgHelpButton = document.getElementById('ekg-help-button');
@@ -150,19 +162,6 @@ export const symptomSuggestions = new Set([
     "palpitations","edema","cough","anxiety","depression","back pain","trauma"
 ]);
 
-export const lungSoundSuggestions = new Set([
-    "Clear",
-    "Clear Bilaterally",
-    "Diminished",
-    "Coarse",
-    "Crackles",
-    "Rales",
-    "Rhonchi",
-    "Wheezes",
-    "Stridor",
-    "Absent"
-]);
-
 export const ekgSuggestions = new Set([
     'normal sinus rhythm',
     'sinus tachycardia',
@@ -201,6 +200,14 @@ const modifierAssetsById = new Map(EkgModifierAssets.map(asset => [asset.id, ass
  */
 function getInputValue(id) {
     return document.getElementById(id)?.value?.trim() ?? '';
+}
+
+function syncUnitSuffixState(inputEl) {
+    if (!inputEl) return;
+    const wrapper = inputEl.closest('.unit-input');
+    if (!wrapper) return;
+    const hasValue = Boolean(inputEl.value && inputEl.value.toString().trim().length);
+    wrapper.dataset.hasValue = hasValue ? 'true' : 'false';
 }
 /**
  * Parses an integer value from the input with the given id. Returns null if parsing fails or
@@ -254,9 +261,18 @@ function getIntegerFromInput(el, min, max) {
   if (clamped == null) return null;
 
   if (clamped !== parsed) el.value = clamped.toString();
-
+  syncUnitSuffixState(el);
   return clamped;
 
+}
+
+function sanitizeNumericInput(el, maxLength) {
+  if (!el) return '';
+  const raw = typeof el.value === 'string' ? el.value : '';
+  const digitsOnly = raw.replace(/\D/g, '').slice(0, maxLength);
+  if (digitsOnly !== raw) el.value = digitsOnly;
+  syncUnitSuffixState(el);
+  return digitsOnly;
 }
 
 
@@ -433,6 +449,7 @@ function linkNumberAndSelect(numberIds, selectId, options = {}) {
     if (selectEl.value) {
       numberElements.forEach(el => {
         el.value = '';
+        syncUnitSuffixState(el);
       });
     }
   });
@@ -613,6 +630,8 @@ function setSelectedWeightUnit(unit, options = {}) {
     btn.classList.toggle('is-selected', isSelected);
     btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
   });
+  if (weightUnitWrapper) weightUnitWrapper.dataset.unit = normalized;
+  if (weightUnitSuffixEl) weightUnitSuffixEl.textContent = normalized === 'kg' ? 'kg' : 'lbs';
   if (weightInputEl) {
     if (convertInput && weightInputEl.value && previous && previous !== normalized) {
       const parsed = parseFloat(weightInputEl.value);
@@ -626,6 +645,7 @@ function setSelectedWeightUnit(unit, options = {}) {
     weightInputEl.dataset.weightUnit = normalized;
     weightInputEl.placeholder = normalized === 'kg' ? 'kg' : 'lbs';
   }
+  syncUnitSuffixState(weightInputEl);
   if (triggerUpdate) updatePatientData();
 }
 
@@ -787,26 +807,32 @@ function setSelectedAgeUnit(unit, options = {}) {
     if (triggerUpdate) updatePatientData();
     return;
   }
-  selectedAgeUnit = normalized;
-  ageUnitButtons.forEach(btn => {
-    const isSelected = btn.dataset.unit === normalized;
-    btn.classList.toggle('is-selected', isSelected);
-    btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
-  });
-  if (ageInputEl) {
-    if (convertInput && ageInputEl.value && previous && previous !== normalized) {
-      const parsed = parseFloat(ageInputEl.value);
-      if (!Number.isNaN(parsed)) {
-        const converted = convertAgeValue(parsed, previous, normalized);
+    selectedAgeUnit = normalized;
+    ageUnitButtons.forEach(btn => {
+      const isSelected = btn.dataset.unit === normalized;
+      btn.classList.toggle('is-selected', isSelected);
+      btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+    });
+    if (ageUnitWrapper) ageUnitWrapper.dataset.unit = normalized;
+    if (ageUnitSuffixEl) {
+      const suffixText = AGE_UNIT_METADATA[normalized]?.suffix ?? '';
+      ageUnitSuffixEl.textContent = suffixText;
+    }
+    if (ageInputEl) {
+      if (convertInput && ageInputEl.value && previous && previous !== normalized) {
+        const parsed = parseFloat(ageInputEl.value);
+        if (!Number.isNaN(parsed)) {
+          const converted = convertAgeValue(parsed, previous, normalized);
         if (typeof converted === 'number' && !Number.isNaN(converted)) {
           ageInputEl.value = formatAgeValueForInput(converted);
         }
       }
+      }
+      ageInputEl.dataset.ageUnit = normalized;
+      syncUnitSuffixState(ageInputEl);
     }
-    ageInputEl.dataset.ageUnit = normalized;
+    if (triggerUpdate) updatePatientData();
   }
-  if (triggerUpdate) updatePatientData();
-}
 
 function updateWeightSummaryDisplay(weightKg) {
   if (!weightSummaryEl) return;
@@ -1024,7 +1050,8 @@ function updatePatientData() {
 
     const bpDetails = getBloodPressureDetails();
     const hrValue = readNumberOrPreset('vs-hr-value', 'vs-hr-select', 0, 400);
-    const spo2Value = readNumberOrPreset('vs-spo2-value', 'vs-spo2-select', 50, 100);
+    const spo2Value = getIntegerFromInput(document.getElementById('vs-spo2-value'), 0, 100);
+    const spo2Source = getInputValue('vs-spo2-source');
     const etco2Value = getNormalizedNumberOrText('vs-etco2', 0, 50);
     const rrValue = getNormalizedNumberOrText('vs-rr', 0, 80);
     const bglValue = readNumberOrPreset('vs-bgl-value', 'vs-bgl-select', 0, 900);
@@ -1038,6 +1065,7 @@ function updatePatientData() {
         map: bpDetails.map,
         hr: hrValue,
         spo2: spo2Value,
+        spo2Source,
         etco2: etco2Value,
         rr: rrValue,
         bgl: bglValue,
@@ -1076,8 +1104,9 @@ function updatePatientData() {
             document.querySelectorAll('.adult-section .strikethrough, .pediatric-section .strikethrough')
                     .forEach(el => el.classList.remove('strikethrough'));
         }
-    }
-    // Refresh the patient snapshot to reflect current data
+  }
+  // Refresh the patient snapshot to reflect current data
+  unitInputElements.forEach(input => syncUnitSuffixState(input));
   renderPatientSnapshot();
 }
 
@@ -1108,7 +1137,6 @@ ageUnitButtons.forEach(btn => {
 });
 if (ageUnitButtons.length) {
   setSelectedAgeUnit(selectedAgeUnit, { force: true, triggerUpdate: false });
-  if (ageInputEl) ageInputEl.dataset.ageUnit = selectedAgeUnit;
 }
 
 weightUnitButtons.forEach(btn => {
@@ -1129,9 +1157,49 @@ if (weightInputEl) {
 
 linkNumberAndSelect(['vs-bp-systolic', 'vs-bp-diastolic'], 'vs-bp-select');
 linkNumberAndSelect('vs-hr-value', 'vs-hr-select');
-linkNumberAndSelect('vs-spo2-value', 'vs-spo2-select');
 linkNumberAndSelect('vs-bgl-value', 'vs-bgl-select');
 linkNumberAndSelect('vs-gcs-value', 'vs-gcs-select');
+
+const bpSystolicEl = document.getElementById('vs-bp-systolic');
+const bpDiastolicEl = document.getElementById('vs-bp-diastolic');
+if (bpSystolicEl && bpDiastolicEl) {
+  bpSystolicEl.addEventListener('input', event => {
+    const digits = sanitizeNumericInput(bpSystolicEl, 3);
+    if (event.inputType !== 'deleteContentBackward' && digits.length === 3) {
+      sanitizeNumericInput(bpDiastolicEl, 3);
+      bpDiastolicEl.value = '';
+      syncUnitSuffixState(bpDiastolicEl);
+      bpDiastolicEl.focus();
+      bpDiastolicEl.select();
+    }
+  }, { capture: true });
+
+  bpDiastolicEl.addEventListener('input', () => {
+    sanitizeNumericInput(bpDiastolicEl, 3);
+  }, { capture: true });
+}
+
+const spo2InputEl = document.getElementById('vs-spo2-value');
+if (spo2InputEl) {
+  spo2InputEl.addEventListener('input', () => {
+    sanitizeNumericInput(spo2InputEl, 3);
+  }, { capture: true });
+
+  spo2InputEl.addEventListener('blur', () => {
+    const digits = sanitizeNumericInput(spo2InputEl, 3);
+    if (!digits) {
+      spo2InputEl.value = '';
+      syncUnitSuffixState(spo2InputEl);
+      updatePatientData();
+      return;
+    }
+    const numeric = parseInt(digits, 10);
+    const clamped = clampNumber(numeric, 0, 100);
+    spo2InputEl.value = clamped != null ? clamped.toString() : '';
+    syncUnitSuffixState(spo2InputEl);
+    updatePatientData();
+  });
+}
 
 const ekgSelectEl = document.getElementById('pt-ekg-select');
 const ekgModifierSelectEl = document.getElementById('pt-ekg-secondary');
@@ -1244,6 +1312,11 @@ if (typeof window !== 'undefined') {
   - Sidebar synchronization is exercised by E2E tests that change sex/weight and then compute TV.
   - No unit test harness present; consider adding a small DOM test for weight lb↔kg sync.
 */
+
+
+
+
+
 
 
 

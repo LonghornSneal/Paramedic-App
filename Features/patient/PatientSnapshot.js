@@ -226,9 +226,20 @@ export function renderPatientSnapshot(){
     if (summary) parts.push(`Symptoms: ${summary}`);
   }
   if (v.bp) parts.push(`BP ${v.bp}`);
-  if (v.hr != null) parts.push(`<span class="${sevHR(v.hr)}">HR ${v.hr}</span>`);
-  if (v.rr != null) parts.push(`<span class="${sevRR(v.rr)}">RR ${v.rr}</span>`);
-  if (v.bgl) parts.push(`<span class="${sevBGL(v.bgl)}">BGL ${v.bgl}</span>`);
+  if (v.hr != null) parts.push(`<span class="${sevHR(v.hr)}">${v.hr}HR</span>`);
+  if (typeof v.spo2 === 'number') {
+    const sourceTag = typeof v.spo2Source === 'string' && v.spo2Source.trim() ? ` ${v.spo2Source.trim()}` : '';
+    parts.push(`${v.spo2}%${sourceTag}`);
+  }
+  if (v.etco2 != null && v.etco2 !== '') {
+    const etValue = typeof v.etco2 === 'number' ? v.etco2 : v.etco2;
+    parts.push(`${etValue}EtCO<sub>2</sub>`);
+  }
+  if (v.rr != null) parts.push(`<span class="${sevRR(v.rr)}">${v.rr}RR</span>`);
+  if (v.bgl) {
+    const bglSuffix = typeof v.bgl === 'number' ? `${v.bgl}mg/dL` : v.bgl;
+    parts.push(`<span class="${sevBGL(v.bgl)}">${bglSuffix}</span>`);
+  }
   const ekgSecondaryNote = typeof d.ekgSecondary === 'string' ? d.ekgSecondary.trim() : '';
   if (hasEkg) {
     const ekgText = typeof ekgLabelSource === 'string' ? ekgLabelSource : '';
