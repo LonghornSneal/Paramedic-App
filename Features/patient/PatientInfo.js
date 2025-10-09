@@ -73,6 +73,14 @@ const weightInputEl = document.getElementById('pt-weight-value');
 const weightUnitButtons = Array.from(document.querySelectorAll('.weight-unit-toggle'));
 const weightUnitWrapper = document.querySelector('.weight-unit-input');
 const weightUnitSuffixEl = document.querySelector('.weight-unit-suffix');
+const chipListElements = {
+  pmh: document.getElementById('pt-pmh-chips'),
+  allergies: document.getElementById('pt-allergies-chips'),
+  medications: document.getElementById('pt-medications-chips'),
+  indications: document.getElementById('pt-indications-chips'),
+  symptoms: document.getElementById('pt-symptoms-chips')
+};
+const ekgSummaryEl = document.getElementById('ekg-summary-text');
 const unitInputElements = Array.from(document.querySelectorAll('.unit-input .sidebar-input'));
 let selectedWeightUnit = 'kg';
 unitInputElements.forEach(input => {
@@ -208,6 +216,50 @@ function syncUnitSuffixState(inputEl) {
     if (!wrapper) return;
     const hasValue = Boolean(inputEl.value && inputEl.value.toString().trim().length);
     wrapper.dataset.hasValue = hasValue ? 'true' : 'false';
+}
+
+function renderChipList(container, values) {
+  if (!container) return;
+  container.replaceChildren();
+  const hasValues = Array.isArray(values) && values.some(value => typeof value === 'string' && value.trim().length);
+  if (!hasValues) {
+    container.classList.add('is-empty');
+    container.removeAttribute('data-count');
+    return;
+  }
+  container.classList.remove('is-empty');
+  const fragment = document.createDocumentFragment();
+  values.forEach(value => {
+    if (typeof value !== 'string') return;
+    const trimmed = value.trim();
+    if (!trimmed) return;
+    const chip = document.createElement('span');
+    chip.className = 'sidebar-chip';
+    chip.textContent = trimmed;
+    fragment.appendChild(chip);
+  });
+  container.appendChild(fragment);
+  container.setAttribute('data-count', container.childElementCount.toString());
+}
+
+function updateEkgSummary(rhythmText, modifierValue) {
+  if (!ekgSummaryEl) return;
+  const rhythm = typeof rhythmText === 'string' ? rhythmText.trim() : '';
+  let modifierLabel = '';
+  if (modifierValue) {
+    const optionLabel = ekgModifierSelectEl?.selectedOptions?.[0]?.textContent ?? '';
+    modifierLabel = optionLabel.trim() || modifierValue.trim();
+  }
+  const parts = [];
+  if (rhythm) parts.push(`Rhythm: ${rhythm}`);
+  if (modifierLabel) parts.push(`Modifier: ${modifierLabel}`);
+  if (!parts.length) {
+    ekgSummaryEl.textContent = '';
+    ekgSummaryEl.classList.add('is-empty');
+    return;
+  }
+  ekgSummaryEl.textContent = parts.join(' • ');
+  ekgSummaryEl.classList.remove('is-empty');
 }
 /**
  * Parses an integer value from the input with the given id. Returns null if parsing fails or
@@ -1010,27 +1062,32 @@ function updatePatientData() {
     const pmhUnique = dedupeByCanonical(pmhValues.canonical, pmhValues.display);
     patientData.pmh = pmhUnique.canonical;
     patientData.pmhDisplay = pmhUnique.display;
+    renderChipList(chipListElements.pmh, patientData.pmhDisplay);
 
     const allergyValues = getFieldValues('allergies', 'pt-allergies');
     const allergyUnique = dedupeByCanonical(allergyValues.canonical, allergyValues.display);
     patientData.allergies = allergyUnique.canonical;
     patientData.allergyDisplay = allergyUnique.display;
+    renderChipList(chipListElements.allergies, patientData.allergyDisplay);
 
     const medicationValues = getFieldValues('medications', 'pt-medications');
     const medicationUnique = dedupeByCanonical(medicationValues.canonical, medicationValues.display);
     patientData.currentMedications = medicationUnique.canonical;
     patientData.medicationsDisplay = medicationUnique.display;
     patientData.medicationClasses = resolveMedicationClasses(medicationUnique.canonical);
+    renderChipList(chipListElements.medications, patientData.medicationsDisplay);
 
     const indicationValues = getFieldValues('indications', 'pt-indications');
     const indicationUnique = dedupeByCanonical(indicationValues.canonical, indicationValues.display);
     patientData.indications = indicationUnique.canonical;
     patientData.indicationsDisplay = indicationUnique.display;
+    renderChipList(chipListElements.indications, patientData.indicationsDisplay);
 
     const symptomValues = getFieldValues('symptoms', 'pt-symptoms');
     const symptomUnique = dedupeByCanonical(symptomValues.canonical, symptomValues.display);
     patientData.symptoms = symptomUnique.canonical;
     patientData.symptomsDisplay = symptomUnique.display;
+    renderChipList(chipListElements.symptoms, patientData.symptomsDisplay);
 
     const ekgSelectValue = document.getElementById('pt-ekg-select')?.value?.trim() ?? '';
     const ekgValues = getFieldValues('ekg', 'pt-ekg');
@@ -1047,6 +1104,7 @@ function updatePatientData() {
     patientData.ekg = ekgUnique.canonical[0] || '';
     patientData.ekgDisplay = ekgUnique.display[0] || '';
     patientData.ekgSecondary = getInputValue('pt-ekg-secondary');
+    updateEkgSummary(patientData.ekgDisplay, patientData.ekgSecondary);
 
     const bpDetails = getBloodPressureDetails();
     const hrValue = readNumberOrPreset('vs-hr-value', 'vs-hr-select', 0, 400);
