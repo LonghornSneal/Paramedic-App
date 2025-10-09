@@ -1,5 +1,6 @@
 {
     "CodeGPT.apiKey": "OpenAI",
     "chatgpt.openOnStartup": true,
-    "chatgpt.commentCodeLensEnabled": true
+    "chatgpt.commentCodeLensEnabled": true,
+    "chat.mcp.gallery.enabled": true
 }
