@@ -40,8 +40,8 @@ body.dark-mode .age-unit-toggle:focus-visible { outline-color: #93c5fd; }
 body.dark-mode .weight-unit-toggle { color: #d1d5db; }
 body.dark-mode .weight-unit-toggle:hover { color: #f9fafb; border-color: #334155; background: #1f2937; }
 body.dark-mode .weight-unit-toggle.is-selected { color: #93c5fd; border-color: #60a5fa; background: rgb(59 130 246 / 18%); }
-.weight-input { flex: 1 1 auto; min-width: 0; }
-.weight-summary { margin-left: auto; font-size: 0.75rem; color: #4b5563; white-space: nowrap; flex: 1 1 100%; text-align: right; }
+.weight-input { flex: 0 0 auto; min-width: 4ch; max-width: 6ch; }
+.weight-summary { margin-left: auto; font-size: 0.75rem; color: #4b5563; white-space: nowrap; flex: 0 0 auto; text-align: right; }
 body.dark-mode .weight-summary { color: #cbd5f5; }
 
 @supports (overflow: hidden) {
