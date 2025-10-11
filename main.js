@@ -2,33 +2,18 @@
 import { MedicationDetailsData } from './Data/MedicationDetailsData.js';
 import { VentilationDetailsData } from './Data/VentilationDetailsData.js';
 import { ProtocolMarkdownMap } from './Data/ProtocolMarkdownMap.js';
-import { addTapListener } from './Utils/addTapListener.js';
 import { attachNavHandlers } from './Features/navigation/Navigation.js';
 import { attachHomeHandler } from './Features/navigation/Home.js';
 import { renderInitialView } from './Features/list/ListView.js';
-import { renderDetailPage } from './Features/detail/DetailPage.js';
-import { pmhSuggestions,
-         allergySuggestions,
-         medicationNameSuggestions,
-         indicationSuggestions,
-         symptomSuggestions,
-         ekgSuggestions,
-         PDE5_INHIBITORS
-        } from './Features/patient/PatientInfo.js';
-import { setupAutocomplete } from './Features/patient/Autocomplete.js';
 import { attachSearchHandlers, processItem } from './Features/search/Search.js';
 import './Features/History.js';
 import './Features/settings.js';
 import { escapeHTML } from './Utils/escapeHTML.js';
-import { setupSlugAnchors } from './Features/anchorNav/slugAnchors.js';
+import { initPatientSidebar, seedPatientSuggestionSets } from './Features/patient/PatientSidebar.js';
 
 // --- Global Variables ---
 let searchInput,
-    patientSidebar,
     contentArea,
-    openSidebarButton,
-    closeSidebarButton,
-    sidebarOverlay,
     navBackButton,
     navForwardButton,
     navHomeButton,
@@ -39,13 +24,9 @@ let allDisplayableTopicsMap = {};
 let paramedicCategories = [];
 
 // Assigns key UI elements to global variables for easy access.
- function assignDomElements() {
+function assignDomElements() {
     searchInput = document.getElementById('searchInput');
     contentArea = document.getElementById('content-area');
-    patientSidebar = document.getElementById('patient-sidebar');
-    openSidebarButton = document.getElementById('open-sidebar-button');
-    closeSidebarButton = document.getElementById('close-sidebar-button');
-    sidebarOverlay = document.getElementById('sidebar-overlay');
     navBackButton = document.getElementById('nav-back-button');
     navForwardButton = document.getElementById('nav-forward-button');
     navHomeButton = document.getElementById('nav-home-button');
@@ -78,59 +59,13 @@ function initApp() {
     // Make these DOM element references global for other modules/scripts to use
     window.searchInput = searchInput;
     window.contentArea = contentArea;
-    window.patientSidebar = patientSidebar;
-    window.openSidebarButton = openSidebarButton;
-    window.closeSidebarButton = closeSidebarButton;
-    window.sidebarOverlay = sidebarOverlay;
     window.navBackButton = navBackButton;
     window.navForwardButton = navForwardButton;
     window.navHomeButton = navHomeButton;
     window.settingsButton = settingsButton;
     window.settingsPanel = settingsPanel;
 
-// Now that medicationDataMap exists, build the class dropdown
-//insertMedicationClassDropdown();
-
-    // Ensure overlay starts hidden
     attachNavHandlers();
-    if (sidebarOverlay) {
-        sidebarOverlay.classList.add('hidden');
-        sidebarOverlay.classList.remove('active');
-    }
-    // Sidebar toggle handlers
-    if (openSidebarButton) {
-        addTapListener(openSidebarButton, () => {
-            patientSidebar.classList.remove('hidden');
-            patientSidebar.classList.add('open');
-            sidebarOverlay.classList.add('active');
-            sidebarOverlay.classList.remove('hidden');
-        });
-    }
-    if (closeSidebarButton) {
-        addTapListener(closeSidebarButton, () => {
-            patientSidebar.classList.remove('open');
-            setTimeout(() => patientSidebar.classList.add('hidden'), 200);
-            sidebarOverlay.classList.remove('active');
-            sidebarOverlay.classList.add('hidden');
-        });
-    }
-    if (sidebarOverlay) {
-        addTapListener(sidebarOverlay, () => {
-            patientSidebar.classList.remove('open');
-            // Wait for slide-out transition (0.2s) to complete, then hide the sidebar
-            setTimeout(() => patientSidebar.classList.add('hidden'), 200);
-            if (settingsPanel && !settingsPanel.classList.contains('hidden')) {
-                settingsPanel.classList.add('hidden');
-            }
-                // If History panel is open, close it
-            const histPanel = document.getElementById('history-panel');
-            if (histPanel && !histPanel.classList.contains('hidden')) {
-                histPanel.classList.add('hidden');
-            }
-            sidebarOverlay.classList.remove('active');
-            sidebarOverlay.classList.add('hidden');
-        });
-    }
 
     // Global error surface to help catch runtime issues
     window.addEventListener('error', (e) => {
@@ -159,18 +94,7 @@ function initApp() {
     window.medicationDataMap = medicationDataMap;
     window.allDisplayableTopicsMap = allDisplayableTopicsMap;
 
-    // Initialize autocomplete suggestions
-    setupAutocomplete('pt-pmh','pt-pmh-suggestions', pmhSuggestions, 'pmh');
-    setupAutocomplete('pt-allergies','pt-allergies-suggestions', allergySuggestions, 'allergies');
-    setupAutocomplete('pt-medications','pt-medications-suggestions', medicationNameSuggestions, 'medications');
-    setupAutocomplete('pt-indications','pt-indications-suggestions', indicationSuggestions, 'indications');
-    setupAutocomplete('pt-symptoms','pt-symptoms-suggestions', symptomSuggestions, 'symptoms');
-    setupAutocomplete('pt-ekg','pt-ekg-suggestions', ekgSuggestions, 'ekg');
-
-    // Render the initial patient snapshot once the dropdown is ready
-    if (typeof window.renderPatientSnapshot === 'function') {
-        window.renderPatientSnapshot();
-    }
+    initPatientSidebar({ settingsPanel });
 
     // Add focus highlight to all textareas and inputs
     document.querySelectorAll('textarea, input').forEach(el => {
@@ -187,97 +111,9 @@ function initApp() {
     }
 }
 
-function insertMedicationClassDropdown() {
-    const sidebar = document.getElementById('patient-sidebar');
-    if (!sidebar) return;
-    if (document.getElementById('pt-medication-class')) return; // avoid duplicates
+// insertMedicationClassDropdown relocated to Features/patient/PatientSidebar.js
 
-    // Collect unique classes (stripped of markup)
-    // IMPORTANT: Only use MedicationDetailsData (drugs). Do NOT include
-    // classes from equipment/ventilation data to avoid polluting the list.
-    const classesSet = new Set();
-    (MedicationDetailsData || []).forEach(med => {
-        const cls = med.class;
-        if (Array.isArray(cls)) {
-            cls.forEach(c => classesSet.add(cleanClassName(c)));
-        } else if (cls) {
-            classesSet.add(cleanClassName(cls));
-        }
-    });
-    const classes = Array.from(classesSet).filter(Boolean)
-        .sort((a, b) => a.localeCompare(b));
-
-    // Build the line
-    const section = document.createElement('div');
-    section.className = 'patient-line patient-line--full patient-line--med-class';
-    section.dataset.line = '5-medication-class';
-
-    const field = document.createElement('div');
-    field.className = 'sidebar-field sidebar-field-textarea';
-
-    const heading = document.createElement('div');
-    heading.className = 'sidebar-field-heading';
-
-    const label = document.createElement('label');
-    label.className = 'sidebar-label';
-    label.htmlFor = 'pt-medication-class';
-    label.textContent = 'Medication Class:';
-    heading.appendChild(label);
-
-    const selectContainer = document.createElement('div');
-    selectContainer.className = 'sidebar-input-flex';
-
-    const select = document.createElement('select');
-    select.id    = 'pt-medication-class';
-    select.className = 'sidebar-input med-class-select';
-
-    const defaultOption    = document.createElement('option');
-    defaultOption.value    = '';
-    defaultOption.textContent = 'Select class';
-    select.appendChild(defaultOption);
-
-    classes.forEach(cls => {
-        const opt = document.createElement('option');
-        opt.value = cls.toLowerCase();
-        opt.textContent = cls;
-        select.appendChild(opt);
-    });
-
-    selectContainer.appendChild(select);
-    field.appendChild(heading);
-    field.appendChild(selectContainer);
-    section.appendChild(field);
-
-    // Insert the new section right after the current medications line, if present
-    const medsLine = sidebar.querySelector('#pt-medications')?.closest('.patient-line');
-    if (medsLine) {
-        medsLine.insertAdjacentElement('afterend', section);
-    } else {
-        sidebar.appendChild(section);
-    }
-
-    // Dispatch custom event so PatientInfo can attach the change listener
-    document.dispatchEvent(new Event('medClassInserted'));
-}
-
-function stripMarkup(str) {
-    if (typeof str !== 'string') return '';
-    return str.replace(/\[\[(.+?)\|(.+?)\]\]/g, '$1');
-}
-
-// Clean up a medication class string to remove markup and extra notes.
-// - Removes wiki-style [[display|info]] markup (keeping display)
-// - Trims whitespace
-// - Drops trailing parenthetical notes
-// - Drops trailing dashes/em-dashes notes
-function cleanClassName(str) {
-    const noMarkup = stripMarkup(String(str));
-    // Remove parenthetical notes
-    const noParens = noMarkup.replace(/\s*\([^)]*\)\s*/g, ' ').trim();
-    // Cut at common separators that indicate extra description
-    const cutAtDash = noParens.split(/\s[-â€“â€”]\s/)[0].trim();
-    return cutAtDash;
-}
+// stripMarkup and cleanClassName relocated to Features/patient/PatientSidebar.js
 
 // Initializes global data structures for categories and medications.
 function applyMarkdownDetails(nodes) {
@@ -318,77 +154,7 @@ function initializeData(categoriesData, medDetailsData) { // /Assign the global 
 
     // Populate allDisplayableTopicsMap safely and build the searchable index
     categoriesData.forEach(cat => processItem(cat));
-    // Removed: Medication Class dropdown (no longer part of Patient Info sidebar)
-
-/**
- * Insert the Medication Class dropdown into the patient sidebar.  Gathers all
- * unique classes from `window.medicationDataMap` and dispatches a custom
- * event once inserted so that PatientInfo can attach listeners.
- */
-
-    // Load common suggestion terms into suggestion sets
-    const commonPmh = ['hypertension','htn',
-                       'diabetes','dm',
-                       'asthma','copd',
-                       'heart failure','hf',
-                       'cad',
-                       'stroke','cva',
-                       'seizure disorder',
-                       'renal insufficiency','ckd',
-                       'hypothyroidism',
-                       'hyperthyroidism',
-                       'glaucoma',
-                       'peptic ulcer',
-                       'anxiety',
-                       'depression'];
-    const commonAllergies = ['penicillin','sulfa',
-                             'aspirin','nsaids',
-                             'morphine', 'codeine',
-                             'iodine','shellfish','latex',
-                             'peanuts','tree nuts'];
-    const commonMedNames  = ['lisinopril','metformin',
-                             'atorvastatin',
-                             'amlodipine',
-                             'hydrochlorothiazide','hctz',
-                             'simvastatin',
-                             'albuterol',
-                             'levothyroxine',
-                             'gabapentin',
-                             'omeprazole',
-                             'losartan',
-                             'sertraline',
-                             'furosemide','lasix',
-                             'insulin',
-                             'warfarin','coumadin','aspirin','clopidogrel','plavix'];
-    // Add these common terms to the suggestion sets (defined in PatientInfo.js)
-    commonPmh.forEach(term => pmhSuggestions.add(term));
-    commonAllergies.forEach(term => allergySuggestions.add(term));
-    commonMedNames.forEach(term => medicationNameSuggestions.add(term));
-    PDE5_INHIBITORS.forEach(term => medicationNameSuggestions.add(term));
-    // Extract additional allergy keywords from medication contraindications
-    Object.values(medicationDataMap).forEach(med => {
-        if (med.contraindications && Array.isArray(med.contraindications)) {
-            med.contraindications.forEach(ci => {
-                const ciLower = ci.toLowerCase();
-                if (ciLower.includes('hypersensitivity') || ciLower.includes('allergy to')) {    // Derive a generalized allergen term from text
-                    let allergen = ciLower.replace('known hypersensitivity to', '')
-                                          .replace('allergy to any nsaid (including asa)', 'nsaid allergy')
-                                          .replace('allergy to', '')
-                                          .trim();
-                    if (allergen.includes('local anesthetic allergy in the amide class')) {
-                        allergen = 'amide anesthetic allergy';
-                    } else if (allergen.includes('nsaid (including asa)')) {
-                        allergen = 'nsaid allergy';
-                    } else {
-                        allergen = allergen.split('(')[0].trim();
-                    }
-                    if (allergen && allergen.length > 2 && allergen.length < 30) {
-                        allergySuggestions.add(allergen);
-                    }
-                }
-            });
-        }
-    });
+    seedPatientSuggestionSets(medicationDataMap);
 }
 /*
   main.js

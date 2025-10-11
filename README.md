@@ -829,6 +829,7 @@ Ad‑hoc check: `node dev-tools/check-tv.js` prints the live answer and modal co
 
 ## Recent fixes (verified)
 
+- **[2025-10-11 Patient Info sidebar module extraction: Added Features/patient/PatientSidebar.js to encapsulate sidebar open/close behavior, autocomplete wiring, and suggestion seeding; main.js now imports the module, delegates initialization to initPatientSidebar(), and seeds vocab via seedPatientSuggestionSets().]**
 - **[2025-10-06 Patient Info sidebar selectors refreshed: Age toggles now render inline calendar SVGs for day/month/year using Material Symbols Outlined references (https://fonts.google.com/icons), Sex icons rely on stroke-weight color shifts without box borders, Weight unit buttons use typography-only states, and Height inputs now show compact ft/in entry fields (index.html; styles.css).]**
 
 - **[2025-10-01 Task timer MCP tooling: Added dev-tools/mcp/task-timer-server.mjs with per-step metadata, automatic flagging thresholds, comparison reporting, and registrations in dev-tools/mcp-call.mjs, inspector.mcp.json, and ~/.codex/config.toml.]**
