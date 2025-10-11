@@ -1,259 +1,727 @@
 /* Sidebar sections */
+.sidebar-section { /* Wraps each sidebar section so we can control separators between blocks */
+  margin: 0; /* Remove default section margin so rows sit flush against each other */
+  padding: 0; /* Strip padding so content aligns edge-to-edge with labels */
+  border-top: none; /* Drop the top border to avoid double borders between stacked sections */
+  border-bottom: 1px solid #e5e7eb; /* Light divider under each section to improve scanability */
+} /* End .sidebar-section block */
 
-  .sidebar-section { margin: 0; padding: 0; border-top: none; border-bottom: 1px solid #e5e7eb; } 
-  .sidebar-section:last-child { border-bottom: none; } 
+.sidebar-section:last-child { /* Special case for final section so it does not draw a bottom border */
+  border-bottom: none; /* Remove trailing divider to avoid a hanging line at the bottom */
+} /* End last-child rule */
 
-  .sidebar-section-title { font-size: 1.125rem; font-weight: 600; color: #2563eb; margin: 0; padding: 0; }
+.sidebar-section-title { /* Handles headings such as “Vitals” within each sidebar section */
+  font-size: 1.125rem; /* Slightly larger text to distinguish headings from field labels */
+  font-weight: 600; /* Semi-bold weight so headings stand out */
+  color: #2563eb; /* Use primary blue to match the rest of the sidebar accents */
+  margin: 0; /* Prevent extra space above/below the heading */
+  padding: 0; /* Keep heading flush with container edges */
+} /* End .sidebar-section-title */
 
 /* Form inputs in sidebar */
+.sidebar-input { /* Base styling for all single-line inputs in the patient sidebar */
+  flex: 0 0 auto; /* Prevent inputs from stretching and keep them only as wide as needed */
+  width: auto; /* Allow width to be dictated by min/max width constraints */
+  min-width: 5.5ch; /* Ensure at least enough room for typical numeric/text entry */
+  max-width: 12ch; /* Cap width so long values do not stretch the row */
+  min-height: 2rem; /* Give inputs enough height for comfortable tap targets */
+  padding: 0.3rem 0.45rem; /* Add internal space so text is not flush against borders */
+  border: 1px solid #d1d5db; /* Use neutral border consistent with rest of UI */
+  border-radius: 0.4rem; /* Soften corners to match the design language */
+  font-size: 0.85rem; /* Slightly smaller font to fit more data within compact rows */
+  line-height: 1.2; /* Ensure adequate vertical spacing for readability */
+  color: #1f2937; /* Dark slate text for high contrast on white background */
+  background-color: #fff; /* Keep input background white for clarity against sidebar */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Smooth focus/hover effects */
+} /* End .sidebar-input */
 
-  .sidebar-input { flex: 0 0 auto; width: auto; min-width: 0.5ch; max-width: 2ch; min-height: 0.1rem; padding: 0.0rem 0.045rem; border: .001px solid #32d81f; border-radius: 0.04rem; font-size: 0.85rem; line-height: 0.04; color: #1f2937; background-color: #15bbdc74; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
-  .sidebar-input::placeholder { color: #9ca3af; }
-  .sidebar-input:focus { border-color: #2563eb; box-shadow: 0 0 0 2px rgb(37 99 235 / 20%); outline: none; }
-textarea.sidebar-input { min-height: 0.4rem; max-width: 6ch; padding-top: 0.0rem; padding-bottom: 0.0rem; line-height: 1; }
+.sidebar-input::placeholder { /* Placeholder styling for empty fields */
+  color: #9ca3af; /* Use soft gray so hints are visible but not overwhelming */
+} /* End placeholder styling */
 
-select.sidebar-input {
-  width: 0.1rem;
-  min-width: 0.1rem;
-  max-width: 1.1rem;
-  padding: 0;
-  text-indent: -9999px;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' fill='none' stroke='%236b7280' stroke-width='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: #f0ff;
-  border-radius: 0.03rem;
-}
+.sidebar-input:focus { /* Focus state for keyboard/mouse users */
+  border-color: #2563eb; /* Highlight border with primary blue to indicate focus */
+  box-shadow: 0 0 0 2px rgb(37 99 235 / 20%); /* Add subtle glow to reinforce focus */
+  outline: none; /* Remove default outline so only custom glow is shown */
+} /* End focus styling */
 
-select.sidebar-input:focus-visible {
-  outline: 1px solid #2563eb;
-  outline-offset: 2px;
-}
+textarea.sidebar-input { /* Overrides for multi-line fields like PMH and Symptoms */
+  min-height: 2.4rem; /* Allow slightly taller area for multi-line text */
+  max-width: 16ch; /* Avoid overly wide text areas that could break layout */
+  padding-top: 0.4rem; /* Balance vertical padding now that field is deeper */
+  padding-bottom: 0.4rem; /* Mirror top padding for symmetry */
+  line-height: 1.3; /* Slightly larger line height for multi-line readability */
+} /* End textarea overrides */
 
-@supports (resize: vertical) {
-  textarea.sidebar-input { resize: vertical; }
-}
+select.sidebar-input { /* Styles dropdown selects to appear as compact square buttons */
+  width: 2.1rem; /* Provide a perfect square footprint around the dropdown arrow */
+  min-width: 2.1rem; /* Prevent the select from shrinking smaller than the icon */
+  max-width: 2.1rem; /* Keep the select from stretching wider than intended */
+  padding: 0; /* Remove padding so the chevron is centered */
+  text-indent: -9999px; /* Hide textual value, leaving only the icon visible */
+  appearance: none; /* Remove native browser styling for consistent look */
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' fill='none' stroke='%236b7280' stroke-width='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E"); /* Inline chevron icon */
+  background-repeat: no-repeat; /* Prevent icon tiling */
+  background-position: center; /* Center icon within the square */
+  background-color: #fff; /* Match other input backgrounds */
+  border-radius: 0.3rem; /* Slight rounding so dropdown matches other inputs */
+} /* End select styling */
 
-.patient-line {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.05rem;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-}
+select.sidebar-input:focus-visible { /* Focus styling for keyboard navigation on selects */
+  outline: 2px solid #2563eb; /* Blue outline to show focus state */
+  outline-offset: 2px; /* Offset outline slightly for better visibility */
+} /* End select focus styling */
 
-.patient-line::-webkit-scrollbar { height: 0.1px; }
-.patient-line { scrollbar-width: thin; }
+@supports (resize: vertical) { /* Feature query for browsers that support textarea resize control */
+  textarea.sidebar-input { /* Apply only when vertical resize is supported */
+    resize: vertical; /* Allow user to expand textarea vertically without affecting width */
+  } /* End textarea resize rule */
+} /* End @supports block */
 
-  #patient-sidebar .patient-line .sidebar-input { flex: 0 0 auto; }
-  #patient-sidebar .patient-line textarea.sidebar-input { width: 1ch; }
-  #patient-sidebar .patient-line .sidebar-input.age-input { min-width: 4ch; max-width: 6ch; }
-  #patient-sidebar .patient-line .weight-input { min-width: 1ch; max-width: 2ch; }
-  #patient-sidebar .patient-line .height-input { min-width: 1ch; max-width: 2ch; }
-  #patient-sidebar .patient-line .med-class-select { width: auto; min-width: 0.5ch; }
-  .sidebar-field { display: inline-flex; align-items: flex-start; gap: 0.35rem; flex-wrap: nowrap; padding: 0; min-width: 0; }
-  .sidebar-field .sidebar-label { display: inline-flex; align-items: center; margin-bottom: 0; white-space: nowrap; }
-  .sidebar-field-textarea { align-items: flex-start; }
-  .sidebar-field-textarea .sidebar-label { min-width: 0; padding: 0; }
-  .sidebar-field-heading { display: inline-flex; align-items: center; gap: 0.35rem; white-space: nowrap; }
-  .sidebar-field-heading .sidebar-label { flex: 0 0 auto; white-space: nowrap; }
-  .sidebar-chip-list { display: inline-flex; flex: 0 0 auto; gap: 0.2rem; margin-left: 0.4rem; min-height: 1.1rem; overflow-x: auto; padding-bottom: 0rem; }
-  .sidebar-chip-list::-webkit-scrollbar { height: 3px; }
-  .sidebar-chip-list.is-empty { display: none; }
-  .sidebar-chip { display: inline-flex; align-items: center; padding: 0rem 0.2rem; font-size: 0.25em; line-height: 1; letter-spacing: 0.02em; border-radius: 0.3rem; background: #fff7ed; border: 1px solid #fdba74; color: #f97316; flex: 0 0 auto; }
-  .sidebar-chip strong { font-weight: 700; }
-  body.dark-mode .sidebar-chip { background: #451a03; border-color: #fb923c; color: #fdba74; }
+.patient-line { /* Wrapper for each logical row inside the sidebar */
+  display: inline-flex; /* Lay out inputs in a single line using flexbox */
+  align-items: center; /* Vertically center labels and inputs within the row */
+  gap: 0.45rem; /* Provide consistent spacing between elements in the row */
+  flex-wrap: nowrap; /* Disable wrapping so each row stays on a single line */
+  overflow-x: auto; /* Enable horizontal scrolling when content exceeds width */
+  scroll-behavior: smooth; /* Smooth scrolling for better UX when using trackpads */
+} /* End .patient-line */
 
-@supports (overflow: hidden) {
-  .sidebar-chip { overflow: hidden; text-overflow: ellipsis; }
-}
-  .sidebar-input-flex { flex: 0 0 auto; min-width: 0; display: flex; flex-direction: column; }
-  .sidebar-field-vital { align-items: center; }
-  .sidebar-field-vital .sidebar-label { flex: 0 0 auto; min-width: 5.5rem; white-space: nowrap; }
-  .sidebar-field-vital .sidebar-input { flex: 0 0 auto; min-width: 4ch; max-width: 6ch; }
-  .vital-input { flex: 0 0 auto; min-width: 4ch; max-width: 6ch; }
-  #patient-sidebar .patient-line .vital-input { text-align: right; }
-  .vital-select { flex: 0 0 auto; }
-  .vital-row { display: inline-flex; align-items: center; gap: 0.45rem; flex-wrap: nowrap; }
-  .vital-row:last-child { margin-bottom: 0; }
-  .vital-item { display: inline-flex; align-items: center; gap: 0.35rem; flex: 0 0 auto; min-width: 0; }
-  .vital-item-pupils .vital-mini-select,
-  .vital-item-gcs .vital-mini-select { min-width: 2.6rem; }
-  .vital-label { font-weight: 600; font-size: 0.82rem; white-space: nowrap; }
-  .vital-mini-select { width: 2.1rem; height: 2.1rem; padding: 0; border-radius: 0rem; appearance: none; text-indent: -9999px; background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' fill='none' stroke='%236b7280' stroke-width='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; background-color: #fff; border: 1px solid #d1d5db; cursor: pointer; }
-  .vital-mini-select:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
-  .unit-input { position: relative; display: flex; align-items: center; flex: 0 0 auto; min-width: 0; }
-  .unit-input .sidebar-input { padding-right: 0rem; text-align: right; }
-  .unit-suffix { position: absolute; top: 50%; right: 0.4rem; transform: translateY(-50%); font-size: 0.62rem; font-weight: 600; color: #475569; pointer-events: none; text-transform: uppercase; opacity: 0; transition: opacity 0.15s ease; }
-  .unit-input[data-has-value="true"] .unit-suffix { opacity: 1; } 
-  .unit-suffix sub { font-size: 0.6rem; }
-  body.dark-mode .unit-suffix { color: #cbd5f5; }
-  .bp-stack { position: relative; display: flex; flex-direction: column; border: 1px solid #d1d5db; border-radius: 0.4rem; background: #fff; min-width: 5rem; }
-  .bp-stack:focus-within { border-color: #2563eb; box-shadow: 0 0 0 2px rgb(37 99 235 / 20%); }
+.patient-line::-webkit-scrollbar { /* Custom scrollbar styling for WebKit browsers */
+  height: 4px; /* Keep horizontal scrollbar slim so it does not distract */
+} /* End scrollbar height setting */
 
-@supports (overflow: hidden) {
-  .bp-stack { overflow: hidden; }
-}
+.patient-line { /* Additional scrollbar styling for Firefox and other browsers */
+  scrollbar-width: thin; /* Use thin scrollbar track for consistency */
+} /* End patient-line scrollbar rule */
 
-  .bp-input { border: none; background: transparent; padding: 0.rem 0.4rem; text-align: center; font-size: 0.95rem; font-weight: 600; color: #1f2937; width: 100%; min-height: 2rem; cursor: text; }
-  .bp-input:focus-visible { outline: none; background: #eef2ff; }
-  .bp-divider-line { display: block; width: 100%; height: 1px; background: #d1d5db; }
-  .ekg-module { display: flex; flex-direction: column; gap: 0.85rem; }
-  .ekg-module-row { display: inline-flex; align-items: center; gap: 0.6rem; flex-wrap: nowrap; }
-  .ekg-row-main { flex: 0 0 auto; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: 0.35rem; }
-  .ekg-row-heading { display: inline-flex; align-items: center; gap: 0.45rem; }
-  .ekg-row-main .sidebar-label { margin-bottom: 0; white-space: nowrap; }
-  .ekg-row-controls { display: inline-flex; align-items: center; gap: 0.4rem; flex-wrap: nowrap; }
-  .ekg-autocomplete { flex: 0 0 auto; min-width: 10ch; }
-  .ekg-autocomplete .sidebar-input { width: 12ch; }
-  .ekg-preview-shell { flex: 0 0 auto; width: 96px; height: 60px; border-radius: 0.45rem; background: #0b1220; border: 1px solid #1f2937; display: flex; align-items: center; justify-content: center; }
-  .ekg-preview-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.2s ease; }
-  .ekg-preview-img.is-empty { opacity: 0; }
+#patient-sidebar .patient-line .sidebar-input { /* Inputs inside rows should stay compact */
+  flex: 0 0 auto; /* Prevent flex growth so width stays bounded by min/max */
+} /* End specific input rule */
 
-@supports (overflow: hidden) {
-  .ekg-preview-shell { overflow: hidden; }
-}
-  .ekg-info-button { flex: 0 0 auto; width: 1.9rem; height: 1.9rem; border-radius: 999px; border: 1px solid #94a3b8; background: #fff; color: #1e293b; font-size: 0.85rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
-  .ekg-info-button:disabled { opacity: 0.45; cursor: default; border-color: #cbd5f5; }
+#patient-sidebar .patient-line textarea.sidebar-input { /* Multi-line fields inside rows */
+  width: 16ch; /* Provide enough width for short phrases while remaining compact */
+} /* End textarea width rule */
 
-@supports (cursor: not-allowed) {
-  .ekg-info-button:disabled { cursor: not-allowed; }
-}
-  .ekg-info-button:not(:disabled):hover { background: #2563eb; color: #fff; border-color: #2563eb; }
-  .ekg-info-button:not(:disabled):focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
-  .ekg-summary-text { flex: 1 1 14rem; min-width: 0; font-size: 0.78rem; color: #475569; line-height: 1.3; }
-  .ekg-summary-text.is-empty { display: none; }
-  body.dark-mode .ekg-summary-text { color: #cbd5f5; }
-  .sidebar-section-header { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
-  .sidebar-help-button { border: none; background: none; color: #2563eb; font-size: 0.85rem; padding: 0; cursor: pointer; text-decoration: underline; }
-  .sidebar-help-button:hover { color: #1d4ed8; }
-  .sidebar-help-button:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; border-radius: 0.25rem; }
-  .sidebar-demographics-item .sidebar-label { min-width: 3.25rem; margin-bottom: 0; white-space: nowrap; }
+#patient-sidebar .patient-line .sidebar-input.age-input { /* Age inputs (various units) */
+  min-width: 4ch; /* Ensure digits fit comfortably */
+  max-width: 6ch; /* Prevent wider-than-necessary fields */
+} /* End age input sizing */
 
-@supports (text-decoration-thickness: 1px) {
-  .sidebar-help-button { text-decoration-thickness: 1px; }
-}
+#patient-sidebar .patient-line .weight-input { /* Weight input field */
+  min-width: 4ch; /* Provide room for typical weight values */
+  max-width: 6ch; /* Maintain consistent sizing across units */
+} /* End weight input sizing */
 
-  .sidebar-demographics-row,
-  #patient-sidebar .patient-line--demographics { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0.05rem; }
-  .sidebar-demographics-row:last-child { margin-bottom: 0; }
-  .sidebar-demographics-item { flex: 1 1 12rem; min-width: 0; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
-  .sidebar-demographics-item.sidebar-demographics-item-sex { flex: 0 0 auto; gap: 0.5rem; flex-wrap: nowrap; }
+#patient-sidebar .patient-line .height-input { /* Height inputs (ft/in) */
+  min-width: 3ch; /* Enough space for 1–2 digits */
+  max-width: 4ch; /* Cap width so fields stay compact */
+} /* End height input sizing */
 
-  .patient-line[data-line="1"] { order: 1; }
-  .patient-line[data-line="2"] { order: 2; }
-  .patient-line[data-line="3"] { order: 3; }
-  .patient-line[data-line="4"] { order: 4; }
-  .patient-line[data-line="5"] { order: 5; }
-  .patient-line[data-line="6"] { order: 6; }
-  .patient-line[data-line="7"] { order: 7; }
-  .patient-line[data-line="8"] { order: 8; }
-  .patient-line[data-line="9"] { order: 9; }
-  .patient-line[data-line="10"] { order: 10; }
-  .patient-line[data-line="11"] { order: 11; }
-  .patient-line[data-line="12"] { order: 12; }
-  .patient-line[data-line="13"] { order: 13; }
+#patient-sidebar .patient-line .med-class-select { /* Dropdown selects within rows */
+  width: auto; /* Allow the select to use default width unless overridden */
+  min-width: 4.5ch; /* Reserve enough width for short labels */
+} /* End med class select sizing */
 
+.sidebar-field { /* Shared styling for the label + control pairing */
+  display: inline-flex; /* Keep label and control aligned in a row */
+  align-items: flex-start; /* Align content to top so multi-line labels line up */
+  gap: 0.35rem; /* Maintain consistent gap between label and control */
+  flex-wrap: nowrap; /* Do not wrap label/control to preserve single-line layout */
+  padding: 0; /* Remove default padding for tighter alignment */
+  min-width: 0; /* Allow flex container to shrink if needed */
+} /* End sidebar-field */
 
-@media (min-width: 768px) {
-  .sidebar-section .vital-row {
-    flex-wrap: nowrap;
-    align-items: center;
-    gap: clamp(0.5rem, 1vw, 0.85rem);
-  }
+.sidebar-field .sidebar-label { /* Styling for labels inside the field wrapper */
+  display: inline-flex; /* Keep label text aligned with control */
+  align-items: center; /* Center label text vertically */
+  margin-bottom: 0; /* Ensure labels do not add extra space below */
+  white-space: nowrap; /* Prevent labels from breaking onto multiple lines */
+} /* End label styling */
 
-  .sidebar-section .vital-item {
-    flex: 0 1 auto;
-    min-width: 0;
-    gap: clamp(0.35rem, 0.9vw, 0.55rem);
-  }
+.sidebar-field-textarea { /* Wrapper around textarea fields like PMH */
+  align-items: flex-start; /* Align the textarea to the top to match label height */
+} /* End textarea wrapper */
 
-  .sidebar-section .vital-label {
-    font-size: 0.9rem;
-    letter-spacing: 0.01em;
-  }
+.sidebar-field-textarea .sidebar-label { /* Labels specifically for textarea fields */
+  min-width: 0; /* Allow narrow labels so textarea can take available width */
+  padding: 0; /* Keep label flush with container */
+} /* End textarea label rule */
 
-  .bp-stack {
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.3rem;
-    padding: 0.rem 0.4rem;
-    min-width: 5.8rem;
-    border-radius: 0.6rem;
-  }
+.sidebar-field-heading { /* Container for labels that have trailing chip lists */
+  display: inline-flex; /* Keep heading and chips on the same line */
+  align-items: center; /* Vertically center heading text */
+  gap: 0.35rem; /* Provide breathing room between heading and chips */
+  white-space: nowrap; /* Prevent heading from wrapping */
+} /* End field heading */
 
-  .bp-stack .bp-divider-line {
-    flex: 0 0 1px;
-    width: 1px;
-    height: auto;
-    align-self: stretch;
-  }
+.sidebar-field-heading .sidebar-label { /* Label inside heading container */
+  flex: 0 0 auto; /* Prevent label from stretching */
+  white-space: nowrap; /* Keep label on a single line for clarity */
+} /* End heading label */
 
-  .bp-input {
-    padding: 0.rem 0.3rem;
-    font-size: 1rem;
-    line-height: 0.2;
-  }
+.sidebar-chip-list { /* Container for multi-select chips (e.g., PMH, Allergies) */
+  display: inline-flex; /* Lay chips left-to-right */
+  flex: 0 0 auto; /* Keep chip list from expanding vertically */
+  gap: 0.2rem; /* Small spacing between chips */
+  margin-left: 0.4rem; /* Space between label and chip list */
+  min-height: 1.1rem; /* Reserve vertical space so row height is stable */
+  overflow-x: auto; /* Allow horizontal scrolling when many chips selected */
+  padding-bottom: 0.15rem; /* Create breathing room for scrollbar track */
+} /* End chip list */
 
-  .bp-stack:hover {
-    border-color: #60a5fa;
-  }
+.sidebar-chip-list::-webkit-scrollbar { /* Customize scroll track for chip list in WebKit */
+  height: 3px; /* Keep horizontal scrollbar subtle */
+} /* End chip scrollbar */
 
-  .bp-stack:focus-within {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 2px rgb(37 99 235 / 28%);
-  }
+.sidebar-chip-list.is-empty { /* Hide chip list entirely when no chips exist */
+  display: none; /* Prevent empty container from occupying space */
+} /* End empty chip rule */
 
-  .sidebar-section .unit-input {
-    flex: 1 1 auto;
-    min-width: 0;
-  }
+.sidebar-chip { /* Individual chip styling for multi-select fields */
+  display: inline-flex; /* Show chip text inline with icon (if any) */
+  align-items: center; /* Center text vertically within chip */
+  padding: 0.05rem 0.2rem; /* Keep chips compact but readable */
+  font-size: 0.25em; /* Reduce font size to 25% of parent per requirement */
+  line-height: 1; /* Keep chip content tight without extra vertical space */
+  letter-spacing: 0.02em; /* Slight tracking for readability at small size */
+  border-radius: 0.3rem; /* Rounded chip corners */
+  background: #fff7ed; /* Light orange background to match request */
+  border: 1px solid #fdba74; /* Orange border for emphasis */
+  color: #f97316; /* Orange text per requirement */
+  flex: 0 0 auto; /* Keep chip width based on content */
+} /* End chip styling */
 
-  .sidebar-section .unit-input .sidebar-input {
-    font-size: 0.92rem;
-    letter-spacing: 0.01em;
-  }
+.sidebar-chip strong { /* Emphasized text within chips, e.g., abbreviations */
+  font-weight: 700; /* Make strong text stand out even at reduced size */
+} /* End strong chip styling */
 
-  .sidebar-section .unit-input:focus-within .unit-suffix {
-    color: #2563eb;
-  }
+body.dark-mode .sidebar-chip { /* Dark theme variant of chips */
+  background: #451a03; /* Deep brown to maintain contrast in dark mode */
+  border-color: #fb923c; /* Bright border to keep chip visible */
+  color: #fdba74; /* Soft orange text that remains legible on dark background */
+} /* End dark-mode chip styling */
 
-  .sidebar-section .unit-suffix {
-    right: 0.75rem;
-    font-size: 0.74rem;
-    letter-spacing: 0.05em;
-  }
+@supports (overflow: hidden) { /* Feature query to ensure clipping works where supported */
+  .sidebar-chip { /* Limit chip overflow to avoid layout stretching */
+    overflow: hidden; /* Hide overflow text for chips with long strings */
+    text-overflow: ellipsis; /* Add ellipsis to signify truncated text */
+  } /* End chip overflow adjustments */
+} /* End @supports for chip overflow */
 
-  .age-unit-toggle-group {
-    gap: 0.45rem;
-  }
+.sidebar-input-flex { /* Wrapper when a label is above a control (e.g., textareas) */
+  flex: 0 0 auto; /* Prevent wrapper from stretching */
+  min-width: 0; /* Allow shrink when horizontal space is constrained */
+  display: flex; /* Stack label and control vertically */
+  flex-direction: column; /* Ensure label sits above control */
+} /* End input flex wrapper */
 
-  .age-unit-toggle {
-    padding: 0.25rem 0.75rem;
-    border-radius: 999px;
-    transition: background-color 0.16s ease, color 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
-  }
+.sidebar-field-vital { /* Wrapper specifically for vital sign entries */
+  align-items: center; /* Align vital label and field along baseline */
+} /* End vital wrapper */
+
+.sidebar-field-vital .sidebar-label { /* Label next to vital entry */
+  flex: 0 0 auto; /* Keep label width fixed to fit text */
+  min-width: 5.5rem; /* Ensure label text is readable without wrapping */
+  white-space: nowrap; /* Prevent label from splitting into multiple lines */
+} /* End vital label rule */
+
+.sidebar-field-vital .sidebar-input { /* Vital input boxes (e.g., HR, RR) */
+  flex: 0 0 auto; /* Keep input width controlled by min/max width */
+  min-width: 4ch; /* Provide space for up to three-digit values */
+  max-width: 6ch; /* Prevent fields from stretching too wide */
+} /* End vital input rule */
+
+.vital-input { /* General vital input fallback */
+  flex: 0 0 auto; /* Keep width consistent for these controls */
+  min-width: 4ch; /* Enough room for vital numbers */
+  max-width: 6ch; /* Prevent overly wide fields */
+} /* End .vital-input */
+
+#patient-sidebar .patient-line .vital-input { /* Align vital numeric inputs */
+  text-align: right; /* Right align numbers for consistent visual alignment */
+} /* End vital alignment */
+
+.vital-select { /* Dropdown fields within vital rows */
+  flex: 0 0 auto; /* Keep select width tight */
+} /* End .vital-select */
+
+.vital-row { /* Container for grouped vital items */
+  display: inline-flex; /* Lay out vitals side-by-side */
+  align-items: center; /* Keep labels and inputs aligned vertically */
+  gap: 0.45rem; /* Provide consistent spacing between vitals */
+  flex-wrap: nowrap; /* Prevent vital group from wrapping */
+} /* End .vital-row */
+
+.vital-row:last-child { /* Ensure last vital row has consistent spacing */
+  margin-bottom: 0; /* Avoid extra space after final vital group */
+} /* End last-child vital row rule */
+
+.vital-item { /* Individual vital item container */
+  display: inline-flex; /* Keep label and control aligned horizontally */
+  align-items: center; /* Vertically center label and control */
+  gap: 0.35rem; /* Provide space between label and field */
+  flex: 0 0 auto; /* Keep item’s width fixed to its content */
+  min-width: 0; /* Allow shrink if space gets tight */
+} /* End .vital-item */
+
+.vital-item-pupils .vital-mini-select,
+.vital-item-gcs .vital-mini-select { /* Special case for wider dropdowns (Pupils/GCS) */
+  min-width: 2.6rem; /* Provide extra room for longer values */
+} /* End special dropdown widths */
+
+.vital-label { /* Label in front of each vital field */
+  font-weight: 600; /* Make vital labels prominent */
+  font-size: 0.82rem; /* Slightly smaller to fit more labels in a row */
+  white-space: nowrap; /* Prevent labels from breaking lines */
+} /* End .vital-label */
+
+.vital-mini-select { /* Square dropdowns used across vital rows */
+  width: 2.1rem; /* Square dimension to match requirement */
+  height: 2.1rem; /* Keep height equal to width for perfect square */
+  padding: 0; /* Remove padding so icon sits centered */
+  border-radius: 0.3rem; /* Match rounding used on other inputs */
+  appearance: none; /* Remove default OS styles */
+  text-indent: -9999px; /* Hide text values to show only chevron */
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' fill='none' stroke='%236b7280' stroke-width='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E"); /* Chevron icon */
+  background-repeat: no-repeat; /* Prevent icon tiling */
+  background-position: center; /* Keep icon centered */
+  background-color: #fff; /* White background like other inputs */
+  border: 1px solid #d1d5db; /* Neutral border to match inputs */
+  cursor: pointer; /* Indicate dropdown is interactive */
+} /* End .vital-mini-select */
+
+.vital-mini-select:focus-visible { /* Keyboard focus styling for dropdowns */
+  outline: 2px solid #2563eb; /* Blue outline to show focus */
+  outline-offset: 2px; /* Slight offset for clarity */
+} /* End dropdown focus */
+
+.unit-input { /* Wrapper for inputs that show a measurement suffix */
+  position: relative; /* Allow suffix to be positioned within the field */
+  display: flex; /* Keep input and suffix aligned */
+  align-items: center; /* Vertically center suffix with input text */
+  flex: 0 0 auto; /* Prevent wrapper from stretching */
+  min-width: 0; /* Allow shrink if necessary */
+} /* End .unit-input */
+
+.unit-input .sidebar-input { /* Input inside a unit wrapper */
+  padding-right: 1.4rem; /* Leave room for suffix text on the right */
+  text-align: right; /* Align numeric values to the right for readability */
+} /* End input padding adjustment */
+
+.unit-suffix { /* Measurement suffix that overlays the input */
+  position: absolute; /* Allow suffix to sit inside the input field */
+  top: 50%; /* Vertically align the suffix */
+  right: 0.4rem; /* Place suffix near the right edge */
+  transform: translateY(-50%); /* Perfectly center suffix vertically */
+  font-size: 0.62rem; /* Use small type so units do not dominate field */
+  font-weight: 600; /* Slightly bold so unit is legible */
+  color: #475569; /* Neutral slate color to differentiate from data */
+  pointer-events: none; /* Allow clicks to pass through to input */
+  text-transform: uppercase; /* Present units in uppercase for consistency */
+  opacity: 0; /* Hide suffix until field has a value */
+  transition: opacity 0.15s ease; /* Smooth appearance when value is entered */
+} /* End unit suffix */
+
+.unit-input[data-has-value="true"] .unit-suffix { /* Show suffix when input has a value */
+  opacity: 1; /* Fade suffix in */
+} /* End value-driven suffix visibility */
+
+.unit-suffix sub { /* Styling for subset of unit text (e.g., O₂) */
+  font-size: 0.6rem; /* Reduce size for subscript characters */
+} /* End unit subscript */
+
+body.dark-mode .unit-suffix { /* Dark theme adjustments for unit suffix */
+  color: #cbd5f5; /* Lighten suffix so it remains visible on dark background */
+} /* End dark-mode suffix */
+
+.bp-stack { /* Container for systolic/diastolic stacked inputs */
+  position: relative; /* Prepare for pseudo elements if needed */
+  display: flex; /* Stack systolic and diastolic vertically */
+  flex-direction: column; /* Align inputs vertically within stack */
+  border: 1px solid #d1d5db; /* Neutral border to match other inputs */
+  border-radius: 0.4rem; /* Rounded corners consistent with design */
+  background: #fff; /* Match input background coloring */
+  min-width: 5rem; /* Keep stack wide enough for two-digit values */
+} /* End blood pressure stack */
+
+.bp-stack:focus-within { /* Highlight stack when either systolic or diastolic focused */
+  border-color: #2563eb; /* Blue border to show focus state */
+  box-shadow: 0 0 0 2px rgb(37 99 235 / 20%); /* Add glow for extra emphasis */
+} /* End BP focus styling */
+
+@supports (overflow: hidden) { /* Ensure overflow clipping works where supported */
+  .bp-stack { /* BP stack overflow control */
+    overflow: hidden; /* Prevent content from spilling beyond rounded corners */
+  } /* End overflow rule */
+} /* End @supports */
+
+.bp-input { /* Input fields inside the blood pressure stack */
+  border: none; /* Remove internal borders to avoid double lines */
+  background: transparent; /* Let stack background show through */
+  padding: 0.35rem 0.4rem; /* Provide comfortable tap target */
+  text-align: center; /* Center numbers for easy comparison */
+  font-size: 0.95rem; /* Slightly larger for key vital values */
+  font-weight: 600; /* Emphasize blood pressure readings */
+  color: #1f2937; /* Dark slate for maximal contrast */
+  width: 100%; /* Ensure input spans stack width */
+  min-height: 2rem; /* Keep field tall enough for finger taps */
+  cursor: text; /* Indicate field is editable */
+} /* End .bp-input */
+
+.bp-input:focus-visible { /* Focus styling for BP inputs */
+  outline: none; /* Remove default outline to rely on stack glow */
+  background: #eef2ff; /* Light highlight to differentiate active cell */
+} /* End BP focus visible */
+
+.bp-divider-line { /* Divider between systolic and diastolic inputs */
+  display: block; /* Render as full-width block */
+  width: 100%; /* Span entire stack */
+  height: 1px; /* Thin divider line */
+  background: #d1d5db; /* Neutral color consistent with borders */
+} /* End divider line */
+
+.ekg-module { /* Wrapper for rhythm/modifier rows */
+  display: flex; /* Stack rows vertically */
+  flex-direction: column; /* Maintain column layout */
+  gap: 0.85rem; /* Add spacing between rhythm and modifier groups */
+} /* End ekg module */
+
+.ekg-module-row { /* Individual EKG row container */
+  display: inline-flex; /* Keep row elements inline and padded */
+  align-items: center; /* Align controls and labels */
+  gap: 0.6rem; /* Provide space between inputs */
+  flex-wrap: nowrap; /* Keep row on one line */
+} /* End module row */
+
+.ekg-row-main { /* Wrapper for the main rhythm/modifier inputs */
+  flex: 0 0 auto; /* Prevent stretching */
+  min-width: 0; /* Allow shrink within flex container */
+  display: flex; /* Stack label and controls vertically */
+  flex-direction: column; /* Arrange label above control */
+  align-items: stretch; /* Make control fill available width within wrapper */
+  gap: 0.35rem; /* Add spacing between label and control */
+} /* End EKG row main */
+
+.ekg-row-heading { /* Header row for rhythm dropdown + chips */
+  display: inline-flex; /* Keep label and buttons in one line */
+  align-items: center; /* Vertically center heading contents */
+  gap: 0.45rem; /* Provide space between label and actions */
+} /* End row heading */
+
+.ekg-row-main .sidebar-label { /* Label inside the EKG row */
+  margin-bottom: 0; /* Ensure no additional spacing below label */
+  white-space: nowrap; /* Keep label on single line */
+} /* End EKG label */
+
+.ekg-row-controls { /* Container for rhythm input, dropdowns, chips */
+  display: inline-flex; /* Align controls horizontally */
+  align-items: center; /* Vertically center each control */
+  gap: 0.4rem; /* Provide spacing between controls */
+  flex-wrap: nowrap; /* Keep controls on single line */
+} /* End EKG controls */
+
+.ekg-autocomplete { /* Wrapper for the rhythm autocomplete field */
+  flex: 0 0 auto; /* Keep width determined by content */
+  min-width: 10ch; /* Enough width for short rhythm names */
+} /* End EKG autocomplete wrapper */
+
+.ekg-autocomplete .sidebar-input { /* Input inside EKG autocomplete */
+  width: 12ch; /* Provide fixed width to keep field compact */
+} /* End EKG input sizing */
+
+.ekg-preview-shell { /* Preview area for the selected rhythm image */
+  flex: 0 0 auto; /* Keep preview from stretching */
+  width: 96px; /* Match original preview dimensions */
+  height: 60px; /* Maintain aspect ratio for preview */
+  border-radius: 0.45rem; /* Rounded corners consistent with design */
+  background: #0b1220; /* Dark background to highlight waveform */
+  border: 1px solid #1f2937; /* Subtle border to frame the preview */
+  display: flex; /* Center the content inside */
+  align-items: center; /* Vertically center waveform */
+  justify-content: center; /* Horizontally center waveform */
+} /* End preview shell */
+
+.ekg-preview-img { /* Image element within the preview shell */
+  width: 100%; /* Scale image to container width */
+  height: 100%; /* Maintain coverage of container height */
+  object-fit: cover; /* Crop image to fill container */
+  display: block; /* Remove inline spacing around image */
+  transition: opacity 0.2s ease; /* Smooth fade in/out when switching images */
+} /* End EKG image */
+
+.ekg-preview-img.is-empty { /* Placeholder state when no preview available */
+  opacity: 0; /* Hide placeholder until data exists */
+} /* End empty preview */
+
+@supports (overflow: hidden) { /* Ensure clip works only when supported */
+  .ekg-preview-shell { /* Prevent waveform from bleeding outside rounded corners */
+    overflow: hidden; /* Clip content to rounded border */
+  } /* End overflow control */
+} /* End @supports for preview */
+
+.ekg-info-button { /* Information button next to rhythm selector */
+  flex: 0 0 auto; /* Keep button from expanding */
+  width: 1.9rem; /* Set square footprint */
+  height: 1.9rem; /* Match width for perfect circle */
+  border-radius: 999px; /* Fully round button */
+  border: 1px solid #94a3b8; /* Neutral border to match rest of UI */
+  background: #fff; /* White background for contrast */
+  color: #1e293b; /* Slate text color */
+  font-size: 0.85rem; /* Moderate font size for icon/text */
+  font-weight: 600; /* Slightly bold for readability */
+  cursor: pointer; /* Show clickable cursor */
+  display: inline-flex; /* Center icon inside button */
+  align-items: center; /* Vertically center icon */
+  justify-content: center; /* Horizontally center icon */
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; /* Smooth hover/focus transitions */
+} /* End info button */
+
+.ekg-info-button:disabled { /* Disabled state for info button */
+  opacity: 0.45; /* Dim button to indicate non-interactive state */
+  cursor: default; /* Remove pointer cursor */
+  border-color: #cbd5f5; /* Lighten border when inactive */
+} /* End disabled styling */
+
+@supports (cursor: not-allowed) { /* Only apply if browser supports custom cursors */
+  .ekg-info-button:disabled { /* Disabled button cursor */
+    cursor: not-allowed; /* Use standard disabled cursor */
+  } /* End cursor override */
+} /* End @supports */
+
+.ekg-info-button:not(:disabled):hover { /* Hover styling when button is active */
+  background: #2563eb; /* Fill button with primary blue */
+  color: #fff; /* Switch icon/text to white */
+  border-color: #2563eb; /* Match border with background */
+} /* End hover state */
+
+.ekg-info-button:not(:disabled):focus-visible { /* Keyboard focus feedback */
+  outline: 2px solid #2563eb; /* Blue outline for accessibility */
+  outline-offset: 2px; /* Offset outline for clarity */
+} /* End focus visible */
+
+.ekg-summary-text { /* Text summary beneath rhythm selector */
+  flex: 1 1 14rem; /* Allow summary to grow while maintaining base width */
+  min-width: 0; /* Permit shrink if space limited */
+  font-size: 0.78rem; /* Slightly smaller text for supplementary info */
+  color: #475569; /* Neutral text color */
+  line-height: 1.3; /* Comfortable spacing for multi-line text */
+} /* End summary text */
+
+.ekg-summary-text.is-empty { /* Hide summary when no data */
+  display: none; /* Prevent empty block from taking space */
+} /* End hidden state */
+
+body.dark-mode .ekg-summary-text { /* Dark theme summary adjustments */
+  color: #cbd5f5; /* Lighten text for readability on dark background */
+} /* End dark-mode summary */
+
+.sidebar-section-header { /* Header row containing label and help button */
+  display: flex; /* Align items horizontally */
+  align-items: center; /* Vertically center contents */
+  justify-content: space-between; /* Push help button to far edge */
+  gap: 0.5rem; /* Provide spacing between header elements */
+} /* End section header */
+
+.sidebar-help-button { /* Inline help button next to labels */
+  border: none; /* Remove default button border */
+  background: none; /* Keep background transparent */
+  color: #2563eb; /* Primary blue for call-to-action */
+  font-size: 0.85rem; /* Slightly smaller text to match labels */
+  padding: 0; /* Remove padding so button occupies minimal space */
+  cursor: pointer; /* Indicate interactivity */
+  text-decoration: underline; /* Underline to resemble link */
+} /* End help button */
+
+.sidebar-help-button:hover { /* Hover state for help button */
+  color: #1d4ed8; /* Darken blue on hover */
+} /* End hover */
+
+.sidebar-help-button:focus-visible { /* Keyboard focus styling */
+  outline: 2px solid #2563eb; /* Add blue outline for accessibility */
+  outline-offset: 2px; /* Offset outline for improved visibility */
+  border-radius: 0.25rem; /* Slight rounding around focus outline */
+} /* End focus styling */
+
+.sidebar-demographics-item .sidebar-label { /* Shared label styling for early rows */
+  min-width: 3.25rem; /* Reserve space for short labels like “Sex” */
+  margin-bottom: 0; /* Keep label tight against controls */
+  white-space: nowrap; /* Prevent label from wrapping */
+} /* End demographic label */
+
+@supports (text-decoration-thickness: 1px) { /* Feature detection for modern underline control */
+  .sidebar-help-button { /* Enhance underlines where supported */
+    text-decoration-thickness: 1px; /* Make underline sharper without being too bold */
+  } /* End help button thickness */
+} /* End @supports underline */
+
+.sidebar-demographics-row,
+#patient-sidebar .patient-line--demographics { /* Rows that hold demographic items */
+  display: flex; /* Lay out demographic items horizontally */
+  flex-wrap: wrap; /* Allow wrapping if the viewport gets very narrow */
+  align-items: stretch; /* Ensure items fill the row height */
+  gap: 0.85rem; /* Provide generous spacing between demographic groups */
+} /* End demographic row styling */
+
+.sidebar-demographics-row:last-child { /* Final demographic row adjustments */
+  margin-bottom: 0; /* Remove bottom spacing at end of section */
+} /* End last demographic row */
+
+.sidebar-demographics-item { /* Container for individual demographic items */
+  flex: 1 1 2rem; /* Allow items to grow but keep a usable minimum width */
+  min-width: 0; /* Allow shrink when layout is constrained */
+  display: flex; /* Align label and control horizontally */
+  align-items: center; /* Center content vertically */
+  gap: 0.1rem; /* Space label and control */
+  flex-wrap: wrap; /* Permit internal wrapping when needed */
+} /* End demographic item */
+
+.sidebar-demographics-item.sidebar-demographics-item-sex { /* Sex selector specifics */
+  flex: 0 0 auto; /* Keep width tight around buttons */
+  gap: 0.1rem; /* Provide room between toggle buttons */
+  flex-wrap: nowrap; /* Prevent sex buttons from wrapping */
+} /* End sex item */
+
+.patient-line[data-line="1"] { order: 1; } /* Guarantee Sex/Age row appears first */
+.patient-line[data-line="2"] { order: 2; } /* Weight/Height on second row */
+.patient-line[data-line="3"] { order: 3; } /* PMH occupies third row */
+.patient-line[data-line="4"] { order: 4; } /* Allergies on fourth row */
+.patient-line[data-line="5"] { order: 5; } /* Current Rx’s on fifth row */
+.patient-line[data-line="6"] { order: 6; } /* Indications on sixth row */
+.patient-line[data-line="7"] { order: 7; } /* S/S on seventh row */
+.patient-line[data-line="8"] { order: 8; } /* BP/HR/SpO2 on eighth row */
+.patient-line[data-line="9"] { order: 9; } /* EtCO2/RR/BGL on ninth row */
+.patient-line[data-line="10"] { order: 10; } /* Pupils/Lung Sounds on row ten */
+.patient-line[data-line="11"] { order: 11; } /* GCS/A&O on row eleven */
+.patient-line[data-line="12"] { order: 12; } /* Rhythm on row twelve */
+.patient-line[data-line="13"] { order: 13; } /* Modifier on row thirteen */
+
+@media (min-width: 768px) { /* Tablet/desktop enhancements */
+  .sidebar-section .vital-row { /* Adjust vital rows on larger screens */
+    flex-wrap: nowrap; /* Keep vital row items on one line */
+    align-items: center; /* Center fields vertically */
+    gap: clamp(0.5rem, 1vw, 0.85rem); /* Scale gap based on viewport width */
+  } /* End vital row media adjustments */
+
+  .sidebar-section .vital-item { /* Vital item spacing on larger screens */
+    flex: 0 1 auto; /* Allow slight growth while keeping compact */
+    min-width: 0; /* Permit shrink */
+    gap: clamp(0.35rem, 0.9vw, 0.55rem); /* Responsive spacing around labels */
+  } /* End vital item adjustments */
+
+  .sidebar-section .vital-label { /* Vital labels on larger screens */
+    font-size: 0.9rem; /* Make labels a bit larger for readability */
+    letter-spacing: 0.01em; /* Slight tracking to improve legibility */
+  } /* End larger label styling */
+
+  .bp-stack { /* Adjust BP stack layout on larger screens */
+    display: inline-flex; /* Align systolic/diastolic side by side if needed */
+    flex-direction: row; /* Switch from vertical stacking to horizontal */
+    align-items: center; /* Align values vertically */
+    gap: 0.3rem; /* Provide small gap between systolic and diastolic */
+    padding: 0.25rem 0.4rem; /* Add padding once horizontal */
+    min-width: 5.8rem; /* Expand minimum width for readability */
+    border-radius: 0.6rem; /* Slightly rounder corners on larger displays */
+  } /* End BP stack media adjustments */
+
+  .bp-stack .bp-divider-line { /* Divider styling when stack is horizontal */
+    flex: 0 0 1px; /* Keep divider a thin strip */
+    width: 1px; /* Set divider width appropriate for vertical separator */
+    height: auto; /* Allow divider to span the height of the stack */
+    align-self: stretch; /* Stretch divider between systolic and diastolic */
+  } /* End divider adjustments */
+
+  .bp-input { /* Input styling inside horizontal BP stack */
+    padding: 0.25rem 0.3rem; /* Reduce padding once fields are side-by-side */
+    font-size: 1rem; /* Increase font size slightly for desktop readability */
+    line-height: 1.2; /* Maintain comfortable line height */
+  } /* End BP input adjustments */
+
+  .bp-stack:hover { /* Hover state for BP stack on larger screens */
+    border-color: #60a5fa; /* Lighten border color to show hover */
+  } /* End BP hover */
+
+  .bp-stack:focus-within { /* Focus styling when stack used horizontally */
+    border-color: #2563eb; /* Keep focus border consistent */
+    box-shadow: 0 0 0 2px rgb(37 99 235 / 28%); /* Intensify glow for accessibility */
+  } /* End horizontal focus styling */
+
+  .sidebar-section .unit-input { /* Unit wrapper adjustments on larger screens */
+    flex: 1 1 auto; /* Allow wrapper to grow and fill row */
+    min-width: 0; /* Allow shrink so layout remains flexible */
+  } /* End unit wrapper media adjustments */
+
+  .sidebar-section .unit-input .sidebar-input { /* Input sizing inside unit wrappers */
+    font-size: 0.92rem; /* Slightly larger text for desktop readability */
+    letter-spacing: 0.01em; /* Improve legibility with subtle tracking */
+  } /* End unit input adjustments */
+
+  .sidebar-section .unit-input:focus-within .unit-suffix { /* Highlight suffix when focused */
+    color: #2563eb; /* Tint suffix to match focused input */
+  } /* End suffix focus adjustments */
+
+  .sidebar-section .unit-suffix { /* Unit suffix styling on larger screens */
+    right: 0.75rem; /* Adjust horizontal offset for larger inputs */
+    font-size: 0.74rem; /* Increase size for readability */
+    letter-spacing: 0.05em; /* Give uppercase units a bit of breathing room */
+  } /* End unit suffix adjustments */
+
+  .age-unit-toggle-group { /* Spacing for age unit toggle group */
+    gap: 0.45rem; /* Provide wider spacing between toggles on desktop */
+  } /* End toggle group spacing */
+
+  .age-unit-toggle { /* Toggle styling on larger screens */
+    padding: 0.25rem 0.75rem; /* Increase padding for easier interaction */
+    border-radius: 999px; /* Make toggles pill-shaped for aesthetics */
+    transition: background-color 0.16s ease, color 0.16s ease, border-color 0.16s ease, transform 0.16s ease; /* Smooth interactive feedback */
+  } /* End toggle adjustments */
 
   .age-unit-toggle:hover,
-  .age-unit-toggle:focus-visible {
-    transform: translateY(-1px);
-  }
+  .age-unit-toggle:focus-visible { /* Hover and focus feedback for toggles */
+    transform: translateY(-1px); /* Provide subtle lift effect */
+  } /* End hover/focus transitions */
 
-  .age-unit-toggle:active {
-    transform: translateY(0);
-    background: rgb(37 99 235 / 12%);
-  }
-}
+  .age-unit-toggle:active { /* Active state for toggles when pressed */
+    transform: translateY(0); /* Reset lift when actively pressed */
+    background: rgb(37 99 235 / 12%); /* Slight blue tint to acknowledge press */
+  } /* End active state */
+} /* End media query */
 
-  .sidebar-demographics-item-height { gap: 0rem; align-items: center; }
-  .height-inline-inputs { display: inline-flex; align-items: center; gap: 0rem; }
-  .height-unit-text { font-size: 0.85rem; color: #4b5563; }
-  .height-input { flex: 0 0 auto; }
-  .height-input--compact { width: 0.05rem; padding: 0rem 0.-05rem; font-size: 0.85rem; }
-  body.dark-mode .height-unit-text { color: #d1d5db; }
+.sidebar-demographics-item-height { /* Wrapper for height fields */
+  gap: 0.6rem; /* Maintain spacing between label and inputs */
+  align-items: center; /* Align height fields vertically */
+} /* End height wrapper */
 
-  .sidebar-label { display: block; font-size: 0.875rem; line-height: 0.55rem;
-    font-weight: 500; color: #374151; margin-bottom: 0.05rem; }
+.height-inline-inputs { /* Container for ft/in inline pair */
+  display: inline-flex; /* Keep foot and inch inputs inline */
+  align-items: center; /* Align inputs vertically */
+  gap: 0.35rem; /* Add space between fields */
+} /* End inline height inputs */
+
+.height-unit-text { /* Text label such as “ft” or “in” */
+  font-size: 0.85rem; /* Match label size for consistency */
+  color: #4b5563; /* Neutral text color */
+} /* End height unit text */
+
+.height-input { /* Numeric field for height values */
+  flex: 0 0 auto; /* Keep width tight */
+} /* End height input */
+
+.height-input--compact { /* Compact variant of height input */
+  width: 2.75rem; /* Provide precise width for one- or two-digit values */
+  padding: 0.2rem 0.35rem; /* Adjust padding to maintain square feel */
+  font-size: 0.85rem; /* Keep text consistent with other inputs */
+} /* End compact height input */
+
+body.dark-mode .height-unit-text { /* Dark theme adjustment for unit text */
+  color: #d1d5db; /* Lighten units so they remain legible on dark background */
+} /* End dark-mode height text */
+
+.sidebar-label { /* Global label styling in patient sidebar */
+  display: block; /* Ensure labels occupy full line above controls when stacked */
+  font-size: 0.875rem; /* Standard font size for readability */
+  line-height: 1.25rem; /* Maintain vertical rhythm */
+  font-weight: 500; /* Semi-bold weight so labels stand out */
+  color: #374151; /* Slate text to contrast with white background */
+  margin-bottom: 0.25rem; /* Provide space between label and input */
+} /* End sidebar label */
