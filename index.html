@@ -31,7 +31,7 @@
       </svg>
     </button>
   </div>
-    <div class="patient-sidebar-content">
+  <div class="patient-sidebar-content">
     <div class="patient-line patient-line--demographics" data-line="1">
       <div class="sidebar-demographics-item sidebar-demographics-item-sex">
         <span class="sidebar-label">Sex:</span>
@@ -165,7 +165,7 @@
           <input type="text" id="vs-bp-diastolic" class="bp-input bp-input--diastolic" inputmode="numeric" maxlength="3" aria-label="Diastolic blood pressure">
         </div>
         <select id="vs-bp-select" class="vital-mini-select" aria-label="Blood pressure preset">
-          <option value="" aria-label="No preset"></option>
+          <option value=""></option>
           <option value="200+">200+</option>
           <option value="160+">160+</option>
           <option value="Normal (90-160 SBP)">Normal (90-160 SBP)</option>
@@ -180,7 +180,7 @@
           <span class="unit-suffix" aria-hidden="true">HR</span>
         </div>
         <select id="vs-hr-select" class="vital-mini-select" aria-label="Heart rate preset">
-          <option value="" aria-label="No preset"></option>
+          <option value=""></option>
           <option value="150+">150+</option>
           <option value="100+">100+</option>
           <option value="60-100">60-100</option>
@@ -226,7 +226,7 @@
           <span class="unit-suffix" aria-hidden="true">mg/dL</span>
         </div>
         <select id="vs-bgl-select" class="vital-mini-select" aria-label="Blood glucose preset">
-          <option value="" aria-label="No preset"></option>
+          <option value=""></option>
           <option value="Normal">Normal</option>
           <option value="High">High</option>
           <option value="Low">Low</option>
@@ -242,7 +242,7 @@
           <span class="unit-suffix" aria-hidden="true">mm</span>
         </div>
         <select id="vs-pupils-select" class="vital-mini-select" aria-label="Pupil descriptor">
-          <option value="" aria-label="No descriptor"></option>
+          <option value=""></option>
           <option value="PERRL">PERRL</option>
           <option value="Pinpoint">Pinpoint</option>
           <option value="Dilated">Dilated</option>
@@ -277,7 +277,7 @@
           <span class="unit-suffix" aria-hidden="true">GCS</span>
         </div>
         <select id="vs-gcs-select" class="vital-mini-select" aria-label="Glasgow Coma Scale preset">
-          <option value="" aria-label="No preset"></option>
+          <option value=""></option>
           <option value="15">15</option>
           <option value="14">14</option>
           <option value="13">13</option>
@@ -313,7 +313,7 @@
         </div>
         <div class="ekg-row-controls">
           <select id="pt-ekg-select" class="sidebar-input vital-select" aria-label="EKG rhythm preset">
-            <option value="" aria-label="No rhythm selected"></option>
+            <option value=""></option>
           </select>
           <div class="autocomplete-container ekg-autocomplete">
             <input type="text" id="pt-ekg" class="sidebar-input vital-input" placeholder="Type or select rhythm">
@@ -322,7 +322,7 @@
         </div>
       </div>
       <div class="ekg-preview-shell" aria-hidden="true">
-        <img id="ekg-rhythm-preview" alt="" class="ekg-preview-img">
+        <img id="ekg-rhythm-preview" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="" class="ekg-preview-img">
       </div>
       <button type="button" id="ekg-rhythm-info" class="ekg-info-button" aria-label="View rhythm definition" disabled>i</button>
     </div>
@@ -331,17 +331,18 @@
         <label for="pt-ekg-secondary" class="sidebar-label">Modifier:</label>
         <div class="ekg-row-controls">
           <select id="pt-ekg-secondary" class="sidebar-input vital-select" aria-label="EKG modifier preset">
-            <option value="" aria-label="No modifier selected"></option>
+            <option value=""></option>
           </select>
         </div>
       </div>
       <div class="ekg-preview-shell" aria-hidden="true">
-        <img id="ekg-modifier-preview" alt="" class="ekg-preview-img">
+        <img id="ekg-modifier-preview" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="" class="ekg-preview-img">
       </div>
       <button type="button" id="ekg-modifier-info" class="ekg-info-button" aria-label="View modifier definition" disabled>i</button>
       <div id="ekg-summary-text" class="ekg-summary-text is-empty" aria-live="polite"></div>
     </div>
   </div>
+</div>
 <div id="settings-panel" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-lg shadow-lg">
     <div class="flex justify-end mb-2">
         <button type="button" id="close-settings-button" aria-label="Close Settings" title="Close Settings" class="p-2 rounded-full text-gray-500 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
@@ -442,8 +443,8 @@
       </ul>
     </div>
     <div id="ekg-modal-detail" class="ekg-modal-detail hidden">
-      <h4 id="ekg-modal-detail-title"></h4>
-      <img id="ekg-modal-detail-image" alt="" class="ekg-modal-detail-image">
+      <h4 id="ekg-modal-detail-title">EKG Detail</h4>
+      <img id="ekg-modal-detail-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="" class="ekg-modal-detail-image">
       <p id="ekg-modal-detail-definition" class="ekg-modal-detail-definition"></p>
       <button type="button" id="ekg-modal-back" class="modal-back-button">Back</button>
     </div>
