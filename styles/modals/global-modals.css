@@ -1,0 +1,23 @@
+/* Shared modal styling */
+
+.modal-backdrop { position: fixed; inset: 0; background: rgb(15 23 42 / 45%); z-index: 90; }
+
+.modal { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 95; }
+
+.modal.hidden { display: none; }
+
+.modal-backdrop.hidden { display: none; }
+
+.modal-content { background: #fff; border-radius: 0.75rem; box-shadow: 0 24px 60px rgb(15 23 42 / 25%); padding: 1.5rem; width: min(520px, 90vw); max-height: 80vh; }
+
+@supports (overflow-y: auto) {
+  .modal-content { overflow-y: auto; }
+}
+
+.modal-close { border: none; background: transparent; color: #1f2937; font-size: 1.5rem; float: right; cursor: pointer; }
+
+.modal-intro { margin-top: 0.5rem; margin-bottom: 1rem; color: #4b5563; font-size: 0.95rem; }
+
+.modal-list { list-style: disc; padding-left: 1.25rem; color: #1f2937; font-size: 0.9rem; }
+
+.modal-list li { margin-bottom: 0.5rem; }

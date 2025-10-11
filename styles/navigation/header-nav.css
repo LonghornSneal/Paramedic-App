@@ -1,0 +1,7 @@
+/* Header navigation buttons (top-right corner buttons) */
+
+  .header-nav-button { padding: 0.5rem; border-radius: 0.375rem; color: #fff; } 
+
+  .header-nav-button:hover { background-color: #1d4ed8; }
+
+  .header-nav-button:disabled { opacity: 0.5;  }

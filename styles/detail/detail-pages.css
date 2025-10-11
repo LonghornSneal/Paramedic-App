@@ -1,0 +1,807 @@
+/* Medication Detail page styles */
+
+.detail-section {
+  margin-bottom: 1.25rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.9rem;
+  box-shadow: 0 18px 36px rgb(15 23 42 / 10%);
+  padding: 0.85rem 1rem;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+
+}
+
+.detail-section:hover {
+  border-color: #bfdbfe;
+  box-shadow: 0 24px 48px rgb(15 23 42 / 14%);
+  transform: translateY(-2px);
+
+}
+
+.detail-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #1d4ed8;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+}
+
+.section-indicator {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: #bfdbfe;
+  color: #1d4ed8;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+}
+
+.detail-section-title.is-expanded .section-indicator {
+  background: #1d4ed8;
+  color: #fff;
+
+}
+
+.detail-section-title svg {
+  flex-shrink: 0;
+
+}
+
+.detail-section .detail-list,
+
+.detail-section .detail-text {
+  margin-top: 0.75rem;
+  padding-right: 0.25rem;
+
+}
+
+.detail-list {
+  list-style-type: disc;
+  list-style-position: outside;
+  padding-left: 1.25rem;
+  color: #374151;
+
+}
+
+.detail-list li + li {
+  margin-top: 0.35rem;
+
+}
+
+.detail-text {
+  color: #374151;
+  white-space: pre-wrap;
+  line-height: 1.6;
+
+}
+
+.detail-section.adult-section {
+  background: linear-gradient(180deg, #eff6ff 0%, #fff 60%);
+  border-color: #bfdbfe;
+
+}
+
+.detail-section.adult-section .detail-section-title {
+  color: #1d4ed8;
+
+}
+
+.detail-section.pediatric-section {
+  background: linear-gradient(180deg, #fef2f2 0%, #fff 65%);
+  border-color: #fda4af;
+
+}
+
+.detail-section.pediatric-section .detail-section-title {
+  color: #be123c;
+
+}
+
+.med-concentration {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #6b7280;
+  margin-left: 0.5rem;
+
+}
+
+body.dark-mode .detail-section {
+  background: #111827;
+  border-color: #1f2937;
+  box-shadow: none;
+
+}
+
+body.dark-mode .section-indicator {
+  background: #1d4ed8;
+  color: #fff;
+
+}
+
+body.dark-mode .detail-section-title.is-expanded .section-indicator {
+  background: #60a5fa;
+  color: #0f172a;
+
+}
+
+body.dark-mode .category-card {
+  background: linear-gradient(180deg, #1e3a8a 0%, #111827 70%);
+  border-color: #2563eb;
+  color: #bfdbfe;
+  box-shadow: none;
+
+}
+
+body.dark-mode .category-card:hover {
+  box-shadow: 0 22px 48px rgb(37 99 235 / 30%);
+
+}
+
+body.dark-mode .category-card-indicator {
+  background: #2563eb;
+  color: #fff;
+
+}
+
+body.dark-mode .category-card.is-expanded .category-card-indicator {
+  background: #60a5fa;
+  color: #0f172a;
+
+}
+
+body.dark-mode .category-children {
+  border-left-color: #2563eb;
+
+}
+
+body.dark-mode .topic-link-item {
+  background: #111827;
+  border-color: #1f2937;
+  color: #e5e7eb;
+  box-shadow: none;
+
+}
+
+body.dark-mode .topic-link-item:hover {
+  border-color: #2563eb;
+  box-shadow: 0 22px 44px rgb(37 99 235 / 28%);
+
+}
+
+body.dark-mode .topic-link-item.recently-viewed {
+  background: linear-gradient(180deg, #78350f 0%, #111827 70%);
+  border-color: #fbbf24;
+
+}
+
+body.dark-mode .toggle-info {
+  color: #bbf7d0;
+  border-bottom-color: #bbf7d0;
+
+}
+
+body.dark-mode .toggle-info-indicator {
+  background: #064e3b;
+  color: #bbf7d0;
+
+}
+
+body.dark-mode .toggle-info.is-expanded .toggle-info-indicator {
+  background: #22c55e;
+  color: #022c22;
+
+}
+
+body.dark-mode .qv-indicator {
+  background: #1f2937;
+  color: #e5e7eb;
+
+}
+
+body.dark-mode .qv-toggle.open .qv-indicator {
+  background: #2563eb;
+  color: #fff;
+
+}
+
+body.dark-mode .detail-section:hover {
+  border-color: #2563eb;
+  box-shadow: 0 16px 36px rgb(30 64 175 / 22%);
+  transform: translateY(-1px);
+
+}
+
+body.dark-mode .detail-section-title {
+  color: #93c5fd;
+
+}
+
+body.dark-mode .detail-section.adult-section {
+  background: linear-gradient(180deg, #1e3a8a 0%, #111827 70%);
+  border-color: #2563eb;
+
+}
+
+body.dark-mode .detail-section.pediatric-section {
+  background: linear-gradient(180deg, #7f1d1d 0%, #111827 70%);
+  border-color: #f87171;
+
+}
+
+body.dark-mode .detail-list,
+
+body.dark-mode .detail-text {
+  color: #e5e7eb;
+
+}
+
+/* Warning message boxes */
+
+.warning-box {
+  position: relative;
+  margin: 1rem 0;
+  padding: 0.9rem 1.1rem 0.9rem 1.4rem;
+  border-radius: 0.85rem;
+  border: 1px solid #e2e8f0;
+  font-size: 0.9rem;
+  background-color: #fff;
+  box-shadow: 0 14px 32px rgb(15 23 42 / 12%);
+
+  --warning-accent: #2563eb;
+
+}
+
+.warning-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 6px;
+  border-top-left-radius: inherit;
+  border-bottom-left-radius: inherit;
+  background: var(--warning-accent);
+
+}
+
+.warning-box > * + * {
+  margin-top: 0.5rem;
+
+}
+
+.warning-box div {
+  display: flex;
+  align-items: flex-start;
+
+}
+
+.warning-box svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.65rem;
+  flex-shrink: 0;
+
+}
+
+.warning-box-red {
+  --warning-accent: #ef4444;
+
+  border-color: #fca5a5;
+  background-color: #fef2f2;
+  color: #b91c1c;
+
+}
+
+.warning-box-orange {
+  --warning-accent: #f97316;
+
+  border-color: #fdba74;
+  background-color: #fff7ed;
+  color: #c2410c;
+
+}
+
+.warning-box-yellow {
+  --warning-accent: #f59e0b;
+
+  border-color: #fcd34d;
+  background-color: #fefce8;
+  color: #713f12;
+
+}
+
+body.dark-mode .warning-box {
+  background-color: #111827;
+  border-color: #1f2937;
+  box-shadow: none;
+  color: #f9fafb;
+
+}
+
+body.dark-mode .warning-box::before {
+  background: var(--warning-accent);
+  opacity: 0.85;
+
+}
+
+/* Keep header blue (Tailwind), focus on content readability */
+
+body.dark-mode #content-area {
+  background-color: #111827;
+  border-color: #1f2937;
+  box-shadow: none;
+
+}
+
+body.dark-mode #content-area:hover {
+  box-shadow: none;
+
+}
+
+body.dark-mode #content-area, body.dark-mode p, body.dark-mode li, body.dark-mode span { color: #e5e7eb; }
+
+body.dark-mode .sidebar-label { color: #e5e7eb; }
+
+body.dark-mode .sidebar-input { background-color: #1f2937; color: #e5e7eb; border-color: #374151; }
+
+body.dark-mode .sidebar-input::placeholder { color: #9ca3af; }
+body.dark-mode .sidebar-help-button { color: #93c5fd; }
+body.dark-mode .sidebar-help-button:hover { color: #bfdbfe; }
+body.dark-mode .bp-divider { color: #9ca3af; }
+body.dark-mode .age-icon-img { box-shadow: 0 0 0 1px rgb(148 163 184 / 50%), 0 1px 4px rgb(15 23 42 / 35%); }
+
+body.dark-mode footer { background-color: #111827; color: #9ca3af; }
+
+/* Cricothyrotomy detail layout */
+
+.cric-module {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+}
+
+.cric-module + .cric-module {
+    margin-top: 2.5rem;
+
+}
+
+.cric-module-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+
+}
+
+.cric-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+}
+
+/* stylelint-disable-next-line media-feature-range-notation */
+
+@media (min-width: 1024px) {
+
+    .cric-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        gap: 2rem;
+        align-items: start;
+
+    }
+
+}
+
+.cric-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+}
+
+.cric-rail {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+}
+
+.cric-section {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 1px 2px rgb(15 23 42 / 5%);
+
+}
+
+.cric-banner {
+    background: linear-gradient(180deg, #ecfdf5 0%, #fff 100%);
+    border-color: rgb(16 185 129 / 25%);
+
+}
+
+.cric-banner-age {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #047857;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+
+}
+
+.cric-banner-headline {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #064e3b;
+    margin-bottom: 0.75rem;
+
+}
+
+.cric-banner-summary {
+    list-style: disc;
+    margin: 0 0 0.75rem 1.25rem;
+    color: #0f172a;
+
+}
+
+.cric-banner-summary li {
+    margin-bottom: 0.25rem;
+
+}
+
+.cric-banner-caution {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    border-radius: 12px;
+    background: #fef3c7;
+    border: 1px solid #f59e0b;
+    padding: 0.75rem;
+    color: #92400e;
+
+}
+
+.cric-banner-caution-label {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+
+}
+
+.cric-banner-caution-text {
+    flex: 1;
+
+}
+
+.cric-toggle-section {
+    background: #f5f3ff;
+    border-color: #c4b5fd;
+
+}
+
+.cric-toggle-group {
+    background: #fff;
+    border: 1px solid rgb(15 23 42 / 8%);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 2px rgb(15 23 42 / 4%);
+
+}
+
+.cric-toggle-group:last-child {
+    margin-bottom: 0;
+
+}
+
+.cric-toggle-label {
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 0.75rem;
+
+}
+
+.cric-toggle-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+
+}
+
+.cric-toggle-button {
+    border: 1px solid #10b981;
+    background: #ecfdf5;
+    color: #047857;
+    border-radius: 9999px;
+    padding: 0.4rem 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+}
+
+.cric-toggle-button.is-active {
+    background: #10b981;
+    color: #fff;
+    border-color: #059669;
+
+}
+
+.cric-toggle-button:focus-visible {
+    outline: 2px solid #0284c7;
+    outline-offset: 2px;
+
+}
+
+.cric-toggle-description {
+    color: #1f2937;
+    line-height: 1.5;
+
+}
+
+.cric-toggle-body {
+    margin: 0 0 0.5rem;
+
+}
+
+.cric-workflow-section {
+    background: #fff7ed;
+    border-color: #fcd34d;
+
+}
+
+.cric-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+}
+
+.cric-step {
+    background: #fff;
+    border: 1px solid rgb(15 23 42 / 8%);
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 1px 2px rgb(15 23 42 / 4%);
+
+}
+
+.cric-step-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+
+}
+
+.cric-step-number {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    background: #0f172a;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+
+}
+
+.cric-step-title {
+    font-size: 1rem;
+    margin: 0;
+    color: #0f172a;
+
+}
+
+.cric-step-detail {
+    margin: 0;
+    color: #1f2937;
+    line-height: 1.5;
+
+}
+
+.cric-step-equipment {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+}
+
+.cric-equipment-chip {
+    border: 1px solid #0ea5e9;
+    background: #e0f2fe;
+    color: #075985;
+    border-radius: 9999px;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+}
+
+.cric-equipment-chip:hover {
+    background: #bae6fd;
+    border-color: #0284c7;
+    color: #0369a1;
+
+}
+
+.cric-equipment-chip:focus-visible {
+    outline: 2px solid #f59e0b;
+    outline-offset: 2px;
+
+}
+
+.cric-rail-card {
+    background: #fff;
+    border: 1px solid rgb(15 23 42 / 8%);
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 1px 2px rgb(15 23 42 / 5%);
+
+}
+
+.cric-rail-title {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #475569;
+    margin-bottom: 0.75rem;
+
+}
+
+.cric-kit-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+}
+
+.cric-media-title {
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 0.5rem;
+
+}
+
+.cric-video-player {
+    width: 100%;
+    border-radius: 12px;
+    background: #000;
+    margin-bottom: 0.5rem;
+
+}
+
+.cric-video-download {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: #0ea5e9;
+    margin-bottom: 0.5rem;
+
+}
+
+.cric-video-download:hover {
+    color: #0284c7;
+
+}
+
+.cric-video-caption {
+    font-size: 0.85rem;
+    color: #475569;
+    margin: 0;
+
+}
+
+.cric-citations {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: #475569;
+
+}
+
+.cric-citations-label {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #1f2937;
+
+}
+
+.cric-citation-link {
+    color: #2563eb;
+
+}
+
+.cric-citation-link:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+
+}
+
+.cric-citation-text {
+    color: #475569;
+
+}
+
+.cric-citations-separator {
+    color: #94a3b8;
+
+}
+
+.cric-reference-section {
+    background: #f8fafc;
+    border-color: #cbd5f5;
+
+}
+
+.cric-reference-list {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: #334155;
+
+}
+
+.cric-reference-list li {
+    margin-bottom: 0.35rem;
+
+}
+
+.cric-reference-link {
+    color: #1d4ed8;
+
+}
+
+.cric-reference-link:hover {
+    text-decoration: underline;
+
+}
+
+/* stylelint-disable-next-line media-feature-range-notation */
+
+@media (max-width: 1023px) {
+
+    .cric-layout {
+        gap: 1.75rem;
+
+    }
+
+    .cric-rail-card .detail-section-title {
+        margin-bottom: 0.5rem;
+
+    }
+
+}
+
+.equipment-popover-credit {
+    font-size: 0.8rem;
+    color: #475569;
+    margin: 0.25rem 0;
+
+}

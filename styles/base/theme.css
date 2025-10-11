@@ -1,0 +1,15 @@
+:root { --brightness: 1; }
+
+  /* Dark mode logic */
+
+@keyframes text-color-transition { 0%, 100% { color: #2563eb; } 50% { color: #16a34a; } }
+
+#settings-button { font-family: 'Baloo 2', cursive;
+                   font-size: 1.5rem;
+                   animation: text-color-transition 2s ease-in-out infinite; }
+
+#settings-panel { z-index: 110; }
+
+/* When dark mode is active, apply brightness filter using the root variable. */
+
+body.dark-mode { filter: brightness(var(--brightness)); }

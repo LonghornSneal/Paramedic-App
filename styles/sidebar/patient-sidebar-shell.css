@@ -1,0 +1,49 @@
+/* Sidebar and Overlay */
+
+#patient-sidebar { position: fixed; top: 0; left: 0; width: 300px; max-width: 80%; height: 100vh; background: #fff;      
+    border-right: 1px solid #e5e7eb; padding: 0; /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- Preserve scrollable panel for modern browsers; Safari gracefully ignores overflow control */
+    overflow-y: auto; z-index: 100;
+    transform: translateX(-100%); transition: transform 0.3s ease-in-out;
+    box-shadow: 2px 0 10px rgb(0 0 0 / 10%); }
+
+  #patient-sidebar.open { transform: translateX(0); }
+
+  #sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgb(0 0 0 / 50%); z-index: 40; opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; pointer-events: none; }
+
+  #sidebar-overlay.active { opacity: 1; visibility: visible; pointer-events: auto; }
+
+  #app-container { display: flex; flex-direction: column; flex-grow: 1;
+    width: 100%; transition: margin-left 0.3s ease-in-out; }
+
+/* Patient sidebar layout */
+
+  #patient-sidebar .patient-sidebar-content { display: flex; flex-direction: column; gap: 0.6rem; }
+  #patient-sidebar .patient-line { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.75rem; }
+  #patient-sidebar .patient-line--demographics { align-items: center; justify-content: flex-start; }
+  #patient-sidebar .patient-line--full { flex-direction: column; align-items: stretch; gap: 0.35rem; }
+  #patient-sidebar .patient-line--full .sidebar-field { width: 100%; }
+  #patient-sidebar .patient-line--full .sidebar-input { width: 100%; flex: 1 1 auto; }
+  #patient-sidebar .patient-line--vitals { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); align-items: stretch; gap: 0.55rem; }
+  #patient-sidebar .patient-line--rhythm,
+  #patient-sidebar .patient-line--modifier { align-items: flex-start; gap: 0.5rem; }
+  #patient-sidebar .patient-line--rhythm .ekg-row-main,
+  #patient-sidebar .patient-line--modifier .ekg-row-main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 0.35rem; }
+  #patient-sidebar .patient-line--modifier #ekg-summary-text { flex: 1 1 100%; }
+  #patient-sidebar .patient-line .unit-input { flex: 0 0 auto; }
+  #patient-sidebar .patient-line .unit-input .sidebar-input { text-align: right; }
+  #patient-sidebar .bp-stack { min-width: 0; width: auto; }
+  #patient-sidebar .bp-input { width: 3.6ch; padding: 0.3rem 0.35rem; min-height: 1.8rem; }
+  #patient-sidebar .patient-line--vitals .vital-item { align-items: center; gap: 0.35rem; }
+  #patient-sidebar .vital-mini-select { width: 1.9rem; min-width: 1.9rem; height: 1.9rem; padding: 0; font-size: 0; line-height: 1; display: inline-flex; align-items: center; justify-content: center; }
+  #patient-sidebar .vital-mini-select option { font-size: 0.78rem; }
+  #patient-sidebar .vital-item-pupils .vital-mini-select,
+  #patient-sidebar .vital-item-gcs .vital-mini-select { min-width: 5.5rem; height: 2.15rem; font-size: 0.78rem; }
+  #patient-sidebar .vital-item-lungs .vital-mini-select,
+#patient-sidebar .vital-item-ao .vital-mini-select { min-width: 6.5rem; height: 2.2rem; font-size: 0.82rem; justify-content: flex-start; padding: 0 0.4rem; }
+
+/* Sidebar width slightly smaller on very narrow screens */
+
+@media (max-width: 360px) {
+  #patient-sidebar { width: 85vw; max-width: 85vw; }
+}
