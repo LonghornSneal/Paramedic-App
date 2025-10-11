@@ -2777,6 +2777,168 @@
         "repeatsInTask": 1,
         "crossTaskLongRuns": 1
       }
+    },
+    {
+      "id": "step-1760046222190",
+      "taskId": "2025-10-09",
+      "taskName": "VS Update Verification",
+      "stepName": "Tool audit",
+      "stepType": "research",
+      "startedAt": "2025-10-09T21:43:37.143Z",
+      "endedAt": "2025-10-09T21:43:42.190Z",
+      "startNote": "Testing task timer MCP",
+      "stopNote": "Tool audit confirmation",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 5047,
+      "durationSeconds": 5.047,
+      "durationReadable": "5s",
+      "errors": 0,
+      "result": "success",
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1760053372055",
+      "taskId": "2025-10-09B",
+      "taskName": "VS17.14 MCP Audit Followup",
+      "stepName": "Inventory new MCP servers",
+      "stepType": "research",
+      "startedAt": "2025-10-09T23:22:40.564Z",
+      "endedAt": "2025-10-09T23:42:52.055Z",
+      "startNote": "Identifying new MCP servers/extensions post VS update",
+      "stopNote": "New MCP extensions inventoried",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 1211491,
+      "durationSeconds": 1211.491,
+      "durationReadable": "20m 11.5s",
+      "errors": 0,
+      "result": "success",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 20m 11.5s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1760053485909",
+      "taskId": "2025-10-09B",
+      "taskName": "VS17.14 MCP Audit Followup",
+      "stepName": "Research MCP/Agent updates",
+      "stepType": "research",
+      "startedAt": "2025-10-09T23:43:06.101Z",
+      "endedAt": "2025-10-09T23:44:45.909Z",
+      "startNote": "Gathering new MCP server + agent guidance from docs",
+      "stopNote": "Release notes sections captured",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 99808,
+      "durationSeconds": 99.808,
+      "durationReadable": "1m 39.8s",
+      "errors": 0,
+      "result": "success",
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1760053944656",
+      "taskId": "2025-10-09B",
+      "taskName": "VS17.14 MCP Audit Followup",
+      "stepName": "Retrieve FIRECRAWL key",
+      "stepType": "research",
+      "startedAt": "2025-10-09T23:44:56.681Z",
+      "endedAt": "2025-10-09T23:52:24.656Z",
+      "startNote": "Searching system for FIRECRAWL_API_KEY",
+      "stopNote": "Key not found in env or config",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 447975,
+      "durationSeconds": 447.975,
+      "durationReadable": "7m 28s",
+      "errors": 0,
+      "result": "needs-followup",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 7m 28s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1760054311797",
+      "taskId": "2025-10-09B",
+      "taskName": "VS17.14 MCP Audit Followup",
+      "stepName": "Install Chrome",
+      "stepType": "action",
+      "startedAt": "2025-10-09T23:52:37.235Z",
+      "endedAt": "2025-10-09T23:58:31.797Z",
+      "startNote": "Using winget for Google Chrome",
+      "stopNote": "Chrome installed to AppData Local",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 354562,
+      "durationSeconds": 354.562,
+      "durationReadable": "5m 54.6s",
+      "errors": 0,
+      "result": "success",
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 5m 54.6s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1760054344074",
+      "taskId": "2025-10-09B",
+      "taskName": "VS17.14 MCP Audit Followup",
+      "stepName": "Plan migration & prompt updates",
+      "stepType": "planning",
+      "startedAt": "2025-10-09T23:58:53.324Z",
+      "endedAt": "2025-10-09T23:59:04.074Z",
+      "startNote": "Drafting MCP migration plan and prompt edits",
+      "stopNote": "Plan drafted",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 10750,
+      "durationSeconds": 10.75,
+      "durationReadable": "10.8s",
+      "errors": 0,
+      "result": "success",
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
     }
   ],
   "metrics": {
@@ -4046,6 +4208,96 @@
           "patient-sidebar-redesign": 1
         },
         "experiments": {}
+      },
+      "tool audit": {
+        "stepName": "Tool audit",
+        "totalRuns": 1,
+        "totalDurationMs": 5047,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "2025-10-09": 1
+        },
+        "experiments": {}
+      },
+      "inventory new mcp servers": {
+        "stepName": "Inventory new MCP servers",
+        "totalRuns": 1,
+        "totalDurationMs": 1211491,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "2025-10-09B": 1
+        },
+        "experiments": {}
+      },
+      "research mcp/agent updates": {
+        "stepName": "Research MCP/Agent updates",
+        "totalRuns": 1,
+        "totalDurationMs": 99808,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "2025-10-09B": 1
+        },
+        "experiments": {}
+      },
+      "retrieve firecrawl key": {
+        "stepName": "Retrieve FIRECRAWL key",
+        "totalRuns": 1,
+        "totalDurationMs": 447975,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "2025-10-09B": 1
+        },
+        "experiments": {}
+      },
+      "install chrome": {
+        "stepName": "Install Chrome",
+        "totalRuns": 1,
+        "totalDurationMs": 354562,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "2025-10-09B": 1
+        },
+        "experiments": {}
+      },
+      "plan migration & prompt updates": {
+        "stepName": "Plan migration & prompt updates",
+        "totalRuns": 1,
+        "totalDurationMs": 10750,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "2025-10-09B": 1
+        },
+        "experiments": {}
       }
     },
     "experiments": {
@@ -4063,7 +4315,7 @@
         }
       }
     },
-    "updatedAt": "2025-10-09T18:49:58.398Z"
+    "updatedAt": "2025-10-09T23:59:04.074Z"
   },
-  "lastUpdated": "2025-10-09T18:49:58.398Z"
+  "lastUpdated": "2025-10-09T23:59:04.074Z"
 }
