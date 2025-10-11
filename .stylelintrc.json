@@ -24,7 +24,12 @@
     "comment-empty-line-before": null,
     "declaration-block-single-line-max-declarations": null,
     "font-family-name-quotes": null,
-    "no-descending-specificity": null
+    "no-descending-specificity": null,
+    "selector-class-pattern": [
+      "^[a-z0-9]+(?:-[a-z0-9]+)*(?:__(?:[a-z0-9]+(?:-[a-z0-9]+)*))?(?:--(?:[a-z0-9]+(?:-[a-z0-9]+)*))?$",
+      {
+        "message": "Expected class selector to follow BEM (block__element--modifier) or kebab-case."
+      }
+    ]
   }
 }
-
