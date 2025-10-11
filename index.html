@@ -31,10 +31,8 @@
       </svg>
     </button>
   </div>
-  <!-- Section: Basic Info -->
-  <div class="sidebar-section">
-    <h2 class="sidebar-section-title">Patient Details</h2>
-    <div class="sidebar-demographics-row">
+    <div class="patient-sidebar-content">
+    <div class="patient-line patient-line--demographics" data-line="1">
       <div class="sidebar-demographics-item sidebar-demographics-item-sex">
         <span class="sidebar-label">Sex:</span>
         <input type="hidden" id="pt-gender" value="">
@@ -75,7 +73,7 @@
         </div>
       </div>
     </div>
-    <div class="sidebar-demographics-row">
+    <div class="patient-line patient-line--demographics" data-line="2">
       <div class="sidebar-demographics-item sidebar-demographics-item-weight">
         <label for="pt-weight-value" class="sidebar-label">Weight:</label>
         <div class="unit-input weight-unit-input" data-unit="kg">
@@ -98,69 +96,67 @@
         </div>
       </div>
     </div>
-  </div>
-  <!-- Section: Medical History -->
-  <div class="sidebar-section">
-    <h2 class="sidebar-section-title">Medical History</h2>
-    <div class="sidebar-field sidebar-field-textarea">
-      <div class="sidebar-field-heading">
-        <label for="pt-pmh" class="sidebar-label">PMH:</label>
-        <div id="pt-pmh-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
-      </div>
-      <div class="autocomplete-container sidebar-input-flex">
-        <textarea id="pt-pmh" rows="1" class="sidebar-input"></textarea>
-        <div id="pt-pmh-suggestions" class="autocomplete-suggestions hidden"></div>
+    <div class="patient-line patient-line--full" data-line="3">
+      <div class="sidebar-field sidebar-field-textarea">
+        <div class="sidebar-field-heading">
+          <label for="pt-pmh" class="sidebar-label">PMH:</label>
+          <div id="pt-pmh-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
+        </div>
+        <div class="autocomplete-container sidebar-input-flex">
+          <textarea id="pt-pmh" rows="1" class="sidebar-input"></textarea>
+          <div id="pt-pmh-suggestions" class="autocomplete-suggestions hidden"></div>
+        </div>
       </div>
     </div>
-    <div class="sidebar-field sidebar-field-textarea mt-2">
-      <div class="sidebar-field-heading">
-        <label for="pt-allergies" class="sidebar-label">Allergies:</label>
-        <div id="pt-allergies-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
-      </div>
-      <div class="autocomplete-container sidebar-input-flex">
-        <textarea id="pt-allergies" rows="1" class="sidebar-input"></textarea>
-        <div id="pt-allergies-suggestions" class="autocomplete-suggestions hidden"></div>
-      </div>
-    </div>
-    <div class="sidebar-field sidebar-field-textarea mt-2">
-      <div class="sidebar-field-heading">
-        <label for="pt-medications" class="sidebar-label">Current Rx's:</label>
-        <div id="pt-medications-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
-      </div>
-      <div class="autocomplete-container sidebar-input-flex">
-        <textarea id="pt-medications" rows="1" class="sidebar-input"></textarea>
-        <div id="pt-medications-suggestions" class="autocomplete-suggestions hidden"></div>
+    <div class="patient-line patient-line--full" data-line="4">
+      <div class="sidebar-field sidebar-field-textarea">
+        <div class="sidebar-field-heading">
+          <label for="pt-allergies" class="sidebar-label">Allergies:</label>
+          <div id="pt-allergies-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
+        </div>
+        <div class="autocomplete-container sidebar-input-flex">
+          <textarea id="pt-allergies" rows="1" class="sidebar-input"></textarea>
+          <div id="pt-allergies-suggestions" class="autocomplete-suggestions hidden"></div>
+        </div>
       </div>
     </div>
-  </div>
-  <!-- Section: Current Presentation -->
-  <div class="sidebar-section">
-    <h2 class="sidebar-section-title">Current Presentation</h2>
-    <div class="sidebar-field sidebar-field-textarea">
-      <div class="sidebar-field-heading">
-        <label for="pt-indications" class="sidebar-label">Indications:</label>
-        <div id="pt-indications-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
-      </div>
-      <div class="autocomplete-container sidebar-input-flex">
-        <textarea id="pt-indications" rows="1" class="sidebar-input"></textarea>
-        <div id="pt-indications-suggestions" class="autocomplete-suggestions hidden"></div>
+    <div class="patient-line patient-line--full" data-line="5">
+      <div class="sidebar-field sidebar-field-textarea">
+        <div class="sidebar-field-heading">
+          <label for="pt-medications" class="sidebar-label">Current Rx's:</label>
+          <div id="pt-medications-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
+        </div>
+        <div class="autocomplete-container sidebar-input-flex">
+          <textarea id="pt-medications" rows="1" class="sidebar-input"></textarea>
+          <div id="pt-medications-suggestions" class="autocomplete-suggestions hidden"></div>
+        </div>
       </div>
     </div>
-    <div class="sidebar-field sidebar-field-textarea mt-2">
-      <div class="sidebar-field-heading">
-        <label for="pt-symptoms" class="sidebar-label">S/S:</label>
-        <div id="pt-symptoms-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
-      </div>
-      <div class="autocomplete-container sidebar-input-flex">
-        <textarea id="pt-symptoms" rows="1" class="sidebar-input"></textarea>
-        <div id="pt-symptoms-suggestions" class="autocomplete-suggestions hidden"></div>
+    <div class="patient-line patient-line--full" data-line="6">
+      <div class="sidebar-field sidebar-field-textarea">
+        <div class="sidebar-field-heading">
+          <label for="pt-indications" class="sidebar-label">Indications:</label>
+          <div id="pt-indications-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
+        </div>
+        <div class="autocomplete-container sidebar-input-flex">
+          <textarea id="pt-indications" rows="1" class="sidebar-input"></textarea>
+          <div id="pt-indications-suggestions" class="autocomplete-suggestions hidden"></div>
+        </div>
       </div>
     </div>
-  </div>
-  <!-- Section: Vital Signs -->
-  <div class="sidebar-section">
-    <h2 class="sidebar-section-title">VS</h2>
-    <div class="vital-row vital-row-top">
+    <div class="patient-line patient-line--full" data-line="7">
+      <div class="sidebar-field sidebar-field-textarea">
+        <div class="sidebar-field-heading">
+          <label for="pt-symptoms" class="sidebar-label">S/S:</label>
+          <div id="pt-symptoms-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
+        </div>
+        <div class="autocomplete-container sidebar-input-flex">
+          <textarea id="pt-symptoms" rows="1" class="sidebar-input"></textarea>
+          <div id="pt-symptoms-suggestions" class="autocomplete-suggestions hidden"></div>
+        </div>
+      </div>
+    </div>
+    <div class="patient-line patient-line--vitals" data-line="8">
       <div class="vital-item vital-item-bp">
         <span class="vital-label">BP:</span>
         <div class="bp-stack" role="group" aria-label="Blood pressure entry">
@@ -188,8 +184,8 @@
           <option value="150+">150+</option>
           <option value="100+">100+</option>
           <option value="60-100">60-100</option>
-          <option value=">60">&gt;60</option>
-          <option value=">40">&gt;40</option>
+          <option value="&gt;60">&gt;60</option>
+          <option value="&gt;40">&gt;40</option>
         </select>
       </div>
       <div class="vital-item vital-item-spo2">
@@ -208,10 +204,10 @@
         </select>
       </div>
     </div>
-    <div class="vital-row vital-row-mid">
+    <div class="patient-line patient-line--vitals" data-line="9">
       <div class="vital-item">
         <span class="vital-label">EtCO<sub>2</sub>:</span>
-        <div class="unit-input" data-unit="EtCO₂">
+        <div class="unit-input" data-unit="EtCO2">
           <input type="text" id="vs-etco2" class="sidebar-input vital-input" inputmode="numeric" maxlength="2" aria-label="End tidal CO2">
           <span class="unit-suffix" aria-hidden="true">EtCO<sub>2</sub></span>
         </div>
@@ -238,7 +234,7 @@
         </select>
       </div>
     </div>
-    <div class="vital-row vital-row-pupils">
+    <div class="patient-line patient-line--vitals" data-line="10">
       <div class="vital-item vital-item-pupils">
         <span class="vital-label">Pupils:</span>
         <div class="unit-input" data-unit="mm">
@@ -273,7 +269,7 @@
         </select>
       </div>
     </div>
-    <div class="vital-row vital-row-awareness">
+    <div class="patient-line patient-line--vitals" data-line="11">
       <div class="vital-item vital-item-gcs">
         <span class="vital-label">GCS:</span>
         <div class="unit-input" data-unit="GCS">
@@ -309,52 +305,43 @@
         </select>
       </div>
     </div>
-  </div>
-  <!-- Section: EKG -->
-  <div class="sidebar-section">
-    <div class="sidebar-section-header">
-      <h2 class="sidebar-section-title">EKG Interpretation</h2>
-      <button type="button" id="ekg-help-button" class="sidebar-help-button" aria-haspopup="dialog" aria-controls="ekg-help-modal">Help</button>
-    </div>
-    <div class="ekg-module">
-      <div class="ekg-module-row ekg-module-row--primary">
-        <div class="ekg-row-main">
+    <div class="patient-line patient-line--rhythm" data-line="12">
+      <div class="ekg-row-main">
+        <div class="ekg-row-heading">
           <label for="pt-ekg-select" class="sidebar-label">Rhythm:</label>
-          <div class="ekg-row-controls">
-            <select id="pt-ekg-select" class="sidebar-input vital-select" aria-label="EKG rhythm preset">
-              <option value="" aria-label="No rhythm selected"></option>
-            </select>
-            <div class="autocomplete-container ekg-autocomplete">
-              <input type="text" id="pt-ekg" class="sidebar-input vital-input" placeholder="Type or select rhythm">
-              <div id="pt-ekg-suggestions" class="autocomplete-suggestions hidden"></div>
-            </div>
+          <button type="button" id="ekg-help-button" class="sidebar-help-button" aria-haspopup="dialog" aria-controls="ekg-help-modal">Help</button>
+        </div>
+        <div class="ekg-row-controls">
+          <select id="pt-ekg-select" class="sidebar-input vital-select" aria-label="EKG rhythm preset">
+            <option value="" aria-label="No rhythm selected"></option>
+          </select>
+          <div class="autocomplete-container ekg-autocomplete">
+            <input type="text" id="pt-ekg" class="sidebar-input vital-input" placeholder="Type or select rhythm">
+            <div id="pt-ekg-suggestions" class="autocomplete-suggestions hidden"></div>
           </div>
         </div>
-        <div class="ekg-preview-shell" aria-hidden="true">
-          <img id="ekg-rhythm-preview" alt="" class="ekg-preview-img">
-        </div>
-        <button type="button" id="ekg-rhythm-info" class="ekg-info-button" aria-label="View rhythm definition" disabled>i</button>
       </div>
-      <div class="ekg-module-row ekg-module-row--secondary">
-        <div class="ekg-row-main">
-          <label for="pt-ekg-secondary" class="sidebar-label">Modifier:</label>
-          <div class="ekg-row-controls">
-            <select id="pt-ekg-secondary" class="sidebar-input vital-select" aria-label="EKG modifier preset">
-              <option value="" aria-label="No modifier selected"></option>
-            </select>
-          </div>
-        </div>
-        <div class="ekg-preview-shell" aria-hidden="true">
-          <img id="ekg-modifier-preview" alt="" class="ekg-preview-img">
-        </div>
-        <button type="button" id="ekg-modifier-info" class="ekg-info-button" aria-label="View modifier definition" disabled>i</button>
-        <div id="ekg-summary-text" class="ekg-summary-text is-empty" aria-live="polite"></div>
+      <div class="ekg-preview-shell" aria-hidden="true">
+        <img id="ekg-rhythm-preview" alt="" class="ekg-preview-img">
       </div>
+      <button type="button" id="ekg-rhythm-info" class="ekg-info-button" aria-label="View rhythm definition" disabled>i</button>
+    </div>
+    <div class="patient-line patient-line--modifier" data-line="13">
+      <div class="ekg-row-main">
+        <label for="pt-ekg-secondary" class="sidebar-label">Modifier:</label>
+        <div class="ekg-row-controls">
+          <select id="pt-ekg-secondary" class="sidebar-input vital-select" aria-label="EKG modifier preset">
+            <option value="" aria-label="No modifier selected"></option>
+          </select>
+        </div>
+      </div>
+      <div class="ekg-preview-shell" aria-hidden="true">
+        <img id="ekg-modifier-preview" alt="" class="ekg-preview-img">
+      </div>
+      <button type="button" id="ekg-modifier-info" class="ekg-info-button" aria-label="View modifier definition" disabled>i</button>
+      <div id="ekg-summary-text" class="ekg-summary-text is-empty" aria-live="polite"></div>
     </div>
   </div>
-
-</div>
-
 <div id="settings-panel" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-lg shadow-lg">
     <div class="flex justify-end mb-2">
         <button type="button" id="close-settings-button" aria-label="Close Settings" title="Close Settings" class="p-2 rounded-full text-gray-500 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400">

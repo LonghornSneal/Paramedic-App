@@ -207,15 +207,29 @@ function insertMedicationClassDropdown() {
     const classes = Array.from(classesSet).filter(Boolean)
         .sort((a, b) => a.localeCompare(b));
 
-    // Build the section
+    // Build the line
     const section = document.createElement('div');
-    section.className = 'sidebar-section';
-    const title = document.createElement('div');
-    title.className = 'sidebar-section-title';
-    title.textContent = 'Medication Class';
+    section.className = 'patient-line patient-line--full patient-line--med-class';
+    section.dataset.line = '5-medication-class';
+
+    const field = document.createElement('div');
+    field.className = 'sidebar-field sidebar-field-textarea';
+
+    const heading = document.createElement('div');
+    heading.className = 'sidebar-field-heading';
+
+    const label = document.createElement('label');
+    label.className = 'sidebar-label';
+    label.htmlFor = 'pt-medication-class';
+    label.textContent = 'Medication Class:';
+    heading.appendChild(label);
+
+    const selectContainer = document.createElement('div');
+    selectContainer.className = 'sidebar-input-flex';
+
     const select = document.createElement('select');
     select.id    = 'pt-medication-class';
-    select.className = 'sidebar-input w-full mt-1';
+    select.className = 'sidebar-input med-class-select';
 
     const defaultOption    = document.createElement('option');
     defaultOption.value    = '';
@@ -229,13 +243,15 @@ function insertMedicationClassDropdown() {
         select.appendChild(opt);
     });
 
-    section.appendChild(title);
-    section.appendChild(select);
+    selectContainer.appendChild(select);
+    field.appendChild(heading);
+    field.appendChild(selectContainer);
+    section.appendChild(field);
 
-    // Insert the new section right after the current medications section, if present
-    const medsSection = sidebar.querySelector('#pt-medications')?.closest('.sidebar-section');
-    if (medsSection) {
-        medsSection.insertAdjacentElement('afterend', section);
+    // Insert the new section right after the current medications line, if present
+    const medsLine = sidebar.querySelector('#pt-medications')?.closest('.patient-line');
+    if (medsLine) {
+        medsLine.insertAdjacentElement('afterend', section);
     } else {
         sidebar.appendChild(section);
     }
