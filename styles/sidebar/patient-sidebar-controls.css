@@ -1,13 +1,13 @@
 /* Patient sidebar controls */
 
-.sex-picker { display: inline-flex; gap: 0.25rem; align-items: center; }
+.sex-picker { display: inline-flex; gap: 0.00025rem; align-items: center; }
 .sex-option { display: inline-flex; align-items: center; justify-content: center; width: 2.1rem; height: 2.1rem; padding: 0; border: none; background: transparent; color: #6b7280; cursor: pointer; transition: color 0.2s ease, transform 0.2s ease; --sex-stroke-width: 2.2; }
 .sex-option[data-value="female"] { --sex-active-color: #ec4899; }
 .sex-option[data-value="male"] { --sex-active-color: #2563eb; --sex-stroke-width: 2.8; }
 .sex-option:hover { color: var(--sex-active-color); }
 .sex-option.is-selected { color: var(--sex-active-color); --sex-stroke-width: 3.2; transform: translateY(-1px); }
 .sex-option:focus-visible { outline: 2px solid var(--sex-active-color, #2563eb); outline-offset: 2px; border-radius: 999px; }
-.sex-option .sex-icon { display: inline-flex; width: 1.6rem; height: 1.6rem; align-items: center; justify-content: center; pointer-events: none; }
+.sex-option .sex-icon { display: inline-flex; width: 1.6rem; height: 1.6rem; align-items: left; justify-content: left; pointer-events: none; }
 .sex-option .sex-icon-svg { width: 100%; height: 100%; stroke: currentcolor; fill: none; stroke-width: var(--sex-stroke-width); stroke-linecap: round; stroke-linejoin: round; }
 .sex-option .sex-icon-ring { fill: none; }
 .sex-option .sex-icon-cross,
@@ -17,11 +17,18 @@ body.dark-mode .sex-option { color: #d1d5db; }
 body.dark-mode .sex-option:hover,
 body.dark-mode .sex-option.is-selected { color: var(--sex-active-color); }
 
-.sidebar-demographics-item-age { gap: 0.75rem; align-items: center; flex: 1 1 auto; }
+/* .sidebar-demographics-item-age { gap: 0.75rem; align-items: center; flex: 1 1 auto; */
+  /* To stack the Age unit buttons (Days/Months/Years) vertically, switch the toggle group to column layout: */
+/* .age-unit-toggle-group { flex-direction: column; align-items: flex-start; } */
+
 .sidebar-demographics-item-age .age-input { flex: 1 1 auto; min-width: 0; }
 .age-input--compact { max-width: 6rem; }
-.age-unit-toggle-group { display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap; }
-.age-unit-toggle { border: 1px solid #cbd5f5; background: #f1f5f9; padding: 0.2rem 0.6rem; font-size: 0.75rem; font-weight: 600; line-height: 1.2; color: #1f2937; cursor: pointer; border-radius: 999px; transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+.age-unit-toggle-group { flex-direction: column; align-items: flex-start; }
+.age-unit-toggle { border: 1px solid #cbd5f5; background: #f1f5f9; 
+  padding: 0.2rem 0.6rem; 
+  font-size: 0.75rem; font-weight: 600; 
+  line-height: 1.2; color: #1f2937; cursor: pointer; 
+  border-radius: 999px; transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
 .age-unit-toggle:hover { background: #e0ecff; border-color: #93c5fd; }
 .age-unit-toggle.is-selected { background: #2563eb; border-color: #2563eb; color: #fff; }
 .age-unit-toggle:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
@@ -32,8 +39,22 @@ body.dark-mode .age-unit-toggle:focus-visible { outline-color: #93c5fd; }
 .age-unit-tooltip { pointer-events: none; font-size: 0.75rem; white-space: nowrap; }
 
 .sidebar-demographics-item-weight { gap: 0.5rem; align-items: center; }
-.weight-unit-toggle-group { display: inline-flex; flex-direction: row; gap: 0.35rem; align-items: center; justify-content: flex-end; margin-left: auto; }
-.weight-unit-toggle { border: 1px solid transparent; background: transparent; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em; padding: 0.2rem 0.45rem; color: #4b5563; cursor: pointer; transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease; border-radius: 999px; text-transform: uppercase; }
+/*   To insert a stacked kg/lbs indicator between the "Weight" label and the numeric field, add a small column container. */
+/*     Example markup + CSS combo (commented): */
+     <!-- index.html -->
+     <!-- <div class="weight-unit-stack">kg<br>lbs</div> -->
+     
+.sidebar-demographics-item-weight { gap: 0.5rem; }
+  .weight-unit-stack { display: inline-flex; flex-direction: column; justify-content: center;
+    font-size: 0.7rem; margin-right: 0.25rem; text-transform: lowercase; }
+
+/* .weight-unit-toggle-group { display: inline-flex; flex-direction: row; gap: 0.35rem; align-items: center; justify-content: flex-end; margin-left: auto; } */
+      /* To stack the kg/lbs buttons vertically instead of side-by-side, use: */
+.weight-unit-toggle-group { flex-direction: column; align-items: flex-start; }
+
+.weight-unit-toggle { border: 1px solid transparent; background: transparent; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em; padding: 0.2rem 0.45rem; color: #4b5563; cursor: pointer; transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease; border-radius: 999px; text-transform: none; }
+  /* To display "kg" and "lbs" in lowercase, either adjust the markup text or override here: */
+
 .weight-unit-toggle:hover { color: #1f2937; border-color: #cbd5f5; background: #f1f5f9; }
 .weight-unit-toggle.is-selected { color: #2563eb; border-color: #2563eb; background: rgb(37 99 235 / 12%); }
 .weight-unit-toggle:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }

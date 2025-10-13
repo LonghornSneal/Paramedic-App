@@ -21,6 +21,28 @@ const AUTOCOMPLETE_FIELDS = [
     { inputId: 'pt-ekg', containerId: 'pt-ekg-suggestions', source: ekgSuggestions, fieldKey: 'ekg' }
 ];
 
+// NOTE: When entering PMH / Allergies / Current Rx's / Indications / S/S, the text boxes remain fixed because patientData.*Display arrays
+//       (maintained in PatientInfo.js) feed the chip lists rendered beside each textarea. If you ever need to force a chip to appear after typing,
+//       push the formatted value into the relevant display array before dispatching the render, e.g.:
+//       /*
+//       // Example: add PMH entry manually before chips render
+//       patientData.pmhDisplay = [...patientData.pmhDisplay, 'Chronic Migraine'];
+//       buildTextareaChipList('pmh', patientData.pmhDisplay);
+//       */
+//       To widen the dropdown suggestion panel while keeping the input compact, edit styles/sidebar/patient-autocomplete.css and override
+//       `.autocomplete-suggestions` width. For instance:
+//       /*
+//       .autocomplete-suggestions { width: clamp(18ch, 24vw, 28ch); }
+//       */
+//       When you need to move categories onto different numbered lines (e.g., to guarantee BP/HR/%SpO₂ share line 8),
+//       update the `data-line` attribute in index.html and keep the CSS order rules in sync. Example markup adjustment:
+//       /*
+//       <!-- Original vitals row -->
+//       <div class="patient-line patient-line--vitals" data-line="9">
+//       <!-- Move the same row to line 8 -->
+//       <div class="patient-line patient-line--vitals" data-line="8">
+//       */
+
 const COMMON_PMH_TERMS = [
     'hypertension', 'htn',
     'diabetes', 'dm',
