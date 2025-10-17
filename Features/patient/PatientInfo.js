@@ -145,7 +145,6 @@ function closeEkgHelp() {
   ekgHelpBackdrop.classList.add('hidden');
 }
 
-
 // Constants related to warnings and suggestions. PEDIATRIC_AGE_THRESHOLD defines the minimum age
 // considered adult for protocol purposes. PDE5_INHIBITORS lists medications that may interact
 // dangerously with nitroglycerin and similar treatments.
@@ -218,6 +217,21 @@ function syncUnitSuffixState(inputEl) {
     wrapper.dataset.hasValue = hasValue ? 'true' : 'false';
 }
 
+/*
+NEW CODE:
+const nextDisplay = Array.from(new Set([...patientData.pmhDisplay, committedValue]));
+patientData.pmhDisplay = nextDisplay;
+renderChipList(chipListElements.pmh, patientData.pmhDisplay);
+%%%%
+renderChipList(chipListElements.pmh, patientData.pmhDisplay);
+%%%%
+Explanation:
+- After you capture a dropdown selection (for PMH, Allergies, Current Rx's, Indications, or S/S), push the formatted string into the matching `patientData.*Display` array before re-calling `renderChipList`. That array is what feeds the chips that appear to the right of the textarea.
+- Wrapping the new values in `new Set` maintains uniqueness so the chip list does not show duplicates when the same term is picked twice.
+Override notes:
+- If you run this snippet but chips still fail to show on the right, make sure the markup in index.html uses the `.sidebar-field-textarea--chips-right` modifier and the CSS grid comment in `patient-sidebar-forms.css`; without that layout update, the chip container will continue to drop beneath the input.
+- When no chips appear even though the array has values, inspect the console for `renderChipList` errors—missing container references (null) will short-circuit the function early.
+*/
 function renderChipList(container, values) {
   if (!container) return;
   container.replaceChildren();
@@ -261,6 +275,7 @@ function updateEkgSummary(rhythmText, modifierValue) {
   ekgSummaryEl.textContent = parts.join(' • ');
   ekgSummaryEl.classList.remove('is-empty');
 }
+
 /**
  * Parses an integer value from the input with the given id. Returns null if parsing fails or
  * the value is empty. This helps avoid NaN creeping into patientData.
@@ -280,42 +295,26 @@ function getParsedInt(id, min, max) {
     if (el && clamped !== parsed) el.value = clamped.toString();
     return clamped;
 }
+
 function clampNumber(value, min, max) {
-
   if (typeof value !== 'number' || Number.isNaN(value)) return null;
-
   let clamped = value;
-
   if (typeof min === 'number' && clamped < min) clamped = min;
-
   if (typeof max === 'number' && clamped > max) clamped = max;
-
   return clamped;
-
 }
 
-
-
 function getIntegerFromInput(el, min, max) {
-
   if (!el) return null;
-
   const raw = typeof el.value === 'string' ? el.value.trim() : '';
-
   if (!raw) return null;
-
   const parsed = parseInt(raw, 10);
-
   if (Number.isNaN(parsed)) return null;
-
   const clamped = clampNumber(parsed, min, max);
-
   if (clamped == null) return null;
-
   if (clamped !== parsed) el.value = clamped.toString();
   syncUnitSuffixState(el);
   return clamped;
-
 }
 
 function sanitizeNumericInput(el, maxLength) {
@@ -327,163 +326,80 @@ function sanitizeNumericInput(el, maxLength) {
   return digitsOnly;
 }
 
-
-
 function getBloodPressureDetails() {
-
   const systolicEl = document.getElementById('vs-bp-systolic');
-
   const diastolicEl = document.getElementById('vs-bp-diastolic');
-
   const presetEl = document.getElementById('vs-bp-select');
-
-
-
   const systolic = getIntegerFromInput(systolicEl, 0, 400);
-
   const diastolic = getIntegerFromInput(diastolicEl, 0, 300);
-
   const preset = presetEl?.value?.trim() ?? '';
-
-
-
   let formatted = '';
-
   if (systolic != null && diastolic != null) {
-
     formatted = systolic + '/' + diastolic;
-
   } else if (systolic != null) {
-
     formatted = systolic.toString();
-
   }
-
-
-
   if (formatted && presetEl && preset) {
-
     presetEl.value = '';
-
   } else if (!formatted && preset) {
-
     formatted = preset;
-
   }
-
-
-
   let map = null;
-
   if (systolic != null && diastolic != null) {
-
     map = Math.round((systolic + (2 * diastolic)) / 3);
-
     if (systolicEl) systolicEl.dataset.mapValue = map.toString();
-
     if (diastolicEl) diastolicEl.dataset.mapValue = map.toString();
-
   } else {
-
     if (systolicEl) delete systolicEl.dataset.mapValue;
-
     if (diastolicEl) delete diastolicEl.dataset.mapValue;
-
   }
-
-
-
   return { value: formatted, systolic, diastolic, preset, map };
-
 }
-
-
 
 function getPupilDetails(sizeId, descriptorId) {
-
   const sizeEl = document.getElementById(sizeId);
-
   const descriptorEl = document.getElementById(descriptorId);
-
   const sizeRaw = sizeEl?.value?.trim() ?? '';
-
   let size = null;
-
   if (sizeRaw) {
-
     const parsed = parseFloat(sizeRaw);
-
     if (!Number.isNaN(parsed)) {
-
       const clamped = clampNumber(parsed, 0, 8);
-
       if (clamped != null) {
-
         const normalized = Math.round(clamped * 2) / 2;
-
         size = normalized;
-
         if (sizeEl) sizeEl.value = Number.isInteger(normalized) ? normalized.toString() : normalized.toFixed(1);
-
       }
-
     }
-
   }
-
   const descriptor = descriptorEl?.value?.trim() ?? '';
-
   let combined = '';
-
   if (size != null) {
-
     combined = Number.isInteger(size) ? size.toString() + 'mm' : size.toFixed(1) + 'mm';
-
   }
-
   if (descriptor) {
-
     combined = combined ? combined + ', ' + descriptor : descriptor;
-
   }
-
   return { combined, size, descriptor };
-
 }
-
-
 
 function readNumberOrPreset(numberId, selectId, min, max, options = {}) {
-
   const numberEl = document.getElementById(numberId);
-
   const selectEl = document.getElementById(selectId);
-
   const numberValue = getIntegerFromInput(numberEl, min, max);
-
   if (numberValue != null) {
-
     if (selectEl) selectEl.value = '';
-
     return numberValue;
-
   }
-
   const preset = selectEl?.value?.trim() ?? '';
-
   if (!preset) return '';
-
   if (options.parsePresetAsNumber && /^\d+$/.test(preset)) {
-
     const parsed = parseInt(preset, 10);
-
     return clampNumber(parsed, min, max);
-
   }
-
   return preset;
-
 }
+
 function linkNumberAndSelect(numberIds, selectId, options = {}) {
   const ids = Array.isArray(numberIds) ? numberIds : [numberIds];
   const numberElements = ids.map(id => document.getElementById(id)).filter(Boolean);
@@ -592,46 +508,22 @@ function updateModifierPreview(sourceValue) {
   renderEkgPreview(ekgModifierPreviewImg, ekgModifierInfoButton, asset, 'Modifier');
   return asset;
 }
-
-
-
-
 /**
-
  * Parses a floating point value from the input with the given id. Returns null if parsing fails
-
  * or the value is empty. This helper is used for weight inputs where decimals are allowed.
-
- *
-
  * @param {string} id The id of the input element to parse.
-
  * @returns {number|null} The parsed float or null.
-
  */
-
 function getParsedFloat(id) {
-
     const val = getInputValue(id);
-
     return val && !isNaN(parseFloat(val)) ? parseFloat(val) : null;
-
 }
-
 function getNormalizedNumberOrText(id, min, max) {
-
   const el = document.getElementById(id);
-
   const numeric = getIntegerFromInput(el, min, max);
-
   if (numeric != null) return numeric;
-
   return el?.value?.trim() ?? '';
-
 }
-
-
-
 
 /**
  * Splits a comma‑separated textarea into an array of lower‑cased values. Returns an empty
@@ -1014,7 +906,6 @@ function applyTopicStrikethroughs() {
   });
 }
 
-
 /**
  * Updates the global patientData object by reading all current inputs. This function is called on
  * every input event for monitored fields. It also handles striking through irrelevant topics in
@@ -1132,10 +1023,9 @@ function updatePatientData() {
         aoStatus: getInputValue('vs-ao-status'),
         lungSounds: getInputValue('vs-lung-sounds')
     };
-     // If any indications are entered, strike through irrelevant topics in the list. We compare the
-      // patient’s indications against each topic’s indications to determine relevance. This logic
-      // originally lived in the ListView module but has been centralized here to respond to patient
-      // input changes immediately.
+// If any indications are entered, strike through irrelevant topics in the list. We compare the
+// patient’s indications against each topic’s indications to determine relevance. This logic
+// originally lived in the ListView module but has been centralized here to respond to patient input changes immediately.
     updateSuggestedTopics();
     const currentTopicTitleEl = window.contentArea?.querySelector('.topic-h2');
     const isSearchResults = Boolean(document.getElementById('results-container'));
@@ -1265,7 +1155,6 @@ const ekgInputEl = document.getElementById('pt-ekg');
 
 if (ekgSelectEl) populateEkgSelect(ekgSelectEl, EkgRhythmAssets, findRhythmAssetByName);
 if (ekgModifierSelectEl) populateEkgSelect(ekgModifierSelectEl, EkgModifierAssets, findModifierAssetByName);
-
 if (ekgSelectEl && ekgInputEl) {
   ekgSelectEl.addEventListener('change', () => {
     const selectedValue = ekgSelectEl.value || '';
@@ -1294,7 +1183,6 @@ if (ekgModifierSelectEl) {
   });
   updateModifierPreview(ekgModifierSelectEl.value);
 }
-
 
 sexButtons.forEach(btn => {
   btn.setAttribute('aria-pressed', 'false');
@@ -1346,11 +1234,9 @@ ekgModifierInfoButton?.addEventListener('click', () => {
 });
 
 // Removed Medication Class dropdown integration
-
 // Expose our important values and functions globally for legacy scripts. This allows older code
 // that references window.patientData, window.PEDIATRIC_AGE_THRESHOLD, etc. to continue working
-// even though this module exports them. Once the entire app uses ES modules, these exposures can
-// be removed.
+// even though this module exports them. Once the entire app uses ES modules, these exposures can be removed.
 if (typeof window !== 'undefined') {
   window.patientData = patientData;
   window.PEDIATRIC_AGE_THRESHOLD = PEDIATRIC_AGE_THRESHOLD;
@@ -1370,21 +1256,3 @@ if (typeof window !== 'undefined') {
   - Sidebar synchronization is exercised by E2E tests that change sex/weight and then compute TV.
   - No unit test harness present; consider adding a small DOM test for weight lb↔kg sync.
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

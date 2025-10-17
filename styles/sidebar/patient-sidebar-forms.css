@@ -1,133 +1,87 @@
 /* Sidebar sections (applies to every grouping inside the Patient Info Sidebar: Demographics, PMH, Allergies, etc.) */
 .sidebar-section { /* Wraps each patient sidebar section (e.g., PMH block, Allergies block) so we can control separators between blocks */
-  margin: 0; /* Remove default section margin so rows sit flush against each other */
-  padding: 0; /* Strip padding so content aligns edge-to-edge with labels */
-  border-top: none; /* Drop the top border to avoid double borders between stacked sections */
-  border-bottom: 0.5px solid #e5e7eb; } /* Light divider under each section to improve scanability */
+  margin: 0; /* "0" Removes default section margin so rows sit flush against each other */
+  padding: 0; /* "0" Strips padding so content aligns edge-to-edge with labels */
+  border-top: none; /* "none" Drop the top border to avoid double borders between stacked sections */
+  border-bottom: 0.5px solid #e5e7eb; } /* Light divider under each section */
 
 .sidebar-section:last-child { /* Special case for final section so it does not draw a bottom border */
-  border-bottom: none; } /* Remove trailing divider to avoid a hanging line at the bottom */
+  border-bottom: none; } /* "none" Removes trailing divider to avoid a hanging line at the bottom */
 
-.sidebar-section-title { /* Handles headings such as "Vitals" and any future sidebar section titles */
-  font-size: 1.125rem; /* Slightly larger text to distinguish headings from field labels */
-  font-weight: 600; /* Semi-bold weight so headings stand out */
-  color: #2563eb; /* Use primary blue to match the rest of the sidebar accents */
-  margin: 0; /* Prevent extra space above/below the heading */
-  padding: 0; } /* Keep heading flush with container edges */
+.sidebar-section-title { /* Handles headings such as "Vitals" & any future sidebar section titles */
+  font-size: 1.125rem; font-weight: 600; /* Semi-bold weight */
+  color: #2563eb;
+  margin: 0; /* "0" Prevents extra space above/below the heading */
+  padding: 0; } /* "0" Keeps heading flush with container edges */
 
-/* Form inputs in sidebar */
+  /* Base styling for all single-line inputs within the Patient Info Sidebar (e.g., Sex selector hidden input, Age numeric field, Vital sign fields).
+    To display PMH/Allergies/Current Rx's/Indications/S/S entries to the right without moving this box, populate patientData
+    arrays (pmhDisplay, allergyDisplay, etc.) so the .sidebar-chip-list renders the orange chips adjacent to the input.
+    Increase the font size of all sidebar inputs by uncommenting the snippet below: */
+  
 /*
-NEW CODE:
-.sidebar-input,
-textarea.sidebar-input {
-  font-size: 0.95rem;
-  line-height: 1.15;
-  letter-spacing: 0.01em;
-}
-%%%%
-.sidebar-input { 
-  /* Base styling for all single-line inputs within the Patient Info Sidebar (e.g., Sex selector hidden input, Age numeric field, Vital sign fields).
-    To display PMH/Allergies/Current Rx's/Indications/S/S entries to the right without moving this box, populate patientData
-    arrays (pmhDisplay, allergyDisplay, etc.) so the .sidebar-chip-list renders the orange chips adjacent to the input.
-    Increase the font size of all sidebar inputs by uncommenting the snippet below: */
-.sidebar-input, textarea.sidebar-input {
-  font-size: 1rem; }  /* makes characters larger in PMH, vitals, etc. */
-  flex: 0 0 auto; /* Prevent inputs from stretching and keep them only as wide as needed */
-  width: auto; /* Allow width to be dictated by min/max width constraints */
-  min-width: 1.5ch; /* Ensure at least enough room for typical numeric/text entry */
-  max-width: 10ch; /* Cap width so long values do not stretch the row */
-  min-height: 0.5rem; /* Give inputs enough height for comfortable tap targets */
-  padding: 0.003rem 0.0045rem; /* Add internal space so text is not flush against borders */
-  border: 1px solid #2311e9; /* Use neutral border consistent with rest of UI */
-  border-radius: 0.7rem; /* Soften corners to match the design language */
-  font-size: 0.485rem; /* Slightly smaller font to fit more data within compact rows */
-  line-height: 0.5; /* Ensure adequate vertical spacing for readability */
-  color: #1f2937; /* Dark slate text for high contrast on white background */
-  background-color: #fff; /* Keep input background white for clarity against sidebar */
-  transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Smooth focus/hover effects */
-}
-%%%%
-Explanation:
-- Use this override snippet when you want the characters typed into any patient sidebar input (PMH textarea, vitals, demographics) to appear larger; it intentionally targets both single-line and textarea variants so font sizing stays consistent.
-- Increasing `letter-spacing` a touch keeps condensed vitals legible even after you tighten the input widths for BP and HR.
-Override notes:
-- If the new font size does not apply, confirm Tailwind utility classes (e.g., `text-sm`) are not being injected on the inputs elsewhere—classList additions in JavaScript can override CSS specificity; add `!important` as a last resort on the `.sidebar-input` rule.
-- The `.sidebar-input, textarea.sidebar-input { font-size: 1rem; }` inside the original block fires only when you comment out its leading `/*`; if you try editing that line but see no change, double-check that the opening comment is removed all the way back to `/* Base styling ... */`.
-*/
-.sidebar-input { 
-  /* Base styling for all single-line inputs within the Patient Info Sidebar (e.g., Sex selector hidden input, Age numeric field, Vital sign fields).
-    To display PMH/Allergies/Current Rx's/Indications/S/S entries to the right without moving this box, populate patientData
-    arrays (pmhDisplay, allergyDisplay, etc.) so the .sidebar-chip-list renders the orange chips adjacent to the input.
-    Increase the font size of all sidebar inputs by uncommenting the snippet below: */
-.sidebar-input, textarea.sidebar-input {
-  font-size: 1rem; }  /* makes characters larger in PMH, vitals, etc. */
-  flex: 0 0 auto; /* Prevent inputs from stretching and keep them only as wide as needed */
-  width: auto; /* Allow width to be dictated by min/max width constraints */
-  min-width: 1.5ch; /* Ensure at least enough room for typical numeric/text entry */
-  max-width: 10ch; /* Cap width so long values do not stretch the row */
-  min-height: 0.5rem; /* Give inputs enough height for comfortable tap targets */
-  padding: 0.003rem 0.0045rem; /* Add internal space so text is not flush against borders */
-  border: 1px solid #2311e9; /* Use neutral border consistent with rest of UI */
-  border-radius: 0.7rem; /* Soften corners to match the design language */
-  font-size: 0.485rem; /* Slightly smaller font to fit more data within compact rows */
-  line-height: 0.5; /* Ensure adequate vertical spacing for readability */
-  color: #1f2937; /* Dark slate text for high contrast on white background */
-  background-color: #fff; /* Keep input background white for clarity against sidebar */
-  transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Smooth focus/hover effects */
-}
+- (override snippet) text in any pt sidebar input (PMH textarea, vitals, demographics) appears larger; 
+- targets both single-line & textarea variants so font sizing stays consistent.
+- Increasing `letter-spacing`("letter-spacing: 0.01em") a touch keeps condensed vitals legible even after you tighten the input widths for BP & HR.
+- If the new font size does not apply, confirm Tailwind utility classes (e.g., `text-sm`) are not being injected on the inputs elsewhere—classList additions in JavaScript can override CSS specificity; 
+- add `!important` as a last resort on the `.sidebar-input` rule. */
+
+.sidebar-input, textarea.sidebar-input { font-size: 10rem;  /* mPMH, vitals, etc. */
+  flex: 0 0 auto; /* "0 0 auto" Prevents inputs from stretching and keep them only as wide as needed */
+  width: auto; /* "auto" Allows width to be dictated by min/max width constraints */
+  min-width: 1.5ch; max-width: 10ch; min-height: 0.5rem; padding: 0.003rem 0.0045rem; /* text entry */
+  border: 1px solid #2311e9; border-radius: 0.7rem;
+  font-size: 0.485rem; line-height: 0.5;
+  color: #d406b9; background-color: #fff; transition: border-color 0.2s ease, box-shadow 0.2s ease; } /* focus/hover effects */
 
 .sidebar-input::placeholder { /* Placeholder styling for empty fields (e.g., PMH textarea hint text) */
   color: #9ca3af; }
 .sidebar-input:focus { /* Focus state for keyboard/mouse users when they click into a sidebar field (Sex, Age, vitals, etc.) */
-  border-color: #2563eb; /* Highlight border */
+  border-color: #2563eb;
   box-shadow: 0 0 0 2px rgb(37 99 235 / 20%); /* Add subtle glow */
   outline: none; } /* Remove default outline so only custom glow is shown */
 
 textarea.sidebar-input { 
   /* Overrides for multi-line fields such as the PMH, Allergies, Current Rx's, Indications, & S/S textareas.
     The textarea stays fixed in place while the .sidebar-chip-list element (adjacent to this field) displays the chosen items.
-    If you need a taller typing area without shifting chips, adjust min-height here or use: */
-textarea.sidebar-input { min-height: 2.8rem; }  /* taller input while chips remain to the right */
+    If you need a taller typing area without shifting chips, adjust min-height here */
   min-height: 0.5rem; /* Allow slightly taller area for multi-line text */
-  max-width: 10ch; /* Avoid overly wide text areas that could break layout
+  max-width: 10ch; /* Avoid overly wide text areas that could break layout */
   padding-top: 0.2rem; /* Balance vertical padding now that field is deeper */
   padding-bottom: 0.2rem; /* Mirror top padding for symmetry */
-  line-height: 1.0; } /* Slightly larger line height for multi-line readability */
+  line-height: 1.0; }
 
 select.sidebar-input { 
   /* Styles dropdown selects within the sidebar (e.g., Pupils, GCS, Lung Sounds dropdown arrows) to appear as compact square buttons.
     For autocomplete dropdowns that need to be wider (PMH suggestions), adjust .autocomplete-suggestions width in patient-sidebar-autocomplete.css
     so the suggestion panel exceeds the input while the input width here remains compact.
     Example override (commented) you can place in patient-sidebar-autocomplete.css: */
-  .autocomplete-suggestions { width: clamp(20ch, 28vw, 32ch);
-                              max-height: 14rem; }
+  /* .autocomplete-suggestions { width: clamp(20ch, 28vw, 32ch); max-height: 14rem; } */
 
-  width: 1.9rem; /* Provide a perfect square footprint around the dropdown arrow */
-  min-width: 0.1rem; /* Prevent the select from shrinking smaller than the icon */
-  max-width: 1.1rem; /* Keep the select from stretching wider than intended */
-  padding: 0; /* Remove padding so the chevron is centered */
-  text-indent: -9999px; /* Hide textual value, leaving only the icon visible */
+  width: 0.9rem; /* dropdown arrow */
+  min-width: 0.1rem; /* Prevent options from shrinking smaller than the icon */
+  max-width: 1.1rem; /* Keep options from stretching wider than intended */
+  padding: 0; /* centers chevron */
+  text-indent: -9999px; /* Hide options, leaves only icon visible */
   appearance: none; /* Remove native browser styling for consistent look */
   background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' fill='none' stroke='%236b7280' stroke-width='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E"); /* Inline chevron icon */
   background-repeat: no-repeat; /* Prevent icon tiling */
   background-position: center; /* Center icon within the square */
-  background-color: #ed1818; /* Match other input backgrounds */
-  border-radius: 0.1rem; /* Slight rounding so dropdown matches other inputs */
-} /* End select styling */
+  background-color: #ed1818;
+  border-radius: 0.6rem; /* rounded corners */
+}
 
-select.sidebar-input:focus-visible { /* Focus styling for keyboard navigation when a user tabs onto a sidebar dropdown (e.g., Pupils select) */
-  outline: 1px solid #2535eb; /* Blue outline to show focus state */
-  outline-offset: 0px; /* Offset outline slightly for better visibility */
-} /* End select focus styling */
+select.sidebar-input:focus-visible { /* Focus styling for keyboard tab navigation (e.g., Pupils select) */
+  outline: 1px solid #2535eb; /* outline for focus state */
+  outline-offset: 0px; } /* Offset outline */
 
 @supports (resize: vertical) { /* Feature query for browsers that support textarea resize control */
   textarea.sidebar-input { /* Apply only when vertical resize is supported so PMH/Allergies/Current Rx's/Indications/Symptoms textareas can be resized vertically */
-    resize: vertical; /* Allow user to expand textarea vertically without affecting width */
-  } /* End textarea resize rule */
-} /* End @supports block */
+    resize: vertical; } /* Allow user to expand textarea vertically without affecting width */
+}
 
 .patient-line { 
-  /* Wrapper for each logical row inside the sidebar (e.g., line 1 Sex/Age row, line 8 vitals row).
+  /* Wrapper for each row inside the sidebar (e.g., line 1 through line 13).
     To move categories onto specific numbered lines (e.g., keeping BP/HR/% SpO₂ together), adjust the data-line attribute
     in index.html and update the order rules at the bottom of this file to match the desired row placement.
     Example swap (commented) of rows 8 and 9: /*
@@ -139,137 +93,168 @@ select.sidebar-input:focus-visible { /* Focus styling for keyboard navigation wh
                       .patient-line[data-line="8"] { order: 9; }
                       .patient-line[data-line="9"] { order: 8; }
                     */
-  display: inline-flex; /* Lay out inputs in a single line using flexbox */
-  align-items: center; /* Vertically center labels and inputs within the row */
-  gap: 0.245rem; /* Provide consistent spacing between elements in the row */
+  /*
+  NEW CODE:
+  <!-- index.html -->
+  <div class="patient-line patient-line--vitals patient-line--vitals-primary" data-line="8">...</div>
+  <div class="patient-line patient-line--vitals" data-line="9">...</div>
+
+   styles/sidebar/patient-sidebar-forms.css
+  .patient-line[data-line="8"] { order: 8; }
+  .patient-line[data-line="9"] { order: 9; }
+  .patient-line[data-line="8"] .vital-item--compact { flex: 0 0 auto; }
+  
+  old code:
+  <!-- index.html -->
+  <div class="patient-line patient-line--vitals" data-line="8">...</div>
+  <div class="patient-line patient-line--vitals" data-line="9">...</div>
+
+   styles/sidebar/patient-sidebar-forms.css
+  .patient-line[data-line="8"] { order: 8; }
+  .patient-line[data-line="9"] { order: 9; }
+  
+  - Assign the `patient-line--vitals-primary` helper and lock the `order` values so BP, HR, and %SpO₂ stay together on line 8 while downstream vitals remain on their numbered lines.
+  - Narrowing the vitals with `.vital-item--compact { flex: 0 0 auto; }` keeps the row from wrapping after you shrink the BP inputs.
+  Override notes:
+  - If nothing changes, check for Tailwind `order-*` utilities in index.html—they override these declarations and must be removed or superseded with more specific selectors.
+  - When the vitals still wrap, ensure `.patient-line--vitals` later in the file is not forcing `flex-wrap: wrap;`; add `.patient-line--vitals-primary { flex-wrap: nowrap; }` if necessary.
+  */
+  display: inline-flex; /* single line layout using flexbox */
+  align-items: center; /* Vertically center labels & inputs within row */
+  gap: 0.245rem; /* spacing between row elements */
   flex-wrap: nowrap; /* Disable wrapping so each row stays on a single line */
   overflow-x: auto; /* Enable horizontal scrolling when content exceeds width */
-  scroll-behavior: smooth; /* Smooth scrolling for better UX when using trackpads */
+  scroll-behavior: smooth; /* Smooth scrolling when using trackpads */
 } /* End .patient-line */
 
-.patient-line::-webkit-scrollbar { /* Custom scrollbar styling for WebKit browsers applied to each logical sidebar row */
-  height: 3px; /* Keep horizontal scrollbar slim so it does not distract */
-} /* End scrollbar height setting */
+.patient-line::-webkit-scrollbar { /* Custom scrollbar styling for WebKit browsers applied to each sidebar row */
+  height: 3px; }
 
-.patient-line { /* Additional scrollbar styling for Firefox and other browsers on each sidebar row */
-  scrollbar-width: thin; /* Use thin scrollbar track for consistency */
-} /* End patient-line scrollbar rule */
+.patient-line { /* Additional scrollbar styling for Firefox & other browsers on each sidebar row */
+  scrollbar-width: thin; }
 
-#patient-sidebar .patient-line .sidebar-input { /* Inputs inside rows (e.g., Age number, HR, RR) should stay compact */
+#patient-sidebar .patient-line .sidebar-input { /* Inputs inside rows (e.g., Age #, HR, RR) should stay compact */
   flex: 0 0 auto; /* Prevent flex growth so width stays bounded by min/max */
-} /* End specific input rule */
+}
 
-#patient-sidebar .patient-line textarea.sidebar-input { /* Multi-line fields inside rows (PMH, Allergies, Current Rx's, Indications, S/S) */
-  width: 16ch; /* Provide enough width for short phrases while remaining compact */
-} /* End textarea width rule */
+#patient-sidebar .patient-line textarea.sidebar-input { /* (textarea width rule) Multi-line fields inside rows (PMH, Allergies, Current Rx's, Indications, S/S) */
+  width: 16ch; }
 
-#patient-sidebar .patient-line .sidebar-input.age-input { /* Age inputs (the Age numeric field, regardless of unit selection) */
-  min-width: 6ch; /* Ensure digits fit comfortably */
+#patient-sidebar .patient-line .sidebar-input.age-input { /* Age input sizing (the Age numeric field, regardless of unit selection) */
+  min-width: 6ch;
   max-width: 7ch; /* Prevent wider-than-necessary fields */
-} /* End age input sizing */
+}
 
 #patient-sidebar .patient-line .weight-input { /* Weight input field (the numeric entry for patient weight) */
-  min-width: 6ch; /* Provide room for typical weight values */
-  max-width: 8ch; /* Maintain consistent sizing across units */
-} /* End weight input sizing */
+  min-width: 6ch;
+  max-width: 8ch; }
 
-#patient-sidebar .patient-line .height-input { /* Height inputs (feet and inches fields on the Weight/Height row) */
-  min-width: 3ch; /* Enough space for 1–2 digits */
-  max-width: 4ch; /* Cap width so fields stay compact */
-} /* End height input sizing */
+#patient-sidebar .patient-line .height-input { /* Height inputs (feet & inches fields on the Weight/Height row) */
+  min-width: 3ch;
+  max-width: 4ch;
+}
 
 #patient-sidebar .patient-line .med-class-select { /* Dropdown selects within rows (future use for medication class selection) */
   width: auto; /* Allow the select to use default width unless overridden */
-  min-width: 4.5ch; /* Reserve enough width for short labels */
-} /* End med class select sizing */
+  min-width: 4.5ch; }
 
 .sidebar-field { /* Shared styling for the label + control pairing on each row (e.g., "PMH:" label plus textarea) */
-  display: inline-flex; /* Keep label and control aligned in a row */
+  display: inline-flex; /* Keeps label & control aligned in row */
   align-items: flex-start; /* Align content to top so multi-line labels line up */
-  gap: 0.0035rem; /* Maintain consistent gap between label and control */
-  flex-wrap: nowrap; /* Do not wrap label/control to preserve single-line layout */
-  padding: 0; /* Remove default padding for tighter alignment */
+  gap: 0.0035rem; /* gap between label & control */
+  flex-wrap: nowrap; /* Do not wrap label/control (preserves single-line layout) */
+  padding: 0;
   min-width: 0; /* Allow flex container to shrink if needed */
-} /* End sidebar-field */
+}
+
+.sidebar-field-textarea.sidebar-field-textarea--chips-right { display: grid; grid-template-columns: minmax(0, 16ch) minmax(10ch, auto); gap: 0.6rem; align-items: start; }
+.sidebar-field-textarea--chips-right .sidebar-field-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
+.sidebar-field-textarea--chips-right .sidebar-field-row--input { align-items: stretch; }
+.sidebar-field-textarea--chips-right .sidebar-chip-list { min-width: 12ch; }
+.sidebar-field-textarea--chips-right .sidebar-chip-ghost { min-width: 22ch; visibility: hidden; }
+
+/*
+- The grid layout reserves a second column so the chip list (selected options) can sit to the right of the textarea without nudging the input out of place; reuse the modifier on Allergies, Current Rx's, Indications, and S/S.
+- `.sidebar-chip-ghost` keeps the second column width stable when no chips are selected, preventing the textarea from stretching full-width and then snapping smaller once chips appear.
+Override notes:
+- If the chips remain below the textarea, double-check that `.sidebar-field-heading` is not forcing `width:100%`; remove or override with `.sidebar-field-textarea--chips-right .sidebar-field-heading { width:auto; }`.
+- Should the grid columns be too narrow or wide, adjust the `minmax` values; the first column controls the textarea width, while the second column tracks the chip list width.
+*/
 
 .sidebar-field .sidebar-label { /* Styling for labels inside the field wrapper (e.g., "Allergies:", "HR:", "Rhythm:") */
   display: inline-flex; /* Keep label text aligned with control */
   align-items: center; /* Center label text vertically */
   margin-bottom: 0; /* Ensure labels do not add extra space below */
   white-space: nowrap; /* Prevent labels from breaking onto multiple lines */
-} /* End label styling */
+}
 
 .sidebar-field-textarea { /* Wrapper around textarea fields like PMH, Allergies, Current Rx's, Indications, and S/S */
   align-items: flex-start; /* Align the textarea to the top to match label height */
-} /* End textarea wrapper */
+}
 
 .sidebar-field-textarea .sidebar-label { /* Labels specifically for textarea fields (PMH label, Allergies label, etc.) */
   min-width: 0; /* Allow narrow labels so textarea can take available width */
   padding: 0; /* Keep label flush with container */
-} /* End textarea label rule */
+}
 
 .sidebar-field-heading { /* Container for labels that have trailing chip lists (e.g., PMH label plus chip list); ensure template keeps .sidebar-chip-list sibling to show selections on the right. */
-  display: inline-flex; /* Keep heading and chips on the same line */
+  display: inline-flex; /* Keeps heading & chips on the same line */
   align-items: center; /* Vertically center heading text */
-  gap: 0.15rem; /* Provide breathing room between heading and chips */
+  gap: 0.15rem; /* gap between heading & chips */
   white-space: nowrap; /* Prevent heading from wrapping */
-} /* End field heading */
+}
 
 .sidebar-field-heading .sidebar-label { /* Label inside heading container (e.g., PMH label when chips are present) */
   flex: 0 0 auto; /* Prevent label from stretching */
-  white-space: nowrap; /* Keep label on a single line for clarity */
-} /* End heading label */
+  white-space: nowrap; /* Keep label on a single line */
+}
 
 .sidebar-chip-list { /* Container for multi-select chips (e.g., previously entered PMH values, Allergies selections).
                           When patientData arrays are updated, chips appear here to the right of the input without moving the text box.
                           Example optional override (leave commented) to give the chip rail a fixed width:
-                          /*
-                          .sidebar-chip-list {
-                            width: clamp(14ch, 22vw, 28ch);
-                            white-space: nowrap;
-                          }
-                          */
-                        */
+  .sidebar-chip-list { width: clamp(14ch, 22vw, 28ch); white-space: nowrap; }
+*/
+                        
   display: inline-flex; /* Lay chips left-to-right */
   flex: 0 0 auto; /* Keep chip list from expanding vertically */
   gap: 0.2rem; /* Small spacing between chips */
-  margin-left: 0.4rem; /* Space between label and chip list */
+  margin-left: 0.4rem; /* Space between label & chip list */
   min-height: 1.1rem; /* Reserve vertical space so row height is stable */
   overflow-x: auto; /* Allow horizontal scrolling when many chips selected */
-  padding-bottom: 0.15rem; /* Create breathing room for scrollbar track */
-} /* End chip list */
+  padding-bottom: 0.15rem; /* space for scrollbar track */
+}
 
 .sidebar-chip-list::-webkit-scrollbar { /* Customize scroll track for chip list in WebKit */
   height: 3px; /* Keep horizontal scrollbar subtle */
-} /* End chip scrollbar */
+}
 
 .sidebar-chip-list.is-empty { /* Hide chip list entirely when no chips exist */
   display: none; /* Prevent empty container from occupying space */
-} /* End empty chip rule */
+}
 
 .sidebar-chip { /* Individual chip styling representing each selected PMH/Allergy/Current Rx/Indication entry */
   display: inline-flex; /* Show chip text inline with icon (if any) */
   align-items: center; /* Center text vertically within chip */
-  padding: 0.05rem 0.2rem; /* Keep chips compact but readable */
-  font-size: 0.45em; /* Reduce font size to 25% of parent per requirement */
+  padding: 0.05rem 0.2rem;
+  font-size: 0.45em;
   line-height: 1; /* Keep chip content tight without extra vertical space */
-  letter-spacing: 0.02em; /* Slight tracking for readability at small size */
+  letter-spacing: 0.02em;
   border-radius: 0.3rem; /* Rounded chip corners */
-  background: #fff7ed; /* Light orange background to match request */
-  border: 1px solid #1da9ea; /* Orange border for emphasis */
-  color: #ab0000; /* Orange text per requirement */
+  background: #fff7ed;
+  border: 1px solid #1da9ea;
+  color: #ab0000;
   flex: 0 0 auto; /* Keep chip width based on content */
-} /* End chip styling */
+}
 
 .sidebar-chip strong { /* Emphasized text within chips, e.g., abbreviations or critical flags inside the chip */
-  font-weight: 700; /* Make strong text stand out even at reduced size */
-} /* End strong chip styling */
+  font-weight: 700;
+}
 
 body.dark-mode .sidebar-chip { /* Dark theme variant of chips for PMH/Allergies/Current Rx's/Indications selections */
-  background: #451a03; /* Deep brown to maintain contrast in dark mode */
-  border-color: #fb923c; /* Bright border to keep chip visible */
-  color: #fdba74; /* Soft orange text that remains legible on dark background */
-} /* End dark-mode chip styling */
+  background: #451a03;
+  border-color: #fb923c;
+  color: #fdba74;
+}
 
 @supports (overflow: hidden) { /* Feature query to ensure clipping works where supported */
   .sidebar-chip { /* Limit chip overflow to avoid layout stretching */
@@ -283,100 +268,100 @@ body.dark-mode .sidebar-chip { /* Dark theme variant of chips for PMH/Allergies/
   min-width: 0; /* Allow shrink when horizontal space is constrained */
   display: flex; /* Stack label and control vertically */
   flex-direction: column; /* Ensure label sits above control */
-} /* End input flex wrapper */
+}
 
-.sidebar-field-vital { /* Wrapper specifically for vital sign entries (BP, HR, SpO2, EtCO2, RR, BGL, Pupils, Lung Sounds, GCS, A&O) */
-  align-items: center; /* Align vital label and field along baseline */
-} /* End vital wrapper */
+.sidebar-field-vital { /* Wrapper specifically for VS entries (BP, HR, SpO2, EtCO2, RR, BGL, Pupils, Lung Sounds, GCS, A&O) */
+  align-items: center; /* Align vital label & field along baseline */
+}
 
 .sidebar-field-vital .sidebar-label { /* Label next to each vital entry (e.g., "HR:", "% SpO2:", "EtCO2:") */
   flex: 0 0 auto; /* Keep label width fixed to fit text */
   min-width: 5.5rem; /* Ensure label text is readable without wrapping */
   white-space: nowrap; /* Prevent label from splitting into multiple lines */
-} /* End vital label rule */
+}
 
 .sidebar-field-vital .sidebar-input { /* Vital input boxes (e.g., HR bpm box, RR respiration box, BGL entry) */
   flex: 0 0 auto; /* Keep input width controlled by min/max width */
   min-width: 4ch; /* Provide space for up to three-digit values */
   max-width: 6ch; /* Prevent fields from stretching too wide */
-} /* End vital input rule */
+}
 
 .vital-input { /* General vital input fallback covering BP systolic/diastolic, EtCO2 numeric, RR numeric, BGL value */
   flex: 0 0 auto; /* Keep width consistent for these controls */
   min-width: 4ch; /* Enough room for vital numbers */
   max-width: 6ch; /* Prevent overly wide fields */
-} /* End .vital-input */
+}
 
 #patient-sidebar .patient-line .vital-input { /* Align vital numeric inputs (HR/ RR/ BGL etc.) in their respective rows */
   text-align: right; /* Right align numbers for consistent visual alignment */
-} /* End vital alignment */
+}
 
 .vital-select { /* Dropdown fields within vital rows (e.g., Pupils reaction dropdown, Lung Sounds dropdown) */
   flex: 0 0 auto; /* Keep select width tight */
-} /* End .vital-select */
+}
 
 .vital-row { /* Container for grouped vital items on lines 8-11 (BP/HR/SpO2, EtCO2/RR/BGL, Pupils/Lung Sounds, GCS/A&O) */
   display: inline-flex; /* Lay out vitals side-by-side */
-  align-items: center; /* Keep labels and inputs aligned vertically */
-  gap: 0.45rem; /* Provide consistent spacing between vitals */
+  align-items: center; /* Keep labels & inputs aligned vertically */
+  gap: 0.45rem; /* gap between vitals */
   flex-wrap: nowrap; /* Prevent vital group from wrapping */
-} /* End .vital-row */
+}
 
 .vital-row:last-child { /* Ensure last vital row has consistent spacing */
   margin-bottom: 0; /* Avoid extra space after final vital group */
-} /* End last-child vital row rule */
+}
 
 .vital-item { /* Individual vital item container (e.g., the entire "HR:" label + input pair) */
-  display: inline-flex; /* Keep label and control aligned horizontally */
-  align-items: center; /* Vertically center label and control */
-  gap: 0.35rem; /* Provide space between label and field */
+  display: inline-flex; /* Keep label & control aligned horizontally */
+  align-items: center; /* Vertically center label & control */
+  gap: 0.35rem; /* gap between label & field */
   flex: 0 0 auto; /* Keep item’s width fixed to its content */
   min-width: 0; /* Allow shrink if space gets tight */
-} /* End .vital-item */
+}
 
 .vital-item-pupils .vital-mini-select,
 .vital-item-gcs .vital-mini-select { /* Special case for wider dropdowns: Pupils assessment and GCS dropdown fields */
   min-width: 2.6rem; /* Provide extra room for longer values */
-} /* End special dropdown widths */
+}
 
 .vital-label { /* Label in front of each vital field (e.g., "BP:", "% SpO2:", "GCS:") */
-  font-weight: 600; /* Make vital labels prominent */
-  font-size: 0.82rem; /* Slightly smaller to fit more labels in a row */
+  font-weight: 600;
+  font-size: 0.82rem;
   white-space: nowrap; /* Prevent labels from breaking lines */
-} /* End .vital-label */
+}
 
 .vital-mini-select { /* Square dropdowns used across vital rows (Pupils reaction, Lung Sounds, modifier selects) */
-  width: 2.1rem; /* Square dimension to match requirement */
+  width: 2.1rem;
   height: 2.1rem; /* Keep height equal to width for perfect square */
   padding: 0; /* Remove padding so icon sits centered */
-  border-radius: 0.3rem; /* Match rounding used on other inputs */
+  border-radius: 0.3rem;
   appearance: none; /* Remove default OS styles */
   text-indent: -9999px; /* Hide text values to show only chevron */
   background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' fill='none' stroke='%236b7280' stroke-width='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E"); /* Chevron icon */
   background-repeat: no-repeat; /* Prevent icon tiling */
   background-position: center; /* Keep icon centered */
-  background-color: #fff; /* White background like other inputs */
-  border: 1px solid #d1d5db; /* Neutral border to match inputs */
+  background-color: #fff;
+  border: 1px solid #d1d5db;
   cursor: pointer; /* Indicate dropdown is interactive */
-} /* End .vital-mini-select */
+}
 
 .vital-mini-select:focus-visible { /* Keyboard focus styling for dropdowns, ensuring Pupils/GCS combos show clear focus ring */
-  outline: 2px solid #2563eb; /* Blue outline to show focus */
+  outline: 2px solid #2563eb;
   outline-offset: 2px; /* Slight offset for clarity */
-} /* End dropdown focus */
+}
 
 .unit-input { /* Wrapper for inputs that show a measurement suffix, e.g., BP mmHg stack, EtCO2 mmHg, SpO2 percent */
   position: relative; /* Allow suffix to be positioned within the field */
-  display: flex; /* Keep input and suffix aligned */
+  display: flex; /* Keep input & suffix aligned */
   align-items: center; /* Vertically center suffix with input text */
   flex: 0 0 auto; /* Prevent wrapper from stretching */
   min-width: 0; /* Allow shrink if necessary */
-} /* End .unit-input */
+}
 
 .unit-input .sidebar-input { /* Input inside a unit wrapper (e.g., numeric component of BP, EtCO2, SpO2) */
   padding-right: 1.4rem; /* Leave room for suffix text on the right */
   text-align: right; /* Align numeric values to the right for readability */
-} /* End input padding adjustment */
+}
 
 .unit-suffix { /* Measurement suffix that overlays the input (e.g., "mmHg", "%", "EtCO2" label overlay) */
   position: absolute; /* Allow suffix to sit inside the input field */
@@ -390,125 +375,127 @@ body.dark-mode .sidebar-chip { /* Dark theme variant of chips for PMH/Allergies/
   text-transform: uppercase; /* Present units in uppercase for consistency */
   opacity: 0; /* Hide suffix until field has a value */
   transition: opacity 0.15s ease; /* Smooth appearance when value is entered */
-} /* End unit suffix */
+} 
 
 .unit-input[data-has-value="true"] .unit-suffix { /* Show suffix when input has a value so units appear beside entries */
   opacity: 1; /* Fade suffix in */
-} /* End value-driven suffix visibility */
+}
 
 .unit-suffix sub { /* Styling for subset of unit text (e.g., subscript in SpO₂ label) */
   font-size: 0.6rem; /* Reduce size for subscript characters */
-} /* End unit subscript */
+}
 
 body.dark-mode .unit-suffix { /* Dark theme adjustments for unit suffix (affects all measurement overlays in vitals rows) */
   color: #cbd5f5; /* Lighten suffix so it remains visible on dark background */
-} /* End dark-mode suffix */
+}
 
 .bp-stack { /* Container for systolic/diastolic stacked inputs in the "BP" portion of vitals line 8 */
   position: relative; /* Prepare for pseudo elements if needed */
-  display: flex; /* Stack systolic and diastolic vertically */
+  display: flex; /* Stack systolic & diastolic vertically */
   flex-direction: column; /* Align inputs vertically within stack */
   border: 1px solid #d1d5db; /* Neutral border to match other inputs */
   border-radius: 0.4rem; /* Rounded corners consistent with design */
-  background: #fff; /* Match input background coloring */
-  min-width: 5rem; /* Keep stack wide enough for two-digit values */
-} /* End blood pressure stack */
+  background: #75f79a;
+  min-width: 0.1rem; /* Keep stack wide enough for two-digit values */
+}
 
 .bp-stack:focus-within { /* Highlight BP stack when either systolic or diastolic field is focused */
   border-color: #2563eb; /* Blue border to show focus state */
   box-shadow: 0 0 0 2px rgb(37 99 235 / 20%); /* Add glow for extra emphasis */
-} /* End BP focus styling */
-
-@supports (overflow: hidden) { /* Ensure overflow clipping works where supported */
-  .bp-stack { /* BP stack overflow control to keep systolic/diastolic boxed within rounded corners */
-    overflow: hidden; /* Prevent content from spilling beyond rounded corners */
-  } /* End overflow rule */
-} /* End @supports */
+}
 /*
-NEW CODE:
+@supports (overflow: hidden) {  Ensure overflow clipping works where supported 
+  .bp-stack {  BP stack overflow control to keep systolic/diastolic boxed within rounded corners
+     overflow: hidden;  Prevent content from spilling beyond rounded corners
+  }
+} */
+
+/*
+NEW CODE: */
 .bp-stack.bp-stack--narrow {
   max-width: 5.5rem;
 }
 .bp-input.bp-input--compact {
   padding: 0.2rem 0.25rem;
   font-size: 0.82rem;
-  min-height: 1.6rem;
-}
-%%%%
-.bp-input { /* Input fields inside the blood pressure stack (systolic on top, diastolic below) */
-  border: none; /* Remove internal borders to avoid double lines */
-  background: transparent; /* Let stack background show through */
-  padding: 0.35rem 0.4rem; /* Provide comfortable tap target */
-  text-align: center; /* Center numbers for easy comparison */
-  font-size: 0.95rem; /* Slightly larger for key vital values */
-  font-weight: 600; /* Emphasize blood pressure readings */
-  color: #1f2937; /* Dark slate for maximal contrast */
-  width: 100%; /* Ensure input spans stack width */
-  min-height: 2rem; /* Keep field tall enough for finger taps */
-  cursor: text; /* Indicate field is editable */
-  /* To make the BP fields more compact (per request), reduce padding and font-size like so:
-     /*
-     .bp-input {
-       padding: 0.2rem 0.25rem;  // tighter vertical space
-       font-size: 0.8rem;        // smaller numbers
-     }
-     */
-  */
-} /* End .bp-input */
-%%%%
-Explanation:
-- Attach `bp-stack--narrow` and `bp-input--compact` (as shown in index.html comments) when you want the BP fields to shrink without affecting other patient sidebar inputs; the new classes let you dial the width and padding down independently.
+  min-height: 1.6rem; }
+/*
+- Attach `bp-stack--narrow` and `bp-input--compact` (as shown in index.html comments) when you want the BP fields to shrink without affecting other pt sidebar inputs; the new classes let you dial the width & padding down independently.
 - Reducing the minimum height complements the stacked Age toggles, so the vitals line settles into a tighter row while still respecting touch targets.
 Override notes:
 - If the width refuses to cap, check for `flex:1` declarations on `.bp-stack` later in this file (line 270) and add `.bp-stack--narrow { flex: 0 0 auto !important; }` to override.
 - When the compact classes affect other vitals unintentionally, ensure you only append the modifiers to the BP markup; CSS inheritance alone will not apply them elsewhere unless you reuse the class names.
 */
 
-.bp-input { /* Input fields inside the blood pressure stack (systolic on top, diastolic below) */
-  border: none; /* Remove internal borders to avoid double lines */
+.bp-input { /* Input fields inside the bp stack (sys on top, diastolic below) */
+  border: none; /* "none" avoids double lines */
   background: transparent; /* Let stack background show through */
-  padding: 0.35rem 0.4rem; /* Provide comfortable tap target */
-  text-align: center; /* Center numbers for easy comparison */
-  font-size: 0.95rem; /* Slightly larger for key vital values */
-  font-weight: 600; /* Emphasize blood pressure readings */
-  color: #1f2937; /* Dark slate for maximal contrast */
+  padding: 0.2rem 0.2rem; /* Provide comfortable tap target */
+  text-align: center; /* Center numbers */
+  font-size: 0.9rem; /* Slightly larger for key vital values */
+  font-weight: 600;
+  color: #1f2937;
   width: 100%; /* Ensure input spans stack width */
-  min-height: 2rem; /* Keep field tall enough for finger taps */
-  cursor: text; /* Indicate field is editable */
-  /* To make the BP fields more compact (per request), reduce padding and font-size like so:
-     /*
-     .bp-input {
-       padding: 0.2rem 0.25rem;  // tighter vertical space
-       font-size: 0.8rem;        // smaller numbers
-     }
-     */
-  */
-} /* End .bp-input */
+  min-height: 1rem; /* Keep field tall enough for finger taps */
+  cursor: text; } /* Indicate field is editable */
 
 .bp-input:focus-visible { /* Focus styling when the BP systolic or diastolic field is active */
   outline: none; /* Remove default outline to rely on stack glow */
-  background: #eef2ff; /* Light highlight to differentiate active cell */
-} /* End BP focus visible */
+  background: #eef2ff;
+}
 
-.bp-divider-line { /* Divider between systolic and diastolic inputs within the BP stack */
+.bp-divider-line {
   display: block; /* Render as full-width block */
   width: 100%; /* Span entire stack */
   height: 1px; /* Thin divider line */
-  background: #d1d5db; /* Neutral color consistent with borders */
-} /* End divider line */
+  background: #d1d5db;
+}
+
+/*
+.bp-stack { /* Adjust BP stack layout on larger screens 
+    display: inline-flex;  Align systolic/diastolic side by side if needed
+    flex-direction: row;  Switch from vertical stacking to horizontal 
+    align-items: center;  Align values vertically 
+    gap: 0.3rem;
+    padding: 0.25rem 0.4rem;
+    min-width: 5.8rem;
+    border-radius: 0.6rem;
+  }  End BP stack media adjustments
+
+  .bp-stack .bp-divider-line {  Divider styling when stack is horizontal 
+    flex: 0 0 1px;  Keep divider a thin strip 
+    width: 1px;
+    height: auto;  Allow divider to span the height of the stack 
+    align-self: stretch;  Stretch divider between systolic and diastolic 
+  }
+
+  .bp-input { /* Input styling inside horizontal BP stack 
+    padding: 0.25rem 0.3rem; /* Reduce padding once fields are side-by-side 
+    font-size: 1rem;
+    line-height: 1.2; /* Maintain comfortable line height 
+  } */
+
+  .bp-stack:hover { /* Hover state for BP stack on larger screens */
+    border-color: #60a5fa;
+  } 
+
+  .bp-stack:focus-within { /* horizontal focus styling */
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgb(37 99 235 / 28%); /* Intensify glow for accessibility */
+  }
 
 .ekg-module { /* Wrapper for the Rhythm (line 12) and Modifier (line 13) rows in the sidebar */
   display: flex; /* Stack rows vertically */
   flex-direction: column; /* Maintain column layout */
-  gap: 0.85rem; /* Add spacing between rhythm and modifier groups */
-} /* End ekg module */
+  gap: 0.85rem; /* gap between rhythm & modifier groups */
+}
 
 .ekg-module-row { /* Individual EKG row container (applies to both Rhythm and Modifier row layouts) */
   display: inline-flex; /* Keep row elements inline and padded */
-  align-items: center; /* Align controls and labels */
-  gap: 0.6rem; /* Provide space between inputs */
+  align-items: center; /* Align controls & labels */
+  gap: 0.6rem; /* gap between inputs */
   flex-wrap: nowrap; /* Keep row on one line */
-} /* End module row */
+}
 
 .ekg-row-main { /* Wrapper for the main Rhythm dropdown/inputs and the Modifier text area */
   flex: 0 0 auto; /* Prevent stretching */
@@ -516,35 +503,35 @@ Override notes:
   display: flex; /* Stack label and controls vertically */
   flex-direction: column; /* Arrange label above control */
   align-items: stretch; /* Make control fill available width within wrapper */
-  gap: 0.35rem; /* Add spacing between label and control */
-} /* End EKG row main */
+  gap: 0.35rem; /* gap between label & control */
+}
 
 .ekg-row-heading { /* Header row for Rhythm dropdown, including label and optional action buttons */
   display: inline-flex; /* Keep label and buttons in one line */
   align-items: center; /* Vertically center heading contents */
   gap: 0.45rem; /* Provide space between label and actions */
-} /* End row heading */
+}
 
 .ekg-row-main .sidebar-label { /* Label inside the Rhythm/Modifier rows (e.g., "Rhythm:" text) */
   margin-bottom: 0; /* Ensure no additional spacing below label */
   white-space: nowrap; /* Keep label on single line */
-} /* End EKG label */
+}
 
 .ekg-row-controls { /* Container for Rhythm input, optional dropdowns, and modifier chips on lines 12-13 */
   display: inline-flex; /* Align controls horizontally */
   align-items: center; /* Vertically center each control */
   gap: 0.4rem; /* Provide spacing between controls */
   flex-wrap: nowrap; /* Keep controls on single line */
-} /* End EKG controls */
+}
 
 .ekg-autocomplete { /* Wrapper for the Rhythm autocomplete field (line 12) */
   flex: 0 0 auto; /* Keep width determined by content */
   min-width: 10ch; /* Enough width for short rhythm names */
-} /* End EKG autocomplete wrapper */
+}
 
 .ekg-autocomplete .sidebar-input { /* Input inside Rhythm autocomplete (controls the width of the rhythm text entry) */
   width: 12ch; /* Provide fixed width to keep field compact */
-} /* End EKG input sizing */
+}
 
 .ekg-preview-shell { /* Preview area for the selected rhythm image shown beside the Rhythm row */
   flex: 0 0 auto; /* Keep preview from stretching */
@@ -556,7 +543,7 @@ Override notes:
   display: flex; /* Center the content inside */
   align-items: center; /* Vertically center waveform */
   justify-content: center; /* Horizontally center waveform */
-} /* End preview shell */
+}
 
 .ekg-preview-img { /* Image element within the rhythm preview shell */
   width: 100%; /* Scale image to container width */
@@ -564,40 +551,40 @@ Override notes:
   object-fit: cover; /* Crop image to fill container */
   display: block; /* Remove inline spacing around image */
   transition: opacity 0.2s ease; /* Smooth fade in/out when switching images */
-} /* End EKG image */
+}
 
 .ekg-preview-img.is-empty { /* Placeholder state when no rhythm preview image has been selected */
   opacity: 0; /* Hide placeholder until data exists */
-} /* End empty preview */
+}
 
 @supports (overflow: hidden) { /* Ensure clip works only when supported */
   .ekg-preview-shell { /* Prevent waveform preview from bleeding outside rounded corners */
     overflow: hidden; /* Clip content to rounded border */
-  } /* End overflow control */
+  }
 } /* End @supports for preview */
 
 .ekg-info-button { /* Information button next to the Rhythm selector (line 12) */
   flex: 0 0 auto; /* Keep button from expanding */
   width: 1.9rem; /* Set square footprint */
   height: 1.9rem; /* Match width for perfect circle */
-  border-radius: 999px; /* Fully round button */
-  border: 1px solid #94a3b8; /* Neutral border to match rest of UI */
-  background: #fff; /* White background for contrast */
+  border-radius: 1px; /* Fully round button */
+  border: 999px solid #94a3b8;
+  background: #fff;
   color: #1e293b; /* Slate text color */
-  font-size: 0.85rem; /* Moderate font size for icon/text */
-  font-weight: 600; /* Slightly bold for readability */
+  font-size: 0.85rem; /* font size for icon/text */
+  font-weight: 600;
   cursor: pointer; /* Show clickable cursor */
   display: inline-flex; /* Center icon inside button */
   align-items: center; /* Vertically center icon */
   justify-content: center; /* Horizontally center icon */
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; /* Smooth hover/focus transitions */
-} /* End info button */
+}
 
 .ekg-info-button:disabled { /* Disabled state for the rhythm info button when no rhythm is chosen */
   opacity: 0.45; /* Dim button to indicate non-interactive state */
   cursor: default; /* Remove pointer cursor */
   border-color: #cbd5f5; /* Lighten border when inactive */
-} /* End disabled styling */
+}
 
 @supports (cursor: not-allowed) { /* Only apply if browser supports custom cursors */
   .ekg-info-button:disabled { /* Disabled button cursor for the rhythm info button */
@@ -609,66 +596,66 @@ Override notes:
   background: #2563eb; /* Fill button with primary blue */
   color: #fff; /* Switch icon/text to white */
   border-color: #2563eb; /* Match border with background */
-} /* End hover state */
+}
 
 .ekg-info-button:not(:disabled):focus-visible { /* Keyboard focus feedback for rhythm info button */
   outline: 2px solid #2563eb; /* Blue outline for accessibility */
   outline-offset: 2px; /* Offset outline for clarity */
-} /* End focus visible */
+}
 
 .ekg-summary-text { /* Text summary beneath Rhythm selector summarizing current selection */
   flex: 1 1 14rem; /* Allow summary to grow while maintaining base width */
   min-width: 0; /* Permit shrink if space limited */
-  font-size: 0.78rem; /* Slightly smaller text for supplementary info */
-  color: #475569; /* Neutral text color */
-  line-height: 1.3; /* Comfortable spacing for multi-line text */
-} /* End summary text */
+  font-size: 0.78rem;
+  color: #475569;
+  line-height: 1.3;
+}
 
 .ekg-summary-text.is-empty { /* Hide rhythm summary text when no rhythm has been provided */
   display: none; /* Prevent empty block from taking space */
-} /* End hidden state */
+}
 
 body.dark-mode .ekg-summary-text { /* Dark theme summary adjustments for Rhythm summary text */
   color: #cbd5f5; /* Lighten text for readability on dark background */
-} /* End dark-mode summary */
+}
 
 .sidebar-section-header { /* Header row within each sidebar section, e.g., label plus help button for Rhythm section */
   display: flex; /* Align items horizontally */
   align-items: center; /* Vertically center contents */
   justify-content: space-between; /* Push help button to far edge */
-  gap: 0.5rem; /* Provide spacing between header elements */
-} /* End section header */
+  gap: 0.5rem; /* gap between header elements */
+}
 
 .sidebar-help-button { /* Inline help button next to labels such as Rhythm or Modifier */
   border: none; /* Remove default button border */
   background: none; /* Keep background transparent */
   color: #2563eb; /* Primary blue for call-to-action */
   font-size: 0.85rem; /* Slightly smaller text to match labels */
-  padding: 0; /* Remove padding so button occupies minimal space */
+  padding: 0; /* Removes padding */
   cursor: pointer; /* Indicate interactivity */
-  text-decoration: underline; /* Underline to resemble link */
-} /* End help button */
+  text-decoration: underline; /* Underline */
+}
 
 .sidebar-help-button:hover { /* Hover state for sidebar help buttons (e.g., Rhythm help) */
   color: #1d4ed8; /* Darken blue on hover */
-} /* End hover */
+}
 
 .sidebar-help-button:focus-visible { /* Keyboard focus styling for sidebar help buttons */
   outline: 2px solid #2563eb; /* Add blue outline for accessibility */
   outline-offset: 2px; /* Offset outline for improved visibility */
   border-radius: 0.25rem; /* Slight rounding around focus outline */
-} /* End focus styling */
+}
 
 .sidebar-demographics-item .sidebar-label { /* Shared label styling for early rows (Sex:, Age:, Weight:, Height:) */
-  min-width: 3.25rem; /* Reserve space for short labels like “Sex” */
+  min-width: 0.25rem; /* Reserve space for short labels like “Sex” */
   margin-bottom: 0; /* Keep label tight against controls */
   white-space: nowrap; /* Prevent label from wrapping */
-} /* End demographic label */
+}
 
 @supports (text-decoration-thickness: 1px) { /* Feature detection for modern underline control */
   .sidebar-help-button { /* Enhance underlines where supported */
     text-decoration-thickness: 1px; /* Make underline sharper without being too bold */
-  } /* End help button thickness */
+  }
 } /* End @supports underline */
 
 .sidebar-demographics-row,
@@ -676,35 +663,31 @@ body.dark-mode .ekg-summary-text { /* Dark theme summary adjustments for Rhythm 
   display: flex; /* Lay out demographic items horizontally */
   flex-wrap: wrap; /* Allow wrapping if the viewport gets very narrow */
   align-items: stretch; /* Ensure items fill the row height */
-  gap: 0.85rem; /* Provide generous spacing between demographic groups */
-} /* End demographic row styling */
+  gap: 0.85rem; /* spacing between demographic groups */
+}
 
 .sidebar-demographics-row:last-child { /* Final demographic row adjustments */
   margin-bottom: 0; /* Remove bottom spacing at end of section */
-} /* End last demographic row */
+}
 
 .sidebar-demographics-item { /* Container for individual demographic items */
-  flex: 1 1 2rem; /* Allow items to grow but keep a usable minimum width */
+  flex: 0 0 7rem; /* Allow items to grow but keep a usable minimum width */
   min-width: 0; /* Allow shrink when layout is constrained */
-  display: flex; /* Align label and control horizontally */
-  align-items: center; /* Center content vertically */
-  gap: 0.1rem; /* Space label and control */
-  flex-wrap: wrap; /* Permit internal wrapping when needed */
+  display: flex; /* Align label & control horizontally */
+  align-items: stretch; /* Center content vertically */
+  gap: 0.1rem; /* (label & control) */
+  flex-wrap: wrap; } /* Permit internal wrapping when needed */
   /* To guarantee the Age category stays on the same line as Sex, keep both containers within the same data-line (1) in index.html and optionally reduce
      the flex-basis of the Age wrapper like so:
-     /*
      .sidebar-demographics-item.sidebar-demographics-item-age {
        flex: 0 0 12rem;
      }
-     */
-  */
-} /* End demographic item */
-
+*/
 .sidebar-demographics-item.sidebar-demographics-item-sex { /* Sex selector specifics */
   flex: 0 0 auto; /* Keep width tight around buttons */
   gap: 0.1rem; /* Provide room between toggle buttons */
   flex-wrap: nowrap; /* Prevent sex buttons from wrapping */
-} /* End sex item */
+}
 
 .patient-line[data-line="1"] { order: 1; } /* Guarantee Sex/Age row appears first; update this order if the data-line assignments change. */
 .patient-line[data-line="2"] { order: 2; } /* Weight/Height on second row; change order value if you relocate the Weight/Height row. */
@@ -725,51 +708,20 @@ body.dark-mode .ekg-summary-text { /* Dark theme summary adjustments for Rhythm 
     flex-wrap: nowrap; /* Keep vital row items on one line */
     align-items: center; /* Center fields vertically */
     gap: clamp(0.5rem, 1vw, 0.85rem); /* Scale gap based on viewport width */
-  } /* End vital row media adjustments */
+  }
 
   .sidebar-section .vital-item { /* Vital item spacing on larger screens */
     flex: 0 1 auto; /* Allow slight growth while keeping compact */
     min-width: 0; /* Permit shrink */
     gap: clamp(0.35rem, 0.9vw, 0.55rem); /* Responsive spacing around labels */
-  } /* End vital item adjustments */
+  }
 
   .sidebar-section .vital-label { /* Vital labels on larger screens */
     font-size: 0.9rem; /* Make labels a bit larger for readability */
     letter-spacing: 0.01em; /* Slight tracking to improve legibility */
-  } /* End larger label styling */
+  }
 
-  .bp-stack { /* Adjust BP stack layout on larger screens */
-    display: inline-flex; /* Align systolic/diastolic side by side if needed */
-    flex-direction: row; /* Switch from vertical stacking to horizontal */
-    align-items: center; /* Align values vertically */
-    gap: 0.3rem; /* Provide small gap between systolic and diastolic */
-    padding: 0.25rem 0.4rem; /* Add padding once horizontal */
-    min-width: 5.8rem; /* Expand minimum width for readability */
-    border-radius: 0.6rem; /* Slightly rounder corners on larger displays */
-  } /* End BP stack media adjustments */
-
-  .bp-stack .bp-divider-line { /* Divider styling when stack is horizontal */
-    flex: 0 0 1px; /* Keep divider a thin strip */
-    width: 1px; /* Set divider width appropriate for vertical separator */
-    height: auto; /* Allow divider to span the height of the stack */
-    align-self: stretch; /* Stretch divider between systolic and diastolic */
-  } /* End divider adjustments */
-
-  .bp-input { /* Input styling inside horizontal BP stack */
-    padding: 0.25rem 0.3rem; /* Reduce padding once fields are side-by-side */
-    font-size: 1rem; /* Increase font size slightly for desktop readability */
-    line-height: 1.2; /* Maintain comfortable line height */
-  } /* End BP input adjustments */
-
-  .bp-stack:hover { /* Hover state for BP stack on larger screens */
-    border-color: #60a5fa; /* Lighten border color to show hover */
-  } /* End BP hover */
-
-  .bp-stack:focus-within { /* Focus styling when stack used horizontally */
-    border-color: #2563eb; /* Keep focus border consistent */
-    box-shadow: 0 0 0 2px rgb(37 99 235 / 28%); /* Intensify glow for accessibility */
-  } /* End horizontal focus styling */
-
+  
   .sidebar-section .unit-input { /* Unit wrapper adjustments on larger screens */
     flex: 1 1 auto; /* Allow wrapper to grow and fill row */
     min-width: 0; /* Allow shrink so layout remains flexible */
@@ -817,35 +769,34 @@ body.dark-mode .ekg-summary-text { /* Dark theme summary adjustments for Rhythm 
 } /* End height wrapper */
 
 .height-inline-inputs { /* Container for ft/in inline pair */
-  display: inline-flex; /* Keep foot and inch inputs inline */
+  display: inline-flex; /* Keep foot & inch inputs inline */
   align-items: center; /* Align inputs vertically */
   gap: 0.35rem; /* Add space between fields */
-} /* End inline height inputs */
+}
 
 .height-unit-text { /* Text label such as “ft” or “in” */
   font-size: 0.85rem; /* Match label size for consistency */
   color: #4b5563; /* Neutral text color */
-} /* End height unit text */
+}
 
 .height-input { /* Numeric field for height values */
   flex: 0 0 auto; /* Keep width tight */
-} /* End height input */
+}
 
 .height-input--compact { /* Compact variant of height input */
   width: 2.75rem; /* Provide precise width for one- or two-digit values */
   padding: 0.2rem 0.35rem; /* Adjust padding to maintain square feel */
   font-size: 0.85rem; /* Keep text consistent with other inputs */
-} /* End compact height input */
+}
 
 body.dark-mode .height-unit-text { /* Dark theme adjustment for unit text */
   color: #d1d5db; /* Lighten units so they remain legible on dark background */
-} /* End dark-mode height text */
+}
 
 .sidebar-label { /* Global label styling in patient sidebar */
   display: block; /* Ensure labels occupy full line above controls when stacked */
   font-size: 0.875rem; /* Standard font size for readability */
   line-height: 1.25rem; /* Maintain vertical rhythm */
-  font-weight: 500; /* Semi-bold weight so labels stand out */
-  color: #374151; /* Slate text to contrast with white background */
-  margin-bottom: 0.25rem; /* Provide space between label and input */
-} /* End sidebar label */
+  font-weight: 500; /* Semi-bold weight */
+  color: #374151; /* Slate text */
+  margin-bottom: 0.25rem; } /* Provide space between label & input */

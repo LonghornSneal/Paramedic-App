@@ -4,13 +4,18 @@
   .autocomplete-suggestions { border: 1px solid #2563eb; background: #fff; padding: 0.35rem 0;
     box-shadow: 0 8px 16px rgba(15, 23, 42, 0.15); }
   .autocomplete-container { position: relative; }
- /* .autocomplete-suggestions { width: clamp(18ch, 24vw, 28ch); } */
+ .autocomplete-suggestions { width: clamp(20ch, 28vw, 32ch); border: 1px solid #2563eb; background: #ffffff; }
   /* .autocomplete-suggestions { position: absolute; border: 1px solid #1562d5; */
   /*  border-top: none; z-index: 101; max-height: 150px;  stylelint-disable-next-line plugin/no-unsupported-browser-features -- Preserve scrollable panel for modern browsers; Safari gracefully ignores overflow control */
   /*  overflow-y: auto; */
   /*  background: #f61c1c; width: 100%; box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
     border-radius: 0 0 0.375rem 0.375rem; }  /* + theme("borderRadius.md") + " " + theme("borderRadius.md") */
-
+/*
+- Widening the suggestion panel ensures PMH/Allergies/etc. dropdowns stretch far enough to align with the chip column on the right while keeping the textarea anchored in place.
+- The explicit border/background pairing ties the dropdown color scheme to the patient info sidebar (the blue border you see here affects the suggestion container only).
+Override notes:
+- If the new width does not apply, check for inline styles added by the autocomplete script (some libraries inject a `style` attribute); removing that attribute or applying `!important` to the width may be necessary.
+- When the dropdown exceeds the sidebar width on smaller screens, wrap this rule in a `@media (min-width: 640px)` condition and fall back to the narrower clamp listed in the original commented line.
+*/
   .autocomplete-suggestion-item { padding: 0.5rem; cursor: pointer; font-size: 0.875rem; }
-
   .autocomplete-suggestion-item:hover { background: #3799daab; }

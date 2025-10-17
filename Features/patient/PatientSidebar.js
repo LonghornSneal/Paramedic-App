@@ -42,6 +42,19 @@ const AUTOCOMPLETE_FIELDS = [
 //       <!-- Move the same row to line 8 -->
 //       <div class="patient-line patient-line--vitals" data-line="8">
 //       */
+/*
+import { insertMedicationClassDropdown } from './Features/patient/PatientSidebar.js';
+document.addEventListener('DOMContentLoaded', () => insertMedicationClassDropdown());
+
+// Currently no initialization hook calls insertMedicationClassDropdown(), so the Medication Class dropdown never renders.
+
+Explanation:
+- When you decide to surface the Medication Class select, add the import + DOMContentLoaded handler shown above to a bootstrap file such as main.js (not inside this module) so the helper runs after the sidebar mounts.
+- Keeping the logic outside this file avoids a self-import cycle and prevents the sidebar script from re-evaluating itself.
+Override notes:
+- If you do not plan to enable this dropdown, you can delete insertMedicationClassDropdown entirely; confirm no other module references it before removal.
+- Should you wire it up but see duplicate selects, remember the helper guards against duplicates by checking for #pt-medication-class—only trigger it once per page load.
+*/
 
 const COMMON_PMH_TERMS = [
     'hypertension', 'htn',

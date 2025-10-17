@@ -61,35 +61,6 @@
         </div>
       </div>
       <!--
-      NEW CODE:
-      <div class="sidebar-demographics-item sidebar-demographics-item-age sidebar-demographics-item-age--inline">
-        <label for="pt-age" class="sidebar-label">Age:</label>
-        <div class="age-inline-wrap">
-          <div class="age-unit-toggle-group age-unit-toggle-group--stacked" role="group" aria-label="Select age units">
-            <button type="button" class="age-unit-toggle" data-unit="days" data-tooltip="Days" aria-label="Days" aria-pressed="false">Days</button>
-            <button type="button" class="age-unit-toggle" data-unit="months" data-tooltip="Months" aria-label="Months" aria-pressed="false">Months</button>
-            <button type="button" class="age-unit-toggle" data-unit="years" data-tooltip="Years" aria-label="Years" aria-pressed="true">Years</button>
-          </div>
-          <div class="unit-input age-unit-input" data-unit="years">
-            <input type="number" id="pt-age" class="sidebar-input age-input age-input--compact" inputmode="decimal" step="any">
-            <span class="unit-suffix age-unit-suffix" aria-hidden="true"></span>
-          </div>
-        </div>
-      </div>
-      %%%%
-      <div class="sidebar-demographics-item sidebar-demographics-item-age">
-        <label for="pt-age" class="sidebar-label">Age:</label>
-        <div class="age-unit-toggle-group" role="group" aria-label="Select age units">
-          <button type="button" class="age-unit-toggle" data-unit="days" data-tooltip="Days" aria-label="Days" aria-pressed="false">Days</button>
-          <button type="button" class="age-unit-toggle" data-unit="months" data-tooltip="Months" aria-label="Months" aria-pressed="false">Months</button>
-          <button type="button" class="age-unit-toggle" data-unit="years" data-tooltip="Years" aria-label="Years" aria-pressed="false">Years</button>
-        </div>
-        <div class="unit-input age-unit-input" data-unit="years">
-          <input type="number" id="pt-age" class="sidebar-input age-input age-input--compact" inputmode="decimal" step="any">
-          <span class="unit-suffix age-unit-suffix" aria-hidden="true"></span>
-        </div>
-      </div>
-      %%%%
       Explanation:
       - Adding the `sidebar-demographics-item-age--inline` class lets you declare `display:flex; gap:0.5rem; align-items:center;` in `styles/sidebar/patient-sidebar-controls.css`, which keeps the entire Age category on the same horizontal baseline as the Sex controls.
       - Wrapping the toggle group and numeric input inside `.age-inline-wrap { display:flex; align-items:center; gap:0.35rem; }` ensures the stacked Days/Months/Years buttons sit immediately to the left of the age number field without breaking the line.
@@ -98,12 +69,12 @@
       - If you already changed `.age-unit-toggle-group` in `styles/sidebar/patient-sidebar-controls.css`, remember the `@media (min-width: 768px)` block in `styles/sidebar/patient-sidebar-forms.css` increases spacing; apply the new modifier selector there too so the responsiveness does not undo your column layout.
       - When the Age block still wraps underneath Sex after these changes, check `styles/sidebar/patient-sidebar-forms.css` for `.patient-line--demographics { flex-wrap: wrap; }`; set it to `nowrap` when the viewport is wide enough so the new inline wrapper has room.
       -->
-      <div class="sidebar-demographics-item sidebar-demographics-item-age">
+      <div class="sidebar-demographics-item sidebar-demographics-item-age sidebar-demographics-item-age--inline">
         <label for="pt-age" class="sidebar-label">Age:</label>
-        <div class="age-unit-toggle-group" role="group" aria-label="Select age units">
+        <div class="age-unit-toggle-group age-unit-toggle-group--stacked" role="group" aria-label="Select age units">
           <button type="button" class="age-unit-toggle" data-unit="days" data-tooltip="Days" aria-label="Days" aria-pressed="false">Days</button>
           <button type="button" class="age-unit-toggle" data-unit="months" data-tooltip="Months" aria-label="Months" aria-pressed="false">Months</button>
-          <button type="button" class="age-unit-toggle" data-unit="years" data-tooltip="Years" aria-label="Years" aria-pressed="false">Years</button>
+          <button type="button" class="age-unit-toggle" data-unit="years" data-tooltip="Years" aria-label="Years" aria-pressed="true">Years</button>
         </div>
         <div class="unit-input age-unit-input" data-unit="years">
           <input type="number" id="pt-age" class="sidebar-input age-input age-input--compact" inputmode="decimal" step="any">
@@ -112,51 +83,28 @@
       </div>
     </div>
     <div class="patient-line patient-line--demographics" data-line="2">
-      <!--
-      NEW CODE:
-      <div class="sidebar-demographics-item sidebar-demographics-item-weight sidebar-demographics-item-weight--stacked">
-        <label for="pt-weight-value" class="sidebar-label">Weight:</label>
-        <div class="weight-unit-stack" aria-hidden="true">
-          <span class="weight-unit-stack__kg">kg</span>
-          <span class="weight-unit-stack__lbs">lbs</span>
-        </div>
-        <div class="unit-input weight-unit-input" data-unit="kg">
-          <input type="number" id="pt-weight-value" class="sidebar-input weight-input" placeholder="kg" inputmode="decimal" step="any">
-          <span class="unit-suffix weight-unit-suffix" aria-hidden="true"></span>
-        </div>
-        <div class="weight-unit-toggle-group weight-unit-toggle-group--vertical" role="group" aria-label="Select weight units">
-          <button type="button" class="weight-unit-toggle" data-unit="kg" aria-label="Kilograms" aria-pressed="true">kg</button>
-          <button type="button" class="weight-unit-toggle" data-unit="lb" aria-label="Pounds" aria-pressed="false">lbs</button>
-        </div>
-      </div>
-      %%%%
-      <div class="sidebar-demographics-item sidebar-demographics-item-weight">
-        <label for="pt-weight-value" class="sidebar-label">Weight:</label>
-        <div class="unit-input weight-unit-input" data-unit="kg">
-          <input type="number" id="pt-weight-value" class="sidebar-input weight-input" placeholder="kg" inputmode="decimal" step="any">
-          <span class="unit-suffix weight-unit-suffix" aria-hidden="true"></span>
-        </div>
-        <div class="weight-unit-toggle-group" role="group" aria-label="Select weight units">
-          <button type="button" class="weight-unit-toggle" data-unit="kg" aria-label="Kilograms" aria-pressed="true">kg</button>
-          <button type="button" class="weight-unit-toggle" data-unit="lb" aria-label="Pounds" aria-pressed="false">lbs</button>
-        </div>
-      </div>
-      %%%%
-      Explanation:
-      - The new `weight-unit-stack` element slots directly between the label and numeric input; give it `display:inline-flex; flex-direction:column; gap:0.15rem; font-size:0.7rem; text-transform:lowercase;` in `styles/sidebar/patient-sidebar-controls.css` so "kg" appears above "lbs" without pushing the input out of alignment.
+    <!--  - The new `weight-unit-stack` element slots directly between the label and numeric input; give it `display:inline-flex; flex-direction:column; gap:0.15rem; font-size:0.7rem; text-transform:lowercase;` in `styles/sidebar/patient-sidebar-controls.css` so "kg" appears above "lbs" without pushing the input out of alignment.
       - Adding the `sidebar-demographics-item-weight--stacked` modifier lets you constrain the row width via `.sidebar-demographics-item-weight--stacked { display:flex; align-items:center; gap:0.45rem; }`, keeping the stack, input, and toggles on one line between the Weight label and field.
       - Applying the `weight-unit-toggle-group--vertical` class ensures the toggle buttons inherit `flex-direction:column;` even if the base `.weight-unit-toggle-group` gets overridden elsewhere.
       Override notes:
       - If the stacked letters disappear, confirm `styles/sidebar/patient-sidebar-forms.css` does not clip inline children (remove `overflow:hidden` if present on `.sidebar-demographics-item-weight`).
       - When the toggle buttons refuse to stack, check for media query overrides in `styles/sidebar/patient-sidebar-forms.css` (the `@media (min-width: 768px)` block can reassign `flex-direction:row`; offset with `.weight-unit-toggle-group--vertical` selector in that media query).
-      -->
-      <div class="sidebar-demographics-item sidebar-demographics-item-weight">
+
+      <div class="weight-unit-stack">kg<br>lbs</div>
+.weight-unit-stack { display: inline-flex; flex-direction: column; justify-content: center;
+    font-size: 0.7rem; margin-right: 0.25rem; text-transform: lowercase; }
+ NOTE: `.weight-unit-stack` is currently unused because index.html does not render the helper span yet.
+   - To activate it, insert the `<div class="weight-unit-stack"><span>kg</span><span>lbs</span></div>` snippet from the inline comment in index.html between the Weight label and the numeric input.
+   - The style keeps "kg" stacked above "lbs" in the small column you requested; once the markup is present, this CSS will take effect immediately.
+-->
+      <div class="sidebar-demographics-item sidebar-demographics-item-weight sidebar-demographics-item-weight--stacked">
         <label for="pt-weight-value" class="sidebar-label">Weight:</label>
+        <div class="weight-unit-stack"><span>kg</span><span>lbs</span></div>
         <div class="unit-input weight-unit-input" data-unit="kg">
           <input type="number" id="pt-weight-value" class="sidebar-input weight-input" placeholder="kg" inputmode="decimal" step="any">
           <span class="unit-suffix weight-unit-suffix" aria-hidden="true"></span>
         </div>
-        <div class="weight-unit-toggle-group" role="group" aria-label="Select weight units">
+        <div class="weight-unit-toggle-group weight-unit-toggle-group--vertical" role="group" aria-label="Select weight units">
           <button type="button" class="weight-unit-toggle" data-unit="kg" aria-label="Kilograms" aria-pressed="false">kg</button>
           <button type="button" class="weight-unit-toggle" data-unit="lb" aria-label="Pounds" aria-pressed="false">lbs</button>
         </div>
@@ -172,8 +120,6 @@
         </div>
       </div>
     </div>
-    <!--
-    NEW CODE:
     <div class="patient-line patient-line--full" data-line="3">
       <div class="sidebar-field sidebar-field-textarea sidebar-field-textarea--chips-right">
         <div class="sidebar-field-row">
@@ -189,21 +135,7 @@
         </div>
       </div>
     </div>
-    %%%%
-    <div class="patient-line patient-line--full" data-line="3">
-      <div class="sidebar-field sidebar-field-textarea">
-        <div class="sidebar-field-heading">
-          <label for="pt-pmh" class="sidebar-label">PMH:</label>
-          <div id="pt-pmh-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
-        </div>
-        <div class="autocomplete-container sidebar-input-flex">
-          <textarea id="pt-pmh" rows="1" class="sidebar-input"></textarea>
-          <div id="pt-pmh-suggestions" class="autocomplete-suggestions hidden"></div>
-        </div>
-      </div>
-    </div>
-    %%%%
-    Explanation:
+    <!-- Explanation:
     - Introduce `.sidebar-field-textarea--chips-right { display:grid; grid-template-columns:minmax(0, 1fr) auto; gap:0.5rem; align-items:start; }` in `styles/sidebar/patient-sidebar-forms.css` so the label/input column and chip column sit side-by-side without relocating the textarea.
     - `.sidebar-field-row` becomes a flex helper (`display:flex; justify-content:space-between; gap:0.5rem;`) to keep the label on the left while chips render in a consistent column on the right; reuse the same structure for Allergies, Current Rx's, Indications, and S/S by applying the modifier class to those wrappers too.
     - The optional `.sidebar-chip-ghost` placeholder preserves the chip column width when no chips exist; style it with `visibility:hidden; min-width:12ch;` to prevent the textarea column from stretching when the chip list is empty.
@@ -211,19 +143,28 @@
     - If the chips still fall underneath the textarea, verify `styles/sidebar/patient-sidebar-forms.css` does not force `.sidebar-chip-list { width:100%; }`; remove or override that declaration inside the modifier scope so the grid column can size to content.
     - When the Autocomplete dropdown suddenly shrinks, adjust `.sidebar-field-textarea--chips-right .autocomplete-container { width:100%; }` because the new grid makes width auto by default.
     -->
-    <div class="patient-line patient-line--full" data-line="3">
     <div class="patient-line patient-line--full" data-line="4">
-      <div class="sidebar-field sidebar-field-textarea">
-        <div class="sidebar-field-heading">
+      <div class="sidebar-field sidebar-field-textarea sidebar-field-textarea--chips-right">
+        <div class="sidebar-field-row">
           <label for="pt-allergies" class="sidebar-label">Allergies:</label>
           <div id="pt-allergies-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
         </div>
-        <div class="autocomplete-container sidebar-input-flex">
-          <textarea id="pt-allergies" rows="1" class="sidebar-input"></textarea>
-          <div id="pt-allergies-suggestions" class="autocomplete-suggestions hidden"></div>
+        <div class="sidebar-field-row sidebar-field-row--input">
+          <div class="autocomplete-container sidebar-input-flex">
+            <textarea id="pt-allergies" rows="1" class="sidebar-input"></textarea>
+            <div id="pt-allergies-suggestions" class="autocomplete-suggestions hidden"></div>
+          </div>
+          <div class="sidebar-chip-ghost" aria-hidden="true"></div>
         </div>
       </div>
     </div>
+       <!-- 
+    - Copy the PMH layout change to each textarea section so Allergies (and the remaining drop-downs) hold their chip column to the right of the input.
+    - The `sidebar-chip-ghost` placeholder locks in the column width until a chip is added, eliminating layout jump when the first allergy is selected.
+    Override notes:
+    - If this block still collapses downward, confirm `styles/sidebar/patient-sidebar-forms.css` includes the `.sidebar-field-textarea--chips-right` grid rules and that no Tailwind utility is resetting the layout.
+    - Should the dropdown overlay clip against the right column, adjust the width using the `.autocomplete-suggestions` comment in `styles/sidebar/patient-autocomplete.css`.
+    -->
     <div class="patient-line patient-line--full" data-line="5">
       <div class="sidebar-field sidebar-field-textarea">
         <div class="sidebar-field-heading">
@@ -310,56 +251,7 @@
         </select>
       </div>
     </div>
-    %%%%
-    <div class="patient-line patient-line--vitals" data-line="8">
-      <div class="vital-item vital-item-bp">
-        <span class="vital-label">BP:</span>
-        <div class="bp-stack" role="group" aria-label="Blood pressure entry">
-          <input type="text" id="vs-bp-systolic" class="bp-input bp-input--systolic" inputmode="numeric" maxlength="3" aria-label="Systolic blood pressure">
-          <span class="bp-divider-line" aria-hidden="true"></span>
-          <input type="text" id="vs-bp-diastolic" class="bp-input bp-input--diastolic" inputmode="numeric" maxlength="3" aria-label="Diastolic blood pressure">
-        </div>
-        <select id="vs-bp-select" class="vital-mini-select" aria-label="Blood pressure preset">
-          <option value=""></option>
-          <option value="200+">200+</option>
-          <option value="160+">160+</option>
-          <option value="Normal (90-160 SBP)">Normal (90-160 SBP)</option>
-          <option value="70-90">70-90</option>
-          <option value="70-">70-</option>
-        </select>
-      </div>
-      <div class="vital-item vital-item-hr">
-        <span class="vital-label">HR:</span>
-        <div class="unit-input" data-unit="HR">
-          <input type="text" id="vs-hr-value" class="sidebar-input vital-input" inputmode="numeric" maxlength="3" aria-label="Heart rate numeric entry">
-          <span class="unit-suffix" aria-hidden="true">HR</span>
-        </div>
-        <select id="vs-hr-select" class="vital-mini-select" aria-label="Heart rate preset">
-          <option value=""></option>
-          <option value="150+">150+</option>
-          <option value="100+">100+</option>
-          <option value="60-100">60-100</option>
-          <option value="&gt;60">&gt;60</option>
-          <option value="&gt;40">&gt;40</option>
-        </select>
-      </div>
-      <div class="vital-item vital-item-spo2">
-        <span class="vital-label">% SpO<sub>2</sub>:</span>
-        <div class="unit-input" data-unit="%">
-          <input type="text" id="vs-spo2-value" class="sidebar-input vital-input" inputmode="numeric" maxlength="3" aria-label="Pulse oximetry numeric entry">
-          <span class="unit-suffix" aria-hidden="true">%</span>
-        </div>
-        <select id="vs-spo2-source" class="vital-mini-select" aria-label="Oxygen delivery source">
-          <option value=""></option>
-          <option value="RA">RA</option>
-          <option value="NC">NC</option>
-          <option value="Vent">Vent</option>
-          <option value="CPAP">CPAP</option>
-          <option value="BiPaP">BiPaP</option>
-        </select>
-      </div>
-    </div>
-    %%%%
+
     Explanation:
     - Applying `patient-line--vitals patient-line--vitals-primary { display:flex; gap:0.5rem; align-items:flex-start; }` in `styles/sidebar/patient-sidebar-forms.css` keeps BP, HR, and %SpO₂ locked on the same numbered line while still allowing wrap on narrow screens by toggling `flex-wrap`.
     - The `vital-item--compact` modifier gives you room to shrink each group with CSS like `.vital-item--compact { flex: 0 0 auto; }`, so the three vitals sit shoulder-to-shoulder without spiking the row height.
@@ -623,7 +515,6 @@
         </div>
     </header>
 
-
     <!-- Main Content Area -->
     <main class="w-full p-1">
     <div id="content-area" class="bg-white p-3 md:p-6 rounded-lg shadow-lg min-h-[calc(var(--vh,1vh)*100-220px)]">
@@ -663,8 +554,5 @@
     </div>
   </div>
 </div>
-
 </body>
 </html>
-
-
