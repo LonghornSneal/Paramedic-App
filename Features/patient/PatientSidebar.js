@@ -38,9 +38,9 @@ const AUTOCOMPLETE_FIELDS = [
 //       update the `data-line` attribute in index.html and keep the CSS order rules in sync. Example markup adjustment:
 //       /*
 //       <!-- Original vitals row -->
-//       <div class="patient-line patient-line--vitals" data-line="9">
+//       <div class="patient-line patient-line--vital" data-line="9">
 //       <!-- Move the same row to line 8 -->
-//       <div class="patient-line patient-line--vitals" data-line="8">
+//       <div class="patient-line patient-line--vital" data-line="8">
 //       */
 /*
 import { insertMedicationClassDropdown } from './Features/patient/PatientSidebar.js';

@@ -34,7 +34,7 @@
   <div class="patient-sidebar-content">
     <div class="patient-line patient-line--demographics" data-line="1">
       <div class="sidebar-demographics-item sidebar-demographics-item-sex">
-        <span class="sidebar-label">Sex:</span>
+        <span class="sidebar-patient-demographics-item-sex>"></span> </span>sex:</span>
         <input type="hidden" id="pt-gender" value="">
         <div class="sex-picker" role="group" aria-label="Patient sex selection">
           <button type="button" class="sex-option" data-value="female" data-tooltip="Female" aria-label="Female">
@@ -82,7 +82,7 @@
         </div>
       </div>
     </div>
-    <div class="patient-line patient-line--demographics" data-line="2">
+    <div class="patient-line patient-line--demographic" data-line="2">
     <!--  - The new `weight-unit-stack` element slots directly between the label and numeric input; give it `display:inline-flex; flex-direction:column; gap:0.15rem; font-size:0.7rem; text-transform:lowercase;` in `styles/sidebar/patient-sidebar-controls.css` so "kg" appears above "lbs" without pushing the input out of alignment.
       - Adding the `sidebar-demographics-item-weight--stacked` modifier lets you constrain the row width via `.sidebar-demographics-item-weight--stacked { display:flex; align-items:center; gap:0.45rem; }`, keeping the stack, input, and toggles on one line between the Weight label and field.
       - Applying the `weight-unit-toggle-group--vertical` class ensures the toggle buttons inherit `flex-direction:column;` even if the base `.weight-unit-toggle-group` gets overridden elsewhere.
@@ -99,7 +99,7 @@
 -->
       <div class="sidebar-demographics-item sidebar-demographics-item-weight sidebar-demographics-item-weight--stacked">
         <label for="pt-weight-value" class="sidebar-label">Weight:</label>
-        <div class="weight-unit-stack"><span>kg</span><span>lbs</span></div>
+        <div class="weight-unit-stack"><span class="kg"
         <div class="unit-input weight-unit-input" data-unit="kg">
           <input type="number" id="pt-weight-value" class="sidebar-input weight-input" placeholder="kg" inputmode="decimal" step="any">
           <span class="unit-suffix weight-unit-suffix" aria-hidden="true"></span>
@@ -196,14 +196,14 @@
           <div id="pt-symptoms-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
         </div>
         <div class="autocomplete-container sidebar-input-flex">
-          <textarea id="pt-symptoms" rows="1" class="sidebar-input"></textarea>
+          <textarea id="pt-symptoms" rows="1.5" class="sidebar-input"></textarea>
           <div id="pt-symptoms-suggestions" class="autocomplete-suggestions hidden"></div>
         </div>
       </div>
     </div>
     <!--
     NEW CODE:
-    <div class="patient-line patient-line--vitals patient-line--vitals-primary" data-line="8">
+    <div class="patient-line patient-line--vital patient-line--vitals-primary" data-line="8">
       <div class="vital-item vital-item-bp vital-item--compact">
         <span class="vital-label">BP:</span>
         <div class="bp-stack bp-stack--narrow" role="group" aria-label="Blood pressure entry">
@@ -253,7 +253,7 @@
     </div>
 
     Explanation:
-    - Applying `patient-line--vitals patient-line--vitals-primary { display:flex; gap:0.5rem; align-items:flex-start; }` in `styles/sidebar/patient-sidebar-forms.css` keeps BP, HR, and %SpO₂ locked on the same numbered line while still allowing wrap on narrow screens by toggling `flex-wrap`.
+    - Applying `patient-line--vitals patient-line--vital-primary { display:flex; gap:0.5rem; align-items:flex-start; }` in `styles/sidebar/patient-sidebar-forms.css` keeps BP, HR, and %SpO₂ locked on the same numbered line while still allowing wrap on narrow screens by toggling `flex-wrap`.
     - The `vital-item--compact` modifier gives you room to shrink each group with CSS like `.vital-item--compact { flex: 0 0 auto; }`, so the three vitals sit shoulder-to-shoulder without spiking the row height.
     - Use `.bp-stack--narrow { max-width: 5.5rem; }` and `.bp-input--compact { width: 2.5rem; padding: 0.2rem 0.25rem; font-size: 0.85rem; }` to make both blood pressure inputs smaller while keeping the divider line in the middle.
     - Tag the HR and SpO₂ inputs with `.vital-input--tight { width: 3rem; font-size: 0.85rem; }` so they visually match the new BP width and line up evenly.
@@ -261,7 +261,7 @@
     - If you change `data-line` numbers but nothing moves, check `styles/sidebar/patient-sidebar-forms.css` for rules that set explicit `order` on `.vital-item-*`; update those selectors to reference your `data-line-order` attributes or remove the hard-coded order.
     - When the BP stack refuses to shrink, confirm there is no lingering `flex:1` declaration on `.bp-stack` or `.bp-input`—line 270 in `styles/sidebar/patient-sidebar-forms.css` grants them extra width; override it with the `--narrow` modifier.
     -->
-    <div class="patient-line patient-line--vitals" data-line="8">
+    <div class="patient-line patient-line--vital" data-line="8">
       <div class="vital-item vital-item-bp">
         <span class="vital-label">BP:</span>
         <div class="bp-stack" role="group" aria-label="Blood pressure entry">
@@ -309,7 +309,7 @@
         </select>
       </div>
     </div>
-    <div class="patient-line patient-line--vitals" data-line="9">
+    <div class="patient-line patient-line--vital" data-line="9">
       <div class="vital-item">
         <span class="vital-label">EtCO<sub>2</sub>:</span>
         <div class="unit-input" data-unit="EtCO2">
@@ -339,7 +339,7 @@
         </select>
       </div>
     </div>
-    <div class="patient-line patient-line--vitals" data-line="10">
+    <div class="patient-line patient-line--vital" data-line="10">
       <div class="vital-item vital-item-pupils">
         <span class="vital-label">Pupils:</span>
         <div class="unit-input" data-unit="mm">
@@ -374,7 +374,7 @@
         </select>
       </div>
     </div>
-    <div class="patient-line patient-line--vitals" data-line="11">
+    <div class="patient-line patient-line--vital" data-line="11">
       <div class="vital-item vital-item-gcs">
         <span class="vital-label">GCS:</span>
         <div class="unit-input" data-unit="GCS">

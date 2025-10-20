@@ -19,7 +19,7 @@
 /* Patient sidebar layout */
 
   #patient-sidebar .patient-sidebar-content { display: flex; flex-direction: column; gap: 0.6rem; }
-  #patient-sidebar .patient-line { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.75rem; }
+  #patient-sidebar .patient-line { display: flex; flex-wrap: nowrap; align-items: center; gap: 0.4rem 0.75rem; }
   #patient-sidebar .patient-line--demographics { align-items: center; justify-content: flex-start; }
   #patient-sidebar .patient-line--full { flex-direction: column; align-items: stretch; gap: 0.35rem; }
   #patient-sidebar .patient-line--full .sidebar-field { width: 100%; }
@@ -34,7 +34,7 @@
   #patient-sidebar .patient-line .unit-input .sidebar-input { text-align: right; }
   #patient-sidebar .bp-stack { min-width: 0; width: auto; }
   #patient-sidebar .bp-input { width: 3.6ch; padding: 0.3rem 0.35rem; min-height: 1.8rem; }
-  #patient-sidebar .patient-line--vitals .vital-item { align-items: center; gap: 0.35rem; }
+  #patient-sidebar .patient-line--vital .vital-item { align-items: center; gap: 0.35rem; }
   #patient-sidebar .vital-mini-select { width: 1.9rem; min-width: 1.9rem; height: 1.9rem; padding: 0; font-size: 0; line-height: 1; display: inline-flex; align-items: center; justify-content: center; }
   #patient-sidebar .vital-mini-select option { font-size: 0.78rem; }
   #patient-sidebar .vital-item-pupils .vital-mini-select,

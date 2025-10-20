@@ -5,17 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Edge",
+            "name": "Launch Chrome (WSL)",
             "request": "launch",
-            "type": "msedge",
-            "url": "http://localhost:8080",
+            "type": "pwa-chrome",
+            "url": "http://localhost:5173",
             "webRoot": "${workspaceFolder}"
         },
         {
-            "type": "chrome",
+            "name": "Launch Chrome (loopback)",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://127.0.0.1",
+            "type": "pwa-chrome",
+            "url": "http://127.0.0.1:5173",
             "webRoot": "${workspaceFolder}"
         }
     ]

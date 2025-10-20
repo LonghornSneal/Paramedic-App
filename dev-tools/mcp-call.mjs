@@ -1,7 +1,11 @@
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
+import { fileURLToPath } from "node:url";
+import { dirname, resolve } from "node:path";
 
-const basePath = "C:/Users/HhsJa/OneDrive/Documents/GitHub/Paramedic-App";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const basePath = resolve(__dirname, "..");
 const serverConfigs = {
   filesystem: {
     command: "node",
@@ -146,9 +150,3 @@ if (!server) {
   console.error(error);
   process.exit(1);
 });
-
-
-
-
-
-

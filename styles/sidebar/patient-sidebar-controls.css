@@ -22,37 +22,26 @@ body.dark-mode .sex-option.is-selected { color: var(--sex-active-color); }
 .sidebar-demographics-item-age--inline .age-inline-wrap { display: flex; align-items: center; gap: 0.35rem; }
 .age-unit-toggle-group--stacked { flex-direction: column; align-items: flex-start; }
 /*
-- `.sidebar-demographics-item-age--inline` keeps the Age block on the same line as the Sex controls by switching the wrapper to a horizontal flex layout; apply this class to the Age container in index.html (see the inline comment there).
+- `.sidebar-demographics-item-age--inline` keeps Age & Sex on same line, switches wrapper to horizontal flex layout; apply class to Age container in index.html (inline comment there).
 - `.age-inline-wrap` aligns the stacked Days/Months/Years buttons right next to the age input without breaking the layout, while `age-unit-toggle-group--stacked` preserves the vertical stack even after you switch to flex rows.
-Override notes:
-- If the toggle group still lays out horizontally, confirm no `display: grid` or `flex-direction` overrides exist farther down this file—add `.sidebar-demographics-item-age--inline .age-unit-toggle-group { flex-direction: column !important; }` as a fallback.
-- After adding these helper classes, remove any ad-hoc width hacks (like `flex-basis` tweaks) so the new layout controls the spacing instead.
+- If toggle group still lays out horizontally, confirm no `display: grid` or `flex-direction` overrides exist farther down this file—add `.sidebar-demographics-item-age--inline .age-unit-toggle-group { flex-direction: column !important; }` as a fallback.
+- After adding these helper classes, remove any ad-hoc width hacks (like `flex-basis` tweaks) so new layout controls the spacing instead.
 */
 
 /* .sidebar-demographics-item-age { gap: 0.75rem; align-items: center; flex: 1 1 auto; */
-  /* To stack the Age unit buttons (Days/Months/Years) vertically, switch the toggle group to column layout: */
-/* .age-unit-toggle-group { flex-direction: column; align-items: flex-start; } */
+  /* To stack the Age unit buttons vertically, switch the toggle group to column layout: */
+ .age-unit-toggle-group { flex-direction: column; align-items: flex-start; }
 
 .sidebar-demographics-item-age .age-input { flex: 1 1 auto; min-width: 0; }
 .age-input--compact { max-width: 6rem; }
 .age-unit-toggle-group { flex-direction: column; align-items: flex-start; }
 
 .age-unit-toggle { border: 1px solid #cbd5f5; background: #f1f5f9; 
-  padding: 0.2rem 0.6rem; 
-  font-size: 0.75rem; font-weight: 600; 
+  padding: 0.2rem 0.6rem; font-size: 0.75rem; font-weight: 600; 
   line-height: 1.2; color: #1f2937; cursor: pointer; 
   border-radius: 999px; transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
-/*
-NEW CODE:
-.age-unit-toggle { background: #e2f0ff; border-color: #3b82f6; color: #0b3a75; }
-
-.age-unit-toggle.is-selected { background: #1d4ed8; border-color: #1d4ed8; color: #fff; }
-*/
-
 .age-unit-toggle:hover { background: #e0ecff; border-color: #93c5fd; }
-
 .age-unit-toggle.is-selected { background: #2563eb; border-color: #2563eb; color: #fff; }
-
 .age-unit-toggle:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
 body.dark-mode .age-unit-toggle { background: #1e293b; border-color: #334155; color: #e2e8f0; }
 body.dark-mode .age-unit-toggle:hover { background: #334155; border-color: #60a5fa; color: #f8fafc; }
@@ -61,38 +50,27 @@ body.dark-mode .age-unit-toggle:focus-visible { outline-color: #93c5fd; }
 .age-unit-tooltip { pointer-events: none; font-size: 0.75rem; white-space: nowrap; }
 
 /*
-- This override targets the Age unit buttons specifically, shifting their background, border, and text color so the user sees a brighter stacked toggle column; it only affects the Age unit toggle component inside the patient sidebar.
-- The companion `.is-selected` rule ensures the active Day/Month/Year button matches the new color scheme without losing contrast.
-Override notes:
-- If your new colors do not appear, confirm no Tailwind button utilities (like `bg-blue-500`) are being applied dynamically in JavaScript; remove them or increase specificity with `.patient-sidebar-content .age-unit-toggle`.
-- Update the dark-mode variants below if you want the same palette in dark theme; otherwise, the existing dark-mode overrides will continue to tint the toggles in their default slate/blue shades.
+- targets Age buttons (background, border, & text color); only affects Age toggle component inside patient sidebar.
+- `.is-selected` rule ensures Day/Month/Year button matches the new color scheme.
+- If new colors do not appear, confirm no Tailwind button utilities (like `bg-blue-500`) are being applied dynamically; remove them or increase specificity with `.patient-sidebar-content .age-unit-toggle`.
+- Update dark-mode variants below if you want the same palette in dark theme.
 */
 
 .sidebar-demographics-item-weight { gap: 0.5rem; align-items: center; }
-/*   To insert a stacked kg/lbs indicator between the "Weight" label and the numeric field, add a small column container. */
+/*   To insert stacked kg/lbs indicator between the "Weight" label & # field, add a small column container. */
 /*     Example markup + CSS combo (commented): */
 
-.sidebar-demographics-item-weight { gap: 0.5rem; }
-
 /* .weight-unit-toggle-group { display: inline-flex; flex-direction: row; gap: 0.35rem; align-items: center; justify-content: flex-end; margin-left: auto; } */
-      /* To stack the kg/lbs buttons vertically instead of side-by-side, use: */
-
-.weight-unit-toggle-group.weight-unit-toggle-group--vertical {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.35rem;
-}
+      /* To stack the kg/lbs buttons vertically in, use: */
+.weight-unit-toggle-group.weight-unit-toggle-group--vertical { flex-direction: column; align-items: flex-start; gap: 0.35rem;}
 /*
 - Use the `weight-unit-toggle-group--vertical` modifier (added in index.html comment) to guarantee the kg/lbs toggle buttons stack vertically even if another rule later flips `.weight-unit-toggle-group` back to `row`.
-- Setting an explicit gap keeps the stacked buttons evenly spaced and lines up with the unit stack column.
-Override notes:
+- Setting an explicit gap keeps the stacked buttons evenly spaced & lines up with the unit stack column.
 - If desktop media queries reset the base rule to `row`, copy this modifier inside the same media query so it wins when the screen is wide.
-- Remove the modifier when you want to fall back to the horizontal version; the base selector above will continue to apply.
 */
-
-.weight-unit-toggle { border: 1px solid transparent; background: transparent; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em; padding: 0.2rem 0.45rem; color: #4b5563; cursor: pointer; transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease; border-radius: 999px; text-transform: none; }
-  /* To display "kg" and "lbs" in lowercase, either adjust the markup text or override here: */
-
+.weight-unit-toggle { border: 1px solid transparent; background: transparent; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em; 
+  padding: 0.2rem 0.45rem; color: #4b5563; cursor: pointer; transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease; 
+  border-radius: 999px; text-transform: none; }
 .weight-unit-toggle:hover { color: #1f2937; border-color: #cbd5f5; background: #f1f5f9; }
 .weight-unit-toggle.is-selected { color: #2563eb; border-color: #2563eb; background: rgb(37 99 235 / 12%); }
 .weight-unit-toggle:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
@@ -102,7 +80,4 @@ body.dark-mode .weight-unit-toggle.is-selected { color: #93c5fd; border-color: #
 .weight-input { flex: 0 0 auto; min-width: 4ch; max-width: 6ch; }
 .weight-summary { margin-left: auto; font-size: 0.75rem; color: #4b5563; white-space: nowrap; flex: 0 0 auto; text-align: right; }
 body.dark-mode .weight-summary { color: #cbd5f5; }
-
-@supports (overflow: hidden) {
-  .weight-summary { overflow: hidden; text-overflow: ellipsis; }
-}
+@supports (overflow: hidden) { .weight-summary { overflow: hidden; text-overflow: ellipsis; } }

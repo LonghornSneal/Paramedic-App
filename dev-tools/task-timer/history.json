@@ -3396,6 +3396,214 @@
         "repeatsInTask": 1,
         "crossTaskLongRuns": 0
       }
+    },
+    {
+      "id": "step-1760950374922",
+      "taskId": "wsl-setup-audit",
+      "taskName": "WSL Migration Check",
+      "stepName": "Collect environment diagnostics",
+      "stepType": "analysis",
+      "startedAt": "2025-10-20T08:52:28.483Z",
+      "endedAt": "2025-10-20T08:52:54.922Z",
+      "startNote": "Gather version info and repo status after move to WSL.",
+      "stopNote": "Node/npm versions captured; repo status reviewed.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 26439,
+      "durationSeconds": 26.439,
+      "durationReadable": "26.4s",
+      "errors": 0,
+      "result": null,
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1760950415784",
+      "taskId": "wsl-setup-audit",
+      "taskName": "WSL Migration Check",
+      "stepName": "Assess updates needed",
+      "stepType": "analysis",
+      "startedAt": "2025-10-20T08:53:04.378Z",
+      "endedAt": "2025-10-20T08:53:35.784Z",
+      "startNote": "Review configuration files and dependency state for post-WSL adjustments.",
+      "stopNote": "Captured npm outdated results and reviewed debug configs.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 31406,
+      "durationSeconds": 31.406,
+      "durationReadable": "31.4s",
+      "errors": 0,
+      "result": null,
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1760953854478",
+      "taskId": "wsl-setup-audit",
+      "taskName": "WSL Migration Check",
+      "stepName": "Validate functionality",
+      "stepType": "execution",
+      "startedAt": "2025-10-20T08:53:44.884Z",
+      "endedAt": "2025-10-20T09:50:54.478Z",
+      "startNote": "Run lint/tests to confirm app behaviour still matches pre-migration state.",
+      "stopNote": "lint fails on webhint errors; Playwright tests need system deps.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 3429594,
+      "durationSeconds": 3429.594,
+      "durationReadable": "57m 9.6s",
+      "errors": 2,
+      "result": null,
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 57m 9.6s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1760953956034",
+      "taskId": "wsl-setup-audit",
+      "taskName": "WSL Migration Check",
+      "stepName": "Summarize findings",
+      "stepType": "analysis",
+      "startedAt": "2025-10-20T09:51:17.970Z",
+      "endedAt": "2025-10-20T09:52:36.034Z",
+      "startNote": "Prepare final report with diagnostics and next steps.",
+      "stopNote": "Prepared notes for final response.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 78064,
+      "durationSeconds": 78.064,
+      "durationReadable": "1m 18.1s",
+      "errors": 0,
+      "result": null,
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1760954589735",
+      "taskId": "wsl-next-steps-20251020",
+      "taskName": "WSL Follow-ups",
+      "stepName": "Update configs for WSL",
+      "stepType": "execution",
+      "startedAt": "2025-10-20T10:02:32.261Z",
+      "endedAt": "2025-10-20T10:03:09.735Z",
+      "startNote": "Adjust MCP scripts and VSCode launch to use Linux paths and correct preview port.",
+      "stopNote": "Converted helper scripts to dynamic basePath and updated VSCode launch entries for 5173.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 37474,
+      "durationSeconds": 37.474,
+      "durationReadable": "37.5s",
+      "errors": 0,
+      "result": null,
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1760982733982",
+      "taskId": "wsl-next-steps-20251020",
+      "taskName": "WSL Follow-ups",
+      "stepName": "Install deps & rerun tests",
+      "stepType": "execution",
+      "startedAt": "2025-10-20T10:03:18.960Z",
+      "endedAt": "2025-10-20T17:52:13.982Z",
+      "startNote": "Install Playwright system packages and rerun npm run test to verify.",
+      "stopNote": "Unable to run apt-get without sudo password; tests not rerun.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 28135022,
+      "durationSeconds": 28135.022,
+      "durationReadable": "7h 48m 55s",
+      "errors": 1,
+      "result": null,
+      "flags": [
+        "duration_over_2m"
+      ],
+      "flagDetails": [
+        "Duration 7h 48m 55s exceeds 2 minute threshold."
+      ],
+      "flagged": true,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 1
+      }
+    },
+    {
+      "id": "step-1760982810748",
+      "taskId": "wsl-next-steps-20251020",
+      "taskName": "WSL Follow-ups",
+      "stepName": "Review hint report",
+      "stepType": "analysis",
+      "startedAt": "2025-10-20T17:52:28.348Z",
+      "endedAt": "2025-10-20T17:53:30.748Z",
+      "startNote": "Inspect hint-report HTML to identify critical errors to fix first.",
+      "stopNote": "Identified 14 errors all in research/ncbi_cricothyrotomy.html plus CSS warning in styles/utilities/print-accessibility.css.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 62400,
+      "durationSeconds": 62.4,
+      "durationReadable": "1m 2.4s",
+      "errors": 0,
+      "result": null,
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
+    },
+    {
+      "id": "step-1760982871600",
+      "taskId": "wsl-next-steps-20251020",
+      "taskName": "WSL Follow-ups",
+      "stepName": "Clean stray directory",
+      "stepType": "execution",
+      "startedAt": "2025-10-20T17:53:42.568Z",
+      "endedAt": "2025-10-20T17:54:31.600Z",
+      "startNote": "Remove /home/longhorn/C: and confirm it is gone.",
+      "stopNote": "Removed /home/longhorn/C: via python3 shutil.rmtree; verified gone.",
+      "tags": [],
+      "experimentId": null,
+      "durationMs": 49032,
+      "durationSeconds": 49.032,
+      "durationReadable": "49s",
+      "errors": 0,
+      "result": null,
+      "flags": [],
+      "flagDetails": [],
+      "flagged": false,
+      "counts": {
+        "repeatsInTask": 1,
+        "crossTaskLongRuns": 0
+      }
     }
   ],
   "metrics": {
@@ -4912,6 +5120,126 @@
           "css-modularization-impl": 1
         },
         "experiments": {}
+      },
+      "collect environment diagnostics": {
+        "stepName": "Collect environment diagnostics",
+        "totalRuns": 1,
+        "totalDurationMs": 26439,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "wsl-setup-audit": 1
+        },
+        "experiments": {}
+      },
+      "assess updates needed": {
+        "stepName": "Assess updates needed",
+        "totalRuns": 1,
+        "totalDurationMs": 31406,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "wsl-setup-audit": 1
+        },
+        "experiments": {}
+      },
+      "validate functionality": {
+        "stepName": "Validate functionality",
+        "totalRuns": 1,
+        "totalDurationMs": 3429594,
+        "totalErrors": 2,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "wsl-setup-audit": 1
+        },
+        "experiments": {}
+      },
+      "summarize findings": {
+        "stepName": "Summarize findings",
+        "totalRuns": 1,
+        "totalDurationMs": 78064,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "wsl-setup-audit": 1
+        },
+        "experiments": {}
+      },
+      "update configs for wsl": {
+        "stepName": "Update configs for WSL",
+        "totalRuns": 1,
+        "totalDurationMs": 37474,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "wsl-next-steps-20251020": 1
+        },
+        "experiments": {}
+      },
+      "install deps & rerun tests": {
+        "stepName": "Install deps & rerun tests",
+        "totalRuns": 1,
+        "totalDurationMs": 28135022,
+        "totalErrors": 1,
+        "flaggedCounts": {
+          "duration_over_2m": 1,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "wsl-next-steps-20251020": 1
+        },
+        "experiments": {}
+      },
+      "review hint report": {
+        "stepName": "Review hint report",
+        "totalRuns": 1,
+        "totalDurationMs": 62400,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "wsl-next-steps-20251020": 1
+        },
+        "experiments": {}
+      },
+      "clean stray directory": {
+        "stepName": "Clean stray directory",
+        "totalRuns": 1,
+        "totalDurationMs": 49032,
+        "totalErrors": 0,
+        "flaggedCounts": {
+          "duration_over_2m": 0,
+          "repeat_5_in_task": 0,
+          "repeat_3_tasks_3m": 0
+        },
+        "tasks": {
+          "wsl-next-steps-20251020": 1
+        },
+        "experiments": {}
       }
     },
     "experiments": {
@@ -4929,7 +5257,7 @@
         }
       }
     },
-    "updatedAt": "2025-10-11T10:05:03.805Z"
+    "updatedAt": "2025-10-20T17:54:31.600Z"
   },
-  "lastUpdated": "2025-10-11T10:05:03.805Z"
+  "lastUpdated": "2025-10-20T17:54:31.600Z"
 }
