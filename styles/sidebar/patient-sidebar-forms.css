@@ -27,7 +27,7 @@
 - add `!important` as a last resort on the `.sidebar-input` rule. */
 
 .sidebar-input, textarea.sidebar-input { font-size: 10rem;  /* mPMH, vitals, etc. */
-  flex: 0 0 auto; /* "0 0 auto" Prevents inputs from stretching and keep them only as wide as needed */
+  justify-self: start; /* Prevent inputs from stretching and keep width content-based */
   width: auto; /* "auto" Allows width to be dictated by min/max width constraints */
   min-width: 1.5ch; max-width: 10ch; min-height: 0.5rem; padding: 0.003rem 0.0045rem; /* text entry */
   border: 1px solid #2311e9; border-radius: 0.7rem;
@@ -102,7 +102,7 @@ select.sidebar-input:focus-visible { /* Focus styling for keyboard tab navigatio
    styles/sidebar/patient-sidebar-forms.css
   .patient-line[data-line="8"] { order: 8; }
   .patient-line[data-line="9"] { order: 9; }
-  .patient-line[data-line="8"] .vital-item--compact { flex: 0 0 auto; }
+  .patient-line[data-line="8"] .vital-item--compact { justify-self: start; }
   
   old code:
   <!-- index.html -->
@@ -114,15 +114,15 @@ select.sidebar-input:focus-visible { /* Focus styling for keyboard tab navigatio
   .patient-line[data-line="9"] { order: 9; }
   
   - Assign the `patient-line--vitals-primary` helper and lock the `order` values so BP, HR, and %SpO₂ stay together on line 8 while downstream vitals remain on their numbered lines.
-  - Narrowing the vitals with `.vital-item--compact { flex: 0 0 auto; }` keeps the row from wrapping after you shrink the BP inputs.
+  - Narrowing the vitals with `.vital-item--compact { justify-self: start; }` keeps the row from wrapping after you shrink the BP inputs.
   Override notes:
   - If nothing changes, check for Tailwind `order-*` utilities in index.html—they override these declarations and must be removed or superseded with more specific selectors.
-  - When the vitals still wrap, ensure `.patient-line--vitals` later in the file is not forcing `flex-wrap: wrap;`; add `.patient-line--vitals-primary { flex-wrap: nowrap; }` if necessary.
+  - When the vitals still wrap, ensure `.patient-line--vitals` later in the file is not forcing alternative layout overrides; add `.patient-line--vitals-primary { grid-auto-flow: column; }` if necessary.
   */
-  display: inline-flex; /* single line layout using flexbox */
+  display: inline-grid; /* single line layout using CSS grid */
+  grid-auto-flow: column;
   align-items: center; /* Vertically center labels & inputs within row */
-  gap: 0.245rem; /* spacing between row elements */
-  flex-wrap: nowrap; /* Disable wrapping so each row stays on a single line */
+  column-gap: 0.245rem; /* spacing between row elements */
   overflow-x: auto; /* Enable horizontal scrolling when content exceeds width */
   scroll-behavior: smooth; /* Smooth scrolling when using trackpads */
 } /* End .patient-line */
@@ -134,7 +134,7 @@ select.sidebar-input:focus-visible { /* Focus styling for keyboard tab navigatio
   scrollbar-width: thin; }
 
 #patient-sidebar .patient-line .sidebar-input { /* Inputs inside rows (e.g., Age #, HR, RR) should stay compact */
-  flex: 0 0 auto; /* Prevent flex growth so width stays bounded by min/max */
+  justify-self: start; /* Prevent width from stretching beyond content */
 }
 
 #patient-sidebar .patient-line textarea.sidebar-input { /* (textarea width rule) Multi-line fields inside rows (PMH, Allergies, Current Rx's, Indications, S/S) */
@@ -159,16 +159,16 @@ select.sidebar-input:focus-visible { /* Focus styling for keyboard tab navigatio
   min-width: 4.5ch; }
 
 .sidebar-field { /* Shared styling for the label + control pairing on each row (e.g., "PMH:" label plus textarea) */
-  display: inline-flex; /* Keeps label & control aligned in row */
+  display: inline-grid; /* Keeps label & control aligned in row using grid flow */
+  grid-auto-flow: column; /* Arrange label then control horizontally */
   align-items: flex-start; /* Align content to top so multi-line labels line up */
-  gap: 0.0035rem; /* gap between label & control */
-  flex-wrap: nowrap; /* Do not wrap label/control (preserves single-line layout) */
+  column-gap: 0.0035rem; /* gap between label & control */
   padding: 0;
-  min-width: 0; /* Allow flex container to shrink if needed */
+  min-width: 0; /* Allow container to shrink if needed */
 }
 
 .sidebar-field-textarea.sidebar-field-textarea--chips-right { display: grid; grid-template-columns: minmax(0, 16ch) minmax(10ch, auto); gap: 0.6rem; align-items: start; }
-.sidebar-field-textarea--chips-right .sidebar-field-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
+.sidebar-field-textarea--chips-right .sidebar-field-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: flex-start; column-gap: 0.5rem; }
 .sidebar-field-textarea--chips-right .sidebar-field-row--input { align-items: stretch; }
 .sidebar-field-textarea--chips-right .sidebar-chip-list { min-width: 12ch; }
 .sidebar-field-textarea--chips-right .sidebar-chip-ghost { min-width: 22ch; visibility: hidden; }
@@ -182,8 +182,9 @@ Override notes:
 */
 
 .sidebar-field .sidebar-label { /* Styling for labels inside the field wrapper (e.g., "Allergies:", "HR:", "Rhythm:") */
-  display: inline-flex; /* Keep label text aligned with control */
+  display: inline-grid; /* Keep label text aligned with control */
   align-items: center; /* Center label text vertically */
+  justify-items: start;
   margin-bottom: 0; /* Ensure labels do not add extra space below */
   white-space: nowrap; /* Prevent labels from breaking onto multiple lines */
 }
@@ -198,14 +199,15 @@ Override notes:
 }
 
 .sidebar-field-heading { /* Container for labels that have trailing chip lists (e.g., PMH label plus chip list); ensure template keeps .sidebar-chip-list sibling to show selections on the right. */
-  display: inline-flex; /* Keeps heading & chips on the same line */
+  display: inline-grid; /* Keeps heading & chips on the same line */
+  grid-auto-flow: column;
   align-items: center; /* Vertically center heading text */
-  gap: 0.15rem; /* gap between heading & chips */
+  column-gap: 0.15rem; /* gap between heading & chips */
   white-space: nowrap; /* Prevent heading from wrapping */
 }
 
 .sidebar-field-heading .sidebar-label { /* Label inside heading container (e.g., PMH label when chips are present) */
-  flex: 0 0 auto; /* Prevent label from stretching */
+  justify-self: start; /* Prevent label from stretching */
   white-space: nowrap; /* Keep label on a single line */
 }
 
@@ -215,8 +217,8 @@ Override notes:
   .sidebar-chip-list { width: clamp(14ch, 22vw, 28ch); white-space: nowrap; }
 */
                         
-  display: inline-flex; /* Lay chips left-to-right */
-  flex: 0 0 auto; /* Keep chip list from expanding vertically */
+  display: inline-grid; /* Lay chips left-to-right */
+  grid-auto-flow: column;
   gap: 0.2rem; /* Small spacing between chips */
   margin-left: 0.4rem; /* Space between label & chip list */
   min-height: 1.1rem; /* Reserve vertical space so row height is stable */
@@ -233,7 +235,8 @@ Override notes:
 }
 
 .sidebar-chip { /* Individual chip styling representing each selected PMH/Allergy/Current Rx/Indication entry */
-  display: inline-flex; /* Show chip text inline with icon (if any) */
+  display: inline-grid; /* Show chip text inline with icon (if any) */
+  grid-auto-flow: column;
   align-items: center; /* Center text vertically within chip */
   padding: 0.05rem 0.2rem;
   font-size: 0.45em;
@@ -243,7 +246,7 @@ Override notes:
   background: #fff7ed;
   border: 1px solid #1da9ea;
   color: #ab0000;
-  flex: 0 0 auto; /* Keep chip width based on content */
+  justify-content: start; /* Keep chip width based on content */
 }
 
 .sidebar-chip strong { /* Emphasized text within chips, e.g., abbreviations or critical flags inside the chip */
@@ -264,10 +267,11 @@ body.dark-mode .sidebar-chip { /* Dark theme variant of chips for PMH/Allergies/
 } /* End @supports for chip overflow */
 
 .sidebar-input-flex { /* Wrapper used when a label sits above its control (e.g., PMH textarea stack) */
-  flex: 0 0 auto; /* Prevent wrapper from stretching */
+  justify-self: stretch; /* Allow wrapper to span available space */
   min-width: 0; /* Allow shrink when horizontal space is constrained */
-  display: flex; /* Stack label and control vertically */
-  flex-direction: column; /* Ensure label sits above control */
+  display: grid; /* Stack label and control vertically */
+  grid-auto-flow: row; /* Ensure label sits above control */
+  row-gap: 0.35rem;
 }
 
 .sidebar-field-vital { /* Wrapper specifically for VS entries (BP, HR, SpO2, EtCO2, RR, BGL, Pupils, Lung Sounds, GCS, A&O) */
@@ -275,19 +279,19 @@ body.dark-mode .sidebar-chip { /* Dark theme variant of chips for PMH/Allergies/
 }
 
 .sidebar-field-vital .sidebar-label { /* Label next to each vital entry (e.g., "HR:", "% SpO2:", "EtCO2:") */
-  flex: 0 0 auto; /* Keep label width fixed to fit text */
+  justify-self: start; /* Keep label width fixed to fit text */
   min-width: 5.5rem; /* Ensure label text is readable without wrapping */
   white-space: nowrap; /* Prevent label from splitting into multiple lines */
 }
 
 .sidebar-field-vital .sidebar-input { /* Vital input boxes (e.g., HR bpm box, RR respiration box, BGL entry) */
-  flex: 0 0 auto; /* Keep input width controlled by min/max width */
+  justify-self: start; /* Keep input width controlled by min/max width */
   min-width: 4ch; /* Provide space for up to three-digit values */
   max-width: 6ch; /* Prevent fields from stretching too wide */
 }
 
 .vital-input { /* General vital input fallback covering BP systolic/diastolic, EtCO2 numeric, RR numeric, BGL value */
-  flex: 0 0 auto; /* Keep width consistent for these controls */
+  justify-self: start; /* Keep width consistent for these controls */
   min-width: 4ch; /* Enough room for vital numbers */
   max-width: 6ch; /* Prevent overly wide fields */
 }
@@ -297,14 +301,14 @@ body.dark-mode .sidebar-chip { /* Dark theme variant of chips for PMH/Allergies/
 }
 
 .vital-select { /* Dropdown fields within vital rows (e.g., Pupils reaction dropdown, Lung Sounds dropdown) */
-  flex: 0 0 auto; /* Keep select width tight */
+  justify-self: start; /* Keep select width tight */
 }
 
 .vital-row { /* Container for grouped vital items on lines 8-11 (BP/HR/SpO2, EtCO2/RR/BGL, Pupils/Lung Sounds, GCS/A&O) */
-  display: inline-flex; /* Lay out vitals side-by-side */
+  display: inline-grid; /* Lay out vitals side-by-side */
+  grid-auto-flow: column;
   align-items: center; /* Keep labels & inputs aligned vertically */
-  gap: 0.45rem; /* gap between vitals */
-  flex-wrap: nowrap; /* Prevent vital group from wrapping */
+  column-gap: 0.45rem; /* gap between vitals */
 }
 
 .vital-row:last-child { /* Ensure last vital row has consistent spacing */
@@ -312,10 +316,11 @@ body.dark-mode .sidebar-chip { /* Dark theme variant of chips for PMH/Allergies/
 }
 
 .vital-item { /* Individual vital item container (e.g., the entire "HR:" label + input pair) */
-  display: inline-flex; /* Keep label & control aligned horizontally */
+  display: inline-grid; /* Keep label & control aligned horizontally */
+  grid-auto-flow: column;
   align-items: center; /* Vertically center label & control */
-  gap: 0.35rem; /* gap between label & field */
-  flex: 0 0 auto; /* Keep item’s width fixed to its content */
+  column-gap: 0.35rem; /* gap between label & field */
+  justify-content: start;
   min-width: 0; /* Allow shrink if space gets tight */
 }
 
@@ -352,9 +357,9 @@ body.dark-mode .sidebar-chip { /* Dark theme variant of chips for PMH/Allergies/
 
 .unit-input { /* Wrapper for inputs that show a measurement suffix, e.g., BP mmHg stack, EtCO2 mmHg, SpO2 percent */
   position: relative; /* Allow suffix to be positioned within the field */
-  display: flex; /* Keep input & suffix aligned */
+  display: grid; /* Keep input & suffix aligned via grid */
   align-items: center; /* Vertically center suffix with input text */
-  flex: 1 1 auto; /* Prevent wrapper from stretching */
+  justify-self: stretch; /* Prevent wrapper from shrinking unevenly */
   min-width: 0; /* Allow shrink if necessary */
 }
 
@@ -391,8 +396,8 @@ body.dark-mode .unit-suffix { /* Dark theme adjustments for unit suffix (affects
 
 .bp-stack { /* Container for systolic/diastolic stacked inputs in the "BP" portion of vitals line 8 */
   position: relative; /* Prepare for pseudo elements if needed */
-  display: flex; /* Stack systolic & diastolic vertically */
-  flex-direction: column; /* Align inputs vertically within stack */
+  display: grid; /* Stack systolic & diastolic vertically */
+  grid-auto-flow: row; /* Align inputs vertically within stack */
   border: 1px solid #d1d5db; /* Neutral border to match other inputs */
   border-radius: 0.4rem; /* Rounded corners consistent with design */
   background: #75f79a;
@@ -423,7 +428,7 @@ NEW CODE: */
 - Attach `bp-stack--narrow` and `bp-input--compact` (as shown in index.html comments) when you want the BP fields to shrink without affecting other pt sidebar inputs; the new classes let you dial the width & padding down independently.
 - Reducing the minimum height complements the stacked Age toggles, so the vitals line settles into a tighter row while still respecting touch targets.
 Override notes:
-- If the width refuses to cap, check for `flex:1` declarations on `.bp-stack` later in this file (line 270) and add `.bp-stack--narrow { flex: 0 0 auto !important; }` to override.
+- If the width refuses to cap, check for layout overrides on `.bp-stack` later in this file (line 270) and add `.bp-stack--narrow { justify-self: start !important; }` to override.
 - When the compact classes affect other vitals unintentionally, ensure you only append the modifiers to the BP markup; CSS inheritance alone will not apply them elsewhere unless you reuse the class names.
 */
 
@@ -453,8 +458,8 @@ Override notes:
 
 /*
 .bp-stack { /* Adjust BP stack layout on larger screens 
-    display: inline-flex;  Align systolic/diastolic side by side if needed
-    flex-direction: row;  Switch from vertical stacking to horizontal 
+    display: inline-grid;  Align systolic/diastolic side by side if needed
+    grid-auto-flow: column;  Switch from vertical stacking to horizontal 
     align-items: center;  Align values vertically 
     gap: 0.3rem;
     padding: 0.25rem 0.4rem;
@@ -463,8 +468,7 @@ Override notes:
   }  End BP stack media adjustments
 
   .bp-stack .bp-divider-line {  Divider styling when stack is horizontal 
-    flex: 0 0 1px;  Keep divider a thin strip 
-    width: 1px;
+    width: 1px;  Keep divider a thin strip 
     height: auto;  Allow divider to span the height of the stack 
     align-self: stretch;  Stretch divider between systolic and diastolic 
   }
@@ -485,31 +489,32 @@ Override notes:
   }
 
 .ekg-module { /* Wrapper for the Rhythm (line 12) and Modifier (line 13) rows in the sidebar */
-  display: flex; /* Stack rows vertically */
-  flex-direction: column; /* Maintain column layout */
-  gap: 0.85rem; /* gap between rhythm & modifier groups */
+  display: grid; /* Stack rows vertically */
+  grid-auto-flow: row; /* Maintain column layout */
+  row-gap: 0.85rem; /* gap between rhythm & modifier groups */
 }
 
 .ekg-module-row { /* Individual EKG row container (applies to both Rhythm and Modifier row layouts) */
-  display: inline-flex; /* Keep row elements inline and padded */
+  display: inline-grid; /* Keep row elements inline and padded */
+  grid-auto-flow: column;
   align-items: center; /* Align controls & labels */
-  gap: 0.6rem; /* gap between inputs */
-  flex-wrap: nowrap; /* Keep row on one line */
+  column-gap: 0.6rem; /* gap between inputs */
 }
 
 .ekg-row-main { /* Wrapper for the main Rhythm dropdown/inputs and the Modifier text area */
-  flex: 0 0 auto; /* Prevent stretching */
-  min-width: 0; /* Allow shrink within flex container */
-  display: flex; /* Stack label and controls vertically */
-  flex-direction: column; /* Arrange label above control */
+  justify-self: stretch; /* Prevent stretching */
+  min-width: 0; /* Allow shrink within layout */
+  display: grid; /* Stack label and controls vertically */
+  grid-auto-flow: row; /* Arrange label above control */
   align-items: stretch; /* Make control fill available width within wrapper */
-  gap: 0.35rem; /* gap between label & control */
+  row-gap: 0.35rem; /* gap between label & control */
 }
 
 .ekg-row-heading { /* Header row for Rhythm dropdown, including label and optional action buttons */
-  display: inline-flex; /* Keep label and buttons in one line */
+  display: inline-grid; /* Keep label and buttons in one line */
+  grid-auto-flow: column;
   align-items: center; /* Vertically center heading contents */
-  gap: 0.45rem; /* Provide space between label and actions */
+  column-gap: 0.45rem; /* Provide space between label and actions */
 }
 
 .ekg-row-main .sidebar-label { /* Label inside the Rhythm/Modifier rows (e.g., "Rhythm:" text) */
@@ -518,14 +523,14 @@ Override notes:
 }
 
 .ekg-row-controls { /* Container for Rhythm input, optional dropdowns, and modifier chips on lines 12-13 */
-  display: inline-flex; /* Align controls horizontally */
+  display: inline-grid; /* Align controls horizontally */
+  grid-auto-flow: column;
   align-items: center; /* Vertically center each control */
-  gap: 0.4rem; /* Provide spacing between controls */
-  flex-wrap: nowrap; /* Keep controls on single line */
+  column-gap: 0.4rem; /* Provide spacing between controls */
 }
 
 .ekg-autocomplete { /* Wrapper for the Rhythm autocomplete field (line 12) */
-  flex: 0 0 auto; /* Keep width determined by content */
+  justify-self: start; /* Keep width determined by content */
   min-width: 10ch; /* Enough width for short rhythm names */
 }
 
@@ -534,15 +539,14 @@ Override notes:
 }
 
 .ekg-preview-shell { /* Preview area for the selected rhythm image shown beside the Rhythm row */
-  flex: 0 0 auto; /* Keep preview from stretching */
+  justify-self: start; /* Keep preview from stretching */
   width: 96px; /* Match original preview dimensions */
   height: 60px; /* Maintain aspect ratio for preview */
   border-radius: 0.45rem; /* Rounded corners consistent with design */
   background: #0b1220; /* Dark background to highlight waveform */
   border: 1px solid #1f2937; /* Subtle border to frame the preview */
-  display: flex; /* Center the content inside */
-  align-items: center; /* Vertically center waveform */
-  justify-content: center; /* Horizontally center waveform */
+  display: grid; /* Center the content inside */
+  place-items: center; /* Center waveform content */
 }
 
 .ekg-preview-img { /* Image element within the rhythm preview shell */
@@ -564,7 +568,7 @@ Override notes:
 } /* End @supports for preview */
 
 .ekg-info-button { /* Information button next to the Rhythm selector (line 12) */
-  flex: 0 0 auto; /* Keep button from expanding */
+  justify-self: start; /* Keep button from expanding */
   width: 1.9rem; /* Set square footprint */
   height: 1.9rem; /* Match width for perfect circle */
   border-radius: 1px; /* Fully round button */
@@ -574,9 +578,8 @@ Override notes:
   font-size: 0.85rem; /* font size for icon/text */
   font-weight: 600;
   cursor: pointer; /* Show clickable cursor */
-  display: inline-flex; /* Center icon inside button */
-  align-items: center; /* Vertically center icon */
-  justify-content: center; /* Horizontally center icon */
+  display: inline-grid; /* Center icon inside button */
+  place-items: center; /* Center icon */
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; /* Smooth hover/focus transitions */
 }
 
@@ -604,8 +607,9 @@ Override notes:
 }
 
 .ekg-summary-text { /* Text summary beneath Rhythm selector summarizing current selection */
-  flex: 1 1 14rem; /* Allow summary to grow while maintaining base width */
-  min-width: 0; /* Permit shrink if space limited */
+  justify-self: stretch; /* Allow summary to grow while maintaining base width */
+  min-width: 0; /* Permit shrink when layout tightens */
+  width: min(100%, 14rem); /* Provide baseline width before wrapping */
   font-size: 0.78rem;
   color: #475569;
   line-height: 1.3;
@@ -620,10 +624,11 @@ body.dark-mode .ekg-summary-text { /* Dark theme summary adjustments for Rhythm 
 }
 
 .sidebar-section-header { /* Header row within each sidebar section, e.g., label plus help button for Rhythm section */
-  display: flex; /* Align items horizontally */
+  display: grid; /* Align items horizontally */
+  grid-auto-flow: column;
   align-items: center; /* Vertically center contents */
   justify-content: space-between; /* Push help button to far edge */
-  gap: 0.5rem; /* gap between header elements */
+  column-gap: 0.5rem; /* gap between header elements */
 }
 
 .sidebar-help-button { /* Inline help button next to labels such as Rhythm or Modifier */
@@ -660,10 +665,10 @@ body.dark-mode .ekg-summary-text { /* Dark theme summary adjustments for Rhythm 
 
 .sidebar-demographics-row,
 #patient-sidebar .patient-line--demographics { /* Rows that hold demographic items */
-  display: flex; /* Lay out demographic items horizontally */
-  flex-wrap: nowrap;
+  display: grid; /* Lay out demographic items horizontally */
+  grid-auto-flow: column;
   align-items: stretch; /* Ensure items fill the row height */
-  gap: 0.85rem; /* spacing between demographic groups */
+  column-gap: 0.85rem; /* spacing between demographic groups */
 }
 
 .sidebar-demographics-row:last-child { /* Final demographic row adjustments */
@@ -671,22 +676,22 @@ body.dark-mode .ekg-summary-text { /* Dark theme summary adjustments for Rhythm 
 }
 
 .sidebar-demographics-item { /* Container for individual demographic items */
-  flex: 0 0 7rem; /* Allow items to grow but keep a usable minimum width */
-  min-width: 0; /* Allow shrink when layout is constrained */
-  display: flex; /* Align label & control horizontally */
+  min-width: 7rem; /* Allow items to grow but keep a usable minimum width */
+  display: grid; /* Align label & control horizontally */
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
   align-items: stretch; /* Center content vertically */
-  gap: 0.1rem; /* (label & control) */
-  flex-wrap: wrap; } /* Permit internal wrapping when needed */
+  column-gap: 0.1rem; /* (label & control) */
+  row-gap: 0.25rem; } /* Permit internal wrapping when needed */
   /* To guarantee the Age category stays on the same line as Sex, keep both containers within the same data-line (1) in index.html and optionally reduce
-     the flex-basis of the Age wrapper like so:
+     the minimum width of the Age wrapper like so:
      .sidebar-demographics-item.sidebar-demographics-item-age {
-       flex: 0 0 12rem;
+       min-width: 12rem;
      }
 */
 .sidebar-demographics-item.sidebar-demographics-item-sex { /* Sex selector specifics */
-  flex: 0 0 auto; /* Keep width tight around buttons */
+  justify-self: start; /* Keep width tight around buttons */
   gap: 0.1rem; /* Provide room between toggle buttons */
-  flex-wrap: nowrap; /* Prevent sex buttons from wrapping */
+  grid-auto-flow: column; /* Prevent sex buttons from wrapping */
 }
 
 .patient-line[data-line="1"] { order: 1; } /* Guarantee Sex/Age row appears first; update this order if the data-line assignments change. */
@@ -705,13 +710,13 @@ body.dark-mode .ekg-summary-text { /* Dark theme summary adjustments for Rhythm 
 
 @media (min-width: 768px) { /* Tablet/desktop enhancements */
   .sidebar-section .vital-row { /* Adjust vital rows on larger screens */
-    flex-wrap: nowrap; /* Keep vital row items on one line */
+    grid-auto-flow: column; /* Keep vital row items on one line */
     align-items: center; /* Center fields vertically */
-    gap: clamp(0.5rem, 1vw, 0.85rem); /* Scale gap based on viewport width */
+    column-gap: clamp(0.5rem, 1vw, 0.85rem); /* Scale gap based on viewport width */
   }
 
   .sidebar-section .vital-item { /* Vital item spacing on larger screens */
-    flex: 0 1 auto; /* Allow slight growth while keeping compact */
+    justify-content: start; /* Allow slight growth while keeping compact */
     min-width: 0; /* Permit shrink */
     gap: clamp(0.35rem, 0.9vw, 0.55rem); /* Responsive spacing around labels */
   }
@@ -722,7 +727,7 @@ body.dark-mode .ekg-summary-text { /* Dark theme summary adjustments for Rhythm 
   }
 
   .sidebar-section .unit-input { /* Unit wrapper adjustments on larger screens */
-    flex: 1 1 auto; /* Allow wrapper to grow and fill row */
+    justify-self: stretch; /* Allow wrapper to grow and fill row */
     min-width: 0; /* Allow shrink so layout remains flexible */
   } /* End unit wrapper media adjustments */
 
@@ -768,9 +773,10 @@ body.dark-mode .ekg-summary-text { /* Dark theme summary adjustments for Rhythm 
 } /* End height wrapper */
 
 .height-inline-inputs { /* Container for ft/in inline pair */
-  display: inline-flex; /* Keep foot & inch inputs inline */
+  display: inline-grid; /* Keep foot & inch inputs inline */
+  grid-auto-flow: column;
   align-items: center; /* Align inputs vertically */
-  gap: 0.35rem; /* Add space between fields */
+  column-gap: 0.35rem; /* Add space between fields */
 }
 
 .height-unit-text { /* Text label such as “ft” or “in” */
@@ -779,7 +785,7 @@ body.dark-mode .ekg-summary-text { /* Dark theme summary adjustments for Rhythm 
 }
 
 .height-input { /* Numeric field for height values */
-  flex: 0 0 auto; /* Keep width tight */
+  justify-self: start; /* Keep width tight */
 }
 
 .height-input--compact { /* Compact variant of height input */

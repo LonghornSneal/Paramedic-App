@@ -548,6 +548,7 @@ Warnings/Alerts: Visually shown under Search Bar.
 ## 8. RECENT FIXES AND CHANGES
 Any entry added to this chapter must keep the rest of the README consistent: remove it from Chapters 6 or 7 if it migrates here, and rewrite any related coverage in Chapters 4 or 5 so those sections reflect current behavior. Never leave the old text in place with an 'updated' note; rewrite the references completely.
 
+**[2025-10-20 Patient sidebar grid conversion: Replaced flexbox-based layout across the Patient Info sidebar with CSS grid, refreshed helper comments to match the new layout model, and corrected the markup so html-validate accepts the demographic rows (files: index.html; styles/sidebar/patient-sidebar-shell.css; styles/sidebar/patient-sidebar-controls.css; styles/sidebar/patient-sidebar-forms.css; styles/sidebar/patient-modals.css; README.md). Tests: npm run lint (fails: webhint continues to flag pre-existing compatibility errors).]**
 **[2025-10-12 Patient sidebar line restructure: Removed the Patient Details/Medical History/Current Presentation/VS/EKG headings, reorganized the patient info sidebar into the mandated 13-line layout, tightened demographic/vital inputs with square preset selects, and embedded the EKG help action inside the Rhythm row while keeping medication-class injection aligned with the new structure (files: index.html; styles.css; main.js; README.md). Tests: npm run lint (fails: command timed out while stylelint surfaces long-standing repository violations).]**
 **[2025-10-12 Patient sidebar markup hotfix: Restored the sidebar container closing tag so the main app renders, removed invalid aria-label attributes from select options, seeded placeholder data-image src values for preview images, and prefilled the EKG modal heading to keep html-validate satisfied (files: index.html; README.md). Tests: npm run lint:html.]**
 **[2025-10-08 Patient sidebar compact refit: Zeroed sidebar padding, forced 30.4px square inputs/textarea, stacked age toggles with high-res icons, hooked auto unit suffix reveal for age/weight/vitals, and retitled PMH/Current Rx's/Sx/VS (files: index.html; styles.css; Features/patient/PatientInfo.js; dev-tools/tests/patient-sidebar.spec.js; test-results/patient-sidebar-tablet.png; test-results/patient-sidebar-full.png; test-results/patient-sidebar-bottom.png). Tests: npx playwright test dev-tools/tests/patient-sidebar.spec.js.]**
@@ -859,6 +860,4 @@ This repo is wired to auto‑deploy to GitHub Pages from `main` via `.github/wor
 
 
 - **[2025-10-01 Task timer MCP tooling: Added dev-tools/mcp/task-timer-server.mjs with per-step metadata, automatic flagging thresholds, comparison reporting, and registrations in dev-tools/mcp-call.mjs, inspector.mcp.json, and ~/.codex/config.toml.]**
-
-
 
