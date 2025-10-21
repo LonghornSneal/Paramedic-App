@@ -82,7 +82,7 @@
         </div>
       </div>
     </div>
-    <div class="patient-line patient-line--demographic" data-line="2">
+    <div class="patient-line patient-line--demographics" data-line="2">
     <!--  - The new `weight-unit-stack` element slots directly between the label and numeric input; give it `display:inline-grid; grid-auto-flow:row; row-gap:0.15rem; font-size:0.7rem; text-transform:lowercase;` in `styles/sidebar/patient-sidebar-controls.css` so "kg" appears above "lbs" without pushing the input out of alignment.
       - Adding the `sidebar-demographics-item-weight--stacked` modifier lets you constrain the row width via `.sidebar-demographics-item-weight--stacked { display:grid; grid-auto-flow:column; align-items:center; column-gap:0.45rem; }`, keeping the stack, input, and toggles on one line between the Weight label and field.
       - Applying the `weight-unit-toggle-group--vertical` class ensures the toggle buttons inherit a column layout via `.weight-unit-toggle-group--vertical { display:grid; grid-auto-flow:row; }` even if the base `.weight-unit-toggle-group` gets overridden elsewhere.

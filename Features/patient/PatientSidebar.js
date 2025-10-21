@@ -99,12 +99,32 @@ const COMMON_MEDICATION_NAMES = [
 ];
 
 const SIDEBAR_HIDE_DELAY_MS = 200;
+const SELECT_VALUE_CLASS = 'sidebar-select--has-value';
 
 let patientSidebarEl = null;
 let sidebarOverlayEl = null;
 let openSidebarButtonEl = null;
 let closeSidebarButtonEl = null;
 let settingsPanelEl = null;
+
+function toggleSelectChevronState(selectEl) {
+    const hasValue = typeof selectEl.value === 'string' && selectEl.value.trim() !== '';
+    if (hasValue) {
+        selectEl.classList.add(SELECT_VALUE_CLASS);
+    } else {
+        selectEl.classList.remove(SELECT_VALUE_CLASS);
+    }
+}
+
+function bindSidebarSelectChevronToggle(rootEl) {
+    if (!rootEl) return;
+    const selectEls = rootEl.querySelectorAll('select');
+    selectEls.forEach(selectEl => {
+        toggleSelectChevronState(selectEl);
+        selectEl.addEventListener('change', () => toggleSelectChevronState(selectEl));
+        selectEl.addEventListener('input', () => toggleSelectChevronState(selectEl));
+    });
+}
 
 export function seedPatientSuggestionSets(medicationDataMap) {
     COMMON_PMH_TERMS.forEach(term => pmhSuggestions.add(term));
@@ -182,6 +202,7 @@ export function initPatientSidebar(options = {}) {
         setupAutocomplete(inputId, containerId, source, fieldKey);
     });
 
+    bindSidebarSelectChevronToggle(patientSidebarEl);
     renderPatientSnapshot();
 }
 

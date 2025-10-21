@@ -1,0 +1,126 @@
+/* Pupil assessment cell (data-line="10"): row layout, mm input suffix, and descriptor select styling. */
+
+#patient-sidebar .patient-line[data-line="10"] {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  column-gap: 0.55rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: 100%;
+  order: 10;
+}
+
+#patient-sidebar .patient-line[data-line="10"]::-webkit-scrollbar {
+  height: 3px;
+}
+
+#patient-sidebar .patient-line[data-line="10"] {
+  scrollbar-width: thin;
+}
+
+#patient-sidebar .patient-line[data-line="10"] .vital-item-pupils {
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  column-gap: 0.35rem;
+  justify-content: start;
+  min-width: 0;
+}
+
+#patient-sidebar .patient-line[data-line="10"] .vital-item-pupils .vital-label {
+  font-weight: 600;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  color: #374151;
+}
+
+#patient-sidebar .patient-line[data-line="10"] .vital-item-pupils .unit-input {
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-self: stretch;
+  min-width: 0;
+}
+
+#patient-sidebar .patient-line[data-line="10"] .vital-item-pupils .unit-input .sidebar-input {
+  justify-self: start;
+  min-width: 4ch;
+  max-width: 6ch;
+  padding: 0.25rem 0.4rem;
+  border: 1px solid #cbd5f5;
+  border-radius: 0.7rem;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  color: #1f2937;
+  background-color: #f8fafc;
+  text-align: right;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+body.dark-mode #patient-sidebar .patient-line[data-line="10"] .vital-item-pupils .unit-input .sidebar-input {
+  border-color: #334155;
+  color: #e2e8f0;
+  background-color: #1f2937;
+}
+
+#patient-sidebar .patient-line[data-line="10"] .vital-item-pupils .unit-input .sidebar-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgb(37 99 235 / 20%);
+  outline: none;
+}
+
+#patient-sidebar .patient-line[data-line="10"] .vital-item-pupils .unit-suffix {
+  position: absolute;
+  top: 50%;
+  right: 0.4rem;
+  transform: translateY(-50%);
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: #475569;
+  pointer-events: none;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+#patient-sidebar .patient-line[data-line="10"] .vital-item-pupils .unit-input[data-has-value="true"] .unit-suffix {
+  opacity: 1;
+}
+
+body.dark-mode #patient-sidebar .patient-line[data-line="10"] .vital-item-pupils .unit-suffix {
+  color: #cbd5f5;
+}
+
+#patient-sidebar .patient-line[data-line="10"] .vital-item-pupils .vital-mini-select {
+  min-width: 5.5rem;
+  height: 2.15rem;
+  font-size: 0.78rem;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 0.3rem;
+  border: 1px solid #d1d5db;
+  background: #e64646;
+  appearance: none;
+  cursor: pointer;
+  padding: 0 0.4rem;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' fill='none' stroke='%236b7280' stroke-width='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.35rem center;
+}
+
+body.dark-mode #patient-sidebar .patient-line[data-line="10"] .vital-item-pupils .vital-mini-select {
+  background-color: #1f2937;
+  border-color: #475569;
+  color: #e2e8f0;
+}
+
+#patient-sidebar .patient-line[data-line="10"] .vital-item-pupils .vital-mini-select:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+#patient-sidebar .patient-line[data-line="10"] .vital-item-pupils .vital-mini-select.sidebar-select--has-value {
+  background-image: none;
+  padding-right: 0.35rem;
+}

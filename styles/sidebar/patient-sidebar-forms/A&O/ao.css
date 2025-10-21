@@ -1,0 +1,54 @@
+/* Alert & oriented cell (data-line="11"): label styling and dropdown pill for A&O status. */
+
+#patient-sidebar .patient-line[data-line="11"] .vital-item-ao {
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  column-gap: 0.25rem;
+  justify-content: start;
+  min-width: 0;
+}
+
+#patient-sidebar .patient-line[data-line="11"] .vital-item-ao .vital-label {
+  font-weight: 600;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  color: #141516;
+}
+
+#patient-sidebar .patient-line[data-line="11"] .vital-item-ao .vital-mini-select {
+  min-width: 1.0rem;
+  height: 1.0rem;
+  font-size: 1.0rem;
+  display: inline-grid;
+  place-items: center start;
+  border-radius: 0.3rem;
+  border: 1px solid #d1d5db;
+  background: #e64646;
+  appearance: none;
+  cursor: pointer;
+  padding: 0.2rem 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' fill='none' stroke='%236b7280' stroke-width='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.35rem center;
+}
+
+body.dark-mode #patient-sidebar .patient-line[data-line="11"] .vital-item-ao .vital-mini-select {
+  background-color: #1f2937;
+  border-color: #475569;
+  color: #e2e8f0;
+}
+
+#patient-sidebar .patient-line[data-line="11"] .vital-item-ao .vital-mini-select option {
+  font-size: 0.88rem;
+}
+
+#patient-sidebar .patient-line[data-line="11"] .vital-item-ao .vital-mini-select:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+#patient-sidebar .patient-line[data-line="11"] .vital-item-ao .vital-mini-select.sidebar-select--has-value {
+  background-image: none;
+  padding-right: 0.35rem;
+}

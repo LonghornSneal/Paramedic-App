@@ -1,0 +1,155 @@
+/* Indications row (data-line="6"): stack layout, chip heading, textarea styling, and chip rail behavior. */
+
+#patient-sidebar .patient-line[data-line="6"] {
+  display: grid;
+  grid-auto-flow: row;
+  align-items: stretch;
+  row-gap: 0.35rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: 100%;
+  order: 6;
+}
+
+#patient-sidebar .patient-line[data-line="6"]::-webkit-scrollbar {
+  height: 3px;
+}
+
+#patient-sidebar .patient-line[data-line="6"] {
+  scrollbar-width: thin;
+}
+
+#patient-sidebar .patient-line[data-line="6"] .sidebar-field {
+  display: grid;
+  grid-auto-flow: row;
+  align-items: stretch;
+  row-gap: 0.35rem;
+  padding: 0;
+  min-width: 0;
+}
+
+#patient-sidebar .patient-line[data-line="6"] .sidebar-field-heading {
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  column-gap: 0.15rem;
+  white-space: nowrap;
+}
+
+#patient-sidebar .patient-line[data-line="6"] .sidebar-label {
+  display: inline-grid;
+  align-items: center;
+  justify-items: start;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+
+#patient-sidebar .patient-line[data-line="6"] .sidebar-input {
+  justify-self: stretch;
+  width: auto;
+  min-width: 4ch;
+  max-width: 10ch;
+  min-height: 0.5rem;
+  padding: 0.25rem 0.4rem;
+  border: 1px solid #cbd5f5;
+  border-radius: 0.7rem;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  color: #1f2937;
+  background-color: #f8fafc;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+body.dark-mode #patient-sidebar .patient-line[data-line="6"] .sidebar-input {
+  border-color: #334155;
+  color: #e2e8f0;
+  background-color: #1f2937;
+}
+
+#patient-sidebar .patient-line[data-line="6"] .sidebar-input::placeholder {
+  color: #9ca3af;
+}
+
+#patient-sidebar .patient-line[data-line="6"] .sidebar-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgb(37 99 235 / 20%);
+  outline: none;
+}
+
+#patient-sidebar .patient-line[data-line="6"] textarea.sidebar-input {
+  width: 16ch;
+  min-height: 0.5rem;
+  max-width: 10ch;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  line-height: 1;
+}
+
+#patient-sidebar .patient-line[data-line="6"] .sidebar-input-flex {
+  justify-self: stretch;
+  min-width: 0;
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 0.35rem;
+}
+
+#patient-sidebar .patient-line[data-line="6"] .sidebar-chip-list {
+  display: inline-grid;
+  grid-auto-flow: column;
+  gap: 0.2rem;
+  margin-left: 0.4rem;
+  min-width: 12ch;
+  min-height: 1.1rem;
+  overflow-x: auto;
+  padding-bottom: 0.15rem;
+}
+
+#patient-sidebar .patient-line[data-line="6"] .sidebar-chip-list::-webkit-scrollbar {
+  height: 3px;
+}
+
+#patient-sidebar .patient-line[data-line="6"] .sidebar-chip-list.is-empty {
+  display: none;
+}
+
+#patient-sidebar .patient-line[data-line="6"] .sidebar-chip {
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  padding: 0.05rem 0.2rem;
+  font-size: 0.7rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  border-radius: 0.3rem;
+  background: #fff7ed;
+  border: 1px solid #1da9ea;
+  color: #54f764;
+  justify-content: start;
+}
+
+#patient-sidebar .patient-line[data-line="6"] .sidebar-chip strong {
+  font-weight: 700;
+}
+
+body.dark-mode #patient-sidebar .patient-line[data-line="6"] .sidebar-chip {
+  background: #451a03;
+  border-color: #fb923c;
+  color: #fdba74;
+}
+
+@supports (overflow: hidden) {
+  #patient-sidebar .patient-line[data-line="6"] .sidebar-chip {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@supports (resize: vertical) {
+  #patient-sidebar .patient-line[data-line="6"] textarea.sidebar-input {
+    resize: vertical;
+  }
+}
