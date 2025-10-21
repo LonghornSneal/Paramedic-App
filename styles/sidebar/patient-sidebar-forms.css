@@ -8,11 +8,11 @@
 .sidebar-section:last-child { /* Special case for final section so it does not draw a bottom border */
   border-bottom: none; } /* "none" Removes trailing divider to avoid a hanging line at the bottom */
 
-.sidebar-section-title { /* Handles headings such as "Vitals" & any future sidebar section titles */
-  font-size: 1.125rem; font-weight: 600; /* Semi-bold weight */
-  color: #2563eb;
-  margin: 0; /* "0" Prevents extra space above/below the heading */
-  padding: 0; } /* "0" Keeps heading flush with container edges */
+.sidebar-section-title { /* unused due to no section titles in use */
+  font-size: 1.125rem; font-weight: 600;
+  color: #f07706;
+  margin: 0;
+  padding: 0; }
 
   /* Base styling for all single-line inputs within the Patient Info Sidebar (e.g., Sex selector hidden input, Age numeric field, Vital sign fields).
     To display PMH/Allergies/Current Rx's/Indications/S/S entries to the right without moving this box, populate patientData
