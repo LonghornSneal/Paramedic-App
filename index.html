@@ -60,15 +60,6 @@
           </button>
         </div>
       </div>
-      <!--
-      Explanation:
-      - Adding the `sidebar-demographics-item-age--inline` class switches the wrapper to `display:grid; grid-auto-flow:column; column-gap:0.5rem; align-items:flex-start;` in `styles/sidebar/patient-sidebar-controls.css`, which keeps the entire Age category aligned with the Sex controls.
-      - Wrapping the toggle group and numeric input inside `.age-inline-wrap { display:inline-grid; grid-auto-flow:column; align-items:center; column-gap:0.35rem; }` ensures the stacked Days/Months/Years buttons sit immediately beside the age number field without breaking the line.
-      - The `age-unit-toggle-group--stacked` modifier keeps the toggle buttons vertical by targeting `.age-unit-toggle-group--stacked { display:grid; grid-auto-flow:row; }`, so the buttons remain stacked even when the surrounding wrapper shifts to a horizontal grid.
-      Override notes:
-      - If you already changed `.age-unit-toggle-group` in `styles/sidebar/patient-sidebar-controls.css`, mirror the modifier inside the `@media (min-width: 768px)` block in `styles/sidebar/patient-sidebar-forms.css` so the desktop spacing keeps the stacked toggle layout.
-      - When the Age block still wraps underneath Sex after these changes, confirm `styles/sidebar/patient-sidebar-forms.css` leaves `.patient-line--demographics` using a column-flow grid; add `.patient-line--demographics { grid-auto-flow: column; }` if the helper was removed.
-      -->
       <div class="sidebar-demographics-item sidebar-demographics-item-age sidebar-demographics-item-age--inline">
         <label for="pt-age" class="sidebar-label">Age:</label>
         <div class="age-unit-toggle-group age-unit-toggle-group--stacked" role="group" aria-label="Select age units">
@@ -83,20 +74,6 @@
       </div>
     </div>
     <div class="patient-line patient-line--demographics" data-line="2">
-    <!--  - The new `weight-unit-stack` element slots directly between the label and numeric input; give it `display:inline-grid; grid-auto-flow:row; row-gap:0.15rem; font-size:0.7rem; text-transform:lowercase;` in `styles/sidebar/patient-sidebar-controls.css` so "kg" appears above "lbs" without pushing the input out of alignment.
-      - Adding the `sidebar-demographics-item-weight--stacked` modifier lets you constrain the row width via `.sidebar-demographics-item-weight--stacked { display:grid; grid-auto-flow:column; align-items:center; column-gap:0.45rem; }`, keeping the stack, input, and toggles on one line between the Weight label and field.
-      - Applying the `weight-unit-toggle-group--vertical` class ensures the toggle buttons inherit a column layout via `.weight-unit-toggle-group--vertical { display:grid; grid-auto-flow:row; }` even if the base `.weight-unit-toggle-group` gets overridden elsewhere.
-      Override notes:
-      - If the stacked letters disappear, confirm `styles/sidebar/patient-sidebar-forms.css` does not clip inline children (remove `overflow:hidden` if present on `.sidebar-demographics-item-weight`).
-      - When the toggle buttons refuse to stack, check for media query overrides in `styles/sidebar/patient-sidebar-forms.css` (the `@media (min-width: 768px)` block can reassign `grid-auto-flow:column`; offset with `.weight-unit-toggle-group--vertical` selector in that media query).
-
-      <div class="weight-unit-stack">kg<br>lbs</div>
-.weight-unit-stack { display: inline-grid; grid-auto-flow: row; justify-content: center;
-    font-size: 0.7rem; margin-right: 0.25rem; text-transform: lowercase; }
- NOTE: `.weight-unit-stack` is currently unused because index.html does not render the helper span yet.
-   - To activate it, insert the `<div class="weight-unit-stack"><span>kg</span><span>lbs</span></div>` snippet from the inline comment in index.html between the Weight label and the numeric input.
-   - The style keeps "kg" stacked above "lbs" in the small column you requested; once the markup is present, this CSS will take effect immediately.
--->
       <div class="sidebar-demographics-item sidebar-demographics-item-weight sidebar-demographics-item-weight--stacked">
         <label for="pt-weight-value" class="sidebar-label">Weight:</label>
         <div class="unit-input weight-unit-input" data-unit="kg">
@@ -134,14 +111,6 @@
         </div>
       </div>
     </div>
-    <!-- Explanation:
-    - Introduce `.sidebar-field-textarea--chips-right { display:grid; grid-template-columns:minmax(0, 1fr) auto; gap:0.5rem; align-items:start; }` in `styles/sidebar/patient-sidebar-forms.css` so the label/input column and chip column sit side-by-side without relocating the textarea.
-    - `.sidebar-field-row` should use a grid helper (`display:grid; grid-template-columns:minmax(0, 1fr) auto; column-gap:0.5rem;`) to keep the label on the left while chips render in a consistent column on the right; reuse the same structure for Allergies, Current Rx's, Indications, and S/S by applying the modifier class to those wrappers too.
-    - The optional `.sidebar-chip-ghost` placeholder preserves the chip column width when no chips exist; style it with `visibility:hidden; min-width:12ch;` to prevent the textarea column from stretching when the chip list is empty.
-    Override notes:
-    - If the chips still fall underneath the textarea, verify `styles/sidebar/patient-sidebar-forms.css` does not force `.sidebar-chip-list { width:100%; }`; remove or override that declaration inside the modifier scope so the grid column can size to content.
-    - When the Autocomplete dropdown suddenly shrinks, adjust `.sidebar-field-textarea--chips-right .autocomplete-container { width:100%; }` because the new grid makes width auto by default.
-    -->
     <div class="patient-line patient-line--full" data-line="4">
       <div class="sidebar-field sidebar-field-textarea sidebar-field-textarea--chips-right">
         <div class="sidebar-field-row">
@@ -157,13 +126,6 @@
         </div>
       </div>
     </div>
-       <!-- 
-    - Copy the PMH layout change to each textarea section so Allergies (and the remaining drop-downs) hold their chip column to the right of the input.
-    - The `sidebar-chip-ghost` placeholder locks in the column width until a chip is added, eliminating layout jump when the first allergy is selected.
-    Override notes:
-    - If this block still collapses downward, confirm `styles/sidebar/patient-sidebar-forms.css` includes the `.sidebar-field-textarea--chips-right` grid rules and that no Tailwind utility is resetting the layout.
-    - Should the dropdown overlay clip against the right column, adjust the width using the `.autocomplete-suggestions` comment in `styles/sidebar/patient-autocomplete.css`.
-    -->
     <div class="patient-line patient-line--full" data-line="5">
       <div class="sidebar-field sidebar-field-textarea">
         <div class="sidebar-field-heading">
@@ -200,66 +162,6 @@
         </div>
       </div>
     </div>
-    <!--
-    NEW CODE:
-    <div class="patient-line patient-line--vital patient-line--vitals-primary" data-line="8">
-      <div class="vital-item vital-item-bp vital-item--compact">
-        <span class="vital-label">BP:</span>
-        <div class="bp-stack bp-stack--narrow" role="group" aria-label="Blood pressure entry">
-          <input type="text" id="vs-bp-systolic" class="bp-input bp-input--systolic bp-input--compact" inputmode="numeric" maxlength="3" aria-label="Systolic blood pressure">
-          <span class="bp-divider-line" aria-hidden="true"></span>
-          <input type="text" id="vs-bp-diastolic" class="bp-input bp-input--diastolic bp-input--compact" inputmode="numeric" maxlength="3" aria-label="Diastolic blood pressure">
-        </div>
-        <select id="vs-bp-select" class="vital-mini-select vital-mini-select--bp" aria-label="Blood pressure preset">
-          <option value=""></option>
-          <option value="200+">200+</option>
-          <option value="160+">160+</option>
-          <option value="Normal (90-160 SBP)">Normal (90-160 SBP)</option>
-          <option value="70-90">70-90</option>
-          <option value="70-">70-</option>
-        </select>
-      </div>
-      <div class="vital-item vital-item-hr vital-item--compact" data-line-order="8.2">
-        <span class="vital-label">HR:</span>
-        <div class="unit-input" data-unit="HR">
-          <input type="text" id="vs-hr-value" class="sidebar-input vital-input vital-input--tight" inputmode="numeric" maxlength="3" aria-label="Heart rate numeric entry">
-          <span class="unit-suffix" aria-hidden="true">HR</span>
-        </div>
-        <select id="vs-hr-select" class="vital-mini-select" aria-label="Heart rate preset">
-          <option value=""></option>
-          <option value="150+">150+</option>
-          <option value="100+">100+</option>
-          <option value="60-100">60-100</option>
-          <option value="&gt;60">&gt;60</option>
-          <option value="&gt;40">&gt;40</option>
-        </select>
-      </div>
-      <div class="vital-item vital-item-spo2 vital-item--compact" data-line-order="8.3">
-        <span class="vital-label">% SpO<sub>2</sub>:</span>
-        <div class="unit-input" data-unit="%">
-          <input type="text" id="vs-spo2-value" class="sidebar-input vital-input vital-input--tight" inputmode="numeric" maxlength="3" aria-label="Pulse oximetry numeric entry">
-          <span class="unit-suffix" aria-hidden="true">%</span>
-        </div>
-        <select id="vs-spo2-source" class="vital-mini-select" aria-label="Oxygen delivery source">
-          <option value=""></option>
-          <option value="RA">RA</option>
-          <option value="NC">NC</option>
-          <option value="Vent">Vent</option>
-          <option value="CPAP">CPAP</option>
-          <option value="BiPaP">BiPaP</option>
-        </select>
-      </div>
-    </div>
-
-    Explanation:
-    - Applying `patient-line--vitals patient-line--vital-primary { display:grid; grid-auto-flow:column; column-gap:0.5rem; align-items:flex-start; }` in `styles/sidebar/patient-sidebar-forms.css` keeps BP, HR, and %SpO₂ locked on the same numbered line while still allowing you to toggle `grid-auto-flow` for narrower screens when needed.
-    - The `vital-item--compact` modifier gives you room to shrink each group with CSS like `.vital-item--compact { justify-content:start; }`, so the three vitals sit shoulder-to-shoulder without spiking the row height.
-    - Use `.bp-stack--narrow { max-width: 5.5rem; }` and `.bp-input--compact { width: 2.5rem; padding: 0.2rem 0.25rem; font-size: 0.85rem; }` to make both blood pressure inputs smaller while keeping the divider line in the middle.
-    - Tag the HR and SpO₂ inputs with `.vital-input--tight { width: 3rem; font-size: 0.85rem; }` so they visually match the new BP width and line up evenly.
-    Override notes:
-    - If you change `data-line` numbers but nothing moves, check `styles/sidebar/patient-sidebar-forms.css` for rules that set explicit `order` on `.vital-item-*`; update those selectors to reference your `data-line-order` attributes or remove the hard-coded order.
-    - When the BP stack refuses to shrink, confirm there is no lingering `justify-self:stretch` override on `.bp-stack` or `.bp-input`—line 270 in `styles/sidebar/patient-sidebar-forms.css` grants them extra width; override it with the `--narrow` modifier.
-    -->
     <div class="patient-line patient-line--vital" data-line="8">
       <div class="vital-item vital-item-bp">
         <span class="vital-label">BP:</span>
