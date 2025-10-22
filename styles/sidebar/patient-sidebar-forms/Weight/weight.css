@@ -28,7 +28,7 @@
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 500;
-  color: #374151;
+  color: #2ab91d;
   margin-bottom: 0.25rem;
   white-space: nowrap;
 }
@@ -45,7 +45,7 @@
   border-radius: 0.7rem;
   font-size: 0.85rem;
   line-height: 1.2;
-  color: #1f2937;
+  color: hsl(355, 94%, 50%);
   background-color: #f8fafc;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
@@ -92,7 +92,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .sidebar-input {
   transform: translateY(-50%);
   font-size: 0.62rem;
   font-weight: 600;
-  color: #475569;
+  color: #beeb0e;
   pointer-events: none;
   text-transform: uppercase;
   opacity: 0;
@@ -111,17 +111,17 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .unit-suffix {
 
 /* Defines the grid for weight and height clusters—label column followed by flexible inputs. */
 #patient-sidebar .patient-line[data-line="2"] .sidebar-demographics-item {
-  min-width: 7rem;
+  min-width: 1rem;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
-  column-gap: 0.4rem;
-  row-gap: 0.25rem;
+  align-items: start;
+  column-gap: 0rem;
+  row-gap: 0rem;
 }
 
 /* Sets the weight cluster to five columns: label, unit stack, toggle, numeric field, and summary. */
 #patient-sidebar .patient-line[data-line="2"] .sidebar-demographics-item-weight {
-  gap: 0.5rem;
+  gap: 0rem;
   grid-template-columns: auto auto minmax(0, 1fr) auto auto;
 }
 
@@ -129,9 +129,9 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .unit-suffix {
 #patient-sidebar .patient-line[data-line="2"] .sidebar-demographics-item-weight .weight-unit-stack {
   display: inline-grid;
   grid-auto-flow: row;
-  justify-content: center;
+  justify-content: start;
   font-size: 0.7rem;
-  margin-right: 0.25rem;
+  margin-right: 0rem;
   text-transform: lowercase;
   line-height: 1.1;
   color: #475569;
@@ -147,21 +147,21 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .sidebar-demographi
   display: grid;
   grid-auto-flow: row;
   align-items: flex-start;
-  row-gap: 0.35rem;
+  row-gap: 0rem;
 }
 
 /* Styles each unit toggle as a pill; border + color transitions give visual feedback when hovering or switching units. */
 #patient-sidebar .patient-line[data-line="2"] .weight-unit-toggle {
-  border: 1px solid transparent;
+  border: 1.2px solid transparent;
   background: transparent;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  padding: 0.2rem 0.45rem;
+  padding: 0rem 0rem;
   color: #4b5563;
   cursor: pointer;
   transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
-  border-radius: 999px;
+  border-radius: 99px;
   text-transform: none;
 }
 
@@ -206,7 +206,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .weight-unit-toggle
 
 /* Sets min/max width for the numeric weight input so three-digit weights fit without stretching the layout. */
 #patient-sidebar .patient-line[data-line="2"] .weight-input {
-  min-width: 6ch;
+  min-width: 4ch;
   max-width: 8ch;
 }
 
@@ -216,7 +216,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .weight-unit-toggle
   font-size: 0.75rem;
   color: #4b5563;
   white-space: nowrap;
-  text-align: right;
+  text-align: left;
 }
 
 /* Lightens the summary text for dark mode so stats remain legible. */
@@ -237,7 +237,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .weight-summary {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
-  column-gap: 0.6rem;
+  column-gap: 0rem;
 }
 
 /* Aligns the feet and inches inputs side by side with 0.35rem spacing to mirror tape-measure layout. */
@@ -245,7 +245,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .weight-summary {
   display: inline-grid;
   grid-auto-flow: column;
   align-items: center;
-  column-gap: 0.35rem;
+  column-gap: 0rem;
 }
 
 /* Styles the unit text (ft/in or cm) so it reads clearly beside the height inputs. */
@@ -266,7 +266,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .height-unit-text {
 
 /* Narrows the compact height input variant used when space is limited, keeping typography consistent. */
 #patient-sidebar .patient-line[data-line="2"] .height-input.height-input--compact {
-  width: 2.75rem;
+  width: 2rem;
   padding: 0.2rem 0.35rem;
   font-size: 0.85rem;
 }

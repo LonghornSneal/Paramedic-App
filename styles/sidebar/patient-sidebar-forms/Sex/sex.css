@@ -3,7 +3,7 @@
 /* Aligns the `Sex` label with the selection buttons in a tight horizontal group; gap 0.1rem keeps the first button from touching the label. */
 #patient-sidebar .patient-line[data-line="1"] .sidebar-demographics-item-sex {
   justify-self: start;
-  gap: 0.1rem;
+  gap: 0rem;
   grid-auto-flow: column;
 }
 
@@ -18,7 +18,7 @@
 #patient-sidebar .patient-line[data-line="1"] .sex-picker {
   display: inline-grid;
   grid-auto-flow: column;
-  gap: 0.3rem;
+  gap: 0rem;
   align-items: center;
 }
 
@@ -34,7 +34,7 @@
   color: #6b7280;
   cursor: pointer;
   transition: color 0.2s ease, transform 0.2s ease;
-  --sex-stroke-width: 2.2;
+  --sex-stroke-width: 1;
 }
 
 /* Sets the highlight color for the female icon to the magenta accent. */
@@ -45,7 +45,7 @@
 /* Applies the blue accent and slightly thicker stroke to the male icon for visual balance. */
 #patient-sidebar .patient-line[data-line="1"] .sex-option[data-value="male"] {
   --sex-active-color: #2563eb;
-  --sex-stroke-width: 2.8;
+  --sex-stroke-width: 2;
 }
 
 /* Changes icon color to the role-specific accent on hover or when selected. */
@@ -56,15 +56,15 @@
 
 /* Thickens the stroke and lifts the selected icon slightly to emphasize the current choice. */
 #patient-sidebar .patient-line[data-line="1"] .sex-option.is-selected {
-  --sex-stroke-width: 3.2;
-  transform: translateY(-1px);
+  --sex-stroke-width: 2;
+  transform: translateY(0px);
 }
 
 /* Adds a color-matched outline when the icon receives keyboard focus, maintaining accessibility. */
 #patient-sidebar .patient-line[data-line="1"] .sex-option:focus-visible {
   outline: 2px solid var(--sex-active-color, #2563eb);
-  outline-offset: 2px;
-  border-radius: 999px;
+  outline-offset: 0px;
+  border-radius: 99px;
 }
 
 /* Sizes the inner SVG grid so the symbol fills the button while ignoring pointer events for clean clicks. */
