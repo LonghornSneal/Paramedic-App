@@ -1,5 +1,6 @@
 /* Age controls (data-line="1"): grid row positioning, unit toggle group, numeric input, and suffix behavior. */
 
+/* Positions the `Age` label, unit toggles, and numeric field in one horizontal row on line 1; the 0.45rem column-gap keeps room between controls and overflow-x allows sideways scrolling on small screens. */
 #patient-sidebar .patient-line[data-line="1"] {
   display: grid;
   grid-auto-flow: column;
@@ -11,14 +12,17 @@
   order: 1;
 }
 
+/* Slims the WebKit scrollbar track for the age row to 3px so the horizontal scroll affordance stays subtle. */
 #patient-sidebar .patient-line[data-line="1"]::-webkit-scrollbar {
   height: 3px;
 }
 
+/* Matches Firefox to the thin scrollbar style so the age row behaves consistently across browsers. */
 #patient-sidebar .patient-line[data-line="1"] {
   scrollbar-width: thin;
 }
 
+/* Gives the age entry field its pill styling; min/max widths ensure values like `105` still fit while padding keeps the numbers readable. */
 #patient-sidebar .patient-line[data-line="1"] .sidebar-input {
   justify-self: start;
   width: auto;
@@ -35,22 +39,26 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Switches the age input pill to dark-mode colors so the text remains legible against the darker sidebar. */
 body.dark-mode #patient-sidebar .patient-line[data-line="1"] .sidebar-input {
   border-color: #334155;
   color: #e2e8f0;
   background-color: #1f2937;
 }
 
+/* Softens placeholder text like `Age` or `--` so it does not compete with entered values. */
 #patient-sidebar .patient-line[data-line="1"] .sidebar-input::placeholder {
   color: #9ca3af;
 }
 
+/* Adds the blue primary highlight when the age field is focused, making keyboard navigation obvious. */
 #patient-sidebar .patient-line[data-line="1"] .sidebar-input:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 2px rgb(37 99 235 / 20%);
   outline: none;
 }
 
+/* Creates a positioning context for the floating unit badge (Y/M/D) that shows inside the age input. */
 #patient-sidebar .patient-line[data-line="1"] .unit-input {
   position: relative;
   display: grid;
@@ -59,11 +67,13 @@ body.dark-mode #patient-sidebar .patient-line[data-line="1"] .sidebar-input {
   min-width: 0;
 }
 
+/* Adds right padding and right-aligns numbers so the suffix badge never overlaps the digits. */
 #patient-sidebar .patient-line[data-line="1"] .unit-input .sidebar-input {
   padding-right: 0.4rem;
   text-align: right;
 }
 
+/* Anchors the upper-case unit badge (e.g., `YR`) within the input and hides it with opacity until data exists. */
 #patient-sidebar .patient-line[data-line="1"] .unit-suffix {
   position: absolute;
   top: 50%;
@@ -78,18 +88,22 @@ body.dark-mode #patient-sidebar .patient-line[data-line="1"] .sidebar-input {
   transition: opacity 0.15s ease;
 }
 
+/* Reveals the unit badge once a user types an age so empty inputs stay clean. */
 #patient-sidebar .patient-line[data-line="1"] .unit-input[data-has-value="true"] .unit-suffix {
   opacity: 1;
 }
 
+/* Keeps any subscript characters (like `O2`) within the unit badge small enough to fit on the pill. */
 #patient-sidebar .patient-line[data-line="1"] .unit-suffix sub {
   font-size: 0.6rem;
 }
 
+/* Adjusts the unit badge color so it hits acceptable contrast on the dark background. */
 body.dark-mode #patient-sidebar .patient-line[data-line="1"] .unit-suffix {
   color: #cbd5f5;
 }
 
+/* Defines the three columns that hold the `Age` label, the unit toggle stack, and the numeric entry. */
 #patient-sidebar .patient-line[data-line="1"] .sidebar-demographics-item {
   min-width: 7rem;
   display: grid;
@@ -99,6 +113,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="1"] .unit-suffix {
   row-gap: 0.25rem;
 }
 
+/* Styles the `Age` label text; white-space: nowrap prevents the label from breaking above the input. */
 #patient-sidebar .patient-line[data-line="1"] .sidebar-label {
   display: block;
   font-size: 0.875rem;
@@ -109,6 +124,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="1"] .unit-suffix {
   white-space: nowrap;
 }
 
+/* Aligns the label, unit toggle column, and numeric field within the Age row, keeping gutters even. */
 #patient-sidebar .patient-line[data-line="1"] .sidebar-demographics-item-age {
   display: grid;
   grid-template-columns: auto auto minmax(0, 1fr);
@@ -116,6 +132,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="1"] .unit-suffix {
   column-gap: 0.45rem;
 }
 
+/* Stacks the `Years`, `Months`, etc. toggle buttons vertically so they read clearly at a glance. */
 #patient-sidebar .patient-line[data-line="1"] .age-unit-toggle-group {
   display: grid;
   grid-auto-flow: row;
@@ -123,6 +140,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="1"] .unit-suffix {
   row-gap: 0.2rem;
 }
 
+/* Styles each unit toggle button as a pill; padding keeps the short labels readable while the rounded border matches other chips. */
 #patient-sidebar .patient-line[data-line="1"] .age-unit-toggle {
   border: 1px solid #cbd5f5;
   background: #f1f5f9;
@@ -136,70 +154,84 @@ body.dark-mode #patient-sidebar .patient-line[data-line="1"] .unit-suffix {
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
+/* Gives a pale blue hover state so pointer users see the button is interactive. */
 #patient-sidebar .patient-line[data-line="1"] .age-unit-toggle:hover {
   background: #e0ecff;
   border-color: #93c5fd;
 }
 
+/* Fills the selected unit toggle with the brand blue so crews instantly know which unit is active. */
 #patient-sidebar .patient-line[data-line="1"] .age-unit-toggle.is-selected {
   background: #2563eb;
   border-color: #2563eb;
   color: #fff;
 }
 
+/* Adds the WCAG-visible focus ring so keyboard users can tab between unit toggles confidently. */
 #patient-sidebar .patient-line[data-line="1"] .age-unit-toggle:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
 
+/* Applies the darker palette to the unit toggles for the dark sidebar while preserving contrast. */
 body.dark-mode #patient-sidebar .patient-line[data-line="1"] .age-unit-toggle {
   background: #1e293b;
   border-color: #334155;
   color: #e2e8f0;
 }
 
+/* Lightens the hover state in dark mode so the button still looks interactive. */
 body.dark-mode #patient-sidebar .patient-line[data-line="1"] .age-unit-toggle:hover {
   background: #334155;
   border-color: #60a5fa;
   color: #f8fafc;
 }
 
+/* Uses a brighter blue fill when the toggle is selected in dark mode to keep contrast consistent with light mode. */
 body.dark-mode #patient-sidebar .patient-line[data-line="1"] .age-unit-toggle.is-selected {
   background: #3b82f6;
   border-color: #60a5fa;
   color: #f8fafc;
 }
 
+/* Softens the focus outline color in dark mode so it still stands out against the darker pill. */
 body.dark-mode #patient-sidebar .patient-line[data-line="1"] .age-unit-toggle:focus-visible {
   outline-color: #93c5fd;
 }
 
+/* Lets the numeric input stretch across its grid column so long inputs still line up with the label. */
 #patient-sidebar .patient-line[data-line="1"] .age-input {
   width: 100%;
   min-width: 0;
   justify-self: stretch;
 }
 
+/* Limits the width on compact layouts (like patient list overlays) so the Age input does not overpower nearby fields. */
 #patient-sidebar .patient-line[data-line="1"] .age-input.age-input--compact {
   max-width: 6rem;
 }
 
+/* Medium+ viewport refinements for age toggle spacing and motion */
+/* Adds additional breathing room between unit toggles on tablet and desktop screens. */
 @media (min-width: 768px) {
   #patient-sidebar .patient-line[data-line="1"] .age-unit-toggle-group {
     row-gap: 0.45rem;
   }
 
+/* Expands horizontal padding and enables a gentle lift animation so toggles feel tactile on larger layouts. */
   #patient-sidebar .patient-line[data-line="1"] .age-unit-toggle {
     padding: 0.25rem 0.75rem;
     border-radius: 999px;
     transition: background-color 0.16s ease, color 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
   }
 
+/* Lifts the toggle 1px on hover/focus to reinforce the button affordance on roomy screens. */
   #patient-sidebar .patient-line[data-line="1"] .age-unit-toggle:hover,
   #patient-sidebar .patient-line[data-line="1"] .age-unit-toggle:focus-visible {
     transform: translateY(-1px);
   }
 
+/* Drops the button back to its resting position when pressed, while the translucent blue fill communicates the click. */
   #patient-sidebar .patient-line[data-line="1"] .age-unit-toggle:active {
     transform: translateY(0);
     background: rgb(37 99 235 / 12%);

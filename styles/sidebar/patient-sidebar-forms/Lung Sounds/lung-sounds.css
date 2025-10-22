@@ -1,5 +1,6 @@
 /* Lung sounds cell (data-line="10"): label formatting and dropdown styling for auscultation presets. */
 
+/* Aligns the `Lung Sounds:` label with the preset dropdown on line 10; the 0.35rem gap keeps the red pill from pressing against the label. */
 #patient-sidebar .patient-line[data-line="10"] .vital-item-lungs {
   display: inline-grid;
   grid-auto-flow: column;
@@ -9,6 +10,7 @@
   min-width: 0;
 }
 
+/* Sets the weight, size, and color for the `Lung Sounds:` label; white-space: nowrap prevents the label from wrapping above the dropdown. */
 #patient-sidebar .patient-line[data-line="10"] .vital-item-lungs .vital-label {
   font-weight: 600;
   font-size: 0.82rem;
@@ -16,6 +18,7 @@
   color: #374151;
 }
 
+/* Styles the lung sounds preset pill—min-width 6.5rem ensures long entries like `Diminished Bases` stay readable while the caret hints at selectable presets. */
 #patient-sidebar .patient-line[data-line="10"] .vital-item-lungs .vital-mini-select {
   min-width: 6.5rem;
   height: 2.2rem;
@@ -33,21 +36,25 @@
   background-position: right 0.35rem center;
 }
 
+/* Switches the preset pill to the dark palette so auscultation states remain legible in night mode. */
 body.dark-mode #patient-sidebar .patient-line[data-line="10"] .vital-item-lungs .vital-mini-select {
   background-color: #1f2937;
   border-color: #475569;
   color: #e2e8f0;
 }
 
+/* Keeps dropdown option labels readable at 0.78rem even for multi-word auscultation patterns. */
 #patient-sidebar .patient-line[data-line="10"] .vital-item-lungs .vital-mini-select option {
   font-size: 0.78rem;
 }
 
+/* Adds the blue outline when the lung sounds dropdown is focused via keyboard. */
 #patient-sidebar .patient-line[data-line="10"] .vital-item-lungs .vital-mini-select:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
 
+/* Removes the caret and tightens the right padding once a preset like `Clear` is selected so the text stays centered. */
 #patient-sidebar .patient-line[data-line="10"] .vital-item-lungs .vital-mini-select.sidebar-select--has-value {
   background-image: none;
   padding-right: 0.35rem;

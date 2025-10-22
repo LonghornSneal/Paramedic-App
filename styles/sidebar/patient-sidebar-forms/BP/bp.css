@@ -1,5 +1,6 @@
 /* Blood pressure cell (data-line="8"): row layout, stacked inputs, preset select styling, and focus states. */
 
+/* Places the `BP` row controls in one horizontal strip on line 8; 0.55rem column-gap keeps the BP stack, MAP field, and preset from crowding, while overflow-x lets the row scroll on phones. */
 #patient-sidebar .patient-line[data-line="8"] {
   display: grid;
   grid-auto-flow: column;
@@ -11,14 +12,17 @@
   order: 8;
 }
 
+/* Slims the WebKit scrollbar track under the BP row to 3px so the scroll hint stays unobtrusive. */
 #patient-sidebar .patient-line[data-line="8"]::-webkit-scrollbar {
   height: 3px;
 }
 
+/* Uses Firefox’s `thin` scrollbar so the BP row looks consistent across browsers. */
 #patient-sidebar .patient-line[data-line="8"] {
   scrollbar-width: thin;
 }
 
+/* Aligns the `BP:` label, systolic/diastolic stack, MAP field, and preset dropdown in one line; the 0.35rem gap keeps the green stack from touching adjacent controls. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp {
   display: inline-grid;
   grid-auto-flow: column;
@@ -28,6 +32,7 @@
   min-width: 0;
 }
 
+/* Gives the `BP:` label its bold look; white-space: nowrap keeps the label from wrapping above the stacked inputs. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .vital-label {
   font-weight: 600;
   font-size: 0.82rem;
@@ -35,6 +40,7 @@
   color: #374151;
 }
 
+/* Builds the green systolic/diastolic card; the grid rows stack top (systolic) and bottom (diastolic) values while the rounded border matches other vitals pills. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .bp-stack {
   position: relative;
   display: grid;
@@ -45,19 +51,23 @@
   min-width: 0.1rem;
 }
 
+/* Adds a light blue border when medics hover over the BP stack so it feels interactive. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .bp-stack:hover {
   border-color: #60a5fa;
 }
 
+/* Shows the blue focus ring when either systolic or diastolic cell has focus, giving keyboard users orientation. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .bp-stack:focus-within {
   border-color: #2563eb;
   box-shadow: 0 0 0 2px rgb(37 99 235 / 20%);
 }
 
+/* Limits the narrow stack variant so compact layouts don’t stretch wider than 5.5rem. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .bp-stack.bp-stack--narrow {
   max-width: 5.5rem;
 }
 
+/* Styles the systolic and diastolic text cells—center alignment keeps the numbers aligned above each other and the bold weight mirrors monitor readouts. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .bp-input {
   border: none;
   background: transparent;
@@ -71,17 +81,20 @@
   cursor: text;
 }
 
+/* Narrows padding for the compact variant so smaller layouts still fit both numbers without wrap. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .bp-input.bp-input--compact {
   padding: 0.2rem 0.25rem;
   font-size: 0.82rem;
   min-height: 1.6rem;
 }
 
+/* Fills the active input with a pale indigo so crews can see whether they are editing systolic or diastolic. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .bp-input:focus-visible {
   outline: none;
   background: #eef2ff;
 }
 
+/* Draws the horizontal divider between systolic and diastolic values to mimic stacked vital monitors. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .bp-divider-line {
   display: block;
   width: 100%;
@@ -89,6 +102,7 @@
   background: #d1d5db;
 }
 
+/* Provides the positioning context required to float the `mmHg` badge inside the MAP input. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .unit-input {
   position: relative;
   display: grid;
@@ -97,6 +111,7 @@
   min-width: 0;
 }
 
+/* Styles the MAP numeric field with pill borders and right-aligned digits; the width caps keep values like `120` from crowding the suffix. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .unit-input .sidebar-input {
   justify-self: start;
   min-width: 4ch;
@@ -112,18 +127,21 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Switches the MAP pill colors for dark mode so readings remain legible. */
 body.dark-mode #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .unit-input .sidebar-input {
   border-color: #334155;
   color: #e2e8f0;
   background-color: #1f2937;
 }
 
+/* Applies the blue focus halo when medics type in the MAP field, matching other inputs. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .unit-input .sidebar-input:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 2px rgb(37 99 235 / 20%);
   outline: none;
 }
 
+/* Anchors the `mmHg` suffix to the bottom-right of the MAP field while keeping it hidden via opacity until data is present. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .unit-suffix {
   position: absolute;
   top: 50%;
@@ -138,18 +156,22 @@ body.dark-mode #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .uni
   transition: opacity 0.15s ease;
 }
 
+/* Shows the `mmHg` badge only when the MAP field has a value, leaving blank fields uncluttered. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .unit-input[data-has-value="true"] .unit-suffix {
   opacity: 1;
 }
 
+/* Recolors the suffix so it contrasts properly when the sidebar is in dark mode. */
 body.dark-mode #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .unit-suffix {
   color: #cbd5f5;
 }
 
+/* Keeps any subscript characters inside the suffix—such as the `2` in mmHg—small enough to fit the badge. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .unit-suffix sub {
   font-size: 0.6rem;
 }
 
+/* Styles the BP preset dropdown pill so quick-set tags like `Normotensive` fit; the caret icon signals additional triage presets. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .vital-mini-select {
   min-width: 1.9rem;
   height: 1.9rem;
@@ -168,21 +190,25 @@ body.dark-mode #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .uni
   background-position: right 0.35rem center;
 }
 
+/* Adapts the preset dropdown to dark mode while keeping the red background legible. */
 body.dark-mode #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .vital-mini-select {
   background-color: #1f2937;
   border-color: #475569;
   color: #e2e8f0;
 }
 
+/* Ensures preset menu items stay readable at 0.78rem even within the compact dropdown. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .vital-mini-select option {
   font-size: 0.78rem;
 }
 
+/* Displays a blue outline when the preset pill receives keyboard focus for accessibility. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .vital-mini-select:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
 
+/* Removes the caret graphic and tightens padding once a preset is chosen so the text centers cleanly inside the pill. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-bp .vital-mini-select.sidebar-select--has-value {
   background-image: none;
   padding-right: 0.35rem;

@@ -1,5 +1,6 @@
 /* Blood glucose cell (data-line="9"): label formatting, unit suffix behavior, and preset select styling. */
 
+/* Lays out the `BGL:` label, value field, and preset inline on line 9; column-gap keeps a 0.35rem buffer so controls do not crowd each other. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-bgl {
   display: inline-grid;
   grid-auto-flow: column;
@@ -9,6 +10,7 @@
   min-width: 0;
 }
 
+/* Sets weight, size, and color for the `BGL:` text; white-space: nowrap keeps the label on one line beside the entry even on narrow screens. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-bgl .vital-label {
   font-weight: 600;
   font-size: 0.82rem;
@@ -16,6 +18,7 @@
   color: #374151;
 }
 
+/* Establishes a positioning context so the mg/dL suffix can sit inside the BGL numeric field without shifting the layout. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-bgl .unit-input {
   position: relative;
   display: grid;
@@ -24,6 +27,7 @@
   min-width: 0;
 }
 
+/* Gives the BGL value field its pill styling and right-aligned digits; min/max width keeps readings legible without letting the input overflow the column. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-bgl .unit-input .sidebar-input {
   justify-self: start;
   min-width: 4ch;
@@ -39,18 +43,21 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Switches the BGL value field palette for dark mode */
 body.dark-mode #patient-sidebar .patient-line[data-line="9"] .vital-item-bgl .unit-input .sidebar-input {
   border-color: #334155;
   color: #e2e8f0;
   background-color: #1f2937;
 }
 
+/* Adds a high-contrast focus ring on the BGL numeric input */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-bgl .unit-input .sidebar-input:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 2px rgb(37 99 235 / 20%);
   outline: none;
 }
 
+/* Anchors the `mg/dL` suffix inside the input so it sits flush to the right edge while opacity hides it when the field is empty. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-bgl .unit-suffix {
   position: absolute;
   top: 50%;
@@ -65,14 +72,17 @@ body.dark-mode #patient-sidebar .patient-line[data-line="9"] .vital-item-bgl .un
   transition: opacity 0.15s ease;
 }
 
+/* Reveals the `mg/dL` badge only after a value is entered so blanks stay uncluttered. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-bgl .unit-input[data-has-value="true"] .unit-suffix {
   opacity: 1;
 }
 
+/* Matches the mg/dL suffix color to the dark theme */
 body.dark-mode #patient-sidebar .patient-line[data-line="9"] .vital-item-bgl .unit-suffix {
   color: #cbd5f5;
 }
 
+/* Styles the BGL preset dropdown pill, including the caret icon that hints at additional severity presets. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-bgl .vital-mini-select {
   min-width: 1.9rem;
   height: 1.9rem;
@@ -91,21 +101,25 @@ body.dark-mode #patient-sidebar .patient-line[data-line="9"] .vital-item-bgl .un
   background-position: right 0.35rem center;
 }
 
+/* Recolors the BGL preset dropdown for dark backgrounds */
 body.dark-mode #patient-sidebar .patient-line[data-line="9"] .vital-item-bgl .vital-mini-select {
   background-color: #1f2937;
   border-color: #475569;
   color: #e2e8f0;
 }
 
+/* Sets readable font size for BGL dropdown options */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-bgl .vital-mini-select option {
   font-size: 0.78rem;
 }
 
+/* Provides keyboard focus outline on the BGL preset dropdown */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-bgl .vital-mini-select:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
 
+/* Removes the caret and nudges padding once a preset is selected */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-bgl .vital-mini-select.sidebar-select--has-value {
   background-image: none;
   padding-right: 0.35rem;

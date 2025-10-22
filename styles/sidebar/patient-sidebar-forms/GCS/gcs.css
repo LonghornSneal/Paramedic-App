@@ -1,5 +1,6 @@
 /* GCS cell (data-line="11"): grid layout, score input suffix, and preset select styling. */
 
+/* Aligns the `GCS:` label, numeric score field, and preset dropdown on line 11; the 0.55rem gap keeps the red preset pill from crowding the score input, and overflow-x allows the row to scroll when space is tight. */
 #patient-sidebar .patient-line[data-line="11"] {
   display: grid;
   grid-auto-flow: column;
@@ -11,14 +12,17 @@
   order: 11;
 }
 
+/* Slims the WebKit scrollbar under GCS to 3px so the scroll hint stays unobtrusive. */
 #patient-sidebar .patient-line[data-line="11"]::-webkit-scrollbar {
   height: 3px;
 }
 
+/* Uses Firefox’s thin scrollbar so the GCS row feels uniform across browsers. */
 #patient-sidebar .patient-line[data-line="11"] {
   scrollbar-width: thin;
 }
 
+/* Places the `GCS:` label, score pill, and preset dropdown side by side with a 0.35rem buffer so the controls never butt together. */
 #patient-sidebar .patient-line[data-line="11"] .vital-item-gcs {
   display: inline-grid;
   grid-auto-flow: column;
@@ -28,6 +32,7 @@
   min-width: 0;
 }
 
+/* Sets the weight, size, and color for the `GCS:` label; white-space: nowrap keeps the label from wrapping above the score field. */
 #patient-sidebar .patient-line[data-line="11"] .vital-item-gcs .vital-label {
   font-weight: 600;
   font-size: 0.82rem;
@@ -35,6 +40,7 @@
   color: #374151;
 }
 
+/* Provides the positioning context for the `pts` suffix that sits inside the GCS score input. */
 #patient-sidebar .patient-line[data-line="11"] .vital-item-gcs .unit-input {
   position: relative;
   display: grid;
@@ -43,6 +49,7 @@
   min-width: 0;
 }
 
+/* Styles the GCS score pill with right-aligned digits; the min/max width ensures scores up to 15 fit while maintaining pill proportions. */
 #patient-sidebar .patient-line[data-line="11"] .vital-item-gcs .unit-input .sidebar-input {
   justify-self: start;
   min-width: 4ch;
@@ -58,18 +65,21 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Switches the score pill to the dark palette so night-mode scores remain legible. */
 body.dark-mode #patient-sidebar .patient-line[data-line="11"] .vital-item-gcs .unit-input .sidebar-input {
   border-color: #334155;
   color: #e2e8f0;
   background-color: #1f2937;
 }
 
+/* Shows the blue focus halo when medics edit the GCS score, matching other vital fields. */
 #patient-sidebar .patient-line[data-line="11"] .vital-item-gcs .unit-input .sidebar-input:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 2px rgb(37 99 235 / 20%);
   outline: none;
 }
 
+/* Positions the `pts` suffix inside the GCS input and keeps it hidden via opacity until a value is captured. */
 #patient-sidebar .patient-line[data-line="11"] .vital-item-gcs .unit-suffix {
   position: absolute;
   top: 50%;
@@ -84,14 +94,17 @@ body.dark-mode #patient-sidebar .patient-line[data-line="11"] .vital-item-gcs .u
   transition: opacity 0.15s ease;
 }
 
+/* Reveals the `pts` suffix only when a score is present so empty fields stay uncluttered. */
 #patient-sidebar .patient-line[data-line="11"] .vital-item-gcs .unit-input[data-has-value="true"] .unit-suffix {
   opacity: 1;
 }
 
+/* Adjusts the suffix color in dark mode to maintain contrast. */
 body.dark-mode #patient-sidebar .patient-line[data-line="11"] .vital-item-gcs .unit-suffix {
   color: #cbd5f5;
 }
 
+/* Styles the red GCS preset dropdown so crews can jump to presets like `AVPU`; the caret indicates additional preset options. */
 #patient-sidebar .patient-line[data-line="11"] .vital-item-gcs .vital-mini-select {
   min-width: 5.5rem;
   height: 2.15rem;
@@ -109,17 +122,20 @@ body.dark-mode #patient-sidebar .patient-line[data-line="11"] .vital-item-gcs .u
   background-position: right 0.35rem center;
 }
 
+/* Adapts the preset pill to dark mode while keeping the red status color visible. */
 body.dark-mode #patient-sidebar .patient-line[data-line="11"] .vital-item-gcs .vital-mini-select {
   background-color: #1f2937;
   border-color: #475569;
   color: #e2e8f0;
 }
 
+/* Adds the blue outline when the preset dropdown receives keyboard focus for accessibility. */
 #patient-sidebar .patient-line[data-line="11"] .vital-item-gcs .vital-mini-select:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
 
+/* Removes the caret graphic and tightens right padding once a preset like `AVPU` is chosen so the text centers cleanly. */
 #patient-sidebar .patient-line[data-line="11"] .vital-item-gcs .vital-mini-select.sidebar-select--has-value {
   background-image: none;
   padding-right: 0.35rem;

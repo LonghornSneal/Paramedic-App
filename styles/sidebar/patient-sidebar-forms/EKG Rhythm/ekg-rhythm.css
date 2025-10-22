@@ -1,5 +1,6 @@
 /* Rhythm row (data-line="12"): heading layout, select + autocomplete pairing, preview shell, and info button styling. */
 
+/* Places the `Rhythm` label, dropdowns, preview, and info button in a single row on line 12; the 0.6rem gap keeps the preview shell from touching the selectors while overflow-x allows horizontal scrolling on phones. */
 #patient-sidebar .patient-line[data-line="12"] {
   display: grid;
   grid-auto-flow: column;
@@ -11,14 +12,17 @@
   order: 12;
 }
 
+/* Slims the Rhythm row’s WebKit scrollbar to 3px so the scroll cue stays subtle beneath the controls. */
 #patient-sidebar .patient-line[data-line="12"]::-webkit-scrollbar {
   height: 3px;
 }
 
+/* Uses Firefox’s thin scrollbar so the Rhythm row looks consistent in non-WebKit browsers. */
 #patient-sidebar .patient-line[data-line="12"] {
   scrollbar-width: thin;
 }
 
+/* Stacks the heading, selector row, and summary text vertically with a 0.35rem gap so each layer reads clearly. */
 #patient-sidebar .patient-line[data-line="12"] .ekg-row-main {
   justify-self: stretch;
   min-width: 0;
@@ -28,6 +32,7 @@
   row-gap: 0.35rem;
 }
 
+/* Aligns the `Rhythm` label with the dropdowns and help link; the 0.45rem gap keeps the help button from hugging the label. */
 #patient-sidebar .patient-line[data-line="12"] .ekg-row-heading {
   display: inline-grid;
   grid-auto-flow: column;
@@ -35,6 +40,7 @@
   column-gap: 0.45rem;
 }
 
+/* Styles the `Rhythm` label; white-space: nowrap stops it from wrapping above the select on tight layouts. */
 #patient-sidebar .patient-line[data-line="12"] .sidebar-label {
   margin-bottom: 0;
   white-space: nowrap;
@@ -44,6 +50,7 @@
   color: #374151;
 }
 
+/* Styles the rhythm select and autocomplete pills; the width constraints keep terms like `Atrial Flutter` inside the control without letting it balloon. */
 #patient-sidebar .patient-line[data-line="12"] .sidebar-input {
   justify-self: start;
   width: auto;
@@ -60,22 +67,26 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Switches the select/autocomplete pills to the dark palette so captured rhythms remain legible at night. */
 body.dark-mode #patient-sidebar .patient-line[data-line="12"] .sidebar-input {
   border-color: #334155;
   color: #e2e8f0;
   background-color: #1f2937;
 }
 
+/* Softens placeholder prompts like `Select rhythm` so real values get visual priority. */
 #patient-sidebar .patient-line[data-line="12"] .sidebar-input::placeholder {
   color: #9ca3af;
 }
 
+/* Adds the blue focus halo when the rhythm select or autocomplete has focus, aiding keyboard navigation. */
 #patient-sidebar .patient-line[data-line="12"] .sidebar-input:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 2px rgb(37 99 235 / 20%);
   outline: none;
 }
 
+/* Adds the caret icon and extra right padding so crews know the rhythm field expands to reveal the full library. */
 #patient-sidebar .patient-line[data-line="12"] select.sidebar-input {
   min-width: 2.8rem;
   appearance: none;
@@ -86,17 +97,20 @@ body.dark-mode #patient-sidebar .patient-line[data-line="12"] .sidebar-input {
   padding-right: 1.4rem;
 }
 
+/* Recolors the rhythm select for dark mode while keeping the caret visible. */
 body.dark-mode #patient-sidebar .patient-line[data-line="12"] select.sidebar-input {
   background-color: #1f2937;
   border-color: #334155;
   color: #e2e8f0;
 }
 
+/* Removes the caret and regains horizontal space once a specific rhythm like `VF` is selected. */
 #patient-sidebar .patient-line[data-line="12"] select.sidebar-input.sidebar-select--has-value {
   background-image: none;
   padding-right: 0.6rem;
 }
 
+/* Aligns the dropdown, autocomplete field, preview shell, and info button so all rhythm tools appear in one continuous row. */
 #patient-sidebar .patient-line[data-line="12"] .ekg-row-controls {
   display: inline-grid;
   grid-auto-flow: column;
@@ -104,15 +118,18 @@ body.dark-mode #patient-sidebar .patient-line[data-line="12"] select.sidebar-inp
   column-gap: 0.4rem;
 }
 
+/* Reserves at least 10ch for the search field so medics can type rhythm names without the input collapsing. */
 #patient-sidebar .patient-line[data-line="12"] .ekg-autocomplete {
   justify-self: start;
   min-width: 10ch;
 }
 
+/* Fixes the internal autocomplete input width so suggestions show consistently regardless of surrounding flex changes. */
 #patient-sidebar .patient-line[data-line="12"] .ekg-autocomplete .sidebar-input {
   width: 12ch;
 }
 
+/* Frames the rhythm strip preview card; the dark background mimics a monitor glass so tracings are easy to read. */
 #patient-sidebar .patient-line[data-line="12"] .ekg-preview-shell {
   justify-self: start;
   width: 96px;
@@ -124,6 +141,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="12"] select.sidebar-inp
   place-items: center;
 }
 
+/* Forces the preview image to cover the shell and fade smoothly when the rhythm changes. */
 #patient-sidebar .patient-line[data-line="12"] .ekg-preview-img {
   width: 100%;
   height: 100%;
@@ -132,16 +150,20 @@ body.dark-mode #patient-sidebar .patient-line[data-line="12"] select.sidebar-inp
   transition: opacity 0.2s ease;
 }
 
+/* Fades the preview out when no strip is stored so the shell appears intentionally empty. */
 #patient-sidebar .patient-line[data-line="12"] .ekg-preview-img.is-empty {
   opacity: 0;
 }
 
+/* Adds overflow clipping for browsers that support it */
+/* Keeps the preview image constrained within the rounded shell */
 @supports (overflow: hidden) {
   #patient-sidebar .patient-line[data-line="12"] .ekg-preview-shell {
     overflow: hidden;
   }
 }
 
+/* Styles the rhythm info button; the pill shape and blue border signal that tapping opens rhythm education content. */
 #patient-sidebar .patient-line[data-line="12"] .ekg-info-button {
   justify-self: start;
   width: 1.9rem;
@@ -158,29 +180,34 @@ body.dark-mode #patient-sidebar .patient-line[data-line="12"] select.sidebar-inp
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
+/* Lowers opacity and removes pointer feedback when no detail sheet is available for the current rhythm. */
 #patient-sidebar .patient-line[data-line="12"] .ekg-info-button:disabled {
   opacity: 0.45;
   cursor: default;
   border-color: #cbd5f5;
 }
 
+/* Shows a not-allowed cursor for disabled info button when supported */
 @supports (cursor: not-allowed) {
   #patient-sidebar .patient-line[data-line="12"] .ekg-info-button:disabled {
     cursor: not-allowed;
   }
 }
 
+/* Fills the info button blue on hover to reinforce that it opens support content when clicked. */
 #patient-sidebar .patient-line[data-line="12"] .ekg-info-button:not(:disabled):hover {
   background: #2563eb;
   color: #fff;
   border-color: #2563eb;
 }
 
+/* Adds an accessible outline when the info button is focused */
 #patient-sidebar .patient-line[data-line="12"] .ekg-info-button:not(:disabled):focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
 
+/* Styles the text summary that restates the interpreted rhythm; width cap ensures sentences remain readable within the sidebar. */
 #patient-sidebar .patient-line[data-line="12"] .ekg-summary-text {
   justify-self: stretch;
   min-width: 0;
@@ -190,14 +217,17 @@ body.dark-mode #patient-sidebar .patient-line[data-line="12"] select.sidebar-inp
   line-height: 1.3;
 }
 
+/* Completely hides the summary element when there is no narrative to display. */
 #patient-sidebar .patient-line[data-line="12"] .ekg-summary-text.is-empty {
   display: none;
 }
 
+/* Adjusts the summary color for dark mode so the narrative maintains contrast. */
 body.dark-mode #patient-sidebar .patient-line[data-line="12"] .ekg-summary-text {
   color: #cbd5f5;
 }
 
+/* Styles the underlined `Help` link so medics know it opens teaching content; pointer cursor reinforces interactivity. */
 #patient-sidebar .patient-line[data-line="12"] .sidebar-help-button {
   border: none;
   background: none;
@@ -208,16 +238,19 @@ body.dark-mode #patient-sidebar .patient-line[data-line="12"] .ekg-summary-text 
   text-decoration: underline;
 }
 
+/* Darkens the link on hover to signal it is clickable. */
 #patient-sidebar .patient-line[data-line="12"] .sidebar-help-button:hover {
   color: #1d4ed8;
 }
 
+/* Adds a focus outline and subtle rounding when the help link is keyboard-focused, aiding accessibility. */
 #patient-sidebar .patient-line[data-line="12"] .sidebar-help-button:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
   border-radius: 0.25rem;
 }
 
+/* Uses a 1px underline where supported so the link matches the design spec thickness. */
 @supports (text-decoration-thickness: 1px) {
   #patient-sidebar .patient-line[data-line="12"] .sidebar-help-button {
     text-decoration-thickness: 1px;

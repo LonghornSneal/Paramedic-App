@@ -1,5 +1,6 @@
 /* Weight & height row (data-line="2"): unit stacks, input sizing, kg/lb toggles, and dark-mode accents. */
 
+/* Aligns the `Weight/Height` controls in a horizontal row; 0.85rem gap keeps the weight and height clusters from crowding each other, and overflow-x lets the row scroll on narrow screens. */
 #patient-sidebar .patient-line[data-line="2"] {
   display: grid;
   grid-auto-flow: column;
@@ -11,14 +12,17 @@
   order: 2;
 }
 
+/* Slims the WebKit scrollbar for the weight row to 3px so the scroll hint stays subtle. */
 #patient-sidebar .patient-line[data-line="2"]::-webkit-scrollbar {
   height: 3px;
 }
 
+/* Uses Firefox’s thin scrollbar so the weight row feels consistent across browsers. */
 #patient-sidebar .patient-line[data-line="2"] {
   scrollbar-width: thin;
 }
 
+/* Styles the `Weight`/`Height` labels with consistent typography; white-space: nowrap keeps labels beside their inputs. */
 #patient-sidebar .patient-line[data-line="2"] .sidebar-label {
   display: block;
   font-size: 0.875rem;
@@ -29,6 +33,7 @@
   white-space: nowrap;
 }
 
+/* Gives weight and height inputs their pill styling; width limits keep three-digit values legible without letting the pills overflow their column. */
 #patient-sidebar .patient-line[data-line="2"] .sidebar-input {
   justify-self: start;
   width: auto;
@@ -45,22 +50,26 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Swaps the input pills to the dark palette so readings stay legible once the app switches to dark mode. */
 body.dark-mode #patient-sidebar .patient-line[data-line="2"] .sidebar-input {
   border-color: #334155;
   color: #e2e8f0;
   background-color: #1f2937;
 }
 
+/* Softens placeholder prompts like `Weight` so real values dominate. */
 #patient-sidebar .patient-line[data-line="2"] .sidebar-input::placeholder {
   color: #9ca3af;
 }
 
+/* Adds the blue focus halo when crews tab into either weight or height field. */
 #patient-sidebar .patient-line[data-line="2"] .sidebar-input:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 2px rgb(37 99 235 / 20%);
   outline: none;
 }
 
+/* Provides a positioning container so unit badges (kg/lb, cm/in) can float inside the entry. */
 #patient-sidebar .patient-line[data-line="2"] .unit-input {
   position: relative;
   display: grid;
@@ -69,11 +78,13 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .sidebar-input {
   min-width: 0;
 }
 
+/* Adds right padding and right-aligned text so the floating unit badge never overlaps the digits. */
 #patient-sidebar .patient-line[data-line="2"] .unit-input .sidebar-input {
   padding-right: 0.4rem;
   text-align: right;
 }
 
+/* Anchors the unit badge inside the field and hides it via opacity until a measurement is entered. */
 #patient-sidebar .patient-line[data-line="2"] .unit-suffix {
   position: absolute;
   top: 50%;
@@ -88,14 +99,17 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .sidebar-input {
   transition: opacity 0.15s ease;
 }
 
+/* Reveals the unit badge once a value is present so empty fields stay clean. */
 #patient-sidebar .patient-line[data-line="2"] .unit-input[data-has-value="true"] .unit-suffix {
   opacity: 1;
 }
 
+/* Adjusts the unit badge color for dark mode to maintain contrast. */
 body.dark-mode #patient-sidebar .patient-line[data-line="2"] .unit-suffix {
   color: #cbd5f5;
 }
 
+/* Defines the grid for weight and height clusters—label column followed by flexible inputs. */
 #patient-sidebar .patient-line[data-line="2"] .sidebar-demographics-item {
   min-width: 7rem;
   display: grid;
@@ -105,11 +119,13 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .unit-suffix {
   row-gap: 0.25rem;
 }
 
+/* Sets the weight cluster to five columns: label, unit stack, toggle, numeric field, and summary. */
 #patient-sidebar .patient-line[data-line="2"] .sidebar-demographics-item-weight {
   gap: 0.5rem;
   grid-template-columns: auto auto minmax(0, 1fr) auto auto;
 }
 
+/* Stacks the kg/lb abbreviations so medics can reference both units while entering data. */
 #patient-sidebar .patient-line[data-line="2"] .sidebar-demographics-item-weight .weight-unit-stack {
   display: inline-grid;
   grid-auto-flow: row;
@@ -121,10 +137,12 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .unit-suffix {
   color: #475569;
 }
 
+/* Lightens the unit stack color in dark mode so the reference text stays legible. */
 body.dark-mode #patient-sidebar .patient-line[data-line="2"] .sidebar-demographics-item-weight .weight-unit-stack {
   color: #d1d5db;
 }
 
+/* Stacks the unit toggle buttons vertically, keeping them adjacent to the entry field for quick switching. */
 #patient-sidebar .patient-line[data-line="2"] .weight-unit-toggle-group {
   display: grid;
   grid-auto-flow: row;
@@ -132,6 +150,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .sidebar-demographi
   row-gap: 0.35rem;
 }
 
+/* Styles each unit toggle as a pill; border + color transitions give visual feedback when hovering or switching units. */
 #patient-sidebar .patient-line[data-line="2"] .weight-unit-toggle {
   border: 1px solid transparent;
   background: transparent;
@@ -146,44 +165,52 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .sidebar-demographi
   text-transform: none;
 }
 
+/* Lightens the toggle color on hover so pointer users can confirm the button. */
 #patient-sidebar .patient-line[data-line="2"] .weight-unit-toggle:hover {
   color: #1f2937;
   border-color: #cbd5f5;
   background: #f1f5f9;
 }
 
+/* Fills the active unit toggle with blue to show whether kg or lb is currently applied. */
 #patient-sidebar .patient-line[data-line="2"] .weight-unit-toggle.is-selected {
   color: #2563eb;
   border-color: #2563eb;
   background: rgb(37 99 235 / 12%);
 }
 
+/* Adds a focus outline for keyboard navigation on the unit toggles. */
 #patient-sidebar .patient-line[data-line="2"] .weight-unit-toggle:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
 
+/* Adjusts base toggle text color in dark mode so unselected states remain visible. */
 body.dark-mode #patient-sidebar .patient-line[data-line="2"] .weight-unit-toggle {
   color: #d1d5db;
 }
 
+/* Lightens the hover outline for dark mode while keeping the background in line with the dark palette. */
 body.dark-mode #patient-sidebar .patient-line[data-line="2"] .weight-unit-toggle:hover {
   color: #f9fafb;
   border-color: #334155;
   background: #1f2937;
 }
 
+/* Uses lighter blue fills in dark mode so the selected unit still pops against the dark background. */
 body.dark-mode #patient-sidebar .patient-line[data-line="2"] .weight-unit-toggle.is-selected {
   color: #93c5fd;
   border-color: #60a5fa;
   background: rgb(59 130 246 / 18%);
 }
 
+/* Sets min/max width for the numeric weight input so three-digit weights fit without stretching the layout. */
 #patient-sidebar .patient-line[data-line="2"] .weight-input {
   min-width: 6ch;
   max-width: 8ch;
 }
 
+/* Right-aligns the quick weight summary (e.g., BMI hints) and keeps it on one line via white-space: nowrap. */
 #patient-sidebar .patient-line[data-line="2"] .weight-summary {
   margin-left: auto;
   font-size: 0.75rem;
@@ -192,10 +219,12 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .weight-unit-toggle
   text-align: right;
 }
 
+/* Lightens the summary text for dark mode so stats remain legible. */
 body.dark-mode #patient-sidebar .patient-line[data-line="2"] .weight-summary {
   color: #cbd5f5;
 }
 
+/* Adds ellipsis handling when the weight summary text exceeds its container width. */
 @supports (overflow: hidden) {
   #patient-sidebar .patient-line[data-line="2"] .weight-summary {
     overflow: hidden;
@@ -203,6 +232,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .weight-summary {
   }
 }
 
+/* Defines the grid for the height cluster—label plus inline feet/inches inputs. */
 #patient-sidebar .patient-line[data-line="2"] .sidebar-demographics-item-height {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
@@ -210,6 +240,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .weight-summary {
   column-gap: 0.6rem;
 }
 
+/* Aligns the feet and inches inputs side by side with 0.35rem spacing to mirror tape-measure layout. */
 #patient-sidebar .patient-line[data-line="2"] .height-inline-inputs {
   display: inline-grid;
   grid-auto-flow: column;
@@ -217,19 +248,23 @@ body.dark-mode #patient-sidebar .patient-line[data-line="2"] .weight-summary {
   column-gap: 0.35rem;
 }
 
+/* Styles the unit text (ft/in or cm) so it reads clearly beside the height inputs. */
 #patient-sidebar .patient-line[data-line="2"] .height-unit-text {
   font-size: 0.85rem;
   color: #4b5563;
 }
 
+/* Adjusts unit text color for dark mode to maintain readability. */
 body.dark-mode #patient-sidebar .patient-line[data-line="2"] .height-unit-text {
   color: #d1d5db;
 }
 
+/* Lets the height input stretch naturally inside its grid column. */
 #patient-sidebar .patient-line[data-line="2"] .height-input {
   justify-self: start;
 }
 
+/* Narrows the compact height input variant used when space is limited, keeping typography consistent. */
 #patient-sidebar .patient-line[data-line="2"] .height-input.height-input--compact {
   width: 2.75rem;
   padding: 0.2rem 0.35rem;

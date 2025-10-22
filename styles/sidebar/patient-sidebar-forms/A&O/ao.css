@@ -1,5 +1,6 @@
 /* Alert & oriented cell (data-line="11"): label styling and dropdown pill for A&O status. */
 
+/* Places the `A&O:` label and status dropdown side by side on line 11; the 0.25rem column gap keeps the pill from colliding with the label. */
 #patient-sidebar .patient-line[data-line="11"] .vital-item-ao {
   display: inline-grid;
   grid-auto-flow: column;
@@ -9,6 +10,7 @@
   min-width: 0;
 }
 
+/* Sets the weight, size, and color for the `A&O:` label; white-space: nowrap prevents the label from breaking above the dropdown. */
 #patient-sidebar .patient-line[data-line="11"] .vital-item-ao .vital-label {
   font-weight: 600;
   font-size: 0.82rem;
@@ -16,6 +18,7 @@
   color: #141516;
 }
 
+/* Styles the alertness dropdown pill—minimum size keeps the single-letter statuses centered while the caret graphic signals extra choices. */
 #patient-sidebar .patient-line[data-line="11"] .vital-item-ao .vital-mini-select {
   min-width: 1.0rem;
   height: 1.0rem;
@@ -33,21 +36,25 @@
   background-position: right 0.35rem center;
 }
 
+/* Applies the dark-mode palette to the A&O dropdown so the red state pill still contrasts with the sidebar. */
 body.dark-mode #patient-sidebar .patient-line[data-line="11"] .vital-item-ao .vital-mini-select {
   background-color: #1f2937;
   border-color: #475569;
   color: #e2e8f0;
 }
 
+/* Sets the readable font size for entries like `A&Ox4` inside the dropdown menu. */
 #patient-sidebar .patient-line[data-line="11"] .vital-item-ao .vital-mini-select option {
   font-size: 0.88rem;
 }
 
+/* Adds the blue outline so keyboard users can see when the A&O dropdown has focus. */
 #patient-sidebar .patient-line[data-line="11"] .vital-item-ao .vital-mini-select:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
 
+/* Removes the caret and tightens padding once a status (e.g., `x3`) is chosen so the value sits centered in the pill. */
 #patient-sidebar .patient-line[data-line="11"] .vital-item-ao .vital-mini-select.sidebar-select--has-value {
   background-image: none;
   padding-right: 0.35rem;

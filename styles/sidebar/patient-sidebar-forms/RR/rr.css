@@ -1,5 +1,6 @@
 /* Respiratory rate cell (data-line="9"): label formatting, unit suffix behavior, and preset select styling. */
 
+/* Aligns the `RR:` label, breaths-per-minute entry, and preset dropdown on line 9; the 0.35rem gap keeps the red status pill from crowding the input. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-rr {
   display: inline-grid;
   grid-auto-flow: column;
@@ -9,6 +10,7 @@
   min-width: 0;
 }
 
+/* Sets the weight, size, and color for the `RR:` label; white-space: nowrap holds the label beside the pill instead of wrapping. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-rr .vital-label {
   font-weight: 600;
   font-size: 0.82rem;
@@ -16,6 +18,7 @@
   color: #374151;
 }
 
+/* Provides the positioning context for the `rpm` suffix that floats inside the respiratory rate field. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-rr .unit-input {
   position: relative;
   display: grid;
@@ -24,6 +27,7 @@
   min-width: 0;
 }
 
+/* Styles the respiration value pill with right-aligned digits; width limits keep counts like `32` centered without stretching the input. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-rr .unit-input .sidebar-input {
   justify-self: start;
   min-width: 4ch;
@@ -39,18 +43,21 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Switches the respiration pill to the dark palette so readings stay legible after dark-mode toggle. */
 body.dark-mode #patient-sidebar .patient-line[data-line="9"] .vital-item-rr .unit-input .sidebar-input {
   border-color: #334155;
   color: #e2e8f0;
   background-color: #1f2937;
 }
 
+/* Adds the blue halo when the respiration field is active, matching other vitals. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-rr .unit-input .sidebar-input:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 2px rgb(37 99 235 / 20%);
   outline: none;
 }
 
+/* Anchors the `rpm` suffix inside the pill and hides it via opacity until a value is present. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-rr .unit-suffix {
   position: absolute;
   top: 50%;
@@ -65,14 +72,17 @@ body.dark-mode #patient-sidebar .patient-line[data-line="9"] .vital-item-rr .uni
   transition: opacity 0.15s ease;
 }
 
+/* Reveals the `rpm` badge only after a respiratory rate is entered so empty fields stay clean. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-rr .unit-input[data-has-value="true"] .unit-suffix {
   opacity: 1;
 }
 
+/* Adjusts the suffix color for dark mode to maintain readability. */
 body.dark-mode #patient-sidebar .patient-line[data-line="9"] .vital-item-rr .unit-suffix {
   color: #cbd5f5;
 }
 
+/* Styles the preset dropdown so quick statuses like `Bradypnea` fit; the caret icon signals additional presets. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-rr .vital-mini-select {
   min-width: 1.9rem;
   height: 1.9rem;
@@ -91,21 +101,25 @@ body.dark-mode #patient-sidebar .patient-line[data-line="9"] .vital-item-rr .uni
   background-position: right 0.35rem center;
 }
 
+/* Adapts the preset pill to dark mode while keeping the red alert color. */
 body.dark-mode #patient-sidebar .patient-line[data-line="9"] .vital-item-rr .vital-mini-select {
   background-color: #1f2937;
   border-color: #475569;
   color: #e2e8f0;
 }
 
+/* Keeps dropdown option labels readable at 0.78rem even within the compact menu. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-rr .vital-mini-select option {
   font-size: 0.78rem;
 }
 
+/* Adds the blue outline when the preset dropdown receives keyboard focus. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-rr .vital-mini-select:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
 
+/* Removes the caret and tightens right padding once a preset such as `Tachypnea` is selected so the text centers neatly. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-rr .vital-mini-select.sidebar-select--has-value {
   background-image: none;
   padding-right: 0.35rem;

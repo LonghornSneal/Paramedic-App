@@ -1,5 +1,6 @@
 /* Pulse oximetry cell (data-line="8"): label formatting, unit suffix, and oxygen source select styling. */
 
+/* Aligns the `SpO₂:` label, percentage input, and oxygen-source preset on line 8; the 0.35rem gap keeps the red pill from crowding the input. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-spo2 {
   display: inline-grid;
   grid-auto-flow: column;
@@ -9,6 +10,7 @@
   min-width: 0;
 }
 
+/* Sets the weight, size, and color for the `SpO₂:` label; white-space: nowrap prevents it from wrapping above the pill. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-spo2 .vital-label {
   font-weight: 600;
   font-size: 0.82rem;
@@ -16,6 +18,7 @@
   color: #374151;
 }
 
+/* Provides the positioning context that lets the percent suffix float inside the SpO₂ entry. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-spo2 .unit-input {
   position: relative;
   display: grid;
@@ -24,6 +27,7 @@
   min-width: 0;
 }
 
+/* Styles the SpO₂ value pill with right-aligned digits; width caps keep values like `100` centered without stretching the field. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-spo2 .unit-input .sidebar-input {
   justify-self: start;
   min-width: 4ch;
@@ -39,18 +43,21 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Switches the SpO₂ pill to the dark palette so readings remain legible after dark-mode toggle. */
 body.dark-mode #patient-sidebar .patient-line[data-line="8"] .vital-item-spo2 .unit-input .sidebar-input {
   border-color: #334155;
   color: #e2e8f0;
   background-color: #1f2937;
 }
 
+/* Adds the blue halo when the SpO₂ field is active, matching other vital inputs. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-spo2 .unit-input .sidebar-input:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 2px rgb(37 99 235 / 20%);
   outline: none;
 }
 
+/* Anchors the `%` suffix inside the pill and hides it via opacity until a reading is captured. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-spo2 .unit-suffix {
   position: absolute;
   top: 50%;
@@ -65,18 +72,22 @@ body.dark-mode #patient-sidebar .patient-line[data-line="8"] .vital-item-spo2 .u
   transition: opacity 0.15s ease;
 }
 
+/* Reveals the `%` badge only once a saturation value is entered so empty fields stay clean. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-spo2 .unit-input[data-has-value="true"] .unit-suffix {
   opacity: 1;
 }
 
+/* Shrinks any subscript (like `2` in O₂) so it fits inside the suffix badge. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-spo2 .unit-suffix sub {
   font-size: 0.6rem;
 }
 
+/* Adjusts the suffix color for dark mode to maintain contrast. */
 body.dark-mode #patient-sidebar .patient-line[data-line="8"] .vital-item-spo2 .unit-suffix {
   color: #cbd5f5;
 }
 
+/* Styles the oxygen-source preset dropdown; the caret icon cues available presets like `NRB` or `NC`. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-spo2 .vital-mini-select {
   min-width: 1.9rem;
   height: 1.9rem;
@@ -95,21 +106,25 @@ body.dark-mode #patient-sidebar .patient-line[data-line="8"] .vital-item-spo2 .u
   background-position: right 0.35rem center;
 }
 
+/* Adapts the preset pill to dark mode while keeping the alarm red intact. */
 body.dark-mode #patient-sidebar .patient-line[data-line="8"] .vital-item-spo2 .vital-mini-select {
   background-color: #1f2937;
   border-color: #475569;
   color: #e2e8f0;
 }
 
+/* Keeps dropdown option labels legible at 0.78rem even with multi-word sources. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-spo2 .vital-mini-select option {
   font-size: 0.78rem;
 }
 
+/* Adds the blue outline when the oxygen-source dropdown receives keyboard focus. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-spo2 .vital-mini-select:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
 
+/* Removes the caret and tightens right padding once a source is selected so the text stays centered. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-spo2 .vital-mini-select.sidebar-select--has-value {
   background-image: none;
   padding-right: 0.35rem;

@@ -1,5 +1,6 @@
 /* Current medications row (data-line="5"): stack layout, chip heading, textarea styling, and chip rail behavior. */
 
+/* Stacks the `Current Rxs` label, free-text field, and chip rail vertically on line 5; the 0.35rem gap keeps the entry area separated from saved meds, while overflow-x lets long chip rows scroll. */
 #patient-sidebar .patient-line[data-line="5"] {
   display: grid;
   grid-auto-flow: row;
@@ -11,14 +12,17 @@
   order: 5;
 }
 
+/* Narrows the WebKit scrollbar under Current Rxs to 3px so the scroll hint stays subtle. */
 #patient-sidebar .patient-line[data-line="5"]::-webkit-scrollbar {
   height: 3px;
 }
 
+/* Applies Firefox’s thin scrollbar to match the minimal WebKit treatment. */
 #patient-sidebar .patient-line[data-line="5"] {
   scrollbar-width: thin;
 }
 
+/* Groups the label row and textarea row together so the label, chip heading, and entry area maintain consistent spacing. */
 #patient-sidebar .patient-line[data-line="5"] .sidebar-field {
   display: grid;
   grid-auto-flow: row;
@@ -28,6 +32,7 @@
   min-width: 0;
 }
 
+/* Aligns the `Current Rxs` label with the add icon or chip ghost; the inline-grid keeps the badge and label on the same baseline. */
 #patient-sidebar .patient-line[data-line="5"] .sidebar-field-heading {
   display: inline-grid;
   grid-auto-flow: column;
@@ -36,6 +41,7 @@
   white-space: nowrap;
 }
 
+/* Styles the `Current Rxs` label; white-space: nowrap keeps it beside the entry rather than wrapping above it. */
 #patient-sidebar .patient-line[data-line="5"] .sidebar-label {
   display: inline-grid;
   align-items: center;
@@ -48,6 +54,7 @@
   white-space: nowrap;
 }
 
+/* Gives the medication textarea its pill border; the width limits keep short entries like `ASA` legible without letting long notes sprawl. */
 #patient-sidebar .patient-line[data-line="5"] .sidebar-input {
   justify-self: stretch;
   width: auto;
@@ -64,22 +71,26 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Recolors the textarea for dark mode so typed medication lists still pass contrast checks. */
 body.dark-mode #patient-sidebar .patient-line[data-line="5"] .sidebar-input {
   border-color: #334155;
   color: #e2e8f0;
   background-color: #1f2937;
 }
 
+/* Softens placeholder text like “List active medications” so actual meds stand out. */
 #patient-sidebar .patient-line[data-line="5"] .sidebar-input::placeholder {
   color: #9ca3af;
 }
 
+/* Shows the blue focus halo when medics tab into the Current Rxs textarea for data entry. */
 #patient-sidebar .patient-line[data-line="5"] .sidebar-input:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 2px rgb(37 99 235 / 20%);
   outline: none;
 }
 
+/* Enforces a comfortable width and reduced vertical padding so multiline medication lists remain compact. */
 #patient-sidebar .patient-line[data-line="5"] textarea.sidebar-input {
   width: 16ch;
   min-height: 0.5rem;
@@ -89,6 +100,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="5"] .sidebar-input {
   line-height: 1;
 }
 
+/* Stacks the free-text field above the chip list so crews can immediately see which meds have been captured. */
 #patient-sidebar .patient-line[data-line="5"] .sidebar-input-flex {
   justify-self: stretch;
   min-width: 0;
@@ -97,6 +109,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="5"] .sidebar-input {
   row-gap: 0.35rem;
 }
 
+/* Arranges saved medication chips in a horizontal rail; margin-left offsets them from the label column, and overflow-x lets crews swipe through long regimens. */
 #patient-sidebar .patient-line[data-line="5"] .sidebar-chip-list {
   display: inline-grid;
   grid-auto-flow: column;
@@ -108,14 +121,17 @@ body.dark-mode #patient-sidebar .patient-line[data-line="5"] .sidebar-input {
   padding-bottom: 0.15rem;
 }
 
+/* Keeps the chip rail’s WebKit scrollbar to a slim 3px so it doesn’t dominate the row. */
 #patient-sidebar .patient-line[data-line="5"] .sidebar-chip-list::-webkit-scrollbar {
   height: 3px;
 }
 
+/* Hides the chip rail entirely when no Current Rxs chips exist to avoid empty visual noise. */
 #patient-sidebar .patient-line[data-line="5"] .sidebar-chip-list.is-empty {
   display: none;
 }
 
+/* Styles each med chip—padding keeps drug names and frequencies legible, while the colored border ties to medication alerts. */
 #patient-sidebar .patient-line[data-line="5"] .sidebar-chip {
   display: inline-grid;
   grid-auto-flow: column;
@@ -131,16 +147,20 @@ body.dark-mode #patient-sidebar .patient-line[data-line="5"] .sidebar-input {
   justify-content: start;
 }
 
+/* Bolds the medication name inside the chip so it stands out from dose or route text. */
 #patient-sidebar .patient-line[data-line="5"] .sidebar-chip strong {
   font-weight: 700;
 }
 
+/* Applies the darker palette to chips when the sidebar is in night mode, maintaining contrast. */
 body.dark-mode #patient-sidebar .patient-line[data-line="5"] .sidebar-chip {
   background: #451a03;
   border-color: #fb923c;
   color: #fdba74;
 }
 
+/* Adds overflow handling for long medication chip labels */
+/* Adds an ellipsis when a med name exceeds chip width so the pill stays tidy. */
 @supports (overflow: hidden) {
   #patient-sidebar .patient-line[data-line="5"] .sidebar-chip {
     overflow: hidden;
@@ -148,6 +168,8 @@ body.dark-mode #patient-sidebar .patient-line[data-line="5"] .sidebar-chip {
   }
 }
 
+/* Allows manual resizing when the browser supports textarea resize */
+/* Lets crews drag the Current Rxs textarea taller for complicated medication histories. */
 @supports (resize: vertical) {
   #patient-sidebar .patient-line[data-line="5"] textarea.sidebar-input {
     resize: vertical;

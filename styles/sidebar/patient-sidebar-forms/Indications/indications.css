@@ -1,5 +1,6 @@
 /* Indications row (data-line="6"): stack layout, chip heading, textarea styling, and chip rail behavior. */
 
+/* Stacks the indications (line 6) label, textarea, and chips vertically */
 #patient-sidebar .patient-line[data-line="6"] {
   display: grid;
   grid-auto-flow: row;
@@ -11,14 +12,17 @@
   order: 6;
 }
 
+/* Sets a 3px scrollbar track for the indications row in WebKit */
 #patient-sidebar .patient-line[data-line="6"]::-webkit-scrollbar {
   height: 3px;
 }
 
+/* Applies thin scrollbar styling for the indications row in Firefox */
 #patient-sidebar .patient-line[data-line="6"] {
   scrollbar-width: thin;
 }
 
+/* Groups the indications label and input stack */
 #patient-sidebar .patient-line[data-line="6"] .sidebar-field {
   display: grid;
   grid-auto-flow: row;
@@ -28,6 +32,7 @@
   min-width: 0;
 }
 
+/* Aligns the indications label with chip heading elements */
 #patient-sidebar .patient-line[data-line="6"] .sidebar-field-heading {
   display: inline-grid;
   grid-auto-flow: column;
@@ -36,6 +41,7 @@
   white-space: nowrap;
 }
 
+/* Styles the Indications label and keeps it on a single line */
 #patient-sidebar .patient-line[data-line="6"] .sidebar-label {
   display: inline-grid;
   align-items: center;
@@ -48,6 +54,7 @@
   white-space: nowrap;
 }
 
+/* Styles the indications textarea/input capsule */
 #patient-sidebar .patient-line[data-line="6"] .sidebar-input {
   justify-self: stretch;
   width: auto;
@@ -64,22 +71,26 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Swaps the indications input colors for dark mode */
 body.dark-mode #patient-sidebar .patient-line[data-line="6"] .sidebar-input {
   border-color: #334155;
   color: #e2e8f0;
   background-color: #1f2937;
 }
 
+/* Sets muted placeholder text for the indications field */
 #patient-sidebar .patient-line[data-line="6"] .sidebar-input::placeholder {
   color: #9ca3af;
 }
 
+/* Adds a blue halo when the indications field is focused */
 #patient-sidebar .patient-line[data-line="6"] .sidebar-input:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 2px rgb(37 99 235 / 20%);
   outline: none;
 }
 
+/* Limits textarea width and trims padding for indications entry */
 #patient-sidebar .patient-line[data-line="6"] textarea.sidebar-input {
   width: 16ch;
   min-height: 0.5rem;
@@ -89,6 +100,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="6"] .sidebar-input {
   line-height: 1;
 }
 
+/* Stacks the textarea and chip rail inside the flex wrapper */
 #patient-sidebar .patient-line[data-line="6"] .sidebar-input-flex {
   justify-self: stretch;
   min-width: 0;
@@ -97,6 +109,7 @@ body.dark-mode #patient-sidebar .patient-line[data-line="6"] .sidebar-input {
   row-gap: 0.35rem;
 }
 
+/* Lays out indication chips in a horizontal scrollable rail */
 #patient-sidebar .patient-line[data-line="6"] .sidebar-chip-list {
   display: inline-grid;
   grid-auto-flow: column;
@@ -108,14 +121,17 @@ body.dark-mode #patient-sidebar .patient-line[data-line="6"] .sidebar-input {
   padding-bottom: 0.15rem;
 }
 
+/* Sets a 3px scrollbar for the indications chip rail in WebKit */
 #patient-sidebar .patient-line[data-line="6"] .sidebar-chip-list::-webkit-scrollbar {
   height: 3px;
 }
 
+/* Hides the chip rail when no indications are recorded */
 #patient-sidebar .patient-line[data-line="6"] .sidebar-chip-list.is-empty {
   display: none;
 }
 
+/* Styles each indication chip badge, spacing, and color */
 #patient-sidebar .patient-line[data-line="6"] .sidebar-chip {
   display: inline-grid;
   grid-auto-flow: column;
@@ -131,16 +147,20 @@ body.dark-mode #patient-sidebar .patient-line[data-line="6"] .sidebar-input {
   justify-content: start;
 }
 
+/* Bold the primary indication text inside each chip */
 #patient-sidebar .patient-line[data-line="6"] .sidebar-chip strong {
   font-weight: 700;
 }
 
+/* Applies dark theme colors to indication chips */
 body.dark-mode #patient-sidebar .patient-line[data-line="6"] .sidebar-chip {
   background: #451a03;
   border-color: #fb923c;
   color: #fdba74;
 }
 
+/* Adds overflow handling for long indication labels */
+/* Adds an ellipsis when indication chip text overflows */
 @supports (overflow: hidden) {
   #patient-sidebar .patient-line[data-line="6"] .sidebar-chip {
     overflow: hidden;
@@ -148,6 +168,8 @@ body.dark-mode #patient-sidebar .patient-line[data-line="6"] .sidebar-chip {
   }
 }
 
+/* Allows manual resizing of the indications textarea when available */
+/* Lets users drag the indications textarea taller */
 @supports (resize: vertical) {
   #patient-sidebar .patient-line[data-line="6"] textarea.sidebar-input {
     resize: vertical;

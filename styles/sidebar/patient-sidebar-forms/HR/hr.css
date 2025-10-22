@@ -1,5 +1,6 @@
 /* Heart rate cell (data-line="8"): hr label, unit wrapper, suffix reveal, and preset select styling. */
 
+/* Aligns the `HR:` label, beats-per-minute entry, and preset dropdown on line 8; the 0.35rem gap keeps the red status pill from crowding the input. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-hr {
   display: inline-grid;
   grid-auto-flow: column;
@@ -9,6 +10,7 @@
   min-width: 0;
 }
 
+/* Sets the weight, size, and color for the `HR:` label; white-space: nowrap prevents the label from wrapping above the BPM field. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-hr .vital-label {
   font-weight: 600;
   font-size: 0.82rem;
@@ -16,6 +18,7 @@
   color: #374151;
 }
 
+/* Provides the positioning container needed so the `bpm` suffix can float inside the heart rate input. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-hr .unit-input {
   position: relative;
   display: grid;
@@ -24,6 +27,7 @@
   min-width: 0;
 }
 
+/* Styles the heart rate numeric pill with right-aligned digits; width caps keep readings like `128` centered without stretching the pill. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-hr .unit-input .sidebar-input {
   justify-self: start;
   min-width: 4ch;
@@ -39,18 +43,21 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Switches the heart rate pill to the dark palette so readings remain legible after dark-mode toggle. */
 body.dark-mode #patient-sidebar .patient-line[data-line="8"] .vital-item-hr .unit-input .sidebar-input {
   border-color: #334155;
   color: #e2e8f0;
   background-color: #1f2937;
 }
 
+/* Shows the blue focus halo when the BPM field is active, matching other vital inputs. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-hr .unit-input .sidebar-input:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 2px rgb(37 99 235 / 20%);
   outline: none;
 }
 
+/* Anchors the `bpm` suffix inside the input while hiding it via opacity until a value is entered. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-hr .unit-suffix {
   position: absolute;
   top: 50%;
@@ -65,14 +72,17 @@ body.dark-mode #patient-sidebar .patient-line[data-line="8"] .vital-item-hr .uni
   transition: opacity 0.15s ease;
 }
 
+/* Reveals the `bpm` badge once a heart rate is entered, keeping empty fields clean. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-hr .unit-input[data-has-value="true"] .unit-suffix {
   opacity: 1;
 }
 
+/* Recolors the suffix to maintain contrast when the sidebar is in dark mode. */
 body.dark-mode #patient-sidebar .patient-line[data-line="8"] .vital-item-hr .unit-suffix {
   color: #cbd5f5;
 }
 
+/* Styles the red heart rate preset dropdown; the caret icon signals there are preset statuses like `Normal` or `Tachy`. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-hr .vital-mini-select {
   min-width: 1.9rem;
   height: 1.9rem;
@@ -91,21 +101,25 @@ body.dark-mode #patient-sidebar .patient-line[data-line="8"] .vital-item-hr .uni
   background-position: right 0.35rem center;
 }
 
+/* Adapts the preset pill to dark mode while keeping the red cue intact. */
 body.dark-mode #patient-sidebar .patient-line[data-line="8"] .vital-item-hr .vital-mini-select {
   background-color: #1f2937;
   border-color: #475569;
   color: #e2e8f0;
 }
 
+/* Keeps dropdown options readable at 0.78rem despite the compact menu. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-hr .vital-mini-select option {
   font-size: 0.78rem;
 }
 
+/* Adds the blue outline when the preset pill is keyboard-focused. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-hr .vital-mini-select:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
 }
 
+/* Removes the caret and tightens the right padding once a preset such as `Irregular` is applied so the text centers neatly. */
 #patient-sidebar .patient-line[data-line="8"] .vital-item-hr .vital-mini-select.sidebar-select--has-value {
   background-image: none;
   padding-right: 0.35rem;

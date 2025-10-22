@@ -1,5 +1,6 @@
 /* EtCO₂ cell (data-line="9"): row structure, input sizing, suffix reveal, and dark-mode accents. */
 
+/* Aligns the `EtCO₂:` label, numeric entry, and preset dropdown on line 9; the 0.55rem column gap keeps the preset pill from colliding with the input while overflow-x allows horizontal scrolling on small screens. */
 #patient-sidebar .patient-line[data-line="9"] {
   display: grid;
   grid-auto-flow: column;
@@ -11,14 +12,17 @@
   order: 9;
 }
 
+/* Slims the EtCO₂ row’s WebKit scrollbar track to 3px so the scroll cue stays unobtrusive. */
 #patient-sidebar .patient-line[data-line="9"]::-webkit-scrollbar {
   height: 3px;
 }
 
+/* Uses Firefox’s thin scrollbar setting so the EtCO₂ row matches other browsers. */
 #patient-sidebar .patient-line[data-line="9"] {
   scrollbar-width: thin;
 }
 
+/* Positions the `EtCO₂:` label and value controls side by side, with a 0.35rem buffer so the digits don’t crowd the label. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-etc02 {
   display: inline-grid;
   grid-auto-flow: column;
@@ -28,6 +32,7 @@
   min-width: 0;
 }
 
+/* Sets the weight, size, and color for the `EtCO₂:` label; white-space: nowrap keeps it from wrapping above the pill. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-etc02 .vital-label {
   font-weight: 600;
   font-size: 0.82rem;
@@ -35,6 +40,7 @@
   color: #374151;
 }
 
+/* Creates the positioning context that lets the `mmHg` suffix float inside the EtCO₂ numeric field. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-etc02 .unit-input {
   position: relative;
   display: grid;
@@ -43,6 +49,7 @@
   min-width: 0;
 }
 
+/* Styles the EtCO₂ value pill with right-aligned digits; the width caps keep values like `45` legible without letting the field sprawl. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-etc02 .unit-input .sidebar-input {
   justify-self: start;
   min-width: 4ch;
@@ -58,18 +65,21 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Switches the EtCO₂ value pill to the dark palette so readings maintain contrast after dark-mode toggle. */
 body.dark-mode #patient-sidebar .patient-line[data-line="9"] .vital-item-etc02 .unit-input .sidebar-input {
   border-color: #334155;
   color: #e2e8f0;
   background-color: #1f2937;
 }
 
+/* Adds the blue focus halo when crews tap into the EtCO₂ field. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-etc02 .unit-input .sidebar-input:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 2px rgb(37 99 235 / 20%);
   outline: none;
 }
 
+/* Positions the `mmHg` suffix inside the input and hides it via opacity until a value is set. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-etc02 .unit-suffix {
   position: absolute;
   top: 50%;
@@ -84,14 +94,17 @@ body.dark-mode #patient-sidebar .patient-line[data-line="9"] .vital-item-etc02 .
   transition: opacity 0.15s ease;
 }
 
+/* Reveals the `mmHg` badge only after medics enter a value, keeping empty fields clean. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-etc02 .unit-input[data-has-value="true"] .unit-suffix {
   opacity: 1;
 }
 
+/* Recolors the suffix for dark mode so the badge still meets contrast requirements. */
 body.dark-mode #patient-sidebar .patient-line[data-line="9"] .vital-item-etc02 .unit-suffix {
   color: #cbd5f5;
 }
 
+/* Styles the EtCO₂ preset dropdown pill; the caret icon cues that preset etCO₂ ranges (e.g., Normal/High) are available. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-etc02 .vital-mini-select {
   min-width: 1.9rem;
   height: 1.9rem;
@@ -110,16 +123,19 @@ body.dark-mode #patient-sidebar .patient-line[data-line="9"] .vital-item-etc02 .
   background-position: right 0.35rem center;
 }
 
+/* Adapts the preset dropdown to dark-mode colors so the pill still pops against the darker sidebar. */
 body.dark-mode #patient-sidebar .patient-line[data-line="9"] .vital-item-etc02 .vital-mini-select {
   background-color: #1f2937;
   border-color: #475569;
   color: #e2e8f0;
 }
 
+/* Keeps preset labels legible at 0.78rem in the dropdown menu. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-etc02 .vital-mini-select option {
   font-size: 0.78rem;
 }
 
+/* Adds the blue outline for keyboard focus on the preset dropdown. */
 #patient-sidebar .patient-line[data-line="9"] .vital-item-etc02 .vital-mini-select:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
