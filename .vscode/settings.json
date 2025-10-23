@@ -63,5 +63,6 @@
         "webpick",
         "Zoll"
     ],
-    "diffEditor.codeLens": true
+    "diffEditor.codeLens": true,
+    "cloudcode.project": "zinc-interface-476018-m6"
 }
