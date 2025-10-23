@@ -409,5 +409,5 @@ export function renderQuickVentCalculator(contentArea){
   const wrap = document.createElement('div');
   wrap.className = 'mb-4';
   wrap.innerHTML = `<div class="text-center mb-3"><span class="font-semibold underline">Tidal Volume Calculator</span></div>`;
-  contentArea.appendChild(wrap);
+  contentArea.appendChild(wrap); }
   // reuse setup UI minimal
