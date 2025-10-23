@@ -62,5 +62,6 @@
         "vmin",
         "webpick",
         "Zoll"
-    ]
+    ],
+    "diffEditor.codeLens": true
 }
