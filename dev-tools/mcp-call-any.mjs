@@ -31,14 +31,7 @@ const defaultServers = {
     cwd: basePath,
     stderr: "pipe"
   },
-  tasktimer: {
-    command: "node",
-    args: [
-      `${basePath}/dev-tools/mcp/task-timer-server.mjs`
-    ],
-    cwd: basePath,
-    stderr: "pipe"
-  },
+
   memory: {
     command: "node",
     args: [

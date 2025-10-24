@@ -56,13 +56,13 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
   - When spotting outdated guidance, confirm whether a newer instruction exists elsewhere before editing; otherwise, create a TODO entry for user review.
   - Surface any tooling discrepancies (scripts, commands) so the user can reconcile docs and package scripts.
 ## Sequential Thinking Playbook
-1. **Scoping Thought** – List every user question/task, call out the files/features involved, timer/checklist updates, and any ambiguities to escalate. Set an initial `totalThoughts` that covers the required structure (scoping + per question + research + QA + TIME) and adjust during execution.
+1. **Scoping Thought** – List every user question/task, call out the files/features involved, and any ambiguities to escalate. Set an initial `totalThoughts` that covers the required structure (scoping + per question + research + QA) and adjust during execution.
 2. **Per-Question Thoughts** – Dedicate one thought to each user question or subtask. Capture acceptance criteria, dependencies, and checklist items. Branch with `branchFromThought`/`branchId` if the work diverges, and mark revisions with `isRevision`.
-3. **Execution Planning Thoughts** – Before editing or running tools, outline the steps, matching files, and MCP actions (filesystem/git/hooks/playwright). Flag rollback plans, timer step names, and memory updates.
+3. **Execution Planning Thoughts** – Before editing or running tools, outline the steps, matching files, and MCP actions (filesystem/git/hooks/playwright). Flag rollback plans, and memory updates.
 4. **Research Thoughts (coding-focused)** – When research is necessary, name the coding sources to pull (repo docs, design specs, GitHub threads, vetted forums) and confirm freshness. Only cite external sources when they materially improve implementation accuracy and never contradict the protocol DOCX.
 5. **Dynamic Adjustment Thoughts** – Emit a new thought when scope changes. Update `totalThoughts` and use `needsMoreThoughts` if you overrun the original estimate so the history stays auditable.
 6. **QA/Test Thought** – Second to last. Review existing automated/manual coverage, decide whether new tests or lint checks are needed, schedule exact commands, and record follow-ups for any failures (CSS, JS, data, or doc regressions).
-7. **TIME Thought** – Final thought. Summarise elapsed steps, surface bottlenecks, propose time-saving automations (scripts, templates, checklist tweaks), and ask the user whether to adopt them. Log notable decisions to the memory MCP before finishing.
+
 
 ## Research Utilities & Fallbacks
 - Run `dev-tools/scripts/Get-McpResearchContent.ps1 <url>` to fetch web content with a Codex-friendly user agent and automatic fallbacks (Reddit share URLs resolve to JSON; other 403/404 responses fall back to `r.jina.ai`). Use `-OutFile` to store the response for later parsing.
@@ -71,22 +71,12 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 ## MCP Tooling Discipline
 - Invoke the seq MCP server at the start of every task to structure the plan before making changes. Assume that the user has already connected to the server, if having issues with using the MCP server, then assume that the user has not connected to it yet, in which case you will set up everything for the server up until the point of that the user must click "Connect", you will then ask the user if the clicked on "Conect" already, then when the user confirms that they are connected to the MCP, you will continue your original task(s) and initiate the seq MCP server. If unable to invoke the seq MCP server, then you must solve this issue until it is invoked. Do not move onto a task until this step is complete.
 - Record task decisions and follow-up items through the memory MCP server before finishing the work.
-- When a user prompt begins with TIMER. start a new timer step before planning so the entire session is captured.
-- Use the task_timer MCP server to start and stop every major step (`action: "start"` / `action: "stop"`) so `dev-tools/task-timer/history.json` captures durations with clear `taskName`, `taskId`, `stepName`, and `stepType` labels. Include a short note for context. Flags trigger when a step lasts longer than 2 minutes, occurs 5+ times in a single task, or recurs across 3+ tasks with each run >=3 minutes.
-- Capture `errors` (count) and an outcome note when stopping so the error calculator can measure improvements safely.
+
 ### MCP Server Auto-Invocation Guide
 - **filesystem** - Auto-run for local file reads and edits because the reference implementation is built for secure, access-controlled filesystem work; skip it for actions that touch locations outside the repo and confirm with the user instead ([servers README](https://github.com/modelcontextprotocol/servers?tab=readme-ov-file#model-context-protocol-servers)).
 - **git** - Invoke whenever you need status, diffs, or to stage/commit so the agent uses the git-aware tooling instead of raw shell commands; avoid it when you only need to skim a single file ([git-mcp-server](https://github.com/cyanheads/git-mcp-server)).
 - **shell** - Use only when a task truly requires running CLI programs or custom scripts, leveraging the server's allowlists and audit logging; skip it for filesystem or git tasks the dedicated servers already cover ([mcp-shell](https://github.com/sonirico/mcp-shell)).
-- **tasktimer** - Start with `action: "start"` whenever you begin a major step and stop with `action: "stop"` immediately after completing it. Populate `taskName`, `taskId`, `stepName`, `stepType`, `tags` (experiments), and a concise note. Flags surface at >2 minutes, 5+ repeats within a task, or >=3 tasks with individual runs >=3 minutes. End each task with `task_timer report` to review flagged steps, comparisons, and error rates.
-  - When calling `node dev-tools/mcp-call.mjs` from PowerShell, pipe JSON via a double-quoted here-string into stdin to avoid quote escaping errors, for example:
 
-    ```powershell
-    @"{
-      "name": "sequentialthinking",
-      "arguments": {...}
-    }"@ | node dev-tools/mcp-call.mjs seq call -
-    ```
 - **webpick** — Auto-run for scoped content grabs where CSS selectors are enough; skip it for heavy navigation or JS-heavy pages that need a headless browser ([mcp-web-content-pick README](https://github.com/kilicmu/mcp-web-content-pick)).
 - **fetch** — Use when you just need a readable copy of an article, title extraction, or optional image saves; avoid it if you require Playwright-grade rendering or multi-hop crawling ([mcp-fetch](https://github.com/kazuph/mcp-fetch)).
 - **fetcher** — Reach for the Playwright-backed fetcher when pages need JavaScript execution or readability cleanup beyond simple HTTP fetches; skip it for static pages where fetch already works ([fetcher-mcp on npm](https://www.npmjs.com/package/fetcher-mcp)).

@@ -55,10 +55,8 @@
     "stylelint": "^16.23.1",
     "stylelint-config-standard": "^39.0.0",
     "stylelint-no-unsupported-browser-features": "^8.0.4"
+  },
+  "dependencies": {
+    "@google-cloud/vertexai": "^1.10.0"
   }
 }
-
-
-
-
-

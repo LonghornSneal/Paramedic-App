@@ -24,14 +24,7 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
    - Import the helper module once per session: `Import-Module (Resolve-Path 'dev-tools/modules/Invoke-SeqThought/Invoke-SeqThought.psd1')`.
    - Run `dev-tools/scripts/Enable-SeqThoughtAutoLoad.ps1` once to append the modules directory to `$PROFILE` and keep `Invoke-SeqThought` available in future PowerShell sessions.
    - Call `Invoke-SeqThought -Thought "..." -ThoughtNumber 1 -TotalThoughts 6 -NextThoughtNeeded $true` and add optional flags (`IsRevision`, `RevisesThought`, `BranchFromThought`, `BranchId`, `NeedsMoreThoughts`) as needed.
-5. **Task timing discipline**  
-   - Use the `task_timer` MCP server to start every major step with a clear `taskName` and `stepName`, then stop it as soon as the step finishes so durations are captured in `dev-tools/task-timer/history.json` for future optimisation.
-   - Include `stepType` (e.g., `thought`, `action`, `research`) and a concise note so repeated work is easy to classify.
-   - Flags trigger when a step runs longer than 2 minutes, the same labelled step appears at least 5 times within one task, or it appears in 3+ different tasks with each run lasting 3 minutes or longer.
-   - Capture  `errors` (count) and an outcome note when stopping so the error calculator can evaluate speed vs accuracy. 
-   - If a step must restart, pass `autoStop: true` when starting the new segment so the previous run is closed cleanly.
-   - When the user prompt begins with `TIMER.` start a new timer step before planning so the session is captured from the outset.
-   - At the end of the task, call `task_timer report` with the relevant `taskName`/`taskId` to review flagged entries, comparisons, and error rates.
+
 6. **MCP-driven validation**  
    - Before delivering a final response, run the relevant lint/tests through MCP (shell_execute_command, hooks, playwright, etc.) so that feature changes are proven to work in the app.
 

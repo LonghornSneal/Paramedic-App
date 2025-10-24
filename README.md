@@ -668,8 +668,6 @@ Tests: Add E2E coverage for “STEMI” and “Anaphylaxis” workflows (toggle 
 
 
 
-
-
   Complete Weight-Based Dosing Automation: Currently we handle some weight calculations, but we plan to automate all weight-specific dosage calculations. This includes rounding to appropriate values and even suggesting volume (mL) if concentration is known. For example, “Epinephrine 0.01 mg/kg” for a 22 kg child → “0.22 mg (0.22 mL of 1:10000 solution)”. This requires augmenting the data with concentration info and writing logic to compute volumes. 
 
   Complete Weight‑Based Dosing Automation
@@ -759,8 +757,6 @@ Click “EKG Help” topic; confirm the Markdown reference renders with images/e
 
 
 
-
-
 **This README is up to date as of JuLY 19TH, 2025. All instructions and documentation reflect the current and intended behavior of the Paramedic Quick Reference app.**
 
 ---
@@ -803,8 +799,8 @@ Launchers:
 **[Connectivity sanity check: after the Codex session opens, call `filesystem_read_text_file` and `git_status` via MCP tools to confirm the repo is wired correctly.]**
 **[If a server fails mid-session, repair it (reinstall, set env vars, or disable optional entries) and restart Codex. Use direct shell commands only as a temporary bridge while restoring MCP coverage.]**
 
-**[Prompts beginning with `TIMER.` must trigger a new `task_timer` step before planning so the entire workflow is captured front to back.]**
-**[Task timing: Call `task_timer` at the start and end of every major step (`action: "start"` / `action: "stop"`) and supply `taskName`, `taskId` (when available), `stepName`, `stepType`, tags (e.g., experiments), and a short note so `dev-tools/task-timer/history.json` captures analysable durations. Run `task_timer report` when the task wraps to review flagged items, comparisons, and error rates. Flags fire when a step exceeds 2 minutes, repeats 5+ times within one task, or recurs across 3+ tasks with runs >=3 minutes.]**
+
+
 
 Good practice
 - Connect only servers needed for the current task.
@@ -835,8 +831,6 @@ Ad‑hoc check: `node dev-tools/check-tv.js` prints the live answer and modal co
 - **[2025-10-11 Patient Info sidebar module extraction: Added Features/patient/PatientSidebar.js to encapsulate sidebar open/close behavior, autocomplete wiring, and suggestion seeding; main.js now imports the module, delegates initialization to initPatientSidebar(), and seeds vocab via seedPatientSuggestionSets().]**
 - **[2025-10-06 Patient Info sidebar selectors refreshed: Age toggles now render inline calendar SVGs for day/month/year using Material Symbols Outlined references (https://fonts.google.com/icons), Sex icons rely on stroke-weight color shifts without box borders, Weight unit buttons use typography-only states, and Height inputs now show compact ft/in entry fields (index.html; styles.css).]**
 
-- **[2025-10-01 Task timer MCP tooling: Added dev-tools/mcp/task-timer-server.mjs with per-step metadata, automatic flagging thresholds, comparison reporting, and registrations in dev-tools/mcp-call.mjs, inspector.mcp.json, and ~/.codex/config.toml.]**
-
 
 - **[2025-09-30 Pediatric protocols hierarchy rebuilt: Data/ParamedicCategoriesData.js now nests the requested pediatric categories/subtopics, slug infrastructure updated, new Content/Pediatric Protocols/*.md files populated from research/paramedic_protocols.txt sections "Pediatric Initial pt Assessment" through "Violent Pt" and "Special Needs Children", and pediatric cricothyrotomy content now omits needle access (<12 yrs) in favor of surgical guidance only.]**
 - **[2025-09-30 Refusals protocol split: Data/ParamedicCategoriesData.js now nests Consent & Refusal plus Refusals & Suicidal Pt's, slug list & ProtocolMarkdownMap updated, and new Content/Adult Protocols/adult-consent-refusal.md / adult-refusals-suicidal-pts.md seeded from research/paramedic_protocols.txt sections "Consent & Refusal" and "Refusals & Suicidal Pts".]**
@@ -859,6 +853,3 @@ This repo is wired to auto‑deploy to GitHub Pages from `main` via `.github/wor
 - If it shows 404 initially, wait for the Pages workflow to finish (Actions tab), or check Settings → Pages to confirm the deployment.
 - Not Sure shows two stacked answers (no ARDS first, ARDS second); pop‑up shows explicit formulas and correct ranges — verified by E2E.
 - Sex icon remains visible when selected (selected state background/border) — verified by E2E.
-
-
-- **[2025-10-01 Task timer MCP tooling: Added dev-tools/mcp/task-timer-server.mjs with per-step metadata, automatic flagging thresholds, comparison reporting, and registrations in dev-tools/mcp-call.mjs, inspector.mcp.json, and ~/.codex/config.toml.]**

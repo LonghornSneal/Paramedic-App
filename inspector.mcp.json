@@ -22,13 +22,7 @@
       ],
       "env": {}
     },
-    "tasktimer": {
-      "command": "node",
-      "args": [
-        "./dev-tools/mcp/task-timer-server.mjs"
-      ],
-      "env": {}
-    },
+
     "memory": {
       "command": "node",
       "args": [
