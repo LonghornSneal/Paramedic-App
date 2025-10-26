@@ -5,7 +5,7 @@ Always follow these guidelines:
 
   1. Read Before Coding: Read this README.md in full to understand how the entire repository works together and to locate relevant information for the task at hand. Chapters 1-5 are essential to understanding everything about the app and must be thoroughly read before beginning user's request. Chapters 6-7 are were you find tasks to work on. Chapters 8-9 are mostly for the user. Chapter 10 is where future tasks will eventually become the current tasks.
 
-  2. Modifying the README.md: After you have finished all of the user's requests, update the README.md to reflect the current state of the app. Fix any spelling errors. Changes should be surrounded by double asterics with the original line in square brackets for easy identification. Ensure everything is located in their appropriate locations, one example of this would be when you finish a task and it passes the test you run on it, then it would logically be moved out of the tasks category and placed at the end of Chapter 8 (additionally placed in Chapter 9 if the change is a major change), and it would be re-written to conform to the style of that Chapter.
+  2. Modifying the README.md: After you have finished all of the user's requests, update the README.md to reflect the current state of the app. Fix any spelling errors. Changes should be surrounded by double astrict with the original line in square brackets for easy identification. Ensure everything is located in their appropriate locations, one example of this would be when you finish a task and it passes the test you run on it, then it would logically be moved out of the tasks category and placed at the end of Chapter 8 (additionally placed in Chapter 9 if the change is a major change), and it would be re-written to conform to the style of that Chapter.
 
     2.1 Chapters 6,7, & 10: If you discover errors that involve features that should already be functional, then specify what the issue is in Chapter 6. If a task is known, but isn't in Chapter 7, then place it in Chapter 7 (unless it is currently the task that the user requested and it is the first time the user has requested this task). When the user's request is simple, research potential future tasks to place in Chapter 10 by looking through other code bases online and ensuring that the future task is appropriate for this specific Paramedic-App and that the user would want the future task added to the README.md.
 
@@ -57,7 +57,7 @@ Built with: HTML, CSS, JavaScript, & ES Modules.
 
 Paramedic Protocols: This app encompasses the user's Paramedic Protocols along with additional information, features, and functions.
 
-App philosphy: Relevant and/or more important information should naturally be easier for the user to access. Pt Treatments that are relevant, relevant warnings, and other relevant information automatically should have the app focus on that information to ensure timely pt care.
+App philosophy: Relevant and/or more important information should naturally be easier for the user to access. Pt Treatments that are relevant, relevant warnings, and other relevant information automatically should have the app focus on that information to ensure timely pt care.
 
 This README serves as a thorough guide to the project, outlining where each piece of functionality resides and highlighting how the components interact. By understanding this structure, developers can more easily identify where to implement new features or fix issues.
 
@@ -67,7 +67,7 @@ Some updates will require updates in multiple files, even with a single minor ch
 
 Styling: Tailwind via CDN + styles.css (custom rules).
 
-## 3. PROJECT PUROPOSE
+## 3. PROJECT PURPOSE
 
 The Paramedic Quick Reference is designed to allow paramedics to find life-saving information within seconds. It functions as an interactive protocol book and drug reference on a phone or tablet. The interface is optimized for speed, clarity, and ease-of-use in emergency situations.
 
@@ -168,7 +168,7 @@ Patient-Snapshot: A compact summary bar (#patient-snapshot-bar) appears below th
   PMH: Most relevant. Abbreviated.
   Vitals: BP/HR/RR/BGL with subtle severity coloring when clearly high/low.
   EKG: Shown with mild severity coloring for “tachy”/“brady”) when patientData.ekg is populated. (Feature description does not reflect what user will eventually have coded).
-  Examples: “45 y/o F, 60 kg; Takes Beta-Blockers (The user entered "Metoprolol” into the Patient Info section, but "Beta-Blocker" would be shown in the Patient-Snapshot, since Beta-Blocker has a higher potential for being relevant in the context of administering Beta adrenergic medications); Broncospasm; (then underneath in red warning font) WARNING: Albuterol may be ineffective for Tx if the pt is actively taking her Metoprolol Rx!" and the WARNING message in red font would also be a clickable button that can provide further information on the WARNING. 
+  Examples: “45 y/o F, 60 kg; Takes Beta-Blockers (The user entered "Metoprolol” into the Patient Info section, but "Beta-Blocker" would be shown in the Patient-Snapshot, since Beta-Blocker has a higher potential for being relevant in the context of administering Beta adrenergic medications); Bronchospasm; (then underneath in red warning font) WARNING: Albuterol may be ineffective for Tx if the pt is actively taking her Metoprolol Rx!" and the WARNING message in red font would also be a clickable button that can provide further information on the WARNING. 
   Note: The snapshot does not currently perform drug‑class mapping or show embedded warnings; those appear on detail pages. 
 
 Auto-Calculations: For Rx dosing, universal automatic mg/kg → mg (and mL) computations are not yet implemented. Medication detail sections render dose text from data (with markup) but do not perform global dose math. A dedicated medication dosage calculator module is planned (see Current Tasks), which will compute mg/kg and mL values with step‑by‑step math shown in Pop-ups, & will all have live updates as patient weight changes.
@@ -292,7 +292,7 @@ These files currently contain descriptive comments only & no runtime behavior.
   /Contraindications.js
   /CurrentMedications.js
   /Indications.js
-  /PatienetAge.js
+  /PatientAge.js
   /PatientWeight.js
   /PMH.js
   /Symptoms.js
@@ -494,7 +494,7 @@ All these components work together to provide a seamless experience: The data pr
 
 **This section provides a list of tasks that must be worked on now unless explicitly told otherwise. Once this section is empty, proceed to the “CURRENT TASKS/GOALS” section in this README for additional tasks.**
 
-Sex: Update the "Sex" field in the Patient Info Sidebar/Section to incoporate the symbols that get highlighted when selected, like in our "Zoll Set Up" Detail Page.
+Sex: Update the "Sex" field in the Patient Info Sidebar/Section to incorporate the symbols that get highlighted when selected, like in our "Zoll Set Up" Detail Page.
 
 Settings: Color sliders for the app.
   Independent sliders for: main background, category background, main text, category text, warnings, pop‑up comments, other pop‑ups.
@@ -512,12 +512,12 @@ Search Bar: dual lists (Filtered + Smart Suggestions) & only one location for us
     Displays: Filtered (by Patient Info & Search Bar text) list of topics.
     Topic List: Dynamically updates list from modification of Patient Info/Search Bar text.
       Example: User inputs "intubated" into Patient Info, and then inputs "d" into the Search Bar.
-        Displays: Returns a list of topics that start with the letter "d" and involve Intubation or Intubated pt's, followed by the alphabatized list of Intubation related topics. Other Patient Info related topics will be prioritized afterwards. After all the Patient Info related topics are displayed first, the list will end with the rest of the baseline full Smart Suggestions list.
+        Displays: Returns a list of topics that start with the letter "d" and involve Intubation or Intubated pt's, followed by the alphabetized list of Intubation related topics. Other Patient Info related topics will be prioritized afterwards. After all the Patient Info related topics are displayed first, the list will end with the rest of the baseline full Smart Suggestions list.
       No Patient Info: Display baseline full Smart Suggestions list (Search Bar text dynamically updates list order).
       Indirect Search Bar Routes: Topics may be found using common terms, synonyms, common spelling errors, or key-stroke errors.
         Key-Stroke Error Example: typing “dAtdi” might surface “Cardiac Arrest” even if those exact words haven’t been fully typed, or might suggest “Cardioversion/Cardizem”.
       Right Clicking/Long press on a Smart Suggestions Topic: Displays topics related the interacted topic (Interacted Topic remains at the top and the user is able to display the prior list by completing the action again).
-      Higher Priority Topics: Cardiac Arrest, SVT, RASS +3, RASS +4, (Narcotic medication), ecetera. Higher Priority Topics may be classified by those which have a higher potential for patient harm if treatments are not quickly given.
+      Higher Priority Topics: Cardiac Arrest, SVT, RASS +3, RASS +4, (Narcotic medication), etcetera. Higher Priority Topics may be classified by those which have a higher potential for patient harm if treatments are not quickly given.
 
 
 ## 7. CURRENT TASKS/GOALS
@@ -576,7 +576,7 @@ Home button (house icon): jumps to main Contents.
 
 Settings: Dark Mode toggle; animated Settings button; brightness slider with live preview/persistence.
 
-Header/UI: ensureHeaderUI stabilizes header layout across navigations.
+Header/UI: ensureHeaderUI stabilizes header layout across navigation.
   **[Toggle alignment: Category cards align titles with Show/Hide badges; spacing improved across sizes.]**
 
   Header UI Structure: ensureHeaderUI checks if elements exist and creates them if not, and ensures they are appended in the proper DOM order.
@@ -639,7 +639,7 @@ Sept 1, 2025: Patient Info given Medication Class dropdown populated from all me
 
 *This section proposes enhancements/ideas for future development. Nothing in this section is to be worked on or looked at until they are moved into TOP PRIORITY TASKS or CURRENT TASKS/GOALS.*
 
-  Figure out how to automatically suggest hospital destinations to transport a patient to. Add a toggle within "SETTINGS" that is named "GPS". When the GPS is toggled on, the app is able to use the user's GPS signal to track the user's current location (perferably using Google Maps). The app then will be able to provide a list of the closest/most appropriate Hospital locations to the user with a drive time ETA shown. The most appropriate locations are dependent on some of the information that the user places into the Patient Info Sidebar. For example, if the user puts that they have a stroke patient into the Patient Info Sidebar, the list would then only show stroke capable hospitals starting with the cosest most appropriate hospital. The available hospital destinations are: Barnes South Hospital, Barnes North Hospital, Barnes West Hospital, Mercy Hospital STL, Mercy South Hospital, Mercy Jefferson Hospital, Saint Louis University Hospital (SLUH), St. Clare Hospital, St. Lukes Hospital, St. Lukes Des Pares Hospital, Christian Northwest Hospital, Christian Northeast Hospital, St. Mary's Hospital, and Missouri Bapitist Hospital. You must attempt to make use of the MCP server located at https://"(https://github.com/manolaz/emergency-medicare-planner-mcp-server)" which appears to have the capabilites of everything needed within it; Research and present ideas on the best way to impliment this feature in conjuntion with the MCP server (https://github.com/manolaz/emergency-medicare-planner-mcp-server)
+  Figure out how to automatically suggest hospital destinations to transport a patient to. Add a toggle within "SETTINGS" that is named "GPS". When the GPS is toggled on, the app is able to use the user's GPS signal to track the user's current location (preferably using Google Maps). The app then will be able to provide a list of the closest/most appropriate Hospital locations to the user with a drive time ETA shown. The most appropriate locations are dependent on some of the information that the user places into the Patient Info Sidebar. For example, if the user puts that they have a stroke patient into the Patient Info Sidebar, the list would then only show stroke capable hospitals starting with the closest most appropriate hospital. The available hospital destinations are: Barnes South Hospital, Barnes North Hospital, Barnes West Hospital, Mercy Hospital STL, Mercy South Hospital, Mercy Jefferson Hospital, Saint Louis University Hospital (SLUH), St. Clare Hospital, St. Lukes Hospital, St. Lukes Des Pares Hospital, Christian Northwest Hospital, Christian Northeast Hospital, St. Mary's Hospital, and Missouri Baptist Hospital. You must attempt to make use of the MCP server located at https://"(https://github.com/manolaz/emergency-medicare-planner-mcp-server)" which appears to have the capabilities of everything needed within it; Research and present ideas on the best way to implement this feature in conjunction with the MCP server (https://github.com/manolaz/emergency-medicare-planner-mcp-server)
 
   Minor glitch that after lots of expansions/collapses and scrolling, some elements (like the header or certain buttons) might appear to shift or jitter slightly – potentially due to scrollbar appearance or focus outlines. We will continue to refine the CSS to eliminate any “weird” movement and ensure smooth scrolling.
 
@@ -647,7 +647,7 @@ Sept 1, 2025: Patient Info given Medication Class dropdown populated from all me
     The anchor Table of Contents at the top of long pages should list all the sections present and allow jumping. Try out a long entry (like one with many sections) to confirm the anchor links scroll correctly. Ensure that anchors appear correctly and that clicking them scrolls smoothly to the section.
 
   Persistent User Data: Implement saving of patient info and user history between sessions. For example, use localStorage or similar to remember the last entered patient details so if the app is closed accidentally or the browser refreshes, the user doesn’t have to re-enter critical info. Also, preserve the History list between sessions so a medic can quickly revisit frequently accessed topics across shifts.
-  Any information inputed by the user persists inbetween sessions (so if they close and reopen the app, no patient information is lost.).
+  Any information inputted by the user persists inbetween sessions (so if they close and reopen the app, no patient information is lost.).
 
   Enhanced Dynamic Protocol Filtering: Expand the intelligence of the main Contents list filtering. Beyond just strike-throughs, we could implement a mode where, say, entering a primary indication or choosing a protocol (e.g., “STEMI” or “Anaphylaxis”) automatically highlights or even isolates the relevant protocols (perhaps by toggling a “Relevant Only” filter). This could guide medics to the correct treatment algorithm faster. It may involve tagging topics with keywords like “chest pain” or “trauma” and then matching those to patient indications input.
 
@@ -740,7 +740,7 @@ Type “MI” and verify the snapshot shows the canonical “MI” (abbr) with t
 
 
 
-  EKGs: User may type their option(s) to filter the Drop-Down menue or just select from the Drop-Down menu. When the user hovers, with a mouse or they press and hold with their finger, over an option that they can select from the Drop-Down menu, a Pop-Up menu will appear. Pop-up menu will appear on screen the same as the other, but instead of info, it will have an EKG example. Off to the side, their will be a "EKG Help" link that takes the user to a new screen dedicated to EKGs.
+  EKGs: User may type their option(s) to filter the Drop-Down menu or just select from the Drop-Down menu. When the user hovers, with a mouse or they press and hold with their finger, over an option that they can select from the Drop-Down menu, a Pop-Up menu will appear. Pop-up menu will appear on screen the same as the other, but instead of info, it will have an EKG example. Off to the side, their will be a "EKG Help" link that takes the user to a new screen dedicated to EKGs.
 
 EKGs (Suggestions + Help View)
 
