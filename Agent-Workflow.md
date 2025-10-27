@@ -28,7 +28,7 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
 6. **MCP-driven validation**  
    - Before delivering a final response, run the relevant lint/tests through MCP (shell_execute_command, hooks, playwright, etc.) so that feature changes are proven to work in the app.
 
-Document any workflow adjustments here so future sessions inherit the same startup behaviour.
+Document any workflow adjustments here so future sessions inherit the same startup behavior.
 
 ## Quick Start
 
@@ -120,9 +120,3 @@ Document any workflow adjustments here so future sessions inherit the same start
   - Navigate to page; trigger the calculator flow (click/fill)
   - `playwright_browser_wait_for` to see the popup text
   - `playwright_browser_evaluate` to assert that the popup contains all steps and that the final answer appears in the target selector
-
-
-
-
-
-
