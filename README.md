@@ -38,6 +38,7 @@ Scope strictly reflects current functionality of this repo (nothing external or 
 ## 2. APP OVERVIEW AND STRUCTURE
 
 Built with: HTML, CSS, JavaScript, & ES Modules.
+**[Supported Browsers: Optimized for the last two releases of Chrome, Firefox, Edge, and Safari, plus iOS Safari 15.4 or newer; Opera Mini is intentionally excluded because it cannot fully run the app's offline SPA tooling.]**
 
 Paramedic Protocols: This app encompasses the user's Paramedic Protocols along with additional information, features, and functions.
 
