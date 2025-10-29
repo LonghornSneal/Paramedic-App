@@ -1,4 +1,4 @@
-import { addTapListener } from '../../../../Utils/addTapListener.js';
+/* import { addTapListener } from '../../../../Utils/addTapListener.js';
 
 export function renderQuickVentSetup(contentArea){
   const wrap = document.createElement('div');
@@ -95,7 +95,7 @@ export function renderQuickVentSetup(contentArea){
         }
       }
     });
-  } catch(e) { /* ignore */ }
+  } catch(e) {
   wrap.querySelectorAll('.qv-toggle').forEach(el => {
     addTapListener(el, () => {
       const info = el.querySelector('.qv-info');
@@ -125,7 +125,7 @@ function frac(numer, denom){
     return `<span class=\"frac\"><span class=\"frac-num\">${numer}</span><span class=\"frac-bar\"></span><span class=\"frac-den\">${denom}</span></span>`;
   }
 
-function setInputSize(el){ /* disabled autosizing to keep inputs fixed */ }
+function setInputSize(el){ }
 
 function sanitizeIntInRange(str, min, max){
     const onlyDigits = String(str || '').replace(/[^0-9]/g, '');
@@ -261,7 +261,7 @@ function compute() {
         tvEl.innerHTML = `<div class=\"qv-tv-ans-line\"><span class=\"qv-tv-ans-val\">${rng2.normal[0]}-${rng2.normal[1]} mL</span><span class=\"qv-tv-ans-label\"> (no ARDS)</span></div>`+
                          `<div class=\"qv-tv-ans-line\"><span class=\"qv-tv-ans-val\">${rng2.ards[0]}-${rng2.ards[1]} mL</span><span class=\"qv-tv-ans-label\"> (ARDS)</span></div>`;
       }
-    } catch(e) { /* ignore */ }
+    } catch(e) { }
     // Ensure explicit formulas are always shown (min/max per case)
     try {
       if (usedKg != null && !/TV min/.test(mathHtml)) {
@@ -296,19 +296,19 @@ function compute() {
           mathHtml += (mathHtml.endsWith('<br/>') ? '' : '<br/>') + detail;
         }
       }
-    } catch(e) { /* ignore */ }
+    } catch(e) { }
     // Normalize ranges to "6 mL/kg - 8 mL/kg" format before fraction styling
     try {
       mathHtml = mathHtml
         .replace(/\[6-8 mL\/<s>kg<\/s>\]/g, '[6 mL/<s>kg</s> - 8 mL/<s>kg</s>]')
         .replace(/\[4-6 mL\/<s>kg<\/s>\]/g, '[4 mL/<s>kg</s> - 6 mL/<s>kg</s>]');
-    } catch(e) { /* ignore */ }
+    } catch(e) { }
     // Render any a/b segments as stacked fractions in the math details
     try {
       mathHtml = mathHtml.replace(/(\d+(?:-\d+)?\s*mL)\s*\/\s*(<s>kg<\/s>|kg)/g, (_, numer, denom) => frac(numer, denom));
       // Replace any legacy arrow markers with equals for final values
       mathHtml = mathHtml.replace(/\u001a/g, ' = ');
-    } catch(e) { /* ignore */ }
+    } catch(e) { }
     // Reformat TV range explanation into formula + min/max with equals, and adjust the displayed answer block
     try {
       const single = mathHtml.match(/TV range = [\s\S]*?\[([0-9]+)-([0-9]+) mL[\s\S]*?\] [\s\S]*?<strong>([0-9]+)-([0-9]+) mL<\/strong>/);
@@ -331,7 +331,7 @@ function compute() {
         }
       }
       if (!isUnsure && display) tvEl.innerHTML = display;
-    } catch(e) { /* ignore */ }
+    } catch(e) { }
     tvEl.dataset.math = mathHtml;
     // hover tooltip
     tvEl.onmouseenter = (e)=>{
@@ -411,3 +411,4 @@ export function renderQuickVentCalculator(contentArea){
   wrap.innerHTML = `<div class="text-center mb-3"><span class="font-semibold underline">Tidal Volume Calculator</span></div>`;
   contentArea.appendChild(wrap); }
   // reuse setup UI minimal
+*/

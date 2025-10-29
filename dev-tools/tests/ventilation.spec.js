@@ -2,38 +2,16 @@
 // Run with: npx playwright test dev-tools/tests/ventilation.spec.js
 
 import { test, expect } from '@playwright/test';
-import { spawn } from 'node:child_process';
-import http from 'node:http';
+import previewServer from './utils/previewServer.cjs';
 
-async function waitForHttp(url, timeoutMs = 15000) {
-  const start = Date.now();
-  return new Promise((resolve, reject) => {
-    (function probe() {
-      const req = http.get(url, res => { res.resume(); resolve(true); });
-      req.on('error', () => {
-        if (Date.now() - start > timeoutMs) reject(new Error('Server not reachable'));
-        else setTimeout(probe, 500);
-      });
-    })();
-  });
-}
-
-let serverProc;
+const { ensurePreviewServer, shutdownPreviewServer } = previewServer;
 
 test.beforeAll(async () => {
-  // If preview not running, start a static server
-  try {
-    await waitForHttp('http://localhost:5173');
-  } catch {
-    serverProc = spawn(process.platform === 'win32' ? 'npx.cmd' : 'npx', ['http-server', '-p', '5173', '-c-1'], {
-      stdio: 'ignore', shell: false,
-    });
-    await waitForHttp('http://localhost:5173');
-  }
+  await ensurePreviewServer();
 });
 
 test.afterAll(async () => {
-  if (serverProc && !serverProc.killed) serverProc.kill();
+  await shutdownPreviewServer();
 });
 
 test('Not Sure shows two distinct ranges with labels; popup formulas are explicit', async ({ page }) => {

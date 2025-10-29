@@ -523,6 +523,7 @@ Warnings/Alerts: Visually shown under Search Bar.
 ## 8. RECENT FIXES AND CHANGES
 Any entry added to this chapter must keep the rest of the README consistent: remove it from Chapters 6 or 7 if it migrates here, and rewrite any related coverage in Chapters 4 or 5 so those sections reflect current behavior. Never leave the old text in place with an 'updated' note; rewrite the references completely.
 
+**[2025-10-29 Quick Vent detail + Playwright harness: merged Features/detail/DetailPage/equipment/QuickVent.js into the shared QuickVent module, cleaned redundant try/catch suppressions in Features/detail/quickVent.js, and added dev-tools/tests/utils/previewServer.cjs with updated ventilation/cricothyrotomy specs for cross-platform http-server bootstrapping.]**
 **[2025-10-21 Patient sidebar refactor: refactored patient-sidebar-forms.css into 20 per-category modules, converted shared helper rules into data-line scoped grid layouts, and deprecated patient-sidebar-controls.css.]**
 **[2025-10-21 Added runtime detection, drops chevron after choice, per-field rules clear arrow (when populated).]**
 **[2025-10-20: Replaced flexbox-based layout within Patient Info sidebar with CSS grid, refreshed helper comments to match the new layout model, and corrected the markup.]**

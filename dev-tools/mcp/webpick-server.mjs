@@ -59,9 +59,12 @@ const TOOL_SCHEMA = {
 };
 
 const TOOL_DEFINITION = {
-  name: TOOL_NAME,
-  description: TOOL_DESCRIPTION,
-  inputSchema: TOOL_SCHEMA
+  type: "function",
+  function: {
+    name: TOOL_NAME,
+    description: TOOL_DESCRIPTION,
+    parameters: TOOL_SCHEMA
+  }
 };
 
 function coerceInteger(value, fieldName) {

@@ -95,5 +95,6 @@
     "cloudcode.project": "zinc-interface-476018-m6",
     "search.useIgnoreFiles": true,
     "search.useParentIgnoreFiles": true,
-    "vscode-openai.embeddingModel.show-welcome": true
+    "vscode-openai.embeddingModel.show-welcome": true,
+    "vscode-openai.embeddingModel": "text-embedding-3-large"
 }
