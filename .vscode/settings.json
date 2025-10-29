@@ -89,5 +89,6 @@
     "diffEditor.codeLens": true,
     "cloudcode.project": "zinc-interface-476018-m6",
     "search.useIgnoreFiles": true,
-    "search.useParentIgnoreFiles": true
+    "search.useParentIgnoreFiles": true,
+    "vscode-openai.embeddingModel.show-welcome": true
 }

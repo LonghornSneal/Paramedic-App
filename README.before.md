@@ -3,17 +3,7 @@
 # *Full Code Context with any code Changes and with any code references:*
   *When proposing code alterations or additions, always provide the complete updated code for the affected segment or file, including the entire line immediately before and after the change. Likewise, whenever referencing specific lines of code in explanations, quote the entire line (not partial fragments). This ensures changes are clear and can be copied into the codebase with proper context.*
 
-## Table of Contents
-1. General Scope
-2. App Overview and Structure
-3. Project Purpose
-4. Project Structure
-5. How the Pieces Work Together
-6. Top Priority Tasks
-7. Current Tasks/Goals
-8. Recent Fixes and Changes
-9. Timeline Summary
-10. Future Tasks/Goals/Ideas
+
 
 ## 1. **General Scope**
 
