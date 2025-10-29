@@ -145,7 +145,7 @@ function initializeData(categoriesData, medDetailsData) { // /Assign the global 
     [...MedicationDetailsData, ...VentilationDetailsData].forEach(item => {
         medicationDataMap[item.id] = item;
     });
-    // âœ… Ensure the global map is set *before* processing items
+    // Ensure the global map is set *before* processing items
     window.medicationDataMap = medicationDataMap;
     // Build the searchable index and allDisplayableTopicsMap using the provided categories
 //    categoriesData.forEach(cat => processItem(cat));

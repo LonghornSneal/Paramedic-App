@@ -1,30 +1,18 @@
 --- **Paramedic Quick Reference Application**
 
-
 Always follow these guidelines:
 
   1. Read Before Coding: Read this README.md in full to understand how the entire repository works together and to locate relevant information for the task at hand. Chapters 1-5 are essential to understanding everything about the app and must be thoroughly read before beginning user's request. Chapters 6-7 are were you find tasks to work on. Chapters 8-9 are mostly for the user. Chapter 10 is where future tasks will eventually become the current tasks.
-
   2. Modifying the README.md: After you have finished all of the user's requests, update the README.md to reflect the current state of the app. Fix any spelling errors. Changes should be surrounded by double astrict with the original line in square brackets for easy identification. Ensure everything is located in their appropriate locations, one example of this would be when you finish a task and it passes the test you run on it, then it would logically be moved out of the tasks category and placed at the end of Chapter 8 (additionally placed in Chapter 9 if the change is a major change), and it would be re-written to conform to the style of that Chapter.
-
     2.1 Chapters 6,7, & 10: If you discover errors that involve features that should already be functional, then specify what the issue is in Chapter 6. If a task is known, but isn't in Chapter 7, then place it in Chapter 7 (unless it is currently the task that the user requested and it is the first time the user has requested this task). When the user's request is simple, research potential future tasks to place in Chapter 10 by looking through other code bases online and ensuring that the future task is appropriate for this specific Paramedic-App and that the user would want the future task added to the README.md.
-
   3. Quote full line + neighbor: When referencing code (for any reason), always quote the entire line and include the line immediately before and after it. Reference the line numbers. 
-
   4. Identify new code in explanations: Wrap new code with double asterisks in explanations only (not in source)
-
   5. Comment new code: Explain why and how; update or remove stale comments you encounter.
-
   6. Avoid duplication: Search first; consolidate or remove duplicates; keep names consistent across files.
-
   7. Align with scope and structure: Changes must align with sections 1–5; do not introduce frameworks or backends.
-
   8. Place Code Correctly: Add or modify code in the appropriate file and maintain logical ordering so that definitions appear before use. This avoids timing or hoisting issues.
-
   9. Fix what you see: If you notice a bug while working here, fix it unless explicitly told not to.
-
   10. File-specific docs: If a file mentions local rules or notes, read and follow them.
-
   11. Verify: Manually verify features still work after changes; run available tests as appropriate. If no appropriate test exists, then create an appropriate test and ensure it is functional and passes the test.
 
 ## Table of Contents
@@ -42,18 +30,15 @@ Always follow these guidelines:
 ## 1. **General Scope**
 
 Single-page, offline app in HTML/CSS/vanilla JS (ES Modules).
-
 All data is local (no APIs). Instant load, no network required.
-
 Files are organized into logical folders (Data, Features, Utils, etc.).
-
 Scope strictly reflects current functionality of this repo (nothing external or future-ware).
-
 
 
 ## 2. APP OVERVIEW AND STRUCTURE
 
 Built with: HTML, CSS, JavaScript, & ES Modules.
+**[Supported Browsers: Optimized for the last two releases of Chrome, Firefox, Edge, and Safari, plus iOS Safari 15.4 or newer; Opera Mini is intentionally excluded because it cannot fully run the app's offline SPA tooling.]**
 
 Paramedic Protocols: This app encompasses the user's Paramedic Protocols along with additional information, features, and functions.
 
@@ -173,8 +158,6 @@ Patient-Snapshot: A compact summary bar (#patient-snapshot-bar) appears below th
 
 Auto-Calculations: For Rx dosing, universal automatic mg/kg → mg (and mL) computations are not yet implemented. Medication detail sections render dose text from data (with markup) but do not perform global dose math. A dedicated medication dosage calculator module is planned (see Current Tasks), which will compute mg/kg and mL values with step‑by‑step math shown in Pop-ups, & will all have live updates as patient weight changes.
   Quick Vent Tidal Volume calculator: Computes tidal‑volume ranges (No ARDS, ARDS, Not‑Sure) using entered weight or IBW (sex + height), and shows explicit math on demand. 
-
-
 
 
 Navigation Buttons (Back, Forward, Home, History): Appears in the top-right of the header. The app provides basic navigation controls similar to a web browser, so users can easily move between viewed pages without losing their place:
@@ -476,18 +459,10 @@ Dynamic Updates on Detail Page: Patient Info changes trigger updatePatientData()
 - **Quick Vent interplay:** When the active topic is part of the Quick Vent workflow, the rerender repopulates sex/weight/height controls and recalculates tidal-volume outputs, keeping the bedside calculator synchronized with sidebar context (`Features/detail/DetailPage.js:375-740`).
 
 
-Back/Forward Navigation: Back/Forward use a view‑state stack. Clicking Back decrements the index and restores either:
-  a list state by re‑rendering the Contents & expanding the relevant category path, highlighting & scrolling the previously viewed topic into view, or
-  a detail state by re‑rendering the corresponding detail page (without adding a new history entry).
-  Back/Forward button enabled states are updated after each move. Detail‑page scroll position is not currently preserved; list restoration scrolls to the highlighted topic.
-
 History List Usage: History List Usage & Anchor Navigation: Opening the History modal shows a list of previously viewed detail pages from this session. Clicking an entry calls renderDetailPage(id) directly; this is treated as a new navigation event and adds a fresh “detail” entry to the history stack. The panel and overlay close immediately after navigation.
   On long detail pages with a Table of Contents, clicking an anchor smoothly scrolls to the target section and auto‑expands it if needed. This does not alter app state or the history stack.
 
-Closing the App & Persistence: Currently, if the user closes the app (or refreshes), all state (patient info, history, expanded menus) resets because we are not using persistent storage. In future, we might use localStorage to save patientData & maybe navigationHistory between sessions. 
-  Future coding task: Code features to persist patientData (so you don’t have to re-enter the same patient’s info if you switch apps briefly). Implementation of that would involve storing patientData in localStorage on unload and loading it on startup if available.
-
-All these components work together to provide a seamless experience: The data provides content, main.js renders it & ties it to user input & navigation, & the patient info customizes it on the fly. Each file has a clear role.
+Closing the App & Persistence: Currently, if the user closes the app (or refreshes), all state (patient info, history, expanded menus) resets because we are not using persistent storage.
 
 
 ## 6. -----TOP PRIORITY TASKS-----
@@ -548,90 +523,54 @@ Warnings/Alerts: Visually shown under Search Bar.
 ## 8. RECENT FIXES AND CHANGES
 Any entry added to this chapter must keep the rest of the README consistent: remove it from Chapters 6 or 7 if it migrates here, and rewrite any related coverage in Chapters 4 or 5 so those sections reflect current behavior. Never leave the old text in place with an 'updated' note; rewrite the references completely.
 
-**[2025-10-21 Patient sidebar refactor: refactored patient-sidebar-forms.css into 20 per-category modules, converted shared helper rules into data-line scoped grid layouts, and deprecated patient-sidebar-controls.css in favor of the new manifest.]**
-**[2025-10-21 Patient sidebar chevron: Added runtime detection, drops chevron after choice, per-field rules clear arrow (when populated).]**
+**[2025-10-21 Patient sidebar refactor: refactored patient-sidebar-forms.css into 20 per-category modules, converted shared helper rules into data-line scoped grid layouts, and deprecated patient-sidebar-controls.css.]**
+**[2025-10-21 Added runtime detection, drops chevron after choice, per-field rules clear arrow (when populated).]**
 **[2025-10-20: Replaced flexbox-based layout within Patient Info sidebar with CSS grid, refreshed helper comments to match the new layout model, and corrected the markup.]**
 **[2025-10-12: Reorganized the patient info sidebar into 13-line layout.]**
-**[2025-10-12: Restored sidebar container closing tag so the main app renders, removed invalid aria-label attributes, seeded placeholders for preview images, and prefilled the EKG modal heading.]**
-**[2025-10-08 Patient sidebar compact refit: Zeroed sidebar padding, forced 30.4px square inputs/textarea, stacked age toggles with high-res icons, hooked auto unit suffix reveal for age/weight/vitals, and retitled PMH/Current Rx's/Sx/VS (files: index.html; styles.css; Features/patient/PatientInfo.js; dev-tools/tests/patient-sidebar.spec.js; test-results/patient-sidebar-tablet.png; test-results/patient-sidebar-full.png; test-results/patient-sidebar-bottom.png). Tests: npx playwright test dev-tools/tests/patient-sidebar.spec.js.]**
-**[2025-10-07 Tablet vitals spacing & QA guardrail: Patient sidebar vitals, unit inputs, and age toggles stay single-line at >=768px with refreshed hover/focus states; BP stack now renders inline; added Playwright regression dev-tools/tests/patient-sidebar.spec.js with tablet snapshots (files: styles.css; dev-tools/tests/patient-sidebar.spec.js; test-results/patient-sidebar-tablet.png; test-results/patient-sidebar-full.png; test-results/patient-sidebar-bottom.png). Tests: npx playwright test dev-tools/tests/patient-sidebar.spec.js.]**
-**[2025-10-06 Vital Signs sidebar single-line alignment: Vitals now render as single-row flex fields with abbreviated labels (BP, HR, % SpO2, RR, BGL, A&O), datalist suggestions for BGL/Pupils/Lung Sounds, BP normalization with MAP dataset exposure, BGL/Pupil parsing safeguards, and README vital-sign docs updated (files: index.html; styles.css; Features/patient/PatientInfo.js; Features/Warnings.js; README.md). Tests: npm run lint (fails on long-standing stylelint violations).]**
-**[2025-10-06 Patient Info sidebar inline layout: Sex symbols now sit beside the label with hover/press tooltips, Age toggles render between the title and input, Weight relies on one field with stacked kg/lb toggles plus tooltip summary, and Height accepts total inches while the snapshot shows weight in the selected unit and only surfaces height for patients under 18 (files: index.html; styles.css; Features/patient/PatientInfo.js; Features/patient/PatientSnapshot.js). Tests: npm run lint (fails: stylelint inherits pre-existing repository violations in styles.css).]**
-**[2025-09-30 Adult protocol detail expansion: added markdown coverage for MI or Acute Coronary Syndrome (ACS), VF/pVT, SVT modalities, arrhythmia management, metabolic emergencies, obstetric complications, SMR/TASER guidance, and trauma triage; updated navigation slug/data for MI and MAT (source: research/paramedic_protocols.txt sections "MI or Acute Coronary Syndrome (ACS)".]**
-**[2025-09-29 MCP webpick tooling hardening: Replaced the upstream web-content-pick server with a sanitized local wrapper so MCP tool registration stays OpenAI-compatible & eliminates the stream disconnects triggered during tool conversion.]**
-**[2025-09-27 Adult & Pediatric Cricothyrotomy updates: Replaced the Abbott indication banner text, embedded photo popovers inside the scalpel-finger-bougie steps, mirrored pediatric emergency tracheotomy guidance, & refreshed citations/assets.]**
-**[2025-09-22 EMV731 operating environment briefings: Environmental Conditions, Transport Use, High Noise, & EMC & Safety pages condensed for field-ready guidance (source: Zoll EMV+ Ventilator Operator's Guide.]**
-**[2025-09-22 EMV731 maintenance quick guides: Preventive Maintenance, Filter Maintenance, Exhalation Valve Diaphragm, Self Test & Service, & Cleaning & Storage summarized for field crews (source: Zoll EMV+ Ventilator Operator's Guide Rev.]**
-**[2025-09-22 EMV731 detail routing: Zoll EMV731 subtopics now open directly to their chapter sections without extra TOC layers, matching the operator workflow for General Information, Product Overview, Setup, Use, Alarms, & Accessories (source: Zoll EMV+ Ventilator Operator's Guide Rev.]**
-**[2025-09-20 EMV731 navigation cleanup: moved Original Documentation to the final slot & removed redundant 'All Content' topics so General Information, Product Overview, Setting Up, & Using open straight to their chapter subsections (source: Zoll EMV+ Ventilator Operator's Guide.]**
-**[2025-09-17 EMV731 general information, product overview, setup, & operations condensed into section summaries with citations for in-app navigation (source: Zoll EMV+ Ventilator Operator's Guide.]**
-
+**[2025-10-11 Patient Info sidebar module extraction.]**
+**[2025-10-08 Patient sidebar compact refit.]**
+**[2025-10-07 Tablet vitals spacing & QA guardrail.]**
+**[2025-10-06 Vital Signs sidebar single-line alignment & Patient Info sidebar selectors refreshed.]**
+**[2025-09-30 Adult protocol detail expansion & Pediatric protocols hierarchy rebuilt, & Refusals protocol split.]**
+**[2025-09-29 Replaced the upstream web-content-pick server with a sanitized local wrapper so MCP tool registration stays OpenAI-compatible & eliminates the stream disconnects triggered during tool conversion & Cricothyrotomy detail rebuilt.]**
+**[2025-09-27 Adult & Pediatric Cricothyrotomy updates.]**
+**[2025-09-26 Abbott abbreviations rebuilt, MACC guidance imported verbatim, & ALS medication concentration on each detail page.]**
+**[2025-09-22 EMV731 updates.]**
+**[2025-09-20 EMV731 navigation cleanup.]**
+**[2025-09-18 updated ~/.codex/config.toml, added dev-tools/mcp-health-check.js.]**
+**[2025-09-17 EMV731 general information, product overview, setup, & operations condensed into section summaries with citations for in-app navigation.]**
 **[2025-03-09 UI polish: Show/Hide badge toggles now replace chevrons across lists & detail sections, aligning styles.css with dev-tools/als-medication-detail.png & preserving cross-browser number-input behavior.]**
-**[2025-03-09 EMV731 alarms chapter summarized: alarm overview, alarm message center, priorities, icon/service code cues, muting behaviors, patient/environment/self-check groupings, & pop ups distilled for field crews (source: Zoll EMV+ Ventilator Operator's Guide.]**
 **[2025-03-09 EMV731 alarms navigation: removed the All Content topic & linked each subsection to chapter-specific summaries with navigation/slug updates.**
-
-
-
 Home button (house icon): jumps to main Contents.
-
 Settings: Dark Mode toggle; animated Settings button; brightness slider with live preview/persistence.
-
-Header/UI: ensureHeaderUI stabilizes header layout across navigation.
-  **[Toggle alignment: Category cards align titles with Show/Hide badges; spacing improved across sizes.]**
-
-  Header UI Structure: ensureHeaderUI checks if elements exist and creates them if not, and ensures they are appended in the proper DOM order.
-
-  UI Layout Consistency: content area scrolls independently when content overflows.
-
-Flexbox: structuring the content area & sidebar. By explicitly setting height on the sidebar (and letting the content area flex), we ensure that even if the viewport recalculates, our layout remains consistent. (Not sure if we are even still using this or something else now)**
-
-Green text: Green clickable text that expands hidden green text.
-
-ES Module Conversion: Continued migrating scripts to ES modules. This change allows tests and other ES Modules to import slugIDs directly.
-
-Detail Page Title Styling: The main title on each detail page now uses a consistent class name & data attribute (Allows uniform CSS styles and allows scripts to easily select it).
-
-Rendering: whenever a new view is rendered (list or detail), the history entry includes enough info to restore that view. Navigation Buttons enabled/disabled states are updated immediately after each navigation so they correctly reflect availability.
-
+Header/UI: ensureHeaderUI stabilizes header layout across navigation, Category cards align titles with Show/Hide badges, ensureHeaderUI checks if elements exist and creates them if not, and ensures they are appended in the proper DOM order, & content area scrolls independently when content overflows.
+Flexbox: structuring the content area & sidebar.
+Green clickable text that expands hidden green text.
+ES Module Conversion.
+The main title on each detail page now uses a consistent class name & data attribute.
+Whenever a new view is rendered (list or detail), the history entry includes enough info to restore that view. Navigation Buttons enabled/disabled states are updated immediately after each navigation so they correctly reflect availability.
 Slug anchors: Initialize after renderDetailPage to ensure TOC appears when applicable
-
-Medication Data Display (ID Matching): The ID matching logic in initializeData (& elsewhere) now handles IDs regardless of whether they’re strings like epiPen or numeric strings like 5glucose.
-
-Sidebar: Gave it a fixed height (applied via JS or CSS). The sidebar now explicitly takes up the full viewport height regardless of browser quirks.
-
-Patient Sidebar weight: Dual KG/LB fields synchronized; internal unit stays kg.
-
-Patient Info Sidebar Behavior: The overlay's semi-transparent background, and the “X” close button both close the Patient Info sidebar.
-
-  We standardized the open/close logic by centralizing it: both main.js and PatientInfo.js use the same functions to add/remove the active and hidden classes on the sidebar and overlay. This prevents divergent behavior.
-
-Data wiring: Build window.medicationDataMap before indexing categories → detail pages load reliably.
-
-Search: Typing no longer pollutes history; only committed searches recorded.
-
+Medication Data Display (ID Matching).
+Sidebar: Gave it a fixed height.
+Pt Sidebar weight: Dual KG/LB fields synchronized; internal unit stays kg.
+Pt Info Sidebar Behavior: The overlay's semi-transparent background, and the “X” close button both close the Patient Info sidebar.
+Standardized the open/close logic by centralizing it: both main.js and PatientInfo.js use the same functions to add/remove the active and hidden classes on the sidebar and overlay.
+Build window.medicationDataMap before indexing categories → detail pages load reliably.
+Typing no longer pollutes search history; only committed searches recorded.
 Added basic default indication suggestions. 
-
-Detail Rendering: Fixed main.js data wiring & Features/Warnings.js so medication/equipment details load reliably; implemented `getAgeWarning`.
-
-Navigation/Home: Hooked up Home button handler to reset to the Contents view.
-
-Medication Classes: Added dynamic Medication Class dropdown (built from data) in Patient Info; wired change listener.
-
+Fixed main.js data wiring & Features/Warnings.js so medication/equipment details load reliably; implemented `getAgeWarning`.
+Hooked up Home button handler to reset to the Contents view.
+Added dynamic Medication Class dropdown (built from data) in Patient Info; wired change listener.
 Patient Snapshot: Implemented and updates on load/changes.
-
 Autocomplete seeds: Added common terms and PDE5 inhibitors.
-
 Settings/Dark Mode: Corrected CSS & added brightness slider.
-
 CSS: Focus rings & Show/Hide badge transitions unified; invalid nested rules removed.
-
 Sept 1, 2025: Patient Info given Medication Class dropdown populated from all medication classes in the data (updates suggestions & filters context).
 
 
 ## 9. TIMELINE SUMMARY (Short & Specific)
 
 07/16/25 — Nearly useful for field work; more data review pending.
-
 07/18/25 — ES Modules progressing; categories not yet loading at that time; Dark Mode working.
 
 
@@ -641,128 +580,35 @@ Sept 1, 2025: Patient Info given Medication Class dropdown populated from all me
 
   Figure out how to automatically suggest hospital destinations to transport a patient to. Add a toggle within "SETTINGS" that is named "GPS". When the GPS is toggled on, the app is able to use the user's GPS signal to track the user's current location (preferably using Google Maps). The app then will be able to provide a list of the closest/most appropriate Hospital locations to the user with a drive time ETA shown. The most appropriate locations are dependent on some of the information that the user places into the Patient Info Sidebar. For example, if the user puts that they have a stroke patient into the Patient Info Sidebar, the list would then only show stroke capable hospitals starting with the closest most appropriate hospital. The available hospital destinations are: Barnes South Hospital, Barnes North Hospital, Barnes West Hospital, Mercy Hospital STL, Mercy South Hospital, Mercy Jefferson Hospital, Saint Louis University Hospital (SLUH), St. Clare Hospital, St. Lukes Hospital, St. Lukes Des Pares Hospital, Christian Northwest Hospital, Christian Northeast Hospital, St. Mary's Hospital, and Missouri Baptist Hospital. You must attempt to make use of the MCP server located at https://"(https://github.com/manolaz/emergency-medicare-planner-mcp-server)" which appears to have the capabilities of everything needed within it; Research and present ideas on the best way to implement this feature in conjunction with the MCP server (https://github.com/manolaz/emergency-medicare-planner-mcp-server)
 
-  Minor glitch that after lots of expansions/collapses and scrolling, some elements (like the header or certain buttons) might appear to shift or jitter slightly – potentially due to scrollbar appearance or focus outlines. We will continue to refine the CSS to eliminate any “weird” movement and ensure smooth scrolling.
+  Persistent User Data: Implement saving of patient info and user history between sessions. Any information inputted by the user persists inbetween sessions (so if they close and reopen the app, no patient information is lost.).
 
-  Slug Anchors & Section Headers: Long detail pages should include a Table of Contents generated from section headings (slugAnchors.js); currently no detail page is long enough to need this implementation.
-    The anchor Table of Contents at the top of long pages should list all the sections present and allow jumping. Try out a long entry (like one with many sections) to confirm the anchor links scroll correctly. Ensure that anchors appear correctly and that clicking them scrolls smoothly to the section.
+  Enhanced Dynamic Protocol Filtering: Expand the intelligence of the main Contents list filtering. Beyond just strike-throughs, we could implement a mode where entering a primary indication or choosing a protocol (e.g., “STEMI” or “Anaphylaxis”) automatically highlights or even isolates the relevant protocols (perhaps by toggling a “Relevant Only” filter). It may involve tagging topics with keywords like “chest pain” or “trauma” and then matching those to patient indications input.
+  Tests: Add E2E coverage for “STEMI” and “Anaphylaxis” workflows (toggle on/off, isolation/highlight, auto‑expand, Back/Forward, and “Show All” reset).
 
-  Persistent User Data: Implement saving of patient info and user history between sessions. For example, use localStorage or similar to remember the last entered patient details so if the app is closed accidentally or the browser refreshes, the user doesn’t have to re-enter critical info. Also, preserve the History list between sessions so a medic can quickly revisit frequently accessed topics across shifts.
-  Any information inputted by the user persists inbetween sessions (so if they close and reopen the app, no patient information is lost.).
+Complete Weight-Based Dosing Automation:
+  Tests: Add unit tests for dose computations and mL conversion with a few representative meds. Add a DOM test ensuring computed annotations appear/disappear as weight becomes available/cleared.
+  Verification: Set weight to 22 kg; open a med with “0.01 mg/kg” and with valid concentration: confirm “(= 0.22 mg [0.22 mL])” and a math modal.
 
-  Enhanced Dynamic Protocol Filtering: Expand the intelligence of the main Contents list filtering. Beyond just strike-throughs, we could implement a mode where, say, entering a primary indication or choosing a protocol (e.g., “STEMI” or “Anaphylaxis”) automatically highlights or even isolates the relevant protocols (perhaps by toggling a “Relevant Only” filter). This could guide medics to the correct treatment algorithm faster. It may involve tagging topics with keywords like “chest pain” or “trauma” and then matching those to patient indications input.
-
-  Proposed rewrite (final)
-Enhanced Dynamic Protocol Filtering:
-
-Introduce a “Relevant Only” mode that isolates protocols most likely to apply based on patient inputs. Implementation plan:
-Data: Add a keywords array to topics (either in Data/ParamedicCategoriesData.js topic objects or in detail objects propagated during indexing). Examples: “chest pain”, “ACS”, “STEMI”, “anaphylaxis”, “trauma”. Populate Data/patientInfoSynonyms.js with mappings so inputs like “SOB” normalize to “shortness of breath”, “MI” to “myocardial infarction”, etc.
-Index: During processItem() (Features/search/Search.js), attach normalized keywords to each full topic record and build a keywordIndex map (keyword → Set<topicId>) for quick lookups.
-Compute relevance: In updatePatientData() (Features/patient/PatientInfo.js), normalize patientData.indications via synonyms and produce a relevantIds Set from keywordIndex unions (optionally expand to closely related terms via synonyms).
-UI: Add a small “Relevant Only” toggle near the search (index.html + main.js). When enabled:
-Modify renderInitialView() / createHierarchicalList() (Features/list/ListView.js) to render only relevant leaves and their ancestor categories. Non‑relevant branches are hidden or visually de‑emphasized.
-Auto‑expand categories containing relevant descendants and apply a .relevant highlight class to matching topics.
-Persist the toggle in localStorage so it survives reloads.
-History/Search integration: Ensure Back/Forward captures and restores the filter state; “Show All Categories” clears both search and “Relevant Only”.
-Tests: Add E2E coverage for “STEMI” and “Anaphylaxis” workflows (toggle on/off, isolation/highlight, auto‑expand, Back/Forward, and “Show All” reset).
-
-
-
-
-  Complete Weight-Based Dosing Automation: Currently we handle some weight calculations, but we plan to automate all weight-specific dosage calculations. This includes rounding to appropriate values and even suggesting volume (mL) if concentration is known. For example, “Epinephrine 0.01 mg/kg” for a 22 kg child → “0.22 mg (0.22 mL of 1:10000 solution)”. This requires augmenting the data with concentration info and writing logic to compute volumes. 
-
-  Complete Weight‑Based Dosing Automation
-
-Goal: Automatically compute mg (and mL where concentration is known) for weight‑based doses shown in medication detail sections, updating live on patient weight changes. Keep math explicit and auditable.
-Data requirements:
-Augment Data/MedicationDetailsData.js entries with normalized dosing metadata where feasible:
-dose: { perKg: number, units: 'mg'|'mcg', route?: 'IV'|'IM'|'IN', max?: number }
-concentration?: { amount: number, units: 'mg', volumeMl: number } (for mL conversion)
-Maintain current adultRx[] / pediatricRx[] text for readability; do not break existing rendering.
-Implementation (Features/dosageCalc.js):
-Build a pure function API:
-computeDose({ kg, perKg, max, units }) → { mg: number, clamped: boolean }
-toMl({ mg, concentration }) → number
-formatDose({ mg, units, ml? }) → string
-Add dose parsers to recognize “N.nn mg/kg” patterns in adultRx[]/pediatricRx[] text if metadata is missing, but prefer explicit metadata when present.
-In Features/detail/DetailPage.js, when generating lines for Rx sections, detect weight‑based items and, if patientData.weight exists, inject an inline computed segment “(= X mg [Y mL])” with a tooltip/modal showing math steps. Use a class like .rx-computed and a click handler to show the math modal (reuse .qv-modal styles).
-Rounding and safety:
-Standard rounding rules per drug class can be configured (e.g., round mg to nearest 0.01; mL to nearest 0.1 unless specified).
-Clamp by max if present; mark clamped: true in the math details.
-Performance: memoize last computed value per item id + weight in a small cache.
-Integration points:
-Wire Features/dosageCalc.js functions into DetailPage during Rx section render; re‑compute on updatePatientData() refresh.
-Tests:
-Add unit tests for dose computations and mL conversion with a few representative meds.
-Add a DOM test ensuring computed annotations appear/disappear as weight becomes available/cleared.
-Verification:
-Set weight to 22 kg; open a med with “0.01 mg/kg” and with valid concentration: confirm “(= 0.22 mg [0.22 mL])” and a math modal.
-
-
-
-
-
-  Smooth Scroll and Section Highlight: Improve the anchor navigation by adding smooth scrolling animation when an anchor link is clicked, rather than a jump. Also, as the user manually scrolls through a detail page, highlight the current section in the anchor menu (e.g., bold or underline the section name in the TOC when that section is at top of viewport). This gives context about where you are in the page. This feature would involve listening to scroll events and computing which section is in view – performance should be considered for longer pages.
-
-  Smooth Scroll and Section Highlight
-
-Present state: Features/anchorNav/slugAnchors.js already inserts a TOC for long pages, smooth‑scrolls to targets, and auto‑expands collapsed sections. Missing: active section highlighting while scrolling.
-Implementation:
-Use IntersectionObserver to observe .detail-section-title elements; determine the currently active section (topmost crossing a visibility threshold).
-In the TOC (#detail-toc), add .active to the matching anchor; remove from others. Add minimal CSS (bold/underline).
-Debounce updates on scroll (requestAnimationFrame) to avoid churn.
-Keep behavior integrated with the existing smooth scroll and auto‑expand logic; do not alter history.
-Verification:
-Open a long detail page with TOC; scroll by wheel/touch. Confirm active TOC entry updates smoothly without jank.
+Smooth Scroll and Section Highlight: Improve the anchor navigation by adding smooth scrolling animation when an anchor link is clicked, rather than a jump. Also, as the user manually scrolls through a detail page, highlight the current section in the anchor menu (e.g., bold or underline the section name in the TOC when that section is at top of viewport). This gives context about where you are in the page. This feature would involve listening to scroll events and computing which section is in view.
+  Verification: Open a long detail page with TOC; scroll by wheel/touch. Confirm active TOC entry updates smoothly without jank.
 Click anchors; confirm smooth scroll and ensure the TOC link and Show/Hide badge reflect the target section.
 
-
-
-
-
-  Additional Autocomplete Enhancements: Our current suggestion lists (for PMH, allergies, etc.) could be enhanced by learning from usage. We might implement that if a user manually enters a term that isn’t in our suggestions, we add it to a local list for next time. Or provide more sophisticated suggestions (like common misspellings or abbreviations mapping to full terms – e.g., typing “MI” could suggest “Myocardial Infarction”). These improvements can make data entry faster and more accurate.
-
-  Additional Autocomplete Enhancements
-
-Goals:
-Learn common local terms the user types and surface them next time (per device).
+Additional Autocomplete Enhancements: Provide more sophisticated suggestions (like common misspellings or abbreviations mapping to full terms – e.g., typing “MI” could suggest “Myocardial Infarction”).
 Normalize to canonical terms using synonyms/misspellings to improve consistency.
-Implementation:
-Data/patientInfoSynonyms.js: add an exportable mapping object for terms → canonical (e.g., “sob” → “shortness of breath”, “mi” → “myocardial infarction”), grouped by field (PMH/indications/symptoms).
-When a user commits a term not in the suggestion set, add it to a learned set persisted in localStorage per field (patientInfoLearned.pmh, etc.). On startup, merge learned sets into the base suggestion sets.
-Fuzzy matching (optional): introduce a thin “contains normalized substring” step (lowercase, strip punctuation) before final includes() to catch near‑misses; keep it performant and deterministic.
+  Fuzzy matching (optional): introduce a thin “contains normalized substring” step (lowercase, strip punctuation) before final includes() to catch near‑misses; keep it performant and deterministic.
 Display canonicalized terms in snapshot (using the synonyms map) while retaining the raw user entry in the textarea.
-Verification:
-Type a novel indication (not in base suggestions); confirm it appears on the next session as a suggestion.
-Type “MI” and verify the snapshot shows the canonical “MI” (abbr) with title/tooltip revealing “Myocardial Infarction.”
+  Verification: Type “MI” and verify the snapshot shows the canonical “MI” (abbr) with title/tooltip revealing “Myocardial Infarction.”
 
-
-
-
-
-
-  EKGs: User may type their option(s) to filter the Drop-Down menu or just select from the Drop-Down menu. When the user hovers, with a mouse or they press and hold with their finger, over an option that they can select from the Drop-Down menu, a Pop-Up menu will appear. Pop-up menu will appear on screen the same as the other, but instead of info, it will have an EKG example. Off to the side, their will be a "EKG Help" link that takes the user to a new screen dedicated to EKGs.
-
-EKGs (Suggestions + Help View)
-
-Goals:
-Improve the EKG input experience and provide quick reference examples.
-Implementation:
-EKG suggestions: seed an ekgSuggestions set (common rhythms) and wire setupAutocomplete('pt‑ekg','pt‑ekg‑suggestions', ekgSuggestions). Add a small suggestions container under the EKG input in index.html.
-Snapshot: wire patientData.ekg = getInputValue('pt‑ekg') in updatePatientData(); keep the existing severity tint for “tachy”/“brady”.
-EKG Help view: add a dedicated route (e.g., topic id ekg-help) in ParamedicCategoriesData.js (under a Reference category) and a corresponding content entry (Markdown under Content/…/ekg-help.md), then render it via existing Markdown equipment page logic in DetailPage.
-Optional pop‑up: add an info icon next to the EKG field that opens a small modal listing example strips with brief captions; content can live as local images under Assets/Images/ekg/.
-Verification:
-Type “sinus tachycardia” and confirm suggestions dropdown appears; select it; verify snapshot shows EKG with yellow tint.
+EKGs:
+  Optional pop‑up: add an info icon next to the EKG field that opens a small modal listing example strips with brief captions; content can live as local images under Assets/Images/ekg/.
+  Verification: Type “sinus tachycardia” and confirm suggestions dropdown appears; select it; verify snapshot shows EKG with yellow tint.
 Click “EKG Help” topic; confirm the Markdown reference renders with images/examples.
-
 
 
 **This README is up to date as of JuLY 19TH, 2025. All instructions and documentation reflect the current and intended behavior of the Paramedic Quick Reference app.**
 
 ---
 # Paramedic Quick Reference — Developer Guide (Updated)
-
-Single‑page reference app for paramedics. It includes searchable topics, a patient sidebar, and a Quick Vent Guide with a Zoll Set Up flow and Tidal Volume (TV) calculator.
 
 Quick links
 - Run preview: `npm run preview` → http://localhost:5173
@@ -774,7 +620,6 @@ Contents
 - MCP servers & effective usage
 - Tests and how to extend them
 - Audit notes (ZOLL/Vent duplicates)
-- Recent fixes (verified)
 
 ## Project structure
 - `index.html` – app shell
@@ -800,8 +645,6 @@ Launchers:
 **[If a server fails mid-session, repair it (reinstall, set env vars, or disable optional entries) and restart Codex. Use direct shell commands only as a temporary bridge while restoring MCP coverage.]**
 
 
-
-
 Good practice
 - Connect only servers needed for the current task.
 - **[Default to MCP tools for edits, diffs, searches, and command execution; drop to direct shell only when MCP servers are being restored.]**
@@ -822,25 +665,8 @@ Playwright E2E tests live in `dev-tools/tests/ventilation.spec.js`.
 Ad‑hoc check: `node dev-tools/check-tv.js` prints the live answer and modal content for a 70 kg example.
 
 ## Audit notes (ZOLL/Vent duplicates)
-- No function duplication found in Quick Vent compute path. Range formatting is normalized in one pass; Not‑Sure stacked layout is rendered once and not overwritten.
 - Ventilation data is in `Data/VentilationDetailsData.js` only.
 - If TV logic expands, consider extracting to `Features/ventilation/tv.js` with unit tests.
-
-## Recent fixes (verified)
-
-- **[2025-10-11 Patient Info sidebar module extraction: Added Features/patient/PatientSidebar.js to encapsulate sidebar open/close behavior, autocomplete wiring, and suggestion seeding; main.js now imports the module, delegates initialization to initPatientSidebar(), and seeds vocab via seedPatientSuggestionSets().]**
-- **[2025-10-06 Patient Info sidebar selectors refreshed: Age toggles now render inline calendar SVGs for day/month/year using Material Symbols Outlined references (https://fonts.google.com/icons), Sex icons rely on stroke-weight color shifts without box borders, Weight unit buttons use typography-only states, and Height inputs now show compact ft/in entry fields (index.html; styles.css).]**
-
-
-- **[2025-09-30 Pediatric protocols hierarchy rebuilt: Data/ParamedicCategoriesData.js now nests the requested pediatric categories/subtopics, slug infrastructure updated, new Content/Pediatric Protocols/*.md files populated from research/paramedic_protocols.txt sections "Pediatric Initial pt Assessment" through "Violent Pt" and "Special Needs Children", and pediatric cricothyrotomy content now omits needle access (<12 yrs) in favor of surgical guidance only.]**
-- **[2025-09-30 Refusals protocol split: Data/ParamedicCategoriesData.js now nests Consent & Refusal plus Refusals & Suicidal Pt's, slug list & ProtocolMarkdownMap updated, and new Content/Adult Protocols/adult-consent-refusal.md / adult-refusals-suicidal-pts.md seeded from research/paramedic_protocols.txt sections "Consent & Refusal" and "Refusals & Suicidal Pts".]**
-- **[2025-09-30 Adult protocol detail expansion: added markdown coverage for MI or Acute Coronary Syndrome (ACS), VF/pVT, SVT modalities, arrhythmia management, metabolic emergencies, obstetric complications, SMR/TASER guidance, and trauma triage; updated navigation slug/data for MI and MAT (source: research/paramedic_protocols.txt sections "MI or Acute Coronary Syndrome (ACS)", "Adult Non-Trauma Cardiocerebral Resuscitation (CCR)", "Hypoglycemia / Insulin Shock", "Delivery OOH/Pre-eclampsia/Eclampsia", "TASER p-deployment", "Trauma Major (Level 1)").]**
-**[2025-09-29 Cricothyrotomy detail experience rebuilt: Data/CricothyrotomyContent.js and Features/detail/DetailPage.js render custom banners, sedation toggles, 13-step workflows, and an offline surgical airway video sourced from Abbott EMS Airway & Breathing: Cricothyrotomy, StatPearls Cricothyrotomy (2025), and Deployed Medicine video 143.]**
-- **[2025-09-26 Abbott abbreviations experience rebuilt: 'Abbott Approved Abbreviations' now offers grouping selectors with term/abbrev grid modes, removal/addition/reorganize flows, and an Other Abbreviations companion page, all sourced from 'Abbreviations for PCR - Approved list' and 'Abbreviations Used in Document' (Abbott EMS Protocols).]**
-- **[2025-09-26 MACC guidance imported verbatim: Medication Administration Cross Check detail renders the full double-check sequence with a collapsible BLS MACC appendix (source: 'Medication Administration Cross Check' and 'BLS MACC').]**
-- **[2025-09-26 ALS medication cards expose concentration metadata via the new Concentration section on each detail page, keeping dosing data aligned with the ALS Medications tables (source: ALS Medications chapter).]**
-- **[2025-09-18 MCP stack hardened: updated ~/.codex/config.toml, added dev-tools/mcp-health-check.js, and wired npm run mcp:health so MCP clients fail fast when binaries or env vars are missing (source: user request).]**
-- **[2025-09-19 mcp:health now marks optional MCP servers as [OK]/[SKIP], ignores commented config entries, and confirms firecrawl remains disabled until credentials exist (dev-tools/mcp-health-check.js; verified with npm run mcp:health).]**
 
 
 ## Hosted URL (GitHub Pages)

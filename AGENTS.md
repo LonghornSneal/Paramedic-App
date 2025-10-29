@@ -7,7 +7,7 @@ _Last updated: 2025-10-05_
 - Respect privacy: never record actual patient identifiers or PHI when adding examples or workflows.
 ## Task Scope & Priorities
 - Follow the user's current instructions as the authoritative task list. Never self-assign protocol content edits or redirect towards content unless the user explicitly requests it.
-- Use the protocol documents to validate behaviour or content only when the user tasks you with that area, keeping their wording, structure, and future plans intact unless they direct otherwise.
+- Use the protocol documents to validate behavior or content only when the user tasks you with that area, keeping their wording, structure, and future plans intact unless they direct otherwise.
 - Escalate when a requirement might change clinical guidance so the user can approve or redirect before any edits land.
 
 ## Protocol Topology & Repository Map
@@ -30,7 +30,7 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 2. **Plan the change**: Outline affected files (`Data/*.js`, `Content/*`, UI features) and note clinical dependencies (e.g., RASS scale, MACC workflow, mandatory reporting numbers).
 3. **Implement**:
    - Data modules: verify IDs are unique, sorted, and cross-referenced. Include metadata such as indications, contraindications, dosing ranges, and links back to content files.
-   - Feature logic: keep behaviour declarative. Calculators (ventilation ratios, dosing, rule of 9s) must show formulae that match the protocol text.
+   - Feature logic: keep behavior declarative. Calculators (ventilation ratios, dosing, rule of 9s) must show formulae that match the protocol text.
 4. **Document**: Annotate `README.md` per repository rules (double-asterisk bracket convention) with summary, rationale, and source location.
 5. **Review**: Run lint/tests, then perform manual QA focusing on the affected protocol workflows.
 
@@ -69,7 +69,7 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 - The curated source catalog at `research/mcp_source_catalog.md` tracks reliable MCP-friendly endpoints (GitHub API, raw GitHub, proxy mirrors) and recording cadence. Update it when new dependable sources or failure modes are discovered.
 - Prefer GitHub API + raw content for code/documentation research before falling back to community mirrors; always reconcile findings with the Abbott protocol DOCX before shipping changes.
 ## MCP Tooling Discipline
-- Invoke the seq MCP server at the start of every task to structure the plan before making changes. Assume that the user has already connected to the server, if having issues with using the MCP server, then assume that the user has not connected to it yet, in which case you will set up everything for the server up until the point of that the user must click "Connect", you will then ask the user if the clicked on "Conect" already, then when the user confirms that they are connected to the MCP, you will continue your original task(s) and initiate the seq MCP server. If unable to invoke the seq MCP server, then you must solve this issue until it is invoked. Do not move onto a task until this step is complete.
+- Invoke the seq MCP server at the start of every task to structure the plan before making changes. Assume that the user has already connected to the server, if having issues with using the MCP server, then assume that the user has not connected to it yet, in which case you will set up everything for the server up until the point of that the user must click "Connect", you will then ask the user if the clicked on "Connect" already, then when the user confirms that they are connected to the MCP, you will continue your original task(s) and initiate the seq MCP server. If unable to invoke the seq MCP server, then you must solve this issue until it is invoked. Do not move onto a task until this step is complete.
 - Record task decisions and follow-up items through the memory MCP server before finishing the work.
 
 ### MCP Server Auto-Invocation Guide
@@ -100,7 +100,7 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 - **Adding or Modifying Features**: Expand the code loop by introducing a `checklist` branch per acceptance criterion, pull relevant design tokens via `figma-developer-mcp` when UI shifts are involved, and keep iterating through the hooks test suite until all checklist items are marked done.
 - **CSS Updates**: Chain `figma-developer-mcp` (fetch design values) to `vscode_mcp` diagnostics to `hooks-mcp` style lint; repeat the trio until the diff matches design tokens and lint passes.
 - **JavaScript Updates**: Use the core code loop with `hooks-mcp` actions for unit and integration tests; if logic touches DOM, append `playwright` or `lighthouse` runs before closing the checklist item.
-- **Researching a User Question**: Create a `checklist` scope node, then cycle through `webpick`, `fetcher`, and `fetch` as needed to gather sources, summarise each pass into `memory`, and only close the checklist node once citations are recorded.
+- **Researching a User Question**: Create a `checklist` scope node, then cycle through `webpick`, `fetcher`, and `fetch` as needed to gather sources, summarize each pass into `memory`, and only close the checklist node once citations are recorded.
 - **Following Specific Instructions**: Convert each instruction into a `checklist` task, execute via the relevant MCP loop (code, design, and docs), and log completion state to `memory` before moving forward.
 - **Thinking Longer on a Task**: Park a `checklist` node labelled “reflection”, use `seq` to fan out sub-questions, document insights in `memory`, and only resume execution loops after the reflection node is closed.
 - **Planning**: Run `seq` for high-level structure, instantiate those nodes in `checklist`, and preload any required servers (`vscode_mcp`, `hooks-mcp`, `figma`, etc.) before implementation begins.
@@ -110,8 +110,8 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 
 ## Clinical Safeguards & Escalation (this section will require updating eventually)
 - **Scope adherence**: If a protocol in the app references restrictions, ensure UI labels and decision aids reflect those limits.
-- **Mandatory reporting**: Keep hotline numbers and reporting steps accurate. When numbers change, update contact cards across all surfaces and add regression tests if possible. Research for updates in this field once a month. Record that the monthly search was perfomed so that this is only researched once a month.
-- **Restraint & sedation content**: Highlight safety notes (no prone restraints, ketamine monitoring, RASS scale) prominently. Validate that warnings propagate to patient snapshot summaries where relevant.
+- **Mandatory reporting**: Keep hotline numbers and reporting steps accurate. When numbers change, update contact cards across all surfaces and add regression tests if possible. Research for updates in this field once a month. Record that the monthly search was performed so that this is only researched once a month.
+- **Restraint & sedation content**: Highlight safety notes (no prone restraints, Ketamine monitoring, RASS scale) prominently. Validate that warnings propagate to patient snapshot summaries where relevant.
 - **Air medical criteria**: If calculators or decision trees reference air transport, match the conditions listed in the protocol (time thresholds, no-go criteria).
 - **Legal/administrative content**: Keep HIPAA, PCR requirements, and incident reporting workflows intact. When altering guidance, notify user for legal review.
 
@@ -148,16 +148,3 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 - `research/agents_samples.json` - external AGENTS.md references (keep for inspiration; do not treat as clinical sources).
 - `research/agents_outline.md` - evolving outline for handbook improvements.
 - `dev-tools/tests/ventilation.spec.js` - baseline automated validation; expand with additional protocol-critical tests as coverage grows.
-
-Stay disciplined: every update must preserve the app's reliability for crews who rely on it in the field.
-
-
-
-
-
-
-
-
-
-
-
