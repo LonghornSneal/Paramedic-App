@@ -57,6 +57,7 @@
     "stylelint-no-unsupported-browser-features": "^8.0.4"
   },
   "dependencies": {
-    "@google-cloud/vertexai": "^1.10.0"
+    "@google-cloud/vertexai": "^1.10.0",
+    "@modelcontextprotocol/inspector": "^0.17.2"
   }
 }
