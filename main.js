@@ -1,4 +1,5 @@
-﻿import { ParamedicCategoriesData } from './Data/ParamedicCategoriesData.js';
+﻿import './tracing/initTracing.js';
+import { ParamedicCategoriesData } from './Data/ParamedicCategoriesData.js';
 import { MedicationDetailsData } from './Data/MedicationDetailsData.js';
 import { VentilationDetailsData } from './Data/VentilationDetailsData.js';
 import { ProtocolMarkdownMap } from './Data/ProtocolMarkdownMap.js';

@@ -96,5 +96,14 @@
     "search.useIgnoreFiles": true,
     "search.useParentIgnoreFiles": true,
     "vscode-openai.embeddingModel.show-welcome": true,
-    "vscode-openai.embeddingModel": "text-embedding-3-large"
+    "vscode-openai.embeddingModel": "text-embedding-ada-002",
+    "java.jdt.ls.java.home": "C:\\Users\\Jake\\Downloads\\openjdk-25_windows-x64_bin\\jdk-25",
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-25",
+            "path": "C:\\Users\\Jake\\Downloads\\openjdk-25_windows-x64_bin\\jdk-25",
+            "default": true
+        }
+    ],
+    "java.format.settings.url": ".vscode/java-formatter.xml"
 }
