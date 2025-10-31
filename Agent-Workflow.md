@@ -12,6 +12,7 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
 
 1. **Launch Inspector with seq enabled**  
    - Run `dev-tools\\start-inspector-seq.cmd` from the repo root. This opens the Inspector UI and starts the seq MCP server alongside the other default servers.
+   - If the user says Inspector is already up, do **not** kill their Node processes. Instead run `node dev-tools/mcp-call.mjs seq listTools` in the repo root to confirm the `sequentialthinking` tool is reachable; the command will also spin the server up if it is missing.
 2. **Confirm Inspector connection**  
    - As soon as the browser window opens, click the **Connect** button. Keep the browser tab and the shell window open; closing either stops the servers.
 3. **Codex session handshake**  
@@ -20,6 +21,7 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
    - Begin work only after the user confirms they clicked **Connect**.
 4. **Sequential thinking discipline**  
    - Invoke the sequentialthinking tool with at least five thoughts for every task, prompt, and response. Increase the total if the work is complex or if any prior attempt needs correction (add one or more extra thoughts for each rework cycle). Use the `needsMoreThoughts` flag when extending a plan beyond the original estimate. The seq MCP server must be invoked for every task, prompt, and response without exception.
+   - Use the helper commands (`Invoke-SeqThought` or `node dev-tools/run-seq-thought.mjs ...`) for the first planning pass so the agent, not the user, initiates each seq session deliberately.
    - Make sure the thought plan mirrors the user's explicit request; ask before altering protocol content if it was not part of the assignment.
    - Import the helper module once per session: `Import-Module (Resolve-Path 'dev-tools/modules/Invoke-SeqThought/Invoke-SeqThought.psd1')`.
    - Run `dev-tools/scripts/Enable-SeqThoughtAutoLoad.ps1` once to append the modules directory to `$PROFILE` and keep `Invoke-SeqThought` available in future PowerShell sessions.
