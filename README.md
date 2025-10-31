@@ -523,7 +523,7 @@ Warnings/Alerts: Visually shown under Search Bar.
 ## 8. RECENT FIXES AND CHANGES
 Any entry added to this chapter must keep the rest of the README consistent: remove it from Chapters 6 or 7 if it migrates here, and rewrite any related coverage in Chapters 4 or 5 so those sections reflect current behavior. Never leave the old text in place with an 'updated' note; rewrite the references completely.
 
-**[2025-10-31 VS Code extension health: moved OpenJDK 25 to C:\Users\Jake\Java\jdk-25, refreshed workspace/user settings to clear the 99.98% download stall, added SonarLint analyzer metadata, and updated Agent-Workflow.md so the agent spins up seq without terminating user processes.]**
+**[2025-10-31 VS Code extension health: moved OpenJDK 25 to C:\Users\Jake\Java\jdk-25, refreshed workspace/user settings to clear the 99.98% download stall, added SonarLint analyzer metadata, generated a Maven wrapper + pom for Java debugging, and updated Agent-Workflow.md so the agent spins up seq without terminating user processes.]**
 **[2025-10-29 Quick Vent detail + Playwright harness: merged Features/detail/DetailPage/equipment/QuickVent.js into the shared QuickVent module, cleaned redundant try/catch suppressions in Features/detail/quickVent.js, and added dev-tools/tests/utils/previewServer.cjs with updated ventilation/cricothyrotomy specs for cross-platform http-server bootstrapping.]**
 **[2025-10-21 Patient sidebar refactor: refactored patient-sidebar-forms.css into 20 per-category modules, converted shared helper rules into data-line scoped grid layouts, and deprecated patient-sidebar-controls.css.]**
 **[2025-10-21 Added runtime detection, drops chevron after choice, per-field rules clear arrow (when populated).]**

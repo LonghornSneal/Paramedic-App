@@ -11,6 +11,7 @@ dev-tools/coverage/
 
 # Build output (if used)
 dist/
+target/
 
 # Logs
 *.log

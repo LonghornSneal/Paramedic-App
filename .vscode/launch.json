@@ -17,6 +17,14 @@
             "type": "pwa-chrome",
             "url": "http://127.0.0.1:5173",
             "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "java",
+            "name": "Debug Main (Java Maven)",
+            "request": "launch",
+            "mainClass": "com.example.Main",
+            "projectName": "paramedic-app-java",
+            "cwd": "${workspaceFolder}"
         }
     ]
 }
