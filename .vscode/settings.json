@@ -105,5 +105,6 @@
             "default": true
         }
     ],
-    "java.format.settings.url": ".vscode/java-formatter.xml"
+    "java.format.settings.url": ".vscode/java-formatter.xml",
+    "markdown.validate.enabled": true
 }
