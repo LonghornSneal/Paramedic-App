@@ -88,6 +88,9 @@ public class Main {
                     payload.put("messages", messages);
 
                     String body = new ObjectMapper().writeValueAsString(payload);
+                    LOGGER.info("Request body: " + body);
+
+                    long startTime = System.currentTimeMillis();
 
                     try (java.io.OutputStream os = conn.getOutputStream()) {
                         os.write(body.getBytes(java.nio.charset.StandardCharsets.UTF_8));
@@ -103,6 +106,11 @@ public class Main {
                         }
                     }
                     String resp = sb.toString();
+
+                    long endTime = System.currentTimeMillis();
+                    LOGGER.info("Request took " + (endTime - startTime) + "ms");
+                    LOGGER.info("Response status: " + status);
+                    LOGGER.info("Response body: " + resp);
 
                     if (status >= 200 && status < 300) {
                         // Parse the response and extract the assistant message content if present.

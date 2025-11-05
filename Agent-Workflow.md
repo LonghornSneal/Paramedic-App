@@ -7,7 +7,6 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
 - Web: fetch docs/snippets structurally when needed
 - Default focus: execute the active user task exactly as requested. Do not volunteer protocol content changes unless the user explicitly assigns them; treat the user as the final authority on wording.
 
-
 ## Session Startup Protocol
 
 1. **Launch Inspector with seq enabled**  
@@ -27,28 +26,29 @@ This guide shows how to use Codex + MCP servers to code in this repo efficiently
    - Run `dev-tools/scripts/Enable-SeqThoughtAutoLoad.ps1` once to append the modules directory to `$PROFILE` and keep `Invoke-SeqThought` available in future PowerShell sessions.
    - Call `Invoke-SeqThought -Thought "..." -ThoughtNumber 1 -TotalThoughts 6 -NextThoughtNeeded $true` and add optional flags (`IsRevision`, `RevisesThought`, `BranchFromThought`, `BranchId`, `NeedsMoreThoughts`) as needed.
 
-6. **MCP-driven validation**  
+5. **MCP-driven validation**  
    - Before delivering a final response, run the relevant lint/tests through MCP (shell_execute_command, hooks, playwright, etc.) so that feature changes are proven to work in the app.
 
 Document any workflow adjustments here so future sessions inherit the same startup behavior.
 
 ## Quick Start
 
-0) Health check
-- Run `npm run mcp:health` from the repo root. Fix any failures (missing packages, `.bin` shims, or env vars) before you launch Codex.
-- Restart Codex after installing dependencies or changing environment variables so the new MCP binaries are picked up.
+1.) Health check:
+ Run `npm run mcp:health` from the repo root. Fix any failures (missing packages, `.bin` shims, or env vars) before you launch Codex.
+   Restart Codex after installing dependencies or changing environment variables so the new MCP binaries are picked up.
 
-1) Start Inspector (UI)
-- Double-click `dev-tools/start-inspector.cmd` (Filesystem)
-- Or use `start-inspector-git.cmd`, `-webpick.cmd`, etc.
-- New: `start-inspector-playwright.cmd` (browser tools), `start-inspector-shell.cmd` (run commands), or `start-inspector-all.cmd` (UI only, pick any server)
+2.) Start Inspector (UI)
+ Double-click `dev-tools/start-inspector.cmd` (Filesystem)
+ Or use `start-inspector-git.cmd`, `-webpick.cmd`, etc.
+ New: `start-inspector-playwright.cmd` (browser tools), `start-inspector-shell.cmd` (run commands), or `start-inspector-all.cmd` (UI only, pick any server)
 
-2) In Codex CLI
-- Run `codex` from this repo folder to start a session.
-- When the session banner shows each server as connected, call `filesystem.read_text_file` (or `list_directory`) and `git_status` via the MCP git server to confirm routing.
-- If a server refuses to connect, rerun the health check, address the issue, and restart Codex before proceeding.
+3.) In Codex CLI
+ Run `codex` from this repo folder to start a session.
+ When the session banner shows each server as connected, call `filesystem.read_text_file` (or `list_directory`) and `git_status` via the MCP git server to confirm routing.
+ If a server refuses to connect, rerun the health check, address the issue, and restart Codex before proceeding.
 
 ## Git tools (via MCP git server)
+
 - First set working directory (per session):
   - Tool: `git_set_working_dir`
   - Arg `path`: `C:\Users\HhsJa\OneDrive\Documents\GitHub\Paramedic-App`
@@ -61,10 +61,12 @@ Document any workflow adjustments here so future sessions inherit the same start
   - `git_push` (configure remote first if needed)
 
 ## Filesystem server
+
 - Use to read/write/edit files from the agent
 - Prefer `edit_file` for surgical line edits (atomic & reversible)
 
 ## Web tools
+
 - Web Picker (`webpick`): `web-content-pick` to extract structured HTML content
 - Fetch (`fetch`/`fetcher`): simple HTTP fetch or Playwright-based fetcher
 - Playwright (`playwright`): full browser automation: navigate, click, type, resize window, take screenshots, evaluate JS
@@ -72,6 +74,7 @@ Document any workflow adjustments here so future sessions inherit the same start
   - First-time: run tool `browser_install` if prompted to download browsers
 
 ## Memory server
+
 - In Inspector (or via Codex), use:
   - `create_entities` / `add_observations` to persist decisions
   - Example entity name: "ParamedicApp:UI-Nav-Design"
