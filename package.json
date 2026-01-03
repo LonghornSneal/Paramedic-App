@@ -26,7 +26,7 @@
     "@hint/parser-html": "^3.1.4",
     "@hint/parser-javascript": "^3.1.25",
     "@kazuph/mcp-fetch": "^1.5.0",
-    "@modelcontextprotocol/sdk": "^1.17.5",
+    "@modelcontextprotocol/sdk": "^1.24.0",
     "@modelcontextprotocol/server-everything": "^2025.8.18",
     "@modelcontextprotocol/server-filesystem": "^2025.8.21",
     "@modelcontextprotocol/server-memory": "^2025.8.4",
