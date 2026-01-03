@@ -1,7 +1,18 @@
-// Utils/slugify.js – Utility to convert text to URL-friendly slug
+// Utils/slugify.js - Utility to convert text to URL-friendly slug
 export function slugify(text) {
     if (!text) return '';
-    const subscriptMap = { '₀': '0', '₁': '1', '₂': '2', '₃': '3', '₄': '4', '₅': '5', '₆': '6', '₇': '7', '₈': '8', '₉': '9' };
+    const subscriptMap = {
+        '\u2080': '0',
+        '\u2081': '1',
+        '\u2082': '2',
+        '\u2083': '3',
+        '\u2084': '4',
+        '\u2085': '5',
+        '\u2086': '6',
+        '\u2087': '7',
+        '\u2088': '8',
+        '\u2089': '9'
+    };
     return text.toString().toLowerCase()
         .replace(/\s+/g, '-')
         .replace(/[+/:(),&%#\u2080-\u2089]/g, match => subscriptMap[match] || '-')

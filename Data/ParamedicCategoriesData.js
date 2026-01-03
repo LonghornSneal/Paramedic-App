@@ -815,7 +815,3 @@ export const ParamedicCategoriesData = [
       ]
     },
 ];
-
-
-
-

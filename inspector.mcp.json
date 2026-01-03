@@ -15,14 +15,6 @@
       ],
       "env": {}
     },
-    "seq": {
-      "command": "node",
-      "args": [
-        "./node_modules/@modelcontextprotocol/server-sequential-thinking/dist/index.js"
-      ],
-      "env": {}
-    },
-
     "memory": {
       "command": "node",
       "args": [

@@ -106,7 +106,7 @@ export function handleSearch(shouldAddHistory = true, highlightId = null, catego
 export function attachSearchHandlers() {
     if (!window.searchInput) return;
     // Typing should NOT push to navigation history
-    window.searchInput.addEventListener('input', () => handleSearch(true));
+    window.searchInput.addEventListener('input', () => handleSearch(false));
     // Pressing Enter records the search in history
     window.searchInput.addEventListener('keypress', e => {
         if (e.key === 'Enter') {

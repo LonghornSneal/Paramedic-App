@@ -8,6 +8,8 @@ node_modules/
 hint-report/
 coverage/
 dev-tools/coverage/
+test-results/
+skill-tests/
 
 # Build output (if used)
 dist/
@@ -21,6 +23,8 @@ temp_*.txt
 styles.*.txt
 tmp-*.ps1
 docs/*.vsix
+notes/screenshots/
+research/tmp_codex_*.html
 
 # Archived logs
 archive/java-upgrade/202506281358/logs/

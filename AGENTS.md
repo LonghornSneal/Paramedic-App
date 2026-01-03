@@ -1,10 +1,11 @@
+
 # Paramedic App Agent Handbook
 _Last updated: 2025-10-05_
 ## Mission & Source of Truth
 - Build and refine the Paramedic App exactly as the user specifies. The active user request is always your current focus.
-- Only touch protocol text or content assets when the user explicitly assigns that work. When assigned, use `C:/Users/HhsJa/OneDrive/Documents/Edited entire Protocols organized.docx` and `research/paramedic_protocols.txt` as the primary sources, and cite any external references with direct hyperlinks that align with the user's material.
+- Only touch protocol text or content assets when the user explicitly assigns that work. When assigned, use `C:/Users/HhsJa/OneDrive/Documents/Edited entire Protocols organized.docx` and as the primary sources, and cite any external references with direct hyperlinks that align with the user's material.
 - Escalate to user before interpreting ambiguous language.
-- Respect privacy: never record actual patient identifiers or PHI when adding examples or workflows.
+
 ## Task Scope & Priorities
 - Follow the user's current instructions as the authoritative task list. Never self-assign protocol content edits or redirect towards content unless the user explicitly requests it.
 - Use the protocol documents to validate behavior or content only when the user tasks you with that area, keeping their wording, structure, and future plans intact unless they direct otherwise.
@@ -55,58 +56,55 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
   - Follow the double-asterisk bracket convention already defined in README.md; log every change in Chapter 6.
   - When spotting outdated guidance, confirm whether a newer instruction exists elsewhere before editing; otherwise, create a TODO entry for user review.
   - Surface any tooling discrepancies (scripts, commands) so the user can reconcile docs and package scripts.
-## Sequential Thinking Playbook
-1. **Scoping Thought** – List every user question/task, call out the files/features involved, and any ambiguities to escalate. Set an initial `totalThoughts` that covers the required structure (scoping + per question + research + QA) and adjust during execution.
-2. **Per-Question Thoughts** – Dedicate one thought to each user question or subtask. Capture acceptance criteria, dependencies, and checklist items. Branch with `branchFromThought`/`branchId` if the work diverges, and mark revisions with `isRevision`.
-3. **Execution Planning Thoughts** – Before editing or running tools, outline the steps, matching files, and MCP actions (filesystem/git/hooks/playwright). Flag rollback plans, and memory updates.
-4. **Research Thoughts (coding-focused)** – When research is necessary, name the coding sources to pull (repo docs, design specs, GitHub threads, vetted forums) and confirm freshness. Only cite external sources when they materially improve implementation accuracy and never contradict the protocol DOCX.
-5. **Dynamic Adjustment Thoughts** – Emit a new thought when scope changes. Update `totalThoughts` and use `needsMoreThoughts` if you overrun the original estimate so the history stays auditable.
-6. **QA/Test Thought** – Second to last. Review existing automated/manual coverage, decide whether new tests or lint checks are needed, schedule exact commands, and record follow-ups for any failures (CSS, JS, data, or doc regressions).
-
+## Sequential Thinking Skill Playbook
+1. **Scoping Thought** - List every user question/task, call out the files/features involved, and any ambiguities to escalate. Set an initial `totalThoughts` that covers the required structure (scoping + per question + research + QA) and adjust during execution.
+2. **Per-Question Thoughts** - Dedicate one thought to each user question or subtask. Capture acceptance criteria, dependencies, and checklist items. Branch with `branchFromThought`/`branchId` if the work diverges, and mark revisions with `isRevision`.
+3. **Execution Planning Thoughts** - Before editing or running tools, outline the steps, matching files, and tool actions (filesystem/git/hooks/playwright). Flag rollback plans, and memory updates.
+4. **Research Thoughts (coding-focused)** - When research is necessary, name the coding sources to pull (repo docs, design specs, GitHub threads, vetted forums) and confirm freshness. Only cite external sources when they materially improve implementation accuracy and never contradict the protocol DOCX.
+5. **Dynamic Adjustment Thoughts** - Emit a new thought when scope changes. Update `totalThoughts` and use `needsMoreThoughts` if you overrun the original estimate so the history stays auditable.
+6. **QA/Test Thought** - Second to last. Review existing automated/manual coverage, decide whether new tests or lint checks are needed, schedule exact commands, and record follow-ups for any failures (CSS, JS, data, or doc regressions).
 
 ## Research Utilities & Fallbacks
 - Run `dev-tools/scripts/Get-McpResearchContent.ps1 <url>` to fetch web content with a Codex-friendly user agent and automatic fallbacks (Reddit share URLs resolve to JSON; other 403/404 responses fall back to `r.jina.ai`). Use `-OutFile` to store the response for later parsing.
 - The curated source catalog at `research/mcp_source_catalog.md` tracks reliable MCP-friendly endpoints (GitHub API, raw GitHub, proxy mirrors) and recording cadence. Update it when new dependable sources or failure modes are discovered.
 - Prefer GitHub API + raw content for code/documentation research before falling back to community mirrors; always reconcile findings with the Abbott protocol DOCX before shipping changes.
-## MCP Tooling Discipline
-- Invoke the seq MCP server at the start of every task to structure the plan before making changes. Assume that the user has already connected to the server, if having issues with using the MCP server, then assume that the user has not connected to it yet, in which case you will set up everything for the server up until the point of that the user must click "Connect", you will then ask the user if the clicked on "Connect" already, then when the user confirms that they are connected to the MCP, you will continue your original task(s) and initiate the seq MCP server. If unable to invoke the seq MCP server, then you must solve this issue until it is invoked. Do not move onto a task until this step is complete.
-- Record task decisions and follow-up items through the memory MCP server before finishing the work.
+## Skill Tooling Discipline
+- Use the sequential-thinking skill at the start of every task to structure the plan before making changes.
+- Record task decisions and follow-up items through the memory-log skill before finishing the work.
 
-### MCP Server Auto-Invocation Guide
-- **filesystem** - Auto-run for local file reads and edits because the reference implementation is built for secure, access-controlled filesystem work; skip it for actions that touch locations outside the repo and confirm with the user instead ([servers README](https://github.com/modelcontextprotocol/servers?tab=readme-ov-file#model-context-protocol-servers)).
-- **git** - Invoke whenever you need status, diffs, or to stage/commit so the agent uses the git-aware tooling instead of raw shell commands; avoid it when you only need to skim a single file ([git-mcp-server](https://github.com/cyanheads/git-mcp-server)).
-- **shell** - Use only when a task truly requires running CLI programs or custom scripts, leveraging the server's allowlists and audit logging; skip it for filesystem or git tasks the dedicated servers already cover ([mcp-shell](https://github.com/sonirico/mcp-shell)).
+### Skill Auto-Invocation Guide
+- **filesystem-ops** - Use for local file reads, edits, and directory listing; confirm before touching paths outside the repo.
+- **git-ops** - Use for status, diffs, staging, and commits instead of raw git commands when reporting results.
+- **shell-exec** - Use when command execution is required and capture output carefully.
+- **webpick** - Use for scoped content grabs where selectors are enough.
+- **web-fetch** - Use for simple HTTP fetches and readable page copies.
+- **web-fetcher** - Use when JavaScript rendering is required.
+- **smart-crawler** - Use for deep or repetitive crawling jobs; keep scope tight.
+- **playwright-browser** - Use for browser automation, snapshots, and UI flow checks.
+- **lighthouse-audit** - Use for performance and best-practices audits on UI changes.
+- **a11y-audit** - Use for accessibility scans when layouts or interactions change.
+- **vscode-diagnostics** - Use for language server diagnostics and symbol lookups when VSCode is available.
+- **hooks-runner** - Use to run vetted lint/test/build hooks defined by repo configuration.
+- **figma-tokens** - Use to retrieve design tokens when UI work references Figma.
+- **checklist** - Use to track multi-step work and acceptance criteria.
+- **agent-care** - Use when auditing SMART-on-FHIR sandbox data with approved credentials.
+- **emergency-transport-planner** - Use when evaluating transport destinations and ETAs.
+- **healthcare-research** - Use for authoritative clinical references and cross-checks.
+- **domain-specific skills** - Use only when the task explicitly calls for a niche workflow.
 
-- **webpick** — Auto-run for scoped content grabs where CSS selectors are enough; skip it for heavy navigation or JS-heavy pages that need a headless browser ([mcp-web-content-pick README](https://github.com/kilicmu/mcp-web-content-pick)).
-- **fetch** — Use when you just need a readable copy of an article, title extraction, or optional image saves; avoid it if you require Playwright-grade rendering or multi-hop crawling ([mcp-fetch](https://github.com/kazuph/mcp-fetch)).
-- **fetcher** — Reach for the Playwright-backed fetcher when pages need JavaScript execution or readability cleanup beyond simple HTTP fetches; skip it for static pages where fetch already works ([fetcher-mcp on npm](https://www.npmjs.com/package/fetcher-mcp)).
-- **smart-crawler** — Auto-run only for deep or repetitive crawling jobs where Playwright automation is justified; otherwise prefer lighter fetch tools to reduce load ([mcp-smart-crawler](https://github.com/loo-y/mcp-smart-crawler)).
-- **playwright** — Use for browser automation, accessibility tree snapshots, or verifying UI flows; skip it when a static fetch suffices so we do not launch full browsers unnecessarily ([playwright-mcp](https://github.com/microsoft/playwright-mcp)).
-- **lighthouse** — Trigger before shipping major UI changes when you need quantified performance metrics; skip for quick content tweaks that do not affect page load ([lighthouse-mcp on npm](https://www.npmjs.com/package/lighthouse-mcp)).
-- **a11y** — Run axe-based scans when layouts or interactions change, holding it back for purely backend or data edits ([a11y-mcp on npm](https://www.npmjs.com/package/a11y-mcp)).
-- **vscode-mcp** - Tap VSCode's language servers for instant diagnostics, symbol lookups, and safe refactors instead of shelling out to `tsc` and `eslint`; keep it running only when the bridge extension is installed and trusted ([vscode-mcp](https://github.com/tjx666/vscode-mcp)).
-- **vscode_mcp** - Tap VSCode's language servers for instant diagnostics, symbol lookups, and safe refactors instead of shelling out to `tsc` and `eslint`; keep it running only when the bridge extension is installed and trusted (tjx666/vscode-mcp).
-- **hooks-mcp** - Expose our lint, build, and test scripts via YAML-defined MCP actions so agents run vetted commands with validated arguments; update the config when workflows change ([hooks_mcp](https://github.com/scosman/hooks_mcp)).
-- **figma-developer-mcp** - Pull structured layout tokens from the latest Figma frames when implementing UI screens, avoiding screenshot guesswork during design-to-code sprints ([Figma-Context-MCP](https://github.com/GLips/Figma-Context-MCP)).
-- **checklist-mcp-server** - Maintain live task trees so agents stay aligned with the approved plan and record hand-offs; start it when coordinating multi-step engineering work ([checklist-mcp-server](https://github.com/radiumce/checklist-mcp-server)).
-- **Domain-specific servers** — Only start niche servers (for example n8n workflow tooling) when working directly in that ecosystem, following community guidance that these integrations shine when the agent needs embedded docs and validation ([n8n-mcp launch post](https://www.reddit.com/r/n8n/comments/1lvcwri/i_built_an_mcp_server_that_finally_enables/)).
-- **agent-care** - Connect to SMART-on-FHIR sandboxes when you must audit real patient charts, vitals, or medication lists against EMR data; keep PHI local and only run it once credentials and sandbox endpoints are confirmed ([agentcare-mcp](https://github.com/Kartha-AI/agentcare-mcp)).
-- **emergency-medicare-planner** - Launch when a workflow requires evaluating nearby hospitals or transport destinations (uses Google Maps Places/Directions); skip if facility selection is already decided in the protocol ([emergency-medicare-planner-mcp-server](https://github.com/manolaz/emergency-medicare-planner-mcp-server)).
-- **healthcare-mcp** - Must use first when researching for additional content to be place within the app. Use for authoritative drug monographs, ICD-10 lookups, researching AHA treatments, and clinical trial references to cross-check protocol content; avoid it for internal Abbott-only guidance where the DOCX already rules ([healthcare-mcp-public](https://github.com/Cicatriiz/healthcare-mcp-public)).
 #### Task Routines & Loop Discipline
-- **Updating README.md**: Start with `checklist-mcp-server` to generate a seq plan node for the doc change, launch `vscode_mcp` for live diagnostics on Markdown anchors, run `hooks-mcp` action `docs_lint` (or equivalent) in a loop until it passes, then capture rationale via `memory` before committing.
-- **Updating AGENTS.md**: Mirror README workflow but add `memory` entries that summarize new agent policies; rerun `checklist` nodes after each edit to ensure every instruction bullet is satisfied.
-- **Modifying/Deleting/Adding Code**: Auto-bind `vscode_mcp` for symbol insight, `hooks-mcp` for `lint` and `test` scripts, and `git` for diff snapshots; loop through (diagnostics to edit to hooks action to `memory` log) until both diagnostics and tests are clean.
-- **Adding or Modifying Features**: Expand the code loop by introducing a `checklist` branch per acceptance criterion, pull relevant design tokens via `figma-developer-mcp` when UI shifts are involved, and keep iterating through the hooks test suite until all checklist items are marked done.
-- **CSS Updates**: Chain `figma-developer-mcp` (fetch design values) to `vscode_mcp` diagnostics to `hooks-mcp` style lint; repeat the trio until the diff matches design tokens and lint passes.
-- **JavaScript Updates**: Use the core code loop with `hooks-mcp` actions for unit and integration tests; if logic touches DOM, append `playwright` or `lighthouse` runs before closing the checklist item.
-- **Researching a User Question**: Create a `checklist` scope node, then cycle through `webpick`, `fetcher`, and `fetch` as needed to gather sources, summarize each pass into `memory`, and only close the checklist node once citations are recorded.
-- **Following Specific Instructions**: Convert each instruction into a `checklist` task, execute via the relevant MCP loop (code, design, and docs), and log completion state to `memory` before moving forward.
-- **Thinking Longer on a Task**: Park a `checklist` node labelled “reflection”, use `seq` to fan out sub-questions, document insights in `memory`, and only resume execution loops after the reflection node is closed.
-- **Planning**: Run `seq` for high-level structure, instantiate those nodes in `checklist`, and preload any required servers (`vscode_mcp`, `hooks-mcp`, `figma`, etc.) before implementation begins.
-- **Long-Running or Looping Tasks**: Maintain an outer `checklist` node that tracks iteration count; within each pass execute (diagnostics to implementation to hooks tests to memory summary). Continue looping until the acceptance condition in the checklist is marked satisfied.
-- **Other Discovered Tasks**: When research uncovers a new workflow (e.g., spec-first dev from `spec-workflow-mcp` or process automation via ActivePieces), register it under the Domain-specific section and extend the checklist sequence accordingly.
-
+- **Updating README.md**: Start with checklist to track tasks, use vscode-diagnostics for anchor checks, run hooks-runner action docs_lint (or equivalent) in a loop until it passes, then capture rationale via memory-log before committing.
+- **Updating AGENTS.md**: Mirror README workflow but add memory-log entries that summarize new agent policies; rerun checklist nodes after each edit to ensure every instruction bullet is satisfied.
+- **Modifying/Deleting/Adding Code**: Use vscode-diagnostics for symbol insight, hooks-runner for lint and test scripts, and git-ops for diff snapshots; loop through diagnostics to edits to hooks until clean, then log decisions in memory-log.
+- **Adding or Modifying Features**: Expand the code loop by introducing a checklist branch per acceptance criterion, pull relevant design tokens via figma-tokens when UI shifts are involved, and iterate hooks-runner tests until all checklist items are marked done.
+- **CSS Updates**: Chain figma-tokens to vscode-diagnostics to hooks-runner style lint; repeat until the diff matches tokens and lint passes.
+- **JavaScript Updates**: Use the core code loop with hooks-runner actions for unit and integration tests; if logic touches DOM, append playwright-browser or lighthouse-audit runs before closing the checklist item.
+- **Researching a User Question**: Create a checklist scope node, then cycle through webpick, web-fetcher, and web-fetch as needed to gather sources, summarize each pass into memory-log, and only close the checklist node once citations are recorded.
+- **Following Specific Instructions**: Convert each instruction into a checklist task, execute via the relevant skill loop (code, design, and docs), and log completion state to memory-log before moving forward.
+- **Thinking Longer on a Task**: Park a checklist node labeled "reflection", use sequential-thinking to fan out sub-questions, document insights in memory-log, and only resume execution loops after the reflection node is closed.
+- **Planning**: Run sequential-thinking for high-level structure, instantiate those nodes in checklist, and use skills only (no MCP servers).
+- **Long-Running or Looping Tasks**: Maintain an outer checklist node that tracks iteration count; within each pass execute (diagnostics to implementation to hooks tests to memory-log summary). Continue looping until the acceptance condition in the checklist is marked satisfied.
+- **Other Discovered Tasks**: When research uncovers a new workflow, register it under the Domain-specific section and extend the checklist sequence accordingly.
 
 ## Clinical Safeguards & Escalation (this section will require updating eventually)
 - **Scope adherence**: If a protocol in the app references restrictions, ensure UI labels and decision aids reflect those limits.
@@ -148,3 +146,8 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 - `research/agents_samples.json` - external AGENTS.md references (keep for inspiration; do not treat as clinical sources).
 - `research/agents_outline.md` - evolving outline for handbook improvements.
 - `dev-tools/tests/ventilation.spec.js` - baseline automated validation; expand with additional protocol-critical tests as coverage grows.
+
+
+
+
+

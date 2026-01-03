@@ -1,0 +1,5 @@
+node_modules/**
+dist/**
+research/**
+dev-tools/**
+hint-report/**

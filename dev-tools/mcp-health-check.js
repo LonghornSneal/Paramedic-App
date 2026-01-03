@@ -51,14 +51,6 @@ const servers = [
     notes: 'Diagnostic server covering every MCP feature.'
   },
   {
-    name: 'seq',
-    package: '@modelcontextprotocol/server-sequential-thinking',
-    binary: 'mcp-server-sequential-thinking',
-    required: false,
-    configKey: 'seq',
-    notes: 'Sequential thinking scratchpad for complex planning.'
-  },
-  {
     name: 'memory',
     package: '@modelcontextprotocol/server-memory',
     binary: 'mcp-server-memory',

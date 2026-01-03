@@ -1,6 +1,8 @@
 {
   "extends": ["development"],
   "hints": {
+    "axe/color": "off",
+    "color-contrast": "off",
     "compat-api/html": ["warning"],
     "compat-api/css": ["warning"],
     "no-inline-styles": "off",

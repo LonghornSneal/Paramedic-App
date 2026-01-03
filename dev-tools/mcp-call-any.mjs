@@ -23,15 +23,6 @@ const defaultServers = {
     cwd: basePath,
     stderr: "pipe"
   },
-  seq: {
-    command: "node",
-    args: [
-      `${basePath}/node_modules/@modelcontextprotocol/server-sequential-thinking/dist/index.js`
-    ],
-    cwd: basePath,
-    stderr: "pipe"
-  },
-
   memory: {
     command: "node",
     args: [

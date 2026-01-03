@@ -232,7 +232,7 @@ function stripMarkup(str) {
 function cleanClassName(str) {
     const noMarkup = stripMarkup(String(str));
     const noParens = noMarkup.replace(/\s*\([^)]*\)\s*/g, ' ').trim();
-    const cutAtDash = noParens.split(/\s[-�?"�?"]\s/)[0].trim();
+    const cutAtDash = noParens.split(/\s[-\u2013\u2014]\s/)[0].trim();
     return cutAtDash;
 }
 
@@ -320,3 +320,4 @@ export function insertMedicationClassDropdown() {
   - Maintains cached DOM references so other modules can call open/close helpers.
   - Keeps suggestion vocabulary synchronized with PatientInfo.js sets.
 */
+

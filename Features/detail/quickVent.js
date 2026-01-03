@@ -67,29 +67,35 @@ function renderQuickVentSetup(contentArea){
   `;
   contentArea.appendChild(wrap);
   // Ensure sex buttons have no stray inner text (control chars) so only ::before icons show
-  wrap.querySelectorAll('#qv-sex button').forEach((btn) => { btn.textContent = ''; });
+  try { wrap.querySelectorAll('#qv-sex button').forEach(b => { b.textContent = ''; }); } catch(e) {} // eslint-disable-line no-empty
   // Transform specific list items: make the leading instruction text non-interactive
-  const togglePatterns = [
-    { prefix: 'Attach circuit to ', clickable: 'circuit tube hole' },
-    { prefix: 'Attach green tube to ', clickable: 'top transducer port' },
-    { prefix: 'Attach clear tube to ', clickable: 'bottom port exhalation valve' },
-  ];
-  wrap.querySelectorAll('.qv-toggle').forEach((span) => {
-    const li = span.closest('li');
-    if (!li) return;
-    const textBeforeToggle = Array.from(span.childNodes)
-      .filter((node) => node.nodeType === Node.TEXT_NODE)
-      .map((node) => node.textContent || '')
-      .join('')
-      .trim();
-    const pattern = togglePatterns.find((p) => textBeforeToggle.startsWith(p.prefix) && textBeforeToggle.includes(p.clickable));
-    if (!pattern) return;
-    li.insertBefore(document.createTextNode(pattern.prefix), span);
-    const firstNode = span.childNodes[0];
-    if (firstNode && firstNode.nodeType === Node.TEXT_NODE) {
-      firstNode.textContent = `${pattern.clickable} `;
-    }
-  });
+  try {
+    const patterns = [
+      { prefix: 'Attach circuit to ', clickable: 'circuit tube hole' },
+      { prefix: 'Attach green tube to ', clickable: 'top transducer port' },
+      { prefix: 'Attach clear tube to ', clickable: 'bottom port exhalation valve' },
+    ];
+    wrap.querySelectorAll('.qv-toggle').forEach(span => {
+      const li = span.closest('li');
+      if (!li) return;
+      const textBeforeToggle = Array.from(span.childNodes)
+        .filter(n => n.nodeType === Node.TEXT_NODE)
+        .map(n => n.textContent || '')
+        .join('')
+        .trim();
+      for (const p of patterns) {
+        if (textBeforeToggle.startsWith(p.prefix) && textBeforeToggle.includes(p.clickable)) {
+          const prefixNode = document.createTextNode(p.prefix);
+          li.insertBefore(prefixNode, span);
+          const firstNode = span.childNodes[0];
+          if (firstNode && firstNode.nodeType === Node.TEXT_NODE) {
+            firstNode.textContent = `${p.clickable} `;
+          }
+          break;
+        }
+      }
+    });
+  } catch(e) { /* ignore */ } // eslint-disable-line no-empty
   wrap.querySelectorAll('.qv-toggle').forEach(el => {
     addTapListener(el, () => {
       const info = el.querySelector('.qv-info');
@@ -212,7 +218,6 @@ function setSelected(container, val){ container.querySelectorAll('button').forEa
 function selectOption(container, val){ if (!val) return; setSelected(container, val); }
 
 function compute() {
-    if (!tvEl) return;
     const sex = getSelected(sexContainer);
     const wkg = parseFloat(wtKgEl.value || 'NaN');
     const wlb = parseFloat(wtLbEl.value || 'NaN');
@@ -248,65 +253,56 @@ function compute() {
     }
     tvEl.innerHTML = display;
     // Enforce exact placement of the pastel-purple answer text
-    const canonicalRange = usedKg != null ? tvRange(usedKg, ards) : null;
-    if (canonicalRange && Array.isArray(canonicalRange)) {
-      tvEl.innerHTML = `<span class="qv-tv-ans-val">${canonicalRange[0]}-${canonicalRange[1]} mL</span>`;
-    } else if (canonicalRange && canonicalRange.normal) {
-      tvEl.innerHTML = `<div class="qv-tv-ans-line"><span class="qv-tv-ans-val">${canonicalRange.normal[0]}-${canonicalRange.normal[1]} mL</span><span class="qv-tv-ans-label"> (no ARDS)</span></div>`+
-                       `<div class="qv-tv-ans-line"><span class="qv-tv-ans-val">${canonicalRange.ards[0]}-${canonicalRange.ards[1]} mL</span><span class="qv-tv-ans-label"> (ARDS)</span></div>`;
-    }
-    // Ensure explicit formulas are always shown (min/max per case)
-    if (usedKg != null && !/TV min/.test(mathHtml)) {
-      const both = tvRange(usedKg, ards);
-      let detail = '';
-      if (both && Array.isArray(both)) {
-        const minPerKg = ards==='yes'?4:6;
-        const maxPerKg = ards==='yes'?6:8;
-        const tvMin = Math.round(usedKg * minPerKg);
-        const tvMax = Math.round(usedKg * maxPerKg);
-        detail += `<div><strong>TV min</strong> = <strong>${minPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${tvMin} mL</strong></div>`;
-        detail += `<div><strong>TV max</strong> = <strong>${maxPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${tvMax} mL</strong></div>`;
-        detail += `<div class="mt-1"><em>Range</em> = <strong>${tvMin}-${tvMax} mL</strong></div>`;
-      } else if (both && both.normal) {
-        const nMinPerKg = 6, nMaxPerKg = 8;
-        const aMinPerKg = 4, aMaxPerKg = 6;
-        const nMin = Math.round(usedKg * nMinPerKg);
-        const nMax = Math.round(usedKg * nMaxPerKg);
-        const aMin = Math.round(usedKg * aMinPerKg);
-        const aMax = Math.round(usedKg * aMaxPerKg);
-        detail += `<div><u>No ARDS</u></div>`;
-        detail += `<div><strong>TV min</strong> = <strong>${nMinPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${nMin} mL</strong></div>`;
-        detail += `<div><strong>TV max</strong> = <strong>${nMaxPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${nMax} mL</strong></div>`;
-        detail += `<div class="mt-1"><em>Range</em> = <strong>${nMin}-${nMax} mL</strong></div>`;
-        detail += `<br/>`;
-        detail += `<div><u>ARDS</u></div>`;
-        detail += `<div><strong>TV min</strong> = <strong>${aMinPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${aMin} mL</strong></div>`;
-        detail += `<div><strong>TV max</strong> = <strong>${aMaxPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${aMax} mL</strong></div>`;
-        detail += `<div class="mt-1"><em>Range</em> = <strong>${aMin}-${aMax} mL</strong></div>`;
-      }
-      if (detail) {
-        mathHtml += (mathHtml.endsWith('<br/>') ? '' : '<br/>') + detail;
-      }
-    }
-    // Normalize ranges to "6 mL/kg - 8 mL/kg" format before fraction styling
     try {
-      mathHtml = mathHtml
-        .replace(/T V range = [\s\S]*?\[([0-9]+)-([0-9]+) mL[\s\S]*?\] [\s\S]*?<strong>([0-9]+)-([0-9]+) mL<\/strong>/g, 'TV range = [6–8 mL/<s>kg</s>] × <strong>${usedKg} <s>kg</s></strong> → <strong>$1–$2 mL</strong>')
-        .replace(/No ARDS:[\s\S]*?<strong>([0-9]+)-([0-9]+) mL<\/strong>/g, 'No ARDS: [6–8 mL/<s>kg</s>] × <strong>${usedKg} <s>kg</s></strong> → <strong>$1–$2 mL</strong>')
-        .replace(/ARDS:[\s\S]*?<strong>([0-9]+)-([0-9]+) mL<\/strong>/g, 'ARDS: [4–6 mL/<s>kg</s>] × <strong>${usedKg} <s>kg</s></strong> → <strong>$1–$2 mL</strong>');
-    } catch (error) {
-      // Ignore formatting failures so the displayed answer remains available.
-      void error;
-    }
+      const rng2 = tvRange(usedKg, ards);
+      if (rng2 && Array.isArray(rng2)) {
+        tvEl.innerHTML = `<span class="qv-tv-ans-val">${rng2[0]}-${rng2[1]} mL</span>`;
+      } else if (rng2 && rng2.normal) {
+        tvEl.innerHTML = `<div class="qv-tv-ans-line"><span class="qv-tv-ans-val">${rng2.normal[0]}-${rng2.normal[1]} mL</span><span class="qv-tv-ans-label"> (no ARDS)</span></div>`+
+                         `<div class="qv-tv-ans-line"><span class="qv-tv-ans-val">${rng2.ards[0]}-${rng2.ards[1]} mL</span><span class="qv-tv-ans-label"> (ARDS)</span></div>`;
+      }
+    } catch(e) { /* ignore */ } // eslint-disable-line no-empty
+    // Ensure explicit formulas are always shown (min/max per case)
+    try {
+      if (usedKg != null && !/TV min/.test(mathHtml)) {
+        const both = tvRange(usedKg, ards);
+        let detail = '';
+        if (both && Array.isArray(both)) {
+          const minPerKg = ards==='yes'?4:6;
+          const maxPerKg = ards==='yes'?6:8;
+          const tvMin = Math.round(usedKg * minPerKg);
+          const tvMax = Math.round(usedKg * maxPerKg);
+          detail += `<div><strong>TV min</strong> = <strong>${minPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${tvMin} mL</strong></div>`;
+          detail += `<div><strong>TV max</strong> = <strong>${maxPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${tvMax} mL</strong></div>`;
+          detail += `<div class="mt-1"><em>Range</em> = <strong>${tvMin}-${tvMax} mL</strong></div>`;
+        } else if (both && both.normal) {
+          const nMinPerKg = 6, nMaxPerKg = 8;
+          const aMinPerKg = 4, aMaxPerKg = 6;
+          const nMin = Math.round(usedKg * nMinPerKg);
+          const nMax = Math.round(usedKg * nMaxPerKg);
+          const aMin = Math.round(usedKg * aMinPerKg);
+          const aMax = Math.round(usedKg * aMaxPerKg);
+          detail += `<div><u>No ARDS</u></div>`;
+          detail += `<div><strong>TV min</strong> = <strong>${nMinPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${nMin} mL</strong></div>`;
+          detail += `<div><strong>TV max</strong> = <strong>${nMaxPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${nMax} mL</strong></div>`;
+          detail += `<div class="mt-1"><em>Range</em> = <strong>${nMin}-${nMax} mL</strong></div>`;
+          detail += `<br/>`;
+          detail += `<div><u>ARDS</u></div>`;
+          detail += `<div><strong>TV min</strong> = <strong>${aMinPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${aMin} mL</strong></div>`;
+          detail += `<div><strong>TV max</strong> = <strong>${aMaxPerKg} mL/<s>kg</s></strong> \u00D7 <strong>${usedKg} <s>kg</s></strong> \u001a <strong>${aMax} mL</strong></div>`;
+          detail += `<div class="mt-1"><em>Range</em> = <strong>${aMin}-${aMax} mL</strong></div>`;
+        }
+        if (detail) {
+          mathHtml += (mathHtml.endsWith('<br/>') ? '' : '<br/>') + detail;
+        }
+      }
+    } catch(e) { /* ignore */ } // eslint-disable-line no-empty
     // Render any a/b segments as stacked fractions in the math details
     try {
       mathHtml = mathHtml.replace(/(\d+(?:-\d+)?\s*mL)\s*\/\s*(<s>kg<\/s>|kg)/g, (_, numer, denom) => frac(numer, denom));
       // Replace any legacy arrow markers with equals for final values
       mathHtml = mathHtml.replace(/\u001a/g, ' = ');
-    } catch (error) {
-      // Ignore formatting failures so the displayed answer remains available.
-      void error;
-    }
+    } catch(e) { /* ignore */ } // eslint-disable-line no-empty
     // Reformat TV range explanation into formula + min/max with equals, and adjust the displayed answer block
     try {
       const single = mathHtml.match(/TV range = [\s\S]*?\[([0-9]+)-([0-9]+) mL[\s\S]*?\] [\s\S]*?<strong>([0-9]+)-([0-9]+) mL<\/strong>/);
@@ -329,10 +325,7 @@ function compute() {
         }
       }
       if (!isUnsure && display) tvEl.innerHTML = display;
-    } catch (error) {
-      // Ignore formatting failures so the displayed answer remains available.
-      void error;
-    }
+    } catch(e) { /* ignore */ } // eslint-disable-line no-empty
     tvEl.dataset.math = mathHtml;
     // hover tooltip
     tvEl.onmouseenter = (e)=>{
@@ -412,7 +405,9 @@ function renderQuickVentCalculator(contentArea){
   wrap.innerHTML = `<div class="text-center mb-3"><span class="font-semibold underline">Tidal Volume Calculator</span></div>`;
   contentArea.appendChild(wrap);
   // reuse setup UI minimal
+  const fake = { quickVent: 'setup' };
   renderQuickVentSetup(contentArea);
 }
 
 export { renderQuickVentSetup, renderQuickVentCalculator };
+

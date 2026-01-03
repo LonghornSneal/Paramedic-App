@@ -143,7 +143,8 @@ function initializeData(categoriesData, medDetailsData) { // /Assign the global 
     medicationDataMap = {};
       // Build the medicationDataMap by merging medication and ventilation details.  This map
     // is used by the search/indexing code to attach detail information to each topic.
-    [...MedicationDetailsData, ...VentilationDetailsData].forEach(item => {
+    const medDetailsList = Array.isArray(medDetailsData) ? medDetailsData : [];
+    [...medDetailsList, ...VentilationDetailsData].forEach(item => {
         medicationDataMap[item.id] = item;
     });
     // Ensure the global map is set *before* processing items

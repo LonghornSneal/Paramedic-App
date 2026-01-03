@@ -3,7 +3,11 @@ import globals from "globals";
 
 export default [
   {
-    ignores: ["dev-tools/coverage/**"],
+    ignores: [
+      "dev-tools/coverage/**",
+      "dist/**",
+      "research/external/**"
+    ],
   },
   {
     files: ["**/*.js"],

@@ -2,16 +2,41 @@
 // Run with: npx playwright test dev-tools/tests/ventilation.spec.js
 
 import { test, expect } from '@playwright/test';
-import previewServer from './utils/previewServer.cjs';
+import { spawn } from 'node:child_process';
+import http from 'node:http';
+import path from 'node:path';
 
-const { ensurePreviewServer, shutdownPreviewServer } = previewServer;
+async function waitForHttp(url, timeoutMs = 15000) {
+  const start = Date.now();
+  return new Promise((resolve, reject) => {
+    (function probe() {
+      const req = http.get(url, res => { res.resume(); resolve(true); });
+      req.on('error', () => {
+        if (Date.now() - start > timeoutMs) reject(new Error('Server not reachable'));
+        else setTimeout(probe, 500);
+      });
+    })();
+  });
+}
+
+let serverProc;
 
 test.beforeAll(async () => {
-  await ensurePreviewServer();
+  // If preview not running, start a static server
+  try {
+    await waitForHttp('http://localhost:5173');
+  } catch {
+    const isWin = process.platform === 'win32';
+    const serverBin = path.resolve(process.cwd(), isWin ? 'node_modules/.bin/http-server.cmd' : 'node_modules/.bin/http-server');
+    const command = isWin ? 'cmd.exe' : serverBin;
+    const args = isWin ? ['/c', serverBin, '-p', '5173', '-c-1'] : ['-p', '5173', '-c-1'];
+    serverProc = spawn(command, args, { stdio: 'ignore', shell: false });
+    await waitForHttp('http://localhost:5173');
+  }
 });
 
 test.afterAll(async () => {
-  await shutdownPreviewServer();
+  if (serverProc && !serverProc.killed) serverProc.kill();
 });
 
 test('Not Sure shows two distinct ranges with labels; popup formulas are explicit', async ({ page }) => {
@@ -53,4 +78,3 @@ test('Sex icon remains visible when selected', async ({ page }) => {
   const bg = await maleBtn.evaluate(el => getComputedStyle(el).backgroundColor);
   expect(bg).not.toBe('rgba(0, 0, 0, 0)');
 });
-
