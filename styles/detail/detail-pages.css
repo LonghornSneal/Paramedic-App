@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@400;600;700&display=swap');
+
 /* Medication Detail page styles */
 
 .detail-section {
@@ -83,6 +85,12 @@
   white-space: pre-wrap;
   line-height: 1.6;
 
+}
+
+.abbr-overline {
+  text-decoration: overline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentcolor;
 }
 
 .detail-section.adult-section {
@@ -803,5 +811,408 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
     font-size: 0.8rem;
     color: #475569;
     margin: 0.25rem 0;
+
+}
+
+/* Anaphylaxis detail redesign */
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] {
+  font-family: "Bebas Neue", "Sora", sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #7f1d1d;
+  padding: 0.85rem 1.1rem 0.85rem 1.35rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  background: linear-gradient(90deg, #fff 0%, #fff5f2 45%, #fff 100%);
+  box-shadow: 0 14px 28px rgb(248 113 113 / 18%);
+  position: relative;
+  overflow: hidden;
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"]::before {
+  content: '';
+  position: absolute;
+  left: 0.6rem;
+  top: 0.55rem;
+  bottom: 0.55rem;
+  width: 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ef4444, #f97316);
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"]::after {
+  content: '';
+  position: absolute;
+  right: -40px;
+  top: -50px;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle at 30% 30%, rgba(239, 68, 68, 0.25), rgba(239, 68, 68, 0));
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section {
+  --ana-ink: #1f1b1b;
+  --ana-accent: #b91c1c;
+  --ana-accent-strong: #7f1d1d;
+  --ana-warm: #c2410c;
+  --ana-line: rgba(185, 28, 28, 0.35);
+  --ana-wash: #fff5f2;
+
+  border-radius: 1rem;
+  border: 1px solid rgba(248, 113, 113, 0.28);
+  background: #fff;
+  box-shadow: 0 16px 30px rgb(30 41 59 / 10%);
+  position: relative;
+  overflow: hidden;
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type {
+  background: linear-gradient(180deg, var(--ana-wash) 0%, #fff 70%);
+  border-left: 5px solid var(--ana-accent);
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-section-title {
+  font-family: "Bebas Neue", "Sora", sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ana-accent-strong);
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.65rem;
+  border: 1px solid var(--ana-line);
+  background: rgba(255, 255, 255, 0.8);
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .section-indicator {
+  background: var(--ana-accent);
+  color: #fff;
+  letter-spacing: 0.2em;
+  font-size: 0.6rem;
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section + .detail-section {
+  background: #fffaf7;
+  border-left: 3px solid rgba(185, 28, 28, 0.2);
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section + .detail-section .detail-section-title {
+  font-family: "Bebas Neue", "Sora", sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ana-accent-strong);
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--ana-line);
+  background: rgba(254, 226, 226, 0.6);
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section .detail-text {
+  font-family: "Sora", "Inter", sans-serif;
+  color: var(--ana-ink);
+  line-height: 1.6;
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text {
+  display: grid;
+  gap: 0.95rem;
+  padding-left: 0.4rem;
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text h3.detail-md-heading {
+  margin: 0.35rem 0 0;
+  font-family: "Sora", "Inter", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--ana-accent-strong);
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text h3.detail-md-heading:first-of-type {
+  font-size: 0.98rem;
+  letter-spacing: 0.01em;
+  padding-bottom: 0;
+  border-bottom: none;
+  text-decoration: underline;
+  text-decoration-color: var(--ana-accent-strong);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.25em;
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text h3.detail-md-heading:nth-of-type(2) {
+  color: var(--ana-warm);
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-top: 0.4rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid rgba(185, 28, 28, 0.18);
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text ul.detail-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text ul.detail-list li {
+  padding: 0.15rem 0;
+  color: var(--ana-ink);
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text h3.detail-md-heading:first-of-type + ul.detail-list li {
+  font-weight: 700;
+  color: var(--ana-warm);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text h3.detail-md-heading:first-of-type + ul.detail-list li:nth-child(2) {
+  padding-left: 1.2rem;
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text h3.detail-md-heading:first-of-type + ul.detail-list li strong {
+  color: var(--ana-accent-strong);
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text h3.detail-md-heading:nth-of-type(2) + ul.detail-list li {
+  color: var(--ana-ink);
+  font-weight: 600;
+  padding-left: 0.35rem;
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text strong {
+  color: var(--ana-accent);
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text h3.detail-md-heading:first-of-type + ul.detail-list + p {
+  margin: 0.1rem 0 0;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(185, 28, 28, 0.18);
+  color: var(--ana-warm);
+  font-weight: 600;
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text h3.detail-md-heading:first-of-type + ul.detail-list + p strong {
+  color: var(--ana-accent-strong);
+  text-decoration: underline;
+  text-decoration-color: var(--ana-accent-strong);
+  text-underline-offset: 0.2em;
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text h3.detail-md-heading:nth-of-type(2) + ul.detail-list + p {
+  margin: 0;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(185, 28, 28, 0.12);
+  color: var(--ana-ink);
+  font-weight: 600;
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text h3.detail-md-heading:nth-of-type(2) + ul.detail-list + p strong {
+  color: var(--ana-warm);
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text code {
+  font-family: "Sora", "Inter", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ana-accent-strong);
+  padding: 0.1rem 0.45rem;
+  border-radius: 0.6rem;
+  border: 1px solid rgba(248, 113, 113, 0.5);
+  background: rgba(254, 226, 226, 0.8);
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text .toggle-info {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+  color: var(--ana-warm);
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text .toggle-info:focus-visible {
+  outline: 2px solid var(--ana-warm);
+  outline-offset: 2px;
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text .toggle-info-label {
+  font-weight: 700;
+  background-image: linear-gradient(120deg, var(--ana-warm) 0%, var(--ana-warm) 38%, rgba(255, 247, 237, 0.95) 50%, var(--ana-warm) 62%, var(--ana-warm) 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: ana-shimmer 2.4s linear infinite;
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text .toggle-info-indicator {
+  display: none;
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text .toggle-info .info-text {
+  display: inline;
+  margin-left: 0.35rem;
+  color: var(--ana-accent-strong);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+@keyframes ana-shimmer {
+  0% { background-position: -160% 0; }
+  100% { background-position: 160% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text .toggle-info-label {
+    animation: none;
+  }
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section + .detail-section .detail-text h3.detail-md-heading {
+  font-family: "Sora", "Inter", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ana-accent-strong);
+  border-left: 3px solid var(--ana-accent);
+  padding-left: 0.6rem;
+  margin-top: 0.9rem;
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section + .detail-section .detail-text ul.detail-list {
+  margin-top: 0.5rem;
+
+}
+
+#content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section .section-indicator {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+
+}
+
+/* stylelint-disable-next-line media-feature-range-notation */
+
+@media (max-width: 720px) {
+  #content-area .topic-h2[data-topic-id="adult-anaphylaxis"] {
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    padding: 0.75rem 0.9rem 0.75rem 1.1rem;
+
+  }
+
+  #content-area .topic-h2[data-topic-id="adult-anaphylaxis"]::before {
+    left: 0.45rem;
+    top: 0.45rem;
+    bottom: 0.45rem;
+
+  }
+
+  #content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text {
+    padding-left: 0.85rem;
+
+  }
+
+  #content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text h3.detail-md-heading {
+    letter-spacing: 0.01em;
+
+  }
+}
+
+body.dark-mode #content-area .topic-h2[data-topic-id="adult-anaphylaxis"] {
+  color: #fecaca;
+  border-color: rgba(248, 113, 113, 0.4);
+  background: linear-gradient(90deg, #1f2937 0%, #2a1414 60%, #111827 100%);
+  box-shadow: none;
+
+}
+
+body.dark-mode #content-area .topic-h2[data-topic-id="adult-anaphylaxis"]::before {
+  background: linear-gradient(180deg, #f87171, #fb923c);
+
+}
+
+body.dark-mode #content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section {
+  --ana-ink: #f3f4f6;
+  --ana-accent: #f87171;
+  --ana-accent-strong: #fecaca;
+  --ana-warm: #fdba74;
+  --ana-line: rgba(248, 113, 113, 0.35);
+  --ana-wash: #1f2937;
+
+  background: #111827;
+  border-color: rgba(248, 113, 113, 0.35);
+  box-shadow: none;
+
+}
+
+body.dark-mode #content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type {
+  background: linear-gradient(180deg, #1f2937 0%, #111827 70%);
+  border-left-color: rgba(248, 113, 113, 0.6);
+
+}
+
+body.dark-mode #content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section + .detail-section {
+  background: #111827;
+
+}
+
+body.dark-mode #content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section .detail-section-title {
+  color: #fecaca;
+  border-color: rgba(248, 113, 113, 0.4);
+  background: rgba(17, 24, 39, 0.85);
+
+}
+
+body.dark-mode #content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text {
+  color: #f3f4f6;
+  border-left-color: rgba(248, 113, 113, 0.6);
+
+}
+
+body.dark-mode #content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text h3.detail-md-heading {
+  color: #fecaca;
+
+}
+
+body.dark-mode #content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text h3.detail-md-heading:nth-of-type(3),
+body.dark-mode #content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text h3.detail-md-heading:nth-of-type(4) {
+  color: #fdba74;
+
+}
+
+body.dark-mode #content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text h3.detail-md-heading:nth-of-type(2) + ul.detail-list li {
+  color: #fecaca;
+
+}
+
+body.dark-mode #content-area .topic-h2[data-topic-id="adult-anaphylaxis"] ~ .detail-section:first-of-type .detail-text code {
+  color: #fecaca;
+  background: rgba(127, 29, 29, 0.6);
+  border-color: rgba(248, 113, 113, 0.5);
 
 }

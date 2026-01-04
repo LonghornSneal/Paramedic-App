@@ -1,6 +1,6 @@
 import { addTapListener } from '../../Utils/addTapListener.js';
 import { slugify } from '../../Utils/slugify.js';
-import { attachToggleCategoryHandlers } from './detailPageUtils.js';
+import { attachToggleCategoryHandlers, attachToggleInfoHandlers } from './detailPageUtils.js';
 import { initializeEquipmentPopovers } from './equipmentPopover.js';
 import { setupSlugAnchors } from '../anchorNav/slugAnchors.js';
 
@@ -25,11 +25,29 @@ function inlineMd(t){
   s = s.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
   s = s.replace(/\*(.+?)\*/g,'<em>$1</em>');
   s = s.replace(/`([^`]+)`/g,'<code>$1</code>');
+  s = s.replace(/\[\[(.+?)\|(.+?)\]\]/g, (_, display, info) => {
+    return `<span class="toggle-info" role="button" tabindex="0" aria-expanded="false"><span class="toggle-info-label">${display}</span><span class="toggle-info-indicator" aria-hidden="true">Show</span><span class="info-text hidden">${info}</span></span>`;
+  });
   // Images ![alt](src)
   s = s.replace(/!\[([^\]]*)\]\(([^\]]*)\)/g, (m,alt,src)=> `<img src="${src}" alt="${escapeHtml(alt)}" class="max-w-full inline-block" />`);
   // Links [text](href)
   s = s.replace(/\b\[([^\]]+)\]\(([^\]]+)\)/g, (m,text,href)=> `<a href="${href}" class="text-blue-600 underline" target="_blank" rel="noopener">${escapeHtml(text)}</a>`);
-  return s;
+  return applyAbbreviationOverlines(s);
+}
+
+function applyAbbreviationOverlines(html) {
+  const tokenRegex = /(^|[^A-Za-z0-9])([qpscaQPSCA])(?=([^A-Za-z0-9]|$))/g;
+  const applyToText = (text) => text.replace(tokenRegex, (match, leading, letter) => {
+    return `${leading}<span class="abbr-overline">${letter}</span>`;
+  });
+  const applyOutsideTags = (segment) => segment
+    .split(/(<[^>]+>)/g)
+    .map(part => (part.startsWith('<') ? part : applyToText(part)))
+    .join('');
+  return html
+    .split(/(<code>[\s\S]*?<\/code>)/g)
+    .map(part => (part.startsWith('<code>') ? part : applyOutsideTags(part)))
+    .join('');
 }
 
 function renderMdBlock(lines){
@@ -176,6 +194,7 @@ export async function renderEquipmentFromMarkdown(details, contentArea, topic) {
         expanded: expandSections
       });
     });
+    attachToggleInfoHandlers(contentArea);
     attachToggleCategoryHandlers(contentArea);
     initializeEquipmentPopovers(contentArea);
     const tocSections = [];
@@ -256,6 +275,7 @@ export async function renderMarkdownDetail(details, contentArea, topic) {
       wrapper.append(titleEl, body);
       contentArea.appendChild(wrapper);
     });
+    attachToggleInfoHandlers(contentArea);
     attachToggleCategoryHandlers(contentArea);
     initializeEquipmentPopovers(contentArea);
   } catch (err) {

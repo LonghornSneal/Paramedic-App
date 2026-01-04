@@ -1,3 +1,21 @@
+## 2026-01-03 02:22:23 Anaphylaxis restructure + split protocols
+- [x] Create new protocol topics (CPR initiation/termination, OOH DNR + surrogate, death documentation) and move content
+- [x] Update categories + markdown maps + slug list for new topics
+- [x] Redesign anaphylaxis markdown layout for fast scanning
+- [x] Add anaphylaxis-specific CSS visual treatment
+- [x] Capture updated screenshots
+- [x] Verify ASCII-only content
+- [x] Record memory-log entry
+- [x] Update README Chapter 8 entry for protocol changes
+
+## 2026-01-03 03:00:00 Anaphylaxis redesign (layout match)
+- [x] Restructure anaphylaxis markdown to match Rx-first layout
+- [x] Update anaphylaxis CSS treatment to match reference image
+- [x] Capture updated screenshots (desktop + mobile)
+- [x] Run a11y audit for the updated layout
+- [x] Update README Chapter 8 entry
+- [x] Record memory-log entry
+
 ## 2026-01-02 12:00:16 Adult anaphylaxis visual redesign
 - [x] Capture baseline screenshot of Content/Adult Protocols/adult-anaphylaxis.md
 - [x] Redesign markdown layout (sections, lists, emphasis) without deleting info

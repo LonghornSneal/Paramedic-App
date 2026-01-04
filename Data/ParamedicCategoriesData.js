@@ -444,6 +444,9 @@ export const ParamedicCategoriesData = [
           id: slugify("PCR Requirements"), title: "PCR Requirements", 
           type: "topic" 
         },{ 
+          id: slugify("CPR Initiation & Termination"), title: "CPR Initiation & Termination", 
+          type: "topic" 
+        },{ 
           id: slugify("Clinical Errors & Reporting"), title: "Clinical Errors & Reporting", 
           type: "topic" 
         },{ 
@@ -774,6 +777,9 @@ export const ParamedicCategoriesData = [
           id: slugify("Consulting OLMC"), title: "Consulting OLMC", 
           type: "topic" 
         },{ 
+          id: slugify("OOH DNR & Surrogate Decision Makers"), title: "OOH DNR & Surrogate Decision Makers", 
+          type: "topic" 
+        },{ 
           id: slugify("Transfer to Lesser Credential"), title: "Transfer to Lesser Credential", 
           type: "topic" 
         },{ 
@@ -791,6 +797,9 @@ export const ParamedicCategoriesData = [
           details: { mdPath: "Content/Administrative & Legal Essentials/applicability-of-the-cog.md" } 
         },{ 
           id: slugify("Mandatory Reporting"), title: "Mandatory Reporting", 
+          type: "topic" 
+        },{ 
+          id: slugify("Death Documentation; Body Temp."), title: "Death Documentation; Body Temp.", 
           type: "topic" 
         },{ 
           id: slugify("Crime Scene"), title: "Crime Scene", 
