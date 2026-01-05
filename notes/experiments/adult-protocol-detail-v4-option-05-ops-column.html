@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adult Protocol Detail Page - Experimental Option 16 - Ops Column</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Staatliches&family=Hind:wght@400;600;700&display=swap');
+
+    :root {
+      --bg: #101213;
+      --panel: #1a1e21;
+      --ink: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #84cc16;
+      --accent: #f59e0b;
+      --accent-soft: #2a1f0a;
+      --border: rgba(248, 250, 252, 0.14);
+      --shadow: 0 24px 50px rgba(0, 0, 0, 0.55);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Hind", "Segoe UI", sans-serif;
+      background:
+        repeating-linear-gradient(120deg, rgba(132, 204, 22, 0.08) 0, rgba(132, 204, 22, 0.08) 8px, transparent 8px, transparent 16px),
+        var(--bg);
+      color: var(--ink);
+      padding: 32px 20px 60px;
+    }
+
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+      background: var(--panel);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      padding: 26px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    header h1 {
+      font-family: "Staatliches", "Segoe UI", sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    header .subtitle {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .tier-1 {
+      border-radius: var(--radius);
+      border: 2px solid var(--primary);
+      background: linear-gradient(135deg, rgba(132, 204, 22, 0.12), rgba(245, 158, 11, 0.12));
+      padding: 18px 20px 20px;
+      margin-bottom: 16px;
+    }
+
+    .tier-title {
+      font-family: "Staatliches", "Segoe UI", sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      text-decoration: underline;
+      text-underline-offset: 6px;
+      text-decoration-thickness: 3px;
+    }
+
+    .class-block {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+    }
+
+    .class-title { font-weight: 700; color: var(--primary); }
+    .class-text { margin-top: 6px; color: var(--muted); }
+
+    .overline {
+      position: relative;
+      display: inline-block;
+      padding-top: 2px;
+    }
+
+    .overline::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      border-top: 2px solid currentColor;
+    }
+
+    .inline-toggle, .drawer-toggle, .chip-toggle, .fold-toggle {
+      margin-top: 8px;
+      background: none;
+      border: none;
+      color: var(--accent);
+      text-decoration: underline;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .inline-hidden, .drawer-panel, .chip-panel, .fold-panel {
+      display: none;
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .chip-panel { background: rgba(132, 204, 22, 0.2); }
+    .fold-panel { background: rgba(148, 163, 184, 0.2); }
+
+    .tier {
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 12px;
+      background: #14181b;
+    }
+
+    .tier-toggle {
+      width: 100%;
+      background: linear-gradient(90deg, rgba(132, 204, 22, 0.2), rgba(245, 158, 11, 0.2));
+      border: none;
+      padding: 14px 16px;
+      font-family: "Staatliches", "Segoe UI", sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: underline;
+      text-underline-offset: 6px;
+      text-decoration-thickness: 3px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tier-toggle .meta {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .tier-body {
+      display: none;
+      padding: 12px 16px 16px;
+      background: #151a1d;
+    }
+
+    .tier.is-open .tier-body { display: grid; gap: 10px; }
+
+    .inline-hidden.is-open,
+    .drawer-panel.is-open,
+    .chip-panel.is-open,
+    .fold-panel.is-open { display: block; }
+
+    @media (max-width: 840px) {
+      header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <h1>Adult Protocol Detail Page</h1>
+        <div class="subtitle">Experimental Option 16 - Ops Column</div>
+      </div>
+      <div class="subtitle">Immediate Actions</div>
+    </header>
+
+    <section class="tier-1">
+      <div class="tier-title">Tier 1 Info</div>
+      <div class="class-block">
+        <div class="class-title">Tier 1 Info Class 1</div>
+        <div class="class-text">example text example text example text example text.</div>
+      </div>
+      <div class="class-block">
+        <div class="class-title">Tier 1 Info Class 2 <em>(scan)</em></div>
+        <div class="class-text">example text example text <span class="overline">x</span> except example text.</div>
+      </div>
+      <div class="class-block">
+        <div class="class-title">Tier 1 Info Class 3</div>
+        <div class="class-text">example text example text.</div>
+        <button class="inline-toggle" data-toggle="inline">Tap to reveal hidden info</button>
+        <div class="inline-hidden" data-hidden="inline">Hidden example text example text example text.</div>
+      </div>
+    </section>
+
+    <section class="tier tier-2" data-collapsible="true">
+      <button class="tier-toggle" data-toggle="tier">
+        <span>Tier 2 Info</span>
+        <span class="meta">Interactive title</span>
+      </button>
+      <div class="tier-body">
+        <div class="class-block">
+          <div class="class-title">Tier 2 Info Class 1</div>
+          <div class="class-text">example text example text example text.</div>
+        </div>
+        <div class="class-block">
+          <div class="class-title">Tier 2 Info Class 2</div>
+          <div class="class-text">example text example text.</div>
+        </div>
+        <div class="class-block">
+          <div class="class-title">Tier 2 Info Class 3</div>
+          <div class="class-text">example text example text.</div>
+          <button class="drawer-toggle" data-toggle="drawer">Open slide drawer</button>
+          <div class="drawer-panel" data-hidden="drawer">Hidden example text example text example text.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tier tier-3" data-collapsible="true">
+      <button class="tier-toggle" data-toggle="tier">
+        <span>Tier 3 Info</span>
+        <span class="meta">Interactive title</span>
+      </button>
+      <div class="tier-body">
+        <div class="class-block">
+          <div class="class-title">Tier 3 Info Class 1</div>
+          <div class="class-text">example text example text example text.</div>
+        </div>
+        <div class="class-block">
+          <div class="class-title">Tier 3 Info Class 2</div>
+          <div class="class-text">example text example text.</div>
+        </div>
+        <div class="class-block">
+          <div class="class-title">Tier 3 Info Class 3</div>
+          <div class="class-text">example text example text.</div>
+          <button class="chip-toggle" data-toggle="chip">Tap chip for hidden info</button>
+          <div class="chip-panel" data-hidden="chip">Hidden example text example text example text.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tier tier-4" data-collapsible="true">
+      <button class="tier-toggle" data-toggle="tier">
+        <span>Tier 4 Info</span>
+        <span class="meta">Interactive title</span>
+      </button>
+      <div class="tier-body">
+        <div class="class-block">
+          <div class="class-title">Tier 4 Info Class 1</div>
+          <div class="class-text">example text example text example text.</div>
+        </div>
+        <div class="class-block">
+          <div class="class-title">Tier 4 Info Class 2</div>
+          <div class="class-text">example text example text.</div>
+        </div>
+        <div class="class-block">
+          <div class="class-title">Tier 4 Info Class 3</div>
+          <div class="class-text">example text example text.</div>
+          <button class="fold-toggle" data-toggle="fold">Open folded note</button>
+          <div class="fold-panel" data-hidden="fold">Hidden example text example text example text.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const expandAll = new URLSearchParams(window.location.search).get('expanded') === '1';
+
+    document.querySelectorAll('[data-toggle="tier"]').forEach((button) => {
+      const tier = button.closest('.tier');
+      if (!tier) return;
+      button.addEventListener('click', () => tier.classList.toggle('is-open'));
+    });
+
+    ['inline', 'drawer', 'chip', 'fold'].forEach((key) => {
+      document.querySelectorAll(`[data-toggle="${key}"]`).forEach((button) => {
+        button.addEventListener('click', () => {
+          const block = button.closest('.class-block');
+          if (!block) return;
+          const panel = block.querySelector(`[data-hidden="${key}"]`);
+          if (panel) panel.classList.toggle('is-open');
+        });
+      });
+    });
+
+    if (expandAll) {
+      document.querySelectorAll('.tier[data-collapsible="true"]').forEach((tier) => tier.classList.add('is-open'));
+      document.querySelectorAll('.inline-hidden, .drawer-panel, .chip-panel, .fold-panel').forEach((panel) => panel.classList.add('is-open'));
+    }
+  </script>
+</body>
+</html>

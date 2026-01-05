@@ -36,7 +36,7 @@ function inlineMd(t){
 }
 
 function applyAbbreviationOverlines(html) {
-  const tokenRegex = /(^|[^A-Za-z0-9])([qpscaQPSCA])(?=([^A-Za-z0-9]|$))/g;
+  const tokenRegex = /(^|[^A-Za-z0-9/])([qpscaQPSCA])(?=([^A-Za-z0-9/]|$))/g;
   const applyToText = (text) => text.replace(tokenRegex, (match, leading, letter) => {
     return `${leading}<span class="abbr-overline">${letter}</span>`;
   });

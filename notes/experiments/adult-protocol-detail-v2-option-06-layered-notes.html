@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adult Protocol Detail - Layered Notes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Fira+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #2b2621;
+      --muted: #6e645d;
+      --tier1: #7c3aed;
+      --tier2: #db2777;
+      --tier3: #0284c7;
+      --tier4: #64748b;
+      --paper: #fffdf7;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Fira Sans", sans-serif;
+      background: linear-gradient(180deg, #f9f2ff 0%, #ffffff 60%);
+      color: var(--ink);
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 32px auto 60px;
+      padding: 26px 30px 40px;
+      background: var(--paper);
+      border-radius: 18px;
+      border: 1px solid rgba(124, 58, 237, 0.15);
+      box-shadow: 0 18px 36px rgba(60, 35, 90, 0.12);
+    }
+
+    .title {
+      font-family: "Playfair Display", serif;
+      font-size: 2.1rem;
+      margin: 0 0 6px;
+      color: var(--tier1);
+    }
+
+    .subtitle { color: var(--muted); margin-bottom: 22px; }
+
+    .tier {
+      background: #fff;
+      border-radius: 16px;
+      padding: 16px 18px;
+      margin-bottom: 16px;
+      position: relative;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .tier::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      right: 30px;
+      width: 120px;
+      height: 20px;
+      border-radius: 6px;
+      opacity: 0.6;
+    }
+
+    .tier-1::after { background: rgba(124, 58, 237, 0.3); }
+    .tier-2::after { background: rgba(219, 39, 119, 0.3); }
+    .tier-3::after { background: rgba(2, 132, 199, 0.3); }
+    .tier-4::after { background: rgba(100, 116, 139, 0.3); }
+
+    .tier-title {
+      font-family: "Playfair Display", serif;
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+    }
+
+    .tier-1 .tier-title { color: var(--tier1); }
+    .tier-2 .tier-title { color: var(--tier2); }
+    .tier-3 .tier-title { color: var(--tier3); }
+    .tier-4 .tier-title { color: var(--tier4); }
+
+    .class-stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .class-card {
+      background: #fffdfb;
+      border-radius: 12px;
+      padding: 10px 12px;
+      border: 1px dashed rgba(0, 0, 0, 0.12);
+    }
+
+    .class-card h4 { margin: 0 0 4px; }
+
+    .tier-1 .class-card h4 { color: var(--tier1); font-size: 1.05rem; }
+    .tier-2 .class-card h4 { color: var(--tier2); }
+    .tier-3 .class-card h4 { color: var(--tier3); }
+    .tier-4 .class-card h4 { color: var(--tier4); }
+
+    .fold-note {
+      margin-top: 6px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(124, 58, 237, 0.08);
+      display: none;
+    }
+
+    .fold-note.open { display: block; }
+
+    .fold-btn {
+      border: none;
+      background: none;
+      color: var(--tier1);
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .tier-2 .fold-btn { color: var(--tier2); }
+    .tier-3 .fold-btn { color: var(--tier3); }
+    .tier-4 .fold-btn { color: var(--tier4); }
+
+    body.is-expanded .fold-note { display: block; }
+
+    @media (max-width: 720px) {
+      .page { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1 class="title">Adult Protocol Detail Page</h1>
+    <div class="subtitle">Experimental Option 06 - Layered Notes</div>
+
+    <section class="tier tier-1">
+      <div class="tier-title">Tier 1 Info</div>
+      <div class="class-stack">
+        <div class="class-card tier-1-class-1">
+          <h4>Tier 1 Info Class 1</h4>
+          <p>example text example text example text example text example text.</p>
+          <button class="fold-btn" type="button" data-fold>Flip hidden note</button>
+          <div class="fold-note">Hidden example text example text example text.</div>
+        </div>
+        <div class="class-card tier-1-class-2">
+          <h4>Tier 1 Info Class 2</h4>
+          <p>example text example text example text example text.</p>
+        </div>
+        <div class="class-card tier-1-class-3">
+          <h4>Tier 1 Info Class 3</h4>
+          <p>example text example text example text example text example text.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tier tier-2">
+      <div class="tier-title">Tier 2 Info</div>
+      <div class="class-stack">
+        <div class="class-card tier-2-class-1">
+          <h4>Tier 2 Info Class 1</h4>
+          <p>example text example text example text example text.</p>
+        </div>
+        <div class="class-card tier-2-class-2">
+          <h4>Tier 2 Info Class 2</h4>
+          <p>example text example text example text example text example text.</p>
+          <button class="fold-btn" type="button" data-fold>Flip hidden note</button>
+          <div class="fold-note">Hidden example text example text.</div>
+        </div>
+        <div class="class-card tier-2-class-3">
+          <h4>Tier 2 Info Class 3</h4>
+          <p>example text example text example text.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tier tier-3">
+      <div class="tier-title">Tier 3 Info</div>
+      <div class="class-stack">
+        <div class="class-card tier-3-class-1">
+          <h4>Tier 3 Info Class 1</h4>
+          <p>example text example text example text example text example text example text.</p>
+        </div>
+        <div class="class-card tier-3-class-2">
+          <h4>Tier 3 Info Class 2</h4>
+          <p>example text example text example text.</p>
+        </div>
+        <div class="class-card tier-3-class-3">
+          <h4>Tier 3 Info Class 3</h4>
+          <p>example text example text example text.</p>
+          <button class="fold-btn" type="button" data-fold>Flip hidden note</button>
+          <div class="fold-note">Hidden example text example text.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tier tier-4">
+      <div class="tier-title">Tier 4 Info</div>
+      <div class="class-stack">
+        <div class="class-card tier-4-class-1">
+          <h4>Tier 4 Info Class 1</h4>
+          <p>example text example text example text example text.</p>
+        </div>
+        <div class="class-card tier-4-class-2">
+          <h4>Tier 4 Info Class 2</h4>
+          <p>example text example text example text.</p>
+        </div>
+        <div class="class-card tier-4-class-3">
+          <h4>Tier 4 Info Class 3</h4>
+          <p>example text example text example text example text example text.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const expanded = new URLSearchParams(location.search).get('expanded') === '1';
+    document.body.classList.toggle('is-expanded', expanded);
+    document.querySelectorAll('[data-fold]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const note = btn.nextElementSibling;
+        if (!note) return;
+        note.classList.toggle('open');
+      });
+    });
+    if (expanded) {
+      document.querySelectorAll('.fold-note').forEach(note => note.classList.add('open'));
+    }
+  </script>
+</body>
+</html>

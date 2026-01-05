@@ -1,3 +1,24 @@
+## 2026-01-05 00:22:45 Adult detail experiments v2
+- [x] Remove prior experiment mockups and screenshots
+- [x] Create new Adult Protocol detail mockups with tier/class differentiation
+- [x] Capture before/after screenshots for each option
+- [x] Review screenshots for layout and hidden content states
+- [x] Gather research sources for visual hierarchy and attention cues
+- [x] Record memory-log entry
+
+## 2026-01-05 03:00:30 Adult detail experiments v3 (dramatic)
+- [x] Research complementary color wheel guidance for dramatic palettes
+- [x] Create dramatic Adult Protocol mockups with tier-specific interactions
+- [x] Capture before/after screenshots for each option
+- [x] Review screenshots for layout and hidden content states
+- [x] Record memory-log entry
+
+## 2026-01-05 04:18:13 Adult detail experiments v4 (tactical layouts)
+- [x] Create tactical UI mockups with unique layouts
+- [x] Capture before/after screenshots for each option
+- [x] Review screenshots for layout and hidden content states
+- [x] Record memory-log entry
+
 ## 2026-01-03 02:22:23 Anaphylaxis restructure + split protocols
 - [x] Create new protocol topics (CPR initiation/termination, OOH DNR + surrogate, death documentation) and move content
 - [x] Update categories + markdown maps + slug list for new topics

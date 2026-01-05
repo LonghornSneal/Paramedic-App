@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adult Protocol Detail Page - Experimental Option 14 - Ladder Brief</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Work+Sans:wght@400;600;700&display=swap');
+
+    :root {
+      --bg: #f7f3ff;
+      --panel: #ffffff;
+      --ink: #1f1530;
+      --muted: #4b5563;
+      --primary: #4c1d95;
+      --accent: #facc15;
+      --accent-soft: #fef9c3;
+      --border: rgba(76, 29, 149, 0.15);
+      --shadow: 0 20px 45px rgba(76, 29, 149, 0.18);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Work Sans", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(700px 420px at 0% -10%, rgba(250, 204, 21, 0.25), transparent 55%),
+        var(--bg);
+      color: var(--ink);
+      padding: 32px 20px 60px;
+    }
+
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+      background: var(--panel);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      padding: 28px 30px 36px;
+      position: relative;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    header h1 {
+      font-family: "Oswald", "Segoe UI", sans-serif;
+      font-size: 30px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    header .subtitle {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .ladder {
+      position: relative;
+      padding-left: 40px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .ladder::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--primary);
+      border-radius: 999px;
+    }
+
+    .tier {
+      position: relative;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .tier::before {
+      content: attr(data-step);
+      position: absolute;
+      left: -8px;
+      top: 16px;
+      width: 36px;
+      height: 36px;
+      background: var(--accent);
+      color: #3b2200;
+      font-family: "Oswald", "Segoe UI", sans-serif;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      box-shadow: 0 8px 20px rgba(250, 204, 21, 0.4);
+    }
+
+    .tier-1 {
+      border: 2px solid var(--primary);
+      background: linear-gradient(135deg, rgba(76, 29, 149, 0.08), rgba(250, 204, 21, 0.18));
+    }
+
+    .tier-1 .tier-title {
+      font-family: "Oswald", "Segoe UI", sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 16px 18px 0 18px;
+      text-decoration: underline;
+      text-underline-offset: 6px;
+      text-decoration-thickness: 3px;
+    }
+
+    .tier-1 .tier-body {
+      padding: 14px 18px 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .tier-toggle {
+      width: 100%;
+      background: #f5f1ff;
+      border: none;
+      padding: 16px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: "Oswald", "Segoe UI", sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 6px;
+      text-decoration-thickness: 3px;
+    }
+
+    .tier-toggle .meta {
+      font-family: "Work Sans", "Segoe UI", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .tier-body {
+      display: none;
+      padding: 14px 18px 18px;
+      background: #ffffff;
+    }
+
+    .tier.is-open .tier-body { display: grid; gap: 10px; }
+
+    .class-block {
+      border: 1px dashed rgba(76, 29, 149, 0.25);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #fdfcff;
+    }
+
+    .class-title { font-weight: 700; color: var(--primary); }
+    .class-title em { font-style: italic; color: #c026d3; }
+    .class-text { margin-top: 6px; color: var(--muted); }
+
+    .overline {
+      position: relative;
+      display: inline-block;
+      padding-top: 2px;
+    }
+
+    .overline::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      border-top: 2px solid currentColor;
+    }
+
+    .inline-toggle, .drawer-toggle, .chip-toggle, .fold-toggle {
+      margin-top: 8px;
+      background: none;
+      border: none;
+      color: #c026d3;
+      text-decoration: underline;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .inline-hidden, .drawer-panel, .chip-panel, .fold-panel {
+      display: none;
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(250, 204, 21, 0.4);
+    }
+
+    .chip-panel { background: #ede9fe; }
+    .fold-panel { background: #f3f4f6; }
+
+    .inline-hidden.is-open,
+    .drawer-panel.is-open,
+    .chip-panel.is-open,
+    .fold-panel.is-open { display: block; }
+
+    @media (max-width: 760px) {
+      header { flex-direction: column; align-items: flex-start; }
+      .ladder { padding-left: 24px; }
+      .ladder::before { left: 10px; }
+      .tier::before { left: -4px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <h1>Adult Protocol Detail Page</h1>
+        <div class="subtitle">Experimental Option 14 - Ladder Brief</div>
+      </div>
+      <div class="subtitle">Priority Ladder</div>
+    </header>
+
+    <div class="ladder">
+      <section class="tier tier-1" data-step="01">
+        <div class="tier-title">Tier 1 Info</div>
+        <div class="tier-body">
+          <div class="class-block">
+            <div class="class-title">Tier 1 Info Class 1</div>
+            <div class="class-text">example text example text example text example text.</div>
+          </div>
+          <div class="class-block">
+            <div class="class-title">Tier 1 Info Class 2 <em>(scan)</em></div>
+            <div class="class-text">example text example text <span class="overline">x</span> except example text.</div>
+          </div>
+          <div class="class-block">
+            <div class="class-title">Tier 1 Info Class 3</div>
+            <div class="class-text">example text example text.</div>
+            <button class="inline-toggle" data-toggle="inline">Tap to reveal hidden info</button>
+            <div class="inline-hidden" data-hidden="inline">Hidden example text example text example text.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tier tier-2" data-collapsible="true" data-step="02">
+        <button class="tier-toggle" data-toggle="tier">
+          <span>Tier 2 Info</span>
+          <span class="meta">Interactive title</span>
+        </button>
+        <div class="tier-body">
+          <div class="class-block">
+            <div class="class-title">Tier 2 Info Class 1</div>
+            <div class="class-text">example text example text example text.</div>
+          </div>
+          <div class="class-block">
+            <div class="class-title">Tier 2 Info Class 2</div>
+            <div class="class-text">example text example text example text.</div>
+          </div>
+          <div class="class-block">
+            <div class="class-title">Tier 2 Info Class 3</div>
+            <div class="class-text">example text example text.</div>
+            <button class="drawer-toggle" data-toggle="drawer">Open slide drawer</button>
+            <div class="drawer-panel" data-hidden="drawer">Hidden example text example text example text.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tier tier-3" data-collapsible="true" data-step="03">
+        <button class="tier-toggle" data-toggle="tier">
+          <span>Tier 3 Info</span>
+          <span class="meta">Interactive title</span>
+        </button>
+        <div class="tier-body">
+          <div class="class-block">
+            <div class="class-title">Tier 3 Info Class 1</div>
+            <div class="class-text">example text example text example text.</div>
+          </div>
+          <div class="class-block">
+            <div class="class-title">Tier 3 Info Class 2</div>
+            <div class="class-text">example text example text example text.</div>
+          </div>
+          <div class="class-block">
+            <div class="class-title">Tier 3 Info Class 3</div>
+            <div class="class-text">example text example text.</div>
+            <button class="chip-toggle" data-toggle="chip">Tap chip for hidden info</button>
+            <div class="chip-panel" data-hidden="chip">Hidden example text example text example text.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tier tier-4" data-collapsible="true" data-step="04">
+        <button class="tier-toggle" data-toggle="tier">
+          <span>Tier 4 Info</span>
+          <span class="meta">Interactive title</span>
+        </button>
+        <div class="tier-body">
+          <div class="class-block">
+            <div class="class-title">Tier 4 Info Class 1</div>
+            <div class="class-text">example text example text example text.</div>
+          </div>
+          <div class="class-block">
+            <div class="class-title">Tier 4 Info Class 2</div>
+            <div class="class-text">example text example text.</div>
+          </div>
+          <div class="class-block">
+            <div class="class-title">Tier 4 Info Class 3</div>
+            <div class="class-text">example text example text.</div>
+            <button class="fold-toggle" data-toggle="fold">Open folded note</button>
+            <div class="fold-panel" data-hidden="fold">Hidden example text example text example text.</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const expandAll = new URLSearchParams(window.location.search).get('expanded') === '1';
+
+    document.querySelectorAll('[data-toggle="tier"]').forEach((button) => {
+      const tier = button.closest('.tier');
+      if (!tier) return;
+      button.addEventListener('click', () => tier.classList.toggle('is-open'));
+    });
+
+    ['inline', 'drawer', 'chip', 'fold'].forEach((key) => {
+      document.querySelectorAll(`[data-toggle="${key}"]`).forEach((button) => {
+        button.addEventListener('click', () => {
+          const block = button.closest('.class-block');
+          if (!block) return;
+          const panel = block.querySelector(`[data-hidden="${key}"]`);
+          if (panel) panel.classList.toggle('is-open');
+        });
+      });
+    });
+
+    if (expandAll) {
+      document.querySelectorAll('.tier[data-collapsible="true"]').forEach((tier) => tier.classList.add('is-open'));
+      document.querySelectorAll('.inline-hidden, .drawer-panel, .chip-panel, .fold-panel').forEach((panel) => panel.classList.add('is-open'));
+    }
+  </script>
+</body>
+</html>
