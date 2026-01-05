@@ -19,6 +19,12 @@
 - [x] Review screenshots for layout and hidden content states
 - [x] Record memory-log entry
 
+## 2026-01-05 08:45:11 Adult detail experiments v5 (seizure mapping rules)
+- [x] Remove unselected experiment screenshots and references
+- [x] Create seizure mapping example mockup with corrected class visibility
+- [x] Capture before/after screenshots for the new example
+- [x] Record memory-log entry
+
 ## 2026-01-03 02:22:23 Anaphylaxis restructure + split protocols
 - [x] Create new protocol topics (CPR initiation/termination, OOH DNR + surrogate, death documentation) and move content
 - [x] Update categories + markdown maps + slug list for new topics

@@ -3,10 +3,7 @@ const path = require('path');
 
 const options = [
   { file: 'notes/experiments/adult-protocol-detail-v3-option-01-critical-beacon.html', slug: 'critical-beacon' },
-  { file: 'notes/experiments/adult-protocol-detail-v3-option-02-barricade-tabs.html', slug: 'barricade-tabs' },
-  { file: 'notes/experiments/adult-protocol-detail-v3-option-03-command-split.html', slug: 'command-split' },
-  { file: 'notes/experiments/adult-protocol-detail-v3-option-04-signal-arc.html', slug: 'signal-arc' },
-  { file: 'notes/experiments/adult-protocol-detail-v3-option-05-flux-grid.html', slug: 'flux-grid' }
+  { file: 'notes/experiments/adult-protocol-detail-v3-option-02-barricade-tabs.html', slug: 'barricade-tabs' }
 ];
 
 (async () => {

@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adult Protocol Detail Page - Experimental Option 17 - Seizure Mapping</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+    :root {
+      --ink: #0f172a;
+      --muted: #475569;
+      --primary: #0f4c81;
+      --accent: #f97316;
+      --accent-soft: #fff1e6;
+      --panel: #ffffff;
+      --bg: #f3f6fb;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(600px 320px at 0% -10%, rgba(249, 115, 22, 0.18), transparent 60%),
+        repeating-linear-gradient(135deg, rgba(15, 76, 129, 0.05) 0, rgba(15, 76, 129, 0.05) 12px, transparent 12px, transparent 24px),
+        var(--bg);
+      color: var(--ink);
+      padding: 32px 20px 60px;
+    }
+
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+      background: var(--panel);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(15, 76, 129, 0.12);
+      padding: 26px 28px 34px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    header h1 {
+      font-family: "Barlow Condensed", "Segoe UI", sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    header .subtitle {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hide-button {
+      border: 1px solid rgba(15, 76, 129, 0.3);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--primary);
+      background: #fff;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr;
+      gap: 16px;
+    }
+
+    .tier-1 {
+      border-radius: var(--radius);
+      border: 2px solid var(--primary);
+      background: linear-gradient(135deg, rgba(15, 76, 129, 0.08), rgba(249, 115, 22, 0.12));
+      padding: 16px 18px 18px;
+      position: relative;
+    }
+
+    .tier-title {
+      font-family: "Barlow Condensed", "Segoe UI", sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      text-decoration: underline;
+      text-underline-offset: 6px;
+      text-decoration-thickness: 3px;
+    }
+
+    .class-block {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 10px 12px;
+      border: 1px solid rgba(15, 76, 129, 0.12);
+      margin-bottom: 10px;
+    }
+
+    .class-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .class-tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .class-1 { background: #0f4c81; color: #fff; }
+    .class-2 { background: #e2e8f0; color: #0f172a; }
+    .class-3 { background: #fde68a; color: #7c2d12; }
+
+    .class-note {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .toggle-text {
+      display: inline-block;
+      margin-top: 8px;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .clickable {
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    .hidden-class3 {
+      display: none;
+      margin-top: 8px;
+    }
+
+    .hidden-class3.is-open { display: flex; }
+
+    .tier-2 {
+      border-radius: var(--radius);
+      border: 1px solid rgba(15, 76, 129, 0.18);
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .tier-toggle {
+      width: 100%;
+      background: #f1f5f9;
+      border: none;
+      padding: 14px 16px;
+      font-family: "Barlow Condensed", "Segoe UI", sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 6px;
+      text-decoration-thickness: 3px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tier-toggle .meta {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .tier-body {
+      display: block;
+      padding: 14px 16px 18px;
+      background: #ffffff;
+    }
+
+    .tier-body.is-closed { display: none; }
+
+    @keyframes pulse {
+      0%, 100% { color: #f97316; }
+      50% { color: #ffb37a; }
+    }
+
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .toggle-text { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <h1>Adult Protocol Detail Page</h1>
+        <div class="subtitle">Experimental Option 17 - Seizure Mapping</div>
+      </div>
+      <div class="hide-button">Hide</div>
+    </header>
+
+    <div class="layout">
+      <section class="tier-1">
+        <div class="tier-title">Tier 1 Info</div>
+
+        <div class="class-block">
+          <div class="class-row">
+            <span class="class-tag class-2">Tier 1 Info Class 2</span>
+          </div>
+        </div>
+
+        <div class="class-block">
+          <div class="class-row">
+            <span class="class-tag class-2">Tier 1 Info Class 2</span>
+          </div>
+        </div>
+
+        <div class="class-block">
+          <div class="class-row">
+            <span class="class-tag class-1">Tier 1 Info Class 1</span>
+          </div>
+        </div>
+
+        <div class="class-block">
+          <div class="class-row">
+            <span class="class-tag class-1">Tier 1 Info Class 1</span>
+            <span class="class-tag class-2">Tier 1 Info Class 2</span>
+          </div>
+        </div>
+
+        <div class="class-block">
+          <div class="class-row">
+            <span class="class-tag class-2">Tier 1 Info Class 2</span>
+          </div>
+        </div>
+
+        <div class="class-block">
+          <div class="class-row">
+            <span class="class-tag class-1">Tier 1 Info Class 1</span>
+            <span class="class-tag class-2">Tier 1 Info Class 2</span>
+          </div>
+          <div class="class-note">Class 3 is hidden by default.</div>
+          <div class="toggle-text clickable" data-toggle="class3">Tap to reveal Tier 1 Info Class 3</div>
+          <div class="class-row hidden-class3" data-hidden="class3">
+            <span class="class-tag class-3">Tier 1 Info Class 3</span>
+          </div>
+        </div>
+
+        <div class="class-block">
+          <div class="class-row">
+            <span class="class-tag class-2">Tier 1 Info Class 2</span>
+          </div>
+        </div>
+
+        <div class="class-block">
+          <div class="class-row">
+            <span class="class-tag class-2">Tier 1 Info Class 2</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="tier-2">
+        <button class="tier-toggle clickable" data-toggle="tier2">
+          <span>Tier 2 Info</span>
+          <span class="meta">Interactive title</span>
+        </button>
+        <div class="tier-body" data-body="tier2">
+          <div class="class-block">
+            <div class="class-row">
+              <span class="class-tag class-1">Tier 2 Info Class 1</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const expandAll = new URLSearchParams(window.location.search).get('expanded') === '1';
+
+    const class3Toggle = document.querySelector('[data-toggle="class3"]');
+    const class3Hidden = document.querySelector('[data-hidden="class3"]');
+    if (class3Toggle && class3Hidden) {
+      class3Toggle.addEventListener('click', () => {
+        class3Hidden.classList.toggle('is-open');
+      });
+    }
+
+    const tier2Toggle = document.querySelector('[data-toggle="tier2"]');
+    const tier2Body = document.querySelector('[data-body="tier2"]');
+    if (tier2Toggle && tier2Body) {
+      tier2Toggle.addEventListener('click', () => {
+        tier2Body.classList.toggle('is-closed');
+      });
+    }
+
+    if (expandAll) {
+      if (class3Hidden) class3Hidden.classList.add('is-open');
+      if (tier2Body) tier2Body.classList.remove('is-closed');
+    }
+  </script>
+</body>
+</html>
