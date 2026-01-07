@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adult pt Illness:</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Saira+Semi+Condensed:wght@500;600;700&display=swap");
+
+    :root {
+      --ink: #0f172a;
+      --muted: #475569;
+      --paper: #f7f2ea;
+      --panel: #fffdf9;
+      --line: rgba(15, 23, 42, 0.14);
+      --tier1: #c2410c;
+      --tier2: #0f766e;
+      --tier3: #4d7c0f;
+      --shadow: 0 20px 44px rgba(15, 23, 42, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", sans-serif;
+      background:
+        linear-gradient(120deg, rgba(194, 65, 12, 0.14), transparent 45%),
+        radial-gradient(520px 320px at 92% -5%, rgba(15, 118, 110, 0.16), transparent 65%),
+        repeating-linear-gradient(135deg, rgba(15, 23, 42, 0.04) 0 10px, transparent 10px 20px),
+        var(--paper);
+      color: var(--ink);
+      padding: 26px 18px 60px;
+    }
+
+    .canvas {
+      max-width: 980px;
+      margin: 0 auto;
+      background: var(--panel);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      padding: 24px 22px 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .tier {
+      border-radius: 18px;
+      padding: 16px 14px 16px 18px;
+      border-left: var(--rail-width) solid var(--rail);
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.6) 0%, #ffffff 40%);
+      box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.06);
+      display: grid;
+      gap: 10px;
+      position: relative;
+      animation: rise 0.45s ease both;
+    }
+
+    .tier::after {
+      content: "";
+      position: absolute;
+      left: calc(var(--rail-width) * -1);
+      top: 18px;
+      width: var(--rail-width);
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .tier-1 { --rail: var(--tier1); --rail-width: 14px; --accent: rgba(194, 65, 12, 0.38); --accent-soft: rgba(194, 65, 12, 0.12); }
+    .tier-2 { --rail: var(--tier2); --rail-width: 10px; --accent: rgba(15, 118, 110, 0.32); --accent-soft: rgba(15, 118, 110, 0.1); }
+    .tier-3 { --rail: var(--tier3); --rail-width: 8px; --accent: rgba(77, 124, 15, 0.3); --accent-soft: rgba(77, 124, 15, 0.08); }
+
+    .line {
+      width: 100%;
+      text-align: left;
+      border-radius: 10px;
+      padding: 10px 12px 10px 14px;
+      border: 1px solid var(--line);
+      background: linear-gradient(90deg, var(--accent) 0 6px, #ffffff 6px);
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .line.label {
+      font-family: "Saira Semi Condensed", sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.02em;
+      padding: 0 0 6px;
+      border: none;
+      background: transparent;
+    }
+
+    .line.c1 {
+      font-family: "Saira Semi Condensed", sans-serif;
+      font-size: 18px;
+      letter-spacing: 0.02em;
+      background: linear-gradient(90deg, var(--accent) 0 10px, var(--accent-soft) 10px 100%);
+      border-color: rgba(15, 23, 42, 0.18);
+    }
+
+    .line.c1.focus {
+      box-shadow: 0 0 0 2px rgba(194, 65, 12, 0.22);
+    }
+
+    .line.c2 {
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .c3 {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    button.line {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .clickable {
+      position: relative;
+      animation: glint 1.7s ease-in-out infinite;
+    }
+
+    .clickable::after {
+      content: "";
+      position: absolute;
+      right: 12px;
+      top: 10px;
+      width: 6px;
+      height: calc(100% - 20px);
+      border-radius: 999px;
+      background: var(--rail);
+      opacity: 0.45;
+    }
+
+    .is-hidden { display: none; }
+
+    .inline-reveal { display: none; }
+    .inline-reveal.is-open { display: inline; }
+
+    .drawer {
+      display: inline-block;
+      overflow: hidden;
+      max-width: 0;
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: max-width 0.35s ease, opacity 0.35s ease, transform 0.35s ease;
+      vertical-align: baseline;
+      margin-left: 4px;
+      padding: 0;
+    }
+
+    .drawer.is-open {
+      max-width: 560px;
+      opacity: 1;
+      transform: translateX(0);
+      padding: 0 4px;
+      background: rgba(15, 118, 110, 0.12);
+      border-radius: 8px;
+    }
+
+    .pop-wrap { position: relative; }
+
+    .popover {
+      position: absolute;
+      left: 14px;
+      top: calc(100% + 10px);
+      width: min(520px, 88vw);
+      background: #0f172a;
+      color: #f8fafc;
+      border-radius: 14px;
+      padding: 12px 14px;
+      box-shadow: 0 18px 34px rgba(15, 23, 42, 0.24);
+      display: none;
+      z-index: 2;
+    }
+
+    .popover.is-open { display: grid; gap: 8px; }
+
+    .popover-line {
+      font-size: 13px;
+      line-height: 1.3;
+    }
+
+    @keyframes glint {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.14); }
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 720px) {
+      body { padding: 20px 14px 40px; }
+      .canvas { padding: 20px 16px 24px; }
+      .line.label { font-size: 20px; }
+      .line.c1 { font-size: 17px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .clickable { animation: none; }
+      .tier { animation: none; }
+      .drawer { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas">
+    <section class="tier tier-1">
+      <div class="line label">Adult pt Illness:</div>
+      <div class="line c2">Treat if pt has these conditions met.</div>
+      <div class="line c2">Don't treat if pt has this condition.</div>
+      <div class="line c1 focus">Administer drug.</div>
+      <div class="line c1">Repeat drug administration after x amount of time, max dose of drug is.</div>
+      <div class="line c2">Consult for further orders.</div>
+      <div class="line c1">Administer this other drug, may repeat every x amount of minutes prn.</div>
+      <div class="line c2">Take caution for.</div>
+      <div class="line c2">What out for these S/S.</div>
+    </section>
+
+    <section class="tier tier-2">
+      <div class="line c2">Drug has this function.</div>
+      <button class="line c1 clickable" data-toggle="tier2-drawer" type="button">
+        <span data-collapsed="tier2-drawer">Drug wont function if this interaction.</span>
+        <span class="is-hidden" data-expanded="tier2-drawer">Drug wont function if this interaction, <span class="drawer c3" data-hidden="tier2-drawer">Drug function interaction on cellular level.</span></span>
+      </button>
+    </section>
+
+    <section class="tier tier-3">
+      <div class="pop-wrap">
+        <button class="line c2 clickable" data-toggle="tier3-pop" type="button">Illness background Info.</button>
+        <div class="popover c3" data-hidden="tier3-pop">
+          <div class="popover-line">More Illness background Info, Classic recognition signs, Longterm pt signs, Less important illness info.</div>
+          <div class="popover-line">Why we should do this.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tier tier-2">
+      <div class="line c1">Severity potential.</div>
+      <div class="line c2">Potential for harm issues.</div>
+    </section>
+
+    <section class="tier tier-1">
+      <div class="line c2">When pt has Illness and this other thing.</div>
+      <button class="line c1 clickable" data-toggle="tier1-inline" type="button">
+        <span data-collapsed="tier1-inline">Begin this additional Tx en route, Don't let this happen during administration.</span>
+        <span class="is-hidden" data-expanded="tier1-inline">Begin this additional Tx en route, Don't let this happen during administration, <span class="inline-reveal c3" data-hidden="tier1-inline">Why this could happen on a cellular level.</span></span>
+      </button>
+    </section>
+  </main>
+
+  <script>
+    const expandAll = new URLSearchParams(window.location.search).get("expanded") === "1";
+
+    const toggleGroup = (key) => {
+      document.querySelectorAll(`[data-hidden="${key}"]`).forEach((el) => el.classList.toggle("is-open"));
+      const collapsed = document.querySelector(`[data-collapsed="${key}"]`);
+      const expanded = document.querySelector(`[data-expanded="${key}"]`);
+      if (collapsed && expanded) {
+        collapsed.classList.toggle("is-hidden");
+        expanded.classList.toggle("is-hidden");
+      }
+    };
+
+    document.querySelectorAll("[data-toggle]").forEach((el) => {
+      el.addEventListener("click", () => toggleGroup(el.dataset.toggle));
+    });
+
+    if (expandAll) {
+      const groups = new Set([...document.querySelectorAll("[data-toggle]")].map((el) => el.dataset.toggle));
+      groups.forEach((key) => {
+        document.querySelectorAll(`[data-hidden="${key}"]`).forEach((el) => el.classList.add("is-open"));
+        const collapsed = document.querySelector(`[data-collapsed="${key}"]`);
+        const expanded = document.querySelector(`[data-expanded="${key}"]`);
+        if (collapsed && expanded) {
+          collapsed.classList.add("is-hidden");
+          expanded.classList.remove("is-hidden");
+        }
+      });
+    }
+  </script>
+</body>
+</html>
