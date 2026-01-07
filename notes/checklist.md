@@ -25,6 +25,12 @@
 - [x] Capture before/after screenshots for the new example
 - [x] Record memory-log entry
 
+## 2026-01-05 10:40:28 Adult detail experiments v6 (generic sequence)
+- [x] Draft updated ruleset text for experimental layouts
+- [x] Build one new example using generic text flow
+- [x] Capture before/after screenshots for the new example
+- [x] Record memory-log entry
+
 ## 2026-01-03 02:22:23 Anaphylaxis restructure + split protocols
 - [x] Create new protocol topics (CPR initiation/termination, OOH DNR + surrogate, death documentation) and move content
 - [x] Update categories + markdown maps + slug list for new topics
@@ -98,6 +104,12 @@
 - [ ] Test workflow-ui-quality features
 - [ ] Test workflow-web-research features
 - [ ] Compile report and write memory-log entry
+
+## 2026-01-05 14:29:59 Specified-text experiment v7
+- [x] Update v7 experiment to use only user-provided text
+- [x] Capture before/after screenshots
+- [x] Add capture script
+- [x] Record memory-log entry
 
 ## 2026-01-02 12:04:52 Unreferenced markdown investigation
 - [x] Inspect data wiring (ParamedicCategoriesData, VentilationDetailsData, ProtocolMarkdownMap, AbbreviationGroups)

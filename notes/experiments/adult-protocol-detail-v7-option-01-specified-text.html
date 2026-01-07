@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adult Detail Experiment - Specified Text Only</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+    :root {
+      --ink: #0b1b2b;
+      --muted: #5b6574;
+      --primary: #0f4c81;
+      --accent: #f97316;
+      --accent-soft: #fff1e6;
+      --panel: #ffffff;
+      --bg: #f3f6fb;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(600px 320px at 0% -10%, rgba(249, 115, 22, 0.18), transparent 60%),
+        repeating-linear-gradient(135deg, rgba(15, 76, 129, 0.05) 0, rgba(15, 76, 129, 0.05) 12px, transparent 12px, transparent 24px),
+        var(--bg);
+      color: var(--ink);
+      padding: 32px 20px 60px;
+    }
+
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+      background: var(--panel);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(15, 76, 129, 0.12);
+      padding: 22px 24px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .line {
+      border: 1px solid rgba(15, 76, 129, 0.12);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #ffffff;
+      font-size: 14px;
+      color: var(--muted);
+      text-align: left;
+      width: 100%;
+    }
+
+    .line.primary {
+      border-left: 4px solid #0f4c81;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .line.secondary {
+      border-left: 4px solid #94a3b8;
+    }
+
+    .line.section {
+      font-family: "Barlow Condensed", "Segoe UI", sans-serif;
+      letter-spacing: 0.06em;
+      font-size: 16px;
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 6px;
+      text-decoration-thickness: 3px;
+    }
+
+    .clickable {
+      cursor: pointer;
+      animation: pulse 1.8s ease-in-out infinite;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 2px;
+      color: var(--accent);
+    }
+
+    button.line {
+      appearance: none;
+      border: 1px solid rgba(15, 76, 129, 0.12);
+      background: #ffffff;
+      font: inherit;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .hidden.is-open {
+      display: inline;
+    }
+
+    .hidden-line {
+      display: none;
+    }
+
+    .hidden-line.is-open {
+      display: block;
+    }
+
+    .space { height: 6px; }
+
+    @keyframes pulse {
+      0%, 100% { color: #f97316; }
+      50% { color: #ffb37a; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .clickable { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="stack">
+      <div class="line section">Adult pt Illness:</div>
+      <div class="line secondary">Treat if pt has these conditions met.</div>
+      <div class="line secondary">Don't treat if pt has this condition.</div>
+      <div class="line primary">Administer drug.</div>
+      <div class="line secondary">Repeat drug administration after x amount of time, max dose of drug is.</div>
+      <div class="line secondary">Consult for further orders.</div>
+      <div class="line secondary">Administer this other drug, may repeat every x amount of minutes prn.</div>
+      <div class="line secondary">Take caution for.</div>
+      <div class="line secondary">What out for these S/S.</div>
+
+      <div class="line secondary clickable" data-toggle="background">Drug has this function.</div>
+      <div class="line hidden-line" data-hidden="background">Illness background Info.</div>
+      <div class="line hidden-line" data-hidden="background">More Illness background Info, Classic recognition signs, Longterm pt signs, Less important illness info.</div>
+      <div class="line hidden-line" data-hidden="background">Why we should do this.</div>
+
+      <button class="line secondary clickable" data-toggle="interaction" type="button">
+        <span class="collapsed" data-collapsed="interaction">Drug wont function if this interaction.</span>
+        <span class="expanded hidden" data-expanded="interaction">Drug wont function if this interaction, <span class="hidden" data-hidden="interaction">Drug function interaction on cellular level.</span></span>
+      </button>
+
+      <div class="space"></div>
+
+      <div class="line primary">Severity potential.</div>
+      <div class="line secondary">Potential for harm issues.</div>
+      <div class="line secondary">When pt has Illness and this other thing.</div>
+
+      <button class="line secondary clickable" data-toggle="tx" type="button">
+        <span class="collapsed" data-collapsed="tx">Begin this additional Tx en route, Don't let this happen during administration.</span>
+        <span class="expanded hidden" data-expanded="tx">Begin this additional Tx en route, Don't let this happen during administration, <span class="hidden" data-hidden="tx">Why this could happen on a cellular level.</span></span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const expandAll = new URLSearchParams(window.location.search).get('expanded') === '1';
+
+    const toggleGroup = (key) => {
+      document.querySelectorAll(`[data-hidden="${key}"]`).forEach((el) => el.classList.toggle('is-open'));
+      const collapsed = document.querySelector(`[data-collapsed="${key}"]`);
+      const expanded = document.querySelector(`[data-expanded="${key}"]`);
+      if (collapsed && expanded) {
+        collapsed.classList.toggle('hidden');
+        expanded.classList.toggle('hidden');
+      }
+    };
+
+    document.querySelectorAll('[data-toggle="background"]').forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('[data-hidden="background"]').forEach((el) => el.classList.toggle('is-open'));
+      });
+    });
+
+    document.querySelectorAll('[data-toggle="interaction"]').forEach((button) => {
+      button.addEventListener('click', () => toggleGroup('interaction'));
+    });
+
+    document.querySelectorAll('[data-toggle="tx"]').forEach((button) => {
+      button.addEventListener('click', () => toggleGroup('tx'));
+    });
+
+    if (expandAll) {
+      document.querySelectorAll('[data-hidden="background"]').forEach((el) => el.classList.add('is-open'));
+      ['interaction', 'tx'].forEach((key) => {
+        document.querySelectorAll(`[data-hidden="${key}"]`).forEach((el) => el.classList.add('is-open'));
+        const collapsed = document.querySelector(`[data-collapsed="${key}"]`);
+        const expanded = document.querySelector(`[data-expanded="${key}"]`);
+        if (collapsed && expanded) {
+          collapsed.classList.add('hidden');
+          expanded.classList.remove('hidden');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

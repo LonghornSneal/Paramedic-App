@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adult Protocol Detail Page - Experimental Option 18 - Generic Sequence</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+    :root {
+      --ink: #0b1b2b;
+      --muted: #5b6574;
+      --primary: #0f4c81;
+      --accent: #f97316;
+      --accent-soft: #fff1e6;
+      --panel: #ffffff;
+      --bg: #f3f6fb;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(600px 320px at 0% -10%, rgba(249, 115, 22, 0.18), transparent 60%),
+        repeating-linear-gradient(135deg, rgba(15, 76, 129, 0.05) 0, rgba(15, 76, 129, 0.05) 12px, transparent 12px, transparent 24px),
+        var(--bg);
+      color: var(--ink);
+      padding: 32px 20px 60px;
+    }
+
+    .page {
+      max-width: 1040px;
+      margin: 0 auto;
+      background: var(--panel);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(15, 76, 129, 0.12);
+      padding: 26px 28px 34px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    header h1 {
+      font-family: "Barlow Condensed", "Segoe UI", sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    header .subtitle {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.35fr 0.95fr;
+      gap: 16px;
+    }
+
+    .tier {
+      border-radius: var(--radius);
+      border: 1px solid rgba(15, 76, 129, 0.18);
+      background: #ffffff;
+      overflow: hidden;
+    }
+
+    .tier + .tier { margin-top: 12px; }
+
+    .tier-title {
+      width: 100%;
+      background: #f1f5f9;
+      border: none;
+      padding: 14px 16px;
+      font-family: "Barlow Condensed", "Segoe UI", sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--primary);
+      text-decoration: underline;
+      text-underline-offset: 6px;
+      text-decoration-thickness: 3px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tier-title .meta {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .tier-body {
+      padding: 14px 16px 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .line {
+      border: 1px solid rgba(15, 76, 129, 0.12);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #ffffff;
+    }
+
+    .class-1 { border-left: 4px solid #0f4c81; font-weight: 700; }
+    .class-2 { border-left: 4px solid #94a3b8; color: var(--muted); }
+    .class-3 { border-left: 4px solid #f97316; background: var(--accent-soft); }
+
+    .combo {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .pill {
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .pill.class-1 { background: #0f4c81; color: #fff; }
+    .pill.class-2 { background: #e2e8f0; color: #0f172a; }
+    .pill.class-3 { background: #fde68a; color: #7c2d12; }
+
+    .toggle-text {
+      display: inline-block;
+      margin-top: 8px;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: underline;
+      cursor: pointer;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    .hidden { display: none; }
+    .hidden.is-open { display: block; }
+
+    @keyframes pulse {
+      0%, 100% { color: #f97316; }
+      50% { color: #ffb37a; }
+    }
+
+    @media (max-width: 920px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .toggle-text { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <h1>Adult Protocol Detail Page</h1>
+        <div class="subtitle">Experimental Option 18 - Generic Sequence</div>
+      </div>
+      <div class="subtitle">High Acuity Flow</div>
+    </header>
+
+    <div class="layout">
+      <div>
+        <section class="tier">
+          <button class="tier-title" data-toggle="tier1">
+            <span>Tier 1 Info</span>
+            <span class="meta">Interactive title</span>
+          </button>
+          <div class="tier-body" data-body="tier1">
+            <div class="line class-2">Treat if pt has these conditions met.</div>
+            <div class="line class-2">Do not treat if pt has this condition.</div>
+            <div class="line class-1">Administer drug.</div>
+            <div class="line">
+              <div class="combo">
+                <span class="pill class-1">Repeat drug administration after x amount of time</span>
+                <span class="pill class-2">Max dose of drug is</span>
+              </div>
+            </div>
+            <div class="line class-2">Consult for further orders.</div>
+            <div class="line">
+              <div class="combo">
+                <span class="pill class-1">Administer this other drug</span>
+                <span class="pill class-2">May repeat every x minutes prn</span>
+              </div>
+            </div>
+            <div class="line class-2">Take caution for.</div>
+            <div class="line class-2">Watch out for these S/S.</div>
+            <div class="line class-2">Drug has this function.</div>
+
+            <div class="line">
+              <div class="combo">
+                <span class="pill class-1">Drug wont function if this interaction</span>
+                <span class="pill class-3 hidden" data-hidden="tier1c3">Drug function interaction on cellular level</span>
+              </div>
+              <div class="toggle-text" data-toggle="tier1c3">Tap to reveal Tier 1 Info Class 3</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="tier">
+          <button class="tier-title" data-toggle="tier2">
+            <span>Tier 2 Info</span>
+            <span class="meta">Interactive title</span>
+          </button>
+          <div class="tier-body" data-body="tier2">
+            <div class="line class-1">Severity potential.</div>
+            <div class="line class-2">Potential for harm issues.</div>
+            <div class="line class-3 hidden" data-hidden="tier2c3">When pt has illness and this other thing.</div>
+            <div class="toggle-text" data-toggle="tier2c3">Open slide drawer for Tier 2 Info Class 3</div>
+          </div>
+        </section>
+      </div>
+
+      <div>
+        <section class="tier">
+          <button class="tier-title" data-toggle="tier3">
+            <span>Tier 3 Info</span>
+            <span class="meta">Interactive title</span>
+          </button>
+          <div class="tier-body" data-body="tier3">
+            <div class="line class-2">Illness background info.</div>
+            <div class="line class-2">More illness background info, classic recognition signs, longterm pt signs, less important illness info.</div>
+            <div class="line class-3 hidden" data-hidden="tier3c3">Why we should do this.</div>
+            <div class="toggle-text" data-toggle="tier3c3">Tap chip for Tier 3 Info Class 3</div>
+          </div>
+        </section>
+
+        <section class="tier">
+          <button class="tier-title" data-toggle="tier4">
+            <span>Tier 4 Info</span>
+            <span class="meta">Interactive title</span>
+          </button>
+          <div class="tier-body" data-body="tier4">
+            <div class="line class-2">Begin this additional Tx en route.</div>
+            <div class="line class-2">Do not let this happen during administration.</div>
+            <div class="line class-3 hidden" data-hidden="tier4c3">Why this could happen on a cellular level.</div>
+            <div class="toggle-text" data-toggle="tier4c3">Open folded note for Tier 4 Info Class 3</div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const expandAll = new URLSearchParams(window.location.search).get('expanded') === '1';
+
+    const toggles = ['tier1c3', 'tier2c3', 'tier3c3', 'tier4c3'];
+    toggles.forEach((key) => {
+      const button = document.querySelector(`[data-toggle="${key}"]`);
+      const target = document.querySelector(`[data-hidden="${key}"]`);
+      if (!button || !target) return;
+      button.addEventListener('click', () => target.classList.toggle('is-open'));
+    });
+
+    if (expandAll) {
+      toggles.forEach((key) => {
+        const target = document.querySelector(`[data-hidden="${key}"]`);
+        if (target) target.classList.add('is-open');
+      });
+    }
+  </script>
+</body>
+</html>
