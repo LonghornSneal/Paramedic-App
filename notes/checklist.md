@@ -1,3 +1,9 @@
+## 2026-01-06 23:23:08 Adult detail experiments v8 (high-acuity variants)
+- [x] Create four HTML mockups (Stacked Triage Rail, Split Focus Columns, Command Card Deck, Signal Ladder) using only generic text
+- [x] Capture before/after screenshots for each option
+- [x] Review screenshots for class 3 visibility and text-only compliance
+- [x] Record memory-log entry
+
 ## 2026-01-05 00:22:45 Adult detail experiments v2
 - [x] Remove prior experiment mockups and screenshots
 - [x] Create new Adult Protocol detail mockups with tier/class differentiation

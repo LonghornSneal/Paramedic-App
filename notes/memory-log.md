@@ -22,3 +22,4 @@
 2026-01-05 08:45:11 - Removed unselected v2/v3 experiment assets, kept v3 critical beacon + barricade tabs and all v4 screenshots/HTML. Added seizure mapping example (v5) with corrected class-3 hidden behavior and pulsing clickable text; captured before/after screenshots.
 2026-01-05 10:40:28 - Added generic-sequence example (v6) with tier/class visibility rules (class 3 hidden until toggle) and captured before/after screenshots.
 2026-01-05 14:29:59 - Created specified-text experiment (v7) using only user-provided generic text, with hidden context revealed from the immediately preceding line; captured before/after screenshots and added a capture script.
+2026-01-06 23:33:59 - Created four v8 Adult Protocol detail mockups (Stacked Triage Rail, Split Focus Columns, Command Card Deck, Signal Ladder) using only generic text; added capture-detail-v8 script and captured before/after screenshots in notes/screenshots.

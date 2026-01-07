@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adult pt Illness:</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600&family=Sora:wght@400;500;600&display=swap');
+
+    :root {
+      --ink: #0f1d1c;
+      --muted: #3b4a4a;
+      --tier1: #ef6f4c;
+      --tier2: #2a9d8f;
+      --tier3: #457b9d;
+      --bg: #0b2b28;
+      --panel: #0f3230;
+      --shadow: 0 22px 44px rgba(7, 20, 19, 0.3);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Sora", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(500px 300px at 8% -5%, rgba(239, 111, 76, 0.18), transparent 60%),
+        radial-gradient(540px 320px at 90% 0%, rgba(69, 123, 157, 0.18), transparent 60%),
+        var(--bg);
+      color: #f8fafc;
+      padding: 30px 18px 52px;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, rgba(15, 50, 48, 0.96), rgba(9, 31, 30, 0.98));
+      border-radius: 28px;
+      padding: 26px 22px 34px;
+      border: 1px solid rgba(248, 250, 252, 0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .ladder {
+      position: relative;
+      display: grid;
+      gap: 18px;
+    }
+
+    .ladder::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: 10px;
+      bottom: 10px;
+      width: 4px;
+      border-radius: 4px;
+      background: linear-gradient(180deg, var(--tier1), var(--tier2), var(--tier3));
+    }
+
+    .rung {
+      position: relative;
+      display: grid;
+      gap: 10px;
+      padding: 14px 14px 14px 42px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(248, 250, 252, 0.08);
+    }
+
+    .rung::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 20px;
+      width: 28px;
+      height: 2px;
+      background: var(--rung-color);
+      border-radius: 2px;
+    }
+
+    .rung.tier-1 { --rung-color: var(--tier1); }
+    .rung.tier-2 { --rung-color: var(--tier2); }
+    .rung.tier-3 { --rung-color: var(--tier3); }
+
+    .line {
+      width: 100%;
+      text-align: left;
+      border-radius: 12px;
+      padding: 11px 12px;
+      border: 1px solid rgba(15, 29, 28, 0.12);
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .line.section {
+      border-left: 4px solid var(--tier1);
+      font-weight: 700;
+      color: #1f2d2c;
+    }
+
+    .line.c1 {
+      font-family: "Chakra Petch", "Segoe UI", sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      border-color: rgba(239, 111, 76, 0.4);
+      background: #fff0e8;
+    }
+
+    .line.c1.focus {
+      box-shadow: 0 0 0 2px rgba(239, 111, 76, 0.28);
+      background: #ffe3d6;
+    }
+
+    .line.c2 {
+      font-weight: 600;
+      color: #243232;
+    }
+
+    button.line {
+      appearance: none;
+      border: 1px solid rgba(15, 29, 28, 0.12);
+      background: rgba(255, 255, 255, 0.92);
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .clickable {
+      position: relative;
+      animation: pulse 1.7s ease-in-out infinite;
+      box-shadow: 0 0 0 0 var(--glow);
+    }
+
+    .rung.tier-1 .clickable { --glow: rgba(239, 111, 76, 0.26); }
+    .rung.tier-2 .clickable { --glow: rgba(42, 157, 143, 0.26); }
+    .rung.tier-3 .clickable { --glow: rgba(69, 123, 157, 0.26); }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 var(--glow); }
+      50% { box-shadow: 0 0 0 5px var(--glow); }
+    }
+
+    .seg.weak {
+      font-weight: 500;
+      color: #5b6565;
+    }
+
+    .is-hidden { display: none; }
+
+    .hidden-line { display: none; }
+    .hidden-line.is-open { display: block; }
+
+    .drawer {
+      display: inline-block;
+      overflow: hidden;
+      max-width: 0;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: max-width 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+      vertical-align: baseline;
+      background: rgba(42, 157, 143, 0.16);
+      border-radius: 8px;
+      padding: 0 0 0 0;
+    }
+
+    .drawer.is-open {
+      max-width: 520px;
+      opacity: 1;
+      transform: translateX(0);
+      padding: 2px 6px;
+      margin-left: 4px;
+    }
+
+    .inline-reveal {
+      display: none;
+      background: rgba(239, 111, 76, 0.16);
+      border-radius: 8px;
+      padding: 0 0 0 0;
+    }
+
+    .inline-reveal.is-open {
+      display: inline;
+      padding: 2px 6px;
+      margin-left: 4px;
+    }
+
+    .pop-group {
+      position: relative;
+    }
+
+    .popover {
+      position: absolute;
+      left: 12px;
+      top: calc(100% + 10px);
+      width: min(460px, 88vw);
+      background: #0b1f2a;
+      color: #f8fafc;
+      border-radius: 14px;
+      padding: 12px;
+      box-shadow: 0 18px 34px rgba(9, 23, 29, 0.35);
+      display: none;
+      z-index: 2;
+    }
+
+    .popover.is-open { display: grid; gap: 8px; }
+
+    .popover-line {
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .clickable { animation: none; }
+      .drawer { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="ladder">
+      <section class="rung tier-1">
+        <div class="line section">Adult pt Illness:</div>
+        <div class="line c2">Treat if pt has these conditions met.</div>
+        <div class="line c2">Don't treat if pt has this condition.</div>
+        <div class="line c1 focus">Administer drug.</div>
+        <div class="line c1">Repeat drug administration after x amount of time<span class="seg weak">, max dose of drug is.</span></div>
+        <div class="line c2">Consult for further orders.</div>
+        <div class="line c1">Administer this other drug<span class="seg weak">, may repeat every x amount of minutes prn.</span></div>
+        <div class="line c2">Take caution for.</div>
+        <div class="line c2">What out for these S/S.</div>
+        <div class="line c2">When pt has Illness and this other thing.</div>
+        <button class="line c1 clickable" data-toggle="tier1-inline" type="button">
+          <span data-collapsed="tier1-inline">Begin this additional Tx en route, Don't let this happen during administration.</span>
+          <span class="is-hidden" data-expanded="tier1-inline">Begin this additional Tx en route, Don't let this happen during administration, <span class="inline-reveal" data-hidden="tier1-inline">Why this could happen on a cellular level.</span></span>
+        </button>
+      </section>
+
+      <section class="rung tier-2">
+        <div class="line c2">Drug has this function.</div>
+        <button class="line c1 clickable" data-toggle="tier2-drawer" type="button">
+          <span data-collapsed="tier2-drawer">Drug wont function if this interaction.</span>
+          <span class="is-hidden" data-expanded="tier2-drawer">Drug wont function if this interaction, <span class="drawer" data-hidden="tier2-drawer">Drug function interaction on cellular level.</span></span>
+        </button>
+        <div class="line c2">Severity potential.</div>
+        <div class="line c2">Potential for harm issues.</div>
+      </section>
+
+      <section class="rung tier-3">
+        <div class="pop-group">
+          <button class="line c2 clickable" data-toggle="tier3-pop" type="button">Illness background Info.</button>
+          <div class="popover hidden-line" data-hidden="tier3-pop">
+            <div class="popover-line">More Illness background Info, Classic recognition signs, Longterm pt signs, Less important illness info.</div>
+            <div class="popover-line">Why we should do this.</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const expandAll = new URLSearchParams(window.location.search).get('expanded') === '1';
+
+    const toggleGroup = (key) => {
+      document.querySelectorAll(`[data-hidden="${key}"]`).forEach((el) => el.classList.toggle('is-open'));
+      const collapsed = document.querySelector(`[data-collapsed="${key}"]`);
+      const expanded = document.querySelector(`[data-expanded="${key}"]`);
+      if (collapsed && expanded) {
+        collapsed.classList.toggle('is-hidden');
+        expanded.classList.toggle('is-hidden');
+      }
+    };
+
+    document.querySelectorAll('[data-toggle]').forEach((el) => {
+      el.addEventListener('click', () => toggleGroup(el.dataset.toggle));
+    });
+
+    if (expandAll) {
+      const groups = new Set([...document.querySelectorAll('[data-toggle]')].map((el) => el.dataset.toggle));
+      groups.forEach((key) => {
+        document.querySelectorAll(`[data-hidden="${key}"]`).forEach((el) => el.classList.add('is-open'));
+        const collapsed = document.querySelector(`[data-collapsed="${key}"]`);
+        const expanded = document.querySelector(`[data-expanded="${key}"]`);
+        if (collapsed && expanded) {
+          collapsed.classList.add('is-hidden');
+          expanded.classList.remove('is-hidden');
+        }
+      });
+    }
+  </script>
+</body>
+</html>

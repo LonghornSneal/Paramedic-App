@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adult pt Illness:</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Merriweather+Sans:wght@400;600&display=swap');
+
+    :root {
+      --ink: #1a1f2b;
+      --muted: #515b67;
+      --tier1: #fca311;
+      --tier2: #219ebc;
+      --tier3: #2a9d8f;
+      --panel: #ffffff;
+      --bg: #f7f1e9;
+      --shadow: 0 18px 36px rgba(26, 31, 43, 0.16);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Merriweather Sans", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(520px 300px at 8% -5%, rgba(252, 163, 17, 0.2), transparent 65%),
+        radial-gradient(540px 320px at 92% 0%, rgba(33, 158, 188, 0.18), transparent 65%),
+        repeating-linear-gradient(0deg, rgba(26, 31, 43, 0.04) 0, rgba(26, 31, 43, 0.04) 10px, transparent 10px, transparent 20px),
+        var(--bg);
+      color: var(--ink);
+      padding: 30px 18px 52px;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 24px 34px;
+      background: var(--panel);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(26, 31, 43, 0.12);
+    }
+
+    .deck {
+      display: grid;
+      gap: 16px;
+    }
+
+    .card {
+      position: relative;
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border-radius: 20px;
+      border: 2px solid var(--tier-color);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), #ffffff);
+      box-shadow: 0 10px 22px rgba(26, 31, 43, 0.12);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--tier-color), transparent);
+      border-radius: 20px 20px 0 0;
+    }
+
+    .card.tier-1 { --tier-color: var(--tier1); }
+    .card.tier-2 { --tier-color: var(--tier2); border-style: dashed; transform: translateX(12px); }
+    .card.tier-3 { --tier-color: var(--tier3); border-style: double; transform: translateX(22px); }
+
+    .line {
+      width: 100%;
+      text-align: left;
+      border-radius: 12px;
+      padding: 11px 12px;
+      border: 1px solid rgba(26, 31, 43, 0.12);
+      background: #ffffff;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .line.section {
+      border-left: 4px solid var(--tier1);
+      font-weight: 700;
+      color: #243044;
+    }
+
+    .line.c1 {
+      font-family: "Rajdhani", "Segoe UI", sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: var(--ink);
+      border-color: rgba(252, 163, 17, 0.45);
+      background: #fff6e5;
+    }
+
+    .line.c1.focus {
+      box-shadow: 0 0 0 2px rgba(252, 163, 17, 0.28);
+      background: #ffe9c9;
+    }
+
+    .line.c2 {
+      font-weight: 600;
+      color: #2b3a4a;
+    }
+
+    button.line {
+      appearance: none;
+      border: 1px solid rgba(26, 31, 43, 0.12);
+      background: #ffffff;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .clickable {
+      position: relative;
+      animation: scan 2s linear infinite;
+      background: linear-gradient(90deg, rgba(252, 163, 17, 0.08), rgba(252, 163, 17, 0.28), rgba(252, 163, 17, 0.08));
+      background-size: 200% 100%;
+    }
+
+    .card.tier-2 .clickable {
+      background: linear-gradient(90deg, rgba(33, 158, 188, 0.08), rgba(33, 158, 188, 0.28), rgba(33, 158, 188, 0.08));
+    }
+
+    .card.tier-3 .clickable {
+      background: linear-gradient(90deg, rgba(42, 157, 143, 0.08), rgba(42, 157, 143, 0.26), rgba(42, 157, 143, 0.08));
+    }
+
+    @keyframes scan {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .seg.weak {
+      font-weight: 500;
+      color: #5f6a78;
+    }
+
+    .is-hidden { display: none; }
+
+    .hidden-line { display: none; }
+    .hidden-line.is-open { display: block; }
+
+    .drawer {
+      display: inline-block;
+      overflow: hidden;
+      max-width: 0;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: max-width 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+      vertical-align: baseline;
+      background: rgba(33, 158, 188, 0.16);
+      border-radius: 8px;
+      padding: 0 0 0 0;
+    }
+
+    .drawer.is-open {
+      max-width: 520px;
+      opacity: 1;
+      transform: translateX(0);
+      padding: 2px 6px;
+      margin-left: 4px;
+    }
+
+    .inline-reveal {
+      display: none;
+      background: rgba(252, 163, 17, 0.16);
+      border-radius: 8px;
+      padding: 0 0 0 0;
+    }
+
+    .inline-reveal.is-open {
+      display: inline;
+      padding: 2px 6px;
+      margin-left: 4px;
+    }
+
+    .pop-group {
+      position: relative;
+    }
+
+    .popover {
+      position: absolute;
+      left: 16px;
+      top: calc(100% + 10px);
+      width: min(460px, 88vw);
+      background: #1f2937;
+      color: #f8fafc;
+      border-radius: 14px;
+      padding: 12px;
+      box-shadow: 0 18px 34px rgba(31, 41, 55, 0.3);
+      display: none;
+      z-index: 2;
+    }
+
+    .popover.is-open { display: grid; gap: 8px; }
+
+    .popover-line {
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .clickable { animation: none; }
+      .drawer { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="deck">
+      <section class="card tier-1">
+        <div class="line section">Adult pt Illness:</div>
+        <div class="line c2">Treat if pt has these conditions met.</div>
+        <div class="line c2">Don't treat if pt has this condition.</div>
+        <div class="line c1 focus">Administer drug.</div>
+        <div class="line c1">Repeat drug administration after x amount of time<span class="seg weak">, max dose of drug is.</span></div>
+        <div class="line c2">Consult for further orders.</div>
+        <div class="line c1">Administer this other drug<span class="seg weak">, may repeat every x amount of minutes prn.</span></div>
+        <div class="line c2">Take caution for.</div>
+        <div class="line c2">What out for these S/S.</div>
+        <div class="line c2">When pt has Illness and this other thing.</div>
+        <button class="line c1 clickable" data-toggle="tier1-inline" type="button">
+          <span data-collapsed="tier1-inline">Begin this additional Tx en route, Don't let this happen during administration.</span>
+          <span class="is-hidden" data-expanded="tier1-inline">Begin this additional Tx en route, Don't let this happen during administration, <span class="inline-reveal" data-hidden="tier1-inline">Why this could happen on a cellular level.</span></span>
+        </button>
+      </section>
+
+      <section class="card tier-2">
+        <div class="line c2">Drug has this function.</div>
+        <button class="line c1 clickable" data-toggle="tier2-drawer" type="button">
+          <span data-collapsed="tier2-drawer">Drug wont function if this interaction.</span>
+          <span class="is-hidden" data-expanded="tier2-drawer">Drug wont function if this interaction, <span class="drawer" data-hidden="tier2-drawer">Drug function interaction on cellular level.</span></span>
+        </button>
+        <div class="line c2">Severity potential.</div>
+        <div class="line c2">Potential for harm issues.</div>
+      </section>
+
+      <section class="card tier-3">
+        <div class="pop-group">
+          <button class="line c2 clickable" data-toggle="tier3-pop" type="button">Illness background Info.</button>
+          <div class="popover hidden-line" data-hidden="tier3-pop">
+            <div class="popover-line">More Illness background Info, Classic recognition signs, Longterm pt signs, Less important illness info.</div>
+            <div class="popover-line">Why we should do this.</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const expandAll = new URLSearchParams(window.location.search).get('expanded') === '1';
+
+    const toggleGroup = (key) => {
+      document.querySelectorAll(`[data-hidden="${key}"]`).forEach((el) => el.classList.toggle('is-open'));
+      const collapsed = document.querySelector(`[data-collapsed="${key}"]`);
+      const expanded = document.querySelector(`[data-expanded="${key}"]`);
+      if (collapsed && expanded) {
+        collapsed.classList.toggle('is-hidden');
+        expanded.classList.toggle('is-hidden');
+      }
+    };
+
+    document.querySelectorAll('[data-toggle]').forEach((el) => {
+      el.addEventListener('click', () => toggleGroup(el.dataset.toggle));
+    });
+
+    if (expandAll) {
+      const groups = new Set([...document.querySelectorAll('[data-toggle]')].map((el) => el.dataset.toggle));
+      groups.forEach((key) => {
+        document.querySelectorAll(`[data-hidden="${key}"]`).forEach((el) => el.classList.add('is-open'));
+        const collapsed = document.querySelector(`[data-collapsed="${key}"]`);
+        const expanded = document.querySelector(`[data-expanded="${key}"]`);
+        if (collapsed && expanded) {
+          collapsed.classList.add('is-hidden');
+          expanded.classList.remove('is-hidden');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
