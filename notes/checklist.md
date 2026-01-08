@@ -1,3 +1,9 @@
+## 2026-01-07 19:02:18 Adult detail experiments v12 (space-like variants)
+- [x] Create 10 v12 HTML variants based on the reference layout with space-like backgrounds
+- [x] Capture before/after screenshots for each v12 option
+- [ ] Review screenshots for class 3 visibility and text-only compliance
+- [x] Record memory-log entry
+
 ## 2026-01-07 18:23:55 Adult detail experiments v11 (purple-blue-red variants)
 - [x] Generate 10 HTML variants based on the liked layout with purple/blue/red dominant artistic backgrounds
 - [x] Capture before/after screenshots for each v11 option
