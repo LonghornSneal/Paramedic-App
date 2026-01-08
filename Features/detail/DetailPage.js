@@ -161,6 +161,10 @@ export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop =
         contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; 
         return; 
     }
+    contentArea.classList.remove('detail-space', 'detail-space-anaphylaxis');
+    if (topicId === 'adult-anaphylaxis') {
+        contentArea.classList.add('detail-space', 'detail-space-anaphylaxis');
+    }
     const topic = window.allDisplayableTopicsMap[topicId];
     hideEquipmentPopover(true, true);
     contentArea.innerHTML = '';
@@ -169,7 +173,7 @@ export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop =
     if (!isQuickVent) {
         const headerEl = document.createElement('h2');
         headerEl.textContent = topic.title || topic.name || topic.id;
-        headerEl.className = 'topic-h2 font-semibold text-lg mb-4';
+        headerEl.className = 'topic-h2 title-tier font-semibold text-lg mb-4';
         headerEl.dataset.topicId = topic.id;
         contentArea.appendChild(headerEl);
     } else {

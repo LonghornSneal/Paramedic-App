@@ -11,6 +11,7 @@ import { addTapListener } from '../../Utils/addTapListener.js'
 // Renders the main category list view (home screen) and highlights a topic if provided.
 export function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     const contentArea = window.contentArea || document.getElementById('content-area');
+    contentArea.classList.remove('detail-space', 'detail-space-anaphylaxis');
     contentArea.innerHTML = '';  // Clear current content
     const suggested = Array.isArray(window.patientSuggestedTopics) ? window.patientSuggestedTopics : [];
     if (suggested.length) {

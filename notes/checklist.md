@@ -1,3 +1,9 @@
+## 2026-01-07 21:57:54 Adult Anaphylaxis v12 styling (tier/class mapping + readability)
+- [x] Map adult-anaphylaxis detail text to tier/class system
+- [x] Apply v12 space-card styling to adult anaphylaxis detail page (no text edits)
+- [x] Verify full visibility on desktop + mobile with Playwright and fix readability issues
+- [x] Record memory-log entry
+
 ## 2026-01-07 19:02:18 Adult detail experiments v12 (space-like variants)
 - [x] Create 10 v12 HTML variants based on the reference layout with space-like backgrounds
 - [x] Capture before/after screenshots for each v12 option

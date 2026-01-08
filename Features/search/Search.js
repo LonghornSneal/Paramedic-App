@@ -46,7 +46,9 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
         });
     }
     updateNavButtonsState();
-    (window.contentArea || document.getElementById('content-area')).innerHTML = `<div class="flex justify-between items-center mb-3">
+    const contentArea = window.contentArea || document.getElementById('content-area');
+    contentArea.classList.remove('detail-space', 'detail-space-anaphylaxis');
+    contentArea.innerHTML = `<div class="flex justify-between items-center mb-3">
         <p class="text-gray-700 font-medium">Results for "${escapeHTML(searchTerm)}":</p>
         <button id="clear-search-button" class="text-sm text-blue-600 hover:underline">Show All Categories</button>
     </div>
