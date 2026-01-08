@@ -1,3 +1,9 @@
+## 2026-01-07 10:57:04 Adult detail experiments v10 (tier remap)
+- [x] Align v10 options 01-08 to tier/class mapping and inline class 3 styling
+- [x] Capture before/after screenshots for each option
+- [ ] Review screenshots for class 3 visibility and text-only compliance
+- [x] Record memory-log entry
+
 ## 2026-01-07 06:47:30 Adult detail experiments v9 (visual-only variants)
 - [x] Create four HTML mockups (Stacked Triage Rail, Split Focus Columns, Command Card Deck, Signal Ladder) using only generic text
 - [x] Capture before/after screenshots for each option

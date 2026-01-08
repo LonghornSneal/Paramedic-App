@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adult Protocol Detail Experiment v10 Option 08</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700&family=Saira:wght@400;600;700&display=swap');
+
+    :root {
+      --ink: #2c3d4f;
+      --muted: #566579;
+      --page: #f1f4f7;
+      --panel: #ffffff;
+      --tier1: #2c3d4f;
+      --tier1-accent: #d67d3e;
+      --tier2: #2b5d5c;
+      --tier2-accent: #f2c48a;
+      --tier3: #3a4f5c;
+      --tier3-accent: #cfe3d3;
+      --tier4: #7a4a3a;
+      --tier4-accent: #f4b37d;
+      --shadow: 0 16px 32px rgba(44, 61, 79, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Saira", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(520px 240px at 12% 10%, rgba(214, 125, 62, 0.18), transparent 60%),
+        repeating-radial-gradient(circle at 12px 12px, rgba(44, 61, 79, 0.06) 0 2px, transparent 2px 18px),
+        var(--page);
+    }
+
+    .scene { padding: 36px 22px 60px; }
+
+    .stack {
+      max-width: 920px;
+      margin: 0 auto;
+      display: grid;
+      gap: 18px;
+    }
+
+    .tier {
+      background: var(--panel);
+      padding: 18px 20px 12px;
+      box-shadow: var(--shadow);
+      position: relative;
+      border: 1px solid rgba(44, 61, 79, 0.12);
+      border-left: 6px solid var(--accent);
+      border-radius: 14px;
+      animation: pulseIn 0.8s ease both;
+    }
+
+    .tier-1 { --accent: var(--tier1-accent); }
+    .tier-2 { --accent: var(--tier2-accent); }
+    .tier-4 { --accent: var(--tier4-accent); }
+
+    .line {
+      display: block;
+      width: 100%;
+      padding: 8px 4px 10px;
+      border-bottom: 1px dashed rgba(44, 61, 79, 0.18);
+      text-align: left;
+      font-size: 14px;
+      line-height: 1.35;
+      color: var(--muted);
+    }
+
+    .line:last-child { border-bottom: none; }
+
+    .t1.c1 {
+      font-family: "Saira Condensed", sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.03em;
+      color: var(--tier1);
+      background: rgba(214, 125, 62, 0.12);
+      padding: 10px 8px;
+      border-radius: 10px;
+      border-bottom: none;
+    }
+
+    .t1.c2 { color: var(--ink); }
+
+    .t1.c3 {
+      color: var(--tier1);
+      background: rgba(214, 125, 62, 0.2);
+      border: 1px dashed rgba(214, 125, 62, 0.5);
+    }
+    .t2.c1 { color: var(--tier2); font-weight: 700; }
+    .t2.c2 { color: var(--muted); }
+    .t2.c3 {
+      color: var(--tier2);
+      background: rgba(242, 196, 138, 0.3);
+      border-radius: 10px;
+      padding: 10px 8px;
+      border-bottom: none;
+    }
+
+    .t3.c3 {
+      color: var(--tier3);
+      background: rgba(207, 227, 211, 0.9);
+      border-radius: 999px;
+      padding: 10px 16px;
+      border-bottom: none;
+      font-weight: 600;
+    }
+
+    .t4.c2 { color: var(--tier4); }
+
+    button.line {
+      appearance: none;
+      border: none;
+      background: transparent;
+      font: inherit;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+    }
+
+    .clickable {
+      background: linear-gradient(90deg, rgba(214, 125, 62, 0.18), transparent 60%);
+      animation: shimmer 2s ease-in-out infinite;
+    }
+
+    .is-hidden { display: none; }
+
+    .inline-tag {
+      display: inline-block;
+      padding: 0 6px;
+      border-radius: 999px;
+    }
+
+    .slide {
+      display: inline-block;
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      vertical-align: bottom;
+      transform: translateY(-2px);
+      transition: max-width 0.45s ease, opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .slide.is-open {
+      max-width: 1000px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .drawer {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .drawer.is-open {
+      max-height: 240px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .pop-anchor { position: relative; }
+
+    .popover {
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      width: 50%;
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 2;
+    }
+
+    .popover.is-open { opacity: 1; transform: translateY(6px); }
+
+    .swap.is-hidden { display: none; }
+
+    .folded {
+      position: relative;
+      background: linear-gradient(135deg, rgba(244, 179, 125, 0.25), transparent 60%);
+      border-radius: 10px;
+      padding: 10px 8px;
+      border-bottom: none;
+    }
+
+    .folded::after {
+      content: "";
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      background: rgba(244, 179, 125, 0.7);
+      transform: translateY(-50%);
+    }
+
+    @keyframes shimmer {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.2); }
+    }
+
+    @keyframes pulseIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      .popover {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin-top: 8px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .clickable { animation: none; }
+      .tier { animation: none; }
+      .drawer, .popover, .slide { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="scene">
+    <div class="stack">
+      <section class="tier tier-1">
+        <div class="line t1 c1">Adult pt Illness:</div>
+        <div class="line t1 c2">Treat if pt has these conditions met.</div>
+        <div class="line t1 c2">Don't treat if pt has this condition.</div>
+        <div class="line t1 c1">Administer drug.</div>
+        <div class="line t1 c1">Repeat drug administration after x amount of time, max dose of drug is.</div>
+        <div class="line t1 c2">Consult for further orders.</div>
+        <div class="line t1 c1">Administer this other drug, may repeat every x amount of minutes prn.</div>
+        <div class="line t1 c2">Take caution for.</div>
+        <div class="line t1 c2">What out for these S/S.</div>
+      </section>
+
+      <section class="tier tier-2">
+        <div class="line t2 c2">Drug has this function.</div>
+        <div class="pop-anchor">
+          <button class="line t2 c1 clickable" data-toggle="interaction" type="button">
+            <span class="swap" data-collapsed="interaction">Drug wont function if this interaction.</span>
+            <span class="swap slide" data-expanded="interaction">Drug wont function if this interaction<span class="inline-tag t2 c3">, Drug function interaction on cellular level.</span></span>
+          </button>
+          <div class="popover" data-hidden="tier3">
+            <div class="line t3 c3">Illness background Info.</div>
+            <div class="line t3 c3">More Illness background Info, Classic recognition signs, Longterm pt signs, Less important illness info.</div>
+            <div class="line t3 c3">Why we should do this.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tier tier-2">
+        <div class="line t2 c1">Severity potential.</div>
+        <div class="line t2 c2">Potential for harm issues.</div>
+      </section>
+
+      <section class="tier tier-1">
+        <div class="line t1 c2">When pt has Illness and this other thing.</div>
+        <button class="line t1 c1 clickable" data-toggle="tx" type="button">
+          <span class="swap" data-collapsed="tx">Begin this additional Tx en route, Don't let this happen during administration.</span>
+          <span class="swap slide" data-expanded="tx">Begin this additional Tx en route, Don't let this happen during administration<span class="inline-tag t1 c3">, Why this could happen on a cellular level.</span></span>
+        </button>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const expandAll = new URLSearchParams(window.location.search).get('expanded') === '1';
+
+    const toggleInline = (key, forceOpen) => {
+      const collapsed = document.querySelector(`[data-collapsed="${key}"]`);
+      const expanded = document.querySelector(`[data-expanded="${key}"]`);
+      if (!collapsed || !expanded) return;
+      const open = typeof forceOpen === 'boolean' ? forceOpen : collapsed.classList.contains('is-hidden');
+      collapsed.classList.toggle('is-hidden', open);
+      expanded.classList.toggle('is-open', open);
+    };
+
+    const toggleTier3 = (forceOpen) => {
+      const targets = document.querySelectorAll('[data-hidden="tier3"]');
+      targets.forEach((el) => {
+        const open = typeof forceOpen === 'boolean' ? forceOpen : !el.classList.contains('is-open');
+        el.classList.toggle('is-open', open);
+      });
+    };
+
+    document.querySelectorAll('[data-toggle="interaction"]').forEach((button) => {
+      button.addEventListener('click', () => {
+        toggleInline('interaction');
+        toggleTier3();
+      });
+    });
+
+    document.querySelectorAll('[data-toggle="tx"]').forEach((button) => {
+      button.addEventListener('click', () => toggleInline('tx'));
+    });
+
+    if (expandAll) {
+      toggleInline('interaction', true);
+      toggleInline('tx', true);
+      toggleTier3(true);
+    }
+  </script>
+</body>
+</html>
