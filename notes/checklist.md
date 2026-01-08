@@ -1,3 +1,9 @@
+## 2026-01-07 18:23:55 Adult detail experiments v11 (purple-blue-red variants)
+- [x] Generate 10 HTML variants based on the liked layout with purple/blue/red dominant artistic backgrounds
+- [x] Capture before/after screenshots for each v11 option
+- [ ] Review screenshots for class 3 visibility and text-only compliance
+- [x] Record memory-log entry
+
 ## 2026-01-07 10:57:04 Adult detail experiments v10 (tier remap)
 - [x] Align v10 options 01-08 to tier/class mapping and inline class 3 styling
 - [x] Capture before/after screenshots for each option
