@@ -293,8 +293,28 @@ function updateCategoryTreeMetrics(container) {
         tree.style.setProperty('--tree-raise', `${raise}px`);
         tree.style.setProperty('--tree-scale', `${desiredScale(level)}`);
         tree.style.setProperty('--connector-flow-direction', flowDirection);
+        if (tree.classList.contains('category-children') && tree.parentElement?.classList.contains('category-group')) {
+            tree.parentElement.style.setProperty('--child-shift', `${shift}px`);
+        }
         const groups = Array.from(tree.children).filter(child => child.classList.contains('category-group'));
         if (!groups.length) return;
+        let maxLabelWidth = 0;
+        groups.forEach(group => {
+            const directCard = group.querySelector(':scope > .category-card');
+            const label = directCard
+                ? directCard.querySelector('.category-card-title')
+                : group.querySelector(':scope > .topic-link-item');
+            group.style.setProperty('--child-shift', '0px');
+            if (!label) return;
+            const labelWidth = Math.ceil(label.getBoundingClientRect().width);
+            group.style.setProperty('--group-label-width', `${labelWidth}px`);
+            if (labelWidth > maxLabelWidth) maxLabelWidth = labelWidth;
+        });
+        const columnWidth = Math.ceil(maxLabelWidth || 0);
+        tree.style.setProperty('--tree-column-width', `${columnWidth}px`);
+        groups.forEach(group => {
+            group.style.setProperty('--parent-column-width', `${columnWidth}px`);
+        });
         const firstGroup = groups[0];
         const lastGroup = groups[groups.length - 1];
         const start = firstGroup.offsetTop + (firstGroup.offsetHeight / 2);

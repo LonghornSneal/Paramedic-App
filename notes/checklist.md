@@ -1,3 +1,10 @@
+## 2026-01-09 14:20:38 Category tree column spacing + connector alignment
+- [x] Measure column widths per tree and prevent overlap across sibling columns
+- [x] Extend connector runs to account for child column shift offsets
+- [x] Remove active-card horizontal offset so trunk stays centered
+- [x] Capture updated desktop/mobile category tree screenshots
+- [x] Record memory-log entry
+
 ## 2026-01-09 09:17:33 Category tree alignment + travel-line polish
 - [x] Recenter root trunk through category title pills and keep the trunk visible on load
 - [x] Shrink/move active path rows with diminishing offsets and no overlap
