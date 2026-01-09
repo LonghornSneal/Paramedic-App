@@ -4,6 +4,7 @@
 //import './Utils/addTapListener'
 import { addHistoryEntry, updateNavButtonsState } from '../navigation/Navigation.js';
 import { renderDetailPage } from '../detail/DetailPage.js';
+import { resetDetailSpaceClasses } from '../detail/detailSpaceUtils.js';
 import { addTapListener } from '../../Utils/addTapListener.js'
 // import { addHistoryEntry, updateNavButtonsState, attachNavHandlers } from './Features/navigation/Navigation.js';
 // import { renderDetailPage } from './Features/detail/DetailPage.js';
@@ -11,7 +12,7 @@ import { addTapListener } from '../../Utils/addTapListener.js'
 // Renders the main category list view (home screen) and highlights a topic if provided.
 export function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     const contentArea = window.contentArea || document.getElementById('content-area');
-    contentArea.classList.remove('detail-space', 'detail-space-anaphylaxis');
+    resetDetailSpaceClasses(contentArea);
     contentArea.innerHTML = '';  // Clear current content
     const suggested = Array.isArray(window.patientSuggestedTopics) ? window.patientSuggestedTopics : [];
     if (suggested.length) {

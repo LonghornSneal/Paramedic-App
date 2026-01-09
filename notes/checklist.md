@@ -1,3 +1,10 @@
+## 2026-01-08 15:49:43 Adult detail v12 rollout (adult-seizure + adult-sepsis)
+- [x] Map adult-seizure and adult-sepsis detail text to tier/class system
+- [x] Apply v12 detail-space base styling and per-topic overrides
+- [x] Add tiered markdown renderer and detail-space class toggles
+- [x] Capture Playwright screenshots (desktop + mobile, expanded toggles)
+- [x] Record memory-log entry
+
 ## 2026-01-07 21:57:54 Adult Anaphylaxis v12 styling (tier/class mapping + readability)
 - [x] Map adult-anaphylaxis detail text to tier/class system
 - [x] Apply v12 space-card styling to adult anaphylaxis detail page (no text edits)

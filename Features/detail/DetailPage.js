@@ -12,6 +12,7 @@ import { renderEquipmentFromMarkdown, renderMarkdownDetail, renderOriginalPdfSec
 import { renderQuickVentSetup, renderQuickVentCalculator } from './quickVent.js';
 import { attachToggleInfoHandlers, attachToggleCategoryHandlers, parseTextMarkup } from './detailPageUtils.js';
 import { addTapListener } from '../../Utils/addTapListener.js';
+import { applyDetailSpaceClasses } from './detailSpaceUtils.js';
 
 // Appends all detail sections for a topic into the content area, including “Class”, “Indications”, “Contraindications”, etc.
 // If the topic has no details, a placeholder message is inserted.
@@ -161,10 +162,7 @@ export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop =
         contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; 
         return; 
     }
-    contentArea.classList.remove('detail-space', 'detail-space-anaphylaxis');
-    if (topicId === 'adult-anaphylaxis') {
-        contentArea.classList.add('detail-space', 'detail-space-anaphylaxis');
-    }
+    applyDetailSpaceClasses(contentArea, topicId);
     const topic = window.allDisplayableTopicsMap[topicId];
     hideEquipmentPopover(true, true);
     contentArea.innerHTML = '';

@@ -3,6 +3,7 @@ import { slugify } from '../../Utils/slugify.js';
 import { attachToggleCategoryHandlers, attachToggleInfoHandlers } from './detailPageUtils.js';
 import { initializeEquipmentPopovers } from './equipmentPopover.js';
 import { setupSlugAnchors } from '../anchorNav/slugAnchors.js';
+import { TieredDetailConfig } from './tieredDetailConfig.js';
 
 function escapeHtml(s){
   return String(s)
@@ -131,6 +132,135 @@ function parseMdSections(md, topicId){
   return { cheat, sections };
 }
 
+function normalizeTierLine(value) {
+  return value.toString().trim();
+}
+
+function buildTieredSections(md, config) {
+  const lines = md.split(/\r?\n/);
+  const headerMap = new Map();
+  (config.sectionHeaders || []).forEach(item => {
+    headerMap.set(normalizeTierLine(item.line), item.tier);
+  });
+  const prefaceTier = config.prefaceTier ?? 3;
+  const prefaceTitleLine = config.prefaceTitleLine ? normalizeTierLine(config.prefaceTitleLine) : null;
+  const sections = [];
+  let current = { title: null, tier: prefaceTier, lines: [] };
+  let prefaceTitleSet = false;
+  lines.forEach(raw => {
+    const trimmed = raw.trim();
+    if (!trimmed.length) return;
+    const headerTier = headerMap.get(normalizeTierLine(trimmed));
+    if (headerTier) {
+      if (current.title || current.lines.length) sections.push(current);
+      current = { title: trimmed, tier: headerTier, lines: [] };
+      return;
+    }
+    if (!prefaceTitleSet && prefaceTitleLine && current.tier === prefaceTier) {
+      if (normalizeTierLine(trimmed) === prefaceTitleLine) {
+        current.title = trimmed;
+        prefaceTitleSet = true;
+        return;
+      }
+    }
+    current.lines.push(raw);
+  });
+  if (current.title || current.lines.length) sections.push(current);
+  sections.forEach(section => {
+    if (!section.title && section.lines.length) {
+      section.title = section.lines.shift().trim();
+    }
+  });
+  return sections;
+}
+
+function appendTieredLines(container, lines, tier) {
+  let inList = null;
+  let lineIndex = 0;
+  const getLineClass = () => {
+    if (tier >= 3) return 'class-3';
+    return lineIndex === 0 ? 'class-1' : 'class-2';
+  };
+  const appendParagraph = (html, tag = 'p') => {
+    const el = document.createElement(tag);
+    el.className = `tier-line ${getLineClass()}`;
+    el.innerHTML = html;
+    container.appendChild(el);
+    lineIndex += 1;
+  };
+  lines.forEach(raw => {
+    const trimmed = raw.trim();
+    if (!trimmed.length) return;
+    const headingMatch = trimmed.match(/^(#{1,6})\s+(.*)$/);
+    if (headingMatch) {
+      if (inList) {
+        container.appendChild(inList);
+        inList = null;
+      }
+      const level = Math.min(6, headingMatch[1].length);
+      const headingHtml = emphasizeImportant(inlineMd(headingMatch[2].trim()));
+      appendParagraph(headingHtml, `h${level}`);
+      return;
+    }
+    if (/^\s*[-*]\s+/.test(raw)) {
+      if (!inList) {
+        inList = document.createElement('ul');
+        inList.className = 'detail-list tier-list';
+      }
+      const li = document.createElement('li');
+      li.className = `tier-line ${getLineClass()}`;
+      const inner = inlineMd(raw.replace(/^\s*[-*]\s+/, ''));
+      li.innerHTML = emphasizeImportant(inner);
+      inList.appendChild(li);
+      lineIndex += 1;
+      return;
+    }
+    if (inList) {
+      container.appendChild(inList);
+      inList = null;
+    }
+    appendParagraph(emphasizeImportant(inlineMd(trimmed)));
+  });
+  if (inList) {
+    container.appendChild(inList);
+  }
+}
+
+function renderTieredMarkdownDetail(md, topic, contentArea, config) {
+  const sections = buildTieredSections(md, config);
+  sections.forEach((section, index) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'detail-section tier-section mb-3';
+    wrapper.dataset.tier = String(section.tier);
+    const titleEl = document.createElement('div');
+    const collapsible = section.tier >= 3;
+    titleEl.className = `detail-section-title${collapsible ? ' toggle-category' : ''}`;
+    if (collapsible) {
+      titleEl.setAttribute('role', 'button');
+      titleEl.setAttribute('tabindex', '0');
+      titleEl.setAttribute('aria-expanded', 'false');
+    }
+    const titleLabel = document.createElement('span');
+    titleLabel.className = 'detail-section-label';
+    titleLabel.textContent = section.title || topic.title || `Section ${index + 1}`;
+    titleEl.appendChild(titleLabel);
+    if (collapsible) {
+      const indicatorEl = document.createElement('span');
+      indicatorEl.className = 'section-indicator';
+      indicatorEl.textContent = 'Show';
+      titleEl.appendChild(indicatorEl);
+    }
+    titleEl.id = slugify(`${topic.id || 'topic'}-${titleLabel.textContent}-${index}`);
+    wrapper.appendChild(titleEl);
+    const body = document.createElement('div');
+    body.className = 'detail-text tier-body';
+    if (collapsible) body.classList.add('hidden');
+    appendTieredLines(body, section.lines, section.tier);
+    wrapper.appendChild(body);
+    contentArea.appendChild(wrapper);
+  });
+}
+
 export async function renderEquipmentFromMarkdown(details, contentArea, topic) {
   try {
     const res = await fetch(details.mdPath);
@@ -217,6 +347,14 @@ export async function renderMarkdownDetail(details, contentArea, topic) {
     const res = await fetch(details.mdPath);
     if (!res.ok) throw new Error(`Failed to load ${details.mdPath}`);
     const md = await res.text();
+    const tierConfig = TieredDetailConfig?.[topic?.id];
+    if (tierConfig) {
+      renderTieredMarkdownDetail(md, topic, contentArea, tierConfig);
+      attachToggleInfoHandlers(contentArea);
+      attachToggleCategoryHandlers(contentArea);
+      initializeEquipmentPopovers(contentArea);
+      return;
+    }
     const parsed = parseMdSections(md, topic.id) || { sections: [] };
     const sectionList = (parsed.sections && parsed.sections.length)
       ? parsed.sections.map(sec => ({ title: sec.title, html: sec.html ?? renderMdBlock(sec.content || []) }))

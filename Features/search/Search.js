@@ -4,6 +4,7 @@ import { escapeHTML } from '../../Utils/escapeHTML.js';
 import { renderInitialView } from '../list/ListView.js';
 import { renderDetailPage } from '../detail/DetailPage.js';
 import { addHistoryEntry, updateNavButtonsState } from '../navigation/Navigation.js';
+import { resetDetailSpaceClasses } from '../detail/detailSpaceUtils.js';
 
 let allSearchableTopics = [];
 
@@ -47,7 +48,7 @@ function renderSearchResults(filteredTopics, searchTerm, shouldAddHistory = true
     }
     updateNavButtonsState();
     const contentArea = window.contentArea || document.getElementById('content-area');
-    contentArea.classList.remove('detail-space', 'detail-space-anaphylaxis');
+    resetDetailSpaceClasses(contentArea);
     contentArea.innerHTML = `<div class="flex justify-between items-center mb-3">
         <p class="text-gray-700 font-medium">Results for "${escapeHTML(searchTerm)}":</p>
         <button id="clear-search-button" class="text-sm text-blue-600 hover:underline">Show All Categories</button>

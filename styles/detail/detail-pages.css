@@ -818,24 +818,73 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 
 }
 
-/* Anaphylaxis detail v12 space-card */
+/* Detail v12 space-card base */
 
-#content-area.detail-space-anaphylaxis {
+#content-area.detail-space {
   --space-base: #050712;
   --space-vignette: radial-gradient(1200px 620px at 50% -10%, rgba(37, 99, 235, 0.28), transparent 70%),
     radial-gradient(900px 520px at 18% 92%, rgba(219, 39, 119, 0.22), transparent 70%);
   --space-glow-1: radial-gradient(720px 360px at 18% 14%, rgba(124, 58, 237, 0.32), transparent 62%);
   --space-glow-2: radial-gradient(820px 420px at 86% 10%, rgba(59, 130, 246, 0.26), transparent 64%);
   --space-glow-3: radial-gradient(760px 380px at 70% 92%, rgba(239, 68, 68, 0.22), transparent 64%);
-  --ana-ink: #111827;
-  --ana-muted: #334155;
-  --ana-title: #0f172a;
-  --ana-card: rgba(255, 255, 255, 0.96);
-  --ana-card-strong: rgba(255, 255, 255, 0.98);
-  --ana-border: rgba(148, 163, 184, 0.35);
-  --ana-accent: #7c3aed;
-  --ana-accent-2: #2563eb;
-  --ana-accent-3: #ef4444;
+  --detail-ink: #111827;
+  --detail-muted: #334155;
+  --detail-title: #0f172a;
+  --detail-card: rgba(255, 255, 255, 0.96);
+  --detail-card-strong: rgba(255, 255, 255, 0.98);
+  --detail-border: rgba(148, 163, 184, 0.35);
+  --detail-accent: #7c3aed;
+  --detail-accent-2: #2563eb;
+  --detail-accent-3: #ef4444;
+  --detail-accent-4: #db2777;
+  --detail-accent-2-soft: rgba(37, 99, 235, 0.18);
+  --detail-title-font: "Space Grotesk", "Sora", sans-serif;
+  --detail-body-font: "IBM Plex Sans", "Sora", sans-serif;
+  --detail-title-size: 1.25rem;
+  --detail-title-letter: 0.24em;
+  --detail-title-bg: rgba(255, 255, 255, 0.95);
+  --detail-title-border: rgba(124, 58, 237, 0.4);
+  --detail-title-rail: linear-gradient(180deg, var(--detail-accent), var(--detail-accent-2));
+  --detail-title-glow: radial-gradient(circle at 35% 35%, rgba(124, 58, 237, 0.2), rgba(124, 58, 237, 0));
+  --detail-section-title-font: "Space Grotesk", "Sora", sans-serif;
+  --detail-section-title-size: 0.82rem;
+  --detail-section-title-letter: 0.2em;
+  --detail-section-title-padding: 0.55rem 0.85rem;
+  --tier-1-title-color: #312e81;
+  --tier-1-title-bg: rgba(124, 58, 237, 0.08);
+  --tier-1-title-border: rgba(124, 58, 237, 0.25);
+  --tier-2-title-color: #1e3a8a;
+  --tier-2-title-bg: rgba(37, 99, 235, 0.08);
+  --tier-2-title-border: rgba(37, 99, 235, 0.28);
+  --tier-3-title-color: #1f2937;
+  --tier-3-title-bg: rgba(15, 23, 42, 0.06);
+  --tier-3-title-border: rgba(15, 23, 42, 0.18);
+  --tier-4-title-color: #1f2937;
+  --tier-4-title-bg: rgba(15, 23, 42, 0.06);
+  --tier-4-title-border: rgba(15, 23, 42, 0.18);
+  --tier-1-indicator-bg: rgba(124, 58, 237, 0.16);
+  --tier-1-indicator-color: #4c1d95;
+  --tier-1-indicator-border: rgba(124, 58, 237, 0.3);
+  --tier-2-indicator-bg: rgba(37, 99, 235, 0.16);
+  --tier-2-indicator-color: #1e3a8a;
+  --tier-2-indicator-border: rgba(37, 99, 235, 0.3);
+  --tier-3-indicator-bg: rgba(15, 23, 42, 0.12);
+  --tier-3-indicator-color: #1e293b;
+  --tier-3-indicator-border: rgba(15, 23, 42, 0.18);
+  --tier-4-indicator-bg: rgba(15, 23, 42, 0.12);
+  --tier-4-indicator-color: #1e293b;
+  --tier-4-indicator-border: rgba(15, 23, 42, 0.18);
+  --tier-1-glow: rgba(124, 58, 237, 0.08);
+  --tier-2-glow: rgba(37, 99, 235, 0.06);
+  --tier-3-glow: rgba(148, 163, 184, 0.05);
+  --tier-4-glow: rgba(148, 163, 184, 0.05);
+  --tier-1-border-strong: rgba(124, 58, 237, 0.55);
+  --tier-2-border-strong: rgba(37, 99, 235, 0.35);
+  --tier-3-border-strong: rgba(148, 163, 184, 0.35);
+  --tier-4-border-strong: rgba(148, 163, 184, 0.35);
+  --detail-class-1: var(--detail-ink);
+  --detail-class-2: var(--detail-ink);
+  --detail-class-3: var(--detail-muted);
 
   background: var(--space-vignette), var(--space-glow-1), var(--space-glow-2), var(--space-glow-3), var(--space-base);
   color: #e2e8f0;
@@ -846,7 +895,7 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 
 }
 
-#content-area.detail-space-anaphylaxis::before {
+#content-area.detail-space::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -860,29 +909,29 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 
 }
 
-#content-area.detail-space-anaphylaxis > * {
+#content-area.detail-space > * {
   position: relative;
   z-index: 1;
 
 }
 
-#content-area.detail-space-anaphylaxis .title-tier[data-topic-id="adult-anaphylaxis"] {
-  font-family: "Space Grotesk", "Sora", sans-serif;
-  font-size: 1.25rem;
-  letter-spacing: 0.24em;
+#content-area.detail-space .title-tier[data-topic-id] {
+  font-family: var(--detail-title-font);
+  font-size: var(--detail-title-size);
+  letter-spacing: var(--detail-title-letter);
   text-transform: uppercase;
-  color: var(--ana-title);
+  color: var(--detail-title);
   padding: 0.9rem 1.2rem;
   border-radius: 1rem;
-  border: 1px solid rgba(124, 58, 237, 0.4);
-  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--detail-title-border);
+  background: var(--detail-title-bg);
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.25);
   position: relative;
   overflow: hidden;
 
 }
 
-#content-area.detail-space-anaphylaxis .title-tier[data-topic-id="adult-anaphylaxis"]::before {
+#content-area.detail-space .title-tier[data-topic-id]::before {
   content: "";
   position: absolute;
   left: 0.7rem;
@@ -890,24 +939,25 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
   bottom: 0.55rem;
   width: 4px;
   border-radius: 999px;
-  background: linear-gradient(180deg, var(--ana-accent), var(--ana-accent-2));
+  background: var(--detail-title-rail);
 
 }
 
-#content-area.detail-space-anaphylaxis .title-tier[data-topic-id="adult-anaphylaxis"]::after {
+#content-area.detail-space .title-tier[data-topic-id]::after {
   content: "";
   position: absolute;
   right: -30px;
   top: -45px;
   width: 160px;
   height: 160px;
-  background: radial-gradient(circle at 35% 35%, rgba(124, 58, 237, 0.2), rgba(124, 58, 237, 0));
+  background: var(--detail-title-glow);
 
 }
 
-#content-area.detail-space-anaphylaxis .detail-section {
-  background: var(--ana-card);
-  border: 1px solid var(--ana-border);
+#content-area.detail-space .detail-section {
+  --tier-accent: var(--detail-accent);
+  background: var(--detail-card);
+  border: 1px solid var(--detail-border);
   border-radius: 1rem;
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.22);
   position: relative;
@@ -915,102 +965,207 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 
 }
 
-#content-area.detail-space-anaphylaxis .detail-section::before {
+#content-area.detail-space .detail-section::before {
   content: "";
   position: absolute;
   left: 0;
   top: 0;
   height: 6px;
   width: 100%;
-  background: linear-gradient(90deg, var(--ana-accent), transparent 80%);
+  background: linear-gradient(90deg, var(--tier-accent), transparent 80%);
   opacity: 0.85;
 
 }
 
-#content-area.detail-space-anaphylaxis .detail-section:first-of-type {
-  background: linear-gradient(180deg, rgba(124, 58, 237, 0.08) 0%, var(--ana-card-strong) 55%, #fff 100%);
-  border-left: 4px solid rgba(124, 58, 237, 0.55);
+#content-area.detail-space .detail-section[data-tier="1"] {
+  --tier-accent: var(--detail-accent);
+  background: linear-gradient(180deg, var(--tier-1-glow) 0%, var(--detail-card-strong) 55%, #fff 100%);
+  border-left: 4px solid var(--tier-1-border-strong);
 
 }
 
-#content-area.detail-space-anaphylaxis .detail-section + .detail-section::before {
-  background: linear-gradient(90deg, var(--ana-accent-2), transparent 80%);
+#content-area.detail-space .detail-section[data-tier="2"] {
+  --tier-accent: var(--detail-accent-2);
+  background: linear-gradient(180deg, var(--tier-2-glow) 0%, var(--detail-card) 60%);
+  border-left: 4px solid var(--tier-2-border-strong);
 
 }
 
-#content-area.detail-space-anaphylaxis .detail-section-title {
-  font-family: "Space Grotesk", "Sora", sans-serif;
-  font-size: 0.82rem;
-  letter-spacing: 0.2em;
+#content-area.detail-space .detail-section[data-tier="3"] {
+  --tier-accent: var(--detail-accent-3);
+  background: linear-gradient(180deg, var(--tier-3-glow) 0%, var(--detail-card) 65%);
+  border-left: 4px solid var(--tier-3-border-strong);
+
+}
+
+#content-area.detail-space .detail-section[data-tier="4"] {
+  --tier-accent: var(--detail-accent-4);
+  background: linear-gradient(180deg, var(--tier-4-glow) 0%, var(--detail-card) 65%);
+  border-left: 4px solid var(--tier-4-border-strong);
+
+}
+
+#content-area.detail-space .detail-section:not([data-tier]):first-of-type {
+  background: linear-gradient(180deg, var(--tier-1-glow) 0%, var(--detail-card-strong) 55%, #fff 100%);
+  border-left: 4px solid var(--tier-1-border-strong);
+
+}
+
+#content-area.detail-space .detail-section:not([data-tier]) + .detail-section:not([data-tier])::before {
+  background: linear-gradient(90deg, var(--detail-accent-2), transparent 80%);
+
+}
+
+#content-area.detail-space .detail-section:not([data-tier]) + .detail-section:not([data-tier]) .detail-section-title {
+  border-color: var(--tier-2-title-border);
+  background: var(--tier-2-title-bg);
+  color: var(--tier-2-title-color);
+
+}
+
+#content-area.detail-space .detail-section:not([data-tier]) + .detail-section:not([data-tier]) .section-indicator {
+  background: var(--tier-2-indicator-bg);
+  color: var(--tier-2-indicator-color);
+  border: 1px solid var(--tier-2-indicator-border);
+
+}
+
+#content-area.detail-space .detail-section-title {
+  font-family: var(--detail-section-title-font);
+  font-size: var(--detail-section-title-size);
+  letter-spacing: var(--detail-section-title-letter);
   text-transform: uppercase;
-  color: #312e81;
-  padding: 0.55rem 0.85rem;
+  padding: var(--detail-section-title-padding);
   border-radius: 0.85rem;
-  border: 1px solid rgba(124, 58, 237, 0.25);
-  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid var(--tier-1-title-border);
+  background: var(--tier-1-title-bg);
+  color: var(--tier-1-title-color);
 
 }
 
-#content-area.detail-space-anaphylaxis .detail-section + .detail-section .detail-section-title {
-  color: #1e3a8a;
-  border-color: rgba(37, 99, 235, 0.28);
-  background: rgba(37, 99, 235, 0.08);
+#content-area.detail-space .detail-section-title:not(.toggle-category) {
+  cursor: default;
 
 }
 
-#content-area.detail-space-anaphylaxis .section-indicator {
+#content-area.detail-space .detail-section[data-tier="2"] .detail-section-title {
+  border-color: var(--tier-2-title-border);
+  background: var(--tier-2-title-bg);
+  color: var(--tier-2-title-color);
+
+}
+
+#content-area.detail-space .detail-section[data-tier="3"] .detail-section-title {
+  border-color: var(--tier-3-title-border);
+  background: var(--tier-3-title-bg);
+  color: var(--tier-3-title-color);
+
+}
+
+#content-area.detail-space .detail-section[data-tier="4"] .detail-section-title {
+  border-color: var(--tier-4-title-border);
+  background: var(--tier-4-title-bg);
+  color: var(--tier-4-title-color);
+
+}
+
+#content-area.detail-space .section-indicator {
   font-size: 0.62rem;
   letter-spacing: 0.14em;
-  background: rgba(124, 58, 237, 0.16);
-  color: #4c1d95;
-  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: 999px;
 
 }
 
-#content-area.detail-space-anaphylaxis .detail-section-title.is-expanded .section-indicator {
-  background: var(--ana-accent);
+#content-area.detail-space .detail-section[data-tier="1"] .section-indicator {
+  background: var(--tier-1-indicator-bg);
+  color: var(--tier-1-indicator-color);
+  border: 1px solid var(--tier-1-indicator-border);
+
+}
+
+#content-area.detail-space .detail-section[data-tier="2"] .section-indicator {
+  background: var(--tier-2-indicator-bg);
+  color: var(--tier-2-indicator-color);
+  border: 1px solid var(--tier-2-indicator-border);
+
+}
+
+#content-area.detail-space .detail-section[data-tier="3"] .section-indicator {
+  background: var(--tier-3-indicator-bg);
+  color: var(--tier-3-indicator-color);
+  border: 1px solid var(--tier-3-indicator-border);
+
+}
+
+#content-area.detail-space .detail-section[data-tier="4"] .section-indicator {
+  background: var(--tier-4-indicator-bg);
+  color: var(--tier-4-indicator-color);
+  border: 1px solid var(--tier-4-indicator-border);
+
+}
+
+#content-area.detail-space .detail-section[data-tier="1"] .detail-section-title.is-expanded .section-indicator {
+  background: var(--detail-accent);
   color: #fff;
 
 }
 
-#content-area.detail-space-anaphylaxis .detail-text,
-#content-area.detail-space-anaphylaxis .detail-list {
-  color: var(--ana-ink);
+#content-area.detail-space .detail-section[data-tier="2"] .detail-section-title.is-expanded .section-indicator {
+  background: var(--detail-accent-2);
+  color: #fff;
+
+}
+
+#content-area.detail-space .detail-section[data-tier="3"] .detail-section-title.is-expanded .section-indicator {
+  background: var(--detail-accent-3);
+  color: #fff;
+
+}
+
+#content-area.detail-space .detail-section[data-tier="4"] .detail-section-title.is-expanded .section-indicator {
+  background: var(--detail-accent-4);
+  color: #fff;
+
+}
+
+#content-area.detail-space .detail-text,
+#content-area.detail-space .detail-list {
+  color: var(--detail-ink);
   line-height: 1.6;
 
 }
 
-#content-area.detail-space-anaphylaxis .detail-text {
-  font-family: "IBM Plex Sans", "Sora", sans-serif;
+#content-area.detail-space .detail-text {
+  font-family: var(--detail-body-font);
 
 }
 
-#content-area.detail-space-anaphylaxis .detail-text h3.detail-md-heading {
-  font-family: "Space Grotesk", "Sora", sans-serif;
+#content-area.detail-space .detail-text h3.detail-md-heading {
+  font-family: var(--detail-section-title-font);
   font-size: 0.95rem;
   letter-spacing: 0.02em;
-  color: #4338ca;
+  color: var(--detail-accent-2);
   margin-top: 0.45rem;
 
 }
 
-#content-area.detail-space-anaphylaxis .detail-section:first-of-type .detail-text h3.detail-md-heading:nth-of-type(2) {
-  color: #1d4ed8;
+#content-area.detail-space .detail-section:not([data-tier]):first-of-type .detail-text h3.detail-md-heading:nth-of-type(2) {
+  color: var(--detail-accent-2);
   font-size: 0.82rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  border-top: 1px solid rgba(37, 99, 235, 0.18);
+  border-top: 1px solid var(--detail-accent-2-soft);
   padding-top: 0.55rem;
 
 }
 
-#content-area.detail-space-anaphylaxis .detail-text strong {
-  color: #5b21b6;
+#content-area.detail-space .detail-text strong {
+  color: var(--detail-accent);
 
 }
 
-#content-area.detail-space-anaphylaxis .detail-text code {
-  font-family: "IBM Plex Sans", "Sora", sans-serif;
+#content-area.detail-space .detail-text code {
+  font-family: var(--detail-body-font);
   font-size: 0.85rem;
   font-weight: 700;
   color: #9f1239;
@@ -1021,31 +1176,53 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 
 }
 
-#content-area.detail-space-anaphylaxis .toggle-info {
-  color: #be123c;
+#content-area.detail-space .tier-line {
+  margin: 0.3rem 0;
+
+}
+
+#content-area.detail-space .tier-line.class-1 {
+  font-weight: 700;
+  color: var(--detail-class-1);
+
+}
+
+#content-area.detail-space .tier-line.class-2 {
+  color: var(--detail-class-2);
+
+}
+
+#content-area.detail-space .tier-line.class-3 {
+  color: var(--detail-class-3);
+  font-size: 0.92rem;
+
+}
+
+#content-area.detail-space .toggle-info {
+  color: var(--detail-accent-3);
   border-bottom: 1px dashed rgba(190, 18, 60, 0.7);
   padding-bottom: 0.08rem;
 
 }
 
-#content-area.detail-space-anaphylaxis .toggle-info:focus-visible {
+#content-area.detail-space .toggle-info:focus-visible {
   outline: 2px solid rgba(190, 18, 60, 0.6);
   outline-offset: 2px;
 
 }
 
-#content-area.detail-space-anaphylaxis .toggle-info-label {
+#content-area.detail-space .toggle-info-label {
   font-weight: 700;
   background-image: linear-gradient(120deg, rgba(190, 18, 60, 0.95) 0%, rgba(190, 18, 60, 0.95) 40%, rgba(255, 241, 242, 0.95) 50%, rgba(190, 18, 60, 0.95) 60%, rgba(190, 18, 60, 0.95) 100%);
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: ana-space-shimmer 2.4s linear infinite;
+  animation: detail-space-shimmer 2.4s linear infinite;
 
 }
 
-#content-area.detail-space-anaphylaxis .toggle-info .info-text {
+#content-area.detail-space .toggle-info .info-text {
   display: inline-block;
   margin-left: 0.35rem;
   padding: 0.08rem 0.45rem;
@@ -1057,7 +1234,7 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 
 }
 
-#content-area.detail-space-anaphylaxis .toggle-info-indicator {
+#content-area.detail-space .toggle-info-indicator {
   font-size: 0.62rem;
   background: rgba(219, 39, 119, 0.15);
   color: #9f1239;
@@ -1065,40 +1242,202 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 
 }
 
-#content-area.detail-space-anaphylaxis .toggle-info.is-expanded .toggle-info-indicator {
+#content-area.detail-space .toggle-info.is-expanded .toggle-info-indicator {
   background: #db2777;
   color: #fff;
 
 }
 
-@keyframes ana-space-shimmer {
+@keyframes detail-space-shimmer {
   0% { background-position: -160% 0; }
   100% { background-position: 160% 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #content-area.detail-space-anaphylaxis .toggle-info-label {
+  #content-area.detail-space .toggle-info-label {
     animation: none;
   }
+}
+
+#content-area.detail-space-adult-anaphylaxis {
+  --space-base: #050712;
+  --space-vignette: radial-gradient(1200px 620px at 50% -10%, rgba(37, 99, 235, 0.28), transparent 70%),
+    radial-gradient(900px 520px at 18% 92%, rgba(219, 39, 119, 0.22), transparent 70%);
+  --space-glow-1: radial-gradient(720px 360px at 18% 14%, rgba(124, 58, 237, 0.32), transparent 62%);
+  --space-glow-2: radial-gradient(820px 420px at 86% 10%, rgba(59, 130, 246, 0.26), transparent 64%);
+  --space-glow-3: radial-gradient(760px 380px at 70% 92%, rgba(239, 68, 68, 0.22), transparent 64%);
+  --detail-ink: #111827;
+  --detail-muted: #334155;
+  --detail-title: #0f172a;
+  --detail-card: rgba(255, 255, 255, 0.96);
+  --detail-card-strong: rgba(255, 255, 255, 0.98);
+  --detail-border: rgba(148, 163, 184, 0.35);
+  --detail-accent: #7c3aed;
+  --detail-accent-2: #2563eb;
+  --detail-accent-3: #ef4444;
+  --detail-accent-4: #db2777;
+  --detail-title-border: rgba(124, 58, 237, 0.4);
+  --detail-title-glow: radial-gradient(circle at 35% 35%, rgba(124, 58, 237, 0.2), rgba(124, 58, 237, 0));
+  --tier-1-title-color: #312e81;
+  --tier-1-title-bg: rgba(124, 58, 237, 0.08);
+  --tier-1-title-border: rgba(124, 58, 237, 0.25);
+  --tier-2-title-color: #1e3a8a;
+  --tier-2-title-bg: rgba(37, 99, 235, 0.08);
+  --tier-2-title-border: rgba(37, 99, 235, 0.28);
+  --tier-3-title-color: #1f2937;
+  --tier-3-title-bg: rgba(15, 23, 42, 0.06);
+  --tier-3-title-border: rgba(15, 23, 42, 0.18);
+  --tier-4-title-color: #1f2937;
+  --tier-4-title-bg: rgba(15, 23, 42, 0.06);
+  --tier-4-title-border: rgba(15, 23, 42, 0.18);
+  --tier-1-indicator-bg: rgba(124, 58, 237, 0.16);
+  --tier-1-indicator-color: #4c1d95;
+  --tier-1-indicator-border: rgba(124, 58, 237, 0.3);
+  --tier-2-indicator-bg: rgba(37, 99, 235, 0.16);
+  --tier-2-indicator-color: #1e3a8a;
+  --tier-2-indicator-border: rgba(37, 99, 235, 0.3);
+  --tier-3-indicator-bg: rgba(15, 23, 42, 0.12);
+  --tier-3-indicator-color: #1e293b;
+  --tier-3-indicator-border: rgba(15, 23, 42, 0.18);
+  --tier-4-indicator-bg: rgba(15, 23, 42, 0.12);
+  --tier-4-indicator-color: #1e293b;
+  --tier-4-indicator-border: rgba(15, 23, 42, 0.18);
+  --tier-1-glow: rgba(124, 58, 237, 0.08);
+  --tier-2-glow: rgba(37, 99, 235, 0.06);
+  --tier-3-glow: rgba(148, 163, 184, 0.05);
+  --tier-4-glow: rgba(148, 163, 184, 0.05);
+  --tier-1-border-strong: rgba(124, 58, 237, 0.55);
+  --tier-2-border-strong: rgba(37, 99, 235, 0.35);
+  --tier-3-border-strong: rgba(148, 163, 184, 0.35);
+  --tier-4-border-strong: rgba(148, 163, 184, 0.35);
+
+}
+
+#content-area.detail-space-adult-seizure {
+  --space-base: #05060e;
+  --space-vignette: radial-gradient(1200px 620px at 50% -10%, rgba(14, 116, 144, 0.3), transparent 70%),
+    radial-gradient(900px 520px at 18% 92%, rgba(34, 197, 94, 0.22), transparent 70%);
+  --space-glow-1: radial-gradient(720px 360px at 18% 14%, rgba(6, 182, 212, 0.3), transparent 62%);
+  --space-glow-2: radial-gradient(820px 420px at 86% 10%, rgba(37, 99, 235, 0.24), transparent 64%);
+  --space-glow-3: radial-gradient(760px 380px at 70% 92%, rgba(34, 197, 94, 0.22), transparent 64%);
+  --detail-ink: #0f172a;
+  --detail-muted: #475569;
+  --detail-title: #0f172a;
+  --detail-card: rgba(255, 255, 255, 0.96);
+  --detail-card-strong: rgba(255, 255, 255, 0.99);
+  --detail-border: rgba(148, 163, 184, 0.35);
+  --detail-accent: #0f766e;
+  --detail-accent-2: #2563eb;
+  --detail-accent-3: #22c55e;
+  --detail-accent-4: #14b8a6;
+  --detail-title-border: rgba(15, 118, 110, 0.4);
+  --detail-title-glow: radial-gradient(circle at 35% 35%, rgba(14, 116, 144, 0.22), rgba(14, 116, 144, 0));
+  --tier-1-title-color: #0f766e;
+  --tier-1-title-bg: rgba(20, 184, 166, 0.08);
+  --tier-1-title-border: rgba(15, 118, 110, 0.3);
+  --tier-2-title-color: #1d4ed8;
+  --tier-2-title-bg: rgba(37, 99, 235, 0.08);
+  --tier-2-title-border: rgba(37, 99, 235, 0.3);
+  --tier-3-title-color: #0f172a;
+  --tier-3-title-bg: rgba(15, 23, 42, 0.06);
+  --tier-3-title-border: rgba(15, 23, 42, 0.18);
+  --tier-4-title-color: #0f172a;
+  --tier-4-title-bg: rgba(15, 23, 42, 0.06);
+  --tier-4-title-border: rgba(15, 23, 42, 0.18);
+  --tier-1-indicator-bg: rgba(15, 118, 110, 0.14);
+  --tier-1-indicator-color: #134e4a;
+  --tier-1-indicator-border: rgba(15, 118, 110, 0.28);
+  --tier-2-indicator-bg: rgba(37, 99, 235, 0.14);
+  --tier-2-indicator-color: #1e3a8a;
+  --tier-2-indicator-border: rgba(37, 99, 235, 0.28);
+  --tier-3-indicator-bg: rgba(15, 23, 42, 0.12);
+  --tier-3-indicator-color: #1e293b;
+  --tier-3-indicator-border: rgba(15, 23, 42, 0.18);
+  --tier-4-indicator-bg: rgba(15, 23, 42, 0.12);
+  --tier-4-indicator-color: #1e293b;
+  --tier-4-indicator-border: rgba(15, 23, 42, 0.18);
+  --tier-1-glow: rgba(20, 184, 166, 0.08);
+  --tier-2-glow: rgba(37, 99, 235, 0.06);
+  --tier-3-glow: rgba(148, 163, 184, 0.05);
+  --tier-4-glow: rgba(148, 163, 184, 0.05);
+  --tier-1-border-strong: rgba(15, 118, 110, 0.55);
+  --tier-2-border-strong: rgba(37, 99, 235, 0.35);
+  --tier-3-border-strong: rgba(148, 163, 184, 0.35);
+  --tier-4-border-strong: rgba(148, 163, 184, 0.35);
+
+}
+
+#content-area.detail-space-adult-sepsis {
+  --space-base: #0a0705;
+  --space-vignette: radial-gradient(1200px 620px at 50% -10%, rgba(234, 88, 12, 0.28), transparent 70%),
+    radial-gradient(900px 520px at 18% 92%, rgba(163, 230, 53, 0.2), transparent 70%);
+  --space-glow-1: radial-gradient(720px 360px at 18% 14%, rgba(249, 115, 22, 0.3), transparent 62%);
+  --space-glow-2: radial-gradient(820px 420px at 86% 10%, rgba(245, 158, 11, 0.24), transparent 64%);
+  --space-glow-3: radial-gradient(760px 380px at 70% 92%, rgba(132, 204, 22, 0.22), transparent 64%);
+  --detail-ink: #111827;
+  --detail-muted: #475569;
+  --detail-title: #0f172a;
+  --detail-card: rgba(255, 255, 255, 0.97);
+  --detail-card-strong: rgba(255, 255, 255, 0.99);
+  --detail-border: rgba(148, 163, 184, 0.35);
+  --detail-accent: #ea580c;
+  --detail-accent-2: #d97706;
+  --detail-accent-3: #84cc16;
+  --detail-accent-4: #f97316;
+  --detail-title-border: rgba(234, 88, 12, 0.38);
+  --detail-title-glow: radial-gradient(circle at 35% 35%, rgba(234, 88, 12, 0.2), rgba(234, 88, 12, 0));
+  --tier-1-title-color: #9a3412;
+  --tier-1-title-bg: rgba(234, 88, 12, 0.08);
+  --tier-1-title-border: rgba(234, 88, 12, 0.28);
+  --tier-2-title-color: #b45309;
+  --tier-2-title-bg: rgba(245, 158, 11, 0.08);
+  --tier-2-title-border: rgba(245, 158, 11, 0.28);
+  --tier-3-title-color: #1f2937;
+  --tier-3-title-bg: rgba(15, 23, 42, 0.06);
+  --tier-3-title-border: rgba(15, 23, 42, 0.18);
+  --tier-4-title-color: #1f2937;
+  --tier-4-title-bg: rgba(15, 23, 42, 0.06);
+  --tier-4-title-border: rgba(15, 23, 42, 0.18);
+  --tier-1-indicator-bg: rgba(234, 88, 12, 0.16);
+  --tier-1-indicator-color: #9a3412;
+  --tier-1-indicator-border: rgba(234, 88, 12, 0.3);
+  --tier-2-indicator-bg: rgba(245, 158, 11, 0.16);
+  --tier-2-indicator-color: #92400e;
+  --tier-2-indicator-border: rgba(245, 158, 11, 0.3);
+  --tier-3-indicator-bg: rgba(15, 23, 42, 0.12);
+  --tier-3-indicator-color: #1e293b;
+  --tier-3-indicator-border: rgba(15, 23, 42, 0.18);
+  --tier-4-indicator-bg: rgba(15, 23, 42, 0.12);
+  --tier-4-indicator-color: #1e293b;
+  --tier-4-indicator-border: rgba(15, 23, 42, 0.18);
+  --tier-1-glow: rgba(234, 88, 12, 0.08);
+  --tier-2-glow: rgba(245, 158, 11, 0.06);
+  --tier-3-glow: rgba(148, 163, 184, 0.05);
+  --tier-4-glow: rgba(148, 163, 184, 0.05);
+  --tier-1-border-strong: rgba(234, 88, 12, 0.5);
+  --tier-2-border-strong: rgba(245, 158, 11, 0.35);
+  --tier-3-border-strong: rgba(148, 163, 184, 0.35);
+  --tier-4-border-strong: rgba(148, 163, 184, 0.35);
+
 }
 
 /* stylelint-disable-next-line media-feature-range-notation */
 
 @media (max-width: 720px) {
-  #content-area.detail-space-anaphylaxis .title-tier[data-topic-id="adult-anaphylaxis"] {
+  #content-area.detail-space .title-tier[data-topic-id] {
     font-size: 1.05rem;
     letter-spacing: 0.18em;
     padding: 0.75rem 0.95rem;
 
   }
 
-  #content-area.detail-space-anaphylaxis .detail-section-title {
+  #content-area.detail-space .detail-section-title {
     font-size: 0.72rem;
     letter-spacing: 0.16em;
 
   }
 
-  #content-area.detail-space-anaphylaxis .detail-text h3.detail-md-heading {
+  #content-area.detail-space .detail-text h3.detail-md-heading {
     font-size: 0.9rem;
 
   }
