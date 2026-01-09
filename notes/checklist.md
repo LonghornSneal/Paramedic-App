@@ -1,7 +1,22 @@
+## 2026-01-09 09:17:33 Category tree alignment + travel-line polish
+- [x] Recenter root trunk through category title pills and keep the trunk visible on load
+- [x] Shrink/move active path rows with diminishing offsets and no overlap
+- [x] Raise active path toward header edge and collapse sibling branches
+- [x] Slow shimmer travel and brighten active path connector + pill perimeter
+- [x] Capture updated desktop/mobile category tree screenshots
+- [x] Record memory-log entry
+
 ## 2026-01-09 00:04:29 Category tree connector animation + title chips
 - [x] Resize category title pills to text width and keep indicator separate
 - [x] Add connector line animations for expanded categories and subcategories
 - [x] Update list rendering to flag expanded groups for connector styling
+- [x] Record memory-log entry
+
+## 2026-01-09 05:11:18 Category tree connector fixes + active path styling
+- [x] Stop connector trunks at last visible item and fix missing segments
+- [x] Prevent list columns from shifting vertically on expand (absolute child columns)
+- [x] Add active path shifts/shrink and highlight styling for connectors and cards
+- [x] Hide Show/Hide indicator text across category/detail UI
 - [x] Record memory-log entry
 
 ## 2026-01-08 15:49:43 Adult detail v12 rollout (adult-seizure + adult-sepsis)
