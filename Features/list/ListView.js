@@ -113,6 +113,9 @@ function createHierarchicalList(items, container, level = 0) {
     items.forEach(item => { 
         const group = document.createElement('div');
         group.className = 'category-group';
+        if (item.type === 'category' && item.expanded) {
+            group.classList.add('is-expanded');
+        }
         group.style.setProperty('--category-level', level);
         if (item.type === 'category') {  // Category with collapsible children
             const card = document.createElement('button');

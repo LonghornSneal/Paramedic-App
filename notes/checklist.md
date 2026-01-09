@@ -1,3 +1,9 @@
+## 2026-01-09 00:04:29 Category tree connector animation + title chips
+- [x] Resize category title pills to text width and keep indicator separate
+- [x] Add connector line animations for expanded categories and subcategories
+- [x] Update list rendering to flag expanded groups for connector styling
+- [x] Record memory-log entry
+
 ## 2026-01-08 15:49:43 Adult detail v12 rollout (adult-seizure + adult-sepsis)
 - [x] Map adult-seizure and adult-sepsis detail text to tier/class system
 - [x] Apply v12 detail-space base styling and per-topic overrides
