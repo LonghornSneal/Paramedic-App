@@ -255,7 +255,7 @@ function updateCategoryTreeMetrics(container) {
     const raiseForSteps = steps => stepSum(steps, baseRaise, 0.7, minRaise);
     const scaleForSteps = steps => {
         const minScale = 0.86;
-        const decay = 0.7;
+        const decay = 0.4;
         return minScale + ((1 - minScale) * Math.pow(decay, steps));
     };
     const desiredShift = level => (hasActiveDepth ? -shiftForSteps(Math.max(0, activeDepth - level)) : 0);
@@ -265,7 +265,7 @@ function updateCategoryTreeMetrics(container) {
     };
     const desiredRaise = level => desiredBaseRaise(level);
     const desiredScale = level => (hasActiveDepth ? scaleForSteps(Math.max(0, activeDepth - level)) : 1);
-    const flowDirection = 'normal';
+    const flowDirection = 'reverse';
     let rootShiftOverride = desiredShift(0);
     let rootRaiseOverride = desiredRaise(0);
     if (rootTree) {
@@ -309,6 +309,10 @@ function updateCategoryTreeMetrics(container) {
             const labelWidth = Math.ceil(label.getBoundingClientRect().width);
             group.style.setProperty('--group-label-width', `${labelWidth}px`);
             if (labelWidth > maxLabelWidth) maxLabelWidth = labelWidth;
+            const childContainer = group.querySelector(':scope > .category-children');
+            if (!childContainer || !contentRect) {
+                group.style.removeProperty('--child-column-top');
+            }
         });
         const columnWidth = Math.ceil(maxLabelWidth || 0);
         tree.style.setProperty('--tree-column-width', `${columnWidth}px`);
@@ -317,18 +321,41 @@ function updateCategoryTreeMetrics(container) {
         });
         const firstGroup = groups[0];
         const lastGroup = groups[groups.length - 1];
-        const start = firstGroup.offsetTop + (firstGroup.offsetHeight / 2);
-        const stop = lastGroup.offsetTop + (lastGroup.offsetHeight / 2);
+        const isRootLevel = tree.dataset.level === '0';
+        const start = isRootLevel
+            ? firstGroup.offsetTop
+            : firstGroup.offsetTop + (firstGroup.offsetHeight / 2);
+        const stop = isRootLevel
+            ? lastGroup.offsetTop + lastGroup.offsetHeight
+            : lastGroup.offsetTop + (lastGroup.offsetHeight / 2);
         tree.style.setProperty('--tree-trunk-start', `${start}px`);
         tree.style.setProperty('--tree-trunk-stop', `${stop}px`);
         const activeGroup = groups.find(child => child.classList.contains('is-active-path'));
-        if (tree.dataset.level === '0' && activeGroup) {
-            const activeStop = activeGroup.offsetTop + (activeGroup.offsetHeight / 2);
+        if (isRootLevel && activeGroup) {
+            const activeStop = activeGroup.offsetTop + activeGroup.offsetHeight;
             tree.style.setProperty('--tree-trunk-active-stop', `${activeStop}px`);
-        } else if (tree.dataset.level === '0') {
+        } else if (isRootLevel) {
             tree.style.setProperty('--tree-trunk-active-stop', `${start}px`);
         }
     });
+    const childColumns = metricsRoot.querySelectorAll('.category-group > .category-children');
+    if (childColumns.length && contentArea) {
+        const alignChildColumns = () => {
+            const nextContentRect = contentArea.getBoundingClientRect();
+            childColumns.forEach(childContainer => {
+                const group = childContainer.parentElement;
+                if (!group) return;
+                const groupRect = group.getBoundingClientRect();
+                const childTop = Math.round(nextContentRect.top - groupRect.top);
+                group.style.setProperty('--child-column-top', `${childTop}px`);
+            });
+        };
+        alignChildColumns();
+        if (window.categoryTreeAlignTimer) {
+            clearTimeout(window.categoryTreeAlignTimer);
+        }
+        window.categoryTreeAlignTimer = setTimeout(alignChildColumns, 360);
+    }
     const childContainers = metricsRoot.querySelectorAll('.category-children');
     childContainers.forEach(childContainer => {
         const groups = Array.from(childContainer.children).filter(child => child.classList.contains('category-group'));

@@ -1,3 +1,27 @@
+## 2026-01-09 19:50:36 Category tree connector direction + length pass
+- [x] Reverse connector shimmer to travel leaf -> main
+- [x] Halve horizontal connector spacing between columns and branch taps
+- [x] Tighten root trunk gap to match shorter connectors
+- [ ] Recheck list view layout in preview (manual)
+- [ ] Capture updated desktop/mobile screenshots if visuals change
+- [x] Record memory-log entry
+
+## 2026-01-09 20:28:15 Category tree path light cleanup
+- [x] Move active trunk line behind pills to stop crossing labels
+- [x] Reduce active-path glow inheritance so only selected branch shimmers
+- [x] Remove extra base vertical line when active path is present
+- [x] Align connector shimmer timing for branch taps
+- [ ] Recheck live list view (Adult Protocols line + shimmer continuity)
+- [ ] Capture updated desktop/mobile screenshots if visuals change
+- [x] Record memory-log entry
+
+## 2026-01-09 15:50:52 Category tree alignment + darker active path
+- [x] Reverse shimmer direction from leaf to root and darken active connector path
+- [x] Tighten column spacing while keeping labels from overlapping
+- [x] Align child columns to the top edge of the content area after layout settles
+- [x] Capture updated desktop/mobile category tree screenshots
+- [x] Record memory-log entry
+
 ## 2026-01-09 14:20:38 Category tree column spacing + connector alignment
 - [x] Measure column widths per tree and prevent overlap across sibling columns
 - [x] Extend connector runs to account for child column shift offsets
