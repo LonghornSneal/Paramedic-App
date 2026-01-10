@@ -1,3 +1,9 @@
+## 2026-01-10 04:12:54 Playwright suite fixes
+- [x] Add Playwright config + global setup/teardown to isolate spec tests and start preview server
+- [x] Update UI smoke test to use a valid Adult Airway topic
+- [x] Run `npx playwright test`
+- [x] Record memory-log entry
+
 ## 2026-01-10 03:53:49 Category tree line visibility + tighter rows
 - [x] Move line color/thickness vars to content area so the overlay lines render
 - [x] Reset light animation on list render/back navigation and stop it when list is removed
