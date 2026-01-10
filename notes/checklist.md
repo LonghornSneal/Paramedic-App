@@ -1,3 +1,12 @@
+## 2026-01-10 03:04:27 Category tree drag + single-path light
+- [x] Add draggable pills with live connector updates and path-aware centering
+- [x] Replace legacy connector pseudo-elements with a line overlay + single moving light segment
+- [x] Thicken/darken base lines and darken active-path lines
+- [x] Disable old shimmer and align pill perimeter split to the moving light
+- [x] Add Playwright category tree spec and capture desktop/mobile screenshots
+- [x] Run `npm run preview`, `npm run test`, `npx playwright test dev-tools/tests/category-tree.spec.js`
+- [x] Record memory-log entry
+
 ## 2026-01-09 19:50:36 Category tree connector direction + length pass
 - [x] Reverse connector shimmer to travel leaf -> main
 - [x] Halve horizontal connector spacing between columns and branch taps
