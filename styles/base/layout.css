@@ -46,6 +46,10 @@ body {
   box-shadow: 0 24px 48px rgb(15 23 42 / 14%);
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
   position: relative;
+  --line-color: #1e3a8a;
+  --line-active-color: #0b1f4a;
+  --line-highlight-color: #bfdbfe;
+  --line-thickness: 4px;
 
 }
 
@@ -79,7 +83,7 @@ body.dark-mode .snapshot-card {
 /* Hierarchical List (Categories/Topics) */
 
 .category-tree {
-  --tree-row-gap: 1.1rem;
+  --tree-row-gap: 0.45rem;
   --tree-shift-base: 2.2rem;
   --tree-shift-step: 0.32rem;
   --tree-shift-min: 0.6rem;
@@ -96,10 +100,6 @@ body.dark-mode .snapshot-card {
   --root-trunk-width: 1px;
   --root-trunk-x: 50%;
   --root-trunk-active-x: 50%;
-  --line-color: #1d4ed8;
-  --line-active-color: #0f2a6b;
-  --line-highlight-color: #bfdbfe;
-  --line-thickness: 4px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -297,7 +297,7 @@ body.dark-mode .snapshot-card {
   align-items: center;
   justify-content: flex-start;
   gap: 0.75rem;
-  padding: 0.15rem 0;
+  padding: 0.05rem 0;
   border: none;
   background: transparent;
   color: #1d4ed8;

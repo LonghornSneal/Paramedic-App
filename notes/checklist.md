@@ -1,3 +1,10 @@
+## 2026-01-10 03:53:49 Category tree line visibility + tighter rows
+- [x] Move line color/thickness vars to content area so the overlay lines render
+- [x] Reset light animation on list render/back navigation and stop it when list is removed
+- [x] Tighten vertical spacing between pills
+- [x] Run `npm run preview` and `npx playwright test dev-tools/tests/category-tree.spec.js`
+- [x] Record memory-log entry
+
 ## 2026-01-10 03:04:27 Category tree drag + single-path light
 - [x] Add draggable pills with live connector updates and path-aware centering
 - [x] Replace legacy connector pseudo-elements with a line overlay + single moving light segment

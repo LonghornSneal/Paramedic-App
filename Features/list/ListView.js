@@ -42,11 +42,24 @@ function getCategoryTreeState() {
     }
     return window.categoryTreeState;
 }
+
+function resetCategoryTreeAnimation() {
+    const state = getCategoryTreeState();
+    if (state.animationId) {
+        cancelAnimationFrame(state.animationId);
+    }
+    state.animationId = null;
+    state.startTime = null;
+    state.activePathSignature = '';
+    state.pathSteps = [];
+    state.totalLength = 0;
+}
 // Renders the main category list view (home screen) and highlights a topic if provided.
 export function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     const contentArea = window.contentArea || document.getElementById('content-area');
     resetDetailSpaceClasses(contentArea);
     contentArea.innerHTML = '';  // Clear current content
+    resetCategoryTreeAnimation();
     if (!Array.isArray(window.activeCategoryPath)) {
         window.activeCategoryPath = [];
     }
@@ -131,6 +144,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
     window.activeTopicId = highlightId || null;
     // Re-render list with updated expansion states
     contentArea.innerHTML = '';
+    resetCategoryTreeAnimation();
     const listContainer = document.createElement('div');
     listContainer.className = 'category-tree-container';
     createHierarchicalList(window.paramedicCategories, listContainer, 0, []);
@@ -774,6 +788,11 @@ function updateActivePathAnimation(state, lineLayer) {
     }
     if (state.animationId) return;
     const tick = timestamp => {
+        if (!lineLayer.isConnected) {
+            state.animationId = null;
+            state.startTime = null;
+            return;
+        }
         if (!state.startTime) state.startTime = timestamp;
         const elapsed = (timestamp - state.startTime) % CATEGORY_TREE_LIGHT_SPEED;
         const progress = (elapsed / CATEGORY_TREE_LIGHT_SPEED) * state.totalLength;
@@ -800,7 +819,7 @@ function updateCategoryTreeLines(container) {
         state.startTime = null;
         state.activeLineLayer = lineLayer;
     }
-    const lineThickness = getLineThickness(rootTree);
+    const lineThickness = getLineThickness(lineLayer);
     const lineGap = Math.max(CATEGORY_TREE_LINE_GAP, lineThickness * 2);
     const rootGap = Math.max(CATEGORY_TREE_ROOT_GAP, lineThickness * 2.5);
     const contentRect = contentArea.getBoundingClientRect();
