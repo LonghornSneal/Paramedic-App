@@ -3,6 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 test('category tree active path and layout rules', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto('http://127.0.0.1:5173/');
   await page.waitForFunction(() => !!document.querySelector('.category-tree'));
 
@@ -62,10 +63,55 @@ test('category tree active path and layout rules', async ({ page }) => {
   });
   expect(flowDirection).toBe('reverse');
 
+  const fitCheck = await page.evaluate(() => {
+    const contentArea = document.getElementById('content-area');
+    const contentRect = contentArea.getBoundingClientRect();
+    const nodes = Array.from(contentArea.querySelectorAll('.category-card, .topic-link-item'))
+      .filter(node => node.offsetParent && node.getClientRects().length);
+    const overflow = nodes
+      .map(node => {
+        const rect = node.getBoundingClientRect();
+        const clipped = rect.left < contentRect.left - 1
+          || rect.right > contentRect.right + 1
+          || rect.top < contentRect.top - 1
+          || rect.bottom > contentRect.bottom + 1;
+        return {
+          label: (node.textContent || '').trim(),
+          clipped
+        };
+      })
+      .filter(item => item.clipped)
+      .map(item => item.label);
+    return { overflow, contentCenterX: contentRect.left + (contentRect.width / 2) };
+  });
+  expect(fitCheck.overflow).toEqual([]);
+
+  const centerCheck = await page.evaluate(() => {
+    const contentArea = document.getElementById('content-area');
+    const contentRect = contentArea.getBoundingClientRect();
+    const candidateTrees = Array.from(document.querySelectorAll('.category-children'))
+      .filter(tree => tree.children.length && tree.getClientRects().length);
+    const rightmostTree = candidateTrees.reduce((current, tree) => {
+      if (!current) return tree;
+      const rect = tree.getBoundingClientRect();
+      const currentRect = current.getBoundingClientRect();
+      return rect.left > currentRect.left ? tree : current;
+    }, null);
+    if (!rightmostTree) return { offset: null, tolerance: null };
+    const rect = rightmostTree.getBoundingClientRect();
+    const activeCenterX = rect.left + (rect.width / 2);
+    const contentCenterX = contentRect.left + (contentRect.width / 2);
+    return {
+      offset: Math.abs(activeCenterX - contentCenterX),
+      tolerance: Math.max(16, contentRect.width * 0.04)
+    };
+  });
+  expect(centerCheck.offset).not.toBeNull();
+  expect(centerCheck.offset).toBeLessThanOrEqual(centerCheck.tolerance);
+
   const screenshotDir = path.resolve(process.cwd(), 'dev-tools/screenshots');
   fs.mkdirSync(screenshotDir, { recursive: true });
 
-  await page.setViewportSize({ width: 1280, height: 720 });
   await page.waitForTimeout(300);
   await page.screenshot({ path: path.join(screenshotDir, 'category-tree-desktop.png'), fullPage: true });
 

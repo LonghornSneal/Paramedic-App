@@ -1,3 +1,17 @@
+## 2026-01-11 17:12:59 Category pill size overlay controls
+- [x] Increase base pill sizes and add pill-scale variable
+- [x] Add overlay with per-column size controls
+- [x] Run Playwright category-tree spec
+- [x] Record memory-log entry
+
+## 2026-01-11 08:10:01 Category tree sizing + centerline + animation update
+- [x] Adjust root connector geometry to centerline
+- [x] Shrink pill sizing and column widths, rebalance shifts
+- [x] Replace moving light with full-path animation
+- [x] Update Playwright category-tree spec to assert fit and centering
+- [x] Run Playwright spec
+- [x] Record memory-log entry
+
 ## 2026-01-10 04:12:54 Playwright suite fixes
 - [x] Add Playwright config + global setup/teardown to isolate spec tests and start preview server
 - [x] Update UI smoke test to use a valid Adult Airway topic

@@ -11,12 +11,7 @@ import { addTapListener } from '../../Utils/addTapListener.js'
 // import { addTapListener } from '../../Utils/addTapListener.js';
 
 const CATEGORY_TREE_LINE_THICKNESS = 4;
-const CATEGORY_TREE_LINE_GAP = 10;
-const CATEGORY_TREE_ROOT_GAP = 14;
-const CATEGORY_TREE_LIGHT_SPEED = 5000;
-const CATEGORY_TREE_LIGHT_RATIO = 0.12;
-const CATEGORY_TREE_LIGHT_MIN = 36;
-const CATEGORY_TREE_LIGHT_MAX = 160;
+const CATEGORY_TREE_LINE_GAP = 8;
 const CATEGORY_TREE_DRAG_THRESHOLD = 4;
 
 function getCategoryTreeState() {
@@ -31,13 +26,14 @@ function getCategoryTreeState() {
             baseLines: new Map(),
             highlightPool: [],
             animationId: null,
-            startTime: null,
             lineUpdateHandle: null,
-            activePathSignature: '',
+            fitScale: 1,
             pathSteps: [],
-            totalLength: 0,
-            lightLength: 0,
-            lineThickness: CATEGORY_TREE_LINE_THICKNESS
+            lineThickness: CATEGORY_TREE_LINE_THICKNESS,
+            centeringTimer: null,
+            pillScaleByLevel: new Map(),
+            overlayLevelsKey: '',
+            overlayHidden: false
         };
     }
     return window.categoryTreeState;
@@ -49,10 +45,8 @@ function resetCategoryTreeAnimation() {
         cancelAnimationFrame(state.animationId);
     }
     state.animationId = null;
-    state.startTime = null;
-    state.activePathSignature = '';
+    state.fitScale = 1;
     state.pathSteps = [];
-    state.totalLength = 0;
 }
 // Renders the main category list view (home screen) and highlights a topic if provided.
 export function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
@@ -115,6 +109,7 @@ export function renderInitialView(shouldAddHistory = true, highlightId = null, c
     createHierarchicalList(window.paramedicCategories, listContainer, 0, []);
     contentArea.appendChild(listContainer);
     ensureCategoryTreeLineLayer(contentArea);
+    ensureCategorySizeOverlay(contentArea, listContainer);
     requestAnimationFrame(() => updateCategoryTreeMetrics(listContainer));
     if (typeof window.applyTopicStrikethroughs === 'function') {
         window.applyTopicStrikethroughs();
@@ -150,6 +145,7 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
     createHierarchicalList(window.paramedicCategories, listContainer, 0, []);
     contentArea.appendChild(listContainer);
     ensureCategoryTreeLineLayer(contentArea);
+    ensureCategorySizeOverlay(contentArea, listContainer);
     requestAnimationFrame(() => updateCategoryTreeMetrics(listContainer));
     // Highlight the specified topic, if provided
     if (highlightId) { 
@@ -400,6 +396,142 @@ function getLineThickness(referenceEl) {
     return Number.isFinite(parsed) ? parsed : CATEGORY_TREE_LINE_THICKNESS;
 }
 
+function getPillScaleForLevel(level) {
+    const state = getCategoryTreeState();
+    const stored = state.pillScaleByLevel.get(level);
+    return Number.isFinite(stored) ? stored : 1;
+}
+
+function setPillScaleForLevel(level, scale) {
+    const state = getCategoryTreeState();
+    const nextScale = Math.min(1.6, Math.max(0.7, scale));
+    state.pillScaleByLevel.set(level, nextScale);
+    return nextScale;
+}
+
+function getCategoryTreeLevels(rootTree) {
+    if (!rootTree) return [];
+    const levels = new Set();
+    levels.add(Number(rootTree.dataset.level || 0));
+    rootTree.querySelectorAll('.category-tree').forEach(tree => {
+        levels.add(Number(tree.dataset.level || 0));
+    });
+    return Array.from(levels).sort((a, b) => a - b);
+}
+
+function updateCategorySizeOverlayValues(overlay) {
+    if (!overlay) return;
+    overlay.querySelectorAll('.category-size-row').forEach(row => {
+        const level = Number(row.dataset.level || 0);
+        const value = row.querySelector('.category-size-value');
+        if (!value) return;
+        const scale = getPillScaleForLevel(level);
+        value.textContent = `${Math.round(scale * 100)}%`;
+    });
+}
+
+function buildCategorySizeOverlay(overlay, levels) {
+    overlay.innerHTML = '';
+    const header = document.createElement('div');
+    header.className = 'category-size-overlay-header';
+    const title = document.createElement('div');
+    title.className = 'category-size-overlay-title';
+    title.textContent = 'Pill Size';
+    const hideButton = document.createElement('button');
+    hideButton.type = 'button';
+    hideButton.className = 'category-size-overlay-hide';
+    hideButton.dataset.action = 'hide';
+    hideButton.textContent = 'Hide';
+    header.append(title, hideButton);
+    overlay.appendChild(header);
+
+    const body = document.createElement('div');
+    body.className = 'category-size-overlay-body';
+    levels.forEach(level => {
+        const row = document.createElement('div');
+        row.className = 'category-size-row';
+        row.dataset.level = String(level);
+        const label = document.createElement('div');
+        label.className = 'category-size-label';
+        label.textContent = `Column ${level + 1}`;
+        const downButton = document.createElement('button');
+        downButton.type = 'button';
+        downButton.className = 'category-size-btn';
+        downButton.dataset.action = 'adjust';
+        downButton.dataset.dir = 'down';
+        downButton.dataset.level = String(level);
+        downButton.setAttribute('aria-label', `Decrease column ${level + 1} pill size`);
+        downButton.textContent = '-';
+        const value = document.createElement('div');
+        value.className = 'category-size-value';
+        value.textContent = '100%';
+        const upButton = document.createElement('button');
+        upButton.type = 'button';
+        upButton.className = 'category-size-btn';
+        upButton.dataset.action = 'adjust';
+        upButton.dataset.dir = 'up';
+        upButton.dataset.level = String(level);
+        upButton.setAttribute('aria-label', `Increase column ${level + 1} pill size`);
+        upButton.textContent = '+';
+        row.append(label, downButton, value, upButton);
+        body.appendChild(row);
+    });
+    overlay.appendChild(body);
+
+    const footer = document.createElement('div');
+    footer.className = 'category-size-overlay-footer';
+    const resetButton = document.createElement('button');
+    resetButton.type = 'button';
+    resetButton.className = 'category-size-reset';
+    resetButton.dataset.action = 'reset';
+    resetButton.textContent = 'Reset';
+    footer.appendChild(resetButton);
+    overlay.appendChild(footer);
+}
+
+function ensureCategorySizeOverlay(contentArea, rootTree) {
+    const state = getCategoryTreeState();
+    if (!contentArea || !rootTree || state.overlayHidden) return;
+    let overlay = contentArea.querySelector('.category-size-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'category-size-overlay';
+        overlay.addEventListener('click', event => {
+            const button = event.target.closest('button');
+            if (!button) return;
+            const action = button.dataset.action;
+            if (action === 'hide') {
+                state.overlayHidden = true;
+                overlay.remove();
+                return;
+            }
+            if (action === 'reset') {
+                state.pillScaleByLevel.clear();
+                updateCategoryTreeMetrics(rootTree);
+                updateCategorySizeOverlayValues(overlay);
+                return;
+            }
+            if (action === 'adjust') {
+                const level = Number(button.dataset.level || 0);
+                const delta = button.dataset.dir === 'down' ? -0.05 : 0.05;
+                const nextScale = setPillScaleForLevel(level, getPillScaleForLevel(level) + delta);
+                const tree = contentArea.querySelector(`.category-tree[data-level="${level}"]`);
+                if (tree) tree.style.setProperty('--pill-scale', `${nextScale}`);
+                updateCategoryTreeMetrics(rootTree);
+                updateCategorySizeOverlayValues(overlay);
+            }
+        });
+        contentArea.appendChild(overlay);
+    }
+    const levels = getCategoryTreeLevels(rootTree);
+    const levelsKey = levels.join(',');
+    if (levelsKey !== state.overlayLevelsKey) {
+        buildCategorySizeOverlay(overlay, levels);
+        state.overlayLevelsKey = levelsKey;
+    }
+    updateCategorySizeOverlayValues(overlay);
+}
+
 function collectCategoryNodeRects(rootTree, contentRect) {
     const nodeMap = new Map();
     if (!rootTree || !contentRect) return nodeMap;
@@ -496,9 +628,8 @@ function buildActiveSegmentKeys(steps) {
     return keys;
 }
 
-function buildBaseSegments(rootTree, nodeMap, columnInfo, activeSegmentKeys, rootGap) {
+function buildBaseSegments(rootTree, nodeMap, columnInfo, activeSegmentKeys) {
     const segments = [];
-    const gap = Number.isFinite(rootGap) ? rootGap : CATEGORY_TREE_ROOT_GAP;
     const rootGroups = Array.from(rootTree.children).filter(child => child.classList.contains('category-group'));
     const rootRects = rootGroups.map(group => {
         const card = group.querySelector(':scope > .category-card');
@@ -507,7 +638,7 @@ function buildBaseSegments(rootTree, nodeMap, columnInfo, activeSegmentKeys, roo
         return nodeMap.get(id) || null;
     }).filter(Boolean);
     if (rootRects.length) {
-        const rootTrunkX = Math.min(...rootRects.map(rect => rect.left)) - gap;
+        const rootTrunkX = rootRects.reduce((sum, rect) => sum + rect.centerX, 0) / rootRects.length;
         const trunkStart = Math.min(...rootRects.map(rect => rect.centerY));
         const trunkStop = Math.max(...rootRects.map(rect => rect.centerY));
         segments.push({
@@ -517,21 +648,6 @@ function buildBaseSegments(rootTree, nodeMap, columnInfo, activeSegmentKeys, roo
             y1: trunkStart,
             x2: rootTrunkX,
             y2: trunkStop
-        });
-        rootRects.forEach((rect, index) => {
-            const segment = {
-                orientation: 'horizontal',
-                x1: rootTrunkX,
-                y1: rect.centerY,
-                x2: rect.left,
-                y2: rect.centerY
-            };
-            const key = buildSegmentKey(segment);
-            segments.push({
-                key: `root-branch:${index}:${key}`,
-                ...segment,
-                isActive: activeSegmentKeys.has(key)
-            });
         });
     }
     columnInfo.forEach((column, parentId) => {
@@ -705,46 +821,20 @@ function buildActivePathSteps(nodeMap, columnInfo, lineThickness) {
     return steps.filter(step => step.length > 0);
 }
 
-function computeHighlightSegments(steps, totalLength, progress, lightLength) {
-    if (!steps.length || totalLength <= 0 || lightLength <= 0) return [];
-    const windows = [];
-    const end = progress + lightLength;
-    if (end <= totalLength) {
-        windows.push([progress, end]);
-    } else {
-        windows.push([progress, totalLength]);
-        windows.push([0, end - totalLength]);
-    }
+function computeHighlightSegments(steps) {
+    if (!steps.length) return [];
     const highlights = [];
-    let cursor = 0;
     steps.forEach(step => {
-        const stepStart = cursor;
-        const stepEnd = cursor + step.length;
-        windows.forEach(window => {
-            const overlapStart = Math.max(stepStart, window[0]);
-            const overlapEnd = Math.min(stepEnd, window[1]);
-            if (overlapEnd <= overlapStart) return;
-            const localStart = overlapStart - stepStart;
-            const localLength = overlapEnd - overlapStart;
-            step.segments.forEach(segment => {
-                const dx = segment.x2 - segment.x1;
-                const dy = segment.y2 - segment.y1;
-                const dirX = dx === 0 ? 0 : dx / Math.abs(dx);
-                const dirY = dy === 0 ? 0 : dy / Math.abs(dy);
-                const startX = segment.x1 + (dirX * localStart);
-                const startY = segment.y1 + (dirY * localStart);
-                const endX = segment.x1 + (dirX * (localStart + localLength));
-                const endY = segment.y1 + (dirY * (localStart + localLength));
-                highlights.push({
-                    orientation: segment.orientation,
-                    x1: startX,
-                    y1: startY,
-                    x2: endX,
-                    y2: endY
-                });
+        if (step.kind !== 'connector') return;
+        step.segments.forEach(segment => {
+            highlights.push({
+                orientation: segment.orientation,
+                x1: segment.x1,
+                y1: segment.y1,
+                x2: segment.x2,
+                y2: segment.y2
             });
         });
-        cursor = stepEnd;
     });
     return highlights;
 }
@@ -758,8 +848,8 @@ function ensureHighlightPool(state, lineLayer, count) {
     }
 }
 
-function renderCategoryTreeHighlight(state, lineLayer, progress) {
-    const highlights = computeHighlightSegments(state.pathSteps, state.totalLength, progress, state.lightLength);
+function renderCategoryTreeHighlight(state, lineLayer) {
+    const highlights = computeHighlightSegments(state.pathSteps);
     const baseThickness = Number.isFinite(state.lineThickness) ? state.lineThickness : CATEGORY_TREE_LINE_THICKNESS;
     ensureHighlightPool(state, lineLayer, highlights.length);
     highlights.forEach((segment, index) => {
@@ -775,7 +865,7 @@ function renderCategoryTreeHighlight(state, lineLayer, progress) {
 }
 
 function updateActivePathAnimation(state, lineLayer) {
-    if (!state.totalLength) {
+    if (!state.pathSteps.length) {
         state.highlightPool.forEach(element => {
             element.style.display = 'none';
         });
@@ -783,23 +873,13 @@ function updateActivePathAnimation(state, lineLayer) {
             cancelAnimationFrame(state.animationId);
             state.animationId = null;
         }
-        state.startTime = null;
         return;
     }
-    if (state.animationId) return;
-    const tick = timestamp => {
-        if (!lineLayer.isConnected) {
-            state.animationId = null;
-            state.startTime = null;
-            return;
-        }
-        if (!state.startTime) state.startTime = timestamp;
-        const elapsed = (timestamp - state.startTime) % CATEGORY_TREE_LIGHT_SPEED;
-        const progress = (elapsed / CATEGORY_TREE_LIGHT_SPEED) * state.totalLength;
-        renderCategoryTreeHighlight(state, lineLayer, progress);
-        state.animationId = requestAnimationFrame(tick);
-    };
-    state.animationId = requestAnimationFrame(tick);
+    if (state.animationId) {
+        cancelAnimationFrame(state.animationId);
+        state.animationId = null;
+    }
+    renderCategoryTreeHighlight(state, lineLayer);
 }
 
 function updateCategoryTreeLines(container) {
@@ -816,34 +896,100 @@ function updateCategoryTreeLines(container) {
             cancelAnimationFrame(state.animationId);
             state.animationId = null;
         }
-        state.startTime = null;
         state.activeLineLayer = lineLayer;
     }
     const lineThickness = getLineThickness(lineLayer);
     const lineGap = Math.max(CATEGORY_TREE_LINE_GAP, lineThickness * 2);
-    const rootGap = Math.max(CATEGORY_TREE_ROOT_GAP, lineThickness * 2.5);
     const contentRect = contentArea.getBoundingClientRect();
     const nodeMap = collectCategoryNodeRects(rootTree, contentRect);
     const columnInfo = collectCategoryColumnInfo(rootTree, nodeMap, lineGap);
     const activeSteps = buildActivePathSteps(nodeMap, columnInfo, lineThickness);
     const activeSegmentKeys = buildActiveSegmentKeys(activeSteps);
-    const baseSegments = buildBaseSegments(rootTree, nodeMap, columnInfo, activeSegmentKeys, rootGap);
-    const activeSignature = getActivePathIds().join('|');
-    if (state.activePathSignature !== activeSignature) {
-        state.activePathSignature = activeSignature;
-        state.startTime = null;
-    }
+    const baseSegments = buildBaseSegments(rootTree, nodeMap, columnInfo, activeSegmentKeys);
     renderBaseSegments(lineLayer, baseSegments, state, lineThickness);
     state.pathSteps = activeSteps;
-    state.totalLength = activeSteps.reduce((sum, step) => sum + step.length, 0);
-    if (state.totalLength) {
-        const rawLength = state.totalLength * CATEGORY_TREE_LIGHT_RATIO;
-        state.lightLength = Math.max(CATEGORY_TREE_LIGHT_MIN, Math.min(CATEGORY_TREE_LIGHT_MAX, rawLength));
-    } else {
-        state.lightLength = 0;
-    }
     state.lineThickness = lineThickness;
     updateActivePathAnimation(state, lineLayer);
+}
+
+function getCategoryTreeBounds(metricsRoot) {
+    if (!metricsRoot) return null;
+    const nodes = Array.from(metricsRoot.querySelectorAll('.category-card, .topic-link-item'))
+        .filter(node => node.offsetParent && node.getClientRects().length);
+    if (!nodes.length) return null;
+    let minLeft = Infinity;
+    let maxRight = -Infinity;
+    let minTop = Infinity;
+    let maxBottom = -Infinity;
+    nodes.forEach(node => {
+        const rect = node.getBoundingClientRect();
+        if (rect.width <= 0 || rect.height <= 0) return;
+        minLeft = Math.min(minLeft, rect.left);
+        maxRight = Math.max(maxRight, rect.right);
+        minTop = Math.min(minTop, rect.top);
+        maxBottom = Math.max(maxBottom, rect.bottom);
+    });
+    if (!Number.isFinite(minLeft)) return null;
+    return {
+        left: minLeft,
+        right: maxRight,
+        top: minTop,
+        bottom: maxBottom,
+        width: Math.max(1, maxRight - minLeft),
+        height: Math.max(1, maxBottom - minTop)
+    };
+}
+
+function computeCategoryTreeFitScale(metricsRoot, contentRect) {
+    if (!metricsRoot || !contentRect) return 1;
+    const bounds = getCategoryTreeBounds(metricsRoot);
+    if (!bounds) return 1;
+    const availableWidth = Math.max(1, contentRect.width - 16);
+    const availableHeight = Math.max(1, contentRect.height - 16);
+    const usedWidth = bounds.width;
+    const usedHeight = bounds.height;
+    const scaleX = availableWidth / usedWidth;
+    const scaleY = availableHeight / usedHeight;
+    const nextScale = Math.min(1, scaleX, scaleY);
+    return Math.max(0.55, nextScale);
+}
+
+function centerCategoryTreeColumns(metricsRoot, rootTree, contentRect) {
+    if (!metricsRoot || !rootTree || !contentRect) return;
+    const candidateTrees = Array.from(metricsRoot.querySelectorAll('.category-children'))
+        .filter(tree => tree.children.length && tree.getClientRects().length);
+    const rightmostTree = candidateTrees.reduce((current, tree) => {
+        if (!current) return tree;
+        const rect = tree.getBoundingClientRect();
+        const currentRect = current.getBoundingClientRect();
+        return rect.left > currentRect.left ? tree : current;
+    }, null);
+    const activeTree = rightmostTree || metricsRoot;
+    const activeBounds = getCategoryTreeBounds(activeTree);
+    const bounds = getCategoryTreeBounds(metricsRoot);
+    if (!activeBounds || !bounds) return;
+    const currentShiftValue = getComputedStyle(rootTree).getPropertyValue('--tree-shift');
+    const currentShift = Number.isFinite(parseFloat(currentShiftValue)) ? parseFloat(currentShiftValue) : 0;
+    const targetCenterX = contentRect.left + (contentRect.width / 2);
+    let delta = targetCenterX - (activeBounds.left + (activeBounds.width / 2));
+    const margin = Math.min(18, Math.max(8, contentRect.width * 0.02));
+    const minShift = (contentRect.left + margin) - bounds.left;
+    const maxShift = (contentRect.right - margin) - bounds.right;
+    if (delta < minShift) delta = minShift;
+    if (delta > maxShift) delta = maxShift;
+    const nextShift = currentShift + delta;
+    rootTree.style.setProperty('--tree-shift', `${nextShift}px`);
+    const state = getCategoryTreeState();
+    if (state.centeringTimer) {
+        clearTimeout(state.centeringTimer);
+        state.centeringTimer = null;
+    }
+    if (Math.abs(delta) > 1) {
+        state.centeringTimer = setTimeout(() => {
+            state.centeringTimer = null;
+            updateCategoryTreeMetrics(rootTree);
+        }, 360);
+    }
 }
 
 function updateCategoryTreeMetrics(container) {
@@ -851,6 +997,8 @@ function updateCategoryTreeMetrics(container) {
     const contentArea = document.getElementById('content-area');
     const rootTree = getCategoryTreeRoot(container);
     const metricsRoot = rootTree || container;
+    const state = getCategoryTreeState();
+    const fitScale = Number.isFinite(state.fitScale) ? state.fitScale : 1;
     const activePath = Array.isArray(window.activeCategoryPath) ? window.activeCategoryPath : [];
     const activeDepth = activePath.length;
     const hasActiveDepth = activeDepth > 0;
@@ -875,15 +1023,15 @@ function updateCategoryTreeMetrics(container) {
         return total;
     };
     const contentRect = contentArea ? contentArea.getBoundingClientRect() : null;
-    const baseShift = contentRect ? Math.min(110, Math.max(52, contentRect.width * 0.06)) : 72;
-    const baseRaise = contentRect ? Math.min(36, Math.max(10, contentRect.height * 0.02)) : 22;
-    const minShift = contentRect ? Math.max(10, contentRect.width * 0.015) : 10;
-    const minRaise = contentRect ? Math.max(4, contentRect.height * 0.01) : 4;
-    const shiftForSteps = steps => stepSum(steps, baseShift, 0.68, minShift);
-    const raiseForSteps = steps => stepSum(steps, baseRaise, 0.7, minRaise);
+    const baseShift = contentRect ? Math.min(84, Math.max(32, contentRect.width * 0.045)) : 52;
+    const baseRaise = contentRect ? Math.min(26, Math.max(8, contentRect.height * 0.016)) : 18;
+    const minShift = contentRect ? Math.max(8, contentRect.width * 0.012) : 8;
+    const minRaise = contentRect ? Math.max(3, contentRect.height * 0.008) : 3;
+    const shiftForSteps = steps => stepSum(steps, baseShift, 0.6, minShift);
+    const raiseForSteps = steps => stepSum(steps, baseRaise, 0.65, minRaise);
     const scaleForSteps = steps => {
-        const minScale = 0.86;
-        const decay = 0.4;
+        const minScale = 0.5;
+        const decay = 0.6;
         return minScale + ((1 - minScale) * Math.pow(decay, steps));
     };
     const desiredShift = level => (hasActiveDepth ? -shiftForSteps(Math.max(0, activeDepth - level)) : 0);
@@ -894,12 +1042,14 @@ function updateCategoryTreeMetrics(container) {
     const desiredRaise = level => desiredBaseRaise(level);
     const desiredScale = level => (hasActiveDepth ? scaleForSteps(Math.max(0, activeDepth - level)) : 1);
     const flowDirection = 'reverse';
-    let rootShiftOverride = desiredShift(0);
+    const currentRootShiftValue = rootTree ? getComputedStyle(rootTree).getPropertyValue('--tree-shift') : '';
+    const currentRootShift = Number.isFinite(parseFloat(currentRootShiftValue)) ? parseFloat(currentRootShiftValue) : 0;
+    let rootShiftOverride = currentRootShift;
     let rootRaiseOverride = desiredRaise(0);
-    if (rootTree) {
+    if (rootTree && metricsRoot === rootTree) {
         rootTree.style.setProperty('--tree-shift', `${rootShiftOverride}px`);
         rootTree.style.setProperty('--tree-raise', `${rootRaiseOverride}px`);
-        rootTree.style.setProperty('--tree-scale', `${desiredScale(0)}`);
+        rootTree.style.setProperty('--tree-scale', `${desiredScale(0) * fitScale}`);
         rootTree.style.setProperty('--connector-flow-direction', flowDirection);
     }
     const trees = [];
@@ -909,6 +1059,7 @@ function updateCategoryTreeMetrics(container) {
     trees.push(...metricsRoot.querySelectorAll('.category-tree'));
     trees.forEach(tree => {
         const level = Number(tree.dataset.level || 0);
+        const pillScale = getPillScaleForLevel(level);
         const parentTree = tree.parentElement ? tree.parentElement.closest('.category-tree') : null;
         const parentLevel = parentTree ? Number(parentTree.dataset.level || 0) : null;
         const shift = level === 0
@@ -919,7 +1070,8 @@ function updateCategoryTreeMetrics(container) {
             : desiredBaseRaise(level) - desiredBaseRaise(parentLevel);
         tree.style.setProperty('--tree-shift', `${shift}px`);
         tree.style.setProperty('--tree-raise', `${raise}px`);
-        tree.style.setProperty('--tree-scale', `${desiredScale(level)}`);
+        tree.style.setProperty('--tree-scale', `${desiredScale(level) * fitScale}`);
+        tree.style.setProperty('--pill-scale', `${pillScale}`);
         tree.style.setProperty('--connector-flow-direction', flowDirection);
         if (tree.classList.contains('category-children') && tree.parentElement?.classList.contains('category-group')) {
             tree.parentElement.style.setProperty('--child-shift', `${shift}px`);
@@ -938,7 +1090,11 @@ function updateCategoryTreeMetrics(container) {
             group.style.setProperty('--group-label-width', `${labelWidth}px`);
             if (labelWidth > maxLabelWidth) maxLabelWidth = labelWidth;
             const childContainer = group.querySelector(':scope > .category-children');
-            if (!childContainer || !contentRect) {
+            if (childContainer && contentRect) {
+                const groupRect = group.getBoundingClientRect();
+                const childTop = Math.round(contentRect.top - groupRect.top);
+                group.style.setProperty('--child-column-top', `${childTop}px`);
+            } else {
                 group.style.removeProperty('--child-column-top');
             }
         });
@@ -950,38 +1106,24 @@ function updateCategoryTreeMetrics(container) {
         const firstGroup = groups[0];
         const lastGroup = groups[groups.length - 1];
         const isRootLevel = tree.dataset.level === '0';
-        const start = isRootLevel
-            ? firstGroup.offsetTop
-            : firstGroup.offsetTop + (firstGroup.offsetHeight / 2);
-        const stop = isRootLevel
-            ? lastGroup.offsetTop + lastGroup.offsetHeight
-            : lastGroup.offsetTop + (lastGroup.offsetHeight / 2);
+        const start = firstGroup.offsetTop + (firstGroup.offsetHeight / 2);
+        const stop = lastGroup.offsetTop + (lastGroup.offsetHeight / 2);
         tree.style.setProperty('--tree-trunk-start', `${start}px`);
         tree.style.setProperty('--tree-trunk-stop', `${stop}px`);
         const activeGroup = groups.find(child => child.classList.contains('is-active-path'));
         if (isRootLevel && activeGroup) {
-            const activeStop = activeGroup.offsetTop + activeGroup.offsetHeight;
+            const activeStop = activeGroup.offsetTop + (activeGroup.offsetHeight / 2);
             tree.style.setProperty('--tree-trunk-active-stop', `${activeStop}px`);
         } else if (isRootLevel) {
             tree.style.setProperty('--tree-trunk-active-stop', `${start}px`);
         }
     });
-    if (rootTree && contentRect) {
-        const activeAnchor = getActiveAnchor(metricsRoot);
-        const activeTree = activeAnchor ? activeAnchor.closest('.category-tree') : null;
-        if (activeTree) {
-            const activeRect = activeTree.getBoundingClientRect();
-            const rootRect = rootTree.getBoundingClientRect();
-            const targetCenterX = contentRect.left + (contentRect.width / 2);
-            const activeCenterX = activeRect.left + (activeRect.width / 2);
-            let extraShift = targetCenterX - activeCenterX;
-            const margin = Math.min(32, Math.max(12, contentRect.width * 0.04));
-            const minShift = (contentRect.left + margin) - rootRect.left;
-            const maxShift = (contentRect.right - margin) - rootRect.right;
-            if (extraShift < minShift) extraShift = minShift;
-            if (extraShift > maxShift) extraShift = maxShift;
-            rootShiftOverride += extraShift;
-            rootTree.style.setProperty('--tree-shift', `${rootShiftOverride}px`);
+    if (contentRect && rootTree && metricsRoot === rootTree) {
+        const nextFitScale = computeCategoryTreeFitScale(metricsRoot, contentRect);
+        if (Math.abs(nextFitScale - fitScale) > 0.02) {
+            state.fitScale = nextFitScale;
+            requestAnimationFrame(() => updateCategoryTreeMetrics(metricsRoot));
+            return;
         }
     }
     const childColumns = metricsRoot.querySelectorAll('.category-group > .category-children');
@@ -1020,6 +1162,12 @@ function updateCategoryTreeMetrics(container) {
             childContainer.classList.remove('has-active-path');
         }
     });
+    if (rootTree && contentRect && metricsRoot === rootTree) {
+        centerCategoryTreeColumns(metricsRoot, rootTree, contentRect);
+    }
+    if (contentArea && rootTree && metricsRoot === rootTree) {
+        ensureCategorySizeOverlay(contentArea, rootTree);
+    }
     updateCategoryTreeLines(metricsRoot);
 }
 
