@@ -1,3 +1,10 @@
+## 2026-01-12 11:09:11 Overlay input ranges + spacing boost
+- [x] Convert overlay value fields to editable numeric inputs (percent/px) with decimal support
+- [x] Expand overlay percent/px ranges to 1-1000% and -1000..1000
+- [x] Increase column spacing response to percent input
+- [ ] Run Playwright category-tree spec
+- [x] Record memory-log entry
+
 ## 2026-01-12 07:58:32 S/S toggles on detail pages
 - [x] Scan detail pages for S/S lists and confirm targets
 - [x] Add S/S toggle rendering, handlers, and styles

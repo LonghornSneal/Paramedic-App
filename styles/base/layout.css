@@ -288,6 +288,21 @@ body.dark-mode .snapshot-card {
   font-variant-numeric: tabular-nums;
 }
 
+.category-size-input {
+  width: 3.6rem;
+  padding: 0.15rem 0.3rem;
+  border-radius: 0.35rem;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: #fff;
+  color: #0f172a;
+  font-size: 0.65rem;
+}
+
+.category-size-input:focus {
+  outline: 2px solid rgba(59, 130, 246, 0.4);
+  outline-offset: 1px;
+}
+
 .category-size-layout {
   display: grid;
   gap: 0.5rem;
