@@ -1,3 +1,10 @@
+## 2026-01-12 00:53:47 Overlay header/footer + spacing controls
+- [x] Split header room vs header content sizing and add header move controls
+- [x] Switch footer controls to room-only sizing
+- [x] Add per-column spacing controls
+- [x] Run Playwright category-tree spec
+- [x] Record memory-log entry
+
 ## 2026-01-12 00:31:54 Overlay controls: size range, column shift, header/footer
 - [x] Extend pill size ceiling to 260% and add column shift controls
 - [x] Add header/footer height controls via overlay variables

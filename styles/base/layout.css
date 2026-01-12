@@ -18,42 +18,49 @@ body {
 }
 
 #app-container {
-  --header-scale: 1;
-  --footer-scale: 1;
+  --header-room-scale: 1;
+  --header-content-scale: 1;
+  --header-offset-x: 0px;
+  --header-offset-y: 0px;
+  --footer-room-scale: 1;
 }
 
 #app-container > header {
-  padding-top: calc(0.25rem * var(--header-scale));
-  padding-bottom: calc(0.25rem * var(--header-scale));
+  padding-top: calc(0.25rem * var(--header-room-scale));
+  padding-bottom: calc(0.25rem * var(--header-room-scale));
+}
+
+#app-container > header .container {
+  transform: translate(var(--header-offset-x), var(--header-offset-y)) scale(var(--header-content-scale));
+  transform-origin: top center;
 }
 
 #app-container > header .mt-2 {
-  margin-top: calc(0.5rem * var(--header-scale));
+  margin-top: 0.5rem;
 }
 
 #app-container > header #searchInput {
-  padding-top: calc(0.5rem * var(--header-scale));
-  padding-bottom: calc(0.5rem * var(--header-scale));
-  font-size: calc(1rem * var(--header-scale));
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1rem;
 }
 
 #app-container > header .header-nav-button {
-  padding: calc(0.5rem * var(--header-scale));
+  padding: 0.5rem;
 }
 
 #app-container > header #patient-snapshot-bar {
-  margin-top: calc(0.5rem * var(--header-scale));
-  font-size: calc(0.875rem * var(--header-scale));
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
 }
 
 #app-container > footer {
-  padding-top: calc(1rem * var(--footer-scale));
-  padding-bottom: calc(1rem * var(--footer-scale));
-  font-size: calc(0.875rem * var(--footer-scale));
+  padding-top: calc(1rem * var(--footer-room-scale));
+  padding-bottom: calc(1rem * var(--footer-room-scale));
 }
 
 #app-container > footer #settings-button {
-  font-size: calc(1rem * var(--footer-scale));
+  font-size: 1rem;
 }
 
 #app-container > header h1 {
@@ -134,6 +141,7 @@ body.dark-mode .snapshot-card {
   --tree-scale: 1;
   --pill-scale: 1;
   --column-shift: 0px;
+  --row-gap-scale: 1;
   --tree-column-width: 0px;
   --connector-flow-direction: reverse;
   --connector-shimmer-speed: 5s;
@@ -145,7 +153,7 @@ body.dark-mode .snapshot-card {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: calc(var(--tree-row-gap) * var(--tree-scale, 1));
+  gap: calc(var(--tree-row-gap) * var(--tree-scale, 1) * var(--row-gap-scale, 1));
   position: relative;
   width: 100%;
   transition: transform 0.32s ease;
@@ -179,7 +187,7 @@ body.dark-mode .snapshot-card {
   z-index: 6;
   display: grid;
   gap: 0.45rem;
-  min-width: 9.5rem;
+  min-width: 11rem;
   padding: 0.55rem 0.65rem;
   border-radius: 0.75rem;
   border: 1px solid rgba(30, 64, 175, 0.2);
@@ -265,7 +273,7 @@ body.dark-mode .snapshot-card {
 }
 
 .category-size-value {
-  min-width: 2.4rem;
+  min-width: 3rem;
   text-align: center;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
