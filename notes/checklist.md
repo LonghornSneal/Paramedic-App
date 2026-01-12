@@ -1,3 +1,16 @@
+## 2026-01-12 07:58:32 S/S toggles on detail pages
+- [x] Scan detail pages for S/S lists and confirm targets
+- [x] Add S/S toggle rendering, handlers, and styles
+- [ ] Verify S/S toggles on affected detail pages
+- [x] Record memory-log entry
+
+## 2026-01-12 02:14:32 Overlay per-element + dev toggle updates
+- [x] Add header/footer element size and position controls in overlay
+- [x] Fix header/footer room sizing to resize content area accurately
+- [x] Add Dev Overlay toggle in settings
+- [x] Run Playwright category-tree spec
+- [x] Record memory-log entry
+
 ## 2026-01-12 00:53:47 Overlay header/footer + spacing controls
 - [x] Split header room vs header content sizing and add header move controls
 - [x] Switch footer controls to room-only sizing

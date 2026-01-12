@@ -1238,6 +1238,17 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 
 }
 
+.ss-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+
+}
+
 #content-area.detail-space .toggle-info:focus-visible {
   outline: 2px solid rgba(190, 18, 60, 0.6);
   outline-offset: 2px;
@@ -1264,6 +1275,12 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
   color: #991b1b;
   font-weight: 600;
   font-size: 0.85rem;
+
+}
+
+.detail-section .ss-list {
+  margin-top: 0.35rem;
+  margin-bottom: 0.35rem;
 
 }
 

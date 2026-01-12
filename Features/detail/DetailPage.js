@@ -10,7 +10,7 @@ import { renderCricothyrotomyDetail } from './cricothyrotomyDetail.js';
 import { renderAbbreviationGroupDetail } from './abbreviationDetail.js';
 import { renderEquipmentFromMarkdown, renderMarkdownDetail, renderOriginalPdfSection, renderPlaceholder, insertEquipmentSection } from './markdownDetail.js';
 import { renderQuickVentSetup, renderQuickVentCalculator } from './quickVent.js';
-import { attachToggleInfoHandlers, attachToggleCategoryHandlers, parseTextMarkup } from './detailPageUtils.js';
+import { attachSsToggleHandlers, attachToggleInfoHandlers, attachToggleCategoryHandlers, parseTextMarkup } from './detailPageUtils.js';
 import { addTapListener } from '../../Utils/addTapListener.js';
 import { applyDetailSpaceClasses } from './detailSpaceUtils.js';
 
@@ -190,6 +190,7 @@ export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop =
     appendTopicDetails(topic, contentArea);
     // Attach toggle handlers for collapsible info and category sections
     attachToggleInfoHandlers(contentArea);
+    attachSsToggleHandlers(contentArea);
     attachToggleCategoryHandlers(contentArea);
     initializeEquipmentPopovers(contentArea);
     // Insert table of contents for detail sections (if any sections exist)

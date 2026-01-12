@@ -16,6 +16,24 @@ export function attachToggleInfoHandlers(container) {
   });
 }
 
+export function attachSsToggleHandlers(container) {
+  container.querySelectorAll('.ss-toggle').forEach(toggle => {
+    addTapListener(toggle, e => {
+      e.stopPropagation();
+      const targetId = toggle.dataset.ssTarget;
+      if (!targetId) return;
+      const list = container.querySelector(`#${targetId}`);
+      if (!list) return;
+      const isHidden = list.classList.toggle('hidden');
+      const expanded = !isHidden;
+      const indicator = toggle.querySelector('.toggle-info-indicator');
+      if (indicator) indicator.textContent = expanded ? 'Hide' : 'Show';
+      toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      toggle.classList.toggle('is-expanded', expanded);
+    });
+  });
+}
+
 export function attachToggleCategoryHandlers(container) {
   container.querySelectorAll('.toggle-category').forEach(header => {
     addTapListener(header, () => {

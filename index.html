@@ -362,6 +362,10 @@
         <label for="dark-mode-toggle" class="mr-2 text-gray-800">Dark Mode</label>
         <input type="checkbox" id="dark-mode-toggle" class="w-5 h-5" >
     </div>
+    <div class="flex items-center justify-between mt-3">
+        <label for="dev-overlay-toggle" class="mr-2 text-gray-800">Dev Overlay</label>
+        <input type="checkbox" id="dev-overlay-toggle" class="w-5 h-5">
+    </div>
 </div>
 
 <div id="app-container" class="flex flex-col min-h-screen">
@@ -424,7 +428,7 @@
     </main>
     <!-- Application Footer -->
     <footer class="text-center p-4 text-gray-500 text-sm">
-  App Version 0.7
+  <span id="app-version">App Version 0.7</span>
       <button type="button" id="settings-button" class="ml-4">Settings</button>
     </footer>
 </div>

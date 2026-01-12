@@ -4,6 +4,7 @@ const settingsButtonEl = document.getElementById('settings-button');
 const settingsPanelEl = document.getElementById('settings-panel');
 const closeSettingsButton = document.getElementById('close-settings-button');
 const darkModeToggle = document.getElementById('dark-mode-toggle');
+const devOverlayToggle = document.getElementById('dev-overlay-toggle');
 const overlayEl = document.getElementById('sidebar-overlay');
 const patientSidebarEl = document.getElementById('patient-sidebar');
 
@@ -17,6 +18,14 @@ if (settingsButtonEl) {
 if (localStorage.getItem('darkMode') === 'true') {
     document.body.classList.add('dark-mode');
     if (darkModeToggle) darkModeToggle.checked = true;
+}
+
+const savedDevOverlay = localStorage.getItem('devOverlay');
+if (devOverlayToggle) {
+    devOverlayToggle.checked = savedDevOverlay !== 'false';
+}
+if (typeof window.setDevOverlayVisible === 'function' && devOverlayToggle) {
+    window.setDevOverlayVisible(devOverlayToggle.checked);
 }
 
 // Open Settings panel when Settings button is clicked
@@ -61,6 +70,14 @@ darkModeToggle?.addEventListener('change', () => {
     } else {
         document.body.classList.remove('dark-mode');
         localStorage.setItem('darkMode', 'false');
+    }
+});
+
+devOverlayToggle?.addEventListener('change', () => {
+    const enabled = devOverlayToggle.checked;
+    localStorage.setItem('devOverlay', enabled ? 'true' : 'false');
+    if (typeof window.setDevOverlayVisible === 'function') {
+        window.setDevOverlayVisible(enabled);
     }
 });
 function createBrightnessControl() {

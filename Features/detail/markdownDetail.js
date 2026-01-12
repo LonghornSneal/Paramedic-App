@@ -1,6 +1,6 @@
 import { addTapListener } from '../../Utils/addTapListener.js';
 import { slugify } from '../../Utils/slugify.js';
-import { attachToggleCategoryHandlers, attachToggleInfoHandlers } from './detailPageUtils.js';
+import { attachSsToggleHandlers, attachToggleCategoryHandlers, attachToggleInfoHandlers } from './detailPageUtils.js';
 import { initializeEquipmentPopovers } from './equipmentPopover.js';
 import { setupSlugAnchors } from '../anchorNav/slugAnchors.js';
 import { TieredDetailConfig } from './tieredDetailConfig.js';
@@ -36,6 +36,69 @@ function inlineMd(t){
   return applyAbbreviationOverlines(s);
 }
 
+function normalizeSsListItem(item) {
+  return item.replace(/^(&|\band)\s+/i, '').trim();
+}
+
+function splitSsInlineList(text) {
+  const boldMatch = text.match(/^\*\*(.+?)\s+S\/S:\*\*\s*(.+)$/);
+  if (boldMatch) {
+    return {
+      prefix: `**${boldMatch[1]}**`,
+      listText: boldMatch[2]
+    };
+  }
+  const colonMatch = text.match(/^(.*)\bS\/S:\s*(.+)$/);
+  if (colonMatch) {
+    return {
+      prefix: colonMatch[1],
+      listText: colonMatch[2]
+    };
+  }
+  const gapMatch = text.match(/^(.*)\bS\/S\s{2,}(.+)$/);
+  if (gapMatch && /,/.test(gapMatch[2])) {
+    return {
+      prefix: gapMatch[1],
+      listText: gapMatch[2]
+    };
+  }
+  return null;
+}
+
+function parseSsListText(listText) {
+  return listText
+    .split(/,\s*/)
+    .map(normalizeSsListItem)
+    .filter(Boolean);
+}
+
+function collectListItems(lines, startIndex) {
+  const items = [];
+  let index = startIndex;
+  while (index < lines.length && /^\s*[-*]\s+/.test(lines[index])) {
+    items.push(lines[index].replace(/^\s*[-*]\s+/, '').trim());
+    index += 1;
+  }
+  return { items, lastIndex: index - 1 };
+}
+
+function buildSsListId(prefix, index) {
+  const base = (prefix || 'ss').replace(/[*`]/g, '').trim();
+  return `ss-list-${slugify(`${base}-${index}`)}`;
+}
+
+function buildSsToggle(listId) {
+  return `<button type="button" class="toggle-info ss-toggle" data-ss-target="${listId}" aria-expanded="false" aria-controls="${listId}"><span class="toggle-info-label">S/S</span><span class="toggle-info-indicator" aria-hidden="true">Show</span></button>`;
+}
+
+function buildSsList(listId, items) {
+  if (!items.length) return '';
+  const itemsHtml = items
+    .map(item => `<li>${emphasizeImportant(inlineMd(item))}</li>`)
+    .join('');
+  return `<ul id="${listId}" class="detail-list ss-list hidden">${itemsHtml}</ul>`;
+}
+
 function applyAbbreviationOverlines(html) {
   const tokenRegex = /(^|[^A-Za-z0-9/])([qpscaQPSCA])(?=([^A-Za-z0-9/]|$))/g;
   const applyToText = (text) => text.replace(tokenRegex, (match, leading, letter) => {
@@ -55,7 +118,8 @@ function renderMdBlock(lines){
   // Convert bullets, headings, and paragraphs into HTML
   let html = '';
   let inList = false;
-  for (const ln of lines) {
+  for (let i = 0; i < lines.length; i += 1) {
+    const ln = lines[i];
     if (/^\s*[-*]\s+/.test(ln)) {
       if (!inList) {
         html += '<ul class="detail-list">';
@@ -76,8 +140,35 @@ function renderMdBlock(lines){
     const headingMatch = trimmed.match(/^(#{1,6})\s+(.*)$/);
     if (headingMatch) {
       const level = Math.min(6, headingMatch[1].length);
-      const headingHtml = emphasizeImportant(inlineMd(headingMatch[2].trim()));
+      const headingText = headingMatch[2].trim();
+      const ssHeadingMatch = headingText.match(/^(.*)\bS\/S:?$/);
+      if (ssHeadingMatch) {
+        const listInfo = collectListItems(lines, i + 1);
+        if (listInfo.items.length) {
+          const headingPrefix = ssHeadingMatch[1].trim();
+          const headingHtml = emphasizeImportant(inlineMd(headingPrefix));
+          const listId = buildSsListId(headingPrefix, i);
+          html += `<h${level} class="detail-md-heading">${headingHtml} ${buildSsToggle(listId)}</h${level}>`;
+          html += buildSsList(listId, listInfo.items);
+          i = listInfo.lastIndex;
+          continue;
+        }
+      }
+      const headingHtml = emphasizeImportant(inlineMd(headingText));
       html += `<h${level} class="detail-md-heading">${headingHtml}</h${level}>`;
+      continue;
+    }
+    const ssInline = splitSsInlineList(trimmed);
+    if (ssInline) {
+      const prefixText = ssInline.prefix.trim();
+      const listId = buildSsListId(prefixText, i);
+      const prefixHtml = prefixText.length
+        ? emphasizeImportant(inlineMd(prefixText))
+        : '';
+      const listItems = parseSsListText(ssInline.listText);
+      const prefixChunk = prefixHtml ? `${prefixHtml} ` : '';
+      html += `<p>${prefixChunk}${buildSsToggle(listId)}</p>`;
+      html += buildSsList(listId, listItems);
       continue;
     }
     const paragraphHtml = emphasizeImportant(inlineMd(trimmed));
@@ -325,6 +416,7 @@ export async function renderEquipmentFromMarkdown(details, contentArea, topic) {
       });
     });
     attachToggleInfoHandlers(contentArea);
+    attachSsToggleHandlers(contentArea);
     attachToggleCategoryHandlers(contentArea);
     initializeEquipmentPopovers(contentArea);
     const tocSections = [];
@@ -351,6 +443,7 @@ export async function renderMarkdownDetail(details, contentArea, topic) {
     if (tierConfig) {
       renderTieredMarkdownDetail(md, topic, contentArea, tierConfig);
       attachToggleInfoHandlers(contentArea);
+      attachSsToggleHandlers(contentArea);
       attachToggleCategoryHandlers(contentArea);
       initializeEquipmentPopovers(contentArea);
       return;
@@ -414,6 +507,7 @@ export async function renderMarkdownDetail(details, contentArea, topic) {
       contentArea.appendChild(wrapper);
     });
     attachToggleInfoHandlers(contentArea);
+    attachSsToggleHandlers(contentArea);
     attachToggleCategoryHandlers(contentArea);
     initializeEquipmentPopovers(contentArea);
   } catch (err) {

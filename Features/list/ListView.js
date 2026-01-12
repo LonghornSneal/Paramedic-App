@@ -13,10 +13,24 @@ import { addTapListener } from '../../Utils/addTapListener.js'
 const CATEGORY_TREE_LINE_THICKNESS = 4;
 const CATEGORY_TREE_LINE_GAP = 8;
 const CATEGORY_TREE_DRAG_THRESHOLD = 4;
+const HEADER_ELEMENT_DEFS = [
+    { key: 'search', label: 'Search Bar', selector: '#searchInput' },
+    { key: 'menu', label: 'Menu Button', selector: '#open-sidebar-button' },
+    { key: 'back', label: 'Back Button', selector: '#nav-back-button' },
+    { key: 'forward', label: 'Forward Button', selector: '#nav-forward-button' },
+    { key: 'home', label: 'Home Button', selector: '#nav-home-button' },
+    { key: 'history', label: 'History Button', selector: '#history-button' }
+];
+const FOOTER_ELEMENT_DEFS = [
+    { key: 'version', label: 'App Version', selector: '#app-version' },
+    { key: 'settings', label: 'Settings Button', selector: '#settings-button' }
+];
 
 function getCategoryTreeState() {
     if (typeof window === 'undefined') return {};
     if (!window.categoryTreeState) {
+        const overlayPref = typeof localStorage !== 'undefined' ? localStorage.getItem('devOverlay') : null;
+        const overlayEnabled = overlayPref !== 'false';
         window.categoryTreeState = {
             dragOffsets: new Map(),
             dragActive: null,
@@ -35,13 +49,19 @@ function getCategoryTreeState() {
             columnShiftByLevel: new Map(),
             rowGapScaleByLevel: new Map(),
             overlayLevelsKey: '',
-            overlayHidden: false,
+            overlayHidden: !overlayEnabled,
             manualColumnShift: false,
             headerScale: 1,
             headerContentScale: 1,
             headerOffsetX: 0,
             headerOffsetY: 0,
-            footerScale: 1
+            footerScale: 1,
+            headerElementScale: new Map(),
+            headerElementOffsetX: new Map(),
+            headerElementOffsetY: new Map(),
+            footerElementScale: new Map(),
+            footerElementOffsetX: new Map(),
+            footerElementOffsetY: new Map()
         };
     }
     return window.categoryTreeState;
@@ -476,14 +496,14 @@ function getFooterScale() {
 
 function setHeaderScale(scale) {
     const state = getCategoryTreeState();
-    const nextScale = Math.min(1.6, Math.max(0.6, scale));
+    const nextScale = Math.min(1.8, Math.max(0.2, scale));
     state.headerScale = nextScale;
     return nextScale;
 }
 
 function setHeaderContentScale(scale) {
     const state = getCategoryTreeState();
-    const nextScale = Math.min(1.6, Math.max(0.6, scale));
+    const nextScale = Math.min(1.8, Math.max(0.4, scale));
     state.headerContentScale = nextScale;
     return nextScale;
 }
@@ -504,9 +524,111 @@ function setHeaderOffsetY(value) {
 
 function setFooterScale(scale) {
     const state = getCategoryTreeState();
-    const nextScale = Math.min(1.6, Math.max(0.6, scale));
+    const nextScale = Math.min(1.8, Math.max(0.2, scale));
     state.footerScale = nextScale;
     return nextScale;
+}
+
+function getHeaderElementScale(key) {
+    const state = getCategoryTreeState();
+    const stored = state.headerElementScale.get(key);
+    return Number.isFinite(stored) ? stored : 1;
+}
+
+function setHeaderElementScale(key, scale) {
+    const state = getCategoryTreeState();
+    const nextScale = Math.min(2.6, Math.max(0.4, scale));
+    state.headerElementScale.set(key, nextScale);
+    return nextScale;
+}
+
+function getHeaderElementOffsetX(key) {
+    const state = getCategoryTreeState();
+    const stored = state.headerElementOffsetX.get(key);
+    return Number.isFinite(stored) ? stored : 0;
+}
+
+function getHeaderElementOffsetY(key) {
+    const state = getCategoryTreeState();
+    const stored = state.headerElementOffsetY.get(key);
+    return Number.isFinite(stored) ? stored : 0;
+}
+
+function setHeaderElementOffsetX(key, value) {
+    const state = getCategoryTreeState();
+    const nextValue = Math.min(220, Math.max(-220, value));
+    state.headerElementOffsetX.set(key, nextValue);
+    return nextValue;
+}
+
+function setHeaderElementOffsetY(key, value) {
+    const state = getCategoryTreeState();
+    const nextValue = Math.min(180, Math.max(-180, value));
+    state.headerElementOffsetY.set(key, nextValue);
+    return nextValue;
+}
+
+function getFooterElementScale(key) {
+    const state = getCategoryTreeState();
+    const stored = state.footerElementScale.get(key);
+    return Number.isFinite(stored) ? stored : 1;
+}
+
+function setFooterElementScale(key, scale) {
+    const state = getCategoryTreeState();
+    const nextScale = Math.min(2.2, Math.max(0.4, scale));
+    state.footerElementScale.set(key, nextScale);
+    return nextScale;
+}
+
+function getFooterElementOffsetX(key) {
+    const state = getCategoryTreeState();
+    const stored = state.footerElementOffsetX.get(key);
+    return Number.isFinite(stored) ? stored : 0;
+}
+
+function getFooterElementOffsetY(key) {
+    const state = getCategoryTreeState();
+    const stored = state.footerElementOffsetY.get(key);
+    return Number.isFinite(stored) ? stored : 0;
+}
+
+function setFooterElementOffsetX(key, value) {
+    const state = getCategoryTreeState();
+    const nextValue = Math.min(220, Math.max(-220, value));
+    state.footerElementOffsetX.set(key, nextValue);
+    return nextValue;
+}
+
+function setFooterElementOffsetY(key, value) {
+    const state = getCategoryTreeState();
+    const nextValue = Math.min(120, Math.max(-120, value));
+    state.footerElementOffsetY.set(key, nextValue);
+    return nextValue;
+}
+
+function applyHeaderElementOverrides() {
+    HEADER_ELEMENT_DEFS.forEach(def => {
+        const element = document.querySelector(def.selector);
+        if (!element) return;
+        const scale = getHeaderElementScale(def.key);
+        const offsetX = getHeaderElementOffsetX(def.key);
+        const offsetY = getHeaderElementOffsetY(def.key);
+        element.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+        element.style.transformOrigin = 'center';
+    });
+}
+
+function applyFooterElementOverrides() {
+    FOOTER_ELEMENT_DEFS.forEach(def => {
+        const element = document.querySelector(def.selector);
+        if (!element) return;
+        const scale = getFooterElementScale(def.key);
+        const offsetX = getFooterElementOffsetX(def.key);
+        const offsetY = getFooterElementOffsetY(def.key);
+        element.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+        element.style.transformOrigin = 'center';
+    });
 }
 
 function applyLayoutScale() {
@@ -517,6 +639,26 @@ function applyLayoutScale() {
     appContainer.style.setProperty('--header-offset-x', `${getHeaderOffsetX()}px`);
     appContainer.style.setProperty('--header-offset-y', `${getHeaderOffsetY()}px`);
     appContainer.style.setProperty('--footer-room-scale', `${getFooterScale()}`);
+    applyHeaderElementOverrides();
+    applyFooterElementOverrides();
+    updateLayoutChromeHeight();
+}
+
+function updateLayoutChromeHeight() {
+    const appContainer = document.getElementById('app-container');
+    if (!appContainer || typeof window === 'undefined') return;
+    const header = appContainer.querySelector('header');
+    const footer = appContainer.querySelector('footer');
+    const main = appContainer.querySelector('main');
+    const headerHeight = header ? header.getBoundingClientRect().height : 0;
+    const footerHeight = footer ? footer.getBoundingClientRect().height : 0;
+    let mainPadding = 0;
+    if (main) {
+        const mainStyle = window.getComputedStyle(main);
+        mainPadding = (parseFloat(mainStyle.paddingTop) || 0) + (parseFloat(mainStyle.paddingBottom) || 0);
+    }
+    const chromeHeight = headerHeight + footerHeight + mainPadding;
+    appContainer.style.setProperty('--layout-chrome-height', `${chromeHeight}px`);
 }
 
 function getCategoryTreeLevels(rootTree) {
@@ -572,6 +714,38 @@ function updateCategorySizeOverlayValues(overlay) {
     if (footerRoomValue) {
         footerRoomValue.textContent = `${Math.round(getFooterScale() * 100)}%`;
     }
+    HEADER_ELEMENT_DEFS.forEach(def => {
+        const sizeValue = overlay.querySelector(`[data-value="header-${def.key}-scale"]`);
+        if (sizeValue) {
+            sizeValue.textContent = `${Math.round(getHeaderElementScale(def.key) * 100)}%`;
+        }
+        const xValue = overlay.querySelector(`[data-value="header-${def.key}-x"]`);
+        if (xValue) {
+            const value = Math.round(getHeaderElementOffsetX(def.key));
+            xValue.textContent = `${value >= 0 ? '+' : ''}${value}px`;
+        }
+        const yValue = overlay.querySelector(`[data-value="header-${def.key}-y"]`);
+        if (yValue) {
+            const value = Math.round(getHeaderElementOffsetY(def.key));
+            yValue.textContent = `${value >= 0 ? '+' : ''}${value}px`;
+        }
+    });
+    FOOTER_ELEMENT_DEFS.forEach(def => {
+        const sizeValue = overlay.querySelector(`[data-value="footer-${def.key}-scale"]`);
+        if (sizeValue) {
+            sizeValue.textContent = `${Math.round(getFooterElementScale(def.key) * 100)}%`;
+        }
+        const xValue = overlay.querySelector(`[data-value="footer-${def.key}-x"]`);
+        if (xValue) {
+            const value = Math.round(getFooterElementOffsetX(def.key));
+            xValue.textContent = `${value >= 0 ? '+' : ''}${value}px`;
+        }
+        const yValue = overlay.querySelector(`[data-value="footer-${def.key}-y"]`);
+        if (yValue) {
+            const value = Math.round(getFooterElementOffsetY(def.key));
+            yValue.textContent = `${value >= 0 ? '+' : ''}${value}px`;
+        }
+    });
 }
 
 function buildCategorySizeOverlay(overlay, levels) {
@@ -775,6 +949,97 @@ function buildCategorySizeOverlay(overlay, levels) {
     });
     overlay.appendChild(layout);
 
+    const createElementGroup = (def, actionName, labelText, controlKey, downText, upText, valueKey, ariaDown, ariaUp) => {
+        const group = document.createElement('div');
+        group.className = 'category-size-control-group';
+        const label = document.createElement('span');
+        label.className = 'category-size-control-label';
+        label.textContent = labelText;
+        const downButton = document.createElement('button');
+        downButton.type = 'button';
+        downButton.className = 'category-size-btn';
+        downButton.dataset.action = actionName;
+        downButton.dataset.dir = 'down';
+        downButton.dataset.key = def.key;
+        downButton.dataset.control = controlKey;
+        downButton.setAttribute('aria-label', ariaDown);
+        downButton.textContent = downText;
+        const value = document.createElement('div');
+        value.className = 'category-size-value';
+        value.dataset.value = valueKey;
+        value.textContent = controlKey === 'scale' ? '100%' : '+0px';
+        const upButton = document.createElement('button');
+        upButton.type = 'button';
+        upButton.className = 'category-size-btn';
+        upButton.dataset.action = actionName;
+        upButton.dataset.dir = 'up';
+        upButton.dataset.key = def.key;
+        upButton.dataset.control = controlKey;
+        upButton.setAttribute('aria-label', ariaUp);
+        upButton.textContent = upText;
+        group.append(label, downButton, value, upButton);
+        return group;
+    };
+
+    const buildElementSection = (titleText, defs, actionName, valuePrefix) => {
+        const section = document.createElement('div');
+        section.className = 'category-size-layout';
+        const sectionTitle = document.createElement('div');
+        sectionTitle.className = 'category-size-layout-title';
+        sectionTitle.textContent = titleText;
+        section.appendChild(sectionTitle);
+        defs.forEach(def => {
+            const row = document.createElement('div');
+            row.className = 'category-size-row';
+            const label = document.createElement('div');
+            label.className = 'category-size-label';
+            label.textContent = def.label;
+            const controlStack = document.createElement('div');
+            controlStack.className = 'category-size-control-stack';
+            controlStack.append(
+                createElementGroup(
+                    def,
+                    actionName,
+                    'Size',
+                    'scale',
+                    '-',
+                    '+',
+                    `${valuePrefix}-${def.key}-scale`,
+                    `Decrease ${def.label} size`,
+                    `Increase ${def.label} size`
+                ),
+                createElementGroup(
+                    def,
+                    actionName,
+                    'Move X',
+                    'x',
+                    '<',
+                    '>',
+                    `${valuePrefix}-${def.key}-x`,
+                    `Move ${def.label} left`,
+                    `Move ${def.label} right`
+                ),
+                createElementGroup(
+                    def,
+                    actionName,
+                    'Move Y',
+                    'y',
+                    'v',
+                    '^',
+                    `${valuePrefix}-${def.key}-y`,
+                    `Move ${def.label} down`,
+                    `Move ${def.label} up`
+                )
+            );
+            row.append(label, controlStack);
+            section.appendChild(row);
+        });
+        return section;
+    };
+
+    overlay.appendChild(buildElementSection('Header Elements', HEADER_ELEMENT_DEFS, 'header-element', 'header'));
+    overlay.appendChild(buildElementSection('Footer Elements', FOOTER_ELEMENT_DEFS, 'footer-element', 'footer'));
+
     const footer = document.createElement('div');
     footer.className = 'category-size-overlay-footer';
     const resetButton = document.createElement('button');
@@ -784,6 +1049,30 @@ function buildCategorySizeOverlay(overlay, levels) {
     resetButton.textContent = 'Reset';
     footer.appendChild(resetButton);
     overlay.appendChild(footer);
+}
+
+function setDevOverlayVisible(isVisible) {
+    const state = getCategoryTreeState();
+    const visible = Boolean(isVisible);
+    state.overlayHidden = !visible;
+    if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('devOverlay', visible ? 'true' : 'false');
+    }
+    const toggle = document.getElementById('dev-overlay-toggle');
+    if (toggle) {
+        toggle.checked = visible;
+    }
+    const contentArea = window.contentArea || document.getElementById('content-area');
+    if (!contentArea) return;
+    const existing = contentArea.querySelector('.category-size-overlay');
+    if (!visible) {
+        if (existing) existing.remove();
+        return;
+    }
+    const rootTree = contentArea.querySelector('.category-tree-container');
+    if (rootTree) {
+        ensureCategorySizeOverlay(contentArea, rootTree);
+    }
 }
 
 function ensureCategorySizeOverlay(contentArea, rootTree) {
@@ -798,8 +1087,7 @@ function ensureCategorySizeOverlay(contentArea, rootTree) {
             if (!button) return;
             const action = button.dataset.action;
             if (action === 'hide') {
-                state.overlayHidden = true;
-                overlay.remove();
+                setDevOverlayVisible(false);
                 return;
             }
             if (action === 'reset') {
@@ -812,6 +1100,12 @@ function ensureCategorySizeOverlay(contentArea, rootTree) {
                 state.headerOffsetX = 0;
                 state.headerOffsetY = 0;
                 state.footerScale = 1;
+                state.headerElementScale.clear();
+                state.headerElementOffsetX.clear();
+                state.headerElementOffsetY.clear();
+                state.footerElementScale.clear();
+                state.footerElementOffsetX.clear();
+                state.footerElementOffsetY.clear();
                 applyLayoutScale();
                 updateCategoryTreeMetrics(rootTree);
                 updateCategorySizeOverlayValues(overlay);
@@ -871,6 +1165,48 @@ function ensureCategorySizeOverlay(contentArea, rootTree) {
                 if (button.dataset.target === 'header-y') {
                     const direction = button.dataset.dir === 'down' ? 8 : -8;
                     setHeaderOffsetY(getHeaderOffsetY() + direction);
+                }
+                applyLayoutScale();
+                updateCategoryTreeMetrics(rootTree);
+                updateCategorySizeOverlayValues(overlay);
+                return;
+            }
+            if (action === 'header-element') {
+                const key = button.dataset.key;
+                const control = button.dataset.control;
+                if (!key || !control) return;
+                if (control === 'scale') {
+                    const delta = button.dataset.dir === 'down' ? -0.05 : 0.05;
+                    setHeaderElementScale(key, getHeaderElementScale(key) + delta);
+                }
+                if (control === 'x') {
+                    const delta = button.dataset.dir === 'down' ? -8 : 8;
+                    setHeaderElementOffsetX(key, getHeaderElementOffsetX(key) + delta);
+                }
+                if (control === 'y') {
+                    const delta = button.dataset.dir === 'down' ? 8 : -8;
+                    setHeaderElementOffsetY(key, getHeaderElementOffsetY(key) + delta);
+                }
+                applyLayoutScale();
+                updateCategoryTreeMetrics(rootTree);
+                updateCategorySizeOverlayValues(overlay);
+                return;
+            }
+            if (action === 'footer-element') {
+                const key = button.dataset.key;
+                const control = button.dataset.control;
+                if (!key || !control) return;
+                if (control === 'scale') {
+                    const delta = button.dataset.dir === 'down' ? -0.05 : 0.05;
+                    setFooterElementScale(key, getFooterElementScale(key) + delta);
+                }
+                if (control === 'x') {
+                    const delta = button.dataset.dir === 'down' ? -8 : 8;
+                    setFooterElementOffsetX(key, getFooterElementOffsetX(key) + delta);
+                }
+                if (control === 'y') {
+                    const delta = button.dataset.dir === 'down' ? 8 : -8;
+                    setFooterElementOffsetY(key, getFooterElementOffsetY(key) + delta);
                 }
                 applyLayoutScale();
                 updateCategoryTreeMetrics(rootTree);
@@ -1538,6 +1874,7 @@ function updateCategoryTreeMetrics(container) {
 // Temporary global exposure
 if (typeof window !== 'undefined') {
     window.renderInitialView = renderInitialView;
+    window.setDevOverlayVisible = setDevOverlayVisible;
 }
 /*
   Features/list/ListView.js
