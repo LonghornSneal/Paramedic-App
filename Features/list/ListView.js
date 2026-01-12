@@ -32,8 +32,12 @@ function getCategoryTreeState() {
             lineThickness: CATEGORY_TREE_LINE_THICKNESS,
             centeringTimer: null,
             pillScaleByLevel: new Map(),
+            columnShiftByLevel: new Map(),
             overlayLevelsKey: '',
-            overlayHidden: false
+            overlayHidden: false,
+            manualColumnShift: false,
+            headerScale: 1,
+            footerScale: 1
         };
     }
     return window.categoryTreeState;
@@ -404,9 +408,59 @@ function getPillScaleForLevel(level) {
 
 function setPillScaleForLevel(level, scale) {
     const state = getCategoryTreeState();
-    const nextScale = Math.min(1.6, Math.max(0.7, scale));
+    const nextScale = Math.min(2.6, Math.max(0.7, scale));
     state.pillScaleByLevel.set(level, nextScale);
     return nextScale;
+}
+
+function getColumnShiftForLevel(level) {
+    const state = getCategoryTreeState();
+    const stored = state.columnShiftByLevel.get(level);
+    return Number.isFinite(stored) ? stored : 0;
+}
+
+function updateManualColumnShiftFlag(state) {
+    state.manualColumnShift = Array.from(state.columnShiftByLevel.values())
+        .some(value => Number.isFinite(value) && Math.abs(value) > 0.5);
+}
+
+function setColumnShiftForLevel(level, shift) {
+    const state = getCategoryTreeState();
+    const nextShift = Math.min(260, Math.max(-260, shift));
+    state.columnShiftByLevel.set(level, nextShift);
+    updateManualColumnShiftFlag(state);
+    return nextShift;
+}
+
+function getHeaderScale() {
+    const state = getCategoryTreeState();
+    return Number.isFinite(state.headerScale) ? state.headerScale : 1;
+}
+
+function getFooterScale() {
+    const state = getCategoryTreeState();
+    return Number.isFinite(state.footerScale) ? state.footerScale : 1;
+}
+
+function setHeaderScale(scale) {
+    const state = getCategoryTreeState();
+    const nextScale = Math.min(1.6, Math.max(0.6, scale));
+    state.headerScale = nextScale;
+    return nextScale;
+}
+
+function setFooterScale(scale) {
+    const state = getCategoryTreeState();
+    const nextScale = Math.min(1.6, Math.max(0.6, scale));
+    state.footerScale = nextScale;
+    return nextScale;
+}
+
+function applyLayoutScale() {
+    const appContainer = document.getElementById('app-container');
+    if (!appContainer) return;
+    appContainer.style.setProperty('--header-scale', `${getHeaderScale()}`);
+    appContainer.style.setProperty('--footer-scale', `${getFooterScale()}`);
 }
 
 function getCategoryTreeLevels(rootTree) {
@@ -423,11 +477,26 @@ function updateCategorySizeOverlayValues(overlay) {
     if (!overlay) return;
     overlay.querySelectorAll('.category-size-row').forEach(row => {
         const level = Number(row.dataset.level || 0);
-        const value = row.querySelector('.category-size-value');
-        if (!value) return;
+        const sizeValue = row.querySelector('[data-value="size"]');
+        const shiftValue = row.querySelector('[data-value="shift"]');
         const scale = getPillScaleForLevel(level);
-        value.textContent = `${Math.round(scale * 100)}%`;
+        if (sizeValue) {
+            sizeValue.textContent = `${Math.round(scale * 100)}%`;
+        }
+        if (shiftValue) {
+            const shift = getColumnShiftForLevel(level);
+            const rounded = Math.round(shift);
+            shiftValue.textContent = `${rounded >= 0 ? '+' : ''}${rounded}px`;
+        }
     });
+    const headerValue = overlay.querySelector('[data-value="header-scale"]');
+    if (headerValue) {
+        headerValue.textContent = `${Math.round(getHeaderScale() * 100)}%`;
+    }
+    const footerValue = overlay.querySelector('[data-value="footer-scale"]');
+    if (footerValue) {
+        footerValue.textContent = `${Math.round(getFooterScale() * 100)}%`;
+    }
 }
 
 function buildCategorySizeOverlay(overlay, levels) {
@@ -436,7 +505,7 @@ function buildCategorySizeOverlay(overlay, levels) {
     header.className = 'category-size-overlay-header';
     const title = document.createElement('div');
     title.className = 'category-size-overlay-title';
-    title.textContent = 'Pill Size';
+    title.textContent = 'Overlay Controls';
     const hideButton = document.createElement('button');
     hideButton.type = 'button';
     hideButton.className = 'category-size-overlay-hide';
@@ -454,29 +523,117 @@ function buildCategorySizeOverlay(overlay, levels) {
         const label = document.createElement('div');
         label.className = 'category-size-label';
         label.textContent = `Column ${level + 1}`;
+
+        const controlStack = document.createElement('div');
+        controlStack.className = 'category-size-control-stack';
+
+        const sizeGroup = document.createElement('div');
+        sizeGroup.className = 'category-size-control-group';
+        const sizeLabel = document.createElement('span');
+        sizeLabel.className = 'category-size-control-label';
+        sizeLabel.textContent = 'Size';
         const downButton = document.createElement('button');
         downButton.type = 'button';
         downButton.className = 'category-size-btn';
-        downButton.dataset.action = 'adjust';
+        downButton.dataset.action = 'size';
         downButton.dataset.dir = 'down';
         downButton.dataset.level = String(level);
         downButton.setAttribute('aria-label', `Decrease column ${level + 1} pill size`);
         downButton.textContent = '-';
-        const value = document.createElement('div');
-        value.className = 'category-size-value';
-        value.textContent = '100%';
+        const sizeValue = document.createElement('div');
+        sizeValue.className = 'category-size-value';
+        sizeValue.dataset.value = 'size';
+        sizeValue.textContent = '100%';
         const upButton = document.createElement('button');
         upButton.type = 'button';
         upButton.className = 'category-size-btn';
-        upButton.dataset.action = 'adjust';
+        upButton.dataset.action = 'size';
         upButton.dataset.dir = 'up';
         upButton.dataset.level = String(level);
         upButton.setAttribute('aria-label', `Increase column ${level + 1} pill size`);
         upButton.textContent = '+';
-        row.append(label, downButton, value, upButton);
+        sizeGroup.append(sizeLabel, downButton, sizeValue, upButton);
+
+        const shiftGroup = document.createElement('div');
+        shiftGroup.className = 'category-size-control-group';
+        const shiftLabel = document.createElement('span');
+        shiftLabel.className = 'category-size-control-label';
+        shiftLabel.textContent = 'Shift';
+        const leftButton = document.createElement('button');
+        leftButton.type = 'button';
+        leftButton.className = 'category-size-btn';
+        leftButton.dataset.action = 'shift';
+        leftButton.dataset.dir = 'left';
+        leftButton.dataset.level = String(level);
+        leftButton.setAttribute('aria-label', `Move column ${level + 1} left`);
+        leftButton.textContent = '<';
+        const shiftValue = document.createElement('div');
+        shiftValue.className = 'category-size-value';
+        shiftValue.dataset.value = 'shift';
+        shiftValue.textContent = '+0px';
+        const rightButton = document.createElement('button');
+        rightButton.type = 'button';
+        rightButton.className = 'category-size-btn';
+        rightButton.dataset.action = 'shift';
+        rightButton.dataset.dir = 'right';
+        rightButton.dataset.level = String(level);
+        rightButton.setAttribute('aria-label', `Move column ${level + 1} right`);
+        rightButton.textContent = '>';
+        shiftGroup.append(shiftLabel, leftButton, shiftValue, rightButton);
+
+        controlStack.append(sizeGroup, shiftGroup);
+        row.append(label, controlStack);
         body.appendChild(row);
     });
     overlay.appendChild(body);
+
+    const layout = document.createElement('div');
+    layout.className = 'category-size-layout';
+    const layoutTitle = document.createElement('div');
+    layoutTitle.className = 'category-size-layout-title';
+    layoutTitle.textContent = 'Header/Footer Height';
+    layout.appendChild(layoutTitle);
+
+    const layoutRows = [
+        { key: 'header', label: 'Header' },
+        { key: 'footer', label: 'Footer' }
+    ];
+    layoutRows.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'category-size-row';
+        const label = document.createElement('div');
+        label.className = 'category-size-label';
+        label.textContent = item.label;
+        const controlStack = document.createElement('div');
+        controlStack.className = 'category-size-control-stack';
+        const group = document.createElement('div');
+        group.className = 'category-size-control-group';
+        const downButton = document.createElement('button');
+        downButton.type = 'button';
+        downButton.className = 'category-size-btn';
+        downButton.dataset.action = 'layout';
+        downButton.dataset.dir = 'down';
+        downButton.dataset.target = item.key;
+        downButton.setAttribute('aria-label', `Decrease ${item.label} height`);
+        downButton.textContent = '-';
+        const value = document.createElement('div');
+        value.className = 'category-size-value';
+        value.dataset.value = `${item.key}-scale`;
+        value.textContent = '100%';
+        const upButton = document.createElement('button');
+        upButton.type = 'button';
+        upButton.className = 'category-size-btn';
+        upButton.dataset.action = 'layout';
+        upButton.dataset.dir = 'up';
+        upButton.dataset.target = item.key;
+        upButton.setAttribute('aria-label', `Increase ${item.label} height`);
+        upButton.textContent = '+';
+        group.append(downButton, value, upButton);
+        controlStack.appendChild(group);
+        row.append(label, controlStack);
+        layout.appendChild(row);
+    });
+    overlay.appendChild(layout);
 
     const footer = document.createElement('div');
     footer.className = 'category-size-overlay-footer';
@@ -507,16 +664,43 @@ function ensureCategorySizeOverlay(contentArea, rootTree) {
             }
             if (action === 'reset') {
                 state.pillScaleByLevel.clear();
+                state.columnShiftByLevel.clear();
+                state.manualColumnShift = false;
+                state.headerScale = 1;
+                state.footerScale = 1;
+                applyLayoutScale();
                 updateCategoryTreeMetrics(rootTree);
                 updateCategorySizeOverlayValues(overlay);
                 return;
             }
-            if (action === 'adjust') {
+            if (action === 'size') {
                 const level = Number(button.dataset.level || 0);
                 const delta = button.dataset.dir === 'down' ? -0.05 : 0.05;
                 const nextScale = setPillScaleForLevel(level, getPillScaleForLevel(level) + delta);
                 const tree = contentArea.querySelector(`.category-tree[data-level="${level}"]`);
                 if (tree) tree.style.setProperty('--pill-scale', `${nextScale}`);
+                updateCategoryTreeMetrics(rootTree);
+                updateCategorySizeOverlayValues(overlay);
+                return;
+            }
+            if (action === 'shift') {
+                const level = Number(button.dataset.level || 0);
+                const delta = button.dataset.dir === 'left' ? -12 : 12;
+                const nextShift = setColumnShiftForLevel(level, getColumnShiftForLevel(level) + delta);
+                const tree = contentArea.querySelector(`.category-tree[data-level="${level}"]`);
+                if (tree) tree.style.setProperty('--column-shift', `${nextShift}px`);
+                updateCategoryTreeMetrics(rootTree);
+                updateCategorySizeOverlayValues(overlay);
+                return;
+            }
+            if (action === 'layout') {
+                const delta = button.dataset.dir === 'down' ? -0.05 : 0.05;
+                if (button.dataset.target === 'header') {
+                    setHeaderScale(getHeaderScale() + delta);
+                } else {
+                    setFooterScale(getFooterScale() + delta);
+                }
+                applyLayoutScale();
                 updateCategoryTreeMetrics(rootTree);
                 updateCategorySizeOverlayValues(overlay);
             }
@@ -529,6 +713,7 @@ function ensureCategorySizeOverlay(contentArea, rootTree) {
         buildCategorySizeOverlay(overlay, levels);
         state.overlayLevelsKey = levelsKey;
     }
+    applyLayoutScale();
     updateCategorySizeOverlayValues(overlay);
 }
 
@@ -956,6 +1141,8 @@ function computeCategoryTreeFitScale(metricsRoot, contentRect) {
 
 function centerCategoryTreeColumns(metricsRoot, rootTree, contentRect) {
     if (!metricsRoot || !rootTree || !contentRect) return;
+    const state = getCategoryTreeState();
+    if (state.manualColumnShift) return;
     const candidateTrees = Array.from(metricsRoot.querySelectorAll('.category-children'))
         .filter(tree => tree.children.length && tree.getClientRects().length);
     const rightmostTree = candidateTrees.reduce((current, tree) => {
@@ -979,7 +1166,6 @@ function centerCategoryTreeColumns(metricsRoot, rootTree, contentRect) {
     if (delta > maxShift) delta = maxShift;
     const nextShift = currentShift + delta;
     rootTree.style.setProperty('--tree-shift', `${nextShift}px`);
-    const state = getCategoryTreeState();
     if (state.centeringTimer) {
         clearTimeout(state.centeringTimer);
         state.centeringTimer = null;
@@ -1060,6 +1246,7 @@ function updateCategoryTreeMetrics(container) {
     trees.forEach(tree => {
         const level = Number(tree.dataset.level || 0);
         const pillScale = getPillScaleForLevel(level);
+        const columnShift = getColumnShiftForLevel(level);
         const parentTree = tree.parentElement ? tree.parentElement.closest('.category-tree') : null;
         const parentLevel = parentTree ? Number(parentTree.dataset.level || 0) : null;
         const shift = level === 0
@@ -1072,9 +1259,10 @@ function updateCategoryTreeMetrics(container) {
         tree.style.setProperty('--tree-raise', `${raise}px`);
         tree.style.setProperty('--tree-scale', `${desiredScale(level) * fitScale}`);
         tree.style.setProperty('--pill-scale', `${pillScale}`);
+        tree.style.setProperty('--column-shift', `${columnShift}px`);
         tree.style.setProperty('--connector-flow-direction', flowDirection);
         if (tree.classList.contains('category-children') && tree.parentElement?.classList.contains('category-group')) {
-            tree.parentElement.style.setProperty('--child-shift', `${shift}px`);
+            tree.parentElement.style.setProperty('--child-shift', `${shift + columnShift}px`);
         }
         const groups = Array.from(tree.children).filter(child => child.classList.contains('category-group'));
         if (!groups.length) return;
@@ -1168,6 +1356,7 @@ function updateCategoryTreeMetrics(container) {
     if (contentArea && rootTree && metricsRoot === rootTree) {
         ensureCategorySizeOverlay(contentArea, rootTree);
     }
+    applyLayoutScale();
     updateCategoryTreeLines(metricsRoot);
 }
 

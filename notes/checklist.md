@@ -1,3 +1,9 @@
+## 2026-01-12 00:31:54 Overlay controls: size range, column shift, header/footer
+- [x] Extend pill size ceiling to 260% and add column shift controls
+- [x] Add header/footer height controls via overlay variables
+- [x] Run Playwright category-tree spec
+- [x] Record memory-log entry
+
 ## 2026-01-11 17:12:59 Category pill size overlay controls
 - [x] Increase base pill sizes and add pill-scale variable
 - [x] Add overlay with per-column size controls
