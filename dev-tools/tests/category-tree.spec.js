@@ -1,8 +1,6 @@
 const { test, expect } = require('@playwright/test');
-const fs = require('node:fs');
-const path = require('node:path');
 
-test('category tree active path and layout rules', async ({ page }) => {
+test('category tree active path and layout rules', async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto('http://127.0.0.1:5173/');
   await page.waitForFunction(() => !!document.querySelector('.category-tree'));
@@ -109,13 +107,20 @@ test('category tree active path and layout rules', async ({ page }) => {
   expect(centerCheck.offset).not.toBeNull();
   expect(centerCheck.offset).toBeLessThanOrEqual(centerCheck.tolerance);
 
-  const screenshotDir = path.resolve(process.cwd(), 'dev-tools/screenshots');
-  fs.mkdirSync(screenshotDir, { recursive: true });
-
   await page.waitForTimeout(300);
-  await page.screenshot({ path: path.join(screenshotDir, 'category-tree-desktop.png'), fullPage: true });
+  const desktopPath = testInfo.outputPath('category-tree-desktop.png');
+  await page.screenshot({ path: desktopPath, fullPage: true });
+  await testInfo.attach('category-tree-desktop', {
+    path: desktopPath,
+    contentType: 'image/png'
+  });
 
   await page.setViewportSize({ width: 390, height: 844 });
   await page.waitForTimeout(300);
-  await page.screenshot({ path: path.join(screenshotDir, 'category-tree-mobile.png'), fullPage: true });
+  const mobilePath = testInfo.outputPath('category-tree-mobile.png');
+  await page.screenshot({ path: mobilePath, fullPage: true });
+  await testInfo.attach('category-tree-mobile', {
+    path: mobilePath,
+    contentType: 'image/png'
+  });
 });

@@ -13,7 +13,7 @@ import { renderQuickVentSetup, renderQuickVentCalculator } from './quickVent.js'
 import { attachSsToggleHandlers, attachToggleInfoHandlers, attachToggleCategoryHandlers, parseTextMarkup } from './detailPageUtils.js';
 import { addTapListener } from '../../Utils/addTapListener.js';
 import { applyDetailSpaceClasses } from './detailSpaceUtils.js';
-import { calculateLineDose } from '../../dosageCalc.js';
+import { calculateLineDose } from '../dosageCalc.js';
 
 // Appends all detail sections for a topic into the content area, including “Class”, “Indications”, “Contraindications”, etc.
 // If the topic has no details, a placeholder message is inserted.
@@ -92,6 +92,7 @@ function appendTopicDetails(topic, contentArea) {
             { key: 'adultRx', label: 'Adult Rx' },
             { key: 'pediatricRx', label: 'Pediatric Rx' } 
         ]; 
+        const concentrationText = details.concentration || topic?.concentration || '';
         sections.forEach(sec => {
             if (!details[sec.key]) return;
             const wrapper = document.createElement('div');
@@ -125,7 +126,7 @@ function appendTopicDetails(topic, contentArea) {
                         const calcResult = calculateLineDose({
                             text: line,
                             weightKg: window?.patientData?.weight,
-                            concentration: line || topic?.concentration
+                            concentration: concentrationText
                         });
                         if (calcResult?.formatted?.html) {
                             const calcEl = document.createElement('div');
@@ -144,7 +145,7 @@ function appendTopicDetails(topic, contentArea) {
                     const calcResult = calculateLineDose({
                         text: details[sec.key],
                         weightKg: window?.patientData?.weight,
-                        concentration: details[sec.key] || topic?.concentration
+                        concentration: concentrationText
                     });
                     if (calcResult?.formatted?.html) {
                         const calcEl = document.createElement('div');

@@ -5,14 +5,25 @@ const { ensurePreviewServer, shutdownPreviewServer } = previewServer;
 const BASE_URL = 'http://127.0.0.1:5173/';
 
 async function setWeight(page, pounds) {
+  await page.click('#open-sidebar-button');
+  await page.waitForFunction(() => document.getElementById('patient-sidebar')?.classList.contains('open'));
   const weightInput = page.locator('#pt-weight-value');
+  await expect(weightInput).toBeVisible();
   await weightInput.fill(String(pounds));
   await weightInput.dispatchEvent('input');
+  await page.click('#close-sidebar-button');
+  await page.waitForFunction(() => document.getElementById('patient-sidebar')?.classList.contains('hidden'));
 }
 
 async function openMedicationDetail(page, topicId) {
   await page.waitForFunction(() => typeof window.renderDetailPage === 'function');
   await page.evaluate((id) => window.renderDetailPage(id, false, false), topicId);
+}
+
+function sectionByTitle(page, title) {
+  return page.locator('.detail-section').filter({
+    has: page.locator('.detail-section-title', { hasText: title })
+  }).first();
 }
 
 test.beforeAll(async () => {
@@ -28,9 +39,10 @@ test('Adult Rx line auto-calculates from weight with visible formula', async ({ 
   await page.waitForFunction(() => typeof window.patientData !== 'undefined');
 
   await openMedicationDetail(page, '2-lidocaine-xylocaine');
-  await page.locator('.detail-section-title', { hasText: 'Adult Rx' }).click();
+  const adultSection = sectionByTitle(page, 'Adult Rx');
+  await adultSection.locator('.detail-section-title').click();
 
-  const calc = page.locator('.med-dose-calc').first();
+  const calc = adultSection.locator('.med-dose-calc').first();
   await expect(calc).toBeVisible();
   await expect(calc).toContainText('Enter weight to calculate');
 
@@ -45,9 +57,10 @@ test('Pediatric Rx line auto-calculates and updates from patient weight', async 
 
   await setWeight(page, 20);
   await openMedicationDetail(page, 'midazolam-versed');
-  await page.locator('.detail-section-title', { hasText: 'Pediatric Rx' }).click();
+  const pediatricSection = sectionByTitle(page, 'Pediatric Rx');
+  await pediatricSection.locator('.detail-section-title').click();
 
-  const calc = page.locator('.med-dose-calc').first();
+  const calc = pediatricSection.locator('.med-dose-calc').first();
   await expect(calc).toContainText('Formula: Dose: 0.1 mg/kg × 20kg = 2 mg');
   await expect(calc).toContainText('Volume: 2 mg ÷ 10mg/2mL');
   await expect(calc).toContainText('0.4 mL');

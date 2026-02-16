@@ -9,6 +9,7 @@
     "lint:js": "eslint . --ext .js",
     "hint": "hint index.html",
     "lint": "npm run lint:css && npm run validate:css && npm run lint:html && npm run lint:js && npm run hint",
+    "build:tailwind": "npx tailwindcss@3.4.17 -c tailwind.config.cjs -i styles/tailwind.input.css -o styles/tailwind.generated.css --minify",
     "preview": "http-server -p 5173 -c-1",
     "scan:dead": "knip --json",
     "scan:deps": "depcheck --json",

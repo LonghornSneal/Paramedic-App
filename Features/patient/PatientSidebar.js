@@ -99,6 +99,7 @@ const COMMON_MEDICATION_NAMES = [
 ];
 
 const SIDEBAR_HIDE_DELAY_MS = 200;
+const SIDEBAR_MODAL_MEDIA_QUERY = '(max-width: 1024px)';
 const SELECT_VALUE_CLASS = 'sidebar-select--has-value';
 
 let patientSidebarEl = null;
@@ -106,6 +107,25 @@ let sidebarOverlayEl = null;
 let openSidebarButtonEl = null;
 let closeSidebarButtonEl = null;
 let settingsPanelEl = null;
+
+function shouldUseSidebarOverlay() {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+        return true;
+    }
+    return window.matchMedia(SIDEBAR_MODAL_MEDIA_QUERY).matches;
+}
+
+function showSidebarOverlay() {
+    if (!sidebarOverlayEl) return;
+    sidebarOverlayEl.classList.add('active');
+    sidebarOverlayEl.classList.remove('hidden');
+}
+
+function hideSidebarOverlay() {
+    if (!sidebarOverlayEl) return;
+    sidebarOverlayEl.classList.remove('active');
+    sidebarOverlayEl.classList.add('hidden');
+}
 
 function toggleSelectChevronState(selectEl) {
     const hasValue = typeof selectEl.value === 'string' && selectEl.value.trim() !== '';
@@ -207,21 +227,21 @@ export function initPatientSidebar(options = {}) {
 }
 
 export function openPatientSidebar() {
-    if (!patientSidebarEl || !sidebarOverlayEl) return;
+    if (!patientSidebarEl) return;
     patientSidebarEl.classList.remove('hidden');
     patientSidebarEl.classList.add('open');
-    sidebarOverlayEl.classList.add('active');
-    sidebarOverlayEl.classList.remove('hidden');
+    if (shouldUseSidebarOverlay()) {
+        showSidebarOverlay();
+    } else {
+        hideSidebarOverlay();
+    }
 }
 
 export function closePatientSidebar() {
     if (!patientSidebarEl) return;
     patientSidebarEl.classList.remove('open');
     setTimeout(() => patientSidebarEl?.classList.add('hidden'), SIDEBAR_HIDE_DELAY_MS);
-    if (sidebarOverlayEl) {
-        sidebarOverlayEl.classList.remove('active');
-        sidebarOverlayEl.classList.add('hidden');
-    }
+    hideSidebarOverlay();
 }
 
 function stripMarkup(str) {
@@ -320,4 +340,3 @@ export function insertMedicationClassDropdown() {
   - Maintains cached DOM references so other modules can call open/close helpers.
   - Keeps suggestion vocabulary synchronized with PatientInfo.js sets.
 */
-
