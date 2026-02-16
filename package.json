@@ -31,7 +31,7 @@
     "@modelcontextprotocol/server-everything": "^2025.8.18",
     "@modelcontextprotocol/server-filesystem": "^2025.8.21",
     "@modelcontextprotocol/server-memory": "^2025.8.4",
-    "@playwright/mcp": "^0.0.36",
+    "@playwright/mcp": "^0.0.40",
     "@playwright/test": "^1.56.1",
     "a11y-mcp": "^1.0.4",
     "csstree-validator": "^4.0.1",
