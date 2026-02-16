@@ -13,6 +13,7 @@ import { renderQuickVentSetup, renderQuickVentCalculator } from './quickVent.js'
 import { attachSsToggleHandlers, attachToggleInfoHandlers, attachToggleCategoryHandlers, parseTextMarkup } from './detailPageUtils.js';
 import { addTapListener } from '../../Utils/addTapListener.js';
 import { applyDetailSpaceClasses } from './detailSpaceUtils.js';
+import { calculateLineDose } from '../../dosageCalc.js';
 
 // Appends all detail sections for a topic into the content area, including “Class”, “Indications”, “Contraindications”, etc.
 // If the topic has no details, a placeholder message is inserted.
@@ -91,7 +92,7 @@ function appendTopicDetails(topic, contentArea) {
             { key: 'adultRx', label: 'Adult Rx' },
             { key: 'pediatricRx', label: 'Pediatric Rx' } 
         ]; 
-        sections.forEach(sec => { 
+        sections.forEach(sec => {
             if (!details[sec.key]) return;
             const wrapper = document.createElement('div');
             wrapper.className = 'detail-section mb-3';
@@ -120,18 +121,44 @@ function appendTopicDetails(topic, contentArea) {
                 details[sec.key].forEach(line => {
                     const li = document.createElement('li');
                     li.innerHTML = parseTextMarkup ? parseTextMarkup(line) : line;
+                    if (sec.key === 'adultRx' || sec.key === 'pediatricRx') {
+                        const calcResult = calculateLineDose({
+                            text: line,
+                            weightKg: window?.patientData?.weight,
+                            concentration: line || topic?.concentration
+                        });
+                        if (calcResult?.formatted?.html) {
+                            const calcEl = document.createElement('div');
+                            calcEl.className = 'mt-1';
+                            calcEl.innerHTML = calcResult.formatted.html;
+                            li.appendChild(calcEl);
+                        }
+                    }
                     body.appendChild(li);
                 });
             } else {
                 body = document.createElement('div');
                 body.className = 'detail-text';
                 body.innerHTML = parseTextMarkup ? parseTextMarkup(details[sec.key]) : details[sec.key];
+                if (sec.key === 'adultRx' || sec.key === 'pediatricRx') {
+                    const calcResult = calculateLineDose({
+                        text: details[sec.key],
+                        weightKg: window?.patientData?.weight,
+                        concentration: details[sec.key] || topic?.concentration
+                    });
+                    if (calcResult?.formatted?.html) {
+                        const calcEl = document.createElement('div');
+                        calcEl.className = 'mt-1';
+                        calcEl.innerHTML = calcResult.formatted.html;
+                        body.appendChild(calcEl);
+                    }
+                }
             }
             // Hide section content by default; revealed when header is clicked
             body.classList.add('hidden');
             wrapper.appendChild(body);
-            contentArea.appendChild(wrapper); 
-        });  
+            contentArea.appendChild(wrapper);
+        });
     } else { 
         contentArea.insertAdjacentHTML('beforeend', `<div class="text-gray-500 italic">No detail information found for this item.</div>`);
     }
