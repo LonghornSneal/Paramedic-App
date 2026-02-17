@@ -1,0 +1,115 @@
+                 <div id="dpi" style="height: 1in; width: 1in; left: 100%; position: fixed; top: 100%;"></div>
+        <script type="text/javascript">
+            function setDeviceData()
+            {
+                var dpi_x = document.getElementById('dpi').offsetWidth;
+                var dpi_y = document.getElementById('dpi').offsetHeight;
+                var width = screen.width / dpi_x;
+                var height = screen.height / dpi_y;
+                // docCookies.setItem('device_data', width + '-' + height + '-' + window.devicePixelRatio , Infinity);
+                location.reload();
+                docCookies.setItem('device_data', width + '-' + height + '-' + window.devicePixelRatio , Infinity,"/;samesite=None","",1); 
+            }
+        //function checkDeviceSize()
+        //{
+        //    if( parseInt(deviceWidth) < 768 && parseInt(deviceHeight) < 1024 )
+        //    {
+        //        isSmallDevice = true;
+        //        if( isSmallDevice )
+        //        {
+        //            docCookies.setItem('device_size', 'small', Infinity);
+        //            docCookies.setItem('device_width', deviceWidth, Infinity);
+        //            docCookies.setItem('device_height', deviceHeight, Infinity);
+        //        }
+        //    }else{
+        //        isBigDevice = true;
+        //        if( isBigDevice )
+        //        {
+        //            docCookies.setItem('device_size', 'big', Infinity);
+        //            docCookies.setItem('device_width', deviceWidth, Infinity);
+        //            docCookies.setItem('device_height', deviceHeight, Infinity);
+        //        }
+        //    }
+        //    //alert(docCookies.getItem('device_size'));
+        //}
+
+        //var nvUA = navigator.userAgent.toLowerCase();
+        //var deviceWidth = screen.width;
+        //var deviceHeight = screen.height;
+        //var isSmallDevice = false;
+        //var isBigDevice = false;
+            /*For set,get,remove cookie*/
+            var docCookies = {
+                getItem: function(sKey) {
+                    return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+                },
+                setItem: function(sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+                    if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) {
+                        return false;
+                    }
+                    var sExpires = "";
+                    if (vEnd) {
+                        switch (vEnd.constructor) {
+                            case Number:
+                                sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+                                break;
+                            case String:
+                                sExpires = "; expires=" + vEnd;
+                                break;
+                            case Date:
+                                sExpires = "; expires=" + vEnd.toUTCString();
+                                break;
+                        }
+                    }
+                    document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue) + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+                    return true;
+                },
+                removeItem: function(sKey, sPath, sDomain) {
+                    if (!sKey || !this.hasItem(sKey)) {
+                        return false;
+                    }
+                    document.cookie = encodeURIComponent(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "");
+                    return true;
+                },
+                hasItem: function(sKey) {
+                    return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+                }
+            };
+            /*end*/
+            if (!docCookies.hasItem('device_data'))
+                setDeviceData();
+        //if( !(docCookies.hasItem('device_size') && docCookies.hasItem('device_width') && docCookies.hasItem('device_height')) )
+        //{
+        //  checkDeviceSize();
+        //}
+
+        </script>
+
+
+        
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>POST data</title>
+</head>
+<body onload="document.getElementsByTagName('input')[0].click();">
+
+	<noscript>
+		<p><strong>Note:</strong> Since your browser does not support JavaScript, you must press the button below once to proceed.</p> 
+	</noscript> 
+	
+	<form method="post" action="https://ahasso.heart.org/saml/sso">
+	<!-- Need to add this element and call click method, because calling submit()
+	on the form causes failed submission if the form has another element with name or id of submit.
+	See: https://developer.mozilla.org/en/DOM/form.submit#Specification -->
+	<input type="submit" style="display:none;" />
+<input type="hidden" name="SAMLRequest" value="PHNhbWxwOkF1dGhuUmVxdWVzdCB4bWxuczpzYW1scD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sIiB4bWxuczpzYW1sPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIiBJRD0iXzBjMzYyYTRiNjUyODdmNDVlZDBjYzA3M2Q2NGY4NDhhOWI0NTY2YTUyOCIgVmVyc2lvbj0iMi4wIiBJc3N1ZUluc3RhbnQ9IjIwMjYtMDItMTdUMDQ6MDg6MzVaIiBEZXN0aW5hdGlvbj0iaHR0cHM6Ly9haGFzc28uaGVhcnQub3JnL3NhbWwvc3NvIiBBc3NlcnRpb25Db25zdW1lclNlcnZpY2VVUkw9Imh0dHBzOi8vZWJvb2tzLmhlYXJ0Lm9yZy8yLjAvc2FtbC93d3cvbW9kdWxlLnBocC9zYW1sL3NwL3NhbWwyLWFjcy5waHAvZGVmYXVsdC1zcCIgUHJvdG9jb2xCaW5kaW5nPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YmluZGluZ3M6SFRUUC1QT1NUIj48c2FtbDpJc3N1ZXI+aHR0cHM6Ly9lYm9va3MuaGVhcnQub3JnLzIuMC9zYW1sL3d3dy9tb2R1bGUucGhwL3NhbWwvc3AvbWV0YWRhdGEucGhwL2RlZmF1bHQtc3A8L3NhbWw6SXNzdWVyPjxkczpTaWduYXR1cmUgeG1sbnM6ZHM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyMiPgogIDxkczpTaWduZWRJbmZvPjxkczpDYW5vbmljYWxpemF0aW9uTWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS8xMC94bWwtZXhjLWMxNG4jIi8+CiAgICA8ZHM6U2lnbmF0dXJlTWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnI3JzYS1zaGExIi8+CiAgPGRzOlJlZmVyZW5jZSBVUkk9IiNfMGMzNjJhNGI2NTI4N2Y0NWVkMGNjMDczZDY0Zjg0OGE5YjQ1NjZhNTI4Ij48ZHM6VHJhbnNmb3Jtcz48ZHM6VHJhbnNmb3JtIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnI2VudmVsb3BlZC1zaWduYXR1cmUiLz48ZHM6VHJhbnNmb3JtIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS8xMC94bWwtZXhjLWMxNG4jIi8+PC9kczpUcmFuc2Zvcm1zPjxkczpEaWdlc3RNZXRob2QgQWxnb3JpdGhtPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwLzA5L3htbGRzaWcjc2hhMSIvPjxkczpEaWdlc3RWYWx1ZT5jS09GT2hrOUpvNjdCZ3E2ZC91V3dnRnJHZGc9PC9kczpEaWdlc3RWYWx1ZT48L2RzOlJlZmVyZW5jZT48L2RzOlNpZ25lZEluZm8+PGRzOlNpZ25hdHVyZVZhbHVlPmhBNVl4eUZxQzAvSEo5RXlNN01zVjR4Z1R6bzh2UEVUQ0NjWlFuSi84amhHdzR4Ti9zL1ltbTN6T3FyNGljZ2RtdkdOejA5Q2NyRjM5Q2FrNjJub3hTZTZ2YkJxYjNhSTJtRkVVTjU5U1hqMDFlTkEvUi9aYUJDTXhubVJCZTlQalFyYW1uMll2N21KN1gxMjhmZ3NvWTAvSFA3NHpMemdGcTFULzVGdnhzQT08L2RzOlNpZ25hdHVyZVZhbHVlPgo8ZHM6S2V5SW5mbz48ZHM6WDUwOURhdGE+PGRzOlg1MDlDZXJ0aWZpY2F0ZT5NSUlEbkRDQ0F3V2dBd0lCQWdJSkFMODMweklQWGI5d01BMEdDU3FHU0liM0RRRUJCUVVBTUlHUk1Rc3dDUVlEVlFRR0V3SkpUakVTTUJBR0ExVUVDQk1KUWtGT1IwRk1UMUpGTVJJd0VBWURWUVFIRXdsQ1FVNUhRVXhQVWtVeEVUQVBCZ05WQkFvVENFbE5VRVZNVTFsVE1SQXdEZ1lEVlFRTEV3ZFFVazlFVlVOVU1Rd3dDZ1lEVlFRREV3TkpUVkF4SnpBbEJna3Foa2lHOXcwQkNRRVdHSFpsYm10aGRHVnphQzVyUUdsdGNHVnNjM2x6TG1OdmJUQWVGdzB4TmpBeE1Ua3dPVFUzTlRkYUZ3MHlOakF4TVRnd09UVTNOVGRhTUlHUk1Rc3dDUVlEVlFRR0V3SkpUakVTTUJBR0ExVUVDQk1KUWtGT1IwRk1UMUpGTVJJd0VBWURWUVFIRXdsQ1FVNUhRVXhQVWtVeEVUQVBCZ05WQkFvVENFbE5VRVZNVTFsVE1SQXdEZ1lEVlFRTEV3ZFFVazlFVlVOVU1Rd3dDZ1lEVlFRREV3TkpUVkF4SnpBbEJna3Foa2lHOXcwQkNRRVdHSFpsYm10aGRHVnphQzVyUUdsdGNHVnNjM2x6TG1OdmJUQ0JuekFOQmdrcWhraUc5dzBCQVFFRkFBT0JqUUF3Z1lrQ2dZRUF5RGNMTThwZkc4YU40dHZyS3BJbyt5WWNuZ3A1UldmeEVzU092NG9ta1VmZFhVSk9kTG9CVmJhdFhBWEVJZnRqeDlEU2czZzFvS2ZRZEEzT3NwWlV5dk9oc1B5V3FBVThGSC9oQjNra2FaYkFESHNER3ppT2ozRnMxWFJEaU5SWDVzSDdzSXRDWkRVOXorVlJjSndLaGVKMTMwU1VwWE5hVzVGeWgycXhLaGNDQXdFQUFhT0IrVENCOWpBZEJnTlZIUTRFRmdRVWhHS25vaCtld3doMERMZnJ3RlZ6WmN0NHc1SXdnY1lHQTFVZEl3U0J2akNCdTRBVWhHS25vaCtld3doMERMZnJ3RlZ6WmN0NHc1S2hnWmVrZ1pRd2daRXhDekFKQmdOVkJBWVRBa2xPTVJJd0VBWURWUVFJRXdsQ1FVNUhRVXhQVWtVeEVqQVFCZ05WQkFjVENVSkJUa2RCVEU5U1JURVJNQThHQTFVRUNoTUlTVTFRUlV4VFdWTXhFREFPQmdOVkJBc1RCMUJTVDBSVlExUXhEREFLQmdOVkJBTVRBMGxOVURFbk1DVUdDU3FHU0liM0RRRUpBUllZZG1WdWEyRjBaWE5vTG10QWFXMXdaV3h6ZVhNdVkyOXRnZ2tBdnpmVE1nOWR2M0F3REFZRFZSMFRCQVV3QXdFQi96QU5CZ2txaGtpRzl3MEJBUVVGQUFPQmdRQ2pBcC9RV1FuZmxiOWlpS09TVEJkd2hyU1UwdDk5WkFCS3RjUVNXdjNIeEF3Z0YzSjhvREpxT2Iyb25aMVQ1WTk0VHBab1RLS3N4ekdrNTBVdm9uTFlUT3M1LzI1ZHVLSjJQWjZIRjlsdDgrMmF2Q2dGQUdCS0MyT01PL1B5dFN2VTYzRm1iZW1NTDJ4Q3BCY0FGbktJSDRwT2R0ZGZhVE55QXgxazM1ckl6Zz09PC9kczpYNTA5Q2VydGlmaWNhdGU+PC9kczpYNTA5RGF0YT48L2RzOktleUluZm8+PC9kczpTaWduYXR1cmU+PHNhbWxwOk5hbWVJRFBvbGljeSBGb3JtYXQ9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDpuYW1laWQtZm9ybWF0OnRyYW5zaWVudCIgQWxsb3dDcmVhdGU9InRydWUiLz48L3NhbWxwOkF1dGhuUmVxdWVzdD4=" /><input type="hidden" name="RelayState" value="https://ebooks.heart.org/custom/ahasaml/ahasamllogin?redirecturl=" />
+		<noscript>
+			<input type="submit" value="Submit" />
+		</noscript>
+	</form>
+
+</body>
+</html>
