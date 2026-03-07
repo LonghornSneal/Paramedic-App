@@ -3,6 +3,18 @@
 
 export const ProtocolMarkdownMap = {
   "abbott-approved-abbreviations-respiratory-airway": "Content/Abbreviations & References/abbott-approved-abbreviations-respiratory-airway.md",
+  "acls-algorithms": "Content/Skills & Equipment/ACLS/Algorithms.md",
+  "acls-appendix": "Content/Skills & Equipment/ACLS/Appendix.md",
+  "acls-figures": "Content/Skills & Equipment/ACLS/Figures.md",
+  "acls-glossary": "Content/Skills & Equipment/ACLS/Glossary.md",
+  "acls-high-performance-teams": "Content/Skills & Equipment/ACLS/High-Performance Teams.md",
+  "acls-learning-station-checklists": "Content/Skills & Equipment/ACLS/Learning Station Checklists.md",
+  "acls-megacode-testing-checklists": "Content/Skills & Equipment/ACLS/Megacode Testing Checklists.md",
+  "acls-overview-of-acls": "Content/Skills & Equipment/ACLS/Overview of ACLS.md",
+  "acls-pharmacology-summary-table": "Content/Skills & Equipment/ACLS/ACLS Pharmacology Summary Table.md",
+  "acls-preventing-arrest": "Content/Skills & Equipment/ACLS/Preventing Arrest.md",
+  "acls-science-summary-table": "Content/Skills & Equipment/ACLS/Science Summary Table.md",
+  "acls-testing-checklists": "Content/Skills & Equipment/ACLS/Testing Checklists.md",
   "ekg-rhythm-reference": "Content/Abbreviations & References/ekg-help.md",
   "adult-a-fib-rvr-or-a-flutter-stable-symptomatic": "Content/Adult Protocols/adult-a-fib-rvr-or-a-flutter-stable-symptomatic.md",
   "adult-allergic-reaction": "Content/Adult Protocols/adult-allergic-reaction.md",
