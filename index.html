@@ -63,9 +63,9 @@
       <div class="sidebar-demographics-item sidebar-demographics-item-age sidebar-demographics-item-age--inline">
         <label for="pt-age" class="sidebar-label">Age:</label>
         <div class="age-unit-toggle-group age-unit-toggle-group--stacked" role="group" aria-label="Select age units">
-          <button type="button" class="age-unit-toggle" data-unit="days" data-tooltip="Days" aria-label="Days" aria-pressed="false">Days</button>
-          <button type="button" class="age-unit-toggle" data-unit="months" data-tooltip="Months" aria-label="Months" aria-pressed="false">Months</button>
-          <button type="button" class="age-unit-toggle" data-unit="years" data-tooltip="Years" aria-label="Years" aria-pressed="true">Years</button>
+          <button type="button" class="age-unit-toggle" data-unit="days" data-tooltip="Days" aria-label="Days" aria-pressed="false">D</button>
+          <button type="button" class="age-unit-toggle" data-unit="months" data-tooltip="Months" aria-label="Months" aria-pressed="false">Mo</button>
+          <button type="button" class="age-unit-toggle" data-unit="years" data-tooltip="Years" aria-label="Years" aria-pressed="true">Y</button>
         </div>
         <div class="unit-input age-unit-input" data-unit="years">
           <input type="number" id="pt-age" class="sidebar-input age-input age-input--compact" inputmode="decimal" step="any">
@@ -82,7 +82,7 @@
         </div>
         <div class="weight-unit-toggle-group weight-unit-toggle-group--vertical" role="group" aria-label="Select weight units">
           <button type="button" class="weight-unit-toggle" data-unit="kg" aria-label="Kilograms" aria-pressed="false">kg</button>
-          <button type="button" class="weight-unit-toggle" data-unit="lb" aria-label="Pounds" aria-pressed="false">lbs</button>
+          <button type="button" class="weight-unit-toggle" data-unit="lb" aria-label="Pounds" aria-pressed="false">lb</button>
         </div>
         <div id="weight-summary" class="weight-summary hidden" aria-live="polite"></div>
       </div>
@@ -97,69 +97,63 @@
       </div>
     </div>
     <div class="patient-line patient-line--full" data-line="3">
-      <div class="sidebar-field sidebar-field-textarea sidebar-field-textarea--chips-right">
-        <div class="sidebar-field-row">
+      <div class="sidebar-field sidebar-field-textarea">
+        <div class="sidebar-inline-field">
           <label for="pt-pmh" class="sidebar-label">PMH:</label>
-          <div id="pt-pmh-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
-        </div>
-        <div class="sidebar-field-row sidebar-field-row--input">
           <div class="autocomplete-container sidebar-input-flex">
             <textarea id="pt-pmh" rows="1" class="sidebar-input"></textarea>
             <div id="pt-pmh-suggestions" class="autocomplete-suggestions hidden"></div>
           </div>
-          <div class="sidebar-chip-ghost" aria-hidden="true"></div>
         </div>
+        <div id="pt-pmh-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
       </div>
     </div>
     <div class="patient-line patient-line--full" data-line="4">
-      <div class="sidebar-field sidebar-field-textarea sidebar-field-textarea--chips-right">
-        <div class="sidebar-field-row">
+      <div class="sidebar-field sidebar-field-textarea">
+        <div class="sidebar-inline-field">
           <label for="pt-allergies" class="sidebar-label">Allergies:</label>
-          <div id="pt-allergies-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
-        </div>
-        <div class="sidebar-field-row sidebar-field-row--input">
           <div class="autocomplete-container sidebar-input-flex">
             <textarea id="pt-allergies" rows="1" class="sidebar-input"></textarea>
             <div id="pt-allergies-suggestions" class="autocomplete-suggestions hidden"></div>
           </div>
-          <div class="sidebar-chip-ghost" aria-hidden="true"></div>
         </div>
+        <div id="pt-allergies-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
       </div>
     </div>
     <div class="patient-line patient-line--full" data-line="5">
       <div class="sidebar-field sidebar-field-textarea">
-        <div class="sidebar-field-heading">
+        <div class="sidebar-inline-field">
           <label for="pt-medications" class="sidebar-label">Current Rx's:</label>
-          <div id="pt-medications-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
+          <div class="autocomplete-container sidebar-input-flex">
+            <textarea id="pt-medications" rows="1" class="sidebar-input"></textarea>
+            <div id="pt-medications-suggestions" class="autocomplete-suggestions hidden"></div>
+          </div>
         </div>
-        <div class="autocomplete-container sidebar-input-flex">
-          <textarea id="pt-medications" rows="1" class="sidebar-input"></textarea>
-          <div id="pt-medications-suggestions" class="autocomplete-suggestions hidden"></div>
-        </div>
+        <div id="pt-medications-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
       </div>
     </div>
     <div class="patient-line patient-line--full" data-line="6">
       <div class="sidebar-field sidebar-field-textarea">
-        <div class="sidebar-field-heading">
+        <div class="sidebar-inline-field">
           <label for="pt-indications" class="sidebar-label">Indications:</label>
-          <div id="pt-indications-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
+          <div class="autocomplete-container sidebar-input-flex">
+            <textarea id="pt-indications" rows="1" class="sidebar-input"></textarea>
+            <div id="pt-indications-suggestions" class="autocomplete-suggestions hidden"></div>
+          </div>
         </div>
-        <div class="autocomplete-container sidebar-input-flex">
-          <textarea id="pt-indications" rows="1" class="sidebar-input"></textarea>
-          <div id="pt-indications-suggestions" class="autocomplete-suggestions hidden"></div>
-        </div>
+        <div id="pt-indications-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
       </div>
     </div>
     <div class="patient-line patient-line--full" data-line="7">
       <div class="sidebar-field sidebar-field-textarea">
-        <div class="sidebar-field-heading">
+        <div class="sidebar-inline-field">
           <label for="pt-symptoms" class="sidebar-label">S/S:</label>
-          <div id="pt-symptoms-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
+          <div class="autocomplete-container sidebar-input-flex">
+            <textarea id="pt-symptoms" rows="2" class="sidebar-input"></textarea>
+            <div id="pt-symptoms-suggestions" class="autocomplete-suggestions hidden"></div>
+          </div>
         </div>
-        <div class="autocomplete-container sidebar-input-flex">
-          <textarea id="pt-symptoms" rows="2" class="sidebar-input"></textarea>
-          <div id="pt-symptoms-suggestions" class="autocomplete-suggestions hidden"></div>
-        </div>
+        <div id="pt-symptoms-chips" class="sidebar-chip-list is-empty" aria-live="polite"></div>
       </div>
     </div>
     <div class="patient-line patient-line--vital" data-line="8">
@@ -174,9 +168,9 @@
           <option value=""></option>
           <option value="200+">200+</option>
           <option value="160+">160+</option>
-          <option value="Normal (90-160 SBP)">Normal (90-160 SBP)</option>
+          <option value="Normal (90-160 SBP)">Normal</option>
           <option value="70-90">70-90</option>
-          <option value="70-">70-</option>
+          <option value="70-">&lt;70</option>
         </select>
       </div>
       <div class="vital-item vital-item-hr">
@@ -195,37 +189,35 @@
         </select>
       </div>
       <div class="vital-item vital-item-spo2">
-        <span class="vital-label">% SpO<sub>2</sub>:</span>
-        <div class="unit-input" data-unit="%">
+        <span class="vital-label">SpO<sub>2</sub>:</span>
+        <div class="unit-input" data-unit="SpO2">
           <input type="text" id="vs-spo2-value" class="sidebar-input vital-input" inputmode="numeric" maxlength="3" aria-label="Pulse oximetry numeric entry">
-          <span class="unit-suffix" aria-hidden="true">%</span>
+          <span class="unit-suffix" aria-hidden="true">SpO<sub>2</sub></span>
         </div>
-        <select id="vs-spo2-source" class="vital-mini-select" aria-label="Oxygen delivery source">
+        <select id="vs-spo2-select" class="vital-mini-select" aria-label="Pulse oximetry preset">
           <option value=""></option>
-          <option value="RA">RA</option>
-          <option value="NC">NC</option>
-          <option value="Vent">Vent</option>
-          <option value="CPAP">CPAP</option>
-          <option value="BiPaP">BiPaP</option>
+          <option value="Normal">Normal</option>
+          <option value="Low">Low</option>
+          <option value="Severely Low">Severe</option>
         </select>
       </div>
     </div>
     <div class="patient-line patient-line--vital" data-line="9">
-      <div class="vital-item">
+      <div class="vital-item vital-item-etc02">
         <span class="vital-label">EtCO<sub>2</sub>:</span>
         <div class="unit-input" data-unit="EtCO2">
           <input type="text" id="vs-etco2" class="sidebar-input vital-input" inputmode="numeric" maxlength="2" aria-label="End tidal CO2">
           <span class="unit-suffix" aria-hidden="true">EtCO<sub>2</sub></span>
         </div>
       </div>
-      <div class="vital-item">
+      <div class="vital-item vital-item-rr">
         <span class="vital-label">RR:</span>
         <div class="unit-input" data-unit="RR">
           <input type="text" id="vs-rr" class="sidebar-input vital-input" inputmode="numeric" maxlength="2" aria-label="Respiratory rate">
           <span class="unit-suffix" aria-hidden="true">RR</span>
         </div>
       </div>
-      <div class="vital-item">
+      <div class="vital-item vital-item-bgl">
         <span class="vital-label">BGL:</span>
         <div class="unit-input" data-unit="mg/dL">
           <input type="text" id="vs-bgl-value" class="sidebar-input vital-input" inputmode="numeric" maxlength="3" aria-label="Blood glucose numeric entry">
@@ -233,10 +225,10 @@
         </div>
         <select id="vs-bgl-select" class="vital-mini-select" aria-label="Blood glucose preset">
           <option value=""></option>
-          <option value="Normal">Normal</option>
+          <option value="Normal">Norm</option>
           <option value="High">High</option>
           <option value="Low">Low</option>
-          <option value="Critical">Critical</option>
+          <option value="Critical">Crit</option>
         </select>
       </div>
     </div>

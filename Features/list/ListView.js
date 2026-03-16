@@ -15,6 +15,7 @@ const CATEGORY_TREE_LINE_THICKNESS = 4;
 const CATEGORY_TREE_LINE_GAP = 8;
 const CATEGORY_TREE_DRAG_THRESHOLD = 4;
 const CATEGORY_TREE_TRANSITION_MS = 360;
+const CATEGORY_TREE_STABILIZE_MS = 220;
 const ROW_GAP_PERCENT_BOOST = 2.5;
 const HEADER_ELEMENT_DEFS = [
     { key: 'search', label: 'Search Bar', selector: '#searchInput' },
@@ -98,6 +99,7 @@ function getCategoryTreeState() {
             centeringPass: 0,
             alignPass: 0,
             alignTimer: null,
+            revealTimer: null,
             manualColumnShift: false,
             headerScale: DEFAULT_HEADER_ROOM_SCALE,
             headerContentScale: 1,
@@ -159,9 +161,22 @@ function buildCurrentSpiderwebContext() {
 
 function scheduleTreeMetricsPass(rootContainer) {
     if (!rootContainer) return;
+    const contentArea = document.getElementById('content-area');
+    const state = getCategoryTreeState();
+    contentArea?.classList.add('category-tree-stabilizing');
     requestAnimationFrame(() => {
         updateCategoryTreeMetrics(rootContainer);
-        window.setTimeout(() => updateCategoryTreeMetrics(rootContainer), 180);
+        if (state.revealTimer) {
+            clearTimeout(state.revealTimer);
+            state.revealTimer = null;
+        }
+        state.revealTimer = window.setTimeout(() => {
+            updateCategoryTreeMetrics(rootContainer);
+            requestAnimationFrame(() => {
+                contentArea?.classList.remove('category-tree-stabilizing');
+            });
+            state.revealTimer = null;
+        }, CATEGORY_TREE_STABILIZE_MS);
     });
 }
 // Renders the main category list view (home screen) and highlights a topic if provided.
@@ -2059,6 +2074,21 @@ function computeCategoryTreeFitScale(metricsRoot, contentRect) {
     return Math.min(1, scaleX, scaleY);
 }
 
+function getElementTranslateX(element) {
+    if (!element) return 0;
+    const transform = getComputedStyle(element).transform;
+    if (!transform || transform === 'none') return 0;
+    if (typeof DOMMatrixReadOnly === 'function') {
+        return new DOMMatrixReadOnly(transform).m41;
+    }
+    const matrixMatch = transform.match(/matrix\(([^)]+)\)/);
+    if (matrixMatch) {
+        const values = matrixMatch[1].split(',').map(value => parseFloat(value.trim()));
+        return Number.isFinite(values[4]) ? values[4] : 0;
+    }
+    return 0;
+}
+
 function centerCategoryTreeColumns(metricsRoot, rootTree, contentRect) {
     if (!metricsRoot || !rootTree || !contentRect) return;
     const state = getCategoryTreeState();
@@ -2078,8 +2108,9 @@ function centerCategoryTreeColumns(metricsRoot, rootTree, contentRect) {
     const activeBounds = getCategoryTreeBounds(activeTree);
     const bounds = getCategoryTreeBounds(metricsRoot);
     if (!activeBounds || !bounds) return;
-    const currentShiftValue = getComputedStyle(rootTree).getPropertyValue('--tree-shift');
-    const currentShift = Number.isFinite(parseFloat(currentShiftValue)) ? parseFloat(currentShiftValue) : 0;
+    const currentVisualShift = getElementTranslateX(rootTree);
+    const columnShiftValue = getComputedStyle(rootTree).getPropertyValue('--column-shift');
+    const columnShift = Number.isFinite(parseFloat(columnShiftValue)) ? parseFloat(columnShiftValue) : 0;
     const margin = hasActivePath
         ? Math.min(18, Math.max(8, contentRect.width * 0.02))
         : Math.min(36, Math.max(22, contentRect.width * 0.03));
@@ -2097,7 +2128,7 @@ function centerCategoryTreeColumns(metricsRoot, rootTree, contentRect) {
     const maxShift = (contentRect.right - margin) - bounds.right;
     if (delta < minShift) delta = minShift;
     if (delta > maxShift) delta = maxShift;
-    const nextShift = currentShift + delta;
+    const nextShift = currentVisualShift + delta - columnShift;
     rootTree.style.setProperty('--tree-shift', `${nextShift}px`);
     if (state.centeringTimer) {
         clearTimeout(state.centeringTimer);

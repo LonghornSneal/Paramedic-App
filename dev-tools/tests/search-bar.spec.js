@@ -142,3 +142,66 @@ test('8. mobile suggestions stay readable and inside the viewport', async ({ pag
   expect(metrics.width).toBeGreaterThan(220);
   expect(metrics.display).not.toBe('none');
 });
+
+test('9. repeated searches show matching detail previews under the existing title line', async ({ page }) => {
+  await gotoApp(page);
+
+  const searchCases = [
+    'svt',
+    'torsades',
+    'seizure',
+    'stroke',
+    'anaphylaxis',
+    'ketamine',
+    'midazolam',
+    'naloxone',
+    'asa',
+    'epinephrine',
+    'magnesium',
+    'cpap',
+    'bipap',
+    'bradycardia',
+    'hypoglycemia',
+    'ventilator'
+  ];
+
+  for (const query of searchCases) {
+    await page.fill('#searchInput', query);
+    await expect(page.locator('#search-suggestion-panel')).toBeVisible();
+
+    await expect.poll(async () => {
+      return await page.evaluate(currentQuery => {
+        const previewNodes = Array.from(document.querySelectorAll('[data-search-secondary="preview"]'));
+        const normalizedQuery = currentQuery.toLowerCase();
+        return previewNodes.some(node => {
+          const text = (node.textContent || '').toLowerCase();
+          return text.includes(normalizedQuery) && !text.includes(' > ');
+        });
+      }, query);
+    }, {
+      message: `Expected a detail preview containing "${query}"`,
+      timeout: 5000
+    }).toBe(true);
+
+    const previewLayout = await page.evaluate(() => {
+      const preview = document.querySelector('[data-search-secondary="preview"]');
+      if (!preview) return null;
+      const item = preview.closest('.search-suggestion-item');
+      const title = item?.querySelector('.search-suggestion-title');
+      if (!item || !title) return null;
+      const itemRect = item.getBoundingClientRect();
+      const titleRect = title.getBoundingClientRect();
+      const previewRect = preview.getBoundingClientRect();
+      return {
+        itemHeight: itemRect.height,
+        stacked: previewRect.top >= titleRect.bottom - 2,
+        insideCard: previewRect.left >= itemRect.left && previewRect.right <= itemRect.right + 1
+      };
+    });
+
+    expect(previewLayout).not.toBeNull();
+    expect(previewLayout.itemHeight).toBeGreaterThan(40);
+    expect(previewLayout.stacked).toBe(true);
+    expect(previewLayout.insideCard).toBe(true);
+  }
+});

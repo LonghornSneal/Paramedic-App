@@ -1,21 +1,835 @@
-/* Patient Info sidebar manifest: imports per-field CSS modules in row order (Sex → EKG Modifiers). */
-@import url("./patient-sidebar-forms/Sex/sex.css");
-@import url("./patient-sidebar-forms/Age/age.css");
-@import url("./patient-sidebar-forms/Weight/weight.css");
-@import url("./patient-sidebar-forms/PMH/pmh.css");
-@import url("./patient-sidebar-forms/Allergies/allergies.css");
-@import url("./patient-sidebar-forms/Current Rxs/current-rxs.css");
-@import url("./patient-sidebar-forms/Indications/indications.css");
-@import url("./patient-sidebar-forms/S_S/s_s.css");
-@import url("./patient-sidebar-forms/BP/bp.css");
-@import url("./patient-sidebar-forms/HR/hr.css");
-@import url("./patient-sidebar-forms/perc-spo2/spo2.css");
-@import url("./patient-sidebar-forms/EtCO2/etc02.css");
-@import url("./patient-sidebar-forms/RR/rr.css");
-@import url("./patient-sidebar-forms/BGL/bgl.css");
-@import url("./patient-sidebar-forms/Pupils/pupils.css");
-@import url("./patient-sidebar-forms/Lung Sounds/lung-sounds.css");
-@import url("./patient-sidebar-forms/GCS/gcs.css");
-@import url("./patient-sidebar-forms/A&O/ao.css");
-@import url("./patient-sidebar-forms/EKG Rhythm/ekg-rhythm.css");
-@import url("./patient-sidebar-forms/EKG Modifiers/ekg-modifiers.css");
+#patient-sidebar,
+#patient-sidebar * {
+  box-sizing: border-box;
+}
+
+#patient-sidebar .patient-line {
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+#patient-sidebar .sidebar-label,
+#patient-sidebar .vital-label {
+  margin: 0;
+  color: var(--ps-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+#patient-sidebar .sidebar-input,
+#patient-sidebar .bp-input,
+#patient-sidebar .vital-mini-select,
+#patient-sidebar select.sidebar-input {
+  width: 100%;
+  min-width: 0;
+  min-height: 1.94rem;
+  padding: 0 0.64rem;
+  border: 1px solid var(--ps-border);
+  border-radius: 999px;
+  background: var(--ps-surface-strong);
+  color: var(--ps-text);
+  font-size: 0.82rem;
+  line-height: 1.2;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 36%);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+body.dark-mode #patient-sidebar .sidebar-input,
+body.dark-mode #patient-sidebar .bp-input,
+body.dark-mode #patient-sidebar .vital-mini-select,
+body.dark-mode #patient-sidebar select.sidebar-input {
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 4%);
+}
+
+#patient-sidebar .sidebar-input::placeholder {
+  color: #94a3b8;
+}
+
+body.dark-mode #patient-sidebar .sidebar-input::placeholder {
+  color: #7c93b8;
+}
+
+#patient-sidebar .sidebar-input:focus,
+#patient-sidebar .sidebar-input:focus-visible,
+#patient-sidebar .bp-input:focus,
+#patient-sidebar .bp-input:focus-visible,
+#patient-sidebar .vital-mini-select:focus,
+#patient-sidebar .vital-mini-select:focus-visible,
+#patient-sidebar select.sidebar-input:focus,
+#patient-sidebar select.sidebar-input:focus-visible,
+#patient-sidebar .age-unit-toggle:focus-visible,
+#patient-sidebar .weight-unit-toggle:focus-visible,
+#patient-sidebar .sex-option:focus-visible,
+#patient-sidebar .ekg-info-button:focus-visible,
+#patient-sidebar .sidebar-help-button:focus-visible {
+  outline: none;
+  border-color: var(--ps-accent-strong);
+  box-shadow: 0 0 0 3px var(--ps-focus);
+}
+
+#patient-sidebar textarea.sidebar-input {
+  min-height: 2.06rem;
+  padding: 0.34rem 0.7rem;
+  border-radius: 1rem;
+  resize: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+#patient-sidebar select.sidebar-input,
+#patient-sidebar .vital-mini-select {
+  appearance: none;
+  padding-right: 1.72rem;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%2352697a' stroke-width='1.8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6.25L8 10.25L12 6.25'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.52rem center;
+  background-size: 0.86rem;
+}
+
+body.dark-mode #patient-sidebar select.sidebar-input,
+body.dark-mode #patient-sidebar .vital-mini-select {
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%23bfdbfe' stroke-width='1.8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6.25L8 10.25L12 6.25'/%3E%3C/svg%3E");
+}
+
+#patient-sidebar .sidebar-input-flex,
+#patient-sidebar .autocomplete-container,
+#patient-sidebar .unit-input,
+#patient-sidebar .ekg-autocomplete {
+  width: 100%;
+  min-width: 0;
+}
+
+#patient-sidebar .unit-suffix {
+  display: none !important;
+}
+
+#patient-sidebar .patient-line[data-line="1"],
+#patient-sidebar .patient-line[data-line="2"] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.56rem;
+  align-items: start;
+}
+
+#patient-sidebar .sidebar-demographics-item-sex,
+#patient-sidebar .sidebar-demographics-item-age,
+#patient-sidebar .sidebar-demographics-item-weight,
+#patient-sidebar .sidebar-demographics-item-height,
+#patient-sidebar .patient-line[data-line="3"],
+#patient-sidebar .patient-line[data-line="4"],
+#patient-sidebar .patient-line[data-line="5"],
+#patient-sidebar .patient-line[data-line="6"],
+#patient-sidebar .patient-line[data-line="7"],
+#patient-sidebar .patient-line[data-line="8"] .vital-item,
+#patient-sidebar .patient-line[data-line="9"] .vital-item,
+#patient-sidebar .patient-line[data-line="10"] .vital-item,
+#patient-sidebar .patient-line[data-line="11"] .vital-item,
+#patient-sidebar .patient-line[data-line="12"],
+#patient-sidebar .patient-line[data-line="13"] {
+  border: 1px solid var(--ps-border);
+  border-radius: 1rem;
+  background: var(--ps-surface);
+  box-shadow: 0 8px 20px rgb(15 23 42 / 6%);
+}
+
+#patient-sidebar .sidebar-demographics-item-sex,
+#patient-sidebar .sidebar-demographics-item-age,
+#patient-sidebar .sidebar-demographics-item-weight,
+#patient-sidebar .sidebar-demographics-item-height {
+  min-width: 0;
+  padding: 0.34rem 0.48rem;
+}
+
+#patient-sidebar .sidebar-demographics-item-sex {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+#patient-sidebar .sex-picker {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  gap: 0.32rem;
+}
+
+#patient-sidebar .sex-option {
+  display: inline-grid;
+  place-items: center;
+  width: 2.08rem;
+  height: 2.08rem;
+  padding: 0;
+  border: 1px solid var(--ps-border);
+  border-radius: 999px;
+  background: var(--ps-surface-strong);
+  color: #64748b;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, color 0.18s ease, background-color 0.18s ease;
+}
+
+#patient-sidebar .sex-option:hover {
+  transform: translateY(-1px);
+}
+
+#patient-sidebar .sex-option[data-value="female"].is-selected {
+  border-color: rgb(219 39 119 / 45%);
+  background: rgb(253 242 248 / 92%);
+  color: #db2777;
+}
+
+#patient-sidebar .sex-option[data-value="male"].is-selected {
+  border-color: rgb(2 132 199 / 45%);
+  background: rgb(240 249 255 / 92%);
+  color: #0284c7;
+}
+
+body.dark-mode #patient-sidebar .sex-option {
+  color: #cbd5e1;
+}
+
+body.dark-mode #patient-sidebar .sex-option[data-value="female"].is-selected {
+  background: rgb(131 24 67 / 55%);
+  color: #f9a8d4;
+}
+
+body.dark-mode #patient-sidebar .sex-option[data-value="male"].is-selected {
+  background: rgb(12 74 110 / 55%);
+  color: #7dd3fc;
+}
+
+#patient-sidebar .sex-option .sex-icon {
+  display: inline-grid;
+  width: 1.36rem;
+  height: 1.36rem;
+  pointer-events: none;
+}
+
+#patient-sidebar .sex-option .sex-icon-svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentcolor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#patient-sidebar .sex-option .sex-icon-ring {
+  fill: none;
+}
+
+#patient-sidebar .sidebar-demographics-item-age {
+  display: grid;
+  grid-template-columns: auto auto minmax(4.4rem, 1fr);
+  align-items: center;
+  gap: 0.42rem;
+}
+
+#patient-sidebar .age-unit-toggle-group,
+#patient-sidebar .weight-unit-toggle-group {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+#patient-sidebar .age-unit-toggle,
+#patient-sidebar .weight-unit-toggle {
+  min-height: 1.76rem;
+  padding: 0 0.4rem;
+  border: 1px solid var(--ps-border);
+  border-radius: 999px;
+  background: var(--ps-surface-strong);
+  color: var(--ps-muted);
+  font-size: 0.64rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, background-color 0.18s ease, color 0.18s ease;
+}
+
+#patient-sidebar .age-unit-toggle:hover,
+#patient-sidebar .weight-unit-toggle:hover {
+  transform: translateY(-1px);
+  border-color: rgb(14 116 144 / 28%);
+}
+
+#patient-sidebar .age-unit-toggle.is-selected,
+#patient-sidebar .weight-unit-toggle.is-selected {
+  border-color: rgb(14 116 144 / 34%);
+  background: rgb(224 242 254 / 94%);
+  color: var(--ps-accent-strong);
+}
+
+body.dark-mode #patient-sidebar .age-unit-toggle.is-selected,
+body.dark-mode #patient-sidebar .weight-unit-toggle.is-selected {
+  background: rgb(12 74 110 / 42%);
+  color: #bae6fd;
+}
+
+#patient-sidebar .sidebar-demographics-item-weight {
+  display: grid;
+  grid-template-columns: auto minmax(4.8rem, 1fr) auto;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+#patient-sidebar .weight-summary {
+  display: none;
+}
+
+#patient-sidebar .sidebar-demographics-item-height {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.46rem;
+}
+
+#patient-sidebar .height-inline-inputs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.32rem;
+}
+
+#patient-sidebar .height-unit-text {
+  color: var(--ps-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+#patient-sidebar .age-input,
+#patient-sidebar .weight-input,
+#patient-sidebar .height-input,
+#patient-sidebar .vital-input,
+#patient-sidebar .bp-input {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+#patient-sidebar .patient-line[data-line="3"],
+#patient-sidebar .patient-line[data-line="4"],
+#patient-sidebar .patient-line[data-line="5"],
+#patient-sidebar .patient-line[data-line="6"],
+#patient-sidebar .patient-line[data-line="7"] {
+  padding: 0.34rem 0.44rem;
+}
+
+#patient-sidebar .sidebar-field {
+  --sidebar-label-width: 5.9rem;
+  display: grid;
+  gap: 0.22rem;
+  min-width: 0;
+}
+
+#patient-sidebar .sidebar-field-textarea {
+  display: grid;
+  grid-template-columns: var(--sidebar-label-width) minmax(0, 1.08fr) minmax(0, 0.92fr);
+  align-items: center;
+  column-gap: 0.38rem;
+  row-gap: 0;
+}
+
+#patient-sidebar .sidebar-inline-field {
+  display: grid;
+  grid-template-columns: var(--sidebar-label-width) minmax(0, 1fr);
+  align-items: start;
+  gap: 0.56rem;
+  min-width: 0;
+}
+
+#patient-sidebar .sidebar-field-textarea .sidebar-inline-field {
+  display: contents;
+}
+
+#patient-sidebar .sidebar-field-textarea .sidebar-label {
+  align-self: center;
+}
+
+#patient-sidebar .sidebar-field-textarea .autocomplete-container {
+  align-self: center;
+}
+
+#patient-sidebar .sidebar-inline-field .sidebar-label {
+  align-self: center;
+}
+
+#patient-sidebar .sidebar-chip-list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.24rem;
+  margin-left: calc(var(--sidebar-label-width) + 0.56rem);
+  min-height: 1.3rem;
+  max-height: 1.3rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+}
+
+#patient-sidebar .sidebar-field-textarea .sidebar-chip-list {
+  margin-left: 0;
+  align-self: center;
+}
+
+#patient-sidebar .sidebar-chip-list.is-empty {
+  display: none;
+}
+
+#patient-sidebar .sidebar-chip {
+  display: inline-flex;
+  max-width: 7.25rem;
+  align-items: center;
+  gap: 0.18rem;
+  padding: 0.12rem 0.4rem;
+  border: 1px solid #bae6fd;
+  border-radius: 999px;
+  background: #f0f9ff;
+  color: #0c4a6e;
+  font-size: 0.6rem;
+  font-weight: 700;
+  line-height: 1.05;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.dark-mode #patient-sidebar .sidebar-chip {
+  border-color: rgb(56 189 248 / 42%);
+  background: rgb(12 74 110 / 36%);
+  color: #bae6fd;
+}
+
+#patient-sidebar .patient-line[data-line="8"],
+#patient-sidebar .patient-line[data-line="9"] {
+  display: grid;
+  gap: 0.34rem;
+}
+
+#patient-sidebar .patient-line[data-line="8"] {
+  grid-template-columns: 1.08fr 0.9fr 1.12fr;
+}
+
+#patient-sidebar .patient-line[data-line="9"] {
+  grid-template-columns: 1fr 0.9fr 1fr;
+}
+
+#patient-sidebar .patient-line[data-line="10"],
+#patient-sidebar .patient-line[data-line="11"] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.3rem;
+}
+
+#patient-sidebar .patient-line[data-line="8"] .vital-item,
+#patient-sidebar .patient-line[data-line="9"] .vital-item,
+#patient-sidebar .patient-line[data-line="10"] .vital-item,
+#patient-sidebar .patient-line[data-line="11"] .vital-item {
+  display: grid;
+  align-items: center;
+  min-width: 0;
+  padding: 0.22rem 0.3rem;
+  gap: 0.22rem;
+}
+
+#patient-sidebar .vital-item-bp {
+  grid-template-columns: auto minmax(3.95rem, 1fr) 3.8rem;
+}
+
+#patient-sidebar .vital-item-hr {
+  grid-template-columns: auto minmax(3.05rem, 1fr) 3.55rem;
+}
+
+#patient-sidebar .vital-item-spo2 {
+  grid-template-columns: auto minmax(3.1rem, 1fr) 4.7rem;
+}
+
+#patient-sidebar .vital-item-etc02,
+#patient-sidebar .vital-item-rr {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+#patient-sidebar .vital-item-bgl {
+  grid-template-columns: auto minmax(3.05rem, 1fr) 4.05rem;
+}
+
+#patient-sidebar .vital-item-pupils {
+  grid-template-columns: auto minmax(3rem, 1fr) 5.3rem;
+}
+
+#patient-sidebar .vital-item-lungs {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+#patient-sidebar .vital-item-gcs {
+  grid-template-columns: auto minmax(3rem, 1fr) 4rem;
+}
+
+#patient-sidebar .vital-item-ao {
+  grid-template-columns: auto 4.05rem;
+}
+
+#patient-sidebar .bp-stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  gap: 0.24rem;
+  border: none;
+  background: transparent;
+}
+
+#patient-sidebar .bp-divider-line {
+  display: grid;
+  place-items: center;
+  width: auto;
+  height: auto;
+  background: none;
+  color: var(--ps-muted);
+}
+
+#patient-sidebar .bp-divider-line::before {
+  content: "/";
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+#patient-sidebar .bp-input {
+  padding-inline: 0.48rem;
+}
+
+#patient-sidebar .patient-line[data-line="12"],
+#patient-sidebar .patient-line[data-line="13"] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 4.75rem 2.1rem;
+  align-items: end;
+  gap: 0.34rem;
+  padding: 0.34rem 0.42rem;
+}
+
+#patient-sidebar .ekg-row-main {
+  display: grid;
+  gap: 0.24rem;
+  min-width: 0;
+}
+
+#patient-sidebar .ekg-row-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+#patient-sidebar .ekg-row-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 0.28rem;
+  min-width: 0;
+}
+
+#patient-sidebar .patient-line[data-line="13"] .ekg-row-controls {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+#patient-sidebar .ekg-preview-shell {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 2.7rem;
+  min-width: 0;
+  border: 1px solid var(--ps-border);
+  border-radius: 0.92rem;
+  background: linear-gradient(180deg, #10233a, #08101c);
+  overflow: hidden;
+}
+
+#patient-sidebar .ekg-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#patient-sidebar .ekg-preview-img.is-empty {
+  opacity: 0.18;
+}
+
+#patient-sidebar .ekg-info-button {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid var(--ps-border);
+  border-radius: 999px;
+  background: var(--ps-surface-strong);
+  color: var(--ps-accent-strong);
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+#patient-sidebar .ekg-info-button:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+#patient-sidebar .ekg-info-button:disabled {
+  color: var(--ps-muted);
+  opacity: 0.5;
+  cursor: default;
+}
+
+#patient-sidebar .sidebar-help-button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--ps-accent-strong);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#patient-sidebar .sidebar-help-button:hover {
+  color: var(--ps-accent);
+}
+
+#patient-sidebar .ekg-summary-text {
+  grid-column: 1 / -1;
+  min-height: 0.8rem;
+  color: var(--ps-muted);
+  font-size: 0.66rem;
+  line-height: 1.15;
+}
+
+#patient-sidebar .ekg-summary-text.is-empty {
+  display: none;
+}
+
+@media (min-width: 900px) and (max-height: 760px) {
+  #patient-sidebar .sidebar-label,
+  #patient-sidebar .vital-label {
+    font-size: 0.72rem;
+  }
+
+  #patient-sidebar .sidebar-input,
+  #patient-sidebar .bp-input,
+  #patient-sidebar .vital-mini-select,
+  #patient-sidebar select.sidebar-input {
+    min-height: 1.78rem;
+    padding-inline: 0.56rem;
+    font-size: 0.78rem;
+  }
+
+  #patient-sidebar textarea.sidebar-input {
+    min-height: 1.82rem;
+    padding: 0.26rem 0.58rem;
+  }
+
+  #patient-sidebar .sidebar-demographics-item-sex,
+  #patient-sidebar .sidebar-demographics-item-age,
+  #patient-sidebar .sidebar-demographics-item-weight,
+  #patient-sidebar .sidebar-demographics-item-height {
+    padding: 0.28rem 0.4rem;
+  }
+
+  #patient-sidebar .sex-option {
+    width: 1.92rem;
+    height: 1.92rem;
+  }
+
+  #patient-sidebar .sex-option .sex-icon {
+    width: 1.26rem;
+    height: 1.26rem;
+  }
+
+  #patient-sidebar .age-unit-toggle,
+  #patient-sidebar .weight-unit-toggle {
+    min-height: 1.62rem;
+    padding-inline: 0.34rem;
+    font-size: 0.6rem;
+  }
+
+  #patient-sidebar .patient-line[data-line="3"],
+  #patient-sidebar .patient-line[data-line="4"],
+  #patient-sidebar .patient-line[data-line="5"],
+  #patient-sidebar .patient-line[data-line="6"],
+  #patient-sidebar .patient-line[data-line="7"] {
+    padding: 0.3rem 0.38rem;
+  }
+
+  #patient-sidebar .sidebar-field {
+    --sidebar-label-width: 5.9rem;
+    gap: 0;
+  }
+
+  #patient-sidebar .sidebar-field-textarea {
+    grid-template-columns: var(--sidebar-label-width) minmax(0, 1.06fr) minmax(0, 0.94fr);
+    column-gap: 0.34rem;
+  }
+
+  #patient-sidebar .sidebar-chip-list {
+    min-height: 1.12rem;
+    max-height: 1.12rem;
+  }
+
+  #patient-sidebar .sidebar-chip {
+    max-width: 5.5rem;
+    padding: 0.06rem 0.3rem;
+    font-size: 0.54rem;
+  }
+
+  #patient-sidebar .patient-line[data-line="8"],
+  #patient-sidebar .patient-line[data-line="9"] {
+    gap: 0.28rem;
+  }
+
+  #patient-sidebar .patient-line[data-line="10"],
+  #patient-sidebar .patient-line[data-line="11"] {
+    gap: 0.26rem;
+  }
+
+  #patient-sidebar .patient-line[data-line="8"] .vital-item,
+  #patient-sidebar .patient-line[data-line="9"] .vital-item,
+  #patient-sidebar .patient-line[data-line="10"] .vital-item,
+  #patient-sidebar .patient-line[data-line="11"] .vital-item {
+    padding: 0.16rem 0.22rem;
+    gap: 0.18rem;
+  }
+
+  #patient-sidebar .bp-stack {
+    gap: 0.18rem;
+  }
+
+  #patient-sidebar .bp-divider-line::before {
+    font-size: 0.82rem;
+  }
+
+  #patient-sidebar .patient-line[data-line="12"],
+  #patient-sidebar .patient-line[data-line="13"] {
+    grid-template-columns: minmax(0, 1fr) 4.1rem 1.9rem;
+    gap: 0.26rem;
+    padding: 0.28rem 0.34rem;
+  }
+
+  #patient-sidebar .ekg-row-main,
+  #patient-sidebar .ekg-row-controls {
+    gap: 0.18rem;
+  }
+
+  #patient-sidebar .ekg-row-heading {
+    gap: 0.34rem;
+  }
+
+  #patient-sidebar .ekg-preview-shell {
+    height: 2.2rem;
+    border-radius: 0.82rem;
+  }
+
+  #patient-sidebar .ekg-info-button {
+    width: 1.82rem;
+    height: 1.82rem;
+    font-size: 0.84rem;
+  }
+
+  #patient-sidebar .sidebar-help-button {
+    font-size: 0.68rem;
+  }
+
+  #patient-sidebar .ekg-summary-text {
+    min-height: 0.64rem;
+    font-size: 0.58rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 420px) {
+  #patient-sidebar .sidebar-label,
+  #patient-sidebar .vital-label {
+    font-size: 0.72rem;
+  }
+
+  #patient-sidebar .sidebar-input,
+  #patient-sidebar .bp-input,
+  #patient-sidebar .vital-mini-select,
+  #patient-sidebar select.sidebar-input {
+    min-height: 1.96rem;
+    padding-inline: 0.6rem;
+    font-size: 0.78rem;
+  }
+
+  #patient-sidebar .sidebar-field {
+    --sidebar-label-width: 5.35rem;
+  }
+
+  #patient-sidebar .sidebar-demographics-item-sex,
+  #patient-sidebar .sidebar-demographics-item-age,
+  #patient-sidebar .sidebar-demographics-item-weight,
+  #patient-sidebar .sidebar-demographics-item-height,
+  #patient-sidebar .patient-line[data-line="3"],
+  #patient-sidebar .patient-line[data-line="4"],
+  #patient-sidebar .patient-line[data-line="5"],
+  #patient-sidebar .patient-line[data-line="6"],
+  #patient-sidebar .patient-line[data-line="7"],
+  #patient-sidebar .patient-line[data-line="8"] .vital-item,
+  #patient-sidebar .patient-line[data-line="9"] .vital-item,
+  #patient-sidebar .patient-line[data-line="10"] .vital-item,
+  #patient-sidebar .patient-line[data-line="11"] .vital-item,
+  #patient-sidebar .patient-line[data-line="12"],
+  #patient-sidebar .patient-line[data-line="13"] {
+    box-shadow: 0 6px 14px rgb(15 23 42 / 5%);
+  }
+
+  #patient-sidebar .sidebar-demographics-item-age {
+    grid-template-columns: auto auto minmax(3.7rem, 1fr);
+  }
+
+  #patient-sidebar .vital-item-bp {
+    grid-template-columns: auto minmax(3.5rem, 1fr) 3.55rem;
+  }
+
+  #patient-sidebar .vital-item-hr {
+    grid-template-columns: auto minmax(2.8rem, 1fr) 3.2rem;
+  }
+
+  #patient-sidebar .vital-item-spo2 {
+    grid-template-columns: auto minmax(2.8rem, 1fr) 4.3rem;
+  }
+
+  #patient-sidebar .vital-item-bgl {
+    grid-template-columns: auto minmax(2.8rem, 1fr) 3.75rem;
+  }
+
+  #patient-sidebar .vital-item-pupils {
+    grid-template-columns: auto minmax(2.7rem, 1fr) 4.85rem;
+  }
+
+  #patient-sidebar .vital-item-lungs {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  #patient-sidebar .vital-item-gcs {
+    grid-template-columns: auto minmax(2.7rem, 1fr) 3.75rem;
+  }
+
+  #patient-sidebar .vital-item-ao {
+    grid-template-columns: auto 3.7rem;
+  }
+
+  #patient-sidebar .patient-line[data-line="12"],
+  #patient-sidebar .patient-line[data-line="13"] {
+    grid-template-columns: minmax(0, 1fr) 4.15rem 1.9rem;
+  }
+
+  #patient-sidebar .ekg-preview-shell {
+    height: 3.1rem;
+  }
+}

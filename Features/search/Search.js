@@ -4,6 +4,12 @@ import { buildSpiderwebContext } from '../list/spiderwebContext.js';
 import { addHistoryEntry, updateNavButtonsState } from '../navigation/Navigation.js';
 import { renderDetailPage } from '../detail/DetailPage.js';
 import { addTapListener } from '../../Utils/addTapListener.js';
+import {
+    ensureSearchPreviewContent,
+    getSearchPreview,
+    needsAsyncSearchPreview,
+    resetSearchPreviewCache
+} from './searchPreview.js';
 
 const MAX_FILTERED_RESULTS = 7;
 const MAX_SMART_RESULTS = 7;
@@ -192,7 +198,11 @@ function buildSuggestionModel(rawQuery) {
             if (b.patientScore !== a.patientScore) return b.patientScore - a.patientScore;
             return compareTitles(a.displayTitle, b.displayTitle);
         })
-        .slice(0, MAX_FILTERED_RESULTS);
+        .slice(0, MAX_FILTERED_RESULTS)
+        .map(entry => ({
+            ...entry,
+            previewText: getSearchPreview(entry, searchTerm)
+        }));
 
     const smartResults = scoredEntries
         .filter(entry => entry.smartScore > 0)
@@ -202,9 +212,29 @@ function buildSuggestionModel(rawQuery) {
             if (Number(b.isSearchHit) !== Number(a.isSearchHit)) return Number(b.isSearchHit) - Number(a.isSearchHit);
             return compareTitles(a.displayTitle, b.displayTitle);
         })
-        .slice(0, MAX_SMART_RESULTS);
+        .slice(0, MAX_SMART_RESULTS)
+        .map(entry => ({
+            ...entry,
+            previewText: getSearchPreview(entry, searchTerm)
+        }));
 
     return { filteredResults, smartResults };
+}
+
+function primeSuggestionPreviews(entries) {
+    const pendingLoads = [];
+    const seenEntryIds = new Set();
+    entries.forEach(entry => {
+        if (!entry?.id || seenEntryIds.has(entry.id)) return;
+        seenEntryIds.add(entry.id);
+        if (needsAsyncSearchPreview(entry)) {
+            pendingLoads.push(ensureSearchPreviewContent(entry));
+        }
+    });
+    if (!pendingLoads.length) return;
+    Promise.allSettled(pendingLoads).then(() => {
+        refreshSearchSuggestions();
+    });
 }
 
 function setActiveSuggestion(index) {
@@ -255,10 +285,11 @@ function buildSuggestionItem(entry, flatIndex) {
     titleEl.textContent = entry.displayTitle;
     button.appendChild(titleEl);
 
-    const pathEl = document.createElement('span');
-    pathEl.className = 'search-suggestion-path';
-    pathEl.textContent = entry.path;
-    button.appendChild(pathEl);
+    const secondaryEl = document.createElement('span');
+    secondaryEl.className = entry.previewText ? 'search-suggestion-preview' : 'search-suggestion-path';
+    secondaryEl.dataset.searchSecondary = entry.previewText ? 'preview' : 'path';
+    secondaryEl.textContent = entry.previewText || entry.path;
+    button.appendChild(secondaryEl);
 
     button.addEventListener('mousedown', event => {
         event.preventDefault();
@@ -315,6 +346,7 @@ function renderSearchSuggestions(rawQuery) {
         filteredCount
     );
     updateSuggestionCounts(filteredCount, smartCount);
+    primeSuggestionPreviews(searchUiState.flatResults);
 
     if (!searchUiState.flatResults.length) {
         showSearchSuggestions();
@@ -404,6 +436,7 @@ function renderSearchResults(searchTerm, shouldAddHistory = true, highlightId = 
 export function resetSearchIndex() {
     allSearchableTopics = [];
     searchTitleCounts = new Map();
+    resetSearchPreviewCache();
     if (typeof window !== 'undefined') {
         window.allSearchableTopics = allSearchableTopics;
     }

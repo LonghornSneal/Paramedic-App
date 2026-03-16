@@ -202,6 +202,12 @@ body {
   color: #475569;
 }
 
+.search-suggestion-preview {
+  font-size: 0.79rem;
+  line-height: 1.42;
+  color: #334155;
+}
+
 .search-suggestion-empty {
   display: flex;
   align-items: center;
@@ -310,6 +316,7 @@ body.dark-mode .snapshot-card {
   justify-content: flex-start;
   width: 100%;
   min-height: 100%;
+  transition: opacity 0.18s ease;
 }
 
 .category-tree-lines {
@@ -317,6 +324,16 @@ body.dark-mode .snapshot-card {
   inset: 0;
   pointer-events: none;
   z-index: 2;
+  transition: opacity 0.18s ease;
+}
+
+#content-area.category-tree-stabilizing .category-tree {
+  transition: none;
+}
+
+#content-area.category-tree-stabilizing .category-tree-container,
+#content-area.category-tree-stabilizing .category-tree-lines {
+  opacity: 0;
 }
 
 .category-size-overlay {

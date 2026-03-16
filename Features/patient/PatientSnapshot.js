@@ -228,8 +228,9 @@ export function renderPatientSnapshot(){
   if (v.bp) parts.push(`BP ${v.bp}`);
   if (v.hr != null) parts.push(`<span class="${sevHR(v.hr)}">${v.hr}HR</span>`);
   if (typeof v.spo2 === 'number') {
-    const sourceTag = typeof v.spo2Source === 'string' && v.spo2Source.trim() ? ` ${v.spo2Source.trim()}` : '';
-    parts.push(`${v.spo2}%${sourceTag}`);
+    parts.push(`${v.spo2}%`);
+  } else if (typeof v.spo2 === 'string' && v.spo2.trim()) {
+    parts.push(`SpO2 ${v.spo2.trim()}`);
   }
   if (v.etco2 != null && v.etco2 !== '') {
     const etValue = typeof v.etco2 === 'number' ? v.etco2 : v.etco2;

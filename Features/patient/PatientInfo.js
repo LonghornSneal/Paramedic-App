@@ -24,7 +24,7 @@ export const patientData = {
     indications: [], indicationsDisplay: [],
     symptoms: [], symptomsDisplay: [],
     vitalSigns: {
-        bp: '', bpSystolic: null, bpDiastolic: null, map: null, hr: null, spo2: null, spo2Source: '', etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: ''
+        bp: '', bpSystolic: null, bpDiastolic: null, map: null, hr: null, spo2: null, etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: ''
     },
     ekg: '', ekgDisplay: '', ekgSecondary: ''
 };
@@ -45,7 +45,7 @@ const ptInputIds = [ 'pt-age',
     'vs-hr-value',
     'vs-hr-select',
     'vs-spo2-value',
-    'vs-spo2-source',
+    'vs-spo2-select',
     'vs-etco2',
     'vs-rr',
     'vs-bgl-value',
@@ -80,6 +80,7 @@ const chipListElements = {
   indications: document.getElementById('pt-indications-chips'),
   symptoms: document.getElementById('pt-symptoms-chips')
 };
+const chipTextareaIds = ['pt-pmh', 'pt-allergies', 'pt-medications', 'pt-indications', 'pt-symptoms'];
 const ekgSummaryEl = document.getElementById('ekg-summary-text');
 const unitInputElements = Array.from(document.querySelectorAll('.unit-input .sidebar-input'));
 let selectedWeightUnit = 'kg';
@@ -215,6 +216,13 @@ function syncUnitSuffixState(inputEl) {
     if (!wrapper) return;
     const hasValue = Boolean(inputEl.value && inputEl.value.toString().trim().length);
     wrapper.dataset.hasValue = hasValue ? 'true' : 'false';
+}
+
+function resetTextareaScrollPosition(textareaEl) {
+  if (!textareaEl) return;
+  window.setTimeout(() => {
+    textareaEl.scrollLeft = 0;
+  }, 0);
 }
 
 /*
@@ -986,9 +994,8 @@ function updatePatientData() {
     updateEkgSummary(patientData.ekgDisplay, patientData.ekgSecondary);
 
     const bpDetails = getBloodPressureDetails();
-    const hrValue = readNumberOrPreset('vs-hr-value', 'vs-hr-select', 0, 400);
-    const spo2Value = getIntegerFromInput(document.getElementById('vs-spo2-value'), 0, 100);
-    const spo2Source = getInputValue('vs-spo2-source');
+    const hrValue = readNumberOrPreset('vs-hr-value', 'vs-hr-select', 0, 300);
+    const spo2Value = readNumberOrPreset('vs-spo2-value', 'vs-spo2-select', 50, 100);
     const etco2Value = getNormalizedNumberOrText('vs-etco2', 0, 50);
     const rrValue = getNormalizedNumberOrText('vs-rr', 0, 80);
     const bglValue = readNumberOrPreset('vs-bgl-value', 'vs-bgl-select', 0, 900);
@@ -1002,7 +1009,6 @@ function updatePatientData() {
         map: bpDetails.map,
         hr: hrValue,
         spo2: spo2Value,
-        spo2Source,
         etco2: etco2Value,
         rr: rrValue,
         bgl: bglValue,
@@ -1091,8 +1097,15 @@ if (weightInputEl) {
   });
 }
 
+chipTextareaIds.forEach(id => {
+  const textareaEl = document.getElementById(id);
+  if (!textareaEl) return;
+  textareaEl.addEventListener('blur', () => resetTextareaScrollPosition(textareaEl));
+});
+
 linkNumberAndSelect(['vs-bp-systolic', 'vs-bp-diastolic'], 'vs-bp-select');
 linkNumberAndSelect('vs-hr-value', 'vs-hr-select');
+linkNumberAndSelect('vs-spo2-value', 'vs-spo2-select');
 linkNumberAndSelect('vs-bgl-value', 'vs-bgl-select');
 linkNumberAndSelect('vs-gcs-value', 'vs-gcs-select');
 
@@ -1130,7 +1143,7 @@ if (spo2InputEl) {
       return;
     }
     const numeric = parseInt(digits, 10);
-    const clamped = clampNumber(numeric, 0, 100);
+    const clamped = clampNumber(numeric, 50, 100);
     spo2InputEl.value = clamped != null ? clamped.toString() : '';
     syncUnitSuffixState(spo2InputEl);
     updatePatientData();
