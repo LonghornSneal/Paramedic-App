@@ -1154,7 +1154,12 @@ body.dark-mode .category-tree.has-active-path {
   }
 
   .category-tree.has-search[data-level="0"] {
-    margin-left: 0.75rem;
+    left: 0.5rem;
+  }
+
+  .category-tree.has-active-path,
+  .category-tree.has-search {
+    --tree-row-gap: 0.2rem;
   }
 
   .category-card-title {
@@ -1218,6 +1223,10 @@ body.dark-mode .category-tree.has-active-path {
 
   .category-tree.has-search .topic-link-item {
     max-width: min(8.5rem, calc(100vw - 6rem));
+  }
+
+  .category-tree.has-search[data-level="0"] {
+    left: 1.125rem;
   }
 
   .category-tree.has-active-path .topic-link-item,

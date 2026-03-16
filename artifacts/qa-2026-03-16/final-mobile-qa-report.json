@@ -89,14 +89,9 @@
         "detail": ""
       },
       {
-        "name": "search panel in viewport anaphylaxis",
+        "name": "search panel in viewport adult anaphylaxis",
         "ok": true,
         "detail": "{\"x\":40,\"y\":119.21875,\"width\":236,\"height\":371.1875}"
-      },
-      {
-        "name": "extra anaphylaxis detail opened",
-        "ok": true,
-        "detail": ""
       },
       {
         "name": "run failure",
@@ -195,14 +190,9 @@
         "detail": ""
       },
       {
-        "name": "search panel in viewport anaphylaxis",
+        "name": "search panel in viewport adult anaphylaxis",
         "ok": true,
-        "detail": "{\"x\":40,\"y\":91.21875,\"width\":265.5,\"height\":448}"
-      },
-      {
-        "name": "extra anaphylaxis detail opened",
-        "ok": true,
-        "detail": ""
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":265.5,\"height\":402.0625}"
       },
       {
         "name": "run failure",
@@ -301,14 +291,9 @@
         "detail": ""
       },
       {
-        "name": "search panel in viewport anaphylaxis",
+        "name": "search panel in viewport adult anaphylaxis",
         "ok": true,
-        "detail": "{\"x\":40,\"y\":91.21875,\"width\":305.5,\"height\":448}"
-      },
-      {
-        "name": "extra anaphylaxis detail opened",
-        "ok": true,
-        "detail": ""
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":305.5,\"height\":402.0625}"
       },
       {
         "name": "run failure",
@@ -407,14 +392,9 @@
         "detail": ""
       },
       {
-        "name": "search panel in viewport anaphylaxis",
+        "name": "search panel in viewport adult anaphylaxis",
         "ok": true,
-        "detail": "{\"x\":40,\"y\":91.21875,\"width\":355.5,\"height\":448}"
-      },
-      {
-        "name": "extra anaphylaxis detail opened",
-        "ok": true,
-        "detail": ""
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":355.5,\"height\":402.0625}"
       },
       {
         "name": "run failure",
