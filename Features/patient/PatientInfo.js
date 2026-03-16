@@ -890,19 +890,7 @@ function updateSuggestedTopics() {
 function applyTopicStrikethroughs() {
   const topicLinks = document.querySelectorAll('a.topic-link-item');
   topicLinks.forEach(link => {
-    const topicId = link.dataset.topicId;
-    const topicObj = window.allDisplayableTopicsMap?.[topicId];
-    if (patientData.indications.length > 0 && topicObj?.details?.indications) {
-      const medIndications = topicObj.details.indications.map(i => i.toLowerCase());
-      const hasMatch = patientData.indications.some(ind => medIndications.includes(ind.toLowerCase()));
-      if (!hasMatch) {
-        link.classList.add('strikethrough');
-      } else {
-        link.classList.remove('strikethrough');
-      }
-    } else {
-      link.classList.remove('strikethrough');
-    }
+    link.classList.remove('strikethrough');
   });
 }
 

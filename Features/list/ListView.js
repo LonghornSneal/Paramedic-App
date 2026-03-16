@@ -3,9 +3,10 @@
 //import './Features/detail/DetailPage.js';
 //import './Utils/addTapListener'
 import { addHistoryEntry, updateNavButtonsState } from '../navigation/Navigation.js';
-import { renderDetailPage } from '../detail/DetailPage.js';
+import { renderDetailPageFromPill } from '../detail/DetailPage.js';
 import { resetDetailSpaceClasses } from '../detail/detailSpaceUtils.js';
-import { addTapListener } from '../../Utils/addTapListener.js'
+import { addTapListener } from '../../Utils/addTapListener.js';
+import { buildSpiderwebContext, getSpiderwebNodeState } from './spiderwebContext.js';
 // import { addHistoryEntry, updateNavButtonsState, attachNavHandlers } from './Features/navigation/Navigation.js';
 // import { renderDetailPage } from './Features/detail/DetailPage.js';
 // import { addTapListener } from '../../Utils/addTapListener.js';
@@ -60,8 +61,6 @@ const COLUMN_BASELINE_PROFILES = {
 function getCategoryTreeState() {
     if (typeof window === 'undefined') return {};
     if (!window.categoryTreeState) {
-        const overlayPref = typeof localStorage !== 'undefined' ? localStorage.getItem('devOverlay') : null;
-        const overlayEnabled = overlayPref !== 'false';
         window.categoryTreeState = {
             dragOffsets: new Map(),
             dragActive: null,
@@ -85,7 +84,7 @@ function getCategoryTreeState() {
             columnBaselineByLevel: new Map(),
             baselineLevelsKey: '',
             overlayLevelsKey: '',
-            overlayHidden: !overlayEnabled,
+            overlayHidden: true,
             layoutDirty: false,
             layoutKey: '',
             fitScalePass: 0,
@@ -118,61 +117,58 @@ function resetCategoryTreeAnimation() {
     state.fitScale = 1;
     state.pathSteps = [];
 }
+
+function applyExplicitNavigationState(highlightId = null, categoryPath = []) {
+    const hasExplicitPath = Array.isArray(categoryPath) && categoryPath.length > 0;
+    if (hasExplicitPath) {
+        categoryPath.forEach(catId => {
+            const catItem = window.allDisplayableTopicsMap?.[catId];
+            if (catItem?.type === 'category') {
+                catItem.expanded = true;
+            }
+        });
+        window.activeCategoryPath = [...categoryPath];
+    }
+    if (highlightId) {
+        window.activeTopicId = highlightId;
+    } else if (hasExplicitPath) {
+        window.activeTopicId = null;
+    }
+}
+
+function buildCurrentSpiderwebContext() {
+    const context = buildSpiderwebContext(window.paramedicCategories, {
+        patientData: window.patientData || {},
+        searchTerm: window.searchInput?.value || '',
+        activeCategoryPath: window.activeCategoryPath || [],
+        activeTopicId: window.activeTopicId || null,
+        pediatricAgeThreshold: Number(window.PEDIATRIC_AGE_THRESHOLD) || 18
+    });
+    window.spiderwebContext = context;
+    return context;
+}
+
+function scheduleTreeMetricsPass(rootContainer) {
+    if (!rootContainer) return;
+    requestAnimationFrame(() => {
+        updateCategoryTreeMetrics(rootContainer);
+        window.setTimeout(() => updateCategoryTreeMetrics(rootContainer), 120);
+        window.setTimeout(() => updateCategoryTreeMetrics(rootContainer), 320);
+    });
+}
 // Renders the main category list view (home screen) and highlights a topic if provided.
 export function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
     const contentArea = window.contentArea || document.getElementById('content-area');
     resetDetailSpaceClasses(contentArea);
-    contentArea.innerHTML = '';  // Clear current content
+    contentArea.classList.add('spiderweb-mode');
+    contentArea.classList.remove('detail-transition-shell', 'detail-transition-entered', 'detail-transition-out');
+    contentArea.innerHTML = '';
     resetCategoryTreeAnimation();
     if (!Array.isArray(window.activeCategoryPath)) {
         window.activeCategoryPath = [];
     }
-    const suggested = Array.isArray(window.patientSuggestedTopics) ? window.patientSuggestedTopics : [];
-    if (suggested.length) {
-        const suggestedWrapper = document.createElement('div');
-        suggestedWrapper.className = 'suggested-topics';
-        const heading = document.createElement('h3');
-        heading.className = 'suggested-heading';
-        heading.textContent = 'Suggested';
-        suggestedWrapper.appendChild(heading);
-        const suggestedList = document.createElement('div');
-        suggestedList.className = 'suggested-list';
-        suggested.forEach(entry => {
-            const topic = window.allDisplayableTopicsMap?.[entry.id];
-            if (!topic) return;
-            const link = document.createElement('a');
-            link.className = 'topic-link-item suggested-topic';
-            link.textContent = topic.title;
-            link.href = `#${topic.id}`;
-            link.dataset.topicId = topic.id;
-            link.setAttribute('role', 'button');
-            link.setAttribute('tabindex', '0');
-            addTapListener(link, e => {
-                e.preventDefault();
-                renderDetailPage(topic.id);
-            });
-            link.addEventListener('keydown', evt => {
-                if (evt.key === 'Enter' || evt.key === ' ') {
-                    evt.preventDefault();
-                    renderDetailPage(topic.id);
-                }
-            });
-            const meta = [];
-            if (entry.matchedIndications && entry.matchedIndications.length) meta.push('Indications');
-            if (entry.matchedSymptoms && entry.matchedSymptoms.length) meta.push('Symptoms');
-            if (meta.length) {
-                const reason = document.createElement('div');
-                reason.className = 'suggested-reason';
-                reason.textContent = `Matches: ${meta.join(', ')}`;
-                link.appendChild(reason);
-            }
-            suggestedList.appendChild(link);
-        });
-        if (suggestedList.children.length) {
-            suggestedWrapper.appendChild(suggestedList);
-            contentArea.appendChild(suggestedWrapper);
-        }
-    }
+    applyExplicitNavigationState(highlightId, categoryPath);
+    buildCurrentSpiderwebContext();
     // Render the hierarchical list of all categories
     const listContainer = document.createElement('div');
     listContainer.className = 'category-tree-container';
@@ -180,11 +176,7 @@ export function renderInitialView(shouldAddHistory = true, highlightId = null, c
     contentArea.appendChild(listContainer);
     ensureCategoryTreeLineLayer(contentArea);
     ensureCategorySizeOverlay(contentArea, listContainer);
-    requestAnimationFrame(() => updateCategoryTreeMetrics(listContainer));
-    if (typeof window.applyTopicStrikethroughs === 'function') {
-        window.applyTopicStrikethroughs();
-    }
-    // Expand categories along path and highlight topic if provided
+    scheduleTreeMetricsPass(listContainer);
     openCategoriesAndHighlight(categoryPath, highlightId);
     if (shouldAddHistory) {
         addHistoryEntry({ 
@@ -197,65 +189,67 @@ export function renderInitialView(shouldAddHistory = true, highlightId = null, c
     updateNavButtonsState();
 }
 
-// Expands categories along the given path and highlights the specified topic, then re-renders the list.
+// Scroll the highlighted topic into view after the current spiderweb state renders.
 function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
     const contentArea = window.contentArea || document.getElementById('content-area');
-    // Collapse or expand categories along the given path
-    categoryPath.forEach(catId => { 
-        const catItem = window.allDisplayableTopicsMap[catId];
-        if (catItem) catItem.expanded = true; 
-    });
-    window.activeCategoryPath = Array.isArray(categoryPath) ? [...categoryPath] : [];
-    window.activeTopicId = highlightId || null;
-    // Re-render list with updated expansion states
-    contentArea.innerHTML = '';
-    resetCategoryTreeAnimation();
-    const listContainer = document.createElement('div');
-    listContainer.className = 'category-tree-container';
-    createHierarchicalList(window.paramedicCategories, listContainer, 0, []);
-    contentArea.appendChild(listContainer);
-    ensureCategoryTreeLineLayer(contentArea);
-    ensureCategorySizeOverlay(contentArea, listContainer);
-    requestAnimationFrame(() => updateCategoryTreeMetrics(listContainer));
-    // Highlight the specified topic, if provided
+    void categoryPath;
+    if (!contentArea) return;
     if (highlightId) { 
-        const topicEl = contentArea.querySelector(`[data-topic-id="${highlightId}\"]`);
+        const topicEl = contentArea.querySelector(`.topic-link-item[data-topic-id="${highlightId}"]`);
         if (topicEl) {
             topicEl.classList.add('recently-viewed'); 
-            topicEl.scrollIntoView({ block: 'center' });
+            topicEl.scrollIntoView({ block: 'center', inline: 'nearest' });
         }
     }
-    // Scroll highlighted topic into view (if any)**
-//    if (highlightId && topicEl) {
-//        topicEl.scrollIntoView({ block: 'center' });
-//    }
+}
+
+function getEffectiveCategoryExpanded(item, spiderwebContext) {
+    return Boolean(item?.expanded || spiderwebContext?.autoExpandedIds?.has(item?.id));
+}
+
+function applySpiderwebPresentation(pill, group, presentation) {
+    if (!pill) return;
+    const scale = presentation?.scale ?? 1;
+    const opacity = presentation?.opacity ?? 1;
+    pill.style.setProperty('--node-scale', `${scale}`);
+    pill.style.setProperty('--node-opacity', `${opacity}`);
+    pill.dataset.emphasis = presentation?.tier || 'default';
+    pill.classList.toggle('is-context-match', Boolean(presentation?.isRelevant || presentation?.isSearchHit));
+    pill.classList.toggle('is-context-branch', Boolean(presentation?.isRelevantBranch || presentation?.isSearchBranch));
+    pill.classList.toggle('is-age-mismatch', Boolean(presentation?.isAgeMismatch));
+    if (!group) return;
+    group.dataset.tier = presentation?.tier || 'default';
+    group.classList.toggle('is-context-muted', presentation?.tier === 'muted');
+    group.classList.toggle('is-context-match', Boolean(presentation?.isRelevant || presentation?.isSearchHit));
+    group.classList.toggle('is-context-branch', Boolean(presentation?.isRelevantBranch || presentation?.isSearchBranch));
+    group.classList.toggle('is-age-mismatch', Boolean(presentation?.isAgeMismatch));
+    group.classList.toggle('is-active-path', Boolean(presentation?.isInActivePath));
+    group.classList.toggle('is-focus-node', Boolean(presentation?.isFocus));
 }
 
 // Builds a nested list of categories and topics, appending it to the given container. Handles expandable categories.
 function createHierarchicalList(items, container, level = 0, path = []) {
+    const spiderwebContext = window.spiderwebContext || buildCurrentSpiderwebContext();
     container.innerHTML = '';
     container.classList.add('category-tree');
     container.dataset.level = String(level);
     container.style.setProperty('--category-level', level);
-    const hasExpanded = items.some(item => item.type === 'category' && item.expanded);
+    const hasExpanded = items.some(item => item.type === 'category' && getEffectiveCategoryExpanded(item, spiderwebContext));
     container.classList.toggle('has-expanded', hasExpanded);
-    const hasActivePath = items.some(item =>
-        (Array.isArray(window.activeCategoryPath) && window.activeCategoryPath.includes(item.id)) ||
-        window.activeTopicId === item.id
-    );
+    container.classList.toggle('has-context-signal', Boolean(spiderwebContext?.hasContextSignal));
+    const hasActivePath = items.some(item => spiderwebContext?.activePathIds?.includes(item.id));
     container.classList.toggle('has-active-path', hasActivePath);
     items.forEach(item => { 
         const currentPath = [...path, item.id];
+        const presentation = getSpiderwebNodeState(spiderwebContext, item.id);
+        const isExpanded = item.type === 'category' && getEffectiveCategoryExpanded(item, spiderwebContext);
         const group = document.createElement('div');
         group.className = 'category-group';
         if (level === 0) {
             group.classList.add('is-root');
         }
-        if (item.type === 'category' && item.expanded) {
+        if (isExpanded) {
             group.classList.add('is-expanded');
-        }
-        if (Array.isArray(window.activeCategoryPath) && window.activeCategoryPath.includes(item.id)) {
-            group.classList.add('is-active-path');
         }
         group.style.setProperty('--category-level', level);
         if (item.type === 'category') {  // Category with collapsible children
@@ -264,11 +258,11 @@ function createHierarchicalList(items, container, level = 0, path = []) {
             card.type = 'button';
             card.className = 'category-card';
             card.dataset.categoryId = item.id;
-            if (item.expanded) card.classList.add('is-expanded');
-            if (group.classList.contains('is-active-path')) {
+            if (isExpanded) card.classList.add('is-expanded');
+            if (presentation?.isInActivePath) {
                 card.classList.add('is-active-path');
             }
-            card.setAttribute('aria-expanded', item.expanded ? 'true' : 'false');
+            card.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
             const label = document.createElement('span');
             label.className = 'category-card-title';
             label.textContent = item.title;
@@ -276,6 +270,7 @@ function createHierarchicalList(items, container, level = 0, path = []) {
                 label.classList.add('quick-vent-title');
             }
             card.append(label);
+            applySpiderwebPresentation(card, group, presentation);
             prepareCategoryPill(card, item.id);
             addTapListener(card, () => { 
                 if (shouldSuppressCategoryClick(item.id)) return;
@@ -297,20 +292,22 @@ function createHierarchicalList(items, container, level = 0, path = []) {
                 }
                 const rootContainer = container.closest('.category-tree[data-level="0"]');
                 if (rootContainer && rootContainer !== container) {
+                    buildCurrentSpiderwebContext();
                     createHierarchicalList(window.paramedicCategories, rootContainer, 0, []);
                 } else {
+                    buildCurrentSpiderwebContext();
                     createHierarchicalList(items, container, level, path);
                 }
             });
             group.appendChild(card);
-            if (item.expanded && item.children?.length) {
+            if (isExpanded && item.children?.length) {
                 const childContainer = document.createElement('div');
                 childContainer.className = 'category-children category-tree';
                 group.appendChild(childContainer);
-            createHierarchicalList(item.children, childContainer, level + 1, currentPath);
-        }
-        container.appendChild(group);
-    } else if (item.type === 'topic') { 
+                createHierarchicalList(item.children, childContainer, level + 1, currentPath);
+            }
+            container.appendChild(group);
+        } else if (item.type === 'topic') { 
             group.dataset.topicId = item.id;
             const topicLink = document.createElement('a');
             topicLink.className = 'topic-link-item';
@@ -324,18 +321,19 @@ function createHierarchicalList(items, container, level = 0, path = []) {
                 if (shouldSuppressCategoryClick(item.id)) return;
                 e.preventDefault();
                 window.activeTopicId = item.id;
-                renderDetailPage(item.id); 
+                buildCurrentSpiderwebContext();
+                renderDetailPageFromPill(item.id, topicLink); 
             });
-            if (window.activeTopicId === item.id) {
+            applySpiderwebPresentation(topicLink, group, presentation);
+            if (presentation?.isInActivePath) {
                 topicLink.classList.add('is-active-path');
-                group.classList.add('is-active-path');
             }
             group.appendChild(topicLink);
             container.appendChild(group);
         }
     });
     if (level === 0) {
-        requestAnimationFrame(() => updateCategoryTreeMetrics(container));
+        scheduleTreeMetricsPass(container);
     }
 }
 
@@ -363,8 +361,7 @@ function ensureCategoryTreeLineLayer(contentArea) {
 function prepareCategoryPill(element, id) {
     if (!element || !id) return;
     element.dataset.dragId = id;
-    applyCategoryDragOffset(element, id);
-    attachCategoryDragHandlers(element, id);
+    element.style.translate = '0px 0px';
 }
 
 function applyCategoryDragOffset(element, id) {
@@ -2038,20 +2035,23 @@ function computeCategoryTreeFitScale(metricsRoot, contentRect) {
     if (!metricsRoot || !contentRect) return 1;
     const bounds = getCategoryTreeBounds(metricsRoot);
     if (!bounds) return 1;
-    const availableWidth = Math.max(1, contentRect.width - 16);
-    const availableHeight = Math.max(1, contentRect.height - 16);
+    const availableWidth = Math.max(1, contentRect.width - 32);
+    const availableHeight = Math.max(1, contentRect.height - 32);
     const usedWidth = bounds.width;
     const usedHeight = bounds.height;
     const scaleX = availableWidth / usedWidth;
     const scaleY = availableHeight / usedHeight;
-    const nextScale = Math.min(1, scaleX, scaleY);
-    return Math.max(0.55, nextScale);
+    return Math.min(1, scaleX, scaleY);
 }
 
 function centerCategoryTreeColumns(metricsRoot, rootTree, contentRect) {
     if (!metricsRoot || !rootTree || !contentRect) return;
     const state = getCategoryTreeState();
     if (state.manualColumnShift) return;
+    const hasActivePath = getActivePathIds().length > 0;
+    const hasSearch = Boolean(window.spiderwebContext?.hasSearch);
+    const levels = getCategoryTreeLevels(metricsRoot);
+    const visibleDepth = Math.max(0, levels.length - 1);
     const candidateTrees = Array.from(metricsRoot.querySelectorAll('.category-children'))
         .filter(tree => tree.children.length && tree.getClientRects().length);
     const rightmostTree = candidateTrees.reduce((current, tree) => {
@@ -2060,15 +2060,23 @@ function centerCategoryTreeColumns(metricsRoot, rootTree, contentRect) {
         const currentRect = current.getBoundingClientRect();
         return rect.left > currentRect.left ? tree : current;
     }, null);
-    const activeTree = rightmostTree || metricsRoot;
+    const activeTree = hasActivePath ? (rightmostTree || metricsRoot) : metricsRoot;
     const activeBounds = getCategoryTreeBounds(activeTree);
     const bounds = getCategoryTreeBounds(metricsRoot);
     if (!activeBounds || !bounds) return;
     const currentShiftValue = getComputedStyle(rootTree).getPropertyValue('--tree-shift');
     const currentShift = Number.isFinite(parseFloat(currentShiftValue)) ? parseFloat(currentShiftValue) : 0;
-    const targetCenterX = contentRect.left + (contentRect.width / 2);
-    let delta = targetCenterX - (activeBounds.left + (activeBounds.width / 2));
-    const margin = Math.min(18, Math.max(8, contentRect.width * 0.02));
+    const margin = hasActivePath
+        ? Math.min(18, Math.max(8, contentRect.width * 0.02))
+        : Math.min(36, Math.max(22, contentRect.width * 0.03));
+    let delta;
+    if (!hasActivePath) {
+        delta = (contentRect.left + margin) - bounds.left;
+    } else {
+        const focusRatio = Math.min(0.78, 0.24 + (visibleDepth * 0.16));
+        const targetCenterX = contentRect.left + (contentRect.width * focusRatio);
+        delta = targetCenterX - (activeBounds.left + (activeBounds.width / 2));
+    }
     const minShift = (contentRect.left + margin) - bounds.left;
     const maxShift = (contentRect.right - margin) - bounds.right;
     if (delta < minShift) delta = minShift;
@@ -2108,7 +2116,7 @@ function updateCategoryTreeMetrics(container) {
     const contentRect = contentArea ? contentArea.getBoundingClientRect() : null;
     let fitScale = Number.isFinite(state.fitScale) ? state.fitScale : 1;
     if (contentRect && rootTree && metricsRoot === rootTree) {
-        const nextFitScale = computeCategoryTreeFitScale(metricsRoot, contentRect);
+        const nextFitScale = Math.max(0.28, Math.min(1, fitScale * computeCategoryTreeFitScale(metricsRoot, contentRect)));
         if (Math.abs(nextFitScale - fitScale) > 0.02) {
             fitScale = nextFitScale;
             state.fitScale = nextFitScale;

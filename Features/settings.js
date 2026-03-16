@@ -20,9 +20,9 @@ if (localStorage.getItem('darkMode') === 'true') {
     if (darkModeToggle) darkModeToggle.checked = true;
 }
 
-const savedDevOverlay = localStorage.getItem('devOverlay');
 if (devOverlayToggle) {
-    devOverlayToggle.checked = savedDevOverlay !== 'false';
+    devOverlayToggle.checked = false;
+    localStorage.setItem('devOverlay', 'false');
 }
 if (typeof window.setDevOverlayVisible === 'function' && devOverlayToggle) {
     window.setDevOverlayVisible(devOverlayToggle.checked);

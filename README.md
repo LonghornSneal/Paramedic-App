@@ -61,16 +61,13 @@ Design & Feature Overview: The app’s UI elements & features.
 
   Main Contents Page: The default view that shows categories & subtopics.
     The header: shows the app title centered with the search bar directly below; the Patient Info button is top‑left; Back/Forward arrows are top‑right (disabled initially), with the Home button beneath them and the History button below Home. 
-    **[The hierarchical Contents list renders in the main content area: rounded Show/Hide badges expand or collapse categories, and selecting a final topic opens its detailed page.]**
-    Entering patient data in the sidebar immediately updates the experience: irrelevant list items are strike‑through by indications, detail pages re‑render, and relevant warnings appear at the top of details. 
+    **[The Contents view now renders as a left-origin spiderweb of connected pills: the 8 root categories stay stacked on the left, selecting a category reveals the next connected pill column to the right, and selecting a final topic animates that pill toward the left edge before the detail page takes over.]**
+    **[Entering patient data in the sidebar now re-scores the spiderweb in place: the most relevant pills and branches become larger/brighter, unrelated branches stay visible but shrink/fade, and detail pages still re-render with the appropriate warnings at the top.]**
     All rendering is local, IDs are stable, taps are minimal, and flows are simple.
-    **[Expandable Topic List: Each category row uses a Show/Hide badge to toggle its section, while final topics render as cards that open the detail page (see Show/Hide Badges below).]**
-
-  **[Show/Hide Badges: On the Contents list.]**
-    **[Each expandable category includes a pill-shaped Show/Hide badge on the right edge. Tapping the badge or the category card opens or collapses the children. Leaf topics omit the badge; tapping the card opens the detail page immediately.]**
+    **[Spiderweb Topic Flow: Each category pill opens the next column of connected pills to the right while the active path stays largest; unrelated pills remain readable but visually quieter.]**
 
   Subtopics and Navigation Hierarchy: Topics are organized as a tree.
-    Parent items (type "category") render with a bold label and a blue chevron to the left; clicking the chevron or label toggles the section. Nested categories are supported recursively, so multiple levels can expand as needed. Final items (type "topic") do not show a chevron; their text is a clickable link that opens the corresponding detail page (the link carries data-topic-id and routes to renderDetailPage(id)).
+    **[Parent items (type "category") render as connected pills instead of chevron rows. Clicking a category pill opens its child column, keeps the active branch visually dominant, and literal connector lines show the path from left to right. Final items (type "topic") render as clickable pills with data-topic-id and route through the pill-to-detail transition.]**
 
     Focused Subtopic Sections (Detail Pages): Clicking a leaf topic opens a detail page for that item. The page content is generated from the data entry for that topic, with each section rendered under a collapsible subheading.
       Text is processed for inline markup: bracketed pairs like [[display|info]] render as green, clickable “toggle-info” spans that reveal additional details in-place; colored emphasis (e.g., {{red:...}}) is also supported.
@@ -78,19 +75,16 @@ Design & Feature Overview: The app’s UI elements & features.
       Warnings: are injected at the top of the page based on patientData (e.g., allergy match, PDE5 + NTG, low BP for NTG, pediatric Etomidate). The app re-renders details on patient updates so context stays current.
         Note: broad, automatic medication administration math is planned (see Current Tasks); some detail content may include calculations, but universal dose auto-calculation is not yet implemented across all Rx's.
 
-  Search Bar: dual lists (Filtered + Smart Suggestions) & only one location for user input.
+  **[Search Bar: live spiderweb filtering/highlighting & only one location for user input.]**
     Matching: Case-insensitive, and tries to match any part of a topic’s name or associated keywords. Updates per keystroke. Clicking navigates to detail. Both lists are scrollable.
-    Two dynamic lists: Two side-by-side list of topics (Appears as the user types into the search input).
-      Displayed: immediately below the Search Bar (side by side).
-    Filtered List of Topics: On the left.
-     This is that standard search bar that is currently implemented.
-    Smart Suggestions: On the right.
-      Displays: Filtered (by Patient Info & Search Bar text) list of topics.
+    **[Search behavior: the app no longer swaps to a standalone results page. The current query re-renders the spiderweb in place, preserves the visible branch structure, and still allows committed searches to be restored through navigation history.]**
+    **[Current matching implementation: case-insensitive against topic titles, ids, and category paths. Matching branches become more prominent while non-matching branches remain readable, smaller, and faded.]**
 
   Patient Info Menu Button: The Patient Info button (#open-sidebar-button) opens the Patient Information sidebar (#patient-sidebar) & activates the dim overlay (#sidebar-overlay).
     Close sidebar: by clicking its close (X) button or by clicking the overlay.
   The sidebar provides fields for sex, age, weight (KG/LB), height, PMH, allergies, current meds, indications, symptoms, VS, & EKG. Entered values update patientData immediately, which personalizes the app by striking through less‑relevant list items, re‑rendering the current detail page, & showing patient‑specific warnings.
 
+  **[Current patient-sidebar effect: sidebar input updates patientData immediately, refreshes the spiderweb relevance model in place, and keeps patient-aware detail warnings synchronized without leaving the current view.]**
   Patient Info Sidebar/Section: The sidebar is an interactive form that updates patientData as you type. All Categories will Auto-Update if the information is filled out elsewhere from within the app.
     Includes: Sex, Age, Weight (kg/lb), Height, PMH, Allergies, Medications, Indications, S/S, & VS.
       Note: pain scale still needs to be coded into app.
@@ -145,6 +139,7 @@ Effects of Patient Data: The information input in the Patient Info sidebar influ
   Dynamic Content Filtering: When Patient Info (or Patient Data) is present, the Contents list visually de‑emphasizes non‑matching topics by applying a strike‑through; all topics remain visible and in their original order. Symptoms do not currently affect the list. Highlighting, hiding, or reordering into a “Suggested” section is not implemented yet and is tracked as a future enhancement (see Enhanced Dynamic Protocol Filtering in Chapter 10).
 The app reflects patient context in three ways today: (1) Indications apply a strike‑through to non‑matching topics in the Contents list; (2) detail pages de‑emphasize Adult vs Pediatric Rx sections based on age; and (3) a compact patient snapshot appears below the search bar showing key details (age/sex/weight, indications, relevant allergies, vitals, and EKG). Category‑level fading or notes (e.g., hiding or dimming entire “Pediatric Protocols” for adults) is not implemented.
 
+**[Current behavior: patient sidebar changes now drive spiderweb relevance in place. Related branches enlarge and brighten, unrelated branches shrink/fade, and detail warnings still re-render from the same patientData source.]**
 Patient-Snapshot: A compact summary bar (#patient-snapshot-bar) appears below the Search Bar. Updates in realtime as Patient Info changes. It is a persistent context line while navigating. It includes:
   Age/sex: (e.g., “45yo Male (Use symbol instead)")
   weight: (e.g., “60kg”)
@@ -232,6 +227,8 @@ Features/ : Feature-specific scripts. This directory groups scripts that handle 
     Fallbacks: if the topic id is missing, shows “Not found.”; if the topic has no details, inserts “No detail information found for this item.”
   Features/list/ListView.js: Owns the Contents (home) list. renderInitialView(shouldAddHistory, highlightId, categoryPath) clears #content-area, renders the hierarchical list, optionally expands along categoryPath, highlights highlightId with the .recently-viewed class, scrolls it into view, & (when requested) pushes a “list” entry into navigation history & updates Back/Forward button state.
     createHierarchicalList() builds rows: categories render with a left blue chevron and bold label; clicking the chevron or label toggles expansion (chevron renders rotated 0°/90° by inline style). Leaf topics render as clickable links with data-topic-id and route to renderDetailPage(id).
+  **[Features/list/ListView.js: Current behavior is the spiderweb home view. renderInitialView(shouldAddHistory, highlightId, categoryPath) rebuilds the left-origin connected pill layout, recalculates spiderweb relevance from patient/search context, restores the active branch/path when provided, highlights recently viewed topics, and schedules fit/alignment passes so the web stays readable as it grows to the right.]**
+    **[createHierarchicalList() now renders connected pill columns with literal connector lines. Category pills expand/collapse child columns, search/patient context can auto-expand relevant branches, and topic pills route through renderDetailPageFromPill() so the clicked pill animates toward the left edge before the detail page takes over.]**
   Features/navigation/Navigation.js: Manages navigation history and Back/Forward controls.
     Exposes: navigationHistory (array of view states) & currentHistoryIndex.
     addHistoryEntry(entry): pushes a new state (truncating any forward entries) and updates Back/Forward enabled state.
@@ -243,10 +240,12 @@ Features/ : Feature-specific scripts. This directory groups scripts that handle 
   Features/navigation/Home.js: Implements the Home button functionality to return to the main Contents page.
   Features/patient/Autocomplete.js: Autocomplete suggestion handling for Patient Info fields. Enables autocomplete suggestions for a textarea input field.
   **[Features/patient/PatientInfo.js: Manages the Patient Info sidebar & central patientData. updatePatientData() reads inputs (single weight field with kg/lb toggles, pediatric-aware height parsing, PMH/Allergies/Meds/Indications/Symptoms, vitals), applies list strike-throughs when Indications are present, re-renders the active detail page to refresh warnings/context, applies age-based strike-throughs to Adult/Pediatric Rx sections, refreshes the snapshot, and keeps weight-unit metadata exposed alongside patientData for legacy access.]**
+  **[Features/patient/PatientInfo.js: Current behavior is to refresh the shared spiderweb relevance model whenever sidebar inputs change. The same update cycle re-renders the active detail page for warnings/context, keeps age-based Adult/Pediatric Rx strike-throughs, refreshes the snapshot, and preserves weight-unit metadata for legacy consumers.]**
     Note: wire patientData.ekg = getInputValue('pt-ekg') if snapshot EKG display and future rhythm logic are desired.
   **[Features/patient/PatientSnapshot.js: Renders the compact patient snapshot under the search bar (age, gender, weight unit selection, pediatric height display, indications, allergies, vitals, and rhythm highlights) using the shared patientData state.]**
   Features/search/Search.js: Builds the searchable index during category processing (processItem) & filters topics as you type. Matching is case‑insensitive against title, id, and  full category path. Results render in #content-area with a “Show All Categories” button that clears the search and restores the full list. Clicking a result (or pressing Enter/Space on it) opens that topic’s detail page.
     Note: the current setup adds search states to navigation history on input changes & on Enter; if you want typing to be non‑committal, adjust the handler to commit only on Enter.
+  **[Features/search/Search.js: Current behavior is to keep the spiderweb visible while filtering. processItem() still builds the searchable topic index, but handleSearch() now re-renders the connected pill layout in place instead of swapping to a standalone results list. Pressing Enter records the filtered spiderweb state in navigation history.]**
   Features/settings.js: The Settings button in the footer cycles between two colors (CSS animation) to draw attention. Manages the footer Settings button & the #settings-panel.
     Clicking Settings Button: Closes Patient Info sidebar if open, then opens the panel & activates the shared overlay; the panel’s close (X) hides it & clears the overlay.
     Current options:
@@ -349,6 +348,9 @@ Utils/ : Utility scripts. These are helpers that are used across the app for sma
 
       The result of this function is that contentArea (the main section in index.html) will be filled with the hierarchical list of all topics. Event listeners are set so that clicking on any Show/Hide badge toggles the appropriate section (show/hide children), and clicking on any topic name (leaf node) triggers renderDetailPage for that topic.
 
+    **[Rendering the Category List (renderInitialView): Current behavior is the connected spiderweb/table-of-contents view. The renderer starts from the eight fixed root categories on the left, recursively builds pill columns to the right, applies per-node emphasis from search/patient context, and measures literal connector lines after render so the web remains aligned and scaled to the available space.]**
+      **[When renderInitialView() is restored from history with a highlightId/categoryPath, it reopens the active branch, reapplies the active-path emphasis, scrolls the target pill into view, and keeps the rest of the web visible but less dominant.]**
+      **[The resulting contentArea is a connected pill map rather than a chevron list. Clicking a category pill expands/collapses the next branch to the right; clicking a topic pill triggers the pill-to-detail transition.]**
     Rendering a Detail Page (renderDetailPage): This function takes a topic ID as argument. It looks up that ID in allDisplayableTopicsMap (which contains both the structural info and the detail info if available). If found, it clears out the contentArea and then builds the detail view for that topic. Steps include:
 
       Insert a title heading (e.g., <h2>Epipen (Epinephrine) Autoinjector</h2>).
@@ -369,12 +371,15 @@ Utils/ : Utility scripts. These are helpers that are used across the app for sma
 
       A global navigationHistory array is maintained. Every time a view is rendered (either list or detail, or search results), an entry is pushed to this history with identifying information (like type of view and an identifier, e.g., {type: 'detail', id: 'aspirin'} or {type: 'list'}). currentHistoryIndex tracks the index of the current view in that array. Clicking Back or Forward will decrement or increment that index and then call the appropriate render function for that historical entry (without pushing a new history entry of course). The code ensures that going back and then clicking a new link throws away “forward” history past the current index (just like a web browser would).
 
+      **[Navigation history now restores either a detail page or a filtered spiderweb state. Committed searches return to the connected pill layout with the same search term/path context instead of reopening a separate results page.]**
       After each render, the code updates the disabled/enabled state of the Back/Forward buttons. If currentHistoryIndex is 0, Back is disabled (nothing before it). If currentHistoryIndex is at the end of the array, Forward is disabled. Otherwise, both can be enabled.
 
       The Home button, when clicked, calls renderInitialView() and pushes a new entry (or possibly clears the history beyond that point, since it’s like starting over). We ensure Back will then go to what was previously viewed.
 
       The search interactions integrate with this too: performing a search might be treated as a new view state (type: 'search', query: 'keyword'), so that pressing Back after going to a detail from search can return you to your search results.
 
+      **[Current search-history behavior: committed searches push a list-state entry that restores the filtered spiderweb, not a dedicated result screen.]**
+    **[Search Handling: handleSearch() manages what happens as the user types or submits the search query. It reuses the indexed topic metadata, normalizes the current query, and hands control back to renderInitialView() so the spiderweb stays onscreen while relevance/emphasis updates.]**
     Search Handling: The function handleSearch(doFilter) is implemented to manage what happens as the user types or submits the search query.
 
       We maintain allSearchableTopics which is an array of objects like { title: "Aspirin", fullPath: "ALS Medications > Aspirin", id: "aspirin" }. The search function will scan through this array to find any topic whose title or path contains the search string (case-insensitive).
@@ -450,6 +455,7 @@ Dynamic Updates on Detail Page: Patient Info changes trigger updatePatientData()
      Because the anchor navigation (slugList/slugAnchors) runs on renderDetailPage, it will re-generate after refresh. it ensures the anchor links are still accurate if any sections were added/removed due to patient data (typically we don’t remove sections entirely, just mark them).
         
 
+**[Current interaction summary: category pills expand the next branch to the right, keep the active path largest, and progressively shrink/fade sibling and unrelated branches while preserving readability. Clicking a final topic pill routes through renderDetailPageFromPill(), which animates a cloned pill toward the left edge before the detail page fades in. Sidebar edits rebuild the spiderweb relevance model in place, then rerender the active detail page, snapshot, and patient-aware warnings from the same patientData source.]**
 5.4 Dynamic Updates on Detail Page  
 - **Trigger pipeline:** `Features/patient/PatientInfo.js:155-276` listens to every sidebar field. When a value changes, `updatePatientData()` synchronizes kg/lb weight inputs, normalizes age/height, and refreshes the shared `patientData` object.  
 - **List synchronization:** The routine iterates `a.topic-link-item` nodes in the live list view, compares patient indications against each topic’s `details.indications`, and toggles the `strikethrough` class to de-emphasize non-matching entries. If the list is hidden (because a detail page is open), the updates are still applied so the list is accurate when the user navigates back.  
@@ -499,9 +505,7 @@ Search Bar: dual lists (Filtered + Smart Suggestions) & only one location for us
 
 **TOP PRIORITY TASKS must all be completed before attempting any of the following Tasks.**
 
-Current Task/Goal completed: Add a short, concise note to Chapter 8.
-  Replace original Task/Goal location with Testing (if not already present).
-  Tests: Add tests for any new bug (before the fix), for new features, and to test any completed Task/Goal.
+**[Completed-task bookkeeping: when a Current Task/Goal is finished and verified, move its summary into Chapter 8 and rewrite any related behavior notes in Chapters 4-5 so the README reflects shipped behavior.]**
     Organize test files: include minimal “how to run” notes when not obvious.
 
 Patient Info Sidebar: visible app‑wide effects.
@@ -509,6 +513,7 @@ Patient Info Sidebar: visible app‑wide effects.
   Examples: Enter “Morphine” in Allergies → viewing chest pain/pain protocols shows allergy warning; “Morphine” item is strike‑through (still accessible).
     Enter age 8 → viewing adult‑only medication should show pediatric warning
  
+**[Testing: Add tests for any new bug (before the fix), for new features, and to verify any completed Task/Goal before it moves into Chapter 8. Organize test files with minimal "how to run" notes when not obvious.]**
   Dynamic Dosage Recalculation: Implement fully dynamic dosage calculations for every medication.
 
 Warnings/Alerts: Visually shown under Search Bar.
@@ -523,6 +528,7 @@ Warnings/Alerts: Visually shown under Search Bar.
 ## 8. RECENT FIXES AND CHANGES
 Any entry added to this chapter must keep the rest of the README consistent: remove it from Chapters 6 or 7 if it migrates here, and rewrite any related coverage in Chapters 4 or 5 so those sections reflect current behavior. Never leave the old text in place with an 'updated' note; rewrite the references completely.
 
+**[2026-03-15 Spiderweb navigation rebuild: replaced the old chevron/list-search flow with a left-origin connected pill spiderweb, added active-path sizing/fading, patient/search-driven relevance emphasis, literal connector lines, and a pill-to-detail left-edge transition. Added Playwright coverage for search filtering, pediatric emphasis, and pill-to-detail navigation. Files: Features/list/ListView.js; Features/list/spiderwebContext.js; Features/search/Search.js; Features/patient/PatientInfo.js; Features/detail/DetailPage.js; Features/settings.js; styles/base/layout.css; dev-tools/tests/spiderweb-navigation.spec.js.]**
 **[2026-01-03 Anaphylaxis layout refresh: reordered Immediate Intervention into a Rx-first stack with consultation and recognition callouts, retuned scoped anaphylaxis styling (new fonts, line-rail layout, simplified lists) to match the provided reference image, and captured new UI screenshots. Source: user-provided layout reference. Files: Content/Adult Protocols/adult-anaphylaxis.md; styles/detail/detail-pages.css; notes/screenshots/adult-anaphylaxis-redesign-v2-desktop.png; notes/screenshots/adult-anaphylaxis-redesign-v2-mobile.png.]**
 **[2026-01-03 Protocol update: split CPR initiation/termination, OOH DNR + surrogate decision makers, and death documentation/body temp into new protocol topics; redesigned Adult Anaphylaxis layout and detail styling; updated Data/ProtocolMarkdownMap.js, Data/ParamedicCategoriesData.js, and Features/anchorNav/slugList.js. Source: Medical > Anaphylaxis (research/paramedic_protocols.txt). Files: Content/Adult Protocols/adult-anaphylaxis.md; Content/Operational Protocols/cpr-initiation-termination.md; Content/Administrative & Legal Essentials/ooh-dnr-surrogate-decision-makers.md; Content/Administrative & Legal Essentials/death-documentation-body-temp.md; styles/detail/detail-pages.css.]**
 **[2025-10-31 VS Code extension health: moved OpenJDK 25 to C:\Users\Jake\Java\jdk-25, refreshed workspace/user settings to clear the 99.98% download stall, added SonarLint analyzer metadata, generated a Maven wrapper + pom for Java debugging, and updated Agent-Workflow.md so the agent spins up seq without terminating user processes.]**
@@ -573,6 +579,7 @@ Sept 1, 2025: Patient Info given Medication Class dropdown populated from all me
 
 
 ## 9. TIMELINE SUMMARY (Short & Specific)
+**[03/15/26 - Replaced the legacy contents/search-results flow with a spiderweb navigation map, context-driven branch emphasis, and animated pill-to-detail transitions.]**
 
 07/16/25 — Nearly useful for field work; more data review pending.
 07/18/25 — ES Modules progressing; categories not yet loading at that time; Dark Mode working.
@@ -589,6 +596,8 @@ Sept 1, 2025: Patient Info given Medication Class dropdown populated from all me
   Enhanced Dynamic Protocol Filtering: Expand the intelligence of the main Contents list filtering. Beyond just strike-throughs, we could implement a mode where entering a primary indication or choosing a protocol (e.g., “STEMI” or “Anaphylaxis”) automatically highlights or even isolates the relevant protocols (perhaps by toggling a “Relevant Only” filter). It may involve tagging topics with keywords like “chest pain” or “trauma” and then matching those to patient indications input.
   Tests: Add E2E coverage for “STEMI” and “Anaphylaxis” workflows (toggle on/off, isolation/highlight, auto‑expand, Back/Forward, and “Show All” reset).
 
+**[Enhanced Spiderweb Relevance Modeling: The current spiderweb already boosts relevant branches from search and patient context while keeping the full map visible. Future work should add explicit relevance tags, case-by-case mixed-topic tagging (for example minor-related legal/admin topics), and an optional "Relevant Only" isolation mode.]**
+**[Tests: Add deeper E2E coverage for condition-driven highlighting workflows (for example STEMI and Anaphylaxis), relevant-only toggles if added later, auto-expand heuristics, and mixed-context branch scoring.]**
 Complete Weight-Based Dosing Automation:
   Tests: Add unit tests for dose computations and mL conversion with a few representative meds. Add a DOM test ensuring computed annotations appear/disappear as weight becomes available/cleared.
   Verification: Set weight to 22 kg; open a med with “0.01 mg/kg” and with valid concentration: confirm “(= 0.22 mg [0.22 mL])” and a math modal.
@@ -609,7 +618,7 @@ EKGs:
 Click “EKG Help” topic; confirm the Markdown reference renders with images/examples.
 
 
-**This README is up to date as of JuLY 19TH, 2025. All instructions and documentation reflect the current and intended behavior of the Paramedic Quick Reference app.**
+**[This README is up to date as of March 15, 2026. The instructions and documentation in Chapters 1-9 reflect the current behavior of the Paramedic Quick Reference app; Chapter 10 remains future-facing.]**
 
 ---
 # Paramedic Quick Reference — Developer Guide (Updated)

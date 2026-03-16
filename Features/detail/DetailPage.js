@@ -15,6 +15,80 @@ import { addTapListener } from '../../Utils/addTapListener.js';
 import { applyDetailSpaceClasses } from './detailSpaceUtils.js';
 import { calculateLineDose } from '../dosageCalc.js';
 
+const DETAIL_TRANSITION_DURATION_MS = 360;
+
+function prefersReducedMotion() {
+    return typeof window !== 'undefined'
+        && typeof window.matchMedia === 'function'
+        && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function clearDetailTransitionState(contentArea) {
+    if (!contentArea) return;
+    contentArea.classList.remove('detail-transition-shell', 'detail-transition-entered', 'detail-transition-out');
+}
+
+function waitForDuration(duration) {
+    return new Promise(resolve => {
+        window.setTimeout(resolve, duration);
+    });
+}
+
+export async function renderDetailPageFromPill(topicId, triggerEl, shouldAddHistory = true) {
+    const contentArea = window.contentArea || document.getElementById('content-area');
+    if (!contentArea || !triggerEl || prefersReducedMotion()) {
+        renderDetailPage(topicId, shouldAddHistory);
+        return;
+    }
+    if (window.detailTransitionInProgress) return;
+    const triggerRect = triggerEl.getBoundingClientRect();
+    if (!triggerRect.width || !triggerRect.height) {
+        renderDetailPage(topicId, shouldAddHistory);
+        return;
+    }
+
+    const contentRect = contentArea.getBoundingClientRect();
+    const clone = triggerEl.cloneNode(true);
+    clone.classList.add('detail-transition-pill');
+    clone.setAttribute('aria-hidden', 'true');
+    clone.querySelectorAll?.('[id]').forEach(node => node.removeAttribute('id'));
+    Object.assign(clone.style, {
+        left: `${triggerRect.left}px`,
+        top: `${triggerRect.top}px`,
+        width: `${triggerRect.width}px`,
+        height: `${triggerRect.height}px`
+    });
+    document.body.appendChild(clone);
+    window.detailTransitionInProgress = true;
+    clearDetailTransitionState(contentArea);
+    contentArea.classList.remove('spiderweb-mode');
+    contentArea.classList.add('detail-transition-shell', 'detail-transition-out');
+
+    try {
+        const targetWidth = Math.min(Math.max(triggerRect.width * 0.94, 176), 276);
+        const targetLeft = Math.max(16, contentRect.left + 18);
+        const targetTop = contentRect.top + 20;
+
+        await new Promise(resolve => requestAnimationFrame(resolve));
+        clone.style.left = `${targetLeft}px`;
+        clone.style.top = `${targetTop}px`;
+        clone.style.width = `${targetWidth}px`;
+        clone.style.opacity = '0.24';
+        clone.style.transform = 'translateY(0) scale(0.96)';
+
+        await waitForDuration(Math.round(DETAIL_TRANSITION_DURATION_MS * 0.45));
+        renderDetailPage(topicId, shouldAddHistory, true);
+        contentArea.classList.add('detail-transition-shell');
+        await new Promise(resolve => requestAnimationFrame(resolve));
+        contentArea.classList.add('detail-transition-entered');
+        await waitForDuration(DETAIL_TRANSITION_DURATION_MS + 40);
+    } finally {
+        clone.remove();
+        clearDetailTransitionState(contentArea);
+        window.detailTransitionInProgress = false;
+    }
+}
+
 // Appends all detail sections for a topic into the content area, including “Class”, “Indications”, “Contraindications”, etc.
 // If the topic has no details, a placeholder message is inserted.
 function appendTopicDetails(topic, contentArea) {
@@ -189,6 +263,9 @@ export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop =
     if (!window.allDisplayableTopicsMap[topicId]) { 
         contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; 
         return; 
+    }
+    if (contentArea) {
+        contentArea.classList.remove('spiderweb-mode');
     }
     applyDetailSpaceClasses(contentArea, topicId);
     const topic = window.allDisplayableTopicsMap[topicId];
