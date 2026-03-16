@@ -5,6 +5,7 @@ const OB_GYN_PATTERN = /\b(ob\/gyn|eclampsia|delivery|breech|prolapsed cord|shou
 
 const itemTextCache = new Map();
 const itemSearchCache = new Map();
+const itemSearchTokensCache = new Map();
 
 function resolveItem(item) {
   if (typeof window === 'undefined' || !item?.id) return item;
@@ -40,6 +41,48 @@ function flattenDetailValue(value) {
   return `${value ?? ''}`;
 }
 
+function getSearchTokens(text) {
+  return tokenize(text);
+}
+
+function getCachedSearchTokens(itemId, text) {
+  if (!itemId) return getSearchTokens(text);
+  if (itemSearchTokensCache.has(itemId)) return itemSearchTokensCache.get(itemId);
+  const tokens = getSearchTokens(text);
+  itemSearchTokensCache.set(itemId, tokens);
+  return tokens;
+}
+
+function getSearchKeywords(item) {
+  if (!Array.isArray(item?.searchKeywords)) return '';
+  return item.searchKeywords.join(' ');
+}
+
+function levenshteinWithin(a, b, maxDistance = 1) {
+  if (a === b) return true;
+  if (!a || !b) return false;
+  if (Math.abs(a.length - b.length) > maxDistance) return false;
+  const prev = new Array(b.length + 1);
+  const next = new Array(b.length + 1);
+  for (let j = 0; j <= b.length; j += 1) prev[j] = j;
+  for (let i = 1; i <= a.length; i += 1) {
+    next[0] = i;
+    let rowMin = next[0];
+    for (let j = 1; j <= b.length; j += 1) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      next[j] = Math.min(
+        prev[j] + 1,
+        next[j - 1] + 1,
+        prev[j - 1] + cost
+      );
+      if (next[j] < rowMin) rowMin = next[j];
+    }
+    if (rowMin > maxDistance) return false;
+    for (let j = 0; j <= b.length; j += 1) prev[j] = next[j];
+  }
+  return prev[b.length] <= maxDistance;
+}
+
 function buildItemText(item) {
   const sourceItem = resolveItem(item);
   if (!sourceItem?.id) return '';
@@ -48,8 +91,10 @@ function buildItemText(item) {
   const text = normalizeText([
     sourceItem.id,
     sourceItem.title,
+    sourceItem.navTitle,
     sourceItem.path,
     sourceItem.description,
+    getSearchKeywords(sourceItem),
     flattenDetailValue(details.class),
     flattenDetailValue(details.concentration),
     flattenDetailValue(details.indications),
@@ -68,11 +113,21 @@ function buildSearchText(item) {
   const sourceItem = resolveItem(item);
   if (!sourceItem?.id) return '';
   if (itemSearchCache.has(sourceItem.id)) return itemSearchCache.get(sourceItem.id);
+  const searchFields = sourceItem.type === 'category'
+    ? [
+        sourceItem.title,
+        sourceItem.navTitle,
+        sourceItem.description,
+        getSearchKeywords(sourceItem)
+      ]
+    : [
+        sourceItem.title,
+        sourceItem.navTitle,
+        sourceItem.description,
+        getSearchKeywords(sourceItem)
+      ];
   const text = normalizeText([
-    sourceItem.id,
-    sourceItem.title,
-    sourceItem.path,
-    sourceItem.description
+    ...searchFields
   ].filter(Boolean).join(' '));
   itemSearchCache.set(sourceItem.id, text);
   return text;
@@ -83,7 +138,14 @@ function textMatches(text, candidate) {
   if (!normalized) return false;
   if (text.includes(normalized)) return true;
   const tokens = tokenize(normalized);
-  return tokens.length > 1 && tokens.every(token => text.includes(token));
+  if (!tokens.length) return false;
+  if (tokens.length > 1 && tokens.every(token => text.includes(token))) return true;
+  const textTokens = getCachedSearchTokens('', text);
+  return tokens.every(token => textTokens.some(textToken => {
+    if (textToken.includes(token) || token.includes(textToken)) return true;
+    if (token.length >= 4 && textToken.length >= 4 && levenshteinWithin(textToken, token, 1)) return true;
+    return false;
+  }));
 }
 
 function pushWeightedTerm(target, value, weight) {
@@ -241,24 +303,24 @@ function buildPresentationState(itemId, info, activePathIds, hasContextSignal) {
   let tier = 'default';
 
   if (isFocus) {
-    scale = 1.28;
+    scale = 1.18;
     opacity = 1;
     tier = 'focus';
   } else if (isInActivePath) {
-    scale = Math.max(1.02, 1.18 - (activeDistance * 0.1));
+    scale = Math.max(1.02, 1.12 - (activeDistance * 0.06));
     opacity = 0.98;
     tier = 'active';
   } else if (info.searchSelf || strongRelevant) {
-    scale = 1.08;
-    opacity = 0.95;
+    scale = 1.04;
+    opacity = 0.96;
     tier = 'match';
   } else if (searchSignal || relevanceSignal) {
     scale = 0.98;
-    opacity = 0.84;
+    opacity = 0.88;
     tier = 'branch';
   } else if (hasContextSignal) {
-    scale = info.ageMismatch ? 0.8 : 0.86;
-    opacity = info.ageMismatch ? 0.42 : 0.55;
+    scale = info.ageMismatch ? 0.9 : 0.94;
+    opacity = info.ageMismatch ? 0.56 : 0.72;
     tier = 'muted';
   }
 

@@ -36,58 +36,87 @@ export const ParamedicCategoriesData = [
           type: "topic"
         }]
       },{
-        id: slugify("Adult Circulation-Cardiology"), title: "Circulation/Cardiology", 
-        type: "category", children: [{ 
-          id: slugify("Adult Bradycardia"), title: "Bradycardia", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult Cardiogenic Shock (not post arrest)"), title: "Cardiogenic Shock (not post arrest)", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult LVAD pt"), title: "LVAD pt", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult Pulmonary Edema"), title: "Pulmonary Edema", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult MI or Acute Coronary Syndrome (ACS)"), title: "MI or Acute Coronary Syndrome (ACS)", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult PEA-Asystole"), title: "PEA/Asystole", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult ROSC Stabilization"), title: "ROSC Stabilization", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult VF-pVT"), title: "VF/pVT", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult Hyperkalemia"), title: "Hyperkalemia", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult SVT-Mono-VT (unstable)"), title: "SVT/Mono-VT (unstable)", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult SVT (stable)"), title: "SVT (stable)", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult A-Fib RVR or A-Flutter (stable symptomatic)"), title: "A-Fib RVR or A-Flutter (stable symptomatic)", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult Multifocal Atrial Tachycardia (MAT) (Stable Symptomatic)"), title: "Multifocal Atrial Tachycardia (MAT) (Stable Symptomatic)", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult Mono-VT (stable)"), title: "Mono-VT (stable)", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult Poly-VT-Torsades (stable)"), title: "Poly-VT/Torsades (stable)", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult Poly-VT-Torsades (unstable)"), title: "Poly-VT/Torsades (unstable)", 
-          type: "topic" 
-        },]
-      },{ 
-        id: slugify("Adult Medical Emergencies"), title: "Medical Emergencies", 
+        id: slugify("Adult Circulation-Cardiology"), title: "Circulation/Cardiology",
+        type: "category", children: [{
+          id: slugify("Adult Cardiogenic Shock (not post arrest)"), title: "Cardiogenic Shock (not post arrest)",
+          navTitle: "Cardiogenic Shock",
+          type: "topic"
+        },{
+          id: slugify("Adult LVAD pt"), title: "LVAD pt",
+          type: "topic"
+        },{
+          id: slugify("Adult Pulmonary Edema"), title: "Pulmonary Edema",
+          type: "topic"
+        },{
+          id: slugify("Adult MI or Acute Coronary Syndrome (ACS)"), title: "MI or Acute Coronary Syndrome (ACS)",
+          navTitle: "MI / ACS",
+          type: "topic"
+        },{
+          id: slugify("Adult ROSC Stabilization"), title: "ROSC Stabilization",
+          type: "topic"
+        },{
+          id: slugify("Adult VF-pVT"), title: "VF/pVT",
+          type: "topic"
+        },{
+          id: slugify("Adult Hyperkalemia"), title: "Hyperkalemia",
+          type: "topic"
+        },{
+          id: slugify("Adult Abnormal Rhythms"), title: "Abnormal Rhythms",
+          type: "category", children: [{
+            id: slugify("Adult Bradycardia"), title: "Bradycardia",
+            type: "topic"
+          },{
+            id: slugify("Adult PEA-Asystole"), title: "PEA/Asystole",
+            navTitle: "PEA / Asystole",
+            type: "topic"
+          },{
+            id: slugify("Adult SVT Rhythm"), title: "SVT",
+            type: "category", children: [{
+              id: slugify("Adult SVT (stable)"), title: "SVT (stable)",
+              navTitle: "Stable",
+              type: "topic"
+            },{
+              id: slugify("Adult SVT (unstable)"), title: "SVT (unstable)",
+              navTitle: "Unstable",
+              type: "topic",
+              details: { mdPath: "Content/Adult Protocols/adult-svt-mono-vt-unstable.md" }
+            }]
+          },{
+            id: slugify("Adult A-Fib RVR or A-Flutter (stable symptomatic)"), title: "A-Fib RVR or A-Flutter (stable symptomatic)",
+            navTitle: "A-Fib / A-Flutter",
+            type: "topic"
+          },{
+            id: slugify("Adult Multifocal Atrial Tachycardia (MAT) (Stable Symptomatic)"), title: "Multifocal Atrial Tachycardia (MAT) (Stable Symptomatic)",
+            navTitle: "MAT",
+            type: "topic"
+          },{
+            id: slugify("Adult Mono-VT Rhythm"), title: "Mono-VT",
+            type: "category", children: [{
+              id: slugify("Adult Mono-VT (stable)"), title: "Mono-VT (stable)",
+              navTitle: "Stable",
+              type: "topic"
+            },{
+              id: slugify("Adult Mono-VT (unstable)"), title: "Mono-VT (unstable)",
+              navTitle: "Unstable",
+              type: "topic",
+              details: { mdPath: "Content/Adult Protocols/adult-svt-mono-vt-unstable.md" }
+            }]
+          },{
+            id: slugify("Adult Poly-VT Torsades Rhythm"), title: "Poly-VT / Torsades",
+            type: "category", children: [{
+              id: slugify("Adult Poly-VT-Torsades (stable)"), title: "Poly-VT/Torsades (stable)",
+              navTitle: "Stable",
+              type: "topic"
+            },{
+              id: slugify("Adult Poly-VT-Torsades (unstable)"), title: "Poly-VT/Torsades (unstable)",
+              navTitle: "Unstable",
+              type: "topic"
+            }]
+          }]
+        }]
+      },{
+        id: slugify("Adult Medical Emergencies"), title: "Medical Emergencies",
+        navTitle: "Medical",
         type: "category", children: [{ 
           id: slugify("Adult Allergic Reaction"), title: "Allergic Reaction", 
           type: "topic" 

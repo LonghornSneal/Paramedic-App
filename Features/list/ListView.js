@@ -39,22 +39,29 @@ const OVERLAY_DEFAULTS = {
 };
 const COLUMN_BASELINE_PROFILES = {
     1: [
-        { size: 220, shift: 0, spacing: 530 }
+        { size: 100, shift: 0, spacing: 100 }
     ],
     2: [
-        { size: 160, shift: 60, spacing: 295 },
-        { size: 220, shift: 0, spacing: 530 }
+        { size: 100, shift: 0, spacing: 100 },
+        { size: 100, shift: 0, spacing: 100 }
     ],
     3: [
-        { size: 160, shift: -12, spacing: 290 },
-        { size: 160, shift: -36, spacing: 295 },
-        { size: 220, shift: 24, spacing: 400 }
+        { size: 100, shift: 0, spacing: 100 },
+        { size: 100, shift: 0, spacing: 100 },
+        { size: 100, shift: 0, spacing: 100 }
     ],
     4: [
-        { size: 125, shift: -60, spacing: 1 },
-        { size: 115, shift: -24, spacing: 270 },
-        { size: 120, shift: 0, spacing: 80 },
-        { size: 220, shift: -12, spacing: 400 }
+        { size: 100, shift: 0, spacing: 100 },
+        { size: 100, shift: 0, spacing: 100 },
+        { size: 100, shift: 0, spacing: 100 },
+        { size: 100, shift: 0, spacing: 100 }
+    ],
+    5: [
+        { size: 100, shift: 0, spacing: 100 },
+        { size: 100, shift: 0, spacing: 100 },
+        { size: 100, shift: 0, spacing: 100 },
+        { size: 100, shift: 0, spacing: 100 },
+        { size: 100, shift: 0, spacing: 100 }
     ]
 };
 
@@ -128,10 +135,12 @@ function applyExplicitNavigationState(highlightId = null, categoryPath = []) {
             }
         });
         window.activeCategoryPath = [...categoryPath];
+    } else {
+        window.activeCategoryPath = [];
     }
     if (highlightId) {
         window.activeTopicId = highlightId;
-    } else if (hasExplicitPath) {
+    } else {
         window.activeTopicId = null;
     }
 }
@@ -152,8 +161,7 @@ function scheduleTreeMetricsPass(rootContainer) {
     if (!rootContainer) return;
     requestAnimationFrame(() => {
         updateCategoryTreeMetrics(rootContainer);
-        window.setTimeout(() => updateCategoryTreeMetrics(rootContainer), 120);
-        window.setTimeout(() => updateCategoryTreeMetrics(rootContainer), 320);
+        window.setTimeout(() => updateCategoryTreeMetrics(rootContainer), 180);
     });
 }
 // Renders the main category list view (home screen) and highlights a topic if provided.
@@ -204,22 +212,43 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
 }
 
 function getEffectiveCategoryExpanded(item, spiderwebContext) {
+    if (spiderwebContext?.hasSearch) {
+        return Boolean(
+            spiderwebContext?.autoExpandedIds?.has(item?.id)
+            || spiderwebContext?.activePathIds?.includes(item?.id)
+        );
+    }
     return Boolean(item?.expanded || spiderwebContext?.autoExpandedIds?.has(item?.id));
+}
+
+function getItemNavLabel(item) {
+    return item?.navTitle || item?.title || item?.id || '';
 }
 
 function applySpiderwebPresentation(pill, group, presentation) {
     if (!pill) return;
     const scale = presentation?.scale ?? 1;
     const opacity = presentation?.opacity ?? 1;
+    const tier = presentation?.tier || 'default';
+    const borderScale = tier === 'focus' || tier === 'active'
+        ? 1
+        : tier === 'match'
+            ? 0.88
+            : tier === 'branch'
+                ? 0.72
+                : tier === 'muted'
+                    ? 0.56
+                    : Math.max(0.7, Math.min(1, scale));
     pill.style.setProperty('--node-scale', `${scale}`);
+    pill.style.setProperty('--node-border-scale', `${borderScale}`);
     pill.style.setProperty('--node-opacity', `${opacity}`);
-    pill.dataset.emphasis = presentation?.tier || 'default';
+    pill.dataset.emphasis = tier;
     pill.classList.toggle('is-context-match', Boolean(presentation?.isRelevant || presentation?.isSearchHit));
     pill.classList.toggle('is-context-branch', Boolean(presentation?.isRelevantBranch || presentation?.isSearchBranch));
     pill.classList.toggle('is-age-mismatch', Boolean(presentation?.isAgeMismatch));
     if (!group) return;
-    group.dataset.tier = presentation?.tier || 'default';
-    group.classList.toggle('is-context-muted', presentation?.tier === 'muted');
+    group.dataset.tier = tier;
+    group.classList.toggle('is-context-muted', tier === 'muted');
     group.classList.toggle('is-context-match', Boolean(presentation?.isRelevant || presentation?.isSearchHit));
     group.classList.toggle('is-context-branch', Boolean(presentation?.isRelevantBranch || presentation?.isSearchBranch));
     group.classList.toggle('is-age-mismatch', Boolean(presentation?.isAgeMismatch));
@@ -265,7 +294,10 @@ function createHierarchicalList(items, container, level = 0, path = []) {
             card.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
             const label = document.createElement('span');
             label.className = 'category-card-title';
-            label.textContent = item.title;
+            label.textContent = getItemNavLabel(item);
+            if (item.navTitle && item.title) {
+                card.title = item.title;
+            }
             if (item.title === 'Quick Vent Guide') {
                 label.classList.add('quick-vent-title');
             }
@@ -311,11 +343,14 @@ function createHierarchicalList(items, container, level = 0, path = []) {
             group.dataset.topicId = item.id;
             const topicLink = document.createElement('a');
             topicLink.className = 'topic-link-item';
-            topicLink.textContent = item.title;
+            topicLink.textContent = getItemNavLabel(item);
             topicLink.href = `#${item.id}`;
             topicLink.dataset.topicId = item.id;
             topicLink.setAttribute('role', 'button');
             topicLink.setAttribute('tabindex', '0');
+            if (item.navTitle && item.title) {
+                topicLink.title = item.title;
+            }
             prepareCategoryPill(topicLink, item.id);
             addTapListener(topicLink, e => { 
                 if (shouldSuppressCategoryClick(item.id)) return;
@@ -1721,26 +1756,6 @@ function buildActiveSegmentKeys(steps) {
 
 function buildBaseSegments(rootTree, nodeMap, columnInfo, activeSegmentKeys) {
     const segments = [];
-    const rootGroups = Array.from(rootTree.children).filter(child => child.classList.contains('category-group'));
-    const rootRects = rootGroups.map(group => {
-        const card = group.querySelector(':scope > .category-card');
-        if (!card) return null;
-        const id = card.dataset.categoryId;
-        return nodeMap.get(id) || null;
-    }).filter(Boolean);
-    if (rootRects.length) {
-        const rootTrunkX = rootRects.reduce((sum, rect) => sum + rect.centerX, 0) / rootRects.length;
-        const trunkStart = Math.min(...rootRects.map(rect => rect.centerY));
-        const trunkStop = Math.max(...rootRects.map(rect => rect.centerY));
-        segments.push({
-            key: `root-trunk:${buildSegmentKey({ orientation: 'vertical', x1: rootTrunkX, y1: trunkStart, x2: rootTrunkX, y2: trunkStop })}`,
-            orientation: 'vertical',
-            x1: rootTrunkX,
-            y1: trunkStart,
-            x2: rootTrunkX,
-            y2: trunkStop
-        });
-    }
     columnInfo.forEach((column, parentId) => {
         const parentRect = nodeMap.get(parentId);
         if (!parentRect) return;
@@ -2049,7 +2064,6 @@ function centerCategoryTreeColumns(metricsRoot, rootTree, contentRect) {
     const state = getCategoryTreeState();
     if (state.manualColumnShift) return;
     const hasActivePath = getActivePathIds().length > 0;
-    const hasSearch = Boolean(window.spiderwebContext?.hasSearch);
     const levels = getCategoryTreeLevels(metricsRoot);
     const visibleDepth = Math.max(0, levels.length - 1);
     const candidateTrees = Array.from(metricsRoot.querySelectorAll('.category-children'))
@@ -2073,7 +2087,9 @@ function centerCategoryTreeColumns(metricsRoot, rootTree, contentRect) {
     if (!hasActivePath) {
         delta = (contentRect.left + margin) - bounds.left;
     } else {
-        const focusRatio = Math.min(0.78, 0.24 + (visibleDepth * 0.16));
+        const focusRatio = contentRect.width <= 600
+            ? Math.min(0.42, 0.28 + (visibleDepth * 0.035))
+            : Math.min(0.76, 0.28 + (visibleDepth * 0.12));
         const targetCenterX = contentRect.left + (contentRect.width * focusRatio);
         delta = targetCenterX - (activeBounds.left + (activeBounds.width / 2));
     }
@@ -2097,7 +2113,13 @@ function updateCategoryTreeMetrics(container) {
     const state = getCategoryTreeState();
     const levels = getCategoryTreeLevels(metricsRoot);
     ensureColumnBaselines(levels);
-    const layoutKey = `${getActivePathIds().join('|')}|${levels.join(',')}`;
+    const searchKey = window.spiderwebContext?.searchTerm || '';
+    const expandedKey = Array.from(metricsRoot.querySelectorAll('.category-group.is-expanded'))
+        .map(group => group.dataset.categoryId)
+        .filter(Boolean)
+        .join('|');
+    const visibleCount = metricsRoot.querySelectorAll('.category-group').length;
+    const layoutKey = `${getActivePathIds().join('|')}|${levels.join(',')}|${searchKey}|${expandedKey}|${visibleCount}`;
     if (layoutKey !== state.layoutKey || state.layoutDirty) {
         state.layoutKey = layoutKey;
         state.fitScalePass = 0;
@@ -2145,23 +2167,17 @@ function updateCategoryTreeMetrics(container) {
         }
         return total;
     };
-    const baseShift = contentRect ? Math.min(84, Math.max(32, contentRect.width * 0.045)) : 52;
-    const baseRaise = contentRect ? Math.min(26, Math.max(8, contentRect.height * 0.016)) : 18;
-    const minShift = contentRect ? Math.max(8, contentRect.width * 0.012) : 8;
-    const minRaise = contentRect ? Math.max(3, contentRect.height * 0.008) : 3;
+    const baseShift = contentRect ? Math.min(48, Math.max(18, contentRect.width * 0.026)) : 28;
+    const minShift = contentRect ? Math.max(6, contentRect.width * 0.01) : 6;
     const shiftForSteps = steps => stepSum(steps, baseShift, 0.6, minShift);
-    const raiseForSteps = steps => stepSum(steps, baseRaise, 0.65, minRaise);
     const scaleForSteps = steps => {
-        const minScale = 0.5;
-        const decay = 0.6;
+        const minScale = 0.82;
+        const decay = 0.74;
         return minScale + ((1 - minScale) * Math.pow(decay, steps));
     };
-    const desiredShift = level => (hasActiveDepth ? -shiftForSteps(Math.max(0, activeDepth - level)) : 0);
-    const desiredBaseRaise = level => {
-        const steps = Math.max(0, activeDepth - level);
-        return hasActiveDepth ? -raiseForSteps(steps) : 0;
-    };
-    const desiredRaise = level => desiredBaseRaise(level);
+    const desiredShift = level => (level === 0 && hasActiveDepth ? -shiftForSteps(activeDepth) : 0);
+    const desiredBaseRaise = () => 0;
+    const desiredRaise = () => 0;
     const desiredScale = level => (hasActiveDepth ? scaleForSteps(Math.max(0, activeDepth - level)) : 1);
     const flowDirection = 'reverse';
     const currentRootShiftValue = rootTree ? getComputedStyle(rootTree).getPropertyValue('--tree-shift') : '';
@@ -2173,6 +2189,7 @@ function updateCategoryTreeMetrics(container) {
         rootTree.style.setProperty('--tree-raise', `${rootRaiseOverride}px`);
         rootTree.style.setProperty('--tree-scale', `${desiredScale(0) * fitScale}`);
         rootTree.style.setProperty('--connector-flow-direction', flowDirection);
+        contentArea?.style.setProperty('--line-thickness', `${Math.max(1.15, Math.min(3.2, 3.2 * fitScale))}px`);
     }
     const trees = [];
     if (metricsRoot.classList.contains('category-tree')) {
@@ -2185,14 +2202,12 @@ function updateCategoryTreeMetrics(container) {
         const columnShift = getColumnShiftForLevel(level);
         const columnRaise = getColumnRaiseForLevel(level);
         const rowGapScale = getRowGapScaleForLevel(level);
-        const parentTree = tree.parentElement ? tree.parentElement.closest('.category-tree') : null;
-        const parentLevel = parentTree ? Number(parentTree.dataset.level || 0) : null;
         const shift = level === 0
             ? rootShiftOverride
-            : desiredShift(level) - desiredShift(parentLevel);
+            : columnShift;
         const raise = level === 0
             ? rootRaiseOverride
-            : desiredBaseRaise(level) - desiredBaseRaise(parentLevel) + columnRaise;
+            : columnRaise;
         tree.style.setProperty('--tree-shift', `${shift}px`);
         tree.style.setProperty('--tree-raise', `${raise}px`);
         tree.style.setProperty('--tree-scale', `${desiredScale(level) * fitScale}`);

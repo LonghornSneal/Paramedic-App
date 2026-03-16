@@ -141,7 +141,7 @@ body.dark-mode .snapshot-card {
 /* Hierarchical List (Categories/Topics) */
 
 .category-tree {
-  --tree-row-gap: 0.14rem;
+  --tree-row-gap: 0.08rem;
   --tree-shift-base: 2.2rem;
   --tree-shift-step: 0.32rem;
   --tree-shift-min: 0.6rem;
@@ -156,7 +156,7 @@ body.dark-mode .snapshot-card {
   --tree-column-width: 0px;
   --connector-flow-direction: reverse;
   --connector-shimmer-speed: 5s;
-  --root-trunk-gap: 0.375rem;
+  --root-trunk-gap: 0.22rem;
   --root-trunk-color: rgba(37, 99, 235, 0.35);
   --root-trunk-width: 1px;
   --root-trunk-x: 50%;
@@ -167,7 +167,7 @@ body.dark-mode .snapshot-card {
   gap: calc(var(--tree-row-gap) * var(--tree-scale, 1) * var(--row-gap-scale, 1));
   position: relative;
   width: 100%;
-  transition: transform 0.32s ease;
+  transition: transform 0.24s ease;
   transform: translate(calc(var(--tree-shift) + var(--column-shift)), var(--tree-raise));
   transform-origin: left top;
 
@@ -175,7 +175,7 @@ body.dark-mode .snapshot-card {
 
 .category-tree[data-level="0"] {
   align-items: flex-start;
-  padding-left: clamp(1rem, 2.8vw, 2.25rem);
+  padding-left: clamp(0.5rem, 1.6vw, 1rem);
 
 }
 
@@ -422,11 +422,11 @@ body.dark-mode .snapshot-card {
 }
 
 .category-group {
-  --connector-step: calc(0.16rem * var(--tree-scale, 1));
-  --connector-branch: calc(0.12rem * var(--tree-scale, 1));
-  --connector-rise: calc(0.4rem * var(--tree-scale, 1));
-  --connector-thickness: 2px;
-  --connector-thickness-active: 4px;
+  --connector-step: calc(0.08rem * var(--tree-scale, 1));
+  --connector-branch: calc(0.06rem * var(--tree-scale, 1));
+  --connector-rise: calc(0.18rem * var(--tree-scale, 1));
+  --connector-thickness: max(1px, calc(var(--line-thickness) * 0.5));
+  --connector-thickness-active: max(1.5px, calc(var(--line-thickness) * 0.8));
   --connector-color: rgba(37, 99, 235, 0.35);
   --connector-active-color: rgba(59, 130, 246, 0.9);
   --connector-glow: 0 0 0 transparent;
@@ -518,14 +518,14 @@ body.dark-mode .snapshot-card {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 0.75rem;
-  padding: 0.05rem 0;
+  gap: 0;
+  padding: 0;
   border: none;
   background: transparent;
   color: #1d4ed8;
   cursor: pointer;
   position: relative;
-  transition: transform 0.22s ease;
+  transition: transform 0.18s ease;
 
 }
 
@@ -539,7 +539,7 @@ body.dark-mode .snapshot-card {
   opacity: var(--node-opacity, 1);
   transform: translateY(var(--node-lift, 0px));
   transform-origin: left center;
-  transition: transform 0.24s ease, opacity 0.24s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .category-card.is-dragging,
@@ -568,22 +568,24 @@ body.dark-mode .snapshot-card {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: calc(0.08rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1)) calc(0.3rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1));
+  padding: calc(0.12rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1)) calc(0.34rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1));
   border-radius: 999px;
-  border: var(--line-thickness) solid var(--line-color);
+  border-style: solid;
+  border-color: var(--line-color);
+  border-width: clamp(1px, calc(var(--line-thickness) * var(--node-border-scale, 1)), 4px);
   background: linear-gradient(180deg, #dbeafe 0%, #fff 70%);
   color: #1d4ed8;
   font-weight: 600;
-  font-size: calc(0.52rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1));
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-size: max(0.72rem, calc(0.64rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1)));
+  letter-spacing: 0.01em;
   position: relative;
   overflow: hidden;
-  max-width: calc(7rem * var(--pill-scale, 1) * var(--node-scale, 1));
+  width: fit-content;
+  max-width: none;
   text-align: center;
-  white-space: normal;
-  line-height: 1.2;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+  line-height: 1.05;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
 
 }
 
@@ -650,9 +652,9 @@ body.dark-mode .snapshot-card {
   position: absolute;
   left: calc(var(--parent-column-width) + var(--connector-step) - (var(--connector-thickness) / 2));
   top: calc(var(--child-column-top, calc(50% + var(--connector-rise))) - var(--tree-raise));
-  padding-left: var(--connector-branch);
-  min-width: clamp(calc(5.2rem * var(--tree-scale, 1)), calc(16vw * var(--tree-scale, 1)), calc(12rem * var(--tree-scale, 1)));
-  max-width: min(calc(32vw * var(--tree-scale, 1)), calc(13rem * var(--tree-scale, 1)));
+  padding-left: calc(var(--connector-branch) * 0.5);
+  min-width: 0;
+  max-width: none;
 
 }
 
@@ -766,17 +768,20 @@ body.dark-mode .snapshot-card {
 .topic-link-item {
   display: inline-block;
   width: fit-content;
-  max-width: min(calc(36vw * var(--pill-scale, 1) * var(--node-scale, 1)), calc(13rem * var(--pill-scale, 1) * var(--node-scale, 1)));
-  padding: calc(0.24rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1)) calc(0.36rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1));
+  max-width: none;
+  padding: calc(0.18rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1)) calc(0.34rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1));
   border-radius: calc(0.65rem * var(--pill-scale, 1) * var(--node-scale, 1));
-  border: var(--line-thickness) solid var(--line-color);
+  border-style: solid;
+  border-color: var(--line-color);
+  border-width: clamp(1px, calc(var(--line-thickness) * var(--node-border-scale, 1)), 4px);
   background: #fff;
   color: #1f2937;
   font-weight: 500;
-  font-size: calc(0.62rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1));
-  white-space: normal;
-  box-shadow: 0 16px 40px rgb(15 23 42 / 12%);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+  font-size: max(0.74rem, calc(0.68rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1)));
+  white-space: nowrap;
+  line-height: 1.08;
+  box-shadow: 0 10px 24px rgb(15 23 42 / 10%);
+  transition: box-shadow 0.18s ease, border-color 0.18s ease, transform 0.18s ease, opacity 0.18s ease;
 
 }
 
@@ -800,7 +805,7 @@ body.dark-mode .snapshot-card {
 
 .topic-link-item:hover {
   border-color: #bfdbfe;
-  box-shadow: 0 20px 48px rgb(15 23 42 / 16%);
+  box-shadow: 0 14px 30px rgb(15 23 42 / 14%);
 
 }
 
@@ -971,6 +976,22 @@ body.dark-mode .category-tree.has-active-path {
   .category-children .topic-link-item::before {
     animation: none;
     transform: translateY(-50%) scaleX(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .category-tree[data-level="0"] {
+    padding-left: 0.25rem;
+  }
+
+  .category-card-title {
+    padding: calc(0.08rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1)) calc(0.24rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1));
+    font-size: max(0.58rem, calc(0.54rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1)));
+  }
+
+  .topic-link-item {
+    padding: calc(0.12rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1)) calc(0.24rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1));
+    font-size: max(0.62rem, calc(0.58rem * var(--tree-scale, 1) * var(--pill-scale, 1) * var(--node-scale, 1)));
   }
 }
 
