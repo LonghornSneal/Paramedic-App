@@ -27,6 +27,12 @@ async function gotoApp(page, viewport = { width: 1440, height: 1024 }) {
   await page.waitForTimeout(900);
 }
 
+async function commitHeaderSearch(page, value) {
+  await page.fill('#searchInput', value);
+  await page.keyboard.press('Enter');
+  await page.waitForTimeout(900);
+}
+
 async function openAdultCardiologyRhythms(page) {
   await page.getByRole('button', { name: 'ADULT PROTOCOLS' }).click();
   await page.waitForTimeout(280);
@@ -105,8 +111,7 @@ test('2. home pills stay compact and single-line', async ({ page }) => {
 
 test('3. search keeps the spiderweb visible and exposes the SVT branch', async ({ page }) => {
   await gotoApp(page);
-  await page.fill('#searchInput', 'svt');
-  await page.waitForTimeout(1200);
+  await commitHeaderSearch(page, 'svt');
   await expect(page.locator('.category-tree[data-level="0"]')).toBeVisible();
   await expect(page.getByRole('button', { name: 'SVT' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Stable', exact: true })).toBeVisible();
@@ -115,8 +120,7 @@ test('3. search keeps the spiderweb visible and exposes the SVT branch', async (
 
 test('4. desktop search layout stays within the content area', async ({ page }) => {
   await gotoApp(page);
-  await page.fill('#searchInput', 'svt');
-  await page.waitForTimeout(1200);
+  await commitHeaderSearch(page, 'svt');
   const metrics = await page.evaluate(() => {
     const content = document.getElementById('content-area').getBoundingClientRect();
     const nodes = Array.from(document.querySelectorAll('.category-card, .topic-link-item'))
@@ -279,8 +283,7 @@ test('13. pediatric context plus search still favors pediatric over adult withou
   await page.fill('#pt-indications', 'seizure');
   await page.keyboard.press('Tab');
   await page.waitForTimeout(600);
-  await page.fill('#searchInput', 'pediatric');
-  await page.waitForTimeout(900);
+  await commitHeaderSearch(page, 'pediatric');
   const result = await page.evaluate(() => {
     const visible = Array.from(document.querySelectorAll('.category-card, .topic-link-item')).filter(el => el.offsetParent);
     const pediatric = Array.from(visible).find(el => el.textContent.trim() === 'Pediatric Protocols');

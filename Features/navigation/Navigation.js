@@ -40,7 +40,11 @@ export function navigateViaHistory(direction) {
     const state = navigationHistory[currentHistoryIndex];
     if (state.viewType === 'list') {
         // If going back from a detail view, highlight that topic in list
-        if (direction === -1 && navigationHistory[currentHistoryIndex+1]?.viewType === 'detail') {
+        if (
+            direction === -1
+            && navigationHistory[currentHistoryIndex + 1]?.viewType === 'detail'
+            && !state.contentId
+        ) {
             const prevTopicId = navigationHistory[currentHistoryIndex+1].contentId;
             const prevCatPath = window.allDisplayableTopicsMap?.[prevTopicId]?.categoryPath || [];
             window.searchInput.value = '';  // clear search

@@ -148,7 +148,7 @@ function applyExplicitNavigationState(highlightId = null, categoryPath = []) {
 function buildCurrentSpiderwebContext() {
     const context = buildSpiderwebContext(window.paramedicCategories, {
         patientData: window.patientData || {},
-        searchTerm: window.searchInput?.value || '',
+        searchTerm: window.committedSearchTerm || '',
         activeCategoryPath: window.activeCategoryPath || [],
         activeTopicId: window.activeTopicId || null,
         pediatricAgeThreshold: Number(window.PEDIATRIC_AGE_THRESHOLD) || 18

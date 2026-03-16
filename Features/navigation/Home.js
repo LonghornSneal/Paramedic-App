@@ -22,6 +22,8 @@ function collapseAllCategories() {
 function handleHomeClick() {
     // Clear any search query and collapse all categories to default state
     window.searchInput.value = '';
+    window.setCommittedSearchTerm?.('');
+    window.hideSearchSuggestions?.();
     collapseAllCategories();
     // Render the main category list view anew and add a new history entry for this "Home" navigation
     renderInitialView(true);

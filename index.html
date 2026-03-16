@@ -380,8 +380,24 @@
             </div>
             <div class="flex-grow text-center">
                 <h1 class="text-lg sm:text-xl md:text-2xl font-semibold">Paramedic Quick Reference</h1>
-                <div class="mt-2">
-                    <input type="search" id="searchInput" placeholder="Search topics or medications..." class="w-full p-sm-3 rounded-lg border-2 border-blue-400 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300" aria-label="Search Treatment Information" >
+                <div class="mt-2 search-shell" id="search-shell">
+                    <input type="search" id="searchInput" placeholder="Search topics or medications..." class="w-full p-sm-3 rounded-lg border-2 border-blue-400 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-300" aria-label="Search Treatment Information" aria-autocomplete="list" aria-expanded="false" aria-controls="search-suggestion-panel" autocomplete="off">
+                    <div id="search-suggestion-panel" class="search-suggestion-panel hidden" hidden>
+                        <section class="search-suggestion-column" data-search-group="filtered" aria-label="Filtered topics">
+                            <div class="search-suggestion-column-header">
+                                <span>Filtered Topics</span>
+                                <span class="search-suggestion-count" id="search-filtered-count">0</span>
+                            </div>
+                            <div class="search-suggestion-list" id="search-filtered-list"></div>
+                        </section>
+                        <section class="search-suggestion-column" data-search-group="smart" aria-label="Smart suggestions">
+                            <div class="search-suggestion-column-header">
+                                <span>Smart Suggestions</span>
+                                <span class="search-suggestion-count" id="search-smart-count">0</span>
+                            </div>
+                            <div class="search-suggestion-list" id="search-smart-list"></div>
+                        </section>
+                    </div>
                 </div>
                 <!-- Compact Patient Snapshot Bar below search -->
                 <div id="patient-snapshot-bar" class="mt-2 text-sm text-yellow-400"></div>

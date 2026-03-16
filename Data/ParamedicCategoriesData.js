@@ -3,12 +3,12 @@ import { slugify } from '../Utils/slugify.js';
 export const ParamedicCategoriesData = [
   {id: slugify("Adult Protocols"), title: "Adult Protocols", 
       type: "category", children: [{
-        id: slugify("Adult Airway & Breathing"), title: "Airway & Breathing",
+        id: slugify("Adult Airway & Breathing"), title: "Airway/Breathing",
         type: "category", children: [{
           id: slugify("Adult COMA/OD"), title: "COMA/OD",
           type: "topic"
         },{
-          id: slugify("Adult CPAP or BiPAP"), title: "CPAP or BiPAP",
+          id: slugify("Adult CPAP or BiPAP"), title: "CPAP/BiPAP",
           type: "topic"
         },{
           id: slugify("Adult SAI"), title: "SAI",
@@ -20,10 +20,10 @@ export const ParamedicCategoriesData = [
           id: slugify("Adult ET Intubation"), title: "ET Intubation",
           type: "topic"
         },{
-          id: slugify("Adult VENTILATOR Pt; Intubated & Sedated"), title: "VENTILATOR Pt; Intubated & Sedated",
+          id: slugify("Adult VENTILATOR Pt; Intubated & Sedated"), title: "Vent pt, Tubed & Sedated",
           type: "topic"
         },{
-          id: slugify("Adult TRACHEOSTOMY CARE"), title: "TRACHEOSTOMY CARE",
+          id: slugify("Adult TRACHEOSTOMY CARE"), title: "Trach Care",
           type: "topic"
         },{
           id: slugify("Adult Cricothyrotomy"), title: "Cricothyrotomy",
@@ -32,7 +32,7 @@ export const ParamedicCategoriesData = [
           id: slugify("Adult Tension Pneumo"), title: "Tension Pneumo",
           type: "topic"
         },{
-          id: slugify("Adult SGA -> Cardiac Arrest = Use 1st"), title: "SGA -> Cardiac Arrest = Use 1st",
+          id: slugify("Adult SGA -> Cardiac Arrest = Use 1st"), title: "SGA -> Cardiac Arrest = Use 1s",
           type: "topic"
         }]
       },{
@@ -224,7 +224,7 @@ export const ParamedicCategoriesData = [
     },
   {id: slugify("Pediatric Protocols"), title: "Pediatric Protocols", 
       type: "category", children: [{ 
-        id: slugify("Pediatric Initial Assessment & VS"), title: "Pediatric Initial Assessment & VS",
+        id: slugify("Pediatric Initial Assessment & VS"), title: "Initial Assessment/VS",
         type: "category", children: [{
           id: slugify("Pediatric Initial Assessment"), title: "Pediatric Initial Assessment",
           type: "topic"
@@ -233,7 +233,7 @@ export const ParamedicCategoriesData = [
           type: "topic"
         }]
       },{ 
-        id: slugify("Pediatric Airway & Breathing"), title: "Airway & Breathing",
+        id: slugify("Pediatric Airway & Breathing"), title: "Airway/Breathing",
         type: "category", children: [{
           id: slugify("Pediatric Airway"), title: "Airway",
           type: "category", children: [{
@@ -338,7 +338,7 @@ export const ParamedicCategoriesData = [
         id: slugify("Pediatric Trauma"), title: "Trauma",
         type: "topic"
       },{ 
-        id: slugify("Pediatric Special Needs Children"), title: "Special Needs Children",
+        id: slugify("Pediatric Special Needs Children"), title: "Special Needs",
         type: "category", children: [{
           id: slugify("Pediatric Central IV Catheters"), title: "Central IV Catheters",
           type: "topic"
@@ -458,41 +458,41 @@ export const ParamedicCategoriesData = [
       type: "category", 
       children: [
         { 
-          id: slugify("Restraint of Agitated/Combative Patients"), title: "Restraint of Agitated/Combative Patients", 
+          id: slugify("Restraint of Agitated/Combative Patients"), title: "Restraints", 
           type: "topic" 
         },{ 
-          id: slugify("Richmond Agitation Sedation Scale (RASS)"), title: "Richmond Agitation Sedation Scale (RASS)", 
+          id: slugify("Richmond Agitation Sedation Scale (RASS)"), title: "RASS", 
           type: "topic" 
         },{ 
-          id: slugify("Rule of 9’s & Rule of Palms (BSA Burn Estimation)"), title: "Rule of 9’s & Rule of Palms (BSA Burn Estimation)", 
+          id: slugify("Rule of 9’s & Rule of Palms (BSA Burn Estimation)"), title: "BSA Burn Estimation", 
           type: "topic" 
         },{ 
-          id: slugify("Smith-Modified Sgarbossa Criteria"), title: "Smith-Modified Sgarbossa Criteria", 
+          id: slugify("Smith-Modified Sgarbossa Criteria"), title: "Sgarbossa Criteria", 
           type: "topic" 
         },{ 
           id: slugify("PCR Requirements"), title: "PCR Requirements", 
           type: "topic" 
         },{ 
-          id: slugify("CPR Initiation & Termination"), title: "CPR Initiation & Termination", 
+          id: slugify("CPR Initiation & Termination"), title: "CPR Initiation/Termination", 
           type: "topic" 
         },{ 
-          id: slugify("Clinical Errors & Reporting"), title: "Clinical Errors & Reporting", 
+          id: slugify("Clinical Errors & Reporting"), title: "Errors & Reporting", 
           type: "topic" 
         },{ 
-          id: slugify("Medication Administration Cross Check (MACC)"), title: "Medication Administration Cross Check (MACC)", 
+          id: slugify("Medication Administration Cross Check (MACC)"), title: "Rx Cross Check (MACC)", 
           type: "topic",
           details: { mdPath: "Content/Administrative & Legal Essentials/medication-administration-cross-check-macc.md", collapsibleHeadings: ["BLS MACC"] } 
         },{ 
-          id: slugify("CDC Field Triage Guidelines (Trauma)"), title: "CDC Field Triage Guidelines (Trauma)", 
+          id: slugify("CDC Field Triage Guidelines (Trauma)"), title: "CDC Triage Guide", 
           type: "topic" 
         },{ 
-          id: slugify("Rehabilitation: Emergency Incidents & Municipal Partners"), title: "Rehabilitation: Emergency Incidents & Municipal Partners", 
+          id: slugify("Rehabilitation: Emergency Incidents & Municipal Partners"), title: "Incidents & Municipal Partners", 
           type: "topic" 
         }
       ]
     },
   {
-      id: slugify("Skills & Equipment"), title: "Skills & Equipment", 
+      id: slugify("Skills & Equipment"), title: "Skills/Equipment", 
       type: "category", children: [{ 
   //      @@ 'Skills & Equipment' children array
          id: slugify("ACLS"), title: "ACLS",
@@ -511,7 +511,7 @@ export const ParamedicCategoriesData = [
           { id: slugify("ACLS Glossary"), title: "Glossary", type: "topic" }
          ]
        },{ 
-         id: slugify("Ventilator Set-Up (ParaPAC Plus)"), title: "Ventilator Set-Up (ParaPAC Plus)",
+         id: slugify("Ventilator Set-Up (ParaPAC Plus)"), title: "Old Vent Info.",
          type: "topic" 
        },{ 
         id: slugify("Zoll EMV731"), title: "Zoll EMV731",
@@ -631,37 +631,37 @@ export const ParamedicCategoriesData = [
         ]
 
       },{ 
-        id: slugify("I-gel Supraglottic Airway (SGA)"), title: "I-gel Supraglottic Airway (SGA)", 
+        id: slugify("I-gel Supraglottic Airway (SGA)"), title: "I-gel (SGA)", 
         type: "topic" 
       },{ 
-        id: slugify("Thermometer (Braun ThermoScan)"), title: "Thermometer (Braun ThermoScan)", 
+        id: slugify("Thermometer (Braun ThermoScan)"), title: "Thermometer", 
         type: "topic" 
       },{ 
-        id: slugify("Glucometer (McKesson True Metrix Pro)"), title: "Glucometer (McKesson True Metrix Pro)", 
+        id: slugify("Glucometer (McKesson True Metrix Pro)"), title: "Glucometer", 
         type: "topic" 
       },{ 
-        id: slugify("Diltiazem Add-Vantage Directions"), title: "Diltiazem Add-Vantage Directions", 
+        id: slugify("Diltiazem Add-Vantage Directions"), title: "Diltiazem Directions", 
         type: "topic" 
       },{ 
-        id: slugify("EZ-IO Insertion"), title: "EZ-IO Insertion", 
+        id: slugify("EZ-IO Insertion"), title: "EZ-IO", 
         type: "topic" 
       },{ 
-        id: slugify("PUSH-DOSE EPI"), title: "PUSH-DOSE EPI", 
+        id: slugify("PUSH-DOSE EPI"), title: "Push-Dose Epi", 
         type: "topic" 
       },{ 
-        id: slugify("Mucosal Atomization Device (M.A.D.)"), title: "Mucosal Atomization Device (M.A.D.)", 
+        id: slugify("Mucosal Atomization Device (M.A.D.)"), title: "M.A.D.", 
         type: "topic" 
       },{ 
-        id: slugify("Minutes of Oxygen by Cylinder Size"), title: "Minutes of Oxygen by Cylinder Size", 
+        id: slugify("Minutes of Oxygen by Cylinder Size"), title: "O2 Tank Calculations", 
         type: "topic" 
       },{ 
-        id: slugify("Understanding Ratios, Percentages & Solution Mixtures"), title: "Understanding Ratios, Percentages & Solution Mixtures", 
+        id: slugify("Understanding Ratios, Percentages & Solution Mixtures"), title: "Ratios, %, & Mixtures", 
         type: "topic" 
       }]
     },
    {
 
-      id: slugify("Abbreviations & References"), title: "Abbreviations & References", 
+      id: slugify("Abbreviations & References"), title: "Abbreviations/References", 
 
       type: "category", 
 
@@ -780,30 +780,30 @@ export const ParamedicCategoriesData = [
     },
 
   {
-      id: slugify("Introduction & Core Principles"), title: "Introduction & Core Principles", 
+      id: slugify("Introduction & Core Principles"), title: "Intro/Core Principles", 
       type: "category", 
       children: [
         { 
-          id: slugify("Introduction to Abbott"), title: "Introduction to Abbott", 
+          id: slugify("Introduction to Abbott"), title: "Intro to Abbott", 
           type: "topic" 
         },{ 
-          id: slugify("Core Principles – Safety & Well-Being"), title: "Core Principles – Safety & Well-Being", 
+          id: slugify("Core Principles – Safety & Well-Being"), title: "Safety & Well-Being Principals", 
           type: "topic" 
         },{ 
-          id: slugify("General Important Information"), title: "General Important Information", 
+          id: slugify("General Important Information"), title: "General Important Info.", 
           type: "topic" 
         }
       ]
     },
   {
-      id: slugify("Administrative & Legal Essentials"), title: "Administrative & Legal Essentials", 
+      id: slugify("Administrative & Legal Essentials"), title: "Administrative & Legal", 
       type: "category", 
       children: [
         { 
           id: slugify("ALS Ground Rules"), title: "ALS Ground Rules", 
           type: "topic" 
         },{ 
-          id: slugify("Scope Violations & Possible Consequences"), title: "Scope Violations & Possible Consequences", 
+          id: slugify("Scope Violations & Possible Consequences"), title: "Scope Violations", 
           type: "topic" 
         },{ 
           id: slugify("Suspension/Revocation"), title: "Suspension/Revocation", 
@@ -836,33 +836,33 @@ export const ParamedicCategoriesData = [
           id: slugify("AIR AMBULANCE UTILIZATION"), title: "AIR AMBULANCE UTILIZATION", 
           type: "topic" 
         },{ 
-          id: slugify("Applicability of the COG"), title: "Applicability of the COG", 
+          id: slugify("Applicability of the COG"), title: "Utilizing the COG", 
           type: "topic",
           details: { mdPath: "Content/Administrative & Legal Essentials/applicability-of-the-cog.md" } 
         },{ 
           id: slugify("Mandatory Reporting"), title: "Mandatory Reporting", 
           type: "topic" 
         },{ 
-          id: slugify("Death Documentation; Body Temp."), title: "Death Documentation; Body Temp.", 
+          id: slugify("Death Documentation; Body Temp."), title: "Death Documentation", 
           type: "topic" 
         },{ 
           id: slugify("Crime Scene"), title: "Crime Scene", 
           type: "topic" 
         },{ 
-          id: slugify("Worker’s Compensation Process"), title: "Worker’s Compensation Process", 
+          id: slugify("Worker’s Compensation Process"), title: "Worker's Comp.", 
           type: "topic" 
         },{ 
-          id: slugify("Clinical Errors & Reporting"), title: "Clinical Errors & Reporting", 
+          id: slugify("Clinical Errors & Reporting"), title: "Errors & Reporting", 
           type: "topic" 
         },{ 
-          id: slugify("Medication Administration Cross Check (MACC)"), title: "Medication Administration Cross Check (MACC)", 
+          id: slugify("Medication Administration Cross Check (MACC)"), title: "Rx Cross Check (MACC)", 
           type: "topic",
           details: { mdPath: "Content/Administrative & Legal Essentials/medication-administration-cross-check-macc.md", collapsibleHeadings: ["BLS MACC"] } 
         },{ 
-          id: slugify("CDC Field Triage Guidelines (Trauma)"), title: "CDC Field Triage Guidelines (Trauma)", 
+          id: slugify("CDC Field Triage Guidelines (Trauma)"), title: "CDC Triage Guide", 
           type: "topic" 
         },{ 
-          id: slugify("Rehabilitation: Emergency Incidents & Municipal Partners"), title: "Rehabilitation: Emergency Incidents & Municipal Partners", 
+          id: slugify("Rehabilitation: Emergency Incidents & Municipal Partners"), title: "Incidents & Municipal Partners", 
           type: "topic" 
         }
       ]
