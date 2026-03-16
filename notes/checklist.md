@@ -1,3 +1,24 @@
+## 2026-01-21 04:01:07 Category tree transition jitter fix
+- [x] Read AGENTS.md and inspect category tree layout code
+- [x] Update list view metrics to remove multi-pass settling and sync lines during transitions
+- [x] Run `npm run test`
+- [x] Run `npm run lint` (fails: hint updateNotifier is not a function)
+- [x] Record memory-log entry
+
+## 2026-01-18 10:02:11 Overlay defaults restoration + category transition smoothing
+- [x] Restore overlay default values while keeping baseline layout via relative mapping
+- [x] Limit layout settle passes to reduce column transition jitter
+- [x] Run `npm run test`
+- [x] Record memory-log entry
+
+## 2026-01-18 09:04:06 Overlay baseline defaults + column raise control
+- [x] Set baseline column size/shift/spacing defaults per depth (1-4 columns)
+- [x] Add per-column vertical move controls and wire into tree layout
+- [x] Update header/footer room defaults and header room precision
+- [ ] Run `npm run lint` (fails: hint updateNotifier is not a function)
+- [x] Run `npm run test`
+- [x] Record memory-log entry
+
 ## 2026-01-12 11:09:11 Overlay input ranges + spacing boost
 - [x] Convert overlay value fields to editable numeric inputs (percent/px) with decimal support
 - [x] Expand overlay percent/px ranges to 1-1000% and -1000..1000

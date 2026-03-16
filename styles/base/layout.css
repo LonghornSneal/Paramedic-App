@@ -18,11 +18,11 @@ body {
 }
 
 #app-container {
-  --header-room-scale: 1;
+  --header-room-scale: 0.01;
   --header-content-scale: 1;
   --header-offset-x: 0px;
   --header-offset-y: 0px;
-  --footer-room-scale: 1;
+  --footer-room-scale: 0.5;
   --layout-chrome-height: 220px;
 }
 

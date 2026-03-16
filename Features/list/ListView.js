@@ -13,6 +13,7 @@ import { addTapListener } from '../../Utils/addTapListener.js'
 const CATEGORY_TREE_LINE_THICKNESS = 4;
 const CATEGORY_TREE_LINE_GAP = 8;
 const CATEGORY_TREE_DRAG_THRESHOLD = 4;
+const CATEGORY_TREE_TRANSITION_MS = 360;
 const ROW_GAP_PERCENT_BOOST = 2.5;
 const HEADER_ELEMENT_DEFS = [
     { key: 'search', label: 'Search Bar', selector: '#searchInput' },
@@ -26,6 +27,35 @@ const FOOTER_ELEMENT_DEFS = [
     { key: 'version', label: 'App Version', selector: '#app-version' },
     { key: 'settings', label: 'Settings Button', selector: '#settings-button' }
 ];
+const DEFAULT_HEADER_ROOM_SCALE = 0.01;
+const DEFAULT_FOOTER_ROOM_SCALE = 0.5;
+const DEFAULT_COLUMN_SETTINGS = { scale: 1, shift: 0, spacing: 100, raise: 0 };
+const OVERLAY_DEFAULTS = {
+    sizePercent: 100,
+    spacingPercent: 100,
+    shiftPx: 0,
+    raisePx: 0
+};
+const COLUMN_BASELINE_PROFILES = {
+    1: [
+        { size: 220, shift: 0, spacing: 530 }
+    ],
+    2: [
+        { size: 160, shift: 60, spacing: 295 },
+        { size: 220, shift: 0, spacing: 530 }
+    ],
+    3: [
+        { size: 160, shift: -12, spacing: 290 },
+        { size: 160, shift: -36, spacing: 295 },
+        { size: 220, shift: 24, spacing: 400 }
+    ],
+    4: [
+        { size: 125, shift: -60, spacing: 1 },
+        { size: 115, shift: -24, spacing: 270 },
+        { size: 120, shift: 0, spacing: 80 },
+        { size: 220, shift: -12, spacing: 400 }
+    ]
+};
 
 function getCategoryTreeState() {
     if (typeof window === 'undefined') return {};
@@ -42,21 +72,32 @@ function getCategoryTreeState() {
             highlightPool: [],
             animationId: null,
             lineUpdateHandle: null,
+            transitionSyncId: null,
+            transitionSyncUntil: 0,
             fitScale: 1,
             pathSteps: [],
             lineThickness: CATEGORY_TREE_LINE_THICKNESS,
             centeringTimer: null,
             pillScaleByLevel: new Map(),
             columnShiftByLevel: new Map(),
+            columnRaiseByLevel: new Map(),
             rowGapPercentByLevel: new Map(),
+            columnBaselineByLevel: new Map(),
+            baselineLevelsKey: '',
             overlayLevelsKey: '',
             overlayHidden: !overlayEnabled,
+            layoutDirty: false,
+            layoutKey: '',
+            fitScalePass: 0,
+            centeringPass: 0,
+            alignPass: 0,
+            alignTimer: null,
             manualColumnShift: false,
-            headerScale: 1,
+            headerScale: DEFAULT_HEADER_ROOM_SCALE,
             headerContentScale: 1,
             headerOffsetX: 0,
             headerOffsetY: 0,
-            footerScale: 1,
+            footerScale: DEFAULT_FOOTER_ROOM_SCALE,
             headerElementScale: new Map(),
             headerElementOffsetX: new Map(),
             headerElementOffsetY: new Map(),
@@ -412,6 +453,51 @@ function scheduleCategoryTreeLineUpdate(source) {
     });
 }
 
+function updateCategoryTreeChildColumnTops(metricsRoot, contentArea) {
+    if (!metricsRoot || !contentArea) return;
+    const childColumns = metricsRoot.querySelectorAll('.category-group > .category-children');
+    if (!childColumns.length) return;
+    const contentRect = contentArea.getBoundingClientRect();
+    childColumns.forEach(childContainer => {
+        const group = childContainer.parentElement;
+        if (!group) return;
+        const groupRect = group.getBoundingClientRect();
+        const childTop = Math.round(contentRect.top - groupRect.top);
+        group.style.setProperty('--child-column-top', `${childTop}px`);
+    });
+}
+
+function scheduleCategoryTreeTransitionSync(source) {
+    if (!source || typeof window === 'undefined') return;
+    const state = getCategoryTreeState();
+    const now = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
+    const nextUntil = now + CATEGORY_TREE_TRANSITION_MS;
+    state.transitionSyncUntil = Math.max(state.transitionSyncUntil || 0, nextUntil);
+    if (state.transitionSyncId) return;
+    const tick = () => {
+        state.transitionSyncId = null;
+        const rootTree = getCategoryTreeRoot(source) || source;
+        if (!rootTree || !rootTree.isConnected) {
+            state.transitionSyncUntil = 0;
+            return;
+        }
+        const contentArea = document.getElementById('content-area');
+        if (!contentArea) {
+            state.transitionSyncUntil = 0;
+            return;
+        }
+        updateCategoryTreeChildColumnTops(rootTree, contentArea);
+        updateCategoryTreeLines(rootTree);
+        const now = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
+        if (state.transitionSyncUntil && now < state.transitionSyncUntil) {
+            state.transitionSyncId = requestAnimationFrame(tick);
+        } else {
+            state.transitionSyncUntil = 0;
+        }
+    };
+    state.transitionSyncId = requestAnimationFrame(tick);
+}
+
 function getActivePathIds() {
     const path = Array.isArray(window.activeCategoryPath) ? [...window.activeCategoryPath] : [];
     if (window.activeTopicId) path.push(window.activeTopicId);
@@ -425,10 +511,105 @@ function getLineThickness(referenceEl) {
     return Number.isFinite(parsed) ? parsed : CATEGORY_TREE_LINE_THICKNESS;
 }
 
+function buildColumnBaselines(levels) {
+    const profile = COLUMN_BASELINE_PROFILES[levels.length] || [];
+    const baseline = new Map();
+    levels.forEach((level, index) => {
+        const entry = profile[index] || {};
+        baseline.set(level, {
+            scale: Number.isFinite(entry.size) ? entry.size / 100 : DEFAULT_COLUMN_SETTINGS.scale,
+            shift: Number.isFinite(entry.shift) ? entry.shift : DEFAULT_COLUMN_SETTINGS.shift,
+            spacing: Number.isFinite(entry.spacing) ? entry.spacing : DEFAULT_COLUMN_SETTINGS.spacing,
+            raise: Number.isFinite(entry.raise) ? entry.raise : DEFAULT_COLUMN_SETTINGS.raise
+        });
+    });
+    return baseline;
+}
+
+function ensureColumnBaselines(levels) {
+    const state = getCategoryTreeState();
+    if (!Array.isArray(levels) || !levels.length) {
+        state.columnBaselineByLevel = new Map();
+        state.baselineLevelsKey = '';
+        updateManualColumnShiftFlag(state);
+        return;
+    }
+    const levelsKey = levels.join(',');
+    if (levelsKey === state.baselineLevelsKey && state.columnBaselineByLevel?.size) return;
+    state.columnBaselineByLevel = buildColumnBaselines(levels);
+    state.baselineLevelsKey = levelsKey;
+    updateManualColumnShiftFlag(state);
+}
+
+function getColumnBaselineForLevel(level) {
+    const state = getCategoryTreeState();
+    const baseline = state.columnBaselineByLevel?.get(level);
+    return baseline || DEFAULT_COLUMN_SETTINGS;
+}
+
+function getOverlaySizePercent(level) {
+    const state = getCategoryTreeState();
+    const stored = state.pillScaleByLevel.get(level);
+    if (!Number.isFinite(stored)) return OVERLAY_DEFAULTS.sizePercent;
+    const baseline = getColumnBaselineForLevel(level).scale || 1;
+    return (stored / baseline) * 100;
+}
+
+function getOverlayShiftPx(level) {
+    const state = getCategoryTreeState();
+    const stored = state.columnShiftByLevel.get(level);
+    if (!Number.isFinite(stored)) return OVERLAY_DEFAULTS.shiftPx;
+    return stored - getColumnBaselineForLevel(level).shift;
+}
+
+function getOverlayRaisePx(level) {
+    const state = getCategoryTreeState();
+    const stored = state.columnRaiseByLevel.get(level);
+    if (!Number.isFinite(stored)) return OVERLAY_DEFAULTS.raisePx;
+    return stored - getColumnBaselineForLevel(level).raise;
+}
+
+function getOverlaySpacingPercent(level) {
+    const state = getCategoryTreeState();
+    const stored = state.rowGapPercentByLevel.get(level);
+    if (!Number.isFinite(stored)) return OVERLAY_DEFAULTS.spacingPercent;
+    const baseline = getColumnBaselineForLevel(level).spacing || 1;
+    return (stored / baseline) * 100;
+}
+
+function markLayoutDirty() {
+    const state = getCategoryTreeState();
+    state.layoutDirty = true;
+}
+
+function applyOverlaySizePercent(level, percent) {
+    const baseline = getColumnBaselineForLevel(level).scale || 1;
+    markLayoutDirty();
+    return setPillScaleForLevel(level, baseline * (percent / 100));
+}
+
+function applyOverlayShiftPx(level, shift) {
+    const baseline = getColumnBaselineForLevel(level).shift || 0;
+    markLayoutDirty();
+    return setColumnShiftForLevel(level, baseline + shift);
+}
+
+function applyOverlayRaisePx(level, raise) {
+    const baseline = getColumnBaselineForLevel(level).raise || 0;
+    markLayoutDirty();
+    return setColumnRaiseForLevel(level, baseline + raise);
+}
+
+function applyOverlaySpacingPercent(level, percent) {
+    const baseline = getColumnBaselineForLevel(level).spacing || 1;
+    markLayoutDirty();
+    return setRowGapPercentForLevel(level, baseline * (percent / 100));
+}
+
 function getPillScaleForLevel(level) {
     const state = getCategoryTreeState();
     const stored = state.pillScaleByLevel.get(level);
-    return Number.isFinite(stored) ? stored : 1;
+    return Number.isFinite(stored) ? stored : getColumnBaselineForLevel(level).scale;
 }
 
 function setPillScaleForLevel(level, scale) {
@@ -441,12 +622,24 @@ function setPillScaleForLevel(level, scale) {
 function getColumnShiftForLevel(level) {
     const state = getCategoryTreeState();
     const stored = state.columnShiftByLevel.get(level);
-    return Number.isFinite(stored) ? stored : 0;
+    return Number.isFinite(stored) ? stored : getColumnBaselineForLevel(level).shift;
 }
 
 function updateManualColumnShiftFlag(state) {
-    state.manualColumnShift = Array.from(state.columnShiftByLevel.values())
-        .some(value => Number.isFinite(value) && Math.abs(value) > 0.5);
+    if (!state.columnBaselineByLevel || !state.columnBaselineByLevel.size) {
+        state.manualColumnShift = Array.from(state.columnShiftByLevel.values())
+            .some(value => Number.isFinite(value) && Math.abs(value) > 0.5);
+        return;
+    }
+    let manual = false;
+    state.columnBaselineByLevel.forEach((baseline, level) => {
+        const value = state.columnShiftByLevel.get(level);
+        if (!Number.isFinite(value)) return;
+        if (Math.abs(value - baseline.shift) > 0.5) {
+            manual = true;
+        }
+    });
+    state.manualColumnShift = manual;
 }
 
 function setColumnShiftForLevel(level, shift) {
@@ -457,10 +650,23 @@ function setColumnShiftForLevel(level, shift) {
     return nextShift;
 }
 
+function getColumnRaiseForLevel(level) {
+    const state = getCategoryTreeState();
+    const stored = state.columnRaiseByLevel.get(level);
+    return Number.isFinite(stored) ? stored : getColumnBaselineForLevel(level).raise;
+}
+
+function setColumnRaiseForLevel(level, raise) {
+    const state = getCategoryTreeState();
+    const nextRaise = Math.min(1000, Math.max(-1000, raise));
+    state.columnRaiseByLevel.set(level, nextRaise);
+    return nextRaise;
+}
+
 function getRowGapPercentForLevel(level) {
     const state = getCategoryTreeState();
     const stored = state.rowGapPercentByLevel.get(level);
-    return Number.isFinite(stored) ? stored : 100;
+    return Number.isFinite(stored) ? stored : getColumnBaselineForLevel(level).spacing;
 }
 
 function setRowGapPercentForLevel(level, percent) {
@@ -479,7 +685,7 @@ function getRowGapScaleForLevel(level) {
 
 function getHeaderScale() {
     const state = getCategoryTreeState();
-    return Number.isFinite(state.headerScale) ? state.headerScale : 1;
+    return Number.isFinite(state.headerScale) ? state.headerScale : DEFAULT_HEADER_ROOM_SCALE;
 }
 
 function getHeaderContentScale() {
@@ -499,12 +705,12 @@ function getHeaderOffsetY() {
 
 function getFooterScale() {
     const state = getCategoryTreeState();
-    return Number.isFinite(state.footerScale) ? state.footerScale : 1;
+    return Number.isFinite(state.footerScale) ? state.footerScale : DEFAULT_FOOTER_ROOM_SCALE;
 }
 
 function setHeaderScale(scale) {
     const state = getCategoryTreeState();
-    const nextScale = Math.min(10, Math.max(0.01, scale));
+    const nextScale = Math.min(10, Math.max(0.001, scale));
     state.headerScale = nextScale;
     return nextScale;
 }
@@ -703,11 +909,12 @@ function updateCategorySizeOverlayValues(overlay) {
         const level = Number(row.dataset.level || 0);
         const sizeValue = row.querySelector('[data-value="size"]');
         const shiftValue = row.querySelector('[data-value="shift"]');
+        const raiseValue = row.querySelector('[data-value="raise"]');
         const spacingValue = row.querySelector('[data-value="spacing"]');
-        const scale = getPillScaleForLevel(level);
-        setOverlayValue(sizeValue, scale * 100, 2);
-        setOverlayValue(shiftValue, getColumnShiftForLevel(level), 1);
-        setOverlayValue(spacingValue, getRowGapPercentForLevel(level), 2);
+        setOverlayValue(sizeValue, getOverlaySizePercent(level), 2);
+        setOverlayValue(shiftValue, getOverlayShiftPx(level), 1);
+        setOverlayValue(raiseValue, getOverlayRaisePx(level), 1);
+        setOverlayValue(spacingValue, getOverlaySpacingPercent(level), 2);
     });
     const headerRoomValue = overlay.querySelector('[data-value="header-room-scale"]');
     setOverlayValue(headerRoomValue, getHeaderScale() * 100, 2);
@@ -833,6 +1040,40 @@ function buildCategorySizeOverlay(overlay, levels) {
         rightButton.textContent = '>';
         shiftGroup.append(shiftLabel, leftButton, shiftValue, rightButton);
 
+        const raiseGroup = document.createElement('div');
+        raiseGroup.className = 'category-size-control-group';
+        const raiseLabel = document.createElement('span');
+        raiseLabel.className = 'category-size-control-label';
+        raiseLabel.textContent = 'Move Y (px)';
+        const raiseDown = document.createElement('button');
+        raiseDown.type = 'button';
+        raiseDown.className = 'category-size-btn';
+        raiseDown.dataset.action = 'raise';
+        raiseDown.dataset.dir = 'down';
+        raiseDown.dataset.level = String(level);
+        raiseDown.setAttribute('aria-label', `Move column ${level + 1} down`);
+        raiseDown.textContent = 'v';
+        const raiseValue = document.createElement('input');
+        raiseValue.type = 'number';
+        raiseValue.className = 'category-size-input category-size-value';
+        raiseValue.dataset.value = 'raise';
+        raiseValue.dataset.action = 'raise';
+        raiseValue.dataset.level = String(level);
+        raiseValue.setAttribute('aria-label', `Column ${level + 1} vertical move in pixels`);
+        raiseValue.min = '-1000';
+        raiseValue.max = '1000';
+        raiseValue.step = '1';
+        raiseValue.value = '0';
+        const raiseUp = document.createElement('button');
+        raiseUp.type = 'button';
+        raiseUp.className = 'category-size-btn';
+        raiseUp.dataset.action = 'raise';
+        raiseUp.dataset.dir = 'up';
+        raiseUp.dataset.level = String(level);
+        raiseUp.setAttribute('aria-label', `Move column ${level + 1} up`);
+        raiseUp.textContent = '^';
+        raiseGroup.append(raiseLabel, raiseDown, raiseValue, raiseUp);
+
         const spacingGroup = document.createElement('div');
         spacingGroup.className = 'category-size-control-group';
         const spacingLabel = document.createElement('span');
@@ -867,7 +1108,7 @@ function buildCategorySizeOverlay(overlay, levels) {
         spacingUp.textContent = '+';
         spacingGroup.append(spacingLabel, spacingDown, spacingValue, spacingUp);
 
-        controlStack.append(sizeGroup, shiftGroup, spacingGroup);
+        controlStack.append(sizeGroup, shiftGroup, raiseGroup, spacingGroup);
         row.append(label, controlStack);
         body.appendChild(row);
     });
@@ -887,6 +1128,8 @@ function buildCategorySizeOverlay(overlay, levels) {
             target: 'header-room',
             valueKey: 'header-room-scale',
             unit: 'percent',
+            min: 0.1,
+            step: 0.1,
             controls: { down: '-', up: '+' },
             aria: { down: 'Decrease header room', up: 'Increase header room' },
             inputAria: 'Header room percent'
@@ -897,6 +1140,8 @@ function buildCategorySizeOverlay(overlay, levels) {
             target: 'header-content',
             valueKey: 'header-content-scale',
             unit: 'percent',
+            min: 1,
+            step: 0.1,
             controls: { down: '-', up: '+' },
             aria: { down: 'Decrease header content size', up: 'Increase header content size' },
             inputAria: 'Header content percent'
@@ -927,6 +1172,8 @@ function buildCategorySizeOverlay(overlay, levels) {
             target: 'footer-room',
             valueKey: 'footer-room-scale',
             unit: 'percent',
+            min: 1,
+            step: 0.1,
             controls: { down: '-', up: '+' },
             aria: { down: 'Decrease footer room', up: 'Increase footer room' },
             inputAria: 'Footer room percent'
@@ -958,9 +1205,9 @@ function buildCategorySizeOverlay(overlay, levels) {
         value.setAttribute('aria-label', item.inputAria);
         value.type = 'number';
         if (item.unit === 'percent') {
-            value.min = '1';
+            value.min = String(item.min ?? 1);
             value.max = '1000';
-            value.step = '0.1';
+            value.step = String(item.step ?? 0.1);
             value.value = '100';
         } else {
             value.min = '-1000';
@@ -1143,19 +1390,21 @@ function ensureCategorySizeOverlay(contentArea, rootTree) {
             if (action === 'reset') {
                 state.pillScaleByLevel.clear();
                 state.columnShiftByLevel.clear();
+                state.columnRaiseByLevel.clear();
                 state.manualColumnShift = false;
                 state.rowGapPercentByLevel.clear();
-                state.headerScale = 1;
+                state.headerScale = DEFAULT_HEADER_ROOM_SCALE;
                 state.headerContentScale = 1;
                 state.headerOffsetX = 0;
                 state.headerOffsetY = 0;
-                state.footerScale = 1;
+                state.footerScale = DEFAULT_FOOTER_ROOM_SCALE;
                 state.headerElementScale.clear();
                 state.headerElementOffsetX.clear();
                 state.headerElementOffsetY.clear();
                 state.footerElementScale.clear();
                 state.footerElementOffsetX.clear();
                 state.footerElementOffsetY.clear();
+                state.layoutDirty = true;
                 applyLayoutScale();
                 updateCategoryTreeMetrics(rootTree);
                 updateCategorySizeOverlayValues(overlay);
@@ -1163,8 +1412,9 @@ function ensureCategorySizeOverlay(contentArea, rootTree) {
             }
             if (action === 'size') {
                 const level = Number(button.dataset.level || 0);
-                const delta = button.dataset.dir === 'down' ? -0.05 : 0.05;
-                const nextScale = setPillScaleForLevel(level, getPillScaleForLevel(level) + delta);
+                const delta = button.dataset.dir === 'down' ? -5 : 5;
+                const nextPercent = Math.min(1000, Math.max(1, getOverlaySizePercent(level) + delta));
+                const nextScale = applyOverlaySizePercent(level, nextPercent);
                 const tree = contentArea.querySelector(`.category-tree[data-level="${level}"]`);
                 if (tree) tree.style.setProperty('--pill-scale', `${nextScale}`);
                 updateCategoryTreeMetrics(rootTree);
@@ -1174,9 +1424,17 @@ function ensureCategorySizeOverlay(contentArea, rootTree) {
             if (action === 'shift') {
                 const level = Number(button.dataset.level || 0);
                 const delta = button.dataset.dir === 'left' ? -12 : 12;
-                const nextShift = setColumnShiftForLevel(level, getColumnShiftForLevel(level) + delta);
+                const nextShift = applyOverlayShiftPx(level, getOverlayShiftPx(level) + delta);
                 const tree = contentArea.querySelector(`.category-tree[data-level="${level}"]`);
                 if (tree) tree.style.setProperty('--column-shift', `${nextShift}px`);
+                updateCategoryTreeMetrics(rootTree);
+                updateCategorySizeOverlayValues(overlay);
+                return;
+            }
+            if (action === 'raise') {
+                const level = Number(button.dataset.level || 0);
+                const delta = button.dataset.dir === 'down' ? 12 : -12;
+                applyOverlayRaisePx(level, getOverlayRaisePx(level) + delta);
                 updateCategoryTreeMetrics(rootTree);
                 updateCategorySizeOverlayValues(overlay);
                 return;
@@ -1184,7 +1442,8 @@ function ensureCategorySizeOverlay(contentArea, rootTree) {
             if (action === 'spacing') {
                 const level = Number(button.dataset.level || 0);
                 const delta = button.dataset.dir === 'down' ? -5 : 5;
-                const nextSpacing = setRowGapPercentForLevel(level, getRowGapPercentForLevel(level) + delta);
+                const nextPercent = Math.min(1000, Math.max(1, getOverlaySpacingPercent(level) + delta));
+                applyOverlaySpacingPercent(level, nextPercent);
                 const tree = contentArea.querySelector(`.category-tree[data-level="${level}"]`);
                 if (tree) tree.style.setProperty('--row-gap-scale', `${getRowGapScaleForLevel(level)}`);
                 updateCategoryTreeMetrics(rootTree);
@@ -1276,19 +1535,23 @@ function ensureCategorySizeOverlay(contentArea, rootTree) {
             let needsLayoutUpdate = false;
             if (action === 'size') {
                 const level = Number(input.dataset.level || 0);
-                const nextScale = setPillScaleForLevel(level, rawValue / 100);
+                const nextScale = applyOverlaySizePercent(level, rawValue);
                 const tree = contentArea.querySelector(`.category-tree[data-level="${level}"]`);
                 if (tree) tree.style.setProperty('--pill-scale', `${nextScale}`);
             }
             if (action === 'shift') {
                 const level = Number(input.dataset.level || 0);
-                const nextShift = setColumnShiftForLevel(level, rawValue);
+                const nextShift = applyOverlayShiftPx(level, rawValue);
                 const tree = contentArea.querySelector(`.category-tree[data-level="${level}"]`);
                 if (tree) tree.style.setProperty('--column-shift', `${nextShift}px`);
             }
+            if (action === 'raise') {
+                const level = Number(input.dataset.level || 0);
+                applyOverlayRaisePx(level, rawValue);
+            }
             if (action === 'spacing') {
                 const level = Number(input.dataset.level || 0);
-                setRowGapPercentForLevel(level, rawValue);
+                applyOverlaySpacingPercent(level, rawValue);
                 const tree = contentArea.querySelector(`.category-tree[data-level="${level}"]`);
                 if (tree) tree.style.setProperty('--row-gap-scale', `${getRowGapScaleForLevel(level)}`);
             }
@@ -1353,6 +1616,7 @@ function ensureCategorySizeOverlay(contentArea, rootTree) {
         contentArea.appendChild(overlay);
     }
     const levels = getCategoryTreeLevels(rootTree);
+    ensureColumnBaselines(levels);
     const levelsKey = levels.join(',');
     if (levelsKey !== state.overlayLevelsKey) {
         buildCategorySizeOverlay(overlay, levels);
@@ -1815,12 +2079,6 @@ function centerCategoryTreeColumns(metricsRoot, rootTree, contentRect) {
         clearTimeout(state.centeringTimer);
         state.centeringTimer = null;
     }
-    if (Math.abs(delta) > 1) {
-        state.centeringTimer = setTimeout(() => {
-            state.centeringTimer = null;
-            updateCategoryTreeMetrics(rootTree);
-        }, 360);
-    }
 }
 
 function updateCategoryTreeMetrics(container) {
@@ -1829,7 +2087,33 @@ function updateCategoryTreeMetrics(container) {
     const rootTree = getCategoryTreeRoot(container);
     const metricsRoot = rootTree || container;
     const state = getCategoryTreeState();
-    const fitScale = Number.isFinite(state.fitScale) ? state.fitScale : 1;
+    const levels = getCategoryTreeLevels(metricsRoot);
+    ensureColumnBaselines(levels);
+    const layoutKey = `${getActivePathIds().join('|')}|${levels.join(',')}`;
+    if (layoutKey !== state.layoutKey || state.layoutDirty) {
+        state.layoutKey = layoutKey;
+        state.fitScalePass = 0;
+        state.centeringPass = 0;
+        state.alignPass = 0;
+        state.layoutDirty = false;
+        if (state.centeringTimer) {
+            clearTimeout(state.centeringTimer);
+            state.centeringTimer = null;
+        }
+        if (state.alignTimer) {
+            clearTimeout(state.alignTimer);
+            state.alignTimer = null;
+        }
+    }
+    const contentRect = contentArea ? contentArea.getBoundingClientRect() : null;
+    let fitScale = Number.isFinite(state.fitScale) ? state.fitScale : 1;
+    if (contentRect && rootTree && metricsRoot === rootTree) {
+        const nextFitScale = computeCategoryTreeFitScale(metricsRoot, contentRect);
+        if (Math.abs(nextFitScale - fitScale) > 0.02) {
+            fitScale = nextFitScale;
+            state.fitScale = nextFitScale;
+        }
+    }
     const activePath = Array.isArray(window.activeCategoryPath) ? window.activeCategoryPath : [];
     const activeDepth = activePath.length;
     const hasActiveDepth = activeDepth > 0;
@@ -1853,7 +2137,6 @@ function updateCategoryTreeMetrics(container) {
         }
         return total;
     };
-    const contentRect = contentArea ? contentArea.getBoundingClientRect() : null;
     const baseShift = contentRect ? Math.min(84, Math.max(32, contentRect.width * 0.045)) : 52;
     const baseRaise = contentRect ? Math.min(26, Math.max(8, contentRect.height * 0.016)) : 18;
     const minShift = contentRect ? Math.max(8, contentRect.width * 0.012) : 8;
@@ -1876,7 +2159,7 @@ function updateCategoryTreeMetrics(container) {
     const currentRootShiftValue = rootTree ? getComputedStyle(rootTree).getPropertyValue('--tree-shift') : '';
     const currentRootShift = Number.isFinite(parseFloat(currentRootShiftValue)) ? parseFloat(currentRootShiftValue) : 0;
     let rootShiftOverride = currentRootShift;
-    let rootRaiseOverride = desiredRaise(0);
+    let rootRaiseOverride = desiredRaise(0) + getColumnRaiseForLevel(0);
     if (rootTree && metricsRoot === rootTree) {
         rootTree.style.setProperty('--tree-shift', `${rootShiftOverride}px`);
         rootTree.style.setProperty('--tree-raise', `${rootRaiseOverride}px`);
@@ -1892,6 +2175,7 @@ function updateCategoryTreeMetrics(container) {
         const level = Number(tree.dataset.level || 0);
         const pillScale = getPillScaleForLevel(level);
         const columnShift = getColumnShiftForLevel(level);
+        const columnRaise = getColumnRaiseForLevel(level);
         const rowGapScale = getRowGapScaleForLevel(level);
         const parentTree = tree.parentElement ? tree.parentElement.closest('.category-tree') : null;
         const parentLevel = parentTree ? Number(parentTree.dataset.level || 0) : null;
@@ -1900,7 +2184,7 @@ function updateCategoryTreeMetrics(container) {
             : desiredShift(level) - desiredShift(parentLevel);
         const raise = level === 0
             ? rootRaiseOverride
-            : desiredBaseRaise(level) - desiredBaseRaise(parentLevel);
+            : desiredBaseRaise(level) - desiredBaseRaise(parentLevel) + columnRaise;
         tree.style.setProperty('--tree-shift', `${shift}px`);
         tree.style.setProperty('--tree-raise', `${raise}px`);
         tree.style.setProperty('--tree-scale', `${desiredScale(level) * fitScale}`);
@@ -1953,32 +2237,8 @@ function updateCategoryTreeMetrics(container) {
             tree.style.setProperty('--tree-trunk-active-stop', `${start}px`);
         }
     });
-    if (contentRect && rootTree && metricsRoot === rootTree) {
-        const nextFitScale = computeCategoryTreeFitScale(metricsRoot, contentRect);
-        if (Math.abs(nextFitScale - fitScale) > 0.02) {
-            state.fitScale = nextFitScale;
-            requestAnimationFrame(() => updateCategoryTreeMetrics(metricsRoot));
-            return;
-        }
-    }
-    const childColumns = metricsRoot.querySelectorAll('.category-group > .category-children');
-    if (childColumns.length && contentArea) {
-        const alignChildColumns = () => {
-            const nextContentRect = contentArea.getBoundingClientRect();
-            childColumns.forEach(childContainer => {
-                const group = childContainer.parentElement;
-                if (!group) return;
-                const groupRect = group.getBoundingClientRect();
-                const childTop = Math.round(nextContentRect.top - groupRect.top);
-                group.style.setProperty('--child-column-top', `${childTop}px`);
-            });
-            updateCategoryTreeLines(metricsRoot);
-        };
-        alignChildColumns();
-        if (window.categoryTreeAlignTimer) {
-            clearTimeout(window.categoryTreeAlignTimer);
-        }
-        window.categoryTreeAlignTimer = setTimeout(alignChildColumns, 360);
+    if (contentArea) {
+        updateCategoryTreeChildColumnTops(metricsRoot, contentArea);
     }
     const childContainers = metricsRoot.querySelectorAll('.category-children');
     childContainers.forEach(childContainer => {
@@ -2005,6 +2265,7 @@ function updateCategoryTreeMetrics(container) {
     }
     applyLayoutScale();
     updateCategoryTreeLines(metricsRoot);
+    scheduleCategoryTreeTransitionSync(metricsRoot);
 }
 
 // Temporary global exposure
