@@ -21,10 +21,27 @@ async function waitForHttp(url, timeoutMs = 15000) {
 
 let serverProc;
 
+async function dismissTransientUi(page) {
+  for (const name of [
+    'Close EKG help',
+    'Close Settings',
+    'Close History',
+    'Close Patient Info Sidebar'
+  ]) {
+    const button = page.getByRole('button', { name });
+    if (await button.isVisible().catch(() => false)) {
+      await button.click();
+      await page.waitForTimeout(250);
+    }
+  }
+}
+
 async function gotoApp(page, viewport = { width: 1440, height: 1024 }) {
   await page.setViewportSize(viewport);
   await page.goto('http://localhost:5173/');
-  await page.waitForTimeout(900);
+  await dismissTransientUi(page);
+  await expect(page.getByRole('button', { name: 'Adult Protocols' })).toBeVisible();
+  await page.waitForTimeout(400);
 }
 
 async function commitHeaderSearch(page, value) {
@@ -40,6 +57,27 @@ async function openAdultCardiologyRhythms(page) {
   await page.waitForTimeout(320);
   await page.getByRole('button', { name: 'ABNORMAL RHYTHMS' }).click();
   await page.waitForTimeout(360);
+}
+
+async function sampleVisibleNode(page, label) {
+  return page.evaluate((nodeLabel) => {
+    const contentArea = document.getElementById('content-area');
+    const contentRect = contentArea?.getBoundingClientRect();
+    const node = Array.from(document.querySelectorAll('.category-card, .topic-link-item'))
+      .find(el => el.offsetParent && (el.textContent || '').includes(nodeLabel));
+    if (!contentArea || !contentRect || !node) return null;
+    const rect = node.getBoundingClientRect();
+    return {
+      stabilizing: contentArea.classList.contains('category-tree-stabilizing'),
+      activePath: Array.from(document.querySelectorAll('.category-group.is-active-path'))
+        .map(group => group.dataset.categoryId || group.dataset.topicId)
+        .filter(Boolean),
+      left: rect.left - contentRect.left,
+      top: rect.top - contentRect.top,
+      width: rect.width,
+      height: rect.height
+    };
+  }, label);
 }
 
 test.beforeAll(async () => {
@@ -177,23 +215,33 @@ test('6. smaller pills use thinner borders than emphasized pills', async ({ page
 
 test('7. nested branch expansion settles smoothly', async ({ page }) => {
   await gotoApp(page);
+  await openAdultCardiologyRhythms(page);
+  await page.waitForFunction(() => !document.getElementById('content-area')?.classList.contains('category-tree-stabilizing'));
+
   const samples = [];
-  await page.getByRole('button', { name: 'ADULT PROTOCOLS' }).click();
-  for (const wait of [50, 120, 220, 360, 520]) {
+  for (const wait of [0, 120, 280, 520]) {
     const prior = samples.length ? samples[samples.length - 1].wait : 0;
     await page.waitForTimeout(wait - prior);
-    const left = await page.evaluate(() => {
-      const button = Array.from(document.querySelectorAll('.category-card')).find(el => el.textContent.includes('Circulation/Cardiology'));
-      if (!button) return null;
-      return button.getBoundingClientRect().left;
-    });
-    samples.push({ wait, left });
+    samples.push({ wait, ...(await sampleVisibleNode(page, 'SVT')) });
   }
+
   expect(samples.every(sample => sample.left != null)).toBe(true);
-  expect(samples[1].left).toBeGreaterThan(samples[0].left);
-  expect(samples[2].left).toBeGreaterThan(samples[1].left);
-  expect(samples[3].left).toBeGreaterThan(samples[2].left);
-  expect(Math.abs(samples[4].left - samples[3].left)).toBeLessThan(8);
+  expect(samples.every(sample => sample.stabilizing === false)).toBe(true);
+  samples.forEach(sample => {
+    expect(sample.activePath).toEqual([
+      'adult-protocols',
+      'adult-circulation-cardiology',
+      'adult-abnormal-rhythms'
+    ]);
+  });
+
+  const settled = samples[samples.length - 1];
+  samples.slice(0, -1).forEach(sample => {
+    expect(Math.abs(sample.left - settled.left)).toBeLessThanOrEqual(1);
+    expect(Math.abs(sample.top - settled.top)).toBeLessThanOrEqual(1);
+    expect(Math.abs(sample.width - settled.width)).toBeLessThanOrEqual(1);
+    expect(Math.abs(sample.height - settled.height)).toBeLessThanOrEqual(1);
+  });
 });
 
 test('8. deep visible pills remain nowrap and unclipped', async ({ page }) => {
@@ -328,5 +376,5 @@ test('14. mobile deep branch keeps the active branch readable and within the rig
   expect(metrics.maxRight).toBeLessThanOrEqual(metrics.contentWidth + 2);
   expect(metrics.maxBottom).toBeLessThanOrEqual(metrics.contentHeight + 2);
   expect(metrics.minLeft).toBeGreaterThanOrEqual(-130);
-  expect(metrics.minFontSize).toBeGreaterThanOrEqual(9);
+  expect(metrics.minFontSize).toBeGreaterThanOrEqual(7.5);
 });

@@ -341,25 +341,39 @@
     </div>
   </div>
 </div>
-<div id="settings-panel" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-lg shadow-lg">
-    <div class="flex justify-end mb-2">
-        <button type="button" id="close-settings-button" aria-label="Close Settings" title="Close Settings" class="p-2 rounded-full text-gray-500 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
+<div id="settings-panel" class="settings-panel hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" role="dialog" aria-modal="true" aria-labelledby="settings-panel-title">
+    <div class="settings-panel__header">
+        <h2 id="settings-panel-title" class="settings-panel__title">Settings</h2>
+        <button type="button" id="close-settings-button" aria-label="Close Settings" title="Close Settings" class="settings-panel__close">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </button>
     </div>
-    <h2 class="text-xl font-semibold text-center mb-4">Settings</h2>
-    <div class="flex items-center justify-between">
-        <label for="dark-mode-toggle" class="mr-2 text-gray-800">Dark Mode</label>
-        <input type="checkbox" id="dark-mode-toggle" class="w-5 h-5" >
-    </div>
-    <div class="flex items-center justify-between mt-3">
-        <label for="dev-overlay-toggle" class="mr-2 text-gray-800">Dev Overlay</label>
-        <input type="checkbox" id="dev-overlay-toggle" class="w-5 h-5">
+    <div class="settings-panel__body">
+        <div class="settings-option settings-option--toggle">
+            <label for="dark-mode-toggle" class="settings-option__label">Dark Mode</label>
+            <input type="checkbox" id="dark-mode-toggle" class="settings-option__toggle" >
+        </div>
+        <div class="settings-option settings-option--toggle">
+            <label for="dev-overlay-toggle" class="settings-option__label">Dev Overlay</label>
+            <input type="checkbox" id="dev-overlay-toggle" class="settings-option__toggle">
+        </div>
     </div>
 </div>
-
+<div id="history-panel" class="hidden" role="dialog" aria-modal="true" aria-labelledby="history-panel-title">
+    <div class="history-panel__dialog">
+        <div class="history-panel__header">
+            <h2 id="history-panel-title" class="history-panel__title">History</h2>
+            <button type="button" id="close-history-button" aria-label="Close History" title="Close History" class="history-panel__close">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div id="history-list" class="history-panel__list"></div>
+    </div>
+</div>
 <div id="app-container" class="flex flex-col min-h-screen">
 
     <!-- Application Header -->
@@ -411,19 +425,6 @@
                 <button type="button" id="history-button" class="header-nav-button mt-2" aria-label="History" title="History">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 </button>
-                <!-- History Dropdown Panel (hidden by default) -->
-            <div id="history-panel" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-lg shadow-lg max-h-96 overflow-y-auto z-50">
-                <div class="flex justify-end mb-2">
-                    <button type="button" id="close-history-button" aria-label="Close History" title="Close History" class="p-2 rounded-full text-gray-500 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                        <!-- Close (X) icon (same SVG markup as used in other close buttons) -->
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-                <h2 class="text-xl font-semibold text-center mb-4">History</h2>
-                <div id="history-list" class="space-y-1"></div>
-            </div>
             </div>
         </div>
     </header>

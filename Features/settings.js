@@ -8,12 +8,6 @@ const devOverlayToggle = document.getElementById('dev-overlay-toggle');
 const overlayEl = document.getElementById('sidebar-overlay');
 const patientSidebarEl = document.getElementById('patient-sidebar');
 
-// Apply a bubbly font to the Settings button.  Without this, the button
-// retains the default font.  See README task "Settings Button Font."
-if (settingsButtonEl) {
-    settingsButtonEl.style.fontFamily = `'Comic Sans MS', 'Comic Sans', cursive`;
-}
-
 // Apply saved dark mode preference on startup
 if (localStorage.getItem('darkMode') === 'true') {
     document.body.classList.add('dark-mode');
@@ -82,13 +76,12 @@ devOverlayToggle?.addEventListener('change', () => {
 });
 function createBrightnessControl() {
     if (!settingsPanelEl) return;
-    // Create wrapper and label
     const wrapper = document.createElement('div');
-    wrapper.className = 'mb-4';
+    wrapper.className = 'settings-option settings-option--slider';
 
     const label = document.createElement('label');
     label.textContent = 'Dark Mode Brightness';
-    label.className   = 'block font-semibold mb-1';
+    label.className   = 'settings-option__label settings-option__label--stacked';
     label.htmlFor     = 'brightness-slider';
 
     const slider = document.createElement('input');
@@ -98,11 +91,10 @@ function createBrightnessControl() {
     slider.max   = '1.5';
     slider.step  = '0.05';
     slider.value = (!isNaN(savedBrightness) ? savedBrightness : 1).toString();
-    slider.className = 'w-full';
+    slider.className = 'settings-slider';
 
-    // Preview box
     const preview = document.createElement('div');
-    preview.className  = 'brightness-preview mt-2 p-2 border rounded';
+    preview.className  = 'settings-preview';
     preview.textContent = 'Preview';
 
     function updatePreview(val) {

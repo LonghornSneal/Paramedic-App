@@ -12,6 +12,96 @@ async function commitSearch(page, value) {
   await page.waitForTimeout(900);
 }
 
+async function collectCommittedSearchState(page, topicId = 'adult-seizure') {
+  return await page.evaluate(currentTopicId => {
+    const visibleTopics = Array.from(document.querySelectorAll('.topic-link-item')).filter(el => el.offsetParent);
+    const overlaps = [];
+    for (let i = 0; i < visibleTopics.length; i += 1) {
+      const currentRect = visibleTopics[i].getBoundingClientRect();
+      for (let j = i + 1; j < visibleTopics.length; j += 1) {
+        const nextRect = visibleTopics[j].getBoundingClientRect();
+        const overlapX = Math.max(0, Math.min(currentRect.right, nextRect.right) - Math.max(currentRect.left, nextRect.left));
+        const overlapY = Math.max(0, Math.min(currentRect.bottom, nextRect.bottom) - Math.max(currentRect.top, nextRect.top));
+        if (overlapX > 1 && overlapY > 1) {
+          overlaps.push({
+            a: visibleTopics[i].dataset.topicId,
+            b: visibleTopics[j].dataset.topicId,
+            overlapX,
+            overlapY
+          });
+        }
+      }
+    }
+
+    const target = visibleTopics.find(el => el.dataset.topicId === currentTopicId) || null;
+    if (!target) {
+      return {
+        overlaps,
+        hitTopicId: null,
+        hitText: null,
+        targetFound: false,
+        searchValue: document.getElementById('searchInput')?.value ?? '',
+        locationHash: window.location.hash
+      };
+    }
+
+    const rect = target.getBoundingClientRect();
+    const centerX = rect.left + (rect.width / 2);
+    const centerY = rect.top + (rect.height / 2);
+    const hitTarget = document.elementFromPoint(centerX, centerY)?.closest('.topic-link-item, .category-card');
+
+    return {
+      overlaps,
+      hitTopicId: hitTarget?.dataset.topicId ?? hitTarget?.dataset.categoryId ?? null,
+      hitText: hitTarget?.textContent?.trim() ?? null,
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height
+      },
+      targetFound: true,
+      searchValue: document.getElementById('searchInput')?.value ?? '',
+      locationHash: window.location.hash
+    };
+  }, topicId);
+}
+
+async function expectCommittedSearchReady(page, topicId = 'adult-seizure') {
+  await expect.poll(async () => {
+    const topic = page.locator(`.topic-link-item[data-topic-id="${topicId}"]`);
+    return await topic.count();
+  }, {
+    message: `Expected committed search topic ${topicId} to render`,
+    timeout: 10000
+  }).toBeGreaterThan(0);
+}
+
+async function assertCommittedSeizureSearch(page) {
+  await expectCommittedSearchReady(page, 'adult-seizure');
+  const state = await collectCommittedSearchState(page, 'adult-seizure');
+  expect(state.targetFound).toBe(true);
+  expect(state.searchValue.toLowerCase()).toBe('seizure');
+  expect(state.locationHash).toBe('');
+  expect(state.overlaps).toEqual([]);
+  expect(state.hitTopicId).toBe('adult-seizure');
+  return state;
+}
+
+async function openAdultSeizureDetail(page) {
+  const topic = page.locator('.topic-link-item[data-topic-id="adult-seizure"]');
+  await topic.click();
+  await expect(page.locator('.topic-h2[data-topic-id="adult-seizure"]')).toBeVisible();
+  await expect(page.locator('.topic-h2[data-topic-id="adult-seizure"]')).toHaveText(/Seizure/i);
+}
+
+async function closeSidebar(page) {
+  await page.locator('#close-sidebar-button').click();
+  await expect(page.locator('#patient-sidebar')).not.toHaveClass(/open/);
+}
+
 test.describe.configure({ mode: 'serial' });
 
 test('1. typing opens suggestions without expanding the spiderweb', async ({ page }) => {
@@ -203,5 +293,57 @@ test('9. repeated searches show matching detail previews under the existing titl
     expect(previewLayout.itemHeight).toBeGreaterThan(40);
     expect(previewLayout.stacked).toBe(true);
     expect(previewLayout.insideCard).toBe(true);
+  }
+});
+
+test('10. mobile committed seizure search stays non-overlapping and directly clickable across interaction orders', async ({ page }) => {
+  test.setTimeout(180000);
+
+  const viewports = [
+    { width: 360, height: 640 },
+    { width: 390, height: 844 },
+    { width: 430, height: 932 },
+    { width: 480, height: 1040 }
+  ];
+
+  for (const viewport of viewports) {
+    await gotoApp(page, viewport);
+    await commitSearch(page, 'seizure');
+    await assertCommittedSeizureSearch(page);
+    await openAdultSeizureDetail(page);
+    await page.click('#nav-back-button');
+    await expect(page.locator('#searchInput')).toHaveValue('seizure');
+    await assertCommittedSeizureSearch(page);
+    await page.click('#nav-forward-button');
+    await expect(page.locator('.topic-h2[data-topic-id="adult-seizure"]')).toBeVisible();
+    await page.click('#nav-back-button');
+    await assertCommittedSeizureSearch(page);
+    await commitSearch(page, 'stroke');
+    await commitSearch(page, 'seizure');
+    await assertCommittedSeizureSearch(page);
+
+    await gotoApp(page, viewport);
+    await page.click('#open-sidebar-button');
+    await page.fill('#pt-age', '34');
+    await page.fill('#pt-indications', 'seizure');
+    await closeSidebar(page);
+    await commitSearch(page, 'seizure');
+    await assertCommittedSeizureSearch(page);
+    await openAdultSeizureDetail(page);
+    await page.click('#nav-back-button');
+    await assertCommittedSeizureSearch(page);
+
+    await gotoApp(page, viewport);
+    await commitSearch(page, 'stroke');
+    await expectCommittedSearchReady(page, 'adult-stroke');
+    await page.locator('.topic-link-item[data-topic-id="adult-stroke"]').click();
+    await expect(page.locator('.topic-h2[data-topic-id="adult-stroke"]')).toBeVisible();
+    await page.click('#nav-back-button');
+    await expect(page.locator('#searchInput')).toHaveValue('stroke');
+    await commitSearch(page, 'seizure');
+    await assertCommittedSeizureSearch(page);
+    await openAdultSeizureDetail(page);
+    await page.click('#nav-back-button');
+    await assertCommittedSeizureSearch(page);
   }
 });

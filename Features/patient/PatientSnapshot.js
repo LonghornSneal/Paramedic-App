@@ -1,4 +1,6 @@
 import { patientData, PEDIATRIC_AGE_THRESHOLD } from './PatientInfo.js';
+import { splitSegments, normalizeCommittedValues } from './patientTerminology.js';
+import { MedicationDetailsData } from '../../Data/MedicationDetailsData.js';
 
 const WEIGHT_CONVERSION_FACTOR = 2.20462;
 
@@ -24,6 +26,14 @@ const CLASS_WARNING_RULES = [
     message: 'Warning: Documented beta-blocker may reduce effectiveness of beta-agonist bronchodilators.'
   }
 ];
+
+const ALLERGY_RELATED_TERMS = ['allergy', 'allergic', 'anaphylaxis', 'anaphylactic'];
+const CONTEXT_TERM_ALIASES = new Map([
+  ['chest pain', ['mi', 'acs', 'myocardial infarction']],
+  ['shortness of breath', ['bronchospasm', 'pulmonary edema', 'dyspnea']],
+  ['sob', ['bronchospasm', 'pulmonary edema', 'dyspnea']],
+  ['dyspnea', ['shortness of breath', 'bronchospasm', 'pulmonary edema']]
+]);
 
 function deriveClassWarnings(data) {
   if (!data) return [];
@@ -69,6 +79,196 @@ function deriveClassWarnings(data) {
   });
 
   return Array.from(warnings);
+}
+
+function stripProtocolMarkup(value) {
+  return `${value ?? ''}`
+    .replace(/\[\[([^|\]]+)\|([^\]]+)\]\]/g, '$1 $2')
+    .replace(/\[\[([^\]]+)\]\]/g, '$1')
+    .replace(/\{\{[^:}]+:([^}]+)\}\}/g, '$1')
+    .replace(/[↑↓]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function normalizeSearchText(value) {
+  return stripProtocolMarkup(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
+function tokenizeSearchText(value) {
+  const normalized = normalizeSearchText(value);
+  return normalized ? normalized.split(' ').filter(Boolean) : [];
+}
+
+function textMatchesAlias(text, alias) {
+  const normalizedText = normalizeSearchText(text);
+  const normalizedAlias = normalizeSearchText(alias);
+  if (!normalizedText || !normalizedAlias) return false;
+  if (normalizedText.includes(normalizedAlias)) return true;
+
+  const textTokens = normalizedText.split(' ').filter(Boolean);
+  const aliasTokens = normalizedAlias.split(' ').filter(Boolean);
+  if (!aliasTokens.length) return false;
+
+  return aliasTokens.every(aliasToken => {
+    if (aliasToken.length <= 3) return textTokens.includes(aliasToken);
+    return textTokens.some(textToken => (
+      textToken === aliasToken ||
+      (textToken.length >= 4 && textToken.includes(aliasToken)) ||
+      (textToken.length >= 4 && aliasToken.includes(textToken))
+    ));
+  });
+}
+
+function compactClassLabel(value) {
+  const stripped = stripProtocolMarkup(value);
+  if (!stripped) return '';
+  const beforeParen = stripped.split('(')[0].trim();
+  return beforeParen || stripped;
+}
+
+function getAllergyEntries(data, rawInputValue = '') {
+  const entries = [];
+  const seen = new Set();
+  const sourceAllergies = Array.isArray(data?.allergies) ? data.allergies : [];
+  const sourceDisplay = Array.isArray(data?.allergyDisplay) ? data.allergyDisplay : [];
+
+  sourceAllergies.forEach((value, index) => {
+    const label = sourceDisplay[index] || value;
+    const key = normalizeSearchText(value || label);
+    if (!key || seen.has(key)) return;
+    seen.add(key);
+    entries.push({
+      key,
+      label,
+      aliases: Array.from(new Set([value, label].map(item => normalizeSearchText(item)).filter(Boolean)))
+    });
+  });
+
+  if (entries.length || !rawInputValue.trim()) return entries;
+
+  const segments = splitSegments(rawInputValue);
+  const rawValues = [...segments.committed];
+  if (segments.current) rawValues.push(segments.current);
+  const normalized = normalizeCommittedValues('allergies', rawValues, { register: false });
+  normalized.canonical.forEach((value, index) => {
+    const label = normalized.display[index] || value;
+    const key = normalizeSearchText(value || label);
+    if (!key || seen.has(key)) return;
+    seen.add(key);
+    entries.push({
+      key,
+      label,
+      aliases: Array.from(new Set([value, label].map(item => normalizeSearchText(item)).filter(Boolean)))
+    });
+  });
+
+  return entries;
+}
+
+function expandContextTerms(values) {
+  const expanded = new Set();
+  (values || []).forEach(value => {
+    const normalized = normalizeSearchText(value);
+    if (!normalized) return;
+    expanded.add(normalized);
+    const aliases = CONTEXT_TERM_ALIASES.get(normalized) || [];
+    aliases.forEach(alias => {
+      const normalizedAlias = normalizeSearchText(alias);
+      if (normalizedAlias) expanded.add(normalizedAlias);
+    });
+  });
+  return Array.from(expanded);
+}
+
+function isAllergyRelatedScenario(data) {
+  const values = [
+    ...(Array.isArray(data?.indications) ? data.indications : []),
+    ...(Array.isArray(data?.symptoms) ? data.symptoms : [])
+  ];
+  return values.some(value => {
+    const normalized = normalizeSearchText(value);
+    return ALLERGY_RELATED_TERMS.some(term => textMatchesAlias(normalized, term));
+  });
+}
+
+function getContextMedicationEntries(data) {
+  const contextTerms = expandContextTerms([
+    ...(Array.isArray(data?.indications) ? data.indications : []),
+    ...(Array.isArray(data?.symptoms) ? data.symptoms : [])
+  ]);
+  if (!contextTerms.length) return [];
+
+  return MedicationDetailsData.filter(medication => {
+    const indicationTexts = Array.isArray(medication?.indications) ? medication.indications : [];
+    if (!indicationTexts.length) return false;
+    return contextTerms.some(term => indicationTexts.some(text => textMatchesAlias(text, term)));
+  });
+}
+
+function medicationMatchesAllergy(medication, allergyEntry) {
+  if (!medication || !allergyEntry) return false;
+  const searchableValues = [
+    medication.title,
+    medication.class,
+    ...(Array.isArray(medication.contraindications) ? medication.contraindications : [])
+  ];
+  return allergyEntry.aliases.some(alias => searchableValues.some(value => textMatchesAlias(value, alias)));
+}
+
+function getClassesForAllergy(allergyEntry, medications) {
+  const classes = new Set();
+  (medications || []).forEach(medication => {
+    if (!medicationMatchesAllergy(medication, allergyEntry)) return;
+    const classLabel = compactClassLabel(medication.class);
+    if (!classLabel) return;
+    if (textMatchesAlias(allergyEntry.label, classLabel)) return;
+    classes.add(classLabel);
+  });
+  return Array.from(classes);
+}
+
+function formatAllergyLabel(allergyEntry, classes = []) {
+  if (!classes.length) return allergyEntry.label;
+  return `${allergyEntry.label} (${classes.join('/')})`;
+}
+
+function getAllergySummary(data, rawInputValue = '') {
+  const allergyEntries = getAllergyEntries(data, rawInputValue);
+  if (!allergyEntries.length) return rawInputValue.trim() ? 'Allergies: NKA' : '';
+
+  const allMedications = MedicationDetailsData;
+  if (isAllergyRelatedScenario(data)) {
+    const labels = allergyEntries.map(entry => formatAllergyLabel(entry, getClassesForAllergy(entry, allMedications)));
+    return `Allergies: ${labels.join(', ')}`;
+  }
+
+  const contextMedications = getContextMedicationEntries(data);
+  const scoredEntries = allergyEntries
+    .map(entry => ({
+      entry,
+      score: contextMedications.reduce((count, medication) => (
+        medicationMatchesAllergy(medication, entry) ? count + 1 : count
+      ), 0)
+    }))
+    .filter(item => item.score > 0)
+    .sort((left, right) => {
+      if (right.score !== left.score) return right.score - left.score;
+      return left.entry.label.localeCompare(right.entry.label);
+    });
+
+  if (scoredEntries.length) {
+    const labels = scoredEntries.slice(0, 2).map(item => item.entry.label);
+    const suffix = allergyEntries.length > labels.length ? ', etc.' : '';
+    return `Allergies: ${labels.join(', ')}${suffix}`;
+  }
+
+  const fallbackLabels = allergyEntries.slice(0, 3).map(entry => entry.label);
+  const suffix = allergyEntries.length > fallbackLabels.length ? ', etc.' : '';
+  return `Allergies: ${fallbackLabels.join(', ')}${suffix}`;
 }
 
 
@@ -130,20 +330,6 @@ function formatSnapshotAge(data) {
 function sevRR(rr){ if (rr==null) return ''; if (rr>24||rr<10) return 'text-red-600'; if (rr>20||rr<12) return 'text-yellow-600'; return ''; }
 function sevBGL(bgl){ const n=parseFloat(bgl); if (isNaN(n)) return ''; if (n>200||n<60) return 'text-red-600'; if (n>140||n<70) return 'text-yellow-600'; return ''; }
 function sevRhythm(ekg){ const s=(ekg||'').toLowerCase(); if (s.includes('tachy')||s.includes('brady')) return 'text-yellow-600'; return ''; }
-function relevantAllergies(inds, allergies, displayMap){
-  const indications = (inds || []).map(value => (value || '').toLowerCase());
-  const allergyKeys = (allergies || []).map(value => (value || '').toLowerCase());
-  const out = [];
-  const chestPainLike = indications.some(t => ['chest pain','mi','acs','myocardial infarction'].includes(t));
-  if (chestPainLike) {
-    if (allergyKeys.includes('asa') || allergyKeys.includes('aspirin')) {
-      const label = displayMap.get('asa') || displayMap.get('aspirin') || 'ASA';
-      if (!out.includes(label)) out.push(label);
-    }
-  }
-  return out;
-}
-
 // Render compact snapshot under the search bar
 export function renderPatientSnapshot(){
   const bar = document.getElementById('patient-snapshot-bar');
@@ -157,12 +343,13 @@ export function renderPatientSnapshot(){
   const heightDisplay = isPediatric ? formatHeightDisplay(d.heightIn) : '';
   const hasDemographics = Boolean(ageDisplay || genderDisplay || weightDisplay || heightDisplay);
   const indicationsDisplay = Array.isArray(d.indicationsDisplay) ? d.indicationsDisplay : [];
-  const allergiesDisplay = Array.isArray(d.allergyDisplay) ? d.allergyDisplay : [];
   const medicationsDisplay = Array.isArray(d.medicationsDisplay) ? d.medicationsDisplay : [];
   const medicationClasses = Array.isArray(d.medicationClasses) ? d.medicationClasses : [];
   const pmhDisplay = Array.isArray(d.pmhDisplay) ? d.pmhDisplay : [];
   const symptomsDisplay = Array.isArray(d.symptomsDisplay) ? d.symptomsDisplay : [];
-  const hasAllergies = allergiesDisplay.length > 0;
+  const allergiesInputValue = document.getElementById('pt-allergies')?.value ?? '';
+  const allergyEntries = getAllergyEntries(d, allergiesInputValue);
+  const hasAllergies = allergyEntries.length > 0;
   const hasPmh = pmhDisplay.length > 0;
   const hasIndications = indicationsDisplay.length > 0;
   const hasSymptoms = symptomsDisplay.length > 0;
@@ -177,21 +364,6 @@ export function renderPatientSnapshot(){
     return;
   }
 
-  const allergiesInputValue = document.getElementById('pt-allergies')?.value ?? '';
-  const allergiesProvided = allergiesInputValue.trim().length > 0;
-
-  const allergyDisplayMap = new Map();
-  if (Array.isArray(d.allergies)) {
-    d.allergies.forEach((value, index) => {
-      const key = (value || '').toLowerCase();
-      if (!key) return;
-      const label = allergiesDisplay[index] || value;
-      if (!allergyDisplayMap.has(key)) {
-        allergyDisplayMap.set(key, label);
-      }
-    });
-  }
-
   const parts = [];
   if (hasDemographics){
     const seg = [ageDisplay, genderDisplay, weightDisplay, heightDisplay].filter(Boolean).join(' ');
@@ -201,14 +373,9 @@ export function renderPatientSnapshot(){
     const inds = indicationsDisplay.map(ind => `<span class="underline decoration-blue-600 text-blue-600" title="${ind}">${abbr(ind)}</span>`);
     parts.push(inds.join(', '));
   }
-  const relevantAllergyList = relevantAllergies(d.indications, d.allergies, allergyDisplayMap);
-  if (relevantAllergyList.length) {
-    parts.push(`Allergy: ${relevantAllergyList.join(', ')}`);
-  } else if (hasAllergies) {
-    const list = allergiesDisplay.slice(0, 3);
-    parts.push(`Allergies: ${list.join(', ')}`);
-  } else if (allergiesProvided) {
-    parts.push('Allergies: NKA');
+  const allergySummary = getAllergySummary(d, allergiesInputValue);
+  if (allergySummary) {
+    parts.push(allergySummary);
   }
   if (hasPmh){
     const pmh = pmhDisplay.slice(0,2).map(p=>`<span title="${p}">${abbr(p)}</span>`).join(', ');

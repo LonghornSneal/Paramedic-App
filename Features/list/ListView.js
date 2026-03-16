@@ -280,6 +280,7 @@ function createHierarchicalList(items, container, level = 0, path = []) {
     container.style.setProperty('--category-level', level);
     const hasExpanded = items.some(item => item.type === 'category' && getEffectiveCategoryExpanded(item, spiderwebContext));
     container.classList.toggle('has-expanded', hasExpanded);
+    container.classList.toggle('has-search', Boolean(spiderwebContext?.hasSearch));
     container.classList.toggle('has-context-signal', Boolean(spiderwebContext?.hasContextSignal));
     const hasActivePath = items.some(item => spiderwebContext?.activePathIds?.includes(item.id));
     container.classList.toggle('has-active-path', hasActivePath);
@@ -2071,6 +2072,9 @@ function computeCategoryTreeFitScale(metricsRoot, contentRect) {
     const usedHeight = bounds.height;
     const scaleX = availableWidth / usedWidth;
     const scaleY = availableHeight / usedHeight;
+    if (typeof window !== 'undefined' && window.innerWidth <= 600) {
+        return 1;
+    }
     return Math.min(1, scaleX, scaleY);
 }
 

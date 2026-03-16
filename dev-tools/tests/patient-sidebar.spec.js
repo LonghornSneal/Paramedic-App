@@ -20,6 +20,12 @@ async function waitForHttp(url, timeoutMs = 15000) {
 }
 
 let serverProc;
+const SNAPSHOT_VIEWPORTS = [
+  { name: '360x640', width: 360, height: 640 },
+  { name: '390x844', width: 390, height: 844 },
+  { name: '430x932', width: 430, height: 932 },
+  { name: '480x960', width: 480, height: 960 }
+];
 
 test.beforeAll(async () => {
   try {
@@ -124,6 +130,28 @@ async function fillDenseSidebar(page) {
   });
 }
 
+async function getSnapshotState(page) {
+  return await page.evaluate(() => ({
+    snapshot: document.getElementById('patient-snapshot-bar')?.innerText ?? '',
+    allergyChips: Array.from(document.querySelectorAll('#pt-allergies-chips .sidebar-chip'))
+      .map(chip => chip.textContent.trim())
+      .filter(Boolean)
+  }));
+}
+
+async function waitForSnapshotState(page, predicate, label) {
+  const timeoutAt = Date.now() + 5000;
+  let lastState = null;
+
+  while (Date.now() < timeoutAt) {
+    lastState = await getSnapshotState(page);
+    if (predicate(lastState)) return lastState;
+    await page.waitForTimeout(100);
+  }
+
+  throw new Error(`${label} failed: ${JSON.stringify(lastState)}`);
+}
+
 test('patient sidebar fits the viewport under dense multi-value input', async ({ page }) => {
   await openSidebar(page);
   const result = await fillDenseSidebar(page);
@@ -190,3 +218,68 @@ test('sidebar linked numeric and preset fields stay in sync', async ({ page }) =
   expect(result.rhythmPreviewEmpty).toBe(false);
   expect(result.modifierPreviewEmpty).toBe(false);
 });
+
+for (const viewport of SNAPSHOT_VIEWPORTS) {
+  test(`typed allergy entries stay live and context-aware in the snapshot on ${viewport.name}`, async ({ page }) => {
+    await openSidebar(page, viewport);
+    await fillAndTrigger(page, '#pt-allergies', 'penicillin');
+
+    const allergyFirstState = await waitForSnapshotState(
+      page,
+      state => state.snapshot.includes('Allergies: Penicillin')
+        && !state.snapshot.includes('NKA')
+        && state.allergyChips.includes('Penicillin'),
+      `${viewport.name} allergy-first`
+    );
+
+    expect(allergyFirstState.snapshot).toContain('Allergies: Penicillin');
+    expect(allergyFirstState.snapshot).not.toContain('NKA');
+    expect(allergyFirstState.allergyChips).toEqual(['Penicillin']);
+
+    await openSidebar(page, viewport);
+    await fillAndTrigger(page, '#pt-age', '45');
+    await fillAndTrigger(page, '#pt-weight-value', '70');
+    await fillAndTrigger(page, '#pt-indications', 'chest pain');
+    await fillAndTrigger(page, '#pt-allergies', 'penicillin, aspirin, latex');
+
+    const chestPainState = await waitForSnapshotState(
+      page,
+      state => state.snapshot.includes('Allergies: ASA, etc.')
+        && state.allergyChips.join(',') === 'Penicillin,ASA,Latex',
+      `${viewport.name} chest-pain-context`
+    );
+
+    expect(chestPainState.snapshot).toContain('Allergies: ASA, etc.');
+    expect(chestPainState.snapshot).not.toContain('Allergies: NKA');
+    expect(chestPainState.allergyChips).toEqual(['Penicillin', 'ASA', 'Latex']);
+
+    await openSidebar(page, viewport);
+    await fillAndTrigger(page, '#pt-indications', 'anaphylaxis');
+    await fillAndTrigger(page, '#pt-allergies', 'penicillin, aspirin, latex');
+
+    const allergyIndicationFirstState = await waitForSnapshotState(
+      page,
+      state => state.snapshot.includes('Allergies: Penicillin, ASA (NSAID), Latex'),
+      `${viewport.name} anaphylaxis-first`
+    );
+
+    expect(allergyIndicationFirstState.snapshot).toContain('Anaphylaxis');
+    expect(allergyIndicationFirstState.snapshot).toContain('Allergies: Penicillin, ASA (NSAID), Latex');
+
+    await openSidebar(page, viewport);
+    await fillAndTrigger(page, '#pt-allergies', 'penicillin, aspirin, latex');
+    await fillAndTrigger(page, '#pt-age', '45');
+    await fillAndTrigger(page, '#pt-weight-value', '70');
+    await fillAndTrigger(page, '#pt-indications', 'anaphylaxis');
+
+    const allergyIndicationAfterState = await waitForSnapshotState(
+      page,
+      state => state.snapshot.includes('Allergies: Penicillin, ASA (NSAID), Latex'),
+      `${viewport.name} anaphylaxis-after`
+    );
+
+    expect(allergyIndicationAfterState.snapshot).toContain('Anaphylaxis');
+    expect(allergyIndicationAfterState.snapshot).toContain('Allergies: Penicillin, ASA (NSAID), Latex');
+    expect(allergyIndicationAfterState.allergyChips).toEqual(['Penicillin', 'ASA', 'Latex']);
+  });
+}
