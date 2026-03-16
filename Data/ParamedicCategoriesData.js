@@ -659,15 +659,21 @@ export const ParamedicCategoriesData = [
         type: "topic" 
       }]
     },
-   {
-
-      id: slugify("Abbreviations & References"), title: "Abbreviations/References", 
-
+  {
+      id: slugify("Introduction & Core Principles"), title: "Intro/Core Principles", 
       type: "category", 
-
       children: [
-
-        {
+        { 
+          id: slugify("Introduction to Abbott"), title: "Intro to Abbott", 
+          type: "topic" 
+        },{ 
+          id: slugify("Core Principles – Safety & Well-Being"), title: "Safety & Well-Being Principals", 
+          type: "topic" 
+        },{ 
+          id: slugify("General Important Information"), title: "General Important Info.", 
+          type: "topic" 
+        }
+,        {
 
           id: slugify("Abbott Approved Abbreviations"), title: "Abbott Approved Abbreviations", 
 
@@ -774,25 +780,6 @@ export const ParamedicCategoriesData = [
           type: "topic" 
 
         }
-
-      ]
-
-    },
-
-  {
-      id: slugify("Introduction & Core Principles"), title: "Intro/Core Principles", 
-      type: "category", 
-      children: [
-        { 
-          id: slugify("Introduction to Abbott"), title: "Intro to Abbott", 
-          type: "topic" 
-        },{ 
-          id: slugify("Core Principles – Safety & Well-Being"), title: "Safety & Well-Being Principals", 
-          type: "topic" 
-        },{ 
-          id: slugify("General Important Information"), title: "General Important Info.", 
-          type: "topic" 
-        }
       ]
     },
   {
@@ -868,3 +855,4 @@ export const ParamedicCategoriesData = [
       ]
     },
 ];
+
