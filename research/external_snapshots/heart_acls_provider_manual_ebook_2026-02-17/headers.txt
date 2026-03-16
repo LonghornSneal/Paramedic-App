@@ -1,0 +1,61 @@
+HTTP/1.1 302 Found
+Date: Tue, 17 Feb 2026 04:08:35 GMT
+Content-Type: text/html; charset=UTF-8
+Connection: keep-alive
+Server: mod_perl/2.0.11 Perl/v5.32.1
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+Set-Cookie: PHPSESSID=ktrumnblfue4sjlea5mcbqmee1; path=/; secure; HttpOnly; SameSite=None
+Strict-Transport-Security: max-age=15768000
+Content-Security-Policy: frame-ancestors 'self' https://ebooks.heart.org https://readerservices.heart.org https://ahaupgrade.ipublishcentral.com/ https://readerservices-beta.ipublishcentral.com/ https://aha-redesign.ipublishcentral.com/ https://atlas-stg-frontend.heartblr.org/ https://atlas-qa.heartblr.org/ https://readerauth-heart.ipublishcentral.com
+Access-Control-Allow-Origin: *
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
+Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE, PUT
+Access-Control-Allow-Headers: append,delete,entries,foreach,get,has,keys,set,values,Authorization,content-type
+Location: https://ebooks.heart.org/authenticate/login
+
+HTTP/1.1 302 Found
+Date: Tue, 17 Feb 2026 04:08:35 GMT
+Content-Type: text/html; charset=UTF-8
+Connection: keep-alive
+Server: mod_perl/2.0.11 Perl/v5.32.1
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+Set-Cookie: PHPSESSID=psol2svuac7oqk1dg7gjumuhsk; path=/; secure; HttpOnly; SameSite=None
+Strict-Transport-Security: max-age=15768000
+Content-Security-Policy: frame-ancestors 'self' https://ebooks.heart.org https://readerservices.heart.org https://ahaupgrade.ipublishcentral.com/ https://readerservices-beta.ipublishcentral.com/ https://aha-redesign.ipublishcentral.com/ https://atlas-stg-frontend.heartblr.org/ https://atlas-qa.heartblr.org/ https://readerauth-heart.ipublishcentral.com
+Access-Control-Allow-Origin: *
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
+Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE, PUT
+Access-Control-Allow-Headers: append,delete,entries,foreach,get,has,keys,set,values,Authorization,content-type
+Location: /custom/ahasaml/ahasamllogin
+
+HTTP/1.1 200 OK
+Date: Tue, 17 Feb 2026 04:08:35 GMT
+Content-Type: text/html; charset=UTF-8
+Connection: keep-alive
+Server: mod_perl/2.0.11 Perl/v5.32.1
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate
+Pragma: no-cache
+Set-Cookie: PHPSESSID=v746bpvsua5fj6ohs0tn5fk08o; path=/; secure; HttpOnly; SameSite=None
+Set-Cookie: SimpleSAMLSessionID=d9bd6927d5a6afbbe7b3b5fded2d3230; path=/; domain=ebooks.heart.org; HttpOnly
+Set-Cookie: SimpleSAMLSessionID=294e1489c9a46b608503b96523410fbe; path=/; domain=ebooks.heart.org; HttpOnly
+Strict-Transport-Security: max-age=15768000
+Content-Security-Policy: frame-ancestors 'self' https://ebooks.heart.org https://readerservices.heart.org https://ahaupgrade.ipublishcentral.com/ https://readerservices-beta.ipublishcentral.com/ https://aha-redesign.ipublishcentral.com/ https://atlas-stg-frontend.heartblr.org/ https://atlas-qa.heartblr.org/ https://readerauth-heart.ipublishcentral.com
+Access-Control-Allow-Origin: *
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
+Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE, PUT
+Access-Control-Allow-Headers: append,delete,entries,foreach,get,has,keys,set,values,Authorization,content-type
+
