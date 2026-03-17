@@ -1,0 +1,203 @@
+[
+  {
+    "viewport": "360x640",
+    "checks": {
+      "homeCategoryCount": 7,
+      "searchPanel": {
+        "itemCount": 9,
+        "rect": {
+          "top": 82.03125,
+          "bottom": 453.21875,
+          "left": 39.984375,
+          "right": 281.125
+        },
+        "withinViewport": true
+      },
+      "detailTitle": "SVT (stable)",
+      "backReturnedHome": 17,
+      "settingsDialog": {
+        "rect": {
+          "top": 6,
+          "bottom": 634,
+          "left": 6,
+          "right": 354
+        },
+        "withinViewport": true
+      },
+      "historyDialog": {
+        "entries": 1,
+        "rect": {
+          "top": 259.828125,
+          "bottom": 380.171875,
+          "left": 8,
+          "right": 352
+        },
+        "withinViewport": true
+      },
+      "quickVent": {
+        "hasQuickVent": true,
+        "title": null
+      },
+      "quickVentReturnHome": 7,
+      "headerLayout": {
+        "titleRight": 281.125,
+        "rightClusterLeft": 286.71875,
+        "titleDoesNotOverlapControls": true,
+        "searchWithinHeader": true
+      }
+    }
+  },
+  {
+    "viewport": "390x844",
+    "checks": {
+      "homeCategoryCount": 7,
+      "searchPanel": {
+        "itemCount": 9,
+        "rect": {
+          "top": 91.21875,
+          "bottom": 539.21875,
+          "left": 39.984375,
+          "right": 311.125
+        },
+        "withinViewport": true
+      },
+      "detailTitle": "SVT (stable)",
+      "backReturnedHome": 17,
+      "settingsDialog": {
+        "rect": {
+          "top": 6,
+          "bottom": 838,
+          "left": 6,
+          "right": 384
+        },
+        "withinViewport": true
+      },
+      "historyDialog": {
+        "entries": 1,
+        "rect": {
+          "top": 361.828125,
+          "bottom": 482.171875,
+          "left": 8,
+          "right": 382
+        },
+        "withinViewport": true
+      },
+      "ekgModal": {
+        "rect": {
+          "top": 182.046875,
+          "bottom": 661.9375,
+          "left": 12,
+          "right": 378
+        },
+        "withinViewport": true
+      },
+      "quickVent": {
+        "hasQuickVent": true,
+        "title": null
+      },
+      "quickVentReturnHome": 7,
+      "headerLayout": {
+        "titleRight": 311.125,
+        "rightClusterLeft": 316.71875,
+        "titleDoesNotOverlapControls": true,
+        "searchWithinHeader": true
+      }
+    }
+  },
+  {
+    "viewport": "430x932",
+    "checks": {
+      "homeCategoryCount": 7,
+      "searchPanel": {
+        "itemCount": 9,
+        "rect": {
+          "top": 91.21875,
+          "bottom": 539.21875,
+          "left": 39.984375,
+          "right": 351.125
+        },
+        "withinViewport": true
+      },
+      "detailTitle": "SVT (stable)",
+      "backReturnedHome": 17,
+      "settingsDialog": {
+        "rect": {
+          "top": 162,
+          "bottom": 770,
+          "left": 12,
+          "right": 418
+        },
+        "withinViewport": true
+      },
+      "historyDialog": {
+        "entries": 1,
+        "rect": {
+          "top": 403.0625,
+          "bottom": 528.9375,
+          "left": 12,
+          "right": 418
+        },
+        "withinViewport": true
+      },
+      "quickVent": {
+        "hasQuickVent": true,
+        "title": null
+      },
+      "quickVentReturnHome": 7,
+      "headerLayout": {
+        "titleRight": 351.125,
+        "rightClusterLeft": 356.71875,
+        "titleDoesNotOverlapControls": true,
+        "searchWithinHeader": true
+      }
+    }
+  },
+  {
+    "viewport": "480x932",
+    "checks": {
+      "homeCategoryCount": 7,
+      "searchPanel": {
+        "itemCount": 9,
+        "rect": {
+          "top": 91.21875,
+          "bottom": 539.21875,
+          "left": 39.984375,
+          "right": 401.125
+        },
+        "withinViewport": true
+      },
+      "detailTitle": "SVT (stable)",
+      "backReturnedHome": 17,
+      "settingsDialog": {
+        "rect": {
+          "top": 162,
+          "bottom": 770,
+          "left": 12,
+          "right": 468
+        },
+        "withinViewport": true
+      },
+      "historyDialog": {
+        "entries": 1,
+        "rect": {
+          "top": 403.0625,
+          "bottom": 528.9375,
+          "left": 16,
+          "right": 464
+        },
+        "withinViewport": true
+      },
+      "quickVent": {
+        "hasQuickVent": true,
+        "title": null
+      },
+      "quickVentReturnHome": 7,
+      "headerLayout": {
+        "titleRight": 401.125,
+        "rightClusterLeft": 406.71875,
+        "titleDoesNotOverlapControls": true,
+        "searchWithinHeader": true
+      }
+    }
+  }
+]

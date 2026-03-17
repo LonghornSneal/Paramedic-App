@@ -5,6 +5,15 @@ export const ParamedicCategoriesData = [
       type: "category", children: [{
         id: slugify("Adult Airway & Breathing"), title: "Airway/Breathing",
         type: "category", children: [{
+          id: slugify("Adult AIRWAY"), title: "Airway",
+          type: "topic"
+        },{
+          id: slugify("Adult BREATHING"), title: "Breathing",
+          type: "topic"
+        },{
+          id: slugify("Adult BRONCHOSPASM"), title: "Bronchospasm",
+          type: "topic"
+        },{
           id: slugify("Adult COMA/OD"), title: "COMA/OD",
           type: "topic"
         },{
@@ -56,9 +65,6 @@ export const ParamedicCategoriesData = [
           type: "topic"
         },{
           id: slugify("Adult VF-pVT"), title: "VF/pVT",
-          type: "topic"
-        },{
-          id: slugify("Adult Hyperkalemia"), title: "Hyperkalemia",
           type: "topic"
         },{
           id: slugify("Adult Abnormal Rhythms"), title: "Abnormal Rhythms",
@@ -130,6 +136,9 @@ export const ParamedicCategoriesData = [
           id: slugify("Adult Hyperglycemia"), title: "Hyperglycemia", 
           type: "topic" 
         },{ 
+          id: slugify("Adult Hyperkalemia"), title: "Hyperkalemia", 
+          type: "topic" 
+        },{ 
           id: slugify("Adult Hypoglycemia"), title: "Hypoglycemia", 
           type: "topic" 
         },{ 
@@ -155,6 +164,12 @@ export const ParamedicCategoriesData = [
           type: "topic" 
         },{ 
           id: slugify("Adult Stroke"), title: "Stroke", 
+          type: "topic" 
+        },{ 
+          id: slugify("CPR Initiation & Termination"), title: "CPR Initiation/Termination", 
+          type: "topic" 
+        },{ 
+          id: slugify("Death Documentation; Body Temp."), title: "Death Documentation", 
           type: "topic" 
         },{ 
           id: slugify("Adult Toxic Ingestion with serious S-S"), title: "Toxic Ingestion with serious S/S", 
@@ -196,19 +211,20 @@ export const ParamedicCategoriesData = [
       },{ 
         id: slugify("Adult Trauma"), title: "Trauma", 
         type: "category", children: [{ 
-          id: slugify("Adult Cardiac Arrest - Pressure Sores from Immobility"), title: "Cardiac Arrest + Pressure Sores from Immobility", 
+          id: slugify("Adult Mace-Pepper-Spray"), title: "Riot Control (Incapacitating Agent)",
+          navTitle: "Riot Control",
           type: "topic" 
         },{ 
-          id: slugify("Adult Mace-Pepper-Spray"), title: "Mace/Pepper-Spray", 
+          id: slugify("Adult SMR"), title: "Spinal Motion Restriction (SMR)",
+          navTitle: "SMR",
           type: "topic" 
         },{ 
-          id: slugify("Adult SMR"), title: "SMR", 
+          id: slugify("Adult Taser"), title: "TASER p-deployment",
+          navTitle: "TASER",
           type: "topic" 
         },{ 
-          id: slugify("Adult Taser"), title: "Taser", 
-          type: "topic" 
-        },{ 
-          id: slugify("Adult Major Level 1 Trauma"), title: "Major Level 1 Trauma", 
+          id: slugify("Adult Major Level 1 Trauma"), title: "TRAUMA Major (Level 1)",
+          navTitle: "Major Trauma",
           type: "topic" 
         },]
       },{ 
@@ -287,9 +303,7 @@ export const ParamedicCategoriesData = [
           type: "topic"
         },{
           id: slugify("Pediatric Neonatal Resuscitation"), title: "Neonatal Resuscitation",
-          type: "topic"
-        },{
-          id: slugify("Pediatric Newborn Resuscitation"), title: "Newborn Resuscitation",
+          searchKeywords: ["newborn resuscitation", "inverted pyramid model"],
           type: "topic"
         },{
           id: slugify("Pediatric Cardiogenic Shock/Post-Arrest Stabilization"), title: "Cardiogenic Shock/Post-Arrest Stabilization",
@@ -469,11 +483,8 @@ export const ParamedicCategoriesData = [
         },{ 
           id: slugify("Smith-Modified Sgarbossa Criteria"), title: "Sgarbossa Criteria", 
           type: "topic" 
-        },{ 
+        },{
           id: slugify("PCR Requirements"), title: "PCR Requirements", 
-          type: "topic" 
-        },{ 
-          id: slugify("CPR Initiation & Termination"), title: "CPR Initiation/Termination", 
           type: "topic" 
         },{ 
           id: slugify("Clinical Errors & Reporting"), title: "Errors & Reporting", 
@@ -481,7 +492,7 @@ export const ParamedicCategoriesData = [
         },{ 
           id: slugify("Medication Administration Cross Check (MACC)"), title: "Rx Cross Check (MACC)", 
           type: "topic",
-          details: { mdPath: "Content/Administrative & Legal Essentials/medication-administration-cross-check-macc.md", collapsibleHeadings: ["BLS MACC"] } 
+          details: { mdPath: "Content/Operational Protocols/medication-administration-cross-check-macc.md", collapsibleHeadings: ["BLS MACC"] } 
         },{ 
           id: slugify("CDC Field Triage Guidelines (Trauma)"), title: "CDC Triage Guide", 
           type: "topic" 
@@ -826,30 +837,14 @@ export const ParamedicCategoriesData = [
           id: slugify("Applicability of the COG"), title: "Utilizing the COG", 
           type: "topic",
           details: { mdPath: "Content/Administrative & Legal Essentials/applicability-of-the-cog.md" } 
-        },{ 
+        },{
           id: slugify("Mandatory Reporting"), title: "Mandatory Reporting", 
           type: "topic" 
-        },{ 
-          id: slugify("Death Documentation; Body Temp."), title: "Death Documentation", 
-          type: "topic" 
-        },{ 
+        },{
           id: slugify("Crime Scene"), title: "Crime Scene", 
           type: "topic" 
-        },{ 
+        },{
           id: slugify("Worker’s Compensation Process"), title: "Worker's Comp.", 
-          type: "topic" 
-        },{ 
-          id: slugify("Clinical Errors & Reporting"), title: "Errors & Reporting", 
-          type: "topic" 
-        },{ 
-          id: slugify("Medication Administration Cross Check (MACC)"), title: "Rx Cross Check (MACC)", 
-          type: "topic",
-          details: { mdPath: "Content/Administrative & Legal Essentials/medication-administration-cross-check-macc.md", collapsibleHeadings: ["BLS MACC"] } 
-        },{ 
-          id: slugify("CDC Field Triage Guidelines (Trauma)"), title: "CDC Triage Guide", 
-          type: "topic" 
-        },{ 
-          id: slugify("Rehabilitation: Emergency Incidents & Municipal Partners"), title: "Incidents & Municipal Partners", 
           type: "topic" 
         }
       ]

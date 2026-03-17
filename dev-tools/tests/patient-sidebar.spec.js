@@ -283,3 +283,66 @@ for (const viewport of SNAPSHOT_VIEWPORTS) {
     expect(allergyIndicationAfterState.allergyChips).toEqual(['Penicillin', 'ASA', 'Latex']);
   });
 }
+
+test('ekg controls update snapshot, avoid blank vitals, and expose help modal', async ({ page }) => {
+  await openSidebar(page);
+
+  await page.locator('#pt-ekg-select').selectOption('Sinus Tachycardia');
+  await page.locator('#pt-ekg-secondary').selectOption('Inferior MI');
+  await page.waitForTimeout(250);
+
+  const snapshotState = await page.evaluate(() => ({
+    text: document.getElementById('patient-snapshot-bar')?.innerText ?? '',
+    html: document.getElementById('patient-snapshot-bar')?.innerHTML ?? '',
+    rhythmInfoDisabled: document.getElementById('ekg-rhythm-info')?.disabled ?? true,
+    modifierInfoDisabled: document.getElementById('ekg-modifier-info')?.disabled ?? true
+  }));
+
+  expect(snapshotState.text).toContain('Sinus Tachy');
+  expect(snapshotState.text).toContain('Inferior MI');
+  expect(snapshotState.text).not.toContain('HR');
+  expect(snapshotState.text).not.toContain('RR');
+  expect(snapshotState.html).toContain('text-yellow-600');
+  expect(snapshotState.rhythmInfoDisabled).toBe(false);
+  expect(snapshotState.modifierInfoDisabled).toBe(false);
+
+  await page.locator('#ekg-help-button').click();
+  await expect(page.locator('#ekg-help-modal')).not.toHaveClass(/hidden/);
+  await expect(page.locator('#ekg-help-backdrop')).not.toHaveClass(/hidden/);
+  await page.locator('#ekg-help-close').click();
+  await expect(page.locator('#ekg-help-modal')).toHaveClass(/hidden/);
+});
+
+test('recognized medication classes add snapshot warnings under the search bar', async ({ page }) => {
+  await openSidebar(page);
+
+  await fillAndTrigger(page, '#pt-medications', 'Metoprolol Tartrate (Lopressor) (5mg/5ml)');
+  await fillAndTrigger(page, '#pt-indications', 'bronchospasm');
+
+  const snapshotState = await page.evaluate(() => ({
+    text: document.getElementById('patient-snapshot-bar')?.innerText ?? '',
+    html: document.getElementById('patient-snapshot-bar')?.innerHTML ?? '',
+    medicationClasses: window.patientData?.medicationClasses ?? []
+  }));
+
+  expect(snapshotState.medicationClasses).toContain('Beta antagonist (β1 selective)');
+  expect(snapshotState.text).toContain('Warning: Documented beta-blocker may reduce effectiveness of beta-agonist bronchodilators.');
+  expect(snapshotState.text).not.toContain('HR');
+  expect(snapshotState.text).not.toContain('RR');
+  expect(snapshotState.html).toContain('snapshot-warning-item');
+});
+
+test('detail contraindication warnings refresh regardless of whether detail or sidebar changes happen first', async ({ page }) => {
+  await openSidebar(page);
+
+  await page.evaluate(() => window.renderDetailPage('ketorolac-tromethamine-toradol', false, false));
+  await fillAndTrigger(page, '#pt-pmh', 'asthma');
+  await page.waitForTimeout(250);
+  await expect(page.locator('.warning-box')).toContainText('Contraindication: Asthma.');
+
+  await openSidebar(page);
+  await fillAndTrigger(page, '#pt-pmh', 'asthma');
+  await page.evaluate(() => window.renderDetailPage('ketorolac-tromethamine-toradol', false, false));
+  await page.waitForTimeout(250);
+  await expect(page.locator('.warning-box')).toContainText('Contraindication: Asthma.');
+});

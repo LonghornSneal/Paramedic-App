@@ -351,13 +351,33 @@
         </button>
     </div>
     <div class="settings-panel__body">
-        <div class="settings-option settings-option--toggle">
-            <label for="dark-mode-toggle" class="settings-option__label">Dark Mode</label>
-            <input type="checkbox" id="dark-mode-toggle" class="settings-option__toggle" >
-        </div>
-        <div class="settings-option settings-option--toggle">
-            <label for="dev-overlay-toggle" class="settings-option__label">Dev Overlay</label>
-            <input type="checkbox" id="dev-overlay-toggle" class="settings-option__toggle">
+        <p class="settings-panel__intro">Changes save automatically between sessions. The patient info sidebar background stays unchanged.</p>
+        <div id="settings-contrast-warning" class="settings-warning-banner hidden" role="alert" aria-live="polite"></div>
+        <div id="settings-live-status" class="settings-panel__status" aria-live="polite"></div>
+        <section class="settings-section" aria-labelledby="settings-appearance-title">
+            <div class="settings-section__header">
+                <h3 id="settings-appearance-title" class="settings-section__title">Appearance</h3>
+                <p class="settings-section__summary">Tune common field-use surfaces without changing the whole app shell.</p>
+            </div>
+            <div id="settings-appearance-options" class="settings-section__options"></div>
+        </section>
+        <section class="settings-section" aria-labelledby="settings-accessibility-title">
+            <div class="settings-section__header">
+                <h3 id="settings-accessibility-title" class="settings-section__title">Accessibility</h3>
+                <p class="settings-section__summary">Keep text readable and motion calm during longer calls.</p>
+            </div>
+            <div id="settings-accessibility-options" class="settings-section__options"></div>
+        </section>
+        <section class="settings-section" aria-labelledby="settings-advanced-title">
+            <div class="settings-section__header">
+                <h3 id="settings-advanced-title" class="settings-section__title">Advanced</h3>
+                <p class="settings-section__summary">Current developer tools remain available here.</p>
+            </div>
+            <div id="settings-advanced-options" class="settings-section__options"></div>
+        </section>
+        <div class="settings-actions">
+            <button type="button" id="settings-reset-button" class="settings-reset-button">Reset to Defaults</button>
+            <p class="settings-actions__note">Default colors restore the current light or dark palette automatically.</p>
         </div>
     </div>
 </div>

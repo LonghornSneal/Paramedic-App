@@ -819,11 +819,7 @@ body.dark-mode #patient-sidebar .sidebar-chip {
   }
 
   #patient-sidebar .ekg-summary-text {
-    min-height: 0.64rem;
-    font-size: 0.58rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: none;
   }
 }
 

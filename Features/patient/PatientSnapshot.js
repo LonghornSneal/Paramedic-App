@@ -330,6 +330,11 @@ function formatSnapshotAge(data) {
 function sevRR(rr){ if (rr==null) return ''; if (rr>24||rr<10) return 'text-red-600'; if (rr>20||rr<12) return 'text-yellow-600'; return ''; }
 function sevBGL(bgl){ const n=parseFloat(bgl); if (isNaN(n)) return ''; if (n>200||n<60) return 'text-red-600'; if (n>140||n<70) return 'text-yellow-600'; return ''; }
 function sevRhythm(ekg){ const s=(ekg||'').toLowerCase(); if (s.includes('tachy')||s.includes('brady')) return 'text-yellow-600'; return ''; }
+function hasSnapshotValue(value) {
+  if (value == null) return false;
+  if (typeof value === 'string') return value.trim().length > 0;
+  return true;
+}
 // Render compact snapshot under the search bar
 export function renderPatientSnapshot(){
   const bar = document.getElementById('patient-snapshot-bar');
@@ -353,7 +358,14 @@ export function renderPatientSnapshot(){
   const hasPmh = pmhDisplay.length > 0;
   const hasIndications = indicationsDisplay.length > 0;
   const hasSymptoms = symptomsDisplay.length > 0;
-  const hasVitals = Boolean(v.bp || v.hr != null || v.rr != null || v.bgl);
+  const hasVitals = Boolean(
+    hasSnapshotValue(v.bp)
+    || hasSnapshotValue(v.hr)
+    || hasSnapshotValue(v.spo2)
+    || hasSnapshotValue(v.etco2)
+    || hasSnapshotValue(v.rr)
+    || hasSnapshotValue(v.bgl)
+  );
   const ekgLabelSource = typeof d.ekgDisplay === 'string' && d.ekgDisplay.trim().length ? d.ekgDisplay : d.ekg;
   const hasEkg = typeof ekgLabelSource === 'string' ? ekgLabelSource.trim().length > 0 : Boolean(ekgLabelSource);
   const hasMeds = medicationClasses.length > 0 || medicationsDisplay.length > 0;
@@ -393,7 +405,7 @@ export function renderPatientSnapshot(){
     if (summary) parts.push(`Symptoms: ${summary}`);
   }
   if (v.bp) parts.push(`BP ${v.bp}`);
-  if (v.hr != null) parts.push(`<span class="${sevHR(v.hr)}">${v.hr}HR</span>`);
+  if (hasSnapshotValue(v.hr)) parts.push(`<span class="${sevHR(v.hr)}">${v.hr}HR</span>`);
   if (typeof v.spo2 === 'number') {
     parts.push(`${v.spo2}%`);
   } else if (typeof v.spo2 === 'string' && v.spo2.trim()) {
@@ -403,7 +415,7 @@ export function renderPatientSnapshot(){
     const etValue = typeof v.etco2 === 'number' ? v.etco2 : v.etco2;
     parts.push(`${etValue}EtCO<sub>2</sub>`);
   }
-  if (v.rr != null) parts.push(`<span class="${sevRR(v.rr)}">${v.rr}RR</span>`);
+  if (hasSnapshotValue(v.rr)) parts.push(`<span class="${sevRR(v.rr)}">${v.rr}RR</span>`);
   if (v.bgl) {
     const bglSuffix = typeof v.bgl === 'number' ? `${v.bgl}mg/dL` : v.bgl;
     parts.push(`<span class="${sevBGL(v.bgl)}">${bglSuffix}</span>`);

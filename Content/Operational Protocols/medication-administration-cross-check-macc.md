@@ -59,5 +59,3 @@
 
 
 Source: "Medication Administration Cross Check" and "BLS MACC" (Section 1: EMS Operations).
-
-

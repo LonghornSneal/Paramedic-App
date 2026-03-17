@@ -59,6 +59,21 @@
         "detail": "{\"x\":8,\"y\":153.34375,\"width\":344,\"height\":333.3125}"
       },
       {
+        "name": "search panel in viewport adult anaphylaxis pre-patient",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":119.21875,\"width\":236,\"height\":371.1875}"
+      },
+      {
+        "name": "extra adult anaphylaxis detail opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "extra hidden-text toggle works",
+        "ok": true,
+        "detail": ""
+      },
+      {
         "name": "flow2 sidebar close top-hit",
         "ok": true,
         "detail": ""
@@ -66,7 +81,7 @@
       {
         "name": "flow2 snapshot updated",
         "ok": true,
-        "detail": "12yo 70kg • Allergies: NKA • HR • RR"
+        "detail": "12yo 70kg • Allergies: NKA"
       },
       {
         "name": "search panel in viewport midazolam",
@@ -89,14 +104,49 @@
         "detail": ""
       },
       {
-        "name": "search panel in viewport adult anaphylaxis",
+        "name": "search panel in viewport tidal volume calculator",
         "ok": true,
         "detail": "{\"x\":40,\"y\":119.21875,\"width\":236,\"height\":371.1875}"
       },
       {
-        "name": "run failure",
-        "ok": false,
-        "detail": "locator.click: Timeout 30000ms exceeded."
+        "name": "flow3 quick vent opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent math visible",
+        "ok": true,
+        "detail": "420-560 mL (no ARDS)\n280-420 mL (ARDS)"
+      },
+      {
+        "name": "flow3 quick vent hidden toggle works",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent modal visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent modal close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 ekg help visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 ekg help close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 sidebar closed",
+        "ok": true,
+        "detail": ""
       }
     ]
   },
@@ -132,7 +182,7 @@
       {
         "name": "search panel in viewport seizure",
         "ok": true,
-        "detail": "{\"x\":40,\"y\":91.21875,\"width\":265.546875,\"height\":448}"
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":265.5,\"height\":448}"
       },
       {
         "name": "flow1 seizure detail opened",
@@ -160,6 +210,21 @@
         "detail": "{\"x\":8,\"y\":255.34375,\"width\":374,\"height\":333.3125}"
       },
       {
+        "name": "search panel in viewport adult anaphylaxis pre-patient",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":265.5,\"height\":448}"
+      },
+      {
+        "name": "extra adult anaphylaxis detail opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "extra hidden-text toggle works",
+        "ok": true,
+        "detail": ""
+      },
+      {
         "name": "flow2 sidebar close top-hit",
         "ok": true,
         "detail": ""
@@ -167,7 +232,7 @@
       {
         "name": "flow2 snapshot updated",
         "ok": true,
-        "detail": "12yo 70kg • Allergies: NKA • HR • RR"
+        "detail": "12yo 70kg • Allergies: NKA"
       },
       {
         "name": "search panel in viewport midazolam",
@@ -190,14 +255,49 @@
         "detail": ""
       },
       {
-        "name": "search panel in viewport adult anaphylaxis",
+        "name": "search panel in viewport tidal volume calculator",
         "ok": true,
-        "detail": "{\"x\":40,\"y\":91.21875,\"width\":265.5,\"height\":402.0625}"
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":265.5,\"height\":383.5625}"
       },
       {
-        "name": "run failure",
-        "ok": false,
-        "detail": "locator.click: Timeout 30000ms exceeded."
+        "name": "flow3 quick vent opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent math visible",
+        "ok": true,
+        "detail": "420-560 mL (no ARDS)\n280-420 mL (ARDS)"
+      },
+      {
+        "name": "flow3 quick vent hidden toggle works",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent modal visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent modal close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 ekg help visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 ekg help close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 sidebar closed",
+        "ok": true,
+        "detail": ""
       }
     ]
   },
@@ -233,7 +333,7 @@
       {
         "name": "search panel in viewport seizure",
         "ok": true,
-        "detail": "{\"x\":40,\"y\":91.21875,\"width\":305.546875,\"height\":448}"
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":305.5,\"height\":448}"
       },
       {
         "name": "flow1 seizure detail opened",
@@ -261,6 +361,21 @@
         "detail": "{\"x\":12,\"y\":287.90625,\"width\":406,\"height\":356.1875}"
       },
       {
+        "name": "search panel in viewport adult anaphylaxis pre-patient",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":305.5,\"height\":448}"
+      },
+      {
+        "name": "extra adult anaphylaxis detail opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "extra hidden-text toggle works",
+        "ok": true,
+        "detail": ""
+      },
+      {
         "name": "flow2 sidebar close top-hit",
         "ok": true,
         "detail": ""
@@ -268,7 +383,7 @@
       {
         "name": "flow2 snapshot updated",
         "ok": true,
-        "detail": "12yo 70kg • Allergies: NKA • HR • RR"
+        "detail": "12yo 70kg • Allergies: NKA"
       },
       {
         "name": "search panel in viewport midazolam",
@@ -291,14 +406,49 @@
         "detail": ""
       },
       {
-        "name": "search panel in viewport adult anaphylaxis",
+        "name": "search panel in viewport tidal volume calculator",
         "ok": true,
-        "detail": "{\"x\":40,\"y\":91.21875,\"width\":305.5,\"height\":402.0625}"
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":305.5,\"height\":383.5625}"
       },
       {
-        "name": "run failure",
-        "ok": false,
-        "detail": "locator.click: Timeout 30000ms exceeded."
+        "name": "flow3 quick vent opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent math visible",
+        "ok": true,
+        "detail": "420-560 mL (no ARDS)\n280-420 mL (ARDS)"
+      },
+      {
+        "name": "flow3 quick vent hidden toggle works",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent modal visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent modal close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 ekg help visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 ekg help close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 sidebar closed",
+        "ok": true,
+        "detail": ""
       }
     ]
   },
@@ -334,7 +484,7 @@
       {
         "name": "search panel in viewport seizure",
         "ok": true,
-        "detail": "{\"x\":40,\"y\":91.21875,\"width\":355.546875,\"height\":448}"
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":355.5,\"height\":448}"
       },
       {
         "name": "flow1 seizure detail opened",
@@ -362,6 +512,21 @@
         "detail": "{\"x\":16,\"y\":341.90625,\"width\":448,\"height\":356.1875}"
       },
       {
+        "name": "search panel in viewport adult anaphylaxis pre-patient",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":355.5,\"height\":448}"
+      },
+      {
+        "name": "extra adult anaphylaxis detail opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "extra hidden-text toggle works",
+        "ok": true,
+        "detail": ""
+      },
+      {
         "name": "flow2 sidebar close top-hit",
         "ok": true,
         "detail": ""
@@ -369,7 +534,7 @@
       {
         "name": "flow2 snapshot updated",
         "ok": true,
-        "detail": "12yo 70kg • Allergies: NKA • HR • RR"
+        "detail": "12yo 70kg • Allergies: NKA"
       },
       {
         "name": "search panel in viewport midazolam",
@@ -392,14 +557,49 @@
         "detail": ""
       },
       {
-        "name": "search panel in viewport adult anaphylaxis",
+        "name": "search panel in viewport tidal volume calculator",
         "ok": true,
-        "detail": "{\"x\":40,\"y\":91.21875,\"width\":355.5,\"height\":402.0625}"
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":355.5,\"height\":383.5625}"
       },
       {
-        "name": "run failure",
-        "ok": false,
-        "detail": "locator.click: Timeout 30000ms exceeded."
+        "name": "flow3 quick vent opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent math visible",
+        "ok": true,
+        "detail": "420-560 mL (no ARDS)\n280-420 mL (ARDS)"
+      },
+      {
+        "name": "flow3 quick vent hidden toggle works",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent modal visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent modal close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 ekg help visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 ekg help close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 sidebar closed",
+        "ok": true,
+        "detail": ""
       }
     ]
   }

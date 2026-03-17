@@ -419,8 +419,34 @@ function bindDocumentDismissal() {
     searchUiState.documentBound = true;
 }
 
+function getCommittedSearchScrollTarget(searchTerm, highlightId = null) {
+    if (highlightId) return highlightId;
+    const { filteredResults, smartResults } = buildSuggestionModel(searchTerm);
+    return filteredResults[0]?.id || smartResults[0]?.id || null;
+}
+
+function scheduleCommittedSearchScroll(targetId) {
+    if (!targetId || typeof window === 'undefined' || window.innerWidth > 600) return;
+    const scrollTargetIntoView = (attempt = 0) => {
+        const topicEl = document.querySelector(`.topic-link-item[data-topic-id="${targetId}"]`);
+        if (topicEl) {
+            topicEl.scrollIntoView({ block: 'center', inline: 'nearest' });
+        }
+        if (attempt < 5) {
+            window.setTimeout(() => scrollTargetIntoView(attempt + 1), 120);
+        }
+    };
+    window.requestAnimationFrame(() => {
+        window.setTimeout(() => scrollTargetIntoView(0), 80);
+    });
+}
+
 function renderSearchResults(searchTerm, shouldAddHistory = true, highlightId = null, categoryPath = []) {
     setCommittedSearchTerm(searchTerm);
+    const scrollTargetId = getCommittedSearchScrollTarget(searchTerm, highlightId);
+    if (typeof window !== 'undefined') {
+        window.pendingSpiderwebScrollId = scrollTargetId;
+    }
     if (shouldAddHistory && searchTerm) {
         addHistoryEntry({
             viewType: 'list',
@@ -431,6 +457,7 @@ function renderSearchResults(searchTerm, shouldAddHistory = true, highlightId = 
     }
     updateNavButtonsState();
     renderInitialView(false, highlightId, categoryPath);
+    scheduleCommittedSearchScroll(scrollTargetId);
 }
 
 export function resetSearchIndex() {

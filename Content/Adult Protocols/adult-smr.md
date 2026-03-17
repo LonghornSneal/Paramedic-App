@@ -1,4 +1,4 @@
-# SMR
+# Spinal Motion Restriction (SMR)
 
 Should be considered in any trauma patient.
 

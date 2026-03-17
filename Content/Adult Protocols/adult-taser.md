@@ -1,4 +1,4 @@
-# Taser
+# TASER p-deployment
 
 Intervention
 Evaluate -> medical/trauma/toxic/psych issues, what attracted LE, & why TASER was needed -> stabilize accordingly

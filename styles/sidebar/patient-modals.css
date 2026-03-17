@@ -73,11 +73,11 @@ body.ekg-help-open #sidebar-overlay {
   width: 2.4rem;
   height: 2.4rem;
   padding: 0;
-  border: 1px solid rgb(148 163 184 / 45%);
+  border: 1px solid var(--app-popup-border);
   border-radius: 999px;
-  background: rgb(255 255 255 / 96%);
+  background: var(--app-popup-surface);
   box-shadow: 0 8px 22px rgb(15 23 42 / 12%);
-  color: #0f172a;
+  color: var(--app-popup-text);
   float: none;
   font-size: 1.35rem;
   line-height: 1;
@@ -85,12 +85,12 @@ body.ekg-help-open #sidebar-overlay {
 }
 
 #ekg-help-close:hover {
-  border-color: rgb(37 99 235 / 42%);
-  color: #2563eb;
+  border-color: var(--app-popup-accent);
+  color: var(--app-popup-accent);
 }
 
 #ekg-help-close:focus-visible {
-  outline: 2px solid #2563eb;
+  outline: 2px solid var(--app-popup-accent);
   outline-offset: 2px;
 }
 
@@ -102,12 +102,10 @@ body.ekg-help-open #sidebar-overlay {
 
 .ekg-modal-detail { display: grid; grid-auto-flow: row; row-gap: 1rem; }
 .ekg-modal-detail-image { width: 100%; border-radius: 0.5rem; background: #0b1220; cursor: zoom-in; }
-.ekg-modal-detail-definition { color: #1f2937; font-size: 0.92rem; line-height: 1.35rem; }
-.modal-back-button { justify-self: start; border: 1px solid #2563eb; background: #fff; color: #2563eb; padding: 0.45rem 0.95rem; border-radius: 0.55rem; font-size: 0.88rem; cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease; }
-.modal-back-button:hover { background: #2563eb; color: #fff; }
-.modal-back-button:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
-body.dark-mode .modal-back-button { border-color: #93c5fd; color: #93c5fd; background: transparent; }
-body.dark-mode .modal-back-button:hover { background: #2563eb; color: #fff; }
+.ekg-modal-detail-definition { color: var(--app-popup-text); font-size: 0.92rem; line-height: 1.35rem; }
+.modal-back-button { justify-self: start; border: 1px solid var(--app-popup-accent); background: var(--app-popup-surface); color: var(--app-popup-accent); padding: 0.45rem 0.95rem; border-radius: 0.55rem; font-size: 0.88rem; cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease; }
+.modal-back-button:hover { background: var(--app-popup-accent); color: var(--app-popup-surface); }
+.modal-back-button:focus-visible { outline: 2px solid var(--app-popup-accent); outline-offset: 2px; }
 
 #ekg-modal-back {
   position: sticky;
@@ -115,21 +113,17 @@ body.dark-mode .modal-back-button:hover { background: #2563eb; color: #fff; }
   z-index: 1;
 }
 
-body.dark-mode #ekg-help-modal .modal-content {
-  background: #0f172a;
-}
-
 body.dark-mode #ekg-help-title,
 body.dark-mode .ekg-modal-detail-definition,
 body.dark-mode .modal-list,
 body.dark-mode .modal-intro {
-  color: #e2e8f0;
+  color: var(--app-popup-text);
 }
 
 body.dark-mode #ekg-help-close {
-  border-color: rgb(125 211 252 / 35%);
-  background: rgb(15 23 42 / 94%);
-  color: #e2e8f0;
+  border-color: var(--app-popup-border);
+  background: var(--app-popup-surface);
+  color: var(--app-popup-text);
 }
 
 .ekg-image-popup-overlay {
@@ -147,9 +141,9 @@ body.dark-mode #ekg-help-close {
   min-width: 10rem;
   min-height: 10rem;
   padding: 2.85rem 0.8rem 0.8rem;
-  border: 1px solid rgb(148 163 184 / 48%);
+  border: 1px solid var(--app-popup-border);
   border-radius: 1rem;
-  background: rgb(255 255 255 / 98%);
+  background: var(--app-popup-bg);
   box-shadow: 0 22px 48px rgb(15 23 42 / 24%);
   overflow: hidden;
   touch-action: none;
@@ -172,10 +166,10 @@ body.dark-mode #ekg-help-close {
   width: 2.2rem;
   height: 2.2rem;
   padding: 0;
-  border: 1px solid rgb(148 163 184 / 42%);
+  border: 1px solid var(--app-popup-border);
   border-radius: 999px;
-  background: rgb(255 255 255 / 96%);
-  color: #0f172a;
+  background: var(--app-popup-surface);
+  color: var(--app-popup-text);
   font-size: 1rem;
   font-weight: 700;
   line-height: 1;
@@ -184,12 +178,12 @@ body.dark-mode #ekg-help-close {
 }
 
 .ekg-image-popup-close:hover {
-  border-color: rgb(37 99 235 / 42%);
-  color: #2563eb;
+  border-color: var(--app-popup-accent);
+  color: var(--app-popup-accent);
 }
 
 .ekg-image-popup-close:focus-visible {
-  outline: 2px solid #2563eb;
+  outline: 2px solid var(--app-popup-accent);
   outline-offset: 2px;
 }
 
@@ -215,8 +209,8 @@ body.dark-mode #ekg-help-close {
 }
 
 body.dark-mode .ekg-image-popup {
-  border-color: rgb(125 211 252 / 30%);
-  background: rgb(15 23 42 / 96%);
+  border-color: var(--app-popup-border);
+  background: var(--app-popup-bg);
 }
 
 body.dark-mode .ekg-image-popup-close {

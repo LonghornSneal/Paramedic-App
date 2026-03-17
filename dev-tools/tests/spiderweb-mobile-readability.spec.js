@@ -170,7 +170,7 @@ test('3. committed search keeps mobile spiderweb labels readable', async ({ page
   for (const viewport of PHONE_VIEWPORTS) {
     await gotoApp(page, viewport);
     await commitSearch(page, 'seizure');
-    await expect(page.getByRole('button', { name: 'Medical' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Medical' }).first()).toBeVisible();
     await expect(page.getByRole('button', { name: 'Seizure', exact: true }).first()).toBeVisible();
 
     const search = await measureSpiderweb(page);

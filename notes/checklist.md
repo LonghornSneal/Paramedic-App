@@ -13,3 +13,10 @@
 - [x] Capture usability, readability, animation, and visual design findings.
 - [x] Draft a numbered remediation prompt for a follow-up agent.
 - [x] Append the QA outcome to notes/memory-log.md.
+
+# 2026-03-16 Background Refresh Checklist
+- [x] Inspect current non-sidebar theme/layout/detail/modal/navigation styles.
+- [x] Review live home, search, detail, history/settings, quick-vent, and modal surfaces in Playwright before editing.
+- [x] Implement reusable non-sidebar background tokens and surface updates.
+- [x] Re-run required Playwright flows after each meaningful styling pass across required mobile widths.
+- [x] Run lint verification and append the design/QA outcome to notes/memory-log.md.

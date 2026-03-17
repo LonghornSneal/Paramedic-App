@@ -164,20 +164,19 @@ function scheduleTreeMetricsPass(rootContainer) {
     const contentArea = document.getElementById('content-area');
     const state = getCategoryTreeState();
     contentArea?.classList.add('category-tree-stabilizing');
-    requestAnimationFrame(() => {
+    updateCategoryTreeMetrics(rootContainer);
+    if (state.revealTimer) {
+        clearTimeout(state.revealTimer);
+        state.revealTimer = null;
+    }
+    state.revealTimer = window.setTimeout(() => {
         updateCategoryTreeMetrics(rootContainer);
-        if (state.revealTimer) {
-            clearTimeout(state.revealTimer);
-            state.revealTimer = null;
-        }
-        state.revealTimer = window.setTimeout(() => {
+        contentArea?.classList.remove('category-tree-stabilizing');
+        requestAnimationFrame(() => {
             updateCategoryTreeMetrics(rootContainer);
-            requestAnimationFrame(() => {
-                contentArea?.classList.remove('category-tree-stabilizing');
-            });
-            state.revealTimer = null;
-        }, CATEGORY_TREE_STABILIZE_MS);
-    });
+        });
+        state.revealTimer = null;
+    }, CATEGORY_TREE_STABILIZE_MS);
 }
 // Renders the main category list view (home screen) and highlights a topic if provided.
 export function renderInitialView(shouldAddHistory = true, highlightId = null, categoryPath = []) {
@@ -217,10 +216,14 @@ function openCategoriesAndHighlight(categoryPath = [], highlightId = null) {
     const contentArea = window.contentArea || document.getElementById('content-area');
     void categoryPath;
     if (!contentArea) return;
-    if (highlightId) { 
-        const topicEl = contentArea.querySelector(`.topic-link-item[data-topic-id="${highlightId}"]`);
+    const scrollTargetId = highlightId || window.pendingSpiderwebScrollId || null;
+    window.pendingSpiderwebScrollId = null;
+    if (scrollTargetId) { 
+        const topicEl = contentArea.querySelector(`.topic-link-item[data-topic-id="${scrollTargetId}"]`);
         if (topicEl) {
-            topicEl.classList.add('recently-viewed'); 
+            if (highlightId) {
+                topicEl.classList.add('recently-viewed');
+            }
             topicEl.scrollIntoView({ block: 'center', inline: 'nearest' });
         }
     }

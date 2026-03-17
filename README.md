@@ -1,680 +1,99 @@
-﻿--- **Paramedic Quick Reference Application**
+--- **Paramedic Quick Reference Application**
 
-Always follow these guidelines:
-
-  1. Read Before Coding: Read this README.md in full to understand how the entire repository works together and to locate relevant information for the task at hand. Chapters 1-5 are essential to understanding everything about the app and must be thoroughly read before beginning user's request. Chapters 6-7 are were you find tasks to work on. Chapters 8-9 are mostly for the user. Chapter 10 is where future tasks will eventually become the current tasks.
-  2. Modifying the README.md: After you have finished all of the user's requests, update the README.md to reflect the current state of the app. Fix any spelling errors. Changes should be surrounded by double astrict with the original line in square brackets for easy identification. Ensure everything is located in their appropriate locations, one example of this would be when you finish a task and it passes the test you run on it, then it would logically be moved out of the tasks category and placed at the end of Chapter 8 (additionally placed in Chapter 9 if the change is a major change), and it would be re-written to conform to the style of that Chapter.
-    2.1 Chapters 6,7, & 10: If you discover errors that involve features that should already be functional, then specify what the issue is in Chapter 6. If a task is known, but isn't in Chapter 7, then place it in Chapter 7 (unless it is currently the task that the user requested and it is the first time the user has requested this task). When the user's request is simple, research potential future tasks to place in Chapter 10 by looking through other code bases online and ensuring that the future task is appropriate for this specific Paramedic-App and that the user would want the future task added to the README.md.
-  3. Quote full line + neighbor: When referencing code (for any reason), always quote the entire line and include the line immediately before and after it. Reference the line numbers. 
-  4. Identify new code in explanations: Wrap new code with double asterisks in explanations only (not in source)
-  5. Comment new code: Explain why and how; update or remove stale comments you encounter.
-  6. Avoid duplication: Search first; consolidate or remove duplicates; keep names consistent across files.
-  7. Align with scope and structure: Changes must align with sections 1â€“5; do not introduce frameworks or backends.
-  8. Place Code Correctly: Add or modify code in the appropriate file and maintain logical ordering so that definitions appear before use. This avoids timing or hoisting issues.
-  9. Fix what you see: If you notice a bug while working here, fix it unless explicitly told not to.
-  10. File-specific docs: If a file mentions local rules or notes, read and follow them.
-  11. Verify: Manually verify features still work after changes; run available tests as appropriate. If no appropriate test exists, then create an appropriate test and ensure it is functional and passes the test.
+- **[Use `AGENTS.md` for repo policy and clinical safeguards, `Agent-Workflow.md` for the skill loop, and this README for live file ownership, current app behavior, and task placement.]**
+- **[Read Chapters 1-5 before changing app behavior. Use Chapters 6-7 for active work, Chapters 8-9 for verified shipped work, and Chapter 10 for future-only ideas.]**
+- **[When README status lines are added or rewritten, keep the repo's double-asterisk bracket convention: `**[ ... ]**`.]**
+- **[Before documenting behavior as current, verify the code path and confirm UI behavior with Playwright where it matters.]**
 
 ## Table of Contents
 1. General Scope
-2. App Overview and Structure
-3. Project Purpose
+2. App Overview and Ownership Areas
+3. Current Product Behavior
 4. Project Structure
-5. How the Pieces Work Together
+5. Common Task Map
 6. Top Priority Tasks
 7. Current Tasks/Goals
 8. Recent Fixes and Changes
 9. Timeline Summary
 10. Future Tasks/Goals/Ideas
 
-## 1. **General Scope**
-
-Single-page, offline app in HTML/CSS/vanilla JS (ES Modules).
-All data is local (no APIs). Instant load, no network required.
-Files are organized into logical folders (Data, Features, Utils, etc.).
-Scope strictly reflects current functionality of this repo (nothing external or future-ware).
-
-
-## 2. APP OVERVIEW AND STRUCTURE
-
-Built with: HTML, CSS, JavaScript, & ES Modules.
-**[Supported Browsers: Optimized for the last two releases of Chrome, Firefox, Edge, and Safari, plus iOS Safari 15.4 or newer; Opera Mini is intentionally excluded because it cannot fully run the app's offline SPA tooling.]**
-
-Paramedic Protocols: This app encompasses the user's Paramedic Protocols along with additional information, features, and functions.
-
-App philosophy: Relevant and/or more important information should naturally be easier for the user to access. Pt Treatments that are relevant, relevant warnings, and other relevant information automatically should have the app focus on that information to ensure timely pt care.
-
-This README serves as a thorough guide to the project, outlining where each piece of functionality resides and highlighting how the components interact. By understanding this structure, developers can more easily identify where to implement new features or fix issues.
-
-Logical File/Folder separation of Codebase: Each file/script has a specific purpose (e.g., data definition, UI rendering, event handling).
-
-Some updates will require updates in multiple files, even with a single minor change. 
-
-Styling: Tailwind via CDN + styles.css (custom rules).
-
-## 3. PROJECT PURPOSE
-
-The Paramedic Quick Reference is designed to allow paramedics to find life-saving information within seconds. It functions as an interactive protocol book and drug reference on a phone or tablet. The interface is optimized for speed, clarity, and ease-of-use in emergency situations.
-
-Design & Feature Overview: The appâ€™s UI elements & features.
-  Detailed below, describing the function & role it plays in the app.
-
-  Main Contents Page: The default view that shows categories & subtopics.
-    The header: shows the app title centered with the search bar directly below; the Patient Info button is topâ€‘left; Back/Forward arrows are topâ€‘right (disabled initially), with the Home button beneath them and the History button below Home. 
-    **[The Contents view now renders as a left-origin spiderweb of connected pills: the 8 root categories stay stacked on the left, selecting a category reveals the next connected pill column to the right, and selecting a final topic animates that pill toward the left edge before the detail page takes over.]**
-    **[Entering patient data in the sidebar now re-scores the spiderweb in place: the most relevant pills and branches become larger/brighter, unrelated branches stay visible but shrink/fade, and detail pages still re-render with the appropriate warnings at the top.]**
-    All rendering is local, IDs are stable, taps are minimal, and flows are simple.
-    **[Spiderweb Topic Flow: Each category pill opens the next column of connected pills to the right while the active path stays largest; unrelated pills remain readable but visually quieter.]**
-
-  Subtopics and Navigation Hierarchy: Topics are organized as a tree.
-    **[Parent items (type "category") render as connected pills instead of chevron rows. Clicking a category pill opens its child column, keeps the active branch visually dominant, and literal connector lines show the path from left to right. Final items (type "topic") render as clickable pills with data-topic-id and route through the pill-to-detail transition.]**
-
-    Focused Subtopic Sections (Detail Pages): Clicking a leaf topic opens a detail page for that item. The page content is generated from the data entry for that topic, with each section rendered under a collapsible subheading.
-      Text is processed for inline markup: bracketed pairs like [[display|info]] render as green, clickable â€œtoggle-infoâ€ spans that reveal additional details in-place; colored emphasis (e.g., {{red:...}}) is also supported.
-      Original documentation: Topics load curated Markdown & provide links (& optional inline embedding) to the original local PDF chapter.
-      Warnings: are injected at the top of the page based on patientData (e.g., allergy match, PDE5 + NTG, low BP for NTG, pediatric Etomidate). The app re-renders details on patient updates so context stays current.
-        Note: broad, automatic medication administration math is planned (see Current Tasks); some detail content may include calculations, but universal dose auto-calculation is not yet implemented across all Rx's.
-
-  **[Search Bar: live Filtered Topics + Smart Suggestions dropdown with committed spiderweb filtering and only one location for user input.]**
-    **[Matching: case-insensitive against topic titles, navigation labels, and associated keywords. Typing updates the two dropdown columns immediately; pressing Enter re-renders the spiderweb, and selecting a suggestion opens detail while committing that search state to history. Both columns are scrollable.]**
-    **[Search behavior: the app no longer swaps to a standalone results page or mutates the spiderweb on every keystroke. Draft typing only updates the dropdown; committed searches (Enter or suggestion selection) re-render the connected pill layout and remain restorable through navigation history.]**
-    **[Current matching implementation: the left column surfaces direct topic matches, the right column blends search hits with patient-aware priority, and duplicate topic names gain contextual prefixes such as "Pediatric Seizure" so the dropdown stays readable.]**
-
-  Patient Info Menu Button: The Patient Info button (#open-sidebar-button) opens the Patient Information sidebar (#patient-sidebar) & activates the dim overlay (#sidebar-overlay).
-    Close sidebar: by clicking its close (X) button or by clicking the overlay.
-  The sidebar provides fields for sex, age, weight (KG/LB), height, PMH, allergies, current meds, indications, symptoms, VS, & EKG. Entered values update patientData immediately, which personalizes the app by striking through lessâ€‘relevant list items, reâ€‘rendering the current detail page, & showing patientâ€‘specific warnings.
-
-  **[Current patient-sidebar effect: sidebar input updates patientData immediately, refreshes the spiderweb relevance model in place, and keeps patient-aware detail warnings synchronized without leaving the current view.]**
-  Patient Info Sidebar/Section: The sidebar is an interactive form that updates patientData as you type. All Categories will Auto-Update if the information is filled out elsewhere from within the app.
-  **[Current sidebar layout: every patient-sidebar label now stays inline with its control, Sex+Age and Weight+Height share the first two rows, BP+HR+SpO2, EtCO2+RR+BGL, Pupils+Lung Sounds, and GCS+A&O stay paired on fixed rows, and dense chip selections remain readable without overlap or duplicate EtCO2 text.]**
-  **[Current sidebar styling: the patient sheet now uses compact blue-white cards, highlighted sex-symbol pills, shorter preset/unit labels where needed, and responsive density rules so dense desktop (1280x720) and mobile (390x844) fills fit without vertical sidebar scrolling.]**
-    Includes: Sex, Age, Weight (kg/lb), Height, PMH, Allergies, Medications, Indications, S/S, & VS.
-      Note: pain scale still needs to be coded into app.
-    VS Categories: BP (auto-calculates MAP), HR, %SpO2, EtCO2, RR, BGL, Pupils (mm), GCS, A&O Status, LS, & EKG Interpretation.
-    Vital Signs (VS): Manual entry or dropdowns. Abnormal values trigger warnings or Strike-Through contraindicated actions.
-      Selectable Options: Each field exposes datalist suggestions today; hover/press-and-hold pop-ups for definitions remain on the roadmap.
-    VS include:
-      BP: Number entry or dropdown.
-          Dropdown Options: 200+, 160+, Normal (90-160 SBP), 70-90, 70-.
-          Input Range: systolic 0-400; diastolic 0-300 (integers). MAP auto-calculated and stored on the input for future pop-up support.
-      HR: Number entry or dropdown.
-          Dropdown Options: 150+, 100+, 60-100, >60, >40.
-          Input Range: 0-300 bpm (integers).
-      % SpO2: Number entry or dropdown.
-          Dropdown Options: Normal, Low, Severely Low.
-          Input Range: 50-100 (integers).
-      EtCO2: Number entry.
-          Input Range: 0-50 (integers).
-      RR: Number entry.
-          Input Range: 0-80 (integers).
-      BGL: Number entry or dropdown (Normal, High, Low, Critical). Numeric entries clamp to 0-900; textual descriptors remain accepted.
-      Pupils (mm): Number entry or dropdown (PERRL, Pinpoint, Dilated, Unequal, Fixed, Sluggish, Non-reactive). Numeric values normalize to 0-8 mm before appending descriptors.
-      GCS: Number entry or dropdown.
-          Input Range: 3-15.
-      A&O Status: Dropdown only (0, 1, 2, 3, 4).
-      Lung Sounds (LS): Type-to-filter dropdown (Clear, Clear Bilaterally, Diminished, Coarse, Crackles, Rales, Rhonchi, Wheezes, Stridor, Absent).
-    EKG: Free text in sidebar (#ptâ€‘ekg).
-      Future Tasks: dropdowns, popâ€‘ups, or â€œhelp.â€ Snapshot can tint entries containing â€œtachyâ€/â€œbradyâ€ if patientData.ekg is set. Current code doesnâ€™t set it in updatePatientData(); add that assignment to enable snapshot and future EKG logic.
-
-  Defaults & Behavior: All fields are optional.
-    More Data: = tighter tailoring.
-    No Data: = No UI/app effects/changes.
-    Data input: UI updates instantly on input.
-    Stored Data: Data persists in memory; session persistence via localStorage is on the roadmap.
-
-Effects of Patient Data: The information input in the Patient Info sidebar influences the main content in real time (Section needs lot of improvements still).
-  StrikeThrough Inapplicable Items: Occurs when certain Patient Info has been entered.
-    Contents List Topic Titles: Irrelevant Topic Titles are visually deâ€‘emphasized by applying a strikeâ€‘through style (relevant topics remain normal).
-    Detail Page Sections: Irrelevant sections are visually de-emphasized by applying a faded strike-through style (relevant info remains normal).
-      Age Patient Info Example: Entering in an Adult age will cause information specific to Pediatric patients to have a faded strike-through style.
-  Warnings/Alerts: Warnings are meant to be more noticeable than Alerts, which should also be noticeable.
-  If patient data triggers a contraindication or warning, the detail page will show a prominent warning box (usually with a red border or background). Warnings are intentionally noticeable (red/yellow boxes) and appear only on the detail page.
-    Warnings/Alerts are capable of being triggered by:
-      Patient Info that may cause a Strike-through effect:
-      Patient Info that may cause a Warning effect:
-      Allergy Input: Corresponding detail page shows a prominent Allergy Alert at the top.
-      Detail pages render prominent warning boxes at the top when patient context triggers a contraindication or caution. Current checks include:
-      Allergy Alert: if an entered allergy matches the topic title/id.
-      NTG-specific: low systolic BP (< 100 mmHg) and PDE5 inhibitor usage both trigger red contraindication warnings (â€œdo not administer â€¦â€).
-      Pediatric Etomidate: age < 10 triggers a contraindication warning for Etomidate.
-      General Contraindications: nonâ€‘allergy entries from the medicationâ€™s contraindications list are displayed as individual warnings.
-  Dynamic Content Filtering: When Patient Info (or Patient Data) is present, the Contents list visually deâ€‘emphasizes nonâ€‘matching topics by applying a strikeâ€‘through; all topics remain visible and in their original order. Symptoms do not currently affect the list. Highlighting, hiding, or reordering into a â€œSuggestedâ€ section is not implemented yet and is tracked as a future enhancement (see Enhanced Dynamic Protocol Filtering in Chapter 10).
-The app reflects patient context in three ways today: (1) Indications apply a strikeâ€‘through to nonâ€‘matching topics in the Contents list; (2) detail pages deâ€‘emphasize Adult vs Pediatric Rx sections based on age; and (3) a compact patient snapshot appears below the search bar showing key details (age/sex/weight, indications, relevant allergies, vitals, and EKG). Categoryâ€‘level fading or notes (e.g., hiding or dimming entire â€œPediatric Protocolsâ€ for adults) is not implemented.
-
-**[Current behavior: patient sidebar changes now drive spiderweb relevance in place. Related branches enlarge and brighten, unrelated branches shrink/fade, and detail warnings still re-render from the same patientData source.]**
-Patient-Snapshot: A compact summary bar (#patient-snapshot-bar) appears below the Search Bar. Updates in realtime as Patient Info changes. It is a persistent context line while navigating. It includes:
-  Age/sex: (e.g., â€œ45yo Male (Use symbol instead)")
-  weight: (e.g., â€œ60kgâ€)
-  Indications: Underlined blue, Abbreviated where possible.
-  Allergies: â€œNKAâ€ if none; otherwise a concise subset relevant to the current context (e.g., â€œASAâ€ for chestâ€‘painâ€‘like indications).
-  PMH: Most relevant. Abbreviated.
-  Vitals: BP/HR/RR/BGL with subtle severity coloring when clearly high/low.
-  EKG: Shown with mild severity coloring for â€œtachyâ€/â€œbradyâ€) when patientData.ekg is populated. (Feature description does not reflect what user will eventually have coded).
-  Examples: â€œ45 y/o F, 60Â kg; Takes Beta-Blockers (The user entered "Metoprololâ€ into the Patient Info section, but "Beta-Blocker" would be shown in the Patient-Snapshot, since Beta-Blocker has a higher potential for being relevant in the context of administering Beta adrenergic medications); Bronchospasm; (then underneath in red warning font) WARNING: Albuterol may be ineffective for Tx if the pt is actively taking her Metoprolol Rx!" and the WARNING message in red font would also be a clickable button that can provide further information on the WARNING. 
-  Note: The snapshot does not currently perform drugâ€‘class mapping or show embedded warnings; those appear on detail pages. 
-
-Auto-Calculations: For Rx dosing, universal automatic mg/kg â†’ mg (and mL) computations are not yet implemented. Medication detail sections render dose text from data (with markup) but do not perform global dose math. A dedicated medication dosage calculator module is planned (see Current Tasks), which will compute mg/kg and mL values with stepâ€‘byâ€‘step math shown in Pop-ups, & will all have live updates as patient weight changes.
-  Quick Vent Tidal Volume calculator: Computes tidalâ€‘volume ranges (No ARDS, ARDS, Notâ€‘Sure) using entered weight or IBW (sex + height), and shows explicit math on demand. 
-
-
-Navigation Buttons (Back, Forward, Home, History): Appears in the top-right of the header. The app provides basic navigation controls similar to a web browser, so users can easily move between viewed pages without losing their place:
-
-  Back Navigation Button: Left arrow. Initially disabled & grayed out (because there is no history yet). Once the user navigates to at least one detail page (or performs a search, etc.), the Back button becomes active.
-    To Activate: View a detail page or commit a search.
-    Clicking Back Navigation Button:  Clicking Back restores the previous state precisely: if returning to the Contents list, the app reâ€‘expands the relevant category path and highlights the previously viewed topic, scrolling it into view. If the previous state was a detail page, it reâ€‘renders that page directly.
-  Forward Navigation Button: Right arrow. Adjacent to Back Navigation Button. 
-    To Enable: is enabled only when a â€œnextâ€ view exists in the navigation history (typically after pressing Back). Clicking it advances to that next view, restoring either the list (with the appropriate expansion/highlight) or a detail page, mirroring browserâ€‘style forward navigation. It re-navigates to the page that was ahead in history. 
-  Home Button: Under the Back/Forward Navigation Buttons. Resets interface to the topâ€‘level Contents view. Clears search field, collapses all expanded categories, and renders a fresh list (renderInitialView(true)). Patient Info entries are not affected by the Home Button. Does not preserve expanded states. Essentially a shortcut to renderInitialView() fresh.
-  History Button (Clock icon): Located under the Home Button. Opens a modal panel listing viewed items for the current session. Entries are clickable and navigate directly to that detail page; the panel closes and the overlay clears when an entry is selected or when the panelâ€™s close (X) is clicked. History is currently sessionâ€‘only, but is planned to be updated to persist through sessions (so if they close and reopen the app, they will still see past items).
-
-Settings Button: Located in the footer (#settings-button). Opens a modal #settings-panel over the overlay. The button text cycles between two colors (CSS animation) to draw attention. Opening Settings automatically closes the Patient Info sidebar if itâ€™s open to avoid overlap. Settings changes persist between sessions; The panel currently includes:
-  Dark Mode toggle: Persists via localStorage('darkMode').
-  Darkâ€‘mode brightness slider with live preview: Persists via localStorage ('darkModeBrightness'), applied through CSS --brightness.
-  Future Updates: Other customization options will be added to this panel over time. There will be a broad depth of options to customize, making the app capable of being tailored to an individuals wants and needs.
-
-Performance and Simplicity: The app prioritizes speed and reliability. It is built using HTML/CSS/JS and ES Modules. All content is loaded locally. Because all data is embedded in JavaScript objects, the app works offline once loaded (ideal for use in the field where internet might not be available). There are no runtime fetch calls for data, eliminating network delay.
-  Tailwind CSS: We use Tailwind CSS via CDN for rapid styling using utility classes. Tailwind provides a consistent look and spacing without writing large custom CSS. Our custom styles.css adds a few project-specific styles (like custom classes for strikethrough or warning highlights, and any layout tweaks). This approach means we can restyle quickly if needed, but also have predictable styling.
-  Interface: Intentionally uncluttered. Simple header, a sidebar for patient info, a content area that either shows a list or detail info, and a footer if needed. Font choices & sizes are made for readability.
-    Color coding: Blue for interactive elements, green for toggles, red for warnings, yellow for Alerts (used to draw attention appropriately). Future tasks may add more color coding options.
-  Design Choices: Center on making the app usable in high-stress scenarios. Big touch targets for buttons (for use on tablets/phones in the field), logical organization so info can be found with minimal taps, & fail-safes like Warnings or Alerts to help prevent medical errors.
-
-
-## 4. PROJECT STRUCTURE
-The project is organized into several files and directories, each serving a specific purpose.
-Overview of the structure & key files along with their associated folders:
-  index.html: The appâ€™s entry document.
-    Header: Links Tailwind CDN and styles.css, & defers viewportFix.js for mobile --vh fixes.
-    Body: Defines the overlay, Patient Info sidebar, header (Patient button left; title + #searchInput + #patient-snapshot-bar center; Back/Forward â†’ Home â†’ History right), the #content-area, the footer with #settings-button, & the #settings-panel.
-    Script loading is ESM: a single <script type="module" src="main.js"> bootstraps the app; all Data/Features/Utils modules are imported from there. If you ever add another topâ€‘level script or change load order, perform a full orderâ€‘ofâ€‘operations audit across affected files (ensure data maps build before indexing; indexing before first render; DOM refs before handler binding) and include the new file in index.html only if it must run before bootstrap.
-
-styles.css: Custom CSS stylesheet. Loaded in the head of index.html to complement Tailwind utilities & provide precise behavior Tailwind canâ€™t address cleanly (e.g., rotation states, overlays, brightness filter). Augments Tailwind with focused rules.
-  Lists & links: .topic-link-item hover/active states; .recently-viewed highlight; .strikethrough to deâ€‘emphasize list items.
-  **[Detail sections: .detail-section-title uses Show/Hide badges; .toggle-info (green) reveals inline panels; .warning-box variants (red/orange/yellow).]**
-  Sidebar & overlay: slideâ€‘in patient sidebar (#patient-sidebar.open), dim overlay (#sidebar-overlay.active), and inputs/focus rings.
-  Autocomplete: .autocomplete-suggestions dropdown layout and visibility.
-  Snapshot: .snapshot-card class (present for potential card styling); darkâ€‘mode adjustments.
-  Dark mode & brightness: body.dark-mode sets a filter using --brightness (persisted via Settings); selected components have darkâ€‘mode color overrides.
-  Quick Vent (ZOLL) UI: .qv-* classes for title, answer layout, modal/tooltip, & input sizing.
-  Settings button: #settings-button animated color transition (CSS keyframes).
-
-
-Data/ (Data files directory): Holds static ES modules that define application content. Files export constants that are imported by main.js, which constructs global registries for runtime use.
-  Data/ParamedicCategoriesData.js: exports the hierarchical Contents tree (export const ParamedicCategoriesData = [...]). Uses slugify() to generate stable IDs for categories/topics, & optional children for nesting.
-    Usage: main.js will iterate over window.ParamedicCategoriesData to build the menu. Each topic or subtopicâ€™s id is crucial as it links to details in the next file. main.js imports this module and calls processItem() for each root category to populate window.allDisplayableTopicsMap and build the search index. These ids must match corresponding entries in MedicationDetailsData or VentilationDetailsData for detail pages to load.
-  Data/MedicationDetailsData.js: exports an array of medication detail objects keyed by id (fields like class, indications, contraindications, adultRx, pediatricRx, etc.).
-    Typical Fields: title, class, indications[], contraindications[], precautions, sideEffects[], adultRx[], pediatricRx[], & optional notes. 
-    main.js: Imports these modules, merges medication + ventilation detail arrays into window.medicationDataMap, indexes categories with processItem() to populate window.allDisplayableTopicsMap, and then renders the initial list.
-    Detail pages: render sections from these fields (Class, Indications, Contraindications, Side Effects, Adult Rx, Pediatric Rx). 
-    Note: Nonâ€‘allergy contraindications are also surfaced as warning boxes automatically on detail pages (this sentence needs to be updated).
-  Placeholders: Data/additionalMedications.js and Data/patientInfoSynonyms.js (reserved for future expansion).
-  Data/VentilationDetailsData.js: Exports equipment & Quick Vent content (EMV731) as an ES module. Entries are keyed by id (must match topic ids in ParamedicCategoriesData.js).
-    equipment: true to mark equipment pages.
-    mdPath for curated Markdown content per section (rendered into collapsible sections on detail pages).
-    originalPdf (+ optional pdfPage) to link and optionally embed the source chapter inline.
-    Quick Vent topics identified by quickVent: 'setup' | 'calculator' for the Zoll Set Up flow and the Tidal Volume calculator UI.
-    main.js merges these entries with medication details into window.medicationDataMap so detail views can be rendered consistently. The Quick Vent calculator logic and section rendering are handled in Features/detail/DetailPage.js (equipment flow).
-
-Features/ : Feature-specific scripts. This directory groups scripts that handle a particular aspect of the appâ€™s functionality.
-  Features/anchorNav/slugAnchors.js: Provides setupSlugAnchors(tocData) which inserts a "Table of Contents" <nav id="detail-toc"> into the detail view and renders a list of anchor links for each section. Clicking an anchor scrolls smoothly to the target; if that section is collapsed, it auto-expands the section, updates the Show/Hide badge, and marks the header as expanded. tocData is built by the detail renderer from .detail-section-title elements (using slugify ids). Current behavior does not highlight the active section while scrolling (though that's a potential enhancement). For now, its main job is to display the list of section links. Both slugList and slugAnchors are triggered after renderDetailPage completes inserting content.
-    Troubleshooting If anchors are not appearing or not working, ensure that: (1) section headings have ids (generated by slugify), (2) slugList is capturing them, and (3) slugAnchors is appending the links to the DOM. Also, check that the anchor link href exactly matches a section id. Consistency is key, which is why slugify should be used everywhere.
-  Features/anchorNav/slugList.js: Provides a static slugIDs array of topic slugs (primarily for developer tooling and legacy anchors). It exposes the array to window.slugIDs for backward compatibility and exports it for ESâ€‘module consumers. It does not scrape the DOM or gather section IDs at runtime. The inâ€‘page Table of Contents is built by the detail renderer from .detail-section-title elements and passed to setupSlugAnchors().
-    Troubleshooting: If a section isnâ€™t appearing in the anchor menu, this script is the first place to check (does it capture it correctly?).
-  Features/detail/DetailPage.js: Renders the detailed view for a selected topic.
-    Escapes HTML and converts inline markup: [[display|info]] produces green, clickable â€œtoggle-infoâ€ spans with Show/Hide chips and hidden text; colored emphasis tokens (e.g., {{red:...}}) are supported.
-    Builds lists and text blocks with sensible defaults: empty arrays render â€œNone listed.â€; empty text renders â€œNot specified.â€
-    Composes collapsible sections: (e.g., Class, Indications, Contraindications, Side Effects, Adult Rx, Pediatric Rx). Each section header includes a Show/Hide badge for toggling; â€œAdult Rxâ€ and â€œPediatric Rxâ€ are marked with .adult-section / .pediatric-section.
-    Assigns stable id values to section titles via slugify(): enabling optional inâ€‘page TOC injection on long pages (window.ENABLE_DETAIL_TOC and â‰¥ 6 sections) using setupSlugAnchors.
-    Inserts patientâ€‘aware warnings at the top: (allergies, PDE5 + NTG, low BP + NTG, pediatric Etomidate, and nonâ€‘allergy contraindications) using appendTopicWarnings.
-    Writes a .topic-h2 header (with data-topic-id) and updates navigation history unless disabled; optionally scrolls to the top of the content area.
-    Fallbacks: if the topic id is missing, shows â€œNot found.â€; if the topic has no details, inserts â€œNo detail information found for this item.â€
-  Features/list/ListView.js: Owns the Contents (home) list. renderInitialView(shouldAddHistory, highlightId, categoryPath) clears #content-area, renders the hierarchical list, optionally expands along categoryPath, highlights highlightId with the .recently-viewed class, scrolls it into view, & (when requested) pushes a â€œlistâ€ entry into navigation history & updates Back/Forward button state.
-    createHierarchicalList() builds rows: categories render with a left blue chevron and bold label; clicking the chevron or label toggles expansion (chevron renders rotated 0Â°/90Â° by inline style). Leaf topics render as clickable links with data-topic-id and route to renderDetailPage(id).
-  **[Features/list/ListView.js: Current behavior is the spiderweb home view. renderInitialView(shouldAddHistory, highlightId, categoryPath) rebuilds the left-origin connected pill layout, recalculates spiderweb relevance from patient/search context, restores the active branch/path when provided, highlights recently viewed topics, and schedules fit/alignment passes so the web stays readable as it grows to the right.]**
-    **[createHierarchicalList() now renders connected pill columns with literal connector lines. Category pills expand/collapse child columns, search/patient context can auto-expand relevant branches, and topic pills route through renderDetailPageFromPill() so the clicked pill animates toward the left edge before the detail page takes over.]**
-  Features/navigation/Navigation.js: Manages navigation history and Back/Forward controls.
-    Exposes: navigationHistory (array of view states) & currentHistoryIndex.
-    addHistoryEntry(entry): pushes a new state (truncating any forward entries) and updates Back/Forward enabled state.
-    updateNavButtonsState(): disables Back at start of history & Forward at end.
-    navigateViaHistory(direction): moves backward/forward one step and restores the state:
-      List state: Restored via window.handleSearch(false, highlightId, categoryPath), which expands categories & highlights the target detail state is restored via renderDetailPage(id, false, false).
-    attachNavHandlers(): binds Back/Forward buttons to history navigation
-    Temporarily exposes a few methods on window for compatibility.
-  Features/navigation/Home.js: Implements the Home button functionality to return to the main Contents page.
-  Features/patient/Autocomplete.js: Autocomplete suggestion handling for Patient Info fields. Enables autocomplete suggestions for a textarea input field.
-  **[Features/patient/PatientInfo.js: Manages the Patient Info sidebar & central patientData. updatePatientData() reads inputs (single weight field with kg/lb toggles, pediatric-aware height parsing, PMH/Allergies/Meds/Indications/Symptoms, vitals), applies list strike-throughs when Indications are present, re-renders the active detail page to refresh warnings/context, applies age-based strike-throughs to Adult/Pediatric Rx sections, refreshes the snapshot, and keeps weight-unit metadata exposed alongside patientData for legacy access.]**
-  **[Features/patient/PatientInfo.js: Current behavior is to refresh the shared spiderweb relevance model whenever sidebar inputs change. The same update cycle re-renders the active detail page for warnings/context, keeps age-based Adult/Pediatric Rx strike-throughs, refreshes the snapshot, and preserves weight-unit metadata for legacy consumers.]**
-  **[Features/patient/PatientInfo.js: The sidebar now keeps chip-backed PMH/Allergies/Current Rx's/Indications/S/S rows on a single readable line, links numeric vital entries with their preset selects (including SpO2 Normal/Low/Severe), and resets horizontal textarea scroll after blur so long comma-separated values do not stay shifted.]**
-    Note: wire patientData.ekg = getInputValue('pt-ekg') if snapshot EKG display and future rhythm logic are desired.
-  **[Features/patient/PatientSnapshot.js: Renders the compact patient snapshot under the search bar (age, gender, weight unit selection, pediatric height display, indications, allergies, vitals, and rhythm highlights) using the shared patientData state.]**
-  **[Features/search/Search.js: processItem() still builds the searchable topic index, but live typing now renders a two-column dropdown (Filtered Topics + Smart Suggestions) beneath the header input. The module tracks a committed search term separately from draft input so the spiderweb only re-renders on Enter or suggestion selection; choosing a suggestion opens detail and seeds Back/Forward with the committed filtered state.]**
-  Features/settings.js: The Settings button in the footer cycles between two colors (CSS animation) to draw attention. Manages the footer Settings button & the #settings-panel.
-    Clicking Settings Button: Closes Patient Info sidebar if open, then opens the panel & activates the shared overlay; the panelâ€™s close (X) hides it & clears the overlay.
-    Current options:
-      Dark Mode toggle: persists via localStorage('darkMode') & applies an app-wide class.
-      Brightness slider: persists via localStorage('darkModeBrightness') & updates CSS --brightness, which body.dark-mode uses to adjust overall brightness.
-  Features/Warnings.js: Builds patientâ€‘aware warnings for detail pages.
-    Current checks:
-      Allergy Alert: when a patient allergy matches the topic title/id.
-      Nitroglycerin (ntg): contraindications for systolic BP < 100 mmHg & for recent PDE5 inhibitor usage (Viagra/Cialis/etc.).
-      Etomidate (etomidateâ€‘amidate): pediatric contraindication when age < 10.
-    General contraindications: Listed in data (excluding allergy/hypersensitivity lines). Rendered as distinct warning boxes.
-    Optional ageâ€‘range cautions: When a detail entry specifies an ageRange.
-    Warnings: Injected at the top of the detail view and are intentionally prominent (red/yellow boxes with an icon).
-  Features/History.js: Implements the History modal (#history-panel).
-    Clicking the History button opens a list of previously viewed detail pages from the current session; each entry is a link that navigates back to that detail & closes the panel/overlay.
-    The modal can also be closed via its (X). History content is derived from navigationHistory. Currently not persisted across reloads (will be coded to do so in future).
-The following feature modules exist as placeholders and are not yet integrated:
-Features/CardiacArrest.js â€” planned â€œCardiac Arrestâ€ mode (timers, intervention prompts, CPR cycle tracking).
-Features/Diagnoses.js â€” planned diagnostic suggestions based on patient inputs (symptoms, VS, PMH).
-Features/dosageCalc.js â€” planned medication dose calculator (mg/kg â†’ mg and mL) with stepâ€‘byâ€‘step math.
-Features/pcrNarrative.js â€” planned PCR narrative generator from patient/context data.
-Features/VoiceMode.js â€” planned voice control (speech recognition + TTS) for handsâ€‘free use.
-These files currently contain descriptive comments only & no runtime behavior.
-# Features/patient/Patient Info Sidebar/ (All files still need to have code placed within them) 
-  /Allergies.js
-  /Contraindications.js
-  /CurrentMedications.js
-  /Indications.js
-  /PatientAge.js
-  /PatientWeight.js
-  /PMH.js
-  /Symptoms.js
-  /VS.js
-
- 
-updatePatientData(): This script works closely with main.js, reads the current values from all patient info fields (e.g., age field number, list of allergies entered, etc.) & updates the patientData object. After updating data, it relies on main.js functions like re-rendering pages or lists. It also relies on global structures (like allDisplayableTopicsMap and allSearchableTopics) which are set up in main.js. Thus, itâ€™s included after those structures exist. The event listeners in PatientInfo.js ensure that as soon as the user types or selects something in the sidebar, the rest of the app responds.
-  Triggers various UI updates: (for example) May call applyPatientFilters() which goes through the topic list in the DOM & adds or removes a CSS class (like .strikethrough) on each topic depending on patient criteria. It will also invoke a refresh of the current detail page view (if one is open) by calling renderDetailPage for the current topic ID with the new context, so that any dosage calculations or warnings can update immediately.
-    May also declare some global sets or arrays for use in *Autocompletion* (for example, lists of common allergies or medications are defined in *main.js* & passed to this fileâ€™s scope for use in *Suggestions*.)
-    The separation of patient info logic here means all rules about how patient data affects the UI can be managed in one place (for instance, if we add a new field like â€œPregnancyâ€ in the future, weâ€™d adjust this file to handle any special cases for that field).
-
-Content: Includes the following folders (Files still need to be created within each of the folders):
-  Content/Abbreviations & References/
-  Content/Administrative & Legal Essentials/
-  Content/Adult Protocols/
-  Content/Introduction & Core Principles/
-  Content/Operational Protocols/
-  Content/Pediatric Protocols/
-  Content/Skills and Equipment/
-
-Assets: Includes the following folders (files still need to be created within each of the folders):
-  Assets/Images/
-  Assets/Videos/
-
-Utils/ : Utility scripts. These are helpers that are used across the app for small tasks, often included early so they can be used by other scripts.*
-  Utils/addTapListener.js: Adds a unified â€œactivateâ€ handler for both mouse & keyboard. When attached to an element, it invokes the given handler on click or when the user presses Enter/Space (via â€˜keypressâ€™), preventing default as needed. Used across list items, search results, & History links to keep interactions consistent & accessible.
-  Utils/escapeHTML.js: Escapes special characters in a string (& < > " ') using a small lookup map.
-    Used when rendering user-sourced or data-sourced strings into HTML (e.g., search headers), to prevent unintended markup & ensure safe display.
-  Utils/slugify.js: Converts strings to URL/IDâ€‘safe slugs.
-    Lowercases, replaces whitespace with -, maps common punctuation and subscript digits to -, collapses multiple -, trims leading/trailing -.
-    Used to generate ids for .detail-section-title headings in detail pages so anchor links & the optional inâ€‘page TOC work reliably. Always use this function for any new section titles or topic ids to avoid mismatches.
-
-
-*Main Scripts (project root): These are the core JavaScript files (often loaded directly in index.html) that drive the appâ€™s functionality.*
-
-  **viewportFix.js** â€“ A small script that fixes the behavior of CSS 100vh on mobile browsers. On some mobile devices, 100vh can be problematic (because of browser UI chrome). This script calculates the actual viewport height and sets a CSS variable or updates elements like the sidebar to ensure full-height coverage. In effect, it ensures elements intended to span the full screen actually do so without causing scroll issues. This is mostly a UX polish for mobile compatibility. (It might add an event listener to window resize and adjust some CSS custom property like --vh which is then used in CSS in place of 100vh).
-
-
-  **main.js** â€“ The central application script that brings everything together. It handles initialization, rendering of views (list or detail), search functionality, and integrates the patient info into the content. Some key responsibilities and functions in main.js:
-
-    Initialization (initApp): On DOMContentLoaded, initApp() is called. This function does initial setup like calling assignDomElements() to cache references to important DOM nodes (search input, content area, buttons, etc.), setting up event listeners (for search bar input, for navigation button clicks, etc.), and preparing the data. It ensures the Patient Info sidebar is hidden by default (adding hidden classes), and attaches the open/close logic for that sidebar (e.g., clicking the overlay or close button hides it, clicking the open button shows it â€“ see lines around 38â€“60 in main.js for how it toggles classes for open/hidden).
-
-      It also initializes autocomplete for patient info fields by calling a helper setupAutocomplete on various patient info textareas (for example, past medical history, allergies, medications, etc. have suggestion dropdowns). This makes user input faster and more uniform.
-
-    Proposed rewrite (final)
-    Initialization (initApp)
-
-    On DOM ready, initApp() runs. It caches key DOM elements via assignDomElements() and exposes them globally (for crossâ€‘module use), ensures the overlay and Patient Info sidebar start hidden, and wires open/close handlers: clicking the Patient Info button opens the sidebar and activates the overlay; clicking the close (X) or overlay hides it (with a short transition). Navigation (Back/Forward), Home, and search listeners are attached here. It also initializes autocomplete for PMH, Allergies, Medications, Indications, and Symptoms, making freeâ€‘text entry faster and more consistent.
-
-
-      Critically, initApp() calls initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData). This merges the static data (loaded from the Data files) into internal structures. For instance, it might copy the array from ParamedicCategoriesData into a global paramedicCategories variable, and then traverse it to build allDisplayableTopicsMap (mapping every topic ID to its object with references to parent categories). It also builds allSearchableTopics, an array of objects each containing a topicâ€™s title and full path, which is used to perform text search quickly.
-
-      Once data initialization is done, it calls renderInitialView() to display the main content list. It also ensures the navigation history is set up (an empty array with index -1 initially) and that the Back/Forward buttons are correctly disabled at start.
-
-  Proposed rewrite (final)
-  main.js â€” application bootstrap
-
-  ES module entry point. On DOM ready, initApp():
-  Caches key DOM elements (assignDomElements) and exposes them on window for crossâ€‘module use; renders an HTTP warning if served via file://.
-  **[Wires navigation (Back/Forward), search (live dropdown suggestions + explicit Enter/select commit), Home, Settings/overlay, and Patient Info sidebar open/close behavior.]**
-  Builds window.medicationDataMap by merging MedicationDetailsData and VentilationDetailsData, then indexes ParamedicCategoriesData via processItem() to populate window.allDisplayableTopicsMap and the search index.
-  Initializes autocomplete for PMH/Allergies/Medications/Indications/Symptoms and renders the initial patient snapshot if available.
-  Adds small UX touches (focus rings on inputs).
-  Renders the initial Contents list via renderInitialView(true) (or shows â€œNo categories availableâ€).
-  All Data/Features/Utils are imported as ES modules; index.html includes only <script type="module" src="main.js">.
-
-
-    Rendering the Category List (renderInitialView): This function populates the main content area with the list of categories and topics (the table of contents of the app). It likely uses a helper (maybe internally defined) that recursively creates HTML for a given category and its children. Each category is output as a clickable card that displays its title alongside a Show/Hide badge. Each topic (child without further children) is output as a <div class="topic-item"> or button element with an attached data-topic-id. The structure in HTML might be nested <div class="category-group"> containing a parent and its child list, etc.
-
-      If renderInitialView(highlightId) is called with a highlightId (meaning we want to highlight a particular topic when rendering, e.g., after coming back via Back button), the function will ensure that category is expanded and scroll into view, and add a highlight style to that topic. This helps the user see where they left off.
-
-      The result of this function is that contentArea (the main section in index.html) will be filled with the hierarchical list of all topics. Event listeners are set so that clicking on any Show/Hide badge toggles the appropriate section (show/hide children), and clicking on any topic name (leaf node) triggers renderDetailPage for that topic.
-
-    **[Rendering the Category List (renderInitialView): Current behavior is the connected spiderweb/table-of-contents view. The renderer starts from the eight fixed root categories on the left, recursively builds pill columns to the right, applies per-node emphasis from search/patient context, and measures literal connector lines after render so the web remains aligned and scaled to the available space.]**
-      **[When renderInitialView() is restored from history with a highlightId/categoryPath, it reopens the active branch, reapplies the active-path emphasis, scrolls the target pill into view, and keeps the rest of the web visible but less dominant.]**
-      **[The resulting contentArea is a connected pill map rather than a chevron list. Clicking a category pill expands/collapses the next branch to the right; clicking a topic pill triggers the pill-to-detail transition.]**
-    Rendering a Detail Page (renderDetailPage): This function takes a topic ID as argument. It looks up that ID in allDisplayableTopicsMap (which contains both the structural info and the detail info if available). If found, it clears out the contentArea and then builds the detail view for that topic. Steps include:
-
-      Insert a title heading (e.g., <h2>Epipen (Epinephrine) Autoinjector</h2>).
-
-      For each section of data present for that topic, create a section in the DOM. For example, if the topic object has a description field (string), create a <h3 id="description">Description</h3> and a <p> or <div> with the description text. If thereâ€™s an indications array, create <h3 id="indications">Indications</h3> and perhaps an unordered list of indications. Do the same for Contraindications, Dosage, etc. The slugify utility is used when setting the id on these headings (ensuring anchor links will match).
-
-      If a dosage field is present (adult and/or pediatric), the function might format them clearly, possibly with subheadings for â€œAdult Doseâ€ and â€œPediatric Doseâ€. Those sub-sections also get slugify IDs like â€œadult-doseâ€ and â€œpediatric-doseâ€. If patientâ€™s weight is known and the dosage is weight-based, perform the calculation as described earlier. If the patientâ€™s age indicates one of those sections doesnâ€™t apply (e.g., a 30-year-old patient would mean that the pediatric dose section is not applicable), that section might get a CSS class to gray it out or a note â€œ(N/A for adult patient)â€ or have a *Strikethrough*.
-
-      Insert any special notes or side effects similarly. Use consistent styling for warning/caution sections â€“ for example, if a medication has a Black Box Warning, that might be highlighted in red or with an icon.
-
-      Patient Data Integration during render: Before finishing, renderDetailPage will incorporate patient context. It checks window.patientData. For instance, if patientData.allergies includes the medication name (or class), it will append an alert box at the top of the detail page like â€œâš ï¸ Allergy Alert: Patient is allergic to [MedicationName]â€. If patientData.medications includes something contraindicated, similarly show an alert. If patientData.vitals (like blood pressure) contraindicate use, show that warning. These checks are coded in this function, often as simple if conditions comparing patientData values to known contraindications in the data.
-
-      Also, as part of rendering doses, it might strike out or italicize parts that donâ€™t apply (for example, if patient is pediatric, the adult dose section could be deemphasized with a note â€œ(patient is pediatric â€“ use pediatric dose below)â€).
-
-      Finally, after injecting all content, renderDetailPage will typically call slugList() (to gather section IDs) and then setupSlugAnchors() (from slugAnchors.js) to build the section table of contents if applicable. The detail page might be long, so having that quick navigation at the top improves usability. If a detail page ends up short (only one or two sections), the anchor menu might be omitted â€“ the implementation can handle that by checking the number of sections.
-
-    Navigation and State Management: main.js also manages the history of views manually, since this is a single-page app (the browserâ€™s back button is not used for navigating content, only our own controls are):
-
-      A global navigationHistory array is maintained. Every time a view is rendered (either list or detail, or search results), an entry is pushed to this history with identifying information (like type of view and an identifier, e.g., {type: 'detail', id: 'aspirin'} or {type: 'list'}). currentHistoryIndex tracks the index of the current view in that array. Clicking Back or Forward will decrement or increment that index and then call the appropriate render function for that historical entry (without pushing a new history entry of course). The code ensures that going back and then clicking a new link throws away â€œforwardâ€ history past the current index (just like a web browser would).
-
-      **[Navigation history now restores either a detail page or a filtered spiderweb state. Committed searches return to the connected pill layout with the same search term/path context instead of reopening a separate results page.]**
-      After each render, the code updates the disabled/enabled state of the Back/Forward buttons. If currentHistoryIndex is 0, Back is disabled (nothing before it). If currentHistoryIndex is at the end of the array, Forward is disabled. Otherwise, both can be enabled.
-
-      The Home button, when clicked, calls renderInitialView() and pushes a new entry (or possibly clears the history beyond that point, since itâ€™s like starting over). We ensure Back will then go to what was previously viewed.
-
-      The search interactions integrate with this too: performing a search might be treated as a new view state (type: 'search', query: 'keyword'), so that pressing Back after going to a detail from search can return you to your search results.
-
-      **[Current search-history behavior: committed searches push a list-state entry that restores the filtered spiderweb, not a dedicated result screen.]**
-    **[Search Handling: Search.js now keeps draft typing in the dropdown and reserves spiderweb re-renders for committed searches. handleSearch() commits the current input on Enter/history restoration, while the live input handler only refreshes the Filtered Topics + Smart Suggestions columns.]**
-      **[The search index still comes from allSearchableTopics/window.allDisplayableTopicsMap. Direct matches are case-insensitive against topic titles, navigation labels, and keywords; smart suggestions layer patient-context scoring and a small high-priority boost list on top of the same query.]**
-
-      If the search input is cleared, the app will return to the previous view or main list. We also provide a â€œclearâ€ button in the search bar (usually an âŒ icon) to quickly reset the search.
-
-      The search feature ensures paramedics can jump directly to what they need (for example, typing â€œepiâ€ will quickly surface the Epinephrine medications). Speed and accuracy of matching are important, so this function should be efficient (iterating a pre-made list rather than traversing the DOM, for instance).
-
-      (The Smart Suggestions in the UI might be handled here as well, possibly by providing quick shortcut links for common searches, but as mentioned, thatâ€™s an evolving feature.)
-
-In summary, the structure ensures that: Data is separated from Logic (data files vs main.js), UI behavior is modular (PatientInfo in its own file, anchor nav in its own file), and everything is glued together by main.js. All scripts are included in the correct order via index.html so that dependencies are satisfied.
-
-
-## 5. HOW THE CODE WORKS TOGETHER
-
-Understanding the flow of the application from load to user interactions:
-
-  Initial Load & Data Preparation: As soon as index.html is opened (in a browser or a WebView), the included scripts load in the specified order. First, ParamedicCategoriesData.js runs and defines window.ParamedicCategoriesData. Then MedicationDetailsData.js runs and defines window.MedicationDetailsData. At this point, all the reference information the app needs is in memory as JavaScript objects.
-
-  Next, utility files like slugify.js load (defining functions for later use). Then feature files like PatientInfo.js load, which likely set up the global patientData (initially empty or with defaults) and possibly event listeners for the sidebar inputs (though some event binding might also happen in main.js after DOMContentLoaded).
-
-  Finally, main.js loads. Because we check document.readyState and possibly attach a DOMContentLoaded event, initApp() will run once the DOM is fully built (ensuring all HTML elements are present to be referenced).
-
-  App Initialization: initApp() in main.js executes. Key steps:
-
-    Cache DOM Elements: assignDomElements() finds important elements by ID (search input, content area, sidebar, open/close buttons for sidebar, overlay, nav buttons) and stores them in variables. This improves performance and code readability (no need to query DOM repeatedly).
-
-    Sidebar Setup: Hide the sidebar overlay initially (adding .hidden class) and ensure the sidebar itself is hidden (maybe it starts hidden via CSS anyway). Attach event listeners to open and close the sidebar:
-
-      Clicking the Patient Info button removes the .hidden class from the sidebar (making it visible, possibly with a CSS transition slide-in) and adds an .active class to the overlay to darken the main content area.
-
-      Clicking the close â€œXâ€ on the sidebar or clicking the semi-transparent overlay does the reverse: it removes the open class from sidebar (triggering slide-out) and after a short delay adds .hidden back to it (actually hiding it so it doesnâ€™t block touch events), and hides the overlay. This logic was unified to ensure closing works consistently no matter how itâ€™s triggered.
-
-    Search Input Events: Add an input event listener to the search field so that every keystroke triggers a filtering function (handleSearch(true) possibly filters the list live). Add a keypress listener for the Enter key to perform a final search action (in case we want to show a separate results page or simply finalize the filter).
-
-    Navigation Buttons: Attach click handlers to Back and Forward buttons (navigateViaHistory(-1) and navigateViaHistory(1) respectively). These will handle updating the view based on the history index. Initially, these buttons are disabled via HTML or by adding a disabled attribute/class in initApp. They will be enabled when appropriate during navigation.
-
-    Data Integration: Check that window.ParamedicCategoriesData and window. MedicationDetailsData are available (they should be, given script order). Call initializeData(window.ParamedicCategoriesData, window.MedicationDetailsData). This function will:
-
-      Take the categories array and copy it into the global paramedicCategories (which main.js uses).
-
-      Initialize or reset allDisplayableTopicsMap and allSearchableTopics.
-
-      Traverse through each item in the categories data, and for each topic (especially leaf topics), find its detail entry in MedicationDetailsData and combine them if necessary. Typically, it might simply ensure that each topic object gets a reference to its detail object, or populate the map with an entry { id: topicId, title: topicTitle, categoryPath: "Category > Subcategory", details: (detailDataObject) }. It likely uses a recursive helper processItem(item, parentPath) to build these.
-
-      Build allSearchableTopics: for each topic that can be searched (probably every final topic and maybe categories too), push an object containing its name and full path. This array is sorted or left unsorted; searching will iterate through it.
-
-      Build medicationDataMap (as seen in code): a quick lookup by id for all detail entries, which helps in checking patient drug interactions quickly (like scanning all contraindications text).
-
-      Pre-load any suggestion sets (as the code snippet shows, it populates sets for common PMH, allergies, meds, plus PDE5 inhibitor list, etc., by reading through the data). This improves the patient info autocomplete feature.
-
-      Proposed rewrite (final)
-Data Integration
-
-main.js imports ParamedicCategoriesData, MedicationDetailsData, and VentilationDetailsData as ES modules.
-  During initialization, it: Merges medication + ventilation detail entries into window.medicationDataMap keyed by id, exposing it before indexing so search/detail code can resolve details quickly.
-  Recursively indexes the categories via Features/search/Search.js processItem(item, parentPath, parentIds), which: Attaches the resolved details to each item, Populates window.allDisplayableTopicsMap[id] = { â€¦ item, path, details, categoryPath }, & Fills an internal allSearchableTopics array used for search (title/id/path matching).
-  The IDs in ParamedicCategoriesData must match the id fields in the detail arrays for the detail pages to render.
-
-Activate Autocomplete, Focus Styling, Initial Render: Autocomplete is attached to the PMH, Allergies, Medications, Indications, and Symptoms textareas via setupAutocomplete(). It filters suggestions against the current commaâ€‘separated segment, shows a clickable list, inserts unique selections with a trailing â€œ, â€, refocuses the field, & dispatches an input event to refresh patientData. Suggestion sets are seeded during init (common PMH/allergies/meds + PDE5 inhibitors; additional allergens extracted from contraindications).
-For usability, all inputs/textareas gain a blue focus ring on focus & remove it on blur.
-After data maps and indexes are ready, renderInitialView(true) renders the main Contents list in #content-area (or a â€œNo categories availableâ€ message if categories are empty).
-
-Expanding Categories (User Interaction): Clicking a categoryâ€™s blue chevron or label toggles its expanded state & re-renders that branch via createHierarchicalList(). When expanded, children are rendered into a nested container; when collapsed, the branch re-renders without children. The chevronâ€™s rotation (0Â° vs 90Â°) is set inline during render based on the current item.expanded value. Expanded/collapsed state is stored on the category item (not in data attributes). Normal toggles do not alter overall scroll position; when restoring state from history, the list re-expands the path and scrolls the previously viewed topic into view.
-
-Viewing a Detail Page (User Interaction): Clicking a final topic (leaf) invokes renderDetailPage(topicId). This replaces #content-area with the topicâ€™s detail view, injects any applicable patientâ€‘aware warnings at the top, & (by default) adds a new â€œdetailâ€ entry to navigationHistory. Adding the entry updates Back/Forward button states (Back becomes enabled; Forward remains disabled because youâ€™re at the newest entry). If renderDetailPage is called from Back/Forward navigation, the call sets shouldAddHistory = false to avoid pushing a duplicate history entry.
-
-Dynamic Updates on Detail Page: Patient Info changes trigger updatePatientData(), which updates the patientData object, applies Indicationsâ€‘based strikeâ€‘throughs to the list (if visible), reâ€‘renders the current detail page in place (without adding a history entry), applies ageâ€‘based strikeâ€‘throughs to Adult/Pediatric Rx sections, and refreshes the snapshot under the search. If the page has many sections & window.ENABLE_DETAIL_TOC is true, the inâ€‘page TOC is rebuilt from the updated section headers. Warnings (e.g., allergy, PDE5 + NTG, low BP + NTG, pediatric Etomidate, general contraindications) are reâ€‘evaluated and injected at the top of the detail. 
-  It then calls functions to update the UI. Typically, it will call something like applyPatientFilters() which goes through the main contents list (if itâ€™s currently displayed) to strike out or highlight items. If the main list is not visible (user is on a detail page), that can be skipped or will simply operate on a hidden DOM (which is fine).
-    It then checks if a detail page is currently shown (we might track the current view type and id). If yes, it calls renderDetailPage(currentTopicId) again to refresh the content with the new patient context. Importantly, when doing this refresh, it should avoid adding another history entry. There might be a flag or a separate internal function for re-rendering the detail in place. The effect is that the user sees the detail page update instantly: new warning boxes might appear, certain text becomes struck through, & dosage calculations update. The scroll position might be preserved if possible, or reset to top if not handled (for now, likely resets to top).
-     Because the anchor navigation (slugList/slugAnchors) runs on renderDetailPage, it will re-generate after refresh. it ensures the anchor links are still accurate if any sections were added/removed due to patient data (typically we donâ€™t remove sections entirely, just mark them).
-        
-
-**[Current interaction summary: category pills expand the next branch to the right, keep the active path largest, and progressively shrink/fade sibling and unrelated branches while preserving readability. Clicking a final topic pill routes through renderDetailPageFromPill(), which animates a cloned pill toward the left edge before the detail page fades in. Sidebar edits rebuild the spiderweb relevance model in place, then rerender the active detail page, snapshot, and patient-aware warnings from the same patientData source.]**
-5.4 Dynamic Updates on Detail Page  
-- **Trigger pipeline:** `Features/patient/PatientInfo.js:155-276` listens to every sidebar field. When a value changes, `updatePatientData()` synchronizes kg/lb weight inputs, normalizes age/height, and refreshes the shared `patientData` object.  
-- **List synchronization:** The routine iterates `a.topic-link-item` nodes in the live list view, compares patient indications against each topicâ€™s `details.indications`, and toggles the `strikethrough` class to de-emphasize non-matching entries. If the list is hidden (because a detail page is open), the updates are still applied so the list is accurate when the user navigates back.  
-- **Detail rerender:** When a detail header (`.topic-h2`) is present, the handler calls `window.renderDetailPage(currentTopicId, false, false)` to redraw in place without adding a history entry. That rerender passes through the warning pipeline (`Features/detail/DetailPage.js:200-240`) so allergy/PDE5/BP/age/general contraindications are recomputed and injected at the top of the page.  
-- **Section emphasis:** Adult vs. pediatric prescription blocks receive age-based `strikethrough` classes (`Features/patient/PatientInfo.js:233-247`), ensuring irrelevant dosing guidance is visually muted.  
-- **Snapshot & tools:** `renderPatientSnapshot()` refreshes the compact banner under the search bar with new age/sex/weight/vitals (`Features/patient/PatientSnapshot.js:1-62`). If `window.ENABLE_DETAIL_TOC` is set and six or more sections exist, `setupSlugAnchors()` rebuilds the in-page TOC so anchors align with the updated headers (`Features/detail/DetailPage.js:234-239`).  
-- **Quick Vent interplay:** When the active topic is part of the Quick Vent workflow, the rerender repopulates sex/weight/height controls and recalculates tidal-volume outputs, keeping the bedside calculator synchronized with sidebar context (`Features/detail/DetailPage.js:375-740`).
-
-
-History List Usage: History List Usage & Anchor Navigation: Opening the History modal shows a list of previously viewed detail pages from this session. Clicking an entry calls renderDetailPage(id) directly; this is treated as a new navigation event and adds a fresh â€œdetailâ€ entry to the history stack. The panel and overlay close immediately after navigation.
-  On long detail pages with a Table of Contents, clicking an anchor smoothly scrolls to the target section and autoâ€‘expands it if needed. This does not alter app state or the history stack.
-
-Closing the App & Persistence: Currently, if the user closes the app (or refreshes), all state (patient info, history, expanded menus) resets because we are not using persistent storage.
-
-
-## 6. -----TOP PRIORITY TASKS-----
-
-**This section provides a list of tasks that must be worked on now unless explicitly told otherwise. Once this section is empty, proceed to the â€œCURRENT TASKS/GOALSâ€ section in this README for additional tasks.**
-
-Settings: Color sliders for the app.
-  Independent sliders for: main background, category background, main text, category text, warnings, popâ€‘up comments, other popâ€‘ups.
-  Allow any color selection. Warn when the selected text color is similar to the chosen background.
-
-Contraindication Warnings: Expand keywords, Add more contraindication keywords to Data/MedicationDetailsData.js, Update checks in updatePatientData() and renderDetailPage() as new medications are added, & Add comments indicating where to extend keywords and what else to update when adding a contraindication.
-
-**[Search Bar: the header input now shows side-by-side Filtered Topics + Smart Suggestions dropdowns while typing, and the spiderweb only commits on Enter or suggestion selection.]**
-  **[Remaining smart-search work: expand the indirect-route vocabulary (synonyms / key-stroke-error coverage), add the related-topic right-click/long-press behavior, and keep tuning the higher-priority weighting list.]**
-
-## 7. CURRENT TASKS/GOALS
-
-**TOP PRIORITY TASKS must all be completed before attempting any of the following Tasks.**
-
-**[Completed-task bookkeeping: when a Current Task/Goal is finished and verified, move its summary into Chapter 8 and rewrite any related behavior notes in Chapters 4-5 so the README reflects shipped behavior.]**
-    Organize test files: include minimal â€œhow to runâ€ notes when not obvious.
-
-Patient Info Sidebar: visible appâ€‘wide effects.
-  Every field should drive visible UI changes: strikeâ€‘through inappropriate treatments, warnings pop, and adapt content.
-  Examples: Enter â€œMorphineâ€ in Allergies â†’ viewing chest pain/pain protocols shows allergy warning; â€œMorphineâ€ item is strikeâ€‘through (still accessible).
-    Enter age 8 â†’ viewing adultâ€‘only medication should show pediatric warning
- 
-**[Testing: Add tests for any new bug (before the fix), for new features, and to verify any completed Task/Goal before it moves into Chapter 8. Organize test files with minimal "how to run" notes when not obvious.]**
-  Dynamic Dosage Recalculation: Implement fully dynamic dosage calculations for every medication.
-
-Warnings/Alerts: Visually shown under Search Bar.
-  Contraindication Warnings: visuals.
-    When Patient Info contains contraindications (allergies, conflicting medications, low BP, etc.) the detail pages should display clear warning boxes in red font. For example, an allergy alert should show a redâ€‘bordered box with a warning icon and message; drug interaction warnings and vital sign warnings should also appear as distinct boxes.
-    If a patient has an allergy that matches the medication (or its class), a red-bordered box with an alert icon and message.
-  Allergy Alert: "Patient has a known allergy to this medicationâ€ will appear at the top of that detail page.
-    If the patientâ€™s recorded medications include a drug that is contraindicated (e.g., PDE5 inhibitors when viewing Nitroglycerin), a warning box will similarly appear.
-      Drug Interaction Warning: "Patient is on [Drug], which contraindicates [This Treatment]â€).   
-  VS Warning: "BP too low for this treatment!â€.
-   "
-## 8. RECENT FIXES AND CHANGES
-Any entry added to this chapter must keep the rest of the README consistent: remove it from Chapters 6 or 7 if it migrates here, and rewrite any related coverage in Chapters 4 or 5 so those sections reflect current behavior. Never leave the old text in place with an 'updated' note; rewrite the references completely.
-
-**[2026-03-16 Patient sidebar dense-layout rebuild: replaced the old stacked sidebar styling with a compact blue-white card layout, switched Sex to highlighted symbol pills, aligned label/control rows so Sex+Age, Weight+Height, BP+HR+SpO2, EtCO2+RR+BGL, Pupils+Lung Sounds, and GCS+A&O stay on shared lines, removed the duplicate EtCO2 label treatment, synced SpO2 to the documented Normal/Low/Severe presets, and added Playwright dense-fill coverage for desktop + mobile sidebar layouts plus linked preset/number behavior. Files: index.html; Features/patient/PatientInfo.js; Features/patient/PatientSnapshot.js; styles/sidebar/patient-sidebar-shell.css; styles/sidebar/patient-sidebar-forms.css; styles/sidebar/patient-autocomplete.css; dev-tools/tests/patient-sidebar.spec.js.]**
-**[2026-03-16 Search commit workflow: added a two-column Filtered Topics + Smart Suggestions dropdown beneath the header input, split draft typing from committed spiderweb filtering so categories only update on Enter or suggestion selection, disambiguated duplicate suggestion titles, fixed Back navigation to restore committed search states, added an 8-test serial Playwright search suite, and wrapped the webhint script so update-notifier no longer throws during lint runs. Files: index.html; Features/search/Search.js; Features/navigation/Navigation.js; Features/navigation/Home.js; Features/list/ListView.js; styles/base/layout.css; dev-tools/tests/search-bar.spec.js; dev-tools/tests/spiderweb-navigation.spec.js; main.js; package.json; dev-tools/run-hint.cjs.]**
-**[2026-03-16 Spiderweb polish pass: removed the root-column vertical trunk, tightened pill sizing/blank space, stabilized Home/search sizing, added shorter cardiology nav labels plus an Abnormal Rhythms branch with Stable/Unstable splits, tuned search expansion so generic queries do not over-expand the tree, and added a 14-test serial Playwright regression suite for the spiderweb flow. Files: Data/ParamedicCategoriesData.js; Features/list/ListView.js; Features/list/spiderwebContext.js; styles/base/layout.css; dev-tools/tests/spiderweb-navigation.spec.js.]**
-**[2026-03-15 Spiderweb navigation rebuild: replaced the old chevron/list-search flow with a left-origin connected pill spiderweb, added active-path sizing/fading, patient/search-driven relevance emphasis, literal connector lines, and a pill-to-detail left-edge transition. Added Playwright coverage for search filtering, pediatric emphasis, and pill-to-detail navigation. Files: Features/list/ListView.js; Features/list/spiderwebContext.js; Features/search/Search.js; Features/patient/PatientInfo.js; Features/detail/DetailPage.js; Features/settings.js; styles/base/layout.css; dev-tools/tests/spiderweb-navigation.spec.js.]**
-**[2026-01-03 Anaphylaxis layout refresh: reordered Immediate Intervention into a Rx-first stack with consultation and recognition callouts, retuned scoped anaphylaxis styling (new fonts, line-rail layout, simplified lists) to match the provided reference image, and captured new UI screenshots. Source: user-provided layout reference. Files: Content/Adult Protocols/adult-anaphylaxis.md; styles/detail/detail-pages.css; notes/screenshots/adult-anaphylaxis-redesign-v2-desktop.png; notes/screenshots/adult-anaphylaxis-redesign-v2-mobile.png.]**
-**[2026-01-03 Protocol update: split CPR initiation/termination, OOH DNR + surrogate decision makers, and death documentation/body temp into new protocol topics; redesigned Adult Anaphylaxis layout and detail styling; updated Data/ProtocolMarkdownMap.js, Data/ParamedicCategoriesData.js, and Features/anchorNav/slugList.js. Source: Medical > Anaphylaxis (research/paramedic_protocols.txt). Files: Content/Adult Protocols/adult-anaphylaxis.md; Content/Operational Protocols/cpr-initiation-termination.md; Content/Administrative & Legal Essentials/ooh-dnr-surrogate-decision-makers.md; Content/Administrative & Legal Essentials/death-documentation-body-temp.md; styles/detail/detail-pages.css.]**
-**[2025-10-31 VS Code extension health: moved OpenJDK 25 to C:\Users\Jake\Java\jdk-25, refreshed workspace/user settings to clear the 99.98% download stall, added SonarLint analyzer metadata, generated a Maven wrapper + pom for Java debugging, and updated Agent-Workflow.md so the agent spins up seq without terminating user processes.]**
-**[2025-10-29 Quick Vent detail + Playwright harness: merged Features/detail/DetailPage/equipment/QuickVent.js into the shared QuickVent module, cleaned redundant try/catch suppressions in Features/detail/quickVent.js, and added dev-tools/tests/utils/previewServer.cjs with updated ventilation/cricothyrotomy specs for cross-platform http-server bootstrapping.]**
-**[2025-10-21 Patient sidebar refactor: refactored patient-sidebar-forms.css into 20 per-category modules, converted shared helper rules into data-line scoped grid layouts, and deprecated patient-sidebar-controls.css.]**
-**[2025-10-21 Added runtime detection, drops chevron after choice, per-field rules clear arrow (when populated).]**
-**[2025-10-20: Replaced flexbox-based layout within Patient Info sidebar with CSS grid, refreshed helper comments to match the new layout model, and corrected the markup.]**
-**[2025-10-12: Reorganized the patient info sidebar into 13-line layout.]**
-**[2025-10-11 Patient Info sidebar module extraction.]**
-**[2025-10-08 Patient sidebar compact refit.]**
-**[2025-10-07 Tablet vitals spacing & QA guardrail.]**
-**[2025-10-06 Vital Signs sidebar single-line alignment & Patient Info sidebar selectors refreshed.]**
-**[2025-09-30 Adult protocol detail expansion & Pediatric protocols hierarchy rebuilt, & Refusals protocol split.]**
-**[2025-09-29 Replaced the upstream web-content-pick server with a sanitized local wrapper so MCP tool registration stays OpenAI-compatible & eliminates the stream disconnects triggered during tool conversion & Cricothyrotomy detail rebuilt.]**
-**[2025-09-27 Adult & Pediatric Cricothyrotomy updates.]**
-**[2025-09-26 Abbott abbreviations rebuilt, MACC guidance imported verbatim, & ALS medication concentration on each detail page.]**
-**[2025-09-22 EMV731 updates.]**
-**[2025-09-20 EMV731 navigation cleanup.]**
-**[2025-09-18 updated ~/.codex/config.toml, added dev-tools/mcp-health-check.js.]**
-**[2025-09-17 EMV731 general information, product overview, setup, & operations condensed into section summaries with citations for in-app navigation.]**
-**[2025-03-09 UI polish: Show/Hide badge toggles now replace chevrons across lists & detail sections, aligning styles.css with dev-tools/als-medication-detail.png & preserving cross-browser number-input behavior.]**
-**[2025-03-09 EMV731 alarms navigation: removed the All Content topic & linked each subsection to chapter-specific summaries with navigation/slug updates.**
-Home button (house icon): jumps to main Contents.
-Settings: Dark Mode toggle; animated Settings button; brightness slider with live preview/persistence.
-Header/UI: ensureHeaderUI stabilizes header layout across navigation, Category cards align titles with Show/Hide badges, ensureHeaderUI checks if elements exist and creates them if not, and ensures they are appended in the proper DOM order, & content area scrolls independently when content overflows.
-Flexbox: structuring the content area & sidebar.
-Green clickable text that expands hidden green text.
-ES Module Conversion.
-The main title on each detail page now uses a consistent class name & data attribute.
-Whenever a new view is rendered (list or detail), the history entry includes enough info to restore that view. Navigation Buttons enabled/disabled states are updated immediately after each navigation so they correctly reflect availability.
-Slug anchors: Initialize after renderDetailPage to ensure TOC appears when applicable
-Medication Data Display (ID Matching).
-Sidebar: Gave it a fixed height.
-Pt Sidebar weight: Dual KG/LB fields synchronized; internal unit stays kg.
-Pt Info Sidebar Behavior: The overlay's semi-transparent background, and the â€œXâ€ close button both close the Patient Info sidebar.
-Standardized the open/close logic by centralizing it: both main.js and PatientInfo.js use the same functions to add/remove the active and hidden classes on the sidebar and overlay.
-Build window.medicationDataMap before indexing categories â†’ detail pages load reliably.
-Typing no longer pollutes search history; only committed searches recorded.
-Added basic default indication suggestions. 
-Fixed main.js data wiring & Features/Warnings.js so medication/equipment details load reliably; implemented `getAgeWarning`.
-Hooked up Home button handler to reset to the Contents view.
-Added dynamic Medication Class dropdown (built from data) in Patient Info; wired change listener.
-Patient Snapshot: Implemented and updates on load/changes.
-Autocomplete seeds: Added common terms and PDE5 inhibitors.
-Settings/Dark Mode: Corrected CSS & added brightness slider.
-CSS: Focus rings & Show/Hide badge transitions unified; invalid nested rules removed.
-Sept 1, 2025: Patient Info given Medication Class dropdown populated from all medication classes in the data (updates suggestions & filters context).
-
-
-## 9. TIMELINE SUMMARY (Short & Specific)
-**[03/15/26 - Replaced the legacy contents/search-results flow with a spiderweb navigation map, context-driven branch emphasis, and animated pill-to-detail transitions.]**
-**[03/16/26 - Search now uses live dropdown suggestions plus explicit Enter/selection commits, keeping the spiderweb stable until the search is committed.]**
-**[03/16/26 - Patient sidebar rebuilt into a compact no-overlap layout with dense desktop/mobile Playwright coverage and synced vital preset behavior.]**
-
-07/16/25 â€” Nearly useful for field work; more data review pending.
-07/18/25 â€” ES Modules progressing; categories not yet loading at that time; Dark Mode working.
-
-
-## 10. FUTURE TASKS/GOALS/IDEAS
-
-*This section proposes enhancements/ideas for future development. Nothing in this section is to be worked on or looked at until they are moved into TOP PRIORITY TASKS or CURRENT TASKS/GOALS.*
-
-  Figure out how to automatically suggest hospital destinations to transport a patient to. Add a toggle within "SETTINGS" that is named "GPS". When the GPS is toggled on, the app is able to use the user's GPS signal to track the user's current location (preferably using Google Maps). The app then will be able to provide a list of the closest/most appropriate Hospital locations to the user with a drive time ETA shown. The most appropriate locations are dependent on some of the information that the user places into the Patient Info Sidebar. For example, if the user puts that they have a stroke patient into the Patient Info Sidebar, the list would then only show stroke capable hospitals starting with the closest most appropriate hospital. The available hospital destinations are: Barnes South Hospital, Barnes North Hospital, Barnes West Hospital, Mercy Hospital STL, Mercy South Hospital, Mercy Jefferson Hospital, Saint Louis University Hospital (SLUH), St. Clare Hospital, St. Lukes Hospital, St. Lukes Des Pares Hospital, Christian Northwest Hospital, Christian Northeast Hospital, St. Mary's Hospital, and Missouri Baptist Hospital. You must attempt to make use of the MCP server located at https://"(https://github.com/manolaz/emergency-medicare-planner-mcp-server)" which appears to have the capabilities of everything needed within it; Research and present ideas on the best way to implement this feature in conjunction with the MCP server (https://github.com/manolaz/emergency-medicare-planner-mcp-server)
-
-  Persistent User Data: Implement saving of patient info and user history between sessions. Any information inputted by the user persists inbetween sessions (so if they close and reopen the app, no patient information is lost.).
-
-  Enhanced Dynamic Protocol Filtering: Expand the intelligence of the main Contents list filtering. Beyond just strike-throughs, we could implement a mode where entering a primary indication or choosing a protocol (e.g., â€œSTEMIâ€ or â€œAnaphylaxisâ€) automatically highlights or even isolates the relevant protocols (perhaps by toggling a â€œRelevant Onlyâ€ filter). It may involve tagging topics with keywords like â€œchest painâ€ or â€œtraumaâ€ and then matching those to patient indications input.
-  Tests: Add E2E coverage for â€œSTEMIâ€ and â€œAnaphylaxisâ€ workflows (toggle on/off, isolation/highlight, autoâ€‘expand, Back/Forward, and â€œShow Allâ€ reset).
-
-**[Enhanced Spiderweb Relevance Modeling: The current spiderweb already boosts relevant branches from search and patient context while keeping the full map visible. Future work should add explicit relevance tags, case-by-case mixed-topic tagging (for example minor-related legal/admin topics), and an optional "Relevant Only" isolation mode.]**
-**[Tests: Add deeper E2E coverage for condition-driven highlighting workflows (for example STEMI and Anaphylaxis), relevant-only toggles if added later, auto-expand heuristics, and mixed-context branch scoring.]**
-Complete Weight-Based Dosing Automation:
-  Tests: Add unit tests for dose computations and mL conversion with a few representative meds. Add a DOM test ensuring computed annotations appear/disappear as weight becomes available/cleared.
-  Verification: Set weight to 22 kg; open a med with â€œ0.01 mg/kgâ€ and with valid concentration: confirm â€œ(= 0.22 mg [0.22 mL])â€ and a math modal.
-
-Smooth Scroll and Section Highlight: Improve the anchor navigation by adding smooth scrolling animation when an anchor link is clicked, rather than a jump. Also, as the user manually scrolls through a detail page, highlight the current section in the anchor menu (e.g., bold or underline the section name in the TOC when that section is at top of viewport). This gives context about where you are in the page. This feature would involve listening to scroll events and computing which section is in view.
-  Verification: Open a long detail page with TOC; scroll by wheel/touch. Confirm active TOC entry updates smoothly without jank.
-Click anchors; confirm smooth scroll and ensure the TOC link and Show/Hide badge reflect the target section.
-
-Additional Autocomplete Enhancements: Provide more sophisticated suggestions (like common misspellings or abbreviations mapping to full terms â€“ e.g., typing â€œMIâ€ could suggest â€œMyocardial Infarctionâ€).
-Normalize to canonical terms using synonyms/misspellings to improve consistency.
-  Fuzzy matching (optional): introduce a thin â€œcontains normalized substringâ€ step (lowercase, strip punctuation) before final includes() to catch nearâ€‘misses; keep it performant and deterministic.
-Display canonicalized terms in snapshot (using the synonyms map) while retaining the raw user entry in the textarea.
-  Verification: Type â€œMIâ€ and verify the snapshot shows the canonical â€œMIâ€ (abbr) with title/tooltip revealing â€œMyocardial Infarction.â€
-
-EKGs:
-  Optional popâ€‘up: add an info icon next to the EKG field that opens a small modal listing example strips with brief captions; content can live as local images under Assets/Images/ekg/.
-  Verification: Type â€œsinus tachycardiaâ€ and confirm suggestions dropdown appears; select it; verify snapshot shows EKG with yellow tint.
-Click â€œEKG Helpâ€ topic; confirm the Markdown reference renders with images/examples.
-
-
-**[This README is up to date as of March 16, 2026. The instructions and documentation in Chapters 1-9 reflect the current behavior of the Paramedic Quick Reference app; Chapter 10 remains future-facing.]**
-
----
-# Paramedic Quick Reference â€” Developer Guide (Updated)
-
-Quick links
-- Run preview: `npm run preview` â†’ http://localhost:5173
-- Run tests (Playwright E2E): `npm run test:vent`
-- MCP Inspector launchers: `dev-tools/start-inspector-*.cmd`
-
-Contents
-- Project structure and responsibilities
-- MCP servers & effective usage
-- Tests and how to extend them
-- Audit notes (ZOLL/Vent duplicates)
-
-## Project structure
-- `index.html` â€“ app shell
-- `styles.css` â€“ global styles
-- `main.js` â€“ bootstrap logic and initial render
-- `Data/` â€“ static reference data (e.g., `VentilationDetailsData.js` for ZOLL topics)
-- `Features/` â€“ UI modules (detail rendering, patient sidebar, navigation, search)
-- `Utils/` â€“ helpers (`addTapListener.js`, `slugify.js`, `escapeHTML.js`)
-- `dev-tools/` â€“ scripts, MCP launchers, and tests (`dev-tools/tests/ventilation.spec.js`)
-
-## MCP servers (Inspector)
-Config: `inspector.mcp.json`. Servers: `fs`, `git`, `everything`, `seq`, `memory`, `webpick`, `crawler`, `fetch`, `fetcher`, `playwright`, `shell`, `a11y`, `lighthouse`.
-
-Launchers:
-- `dev-tools/start-inspector-all.cmd` (UI only - select server)
-- `dev-tools/start-inspector-playwright.cmd`, `-shell.cmd`, `-git.cmd`, etc.
-
-**[CLI client config: `~/.codex/config.toml` mirrors the Inspector roster. Keep `filesystem`, `git`, and `shell` enabled; enable optional servers (`everything`, `seq`, `memory`, `webpick`, `crawler`, `fetch`, `fetcher`, `playwright`, `lighthouse`, `a11y`) when the task needs them.]**
-**[`firecrawl` stays commented until a `FIRECRAWL_API_KEY` is available; uncomment the stub in `~/.codex/config.toml` when you have credentials.]**
-**[Install dependencies with `npm install` so the bundled MCP binaries are available on the local PATH before launching Codex.]**
-**[Startup health check: run `npm run mcp:health` before coding. The script verifies local packages, `.bin` shims, and warns about missing env vars; fix issues, restart Codex, then reconnect servers.]**
-**[Connectivity sanity check: after the Codex session opens, call `filesystem_read_text_file` and `git_status` via MCP tools to confirm the repo is wired correctly.]**
-**[If a server fails mid-session, repair it (reinstall, set env vars, or disable optional entries) and restart Codex. Use direct shell commands only as a temporary bridge while restoring MCP coverage.]**
-
-
-Good practice
-- Connect only servers needed for the current task.
-- **[Default to MCP tools for edits, diffs, searches, and command execution; drop to direct shell only when MCP servers are being restored.]**
-- Filesystem edits: `filesystem_edit_file` for surgical line edits; confirm with `git_status` + `git_diff`.
-- Preview locally with `shell_execute_command` -> `npm run preview`.
-- Validate flows with Playwright tools (or run `npm run test:vent`). On Windows, run `playwright_browser_install` once; Administrator may be required for Chrome.
-- Persist decisions in `memory` during large refactors.
-
-## Tests
-Playwright E2E tests live in `dev-tools/tests/ventilation.spec.js`.
-- `npm run test:vent` checks:
-  - Not Sure shows two distinct ranges (no ARDS, ARDS) in the purple answer area
-  - Calculation Details pop-up shows explicit TV min/max formulas and ranges for both pt types
-  - Sex icon is visible when selected
-
-- `ABBREV_TEST_URL=http://localhost:8124 node dev-tools/run-abbrev-playwright.js` captures grouped abbreviation layouts and dropdown interactions; ensure the preview server is running on the specified port before executing.
-
-Adâ€‘hoc check: `node dev-tools/check-tv.js` prints the live answer and modal content for a 70â€¯kg example.
-
-## Audit notes (ZOLL/Vent duplicates)
-- Ventilation data is in `Data/VentilationDetailsData.js` only.
-- If TV logic expands, consider extracting to `Features/ventilation/tv.js` with unit tests.
-
-
-## Hosted URL (GitHub Pages)
-
-This repo is wired to autoâ€‘deploy to GitHub Pages from `main` via `.github/workflows/pages.yml`.
-
-- After pushing to `main`, the workflow builds `dist/` and publishes it.
-- Your site will be available at:
-  - https://LonghornSneal.github.io/Paramedic-App/
-- If it shows 404 initially, wait for the Pages workflow to finish (Actions tab), or check Settings â†’ Pages to confirm the deployment.
-- Not Sure shows two stacked answers (no ARDS first, ARDS second); popâ€‘up shows explicit formulas and correct ranges â€” verified by E2E.
-- Sex icon remains visible when selected (selected state background/border) â€” verified by E2E.
-
+## 1. General Scope
+
+- **[This repo ships a static browser app rooted at `index.html` + `main.js`. Serve it over HTTP; opening via `file://` breaks ES-module loading.]**
+- **[There is no backend or remote API layer. The category tree, medication/equipment data, Markdown mappings, PDFs, and other assets live in local repo files.]**
+- **[Do not assume "fully offline" means zero runtime loading. The app lazily loads local Markdown files for many detail pages, but it does not depend on a server-side API.]**
+- **[Protocol/content edits are not default work. Only touch `Content/` or protocol text when the user explicitly assigns that scope.]**
+
+## 2. App Overview and Ownership Areas
+
+- **[App shell and bootstrap: `index.html` owns the persistent shell and DOM ids, `viewportFix.js` handles mobile viewport sizing, and `main.js` imports tracing/data/features, exposes shared globals, seeds patient suggestions, and renders the initial spiderweb view.]**
+- **[Home/search/navigation: `Features/list/ListView.js` renders the spiderweb/category tree, `Features/list/spiderwebContext.js` scores relevance, `Features/search/Search.js` owns draft vs committed search behavior, and `Features/navigation/*.js` plus `Features/History.js` handle Back/Forward/Home/History.]**
+- **[Patient context: `Features/patient/PatientSidebar.js` opens/closes the sidebar and wires autocomplete, `Features/patient/PatientInfo.js` normalizes inputs into `window.patientData`, `Features/patient/PatientSnapshot.js` renders the header snapshot, and `Data/EkgAssetsData.js` feeds rhythm/modifier previews.]**
+- **[Detail content: `Features/detail/DetailPage.js` is the live detail entry point, `Features/detail/markdownDetail.js` lazy-loads local Markdown and PDF sections, `Features/detail/quickVent.js` owns Quick Vent UI, and `Features/Warnings.js` injects patient-aware warning boxes.]**
+- **[Styles: `styles.css` is only the import hub. Edit the modular files under `styles/base`, `styles/navigation`, `styles/sidebar`, `styles/detail`, `styles/quick-vent`, `styles/modals`, and `styles/utilities` instead of hand-editing generated output.]**
+- **[Canonical detail/rendering files live in `Features/detail/*.js`; the nested `Features/detail/DetailPage/` folder is not the current app entry path and should not be the default place to patch detail behavior unless you first prove it is imported.]**
+
+## 3. Current Product Behavior
+
+- **[Home view: verified with Playwright on 2026-03-16. The default screen is a seven-root spiderweb of connected pills: `Adult Protocols`, `Pediatric Protocols`, `ALS Medications`, `Operational Protocols`, `Skills/Equipment`, `Intro/Core Principles`, and `Administrative & Legal`.]**
+- **[Search: verified with Playwright. Typing opens a two-column `Filtered Topics` + `Smart Suggestions` panel; the spiderweb only re-renders on Enter or suggestion selection; Back/Forward restore committed search states.]**
+- **[Patient sidebar: verified with Playwright. The header menu opens a dense line-based patient sheet with demographics, chip-backed PMH/Allergies/Current Rx's/Indications/S/S, vitals, and rhythm/modifier inputs that feed a live header snapshot.]**
+- **[Detail pages: verified with Playwright and targeted code inspection. Topic pills transition into detail view, details render collapsible sections, patient-aware warning boxes appear above the content, and Markdown/PDF/equipment sections render when configured.]**
+- **[Settings and History: verified with Playwright on 2026-03-16. Settings now opens a persistent modal with Dark Mode, dark-mode brightness, main/category/background/text warning/comment/popup color controls, text-size scaling, reduced motion, reset-to-defaults, and live contrast warnings for low-contrast text/background combinations; History still opens a session-only modal that starts empty and then lists visited detail pages.]**
+- **[Snapshot vs warnings: the compact snapshot bar is still summary-first, but recognized medication-class warnings can render beneath it. Detail-page warning boxes remain the primary contraindication surface through `Features/Warnings.js`.]**
+
+## 4. Project Structure
+
+- **[Runtime entry files: `index.html`, `main.js`, `viewportFix.js`, `styles.css`, and `playwright.config.js`.]**
+- **[Data source modules: `Data/ParamedicCategoriesData.js`, `Data/MedicationDetailsData.js`, `Data/VentilationDetailsData.js`, `Data/ProtocolMarkdownMap.js`, `Data/EkgAssetsData.js`, `Data/patientInfoSynonyms.js`, `Data/additionalMedications.js`, and `Data/AbbreviationGroups.js`.]**
+- **[Content files: `Content/` holds the protocol Markdown and PDFs grouped by section (`Adult Protocols`, `Pediatric Protocols`, `Operational Protocols`, `Administrative & Legal Essentials`, `Skills & Equipment`, `Introduction & Core Principles`, and `Abbreviations & References`).]**
+- **[Feature modules: `Features/list`, `Features/search`, `Features/patient`, `Features/detail`, and `Features/navigation` are the live app areas; `Features/settings.js`, `Features/History.js`, and `Features/Warnings.js` support them.]**
+- **[Styles: `styles/base` owns layout/theme, `styles/navigation` owns header controls, `styles/sidebar` owns the patient sheet and field-level CSS, `styles/detail` owns topic-detail styling, `styles/quick-vent` owns Quick Vent, `styles/modals` owns shared modals, and `styles/utilities` holds print/accessibility support.]**
+- **[Tooling and tests: `dev-tools/tests/*.spec.js` holds Playwright UI suites, `dev-tools/tests/utils/previewServer.cjs` is the shared preview helper, and `dev-tools/scripts/` / `dev-tools/*.mjs` hold repo utilities.]**
+- **[Support and reference folders: `research/` is the local research/source cache, `notes/` holds decision logs and design experiments, and `artifacts/`, `dist/`, `test-results/`, and `archive/` are outputs/reference rather than primary app source.]**
+- **[Non-SPA workspace artifacts: `.mvn/`, `pom.xml`, `src/`, and `target/` support Java/VS Code tooling and are not the shipping web-app runtime.]**
+
+## 5. Common Task Map
+
+- **[Change the category tree, spiderweb layout, or root labels: start with `Data/ParamedicCategoriesData.js`, then check `Features/list/ListView.js`, `Features/list/spiderwebContext.js`, and the relevant Playwright specs such as `dev-tools/tests/spiderweb-navigation.spec.js`, `dev-tools/tests/category-tree.spec.js`, and `dev-tools/tests/mobile-branch-fit.spec.js`.]**
+- **[Change search behavior or suggestion previews: work in `Features/search/Search.js` and `Features/search/searchPreview.js`; verify with `dev-tools/tests/search-bar.spec.js` and `dev-tools/tests/spiderweb-mobile-readability.spec.js`.]**
+- **[Change patient inputs, chip normalization, snapshot text, or EKG preview behavior: work in `Features/patient/PatientInfo.js`, `Features/patient/PatientSidebar.js`, `Features/patient/PatientSnapshot.js`, `Features/patient/patientTerminology.js`, `Data/EkgAssetsData.js`, and `styles/sidebar/*`; verify with `dev-tools/tests/patient-sidebar.spec.js` and `dev-tools/tests/patient-sidebar-ekg-preview.spec.js`.]**
+- **[Change detail rendering, warning boxes, Markdown/PDF content, or Quick Vent UI: start with `Features/detail/DetailPage.js`, `Features/detail/markdownDetail.js`, `Features/detail/quickVent.js`, `Features/Warnings.js`, `Data/MedicationDetailsData.js`, `Data/VentilationDetailsData.js`, and `Data/ProtocolMarkdownMap.js`; relevant tests include `dev-tools/tests/ventilation.spec.js`, `dev-tools/tests/cricothyrotomy.spec.js`, and `dev-tools/tests/medication-dosing.spec.js`.]**
+- **[Change navigation/history/settings: use `Features/navigation/Navigation.js`, `Features/navigation/Home.js`, `Features/History.js`, `Features/settings.js`, and the layout/theme CSS in `styles/base` and `styles/navigation`.]**
+- **[Change protocol Markdown or add a new protocol page: edit the file under `Content/...`, map it in `Data/ProtocolMarkdownMap.js` when needed, update `Data/ParamedicCategoriesData.js`, and touch `Features/anchorNav/slugList.js` only if a new static anchor list entry is actually required.]**
+- **[Change styling: edit the relevant module under `styles/`; `styles/tailwind.generated.css` is build output from `npm run build:tailwind` and should not be hand-maintained.]**
+- **[Run local verification from repo root: `npm run preview`, `npm run lint`, `npm run test`, `npm run test:vent`, `npx playwright test dev-tools/tests/<spec>.js`, `npm run build:tailwind`, `npm run scan:dead`, `npm run scan:deps`, and `npm run mcp:health`. Only `npm run test` / `npm run test:vent` are scripted shortcuts; the broader UI suites are invoked directly with `npx playwright test`.]**
+
+## 6. Top Priority Tasks
+
+- **[Expand contraindication keyword coverage and extension notes so new medications do not silently bypass `Features/Warnings.js` and patient-context checks.]**
+
+## 7. Current Tasks/Goals
+
+- **[Keep every patient-sidebar field tied to visible app behavior where clinically appropriate. Current live effects already include snapshot updates, detail-page warning refreshes, search reprioritization, and some age/context emphasis, but field-by-field coverage is not complete.]**
+- **[Finish dynamic medication dose calculations across medication detail data. `Features/dosageCalc.js` is partially integrated today, but coverage is not universal.]**
+- **[Broaden smart-search synonym and typo coverage, plus the planned related-topic right-click/long-press behavior, without regressing the committed-search model.]**
+- **[Keep global warning-surface ideas separate from shipped behavior: the header snapshot can show limited medication-class warnings, but general contraindication/warning boxes still live on detail pages.]**
+
+## 8. Recent Fixes and Changes
+
+- **[2026-03-16 Settings expansion: shipped persistent main/category/background/text warning/comment/popup color controls, text-size scaling, reduced motion, reset-to-defaults, and live contrast warnings in `Features/settings.js`, `index.html`, `styles/base/theme.css`, `styles/base/layout.css`, `styles/detail/detail-pages.css`, `styles/modals/global-modals.css`, `styles/sidebar/patient-modals.css`, and `dev-tools/tests/settings.spec.js`; verified the required home -> settings -> detail -> reopen -> reload -> reset flows with Playwright across `360x640`, `390x844`, `430x932`, and `480x932` mobile viewports.]**
+- **[2026-03-16 Regression cleanup: fixed the dense 1280x720 patient-sidebar overflow, restored direct mobile tap targets for committed seizure search across navigation/search-order flows, removed blank HR/RR snapshot tokens when vitals are empty, and expanded Playwright coverage in `dev-tools/tests/patient-sidebar.spec.js` and `dev-tools/tests/search-bar.spec.js`. Files: `Features/patient/PatientSnapshot.js`, `styles/sidebar/patient-sidebar-forms.css`, `Features/search/Search.js`, `Features/list/ListView.js`, `dev-tools/tests/patient-sidebar.spec.js`, `dev-tools/tests/search-bar.spec.js`, `README.md`.]**
+- **[2026-03-16 README navigation cleanup: rewrote Chapters 1-10 so file ownership, commands, and current UI notes match the live repo and verified browser behavior.]**
+- **[2026-03-16 Search and sidebar pass: the app shipped two-column committed search, denser patient-sidebar layout work, linked vital/rhythm field behavior, and broader Playwright coverage in `dev-tools/tests/search-bar.spec.js`, `dev-tools/tests/patient-sidebar.spec.js`, and related suites.]**
+- **[2026-03-15 Spiderweb navigation rebuild: `Features/list/ListView.js` + `Features/list/spiderwebContext.js` replaced the old chevron list with the connected pill map and pill-to-detail transition.]**
+- **[2026-01-03 Protocol/detail expansion: adult, operational, and administrative Markdown coverage grew, and the Adult Anaphylaxis page/styling were redesigned across `Content/`, `Data/ProtocolMarkdownMap.js`, `Data/ParamedicCategoriesData.js`, and `styles/detail/detail-pages.css`.]**
+- **[2025-10 Sidebar/style modularization: patient-sidebar styling moved into `styles/sidebar/*`, Quick Vent detail code was consolidated, and the shared Playwright preview helper landed in `dev-tools/tests/utils/previewServer.cjs`.]**
+
+## 9. Timeline Summary
+
+- **[2026-03: the current UI generation centers on the spiderweb home view, committed search, dense patient-sidebar fit on desktop/mobile, corrected mobile committed-search hit targets, and wider Playwright coverage.]**
+- **[2026-01: protocol-content coverage expanded across Adult, Operational, Administrative, and detail-page presentation work.]**
+- **[2025-10: repo structure shifted away from monolithic sidebar/detail styling toward modular `styles/`, stronger Playwright harnessing, and local tooling support.]**
+
+## 10. Future Tasks/Goals/Ideas
+
+- **[Session persistence for patient data, navigation history, and committed search state is still unshipped.]**
+- **[Placeholder feature modules exist but are not implemented: `Features/CardiacArrest.js`, `Features/Diagnoses.js`, `Features/pcrNarrative.js`, and `Features/VoiceMode.js`.]**
+- **[Longer-term patient-safety work includes richer cross-medication contraindication logic, broader summary warning surfaces, and full step-by-step dose math across all medication topics.]**
+- **[Longer-term UX work includes more settings/theming controls, deeper search intelligence, and broader mobile readability hardening after the current search/sidebar regressions are closed.]**
