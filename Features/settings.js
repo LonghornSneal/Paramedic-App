@@ -151,6 +151,11 @@ const contrastPairDefinitions = [
 
 let currentSettings = createDefaultSettings();
 let settingsStatusTimer = null;
+let settingsSaveTimer = null;
+let contrastWarningTimer = null;
+
+const SETTINGS_SAVE_DEBOUNCE_MS = 120;
+const SETTINGS_CONTRAST_DEBOUNCE_MS = 120;
 
 initializeSettingsFeature();
 
@@ -172,6 +177,8 @@ function initializeSettingsFeature() {
             closeSettingsPanel();
         }
     });
+
+    window.addEventListener('pagehide', flushPendingSettingsWork);
 }
 
 function createDefaultSettings() {
@@ -256,6 +263,43 @@ function saveSettings(settings) {
     localStorage.setItem('darkMode', settings.darkMode ? 'true' : 'false');
     localStorage.setItem('darkModeBrightness', String(settings.darkModeBrightness));
     localStorage.setItem('devOverlay', settings.devOverlay ? 'true' : 'false');
+}
+
+function scheduleSettingsSave() {
+    clearTimeout(settingsSaveTimer);
+    settingsSaveTimer = setTimeout(() => {
+        settingsSaveTimer = null;
+        saveSettings(currentSettings);
+    }, SETTINGS_SAVE_DEBOUNCE_MS);
+}
+
+function flushSettingsSave() {
+    if (settingsSaveTimer) {
+        clearTimeout(settingsSaveTimer);
+        settingsSaveTimer = null;
+    }
+    saveSettings(currentSettings);
+}
+
+function scheduleContrastWarningRefresh() {
+    clearTimeout(contrastWarningTimer);
+    contrastWarningTimer = setTimeout(() => {
+        contrastWarningTimer = null;
+        refreshContrastWarnings();
+    }, SETTINGS_CONTRAST_DEBOUNCE_MS);
+}
+
+function flushContrastWarningRefresh() {
+    if (contrastWarningTimer) {
+        clearTimeout(contrastWarningTimer);
+        contrastWarningTimer = null;
+    }
+    refreshContrastWarnings();
+}
+
+function flushPendingSettingsWork() {
+    flushSettingsSave();
+    flushContrastWarningRefresh();
 }
 
 function buildSettingsControls() {
@@ -449,6 +493,7 @@ function openSettingsPanel() {
 }
 
 function closeSettingsPanel() {
+    flushPendingSettingsWork();
     settingsPanelEl?.classList.add('hidden');
     overlayEl?.classList.remove('active');
     overlayEl?.classList.add('hidden');
@@ -456,6 +501,7 @@ function closeSettingsPanel() {
 }
 
 function handleResetToDefaults() {
+    flushPendingSettingsWork();
     currentSettings = createDefaultSettings();
     applySettings(currentSettings);
     saveSettings(currentSettings);
@@ -473,19 +519,29 @@ function updateSetting(key, value, announcement) {
         currentSettings.textScale = clamp(Number(value), 0.9, 1.3);
     }
 
-    applySettings(currentSettings);
-    saveSettings(currentSettings);
-    syncControlsFromSettings();
-    refreshContrastWarnings();
+    if (key === 'darkMode') {
+        applySettings(currentSettings);
+        syncControlsFromSettings();
+        flushContrastWarningRefresh();
+    } else {
+        applyBaseSettings(currentSettings);
+        if (key === 'darkModeBrightness') {
+            syncRangeControl(definitionForKey(key), currentSettings.darkModeBrightness);
+        } else if (key === 'textScale') {
+            syncRangeControl(definitionForKey(key), currentSettings.textScale);
+        }
+        scheduleContrastWarningRefresh();
+    }
+    scheduleSettingsSave();
     announceStatus(announcement);
 }
 
 function updateColorSetting(key, value, announcement) {
     currentSettings.colors[key] = normalizeColorValue(value);
-    applySettings(currentSettings);
-    saveSettings(currentSettings);
-    syncControlsFromSettings();
-    refreshContrastWarnings();
+    applyColorOverrides(currentSettings);
+    syncColorControl(key);
+    scheduleSettingsSave();
+    scheduleContrastWarningRefresh();
     announceStatus(announcement);
 }
 
@@ -528,7 +584,10 @@ function finalizeColorTextEntry(key) {
     if (!normalizedColor) {
         syncControlsFromSettings();
         announceStatus(`${getDefinitionLabel(key)} kept its previous value.`);
+        return;
     }
+
+    flushPendingSettingsWork();
 }
 
 function getDefinitionLabel(key) {
@@ -536,12 +595,15 @@ function getDefinitionLabel(key) {
 }
 
 function applySettings(settings) {
+    applyBaseSettings(settings);
+    applyColorOverrides(settings);
+}
+
+function applyBaseSettings(settings) {
     document.body.classList.toggle('dark-mode', settings.darkMode);
     document.body.classList.toggle('reduced-motion', settings.reducedMotion);
     document.documentElement.style.setProperty('--brightness', String(settings.darkModeBrightness));
     document.documentElement.style.setProperty('--app-text-scale', String(settings.textScale));
-
-    applyColorOverrides(settings);
 
     if (typeof window.setDevOverlayVisible === 'function') {
         window.setDevOverlayVisible(settings.devOverlay);
@@ -555,6 +617,28 @@ function applySettings(settings) {
     if (devOverlayToggle) {
         devOverlayToggle.checked = settings.devOverlay;
     }
+}
+
+function syncRangeControl(def, value) {
+    if (!def) return;
+    const refs = controlRefs.get(def.key);
+    if (!refs || refs.type !== 'range') return;
+    refs.input.value = String(value);
+    refs.valueOutput.textContent = refs.formatValue(value);
+    updateRangePreview(def.key, refs.preview, value);
+}
+
+function syncColorControl(key) {
+    const refs = controlRefs.get(key);
+    if (!refs || refs.type !== 'color') return;
+    const customValue = currentSettings.colors[key];
+    const effectiveValue = getEffectiveColorValue(key);
+    refs.picker.value = effectiveValue;
+    refs.textInput.value = customValue;
+    refs.textInput.placeholder = effectiveValue;
+    refs.swatch.style.backgroundColor = effectiveValue;
+    refs.state.textContent = customValue ? 'Custom' : 'Default';
+    refs.wrapper.classList.remove('is-invalid');
 }
 
 function applyColorOverrides(settings) {
@@ -657,14 +741,7 @@ function syncControlsFromSettings() {
         }
 
         if (refs.type === 'color') {
-            const customValue = currentSettings.colors[def.key];
-            const effectiveValue = getEffectiveColorValue(def.key);
-            refs.picker.value = effectiveValue;
-            refs.textInput.value = customValue;
-            refs.textInput.placeholder = effectiveValue;
-            refs.swatch.style.backgroundColor = effectiveValue;
-            refs.state.textContent = customValue ? 'Custom' : 'Default';
-            refs.wrapper.classList.remove('is-invalid');
+            syncColorControl(def.key);
         }
     });
 }
@@ -910,6 +987,10 @@ function calculateContrastRatio(colorA, colorB) {
     const lighter = Math.max(luminanceA, luminanceB);
     const darker = Math.min(luminanceA, luminanceB);
     return (lighter + 0.05) / (darker + 0.05);
+}
+
+function definitionForKey(key) {
+    return CONTROL_DEFS.find(def => def.key === key) || null;
 }
 
 function getRelativeLuminance(rgb) {

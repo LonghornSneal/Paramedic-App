@@ -28,7 +28,9 @@ const searchUiState = {
     smartResults: [],
     flatResults: [],
     activeFlatIndex: -1,
-    documentBound: false
+    documentBound: false,
+    previewRefreshVersion: 0,
+    previewRefreshPendingIds: new Set()
 };
 
 let allSearchableTopics = [];
@@ -224,15 +226,26 @@ function buildSuggestionModel(rawQuery) {
 function primeSuggestionPreviews(entries) {
     const pendingLoads = [];
     const seenEntryIds = new Set();
+    const newlyQueuedIds = [];
     entries.forEach(entry => {
         if (!entry?.id || seenEntryIds.has(entry.id)) return;
         seenEntryIds.add(entry.id);
         if (needsAsyncSearchPreview(entry)) {
+            if (!searchUiState.previewRefreshPendingIds.has(entry.id)) {
+                searchUiState.previewRefreshPendingIds.add(entry.id);
+                newlyQueuedIds.push(entry.id);
+            }
             pendingLoads.push(ensureSearchPreviewContent(entry));
         }
     });
-    if (!pendingLoads.length) return;
+    if (!pendingLoads.length || !newlyQueuedIds.length) return;
+    const refreshVersion = searchUiState.previewRefreshVersion + 1;
+    searchUiState.previewRefreshVersion = refreshVersion;
     Promise.allSettled(pendingLoads).then(() => {
+        newlyQueuedIds.forEach(entryId => {
+            searchUiState.previewRefreshPendingIds.delete(entryId);
+        });
+        if (refreshVersion !== searchUiState.previewRefreshVersion) return;
         refreshSearchSuggestions();
     });
 }
@@ -463,6 +476,8 @@ function renderSearchResults(searchTerm, shouldAddHistory = true, highlightId = 
 export function resetSearchIndex() {
     allSearchableTopics = [];
     searchTitleCounts = new Map();
+    searchUiState.previewRefreshVersion += 1;
+    searchUiState.previewRefreshPendingIds.clear();
     resetSearchPreviewCache();
     if (typeof window !== 'undefined') {
         window.allSearchableTopics = allSearchableTopics;
