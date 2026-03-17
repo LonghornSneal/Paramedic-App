@@ -236,6 +236,39 @@ for (const viewport of SNAPSHOT_VIEWPORTS) {
     expect(allergyFirstState.snapshot).not.toContain('NKA');
     expect(allergyFirstState.allergyChips).toEqual(['Penicillin']);
 
+    await page.evaluate(() => {
+      const allergies = document.getElementById('pt-allergies');
+      if (allergies) allergies.value = '';
+      window.renderPatientSnapshot();
+    });
+
+    const clearedRenderState = await waitForSnapshotState(
+      page,
+      state => !state.snapshot.includes('Allergies:')
+        && !state.snapshot.includes('NKA'),
+      `${viewport.name} allergy-cleared-render`
+    );
+
+    expect(clearedRenderState.snapshot).not.toContain('Allergies:');
+    expect(clearedRenderState.snapshot).not.toContain('NKA');
+
+    await fillAndTrigger(page, '#pt-allergies', '');
+    const clearedSyncState = await waitForSnapshotState(
+      page,
+      state => state.allergyChips.length === 0,
+      `${viewport.name} allergy-cleared-sync`
+    );
+
+    expect(clearedSyncState.allergyChips).toEqual([]);
+
+    const clearedPatientState = await page.evaluate(() => ({
+      allergies: Array.isArray(window.patientData?.allergies) ? window.patientData.allergies : null,
+      allergyDisplay: Array.isArray(window.patientData?.allergyDisplay) ? window.patientData.allergyDisplay : null
+    }));
+
+    expect(clearedPatientState.allergies).toEqual([]);
+    expect(clearedPatientState.allergyDisplay).toEqual([]);
+
     await openSidebar(page, viewport);
     await fillAndTrigger(page, '#pt-age', '45');
     await fillAndTrigger(page, '#pt-weight-value', '70');

@@ -224,6 +224,7 @@ function buildSuggestionModel(rawQuery) {
 }
 
 function primeSuggestionPreviews(entries) {
+    const scheduledQuery = normalizeSearchTerm(getSearchDom().input?.value);
     const pendingLoads = [];
     const seenEntryIds = new Set();
     const newlyQueuedIds = [];
@@ -246,6 +247,8 @@ function primeSuggestionPreviews(entries) {
             searchUiState.previewRefreshPendingIds.delete(entryId);
         });
         if (refreshVersion !== searchUiState.previewRefreshVersion) return;
+        const currentQuery = normalizeSearchTerm(getSearchDom().input?.value);
+        if (!currentQuery || currentQuery !== scheduledQuery) return;
         refreshSearchSuggestions();
     });
 }

@@ -130,32 +130,37 @@ function compactClassLabel(value) {
   return beforeParen || stripped;
 }
 
-function getAllergyEntries(data, rawInputValue = '') {
+function getAllergyEntries(data, rawInputValue = null) {
   const entries = [];
   const seen = new Set();
+
+  if (typeof rawInputValue === 'string') {
+    if (!rawInputValue.trim()) return entries;
+
+    const segments = splitSegments(rawInputValue);
+    const rawValues = [...segments.committed];
+    if (segments.current) rawValues.push(segments.current);
+    const normalized = normalizeCommittedValues('allergies', rawValues, { register: false });
+    normalized.canonical.forEach((value, index) => {
+      const label = normalized.display[index] || value;
+      const key = normalizeSearchText(value || label);
+      if (!key || seen.has(key)) return;
+      seen.add(key);
+      entries.push({
+        key,
+        label,
+        aliases: Array.from(new Set([value, label].map(item => normalizeSearchText(item)).filter(Boolean)))
+      });
+    });
+
+    return entries;
+  }
+
   const sourceAllergies = Array.isArray(data?.allergies) ? data.allergies : [];
   const sourceDisplay = Array.isArray(data?.allergyDisplay) ? data.allergyDisplay : [];
 
   sourceAllergies.forEach((value, index) => {
     const label = sourceDisplay[index] || value;
-    const key = normalizeSearchText(value || label);
-    if (!key || seen.has(key)) return;
-    seen.add(key);
-    entries.push({
-      key,
-      label,
-      aliases: Array.from(new Set([value, label].map(item => normalizeSearchText(item)).filter(Boolean)))
-    });
-  });
-
-  if (entries.length || !rawInputValue.trim()) return entries;
-
-  const segments = splitSegments(rawInputValue);
-  const rawValues = [...segments.committed];
-  if (segments.current) rawValues.push(segments.current);
-  const normalized = normalizeCommittedValues('allergies', rawValues, { register: false });
-  normalized.canonical.forEach((value, index) => {
-    const label = normalized.display[index] || value;
     const key = normalizeSearchText(value || label);
     if (!key || seen.has(key)) return;
     seen.add(key);
@@ -352,7 +357,8 @@ export function renderPatientSnapshot(){
   const medicationClasses = Array.isArray(d.medicationClasses) ? d.medicationClasses : [];
   const pmhDisplay = Array.isArray(d.pmhDisplay) ? d.pmhDisplay : [];
   const symptomsDisplay = Array.isArray(d.symptomsDisplay) ? d.symptomsDisplay : [];
-  const allergiesInputValue = document.getElementById('pt-allergies')?.value ?? '';
+  const allergiesInputEl = document.getElementById('pt-allergies');
+  const allergiesInputValue = allergiesInputEl ? allergiesInputEl.value ?? '' : null;
   const allergyEntries = getAllergyEntries(d, allergiesInputValue);
   const hasAllergies = allergyEntries.length > 0;
   const hasPmh = pmhDisplay.length > 0;

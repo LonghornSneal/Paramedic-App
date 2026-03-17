@@ -296,7 +296,34 @@ test('9. repeated searches show matching detail previews under the existing titl
   }
 });
 
-test('10. mobile committed seizure search stays non-overlapping and directly clickable across interaction orders', async ({ page }) => {
+test('10. markdown-backed previews hydrate from title fallback to detail lines', async ({ page }) => {
+  await gotoApp(page);
+
+  await page.route('**/Content/Adult Protocols/adult-anaphylaxis.md', async route => {
+    const response = await route.fetch();
+    await new Promise(resolve => setTimeout(resolve, 700));
+    await route.fulfill({ response });
+  });
+
+  await page.fill('#searchInput', 'anaphylaxis');
+
+  const suggestion = page.locator('.search-suggestion-item[data-topic-id="adult-anaphylaxis"]').first();
+  const secondary = suggestion.locator('[data-search-secondary]');
+
+  await expect(suggestion).toBeVisible();
+  await expect(secondary).toHaveAttribute('data-search-secondary', 'preview');
+  await expect(secondary).toHaveText(/Anaphylaxis/i);
+
+  await expect.poll(async () => {
+    return await secondary.textContent();
+  }, {
+    message: 'Expected markdown-backed preview text to replace the title fallback',
+    timeout: 6000
+  }).toMatch(/criterion|recognition|consultation/i);
+  await expect(secondary).not.toHaveText(/^Anaphylaxis$/i);
+});
+
+test('11. mobile committed seizure search stays non-overlapping and directly clickable across interaction orders', async ({ page }) => {
   test.setTimeout(180000);
 
   const viewports = [

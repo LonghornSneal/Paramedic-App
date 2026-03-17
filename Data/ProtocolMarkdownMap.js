@@ -150,3 +150,9 @@ export const ProtocolMarkdownMap = {
   "ventilator-set-up-parapac-plus": "Content/Skills & Equipment/ventilator-set-up-parapac-plus.md",
   "workers-compensation-process": "Content/Administrative & Legal Essentials/workers-compensation-process.md"
 };
+
+// Explicit backward-compatibility aliases for shared protocol markdown.
+// Keep these narrow so schema validation can reject accidental duplicate keys.
+export const ProtocolMarkdownAliases = Object.freeze({
+  "adult-svt-mono-vt-unstable": "Content/Adult Protocols/adult-svt-mono-vt-unstable.md"
+});

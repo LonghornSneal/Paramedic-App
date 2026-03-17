@@ -79,6 +79,15 @@ async function setRangeValue(page, selector, value) {
   }, value);
 }
 
+async function setRapidInputSequence(page, selector, values) {
+  await page.locator(selector).evaluate((element, nextValues) => {
+    nextValues.forEach(nextValue => {
+      element.value = String(nextValue);
+      element.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+  }, values);
+}
+
 async function applyCustomSettings(page) {
   await page.fill('#settings-mainBackground', '#111111');
   await page.fill('#settings-mainText', '#161616');
@@ -293,4 +302,62 @@ test('3. reset restores defaults after several changes in a different order', as
   await expect(page.locator('#settings-mainBackground')).toHaveValue('');
   await expect(page.locator('#settings-darkMode')).not.toBeChecked();
   await expect(page.locator('#settings-reducedMotion')).not.toBeChecked();
+});
+
+test('4. escape closes settings and rapid inputs persist the final values', async ({ page }) => {
+  await gotoApp(page, VIEWPORTS[0]);
+
+  await page.locator('#settings-button').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#settings-panel')).toBeVisible();
+  await expect(page.locator('#close-settings-button')).toBeFocused();
+
+  await page.keyboard.press('Escape');
+  await expect(page.locator('#settings-panel')).toBeHidden();
+  await expect(page.locator('#settings-button')).toBeFocused();
+
+  await page.locator('#settings-button').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#settings-panel')).toBeVisible();
+
+  await setRapidInputSequence(page, '#settings-mainBackground', ['#1f1f1f', '#111111']);
+  await setRapidInputSequence(page, '#settings-mainText', ['#d1d5db', '#f8fafc']);
+  await setRapidInputSequence(page, '#settings-categoryBackground', ['#1d4ed8', '#0b7285']);
+  await setRapidInputSequence(page, '#settings-categoryText', ['#e2e8f0', '#f8fafc']);
+  await setRapidInputSequence(page, '#settings-warnings', ['#dc2626', '#c92a2a']);
+  await setRapidInputSequence(page, '#settings-popupComments', ['#92400e', '#7c2d12']);
+  await setRapidInputSequence(page, '#settings-popups', ['#312e81', '#4c1d95']);
+  await setRapidInputSequence(page, '#settings-textScale', [1.05, 1.1, 1.15]);
+  await setRapidInputSequence(page, '#settings-darkModeBrightness', [0.9, 1.05, 1.1]);
+
+  await expect(page.locator('#settings-mainBackground')).toHaveValue('#111111');
+  await expect(page.locator('#settings-mainText')).toHaveValue('#f8fafc');
+  await expect(page.locator('#settings-textScale')).toHaveValue('1.15');
+  await expect(page.locator('#settings-darkModeBrightness')).toHaveValue('1.1');
+
+  await closeSettings(page);
+  await page.reload({ waitUntil: 'networkidle' });
+
+  await openSettings(page);
+  await expect(page.locator('#settings-contrast-warning')).toBeHidden();
+  await expect(page.locator('#settings-mainBackground')).toHaveValue('#111111');
+  await expect(page.locator('#settings-mainText')).toHaveValue('#f8fafc');
+  await expect(page.locator('#settings-categoryBackground')).toHaveValue('#0b7285');
+  await expect(page.locator('#settings-categoryText')).toHaveValue('#f8fafc');
+  await expect(page.locator('#settings-warnings')).toHaveValue('#c92a2a');
+  await expect(page.locator('#settings-popupComments')).toHaveValue('#7c2d12');
+  await expect(page.locator('#settings-popups')).toHaveValue('#4c1d95');
+  await expect(page.locator('#settings-textScale')).toHaveValue('1.15');
+  await expect(page.locator('#settings-darkModeBrightness')).toHaveValue('1.1');
+
+  const storedSettings = await page.evaluate(() => JSON.parse(localStorage.getItem('paramedicApp.settings.v1')));
+  expect(storedSettings.colors.mainBackground).toBe('#111111');
+  expect(storedSettings.colors.mainText).toBe('#f8fafc');
+  expect(storedSettings.colors.categoryBackground).toBe('#0b7285');
+  expect(storedSettings.colors.categoryText).toBe('#f8fafc');
+  expect(storedSettings.colors.warnings).toBe('#c92a2a');
+  expect(storedSettings.colors.popupComments).toBe('#7c2d12');
+  expect(storedSettings.colors.popups).toBe('#4c1d95');
+  expect(storedSettings.textScale).toBe(1.15);
+  expect(storedSettings.darkModeBrightness).toBe(1.1);
 });

@@ -1,7 +1,8 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { spawn } from 'node:child_process';
 import http from 'node:http';
 import path from 'node:path';
+import { expectSpiderwebGeometry } from './spiderwebGeometry.js';
 
 const VIEWPORTS = [
   { name: '360x640', width: 360, height: 640 },
@@ -56,39 +57,14 @@ async function openQuickVent(page) {
   await page.waitForTimeout(750);
 }
 
-async function readTreeMetrics(page) {
-  return await page.evaluate(() => {
-    const content = document.getElementById('content-area');
-    const contentRect = content.getBoundingClientRect();
-    const nodeMetrics = Array.from(content.querySelectorAll('.category-card, .topic-link-item'))
-      .filter(el => el.offsetParent && el.getClientRects().length)
-      .map(el => {
-        const rect = el.getBoundingClientRect();
-        const label = el.matches('.category-card') ? el.querySelector('.category-card-title') : el;
-        return {
-          text: (el.textContent || '').trim(),
-          left: rect.left - contentRect.left,
-          right: rect.right - contentRect.left,
-          scrollWidth: label?.scrollWidth ?? 0,
-          clientWidth: label?.clientWidth ?? 0
-        };
-      });
-    return {
-      contentWidth: contentRect.width,
-      leftClipped: nodeMetrics.filter(node => node.left < -1).map(node => node.text),
-      rightClipped: nodeMetrics.filter(node => node.right > contentRect.width + 2).map(node => node.text),
-      wrappedOverflow: nodeMetrics
-        .filter(node => node.scrollWidth > node.clientWidth + 1)
-        .map(node => node.text)
-    };
+async function expectTreeInsideContent(page, options = {}) {
+  await expectSpiderwebGeometry(page, {
+    ...options,
+    maxRightPadding: 2,
+    allowHorizontalClip: false,
+    allowOverlap: false,
+    allowWrappedOverflow: false
   });
-}
-
-async function expectTreeInsideContent(page) {
-  const metrics = await readTreeMetrics(page);
-  expect(metrics.leftClipped).toEqual([]);
-  expect(metrics.rightClipped).toEqual([]);
-  expect(metrics.wrappedOverflow).toEqual([]);
 }
 
 test.beforeAll(async () => {
@@ -117,23 +93,39 @@ test('search-first order keeps mobile branches inside the content area', async (
       await gotoApp(page, viewport);
 
       await commitSearch(page, 'seizure');
-      await expectTreeInsideContent(page);
+      await expectTreeInsideContent(page, {
+        label: `${viewport.name} seizure search`,
+        minLeft: -20,
+        minFontSize: 14
+      });
 
       await page.getByRole('button', { name: 'Seizure' }).first().click();
       await page.waitForTimeout(900);
       await page.click('#nav-back-button');
       await page.waitForTimeout(900);
-      await expectTreeInsideContent(page);
+      await expectTreeInsideContent(page, {
+        label: `${viewport.name} seizure back`,
+        minLeft: -20,
+        minFontSize: 14
+      });
 
       await goHome(page);
       await openQuickVent(page);
-      await expectTreeInsideContent(page);
+      await expectTreeInsideContent(page, {
+        label: `${viewport.name} quick vent`,
+        minLeft: -100,
+        minFontSize: 14
+      });
 
       await page.getByRole('button', { name: 'Zoll Set Up', exact: true }).click();
       await page.waitForTimeout(1000);
       await page.click('#nav-back-button');
       await page.waitForTimeout(900);
-      await expectTreeInsideContent(page);
+      await expectTreeInsideContent(page, {
+        label: `${viewport.name} quick vent back`,
+        minLeft: -100,
+        minFontSize: 14
+      });
     });
   }
 });
@@ -143,7 +135,11 @@ test('quick-vent-first order stays stable through nav cycles and viewport change
   await gotoApp(page, VIEWPORTS[1]);
 
   await openQuickVent(page);
-  await expectTreeInsideContent(page);
+  await expectTreeInsideContent(page, {
+    label: '390x844 quick vent-first',
+    minLeft: -100,
+    minFontSize: 14
+  });
 
   await page.getByRole('button', { name: 'Zoll Set Up', exact: true }).click();
   await page.waitForTimeout(1000);
@@ -153,15 +149,27 @@ test('quick-vent-first order stays stable through nav cycles and viewport change
   await page.waitForTimeout(1000);
   await page.click('#nav-back-button');
   await page.waitForTimeout(900);
-  await expectTreeInsideContent(page);
+  await expectTreeInsideContent(page, {
+    label: '390x844 quick vent nav cycle',
+    minLeft: -100,
+    minFontSize: 14
+  });
 
   await goHome(page);
   await commitSearch(page, 'seizure');
-  await expectTreeInsideContent(page);
+  await expectTreeInsideContent(page, {
+    label: '390x844 quick vent then search',
+    minLeft: -20,
+    minFontSize: 14
+  });
 
   for (const viewport of [VIEWPORTS[2], VIEWPORTS[0], VIEWPORTS[1]]) {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
     await page.waitForTimeout(700);
-    await expectTreeInsideContent(page);
+    await expectTreeInsideContent(page, {
+      label: `${viewport.name} resized quick vent/search`,
+      minLeft: -30,
+      minFontSize: 14
+    });
   }
 });

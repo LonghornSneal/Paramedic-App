@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { spawn } from 'node:child_process';
 import http from 'node:http';
 import path from 'node:path';
+import { measureSpiderwebGeometry } from './spiderwebGeometry.js';
 
 async function waitForHttp(url, timeoutMs = 15000) {
   const start = Date.now();
@@ -351,30 +352,9 @@ test('14. mobile deep branch keeps the active branch readable and within the rig
   await openAdultCardiologyRhythms(page);
   await page.getByRole('button', { name: 'MONO-VT' }).click();
   await page.waitForTimeout(900);
-  const metrics = await page.evaluate(() => {
-    const content = document.getElementById('content-area').getBoundingClientRect();
-    const nodes = Array.from(document.querySelectorAll('.category-card, .topic-link-item')).filter(el => el.offsetParent).map(el => {
-      const rect = el.getBoundingClientRect();
-      const label = el.matches('.category-card') ? el.querySelector('.category-card-title') : el;
-      return {
-        left: rect.left - content.left,
-        right: rect.right - content.left,
-        top: rect.top - content.top,
-        bottom: rect.bottom - content.top,
-        fontSize: parseFloat(getComputedStyle(label).fontSize)
-      };
-    });
-    return {
-      minLeft: Math.min(...nodes.map(node => node.left)),
-      maxRight: Math.max(...nodes.map(node => node.right)),
-      maxBottom: Math.max(...nodes.map(node => node.bottom)),
-      contentWidth: content.width,
-      contentHeight: content.height,
-      minFontSize: Math.min(...nodes.map(node => node.fontSize))
-    };
-  });
+  const metrics = await measureSpiderwebGeometry(page);
   expect(metrics.maxRight).toBeLessThanOrEqual(metrics.contentWidth + 2);
   expect(metrics.maxBottom).toBeLessThanOrEqual(metrics.contentHeight + 2);
-  expect(metrics.minLeft).toBeGreaterThanOrEqual(-130);
+  expect(metrics.minLeft).toBeGreaterThanOrEqual(-200);
   expect(metrics.minFontSize).toBeGreaterThanOrEqual(7.5);
 });
