@@ -62,11 +62,12 @@
 - **[Change navigation/history/settings: use `Features/navigation/Navigation.js`, `Features/navigation/Home.js`, `Features/History.js`, `Features/settings.js`, and the layout/theme CSS in `styles/base` and `styles/navigation`.]**
 - **[Change protocol Markdown or add a new protocol page: edit the file under `Content/...`, map it in `Data/ProtocolMarkdownMap.js` when needed, update `Data/ParamedicCategoriesData.js`, and touch `Features/anchorNav/slugList.js` only if a new static anchor list entry is actually required.]**
 - **[Change styling: edit the relevant module under `styles/`; `styles/tailwind.generated.css` is build output from `npm run build:tailwind` and should not be hand-maintained.]**
-- **[Run local verification from repo root: `npm run preview`, `npm run lint`, `npm run test`, `npm run test:vent`, `npx playwright test dev-tools/tests/<spec>.js`, `npm run build:tailwind`, `npm run scan:dead`, `npm run scan:deps`, and `npm run mcp:health`. Only `npm run test` / `npm run test:vent` are scripted shortcuts; the broader UI suites are invoked directly with `npx playwright test`.]**
+- **[Run local verification from repo root: `npm run preview`, `npm run lint`, `npm run test`, `npm run test:vent`, `npm run test:playwright`, `npx playwright test dev-tools/tests/<spec>.js`, `npm run build:tailwind`, `npm run scan:dead`, `npm run scan:deps`, and `npm run mcp:health`. `npm run test` / `npm run test:vent` are the smoke shortcuts; `npm run test:playwright` runs the broader Playwright suite; `npx playwright test dev-tools/tests/<spec>.js` stays available for a single spec.]**
 
 ## 6. Top Priority Tasks
 
 - **[Expand contraindication keyword coverage and extension notes so new medications do not silently bypass `Features/Warnings.js` and patient-context checks.]**
+- **[Keep the test entrypoints honest: `npm run test` remains the narrow smoke path, `npm run test:playwright` is the broader Playwright suite, and README commands should not imply wider coverage than the scripts actually run.]**
 
 ## 7. Current Tasks/Goals
 

@@ -20,3 +20,10 @@
 - [x] Implement reusable non-sidebar background tokens and surface updates.
 - [x] Re-run required Playwright flows after each meaningful styling pass across required mobile widths.
 - [x] Run lint verification and append the design/QA outcome to notes/memory-log.md.
+
+# 2026-03-22 Session Audit Checklist
+- [x] Locate the Codex/VS Code session store backing the unread-session badge.
+- [x] Review the 49 prior unread-session candidates and group them by outcome.
+- [x] Cross-check remaining candidate tasks against the current repo state and live GitHub workflow status.
+- [x] Spawn worker subagents for the confirmed engineering tasks that are still open.
+- [x] Append the audit outcome and delegation decisions to notes/memory-log.md.

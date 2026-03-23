@@ -23,6 +23,14 @@ function prefersReducedMotion() {
         && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
+function appendNotice(container, message, className = 'text-gray-500 italic') {
+    const notice = document.createElement('div');
+    notice.className = className;
+    notice.textContent = message;
+    container.appendChild(notice);
+    return notice;
+}
+
 function clearDetailTransitionState(contentArea) {
     if (!contentArea) return;
     contentArea.classList.remove('detail-transition-shell', 'detail-transition-entered', 'detail-transition-out');
@@ -235,7 +243,7 @@ function appendTopicDetails(topic, contentArea) {
             contentArea.appendChild(wrapper);
         });
     } else { 
-        contentArea.insertAdjacentHTML('beforeend', `<div class="text-gray-500 italic">No detail information found for this item.</div>`);
+        appendNotice(contentArea, 'No detail information found for this item.');
     }
 }
 
@@ -261,7 +269,8 @@ function findAlsMedTopicIndex(children, topicId) {
 export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop = true) {
     const contentArea = window.contentArea || document.getElementById('content-area');
     if (!window.allDisplayableTopicsMap[topicId]) { 
-        contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; 
+        contentArea.replaceChildren();
+        appendNotice(contentArea, 'Not found.');
         return; 
     }
     if (contentArea) {

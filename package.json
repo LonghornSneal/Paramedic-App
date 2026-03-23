@@ -14,6 +14,7 @@
     "scan:dead": "knip --json",
     "scan:deps": "depcheck --json",
     "test:vent": "playwright test dev-tools/tests/ventilation.spec.js dev-tools/tests/cricothyrotomy.spec.js",
+    "test:playwright": "playwright test",
     "test": "npm run test:vent",
     "mcp:health": "node dev-tools/mcp-health-check.js"
   },

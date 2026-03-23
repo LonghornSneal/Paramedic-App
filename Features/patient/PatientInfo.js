@@ -716,6 +716,7 @@ function populateEkgSelect(selectEl, assets, findByName) {
 function renderEkgPreview(previewImg, infoButton, asset, typeLabel) {
   const label = typeLabel || 'item';
   if (!previewImg) return;
+  const previewShell = previewImg.closest('.ekg-preview-shell');
   setEkgPreviewState(previewImg, Boolean(asset));
   if (asset) {
     previewImg.src = asset.dataUri;
@@ -723,8 +724,14 @@ function renderEkgPreview(previewImg, infoButton, asset, typeLabel) {
     previewImg.classList.remove('is-empty');
     previewImg.alt = '';
     previewImg.title = asset.name;
+    if (previewShell) {
+      previewShell.hidden = false;
+      previewShell.style.display = '';
+    }
     if (infoButton) {
       infoButton.disabled = false;
+      infoButton.hidden = false;
+      infoButton.style.display = '';
       infoButton.dataset.assetId = asset.id;
       infoButton.setAttribute('aria-label', `View ${label.toLowerCase()} definition`);
       infoButton.title = asset.definition;
@@ -734,8 +741,14 @@ function renderEkgPreview(previewImg, infoButton, asset, typeLabel) {
     previewImg.removeAttribute('data-asset-id');
     previewImg.removeAttribute('title');
     previewImg.classList.add('is-empty');
+    if (previewShell) {
+      previewShell.hidden = true;
+      previewShell.style.display = 'none';
+    }
     if (infoButton) {
       infoButton.disabled = true;
+      infoButton.hidden = true;
+      infoButton.style.display = 'none';
       infoButton.removeAttribute('data-asset-id');
       infoButton.setAttribute('aria-label', `No ${label.toLowerCase()} selected`);
       infoButton.removeAttribute('title');

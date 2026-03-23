@@ -11,6 +11,13 @@ function escapeHtml(s){
     .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 
+function appendNotice(container, message, className = 'text-red-700') {
+  const notice = document.createElement('div');
+  notice.className = className;
+  notice.textContent = message;
+  container.appendChild(notice);
+}
+
 function emphasizeImportant(html){
   // critical terms → red, cautionary → yellow
   const critical = /(high\s*priority|failure|failures|do not|never|gas intake failure|self check failure|exhalation system failure)/gi;
@@ -430,7 +437,7 @@ export async function renderEquipmentFromMarkdown(details, contentArea, topic) {
       setupSlugAnchors(tocSections);
     }
   } catch (err) {
-    contentArea.insertAdjacentHTML('beforeend', `<div class="text-red-700">Unable to load content: ${escapeHtml(err.message)}</div>`);
+    appendNotice(contentArea, `Unable to load content: ${err.message}`);
   }
 }
 
@@ -512,7 +519,7 @@ export async function renderMarkdownDetail(details, contentArea, topic) {
     initializeEquipmentPopovers(contentArea);
   } catch (err) {
     console.error('renderMarkdownDetail', err);
-    contentArea.insertAdjacentHTML('beforeend', `<div class="text-red-700">Unable to load content: ${escapeHtml(err.message)}</div>`);
+    appendNotice(contentArea, `Unable to load content: ${err.message}`);
   }
 }
 
