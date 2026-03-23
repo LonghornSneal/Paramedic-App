@@ -70,7 +70,7 @@ export async function renderDetailPageFromPill(topicId, triggerEl, shouldAddHist
     window.detailTransitionInProgress = true;
     clearDetailTransitionState(contentArea);
     contentArea.classList.remove('spiderweb-mode');
-    contentArea.classList.add('detail-transition-shell', 'detail-transition-out');
+    contentArea.classList.add('detail-transition-out');
 
     try {
         const targetWidth = Math.min(Math.max(triggerRect.width * 0.94, 176), 276);
@@ -84,11 +84,8 @@ export async function renderDetailPageFromPill(topicId, triggerEl, shouldAddHist
         clone.style.opacity = '0.24';
         clone.style.transform = 'translateY(0) scale(0.96)';
 
-        await waitForDuration(Math.round(DETAIL_TRANSITION_DURATION_MS * 0.45));
+        await waitForDuration(Math.min(120, Math.round(DETAIL_TRANSITION_DURATION_MS * 0.25)));
         renderDetailPage(topicId, shouldAddHistory, true);
-        contentArea.classList.add('detail-transition-shell');
-        await new Promise(resolve => requestAnimationFrame(resolve));
-        contentArea.classList.add('detail-transition-entered');
         await waitForDuration(DETAIL_TRANSITION_DURATION_MS + 40);
     } finally {
         clone.remove();

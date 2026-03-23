@@ -11,6 +11,18 @@ export let navigationHistory = [];
 export let currentHistoryIndex = -1;
 let isNavigatingViaHistory = false;
 
+function normalizeCategoryPath(categoryPath) {
+    return Array.isArray(categoryPath) ? [...categoryPath] : [];
+}
+
+function areHistoryEntriesEquivalent(left, right) {
+    if (!left || !right) return false;
+    return left.viewType === right.viewType
+        && `${left.contentId || ''}` === `${right.contentId || ''}`
+        && `${left.highlightTopicId || ''}` === `${right.highlightTopicId || ''}`
+        && JSON.stringify(normalizeCategoryPath(left.categoryPath)) === JSON.stringify(normalizeCategoryPath(right.categoryPath));
+}
+
 // Updates the disabled state of the Back/Forward navigation buttons based on history position. 
 export function updateNavButtonsState() {
     if (!window.navBackButton || !window.navForwardButton) return;
@@ -21,10 +33,21 @@ export function updateNavButtonsState() {
 // Adds a new entry to the navigation history and updates the current history index.
 export function addHistoryEntry(entry) {
     if (isNavigatingViaHistory) return;
+    const normalizedEntry = {
+        ...entry,
+        contentId: entry?.contentId ?? '',
+        highlightTopicId: entry?.highlightTopicId ?? null,
+        categoryPath: normalizeCategoryPath(entry?.categoryPath)
+    };
+    const currentEntry = navigationHistory[currentHistoryIndex];
+    if (areHistoryEntriesEquivalent(currentEntry, normalizedEntry)) {
+        updateNavButtonsState();
+        return;
+    }
     if (currentHistoryIndex < navigationHistory.length - 1) {
         navigationHistory.splice(currentHistoryIndex + 1);
     }
-    navigationHistory.push(entry);
+    navigationHistory.push(normalizedEntry);
     currentHistoryIndex = navigationHistory.length - 1;
     updateNavButtonsState();
 }  

@@ -18,8 +18,27 @@ function collapseAllCategories() {
     window.paramedicCategories.forEach(item => collapseItem(item));
 }
 
+function hasExpandedCategories(nodes = window.paramedicCategories) {
+    if (!Array.isArray(nodes)) return false;
+    return nodes.some(item => (
+        item?.type === 'category'
+        && (item.expanded || hasExpandedCategories(item.children))
+    ));
+}
+
+function isAlreadyAtHome() {
+    return !(`${window.committedSearchTerm || ''}`.trim())
+        && !window.activeTopicId
+        && (!Array.isArray(window.activeCategoryPath) || window.activeCategoryPath.length === 0)
+        && !hasExpandedCategories();
+}
+
 // Handles the Home button click: clears search, resets list, and navigates to the main contents page.
 function handleHomeClick() {
+    if (isAlreadyAtHome()) {
+        window.hideSearchSuggestions?.({ restoreCommittedTerm: true });
+        return;
+    }
     // Clear any search query and collapse all categories to default state
     window.searchInput.value = '';
     window.setCommittedSearchTerm?.('');

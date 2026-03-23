@@ -81,6 +81,45 @@ async function sampleVisibleNode(page, label) {
   }, label);
 }
 
+async function sampleBranchTransition(page, label, sampleTimes) {
+  const samples = [];
+  let prior = 0;
+  for (const wait of sampleTimes) {
+    await page.waitForTimeout(wait - prior);
+    prior = wait;
+    samples.push({
+      wait,
+      ...(await page.evaluate((nodeLabel) => {
+        const contentArea = document.getElementById('content-area');
+        const contentRect = contentArea?.getBoundingClientRect();
+        const node = Array.from(document.querySelectorAll('.category-card, .topic-link-item'))
+          .find(el => el.offsetParent && (el.textContent || '').includes(nodeLabel));
+        const tree = contentArea?.querySelector('.category-tree-container');
+        if (!contentArea || !contentRect || !node) {
+          return {
+            stabilizing: contentArea?.classList.contains('category-tree-stabilizing') || false,
+            opacity: tree ? Number(getComputedStyle(tree).opacity) : null,
+            left: null,
+            top: null,
+            width: null,
+            height: null
+          };
+        }
+        const rect = node.getBoundingClientRect();
+        return {
+          stabilizing: contentArea.classList.contains('category-tree-stabilizing'),
+          opacity: tree ? Number(getComputedStyle(tree).opacity) : null,
+          left: rect.left - contentRect.left,
+          top: rect.top - contentRect.top,
+          width: rect.width,
+          height: rect.height
+        };
+      }, label))
+    });
+  }
+  return samples;
+}
+
 test.beforeAll(async () => {
   try {
     await waitForHttp('http://localhost:5173');
@@ -353,8 +392,54 @@ test('14. mobile deep branch keeps the active branch readable and within the rig
   await page.getByRole('button', { name: 'MONO-VT' }).click();
   await page.waitForTimeout(900);
   const metrics = await measureSpiderwebGeometry(page);
+  expect(metrics.anyOverlap).toBe(false);
+  expect(metrics.anyHorizontalClip).toBe(false);
   expect(metrics.maxRight).toBeLessThanOrEqual(metrics.contentWidth + 2);
-  expect(metrics.maxBottom).toBeLessThanOrEqual(metrics.contentHeight + 2);
+  expect(metrics.maxBottom).toBeLessThanOrEqual(metrics.scrollHeight + 2);
   expect(metrics.minLeft).toBeGreaterThanOrEqual(-200);
+  expect(metrics.minFontSize).toBeGreaterThanOrEqual(7.5);
+});
+
+test('15. branch expansion stays visible while the tree stabilizes', async ({ page }) => {
+  await gotoApp(page);
+  await page.getByRole('button', { name: 'Adult Protocols' }).click();
+  await page.getByRole('button', { name: 'Circulation/Cardiology' }).click();
+
+  const samples = await sampleBranchTransition(page, 'Circulation/Cardiology', [0, 40, 80, 140, 220, 320]);
+  expect(samples.some(sample => sample.opacity != null)).toBe(true);
+  expect(samples.every(sample => sample.opacity == null || sample.opacity >= 0.85)).toBe(true);
+  expect(samples.every(sample => sample.left != null)).toBe(true);
+});
+
+test('16. nested branch positions remain pinned during expansion', async ({ page }) => {
+  await gotoApp(page);
+  await openAdultCardiologyRhythms(page);
+  await page.getByRole('button', { name: 'SVT' }).click();
+
+  const samples = await sampleBranchTransition(page, 'SVT', [0, 40, 80, 140, 220, 320, 520]);
+  const settled = samples[samples.length - 1];
+
+  expect(samples.every(sample => sample.left != null && sample.top != null)).toBe(true);
+  expect(samples.some(sample => sample.opacity != null && sample.opacity >= 0.85)).toBe(true);
+  samples.forEach(sample => {
+    expect(Math.abs(sample.left - settled.left)).toBeLessThanOrEqual(1);
+    expect(Math.abs(sample.top - settled.top)).toBeLessThanOrEqual(1);
+    expect(Math.abs(sample.width - settled.width)).toBeLessThanOrEqual(1);
+    expect(Math.abs(sample.height - settled.height)).toBeLessThanOrEqual(1);
+  });
+});
+
+test('17. mobile deep branch stays readable without overlap', async ({ page }) => {
+  await gotoApp(page, { width: 390, height: 844 });
+  await openAdultCardiologyRhythms(page);
+  await page.getByRole('button', { name: 'SVT' }).click();
+  await page.waitForTimeout(900);
+
+  const metrics = await measureSpiderwebGeometry(page);
+  expect(metrics.anyOverlap).toBe(false);
+  expect(metrics.anyHorizontalClip).toBe(false);
+  expect(metrics.minLeft).toBeGreaterThanOrEqual(-200);
+  expect(metrics.maxRight).toBeLessThanOrEqual(metrics.contentWidth + 2);
+  expect(metrics.maxBottom).toBeLessThanOrEqual(metrics.scrollHeight + 2);
   expect(metrics.minFontSize).toBeGreaterThanOrEqual(7.5);
 });
