@@ -3,6 +3,9 @@ node_modules/
 # IDE/editor caches
 .vs/
 .vscode/
+!.vscode/
+.vscode/*
+!.vscode/mcp.json
 
 # Tool outputs and reports
 hint-report/
