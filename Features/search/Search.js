@@ -239,14 +239,11 @@ function primeSuggestionPreviews(entries) {
             pendingLoads.push(ensureSearchPreviewContent(entry));
         }
     });
-    if (!pendingLoads.length || !newlyQueuedIds.length) return;
-    const refreshVersion = searchUiState.previewRefreshVersion + 1;
-    searchUiState.previewRefreshVersion = refreshVersion;
+    if (!pendingLoads.length) return;
     Promise.allSettled(pendingLoads).then(() => {
         newlyQueuedIds.forEach(entryId => {
             searchUiState.previewRefreshPendingIds.delete(entryId);
         });
-        if (refreshVersion !== searchUiState.previewRefreshVersion) return;
         const currentQuery = normalizeSearchTerm(getSearchDom().input?.value);
         if (!currentQuery || currentQuery !== scheduledQuery) return;
         refreshSearchSuggestions();
