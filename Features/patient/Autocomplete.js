@@ -10,12 +10,32 @@ export function setupAutocomplete(textareaId, suggestionsContainerId, suggestion
   const normalizedField = (fieldKey || '').toLowerCase();
   const baseValues = suggestionSourceSet ? Array.from(suggestionSourceSet) : [];
 
+  const clearSuggestions = () => {
+    suggestionsContainer.replaceChildren();
+  };
+
+  const hideSuggestions = () => {
+    suggestionsContainer.classList.add('hidden');
+    clearSuggestions();
+  };
+
+  const renderRows = rows => {
+    const nodes = rows.map(entry => {
+      const item = document.createElement('div');
+      item.className = 'autocomplete-suggestion-item';
+      item.dataset.canonical = entry.canonical;
+      item.dataset.display = entry.display;
+      item.textContent = entry.display;
+      return item;
+    });
+    suggestionsContainer.replaceChildren(...nodes);
+  };
+
   const renderSuggestions = () => {
     const { committed, current } = splitSegments(textarea.value);
     const currentLower = current.toLowerCase();
     if (currentLower.length === 0) {
-      suggestionsContainer.classList.add('hidden');
-      suggestionsContainer.innerHTML = '';
+      hideSuggestions();
       return;
     }
     const committedCanonical = new Set(
@@ -36,13 +56,10 @@ export function setupAutocomplete(textareaId, suggestionsContainerId, suggestion
       seenCanonicals.add(canonicalLower);
     });
     if (rows.length === 0) {
-      suggestionsContainer.classList.add('hidden');
-      suggestionsContainer.innerHTML = '';
+      hideSuggestions();
       return;
     }
-    suggestionsContainer.innerHTML = rows.map(entry => (
-      `<div class="autocomplete-suggestion-item" data-canonical="${entry.canonical}" data-display="${entry.display}">${entry.display}</div>`
-    )).join('');
+    renderRows(rows);
     suggestionsContainer.classList.remove('hidden');
   };
 
@@ -58,8 +75,7 @@ export function setupAutocomplete(textareaId, suggestionsContainerId, suggestion
       nextValues.push(displayValue);
     }
     textarea.value = nextValues.join(', ') + (nextValues.length ? ', ' : '');
-    suggestionsContainer.classList.add('hidden');
-    suggestionsContainer.innerHTML = '';
+    hideSuggestions();
     textarea.focus();
     textarea.dispatchEvent(new Event('input'));
   });
@@ -78,22 +94,38 @@ export function setupSingleValueAutocomplete(inputId, suggestionsContainerId, su
 
   const baseValues = suggestionSourceSet ? Array.from(suggestionSourceSet) : [];
 
+  const clearSuggestions = () => {
+    suggestionsContainer.replaceChildren();
+  };
+
+  const hideSuggestions = () => {
+    suggestionsContainer.classList.add('hidden');
+    clearSuggestions();
+  };
+
+  const renderRows = rows => {
+    const nodes = rows.map(option => {
+      const item = document.createElement('div');
+      item.className = 'autocomplete-suggestion-item';
+      item.dataset.value = option;
+      item.textContent = option;
+      return item;
+    });
+    suggestionsContainer.replaceChildren(...nodes);
+  };
+
   const renderSuggestions = () => {
     const current = (input.value || '').trim().toLowerCase();
     if (!current) {
-      suggestionsContainer.classList.add('hidden');
-      suggestionsContainer.innerHTML = '';
+      hideSuggestions();
       return;
     }
     const rows = baseValues.filter(option => option.toLowerCase().includes(current));
     if (!rows.length) {
-      suggestionsContainer.classList.add('hidden');
-      suggestionsContainer.innerHTML = '';
+      hideSuggestions();
       return;
     }
-    suggestionsContainer.innerHTML = rows.map(option => (
-      `<div class="autocomplete-suggestion-item" data-value="${option}">${option}</div>`
-    )).join('');
+    renderRows(rows);
     suggestionsContainer.classList.remove('hidden');
   };
 
@@ -104,8 +136,7 @@ export function setupSingleValueAutocomplete(inputId, suggestionsContainerId, su
     if (!item) return;
     const value = item.dataset.value || '';
     input.value = value;
-    suggestionsContainer.classList.add('hidden');
-    suggestionsContainer.innerHTML = '';
+    hideSuggestions();
     input.focus();
     input.dispatchEvent(new Event('input'));
   });
