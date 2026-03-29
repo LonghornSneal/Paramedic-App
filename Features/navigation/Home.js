@@ -4,27 +4,14 @@
 import { addTapListener } from '../../Utils/addTapListener.js';
 import { renderInitialView } from '../list/ListView.js';
 
-function collapseAllCategories() {
-    // Recursively collapse all expanded categories in the main topics list
-    if (!Array.isArray(window.paramedicCategories)) return;
-    const collapseItem = (item) => {
-        if (item.type === 'category') {
-            item.expanded = false;  // collapse this category
-            if (item.children) {
-                item.children.forEach(child => collapseItem(child));
-            }
-        }
-    };
-    window.paramedicCategories.forEach(item => collapseItem(item));
-}
-
 // Handles the Home button click: clears search, resets list, and navigates to the main contents page.
 function handleHomeClick() {
-    // Clear any search query and collapse all categories to default state
-    window.searchInput.value = '';
-    collapseAllCategories();
-    // Render the main category list view anew and add a new history entry for this "Home" navigation
+    // Clear any search query and re-render the current branch-aware list state.
+    if (window.searchInput) {
+        window.searchInput.value = '';
+    }
     renderInitialView(true);
+    window.queueNavBranchSync?.('home');
 }
 
 // Attaches the click/tap listener to the Home button element.

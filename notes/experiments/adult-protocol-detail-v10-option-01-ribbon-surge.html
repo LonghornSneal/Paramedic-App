@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adult Protocol Detail Experiment v10 Option 01</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Bebas+Neue&display=swap');
+
+    :root {
+      --ink: #10212d;
+      --muted: #4b5a66;
+      --page: #f4f1ea;
+      --panel: #ffffff;
+      --tier1: #0b3d5c;
+      --tier1-accent: #ff8a3d;
+      --tier2: #1f7a8c;
+      --tier2-accent: #f4b266;
+      --tier3: #3b4f56;
+      --tier3-accent: #f6d2a7;
+      --tier4: #5a2f2f;
+      --tier4-accent: #f2cda2;
+      --shadow: 0 16px 32px rgba(16, 33, 45, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Assistant", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(620px 320px at 6% 6%, rgba(255, 138, 61, 0.18), transparent 60%),
+        repeating-linear-gradient(120deg, rgba(31, 122, 140, 0.08) 0 10px, transparent 10px 22px),
+        var(--page);
+    }
+
+    .scene { padding: 36px 22px 60px; }
+
+    .layout {
+      max-width: 1060px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .main-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .tier {
+      background: var(--panel);
+      border-radius: 22px;
+      padding: 18px 20px 12px;
+      box-shadow: var(--shadow);
+      position: relative;
+      border: 1px solid rgba(16, 33, 45, 0.12);
+      animation: floatIn 0.8s ease both;
+    }
+
+    .tier-1 {
+      border: 2px solid rgba(11, 61, 92, 0.3);
+    }
+
+    .tier-1::before {
+      content: "";
+      position: absolute;
+      left: -12px;
+      top: 22px;
+      bottom: 22px;
+      width: 10px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, var(--tier1-accent), rgba(11, 61, 92, 0.2));
+    }
+
+    .side-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .tier-2 { border-color: rgba(31, 122, 140, 0.25); }
+    .tier-4 { border-color: rgba(90, 47, 47, 0.25); }
+
+    .line {
+      display: block;
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(16, 33, 45, 0.1);
+      background: #fff;
+      text-align: left;
+      margin-bottom: 10px;
+      font-size: 14px;
+      line-height: 1.35;
+      color: var(--muted);
+    }
+
+    .t1.c1 {
+      font-family: "Bebas Neue", sans-serif;
+      font-size: 24px;
+      letter-spacing: 0.04em;
+      color: var(--tier1);
+      background: rgba(11, 61, 92, 0.08);
+    }
+
+    .t1.c2 {
+      color: var(--ink);
+      background: rgba(11, 61, 92, 0.04);
+    }
+
+    .t1.c3 {
+      color: var(--tier1);
+      background: rgba(255, 138, 61, 0.2);
+      border: 1px dashed rgba(255, 138, 61, 0.45);
+    }
+
+    .t2.c1 {
+      color: var(--tier2);
+      font-weight: 700;
+      background: rgba(31, 122, 140, 0.1);
+    }
+
+    .t2.c2 {
+      color: var(--muted);
+      background: rgba(31, 122, 140, 0.05);
+    }
+
+    .t2.c3 {
+      color: var(--tier2);
+      background: rgba(244, 178, 102, 0.22);
+      border-style: dashed;
+    }
+
+    .t3.c3 {
+      color: var(--tier3);
+      background: rgba(246, 210, 167, 0.65);
+      border-color: rgba(59, 79, 86, 0.2);
+      font-weight: 600;
+    }
+
+    .t4.c2 {
+      color: var(--tier4);
+      background: rgba(90, 47, 47, 0.06);
+    }
+
+    .is-hidden { display: none; }
+
+    .inline-tag {
+      display: inline-block;
+      padding: 0 6px;
+      border-radius: 999px;
+    }
+
+    button.line {
+      appearance: none;
+      border: 1px solid rgba(16, 33, 45, 0.1);
+      background: inherit;
+      font: inherit;
+    }
+
+    .clickable {
+      cursor: pointer;
+      animation: shimmer 1.9s ease-in-out infinite;
+    }
+
+    .slide {
+      display: inline-block;
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      vertical-align: bottom;
+      transform: translateX(-6px);
+      transition: max-width 0.45s ease, opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .slide.is-open {
+      max-width: 1000px;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .drawer {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .drawer.is-open {
+      max-height: 260px;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .pop-anchor { position: relative; }
+
+    .popover {
+      position: absolute;
+      left: 58%;
+      top: -4px;
+      width: 42%;
+      display: grid;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 2;
+    }
+
+    .popover.is-open {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .popover::before {
+      content: "";
+      position: absolute;
+      left: -10px;
+      top: 18px;
+      width: 0;
+      height: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-right: 10px solid rgba(246, 210, 167, 0.85);
+    }
+
+    .swap.is-hidden { display: none; }
+
+    .folded {
+      position: relative;
+      border: 1px solid rgba(90, 47, 47, 0.25);
+      background: linear-gradient(135deg, rgba(242, 205, 162, 0.25), transparent 60%);
+    }
+
+    .folded::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 22px;
+      height: 22px;
+      background: linear-gradient(135deg, rgba(242, 205, 162, 0.9), rgba(242, 205, 162, 0));
+      clip-path: polygon(0 0, 100% 0, 100% 100%);
+    }
+
+    @keyframes shimmer {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.2); }
+    }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .popover {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin-top: 8px;
+      }
+      .popover::before { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .clickable { animation: none; }
+      .tier { animation: none; }
+      .drawer, .popover, .slide { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="scene">
+    <div class="layout">
+      <div class="main-stack">
+        <section class="tier tier-1">
+          <div class="line t1 c1">Adult pt Illness:</div>
+          <div class="line t1 c2">Treat if pt has these conditions met.</div>
+          <div class="line t1 c2">Don't treat if pt has this condition.</div>
+          <div class="line t1 c1">Administer drug.</div>
+          <div class="line t1 c1">Repeat drug administration after x amount of time, max dose of drug is.</div>
+          <div class="line t1 c2">Consult for further orders.</div>
+          <div class="line t1 c1">Administer this other drug, may repeat every x amount of minutes prn.</div>
+          <div class="line t1 c2">Take caution for.</div>
+          <div class="line t1 c2">What out for these S/S.</div>
+        </section>
+
+        <section class="tier tier-2">
+          <div class="line t2 c2">Drug has this function.</div>
+          <div class="pop-anchor">
+            <button class="line t2 c1 clickable" data-toggle="interaction" type="button">
+              <span class="swap" data-collapsed="interaction">Drug wont function if this interaction.</span>
+              <span class="swap slide" data-expanded="interaction">Drug wont function if this interaction<span class="inline-tag t2 c3">, Drug function interaction on cellular level.</span></span>
+            </button>
+            <div class="popover" data-hidden="tier3">
+              <div class="line t3 c3">Illness background Info.</div>
+              <div class="line t3 c3">More Illness background Info, Classic recognition signs, Longterm pt signs, Less important illness info.</div>
+              <div class="line t3 c3">Why we should do this.</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <aside class="side-stack">
+        <section class="tier tier-2">
+          <div class="line t2 c1">Severity potential.</div>
+          <div class="line t2 c2">Potential for harm issues.</div>
+        </section>
+
+        <section class="tier tier-1">
+          <div class="line t1 c2">When pt has Illness and this other thing.</div>
+          <button class="line t1 c1 clickable" data-toggle="tx" type="button">
+            <span class="swap" data-collapsed="tx">Begin this additional Tx en route, Don't let this happen during administration.</span>
+            <span class="swap slide" data-expanded="tx">Begin this additional Tx en route, Don't let this happen during administration<span class="inline-tag t1 c3">, Why this could happen on a cellular level.</span></span>
+          </button>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const expandAll = new URLSearchParams(window.location.search).get('expanded') === '1';
+
+    const toggleInline = (key, forceOpen) => {
+      const collapsed = document.querySelector(`[data-collapsed="${key}"]`);
+      const expanded = document.querySelector(`[data-expanded="${key}"]`);
+      if (!collapsed || !expanded) return;
+      const open = typeof forceOpen === 'boolean' ? forceOpen : collapsed.classList.contains('is-hidden');
+      collapsed.classList.toggle('is-hidden', open);
+      expanded.classList.toggle('is-open', open);
+    };
+
+    const toggleTier3 = (forceOpen) => {
+      const targets = document.querySelectorAll('[data-hidden="tier3"]');
+      targets.forEach((el) => {
+        const open = typeof forceOpen === 'boolean' ? forceOpen : !el.classList.contains('is-open');
+        el.classList.toggle('is-open', open);
+      });
+    };
+
+    document.querySelectorAll('[data-toggle="interaction"]').forEach((button) => {
+      button.addEventListener('click', () => {
+        toggleInline('interaction');
+        toggleTier3();
+      });
+    });
+
+    document.querySelectorAll('[data-toggle="tx"]').forEach((button) => {
+      button.addEventListener('click', () => toggleInline('tx'));
+    });
+
+    if (expandAll) {
+      toggleInline('interaction', true);
+      toggleInline('tx', true);
+      toggleTier3(true);
+    }
+  </script>
+</body>
+</html>

@@ -23,6 +23,17 @@ let searchInput,
 let medicationDataMap = {};
 let allDisplayableTopicsMap = {};
 let paramedicCategories = [];
+function queueNavBranchSync() {
+    // The list view owns active-branch styling and motion. Navigation can safely no-op here.
+}
+
+function syncNavBranchState() {
+    // Intentionally empty.
+}
+
+function initializeNavBranchTracking() {
+    // Intentionally empty.
+}
 
 // Assigns key UI elements to global variables for easy access.
 function assignDomElements() {
@@ -65,7 +76,10 @@ function initApp() {
     window.navHomeButton = navHomeButton;
     window.settingsButton = settingsButton;
     window.settingsPanel = settingsPanel;
+    window.queueNavBranchSync = queueNavBranchSync;
+    window.syncNavBranchState = syncNavBranchState;
 
+    initializeNavBranchTracking();
     attachNavHandlers();
 
     // Global error surface to help catch runtime issues

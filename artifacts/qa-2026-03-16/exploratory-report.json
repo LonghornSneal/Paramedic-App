@@ -1,0 +1,419 @@
+[
+  {
+    "viewport": {
+      "name": "android-small",
+      "width": 360,
+      "height": 640
+    },
+    "states": {
+      "home": {
+        "count": 7,
+        "minLeft": 17,
+        "maxRight": 134.890625,
+        "maxBottom": 195.59375,
+        "contentWidth": 352,
+        "contentHeight": 420,
+        "minFontSize": 9.28,
+        "maxFontSize": 9.28
+      },
+      "searchSuggestions": {
+        "left": 40,
+        "right": 276,
+        "top": 119.21875,
+        "bottom": 490.40625,
+        "width": 236,
+        "height": 371.1875,
+        "viewportWidth": 360,
+        "viewportHeight": 640,
+        "scrollHeight": 453,
+        "clientHeight": 369
+      },
+      "searchCommitted": {
+        "count": 47,
+        "minLeft": -92.54662322998047,
+        "maxRight": 330.00025177001953,
+        "maxBottom": 366.84375,
+        "contentWidth": 352,
+        "contentHeight": 454.9375,
+        "minFontSize": 9.28,
+        "maxFontSize": 9.92
+      },
+      "historyModal": {
+        "left": 128.8984375,
+        "right": 231.1015625,
+        "top": 8.03125,
+        "bottom": 132.03125,
+        "width": 102.203125,
+        "height": 124,
+        "viewportWidth": 360,
+        "viewportHeight": 640
+      },
+      "historyItems": [],
+      "settingsModal": {
+        "left": 90,
+        "right": 270,
+        "top": 163,
+        "bottom": 477,
+        "width": 180,
+        "height": 314,
+        "viewportWidth": 360,
+        "viewportHeight": 640
+      },
+      "darkModeClass": true,
+      "sidebarInitial": {
+        "left": 0,
+        "right": 360,
+        "top": 0,
+        "bottom": 640,
+        "width": 360,
+        "height": 640,
+        "scrollHeight": 787,
+        "clientHeight": 640,
+        "overflowX": [
+          {
+            "tag": "SELECT",
+            "id": "vs-spo2-select",
+            "text": "Normal\nLow\nSevere"
+          },
+          {
+            "tag": "SELECT",
+            "id": "vs-bgl-select",
+            "text": "Norm\nHigh\nLow\nCrit"
+          }
+        ]
+      },
+      "sidebarAfterEntry": {
+        "left": 0,
+        "right": 360,
+        "top": 0,
+        "bottom": 640,
+        "width": 360,
+        "height": 640,
+        "scrollHeight": 805,
+        "clientHeight": 640,
+        "overflowX": [
+          {
+            "tag": "SELECT",
+            "id": "vs-spo2-select",
+            "text": "Normal\nLow\nSevere"
+          },
+          {
+            "tag": "SELECT",
+            "id": "vs-bgl-select",
+            "text": "Norm\nHigh\nLow\nCrit"
+          }
+        ]
+      },
+      "snapshotBar": "12yo 70kg • Allergies: NKA • HR • RR • SVT",
+      "ekgHelpModal": {
+        "left": 0,
+        "right": 360,
+        "top": 0,
+        "bottom": 640,
+        "width": 360,
+        "height": 640,
+        "viewportWidth": 360,
+        "viewportHeight": 640
+      }
+    },
+    "consoleMessages": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "errors": [
+      {
+        "step": "open-adult-seizure-detail",
+        "message": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Seizure', exact: true }).first()\u001b[22m\n\u001b[2m    - locator resolved to <a tabindex=\"0\" role=\"button\" href=\"#adult-seizure\" data-emphasis=\"match\" data-drag-id=\"adult-seizure\" data-topic-id=\"adult-seizure\" class=\"topic-link-item is-context-match is-context-branch\">Seizure</a>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <a tabindex=\"0\" role=\"button\" data-emphasis=\"muted\" class=\"topic-link-item\" href=\"#pediatric-toxic-ingestion\" data-drag-id=\"pediatric-toxic-ingestion\" data-topic-id=\"pediatric-toxic-ingestion\">Toxic Ingestion</a> from <div data-tier=\"branch\" data-category-id=\"pediatric-protocols\" class=\"category-group is-root is-expanded is-context-branch\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <a tabindex=\"0\" role=\"button\" data-emphasis=\"muted\" class=\"topic-link-item\" href=\"#pediatric-toxic-ingestion\" data-drag-id=\"pediatric-toxic-ingestion\" data-topic-id=\"pediatric-toxic-ingestion\">Toxic Ingestion</a> from <div data-tier=\"branch\" data-category-id=\"pediatric-protocols\" class=\"category-group is-root is-expanded is-context-branch\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    54 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <a tabindex=\"0\" role=\"button\" data-emphasis=\"muted\" class=\"topic-link-item\" href=\"#pediatric-toxic-ingestion\" data-drag-id=\"pediatric-toxic-ingestion\" data-topic-id=\"pediatric-toxic-ingestion\">Toxic Ingestion</a> from <div data-tier=\"branch\" data-category-id=\"pediatric-protocols\" class=\"category-group is-root is-expanded is-context-branch\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n"
+      },
+      {
+        "step": "sidebar-entry",
+        "message": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#ekg-help-close')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" id=\"ekg-help-close\" class=\"modal-close\" aria-label=\"Close EKG help\">×</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"patient-sidebar-content\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n\u001b[2m    - <div class=\"patient-sidebar-content\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m  2 × retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <input step=\"any\" type=\"number\" id=\"pt-height-in\" inputmode=\"numeric\" aria-label=\"Inches\" class=\"sidebar-input height-input height-input--compact\"/> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m  13 × retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"patient-sidebar-content\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"patient-sidebar-content\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <input step=\"any\" type=\"number\" id=\"pt-height-in\" inputmode=\"numeric\" aria-label=\"Inches\" class=\"sidebar-input height-input height-input--compact\"/> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m       - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <input step=\"any\" type=\"number\" id=\"pt-height-in\" inputmode=\"numeric\" aria-label=\"Inches\" class=\"sidebar-input height-input height-input--compact\"/> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m  2 × retrying click action\u001b[22m\n\u001b[2m      - waiting 500ms\u001b[22m\n\u001b[2m      - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"patient-sidebar-content\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m  - retrying click action\u001b[22m\n\u001b[2m    - waiting 500ms\u001b[22m\n"
+      },
+      {
+        "step": "quick-vent-path",
+        "message": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#nav-home-button')\u001b[22m\n\u001b[2m    - locator resolved to <button title=\"Home\" type=\"button\" aria-label=\"Home\" id=\"nav-home-button\" class=\"header-nav-button mt-sm-2\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"sidebar-demographics-item sidebar-demographics-item-height\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"sidebar-demographics-item sidebar-demographics-item-height\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    54 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"sidebar-demographics-item sidebar-demographics-item-height\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+      },
+      {
+        "step": "midazolam-detail",
+        "message": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#nav-home-button')\u001b[22m\n\u001b[2m    - locator resolved to <button title=\"Home\" type=\"button\" aria-label=\"Home\" id=\"nav-home-button\" class=\"header-nav-button mt-sm-2\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"sidebar-demographics-item sidebar-demographics-item-height\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"sidebar-demographics-item sidebar-demographics-item-height\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    54 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"sidebar-demographics-item sidebar-demographics-item-height\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n"
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "name": "iphone-12",
+      "width": 390,
+      "height": 844
+    },
+    "states": {
+      "home": {
+        "count": 7,
+        "minLeft": 22,
+        "maxRight": 137.890625,
+        "maxBottom": 188.59375,
+        "contentWidth": 382,
+        "contentHeight": 686.9375,
+        "minFontSize": 9.28,
+        "maxFontSize": 9.28
+      },
+      "searchSuggestions": {
+        "left": 40,
+        "right": 305.5,
+        "top": 91.21875,
+        "bottom": 539.21875,
+        "width": 265.5,
+        "height": 448,
+        "viewportWidth": 390,
+        "viewportHeight": 844,
+        "scrollHeight": 448,
+        "clientHeight": 446
+      },
+      "searchCommitted": {
+        "count": 47,
+        "minLeft": -66.01563262939453,
+        "maxRight": 360,
+        "maxBottom": 368.765625,
+        "contentWidth": 382,
+        "contentHeight": 686.9375,
+        "minFontSize": 9.28,
+        "maxFontSize": 9.92
+      },
+      "historyModal": {
+        "left": 143.8984375,
+        "right": 246.1015625,
+        "top": -5.96875,
+        "bottom": 118.03125,
+        "width": 102.203125,
+        "height": 124,
+        "viewportWidth": 390,
+        "viewportHeight": 844
+      },
+      "historyItems": [],
+      "settingsModal": {
+        "left": 97.5,
+        "right": 292.5,
+        "top": 265,
+        "bottom": 579,
+        "width": 195,
+        "height": 314,
+        "viewportWidth": 390,
+        "viewportHeight": 844
+      },
+      "darkModeClass": true,
+      "sidebarInitial": {
+        "left": 0,
+        "right": 390,
+        "top": 0,
+        "bottom": 844,
+        "width": 390,
+        "height": 844,
+        "scrollHeight": 844,
+        "clientHeight": 844,
+        "overflowX": [
+          {
+            "tag": "SELECT",
+            "id": "vs-spo2-select",
+            "text": "Normal\nLow\nSevere"
+          },
+          {
+            "tag": "SELECT",
+            "id": "vs-bgl-select",
+            "text": "Norm\nHigh\nLow\nCrit"
+          }
+        ]
+      },
+      "sidebarAfterEntry": {
+        "left": 0,
+        "right": 390,
+        "top": 0,
+        "bottom": 844,
+        "width": 390,
+        "height": 844,
+        "scrollHeight": 844,
+        "clientHeight": 844,
+        "overflowX": [
+          {
+            "tag": "SELECT",
+            "id": "vs-spo2-select",
+            "text": "Normal\nLow\nSevere"
+          },
+          {
+            "tag": "SELECT",
+            "id": "vs-bgl-select",
+            "text": "Norm\nHigh\nLow\nCrit"
+          }
+        ]
+      },
+      "snapshotBar": "12yo 70kg • Allergies: NKA • HR • RR • SVT",
+      "ekgHelpModal": {
+        "left": 0,
+        "right": 390,
+        "top": 0,
+        "bottom": 844,
+        "width": 390,
+        "height": 844,
+        "viewportWidth": 390,
+        "viewportHeight": 844
+      }
+    },
+    "consoleMessages": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "errors": [
+      {
+        "step": "open-adult-seizure-detail",
+        "message": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Seizure', exact: true }).first()\u001b[22m\n\u001b[2m    - locator resolved to <a tabindex=\"0\" role=\"button\" href=\"#adult-seizure\" data-emphasis=\"match\" data-drag-id=\"adult-seizure\" data-topic-id=\"adult-seizure\" class=\"topic-link-item is-context-match is-context-branch\">Seizure</a>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <a tabindex=\"0\" role=\"button\" data-emphasis=\"muted\" class=\"topic-link-item\" href=\"#pediatric-toxic-ingestion\" data-drag-id=\"pediatric-toxic-ingestion\" data-topic-id=\"pediatric-toxic-ingestion\">Toxic Ingestion</a> from <div data-tier=\"branch\" data-category-id=\"pediatric-protocols\" class=\"category-group is-root is-expanded is-context-branch\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <a tabindex=\"0\" role=\"button\" data-emphasis=\"muted\" class=\"topic-link-item\" href=\"#pediatric-toxic-ingestion\" data-drag-id=\"pediatric-toxic-ingestion\" data-topic-id=\"pediatric-toxic-ingestion\">Toxic Ingestion</a> from <div data-tier=\"branch\" data-category-id=\"pediatric-protocols\" class=\"category-group is-root is-expanded is-context-branch\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    54 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <a tabindex=\"0\" role=\"button\" data-emphasis=\"muted\" class=\"topic-link-item\" href=\"#pediatric-toxic-ingestion\" data-drag-id=\"pediatric-toxic-ingestion\" data-topic-id=\"pediatric-toxic-ingestion\">Toxic Ingestion</a> from <div data-tier=\"branch\" data-category-id=\"pediatric-protocols\" class=\"category-group is-root is-expanded is-context-branch\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m    - element is visible, enabled and stable\u001b[22m\n\u001b[2m    - scrolling into view if needed\u001b[22m\n\u001b[2m    - done scrolling\u001b[22m\n"
+      },
+      {
+        "step": "sidebar-entry",
+        "message": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#ekg-help-close')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" id=\"ekg-help-close\" class=\"modal-close\" aria-label=\"Close EKG help\">×</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-line=\"4\" class=\"patient-line patient-line--full\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div data-line=\"4\" class=\"patient-line patient-line--full\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    54 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div data-line=\"4\" class=\"patient-line patient-line--full\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+      },
+      {
+        "step": "quick-vent-path",
+        "message": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#nav-home-button')\u001b[22m\n\u001b[2m    - locator resolved to <button title=\"Home\" type=\"button\" aria-label=\"Home\" id=\"nav-home-button\" class=\"header-nav-button mt-sm-2\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"sidebar-demographics-item sidebar-demographics-item-age sidebar-demographics-item-age--inline\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"sidebar-demographics-item sidebar-demographics-item-age sidebar-demographics-item-age--inline\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    54 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"sidebar-demographics-item sidebar-demographics-item-age sidebar-demographics-item-age--inline\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+      },
+      {
+        "step": "midazolam-detail",
+        "message": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#nav-home-button')\u001b[22m\n\u001b[2m    - locator resolved to <button title=\"Home\" type=\"button\" aria-label=\"Home\" id=\"nav-home-button\" class=\"header-nav-button mt-sm-2\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"sidebar-demographics-item sidebar-demographics-item-age sidebar-demographics-item-age--inline\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"sidebar-demographics-item sidebar-demographics-item-age sidebar-demographics-item-age--inline\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    54 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"sidebar-demographics-item sidebar-demographics-item-age sidebar-demographics-item-age--inline\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "name": "iphone-plus",
+      "width": 430,
+      "height": 932
+    },
+    "states": {
+      "home": {
+        "count": 7,
+        "minLeft": 22,
+        "maxRight": 137.890625,
+        "maxBottom": 188.59375,
+        "contentWidth": 422,
+        "contentHeight": 774.9375,
+        "minFontSize": 9.28,
+        "maxFontSize": 9.28
+      },
+      "searchSuggestions": {
+        "left": 40,
+        "right": 345.5,
+        "top": 91.21875,
+        "bottom": 539.21875,
+        "width": 305.5,
+        "height": 448,
+        "viewportWidth": 430,
+        "viewportHeight": 932,
+        "scrollHeight": 448,
+        "clientHeight": 446
+      },
+      "searchCommitted": {
+        "count": 47,
+        "minLeft": -30.359378814697266,
+        "maxRight": 400,
+        "maxBottom": 372.203125,
+        "contentWidth": 422,
+        "contentHeight": 774.9375,
+        "minFontSize": 9.28,
+        "maxFontSize": 9.92
+      },
+      "historyModal": {
+        "left": 163.8984375,
+        "right": 266.1015625,
+        "top": -5.96875,
+        "bottom": 118.03125,
+        "width": 102.203125,
+        "height": 124,
+        "viewportWidth": 430,
+        "viewportHeight": 932
+      },
+      "historyItems": [],
+      "settingsModal": {
+        "left": 113.03125,
+        "right": 316.96875,
+        "top": 321,
+        "bottom": 611,
+        "width": 203.9375,
+        "height": 290,
+        "viewportWidth": 430,
+        "viewportHeight": 932
+      },
+      "darkModeClass": true,
+      "sidebarInitial": {
+        "left": 0,
+        "right": 430,
+        "top": 0,
+        "bottom": 932,
+        "width": 430,
+        "height": 932,
+        "scrollHeight": 932,
+        "clientHeight": 932,
+        "overflowX": [
+          {
+            "tag": "SELECT",
+            "id": "vs-spo2-select",
+            "text": "Normal\nLow\nSevere"
+          },
+          {
+            "tag": "SELECT",
+            "id": "vs-bgl-select",
+            "text": "Norm\nHigh\nLow\nCrit"
+          }
+        ]
+      },
+      "sidebarAfterEntry": {
+        "left": 0,
+        "right": 430,
+        "top": 0,
+        "bottom": 932,
+        "width": 430,
+        "height": 932,
+        "scrollHeight": 932,
+        "clientHeight": 932,
+        "overflowX": [
+          {
+            "tag": "SELECT",
+            "id": "vs-spo2-select",
+            "text": "Normal\nLow\nSevere"
+          },
+          {
+            "tag": "SELECT",
+            "id": "vs-bgl-select",
+            "text": "Norm\nHigh\nLow\nCrit"
+          }
+        ]
+      },
+      "snapshotBar": "12yo 70kg • Allergies: NKA • HR • RR • SVT",
+      "ekgHelpModal": {
+        "left": 0,
+        "right": 430,
+        "top": 0,
+        "bottom": 932,
+        "width": 430,
+        "height": 932,
+        "viewportWidth": 430,
+        "viewportHeight": 932
+      }
+    },
+    "consoleMessages": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "errors": [
+      {
+        "step": "open-adult-seizure-detail",
+        "message": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Seizure', exact: true }).first()\u001b[22m\n\u001b[2m    - locator resolved to <a tabindex=\"0\" role=\"button\" href=\"#adult-seizure\" data-emphasis=\"match\" data-drag-id=\"adult-seizure\" data-topic-id=\"adult-seizure\" class=\"topic-link-item is-context-match is-context-branch\">Seizure</a>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <a tabindex=\"0\" role=\"button\" data-emphasis=\"muted\" class=\"topic-link-item\" href=\"#pediatric-toxic-ingestion\" data-drag-id=\"pediatric-toxic-ingestion\" data-topic-id=\"pediatric-toxic-ingestion\">Toxic Ingestion</a> from <div data-tier=\"branch\" data-category-id=\"pediatric-protocols\" class=\"category-group is-root is-expanded is-context-branch\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <a tabindex=\"0\" role=\"button\" data-emphasis=\"muted\" class=\"topic-link-item\" href=\"#pediatric-toxic-ingestion\" data-drag-id=\"pediatric-toxic-ingestion\" data-topic-id=\"pediatric-toxic-ingestion\">Toxic Ingestion</a> from <div data-tier=\"branch\" data-category-id=\"pediatric-protocols\" class=\"category-group is-root is-expanded is-context-branch\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    54 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <a tabindex=\"0\" role=\"button\" data-emphasis=\"muted\" class=\"topic-link-item\" href=\"#pediatric-toxic-ingestion\" data-drag-id=\"pediatric-toxic-ingestion\" data-topic-id=\"pediatric-toxic-ingestion\">Toxic Ingestion</a> from <div data-tier=\"branch\" data-category-id=\"pediatric-protocols\" class=\"category-group is-root is-expanded is-context-branch\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+      },
+      {
+        "step": "sidebar-entry",
+        "message": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#ekg-help-close')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" id=\"ekg-help-close\" class=\"modal-close\" aria-label=\"Close EKG help\">×</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"patient-sidebar-content\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"patient-sidebar-content\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    55 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"patient-sidebar-content\">…</div> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+      },
+      {
+        "step": "quick-vent-path",
+        "message": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#nav-home-button')\u001b[22m\n\u001b[2m    - locator resolved to <button title=\"Home\" type=\"button\" aria-label=\"Home\" id=\"nav-home-button\" class=\"header-nav-button mt-sm-2\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <input step=\"any\" id=\"pt-age\" type=\"number\" inputmode=\"decimal\" data-age-unit=\"years\" class=\"sidebar-input age-input age-input--compact\"/> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <input step=\"any\" id=\"pt-age\" type=\"number\" inputmode=\"decimal\" data-age-unit=\"years\" class=\"sidebar-input age-input age-input--compact\"/> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    54 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <input step=\"any\" id=\"pt-age\" type=\"number\" inputmode=\"decimal\" data-age-unit=\"years\" class=\"sidebar-input age-input age-input--compact\"/> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n"
+      },
+      {
+        "step": "midazolam-detail",
+        "message": "page.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#nav-home-button')\u001b[22m\n\u001b[2m    - locator resolved to <button title=\"Home\" type=\"button\" aria-label=\"Home\" id=\"nav-home-button\" class=\"header-nav-button mt-sm-2\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <input step=\"any\" id=\"pt-age\" type=\"number\" inputmode=\"decimal\" data-age-unit=\"years\" class=\"sidebar-input age-input age-input--compact\"/> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <input step=\"any\" id=\"pt-age\" type=\"number\" inputmode=\"decimal\" data-age-unit=\"years\" class=\"sidebar-input age-input age-input--compact\"/> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    54 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <input step=\"any\" id=\"pt-age\" type=\"number\" inputmode=\"decimal\" data-age-unit=\"years\" class=\"sidebar-input age-input age-input--compact\"/> from <div class=\"open\" id=\"patient-sidebar\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n"
+      }
+    ]
+  }
+]

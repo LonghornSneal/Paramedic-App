@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adult Protocol Detail Experiment v10 Option 05</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Sora:wght@400;600;700&display=swap');
+
+    :root {
+      --ink: #0f2434;
+      --muted: #42515d;
+      --page: #edf3f7;
+      --panel: #ffffff;
+      --tier1: #124559;
+      --tier1-accent: #fca311;
+      --tier2: #1e6f5c;
+      --tier2-accent: #f7d9a0;
+      --tier3: #2c4a5c;
+      --tier3-accent: #cfe3d3;
+      --tier4: #8c3b2f;
+      --tier4-accent: #f7b267;
+      --shadow: 0 14px 30px rgba(15, 36, 52, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(520px 240px at 18% 8%, rgba(252, 163, 17, 0.2), transparent 60%),
+        radial-gradient(520px 240px at 90% 90%, rgba(30, 111, 92, 0.14), transparent 60%),
+        repeating-radial-gradient(circle at 20px 20px, rgba(18, 69, 89, 0.06) 0 2px, transparent 2px 18px),
+        var(--page);
+    }
+
+    .scene { padding: 36px 22px 60px; }
+
+    .rail-layout {
+      max-width: 980px;
+      margin: 0 auto;
+      position: relative;
+      padding-left: 42px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .rail-layout::before {
+      content: "";
+      position: absolute;
+      left: 16px;
+      top: 6px;
+      bottom: 6px;
+      width: 4px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--tier1-accent), rgba(18, 69, 89, 0.15));
+    }
+
+    .tier {
+      background: var(--panel);
+      border-radius: 18px;
+      padding: 18px 18px 10px;
+      box-shadow: var(--shadow);
+      position: relative;
+      border: 1px solid rgba(15, 36, 52, 0.12);
+      animation: floatIn 0.7s ease both;
+    }
+
+    .tier::before {
+      content: "";
+      position: absolute;
+      left: -32px;
+      top: 22px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(18, 69, 89, 0.08);
+    }
+
+    .tier-1 { --accent: var(--tier1-accent); border-color: rgba(18, 69, 89, 0.28); }
+    .tier-2 { --accent: var(--tier2-accent); border-color: rgba(30, 111, 92, 0.25); }
+    .tier-4 { --accent: var(--tier4-accent); border-color: rgba(140, 59, 47, 0.25); }
+
+    .line {
+      display: block;
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(15, 36, 52, 0.1);
+      background: #fff;
+      text-align: left;
+      margin-bottom: 10px;
+      font-size: 14px;
+      line-height: 1.35;
+      color: var(--muted);
+    }
+
+    .t1.c1 {
+      font-family: "Oswald", sans-serif;
+      font-size: 21px;
+      letter-spacing: 0.03em;
+      color: var(--tier1);
+      background: rgba(18, 69, 89, 0.06);
+    }
+
+    .t1.c2 { color: var(--ink); background: rgba(18, 69, 89, 0.03); }
+
+    .t1.c3 {
+      color: var(--tier1);
+      background: rgba(252, 163, 17, 0.2);
+      border: 1px dashed rgba(252, 163, 17, 0.45);
+    }
+    .t2.c1 { color: var(--tier2); font-weight: 700; background: rgba(30, 111, 92, 0.08); }
+    .t2.c2 { color: var(--muted); background: rgba(30, 111, 92, 0.04); }
+    .t2.c3 { color: var(--tier2); background: rgba(247, 217, 160, 0.35); border-style: dashed; }
+
+    .t3.c3 {
+      color: var(--tier3);
+      background: rgba(207, 227, 211, 0.85);
+      border-color: rgba(44, 74, 92, 0.2);
+      font-weight: 600;
+    }
+
+    .t4.c2 { color: var(--tier4); background: rgba(140, 59, 47, 0.06); }
+
+    button.line {
+      appearance: none;
+      border: 1px solid rgba(15, 36, 52, 0.1);
+      background: inherit;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .clickable { animation: shimmer 1.9s ease-in-out infinite; }
+
+    .is-hidden { display: none; }
+
+    .inline-tag {
+      display: inline-block;
+      padding: 0 6px;
+      border-radius: 999px;
+    }
+
+    .slide {
+      display: inline-block;
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      vertical-align: bottom;
+      transform: translateX(-6px);
+      transition: max-width 0.45s ease, opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .slide.is-open {
+      max-width: 1000px;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .drawer {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .drawer.is-open {
+      max-height: 240px;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .pop-anchor { position: relative; }
+
+    .popover {
+      position: absolute;
+      left: 0;
+      top: 100%;
+      width: 62%;
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 2;
+    }
+
+    .popover.is-open { opacity: 1; transform: translateY(6px); }
+
+    .popover::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: -10px;
+      width: 16px;
+      height: 16px;
+      background: rgba(207, 227, 211, 0.9);
+      transform: rotate(45deg);
+    }
+
+    .swap.is-hidden { display: none; }
+
+    .folded {
+      position: relative;
+      border: 1px solid rgba(140, 59, 47, 0.25);
+      background: linear-gradient(135deg, rgba(247, 178, 103, 0.25), transparent 60%);
+    }
+
+    .folded::after {
+      content: "";
+      position: absolute;
+      right: 6px;
+      bottom: 6px;
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      background: rgba(247, 178, 103, 0.6);
+      box-shadow: 0 0 0 2px rgba(140, 59, 47, 0.2);
+    }
+
+    @keyframes shimmer {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.2); }
+    }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      .rail-layout { padding-left: 0; }
+      .rail-layout::before { display: none; }
+      .tier::before { display: none; }
+      .popover {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin-top: 8px;
+      }
+      .popover::before { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .clickable { animation: none; }
+      .tier { animation: none; }
+      .drawer, .popover, .slide { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="scene">
+    <div class="rail-layout">
+      <section class="tier tier-1">
+        <div class="line t1 c1">Adult pt Illness:</div>
+        <div class="line t1 c2">Treat if pt has these conditions met.</div>
+        <div class="line t1 c2">Don't treat if pt has this condition.</div>
+        <div class="line t1 c1">Administer drug.</div>
+        <div class="line t1 c1">Repeat drug administration after x amount of time, max dose of drug is.</div>
+        <div class="line t1 c2">Consult for further orders.</div>
+        <div class="line t1 c1">Administer this other drug, may repeat every x amount of minutes prn.</div>
+        <div class="line t1 c2">Take caution for.</div>
+        <div class="line t1 c2">What out for these S/S.</div>
+      </section>
+
+      <section class="tier tier-2">
+        <div class="line t2 c2">Drug has this function.</div>
+        <div class="pop-anchor">
+          <button class="line t2 c1 clickable" data-toggle="interaction" type="button">
+            <span class="swap" data-collapsed="interaction">Drug wont function if this interaction.</span>
+            <span class="swap slide" data-expanded="interaction">Drug wont function if this interaction<span class="inline-tag t2 c3">, Drug function interaction on cellular level.</span></span>
+          </button>
+          <div class="popover" data-hidden="tier3">
+            <div class="line t3 c3">Illness background Info.</div>
+            <div class="line t3 c3">More Illness background Info, Classic recognition signs, Longterm pt signs, Less important illness info.</div>
+            <div class="line t3 c3">Why we should do this.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tier tier-2">
+        <div class="line t2 c1">Severity potential.</div>
+        <div class="line t2 c2">Potential for harm issues.</div>
+      </section>
+
+      <section class="tier tier-1">
+        <div class="line t1 c2">When pt has Illness and this other thing.</div>
+        <button class="line t1 c1 clickable" data-toggle="tx" type="button">
+          <span class="swap" data-collapsed="tx">Begin this additional Tx en route, Don't let this happen during administration.</span>
+          <span class="swap slide" data-expanded="tx">Begin this additional Tx en route, Don't let this happen during administration<span class="inline-tag t1 c3">, Why this could happen on a cellular level.</span></span>
+        </button>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const expandAll = new URLSearchParams(window.location.search).get('expanded') === '1';
+
+    const toggleInline = (key, forceOpen) => {
+      const collapsed = document.querySelector(`[data-collapsed="${key}"]`);
+      const expanded = document.querySelector(`[data-expanded="${key}"]`);
+      if (!collapsed || !expanded) return;
+      const open = typeof forceOpen === 'boolean' ? forceOpen : collapsed.classList.contains('is-hidden');
+      collapsed.classList.toggle('is-hidden', open);
+      expanded.classList.toggle('is-open', open);
+    };
+
+    const toggleTier3 = (forceOpen) => {
+      const targets = document.querySelectorAll('[data-hidden="tier3"]');
+      targets.forEach((el) => {
+        const open = typeof forceOpen === 'boolean' ? forceOpen : !el.classList.contains('is-open');
+        el.classList.toggle('is-open', open);
+      });
+    };
+
+    document.querySelectorAll('[data-toggle="interaction"]').forEach((button) => {
+      button.addEventListener('click', () => {
+        toggleInline('interaction');
+        toggleTier3();
+      });
+    });
+
+    document.querySelectorAll('[data-toggle="tx"]').forEach((button) => {
+      button.addEventListener('click', () => toggleInline('tx'));
+    });
+
+    if (expandAll) {
+      toggleInline('interaction', true);
+      toggleInline('tx', true);
+      toggleTier3(true);
+    }
+  </script>
+</body>
+</html>

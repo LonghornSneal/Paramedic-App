@@ -1,0 +1,606 @@
+[
+  {
+    "viewport": {
+      "name": "360x640",
+      "width": 360,
+      "height": 640
+    },
+    "pageErrors": [],
+    "consoleErrors": [],
+    "steps": [
+      {
+        "name": "header search top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "header sidebar top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "header history top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "footer settings top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "search panel in viewport seizure",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":119.21875,\"width\":236,\"height\":371.1875}"
+      },
+      {
+        "name": "flow1 seizure detail opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow1 back returns to search list",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow1 history in viewport",
+        "ok": true,
+        "detail": "{\"x\":8,\"y\":259.828125,\"width\":344,\"height\":120.34375}"
+      },
+      {
+        "name": "flow1 history has entry",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow1 settings in viewport",
+        "ok": true,
+        "detail": "{\"x\":8,\"y\":153.34375,\"width\":344,\"height\":333.3125}"
+      },
+      {
+        "name": "search panel in viewport adult anaphylaxis pre-patient",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":119.21875,\"width\":236,\"height\":371.1875}"
+      },
+      {
+        "name": "extra adult anaphylaxis detail opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "extra hidden-text toggle works",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow2 sidebar close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow2 snapshot updated",
+        "ok": true,
+        "detail": "12yo 70kg • Allergies: NKA"
+      },
+      {
+        "name": "search panel in viewport midazolam",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":119.21875,\"width\":236,\"height\":371.1875}"
+      },
+      {
+        "name": "flow2 midazolam detail opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow2 med dose calc visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow2 home returns categories",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "search panel in viewport tidal volume calculator",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":119.21875,\"width\":236,\"height\":371.1875}"
+      },
+      {
+        "name": "flow3 quick vent opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent math visible",
+        "ok": true,
+        "detail": "420-560 mL (no ARDS)\n280-420 mL (ARDS)"
+      },
+      {
+        "name": "flow3 quick vent hidden toggle works",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent modal visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent modal close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 ekg help visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 ekg help close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 sidebar closed",
+        "ok": true,
+        "detail": ""
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "name": "390x844",
+      "width": 390,
+      "height": 844
+    },
+    "pageErrors": [],
+    "consoleErrors": [],
+    "steps": [
+      {
+        "name": "header search top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "header sidebar top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "header history top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "footer settings top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "search panel in viewport seizure",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":265.5,\"height\":448}"
+      },
+      {
+        "name": "flow1 seizure detail opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow1 back returns to search list",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow1 history in viewport",
+        "ok": true,
+        "detail": "{\"x\":8,\"y\":361.828125,\"width\":374,\"height\":120.34375}"
+      },
+      {
+        "name": "flow1 history has entry",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow1 settings in viewport",
+        "ok": true,
+        "detail": "{\"x\":8,\"y\":255.34375,\"width\":374,\"height\":333.3125}"
+      },
+      {
+        "name": "search panel in viewport adult anaphylaxis pre-patient",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":265.5,\"height\":448}"
+      },
+      {
+        "name": "extra adult anaphylaxis detail opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "extra hidden-text toggle works",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow2 sidebar close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow2 snapshot updated",
+        "ok": true,
+        "detail": "12yo 70kg • Allergies: NKA"
+      },
+      {
+        "name": "search panel in viewport midazolam",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":265.5,\"height\":421.65625}"
+      },
+      {
+        "name": "flow2 midazolam detail opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow2 med dose calc visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow2 home returns categories",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "search panel in viewport tidal volume calculator",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":265.5,\"height\":383.5625}"
+      },
+      {
+        "name": "flow3 quick vent opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent math visible",
+        "ok": true,
+        "detail": "420-560 mL (no ARDS)\n280-420 mL (ARDS)"
+      },
+      {
+        "name": "flow3 quick vent hidden toggle works",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent modal visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent modal close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 ekg help visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 ekg help close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 sidebar closed",
+        "ok": true,
+        "detail": ""
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "name": "430x932",
+      "width": 430,
+      "height": 932
+    },
+    "pageErrors": [],
+    "consoleErrors": [],
+    "steps": [
+      {
+        "name": "header search top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "header sidebar top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "header history top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "footer settings top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "search panel in viewport seizure",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":305.5,\"height\":448}"
+      },
+      {
+        "name": "flow1 seizure detail opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow1 back returns to search list",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow1 history in viewport",
+        "ok": true,
+        "detail": "{\"x\":12,\"y\":403.0625,\"width\":406,\"height\":125.875}"
+      },
+      {
+        "name": "flow1 history has entry",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow1 settings in viewport",
+        "ok": true,
+        "detail": "{\"x\":12,\"y\":287.90625,\"width\":406,\"height\":356.1875}"
+      },
+      {
+        "name": "search panel in viewport adult anaphylaxis pre-patient",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":305.5,\"height\":448}"
+      },
+      {
+        "name": "extra adult anaphylaxis detail opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "extra hidden-text toggle works",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow2 sidebar close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow2 snapshot updated",
+        "ok": true,
+        "detail": "12yo 70kg • Allergies: NKA"
+      },
+      {
+        "name": "search panel in viewport midazolam",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":305.5,\"height\":403.71875}"
+      },
+      {
+        "name": "flow2 midazolam detail opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow2 med dose calc visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow2 home returns categories",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "search panel in viewport tidal volume calculator",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":305.5,\"height\":383.5625}"
+      },
+      {
+        "name": "flow3 quick vent opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent math visible",
+        "ok": true,
+        "detail": "420-560 mL (no ARDS)\n280-420 mL (ARDS)"
+      },
+      {
+        "name": "flow3 quick vent hidden toggle works",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent modal visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent modal close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 ekg help visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 ekg help close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 sidebar closed",
+        "ok": true,
+        "detail": ""
+      }
+    ]
+  },
+  {
+    "viewport": {
+      "name": "480x1040",
+      "width": 480,
+      "height": 1040
+    },
+    "pageErrors": [],
+    "consoleErrors": [],
+    "steps": [
+      {
+        "name": "header search top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "header sidebar top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "header history top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "footer settings top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "search panel in viewport seizure",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":355.5,\"height\":448}"
+      },
+      {
+        "name": "flow1 seizure detail opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow1 back returns to search list",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow1 history in viewport",
+        "ok": true,
+        "detail": "{\"x\":16,\"y\":457.0625,\"width\":448,\"height\":125.875}"
+      },
+      {
+        "name": "flow1 history has entry",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow1 settings in viewport",
+        "ok": true,
+        "detail": "{\"x\":16,\"y\":341.90625,\"width\":448,\"height\":356.1875}"
+      },
+      {
+        "name": "search panel in viewport adult anaphylaxis pre-patient",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":355.5,\"height\":448}"
+      },
+      {
+        "name": "extra adult anaphylaxis detail opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "extra hidden-text toggle works",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow2 sidebar close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow2 snapshot updated",
+        "ok": true,
+        "detail": "12yo 70kg • Allergies: NKA"
+      },
+      {
+        "name": "search panel in viewport midazolam",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":355.5,\"height\":383.5625}"
+      },
+      {
+        "name": "flow2 midazolam detail opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow2 med dose calc visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow2 home returns categories",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "search panel in viewport tidal volume calculator",
+        "ok": true,
+        "detail": "{\"x\":40,\"y\":91.21875,\"width\":355.5,\"height\":383.5625}"
+      },
+      {
+        "name": "flow3 quick vent opened",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent math visible",
+        "ok": true,
+        "detail": "420-560 mL (no ARDS)\n280-420 mL (ARDS)"
+      },
+      {
+        "name": "flow3 quick vent hidden toggle works",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent modal visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 quick vent modal close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 ekg help visible",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 ekg help close top-hit",
+        "ok": true,
+        "detail": ""
+      },
+      {
+        "name": "flow3 sidebar closed",
+        "ok": true,
+        "detail": ""
+      }
+    ]
+  }
+]
