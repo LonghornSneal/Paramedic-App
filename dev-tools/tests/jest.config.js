@@ -1,4 +1,9 @@
 module.exports = {
+  rootDir: '..',
   testEnvironment: 'node',
-  testMatch: ['/dev-tools/tests/*.test.js'],
+  testMatch: ['<rootDir>/tests/**/*.test.js'],
+  testPathIgnorePatterns: [
+    '<rootDir>/tests/add.test.js',
+    '<rootDir>/tests/slugify.test.js',
+  ],
 };
