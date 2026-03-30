@@ -2,7 +2,7 @@ import { addHistoryEntry } from '../../navigation/Navigation.js';
 import { appendTopicWarnings } from '../../Warnings.js';
 import { setupSlugAnchors } from '../../anchorNav/slugAnchors.js';
 import { appendTopicDetails } from './topicDetails.js';
-import { attachToggleInfoHandlers, attachToggleCategoryHandlers } from './toggleHandlers.js';
+import { attachSsToggleHandlers, attachToggleInfoHandlers, attachToggleCategoryHandlers } from './toggleHandlers.js';
 import { initializeEquipmentPopovers, hideEquipmentPopover } from './equipment/EquipmentPopover.js';
 
 export function findAlsMedTopicIndex(children, topicId) {
@@ -49,6 +49,7 @@ export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop =
   }
   appendTopicDetails(topic, contentArea);
   attachToggleInfoHandlers(contentArea);
+  attachSsToggleHandlers(contentArea);
   attachToggleCategoryHandlers(contentArea);
   initializeEquipmentPopovers(contentArea);
   const tocSections = Array.from(contentArea.querySelectorAll('.detail-section-title')).map(el => ({

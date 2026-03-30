@@ -1,8 +1,9 @@
 import { addTapListener } from '../../Utils/addTapListener.js';
 import { slugify } from '../../Utils/slugify.js';
-import { attachToggleCategoryHandlers, attachToggleInfoHandlers } from './detailPageUtils.js';
+import { attachSsToggleHandlers, attachToggleCategoryHandlers, attachToggleInfoHandlers } from './detailPageUtils.js';
 import { initializeEquipmentPopovers } from './equipmentPopover.js';
 import { setupSlugAnchors } from '../anchorNav/slugAnchors.js';
+import { TieredDetailConfig } from './tieredDetailConfig.js';
 
 function escapeHtml(s){
   return String(s)
@@ -35,6 +36,69 @@ function inlineMd(t){
   return applyAbbreviationOverlines(s);
 }
 
+function normalizeSsListItem(item) {
+  return item.replace(/^(&|\band)\s+/i, '').trim();
+}
+
+function splitSsInlineList(text) {
+  const boldMatch = text.match(/^\*\*(.+?)\s+S\/S:\*\*\s*(.+)$/);
+  if (boldMatch) {
+    return {
+      prefix: `**${boldMatch[1]}**`,
+      listText: boldMatch[2]
+    };
+  }
+  const colonMatch = text.match(/^(.*)\bS\/S:\s*(.+)$/);
+  if (colonMatch) {
+    return {
+      prefix: colonMatch[1],
+      listText: colonMatch[2]
+    };
+  }
+  const gapMatch = text.match(/^(.*)\bS\/S\s{2,}(.+)$/);
+  if (gapMatch && /,/.test(gapMatch[2])) {
+    return {
+      prefix: gapMatch[1],
+      listText: gapMatch[2]
+    };
+  }
+  return null;
+}
+
+function parseSsListText(listText) {
+  return listText
+    .split(/,\s*/)
+    .map(normalizeSsListItem)
+    .filter(Boolean);
+}
+
+function collectListItems(lines, startIndex) {
+  const items = [];
+  let index = startIndex;
+  while (index < lines.length && /^\s*[-*]\s+/.test(lines[index])) {
+    items.push(lines[index].replace(/^\s*[-*]\s+/, '').trim());
+    index += 1;
+  }
+  return { items, lastIndex: index - 1 };
+}
+
+function buildSsListId(prefix, index) {
+  const base = (prefix || 'ss').replace(/[*`]/g, '').trim();
+  return `ss-list-${slugify(`${base}-${index}`)}`;
+}
+
+function buildSsToggle(listId) {
+  return `<button type="button" class="toggle-info ss-toggle" data-ss-target="${listId}" aria-expanded="false" aria-controls="${listId}"><span class="toggle-info-label">S/S</span><span class="toggle-info-indicator" aria-hidden="true">Show</span></button>`;
+}
+
+function buildSsList(listId, items) {
+  if (!items.length) return '';
+  const itemsHtml = items
+    .map(item => `<li>${emphasizeImportant(inlineMd(item))}</li>`)
+    .join('');
+  return `<ul id="${listId}" class="detail-list ss-list hidden">${itemsHtml}</ul>`;
+}
+
 function applyAbbreviationOverlines(html) {
   const tokenRegex = /(^|[^A-Za-z0-9/])([qpscaQPSCA])(?=([^A-Za-z0-9/]|$))/g;
   const applyToText = (text) => text.replace(tokenRegex, (match, leading, letter) => {
@@ -54,7 +118,8 @@ function renderMdBlock(lines){
   // Convert bullets, headings, and paragraphs into HTML
   let html = '';
   let inList = false;
-  for (const ln of lines) {
+  for (let i = 0; i < lines.length; i += 1) {
+    const ln = lines[i];
     if (/^\s*[-*]\s+/.test(ln)) {
       if (!inList) {
         html += '<ul class="detail-list">';
@@ -75,8 +140,35 @@ function renderMdBlock(lines){
     const headingMatch = trimmed.match(/^(#{1,6})\s+(.*)$/);
     if (headingMatch) {
       const level = Math.min(6, headingMatch[1].length);
-      const headingHtml = emphasizeImportant(inlineMd(headingMatch[2].trim()));
+      const headingText = headingMatch[2].trim();
+      const ssHeadingMatch = headingText.match(/^(.*)\bS\/S:?$/);
+      if (ssHeadingMatch) {
+        const listInfo = collectListItems(lines, i + 1);
+        if (listInfo.items.length) {
+          const headingPrefix = ssHeadingMatch[1].trim();
+          const headingHtml = emphasizeImportant(inlineMd(headingPrefix));
+          const listId = buildSsListId(headingPrefix, i);
+          html += `<h${level} class="detail-md-heading">${headingHtml} ${buildSsToggle(listId)}</h${level}>`;
+          html += buildSsList(listId, listInfo.items);
+          i = listInfo.lastIndex;
+          continue;
+        }
+      }
+      const headingHtml = emphasizeImportant(inlineMd(headingText));
       html += `<h${level} class="detail-md-heading">${headingHtml}</h${level}>`;
+      continue;
+    }
+    const ssInline = splitSsInlineList(trimmed);
+    if (ssInline) {
+      const prefixText = ssInline.prefix.trim();
+      const listId = buildSsListId(prefixText, i);
+      const prefixHtml = prefixText.length
+        ? emphasizeImportant(inlineMd(prefixText))
+        : '';
+      const listItems = parseSsListText(ssInline.listText);
+      const prefixChunk = prefixHtml ? `${prefixHtml} ` : '';
+      html += `<p>${prefixChunk}${buildSsToggle(listId)}</p>`;
+      html += buildSsList(listId, listItems);
       continue;
     }
     const paragraphHtml = emphasizeImportant(inlineMd(trimmed));
@@ -129,6 +221,135 @@ function parseMdSections(md, topicId){
     sections.sort((a,b)=> order.indexOf(a.title) - order.indexOf(b.title));
   }
   return { cheat, sections };
+}
+
+function normalizeTierLine(value) {
+  return value.toString().trim();
+}
+
+function buildTieredSections(md, config) {
+  const lines = md.split(/\r?\n/);
+  const headerMap = new Map();
+  (config.sectionHeaders || []).forEach(item => {
+    headerMap.set(normalizeTierLine(item.line), item.tier);
+  });
+  const prefaceTier = config.prefaceTier ?? 3;
+  const prefaceTitleLine = config.prefaceTitleLine ? normalizeTierLine(config.prefaceTitleLine) : null;
+  const sections = [];
+  let current = { title: null, tier: prefaceTier, lines: [] };
+  let prefaceTitleSet = false;
+  lines.forEach(raw => {
+    const trimmed = raw.trim();
+    if (!trimmed.length) return;
+    const headerTier = headerMap.get(normalizeTierLine(trimmed));
+    if (headerTier) {
+      if (current.title || current.lines.length) sections.push(current);
+      current = { title: trimmed, tier: headerTier, lines: [] };
+      return;
+    }
+    if (!prefaceTitleSet && prefaceTitleLine && current.tier === prefaceTier) {
+      if (normalizeTierLine(trimmed) === prefaceTitleLine) {
+        current.title = trimmed;
+        prefaceTitleSet = true;
+        return;
+      }
+    }
+    current.lines.push(raw);
+  });
+  if (current.title || current.lines.length) sections.push(current);
+  sections.forEach(section => {
+    if (!section.title && section.lines.length) {
+      section.title = section.lines.shift().trim();
+    }
+  });
+  return sections;
+}
+
+function appendTieredLines(container, lines, tier) {
+  let inList = null;
+  let lineIndex = 0;
+  const getLineClass = () => {
+    if (tier >= 3) return 'class-3';
+    return lineIndex === 0 ? 'class-1' : 'class-2';
+  };
+  const appendParagraph = (html, tag = 'p') => {
+    const el = document.createElement(tag);
+    el.className = `tier-line ${getLineClass()}`;
+    el.innerHTML = html;
+    container.appendChild(el);
+    lineIndex += 1;
+  };
+  lines.forEach(raw => {
+    const trimmed = raw.trim();
+    if (!trimmed.length) return;
+    const headingMatch = trimmed.match(/^(#{1,6})\s+(.*)$/);
+    if (headingMatch) {
+      if (inList) {
+        container.appendChild(inList);
+        inList = null;
+      }
+      const level = Math.min(6, headingMatch[1].length);
+      const headingHtml = emphasizeImportant(inlineMd(headingMatch[2].trim()));
+      appendParagraph(headingHtml, `h${level}`);
+      return;
+    }
+    if (/^\s*[-*]\s+/.test(raw)) {
+      if (!inList) {
+        inList = document.createElement('ul');
+        inList.className = 'detail-list tier-list';
+      }
+      const li = document.createElement('li');
+      li.className = `tier-line ${getLineClass()}`;
+      const inner = inlineMd(raw.replace(/^\s*[-*]\s+/, ''));
+      li.innerHTML = emphasizeImportant(inner);
+      inList.appendChild(li);
+      lineIndex += 1;
+      return;
+    }
+    if (inList) {
+      container.appendChild(inList);
+      inList = null;
+    }
+    appendParagraph(emphasizeImportant(inlineMd(trimmed)));
+  });
+  if (inList) {
+    container.appendChild(inList);
+  }
+}
+
+function renderTieredMarkdownDetail(md, topic, contentArea, config) {
+  const sections = buildTieredSections(md, config);
+  sections.forEach((section, index) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'detail-section tier-section mb-3';
+    wrapper.dataset.tier = String(section.tier);
+    const titleEl = document.createElement('div');
+    const collapsible = section.tier >= 3;
+    titleEl.className = `detail-section-title${collapsible ? ' toggle-category' : ''}`;
+    if (collapsible) {
+      titleEl.setAttribute('role', 'button');
+      titleEl.setAttribute('tabindex', '0');
+      titleEl.setAttribute('aria-expanded', 'false');
+    }
+    const titleLabel = document.createElement('span');
+    titleLabel.className = 'detail-section-label';
+    titleLabel.textContent = section.title || topic.title || `Section ${index + 1}`;
+    titleEl.appendChild(titleLabel);
+    if (collapsible) {
+      const indicatorEl = document.createElement('span');
+      indicatorEl.className = 'section-indicator';
+      indicatorEl.textContent = 'Show';
+      titleEl.appendChild(indicatorEl);
+    }
+    titleEl.id = slugify(`${topic.id || 'topic'}-${titleLabel.textContent}-${index}`);
+    wrapper.appendChild(titleEl);
+    const body = document.createElement('div');
+    body.className = 'detail-text tier-body';
+    if (collapsible) body.classList.add('hidden');
+    appendTieredLines(body, section.lines, section.tier);
+    wrapper.appendChild(body);
+    contentArea.appendChild(wrapper);
+  });
 }
 
 export async function renderEquipmentFromMarkdown(details, contentArea, topic) {
@@ -195,6 +416,7 @@ export async function renderEquipmentFromMarkdown(details, contentArea, topic) {
       });
     });
     attachToggleInfoHandlers(contentArea);
+    attachSsToggleHandlers(contentArea);
     attachToggleCategoryHandlers(contentArea);
     initializeEquipmentPopovers(contentArea);
     const tocSections = [];
@@ -217,6 +439,15 @@ export async function renderMarkdownDetail(details, contentArea, topic) {
     const res = await fetch(details.mdPath);
     if (!res.ok) throw new Error(`Failed to load ${details.mdPath}`);
     const md = await res.text();
+    const tierConfig = TieredDetailConfig?.[topic?.id];
+    if (tierConfig) {
+      renderTieredMarkdownDetail(md, topic, contentArea, tierConfig);
+      attachToggleInfoHandlers(contentArea);
+      attachSsToggleHandlers(contentArea);
+      attachToggleCategoryHandlers(contentArea);
+      initializeEquipmentPopovers(contentArea);
+      return;
+    }
     const parsed = parseMdSections(md, topic.id) || { sections: [] };
     const sectionList = (parsed.sections && parsed.sections.length)
       ? parsed.sections.map(sec => ({ title: sec.title, html: sec.html ?? renderMdBlock(sec.content || []) }))
@@ -276,6 +507,7 @@ export async function renderMarkdownDetail(details, contentArea, topic) {
       contentArea.appendChild(wrapper);
     });
     attachToggleInfoHandlers(contentArea);
+    attachSsToggleHandlers(contentArea);
     attachToggleCategoryHandlers(contentArea);
     initializeEquipmentPopovers(contentArea);
   } catch (err) {

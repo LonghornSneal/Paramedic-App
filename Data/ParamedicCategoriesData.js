@@ -466,7 +466,22 @@ export const ParamedicCategoriesData = [
       id: slugify("Skills & Equipment"), title: "Skills & Equipment", 
       type: "category", children: [{ 
   //      @@ 'Skills & Equipment' children array
-
+         id: slugify("ACLS"), title: "ACLS",
+         type: "category", children: [
+          { id: slugify("ACLS Algorithms"), title: "Algorithms", type: "topic" },
+          { id: slugify("ACLS Figures"), title: "Figures", type: "topic" },
+          { id: slugify("ACLS Overview of ACLS"), title: "Overview of ACLS", type: "topic" },
+          { id: slugify("ACLS Preventing Arrest"), title: "Preventing Arrest", type: "topic" },
+          { id: slugify("ACLS High-Performance Teams"), title: "High-Performance Teams", type: "topic" },
+          { id: slugify("ACLS Appendix"), title: "Appendix", type: "topic" },
+          { id: slugify("ACLS Testing Checklists"), title: "Testing Checklists", type: "topic" },
+          { id: slugify("ACLS Megacode Testing Checklists"), title: "Megacode Testing Checklists", type: "topic" },
+          { id: slugify("ACLS Learning Station Checklists"), title: "Learning Station Checklists", type: "topic" },
+          { id: slugify("ACLS Pharmacology Summary Table"), title: "ACLS Pharmacology Summary Table", type: "topic" },
+          { id: slugify("ACLS Science Summary Table"), title: "Science Summary Table", type: "topic" },
+          { id: slugify("ACLS Glossary"), title: "Glossary", type: "topic" }
+         ]
+       },{ 
          id: slugify("Ventilator Set-Up (ParaPAC Plus)"), title: "Ventilator Set-Up (ParaPAC Plus)",
          type: "topic" 
        },{ 

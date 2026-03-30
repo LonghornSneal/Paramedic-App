@@ -10,8 +10,10 @@ import { renderCricothyrotomyDetail } from './cricothyrotomyDetail.js';
 import { renderAbbreviationGroupDetail } from './abbreviationDetail.js';
 import { renderEquipmentFromMarkdown, renderMarkdownDetail, renderOriginalPdfSection, renderPlaceholder, insertEquipmentSection } from './markdownDetail.js';
 import { renderQuickVentSetup, renderQuickVentCalculator } from './quickVent.js';
-import { attachToggleInfoHandlers, attachToggleCategoryHandlers, parseTextMarkup } from './detailPageUtils.js';
+import { attachSsToggleHandlers, attachToggleInfoHandlers, attachToggleCategoryHandlers, parseTextMarkup } from './detailPageUtils.js';
 import { addTapListener } from '../../Utils/addTapListener.js';
+import { applyDetailSpaceClasses } from './detailSpaceUtils.js';
+import { calculateLineDose } from '../dosageCalc.js';
 
 // Appends all detail sections for a topic into the content area, including “Class”, “Indications”, “Contraindications”, etc.
 // If the topic has no details, a placeholder message is inserted.
@@ -90,7 +92,8 @@ function appendTopicDetails(topic, contentArea) {
             { key: 'adultRx', label: 'Adult Rx' },
             { key: 'pediatricRx', label: 'Pediatric Rx' } 
         ]; 
-        sections.forEach(sec => { 
+        const concentrationText = details.concentration || topic?.concentration || '';
+        sections.forEach(sec => {
             if (!details[sec.key]) return;
             const wrapper = document.createElement('div');
             wrapper.className = 'detail-section mb-3';
@@ -119,18 +122,44 @@ function appendTopicDetails(topic, contentArea) {
                 details[sec.key].forEach(line => {
                     const li = document.createElement('li');
                     li.innerHTML = parseTextMarkup ? parseTextMarkup(line) : line;
+                    if (sec.key === 'adultRx' || sec.key === 'pediatricRx') {
+                        const calcResult = calculateLineDose({
+                            text: line,
+                            weightKg: window?.patientData?.weight,
+                            concentration: concentrationText
+                        });
+                        if (calcResult?.formatted?.html) {
+                            const calcEl = document.createElement('div');
+                            calcEl.className = 'mt-1';
+                            calcEl.innerHTML = calcResult.formatted.html;
+                            li.appendChild(calcEl);
+                        }
+                    }
                     body.appendChild(li);
                 });
             } else {
                 body = document.createElement('div');
                 body.className = 'detail-text';
                 body.innerHTML = parseTextMarkup ? parseTextMarkup(details[sec.key]) : details[sec.key];
+                if (sec.key === 'adultRx' || sec.key === 'pediatricRx') {
+                    const calcResult = calculateLineDose({
+                        text: details[sec.key],
+                        weightKg: window?.patientData?.weight,
+                        concentration: concentrationText
+                    });
+                    if (calcResult?.formatted?.html) {
+                        const calcEl = document.createElement('div');
+                        calcEl.className = 'mt-1';
+                        calcEl.innerHTML = calcResult.formatted.html;
+                        body.appendChild(calcEl);
+                    }
+                }
             }
             // Hide section content by default; revealed when header is clicked
             body.classList.add('hidden');
             wrapper.appendChild(body);
-            contentArea.appendChild(wrapper); 
-        });  
+            contentArea.appendChild(wrapper);
+        });
     } else { 
         contentArea.insertAdjacentHTML('beforeend', `<div class="text-gray-500 italic">No detail information found for this item.</div>`);
     }
@@ -161,6 +190,7 @@ export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop =
         contentArea.innerHTML = `<div class="text-gray-500 italic">Not found.</div>`; 
         return; 
     }
+    applyDetailSpaceClasses(contentArea, topicId);
     const topic = window.allDisplayableTopicsMap[topicId];
     hideEquipmentPopover(true, true);
     contentArea.innerHTML = '';
@@ -169,7 +199,7 @@ export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop =
     if (!isQuickVent) {
         const headerEl = document.createElement('h2');
         headerEl.textContent = topic.title || topic.name || topic.id;
-        headerEl.className = 'topic-h2 font-semibold text-lg mb-4';
+        headerEl.className = 'topic-h2 title-tier font-semibold text-lg mb-4';
         headerEl.dataset.topicId = topic.id;
         contentArea.appendChild(headerEl);
     } else {
@@ -188,6 +218,7 @@ export function renderDetailPage(topicId, shouldAddHistory = true, scrollToTop =
     appendTopicDetails(topic, contentArea);
     // Attach toggle handlers for collapsible info and category sections
     attachToggleInfoHandlers(contentArea);
+    attachSsToggleHandlers(contentArea);
     attachToggleCategoryHandlers(contentArea);
     initializeEquipmentPopovers(contentArea);
     // Insert table of contents for detail sections (if any sections exist)

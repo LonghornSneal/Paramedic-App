@@ -32,6 +32,19 @@ const slugIDs = [  'calcium-chloride',
   'abbott-approved-abbreviations-neurologic-trauma',
   'abbott-approved-abbreviations-operations-agencies',
   'abbreviations-references',
+  'acls',
+  'acls-algorithms',
+  'acls-appendix',
+  'acls-figures',
+  'acls-glossary',
+  'acls-high-performance-teams',
+  'acls-learning-station-checklists',
+  'acls-megacode-testing-checklists',
+  'acls-overview-of-acls',
+  'acls-pharmacology-summary-table',
+  'acls-preventing-arrest',
+  'acls-science-summary-table',
+  'acls-testing-checklists',
   'ekg-rhythm-reference',
   'adenosine-adenocard',
   'administrative-legal-essentials',
@@ -272,4 +285,3 @@ if (typeof window !== 'undefined') {
 // Export the slugIDs array so other ES modules can import it. Without this export, slugList.js would not provide
 // any values to the module system. Tests that import slugIDs will fail if this is omitted.
 export { slugIDs };
-
