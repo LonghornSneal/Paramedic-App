@@ -1,13 +1,30 @@
 const { test, expect } = require('@playwright/test');
 
+async function dismissTransientUi(page) {
+  for (const name of [
+    'Close EKG help',
+    'Close Settings',
+    'Close History',
+    'Close Patient Info Sidebar'
+  ]) {
+    const button = page.getByRole('button', { name });
+    if (await button.isVisible().catch(() => false)) {
+      await button.click();
+      await page.waitForTimeout(250);
+    }
+  }
+}
+
 test('category tree active path and layout rules', async ({ page }, testInfo) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto('http://127.0.0.1:5173/');
+  await dismissTransientUi(page);
+  await expect(page.getByRole('button', { name: 'Adult Protocols' })).toBeVisible();
   await page.waitForFunction(() => !!document.querySelector('.category-tree'));
 
   await page.getByRole('button', { name: /Adult Protocols/i }).click();
-  await page.getByRole('button', { name: /Skills & Equipment/i }).waitFor();
-  await page.getByRole('button', { name: /Skills & Equipment/i }).click();
+  await page.getByRole('button', { name: 'Skills/Equipment' }).waitFor();
+  await page.getByRole('button', { name: 'Skills/Equipment' }).click();
   await page.getByRole('button', { name: /Zoll EMV731/i }).waitFor();
   await page.getByRole('button', { name: /Zoll EMV731/i }).click();
 
@@ -84,28 +101,31 @@ test('category tree active path and layout rules', async ({ page }, testInfo) =>
   });
   expect(fitCheck.overflow).toEqual([]);
 
-  const centerCheck = await page.evaluate(() => {
+  const activeColumnCheck = await page.evaluate(() => {
     const contentArea = document.getElementById('content-area');
     const contentRect = contentArea.getBoundingClientRect();
-    const candidateTrees = Array.from(document.querySelectorAll('.category-children'))
-      .filter(tree => tree.children.length && tree.getClientRects().length);
-    const rightmostTree = candidateTrees.reduce((current, tree) => {
-      if (!current) return tree;
-      const rect = tree.getBoundingClientRect();
-      const currentRect = current.getBoundingClientRect();
-      return rect.left > currentRect.left ? tree : current;
-    }, null);
-    if (!rightmostTree) return { offset: null, tolerance: null };
-    const rect = rightmostTree.getBoundingClientRect();
-    const activeCenterX = rect.left + (rect.width / 2);
-    const contentCenterX = contentRect.left + (contentRect.width / 2);
-    return {
-      offset: Math.abs(activeCenterX - contentCenterX),
-      tolerance: Math.max(16, contentRect.width * 0.04)
-    };
+    return Array.from(document.querySelectorAll('.category-tree, .category-children'))
+      .filter(tree =>
+        tree.children.length
+        && tree.getClientRects().length
+        && tree.classList.contains('has-active-path')
+      )
+      .map(tree => {
+        const rect = tree.getBoundingClientRect();
+        return {
+          level: Number(tree.dataset.level || -1),
+          left: rect.left - contentRect.left
+        };
+      })
+      .sort((a, b) => a.level - b.level);
   });
-  expect(centerCheck.offset).not.toBeNull();
-  expect(centerCheck.offset).toBeLessThanOrEqual(centerCheck.tolerance);
+  expect(activeColumnCheck.length).toBeGreaterThanOrEqual(3);
+  activeColumnCheck.forEach((column, index) => {
+    expect(column.level).toBe(index);
+    if (index > 0) {
+      expect(column.left).toBeGreaterThan(activeColumnCheck[index - 1].left);
+    }
+  });
 
   await page.waitForTimeout(300);
   const desktopPath = testInfo.outputPath('category-tree-desktop.png');

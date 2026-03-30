@@ -7,15 +7,18 @@ function populateHistoryList() {
     const historyListEl = document.getElementById('history-list');
     if (!historyListEl) return;
     historyListEl.innerHTML = '';
+    let hasEntries = false;
     // List detail-view history entries in order
     navigationHistory.forEach(entry => {
         if (entry.viewType !== 'detail') return;
         const topic = window.allDisplayableTopicsMap?.[entry.contentId];
         if (!topic) return;
+        hasEntries = true;
         const itemLink = document.createElement('a');
         itemLink.href = '#';
         itemLink.textContent = topic.title;
-        itemLink.className = 'block text-blue-600 hover:underline cursor-pointer';
+        itemLink.className = 'history-panel__item';
+        itemLink.setAttribute('aria-label', `Open ${topic.title}`);
         addTapListener(itemLink, () => {
             renderDetailPage(entry.contentId);
             const historyPanel = document.getElementById('history-panel');
@@ -26,6 +29,13 @@ function populateHistoryList() {
         });
         historyListEl.appendChild(itemLink);
     });
+
+    if (!hasEntries) {
+        const emptyState = document.createElement('p');
+        emptyState.className = 'history-panel__empty';
+        emptyState.textContent = 'No recent topics yet.';
+        historyListEl.appendChild(emptyState);
+    }
 }
 
 export function initHistory() {

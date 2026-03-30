@@ -55,7 +55,6 @@ async function sampleBackTransition(page) {
         opacity: treeContainer ? Number(getComputedStyle(treeContainer).opacity) : 0,
         contentWidth: contentRect.width,
         contentHeight: contentRect.height,
-        scrollHeight: content.scrollHeight,
         minTextLeft: Math.min(...nodes.map(node => node.textLeft)),
         maxTextRight: Math.max(...nodes.map(node => node.textRight)),
         maxPillBottom: Math.max(...nodes.map(node => node.pillBottom)),
@@ -84,17 +83,15 @@ for (const viewport of VIEWPORTS) {
     visibleSamples.forEach(sample => {
       expect(sample.minTextLeft).toBeGreaterThanOrEqual(0);
       expect(sample.maxTextRight).toBeLessThanOrEqual(sample.contentWidth + 1);
-      expect(sample.maxPillBottom).toBeLessThanOrEqual(
-        (viewport.name === 'mobile' ? sample.scrollHeight : sample.contentHeight) + 2
-      );
+      expect(sample.maxPillBottom).toBeLessThanOrEqual(sample.contentHeight + 2);
       expect(sample.clippedLabels).toEqual([]);
       expect(sample.stabilizing).toBe(false);
     });
 
     const rootPositions = visibleSamples.map(sample => sample.rootTextLeft).filter(value => value != null);
     const childPositions = visibleSamples.map(sample => sample.childTextLeft).filter(value => value != null);
-    expect(Math.max(...rootPositions) - Math.min(...rootPositions)).toBeLessThanOrEqual(1.5);
-    expect(Math.max(...childPositions) - Math.min(...childPositions)).toBeLessThanOrEqual(1.5);
+    expect(Math.max(...rootPositions) - Math.min(...rootPositions)).toBeLessThanOrEqual(1);
+    expect(Math.max(...childPositions) - Math.min(...childPositions)).toBeLessThanOrEqual(1);
     expect(visibleSamples.at(-1).opacity).toBeGreaterThanOrEqual(0.95);
   });
 }

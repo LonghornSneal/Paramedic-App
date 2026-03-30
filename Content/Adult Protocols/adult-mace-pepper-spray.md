@@ -1,4 +1,4 @@
-# Mace/Pepper-Spray
+# Riot Control (Incapacitating Agent)
 
 c/o -> skin burning, increased lacrimation, eyelid twitching/spasm, sneezing, &/or coughing
 

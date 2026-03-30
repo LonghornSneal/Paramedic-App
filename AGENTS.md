@@ -1,6 +1,6 @@
 
 # Paramedic App Agent Handbook
-_Last updated: 2025-10-05_
+_Last updated: 2026-03-17_
 ## Mission & Source of Truth
 - Build and refine the Paramedic App exactly as the user specifies. The active user request is always your current focus.
 - Only touch protocol text or content assets when the user explicitly assigns that work. When assigned, use `C:/Users/HhsJa/OneDrive/Documents/Edited entire Protocols organized.docx` and as the primary sources, and cite any external references with direct hyperlinks that align with the user's material.
@@ -71,6 +71,11 @@ The DOCX is organized into five major bodies. Maintain 1:1 coverage across code,
 ## Skill Tooling Discipline
 - Use the sequential-thinking skill at the start of every task to structure the plan before making changes.
 - Record task decisions and follow-up items through the memory-log skill before finishing the work.
+
+### Subagent Delegation
+- When the user asks for subagents, parallel agents, or delegated work, default to implementation-capable worker agents instead of read-only explorers unless the user explicitly wants analysis-only output.
+- Give each subagent explicit file or module ownership and state that it may inspect and edit code within that owned scope, plus run the smallest relevant verification commands for its changes.
+- Keep read-only delegation for narrow scouting/research only when edits would be premature or unsafe; otherwise, delegated tasks should be able to carry findings through to code changes.
 
 ### Skill Auto-Invocation Guide
 - **filesystem-ops** - Use for local file reads, edits, and directory listing; confirm before touching paths outside the repo.

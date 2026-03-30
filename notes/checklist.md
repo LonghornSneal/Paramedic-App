@@ -1,3 +1,26 @@
+# Patient Sidebar Fix Checklist
+- [x] Inspect sidebar structure and locate all layout/input sources.
+- [x] Reproduce current sidebar issues in Playwright.
+- [x] Fix markup/CSS/logic for alignment, duplicate EtCO2, colors, and field behavior.
+- [x] Validate all sidebar fields and pill containers in Playwright.
+- [x] Run lint/tests and update README/task logs.
+
+# 2026-03-16 Extensive Playwright QA Checklist
+- [x] Inspect repo scripts, existing Playwright coverage, and QA artifacts.
+- [x] Run baseline Playwright suites and note regressions/flakes.
+- [x] Perform exploratory mobile QA across multiple phone viewport sizes.
+- [x] Stress repeated interaction orders for search, navigation, history, settings, patient sidebar, calculators, and hidden text.
+- [x] Capture usability, readability, animation, and visual design findings.
+- [x] Draft a numbered remediation prompt for a follow-up agent.
+- [x] Append the QA outcome to notes/memory-log.md.
+
+# 2026-03-16 Background Refresh Checklist
+- [x] Inspect current non-sidebar theme/layout/detail/modal/navigation styles.
+- [x] Review live home, search, detail, history/settings, quick-vent, and modal surfaces in Playwright before editing.
+- [x] Implement reusable non-sidebar background tokens and surface updates.
+- [x] Re-run required Playwright flows after each meaningful styling pass across required mobile widths.
+- [x] Run lint verification and append the design/QA outcome to notes/memory-log.md.
+
 - [x] Replace stale spiderweb selectors with current nested-list motion coverage
 - [x] Run the updated Playwright specs before and after the edits
 - [x] Tighten thresholds if any motion, overlap, or readability assertion is too strict

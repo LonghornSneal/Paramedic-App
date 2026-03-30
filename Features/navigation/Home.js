@@ -4,12 +4,27 @@
 import { addTapListener } from '../../Utils/addTapListener.js';
 import { renderInitialView } from '../list/ListView.js';
 
+function collapseAllCategories() {
+    if (!Array.isArray(window.paramedicCategories)) return;
+    const collapseItem = (item) => {
+        if (item.type === 'category') {
+            item.expanded = false;
+            if (Array.isArray(item.children)) {
+                item.children.forEach(collapseItem);
+            }
+        }
+    };
+    window.paramedicCategories.forEach(collapseItem);
+}
+
 // Handles the Home button click: clears search, resets list, and navigates to the main contents page.
 function handleHomeClick() {
-    // Clear any search query and re-render the current branch-aware list state.
     if (window.searchInput) {
         window.searchInput.value = '';
     }
+    window.setCommittedSearchTerm?.('');
+    window.hideSearchSuggestions?.();
+    collapseAllCategories();
     renderInitialView(true);
     window.queueNavBranchSync?.('home');
 }

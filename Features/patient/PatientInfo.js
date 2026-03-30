@@ -24,7 +24,7 @@ export const patientData = {
     indications: [], indicationsDisplay: [],
     symptoms: [], symptomsDisplay: [],
     vitalSigns: {
-        bp: '', bpSystolic: null, bpDiastolic: null, map: null, hr: null, spo2: null, spo2Source: '', etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: ''
+        bp: '', bpSystolic: null, bpDiastolic: null, map: null, hr: null, spo2: null, etco2: null, rr: null, bgl: '', eyes: '', gcs: null, aoStatus: '', lungSounds: ''
     },
     ekg: '', ekgDisplay: '', ekgSecondary: ''
 };
@@ -45,7 +45,7 @@ const ptInputIds = [ 'pt-age',
     'vs-hr-value',
     'vs-hr-select',
     'vs-spo2-value',
-    'vs-spo2-source',
+    'vs-spo2-select',
     'vs-etco2',
     'vs-rr',
     'vs-bgl-value',
@@ -80,6 +80,7 @@ const chipListElements = {
   indications: document.getElementById('pt-indications-chips'),
   symptoms: document.getElementById('pt-symptoms-chips')
 };
+const chipTextareaIds = ['pt-pmh', 'pt-allergies', 'pt-medications', 'pt-indications', 'pt-symptoms'];
 const ekgSummaryEl = document.getElementById('ekg-summary-text');
 const unitInputElements = Array.from(document.querySelectorAll('.unit-input .sidebar-input'));
 let selectedWeightUnit = 'kg';
@@ -107,6 +108,228 @@ const ekgRhythmPreviewImg = document.getElementById('ekg-rhythm-preview');
 const ekgModifierPreviewImg = document.getElementById('ekg-modifier-preview');
 const ekgRhythmInfoButton = document.getElementById('ekg-rhythm-info');
 const ekgModifierInfoButton = document.getElementById('ekg-modifier-info');
+const ekgImagePopupState = {
+  overlay: null,
+  popup: null,
+  image: null,
+  closeButton: null,
+  resizeHandle: null,
+  pointerMode: '',
+  pointerId: null,
+  pointerStartX: 0,
+  pointerStartY: 0,
+  originLeft: 0,
+  originTop: 0,
+  originWidth: 0,
+  originHeight: 0,
+  left: 0,
+  top: 0,
+  width: 0,
+  height: 0
+};
+
+if (ekgModalDetailImage) {
+  ekgModalDetailImage.tabIndex = 0;
+  ekgModalDetailImage.setAttribute('role', 'button');
+}
+
+function setEkgHelpOpenState(isOpen) {
+  document.body.classList.toggle('ekg-help-open', Boolean(isOpen));
+}
+
+function setEkgImagePopupOpenState(isOpen) {
+  document.body.classList.toggle('ekg-image-popup-open', Boolean(isOpen));
+}
+
+function clampPopupNumber(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function isEkgImagePopupOpen() {
+  return Boolean(ekgImagePopupState.overlay && !ekgImagePopupState.overlay.classList.contains('hidden'));
+}
+
+function getEkgImagePopupBounds() {
+  const margin = 12;
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+  const maxWidth = Math.max(160, viewportWidth - (margin * 2));
+  const maxHeight = Math.max(160, viewportHeight - (margin * 2));
+  const minWidth = Math.min(220, maxWidth);
+  const minHeight = Math.min(180, maxHeight);
+  return { margin, viewportWidth, viewportHeight, minWidth, minHeight, maxWidth, maxHeight };
+}
+
+function applyEkgImagePopupRect() {
+  if (!ekgImagePopupState.popup) return;
+  const bounds = getEkgImagePopupBounds();
+  const width = clampPopupNumber(Math.round(ekgImagePopupState.width || bounds.maxWidth), bounds.minWidth, bounds.maxWidth);
+  const height = clampPopupNumber(Math.round(ekgImagePopupState.height || bounds.maxHeight), bounds.minHeight, bounds.maxHeight);
+  const maxLeft = bounds.viewportWidth - bounds.margin - width;
+  const maxTop = bounds.viewportHeight - bounds.margin - height;
+  ekgImagePopupState.width = width;
+  ekgImagePopupState.height = height;
+  ekgImagePopupState.left = clampPopupNumber(
+    Math.round(typeof ekgImagePopupState.left === 'number' ? ekgImagePopupState.left : bounds.margin),
+    bounds.margin,
+    Math.max(bounds.margin, maxLeft)
+  );
+  ekgImagePopupState.top = clampPopupNumber(
+    Math.round(typeof ekgImagePopupState.top === 'number' ? ekgImagePopupState.top : bounds.margin),
+    bounds.margin,
+    Math.max(bounds.margin, maxTop)
+  );
+  ekgImagePopupState.popup.style.left = `${ekgImagePopupState.left}px`;
+  ekgImagePopupState.popup.style.top = `${ekgImagePopupState.top}px`;
+  ekgImagePopupState.popup.style.width = `${ekgImagePopupState.width}px`;
+  ekgImagePopupState.popup.style.height = `${ekgImagePopupState.height}px`;
+}
+
+function endEkgImagePopupPointerInteraction() {
+  ekgImagePopupState.pointerMode = '';
+  ekgImagePopupState.pointerId = null;
+  ekgImagePopupState.popup?.classList.remove('is-dragging', 'is-resizing');
+}
+
+function handleEkgImagePopupPointerMove(event) {
+  if (!isEkgImagePopupOpen() || ekgImagePopupState.pointerId !== event.pointerId || !ekgImagePopupState.pointerMode) return;
+  event.preventDefault();
+  const deltaX = event.clientX - ekgImagePopupState.pointerStartX;
+  const deltaY = event.clientY - ekgImagePopupState.pointerStartY;
+  if (ekgImagePopupState.pointerMode === 'drag') {
+    ekgImagePopupState.left = ekgImagePopupState.originLeft + deltaX;
+    ekgImagePopupState.top = ekgImagePopupState.originTop + deltaY;
+  } else if (ekgImagePopupState.pointerMode === 'resize') {
+    ekgImagePopupState.width = ekgImagePopupState.originWidth + deltaX;
+    ekgImagePopupState.height = ekgImagePopupState.originHeight + deltaY;
+  }
+  applyEkgImagePopupRect();
+}
+
+function beginEkgImagePopupPointerInteraction(event, mode) {
+  if (!isEkgImagePopupOpen()) return;
+  if (typeof event.button === 'number' && event.button !== 0) return;
+  event.preventDefault();
+  event.stopPropagation();
+  ekgImagePopupState.pointerMode = mode;
+  ekgImagePopupState.pointerId = event.pointerId;
+  ekgImagePopupState.pointerStartX = event.clientX;
+  ekgImagePopupState.pointerStartY = event.clientY;
+  ekgImagePopupState.originLeft = ekgImagePopupState.left;
+  ekgImagePopupState.originTop = ekgImagePopupState.top;
+  ekgImagePopupState.originWidth = ekgImagePopupState.width;
+  ekgImagePopupState.originHeight = ekgImagePopupState.height;
+  ekgImagePopupState.popup?.classList.toggle('is-dragging', mode === 'drag');
+  ekgImagePopupState.popup?.classList.toggle('is-resizing', mode === 'resize');
+}
+
+function ensureEkgImagePopup() {
+  if (ekgImagePopupState.overlay) return ekgImagePopupState;
+  const overlay = document.createElement('div');
+  overlay.id = 'ekg-image-popup-overlay';
+  overlay.className = 'ekg-image-popup-overlay hidden';
+  overlay.setAttribute('aria-hidden', 'true');
+
+  const popup = document.createElement('div');
+  popup.id = 'ekg-image-popup';
+  popup.className = 'ekg-image-popup';
+  popup.setAttribute('role', 'dialog');
+  popup.setAttribute('aria-modal', 'true');
+  popup.setAttribute('aria-label', 'Expanded EKG image');
+
+  const closeButton = document.createElement('button');
+  closeButton.type = 'button';
+  closeButton.className = 'ekg-image-popup-close';
+  closeButton.setAttribute('aria-label', 'Close enlarged EKG image');
+  closeButton.textContent = 'X';
+
+  const image = document.createElement('img');
+  image.id = 'ekg-image-popup-image';
+  image.className = 'ekg-image-popup-image';
+  image.alt = '';
+
+  const resizeHandle = document.createElement('div');
+  resizeHandle.className = 'ekg-image-popup-resize-handle';
+  resizeHandle.setAttribute('aria-hidden', 'true');
+
+  popup.append(closeButton, image, resizeHandle);
+  overlay.appendChild(popup);
+  document.body.appendChild(overlay);
+
+  overlay.addEventListener('pointerdown', event => {
+    if (event.target === overlay) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  });
+  overlay.addEventListener('click', event => {
+    if (event.target === overlay) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  });
+  popup.addEventListener('pointerdown', event => {
+    if (event.target instanceof Element && event.target.closest('.ekg-image-popup-close, .ekg-image-popup-resize-handle')) return;
+    beginEkgImagePopupPointerInteraction(event, 'drag');
+  });
+  resizeHandle.addEventListener('pointerdown', event => beginEkgImagePopupPointerInteraction(event, 'resize'));
+  closeButton.addEventListener('click', event => {
+    event.preventDefault();
+    event.stopPropagation();
+    closeEkgImagePopup();
+  });
+  window.addEventListener('pointermove', handleEkgImagePopupPointerMove);
+  window.addEventListener('pointerup', endEkgImagePopupPointerInteraction);
+  window.addEventListener('pointercancel', endEkgImagePopupPointerInteraction);
+  window.addEventListener('resize', () => {
+    if (isEkgImagePopupOpen()) applyEkgImagePopupRect();
+  });
+
+  ekgImagePopupState.overlay = overlay;
+  ekgImagePopupState.popup = popup;
+  ekgImagePopupState.image = image;
+  ekgImagePopupState.closeButton = closeButton;
+  ekgImagePopupState.resizeHandle = resizeHandle;
+  return ekgImagePopupState;
+}
+
+function openEkgImagePopup() {
+  if (!ekgModalDetailImage || ekgModalDetail?.classList.contains('hidden')) return;
+  const assetId = ekgModalDetailImage.dataset.assetId;
+  const src = ekgModalDetailImage.getAttribute('src');
+  if (!assetId || !src) return;
+  const popup = ensureEkgImagePopup();
+  const bounds = getEkgImagePopupBounds();
+  const naturalWidth = ekgModalDetailImage.naturalWidth || 0;
+  const naturalHeight = ekgModalDetailImage.naturalHeight || 0;
+  const aspectRatio = naturalWidth > 0 && naturalHeight > 0 ? naturalWidth / naturalHeight : 1.65;
+  let width = Math.min(bounds.maxWidth, Math.max(bounds.minWidth, Math.round(bounds.viewportWidth * 0.84)));
+  let height = Math.max(bounds.minHeight, Math.round(width / aspectRatio));
+  if (height > bounds.maxHeight) {
+    height = bounds.maxHeight;
+    width = Math.max(bounds.minWidth, Math.min(bounds.maxWidth, Math.round(height * aspectRatio)));
+  }
+  popup.image.src = src;
+  popup.image.alt = ekgModalDetailImage.alt || 'Expanded EKG waveform';
+  ekgImagePopupState.width = width;
+  ekgImagePopupState.height = height;
+  ekgImagePopupState.left = Math.round((bounds.viewportWidth - width) / 2);
+  ekgImagePopupState.top = Math.round((bounds.viewportHeight - height) / 2);
+  popup.overlay.classList.remove('hidden');
+  popup.overlay.setAttribute('aria-hidden', 'false');
+  setEkgImagePopupOpenState(true);
+  applyEkgImagePopupRect();
+  window.setTimeout(() => popup.closeButton?.focus?.(), 0);
+}
+
+function closeEkgImagePopup() {
+  if (!ekgImagePopupState.overlay) return;
+  endEkgImagePopupPointerInteraction();
+  ekgImagePopupState.overlay.classList.add('hidden');
+  ekgImagePopupState.overlay.setAttribute('aria-hidden', 'true');
+  ekgImagePopupState.image?.removeAttribute('src');
+  setEkgImagePopupOpenState(false);
+}
 
 function showEkgGeneral() {
   if (ekgModalGeneral) ekgModalGeneral.classList.remove('hidden');
@@ -116,6 +339,8 @@ function showEkgGeneral() {
   if (ekgModalDetailTitle) ekgModalDetailTitle.textContent = '';
   if (ekgModalDetailDefinition) ekgModalDetailDefinition.textContent = '';
   ekgModalDetailImage?.removeAttribute('src');
+  ekgModalDetailImage?.removeAttribute('data-asset-id');
+  ekgModalDetailImage?.removeAttribute('aria-label');
 }
 
 function openEkgHelp(detail) {
@@ -128,6 +353,8 @@ function openEkgHelp(detail) {
     ekgModalDetailTitle.textContent = asset.name;
     ekgModalDetailImage.src = asset.dataUri;
     ekgModalDetailImage.alt = `${asset.name} waveform`;
+    ekgModalDetailImage.dataset.assetId = asset.id;
+    ekgModalDetailImage.setAttribute('aria-label', `Open enlarged ${asset.name} waveform`);
     ekgModalDetailDefinition.textContent = asset.definition;
     if (ekgModalBack) ekgModalBack.classList.remove('hidden');
   } else {
@@ -135,14 +362,21 @@ function openEkgHelp(detail) {
   }
   ekgHelpModal.classList.remove('hidden');
   ekgHelpBackdrop.classList.remove('hidden');
+  setEkgHelpOpenState(true);
+  window.setTimeout(() => {
+    const focusTarget = ekgModalBack && !ekgModalBack.classList.contains('hidden') ? ekgModalBack : ekgHelpClose;
+    focusTarget?.focus?.();
+  }, 0);
 }
 
 function closeEkgHelp() {
   if (!ekgHelpModal || !ekgHelpBackdrop) return;
+  closeEkgImagePopup();
   showEkgGeneral();
   ekgModalDetailImage?.removeAttribute('src');
   ekgHelpModal.classList.add('hidden');
   ekgHelpBackdrop.classList.add('hidden');
+  setEkgHelpOpenState(false);
 }
 
 // Constants related to warnings and suggestions. PEDIATRIC_AGE_THRESHOLD defines the minimum age
@@ -215,6 +449,13 @@ function syncUnitSuffixState(inputEl) {
     if (!wrapper) return;
     const hasValue = Boolean(inputEl.value && inputEl.value.toString().trim().length);
     wrapper.dataset.hasValue = hasValue ? 'true' : 'false';
+}
+
+function resetTextareaScrollPosition(textareaEl) {
+  if (!textareaEl) return;
+  window.setTimeout(() => {
+    textareaEl.scrollLeft = 0;
+  }, 0);
 }
 
 /*
@@ -296,7 +537,7 @@ function getParsedInt(id, min, max) {
     return clamped;
 }
 
-function clampNumber(value, min, max) {
+function clampNumericValue(value, min, max) {
   if (typeof value !== 'number' || Number.isNaN(value)) return null;
   let clamped = value;
   if (typeof min === 'number' && clamped < min) clamped = min;
@@ -310,7 +551,7 @@ function getIntegerFromInput(el, min, max) {
   if (!raw) return null;
   const parsed = parseInt(raw, 10);
   if (Number.isNaN(parsed)) return null;
-  const clamped = clampNumber(parsed, min, max);
+  const clamped = clampNumericValue(parsed, min, max);
   if (clamped == null) return null;
   if (clamped !== parsed) el.value = clamped.toString();
   syncUnitSuffixState(el);
@@ -364,7 +605,7 @@ function getPupilDetails(sizeId, descriptorId) {
   if (sizeRaw) {
     const parsed = parseFloat(sizeRaw);
     if (!Number.isNaN(parsed)) {
-      const clamped = clampNumber(parsed, 0, 8);
+      const clamped = clampNumericValue(parsed, 0, 8);
       if (clamped != null) {
         const normalized = Math.round(clamped * 2) / 2;
         size = normalized;
@@ -395,7 +636,7 @@ function readNumberOrPreset(numberId, selectId, min, max, options = {}) {
   if (!preset) return '';
   if (options.parsePresetAsNumber && /^\d+$/.test(preset)) {
     const parsed = parseInt(preset, 10);
-    return clampNumber(parsed, min, max);
+    return clampNumericValue(parsed, min, max);
   }
   return preset;
 }
@@ -443,6 +684,12 @@ function findModifierAssetById(id) {
   return modifierAssetsById.get(id) || null;
 }
 
+function setEkgPreviewState(previewImg, hasAsset) {
+  const row = previewImg?.closest('.patient-line');
+  if (!row) return;
+  row.dataset.previewState = hasAsset ? 'ready' : 'empty';
+}
+
 function populateEkgSelect(selectEl, assets, findByName) {
   if (!selectEl || !Array.isArray(assets)) return;
   const currentValue = selectEl.value || '';
@@ -469,6 +716,7 @@ function populateEkgSelect(selectEl, assets, findByName) {
 function renderEkgPreview(previewImg, infoButton, asset, typeLabel) {
   const label = typeLabel || 'item';
   if (!previewImg) return;
+  setEkgPreviewState(previewImg, Boolean(asset));
   if (asset) {
     previewImg.src = asset.dataUri;
     previewImg.dataset.assetId = asset.id;
@@ -537,7 +785,10 @@ function getFieldValues(field, id) {
   const node = document.getElementById(id);
   const rawValue = node?.value ?? '';
   const segments = splitSegments(rawValue);
-  return normalizeCommittedValues(field, segments.committed);
+  const liveValues = segments.current
+    ? [...segments.committed, segments.current]
+    : segments.committed;
+  return normalizeCommittedValues(field, liveValues);
 }
 // Weight conversion factor used when converting between kilograms and pounds. 1 kilogram equals
 // 2.20462 pounds. We round converted values to one decimal place for display purposes.
@@ -890,19 +1141,7 @@ function updateSuggestedTopics() {
 function applyTopicStrikethroughs() {
   const topicLinks = document.querySelectorAll('a.topic-link-item');
   topicLinks.forEach(link => {
-    const topicId = link.dataset.topicId;
-    const topicObj = window.allDisplayableTopicsMap?.[topicId];
-    if (patientData.indications.length > 0 && topicObj?.details?.indications) {
-      const medIndications = topicObj.details.indications.map(i => i.toLowerCase());
-      const hasMatch = patientData.indications.some(ind => medIndications.includes(ind.toLowerCase()));
-      if (!hasMatch) {
-        link.classList.add('strikethrough');
-      } else {
-        link.classList.remove('strikethrough');
-      }
-    } else {
-      link.classList.remove('strikethrough');
-    }
+    link.classList.remove('strikethrough');
   });
 }
 
@@ -998,9 +1237,8 @@ function updatePatientData() {
     updateEkgSummary(patientData.ekgDisplay, patientData.ekgSecondary);
 
     const bpDetails = getBloodPressureDetails();
-    const hrValue = readNumberOrPreset('vs-hr-value', 'vs-hr-select', 0, 400);
-    const spo2Value = getIntegerFromInput(document.getElementById('vs-spo2-value'), 0, 100);
-    const spo2Source = getInputValue('vs-spo2-source');
+    const hrValue = readNumberOrPreset('vs-hr-value', 'vs-hr-select', 0, 300);
+    const spo2Value = readNumberOrPreset('vs-spo2-value', 'vs-spo2-select', 50, 100);
     const etco2Value = getNormalizedNumberOrText('vs-etco2', 0, 50);
     const rrValue = getNormalizedNumberOrText('vs-rr', 0, 80);
     const bglValue = readNumberOrPreset('vs-bgl-value', 'vs-bgl-select', 0, 900);
@@ -1014,7 +1252,6 @@ function updatePatientData() {
         map: bpDetails.map,
         hr: hrValue,
         spo2: spo2Value,
-        spo2Source,
         etco2: etco2Value,
         rr: rrValue,
         bgl: bglValue,
@@ -1103,8 +1340,15 @@ if (weightInputEl) {
   });
 }
 
+chipTextareaIds.forEach(id => {
+  const textareaEl = document.getElementById(id);
+  if (!textareaEl) return;
+  textareaEl.addEventListener('blur', () => resetTextareaScrollPosition(textareaEl));
+});
+
 linkNumberAndSelect(['vs-bp-systolic', 'vs-bp-diastolic'], 'vs-bp-select');
 linkNumberAndSelect('vs-hr-value', 'vs-hr-select');
+linkNumberAndSelect('vs-spo2-value', 'vs-spo2-select');
 linkNumberAndSelect('vs-bgl-value', 'vs-bgl-select');
 linkNumberAndSelect('vs-gcs-value', 'vs-gcs-select');
 
@@ -1142,7 +1386,7 @@ if (spo2InputEl) {
       return;
     }
     const numeric = parseInt(digits, 10);
-    const clamped = clampNumber(numeric, 0, 100);
+    const clamped = clampNumericValue(numeric, 50, 100);
     spo2InputEl.value = clamped != null ? clamped.toString() : '';
     syncUnitSuffixState(spo2InputEl);
     updatePatientData();
@@ -1214,10 +1458,22 @@ if (ekgHelpButton && ekgHelpModal && ekgHelpBackdrop) {
   ekgHelpBackdrop.addEventListener('click', closeEkgHelp);
   ekgHelpClose?.addEventListener('click', closeEkgHelp);
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') closeEkgHelp();
+    if (event.key !== 'Escape') return;
+    if (isEkgImagePopupOpen()) {
+      closeEkgImagePopup();
+      return;
+    }
+    closeEkgHelp();
   });
   ekgModalBack?.addEventListener('click', showEkgGeneral);
 }
+
+ekgModalDetailImage?.addEventListener('click', openEkgImagePopup);
+ekgModalDetailImage?.addEventListener('keydown', event => {
+  if (event.key !== 'Enter' && event.key !== ' ') return;
+  event.preventDefault();
+  openEkgImagePopup();
+});
 
 ekgRhythmInfoButton?.addEventListener('click', () => {
   const asset = findRhythmAssetById(currentRhythmAssetId);

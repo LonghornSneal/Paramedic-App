@@ -1,21 +1,44 @@
 /* Quick Vent Guide title color */
 
-.quick-vent-title { color: #8b5cf6; } /* violet-500 */
+.quick-vent-title { color: var(--app-accent-cool); }
 
 body.dark-mode .quick-vent-title { color: #fbbf24; } /* amber-400 */
 
 /* Tooltip/modal styles for calculator */
 
-.qv-tooltip { position: absolute; z-index: 100; background: #fff; color: #111827; border: 1px solid #d1d5db; padding: 0.5rem; border-radius: 0.375rem; box-shadow: 0 4px 10px rgb(0 0 0 / 15%); }
+.qv-tooltip {
+  position: absolute;
+  z-index: 100;
+  background: var(--app-panel-bg);
+  color: var(--app-accent-ink);
+  border: 1px solid var(--app-panel-border);
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  box-shadow: var(--app-panel-shadow-soft);
+}
 
 body.dark-mode .qv-tooltip { background: #1f2937; color: #e5e7eb; border-color: #374151; }
 
-.qv-modal { position: fixed; top: 20%; left: 50%; transform: translateX(-50%); width: 480px; max-width: 90vw; background: #fff; color: #111827; border: 1px solid #d1d5db; border-radius: 0.375rem; box-shadow: 0 10px 20px rgb(0 0 0 / 35%); z-index: 110; /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- Modal needs scroll fallback; unsupported browsers display default overflow */
-  overflow: auto; }
+.qv-modal {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 480px;
+  max-width: 90vw;
+  background: var(--app-panel-bg);
+  color: var(--app-accent-ink);
+  border: 1px solid var(--app-panel-border);
+  border-radius: 1rem;
+  box-shadow: var(--app-panel-shadow);
+  z-index: 110;
+  /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- Modal needs scroll fallback; unsupported browsers display default overflow */
+  overflow: auto;
+}
 
 body.dark-mode .qv-modal { background: #111827; color: #e5e7eb; border-color: #374151; }
 
-.qv-modal-header { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0.75rem; border-bottom: 1px solid #d1d5db; }
+.qv-modal-header { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--app-panel-border); }
 
 body.dark-mode .qv-modal-header { border-color: #374151; }
 
@@ -80,7 +103,7 @@ body.dark-mode .qv-modal-header { border-color: #374151; }
 
 /* Quick Vent fieldset legend background for dark mode */
 
-.qv-legend { background: #fff; }
+.qv-legend { background: rgb(255 255 255 / 72%); }
 
 body.dark-mode .qv-legend { background: #111827; }
 
@@ -134,7 +157,7 @@ body.dark-mode .qv-legend { background: #111827; }
 
 .qv-total-label { font-size: 0.75rem; margin-left: 0.1ch; }
 
-.qv-tv-label { color: #a78bfa; }
+.qv-tv-label { color: #64748b; }
 
 /* Remove number input spinners */
 
@@ -179,14 +202,14 @@ body.dark-mode .qv-legend { background: #111827; }
   letter-spacing: 0.1em;
   padding: 0.15rem 0.5rem;
   border-radius: 999px;
-  background: #e5e7eb;
-  color: #111827;
+  background: var(--app-panel-muted-bg);
+  color: var(--app-accent-ink);
   transition: background-color 0.2s ease, color 0.2s ease;
 
 }
 
 .qv-toggle.open .qv-indicator {
-  background: #2563eb;
+  background: var(--app-accent-cool);
   color: #fff;
 
 }
@@ -237,9 +260,9 @@ body.dark-mode .qv-legend { background: #111827; }
 
 .qv-tv-row { display: flex; align-items: flex-start; justify-content: flex-start; gap: 1ch; margin-top: -1ch; }
 
-.qv-tv-title { font-weight: 700; color: #a78bfa; white-space: nowrap; }
+.qv-tv-title { font-weight: 700; color: var(--app-accent-cool); white-space: nowrap; }
 
-#qv-tv { display: inline-flex; flex-direction: column; gap: 0.125rem; font-size: 1rem; font-weight: 700; color: #8b5cf6; }
+#qv-tv { display: inline-flex; flex-direction: column; gap: 0.125rem; font-size: 1rem; font-weight: 700; color: #0f766e; }
 
 .qv-tv-ans-line { line-height: 1.1; }
 

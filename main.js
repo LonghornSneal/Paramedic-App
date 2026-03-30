@@ -6,7 +6,7 @@ import { ProtocolMarkdownMap } from './Data/ProtocolMarkdownMap.js';
 import { attachNavHandlers } from './Features/navigation/Navigation.js';
 import { attachHomeHandler } from './Features/navigation/Home.js';
 import { renderInitialView } from './Features/list/ListView.js';
-import { attachSearchHandlers, processItem } from './Features/search/Search.js';
+import { attachSearchHandlers, processItem, resetSearchIndex } from './Features/search/Search.js';
 import './Features/History.js';
 import './Features/settings.js';
 import { escapeHTML } from './Utils/escapeHTML.js';
@@ -150,6 +150,7 @@ function initializeData(categoriesData, medDetailsData) { // /Assign the global 
     applyMarkdownDetails(paramedicCategories);
     // Reset maps
     allDisplayableTopicsMap = {};
+    resetSearchIndex();
     // Make sure the global map exists BEFORE processItem uses it
     window.allDisplayableTopicsMap = allDisplayableTopicsMap;
 //allSearchableTopics = []; //  //maybe need still maybe not

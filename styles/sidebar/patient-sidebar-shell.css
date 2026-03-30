@@ -1,49 +1,182 @@
-/* Sidebar and Overlay */
+#patient-sidebar {
+  --ps-bg-top: #f8fbff;
+  --ps-bg-bottom: #eef7f4;
+  --ps-surface: rgba(255, 255, 255, 0.86);
+  --ps-surface-strong: rgba(255, 255, 255, 0.94);
+  --ps-border: rgba(148, 163, 184, 0.42);
+  --ps-text: #0f172a;
+  --ps-muted: #475569;
+  --ps-accent: #0f6cbd;
+  --ps-accent-strong: #0a4f8a;
+  --ps-focus: rgba(15, 108, 189, 0.2);
+  --ps-shell-tint-a: rgb(125 211 252 / 18%);
+  --ps-shell-tint-b: rgb(253 224 71 / 14%);
+  --ps-shell-tint-c: rgb(52 211 153 / 12%);
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: min(32rem, calc(100vw - 0.5rem));
+  max-width: 100vw;
+  height: 100vh;
+  padding: 0.68rem 0.74rem 0.9rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-right: 1px solid var(--ps-border);
+  background:
+    radial-gradient(circle at top right, var(--ps-shell-tint-a), transparent 34%),
+    radial-gradient(circle at 14% 18%, var(--ps-shell-tint-b), transparent 28%),
+    radial-gradient(circle at bottom left, var(--ps-shell-tint-c), transparent 36%),
+    linear-gradient(180deg, var(--ps-bg-top), var(--ps-bg-bottom));
+  box-shadow: 0 18px 42px rgb(15 23 42 / 18%);
+  color: var(--ps-text);
+  font-family: "Inter", sans-serif;
+  transform: translateX(-105%);
+  transition: transform 0.24s ease-in-out, box-shadow 0.24s ease-in-out;
+  z-index: 100;
+  isolation: isolate;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.7) transparent;
+}
 
-#patient-sidebar { position: fixed; top: 0; left: 0; width: 300px; max-width: 80%; height: 100vh; background: #fff;      
-    border-right: 1px solid #e5e7eb; padding: 0; /* stylelint-disable-next-line plugin/no-unsupported-browser-features -- Preserve scrollable panel for modern browsers; Safari gracefully ignores overflow control */
-    overflow-y: auto; z-index: 100;
-    transform: translateX(-100%); transition: transform 0.3s ease-in-out;
-    box-shadow: 2px 0 10px rgb(0 0 0 / 10%); }
+body.dark-mode #patient-sidebar {
+  --ps-bg-top: #0f172a;
+  --ps-bg-bottom: #10263a;
+  --ps-surface: rgba(15, 23, 42, 0.86);
+  --ps-surface-strong: rgba(15, 23, 42, 0.94);
+  --ps-border: rgba(96, 165, 250, 0.3);
+  --ps-text: #e2e8f0;
+  --ps-muted: #bfdbfe;
+  --ps-accent: #7dd3fc;
+  --ps-accent-strong: #38bdf8;
+  --ps-focus: rgba(56, 189, 248, 0.28);
+  --ps-shell-tint-a: rgb(56 189 248 / 18%);
+  --ps-shell-tint-b: rgb(245 158 11 / 10%);
+  --ps-shell-tint-c: rgb(16 185 129 / 10%);
+  box-shadow: 0 20px 48px rgb(2 6 23 / 42%);
+}
 
-  #patient-sidebar.open { transform: translateX(0); }
+#patient-sidebar.open {
+  transform: translateX(0);
+}
 
-  #sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgb(0 0 0 / 50%); z-index: 40; opacity: 0; visibility: hidden; transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; pointer-events: none; }
+#patient-sidebar::-webkit-scrollbar {
+  width: 0.45rem;
+}
 
-  #sidebar-overlay.active { opacity: 1; visibility: visible; pointer-events: auto; }
+#patient-sidebar::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.7);
+}
 
-  #app-container { display: flex; flex-direction: column; flex-grow: 1;
-    width: 100%; transition: margin-left 0.3s ease-in-out; }
+#patient-sidebar > .grid.justify-items-end.mb-2 {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  display: grid;
+  justify-items: end;
+  margin: -0.1rem 0 0.55rem;
+  padding: 0 0 0.4rem;
+  background: linear-gradient(180deg, var(--ps-bg-top), transparent);
+}
 
-/* Patient sidebar layout */
+#close-sidebar-button {
+  display: inline-grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid var(--ps-border);
+  border-radius: 999px;
+  background: var(--ps-surface-strong);
+  color: var(--ps-muted);
+  box-shadow: 0 6px 18px rgb(15 23 42 / 8%);
+  transition: transform 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
 
-  #patient-sidebar .patient-sidebar-content { display: grid; grid-auto-rows: min-content; gap: 0.6rem; }
-  #patient-sidebar .patient-line { display: grid; grid-auto-flow: column; align-items: center; gap: 0.4rem 0.75rem; }
-  #patient-sidebar .patient-line--demographics { grid-auto-flow: column; align-items: center; justify-content: flex-start; }
-  #patient-sidebar .patient-line--full { grid-auto-flow: row; align-items: stretch; justify-items: stretch; row-gap: 0.35rem; }
-  #patient-sidebar .patient-line--full .sidebar-field { width: 100%; }
-  #patient-sidebar .patient-line--full .sidebar-input { width: 100%; }
-  #patient-sidebar .patient-line--vitals { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); align-items: stretch; gap: 0.55rem; }
-  #patient-sidebar .patient-line--rhythm,
-  #patient-sidebar .patient-line--modifier { grid-auto-flow: column; align-items: flex-start; gap: 0.5rem; }
-  #patient-sidebar .patient-line--rhythm .ekg-row-main,
-  #patient-sidebar .patient-line--modifier .ekg-row-main { min-width: 0; display: grid; grid-auto-flow: row; row-gap: 0.35rem; }
-  #patient-sidebar .patient-line--modifier #ekg-summary-text { justify-self: stretch; }
-  #patient-sidebar .patient-line .unit-input { justify-self: start; }
-  #patient-sidebar .patient-line .unit-input .sidebar-input { text-align: right; }
-  #patient-sidebar .bp-stack { min-width: 0; width: auto; }
-  #patient-sidebar .bp-input { width: 3.6ch; padding: 0.3rem 0.35rem; min-height: 1.8rem; }
-  #patient-sidebar .patient-line--vital .vital-item { display: inline-grid; grid-auto-flow: column; align-items: center; column-gap: 0.35rem; }
-  #patient-sidebar .vital-mini-select { width: 1.9rem; min-width: 1.9rem; height: 1.9rem; padding: 0; font-size: 0; line-height: 1; display: inline-grid; place-items: center; }
-  #patient-sidebar .vital-mini-select option { font-size: 0.78rem; }
-  #patient-sidebar .vital-item-pupils .vital-mini-select,
-  #patient-sidebar .vital-item-gcs .vital-mini-select { min-width: 5.5rem; height: 2.15rem; font-size: 0.78rem; }
-  #patient-sidebar .vital-item-lungs .vital-mini-select,
-#patient-sidebar .vital-item-ao .vital-mini-select { min-width: 6.5rem; height: 2.2rem; font-size: 0.82rem; justify-items: start; padding: 0 0.4rem; }
+#close-sidebar-button:hover {
+  color: var(--ps-accent-strong);
+  border-color: rgba(14, 116, 144, 0.35);
+  transform: translateY(-1px);
+}
 
-/* Sidebar width slightly smaller on very narrow screens */
+#close-sidebar-button:focus-visible {
+  outline: 2px solid var(--ps-accent);
+  outline-offset: 2px;
+}
 
-@media (max-width: 360px) {
-  #patient-sidebar { width: 85vw; max-width: 85vw; }
+#close-sidebar-button svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+#sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgb(2 6 23 / 48%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.24s ease-in-out, visibility 0.24s ease-in-out;
+  z-index: 40;
+}
+
+#sidebar-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+#app-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  transition: margin-left 0.24s ease-in-out;
+}
+
+#patient-sidebar .patient-sidebar-content {
+  display: grid;
+  gap: 0.42rem;
+  align-content: start;
+  overflow-x: hidden;
+  padding-bottom: 0.2rem;
+}
+
+@media (min-width: 900px) and (max-height: 760px) {
+  #patient-sidebar {
+    padding: 0.46rem 0.56rem 0.62rem;
+  }
+
+  #patient-sidebar > .grid.justify-items-end.mb-2 {
+    margin: -0.04rem 0 0.34rem;
+    padding-bottom: 0.24rem;
+  }
+
+  #close-sidebar-button {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  #patient-sidebar .patient-sidebar-content {
+    gap: 0.24rem;
+  }
+}
+
+@media (max-width: 720px) {
+  #patient-sidebar {
+    width: 100vw;
+    max-width: 100vw;
+    padding-inline: 0.56rem;
+  }
+}
+
+@media (max-width: 420px) {
+  #patient-sidebar {
+    padding: 0.54rem 0.44rem 0.74rem;
+  }
+}
+
+@media (max-width: 380px) {
+  #patient-sidebar {
+    padding-inline: 0.36rem;
+  }
 }

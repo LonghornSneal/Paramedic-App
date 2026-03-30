@@ -1,4 +1,4 @@
-# Major Level 1 Trauma
+# TRAUMA Major (Level 1)
 
 Trauma with >= 1 of the following:
 GCS < 14, SBP < 105, RR < 10 or > 20, airway compromise, breathing difficulty, shock (or shock index >= 0.9), AMS, exsanguinating hemorrhage,

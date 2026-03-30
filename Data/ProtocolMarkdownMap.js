@@ -19,7 +19,10 @@ export const ProtocolMarkdownMap = {
   "adult-a-fib-rvr-or-a-flutter-stable-symptomatic": "Content/Adult Protocols/adult-a-fib-rvr-or-a-flutter-stable-symptomatic.md",
   "adult-allergic-reaction": "Content/Adult Protocols/adult-allergic-reaction.md",
   "adult-anaphylaxis": "Content/Adult Protocols/adult-anaphylaxis.md",
+  "adult-airway": "Content/Adult Protocols/adult-airway.md",
+  "adult-breathing": "Content/Adult Protocols/adult-breathing.md",
   "adult-bradycardia": "Content/Adult Protocols/adult-bradycardia.md",
+  "adult-bronchospasm": "Content/Adult Protocols/adult-bronchospasm.md",
   "adult-breech": "Content/Adult Protocols/adult-breech.md",
   "adult-cardiogenic-shock-not-post-arrest": "Content/Adult Protocols/adult-cardiogenic-shock-not-post-arrest.md",
   "adult-coma-od": "Content/Adult Protocols/adult-coma-od.md",
@@ -52,7 +55,6 @@ export const ProtocolMarkdownMap = {
   "adult-rass-1": "Content/Adult Protocols/adult-rass-1.md",
   "adult-rass-2-3": "Content/Adult Protocols/adult-rass-2-3.md",
   "adult-rass-4": "Content/Adult Protocols/adult-rass-4.md",
-  "adult-refusals": "Content/Adult Protocols/adult-refusals.md",
   "adult-refusals-suicidal-pts": "Content/Adult Protocols/adult-refusals-suicidal-pts.md",
   "adult-rosc-stabilization": "Content/Adult Protocols/adult-rosc-stabilization.md",
   "adult-sai": "Content/Adult Protocols/adult-sai.md",
@@ -76,10 +78,10 @@ export const ProtocolMarkdownMap = {
   "als-ground-rules": "Content/Administrative & Legal Essentials/als-ground-rules.md",
   "clinical-errors-reporting": "Content/Operational Protocols/clinical-errors-reporting.md",
   "consulting-olmc": "Content/Administrative & Legal Essentials/consulting-olmc.md",
-  "cpr-initiation-termination": "Content/Operational Protocols/cpr-initiation-termination.md",
+  "cpr-initiation-termination": "Content/Adult Protocols/cpr-initiation-termination.md",
   "core-principles-safety-well-being": "Content/Introduction & Core Principles/core-principles-safety-well-being.md",
   "crime-scene": "Content/Administrative & Legal Essentials/crime-scene.md",
-  "death-documentation-body-temp": "Content/Administrative & Legal Essentials/death-documentation-body-temp.md",
+  "death-documentation-body-temp": "Content/Adult Protocols/death-documentation-body-temp.md",
   "diltiazem-add-vantage-directions": "Content/Skills & Equipment/diltiazem-add-vantage-directions.md",
   "dispatching-md-200": "Content/Administrative & Legal Essentials/dispatching-md-200.md",
   "emr-accompanying-critically-ill": "Content/Administrative & Legal Essentials/emr-accompanying-critically-ill.md",
@@ -112,7 +114,6 @@ export const ProtocolMarkdownMap = {
   "pediatric-circulation-basics-shock": "Content/Pediatric Protocols/pediatric-circulation-basics-shock.md",
   "pediatric-als": "Content/Pediatric Protocols/pediatric-als.md",
   "pediatric-neonatal-resuscitation": "Content/Pediatric Protocols/pediatric-neonatal-resuscitation.md",
-  "pediatric-newborn-resuscitation": "Content/Pediatric Protocols/pediatric-newborn-resuscitation.md",
   "pediatric-cardiogenic-shock-post-arrest-stabilization": "Content/Pediatric Protocols/pediatric-cardiogenic-shock-post-arrest-stabilization.md",
   "pediatric-ams-suspected-opioid-od": "Content/Pediatric Protocols/pediatric-ams-suspected-opioid-od.md",
   "pediatric-allergic-reaction": "Content/Pediatric Protocols/pediatric-allergic-reaction.md",
@@ -149,3 +150,9 @@ export const ProtocolMarkdownMap = {
   "ventilator-set-up-parapac-plus": "Content/Skills & Equipment/ventilator-set-up-parapac-plus.md",
   "workers-compensation-process": "Content/Administrative & Legal Essentials/workers-compensation-process.md"
 };
+
+// Explicit backward-compatibility aliases for shared protocol markdown.
+// Keep these narrow so schema validation can reject accidental duplicate keys.
+export const ProtocolMarkdownAliases = Object.freeze({
+  "adult-svt-mono-vt-unstable": "Content/Adult Protocols/adult-svt-mono-vt-unstable.md"
+});

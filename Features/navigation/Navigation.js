@@ -1,12 +1,9 @@
 // Features/navigation/Navigation.js
 // Manages navigation history and Back/Forward button functionality (migrated from main.js).
 
-// Import needed functions at the top:
- import { addTapListener } from '../../Utils/addTapListener.js';
-// Import needed functions at the top:
+import { addTapListener } from '../../Utils/addTapListener.js';
 import { renderDetailPage } from '../detail/DetailPage.js';
-//import { addTapListener } from '../Utils/addTapListener.js';
-// Navigation history state variables
+
 export let navigationHistory = [];
 export let currentHistoryIndex = -1;
 let isNavigatingViaHistory = false;
@@ -75,7 +72,9 @@ export function navigateViaHistory(direction) {
         if (window.searchInput) {
             window.searchInput.value = searchTerm;
         }
-        if (searchTerm) {
+        window.setCommittedSearchTerm?.(searchTerm);
+        window.hideSearchSuggestions?.();
+        if (typeof window.handleSearch === 'function') {
             window.handleSearch(false, highlightTopicId, categoryPath);
         } else if (typeof window.renderInitialView === 'function') {
             window.renderInitialView(false, highlightTopicId, categoryPath);

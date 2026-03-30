@@ -16,6 +16,3 @@ Discuss Titrating Epi up by 2mcg/min q min prn
 Max = 16mcg/min
 Always consider Hyperkalemia in Bradycardic pts
 If Hyperkalemia is likely  DO NOT Pace or give Epi (intervene per Hyperkalemia PSO 1st)
-PUSH-DOSE EPI
-Goal Concentration = 10mcg/mL (1:100,000)
-Waste 1mL from NS Flush  Draw 1mL Epi 1:10,000 back in flush
