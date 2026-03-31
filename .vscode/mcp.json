@@ -1,0 +1,82 @@
+{
+  "servers": {
+    "filesystem": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/node_modules/@modelcontextprotocol/server-filesystem/dist/index.js",
+        "${workspaceFolder}"
+      ]
+    },
+    "git": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/node_modules/@cyanheads/git-mcp-server/dist/index.js"
+      ]
+    },
+    "memory": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/node_modules/@modelcontextprotocol/server-memory/dist/index.js"
+      ]
+    },
+    "webpick": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/dev-tools/mcp/webpick-server.mjs"
+      ]
+    },
+    "crawler": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/node_modules/mcp-smart-crawler/build/index.js"
+      ]
+    },
+    "fetch": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/node_modules/@kazuph/mcp-fetch/dist/index.js"
+      ]
+    },
+    "fetcher": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/node_modules/fetcher-mcp/build/index.js"
+      ]
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/node_modules/@playwright/mcp/cli.js"
+      ]
+    },
+    "shell": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/node_modules/mcp-shell-execute/dist/cli.js"
+      ]
+    },
+    "lighthouse": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/node_modules/lighthouse-mcp/build/index.js"
+      ]
+    },
+    "a11y": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/node_modules/a11y-mcp/src/index.js"
+      ]
+    }
+  }
+}

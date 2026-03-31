@@ -141,6 +141,10 @@ body.dark-mode #patient-sidebar .patient-line[data-line="12"] select.sidebar-inp
   place-items: center;
 }
 
+#patient-sidebar .patient-line[data-line="12"] .ekg-preview-shell[hidden] {
+  display: none !important;
+}
+
 /* Forces the preview image to cover the shell and fade smoothly when the rhythm changes. */
 #patient-sidebar .patient-line[data-line="12"] .ekg-preview-img {
   width: 100%;
@@ -178,6 +182,10 @@ body.dark-mode #patient-sidebar .patient-line[data-line="12"] select.sidebar-inp
   display: inline-grid;
   place-items: center;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+#patient-sidebar .patient-line[data-line="12"] .ekg-info-button[hidden] {
+  display: none !important;
 }
 
 /* Lowers opacity and removes pointer feedback when no detail sheet is available for the current rhythm. */

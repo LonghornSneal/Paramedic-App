@@ -1,3 +1,6 @@
+// Legacy reference only. Current VS Code workspace AI configuration for this repo
+// is rooted in ../../AGENTS.md and ../../.vscode/mcp.json.
+// This file uses an older tool-set shape and is not the active repo-level setup.
 {
   "tools": {
     "editFiles": {},

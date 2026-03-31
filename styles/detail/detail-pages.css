@@ -1355,6 +1355,16 @@ body.dark-mode footer { background-color: #111827; color: #9ca3af; }
 
 }
 
+#content-area.detail-transition-shell > *,
+#content-area.detail-transition-shell.detail-transition-entered > * {
+  opacity: 1;
+  transform: none;
+}
+
+#content-area.detail-transition-out > * {
+  will-change: auto;
+}
+
 @keyframes detail-space-shimmer {
   0% { background-position: -160% 0; }
   100% { background-position: 160% 0; }

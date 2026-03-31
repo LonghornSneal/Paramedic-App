@@ -340,6 +340,21 @@ function hasSnapshotValue(value) {
   if (typeof value === 'string') return value.trim().length > 0;
   return true;
 }
+
+function buildSnapshotWarningList(warnings) {
+  if (!Array.isArray(warnings) || !warnings.length) return null;
+  const list = document.createElement('div');
+  list.className = 'snapshot-warning-list';
+  list.setAttribute('role', 'status');
+  warnings.forEach(message => {
+    const item = document.createElement('div');
+    item.className = 'snapshot-warning-item';
+    item.setAttribute('role', 'alert');
+    item.textContent = message;
+    list.appendChild(item);
+  });
+  return list;
+}
 // Render compact snapshot under the search bar
 export function renderPatientSnapshot(){
   const bar = document.getElementById('patient-snapshot-bar');
@@ -378,7 +393,7 @@ export function renderPatientSnapshot(){
   const classWarnings = deriveClassWarnings(d);
 
   if (!hasDemographics && !hasIndications && !hasAllergies && !hasPmh && !hasSymptoms && !hasVitals && !hasMeds && !hasEkg) {
-    bar.innerHTML = '';
+    bar.replaceChildren();
     return;
   }
 
@@ -437,11 +452,13 @@ export function renderPatientSnapshot(){
   }
 
   const summaryHtml = parts.join(' &bull; ');
+  const summaryEl = document.createElement('span');
+  summaryEl.className = 'snapshot-summary';
+  summaryEl.innerHTML = summaryHtml;
+  bar.replaceChildren(summaryEl);
   if (classWarnings.length) {
-    const warningsHtml = classWarnings.map(msg => `<div class="snapshot-warning-item" role="alert">${msg}</div>`).join('');
-    bar.innerHTML = `${summaryHtml}<div class="snapshot-warning-list" role="status">${warningsHtml}</div>`;
-  } else {
-    bar.innerHTML = summaryHtml;
+    const warningsList = buildSnapshotWarningList(classWarnings);
+    if (warningsList) bar.appendChild(warningsList);
   }
 }
 

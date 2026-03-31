@@ -1,6 +1,60 @@
 import { addTapListener } from '../../Utils/addTapListener.js';
 
+let activeQuickVentModal = null;
+
+function closeQuickVentModal() {
+  if (!activeQuickVentModal) return;
+  const { modal, onMove, onUp } = activeQuickVentModal;
+  window.removeEventListener('mousemove', onMove);
+  window.removeEventListener('mouseup', onUp);
+  modal.remove();
+  activeQuickVentModal = null;
+}
+
+function openQuickVentModal(mathHtml) {
+  closeQuickVentModal();
+
+  const modal = document.createElement('div');
+  modal.className = 'qv-modal';
+  modal.id = 'qv-modal';
+  modal.innerHTML = `<div class="qv-modal-header"><span>Calculation Details</span><span id="qv-close" class="qv-close">X</span></div><div class="p-3 text-sm">${mathHtml || ''}</div>`;
+  document.body.appendChild(modal);
+
+  const close = modal.querySelector('#qv-close');
+  const header = modal.querySelector('.qv-modal-header');
+  let dragging = false;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  const onMouseMove = (event) => {
+    if (!dragging) return;
+    modal.style.left = `${event.clientX - offsetX}px`;
+    modal.style.top = `${event.clientY - offsetY}px`;
+    modal.style.transform = 'none';
+  };
+
+  const onMouseUp = () => {
+    dragging = false;
+  };
+
+  const startDrag = (event) => {
+    dragging = true;
+    const rect = modal.getBoundingClientRect();
+    offsetX = event.clientX - rect.left;
+    offsetY = event.clientY - rect.top;
+    event.preventDefault();
+  };
+
+  close?.addEventListener('click', closeQuickVentModal);
+  header?.addEventListener('mousedown', startDrag);
+  window.addEventListener('mousemove', onMouseMove);
+  window.addEventListener('mouseup', onMouseUp);
+
+  activeQuickVentModal = { modal, onMove: onMouseMove, onUp: onMouseUp };
+}
+
 function renderQuickVentSetup(contentArea){
+  closeQuickVentModal();
   const wrap = document.createElement('div');
   wrap.className = 'mb-4';
   wrap.innerHTML = `
@@ -338,16 +392,7 @@ function compute() {
     tvEl.onmouseleave = ()=>{ document.getElementById('qv-tip')?.remove(); };
     tvEl.onclick = ()=>{
       if (!tvEl.textContent) return;
-      const modal = document.createElement('div'); modal.className='qv-modal'; modal.id='qv-modal';
-      modal.innerHTML = `<div class="qv-modal-header"><span>Calculation Details</span><span id="qv-close" class="qv-close">✕</span></div><div class="p-3 text-sm">${tvEl.dataset.math||''}</div>`;
-      document.body.appendChild(modal);
-      const close = modal.querySelector('#qv-close'); close?.addEventListener('click', ()=> modal.remove());
-      // basic drag
-      const hdr = modal.querySelector('.qv-modal-header');
-      let sx=0, sy=0, dragging=false, offX=0, offY=0;
-      hdr?.addEventListener('mousedown', (ev)=>{ dragging=true; sx=ev.clientX; sy=ev.clientY; const rect=modal.getBoundingClientRect(); offX=ev.clientX-rect.left; offY=ev.clientY-rect.top; ev.preventDefault(); });
-      window.addEventListener('mousemove', (ev)=>{ if(!dragging) return; modal.style.left=(ev.clientX-offX)+'px'; modal.style.top=(ev.clientY-offY)+'px'; modal.style.transform='none'; });
-      window.addEventListener('mouseup', ()=> dragging=false);
+      openQuickVentModal(tvEl.dataset.math || '');
     };
   }
   // Set initial input sizes

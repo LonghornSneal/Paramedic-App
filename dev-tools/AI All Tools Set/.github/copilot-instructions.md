@@ -1,17 +1,14 @@
-<!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
+<!-- Legacy sample for the dev-tools/AI All Tools Set subfolder. The current repo-level instruction source is ../../AGENTS.md. -->
 
-# AI All Tools Set Workspace
+# Legacy AI All Tools Set Workspace
 
-This workspace is configured to provide an AI agent (such as GitHub Copilot or Copilot Chat) with access to all available tools for advanced code editing, testing, and automation. The toolset is defined in `All-Tools.toolsets.jsonc` and includes:
+This file documents an older, subfolder-scoped experiment. It is not the current repo-level VS Code AI customization entrypoint.
 
-- File editing, code review, and code generation tools
-- Test discovery and execution tools
-- Terminal and command execution tools
-- Notebook and Jupyter support
-- Java MCP/modernization tools
-- Search, query, and problem analysis tools
+Current repo-level sources of truth:
+- `../../AGENTS.md` for always-on instructions
+- `../../.vscode/mcp.json` for shared workspace MCP servers
+- `../../.vscode/settings.json` for workspace chat settings
 
-**Instructions for Copilot/AI agents:**
-- Use the tools defined in `All-Tools.toolsets.jsonc` for all workspace operations.
-- If you need to perform an action, check the toolset for the appropriate tool before asking the user.
-- Keep the workspace organized and up to date.
+Notes for this subfolder:
+- `All-Tools.toolsets.jsonc` is retained as a legacy artifact.
+- Do not treat this file as the repo-wide instruction file.

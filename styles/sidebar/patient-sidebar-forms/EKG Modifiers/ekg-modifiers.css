@@ -122,6 +122,10 @@ body.dark-mode #patient-sidebar .patient-line[data-line="13"] select.sidebar-inp
   place-items: center;
 }
 
+#patient-sidebar .patient-line[data-line="13"] .ekg-preview-shell[hidden] {
+  display: none !important;
+}
+
 /* Ensures the preview image covers the shell and fades between tracings smoothly during updates. */
 #patient-sidebar .patient-line[data-line="13"] .ekg-preview-img {
   width: 100%;
@@ -159,6 +163,10 @@ body.dark-mode #patient-sidebar .patient-line[data-line="13"] select.sidebar-inp
   display: inline-grid;
   place-items: center;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+#patient-sidebar .patient-line[data-line="13"] .ekg-info-button[hidden] {
+  display: none !important;
 }
 
 /* Dims the info button and removes the pointer cursor when no additional details exist for the selected modifier. */

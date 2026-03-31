@@ -39,6 +39,7 @@ export async function measureSpiderwebGeometry(page) {
     return {
       contentWidth: contentRect.width,
       contentHeight: contentRect.height,
+      scrollHeight: content.scrollHeight,
       minLeft: nodeMetrics.length ? Math.min(...nodeMetrics.map(node => node.left)) : 0,
       minTop: nodeMetrics.length ? Math.min(...nodeMetrics.map(node => node.top)) : 0,
       maxRight: nodeMetrics.length ? Math.max(...nodeMetrics.map(node => node.right)) : 0,

@@ -161,19 +161,22 @@ function buildCurrentSpiderwebContext() {
 
 function scheduleTreeMetricsPass(rootContainer) {
     if (!rootContainer) return;
-    const contentArea = document.getElementById('content-area');
     const state = getCategoryTreeState();
-    contentArea?.classList.add('category-tree-stabilizing');
     updateCategoryTreeMetrics(rootContainer);
     if (state.revealTimer) {
         clearTimeout(state.revealTimer);
         state.revealTimer = null;
     }
     state.revealTimer = window.setTimeout(() => {
+        if (!rootContainer.isConnected) {
+            state.revealTimer = null;
+            return;
+        }
         updateCategoryTreeMetrics(rootContainer);
-        contentArea?.classList.remove('category-tree-stabilizing');
         requestAnimationFrame(() => {
-            updateCategoryTreeMetrics(rootContainer);
+            if (rootContainer.isConnected) {
+                updateCategoryTreeMetrics(rootContainer);
+            }
         });
         state.revealTimer = null;
     }, CATEGORY_TREE_STABILIZE_MS);
@@ -2075,10 +2078,11 @@ function computeCategoryTreeFitScale(metricsRoot, contentRect) {
     const usedHeight = bounds.height;
     const scaleX = availableWidth / usedWidth;
     const scaleY = availableHeight / usedHeight;
+    const fitScale = Math.min(1, scaleX, scaleY);
     if (typeof window !== 'undefined' && window.innerWidth <= 600) {
-        return 1;
+        return Math.max(0.82, fitScale);
     }
-    return Math.min(1, scaleX, scaleY);
+    return fitScale;
 }
 
 function getElementTranslateX(element) {
@@ -2176,7 +2180,14 @@ function updateCategoryTreeMetrics(container) {
     const contentRect = contentArea ? contentArea.getBoundingClientRect() : null;
     let fitScale = Number.isFinite(state.fitScale) ? state.fitScale : 1;
     if (contentRect && rootTree && metricsRoot === rootTree) {
-        const nextFitScale = Math.max(0.28, Math.min(1, fitScale * computeCategoryTreeFitScale(metricsRoot, contentRect)));
+        const activeDepthForCompacting = Array.isArray(window.activeCategoryPath) ? window.activeCategoryPath.length : 0;
+        const mobileCompaction = typeof window !== 'undefined' && window.innerWidth <= 600
+            ? Math.max(0.9, 1 - (Math.min(activeDepthForCompacting, 4) * 0.02))
+            : 1;
+        const nextFitScale = Math.max(
+            0.28,
+            Math.min(1, computeCategoryTreeFitScale(metricsRoot, contentRect) * mobileCompaction)
+        );
         if (Math.abs(nextFitScale - fitScale) > 0.02) {
             fitScale = nextFitScale;
             state.fitScale = nextFitScale;
